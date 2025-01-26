@@ -2,24 +2,31 @@
   "_id": "vh6n0Ad3lamOJXpV",
   "name": "Nanite Surge (EX)",
   "type": "feat",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "special",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,48 +37,90 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.MMyeA7kL5Vhcio05]{Nanocyte}</p>\n<p>In certain situations, you can use a nanite surge to push your nanites to perform extraordinary feats a number of times per day equal to half your nanocyte level plus your Constitution modifier; the exact benefits vary by circumstance and are explained in the abilities below.At 5th level, you can spend 1 Resolve Point to gain and immediately use an additional nanite surge. You can use this ability multiple times.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.MMyeA7kL5Vhcio05]{Nanocyte}</p>\n<p>In certain situations, you can use a nanite surge to push your nanites to perform extraordinary feats a number of times per day equal to half your nanocyte level plus your Constitution modifier; the exact benefits vary by circumstance and are explained in the @UUID[Compendium.sfrpg.classes.Item.MMyeA7kL5Vhcio05]{Nanocyte} class. At 5th level, you can spend 1 Resolve Point to gain and immediately use an additional nanite surge. You can use this ability multiple times.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
-      "category": "classFeature"
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "text",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "recharge": {
       "charged": false,
       "value": null
     },
     "requirements": "1st Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "TR, p. 9",
+    "source": "TR pg. 9",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "floor(@classes.nanoctye.levels/2) + abilities.con.mod",
+      "per": "charges",
       "value": 0
     }
   }

@@ -2,24 +2,31 @@
   "_id": "pQyvikDN4ygzK3XW",
   "name": "Disrupting Shot (Ex)",
   "type": "feat",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
-    "actionType": "",
+    "actionTarget": "",
+    "actionType": "save",
     "activation": {
       "type": "",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -28,16 +35,58 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>For your debilitating trick, you can attempt to hinder your opponent’s ability to cast spells and spell-like abilities. The target must succeed at a Will save or be unable to cast spells or spell-like abilities for 1 round. Once you’ve used this ability to attempt to hinder an opponent’s spellcasting, that creature is immune to your disrupting shot for 24 hours. You must have the deactivating shot and staggering shot exploits to choose this exploit.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>For your @UUID[Compendium.sfrpg.class-features.Item.bhSrjkuWxz2DQHXC]{Debilitating Trick}, you can attempt to hinder your opponent’s ability to cast spells and spell-like abilities. The target must succeed at a Will save or be unable to cast spells or spell-like abilities for 1 round. Once you’ve used this ability to attempt to hinder an opponent’s spellcasting, that creature is immune to your disrupting shot for 24 hours. You must have the @UUID[Compendium.sfrpg.class-features.Item.RWsWmKuo1dvfF3X5]{Deactivating Shot} and @UUID[Compendium.sfrpg.class-features.Item.o2GDNS1g87yquIMS]{Staggering Shot} exploits to choose this exploit.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -45,11 +94,13 @@
       "value": null
     },
     "formula": "",
+    "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
@@ -57,10 +108,15 @@
       "value": null
     },
     "requirements": "6th Level",
+    "rollNotes": "",
     "save": {
+      "type": "will",
+      "dc": "",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": ""
     },
     "source": "Operative Exploit",
     "target": {

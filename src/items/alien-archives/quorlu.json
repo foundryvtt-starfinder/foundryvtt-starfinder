@@ -2,25 +2,39 @@
   "_id": "vW4BSvQTTJkE4aOj",
   "name": "Quorlu",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "Zs8tmTulvbbqvrnk",
       "name": "Endothermic (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
-          "cost": 0
+          "cost": null
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -42,14 +56,73 @@
           "unidentified": "",
           "value": "<p>A quorlu has resistance 5 to fire that stacks with one other source of fire resistance.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "speciesFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
           "value": null
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [],
+        "modifiers": [
+          {
+            "_id": "53e5fc97-56ce-4289-b54a-ea420697e803",
+            "name": "Quorlu Fire Resistance",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "energy-resistance",
+            "enabled": true,
+            "max": 0,
+            "modifier": "5",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "Endothermic",
+            "subtab": "misc",
+            "valueAffected": "fire"
+          }
+        ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -83,12 +156,20 @@
       "_id": "FViY3ezzL8UI2FXp",
       "name": "Lithic (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -96,6 +177,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -117,14 +199,73 @@
           "unidentified": "",
           "value": "<p>A quorlu’s silicon-based physiology grants it immunity to @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{disease} and @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison}, and it gains no benefit from @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drugs}, medicinals, and similar nonmagical substances. It also gains a +2 species bonus to saving throws against bleed effects. A quorlu doesn’t breathe or suffer the normal environmental effects of being in a vacuum.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "speciesFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
           "value": null
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [],
+        "modifiers": [
+          {
+            "_id": "72ffabed-1a50-4f99-ae3e-f922a1d22d30",
+            "name": "Bonus against Bleed Effects",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "saves",
+            "enabled": true,
+            "max": 0,
+            "modifier": "2",
+            "modifierType": "formula",
+            "notes": "",
+            "source": "Lithic",
+            "subtab": "misc",
+            "valueAffected": ""
+          }
+        ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -158,12 +299,20 @@
       "_id": "IeE2ob60cBaTvEcX",
       "name": "Stable (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -171,6 +320,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -192,7 +342,49 @@
           "unidentified": "",
           "value": "<p>A quorlu gains a +4 species bonus to AC against combat maneuvers to bull rush, reposition, or trip.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "speciesFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
           "value": null
@@ -200,84 +392,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "8dCd9GR09AxTbN3q",
-      "name": "Unflankable",
-      "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>Flanking the creature does not grant any bonuses, and abilities that function only against a creature that is flanked do not function against it.</p>\n<hr />"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -311,7 +426,12 @@
       "_id": "A9VffqqmpePybvfn",
       "name": "Heat-amp gauntlet, mk 1",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -321,16 +441,17 @@
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
-          "type": "none",
+          "type": "",
           "condition": "",
           "cost": null
         },
-        "ammunitionType": "",
+        "ammunitionType": "charge",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 9,
         "attributes": {
@@ -359,8 +480,13 @@
         },
         "chatFlavor": "",
         "container": {
-          "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "contents": [
+            {
+              "id": "HRaJJ8Q4RlP0G9TN",
+              "index": 1
+            }
+          ],
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -372,24 +498,44 @@
               "amount": 2,
               "subtype": "fusion",
               "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "ammunition"
+              ],
+              "amount": 1,
+              "subtype": "ammunitionSlot",
+              "weightMultiplier": 1,
+              "weightProperty": ""
             }
           ]
         },
         "critical": {
-          "effect": "Burn 1d4",
+          "effect": "Burn [[/r 1d4]]",
           "parts": []
         },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6+2",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
+                "acid": false,
                 "bludgeoning": true,
-                "fire": true
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -401,14 +547,16 @@
         },
         "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
-        "equippable": false,
-        "equipped": true,
+        "equippable": true,
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 2,
         "modifiers": [],
         "price": 500,
@@ -427,6 +575,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -445,15 +594,19 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
           "harrying": false,
+          "healing": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -471,6 +624,7 @@
           "polymorphic": false,
           "powered": true,
           "professional": false,
+          "propel": false,
           "punchGun": false,
           "qreload": false,
           "radioactive": false,
@@ -479,7 +633,9 @@
           "regrowth": false,
           "relic": false,
           "reposition": false,
+          "scramble": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -492,6 +648,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": false,
           "unbalancing": false,
@@ -506,29 +663,48 @@
           "additional": "",
           "per": "",
           "units": "ft",
-          "value": null
+          "value": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "AA2",
         "special": "",
-        "specialMaterials": {},
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": ""
         },
         "usage": {
-          "per": "Battery charge",
+          "per": "shot",
           "value": 1
         },
         "uses": {
-          "max": 0,
+          "max": "",
           "per": "",
-          "value": 1
+          "value": null
         },
         "weaponCategory": "uncategorized",
         "weaponType": "advancedM"
@@ -538,6 +714,11 @@
       "_id": "Ytu0FFO61UwWlh9p",
       "name": "Arc pistol, static",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
       "system": {
         "type": "",
@@ -548,16 +729,17 @@
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
-          "type": "none",
+          "type": "",
           "condition": "",
           "cost": null
         },
-        "ammunitionType": "",
+        "ammunitionType": "charge",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 7,
         "attributes": {
@@ -586,8 +768,13 @@
         },
         "chatFlavor": "",
         "container": {
-          "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "contents": [
+            {
+              "id": "mt2RfPJpGjb0rxcY",
+              "index": 1
+            }
+          ],
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -599,6 +786,16 @@
               "amount": 2,
               "subtype": "fusion",
               "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "ammunition"
+              ],
+              "amount": 1,
+              "subtype": "ammunitionSlot",
+              "weightMultiplier": 1,
+              "weightProperty": ""
             }
           ]
         },
@@ -609,7 +806,15 @@
               "formula": "2",
               "operator": "",
               "types": {
-                "electricity": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -617,13 +822,24 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6+2",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "electricity": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -635,14 +851,16 @@
         },
         "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "equippable": false,
-        "equipped": true,
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 2,
         "modifiers": [],
         "price": 750,
@@ -661,6 +879,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -679,15 +898,19 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
           "harrying": false,
+          "healing": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -705,6 +928,7 @@
           "polymorphic": false,
           "powered": false,
           "professional": false,
+          "propel": false,
           "punchGun": false,
           "qreload": false,
           "radioactive": false,
@@ -713,7 +937,9 @@
           "regrowth": false,
           "relic": false,
           "reposition": false,
+          "scramble": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -726,6 +952,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": false,
           "unbalancing": false,
@@ -734,45 +961,69 @@
           "variantBoost": false,
           "wideLine": false
         },
-        "quantity": null,
+        "quantity": 0,
         "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
-          "value": 50
+          "value": "50"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "Core Rulebook, P. 173",
         "special": "",
-        "specialMaterials": {},
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": ""
         },
         "usage": {
-          "per": "round",
+          "per": "shot",
           "value": 2
         },
         "uses": {
-          "max": 0,
+          "max": "",
           "per": "",
-          "value": 0
+          "value": null
         },
         "weaponCategory": "uncategorized",
         "weaponType": "smallA"
       }
     },
     {
-      "_id": "2tS7Um9SEd236x42",
-      "name": "Multiarmed",
+      "_id": "OgeY2NGe7NA0p35o",
+      "name": "Tunneler (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -788,81 +1039,7 @@
         },
         "area": {
           "effect": "",
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>&nbsp;(EX)</p>\n<p>The creature has the number of arms listed. This allows it to wield and hold up to that many hands’ worth of weapons and equipment. While this increases the number of items it can have at the ready, it doesn’t increase the number of attacks it can make during combat.</p>\n<hr />"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "OgeY2NGe7NA0p35o",
-      "name": "Tunneler (Ex)",
-      "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -884,14 +1061,58 @@
           "unidentified": "",
           "value": "<p>A quorlu can dig through soil at a rate of 5 feet per minute. A quorlu can use this ability combined with its internal heat to dig through stone at a rate of 1 foot per minute. When it digs, a quorlu can leave a tunnel behind.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "speciesFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
           "value": null
         },
         "formula": "",
+        "id": "OgeY2NGe7NA0p35o",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -910,6 +1131,16 @@
           "descriptor": ""
         },
         "source": "",
+        "system": {
+          "container": {
+            "contents": [
+              {
+                "id": "QltE0zZ3zKJtIQ67",
+                "index": 0
+              }
+            ]
+          }
+        },
         "target": {
           "type": "",
           "value": null
@@ -925,6 +1156,11 @@
       "_id": "JcZzndQX12CWKPZs",
       "name": "Freebooter Armor I",
       "type": "equipment",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/armor/freebooter-armor-1.webp",
       "system": {
         "type": "",
@@ -942,6 +1178,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -1021,7 +1258,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Popularized by the Free Captains of @UUID[Compendium.sfrpg.setting.Yt2xT4Iy6lHjCzso]{The Diaspora}, freebooter armor features an armored jacket or breastplate, heavy boots and gloves, numerous straps and hidden weapons, and a helmet. Novice explorers and mercenaries beginning their career sometimes choose freebooter armor for the air of rakish experience this light armor lends its wearer.</p>"
+          "value": "<p>Popularized by the Free Captains of @UUID[Compendium.sfrpg.setting.Item.Yt2xT4Iy6lHjCzso]{The Diaspora}, freebooter armor features an armored jacket or breastplate, heavy boots and gloves, numerous straps and hidden weapons, and a helmet. Novice explorers and mercenaries beginning their career sometimes choose freebooter armor for the air of rakish experience this light armor lends its wearer.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -1030,6 +1267,7 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -1037,6 +1275,7 @@
         "modifiers": [],
         "price": 750,
         "proficient": true,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -1073,12 +1312,21 @@
       }
     },
     {
-      "_id": "On2NMkJcYMtuwK3Z",
+      "_id": "HRaJJ8Q4RlP0G9TN",
       "name": "Battery",
-      "type": "goods",
+      "type": "ammunition",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
         "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "ammunitionType": "charge",
         "attributes": {
           "ac": {
             "value": ""
@@ -1099,6 +1347,13 @@
         },
         "attuned": false,
         "bulk": "-",
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "critical": {
+          "parts": []
+        },
         "damage": {
           "parts": []
         },
@@ -1111,13 +1366,492 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
-        "modifiers": [],
         "price": 60,
-        "quantity": 2,
+        "quantity": 1,
         "quantityPerPack": 1,
-        "source": "Core Rulebook"
+        "source": "Core Rulebook",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
+        "useCapacity": true
+      }
+    },
+    {
+      "_id": "mt2RfPJpGjb0rxcY",
+      "name": "Battery",
+      "type": "ammunition",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
+      "system": {
+        "type": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "ammunitionType": "charge",
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "-",
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "critical": {
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
+        },
+        "equippable": false,
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "identified": true,
+        "level": 1,
+        "price": 60,
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "source": "Core Rulebook",
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
+        "useCapacity": true
+      }
+    },
+    {
+      "_id": "go9DKmP6S1JCfdvB",
+      "name": "Unflankable (Ex)",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "icons/skills/melee/shield-block-gray-yellow.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Flanking the creature does not grant any bonuses, and abilities that function only against a creature that is flanked do not function against it.</p>\n<p><em>Format</em>:<strong>Defensive Abilities</strong> unflankable.</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "universalCreatureRule",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "AA1 pg. 158",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "ExThyLNvQwumHf4O",
+      "name": "Multiarmed (Ex)",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>The creature has the number of arms listed. This allows it to wield and hold up to that many hands’ worth of weapons and equipment. While this increases the number of items it can have at the ready, it doesn’t increase the number of attacks it can make during combat.</p>\n<p><em>Format</em>:<strong>Other Abilities</strong> multiarmed (4).</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "universalCreatureRule",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "AA2 pg. 151",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "QltE0zZ3zKJtIQ67",
+      "name": "Susceptible to Cold (Ex)",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>When a quorlu takes cold damage, it becomes @UUID[Compendium.sfrpg.conditions.Item.JGFn4MrDZ6X5vrzU]{Fatigued} for 1 round. This effect doesn’t cause a fatigued quorlu to become exhausted.</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "speciesFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "text",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
+        }
       }
     }
   ],
@@ -1125,6 +1859,7 @@
     "name": "Quorlu",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -1136,6 +1871,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1156,11 +1892,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -1174,13 +1928,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -1231,12 +1989,12 @@
     },
     "attributes": {
       "abilityDC": {
-        "base": 0
+        "base": "0"
       },
       "arms": "3",
       "bab": 0,
       "baseSpellDC": {
-        "base": 0
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -1271,7 +2029,7 @@
         "value": 0
       },
       "kac": {
-        "base": null,
+        "base": 14,
         "min": 0,
         "tooltip": [],
         "value": null
@@ -1295,13 +2053,13 @@
         },
         "flying": {
           "base": 0,
-          "baseManeuverability": 0
+          "baseManeuverability": "0"
         },
         "land": {
           "base": 25
         },
         "mainMovement": "land",
-        "special": "original base: 25 ft.",
+        "special": "",
         "swimming": {
           "base": 0
         },
@@ -1374,10 +2132,11 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<section>\n<h2>Quorlu</h2>\n<p>Quorlus are quadrupedal, silicon-based creatures that have three tentacular arms and three eyestalks. They hail from Quorlosh, a strange world in the Vast that is highly geologically active but has only a thin atmosphere. Quorlus live in warrens in the planet’s exposed stony crust, where they delve for minerals that they consume for sustenance. Their warrens are like the settlements of many humanoids, and their inhabitants conduct crystal farming in which they “grow” gypsum, quartzes, and salts for food. The average quorlu is 4-1/2 feet tall and weighs 350 pounds.</p>\n<p>Their planet’s violent tectonic activity has instilled quorlus with a cultural acceptance of impermanence and resilience to loss. Quorlus value experiences more than material possessions, though by the standards of other worlds, they have abundant raw wealth. When a lava flow or quake damages a quorlu settlement, the quorlus dig out and repair, though they are too practical to rebuild where destruction is likely to occur again.</p>\n<p>Quorlus have a crystalline lithic shell that is vulnerable to certain sonic frequencies. Under this exterior, quorlus’ crystal-fiber organ structures float in plasma. At the center is the quorlu’s grinding heart, which serves as both a circulatory and a digestive organ and which generates the quorlu’s high internal heat. Extreme cold can slow a quorlu’s endothermic reactions, momentarily hindering the creature.</p>\n<p>Although quorlus can be tough combatants, few truly enjoy battle. Their extant military traditions stem from their engineering customs and emphasize the use of explosives, but they usually prefer peace and positive new experiences. This societal tendency makes them more inclined to be diplomats and explorers than warriors.</p>\n<p>Supplementing quorlus’ peaceful inclinations is the fact that most other sapient species find their voices soothing, especially when those voices are harmonized in song—and quorlus love to sing. Their language is melodic, tonal, and trilling, and it also includes subtle vibrations that shirrens in particular find especially pleasing thanks to their sensitivity to delicate vibrational shifts. The range of quorlu tones makes their language difficult for non-quorlus to master.</p>\n<p>Quorlus can be found throughout the Pact Worlds. They have an enclave and diplomatic corps on @UUID[Compendium.sfrpg.setting.hepqXl6gFvs5sDQu]{Absalom Station}, and numerous quorlus join exploration outfits, including the Starfinder Society. Others serve as prospectors in @UUID[Compendium.sfrpg.setting.Yt2xT4Iy6lHjCzso]{The Diaspora} and on inhospitable worlds. Quorlus are quick to volunteer for jobs inherently more hazardous for species that need to breathe or that are more susceptible to @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison} or @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{disease}.</p>\n<h2>Heat-Amp Gauntlets</h2>\n<p>Quorlus have developed&nbsp;<a href=\"https://www.aonsrd.com/WeaponDisplay.aspx?ItemName=Mk%201&amp;Family=Heat-Amp%20Gauntlet\">gauntlets that store and amplify ambient heat</a>, unleashing it in hand-to-hand combat. Notorious for their use of these weapons, quorlu infiltrators and sappers also use heat-amp gauntlets to start fires to hinder their enemies.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or team (3-5)</p>\n</section>",
+        "value": "<section>\n<h2>Quorlu</h2>\n<p>Quorlus are quadrupedal, silicon-based creatures that have three tentacular arms and three eyestalks. They hail from Quorlosh, a strange world in the Vast that is highly geologically active but has only a thin atmosphere. Quorlus live in warrens in the planet’s exposed stony crust, where they delve for minerals that they consume for sustenance. Their warrens are like the settlements of many humanoids, and their inhabitants conduct crystal farming in which they “grow” gypsum, quartzes, and salts for food. The average quorlu is 4-1/2 feet tall and weighs 350 pounds.</p>\n<p>Their planet’s violent tectonic activity has instilled quorlus with a cultural acceptance of impermanence and resilience to loss. Quorlus value experiences more than material possessions, though by the standards of other worlds, they have abundant raw wealth. When a lava flow or quake damages a quorlu settlement, the quorlus dig out and repair, though they are too practical to rebuild where destruction is likely to occur again.</p>\n<p>Quorlus have a crystalline lithic shell that is vulnerable to certain sonic frequencies. Under this exterior, quorlus’ crystal-fiber organ structures float in plasma. At the center is the quorlu’s grinding heart, which serves as both a circulatory and a digestive organ and which generates the quorlu’s high internal heat. Extreme cold can slow a quorlu’s endothermic reactions, momentarily hindering the creature.</p>\n<p>Although quorlus can be tough combatants, few truly enjoy battle. Their extant military traditions stem from their engineering customs and emphasize the use of explosives, but they usually prefer peace and positive new experiences. This societal tendency makes them more inclined to be diplomats and explorers than warriors.</p>\n<p>Supplementing quorlus’ peaceful inclinations is the fact that most other sapient species find their voices soothing, especially when those voices are harmonized in song—and quorlus love to sing. Their language is melodic, tonal, and trilling, and it also includes subtle vibrations that shirrens in particular find especially pleasing thanks to their sensitivity to delicate vibrational shifts. The range of quorlu tones makes their language difficult for non-quorlus to master.</p>\n<p>Quorlus can be found throughout the Pact Worlds. They have an enclave and diplomatic corps on @UUID[Compendium.sfrpg.setting.Item.hepqXl6gFvs5sDQu]{Absalom Station}, and numerous quorlus join exploration outfits, including the Starfinder Society. Others serve as prospectors in @UUID[Compendium.sfrpg.setting.Item.Yt2xT4Iy6lHjCzso]{The Diaspora} and on inhospitable worlds. Quorlus are quick to volunteer for jobs inherently more hazardous for species that need to breathe or that are more susceptible to @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison} or @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{disease}.</p>\n<h2>Heat-Amp Gauntlets</h2>\n<p>Quorlus have developed&nbsp;<a href=\"https://www.aonsrd.com/WeaponDisplay.aspx?ItemName=Mk%201&amp;Family=Heat-Amp%20Gauntlet\">gauntlets that store and amplify ambient heat</a>, unleashing it in hand-to-hand combat. Notorious for their use of these weapons, quorlu infiltrators and sappers also use heat-amp gauntlets to start fires to hinder their enemies.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>solitary, pair, or team (3-5)</p>\n</section>",
         "weight": ""
       },
       "class": "",
+      "combatRole": "expert",
       "cr": 2,
       "environment": "",
       "organization": "",
@@ -1388,6 +2147,7 @@
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 104",
+      "subtype": "",
       "xp": {
         "value": 600
       }

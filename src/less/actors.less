@@ -627,6 +627,10 @@
         .inactive {
             color: @colorTan;
         }
+        
+        &.crew-list-npc { //Disable mouse-over hover with npc skills as they aren't draggable.
+            cursor: default;
+        }
 
         .value {
             text-align: right;
@@ -868,8 +872,6 @@
             border: @borderGroove;
             font-weight: bold;
             line-height: 24px;
-            cursor: pointer;
-            transition: color 200ms;
 
             &.disabled {
                 h3 {
@@ -883,10 +885,6 @@
                 font-size: var(--font-size-13);
                 font-weight: bold;
                 border: none;
-            }
-
-            &.collapsed {
-                color: darkgrey;
             }
 
             .item-controls a.item-create,

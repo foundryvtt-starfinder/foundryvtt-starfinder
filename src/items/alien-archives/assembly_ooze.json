@@ -2,13 +2,23 @@
   "_id": "zjktKO2wLiLrAsyY",
   "name": "Assembly Ooze",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "pSpZxOGPJRl2nT4a",
       "name": "Pseudopod",
       "type": "weapon",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -25,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -110,9 +121,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -260,7 +273,12 @@
       "_id": "in6NKCt2tXlvo1JE",
       "name": "Disassemble (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -276,6 +294,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -298,6 +317,11 @@
           "value": "<p>As a full action, an assembly ooze can engulf an unattended piece of technological gear of no more than 5 bulk and with an item level no greater than its CR + 2 (3 for most assembly oozes) within reach of its pseudopod. Unless the object succeeds at a DC 12 Fortitude saving throw, the ooze moves into that object’s space and deconstructs it into its component parts. The assembly ooze gains a number of virtual UPBs equal to the gear’s price in credits. An assembly ooze can hold a maximum number of virtual UPBs equal to 100 × its Constitution modifier (400 for most assembly oozes). In addition, if an assembly ooze succeeds at a grapple combat maneuver against a creature with the technological subtype, that creature takes 1d6+1 acid damage. The assembly ooze gains 1 virtual UPB for every point of damage it deals in this way.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -305,6 +329,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -338,7 +363,12 @@
       "_id": "owFtLMRvo4FcYg86",
       "name": "Assemble (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -354,6 +384,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -376,6 +407,11 @@
           "value": "<p>In a process that takes 1 uninterrupted minute, an assembly ooze can craft a random piece of technological gear using its store of virtual UPBs (see disassemble below). An assembly ooze can craft a piece of technological gear of no more than 5 bulk with a cost equal to the number of virtual UPBs it spends, but with an item level no greater than its CR + 2 (3 for most assembly oozes). There is a 25% chance that a piece of gear an assembly ooze crafts has the broken condition. Roll 1d8 on the table below to determine what kind of gear the assembly ooze creates.&nbsp;</p>\n<table style=\"width: 43.6625%;\" border=\"1\">\n<tbody>\n<tr>\n<td style=\"width: 11.7188%;\"><strong>D8</strong></td>\n<td style=\"width: 88.2812%;\"><strong>Gear</strong></td>\n</tr>\n<tr>\n<td style=\"width: 11.7188%;\">1</td>\n<td style=\"width: 88.2812%;\">Basic or advanced melee weapon</td>\n</tr>\n<tr>\n<td style=\"width: 11.7188%;\">2</td>\n<td style=\"width: 88.2812%;\">Small arm or longarm</td>\n</tr>\n<tr>\n<td style=\"width: 11.7188%;\">3</td>\n<td style=\"width: 88.2812%;\">Heavy weapon or sniper weapon</td>\n</tr>\n<tr>\n<td style=\"width: 11.7188%;\">4</td>\n<td style=\"width: 88.2812%;\">Grenade</td>\n</tr>\n<tr>\n<td style=\"width: 11.7188%;\">5</td>\n<td style=\"width: 88.2812%;\">Ammunition</td>\n</tr>\n<tr>\n<td style=\"width: 11.7188%;\">6</td>\n<td style=\"width: 88.2812%;\">Light or heavy armor</td>\n</tr>\n<tr>\n<td style=\"width: 11.7188%;\">7</td>\n<td style=\"width: 88.2812%;\">Armor upgrade</td>\n</tr>\n<tr>\n<td style=\"width: 11.7188%;\">8</td>\n<td style=\"width: 88.2812%;\">Technological item</td>\n</tr>\n</tbody>\n</table>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -383,6 +419,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -416,12 +453,17 @@
       "_id": "MIhz8Xqh8PgUdsOk",
       "name": "Compression (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "flags": {
         "core": {
           "sourceId": "Compendium.sfrpg.universal-creature-rules.sguC9bc7vP22wrXW"
         }
       },
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -437,6 +479,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -459,6 +502,11 @@
           "value": "<p>The creature can move through an area as small as one-quarter of its space without squeezing or one-eighth its space when squeezing.</p>\n<p><em>Format</em>:<strong>Other Abilities</strong> compression.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -466,6 +514,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -499,12 +548,17 @@
       "_id": "WBeVMBzCOtmb1Lpp",
       "name": "Blindsight (Ex) (vibration) 60 ft., sightless",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "flags": {
         "core": {
           "sourceId": "Compendium.sfrpg.universal-creature-rules.4HvnYWLhFBiuvDxD"
         }
       },
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -520,6 +574,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -539,9 +594,14 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Blindsight is a more precise version of @UUID[Compendium.sfrpg.universal-creature-rules.c6EuAEYG1qEIv82D]{Blindsense}. This ability operates out to a specified range. A creature with blindsight typically perceives using a specific type of sense, indicated in parentheses. See page 262 of the Starfinder Core Rulebook for more information.</p>\n<p><em>Format</em>:<strong>Senses</strong> blindsight (life) 60 ft.</p>\n<p><em>Guidelines</em>: Blindsight usually has a range of 60 feet.</p>"
+          "value": "<p>Blindsight is a more precise version of @UUID[Compendium.sfrpg.universal-creature-rules.Item.c6EuAEYG1qEIv82D]{Blindsense}. This ability operates out to a specified range. A creature with blindsight typically perceives using a specific type of sense, indicated in parentheses. See page 262 of the Starfinder Core Rulebook for more information.</p>\n<p><em>Format</em>:<strong>Senses</strong> blindsight (life) 60 ft.</p>\n<p><em>Guidelines</em>: Blindsight usually has a range of 60 feet.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -549,6 +609,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -583,6 +644,7 @@
     "name": "Assembly Ooze",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -594,6 +656,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -614,11 +677,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -632,13 +713,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -860,7 +945,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2><p>Thought to have been created on the planet @UUID[Compendium.sfrpg.setting.2K7muQyxlXW8wqb3]{Bretheda} as a biotechnological replacement for automation processes, assembly oozes are essentially cores of nanobots suspended within blobs of animated protoplasm. As the ooze absorbs raw materials, the nanobots work at the molecular level to turn that matter into a functioning technological device, the blueprints of which have been entered into the machines’ original programming.</p>\n<p>Due to sloppy programming procedures, the code embedded within an assembly ooze has an unfortunate tendency to easily become corrupted, causing the ooze to haphazardly deconstruct any nearby tech and use the pieces to build random items. The first time this occurred, several assembly oozes escaped the ensuing purge and built copies of themselves, eventually spreading to various shadowy corners of the galaxy. While these rogue oozes are not all that dangerous and have no innate malice, they are the bane of space stations, starships, weapon depots, and anywhere else technology is present. When discovered in such a location, assembly oozes are ruthlessly exterminated, lest their nonstop disassembling of all things mechanical and electronic destroy critical systems-to say nothing of the new, potentially lethal devices left in their wake. While assembly oozes are still used in some factories on Bretheda and its more toxic moons, their use is highly regulated.</p>\n<p>An assembly ooze resembles a human-sized, silvery cube, though its amorphous form allows it to slip through incredibly small openings. As it moves, surging forward on its pseudopods, random scraps the ooze has already collected sometimes float near the creature’s surface before quickly disappearing into its form. Entirely focused on absorbing and reshaping any available technology, assembly oozes usually ignore organic matter, living or otherwise, unless threatened. However, should a creature have mechanical or cybernetic elements attached to or incorporated into its physical form, an assembly ooze could very well cause that creature incidental harm in its attempts to harvest the technological parts. Sentient robots are extremely wary of assembly oozes, as their entire bodies could be targeted for processing into raw resources.</p>\n<p>Every so often, an assembly ooze holding its maximum number of virtual UPBs undergoes a form of mitosis, manufactures an identical copy of its computerized core, and splits its protoplasm into two equal parts. The nanobots of the two new assembly oozes then use the remaining virtual UPBs to build enough protoplasm to form an assembly ooze’s normal cube shape. This process usually takes about 1 hour and consumes all of the parent ooze’s virtual UPBs. That assembly oozes contain the programming necessary to reproduce is troubling to those who realize its implications: a single rogue assembly ooze introduced into an environment stocked with technological items could completely overrun such a place in a matter of days, leaving behind a wasteland of cheap laser pistols and smoke grenades that is inhabited only by the oozes-and any remaining organic beings unfortunate enough to be stranded in the area after their vessels are consumed.</p>\n<p>In some cases, certain unscrupulous types have used assembly oozes as weapons. If slipped into a starship or military base, a manufactory of assembly oozes can easily cause enough chaos to allow an operative to sneak in and complete her mission with very little opposition. However, this is also highly risky to the would-be saboteur, as even one misplaced assembly ooze could render her escape vessel inoperative. Assembly oozes can be temporarily incapacitated by strong electrical fields and kept at bay by mystical force fields, but anyone restraining an assembly ooze must be constantly vigilant and stay out of reach of the ooze’s pseudopod.</p>\n<p>A single assembly ooze can craft handheld objects, but some claim to have seen assembly oozes working together to construct entire starships and other large and complex machinery. Where these oozes received their programming is unknown, as is whether such oozes have a master directing their efforts or if they have gained a collective sentience and are working for their own mysterious purposes. Nevertheless, most engineers agree that, given enough raw material and enough time, there is no technological item a directed horde of assembly oozes couldn’t build, putting it together piece by piece.</p>\n<p>An assembly ooze is a cube exactly 5 feet on each side that weighs 400 pounds.</p>",
+        "value": "<h2>Description</h2><p>Thought to have been created on the planet @UUID[Compendium.sfrpg.setting.Item.2K7muQyxlXW8wqb3]{Bretheda} as a biotechnological replacement for automation processes, assembly oozes are essentially cores of nanobots suspended within blobs of animated protoplasm. As the ooze absorbs raw materials, the nanobots work at the molecular level to turn that matter into a functioning technological device, the blueprints of which have been entered into the machines’ original programming.</p>\n<p>Due to sloppy programming procedures, the code embedded within an assembly ooze has an unfortunate tendency to easily become corrupted, causing the ooze to haphazardly deconstruct any nearby tech and use the pieces to build random items. The first time this occurred, several assembly oozes escaped the ensuing purge and built copies of themselves, eventually spreading to various shadowy corners of the galaxy. While these rogue oozes are not all that dangerous and have no innate malice, they are the bane of space stations, starships, weapon depots, and anywhere else technology is present. When discovered in such a location, assembly oozes are ruthlessly exterminated, lest their nonstop disassembling of all things mechanical and electronic destroy critical systems-to say nothing of the new, potentially lethal devices left in their wake. While assembly oozes are still used in some factories on Bretheda and its more toxic moons, their use is highly regulated.</p>\n<p>An assembly ooze resembles a human-sized, silvery cube, though its amorphous form allows it to slip through incredibly small openings. As it moves, surging forward on its pseudopods, random scraps the ooze has already collected sometimes float near the creature’s surface before quickly disappearing into its form. Entirely focused on absorbing and reshaping any available technology, assembly oozes usually ignore organic matter, living or otherwise, unless threatened. However, should a creature have mechanical or cybernetic elements attached to or incorporated into its physical form, an assembly ooze could very well cause that creature incidental harm in its attempts to harvest the technological parts. Sentient robots are extremely wary of assembly oozes, as their entire bodies could be targeted for processing into raw resources.</p>\n<p>Every so often, an assembly ooze holding its maximum number of virtual UPBs undergoes a form of mitosis, manufactures an identical copy of its computerized core, and splits its protoplasm into two equal parts. The nanobots of the two new assembly oozes then use the remaining virtual UPBs to build enough protoplasm to form an assembly ooze’s normal cube shape. This process usually takes about 1 hour and consumes all of the parent ooze’s virtual UPBs. That assembly oozes contain the programming necessary to reproduce is troubling to those who realize its implications: a single rogue assembly ooze introduced into an environment stocked with technological items could completely overrun such a place in a matter of days, leaving behind a wasteland of cheap laser pistols and smoke grenades that is inhabited only by the oozes-and any remaining organic beings unfortunate enough to be stranded in the area after their vessels are consumed.</p>\n<p>In some cases, certain unscrupulous types have used assembly oozes as weapons. If slipped into a starship or military base, a manufactory of assembly oozes can easily cause enough chaos to allow an operative to sneak in and complete her mission with very little opposition. However, this is also highly risky to the would-be saboteur, as even one misplaced assembly ooze could render her escape vessel inoperative. Assembly oozes can be temporarily incapacitated by strong electrical fields and kept at bay by mystical force fields, but anyone restraining an assembly ooze must be constantly vigilant and stay out of reach of the ooze’s pseudopod.</p>\n<p>A single assembly ooze can craft handheld objects, but some claim to have seen assembly oozes working together to construct entire starships and other large and complex machinery. Where these oozes received their programming is unknown, as is whether such oozes have a master directing their efforts or if they have gained a collective sentience and are working for their own mysterious purposes. Nevertheless, most engineers agree that, given enough raw material and enough time, there is no technological item a directed horde of assembly oozes couldn’t build, putting it together piece by piece.</p>\n<p>An assembly ooze is a cube exactly 5 feet on each side that weighs 400 pounds.</p>",
         "weight": ""
       },
       "class": "",

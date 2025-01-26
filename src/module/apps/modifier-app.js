@@ -20,7 +20,7 @@ export default class SFRPGModifierApplication extends FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
 
-        return mergeObject(options, {
+        return foundry.utils.mergeObject(options, {
             classes: ["sfrpg", "modifier-app"],
             template: "systems/sfrpg/templates/apps/modifier-app.hbs",
             width: 400,
@@ -77,7 +77,6 @@ export default class SFRPGModifierApplication extends FormApplication {
             options: this.options,
             editable: this.isEditable,
             cssClass: this.target.isOwner ? "editable" : "locked",
-            config: CONFIG.SFRPG
         };
 
         return data;
@@ -330,7 +329,7 @@ export default class SFRPGModifierApplication extends FormApplication {
             modifier.max = 0;
         }
 
-        const merged = mergeObject(modifier, formData);
+        const merged = foundry.utils.mergeObject(modifier, formData);
         if (!(modifier instanceof SFRPGModifier)) modifier = new SFRPGModifier(modifier);
         modifier.updateSource(merged);
         modifiers[index] = modifier;

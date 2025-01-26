@@ -2,7 +2,12 @@
   "_id": "4kYO0Mhu0ElJf2BL",
   "name": "Living lash",
   "type": "weapon",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
     "type": "",
     "ability": "str",
@@ -12,17 +17,19 @@
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
-      "type": "none",
+      "type": "",
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
-    "attackBonus": 0,
+    "attackBonus": null,
     "attributes": {
       "ac": {
         "value": "5"
@@ -50,6 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -61,17 +69,6 @@
           "amount": 6,
           "subtype": "fusion",
           "weightProperty": "level"
-        },
-        {
-          "type": "slot",
-          "acceptsType": [
-            "goods"
-          ],
-          "affectsEncumbrance": true,
-          "amount": 1,
-          "subtype": "",
-          "weightMultiplier": 1,
-          "weightProperty": ""
         },
         {
           "type": "slot",
@@ -92,28 +89,45 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d8 + @abilities.str.mod",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": true,
           "types": {
-            "slashing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": true,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>A living lash is grown from a network of filaments closely related to neural fibers, and it remains biologically active after its creation. This living connection to neurophysiology makes the weapon easy to manipulate using telepathy, but it’s difficult to wield without such abilities. These weapons are common only on worlds with telepathic species.</p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 6,
     "modifiers": [],
     "price": 4150,
@@ -132,6 +146,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -150,15 +165,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": true,
@@ -176,6 +195,7 @@
       "polymorphic": false,
       "powered": true,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -184,7 +204,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -197,6 +219,7 @@
       "thought": true,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -206,19 +229,41 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AR pg. 11",
     "special": "",
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -228,7 +273,7 @@
       "value": 1
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

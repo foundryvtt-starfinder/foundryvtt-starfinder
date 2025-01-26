@@ -2,12 +2,22 @@
   "_id": "vankihBkuFsnDl6O",
   "name": "Ferran",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "c6DzZ4uIYBWfsB8J",
       "name": "Dueling sword, tactical",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/dueling-sword.webp",
       "system": {
         "type": "",
@@ -25,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -112,9 +123,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 2,
         "modifiers": [],
         "price": 475,
@@ -244,6 +257,11 @@
       "_id": "dmrX9zhWnjCRSsq2",
       "name": "Zero pistol, frostbite-class",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/zero-pistol-blizzard-class.webp",
       "system": {
         "type": "",
@@ -261,6 +279,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -363,9 +382,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 5,
         "modifiers": [],
         "price": 3060,
@@ -495,7 +516,12 @@
       "_id": "4frJjawfemExsC9u",
       "name": "Momentum (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -511,6 +537,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -532,7 +559,49 @@
           "unidentified": "",
           "value": "<p>A ferran deals 5 additional damage with its first melee attack after it moves at least 10 feet in the same round.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
           "value": null
@@ -540,6 +609,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -573,6 +643,11 @@
       "_id": "16zvxbU1XInUeUlz",
       "name": "Overload (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/classes/overload.webp",
       "system": {
         "type": "",
@@ -589,9 +664,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -608,16 +684,59 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>As a standard action, you can cause a short in an electronic device, including most ranged energy weapons, melee weapons with the powered special property, or a single armor upgrade. This makes the device nonfunctional for 1 round. Overload doesn’t cause a locked door, safe, or other device to open, but it prevents anyone from opening it for 1 round. You must be adjacent to the device to use this ability. If you have a drone, you can instead use this ability on an electronic device adjacent to your drone. If you have an exocortex with the wireless hack ability, you can instead use this ability on any electronic device within range of your exocortex’s wireless hack. If you use overload on an item or armor upgrade in someone’s possession, the owner can attempt a Reflex saving throw to negate the effect (DC = 10 + half your mechanic level + your Intelligence modifier). Overload doesn’t affect androids, cybernetics, drones, powered armor, robots, or creatures with the technological subtype (all of which have shielding against this sort of attack), or items larger than Medium. Once a device has been successfully overloaded, a residual static charge prevents that device from being overloaded again for 1 minute.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>As a standard action, you can cause a short in an electronic device, including most ranged energy weapons, melee weapons with the powered special property, or a single armor upgrade. This makes the device nonfunctional for 1 round. Overload doesn’t cause a locked door, safe, or other device to open, but it prevents anyone from opening it for 1 round. You must be adjacent to the device to use this ability. If you have a drone, you can instead use this ability on an electronic device adjacent to your drone. If you have an exocortex with the wireless hack ability, you can instead use this ability on any electronic device within range of your exocortex’s wireless hack. If you use overload on an item or armor upgrade in someone’s possession, the owner can attempt a Reflex saving throw to negate the effect (DC = 10 + half your mechanic level + your Intelligence modifier). Overload doesn’t affect androids, cybernetics, drones, powered armor, robots, or creatures with the technological subtype (all of which have shielding against this sort of attack), or items larger than Medium. Once a device has been successfully overloaded, a residual static charge prevents that device from being overloaded again for 1 minute.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -641,7 +760,7 @@
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -651,7 +770,12 @@
       "_id": "6ASqtRxOkCbHoadE",
       "name": "Target Tracking (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -661,15 +785,16 @@
         "actionTarget": "",
         "actionType": "",
         "activation": {
-          "type": "",
+          "type": "move",
           "condition": "",
-          "cost": 0
+          "cost": 1
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -688,19 +813,78 @@
           "unidentified": "",
           "value": "<p>As a move action, a ferran can designate a single foe to track, gaining a +2 bonus to attack rolls against that target.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "text",
+          "value": ""
         },
         "formula": "",
         "isActive": null,
-        "modifiers": [],
+        "modifiers": [
+          {
+            "_id": "e1a37f5f-b956-44e8-931d-366d9275fe34",
+            "name": "Tracked Target",
+            "type": "untyped",
+            "condition": "",
+            "effectType": "all-attacks",
+            "enabled": true,
+            "max": 0,
+            "modifier": "2",
+            "modifierType": "formula",
+            "notes": "",
+            "source": "Target Tracking (Ex)",
+            "subtab": "misc",
+            "valueAffected": ""
+          }
+        ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "recharge": {
           "charged": false,
@@ -716,11 +900,11 @@
         "source": "",
         "target": {
           "type": "",
-          "value": null
+          "value": ""
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -729,6 +913,11 @@
       "_id": "IZo9s4quSs86JYY4",
       "name": "Artificial Intelligence (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/classes/artificial_intelligence.webp",
       "system": {
         "type": "",
@@ -745,6 +934,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -764,9 +954,51 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>You construct an artificial intelligence (or AI), a sophisticated program of self-motivated code that you can access for help in a variety of endeavors. This AI is the product of your own genius, far more advanced and complicated than any available for sale to consumers (though it falls short of being truly self-aware), and only you know the secrets of its creation and operation. Your AI can take one of two forms: a drone or an exocortex. You must pick one of these forms upon taking your first level of mechanic, and once this choice is made, it cannot be changed.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.cA0NuGh484BwlDjX]{Drone}</h2>\n<p>You begin play with a powerful robotic drone to house your AI. You build and control this drone, which accompanies you on your adventures and is capable of combat, espionage, and other specialized tasks. As you gain levels, your drone advances in sophistication and gain additional abilities. While the value of your drone is immense, only you, with your extensive knowledge of its quirks and security measures, can ever hope to operate or repair it. Drones are detailed in Drones beginning on page 74.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.cM54UpNXExgDSbq4]{Exocortex}</h2>\n<p>You begin play with an exocortex, an artificial processor that interacts with and augments your biological brain’s cognitive functions, which can aid you in a variety of tasks, from combat to digital infiltration. Your exocortex is implanted within your physical body or brain, similar to a piece of cybernetic hardware, allowing your AI to access your mind and feed you information. As you gain levels, your exocortex advances in sophistication and processing power—see Exocortex on page 79. Only you can access or interact with your exocortex.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>You construct an artificial intelligence (or AI), a sophisticated program of self-motivated code that you can access for help in a variety of endeavors. This AI is the product of your own genius, far more advanced and complicated than any available for sale to consumers (though it falls short of being truly self-aware), and only you know the secrets of its creation and operation. Your AI can take one of two forms: a drone or an exocortex. You must pick one of these forms upon taking your first level of mechanic, and once this choice is made, it cannot be changed.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.cA0NuGh484BwlDjX]{Drone}</h2>\n<p>You begin play with a powerful robotic drone to house your AI. You build and control this drone, which accompanies you on your adventures and is capable of combat, espionage, and other specialized tasks. As you gain levels, your drone advances in sophistication and gain additional abilities. While the value of your drone is immense, only you, with your extensive knowledge of its quirks and security measures, can ever hope to operate or repair it. Drones are detailed in Drones beginning on page 74.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.cM54UpNXExgDSbq4]{Exocortex}</h2>\n<p>You begin play with an exocortex, an artificial processor that interacts with and augments your biological brain’s cognitive functions, which can aid you in a variety of tasks, from combat to digital infiltration. Your exocortex is implanted within your physical body or brain, similar to a piece of cybernetic hardware, allowing your AI to access your mind and feed you information. As you gain levels, your exocortex advances in sophistication and processing power—see Exocortex on page 79. Only you can access or interact with your exocortex.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
           "value": null
@@ -774,6 +1006,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -807,6 +1040,11 @@
       "_id": "ADrZbcnlWB4Vue3s",
       "name": "Custom Rig (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/classes/custom_rig.webp",
       "system": {
         "type": "",
@@ -823,6 +1061,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -842,9 +1081,51 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>You have created a customized toolkit you can use to hack systems and items. Your custom rig can be configured to take up an upgrade slot on your armor or can be installed as a cybernetic augmentation system in your brain (though it can be combined with a datajack for the same price as installing a datajack normally), your eyes, or an arm. For more information on augmentations, see Chapter 7: Equipment. Alternatively, you can configure it to be a handheld device, meaning that you must retrieve it and hold it to use it effectively. While using this rig, you always count as having the appropriate tool or basic kit for any Computers or Engineering skill check you attempt. Some mechanic tricks (see page 71) and drone mods (see page 77) require the use of a custom rig. In addition, you can use your custom rig as a Mk I comm unit (see Chapter 7: Equipment). Finally, if you have a drone, you can use your custom rig to communicate over an encrypted channel with your drone to issue commands to its AI or directly control it at a range of 2,500 feet.</p>\n<p>If your custom rig is damaged, destroyed, lost, or stolen, you can kitbash a new one from any engineering kit, hacking kit, or other technological toolkit, reconfiguring the materials into a new custom rig with 1 hour of work. You can have only one custom rig at a time. If you create a new custom rig, your old one functions as a normal toolkit of whatever type you made it from and can no longer be used with your mechanic tricks.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>You have created a customized toolkit you can use to hack systems and items. Your custom rig can be configured to take up an upgrade slot on your armor or can be installed as a cybernetic augmentation system in your brain (though it can be combined with a datajack for the same price as installing a datajack normally), your eyes, or an arm. For more information on augmentations, see Chapter 7: Equipment. Alternatively, you can configure it to be a handheld device, meaning that you must retrieve it and hold it to use it effectively. While using this rig, you always count as having the appropriate tool or basic kit for any Computers or Engineering skill check you attempt. Some mechanic tricks (see page 71) and drone mods (see page 77) require the use of a custom rig. In addition, you can use your custom rig as a Mk I comm unit (see Chapter 7: Equipment). Finally, if you have a drone, you can use your custom rig to communicate over an encrypted channel with your drone to issue commands to its AI or directly control it at a range of 2,500 feet.</p>\n<p>If your custom rig is damaged, destroyed, lost, or stolen, you can kitbash a new one from any engineering kit, hacking kit, or other technological toolkit, reconfiguring the materials into a new custom rig with 1 hour of work. You can have only one custom rig at a time. If you create a new custom rig, your old one functions as a normal toolkit of whatever type you made it from and can no longer be used with your mechanic tricks.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
           "value": null
@@ -852,6 +1133,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -885,6 +1167,11 @@
       "_id": "PTlyhHybgIQdFNVE",
       "name": "Remote Hack (DC 17)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/classes/remote_hack.webp",
       "system": {
         "type": "",
@@ -901,6 +1188,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -920,9 +1208,51 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>You can use your custom rig to attempt Computers and Engineering skill checks at a range of 20 feet. At 7th level and every 2 levels thereafter, this range increases by 10 feet. A target of this ability (or a creature attending or observing your target) can attempt a Perception or Sense Motive check (DC = 10 + 1-1/2 × your mechanic level + your Intelligence modifier) to determine that you are the origin of this activity.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>You can use your custom rig to attempt Computers and Engineering skill checks at a range of 20 feet. At 7th level and every 2 levels thereafter, this range increases by 10 feet. A target of this ability (or a creature attending or observing your target) can attempt a Perception or Sense Motive check (DC = 10 + 1-1/2 × your mechanic level + your Intelligence modifier) to determine that you are the origin of this activity.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
           "value": null
@@ -930,6 +1260,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -963,6 +1294,11 @@
       "_id": "rlRwJX4SbqzUaNi5",
       "name": "Wireless Hack (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/classes/wireless_hack.webp",
       "system": {
         "type": "",
@@ -979,6 +1315,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -1000,7 +1337,49 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.undefined.undefined]{Exocortex}</p>\n<p>Instead of combat tracking, your exocortex can access another computer system within 20 feet, allowing it to attempt a Computers check against that computer each round, using your skill bonus. This counts as a standard action for the purpose of the Computers skill. You must remain within 20 feet of the computer system for the entire time your exocortex is interacting with the computer. If the task requires multiple actions (or even rounds) to accomplish, you can spend your actions to work in concert with your exocortex, counting both your action and the exocortex’s effective standard action toward the total time required. If you don’t have the remote hack class feature, you must be adjacent to the computer to attempt your checks.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
           "units": "",
           "value": null
@@ -1008,6 +1387,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1041,6 +1421,11 @@
       "_id": "P5vENhtkOs7cz6dT",
       "name": "D-suit I",
       "type": "equipment",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/armor/d-suit-I.webp",
       "system": {
         "type": "",
@@ -1058,6 +1443,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -1136,6 +1522,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -1143,6 +1530,7 @@
         "modifiers": [],
         "price": 2980,
         "proficient": true,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -1182,6 +1570,11 @@
       "_id": "Gy3kZ2aTKm82fky2",
       "name": "Zero pistol, frostbite-class",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/zero-pistol-blizzard-class.webp",
       "system": {
         "type": "",
@@ -1199,6 +1592,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -1296,9 +1690,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 5,
         "modifiers": [],
         "price": 3060,
@@ -1428,6 +1824,11 @@
       "_id": "M0DrMZqYrDH2Wf84",
       "name": "Battery",
       "type": "ammunition",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
         "type": "",
@@ -1468,6 +1869,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "price": 60,
@@ -1482,6 +1884,11 @@
       "_id": "oyUMqra16eb6Ldzg",
       "name": "Dueling sword, tactical",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/dueling-sword.webp",
       "system": {
         "type": "",
@@ -1499,6 +1906,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -1586,9 +1994,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 2,
         "modifiers": [],
         "price": 475,
@@ -1718,10 +2128,31 @@
       "_id": "DUDp8QIWRl9DXlia",
       "name": "Datapad",
       "type": "technological",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/datapad.webp",
       "system": {
         "type": "",
+        "ability": null,
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -1746,15 +2177,21 @@
           "max": 20,
           "value": 20
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": []
         },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1762,19 +2199,49 @@
           "unidentified": "",
           "value": "<p>Datapads are among the most common handheld computers and are ubiquitous in homes, manufacturing settings, and offices. Datapads require at least one hand to use. Nearly all datapads also incorporate a comm unit (which includes a microphone and speaker) along with several other functions, such as infosphere connectivity and data storage. Datapads can record simple audio and video (though not in high enough resolution to serve as proof of recorded events in most courts of law), store thousands of hours of recordings, play games, track time and set time-based alarms, act as word processors, and perform numerous other minor data processing and entertainment functions.</p>\n<p>All datapads have light bulk, and most are tier 1 computers with the miniaturization upgrade. Tier 2 and higher datapads are generally used only by the wealthy elites or technological sophisticates due to the additional miniaturization technology involved, but they are more powerful than many stationary computers while still fitting comfortably in one hand. Datapads can have computer modules and countermeasures installed at the usual additional costs. For example, most datapads in military or industrial use have the hardened upgrade.</p>\n<p>Saboteurs and spies frequently disguise eavesdropping devices or explosives as ordinary datapads, knowing that the datapads’ universal use means they won’t raise suspicion.</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "hands": 1,
         "identified": true,
+        "isActive": null,
         "level": 2,
         "modifiers": [],
         "price": 55,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "Core Rulebook",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "hour",
           "value": 1
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
         }
       }
     },
@@ -1782,7 +2249,12 @@
       "_id": "4FxKetpzf9PY3X36",
       "name": "Loot",
       "type": "container",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
         "type": "",
         "attributes": {
@@ -1875,6 +2347,11 @@
       "_id": "NLOT7P9Nn5EYsRY5",
       "name": "Energy Shield (10 HP, 5 min.)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/classes/energy_shield.webp",
       "system": {
         "type": "",
@@ -1891,9 +2368,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1910,16 +2388,59 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>As a standard action, you can use your custom rig to activate an energy shield around yourself. This shield provides you with a number of temporary Hit Points equal to your Intelligence modifier plus your mechanic level. The shield remains active for 1 minute per mechanic level or until all of its temporary Hit Points are depleted, whichever comes first. Once used, you cannot use this ability again until you spend 1 Resolve Point to regain Stamina Points after a 10-minute rest; your shield automatically shuts off during this period of rest.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>As a standard action, you can use your custom rig to activate an energy shield around yourself. This shield provides you with a number of temporary Hit Points equal to your Intelligence modifier plus your mechanic level. The shield remains active for 1 minute per mechanic level or until all of its temporary Hit Points are depleted, whichever comes first. Once used, you cannot use this ability again until you spend 1 Resolve Point to regain Stamina Points after a 10-minute rest; your shield automatically shuts off during this period of rest.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1943,7 +2464,7 @@
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1953,6 +2474,11 @@
       "_id": "axiNHjYII9DQpNMn",
       "name": "Neural Shunt (Ex)",
       "type": "feat",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/classes/neural_shunt.webp",
       "system": {
         "type": "",
@@ -1969,9 +2495,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1988,16 +2515,59 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>Once per day, as a reaction when you fail a saving throw against a mind-affecting effect, you can shunt that effect into your exocortex instead. When you do so, you are not affected by the mind-affecting effect, but for the normal duration of that effect, you lose the Skill Focus feat granted by your exocortex’s memory module and cannot use any of the exocortex’s abilities in any way (including any proficiencies and mods it grants you). When a mind-affecting effect is shunted into the exocortex, spells such as <em>dispel magic</em> or <em>break enchantment</em> can be cast on you to end the effect as if you were affected by it. Once the duration of the mind-affecting effect has ended, your exocortex resumes its normal functions. You must have an exocortex to learn this trick.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.YMGOKoZtKgJqIsAD]{Mechanic Trick}</p>\n<p>Once per day, as a reaction when you fail a saving throw against a mind-affecting effect, you can shunt that effect into your exocortex instead. When you do so, you are not affected by the mind-affecting effect, but for the normal duration of that effect, you lose the Skill Focus feat granted by your exocortex’s memory module and cannot use any of the exocortex’s abilities in any way (including any proficiencies and mods it grants you). When a mind-affecting effect is shunted into the exocortex, spells such as <em>dispel magic</em> or <em>break enchantment</em> can be cast on you to end the effect as if you were affected by it. Once the duration of the mind-affecting effect has ended, your exocortex resumes its normal functions. You must have an exocortex to learn this trick.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -2021,7 +2591,7 @@
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -2032,6 +2602,7 @@
     "name": "Ferran",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -2043,6 +2614,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -2063,11 +2635,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -2081,13 +2671,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -2138,7 +2732,7 @@
     },
     "attributes": {
       "abilityDC": {
-        "base": 0
+        "base": "0"
       },
       "arms": "2",
       "bab": 0,
@@ -2148,7 +2742,7 @@
         "value": 0
       },
       "baseSpellDC": {
-        "base": 0
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -2183,7 +2777,7 @@
         "value": 0
       },
       "kac": {
-        "base": null,
+        "base": 18,
         "min": 0,
         "tooltip": [],
         "value": null
@@ -2290,6 +2884,7 @@
         "weight": ""
       },
       "class": "",
+      "combatRole": "expert",
       "cr": 5,
       "environment": "any high-gravity (Ratheren)",
       "organization": "solitary, pair, or shift (3-5)",
@@ -2300,7 +2895,7 @@
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #2 pg. 55",
-      "subtype": "",
+      "subtype": "Ferran",
       "xp": {
         "value": 10
       }

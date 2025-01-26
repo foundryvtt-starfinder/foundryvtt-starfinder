@@ -15,7 +15,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @returns {Object}         The modified data object with the modifiers data object added.
      */
     _ensureHasModifiers(data, prop = null) {
-        if (!hasProperty(data, "modifiers")) {
+        if (!foundry.utils.hasProperty(data, "modifiers")) {
             // console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
         }
@@ -56,7 +56,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
         limitTo = "",
         damage = null
     } = {}) {
-        const data = this._ensureHasModifiers(duplicate(this.system));
+        const data = this._ensureHasModifiers(foundry.utils.deepClone(this.system));
         const modifiers = data.modifiers;
 
         modifiers.push(new SFRPGModifier({
@@ -111,11 +111,10 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @returns {SFRPGModifier[]}
      */
     getAllModifiers(ignoreTemporary = false, ignoreEquipment = false, invalidate = false) {
-        if (!invalidate && this.system.modifiers) return this.system.allModifiers;
+        if (!invalidate && this.system.allModifiers) return this.system.allModifiers;
 
         this.system.modifiers = this.system.modifiers.map(mod => {
-            const container = {actorUuid: this.uuid, itemUuid: null};
-            return new SFRPGModifier({...mod, container});
+            return new SFRPGModifier(mod, {parent: this});
         }, this);
 
         const allModifiers = this.system.modifiers.filter(mod => (!ignoreTemporary || mod.subtab === "permanent"));
@@ -125,8 +124,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
 
             // Create each modifier as an SFRPGModifier instance first on the item data.
             const itemModifiers = itemData.modifiers = itemData?.modifiers?.map(mod => {
-                const container = {actorUuid: this.uuid, itemUuid: item.uuid};
-                return new SFRPGModifier({...mod, container});
+                return new SFRPGModifier(mod, {parent: item});
             }, this) || [];
 
             if (!itemModifiers || itemModifiers.length === 0) continue;

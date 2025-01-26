@@ -9,6 +9,10 @@
       "vehicle",
       "npc"
     ],
+    "htmlFields": ["details.biography.value", "details.biography.gmNotes", "details.biography.value", "details.notes"],
+    "filePathFields": {
+      "details.biography.fullBodyImage": ["IMAGE"]
+    },
     "templates": {
       "common": {
         "abilities": {
@@ -1241,6 +1245,7 @@
       "weapon",
       "weaponAccessory"
     ],
+    "htmlFields": ["description.value", "description.gmnotes", "description.chat", "description.short", "description.unidentified"],
     "templates": {
       "container": {
         "container": {
@@ -1269,6 +1274,7 @@
         "level": 1,
         "attuned": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "equippable": false,
         "identified": true,
         "attributes": {
@@ -1318,8 +1324,8 @@
           "per": ""
         },
         "uses": {
-          "value": 0,
-          "max": 0,
+          "value": null,
+          "max": null,
           "per": null
         },
         "isActive": null
@@ -1345,7 +1351,8 @@
           "dc": null,
           "descriptor": ""
         },
-        "descriptors": []
+        "descriptors": [],
+        "properties": {}
       },
       "descriptors": {},
       "itemUsage": {
@@ -1402,11 +1409,11 @@
       "attributes": {
         "sturdy": true
       },
+      "isEquipment": true,
       "weaponType": "basicM",
       "weaponCategory": "uncategorized",
       "special": "",
       "ability": "str",
-      "properties": {},
       "proficient": true,
       "container": {
         "contents": [],
@@ -1531,7 +1538,6 @@
         "modifiers",
         "container"
       ],
-      "equippedBulkMultiplier": 1,
       "container": {
         "contents": [],
         "storage": [
@@ -2098,7 +2104,7 @@
         "modifiers"
       ],
       "abilityMod": {
-        "ability": "cha",
+        "ability": "",
         "mod": 1
       },
       "skill": ""
@@ -2118,7 +2124,9 @@
         "physicalItem",
         "itemUsage",
         "modifiers",
-        "container"
+        "container",
+        "action",
+        "activatedEffect"
       ],
       "hands": 0
     },
@@ -2128,7 +2136,9 @@
         "physicalItem",
         "itemUsage",
         "modifiers",
-        "container"
+        "container",
+        "action",
+        "activatedEffect"
       ],
       "hands": 0,
       "limitedWear": false
@@ -2139,7 +2149,9 @@
         "physicalItem",
         "itemUsage",
         "modifiers",
-        "container"
+        "container",
+        "action",
+        "activatedEffect"
       ],
       "hands": 0,
       "limitedWear": false
@@ -2159,7 +2171,9 @@
         "physicalItem",
         "itemUsage",
         "modifiers",
-        "container"
+        "container",
+        "action",
+        "activatedEffect"
       ],
       "slots": 1,
       "allowedArmorType": "any"
@@ -2613,7 +2627,8 @@
       "type": "effect",
       "enabled": true,
       "context": {},
-      "showOnToken": true
+      "showOnToken": true,
+      "turnEvents": []
     }
   }
 }

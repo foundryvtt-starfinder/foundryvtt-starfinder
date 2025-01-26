@@ -2,6 +2,11 @@
   "_id": "lM2RAJHFbF43D1L1",
   "name": "Cryo grenade I",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
   "img": "icons/weapons/thrown/bomb-fuse-blue.webp",
   "system": {
     "type": "",
@@ -16,8 +21,10 @@
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 10
@@ -50,6 +57,7 @@
     "chatFlavor": "staggered 1 round",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -89,8 +97,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Cryo grenades release a blast of supercooled chemicals on impact, which immediately coalesce into freezing particles.</p>"
     },
@@ -99,10 +110,13 @@
       "units": "",
       "value": ""
     },
+    "equippable": false,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 6,
     "modifiers": [],
     "price": 600,
@@ -195,12 +209,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
@@ -208,6 +224,7 @@
     },
     "source": "CRB pg. 178",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""

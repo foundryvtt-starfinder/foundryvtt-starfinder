@@ -2,13 +2,23 @@
   "_id": "P6jvSiGsAS3l2FKT",
   "name": "Ihonva",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "K6zTlJKkjoyiJcAN",
       "name": "Slam (plus Grab)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -22,6 +32,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -99,9 +110,11 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -145,6 +158,11 @@
       "_id": "XsnNAY0i33olurKo",
       "name": "Arc pistol, static",
       "type": "weapon",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
       "system": {
         "type": "",
@@ -162,6 +180,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -262,9 +281,11 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 2,
         "modifiers": [],
         "price": 750,
@@ -394,7 +415,12 @@
       "_id": "mQ7cfKDI9Iqm9N4Z",
       "name": "Implant Young (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -410,6 +436,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -432,6 +459,11 @@
           "value": "<p>As a standard action, an ihonva can lick a grappled or helpless creature to expose it to ihonva infestation.</p>\n<h2>Ihonva Infestation</h2>\n<p><strong>Type</strong>@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{disease} (injury); <strong>Save</strong> Fortitude DC 13</p>\n<p><strong>Track</strong> physical; <strong>Frequency</strong> 1/day</p>\n<p><strong>Effect</strong> Ihonva young emerge after 7 days, or 1 day after a victim dies, whichever results in more time.</p>\n<p><strong>Cure</strong> 2 consecutive saves</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -439,6 +471,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -472,6 +505,11 @@
       "_id": "wgJ9j8qdWSbMGx8M",
       "name": "Battery",
       "type": "goods",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
         "type": "",
@@ -507,6 +545,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "modifiers": [],
@@ -520,6 +559,11 @@
       "_id": "zbrSqXWV7xQmnRdX",
       "name": "Battery",
       "type": "goods",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
         "type": "",
@@ -555,6 +599,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "modifiers": [],
@@ -569,6 +614,7 @@
     "name": "Ihonva",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -580,6 +626,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -600,11 +647,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -618,13 +683,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -823,7 +892,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Ihonvas are native to the blistering deserts of Fullbright. Although these infamous humanoids call themselves ihonvas, a collective term for their race and their nation of federated tribes, most of @UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces}’s population knows ihonvas by another, sinister name: skin-stitchers. An ihonva is a wormlike being with a chitinous shell, usually dusty yellow or red to match its environment. For appendages, an ihonva has flexible tentacles that, like its tail, separate into multiple parts and allow fine manipulation. A single, outsized eye shaped much like a sideways hourglass dominates an ihonva’s face, the pupil a colored horizontal line across the glossy-black cornea. Below the eye, several feet of trunk end in a circle of teeth. This trunk serves as the ihonva’s only orifice, used for feeding, excretion, and mating.</p>\n<p>Ihonva reproduction begins with both partners exchanging gametes through their snouts in a practice they call “the long kiss.” Each ihonva stores the resulting zygotes until an appropriate host-preferably another intelligent humanoid-is captured and immobilized. The would-be-parent ihonva licks the host’s eyes and other mucous membranes, creating a bridge for the zygotes to enter the host’s bloodstream, where they act as parasites. Ihonva parents stake hosts out in the desert to allow their flesh to wither and cure, and to prevent magic or medical treatment from removing the young. The larval infants grow rapidly in size, sickening and eventually killing their host. When the baby ihonvas are mature enough, they exit through existing openings. Newborns battle until the strongest drives the others away. The winner then claims the host’s skin as a trophy, flaying it with the overlarge teeth that only neonatal ihonvas have. When this victor returns to ihonva society, other ihonvas fashion this “birth-skin” into ceremonial clothing.</p>\n<p>Citizens of the Ring of Nations leave ihonvas alone despite their brutal mating habits. Ihonvas have a fearsome reputation and prey mostly on members of the Outlaw Kingdoms, rarely killing sapients for reasons other than self-defense or breeding. Some ihonva tribes even engage in trade, and a few have settled for using nonsapients as hosts, to the horror of their kind.</p>\n<p>An ihonva stands 6 feet tall and weighs 350 pounds. They reach maturity at about 10 years and have a natural lifespan of 50 years.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>warm desert (@UUID[Compendium.sfrpg.setting.f24qKgU5Wh5LLJyh]{Verces})</p>\n<h3>Organization</h3>\n<p>solitary, pair, raid (3-12), or tribe (20+)</p>\n</section>",
+        "value": "<h2>Description</h2>\n<p>Ihonvas are native to the blistering deserts of Fullbright. Although these infamous humanoids call themselves ihonvas, a collective term for their race and their nation of federated tribes, most of @UUID[Compendium.sfrpg.setting.Item.f24qKgU5Wh5LLJyh]{Verces}’s population knows ihonvas by another, sinister name: skin-stitchers. An ihonva is a wormlike being with a chitinous shell, usually dusty yellow or red to match its environment. For appendages, an ihonva has flexible tentacles that, like its tail, separate into multiple parts and allow fine manipulation. A single, outsized eye shaped much like a sideways hourglass dominates an ihonva’s face, the pupil a colored horizontal line across the glossy-black cornea. Below the eye, several feet of trunk end in a circle of teeth. This trunk serves as the ihonva’s only orifice, used for feeding, excretion, and mating.</p>\n<p>Ihonva reproduction begins with both partners exchanging gametes through their snouts in a practice they call “the long kiss.” Each ihonva stores the resulting zygotes until an appropriate host-preferably another intelligent humanoid-is captured and immobilized. The would-be-parent ihonva licks the host’s eyes and other mucous membranes, creating a bridge for the zygotes to enter the host’s bloodstream, where they act as parasites. Ihonva parents stake hosts out in the desert to allow their flesh to wither and cure, and to prevent magic or medical treatment from removing the young. The larval infants grow rapidly in size, sickening and eventually killing their host. When the baby ihonvas are mature enough, they exit through existing openings. Newborns battle until the strongest drives the others away. The winner then claims the host’s skin as a trophy, flaying it with the overlarge teeth that only neonatal ihonvas have. When this victor returns to ihonva society, other ihonvas fashion this “birth-skin” into ceremonial clothing.</p>\n<p>Citizens of the Ring of Nations leave ihonvas alone despite their brutal mating habits. Ihonvas have a fearsome reputation and prey mostly on members of the Outlaw Kingdoms, rarely killing sapients for reasons other than self-defense or breeding. Some ihonva tribes even engage in trade, and a few have settled for using nonsapients as hosts, to the horror of their kind.</p>\n<p>An ihonva stands 6 feet tall and weighs 350 pounds. They reach maturity at about 10 years and have a natural lifespan of 50 years.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>warm desert (@UUID[Compendium.sfrpg.setting.Item.f24qKgU5Wh5LLJyh]{Verces})</p>\n<h3>Organization</h3>\n<p>solitary, pair, raid (3-12), or tribe (20+)</p>\n</section>",
         "weight": ""
       },
       "class": "",

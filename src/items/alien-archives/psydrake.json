@@ -2,13 +2,23 @@
   "_id": "izZNpNedEg4V2lgD",
   "name": "Psydrake",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "M2brfO0A7pUZaQpU",
       "name": "Bite",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -22,6 +32,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -99,9 +110,11 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -145,7 +158,12 @@
       "_id": "9hyTGPbqUT6XpreB",
       "name": "Claw",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -159,6 +177,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -236,9 +255,11 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -282,7 +303,12 @@
       "_id": "9jOtsalDZZhEE6lE",
       "name": "Tail Slap",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -296,6 +322,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -373,9 +400,11 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -419,7 +448,12 @@
       "_id": "3QO4tcRcvWxHu2H0",
       "name": "Diatribe (Su)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "int",
@@ -435,6 +469,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
           "value": 120
@@ -454,9 +489,14 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a full action, a psydrake can start a lengthy diatribe detailing various conspiracy theories it believes or explaining the esoteric connections between two concepts. Each creature within 120 feet that can hear and understand the psydrake must attempt a DC 14 Will saving throw or become @UUID[Compendium.sfrpg.conditions.7PPRS6krnvaTHbxh]{Fascinated} by the creature’s ramblings for as long as it speaks. The psydrake must take a move action each round to continue talking. This is a @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Mind-affecting}, @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Language-dependent}, and sensedependent effect.</p>"
+          "value": "<p>As a full action, a psydrake can start a lengthy diatribe detailing various conspiracy theories it believes or explaining the esoteric connections between two concepts. Each creature within 120 feet that can hear and understand the psydrake must attempt a DC 14 Will saving throw or become @UUID[Compendium.sfrpg.conditions.Item.7PPRS6krnvaTHbxh]{Fascinated} by the creature’s ramblings for as long as it speaks. The psydrake must take a move action each round to continue talking. This is a @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Mind-affecting}, @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Language-dependent}, and sensedependent effect.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -464,6 +504,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -497,6 +538,11 @@
       "_id": "e0v2ZmX017I3dHVv",
       "name": "Mirror Image",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/spells/mirror_image.webp",
       "system": {
         "type": "",
@@ -519,6 +565,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -562,6 +609,7 @@
           "mode": "innate",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -592,6 +640,11 @@
       "_id": "ZyR9oK1wT30dXmvM",
       "name": "See Invisibility",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "img": "systems/sfrpg/icons/spells/see_invisibility.webp",
       "system": {
         "type": "",
@@ -614,6 +667,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -657,6 +711,7 @@
           "mode": "innate",
           "prepared": true
         },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -688,6 +743,7 @@
     "name": "Psydrake",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -699,6 +755,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -719,11 +776,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -737,13 +812,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },

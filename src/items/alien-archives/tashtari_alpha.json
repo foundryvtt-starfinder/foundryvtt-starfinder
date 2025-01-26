@@ -2,13 +2,23 @@
   "_id": "l0QXshtjvObnBCML",
   "name": "Tashtari Alpha",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "ceNXn4me5SrwOHRt",
       "name": "Bite",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -22,6 +32,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -99,9 +110,11 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -145,7 +158,12 @@
       "_id": "egyLaeQ6UcEsbNUP",
       "name": "Muzzle Beam (Ex)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -162,6 +180,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -238,7 +257,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As an attack, a tashtari alpha can unleash a focused ray of light from its mouth that can @UUID[Compendium.sfrpg.rules.O5GDQUKPCJ9Zbnfj]{Burn} a target like the beam of a laser rifle. This ray has a range increment of 120 feet.</p>"
+          "value": "<p>As an attack, a tashtari alpha can unleash a focused ray of light from its mouth that can @UUID[Compendium.sfrpg.rules.Item.O5GDQUKPCJ9Zbnfj]{Burn} a target like the beam of a laser rifle. This ray has a range increment of 120 feet.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -247,9 +266,11 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -379,7 +400,12 @@
       "_id": "3dLf7YTyaC0CHEfw",
       "name": "Bristle Nova (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -395,6 +421,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
           "value": 60
@@ -417,6 +444,11 @@
           "value": "<p>Once per day as a standard action, a tashtari alpha can cause its filaments to flare with intense light. Each creature within 60 feet must succeed at a DC 15 Fortitude save or be blinded for 1d4 rounds. Creatures that succeed at this save are instead dazzled for 1 round. This ability has no effect on sightless creatures. Tashtaris and tashtari alphas are immune to the effects of this ability.</p>"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": ""
@@ -424,6 +456,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -458,6 +491,7 @@
     "name": "Tashtari Alpha",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -469,6 +503,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -489,11 +524,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -507,13 +560,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },
@@ -707,7 +764,7 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<section>\n<h2>Tashtari</h2>\n<p>The first glimpse most observers have of a tashtari pack is a far-off twinkling of lights, which is easily mistaken for swamp gas or the glint of moonlight. Produced by the coat of supple filaments that cover a tashtari’s body, these phosphorescent lights facilitate communication, allowing tashtari packs to silently coordinate while searching for prey and setting up ambushes. Tashtaris also use this luminescence for social interactions. Tashtaris evolved their tactics and laser attacks to hunt the small, quick-moving mammals of their native habitat on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}, but these predators are not shy about taking down larger prey if circumstances are in their favor.</p>\n<p>A pack of tashtaris consists of a dominant mating pair, their offspring, and close relatives. Juvenile tashtaris leave the pack soon after reaching maturity to seek mates from unrelated groups and found new packs.</p>\n<p>Tashtaris are nocturnal. During the day, they use the flexible claws on their trio of multijointed legs to scramble to the sunlit tops of tall trees in their habitat. They spend much of the day basking, with their photoreceptive filaments raised to maximize sunlight absorption. This basking behavior, more common in cold-blooded creatures, offsets the tremendous caloric demands of the tashtari’s muzzle laser. Instead of using bioluminescence, the tashtari stores solar energy gathered by its filaments in a photoenergetic node at its throat. When attacking, the tashtari uses a flexible focusing membrane to concentrate energy into a coherent, deadly beam.</p>\n<p>Sentient species of @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel} refer to these beasts as tashtaris, but offworlders have nicknamed the creatures “laser wolves,” based on their hunting behavior and unique physiology. Attempts to domesticate tashtaris have spread the creatures to far-flung parts of the galaxy, but trainers must closely monitor the creatures’ intake of solar radiation. Tashtaris transplanted to systems with stronger solar output can become dangerously aggressive.</p>\n<h2>Tashtari Biotech</h2>\n<p>Hunters can do brisk business harvesting the filaments, photoenergetic nodes, and focusing membranes of tashtaris and selling them to bioengineers. If not for conservation efforts on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}, tashtaris could have been hunted to extinction, since their photosensitive adaptations are difficult and expensive to duplicate through synthetic means. Cessation of hostilities between the formians and lashuntas has allowed a recent surge in the regulated trade of biotech that incorporates tashtari tissue. Explorers and scouts equip themselves with&nbsp;<a href=\"https://www.aonsrd.com/Biotech.aspx?ItemName=Mk%201&amp;Family=Focusing%20Membrane\">focusing membranes</a>&nbsp;or&nbsp;<a href=\"https://www.aonsrd.com/Biotech.aspx?ItemName=Mk%201&amp;Family=Filament%20Mesh\">filament mesh</a>, and many people throughout the Pact Worlds use&nbsp;<a href=\"https://www.aonsrd.com/Biotech.aspx?ItemName=Photoenergetic%20Node&amp;Family=None\">photoenergetic nodes</a>&nbsp;for practical and cosmetic purposes.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any forests or marshes (@UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel})</p>\n<h3>Organization</h3>\n<p>pack (2 plus 3-8 tashtaris)</p>\n</section>",
+        "value": "<section>\n<h2>Tashtari</h2>\n<p>The first glimpse most observers have of a tashtari pack is a far-off twinkling of lights, which is easily mistaken for swamp gas or the glint of moonlight. Produced by the coat of supple filaments that cover a tashtari’s body, these phosphorescent lights facilitate communication, allowing tashtari packs to silently coordinate while searching for prey and setting up ambushes. Tashtaris also use this luminescence for social interactions. Tashtaris evolved their tactics and laser attacks to hunt the small, quick-moving mammals of their native habitat on @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel}, but these predators are not shy about taking down larger prey if circumstances are in their favor.</p>\n<p>A pack of tashtaris consists of a dominant mating pair, their offspring, and close relatives. Juvenile tashtaris leave the pack soon after reaching maturity to seek mates from unrelated groups and found new packs.</p>\n<p>Tashtaris are nocturnal. During the day, they use the flexible claws on their trio of multijointed legs to scramble to the sunlit tops of tall trees in their habitat. They spend much of the day basking, with their photoreceptive filaments raised to maximize sunlight absorption. This basking behavior, more common in cold-blooded creatures, offsets the tremendous caloric demands of the tashtari’s muzzle laser. Instead of using bioluminescence, the tashtari stores solar energy gathered by its filaments in a photoenergetic node at its throat. When attacking, the tashtari uses a flexible focusing membrane to concentrate energy into a coherent, deadly beam.</p>\n<p>Sentient species of @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel} refer to these beasts as tashtaris, but offworlders have nicknamed the creatures “laser wolves,” based on their hunting behavior and unique physiology. Attempts to domesticate tashtaris have spread the creatures to far-flung parts of the galaxy, but trainers must closely monitor the creatures’ intake of solar radiation. Tashtaris transplanted to systems with stronger solar output can become dangerously aggressive.</p>\n<h2>Tashtari Biotech</h2>\n<p>Hunters can do brisk business harvesting the filaments, photoenergetic nodes, and focusing membranes of tashtaris and selling them to bioengineers. If not for conservation efforts on @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel}, tashtaris could have been hunted to extinction, since their photosensitive adaptations are difficult and expensive to duplicate through synthetic means. Cessation of hostilities between the formians and lashuntas has allowed a recent surge in the regulated trade of biotech that incorporates tashtari tissue. Explorers and scouts equip themselves with&nbsp;<a href=\"https://www.aonsrd.com/Biotech.aspx?ItemName=Mk%201&amp;Family=Focusing%20Membrane\">focusing membranes</a>&nbsp;or&nbsp;<a href=\"https://www.aonsrd.com/Biotech.aspx?ItemName=Mk%201&amp;Family=Filament%20Mesh\">filament mesh</a>, and many people throughout the Pact Worlds use&nbsp;<a href=\"https://www.aonsrd.com/Biotech.aspx?ItemName=Photoenergetic%20Node&amp;Family=None\">photoenergetic nodes</a>&nbsp;for practical and cosmetic purposes.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any forests or marshes (@UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel})</p>\n<h3>Organization</h3>\n<p>pack (2 plus 3-8 tashtaris)</p>\n</section>",
         "weight": ""
       },
       "class": "",

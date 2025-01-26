@@ -2,13 +2,23 @@
   "_id": "T3EEGO5RNYKL1c6F",
   "name": "Devil, Convergent",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "czpeVk74GTSplj84",
       "name": "Pincer",
       "type": "weapon",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -25,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -111,9 +122,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -266,7 +279,12 @@
       "_id": "1N2DcyFqTj9B3N6C",
       "name": "Biotech Warp (Su)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -282,6 +300,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -301,7 +320,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>When a convergent devil uses their instant upgrade spell-like ability, they can choose to create a biotech augmentation instead of a cybernetic augmentation, subject to the same restrictions. If they do so, the target must attempt a DC 17 Fortitude save. On a failure, the target is @UUID[Compendium.sfrpg.conditions.ZacF0l6IwqBwToTJ]{Sickened} for the duration of the spell.</p>"
+          "value": "<p>When a convergent devil uses their instant upgrade spell-like ability, they can choose to create a biotech augmentation instead of a cybernetic augmentation, subject to the same restrictions. If they do so, the target must attempt a DC 17 Fortitude save. On a failure, the target is @UUID[Compendium.sfrpg.conditions.Item.ZacF0l6IwqBwToTJ]{Sickened} for the duration of the spell.</p>"
         },
         "descriptors": {
           "acid": false,
@@ -341,6 +360,11 @@
           "teleportation": false,
           "water": false
         },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -348,6 +372,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -385,6 +410,11 @@
       "_id": "DT70Rm6pglvYHSP0",
       "name": "Instant Upgrade",
       "type": "spell",
+      "_stats": {
+        "coreVersion": 12,
+        "systemId": "sfrpg",
+        "systemVersion": "0.27.1"
+      },
       "flags": {
         "core": {
           "sourceId": "Compendium.sfrpg.spells.8PaUEWogypdwP2aO"
@@ -412,6 +442,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -493,6 +524,7 @@
           "prepared": true
         },
         "prepared": true,
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -524,6 +556,7 @@
     "name": "Devil, Convergent",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -535,6 +568,7 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
+    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -555,11 +589,29 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -573,13 +625,17 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
     },
     "width": 1
   },

@@ -3,24 +3,6 @@ import { SFRPG } from "../config.js";
 import { ItemSFRPG } from "../item/item.js";
 
 export const registerSystemSettings = function() {
-    game.settings.register("sfrpg", "diagonalMovement", {
-        name: "SFRPG.Settings.DiagonalMovementRule.Name",
-        hint: "SFRPG.Settings.DiagonalMovementRule.Hint",
-        scope: "world",
-        config: true,
-        default: "5105",
-        type: String,
-        choices: {
-            "5105": "SFRPG.Settings.DiagonalMovementRule.Values.Core",
-            "555": "SFRPG.Settings.DiagonalMovementRule.Values.Optional"
-        },
-        onChange: rule => {
-            if (canvas.initialized) {
-                canvas.grid.diagonalRule = rule;
-            }
-        }
-    });
-
     game.settings.register("sfrpg", "disableExperienceTracking", {
         name: "SFRPG.Settings.ExperienceTracking.Name",
         hint: "SFRPG.Settings.ExperienceTracking.Hint",
@@ -39,6 +21,14 @@ export const registerSystemSettings = function() {
         type: Boolean
     });
 
+    game.settings.register("sfrpg", "decimalSpeed", {
+        name: "SFRPG.Settings.DecimalSpeed.Name",
+        hint: "SFRPG.Settings.DecimalSpeed.Hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean
+    });
     game.settings.register("sfrpg", "autoCollapseItemCards", {
         name: "SFRPG.Settings.AutoCollapseCard.Name",
         hint: "SFRPG.Settings.AutoCollapseCard.Hint",
@@ -106,6 +96,24 @@ export const registerSystemSettings = function() {
         onChange: () => {
             ItemSFRPG._onScalingCantripsSettingChanges();
         }
+    });
+
+    game.settings.register("sfrpg", "autoRollCritEffect", {
+        name: "SFRPG.Settings.AutoRollCritEffect.Name",
+        hint: "SFRPG.Settings.AutoRollCritEffect.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
+
+    game.settings.register("sfrpg", "hideHostileStarshipCrit", {
+        name: "SFRPG.Settings.HideHostileStarshipCrit.Name",
+        hint: "SFRPG.Settings.HideHostileStarshipCrit.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
     });
 
     game.settings.register("sfrpg", "difficultyDisplay", {
