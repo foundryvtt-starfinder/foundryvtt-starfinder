@@ -1,6 +1,6 @@
 {
-  "_id": "2OtTLmmqnFWn7WCN",
-  "name": "Arcane Armor (Su)",
+  "_id": "ayEYkKdMN1chDDIC",
+  "name": "Fading Shadow (Su)",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
@@ -15,10 +15,10 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "save",
+    "actionType": "skill",
     "activation": {
-      "type": "reaction",
-      "condition": "",
+      "type": "move",
+      "condition": "Spend 1 Resolve Point",
       "cost": null
     },
     "area": {
@@ -44,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.SRkvq0GXYm3Wi6ze]{Spellbrawler}</p>\n<p>The bonus to AC granted by @UUID[Compendium.sfrpg.class-features.Item.QopuFVX0mdGrmpSy]{Spell Siphon} now lasts a number of rounds equal to the level of the drained spell (minimum 2 rounds), and the enhancement bonus also applies to your saves. You can dismiss these bonuses as a reaction to reduce the damage you take from an attack or effect by an amount equal to [[/r 1d6]] per level of the drained spell or spell-like ability.</p>\n<p><em>In the&nbsp;Spell Siphon (Su) feature, enable the save bonus in the Modifiers tab.</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.9SpVyycUKIvoDFJb]{Silent Slayer}</p>\n<p>As a move action, you can spend 1 Resolve Point to vanish in a whorl of shadows and teleport yourself to any point within 30 feet that you can see. This counts as a diversion, as if you had just successfully used the Bluff skill, so you can immediately attempt a Stealth check to hide with only a –10 penalty. Starting at 15th level, if you have the @UUID[Compendium.sfrpg.feats.Item.pw41PalbzAAGnOzY]{Spring Attack} feat, you can use this ability to teleport, make a single melee attack against an opponent within reach, and then teleport away. The total distance you move between both teleports cannot exceed 30 feet. Like with Spring Attack, you can’t attack a foe that is adjacent to you at the start of your turn.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -90,26 +90,26 @@
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "text",
-      "value": "rounds equal to the level of the drained spell (minimum 2 rounds)"
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [
       {
-        "_id": "34eb1671-5143-46dd-adda-3426e82e9d18",
-        "name": "Spell Siphon",
-        "type": "enhancement",
+        "_id": "61508984-85ea-4c5a-991e-262310303e26",
+        "name": "Fading Shadow Hide Check",
+        "type": "untyped",
         "condition": "",
-        "effectType": "ac",
+        "effectType": "skill",
         "enabled": true,
-        "max": 1,
-        "modifier": "1",
+        "max": 0,
+        "modifier": "-10",
         "modifierType": "constant",
         "notes": "",
-        "source": "",
+        "source": "Fading Shadow",
         "subtab": "misc",
-        "valueAffected": "both"
+        "valueAffected": "ste"
       }
     ],
     "properties": {},
@@ -123,18 +123,18 @@
       "charged": false,
       "value": null
     },
-    "requirements": "13th Technique",
+    "requirements": "9th Level (Soldier)",
     "rollNotes": "",
     "save": {
-      "type": "will",
-      "dc": "10+floor(@classes.soldier.levels/2) + (@classes.soldier.keyAbilityMod)",
+      "type": "",
+      "dc": "",
       "descriptor": "negate"
     },
     "skillCheck": {
-      "type": "",
+      "type": "ste",
       "dc": ""
     },
-    "source": "GM pg. 32",
+    "source": "AP#25 pg. 50",
     "target": {
       "type": "",
       "value": ""
