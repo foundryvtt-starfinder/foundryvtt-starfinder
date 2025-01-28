@@ -94,6 +94,11 @@ Citing a Starfinder One-Shot is done in the format:
 | **3** | System Takedown |
 | **4** | Before the Storm |
 
+## Angel of the Drift Comics
+Citing an Angel of the Drift Comic is done in the format:
+
+> AotD #**y** pg. **x**
+
 
 ## Starfinder Society
 Citing a Starfinder Society Scenario is done in the format:

@@ -18,8 +18,8 @@
     "actionType": "",
     "activation": {
       "type": "reaction",
-      "condition": "",
-      "cost": 1
+      "condition": "Optionally Spend 1 Resolve Point",
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>You're always ready for a tussle or twelve. When an attack succeeds against your AC, you can use your reaction to increase your AC as though you were @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#fight-defensively]{fighting defensively}; if you also spend 1 Resolve Point, calculate your AC as though you were using the @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#total-defense]{total defense} action instead. This can change a successful hit into a miss. Either way, you remain fighting defensively or totally defending yourself until the start of your next turn.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>You're always ready for a tussle or twelve. When an attack succeeds against your AC, you can use your reaction to increase your AC as though you were @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#fight-defensively]{Fighting Defensively}; if you also spend 1 Resolve Point, calculate your AC as though you were using the @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#total-defense]{Total Defense} action instead. This can change a successful hit into a miss. Either way, you remain fighting defensively or totally defending yourself until the start of your next turn.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -94,7 +94,38 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "6f0dda08-fd63-4678-b998-51f8f8d0389c",
+        "name": "Ready to Dance (base)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Ready to Dance",
+        "subtab": "misc",
+        "valueAffected": "both"
+      },
+      {
+        "_id": "16a36b52-236c-4ae8-adf9-726ca4ac5c29",
+        "name": "Ready to Dance (Resolve)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 0,
+        "modifier": "4",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
@@ -113,7 +144,7 @@
       "dc": null,
       "descriptor": ""
     },
-    "source": "AotD#5, p. 28",
+    "source": "AotD #5 pg. 28",
     "target": {
       "type": "",
       "value": ""
