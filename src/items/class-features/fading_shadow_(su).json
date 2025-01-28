@@ -10,16 +10,16 @@
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "skill",
     "activation": {
       "type": "move",
       "condition": "Spend 1 Resolve Point",
-      "cost": 1
+      "cost": null
     },
     "area": {
       "effect": "",
@@ -35,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -89,12 +90,28 @@
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "61508984-85ea-4c5a-991e-262310303e26",
+        "name": "Fading Shadow Hide Check",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "-10",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Fading Shadow",
+        "subtab": "misc",
+        "valueAffected": "ste"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
@@ -110,10 +127,14 @@
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "AP#25, pg. 50",
+    "skillCheck": {
+      "type": "ste",
+      "dc": ""
+    },
+    "source": "AP#25 pg. 50",
     "target": {
       "type": "",
       "value": ""
