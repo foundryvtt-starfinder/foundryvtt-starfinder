@@ -9,6 +9,7 @@ This update primarily adds some new data (including more Starfinder Enhanced mat
 - System manifest url location changed to enable more flexible releases by @ian612
 - git settings updated to allow OS-native line endings by @levirak
 - Non-handled document types dropped on actors are now ignored, allowing modules to handle them by @levirak
+- Untrained skills can now be hidden on the actor sheet by @Imper1um
 
 ## Bug Fixes
 - Power Armor bulk now no longer counts toward inventory weight while worn and charged by @ian612
@@ -28,6 +29,7 @@ The big addition this update is the Starfinder Enhanced class features. Thanks v
 - Enhanced Class Features added by @glitchexe
 - Missing Operative Exploits from Armory by @rmorgens
 - Options from Redshift Rally added by @gustavognog
+- Missing Soldier Fighting Styles added by @rmorgens
 
 ### Corrections and Updates
 - Several aliens missing KAC values have been updated to include them by @ian612
