@@ -1,0 +1,69 @@
+{
+  "_id": "863w01D0qcfxHtYw",
+  "name": "Effect: Improved Brace Yourselves (Ex)",
+  "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/default/stopwatch.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "round",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>Until the start of your next turn, you and your allies gain a +2 morale bonus to AC if adjacent to at least one other ally, as you all position yourselves so that your armor protects you better. The bonus persists even if the enemy moves beyond 60 feet or out of line of sight or hearing.</p>\n<p>At 6th level, you can spend 1 Resolve Point to grant this bonus to AC against attacks made by all enemies within 60 feet.</p>\n<p>When you use this ability, each ally within 60 feet may also drop @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone} as a reaction.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "7d44552b-f293-4aca-ba0e-2202c97979f2",
+        "name": "Brace Yourselves",
+        "type": "morale",
+        "condition": "",
+        "effectType": "ac",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Only applies if adjacent to an ally.",
+        "source": "Brace Yourselves",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
+    "requirements": "",
+    "showOnToken": false,
+    "source": "",
+    "turnEvents": []
+  }
+}

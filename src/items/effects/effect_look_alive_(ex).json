@@ -1,0 +1,84 @@
+{
+  "_id": "g6mtTJBzsqjJFBKA",
+  "name": "Effect: Look Alive (Ex)",
+  "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/classes/look_alive.webp",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "hour",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>All allies who stay within 60 feet of you throughout the rest gain a +2 morale bonus to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.gZlg2ZKze0erNLmP]{Perception} and Initiative checks for the next hour or until the next 10-minute rest to recover Stamina Points, whichever comes first.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "fcc84886-d88f-4124-86ee-d8bedbe90d1d",
+        "name": "Look Alive!",
+        "type": "morale",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "per"
+      },
+      {
+        "_id": "705adad6-3a0d-4253-9d7e-83aaafd55ebf",
+        "name": "Look Alive!",
+        "type": "morale",
+        "condition": "",
+        "effectType": "initiative",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "Look Alive",
+    "showOnToken": true,
+    "source": "CRB pg. 62",
+    "turnEvents": []
+  }
+}
