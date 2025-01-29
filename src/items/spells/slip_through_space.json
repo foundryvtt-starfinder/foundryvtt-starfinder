@@ -1,0 +1,162 @@
+{
+  "_id": "yzKKgOssJnZE9HE1",
+  "name": "Slip Through Space",
+  "type": "spell",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/spells/transport_passenger.webp",
+  "system": {
+    "type": "",
+    "ability": "",
+    "abilityMods": {
+      "parts": []
+    },
+    "actionTarget": "",
+    "actionType": "save",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 1
+    },
+    "allowedClasses": {
+      "myst": true,
+      "precog": false,
+      "tech": false,
+      "wysh": true
+    },
+    "area": {
+      "effect": "burst",
+      "shapable": false,
+      "shape": "sphere",
+      "units": "ft",
+      "value": "lookupRange(@item.level, 0, 3, 5, 4, 5, 5, 10, 6, 15)"
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "concentration": false,
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "name": "",
+          "formula": "(lookupRange(@item.level, 0, 3, 5, 4, 7, 5, 5, 6, 6))d(lookupRange(@item.level, 0,3,6,4,6,5,8,6,8))",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ],
+      "primaryGroup": null
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>You tear open two temporary rifts, one beneath you and one 10 feet in the air above your intended destination within range. You fall into the rift beneath you and out the exit rift, landing without harm as the rifts close. As you land, you release a shockwave of energy, dealing bludgeoning damage in a burst (Reflex for half damage) and making all spaces in the area difficult terrain until the beginning of your next turn; this damage has the force descriptor. Creatures not in contact with the ground aren’t damaged. If you attempt to bring another creature along with you, this spell fails.</p>\n<p><strong>3rd:</strong> You deal 5d6 bludgeoning damage in a 5-foot radius burst.</p>\n<p><strong>4th:</strong> You deal 7d6 bludgeoning damage in a 5-foot radius burst.</p>\n<p><strong>5th:</strong> You deal 5d8 bludgeoning damage in a 10-foot radius burst.</p>\n<p><strong>6th:</strong> You deal 6d8 bludgeoning damage in a 15-foot radius burst.</p>"
+    },
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": true,
+      "water": false
+    },
+    "dismissible": false,
+    "duration": {
+      "units": "instantaneous",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": null,
+    "isVariableLevel": true,
+    "level": 3,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
+    "modifiers": [],
+    "preparation": {
+      "mode": "",
+      "prepared": false
+    },
+    "properties": {},
+    "range": {
+      "additional": "",
+      "per": "",
+      "units": "close",
+      "value": ""
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "descriptor": "half"
+    },
+    "school": "con",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "SA:RR pg. 59",
+    "sr": false,
+    "target": {
+      "type": "",
+      "value": "10 feet above a point within range"
+    },
+    "uses": {
+      "max": "",
+      "per": "",
+      "value": null
+    }
+  }
+}

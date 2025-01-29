@@ -25,8 +25,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,17 +44,54 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@@UUID[Compendium.sfrpg.class-features.Item.SRkvq0GXYm3Wi6ze]{Spellbrawler}</p>\n<p>The bonus to AC granted by spell siphon now lasts a number of rounds equal to the level of the drained spell (minimum 2 rounds), and the enhancement bonus also applies to your saves. You can dismiss these bonuses as a reaction to reduce the damage you take from an attack or effect by an amount equal to 1d6 per level of the drained spell or spell-like ability.</p>\n<p><em>In the&nbsp;</em><em>Spell Siphon (Su) feature, enable the save bonus in the Modifiers tab.</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.SRkvq0GXYm3Wi6ze]{Spellbrawler}</p>\n<p>The bonus to AC granted by @UUID[Compendium.sfrpg.class-features.Item.QopuFVX0mdGrmpSy]{Spell Siphon} now lasts a number of rounds equal to the level of the drained spell (minimum 2 rounds), and the enhancement bonus also applies to your saves. You can dismiss these bonuses as a reaction to reduce the damage you take from an attack or effect by an amount equal to [[/r 1d6]] per level of the drained spell or spell-like ability.</p>\n<p><em>In the&nbsp;Spell Siphon (Su) feature, enable the save bonus in the Modifiers tab.</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
-      "value": ""
+      "units": "text",
+      "value": "rounds equal to the level of the drained spell (minimum 2 rounds)"
     },
     "formula": "",
     "isActive": null,
@@ -79,7 +117,7 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "recharge": {
       "charged": false,
@@ -92,13 +130,17 @@
       "dc": "10+floor(@classes.soldier.levels/2) + (@classes.soldier.keyAbilityMod)",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "GM pg. 32",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }
