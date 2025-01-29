@@ -1759,7 +1759,7 @@ async function packageBuild() {
         await fs.ensureDir('package');
 
         // Initialize the zip file
-        const zipName = `${manifest.file.id}-v${manifest.file.version}.zip`;
+        const zipName = `${manifest.file.id}-${manifest.file.version}.zip`;
         const zipFile = fs.createWriteStream(path.join('package', zipName));
         const zip = archiver('zip', { zlib: { level: 9 } });
 
@@ -1779,6 +1779,16 @@ async function packageBuild() {
         zip.directory('dist/', manifest.file.id);
 
         zip.finalize();
+
+        // Copy the system.json file to the package directory
+        fs.copyFile('src/system.json', 'package/system.json', (err) => {
+            if (err) {
+                console.log(chalk.red("Error Found:", err));
+            }
+            else {
+                console.log(chalk.green("system.json successfully copied."));
+            }
+        });
     } catch (err) {
         Promise.reject(err);
     }
