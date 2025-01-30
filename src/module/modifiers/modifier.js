@@ -206,7 +206,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         if (!this.parent) throw new Error("SFRPG | This modifier has no parent, which is required to perform an update via the parent.");
 
         const modifiers = this.parent.toObject().system.modifiers;
-        const modInParent = modifiers.find(mod => mod._id === this.modifier._id);
+        const modInParent = modifiers.find(mod => mod._id === this._id);
 
         foundry.utils.mergeObject(modInParent, data);
 
