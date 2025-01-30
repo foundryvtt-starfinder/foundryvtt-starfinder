@@ -1,3 +1,51 @@
+# 0.27.1
+This update primarily adds some new data (including more Starfinder Enhanced material) and addresses some bugs that popped up in 0.27.0 and before. Some small system improvements have also been made, primarily to the backend.
+
+## Core System Improvements
+- Update combats to start at round 1 instead of 0, and remove unneeded chat card clutter by @danimrath
+- Handelbars `config` variable was replaced with a static handlebars helper by @levirak
+- EquippedBulkModifier added to all physical item sheets by @ian612
+- Optional hot-reloading of `.css`, `.hbs`, and `.json` files by @LebombJames
+- System manifest url location changed to enable more flexible releases by @ian612
+- git settings updated to allow OS-native line endings by @levirak
+- Non-handled document types dropped on actors are now ignored, allowing modules to handle them by @levirak
+- Untrained skills can now be hidden on the actor sheet by @Imper1um
+- Package manifest URL and release process tweaked to make it more flexible by @ian612
+
+## Bug Fixes
+- Power Armor bulk now no longer counts toward inventory weight while worn and charged by @ian612
+- Feature items correctly list themselves as passive, active, or attack features based on activation settings by @danimrath
+- Compendium browsers correctly check user permissions on compendiums before showing their items to players by @ian612
+- Starship weapons targeting TL are no longer assumed to have the Limited Fire property by @ian612
+- New `.svg` icons are modified to work correctly in Firefox by @ian612
+
+## Data Entry
+The big addition this update is the Starfinder Enhanced class features. Thanks very much to @glitchexe for entering these. A large amount of missing class features from the Armory book have been added by @Iankid and @rmorgens. We have also begun an effort to clean up mis-formatted source fields on all items and actors.
+
+### New Data
+- Caustic Fissure spell and Eldritch Deception paradox added by @danimrath
+- Armory technomancer options added by @Iankid
+- Missing mechanic tricks from Armory added by @rmorgens
+- Missing soldier options from Armory added by @Iankid
+- Enhanced Class Features added by @glitchexe
+- Missing Operative Exploits from Armory by @rmorgens
+- Options from Redshift Rally added by @gustavognog
+- Missing Soldier Fighting Styles added by @rmorgens
+
+### Corrections and Updates
+- Several aliens missing KAC values have been updated to include them by @ian612
+- Assorted fixes to compendium source references by @danimrath
+- Around 250 items had their source fields reformatted to the correct syntax by @danimrath
+- Updates to Spell Gem items by @Iankid
+- Across-the-board updates to mechanic trick attributes and source formatting by @rmorgens
+- Updates to soldier class features from Armory by @Iankid
+- Operative Exploits updated to include in-text links and modern attributes by @rmorgens
+- Icons added to many items by @LucD20
+- Added Healing Touch usage by @LucD20
+- Updates to Envoy Improvisations and addition of effects by @rmorgens
+- Fix roll formula error in Megavitamin by @ian612
+
+
 # v0.27.0
 Apologies for the delay in getting this release out, but the team has added a few new maintainers and made some **big** updates and addressed a number of long-standing issues in this one! This includes the first of the Starfinder Enhanced data: enhanced classes and resolve point usage journals. The rest of the endhanced data will follow in the next few updates. Check out the full list of changes below, and remember to please report any bugs or issues you find.
 
