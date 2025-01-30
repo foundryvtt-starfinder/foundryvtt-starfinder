@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.27.1"
   },
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
@@ -15,18 +15,18 @@
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "other",
+    "actionType": "save",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>@Icon[type:language-dependent] @Icon[type:mind-affecting] @Icon[type:sense-dependent]</p>\n<p>When you throw a grenade, each creature within the radius of the explosion that fails its Reflex save against the grenade and takes damage from it must succeed at a Will save or gain the @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{shaken} condition for 1 round. This is a fear effect.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>@Icon[type:language-dependent] @Icon[type:mind-affecting] @Icon[type:sense-dependent]</p>\n<p>When you throw a grenade, each creature within the radius of the explosion that fails its Reflex save against the grenade and takes damage from it must succeed at a Will save or gain the @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken} condition for 1 round. This is a fear effect.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -62,21 +63,21 @@
       "electricity": false,
       "emotion": false,
       "evil": false,
-      "fear": false,
+      "fear": true,
       "fire": false,
       "force": false,
       "good": false,
       "healing": false,
-      "language-dependent": false,
+      "language-dependent": true,
       "lawful": false,
       "light": false,
-      "mind-affecting": false,
+      "mind-affecting": true,
       "pain": false,
       "poison": false,
       "polymorph": false,
       "radiation": false,
       "scrying": false,
-      "sense-dependent": false,
+      "sense-dependent": true,
       "shadow": false,
       "sonic": false,
       "summoning": false,
@@ -89,8 +90,8 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "round",
+      "value": "1"
     },
     "formula": "",
     "isActive": null,
@@ -99,7 +100,7 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
+      "units": "none",
       "value": null
     },
     "recharge": {
@@ -120,12 +121,12 @@
     "source": "ARM pg. 144",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "",
+      "per": "",
+      "value": null
     }
   }
 }

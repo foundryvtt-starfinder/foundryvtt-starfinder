@@ -76,7 +76,6 @@ export class ActorSheetSFRPG extends ActorSheet {
             isDrone: this.document.type === 'drone',
             isNPC: this.document.type === 'npc' || this.document.type === 'npc2',
             isHazard: this.document.type === 'hazard',
-            config: CONFIG.SFRPG
         };
 
         data.items = [...this.actor.items.values()];
@@ -307,6 +306,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Effect Toggling
         html.find('.effect-toggle').on('click', this._onToggleEffect.bind(this));
+
+        // Option Toggling
+        html.find('.option-toggle').on('click', this._onToggleOption.bind(this));
     }
 
     /** @override */
@@ -553,6 +555,32 @@ export class ActorSheetSFRPG extends ActorSheet {
         const effectUuid = target.closest('.item.effect').data('effectUuid');
 
         this.actor.system.timedEffects.get(effectUuid)?.toggle();
+    }
+
+    /**
+	 * Toggles an option on the selected item.
+	 *
+	 * @param {Event} event The originating click event
+	 */
+    async _onToggleOption(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const opt = target.data('optionKey');
+
+        let options = null;
+        if (this.actor.system.options) {
+            options = duplicate(this.actor.system.options);
+        }
+        if (!options) {
+            options = new Map();
+        }
+        if (!options[opt]) {
+            options[opt] = true;
+        } else {
+            options[opt] = false;
+        }
+
+        await this.actor.update({["system.options"]: options});
     }
 
     /**
@@ -1137,13 +1165,12 @@ export class ActorSheetSFRPG extends ActorSheet {
         const parsedDragData = TextEditor.getDragEventData(event);
         if (!parsedDragData) {
             console.log("Unknown item data");
-            return;
+        } else if (parsedDragData.type === 'Item' || parsedDragData.type === 'ItemCollection') {
+            await this.processDroppedItems(event, parsedDragData);
         }
-
-        return this.processDroppedData(event, parsedDragData);
     }
 
-    async processDroppedData(event, parsedDragData) {
+    async processDroppedItems(event, parsedDragData) {
         const targetActor = new ActorItemHelper(this.actor.id, this.token?.id, this.token?.parent?.id, { actor: this.actor });
         if (!ActorItemHelper.IsValidHelper(targetActor)) {
             ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));

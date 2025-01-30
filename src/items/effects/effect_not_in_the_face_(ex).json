@@ -1,0 +1,69 @@
+{
+  "_id": "Ans8smPl0HJXR85o",
+  "name": "Effect: Not in the Face (Ex)",
+  "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.27.1"
+  },
+  "img": "systems/sfrpg/icons/classes/not_in_the_face.webp",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnEnd",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "round",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><span>Take a –4 penalty to all attacks made against the character that used this improvisation until the end of your next turn.</span></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "88d72a38-b3c2-4768-925c-db63f9cbcbcb",
+        "name": "Not in the Face",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": true,
+        "max": 0,
+        "modifier": "-4",
+        "modifierType": "formula",
+        "notes": "Only attacks against applying Envoy",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "Not in the Face",
+    "showOnToken": true,
+    "source": "CRB pg. 62",
+    "turnEvents": []
+  }
+}

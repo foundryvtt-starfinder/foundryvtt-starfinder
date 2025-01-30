@@ -10,13 +10,13 @@
     <div class="form-group modifier-type">
         <label for="type">{{localize "SFRPG.ModifierTypeLabel"}}</label>
         <select name="type" data-tooltip="{{localize "SFRPG.ModifierTypeTooltip"}}">
-            {{selectOptions config.modifierTypes selected=modifier.type}}
+            {{selectOptions (sfrpg "modifierTypes") selected=modifier.type}}
         </select>
     </div>
     <div class="form-group modifier-effect-type">
         <label for="effectType">{{localize "SFRPG.ModifierEffectTypeLabel"}}</label>
         <select name="effectType" data-tooltip="{{localize "SFRPG.ModifierEffectTypeTooltip"}}">
-            {{selectOptions config.modifierEffectTypes selected=modifier.effectType}}
+            {{selectOptions (sfrpg "modifierEffectTypes") selected=modifier.effectType}}
         </select>
     </div>
     <div class="form-group modifier-value-affected">
@@ -26,42 +26,42 @@
         {{else}}
             <select name="valueAffected" data-tooltip="{{localize "SFRPG.ModifierValueAffectedTooltip"}}">
                 {{#if (eq modifier.effectType "ac")}}
-                    {{selectOptions config.modifierArmorClassAffectedValues selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "modifierArmorClassAffectedValues") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "ability-skills")}}
-                    {{selectOptions config.abilities selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "abilities") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "acp")}}
-                    {{selectOptions config.acpEffectingArmorType selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "acpEffectingArmorType") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "save")}}
                     {{selectOption "highest" "SFRPG.ModifierSaveHighest" selected=modifier.valueAffected localize=true}}
                     {{selectOption "lowest" "SFRPG.ModifierSaveLowest" selected=modifier.valueAffected localize=true}}
-                    {{selectOptions config.saves selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "saves") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "skill")}}
                     {{selectOption "" "-" selected=modifier.valueAffected}}
-                    {{selectOptions config.skills selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "skills") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "skill-ranks")}}
-                    {{selectOptions config.skills selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "skills") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "ability-check")}}
-                    {{selectOptions config.abilities selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "abilities") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "ability-score")}}
-                    {{selectOptions config.abilities selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "abilities") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "weapon-attacks")}}
-                    {{selectOptions config.weaponTypes selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "weaponTypes") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "weapon-property-attacks")}}
-                    {{selectOptions config.weaponProperties selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "weaponProperties") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "weapon-category-attacks")}}
-                    {{selectOptions config.weaponCategories selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "weaponCategories") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "weapon-damage")}}
-                    {{selectOptions config.weaponTypes selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "weaponTypes") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "weapon-property-damage")}}
-                    {{selectOptions config.weaponProperties selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "weaponProperties") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "weapon-category-damage")}}
-                    {{selectOptions config.weaponCategories selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "weaponCategories") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "specific-speed")}}
-                    {{selectOptions config.speeds selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "speeds") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "damage-reduction")}}
-                    {{selectOptions config.damageReductionTypes selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "damageReductionTypes") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "energy-resistance")}}
-                    {{selectOptions config.energyResistanceTypes selected=modifier.valueAffected}}
+                    {{selectOptions (sfrpg "energyResistanceTypes") selected=modifier.valueAffected}}
                 {{else}}
                     <option value=""></option>
                 {{/if}}
@@ -79,7 +79,7 @@
     <div class="form-group modifier-modifier-type">
         <label for="modifierType">{{localize "SFRPG.ModifierModifierTypeLabel"}}</label>
         <select name="modifierType" data-tooltip="{{localize "SFRPG.ModifierModifierTypeTooltip"}}">
-            {{selectOptions config.modifierType selected=modifier.modifierType}}
+            {{selectOptions (sfrpg "modifierType") selected=modifier.modifierType}}
             {{selectOption "damageSection" (localize "SFRPG.Items.Action.DamageSection" section='') selected=modifier.modifierType hidden=true}}
         </select>
     </div>
@@ -94,7 +94,7 @@
         <div class="damage-part-type form-group stacked">
             <div class="form-group form-group-stacked">
                 <label>{{localize "SFRPG.Damage.EnergyDamage"}}</label>
-                {{#each config.energyDamageTypes as |name type|}}
+                {{#each (sfrpg "energyDamageTypes") as |name type|}}
                     <label class="checkbox">
                         <input type="checkbox" name="damage.damageTypes.{{type}}" {{checked (lookup ../modifier.damage.damageTypes
                             type)}} />{{name}}
@@ -103,7 +103,7 @@
             </div>
             <div class="form-group form-group-stacked">
                 <label>{{localize "SFRPG.Damage.KineticDamage"}}</label>
-                {{#each config.kineticDamageTypes as |name type|}}
+                {{#each (sfrpg "kineticDamageTypes") as |name type|}}
                     <label class="checkbox">
                         <input type="checkbox" name="damage.damageTypes.{{type}}" {{checked (lookup ../modifier.damage.damageTypes
                             type)}} />{{name}}

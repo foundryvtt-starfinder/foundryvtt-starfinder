@@ -37,7 +37,7 @@
                     <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSize" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSizeTooltip" }}">
                         <label>{{ localize "SFRPG.ItemSheet.StarshipDriftEngine.MaxSize" }}</label>
                         <select name="system.maxSize">
-                            {{selectOptions config.starshipSizes selected=itemData.maxSize localize=true}}
+                            {{selectOptions (sfrpg "starshipSizes") selected=itemData.maxSize localize=true}}
                         </select>
                     </div>
 

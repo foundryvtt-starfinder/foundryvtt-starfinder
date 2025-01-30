@@ -273,4 +273,39 @@ export function setupHandlebars() {
         const safeLabel = Handlebars.escapeExpression(options.hash.localize? game.i18n.localize(label): label);
         return new Handlebars.SafeString(`<option ${tagParams}>${safeLabel}</option>`);
     });
+
+    /**
+     * Look up a sequence of properties.
+     *
+     * @param {object} root     Topmost object.
+     * @param {object} hbsOpts  The Handlebars helper options parameter.
+     * @param {object} props    Sequence of properties (if any) to look up.
+     */
+    function configHelper(root, hbsOpts, ...props) {
+        let result = root;
+        for (const prop of props) {
+            result = foundry.utils.getProperty(result, prop);
+        }
+        return result;
+    }
+
+    /**
+     * Utility helper to get global config.
+     *
+     * Accepts any number (including zero) arguments, which will be recursively looked up starting from `CONFIG`.
+     */
+    Handlebars.registerHelper('config', function(...args) {
+        const options = args.pop();
+        return configHelper(CONFIG, options, ...args);
+    });
+
+    /**
+     * Utility helper to get global SFRPG config. Equivalent to `(config "SFRPG" ...)`
+     *
+     * Accepts any number (including zero) arguments, which will be recursively looked up starting from `CONFIG.SFRPG`.
+     */
+    Handlebars.registerHelper('sfrpg', function(...args) {
+        const options = args.pop();
+        return configHelper(CONFIG.SFRPG, options, ...args);
+    });
 }

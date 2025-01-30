@@ -142,7 +142,6 @@ export class SpellCastDialog extends Dialog {
             hasSlots: spellLevels.length > 0,
             consume: spellLevels.length > 0,
             spellLevels,
-            config: CONFIG.SFRPG,
             includedClasses: includedClasses
         });
 

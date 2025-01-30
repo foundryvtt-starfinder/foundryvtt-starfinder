@@ -129,13 +129,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Feat Items
         else if (itemData.type === "feat") {
             const act = data.activation;
-            if (act && ["mwak", "rwak", "msak", "rsak"].includes(act.type)) {
-                labels.featType = data?.damage?.parts?.length
-                    ? game.i18n.localize("SFRPG.Attack")
-                    : game.i18n.localize("SFRPG.Items.Actions.TitleAction");
-            } else {
-                labels.featType = game.i18n.localize("SFRPG.Passive");
-            }
+            labels.featType = data?.damage?.parts?.length && ["mwak", "rwak", "msak", "rsak"].includes(data.actionType)
+                ? game.i18n.localize("SFRPG.Attack")
+                : CONFIG.SFRPG.abilityActivationTypes[act.type] ? game.i18n.localize("SFRPG.Items.Action.TitleAction") : game.i18n.localize("SFRPG.Passive");
         }
 
         // Equipment Items
@@ -1099,11 +1095,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
-        if (this.hasCapacity()) {
-            if (this.getCurrentCapacity() <= 0) {
-                ui.notifications.warn(game.i18n.format("SFRPG.StarshipSheet.Weapons.NoCapacity"));
-                return false;
-            }
+        // If max capacity is 0, assume the item doesn't have limited fire property
+        if (this.hasCapacity() && this.getCurrentCapacity() <= 0 && this.getMaxCapacity() > 0) {
+            ui.notifications.warn(game.i18n.format("SFRPG.StarshipSheet.Weapons.NoCapacity"));
+            return false;
         }
 
         /** Build the roll context */
@@ -1168,7 +1163,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                         this.rollDamage({});
                     }
 
-                    if (this.hasCapacity() && !options.disableDeductAmmo) {
+                    if (this.hasCapacity() && !options.disableDeductAmmo && this.getMaxCapacity() > 0) {
                         this.consumeCapacity(1);
                     }
 

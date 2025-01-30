@@ -30,42 +30,42 @@
                     {{ellipsis modifier.modifier 12}}
                 </div>
                 <div class="item-detail modifier-type">
-                    {{lookup ../config.modifierTypes modifier.type}}
+                    {{sfrpg "modifierTypes" modifier.type}}
                 </div>
                 <div class="item-detail modifier-effect-type">
-                    {{lookup ../config.modifierEffectTypes modifier.effectType}}
+                    {{sfrpg "modifierEffectTypes" modifier.effectType}}
                 </div>
                 <div class="item-detail modifier-value-affected">
                     {{#if (eq modifier.effectType "ac")}}
-                        {{lookup ../config.modifierArmorClassAffectedValues modifier.valueAffected}}
+                        {{sfrpg "modifierArmorClassAffectedValues" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "acp")}}
-                        {{lookup ../config.acpEffectingArmorType modifier.valueAffected}}
+                        {{sfrpg "acpEffectingArmorType" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "ability-skills")}}
-                        {{lookup ../config.abilities modifier.valueAffected}}
+                        {{sfrpg "abilities" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "ability-check")}}
-                        {{lookup ../config.abilities modifier.valueAffected}}
+                        {{sfrpg "abilities" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "ability-score")}}
-                        {{lookup ../config.abilities modifier.valueAffected}}
+                        {{sfrpg "abilities" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "skill")}}
-                        {{lookup ../config.skills modifier.valueAffected}}
+                        {{sfrpg "skills" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "save")}}
                         {{#if (eq modifier.valueAffected "highest")}}
                             {{localize "SFRPG.ModifierSaveHighest"}}
                         {{else if (eq modifier.valueAffected "lowest")}}
                             {{localize "SFRPG.ModifierSaveLowest"}}
                         {{else}}
-                            {{lookup ../config.saves modifier.valueAffected}}
+                            {{sfrpg "saves" modifier.valueAffected}}
                         {{/if}}
                     {{else if (eq modifier.effectType "weapon-attacks")}}
-                        {{lookup ../config.weaponTypes modifier.valueAffected}}
+                        {{sfrpg "weaponTypes" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "weapon-property-attacks")}}
-                        {{lookup ../config.weaponProperties modifier.valueAffected}}
+                        {{sfrpg "weaponProperties" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "weapon-damage")}}
-                        {{lookup ../config.weaponTypes modifier.valueAffected}}
+                        {{sfrpg "weaponTypes" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "weapon-property-damage")}}
-                        {{lookup ../config.weaponProperties modifier.valueAffected}}
+                        {{sfrpg "weaponProperties" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "specific-speed")}}
-                        {{lookup ../../config.speeds modifier.valueAffected}}
+                        {{sfrpg "speeds" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "actor-resource")}}
                         <h4>{{~modifier.valueAffected~}}</h4>
                     {{else}}

@@ -45,7 +45,7 @@
                         <label>{{ localize "SFRPG.Items.Theme.AbilityAdjustment" }}</label>
                         <div class="form-fields">
                             <select name="system.abilityMod.ability">
-                                {{selectOptions config.abilities selected=itemData.abilityMod.ability}}
+                                {{selectOptions (sfrpg "abilities") selected=itemData.abilityMod.ability}}
                             </select>
                             <input type="text" name="system.abilityMod.mod" value="{{itemData.abilityMod.mod}}" data-dtype="Number" />
                         </div>
@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <label>{{ localize "SFRPG.Items.Theme.Skill" }}</label>
                         <select name="system.skill">
-                            {{selectOptions config.skills selected=itemData.skill}}
+                            {{selectOptions (sfrpg "skills") selected=itemData.skill}}
                         </select>
                     </div>
                 </div>

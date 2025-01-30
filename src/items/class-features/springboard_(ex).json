@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.0"
+    "systemVersion": "0.27.1"
   },
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
@@ -19,14 +19,14 @@
     "activation": {
       "type": "none",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,7 +44,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>Once per turn when you succeed at a skill check to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.3QdtsfnVJsHEdrt0#tumble]{tumble} through an opponent’s space, you can push off of that creature to gain additional momentum at the cost of their balance. Until the beginning of your next turn, the creature takes a –2 penalty to attack rolls when making attacks of opportunity, and the skill check DC for other creatures to tumble around or through the creature’s space is reduced by 5 (Reflex negates). In addition, you gain a +10-foot circumstance bonus to all of your movement speeds until the end of your turn.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>Once per turn when you succeed at a skill check to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.3QdtsfnVJsHEdrt0#tumble]{Tumble} through an opponent’s space, you can push off of that creature to gain additional momentum at the cost of their balance. Until the beginning of your next turn, the creature takes a –2 penalty to attack rolls when making attacks of opportunity, and the skill check DC for other creatures to tumble around or through the creature’s space is reduced by 5 (Reflex negates). In addition, you gain a +10-foot circumstance bonus to all of your movement speeds until the end of your turn.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -89,7 +90,7 @@
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
@@ -129,15 +130,19 @@
       "dc": "10+floor(@classes.operative.levels/2) + (@classes.operative.keyAbilityMod)",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "IS, pg. 29",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }
