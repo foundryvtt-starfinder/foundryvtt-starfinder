@@ -1,5 +1,5 @@
 # 0.27.1
-This update primarily adds some new data (including more Starfinder Enhanced material) and addresses some bugs that popped up in 0.27.0 and before. Some small system improvements have also been made to backend processes.
+This update primarily adds some new data (including more Starfinder Enhanced material) and addresses some bugs that popped up in 0.27.0 and before. Some small system improvements have also been made, primarily to the backend.
 
 ## Core System Improvements
 - Update combats to start at round 1 instead of 0, and remove unneeded chat card clutter by @danimrath
@@ -10,6 +10,7 @@ This update primarily adds some new data (including more Starfinder Enhanced mat
 - git settings updated to allow OS-native line endings by @levirak
 - Non-handled document types dropped on actors are now ignored, allowing modules to handle them by @levirak
 - Untrained skills can now be hidden on the actor sheet by @Imper1um
+- Package manifest URL and release process tweaked to make it more flexible by @ian612
 
 ## Bug Fixes
 - Power Armor bulk now no longer counts toward inventory weight while worn and charged by @ian612
@@ -41,6 +42,9 @@ The big addition this update is the Starfinder Enhanced class features. Thanks v
 - Operative Exploits updated to include in-text links and modern attributes by @rmorgens
 - Icons added to many items by @LucD20
 - Added Healing Touch usage by @LucD20
+- Updates to Envoy Improvisations and addition of effects by @rmorgens
+- Fix roll formula error in Megavitamin by @ian612
+
 
 # v0.27.0
 Apologies for the delay in getting this release out, but the team has added a few new maintainers and made some **big** updates and addressed a number of long-standing issues in this one! This includes the first of the Starfinder Enhanced data: enhanced classes and resolve point usage journals. The rest of the endhanced data will follow in the next few updates. Check out the full list of changes below, and remember to please report any bugs or issues you find.
