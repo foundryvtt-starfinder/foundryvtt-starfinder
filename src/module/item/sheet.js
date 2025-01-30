@@ -847,30 +847,30 @@ export class ItemSheetSFRPG extends ItemSheet {
     }
 
     /**
-     * Delete a modifier from the item.
-     *
-     * @param {Event} event The originating click event
-     */
+    * Delete a modifier from the actor.
+    *
+    * @param {Event} event The originating click event
+    */
     async _onModifierDelete(event) {
         event.preventDefault();
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.item.system.modifiers.find(mod => mod._id === modifierId);
 
-        await this.item.deleteModifier(modifierId);
+        return modifier.parentDelete();
     }
-
     /**
-     * Edit a modifier for an item.
-     *
-     * @param {Event} event The orginating click event
-     */
-    _onModifierEdit(event) {
+    * Edit a modifier for an item.
+    * @param {Event} event The orginating click event
+    */
+    async _onModifierEdit(event) {
         event.preventDefault();
 
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.item.system.modifiers.find(mod => mod._id === modifierId);
 
-        this.item.editModifier(modifierId);
+        return modifier.edit();
     }
 
     /**

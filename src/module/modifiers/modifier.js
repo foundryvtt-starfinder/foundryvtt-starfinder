@@ -1,4 +1,5 @@
 import { ActorSFRPG } from "../actor/actor.js";
+import SFRPGModifierApplication from "../apps/modifier-app.js";
 import { ItemSFRPG } from "../item/item.js";
 import { generateUUID } from "../utils/utilities.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.js";
@@ -211,5 +212,24 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         foundry.utils.mergeObject(modInParent, data);
 
         return this.parent.update({ "system.modifiers": modifiers }, options);
+    }
+
+    /**
+     * A helper method to delete this modifier from its parent
+     * @param {Object} options Options to be passed to update. @see Document.update in foundry-esm.js 11580.
+     */
+    async parentDelete(options = {}) {
+        if (!this.parent) throw new Error("SFRPG | This modifier has no parent, which is required to delete via the parent.");
+
+        const modifiers = this.parent.toObject().system.modifiers.filter(mod => mod._id !== this._id);
+
+        return this.parent.update({"system.modifiers": modifiers}, options);
+    }
+
+    /**
+     * Open the Modifier editor App for this modifier
+     */
+    async edit() {
+        return new SFRPGModifierApplication(this, this.parent).render(true);
     }
 }
