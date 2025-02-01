@@ -134,9 +134,10 @@
             </ul>
 
             {{!-- Skills --}}
-            <ul class="skills-list">
+            <ul class="skills-list {{#if actor.system.options.hideUntrained }} hide-untrained {{/if}}">
                 <h3 class="skill-ranks noborder {{#if (greaterThan system.skillpoints.used system.skillpoints.max)}}red{{/if}}" data-tooltip="<strong>{{localize "SFRPG.ActorSheet.Attributes.Skills.SkillRanks"}}</strong><br>@skillpoints.used<br>@skillpoints.total<br><br>{{#each system.skillpoints.tooltip as |tip|}}{{tip}}<br>{{/each}}">
-                    {{localize "SFRPG.ActorSheet.Attributes.Skills.SkillRanks"}} ({{system.skillpoints.used}} / {{system.skillpoints.max}})
+                    {{localize "SFRPG.ActorSheet.Attributes.Skills.SkillRanks"}} ({{system.skillpoints.used}} / {{system.skillpoints.max}})&nbsp;
+                    <a class="option-toggle {{#unless actor.system.options.hideUntrained}}selected{{/unless}}" data-option-key="hideUntrained" data-tooltip="{{#if actor.system.options.hideUntrained}}{{localize "SFRPG.ActorSheet.Skills.ShowUntrained"}}{{else}}{{localize "SFRPG.ActorSheet.Skills.HideUntrained"}}{{/if}}"><i class="fas fa-filter"></i></a>
                 </h3>
                 <li class="skills-header flexrow">
                     <div class="skill-header-prof"></div>
@@ -146,7 +147,7 @@
                     <div class="skill-header-mod">{{localize "SFRPG.SkillsHeaderModifier"}}</div>
                 </li>
                 {{#each system.skills as |skill s|}}
-                <li class="skill flexrow {{#if skill.value}}proficient{{/if}}" data-tooltip="<strong>{{skill.label}}</strong>{{#if (or skill.isTrainedOnly skill.hasArmorCheckPenalty)}}<br>(<em>{{#if skill.hasArmorCheckPenalty}}Armor Check Penalty{{/if}}{{#if (and skill.isTrainedOnly skill.hasArmorCheckPenalty)}}; {{/if}}{{#if skill.isTrainedOnly}}Trained Only{{/if}}</em>){{/if}}<br/>Modifier: @skills.{{s}}.mod<br/>Ranks: @skills.{{s}}.ranks<br/><br/>{{#each skill.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-skill="{{s}}">
+                <li class="skill flexrow {{#if skill.value}}proficient{{/if}} {{#if skill.ranks}}trained{{/if}} {{#if skill.isTrainedOnly}}trained-only{{/if}}" data-tooltip="<strong>{{skill.label}}</strong>{{#if (or skill.isTrainedOnly skill.hasArmorCheckPenalty)}}<br>(<em>{{#if skill.hasArmorCheckPenalty}}Armor Check Penalty{{/if}}{{#if (and skill.isTrainedOnly skill.hasArmorCheckPenalty)}}; {{/if}}{{#if skill.isTrainedOnly}}Trained Only{{/if}}</em>){{/if}}<br/>Modifier: @skills.{{s}}.mod<br/>Ranks: @skills.{{s}}.ranks<br/><br/>{{#each skill.tooltip as |tip|}}{{tip}}<br>{{/each}}" data-skill="{{s}}">
                     <input type="hidden" name="system.skills.{{s}}.value" value="{{skill.value}}" data-dtype="Number" />
                     <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                     <a title="Compendium" class="compendium-link" data-skill-id="{{s}}">

@@ -306,6 +306,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Effect Toggling
         html.find('.effect-toggle').on('click', this._onToggleEffect.bind(this));
+
+        // Option Toggling
+        html.find('.option-toggle').on('click', this._onToggleOption.bind(this));
     }
 
     /** @override */
@@ -552,6 +555,32 @@ export class ActorSheetSFRPG extends ActorSheet {
         const effectUuid = target.closest('.item.effect').data('effectUuid');
 
         this.actor.system.timedEffects.get(effectUuid)?.toggle();
+    }
+
+    /**
+	 * Toggles an option on the selected item.
+	 *
+	 * @param {Event} event The originating click event
+	 */
+    async _onToggleOption(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const opt = target.data('optionKey');
+
+        let options = null;
+        if (this.actor.system.options) {
+            options = duplicate(this.actor.system.options);
+        }
+        if (!options) {
+            options = new Map();
+        }
+        if (!options[opt]) {
+            options[opt] = true;
+        } else {
+            options[opt] = false;
+        }
+
+        await this.actor.update({["system.options"]: options});
     }
 
     /**
