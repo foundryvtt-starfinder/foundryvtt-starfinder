@@ -37,7 +37,7 @@ export default class RollTree {
         }
 
         /** Verify variable contexts, replace bad ones with 0. */
-        const variableMatches = new Set(formula.match(/@([a-zA-Z.0-9_\-]+)/g));
+        const variableMatches = new Set(formula.match(/@([a-zA-Z.0-9_-]+)/g));
         for (const variable of variableMatches) {
             const [context, remainingVariable] = RollNode.getContextForVariable(variable, contexts);
             if (!context) {
@@ -60,12 +60,12 @@ export default class RollTree {
      * @param {DamagePart[]} [request.enabledParts]
      */
     #processRollRequest(request) {
-        let result = {
+        const result = {
             button: request.button ?? 'cancel',
             mode: request.mode,
             modifiers: this.getModifiers(),
             bonus: request.bonus,
-            rolls: [],
+            rolls: []
         };
 
         if (result.button === 'cancel') {
@@ -76,15 +76,15 @@ export default class RollTree {
 
             const rootRollFormula = this.rootNode.resolveForRoll([]); // TODO(levirak): pass modifiers?
             for (const [partIndex, part] of request.enabledParts.entries()) {
-                let finalSectionFormula = {
+                const finalSectionFormula = {
                     finalRoll: [
                         part.formula,
-                        part.isPrimarySection ? rootRollFormula.finalRoll : '',
+                        part.isPrimarySection ? rootRollFormula.finalRoll : ''
                     ].filter(Boolean).join(' + ') || '0',
                     formula: [
                         part.formula,
-                        part.isPrimarySection ? rootRollFormula.formula : '',
-                    ].filter(Boolean).join(' + ') || '0',
+                        part.isPrimarySection ? rootRollFormula.formula : ''
+                    ].filter(Boolean).join(' + ') || '0'
                 };
 
                 if (result.bonus) {
@@ -147,7 +147,7 @@ export default class RollTree {
             bonus: null,
             // TODO(levirak): don't roll every part when skipping UI? (E.g., when holding SHIFT)
             enabledParts: options.parts ?? [],
-            debug: options.debug,
+            debug: options.debug
         });
     }
 
@@ -168,19 +168,19 @@ export default class RollTree {
         if (options.skipUI) {
             result = RollTree.buildRollSync(formula, contexts, options);
         } else {
-            let tree = new RollTree(formula, contexts, options);
-            let allRolledMods = tree.getRolledModifiers();
+            const tree = new RollTree(formula, contexts, options);
+            const allRolledMods = tree.getRolledModifiers();
 
             if (options.debug) {
                 console.log(["Available modifiers", allRolledMods]);
             }
 
-            let uiResult = await RollDialog.showRollDialog(tree, formula, contexts, allRolledMods, options.mainDie, {
+            const uiResult = await RollDialog.showRollDialog(tree, formula, contexts, allRolledMods, options.mainDie, {
                 buttons: options.buttons,
                 defaultButton: options.defaultButton,
                 title: options.title,
                 dialogOptions: options.dialogOptions,
-                parts: options.parts,
+                parts: options.parts
             });
 
             /* make sure anything toggled in the UI is correctly enabled */
@@ -195,7 +195,7 @@ export default class RollTree {
                 mode: uiResult.rollMode,
                 bonus: uiResult.bonus,
                 enabledParts: uiResult.parts?.filter(part => part.enabled),
-                debug: options.debug,
+                debug: options.debug
             });
         }
 
@@ -235,13 +235,13 @@ export default class RollTree {
      * @returns {SFRPGModifier[]}
      */
     getModifiers() {
-        let rollMods = [];
-        for (let value of Object.values(this.nodes)) {
+        const rollMods = [];
+        for (const value of Object.values(this.nodes)) {
             if (value.referenceModifier) {
                 rollMods.push(value.referenceModifier);
             }
             if (value.calculatedMods) {
-                for (let bonus of value.calculatedMods.values()) {
+                for (const bonus of value.calculatedMods.values()) {
                     if (rollMods.findIndex((x) => x.name === bonus.name) === -1 && this.formula.indexOf(bonus.name) === -1) {
                         rollMods.push(bonus);
                     }

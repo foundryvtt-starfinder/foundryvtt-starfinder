@@ -154,7 +154,7 @@ export default class RollDialog extends Dialog {
 
             data.formula = [
                 (this.parts.length === 1) ? this.parts[0].formula : '<Primary Section>',
-                this.formula,
+                this.formula
             ].filter(Boolean).join(' + ') || '0';
         }
 

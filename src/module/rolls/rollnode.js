@@ -2,7 +2,7 @@ import { SFRPGModifierType } from "../modifiers/types.js";
 import RollTree from "./rolltree.js";
 
 /** Pattern matching exterior characters of a formula that should be trimmed */
-const exteriorPattern = /^\s+|[\s\+]+$/g;
+const exteriorPattern = /^\s+|[\s+]+$/g;
 
 /** Pattern matching a formula attribute */
 const variablePattern = /@[a-zA-Z.0-9_-]+/g;
@@ -66,7 +66,7 @@ export default class RollNode {
                 if (!existingNode) {
                     const childNode = new RollNode(bonus.modifier, this, this.options, {
                         referenceModifier: bonus,
-                        isEnabled: bonus.enabled,
+                        isEnabled: bonus.enabled
                     });
                     nodes[modKey] = childNode;
                     existingNode = childNode;
@@ -82,7 +82,7 @@ export default class RollNode {
                 let existingNode = nodes[variable];
                 if (!existingNode) {
                     const childNode = new RollNode(variable, this, this.options, {
-                        variableValue: foundry.utils.getProperty(context.data, remainingVariable) ?? '0',
+                        variableValue: foundry.utils.getProperty(context.data, remainingVariable) ?? '0'
                     });
                     nodes[variable] = childNode;
                     existingNode = childNode;
@@ -101,7 +101,7 @@ export default class RollNode {
      * @returns {ResolvedRoll}
      */
     resolveForRoll(rollMods) {
-        let resolvedValue = {
+        const resolvedValue = {
             finalRoll: "",
             formula: ""
         };
@@ -110,14 +110,14 @@ export default class RollNode {
             if (this.variableValue !== "n/a") {
                 // This value has any enabled calculated mods pre-addeded into it.
                 // They need to be subtracted back out if they are also being rolled
-                let variableValue = rollMods
+                const variableValue = rollMods
                     .filter(bonus => this.calculatedMods.get(bonus._id)?.enabled)
                     .reduce((value, bonus) => value - bonus.max, Number(this.variableValue));
 
                 let formulaDescription = this.referenceModifier?.name || "@" + this.formula;
                 if (!this.options.useRawStrings) {
-                    let tooltip = this.rollTooltips.join(',\n') || this.variableTooltips.join(',\n');
-                    let spanTag = tooltip ? `span title="${tooltip}"` : 'span';
+                    const tooltip = this.rollTooltips.join(',\n') || this.variableTooltips.join(',\n');
+                    const spanTag = tooltip ? `span title="${tooltip}"` : 'span';
                     formulaDescription = `<${spanTag}>${formulaDescription}</span>`;
                 }
 
@@ -132,14 +132,14 @@ export default class RollNode {
 
                 resolvedValue.finalRoll = [
                     resolvedValue.finalRoll,
-                    childResolution.finalRoll,
+                    childResolution.finalRoll
                 ].filter(Boolean).join(' + ');
 
                 resolvedValue.formula = [
                     resolvedValue.formula,
                     childResolution.formula.endsWith("]")
                         ? childResolution.formula
-                        : `${childResolution.formula}[${childNode.referenceModifier.name}]`,
+                        : `${childResolution.formula}[${childNode.referenceModifier.name}]`
                 ].filter(Boolean).join(' + ');
             }
         } else {

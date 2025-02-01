@@ -18,7 +18,7 @@ export default class StackModifiers extends Closure {
      */
     process(mods, context, options = { actor: null }) {
         const modifiers = mods;
-        for (let modifier of modifiers) {
+        for (const modifier of modifiers) {
             const actor = options.actor;
             const formula = String(modifier.modifier);
 
@@ -57,7 +57,7 @@ export default class StackModifiers extends Closure {
     async processAsync(mods, context, options = { actor: null }) {
         const modifiers = mods;
         if (modifiers.length > 0) {
-            for (let modifier of modifiers) {
+            for (const modifier of modifiers) {
                 const actor = options.actor;
                 const formula = String(modifier.modifier);
 

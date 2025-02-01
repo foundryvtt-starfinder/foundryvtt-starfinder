@@ -161,7 +161,7 @@ export class DiceSFRPG {
     * @param {Number}               [data.fumble]      The value of d20 result which represents a critical failure
     * @param {onD20DialogClosed}    data.onClose       Callback for actions to take when the dialog form is closed
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
-    * @Returns {Promise<void>}
+    * @returns {Promise<void>}
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
         critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor" }) {
@@ -185,14 +185,14 @@ export class DiceSFRPG {
 
         const partMapper = (part) => {
             if (part instanceof Object) {
-                const explanation = part.explanation? `[${part.explanation}]`: "";
+                const explanation = part.explanation ? `[${part.explanation}]` : "";
                 return `${part.score || "0"}${explanation}`;
             }
             return part;
         };
         const formula = parts.map(partMapper).join(" + ");
 
-        let rollInfo = await RollTree.buildRoll(formula, rollContext, {
+        const rollInfo = await RollTree.buildRoll(formula, rollContext, {
             debug: false,
             buttons: buttons,
             defaultButton: "normal",
@@ -214,7 +214,7 @@ export class DiceSFRPG {
                 dieRoll = "2d20kh";
             }
 
-            let node = rollInfo.rolls[0].node;
+            const node = rollInfo.rolls[0].node;
             const finalFormula = await this._calcStackingFormula(node, rollInfo.modifiers, rollInfo.bonus, rollContext.allContexts[actorContextKey]?.entity);
 
             finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
@@ -337,7 +337,7 @@ export class DiceSFRPG {
         }
 
         const formula = rollFormula || parts.join(" + ");
-        let rollInfo = await RollTree.buildRoll(formula, rollContext, {
+        const rollInfo = await RollTree.buildRoll(formula, rollContext, {
             debug: false,
             buttons: buttons,
             defaultButton: "normal",
@@ -352,7 +352,7 @@ export class DiceSFRPG {
             return null;
         }
 
-        let node = rollInfo.rolls[0].node;
+        const node = rollInfo.rolls[0].node;
         const finalFormula = await this._calcStackingFormula(node, rollInfo.modifiers, rollInfo.bonus, rollContext.allContexts[actorContextKey]?.entity);
 
         if (mainDie) {
@@ -368,7 +368,8 @@ export class DiceSFRPG {
             finalFormula.formula = [dieRoll, finalFormula.formula].filter(Boolean).join(' + ');
         }
 
-        finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ").trim();
+        finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
+            .trim();
         finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
 
         const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
@@ -444,14 +445,14 @@ export class DiceSFRPG {
                 if (part.isDamageSection) {
                     damageSections.push(part);
 
-                    let rollInfo = await RollTree.buildRoll(part.formula, rollContext, {
+                    const rollInfo = await RollTree.buildRoll(part.formula, rollContext, {
                         buttons: buttons,
                         defaultButton: "normal",
-                        skipUI: true,
+                        skipUI: true
                     });
                     part.formula = rollInfo.rolls[0].formula.finalRoll;
                 } else {
-                    let explanation = part.explanation ? `[${part.explanation}]` : "";
+                    const explanation = part.explanation ? `[${part.explanation}]` : "";
                     finalParts.push(`${part.formula || "0"}${explanation}`);
                 }
             } else {
@@ -460,7 +461,7 @@ export class DiceSFRPG {
         }
 
         const formula = finalParts.join(" + ");
-        let rollInfo = await RollTree.buildRoll(formula, rollContext, {
+        const rollInfo = await RollTree.buildRoll(formula, rollContext, {
             debug: false,
             buttons: buttons,
             defaultButton: "normal",
@@ -469,13 +470,13 @@ export class DiceSFRPG {
             mainDie: "",
             dialogOptions: dialogOptions,
             parts: damageSections,
-            useRawStrings: false,
+            useRawStrings: false
         });
         if (rollInfo.button === 'cancel') {
             if (onClose) {
                 onClose(null, null, null, false);
             }
-        } else for (let { formula: finalFormula, node: part } of rollInfo.rolls) {
+        } else for (const { formula: finalFormula, node: part } of rollInfo.rolls) {
             /** @type {Tag[]} */
             const tags = [];
             /** @type {HtmlData[]} */
@@ -728,7 +729,7 @@ export class DiceSFRPG {
             if (errorToThrow) {
                 throw errorToThrow;
             }
-        };
+        }
 
         return rollInfo.button !== 'cancel';
     }
@@ -850,8 +851,8 @@ export class DiceSFRPG {
 
         let resultValue = 0;
 
-        let rollInfo = RollTree.buildRollSync(sourceFormula, rollContext);
-        let finalFormula = rollInfo.rolls[0].formula;
+        const rollInfo = RollTree.buildRollSync(sourceFormula, rollContext);
+        const finalFormula = rollInfo.rolls[0].formula;
         try {
             const formula = Roll.replaceFormulaData(finalFormula.finalRoll, null);
             resultValue = Roll.safeEval(formula);
