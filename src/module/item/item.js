@@ -1,5 +1,4 @@
 import { getItemContainer } from "../actor/actor-inventory-utils.js";
-import SFRPGModifierApplication from "../apps/modifier-app.js";
 import AbilityTemplate from "../canvas/ability-template.js";
 import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
@@ -1896,29 +1895,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         console.log("Adding a modifier to the item");
 
         await this.update({["system.modifiers"]: modifiers});
-    }
-
-    /**
-     * Delete a modifier for this Actor.
-     *
-     * @param {String} id The id for the modifier to delete
-     */
-    async deleteModifier(id) {
-        const modifiers = this.system.modifiers.filter(mod => mod._id !== id);
-
-        await this.update({"system.modifiers": modifiers});
-    }
-
-    /**
-     * Edit a modifier for an Actor.
-     *
-     * @param {String} id The id for the modifier to edit
-     */
-    editModifier(id) {
-        const modifiers = foundry.utils.deepClone(this.system.modifiers);
-        const modifier = modifiers.find(mod => mod._id === id);
-
-        new SFRPGModifierApplication(modifier, this, {}, this.actor).render(true);
     }
 
     static async _onScalingCantripsSettingChanges() {

@@ -1,20 +1,20 @@
-import SFRPGModifier from "../modifiers/modifier.js";
+import { ActorSFRPG } from "../actor/actor.js";
+import { ItemSFRPG } from "../item/item.js";
 import { SFRPGEffectType } from "../modifiers/types.js";
 
 /**
  * Application that is used to edit a dynamic modifier.
- *
- * @param {Object} modifier The modifier being edited.
- * @param {Object} target    The actor or item that the modifier belongs to.
- * @param {Object} options  Any options that modify the rendering of the sheet.
- * @param {Object} owningActor    The actor that the target belongs to, if target is an item.
  */
 export default class SFRPGModifierApplication extends FormApplication {
-    constructor(modifier, target, options = {}, owningActor = null) {
+    /**
+     * @param {SFRPGModifier}         modifier The modifier being edited.
+     * @param {ActorSFRPG|ItemSFRPG}  parent   The actor or item that the modifier belongs to.
+     * @param {Object}                options  Any options that modify the rendering of the sheet.
+     */
+    constructor(modifier, parent, options = {}) {
         super(modifier, options);
 
-        this.target = target;
-        this.owningActor = owningActor;
+        this.parent = parent;
     }
 
     static get defaultOptions() {
@@ -71,12 +71,12 @@ export default class SFRPGModifierApplication extends FormApplication {
      */
     getData() {
         const data = {
-            isOwner: this.target.isOwner,
+            isOwner: this.parent.isOwner,
             modifier: this.modifier,
-            limited: this.target.limited,
+            limited: this.parent.limited,
             options: this.options,
             editable: this.isEditable,
-            cssClass: this.target.isOwner ? "editable" : "locked",
+            cssClass: this.parent.isOwner ? "editable" : "locked"
         };
 
         return data;
@@ -308,32 +308,6 @@ export default class SFRPGModifierApplication extends FormApplication {
      * @param {Object} formData The data from the form
      */
     _updateObject(event, formData) {
-        return this._updateModifierData(formData);
-    }
-
-    async _updateModifierData(formData) {
-        const modifiers = this.target.system.modifiers;
-        const index = modifiers.findIndex(mod => mod._id === this.modifier._id);
-        let modifier = modifiers[index];
-
-        const formula = String(formData["modifier"] || "0");
-        if (formula) {
-            try {
-                const roll = Roll.create(formula, this.owningActor?.system || this.target.system);
-                modifier.max = await roll.evaluate({ maximize: true }).total;
-            } catch (err) {
-                ui.notifications.warn(err);
-                modifier.max = 0;
-            }
-        } else {
-            modifier.max = 0;
-        }
-
-        const merged = foundry.utils.mergeObject(modifier, formData);
-        if (!(modifier instanceof SFRPGModifier)) modifier = new SFRPGModifier(modifier);
-        modifier.updateSource(merged);
-        modifiers[index] = modifier;
-
-        return this.target.update({ "system.modifiers": modifiers });
+        return this.modifier.parentUpdate(formData);
     }
 }
