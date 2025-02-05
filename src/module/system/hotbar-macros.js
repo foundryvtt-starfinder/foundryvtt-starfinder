@@ -1,4 +1,5 @@
 import { ActorItemHelper, getChildItems } from "../actor/actor-inventory-utils.js";
+import { checkIcons } from "./enrichers/check.js";
 
 const createMacroFnLookup = {
     Item: createItemMacro,
@@ -37,62 +38,61 @@ function findElseCreateMacro(data) {
  * Get an existing item macro if one exists, otherwise create a new one.
  *
  * @param {Object} data The item data
- * @returns {Promise<Macro>}
+ * @returns {Promise<Macro|null>}
  */
 async function createItemMacro(data) {
+    let macro = null;
+
     const item = await Item.fromDropData(data);
-    if (!item || !item.actor) return;
+    if (item && item.actor) {
+        let macroType = data.macroType || "chatCard";
+        if (macroType.includes("feat")) macroType = "activate";
+        if (item.type === "spell") macroType = "cast";
 
-    let macroType = data?.macroType || "chatCard";
-    if (macroType.includes("feat")) macroType = "activate";
-    if (item.type === "spell") macroType = "cast";
-
-    const macro = await findElseCreateMacro({
-        name: item.name + (macroType !== "chatCard" ? ` (${game.i18n.localize(`SFRPG.ItemMacro.${macroType.capitalize()}`)})` : ""),
-        type: "script",
-        img: item.img,
-        command: `game.sfrpg.rollItemMacro("${item.uuid}", "${macroType}");`,
-        flags: {
-            sfrpg: {
-                actor: item.actor.uuid,
-                itemMacro: {
-                    itemUuid: item.uuid,
-                    macroType: macroType
+        macro = await findElseCreateMacro({
+            name: item.name + (macroType !== "chatCard" ? ` (${game.i18n.localize(`SFRPG.ItemMacro.${macroType.capitalize()}`)})` : ""),
+            type: "script",
+            img: item.img,
+            command: `game.sfrpg.rollItemMacro("${item.uuid}", "${macroType}");`,
+            flags: {
+                sfrpg: {
+                    actor: item.actor.uuid,
+                    itemMacro: {
+                        itemUuid: item.uuid,
+                        macroType: macroType
+                    }
                 }
             }
-        }
-    });
-    connectToDocument(macro);
+        });
+        connectToDocument(macro);
+    }
+
     return macro;
 }
 
 export function rollItemMacro(itemUuid, macroType) {
-
-    const item = (() => {
-        // New item macros will be created with the first argument as their uuid
-        const uuidItem = fromUuidSync(itemUuid);
-        if (uuidItem) return uuidItem;
-
+    let item = fromUuidSync(itemUuid);
+    if (!item) {
         // For backward compatibility's sake, fallback to the old method of searching by name.
         /** @todo Remove this at some point */
 
         const speaker = ChatMessage.getSpeaker();
-        let actor;
+        const actor = undefined
+            || (speaker.token && game.actors.tokens[speaker.token])
+            || (speaker.actor && game.actors.get(speaker.actor))
+        ;
 
-        if (speaker.token) actor = game.actors.tokens[speaker.token];
-        if (!actor) actor = game.actors.get(speaker.actor);
-        const item = actor ? actor.items.find(i => i.name === itemUuid) : null;
-        if (!item) return ui.notifications.error(`Cannot find the item associated with this item macro.`);
-        else {
-            foundry.utils.logCompatibilityWarning("You are using an item macro which uses the item's name instead of its UUID. Support for these types of item macros will be removed in a future version of the SFRPG system. It is recommended to delete and re-create this item macro.", {since: "0.25"});
-            return item;
+        if (actor) {
+            item = actor.items.find(i => i.name === itemUuid);
+            if (item) {
+                foundry.utils.logCompatibilityWarning("You are using an item macro which uses the item's name instead of its UUID. Support for these types of item macros will be removed in a future version of the SFRPG system. It is recommended to delete and re-create this item macro.", {since: "0.25"});
+            }
         }
+    }
 
-    })();
-
-    if (!item) return;
-
-    switch (macroType) {
+    if (!item) {
+        return ui.notifications.error(`Cannot find the item associated with this item macro.`);
+    } else switch (macroType) {
         case "attack":
             return item.rollAttack({ event });
         case "damage":
@@ -109,32 +109,31 @@ export function rollItemMacro(itemUuid, macroType) {
         default:
             return item.roll();
     }
-
 }
 
 const skillIconDefault = "icons/svg/d20.svg";
 const skillIconLookup = {
-    // Wanted: better icons
-    acr: "icons/skills/movement/feet-winged-boots-brown.webp",
-    ath: "icons/magic/control/buff-strength-muscle-damage-orange.webp",
-    blu: "icons/sundries/gaming/playing-cards.webp",
-    com: "systems/sfrpg/icons/equipment/technological items/datapad.webp",
-    cul: "icons/commodities/treasure/bust-carved-stone.webp",
-    dip: "icons/skills/social/diplomacy-handshake.webp",
-    dis: "icons/magic/perception/silhouette-stealth-shadow.webp",
-    eng: "icons/commodities/tech/blueprint.webp",
-    int: "icons/magic/unholy/silhouette-evil-horned-giant.webp",
-    lsc: "icons/commodities/gems/gem-amber-insect-orange.webp",
-    med: "systems/sfrpg/icons/equipment/technological items/medkit-advanced.webp",
-    mys: "icons/commodities/materials/parchment-secrets.webp",
-    per: "icons/creatures/eyes/human-single-brown.webp",
-    phs: "icons/tools/laboratory/vial-orange.webp",
-    pil: "systems/sfrpg/icons/equipment/technological items/microgoggles.webp",
-    pro: "systems/sfrpg/icons/equipment/goods/credstick.webp",
-    sen: "icons/magic/perception/eye-ringed-glow-angry-teal.webp",
-    sle: "icons/magic/air/air-smoke-casting.webp",
-    ste: "icons/creatures/magical/humanoid-silhouette-dashing-blue.webp",
-    sur: "icons/tools/navigation/map-plain-green.webp"
+    // NOTE: If you're here because an icon is broken, try running `scripts/fa-svg-update/fa-svg-update.js`
+    acr: `systems/sfrpg/icons/fa-svg/${checkIcons["acrobatics"]}.svg`,
+    ath: `systems/sfrpg/icons/fa-svg/${checkIcons["athletics"]}.svg`,
+    blu: `systems/sfrpg/icons/fa-svg/${checkIcons["bluff"]}.svg`,
+    com: `systems/sfrpg/icons/fa-svg/${checkIcons["computers"]}.svg`,
+    cul: `systems/sfrpg/icons/fa-svg/${checkIcons["culture"]}.svg`,
+    dip: `systems/sfrpg/icons/fa-svg/${checkIcons["diplomacy"]}.svg`,
+    dis: `systems/sfrpg/icons/fa-svg/${checkIcons["disguise"]}.svg`,
+    eng: `systems/sfrpg/icons/fa-svg/${checkIcons["engineering"]}.svg`,
+    int: `systems/sfrpg/icons/fa-svg/${checkIcons["intimidate"]}.svg`,
+    lsc: `systems/sfrpg/icons/fa-svg/${checkIcons["life-science"]}.svg`,
+    med: `systems/sfrpg/icons/fa-svg/${checkIcons["medicine"]}.svg`,
+    mys: `systems/sfrpg/icons/fa-svg/${checkIcons["mysticism"]}.svg`,
+    per: `systems/sfrpg/icons/fa-svg/${checkIcons["perception"]}.svg`,
+    phs: `systems/sfrpg/icons/fa-svg/${checkIcons["physical-science"]}.svg`,
+    pil: `systems/sfrpg/icons/fa-svg/${checkIcons["piloting"]}.svg`,
+    pro: `systems/sfrpg/icons/fa-svg/${checkIcons["profession"]}.svg`,
+    sen: `systems/sfrpg/icons/fa-svg/${checkIcons["sense-motive"]}.svg`,
+    sle: `systems/sfrpg/icons/fa-svg/${checkIcons["sleight-of-hand"]}.svg`,
+    ste: `systems/sfrpg/icons/fa-svg/${checkIcons["stealth"]}.svg`,
+    sur: `systems/sfrpg/icons/fa-svg/${checkIcons["survival"]}.svg`
 };
 
 /**
@@ -163,10 +162,10 @@ async function createSkillCheckMacro(data) {
 
 const saveIconDefault = "icons/svg/d20.svg";
 const saveIconLookup = {
-    // Wanted: better icons
-    fort:   "icons/skills/social/intimidation-impressing.webp",
-    reflex: "icons/skills/movement/feet-winged-boots-brown.webp",
-    will:   "icons/magic/holy/meditation-chi-focus-blue.webp"
+    // NOTE: If you're here because an icon is broken, try running `scripts/fa-svg-update/fa-svg-update.js`
+    fort:   `systems/sfrpg/icons/fa-svg/${checkIcons["fortitude"]}.svg`,
+    reflex: `systems/sfrpg/icons/fa-svg/${checkIcons["reflex"]}.svg`,
+    will:   `systems/sfrpg/icons/fa-svg/${checkIcons["will"]}.svg`
 };
 
 /**
@@ -193,13 +192,13 @@ async function createSaveCheckMacro(data) {
 
 const abilityIconDefault = "icons/svg/d20.svg";
 const abilityIconLookup = {
-    // Wanted: better icons
-    str: "icons/magic/control/buff-strength-muscle-damage-orange.webp",
-    dex: "icons/skills/movement/feet-winged-boots-brown.webp",
-    con: "icons/magic/life/heart-area-circle-red-green.webp",
-    int: "icons/tools/scribal/spectacles-glasses.webp",
-    wis: "icons/commodities/treasure/figurine-owl.webp",
-    cha: "icons/skills/social/thumbsup-approval-like.webp"
+    // NOTE: If you're here because an icon is broken, try running `scripts/fa-svg-update/fa-svg-update.js`
+    str: `systems/sfrpg/icons/fa-svg/${checkIcons["strength"]}.svg`,
+    dex: `systems/sfrpg/icons/fa-svg/${checkIcons["dexterity"]}.svg`,
+    con: `systems/sfrpg/icons/fa-svg/${checkIcons["constitution"]}.svg`,
+    int: `systems/sfrpg/icons/fa-svg/${checkIcons["intelligence"]}.svg`,
+    wis: `systems/sfrpg/icons/fa-svg/${checkIcons["wisdom"]}.svg`,
+    cha: `systems/sfrpg/icons/fa-svg/${checkIcons["charisma"]}.svg`
 };
 
 /**
