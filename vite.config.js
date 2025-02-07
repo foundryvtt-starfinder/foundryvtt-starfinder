@@ -1,5 +1,5 @@
 import esbuild from "esbuild";
-import fs from "node:fs";
+import fs from "fs-extra";
 import path from "path";
 import * as Vite from "vite";
 
@@ -11,15 +11,17 @@ const config = Vite.defineConfig(async ({ command }) => {
 
         fs.promises.cp("src/packs", "dist/packs", {recursive: true});
         for (const file of filesToCopy) {
-            fs.promises.copyFile(file, `dist/${file}`);
+            fs.copyFile(file, `dist/${file}`);
         }
 
     }
 
     // Create dummy files for vite
     const message = "This file is for vite and is not copied to a build";
-    fs.writeFileSync("./index.html", `<h1>${message}</h1>\n`);
-    fs.writeFileSync("./index.js", `/** ${message} */\n\nimport "./src/sfrpg.js";\n`);
+    await Promise.all([
+        fs.writeFile("./index.html", `<h1>${message}</h1>\n`),
+        fs.writeFile("./index.js", `/** ${message} */\n\nimport "./src/sfrpg.js";\n`)
+    ]);
 
     return {
         root: "src/",
@@ -75,7 +77,7 @@ const config = Vite.defineConfig(async ({ command }) => {
                     if (context.file.endsWith(".json")) {
                         const basePath = context.file.slice(context.file.indexOf("lang/"));
                         console.log(`Updating lang file at ${basePath}`);
-                        fs.promises.copyFile(context.file, `dist/${basePath}`).then(() => {
+                        fs.copyFile(context.file, `dist/${basePath}`).then(() => {
                             context.server.ws.send({
                                 type: "custom",
                                 event: "lang-update",
@@ -85,7 +87,7 @@ const config = Vite.defineConfig(async ({ command }) => {
                     } else if (context.file.endsWith(".hbs")) {
                         const basePath = context.file.slice(context.file.indexOf("templates/"));
                         console.log(`Updating template file at ${basePath}`);
-                        fs.promises.copyFile(context.file, `dist/${basePath}`).then(() => {
+                        fs.copyFile(context.file, `dist/${basePath}`).then(() => {
                             context.server.ws.send({
                                 type: "custom",
                                 event: "template-update",

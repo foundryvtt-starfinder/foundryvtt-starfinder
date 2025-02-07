@@ -1,5 +1,5 @@
-import fs from "fs";
-import { JSONstringifyOrder, mergeDeep } from "./util.js";
+import fs from "fs-extra";
+import { duplicate, JSONstringifyOrder, mergeDeep } from "./util.js";
 
 console.log(`Opening localization files`);
 
@@ -10,11 +10,11 @@ const files = fs.readdirSync(langSourceDir);
 console.log(`Sorting keys`);
 for (const filePath of files) {
     console.log(`> ${filePath}`);
-    const fileRaw = fs.readFileSync(langSourceDir + "/" + filePath);
+    const fileRaw = await fs.readFile(langSourceDir + "/" + filePath);
     const fileJson = JSON.parse(fileRaw);
 
     const outRaw = JSONstringifyOrder(fileJson, 4);
-    fs.writeFileSync(langSourceDir + "/" + filePath, outRaw);
+    fs.writeFile(langSourceDir + "/" + filePath, outRaw);
 }
 console.log(``);
 
@@ -33,12 +33,12 @@ for (const filePath of files) {
 
     console.log(`> ${filePath}`);
 
-    const languageRaw = fs.readFileSync(langSourceDir + "/" + filePath);
+    const languageRaw = await fs.readFile(langSourceDir + "/" + filePath);
     const languageJson = JSON.parse(languageRaw);
 
-    const copiedJson = JSON.parse(JSON.stringify(englishJson));
+    const copiedJson = duplicate(englishJson);
     mergeDeep(copiedJson, languageJson);
 
     const outRaw = JSONstringifyOrder(copiedJson, 4);
-    fs.writeFileSync(langSourceDir + "/" + filePath, outRaw);
+    fs.writeFile(langSourceDir + "/" + filePath, outRaw);
 }

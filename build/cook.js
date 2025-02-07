@@ -30,9 +30,9 @@ const sizeLookup = {
 // Run only if this file is executed directly
 const modulePath = url.fileURLToPath(import.meta.url);
 if (path.resolve(modulePath) === path.resolve(process.argv[1])) {
-    measureTime(async () => {
+    await measureTime(async () => {
         await cook();
-        console.log(`\nCook finished with ${cookErrorCount} errors.\n---`);
+        console.log(`---`);
 
         await unpackPacks(true);
     });
@@ -54,7 +54,7 @@ async function cook() {
     const allItems = [];
 
     const sourceDir = "src/items";
-    const directories = await fs.promises.readdir(sourceDir);
+    const directories = await fs.readdir(sourceDir);
     const promises = [];
 
     for (const directory of directories) {
@@ -63,33 +63,23 @@ async function cook() {
 
         if (!limitToPack || directory === limitToPack) {
             if (fs.existsSync(outputDir)) {
-                await fs.promises.rm(outputDir, { recursive: true });
+                await fs.rm(outputDir, { recursive: true });
+                console.log(`Cleared ${outputDir}`);
             }
         }
-
-        console.log(`Cleared ${outputDir}`);
 
         console.log(`Processing ${directory} (${itemSourceDir})`);
         compendiumMap[directory] = {};
 
-        const files = await fs.promises.readdir(itemSourceDir);
+        const files = await fs.readdir(itemSourceDir);
         const parsedFiles = [];
 
         const loadFile = async (file) => {
             const filePath = `${itemSourceDir}/${file}`;
-            let jsonInput = await fs.promises.readFile(filePath);
+            let jsonInput = await fs.readFile(filePath);
             try {
                 jsonInput = JSON.parse(jsonInput);
                 parsedFiles.push(jsonInput);
-
-                // Cached conditions to be referenced later
-                if (directory === "conditions" && jsonInput.name !== "Invisible") {
-                // conditionsCache[jsonInput._id] = jsonInput;
-                }
-                // Cached setting to be referenced later
-                else if (directory === "setting") {
-                // settingCache[jsonInput._id] = jsonInput;
-                }
 
                 if (!limitToPack || directory === limitToPack) {
                 // sanitize the incoming JSON
@@ -101,10 +91,6 @@ async function cook() {
                         jsonInput.img = "icons/svg/mystery-man.svg";
                     }
 
-                    const movingActorTypes = ["character", "drone", "npc"];
-                    if (movingActorTypes.includes(jsonInput.type)) {
-                    //  tryMigrateActorSpeed(jsonInput);
-                    }
                 }
 
                 compendiumMap[directory][jsonInput._id] = jsonInput;
@@ -136,7 +122,7 @@ async function cook() {
         const parsedFolders = (async () => {
             const foldersFile = path.resolve(itemSourceDir, "_folders.json");
             if (fs.existsSync(foldersFile)) {
-                const jsonString = await fs.promises.readFile(foldersFile, "utf-8");
+                const jsonString = await fs.readFile(foldersFile, "utf-8");
                 const foldersSource = (() => {
                     try {
                         return JSON.parse(jsonString);
@@ -165,7 +151,7 @@ async function cook() {
         }
     }
 
-    await Promise.allSettled(promises);
+    await Promise.all(promises);
 
     if (cookErrorCount > 0) {
         cookAborted = true;
@@ -196,9 +182,9 @@ async function cook() {
 
     if (!cookAborted) {
         if (cookErrorCount > 0) {
-            console.log(chalk.redBright(`\nCompendiums cooked with ${chalk.bold(cookErrorCount)} non-critical errors. Please check the files listed above and try again.`));
+            console.log(chalk.yellowBright(`\nCompendiums cooked with ${chalk.bold(cookErrorCount)} non-critical errors. Please check the files listed above and try again.`));
         } else {
-            console.log(chalk.greenBright(`\nCompendiums cooked with ${cookErrorCount} errors!\nDon't forget to restart Foundry to refresh compendium data!\n`));
+            console.log(chalk.greenBright(`\nCompendiums cooked with ${cookErrorCount} errors!\nDon't forget to restart Foundry to refresh compendium data!`));
         }
     } else {
         throw Error(chalk.redBright(`\nCook aborted after ${cookErrorCount} critical errors!\n`));

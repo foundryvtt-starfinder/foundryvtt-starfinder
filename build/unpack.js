@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import fs from "fs";
+import fs from "fs-extra";
 import url from "node:url";
 import path from "path";
 import sanitize from "sanitize-filename";
@@ -63,7 +63,7 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
             folderMap.set(folder._id, getFolderPath(folder));
         }
         const folderFilePath = path.resolve(outputDirectory, "_folders.json");
-        promises.push(fs.promises.writeFile(folderFilePath, JSONstringifyOrder(folders, 2), "utf-8"));
+        promises.push(fs.writeFile(folderFilePath, JSONstringifyOrder(folders, 2), "utf-8"));
     }
 
     for (const item of items) {
@@ -75,7 +75,7 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
             .toLowerCase();
 
         const targetFile = `${outputDirectory}/${filename}.json`;
-        promises.push(fs.promises.writeFile(targetFile, jsonOutput, { "flag": "w" }));
+        promises.push(fs.writeFile(targetFile, jsonOutput, { "flag": "w" }));
     }
 
     await Promise.all(promises);

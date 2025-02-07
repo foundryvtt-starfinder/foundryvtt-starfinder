@@ -39,6 +39,9 @@ export default class LevelDatabase extends ClassicLevel {
 
         const docBatch = this.#documentDb.batch();
         const embeddedBatch = this.#embeddedDb?.batch();
+
+        const promises = [];
+
         for (const source of docSources) {
             if (this.#embeddedKey) {
                 const embeddedDocs = source[this.#embeddedKey];
@@ -55,17 +58,19 @@ export default class LevelDatabase extends ClassicLevel {
 
             docBatch.put(source._id, source);
         }
-        await docBatch.write();
+        promises.push(docBatch.write());
         if (embeddedBatch?.length) {
-            await embeddedBatch.write();
+            promises.push(embeddedBatch.write());
         }
         if (folders.length) {
             const folderBatch = this.#foldersDb.batch();
             for (const folder of folders) {
                 folderBatch.put(folder._id, folder);
             }
-            await folderBatch.write();
+            promises.push(folderBatch.write());
         }
+
+        await Promise.all(promises);
 
         await this.close();
         console.log(chalk.greenBright(`> Finished processing data for ${packName}.`));

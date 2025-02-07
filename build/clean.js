@@ -1,5 +1,5 @@
 import chalk from "chalk";
-import fs from "node:fs/promises";
+import fs from "fs-extra";
 import path from "path";
 
 const name = "sfrpg";
