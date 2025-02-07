@@ -57,21 +57,41 @@ async function cook() {
     const directories = await fs.readdir(sourceDir);
     const promises = [];
 
+    const dirPromises = [];
+
     for (const directory of directories) {
         const itemSourceDir = `${sourceDir}/${directory}`;
         const outputDir = `src/packs/${directory}`;
 
-        if (!limitToPack || directory === limitToPack) {
-            if (fs.existsSync(outputDir)) {
-                await fs.rm(outputDir, { recursive: true });
-                console.log(`Cleared ${outputDir}`);
+        const loadDir = async (directory) => {
+            if (!limitToPack || directory === limitToPack) {
+                if (fs.existsSync(outputDir)) {
+                    await fs.rm(outputDir, { recursive: true });
+                    console.log(`Cleared ${outputDir}`);
+                }
             }
-        }
 
-        console.log(`Processing ${directory} (${itemSourceDir})`);
-        compendiumMap[directory] = {};
+            console.log(`Processing ${directory} (${itemSourceDir})`);
+            compendiumMap[directory] = {};
 
-        const files = await fs.readdir(itemSourceDir);
+            const files = await fs.readdir(itemSourceDir);
+            compendiumMap[directory] = files;
+        };
+
+        dirPromises.push(loadDir(directory));
+    }
+
+    await Promise.all(dirPromises);
+
+    // Do smallest first, so large packs don't block
+    directories.sort((a, b) => {
+        return compendiumMap[a].length - compendiumMap[b].length;
+    });
+
+    for (const directory of directories) {
+        const itemSourceDir = `${sourceDir}/${directory}`;
+        const outputDir = `src/packs/${directory}`;
+
         const parsedFiles = [];
 
         const loadFile = async (file) => {
@@ -112,7 +132,7 @@ async function cook() {
         };
 
         const readPromises = [];
-        for (const file of files) {
+        for (const file of compendiumMap[directory].values()) {
             if (file === "_folders.json") continue;
 
             readPromises.push(loadFile(file));
@@ -142,7 +162,7 @@ async function cook() {
 
         readPromises.push(parsedFolders);
 
-        await Promise.all(readPromises);
+        await Promise.all(readPromises); // While this does block the loop, unblocking this causes a "too many files open" error.
 
         if (!limitToPack || directory === limitToPack) {
             const packName = path.basename(outputDir);
