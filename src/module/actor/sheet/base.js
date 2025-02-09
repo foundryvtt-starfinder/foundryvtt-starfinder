@@ -1134,8 +1134,8 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
 
         const parsedDragData = TextEditor.getDragEventData(event);
-        if (!parsedDragData) {
-            console.log("Unknown item data");
+        if (Hooks.call('dropActorSheetData', this.actor, this, parsedDragData) === false) {
+            // Further processing halted
         } else if (parsedDragData.type === 'Item' || parsedDragData.type === 'ItemCollection') {
             await this.processDroppedItems(event, parsedDragData);
         }
