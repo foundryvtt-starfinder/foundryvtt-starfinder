@@ -64,10 +64,14 @@
                         {{/each}}
                     </div>
                     <div class="form-group form-group-stacked">
-                        <label>{{localize "SFRPG.HealingTypesHealing"}}</label>
+                        <label>{{localize "SFRPG.Healing.Healing"}}</label>
                         <label class="checkbox">
                             <input type="checkbox" name="system.turnEvents.{{i}}.damageTypes.healing" {{checked (lookup
-                                event.damageTypes "healing" )}} />{{localize "SFRPG.HealingTypesHealing"}}
+                                event.damageTypes "healing" )}} />{{localize "SFRPG.Healing.Healing"}}
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="system.damage.parts.{{i}}.types.temphp" {{checked (lookup
+                                event.damageTypes "temphp" )}} />{{localize "SFRPG.HealingTypesTempHP"}}
                         </label>
                     </div>
                 </div>

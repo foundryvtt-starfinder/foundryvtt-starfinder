@@ -414,6 +414,7 @@ Hooks.once("i18nInit", () => {
         "modifierEffectTypes",
         "modifierType",
         "modifierTypes",
+        "otherDamageTypes",
         "saveDescriptors",
         "saveProgression",
         "saves",

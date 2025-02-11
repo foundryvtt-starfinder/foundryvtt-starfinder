@@ -51,7 +51,7 @@
             {{#unless ../starshipDamage}}
                 <div class="damage-part-type form-group stacked">
                     <div class="form-group form-group-stacked">
-                        <label>{{localize "Energy Damage"}}</label>
+                        <label>{{localize "SFRPG.Damage.EnergyDamage"}}</label>
                         {{#each (sfrpg "energyDamageTypes") as |name type|}}
                         <label class="checkbox">
                             <input type="checkbox" name="system.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
@@ -59,7 +59,7 @@
                         {{/each}}
                     </div>
                     <div class="form-group form-group-stacked">
-                        <label>{{localize "Kinetic Damage"}}</label>
+                        <label>{{localize "SFRPG.Damage.KineticDamage"}}</label>
                         {{#each (sfrpg "kineticDamageTypes") as |name type|}}
                         <label class="checkbox">
                             <input type="checkbox" name="system.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
@@ -67,10 +67,20 @@
                         {{/each}}
                     </div>
                     <div class="form-group form-group-stacked">
-                        <label>{{localize "SFRPG.HealingTypesHealing"}}</label>
+                        <label>{{localize "SFRPG.Damage.OtherDamage"}}</label>
+                        {{#each (sfrpg "otherDamageTypes") as |name type|}}
                         <label class="checkbox">
-                            <input type="checkbox" name="system.damage.parts.{{i}}.types.healing" {{checked (lookup (lookup (lookup ../itemData.damage.parts i) "types") "healing")}} />{{localize "SFRPG.HealingTypesHealing"}}
+                            <input type="checkbox" name="system.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
                         </label>
+                        {{/each}}
+                    </div>
+                    <div class="form-group form-group-stacked">
+                        <label>{{localize "SFRPG.Healing.Healing"}}</label>
+                        {{#each (sfrpg "healingTypes") as |name type|}}
+                        <label class="checkbox">
+                            <input type="checkbox" name="system.damage.parts.{{i}}.types.{{type}}" {{checked (lookup (lookup (lookup ../../itemData.damage.parts i) "types") type)}} />{{name}}
+                        </label>
+                        {{/each}}
                     </div>
                 </div>
             {{/unless}}

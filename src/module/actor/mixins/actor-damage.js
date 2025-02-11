@@ -24,6 +24,15 @@ export class SFRPGHealingSetting {
         return healSetting;
     }
 
+    // Only heals temp HP
+    static get tempOnly() {
+        const healSetting = new SFRPGHealingSetting();
+        healSetting.healsHitpoints = false;
+        healSetting.healsStamina = false;
+        healSetting.healsTemporaryHitpoints = true;
+        return healSetting;
+    }
+
     // Heals health and stamina
     static get staminaAndHealth() {
         const healSetting = new SFRPGHealingSetting();
@@ -147,9 +156,14 @@ export class SFRPGDamage {
             "c": "cold",
             "e": "electricity",
             "f": "fire",
+            "fo": "force",
+            "hp": "healing",
             "p": "piercing",
+            "r": "radiation",
             "s": "slashing",
-            "so": "sonic"
+            "so": "sonic",
+            "sp": "sp",
+            "tmp": "tempHP"
         };
 
         const lowerType = damageType.trim().toLowerCase();
@@ -176,7 +190,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         const diceRollElement = html.find('.sfrpg.dice-roll');
-        const diceTotal = diceRollElement.data("sfrpgDiceTotal");
+        const diceRollTotal = diceRollElement.data("sfrpgDiceTotal");
 
         const shiftKey = game.keyboard.downKeys.has("ShiftLeft") || game.keyboard.downKeys.has("ShiftRight");
         let modifier = 0;
@@ -193,7 +207,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                     content: `<form>
                         <p>${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ModifyDamageText")}</p>
                         <div class="form-group">
-                            <input type="number" id="modifier" placeholder=0 autofocus />
+                            ${diceRollTotal} +&nbsp;<input type="number" id="modifier" placeholder=0 autofocus />
                         </div>
                         ${(multiplier < 0) // Is healing
                         ? `
@@ -203,6 +217,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                                     <option value="hp">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.HP")}</option>
                                     <option value="sp">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.SP")}</option>
                                     <option value="both">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.HPAndSP")}</option>
+                                    <option value="temp">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.TempHP")}</option>
                                 </select>
                             </div>
                         `
@@ -234,7 +249,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         }
 
-        let rolledAmount = Math.floor((diceTotal ?? Math.floor(parseFloat(html.find('.dice-total').text()))));
+        let rolledAmount = Math.floor((diceRollTotal ?? Math.floor(parseFloat(html.find('.dice-total').text()))));
         const isCritical = diceRollElement.data("sfrpgIsCritical") || false;
         const properties = [];
 
@@ -264,11 +279,13 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         if (multiplier < 0) {
-            const healingSetting = {
+            const healingOptions = {
                 hp: SFRPGHealingSetting.defaultHealing,
                 sp: SFRPGHealingSetting.staminaOnly,
-                both: SFRPGHealingSetting.staminaAndHealth
-            }[healingTarget] || SFRPGHealingSetting.defaultHealing;
+                both: SFRPGHealingSetting.staminaAndHealth,
+                temp: SFRPGHealingSetting.tempOnly
+            };
+            const healingSetting = healingOptions[healingTarget] || SFRPGHealingSetting.defaultHealing;
 
             const heal = SFRPGDamage.createHeal(rolledAmount, healingSetting);
             heal.modifier = modifier || 0;
@@ -432,7 +449,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             }
 
             if (damage.healSettings.healsTemporaryHitpoints) {
-                const newTempHP = Math.clamp(originalTempHP + remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
+                const newTempHP = Math.max(originalTempHP + remainingUndealtDamage, 0);
                 remainingUndealtDamage -= (newTempHP - originalTempHP);
 
                 actorUpdate["system.attributes.hp.temp"] = newTempHP;

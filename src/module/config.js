@@ -174,22 +174,37 @@ SFRPG.kineticDamageTypes = {
     "slashing": "SFRPG.Damage.Types.Slashing"
 };
 
+SFRPG.otherDamageTypes = {
+    "force": "SFRPG.Damage.Types.Force",
+    "radiation": "SFRPG.Damage.Types.Radiation"
+};
+
+SFRPG.healingTypes = {
+    "healing": "SFRPG.Healing.Types.HP",
+    "sp": "SFRPG.Healing.Types.SP",
+    "tempHP": "SFRPG.Healing.Types.TempHP"
+};
+
 SFRPG.damageTypeToAcronym = {
     "acid": "A",
     "cold": "C",
     "electricity": "E",
     "fire": "F",
+    "force": "Fo",
+    "radiation": "R",
     "sonic": "So",
     "bludgeoning": "B",
     "piercing": "P",
-    "slashing": "S"
+    "slashing": "S",
+    "healing": "HP",
+    "sp": "SP",
+    "tempHP": "Tmp"
 };
 
 SFRPG.damageTypes = {
     ...SFRPG.energyDamageTypes,
     ...SFRPG.kineticDamageTypes,
-    "radiation": "SFRPG.Damage.Types.Radiation",
-    "nonlethal": "SFRPG.Damage.Types.Nonlethal"
+    ...SFRPG.otherDamageTypes
 };
 
 SFRPG.damageTypeOperators = {
@@ -377,11 +392,6 @@ SFRPG.durationTypes = {
 SFRPG.targetTypes = {};
 
 SFRPG.timePeriods = {};
-
-// Healing types
-SFRPG.healingTypes = {
-    "healing": "SFRPG.HealingTypesHealing"
-};
 
 SFRPG.spellPreparationModes = {
     "always": "SFRPG.SpellPreparationModesAlways",
@@ -674,6 +684,9 @@ SFRPG.specialMaterials = {
 // Damage Reductions
 SFRPG.damageReductionTypes = {
     "": "-",
+    "bludgeoning": "SFRPG.Damage.Types.Bludgeoning",
+    "piercing": "SFRPG.Damage.Types.Piercing",
+    "slashing": "SFRPG.Damage.Types.Slashing",
     ...SFRPG.specialMaterials,
     "custom": "SFRPG.Damage.Types.Custom"
 };
@@ -684,6 +697,8 @@ SFRPG.energyResistanceTypes = {
     "cold": "SFRPG.Damage.Types.Cold",
     "electricity": "SFRPG.Damage.Types.Electricity",
     "fire": "SFRPG.Damage.Types.Fire",
+    "force": "SFRPG.Damage.Types.Force",
+    "radiation": "SFRPG.Damage.Types.Radiation",
     "sonic": "SFRPG.Damage.Types.Sonic",
     "custom": "SFRPG.Damage.Types.Custom"
 };
