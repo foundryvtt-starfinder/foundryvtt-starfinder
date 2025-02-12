@@ -17,10 +17,8 @@ With those things installed, we can work on getting the repository ready for dev
 3. Run `npm run link` to create a symbolic link between the `dist` folder and your Foundry data folder. When prompted, enter the file path to your Foundry install, where the user data folder resides. This can be found on the Configuration tab on the Setup screen.
 4. Run `npm run build`. This will compile all of the `less` and copy all the necessary files to a `dist` folder in the project root, and because you created a symbolic link, it will also appear in your Foundry data folder.
 
-```diff
-+ Note for Windows users: You may need to run your commandline with administrator privileges if your
-+ data folder is the default FoundryVTT setting of "C:\Users\Username\AppData\Local\FoundryVTT".
-```
+> [!NOTE]
+> Note for Windows users: You may need to run your commandline with administrator privileges if your data folder is the default FoundryVTT setting of `C:\Users\Username\AppData\Local\FoundryVTT`.
 
 5. Run `npm run build:watch` while you're developing so that changes are automatically synced with the `dist` folder. When you make changes to `html`, `css`, or `js` files, you'll need to do a page refresh in Foundry to pick up the changes (F5). Any changes to `template.json` or `system.json` require you to return to the Setup screen and then reload the world. ***Note***: This step only functions if you are actively making changes; running it without making changes will appear to be hanging.
 
@@ -30,9 +28,8 @@ This should be all you need to help contribute. If you have any issues, you can 
 
 If you want to do data entry for the project, we have a version control friendly way of managing the compendium data.
 
-```diff
-+ Please be aware that this process relies on you having completed the previously mentioned setup steps.
-```
+> [!NOTE]
+> Please be aware that this process relies on you having completed the previously mentioned setup steps.
 
 Inside the `src/items` folder, you will find a subfolder for each compendium we have. Within these subfolders you will find a JSON file for each entry.
 
@@ -43,19 +40,16 @@ The easiest workflow is to work through Foundry, and follow the following steps:
 2. Fill out the details, modifiers, etc. Make sure the name closely matches the original name from the SRD.
 3. Add the item to the relevant compendium.
 
-```diff
-- IMPORTANT: Ensure links point to the item in the compendium, *not* to the item in the sidebar!
-```
+> [!IMPORTANT]
+> Ensure links point to the item in the compendium, *not* to the item in the sidebar!
+
 4. Run `npm run unpack` to unpack the changes from your local system install's DB files into JSON files in your git repo.
 5. Once you've finished making changes, run `npm run cook` to check you haven't made any formatting errors, and to run some final sanitization on the JSON files.
 6. (Optional) Restart Foundry and check one last time all your work looks good.
 7. Submit a pull request if everything looks good. :-)
 
-```diff
-- Please don't include database files in your pull request as this can lead to merge conflicts.
-- Obviously you can still cook in order to check everything is in order,
-- but only submit your JSON files as a final cook is performed before every release.
-```
+> [!WARNING]
+> Please don't include database files in your pull request as this can lead to merge conflicts. Obviously you can still cook in order to check everything is in order, but only submit your JSON files as a final cook is performed before every release.
 
 ## Updating existing items
 
@@ -63,11 +57,8 @@ The easiest workflow is to work through Foundry, just simply make the changes to
 
 Alternatively, you can make edits directly to the JSON files and save the file, and then continue the workflow from step 5 as described above.
 
-```diff
-- BE CAREFUL
-- Ensure you have NOT edited any item's ID field!
-- ID field edits result in your Pull Request being rejected!
-```
+> [!CAUTION]
+> Ensure you have NOT edited any item's `id` field! ID field edits result in your Pull Request being rejected!
 
 ## Deleting existing items
 
@@ -78,7 +69,7 @@ There is no Foundry workflow for this, and this is going to get a little more te
 2. Copy the ID field value, e.g. `MkyvEJGsciB2FCD2`
 3. Search the entire `src/items` directory for files containing that ID.
     1. If no results are found, no-one was referencing this item directly, and you can safely delete the JSON file.
-    2. If results are found, you will have to remove all references to the item from the referencing items.
+    2. If results are found, you will have to remove all references to the item from the referencing items before deleting the JSON file.
 4. Update the compendium pack files, by running the following command: `npm run cook`.
 5. Restart Foundry.
 6. Check in Foundry if the compendium is updated properly.
@@ -148,11 +139,11 @@ Automatically sorts localization files and copies any new strings from the edite
 ## `unpack`
 The yin to `cook`'s yang, `unpack` takes Foundry's db files and unpacks them into nice, human-readable JSONs, ready for you to make edits to. You'll run this after you've made new items/changes in Foundry.
 
-### Getting Foundry Intellisense in Visual Studio Code
+# Getting Foundry Intellisense in Visual Studio Code
 
-If you would like some basic Intellisense for the Foundry types when using Visual Studio Code, all you have to do is copy `foundry.js` into the projects root folder. The `foundry.js` can be found in your Foundry installation folder e.g. '\Foundry Virtual Tabletop\resources\app\public\scripts'. Once you do this, restart VS Code, and you should now see proper Intellisense.
+If you would like some basic Intellisense for the Foundry types when using Visual Studio Code, all you have to do is copy `foundry.js` into the projects root folder. The `foundry.js` can be found in your Foundry installation folder e.g. `\Foundry Virtual Tabletop\resources\app\public\scripts`. Once you do this, restart VS Code, and you should now see proper Intellisense.
 
-### Package Release Process (for maintainers only)
+# Package Release Process (for maintainers only)
 
 The steps below indicate step-by-step what to do to release a new version of the game system. This should only need to be done by package maintainers.
 
