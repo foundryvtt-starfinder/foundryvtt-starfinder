@@ -31,7 +31,7 @@ if (symlinkStats) {
             type: "confirm",
             name: "value",
             initial: false,
-            message: `A "sfrpg" ${atPath} already exists in the "systems" subfolder. Replace with new symlink?`
+            message: `An "sfrpg" ${atPath} already exists in the "systems" subfolder. Replace with new symlink?`
         })
     ).value;
     if (!proceed) {
