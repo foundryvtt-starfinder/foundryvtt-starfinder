@@ -75,7 +75,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             isVehicle: this.document.type === 'vehicle',
             isDrone: this.document.type === 'drone',
             isNPC: this.document.type === 'npc' || this.document.type === 'npc2',
-            isHazard: this.document.type === 'hazard',
+            isHazard: this.document.type === 'hazard'
         };
 
         data.items = [...this.actor.items.values()];
@@ -799,7 +799,7 @@ export class ActorSheetSFRPG extends ActorSheet {
      * Handle attempting to recharge an item usage by rolling a recharge check
      * @param {Event} event The originating click event
      */
-    _ontItemRecharge(event) {
+    _onItemRecharge(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
