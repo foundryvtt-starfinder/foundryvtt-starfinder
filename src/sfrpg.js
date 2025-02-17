@@ -245,14 +245,17 @@ Hooks.once('init', async function() {
     console.log("Starfinder | [INIT] Registering system settings");
     registerSystemSettings();
 
+    // V13 TODO: Needs checking
     if (game.settings.get("sfrpg", "sfrpgTheme")) {
         const setAnvil = () => {
             const logo = document.querySelector("#logo");
-            logo.loading = "eager";
-            logo.src = "systems/sfrpg/images/starfinder_icon.webp";
-            logo.style.width = "92px";
-            logo.style.height = "92px";
-            logo.style.margin = "0 0 0 9px";
+            if (logo) {
+                logo.loading = "eager";
+                logo.src = "systems/sfrpg/images/starfinder_icon.webp";
+                logo.style.width = "92px";
+                logo.style.height = "92px";
+                logo.style.margin = "0 0 0 9px";
+            }
         };
 
         const dummy = document.createElement("img");
@@ -598,12 +601,12 @@ Hooks.on("renderChatMessage", (app, html, data) => {
     if (game.settings.get("sfrpg", "autoCollapseItemCards")) html.find('.card-content').hide();
 });
 
-Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
+Hooks.on("getEntryContextChatLog", addChatMessageContextOptions);
 
-Hooks.on("renderSidebarTab", async (app, html) => {
+Hooks.on("renderAbstractSidebarTab", async (app, html) => {
     if (app.options.id === "settings") {
         const textToAdd = `<a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
-        const gameDetails = document.getElementById("game-details");
+        const gameDetails = document.getElementById("settings");
         if (gameDetails) {
             const systemSection = gameDetails.getElementsByClassName("system")[0];
             if (systemSection) {
@@ -614,10 +617,12 @@ Hooks.on("renderSidebarTab", async (app, html) => {
 });
 
 // Set this hook up outside of init for the sake of module compatibility.
-Hooks.on("renderPause", () => {
+Hooks.on("renderGamePause", () => {
     if (game.settings.get("sfrpg", "sfrpgTheme")) {
         const paused = document.querySelector("figure#pause");
-        const icon = paused.children[0];
-        icon.src = "systems/sfrpg/images/cup/organizations/starfinder_society.webp";
+        const icon = paused.querySelector("img");
+        if (icon) {
+            icon.src = "systems/sfrpg/images/cup/organizations/starfinder_society.webp";
+        }
     }
 });

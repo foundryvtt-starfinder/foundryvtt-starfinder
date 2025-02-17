@@ -82,6 +82,7 @@ export default class CounterManagement {
                     additionalHtml += "</a>";
                 }
 
+                // V13 TODO: Needs Fixing
                 // Rearrange the items in the combat tracker so they appear in the right places
                 const $combatantHtml = html.find(`.combatant[data-combatant-id="${combatant.id}"]`);
                 $combatantHtml.addClass('counter-image-relative');
