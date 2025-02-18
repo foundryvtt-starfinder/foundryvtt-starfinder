@@ -31,8 +31,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -44,13 +44,41 @@
     "damage": {
       "parts": [
         {
+          "name": "Standard Action (or Full Action Two Targets)",
           "formula": "1d4",
-          "operator": "",
+          "group": 0,
+          "isPrimarySection": true,
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Full Action (1 Target)",
+          "formula": "2d4",
+          "group": 0,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -60,7 +88,44 @@
       "unidentified": "",
       "value": "<p>You grasp onto a space-time filled with microscopic needles and use them to pierce into your reality. One creature takes 1d4 piercing damage and gains @UUID[Compendium.sfrpg.conditions.Item.v9RNVTqyTyaPchvd]{Bleeding} 1 for 3 rounds.</p>\n<p>You can cast this spell as a full action. If you do, you have two options. You can target two creatures within 20 feet of each other with the effect described above, or target only one creature, who takes 2d4 piercing damage and gains @UUID[Compendium.sfrpg.conditions.Item.v9RNVTqyTyaPchvd]{Bleeding} 2 for 3 rounds.</p>"
     },
-    "descriptors": [],
+    "descriptors": {
+      "acid": false,
+      "air": false,
+      "calling": false,
+      "chaotic": false,
+      "charm": false,
+      "cold": false,
+      "compulsion": false,
+      "creation": false,
+      "curse": false,
+      "darkness": false,
+      "death": false,
+      "disease": false,
+      "earth": false,
+      "electricity": false,
+      "emotion": false,
+      "evil": false,
+      "fear": false,
+      "fire": false,
+      "force": false,
+      "good": false,
+      "healing": false,
+      "language-dependent": false,
+      "lawful": false,
+      "light": false,
+      "mind-affecting": false,
+      "pain": false,
+      "poison": false,
+      "polymorph": false,
+      "radiation": false,
+      "scrying": false,
+      "sense-dependent": false,
+      "shadow": false,
+      "sonic": false,
+      "summoning": false,
+      "teleportation": false,
+      "water": false
+    },
     "dismissible": false,
     "duration": {
       "units": "instantaneous",
@@ -91,10 +156,14 @@
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "school": "evo",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "COM pg. 140",
     "sr": true,
     "target": {
@@ -102,7 +171,7 @@
       "value": "one or two creatures; see text"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }
