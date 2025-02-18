@@ -510,22 +510,23 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.actor.system.modifiers.find(mod => mod._id === modifierId);
 
-        await this.actor.deleteModifier(modifierId);
+        return modifier.parentDelete();
     }
 
     /**
     * Edit a modifier for an actor.
-    *
     * @param {Event} event The orginating click event
     */
-    _onModifierEdit(event) {
+    async _onModifierEdit(event) {
         event.preventDefault();
 
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.actor.system.modifiers.find(mod => mod._id === modifierId);
 
-        this.actor.editModifier(modifierId);
+        return modifier.edit();
     }
 
     /**

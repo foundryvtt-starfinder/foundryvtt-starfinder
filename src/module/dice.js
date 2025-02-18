@@ -866,8 +866,7 @@ export class DiceSFRPG {
 
         if (!resolveResult.hadError) {
             try {
-                const finalResult = eval(resultValue);
-                const finalNumber = Number(finalResult);
+                const finalNumber = Roll.safeEval(resultValue);
                 if (!Number.isNaN(finalNumber)) {
                     resolveResult.total = finalNumber;
                 } else {

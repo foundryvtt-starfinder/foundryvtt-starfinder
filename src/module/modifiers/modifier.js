@@ -1,4 +1,5 @@
 import { ActorSFRPG } from "../actor/actor.js";
+import SFRPGModifierApplication from "../apps/modifier-app.js";
 import { ItemSFRPG } from "../item/item.js";
 import { generateUUID } from "../utils/utilities.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.js";
@@ -194,12 +195,41 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
     }
 
     async toggle(active = null) {
-        const parentMods = this.parent.system.modifiers;
+        return this.parentUpdate({enabled: active ?? !this.enabled});
+    }
 
-        const modInParent = parentMods.find(mod => mod._id === this._id);
-        modInParent.updateSource({enabled: active ?? !modInParent.enabled});
+    /**
+     * A helper method to directly update this modifier within its parent, instead of having to find it in the modifiers array every time.
+     * @param {Object} data Update data to be applied to this modifier
+     * @param {Object} options Options to be passed to update. @see Document.update in foundry-esm.js 11580.
+     */
+    async parentUpdate(data, options = {}) {
+        if (!this.parent) throw new Error("SFRPG | This modifier has no parent, which is required to perform an update via the parent.");
 
-        return this.parent.update({"system.modifiers": parentMods});
+        const modifiers = this.parent.toObject().system.modifiers;
+        const modInParent = modifiers.find(mod => mod._id === this._id);
 
+        foundry.utils.mergeObject(modInParent, data);
+
+        return this.parent.update({ "system.modifiers": modifiers }, options);
+    }
+
+    /**
+     * A helper method to delete this modifier from its parent
+     * @param {Object} options Options to be passed to update. @see Document.update in foundry-esm.js 11580.
+     */
+    async parentDelete(options = {}) {
+        if (!this.parent) throw new Error("SFRPG | This modifier has no parent, which is required to delete via the parent.");
+
+        const modifiers = this.parent.toObject().system.modifiers.filter(mod => mod._id !== this._id);
+
+        return this.parent.update({"system.modifiers": modifiers}, options);
+    }
+
+    /**
+     * Open the Modifier editor App for this modifier
+     */
+    async edit() {
+        return new SFRPGModifierApplication(this, this.parent).render(true);
     }
 }
