@@ -99,7 +99,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
             const rollContext = RollContext.createActorRollContext(this.actor);
 
             const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Damage", {name: this.actor.name});
-            return DiceSFRPG.damageRoll({
+            await DiceSFRPG.damageRoll({
                 event: event,
                 rollContext: rollContext,
                 parts: [{ formula: this.actor.system.attributes.damage.value }],

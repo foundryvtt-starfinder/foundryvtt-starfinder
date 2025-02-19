@@ -858,7 +858,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         const actorData = this.actor.system;
         if (!this.hasAttack) {
-            return ui.notifications.error("You may not make an Attack Roll with this Item.");
+            ui.notifications.error("You may not make an Attack Roll with this Item.");
+            return;
         }
 
         if (this.type === "starshipWeapon") return this._rollStarshipAttack(options);
@@ -964,9 +965,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         parts.push("@additional.modifiers.bonus");
 
         // Call the roll helper utility
-        return DiceSFRPG.d20Roll({
+        await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
+            actorContextKey: "owner",
             rollContext: rollContext,
             title: title,
             flavor: await TextEditor.enrichHTML(this.system?.chatFlavor, {
@@ -1141,7 +1143,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts.push(`@ship.attributes.systems.powerCore.modOther`);
         }
 
-        return await DiceSFRPG.d20Roll({
+        await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             rollContext: rollContext,
@@ -1190,7 +1192,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         rollContext.addContext("weapon", this, this);
         rollContext.setMainContext("");
 
-        return await DiceSFRPG.d20Roll({
+        await DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             rollContext: rollContext,
@@ -1224,6 +1226,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /**
      * Place a damage roll using an item (weapon, feat, spell, or equipment)
      * Rely upon the DiceSFRPG.damageRoll logic for the core implementation
+     * @returns {Promise<bool>}  `true` if roll was performed, `false` if it was canceled
      */
     async rollDamage({ event } = {}, options = {}) {
         const itemData  = this.system;
@@ -1232,7 +1235,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const isHealing = this.system.actionType === "heal";
 
         if (!this.hasDamage) {
-            return ui.notifications.error("You may not make a Damage Roll with this Item.");
+            ui.notifications.error("You may not make a Damage Roll with this Item.");
+            return;
         }
 
         if (this.type === "starshipWeapon") return this._rollStarshipDamage({ event: event });
@@ -1245,7 +1249,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Define Roll parts
         /** @type {DamageParts[]} */
-        const parts = foundry.utils.deepClone(itemData.damage.parts.map(part => part));
+        const parts = foundry.utils.deepClone(itemData.damage.parts);
         for (const part of parts) {
             part.isDamageSection = true;
         }
@@ -1417,7 +1421,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"));
         }
 
-        const parts = itemData.damage.parts.map(part => part);
+        const parts = foundry.utils.deepClone(itemData.damage.parts);
         for (const part of parts) {
             part.isDamageSection = true;
         }
@@ -1464,7 +1468,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             throw new Error("you may not make a Damage Roll with this item");
         }
 
-        const parts = foundry.utils.deepClone(itemData.damage.parts.map(part => part));
+        const parts = foundry.utils.deepClone(itemData.damage.parts);
         for (const part of parts) {
             part.isDamageSection = true;
         }
@@ -1574,8 +1578,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (itemData.actionType && itemData.actionType !== "save") {
             options.flavorOverride = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
 
-            const result = await this.rollDamage({}, options);
-            if (!result.callbackResult) {
+            if (!await this.rollDamage({}, options)) {
                 // Roll was cancelled, don't consume.
                 return;
             }
@@ -1732,7 +1735,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Get the Actor from a synthetic Token
         const chatCardActor = this._getChatCardActor(card);
-        if (!chatCardActor) return ui.notifications.error("SFRPG.ChatCard.ItemAction.NoActor");
+        if (!chatCardActor) {
+            ui.notifications.error("SFRPG.ChatCard.ItemAction.NoActor");
+            return;
+        }
 
         // Get the Item
         let item = chatCardActor.items.get(card.dataset.itemId);
@@ -2065,7 +2071,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @returns {Promise<*>} The return value of the macro
      */
     async executeMacroWithContext(macro, scope = {}) {
-        if (!(macro instanceof Macro)) return ui.notifications.error("A macro was not provided!");
+        if (!(macro instanceof Macro)) {
+            ui.notifications.error("A macro was not provided!");
+            return;
+        }
 
         return macro.execute({
             speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),

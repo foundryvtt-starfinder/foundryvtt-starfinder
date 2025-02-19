@@ -800,7 +800,7 @@ export class ActorSheetSFRPG extends ActorSheet {
      * Handle attempting to recharge an item usage by rolling a recharge check
      * @param {Event} event The originating click event
      */
-    _ontItemRecharge(event) {
+    _onItemRecharge(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
