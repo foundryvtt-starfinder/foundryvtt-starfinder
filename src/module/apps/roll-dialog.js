@@ -104,18 +104,26 @@ export default class RollDialog extends Dialog {
         for (const modifier of data.availableModifiers) {
 
             // Make a simplified roll
-            modifier.simplifiedModifier = Roll.create(modifier.modifier, data.contexts.getRollData()).simplifiedFormula;
+            const simplerRoll = Roll.create(modifier.modifier, data.contexts.getRollData()).simplifiedFormula;
 
             if (modifier.modifier[0] === "+") modifier.modifier = modifier.modifier.slice(1);
 
-            // If the formulas are still different without whitespace, then FunctionTerms must have been simplifed, so let's tell the user.
-            if (modifier.modifier.replace(/\s/g, "") !== modifier.simplifiedModifier.replace(/\s/g, "")) {
-                modifier.originalFormulaTooltip = true;
+            /* If it actually was simplified, append the original modifier for use on the tooltip.
+            *
+            * If the formulas are different with whitespace, that means the original likely has some weird whitespace, so let's correct that, bu we don't need to tell the user.
+            */
+            if (modifier.modifier !== simplerRoll) {
+                modifier.originalFormula = modifier.modifier;
+
+                // If the formulas are still different without whitespace, then FunctionTerms must have been simplifed, so let's tell the user.
+                if (modifier.originalFormula.replace(/\s/g, "") !== simplerRoll.replace(/\s/g, "")) {
+                    modifier.originalFormulaTooltip = true;
+                }
             }
 
             // Sign that string
-            const numMod = Number(modifier.simplifiedModifier);
-            modifier.simplifiedModifier = numMod ? numMod.signedString() : modifier.simplifiedModifier;
+            const numMod = Number(simplerRoll);
+            modifier.modifier = numMod ? numMod.signedString() : simplerRoll;
 
             if (Object.keys(CONFIG.SFRPG.modifierTypes).includes(modifier.type)) {
                 modifier.localizedType = game.i18n.localize(`${CONFIG.SFRPG.modifierTypes[modifier.type]}`);
@@ -145,10 +153,19 @@ export default class RollDialog extends Dialog {
                 }
                 part.type = typeString;
 
-                part.simplifiedFormula = Roll.create(part.formula).simplifiedFormula;
-                // If the formulas are still different without whitespace, then FunctionTerms must have been simplifed, so let's tell the user.
-                if (part.formula.replace(/\s/g, "") !== part.simplifiedFormula.replace(/\s/g, "")) {
-                    part.originalFormulaTooltip = true;
+                /* If it actually was simplified, append the original modififer for use on the tooltip.
+                *
+                * If the formulas are different with whitespace, that means the original likely has some weird whitespace, so let's correct that, bu we don't need to tell the user.
+                */
+                const simplerRoll = Roll.create(part.formula).simplifiedFormula;
+                if (part.formula !== simplerRoll) {
+                    part.originalFormula = part.formula;
+                    part.formula = simplerRoll;
+
+                    // If the formulas are still different without whitespace, then FunctionTerms must have been simplifed, so let's tell the user.
+                    if (part.originalFormula.replace(/\s/g, "") !== simplerRoll.replace(/\s/g, "")) {
+                        part.originalFormulaTooltip = true;
+                    }
                 }
             }
 
