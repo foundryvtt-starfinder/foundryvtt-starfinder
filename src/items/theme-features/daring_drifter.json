@@ -1,6 +1,6 @@
 {
-  "_id": "NW9pxsxvuGNnxfBA",
-  "name": "Blindsense",
+  "_id": "HxVOtJYiMvpJcFe6",
+  "name": "Daring Drifter",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
@@ -25,8 +25,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "",
+      "value": 0
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature has @UUID[Compendium.sfrpg.rules.rX5rK6UWAIOeeipl.JournalEntryPage.p0o9tmWtKZ0qy8DI#blindsense]{Blindsense} with a range of 30 feet.</p>\n<p><em>Additional details of this creature's Blindsense can be copied over from their Race details.</em></p>"
+      "value": "<p>Your training has imbued you with grace and precision when executing maneuvers in weightless environments. When in zero gravity, you move your full land speed when pushing off objects, and you can move along surfaces with handholds as if you had a climb speed equal to your land speed. You also gain a +2 insight bonus to Acrobatics or Athletics checks to avoid becoming @UUID[Compendium.sfrpg.conditions.Item.QnGpBSHSTiszjPSb]{Off-Kilter} in zero-g.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -84,43 +84,74 @@
       "water": false
     },
     "details": {
-      "category": "speciesFeature",
+      "category": "themeFeature",
       "combat": false,
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
-      "value": ""
+      "units": "text",
+      "value": null
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "6bcc3a41-4b19-497b-9f58-d61d9b533002",
+        "name": "Daring Drifter",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Applies to checks to avoid becoming Off-Kilter in Zero-G",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "acr"
+      },
+      {
+        "_id": "23c6c942-f330-4c91-88a3-e37a838b96db",
+        "name": "Daring Drifter",
+        "type": "insight",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Applies to checks to avoid becoming Off-Kilter in Zero-G",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "ath"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
+      "units": "",
       "value": null
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "12th Level",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "EN pg. 17",
     "target": {
       "type": "",
-      "value": ""
+      "value": null
     },
     "uses": {
       "max": null,
-      "per": "day",
+      "per": null,
       "value": null
     }
   }
