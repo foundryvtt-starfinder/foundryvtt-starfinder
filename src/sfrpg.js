@@ -69,7 +69,7 @@ import RollContext from "./module/rolls/rollcontext.js";
 import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
 import registerCompendiumArt from "./module/system/compendium-art.js";
-import { connectToDocument, rollItemMacro } from "./module/system/item-macros.js";
+import { connectToDocument, rollItemMacro } from "./module/system/hotbar-macros.js";
 import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
 
