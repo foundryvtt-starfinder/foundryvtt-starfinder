@@ -83,6 +83,7 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
 }
 
 export async function unpackPacks(partOfCook = false) {
+    const limitToPack = null;
     const sourceDir = partOfCook ? "src/packs" : 'dist/packs';
     console.log(chalk.blueBright(`Unpacking ${partOfCook ? "" : "and sanitizing "}all packs from ${sourceDir}`));
 
