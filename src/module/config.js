@@ -207,6 +207,13 @@ SFRPG.damageTypes = {
     ...SFRPG.otherDamageTypes
 };
 
+SFRPG.damageAndHealingTypes = {
+    ...SFRPG.energyDamageTypes,
+    ...SFRPG.kineticDamageTypes,
+    ...SFRPG.otherDamageTypes,
+    ...SFRPG.healingTypes
+};
+
 SFRPG.damageTypeOperators = {
     "and": "SFRPG.Damage.Types.Operators.And",
     "or": "SFRPG.Damage.Types.Operators.Or"

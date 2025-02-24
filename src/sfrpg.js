@@ -437,6 +437,7 @@ Hooks.once("i18nInit", () => {
         "damageReductionTypes",
         "damageTypeOperators",
         "damageTypes",
+        "damageAndHealingTypes",
         "difficultyLevels",
         "distanceUnits",
         "constantDistanceUnits",

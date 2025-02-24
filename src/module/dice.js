@@ -500,7 +500,7 @@ export class DiceSFRPG {
 
                 if (obj.types && obj.types.length > 0) {
                     const tag = `damage-type-${(obj.types.join(`-${obj.operator}-`))}`;
-                    const text = obj.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[obj.operator]} `);
+                    const text = obj.types.map(type => SFRPG.damageAndHealingTypes[type]).join(` ${SFRPG.damageTypeOperators[obj.operator]} `);
                     const shortText = obj.types.map(type => SFRPG.damageTypeToAcronym[type]).join(` & `);
 
                     // In most use cases, damage rolls should never contain more parts. But because the system is complex and confusing, it is theoretically possible.
