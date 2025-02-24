@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -23,9 +23,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -42,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>@Icon[type:language-dependent] @Icon[type:mind-affecting] @Icon[type:sense-dependent]</p>\n<p>As a move action, you can coordinate your allies into effective flanking partners. Until the start of your next turn, you and your allies count as flanking any creature that at least two of you threaten, regardless of your position.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>@Icon[type:language-dependent] @Icon[type:mind-affecting] @Icon[type:sense-dependent]</p>\n<p>As a move action, you can coordinate your allies into effective flanking partners. Until the start of your next turn, you and your allies count as flanking any creature that at least two of you threaten, regardless of your position.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -66,16 +67,16 @@
       "force": false,
       "good": false,
       "healing": false,
-      "language-dependent": false,
+      "language-dependent": true,
       "lawful": false,
       "light": false,
-      "mind-affecting": false,
+      "mind-affecting": true,
       "pain": false,
       "poison": false,
       "polymorph": false,
       "radiation": false,
       "scrying": false,
-      "sense-dependent": false,
+      "sense-dependent": true,
       "shadow": false,
       "sonic": false,
       "summoning": false,
@@ -84,15 +85,17 @@
     },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -103,20 +106,20 @@
       "charged": false,
       "value": null
     },
-    "requirements": "6th Level",
+    "requirements": "6th Level (Envoy)",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "Improvisation",
+    "source": "COM pg. 70",
     "target": {
       "type": "",
-      "value": ""
+      "value": "Ally who also threatens an opponent"
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

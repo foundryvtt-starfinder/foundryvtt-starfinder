@@ -67,7 +67,8 @@ export class CombatSFRPG extends Combat {
     async begin() {
         const update = {
             "flags.sfrpg.combatType": this.getCombatType(),
-            "flags.sfrpg.phase": 0
+            "flags.sfrpg.phase": 0,
+            "round": 1
         };
 
         await this.update(update);
@@ -341,7 +342,7 @@ export class CombatSFRPG extends Combat {
         const eventData = {
             combat: this,
             isNewRound: nextRound !== this.round,
-            isNewPhase: nextRound !== this.round || nextPhase !== this.flags.sfrpg.phase,
+            isNewPhase: nextPhase !== this.flags.sfrpg.phase,
             isNewTurn: (nextRound !== this.round && phases[nextPhase].iterateTurns) || nextTurn !== this.turn,
             oldTurn: this.turn,
             newTurn: nextTurn,
@@ -395,7 +396,10 @@ export class CombatSFRPG extends Combat {
         // Get an active GM to run events players may not have permissions to do.
         if (!game.users.activeGM?.isSelf) return;
 
-        this._handleTimedEffects(options.eventData);
+        // Handle timed events if the event that is occurring is phase/round/turn advance.
+        if (options.eventData) {
+            this._handleTimedEffects(options.eventData);
+        }
     }
 
     /**
@@ -446,7 +450,7 @@ export class CombatSFRPG extends Combat {
         const speakerName = game.i18n.format(CombatSFRPG.chatCardsText.speaker.GM);
         const templateData = {
             header: {
-                image: "icons/svg/mystery-man.svg",
+                image: "systems/sfrpg/icons/cards/rolling-dices.svg",
                 name: game.i18n.format(CombatSFRPG.chatCardsText.round.headerName, {round: this.round})
             },
             body: {
@@ -475,12 +479,13 @@ export class CombatSFRPG extends Combat {
     async _printNewPhaseChatCard(eventData) {
         const localizedCombatName = this.getCombatName();
         const localizedPhaseName = game.i18n.format(eventData.newPhase.name);
+        const phaseIcon = CONFIG.SFRPG.phaseIcons[eventData.newPhase.name];
 
         // Basic template rendering data
         const speakerName = game.i18n.format(CombatSFRPG.chatCardsText.speaker.GM);
         const templateData = {
             header: {
-                image: "icons/svg/mystery-man.svg",
+                image: phaseIcon,
                 name: game.i18n.format(CombatSFRPG.chatCardsText.phase.headerName, {phase: localizedPhaseName})
             },
             body: {
@@ -583,7 +588,7 @@ export class CombatSFRPG extends Combat {
 
     hasCombatantsWithoutInitiative() {
         for (const [index, combatant] of this.turns.entries()) {
-            if ((!this.settings.skipDefeated || !combatant.defeated) && !combatant.initiative) {
+            if ((!this.settings.skipDefeated || !combatant.defeated) && (combatant.initiative === undefined || combatant.initiative === null)) {
                 return true;
             }
         }
@@ -659,6 +664,9 @@ export class CombatSFRPG extends Combat {
 
     _getInitiativeFormula(combatant) {
         if (this.getCombatType() === "starship") {
+            if (!combatant.actor.system.crew.useNPCCrew) {
+                return "1d20 + @pilot.skills.pil.mod + @ship.attributes.pilotingBonus.value";
+            }
             return "1d20 + @pilot.skills.pil.mod";
         } else {
             return "1d20 + @combatant.attributes.init.total";
@@ -672,6 +680,10 @@ export class CombatSFRPG extends Combat {
 
         if (this.getCombatType() === "starship") {
             parts.push("@pilot.skills.pil.mod");
+            if (!combatant.actor.system.crew.useNPCCrew) {
+                rollContext.addContext("ship", combatant.actor);
+                parts.push("@ship.attributes.pilotingBonus.value");
+            }
             rollContext.setMainContext("pilot");
         } else {
             parts.push("@combatant.attributes.init.total");
@@ -682,6 +694,7 @@ export class CombatSFRPG extends Combat {
 
         const rollResult = await DiceSFRPG.createRoll({
             rollContext: rollContext,
+            actorContextKey: "combatant",
             parts: parts,
             event,
             title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
@@ -696,7 +709,8 @@ export class CombatSFRPG extends Combat {
         // Structure input data
         ids = typeof ids === "string" ? [ids] : ids;
         const currentId = this.combatant?.id;
-        let rollMode = messageOptions.rollMode || game.settings.get("core", "rollMode");
+        const defaultRollMode = game.settings.get("core", "rollMode");
+        let rollMode = messageOptions.rollMode ?? defaultRollMode;
 
         // Iterate over Combatants, performing an initiative roll for each
         const updates = [];
@@ -706,6 +720,15 @@ export class CombatSFRPG extends Combat {
             // Get Combatant data
             const combatant = this.combatants.get(id);
             if ( !combatant?.isOwner ) return results;
+
+            // If starship combat and no pilot initiative is just ship piloting bonuses
+            if (this.getCombatType() === "starship" && combatant.actor.type === "starship"
+                && ((!combatant.actor.system.crew.useNPCCrew && combatant.actor.system.crew.pilot.actorIds.length === 0)
+                    || (combatant.actor.system.crew.useNPCCrew && !combatant.actor.system.crew.npcData.pilot.skills.pil))
+            ) {
+                updates.push({_id: id, initiative: combatant.actor.system.attributes.pilotingBonus.value});
+                continue;
+            }
 
             // Roll initiative
             const roll = await this._getInitiativeRoll(combatant, "");
@@ -738,9 +761,9 @@ export class CombatSFRPG extends Combat {
                 speaker: messageData.speaker,
                 flags: messageData.flags,
                 content: explainedRollContent,
-                rollMode: combatant.hidden && (rollMode === "roll") ? "gmroll" : rollMode,
-                roll: roll,
-                type: CONST.CHAT_MESSAGE_STYLES.ROLL,
+                rollMode: combatant.hidden && rollMode === CONST.DICE_ROLL_MODES.PUBLIC && defaultRollMode === CONST.DICE_ROLL_MODES.PUBLIC ? "gmroll" : rollMode,
+                rolls: [roll],
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 sound: CONFIG.sounds.dice
             };
 
@@ -762,7 +785,9 @@ export class CombatSFRPG extends Combat {
         }
 
         // Create multiple chat messages
-        await CONFIG.ChatMessage.documentClass.create(messages);
+        await messages.forEach(message => {
+            ChatMessage.create(message, { rollMode: message.rollMode });
+        });
 
         // Return the updated Combat
         return this;

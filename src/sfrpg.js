@@ -6,6 +6,10 @@
  * Repository: https://github.com/foundryvtt-starfinder/foundryvtt-starfinder
  * Issue Tracker: https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/issues
  */
+
+// Required for Vite to build Less files
+import './less/sfrpg.less';
+
 import { ActorItemHelper, initializeRemoteInventory } from "./module/actor/actor-inventory-utils.js";
 import { ActorSFRPG } from "./module/actor/actor.js";
 import { SFRPGDamage, SFRPGHealingSetting } from "./module/actor/mixins/actor-damage.js";
@@ -74,6 +78,7 @@ import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js"
 import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
 import { getSpellBrowser } from "./module/packs/spell-browser.js";
 import { getStarshipBrowser } from "./module/packs/starship-browser.js";
+import isObject from './module/utils/is-object.js';
 
 let initTime = null;
 
@@ -359,6 +364,47 @@ Hooks.once('init', async function() {
     console.log("Starfinder | [INIT] Adding math functions");
     SFRPGRoll.registerMathFunctions();
 
+    const rerenderApps = () => {
+        const apps = [...Object.values(ui.windows), ...foundry.applications.instances.values(), ui.sidebar];
+        for (const app of apps) {
+            app.render();
+        }
+    };
+
+    // Vite HMR for lang and hbs files
+    // FIXME: Lang doesn't correctly appear on sheets, but is in game.i18n?
+    if (import.meta.hot) {
+        import.meta.hot.on("lang-update", async ({ path }) => {
+            const lang = await foundry.utils.fetchJsonWithTimeout(path);
+            if (!isObject(lang)) {
+                ui.notifications.error(`Failed to load ${path}`);
+                return;
+            }
+            const apply = () => {
+                foundry.utils.mergeObject(game.i18n.translations, lang);
+                rerenderApps();
+            };
+            if (game.ready) {
+                apply();
+            } else {
+                Hooks.once("ready", apply);
+            }
+        });
+
+        import.meta.hot.on("template-update", async ({ path }) => {
+            const apply = async () => {
+                delete Handlebars.partials[path];
+                await getTemplate(path);
+                rerenderApps();
+            };
+            if (game.ready) {
+                apply();
+            } else {
+                Hooks.once("ready", apply);
+            }
+        });
+    }
+
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
@@ -420,6 +466,7 @@ Hooks.once("i18nInit", () => {
         "senses",
         "skillProficiencyLevels",
         "skills",
+        "controlSkills",
         "specialAbilityTypes",
         "specialMaterials",
         "speeds",
@@ -437,6 +484,7 @@ Hooks.once("i18nInit", () => {
         "starshipWeaponRanges",
         "starshipWeaponTypes",
         "turnEventTypes",
+        "droneArmTypes",
         "vehicleCoverTypes",
         "vehicleSizes",
         "vehicleTypes",
@@ -446,6 +494,7 @@ Hooks.once("i18nInit", () => {
         "weaponProficiencies",
         "weaponProperties",
         "weaponPropertiesTooltips",
+        "weaponAccessoriesSupportedTypes",
         "weaponTypes"
     ];
 
