@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You have a talent for finding hidden weapons and other illicit items, as well as subduing those who refuse to follow the rules. It takes you half as much time as others to search an area using Perception, and you gain a +2 bonus on Perception checks opposing Sleight of Hand checks to hide objects, palm objects, or pick pockets. You only take a –2 penalty to your attack roll when you use a weapon that deals lethal damage to deal nonlethal damage instead.</p>"
+      "value": "<p>You have a talent for finding hidden weapons and other illicit items, as well as subduing those who refuse to follow the rules. It takes you half as much time as others to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.gZlg2ZKze0erNLmP#search]{Search an Area} using @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.gZlg2ZKze0erNLmP]{Perception}, and you gain a +2 bonus on Perception checks opposing @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.qVEW9HjXQN0ok879]{Sleight of Hand} checks to hide objects, palm objects, or pick pockets. You only take a –2 penalty to your attack roll when you use a weapon that deals lethal damage to deal nonlethal damage instead.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -94,7 +94,39 @@
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "bd976a56-390a-44b9-b296-4d5f9e8a722e",
+        "name": "Opposing Sleight of Hand",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "You gain a +2 bonus on Perception checks opposing Sleight of Hand checks to hide objects, palm objects, or pick pockets.",
+        "source": "Taking out the Trash",
+        "subtab": "misc",
+        "valueAffected": "per"
+      },
+      {
+        "_id": "dd3d4542-cb2a-4f0b-9bad-9c3d9e2af2da",
+        "name": "Nonlethal Attack Penalty",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "limitTo": "",
+        "max": 0,
+        "modifier": "-2",
+        "modifierType": "formula",
+        "notes": "Applies instead of the normal penalty when making a nonlethal attack with a weapon that deals lethal damage.",
+        "source": "Taking out the Trash",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
