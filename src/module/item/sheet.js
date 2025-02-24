@@ -192,7 +192,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Action Details
         data.hasAttackRoll = this.item.hasAttack;
-        data.isHealing = data.item.actionType === "heal";
+        data.isHealing = data.item.system.actionType === "heal";
 
         // Determine whether to show calculated totals for fields with formulas
         if (itemData?.activation?.type || data.item.type === "weapon") {

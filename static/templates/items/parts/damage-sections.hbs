@@ -1,5 +1,5 @@
 <div class="form-group" {{ createTippy title="SFRPG.Damage.Types.PrimaryDamageGroup" subtitle="SFRPG.Damage.Types.PrimaryDamageGroupTooltip" }}>
-    <label>Primary Damage Group</label>
+    <label>{{localize "SFRPG.Damage.Types.PrimaryDamageGroup"}}</label>
     <input type="number" name="system.damage.primaryGroup" value="{{itemData.damage.primaryGroup}}" data-dtype="Number"/>
 </div>
 
@@ -50,6 +50,8 @@
             {{!-- Damage Types --}}
             {{#unless ../starshipDamage}}
                 <div class="damage-part-type form-group stacked">
+                    {{log ../isHealing}}
+                    {{#unless ../isHealing}}
                     <div class="form-group form-group-stacked">
                         <label>{{localize "SFRPG.Damage.EnergyDamage"}}</label>
                         {{#each (sfrpg "energyDamageTypes") as |name type|}}
@@ -74,6 +76,7 @@
                         </label>
                         {{/each}}
                     </div>
+                    {{else}}
                     <div class="form-group form-group-stacked">
                         <label>{{localize "SFRPG.Healing.Healing"}}</label>
                         {{#each (sfrpg "healingTypes") as |name type|}}
@@ -82,6 +85,7 @@
                         </label>
                         {{/each}}
                     </div>
+                    {{/unless}}
                 </div>
             {{/unless}}
 
