@@ -1,6 +1,6 @@
 {
-  "_id": "NW9pxsxvuGNnxfBA",
-  "name": "Blindsense",
+  "_id": "KdXTjNdxizN39Sqy",
+  "name": "Plan Ahead",
   "type": "feat",
   "_stats": {
     "coreVersion": 12,
@@ -17,16 +17,16 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "min",
       "condition": "",
-      "cost": 0
+      "cost": 10
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This creature has @UUID[Compendium.sfrpg.rules.rX5rK6UWAIOeeipl.JournalEntryPage.p0o9tmWtKZ0qy8DI#blindsense]{Blindsense} with a range of 30 feet.</p>\n<p><em>Additional details of this creature's Blindsense can be copied over from their Race details.</em></p>"
+      "value": "<p>You know that having a plan for how to handle people is just as important as actually handling them, and work to impart that understanding on your party. Once per day you can spend 10 minutes observing a location. For the next hour, you and your allies gain a +2 bonus to initiative and can still act on their initiative counts in the surprise round even if they failed a Perception check, but only to take the @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#total-defense]{Total Defense} action.</p>\n<p>@UUID[Compendium.sfrpg.effects.Item.us6YymYxObV06aVv]{Effect: Plan Ahead}</p>"
     },
     "descriptors": {
       "acid": false,
@@ -84,44 +84,60 @@
       "water": false
     },
     "details": {
-      "category": "speciesFeature",
+      "category": "themeFeature",
       "combat": false,
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
-      "value": ""
+      "units": "hour",
+      "value": "1"
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "e57bc24a-a82e-4095-a6fd-34319d3cf98b",
+        "name": "Plan Ahead",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "initiative",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
       "per": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "Racial Feature",
+    "requirements": "12th Level",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "",
+    "source": "EN pg. 11",
     "target": {
       "type": "",
-      "value": ""
+      "value": "you and your allies"
     },
     "uses": {
-      "max": null,
+      "max": "1",
       "per": "day",
-      "value": null
+      "value": 1
     }
   }
 }
