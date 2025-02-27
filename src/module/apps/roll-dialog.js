@@ -93,7 +93,6 @@ export default class RollDialog extends Dialog {
         const data = await super.getData();
         data.formula = this.formula;
         data.rollMode = this.rollMode;
-        data.rollModes = CONFIG.Dice.rollModes;
         data.additionalBonus = this.additionalBonus;
         data.availableModifiers = foundry.utils.deepClone(this.availableModifiers) || [];
         data.hasModifiers = data.availableModifiers.length > 0;
@@ -134,24 +133,23 @@ export default class RollDialog extends Dialog {
         if (this.parts?.length > 0) {
             data.hasDamageTypes = true;
 
-            for (const part of this.parts) {
-                const partIndex = this.parts.indexOf(part);
+            if (this.parts[0].enabled === undefined) {
+                this.parts[0].enabled = true;
+            }
 
+            for (const [partIndex, part] of this.parts.entries()) {
                 // If there is no name, create the placeholder name
                 if (!part.name && this.parts.length > 1) {
                     part.name = game.i18n.format("SFRPG.Items.Action.DamageSection", {section: partIndex});
                 }
 
-                if (partIndex === 0 && part.enabled === undefined) {
-                    part.enabled = true;
-                }
-
                 // Create type string out of localized parts
                 let typeString = "";
                 if (part.types && !foundry.utils.isEmpty(part.types)) {
-                    typeString = `${(Object.entries(part.types).filter(type => type[1])
-                        .map(type => SFRPG.damageTypes[type[0]])
-                        .join(` & `))}`;
+                    typeString = Object.entries(part.types)
+                        .filter(([key, value]) => value)
+                        .map(([key, value]) => SFRPG.damageTypes[key])
+                        .join(" & ");
                 }
                 part.type = typeString;
 
@@ -171,10 +169,10 @@ export default class RollDialog extends Dialog {
                 }
             }
 
-            data.formula = this.formula;
-            if (this.parts?.length === 1) {
-                data.formula = this.formula.replace("<damageSection>", this.parts[0].formula);
-            }
+            data.formula = [
+                (this.parts.length === 1) ? this.parts[0].formula : '<Primary Section>',
+                this.formula
+            ].filter(Boolean).join(' + ') || '0';
         }
 
         return data;
@@ -228,7 +226,8 @@ export default class RollDialog extends Dialog {
         this.contexts.allContexts[selectorName] = this.contexts.allContexts[selectedValue];
 
         /** Repopulate nodes, might change modifiers because of different selector. */
-        this.availableModifiers = await this.rollTree.populate();
+        this.rollTree.populate(this.contexts);
+        this.availableModifiers = this.rollTree.getRolledModifiers();
 
         this.position.height = "auto";
         this.render(false);
@@ -288,9 +287,9 @@ export default class RollDialog extends Dialog {
      * @param {Modifier[]} availableModifiers
      * @param {string} mainDie
      * @param {DialogOptions} options
-     * @returns {RollDialog}
+     * @returns {Promise<{button: string, rollMode: string, bonus: string, parts: DamagePart[]}>}
      */
-    static async showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
+    static showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
         return new Promise(resolve => {
             const buttons = options.buttons || { roll: { id: "roll", label: game.i18n.localize("SFRPG.Rolls.Dice.Roll") } };
             const defaultButton = options.defaultButton || (Object.values(buttons)[0].id ?? Object.values(buttons)[0].label);
@@ -307,7 +306,7 @@ export default class RollDialog extends Dialog {
                     buttons: buttons,
                     default: defaultButton,
                     close: (button, rollMode, bonus, parts) => {
-                        resolve({button, rollMode, bonus, parts});
+                        resolve({button, rollMode, bonus: bonus?.trim(), parts});
                     }
                 },
                 options: options.dialogOptions || {}
