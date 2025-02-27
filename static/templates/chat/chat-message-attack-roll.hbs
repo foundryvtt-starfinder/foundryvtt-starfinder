@@ -7,19 +7,21 @@
             {{#if item.img }}<img src="{{item.img}}" />{{/if}}
             <p class="card-buttons damage">
                 {{#if item.img }}<span>{{item.name}}</span>{{else}}<h2>{{flavor}}</h2>{{/if}}
-                {{#if hasDamage }}<button type="button" data-action="damage">{{localize "SFRPG.Damage.Damage"}}</button>{{/if}}
-                {{#if hasSave}}<button type="button" class="chat-button-save" data-action="save" data-type="{{item.system.save.type}}">{{item.labels.save}}</button>{{/if}}
-                {{#if hasSkill}}<button type="button" class="chat-button-skill" data-action="skill" data-type="{{item.system.skillCheck.type}}">{{item.labels.skillCheck}}</button>{{/if}}
-                {{#if hasArea}}<button type="button" class="chat-button-template" data-action="template" data-type="{{item.system.area.type}}">{{localize "SFRPG.ChatCard.PlaceAbilityTemplate" label=item.labels.area}}</button>{{/if}}
-             </p>
+            </p>
+            <div class="chard-card-custom-details">
+                <ul>
+                    {{#if item.labels.range }}<li>{{localize "SFRPG.Range"}} : {{item.labels.range}}</li>{{/if}}
+                    {{#if hasCapacity }}<li>{{localize "SFRPG.Items.Ammunition.Ammo"}} : {{ammoLeft}}/{{item.system.capacity.max}}</li>{{/if}}
+                </ul>
+            </div>
+            <p class="card-buttons damage">
+                {{#if hasDamage}}<button type="button" class="chat-button-damage" data-action="damage" data-tooltip="{{localize "SFRPG.Damage.Damage"}}">{{localize "SFRPG.Damage.Damage"}}</button>{{/if}}
+                {{#if hasSave}}<button type="button" class="chat-button-save" data-action="save" data-type="{{item.system.save.type}}" data-tooltip="{{item.labels.save}}"><i class="fas {{sfrpg "saveIconsShort" item.system.save.type}}"></i> {{localize "SFRPG.Save"}}</button>{{/if}}
+                {{#if hasSkill}}<button type="button" class="chat-button-skill" data-action="skill" data-type="{{item.system.skillCheck.type}}" data-tooltip="{{item.labels.skillCheck}}"><i class="fas {{sfrpg "skillIconsShort" item.system.skillCheck.type}}"></i> {{localize "SFRPG.Skill"}}</button>{{/if}}
+                {{#if hasArea}}<button type="button" class="chat-button-template" data-action="template" data-type="{{item.system.area.type}}" data-tooltip="{{localize "SFRPG.ChatCard.PlaceAbilityTemplate" label=item.labels.area}}"><i class="fas fa-crosshairs"></i> {{localize "SFRPG.Template"}}</button>{{/if}}
+            </p>
         </div>
     </div>
     <div style="clear: both;"></div>
-    <div class="chard-card-custom-details">
-        <ul>
-            {{#if item.labels.range }}<li>{{localize "SFRPG.Range"}} : {{item.labels.range}}</li>{{/if}}
-            {{#if hasCapacity }}<li>{{localize "SFRPG.Items.Ammunition.Ammo"}} : {{ammoLeft}}/{{item.system.capacity.max}}</li>{{/if}}
-        </ul>
-    </div>
 </div>
 {{{rollContent}}}

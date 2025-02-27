@@ -2373,3 +2373,77 @@ SFRPG.defaultItemIcons = {
     "weapon": "bolter-gun.svg",
     "weaponAccessory": "gun-stock.svg"
 };
+
+SFRPG.checkIcons = {
+    "acrobatics":       "fa-person-walking",
+    "athletics":        "fa-dumbbell",
+    "bluff":            "fa-comment",
+    "computers":        "fa-computer",
+    "culture":          "fa-flag",
+    "diplomacy":        "fa-handshake",
+    "disguise":         "fa-mask",
+    "engineering":      "fa-gear",
+    "intimidate":       "fa-face-angry",
+    "life-science":     "fa-dna",
+    "medicine":         "fa-syringe",
+    "mysticism":        "fa-hand-sparkles",
+    "perception":       "fa-magnifying-glass",
+    "profession":       "fa-user-tie",
+    "physical-science": "fa-flask",
+    "piloting":         "fa-plane",
+    "sense-motive":     "fa-person-circle-question",
+    "sleight-of-hand":  "fa-hands",
+    "stealth":          "fa-moon",
+    "survival":         "fa-campground",
+
+    "fortitude":        "fa-shield-heart",
+    "reflex":           "fa-person-running",
+    "will":             "fa-brain",
+
+    "strength":         "fa-weight-hanging",
+    "dexterity":        "fa-feather-pointed",
+    "constitution":     "fa-heart-pulse",
+    "intelligence":     "fa-glasses",
+    "wisdom":           "fa-mountain-sun",
+    "charisma":         "fa-people-arrows",
+
+    "caster-level":     "fa-wand-magic-sparkles"
+};
+
+SFRPG.skillIconsShort = {
+    "acr": "fa-person-walking",
+    "ath": "fa-dumbbell",
+    "blu": "fa-comment",
+    "com": "fa-computer",
+    "cul": "fa-flag",
+    "dip": "fa-handshake",
+    "dis": "fa-mask",
+    "eng": "fa-gear",
+    "int": "fa-face-angry",
+    "lsc": "fa-dna",
+    "med": "fa-syringe",
+    "mys": "fa-hand-sparkles",
+    "per": "fa-magnifying-glass",
+    "pro": "fa-user-tie",
+    "phs": "fa-flask",
+    "pil": "fa-plane",
+    "sen": "fa-person-circle-question",
+    "sle": "fa-hands",
+    "ste": "fa-moon",
+    "sur": "fa-campground"
+},
+
+SFRPG.saveIconsShort = {
+    "fort":   "fa-shield-heart",
+    "reflex": "fa-person-running",
+    "will":   "fa-brain"
+},
+
+SFRPG.abilityIconsShort = {
+    "str": "fa-weight-hanging",
+    "dex": "fa-feather-pointed",
+    "con": "fa-heart-pulse",
+    "int": "fa-glasses",
+    "wis": "fa-mountain-sun",
+    "cha": "fa-people-arrows"
+};
