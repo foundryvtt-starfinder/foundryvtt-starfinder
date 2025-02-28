@@ -32,93 +32,128 @@
     }
 }
 
-.chat-card-custom {
-    .chat-card-custom-item {
-        img {
-            margin: 5px;
-            float: left;
-            border: none;
-            border-radius: 10px;
-            width: 30px;
-        }
-
-        p span {
-            display: block;
-            color: black;
-            font-weight: bold;
-        }
-
-        p button {
-            margin: 5px 0px;
-            background-color: grey;
-            border-color: black;
-            color: white;
-            font-size: var(--font-size-12);
-            height: 20px;
-            width: 60px;
-            line-height: inherit;
-        }
-
-        p button.chat-button-damage {
-            background-color: @sfrpgRed;
-            width: auto;
-        }
-
-        p button.chat-button-save {
-            background-color: @sfrpgBlue;
-            width: auto;
-        }
-
-        p button.chat-button-skill {
-            width: auto;
-        }
-
-        p button.chat-button-template {
-            background-color: @sfrpgGreen;
-            width: auto;
-        }
-
-        h2 {
-            position: initial;
-        }
-    }
-
-    div.chard-card-custom-token {
-        img {
-            float: left;
-            border: none;
-            width: 60px;
-        }
-    }
-}
-
-.chard-card-custom-details {
-    margin-top: 3px;
-
-    ul {
-        margin: 0;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 2px 0 0;
-        padding: 0 3px;
-        font-size: var(--font-size-11);
-        line-height: 16px;
-        border: 1px solid #999;
-        border-radius: 3px;
-        background: rgba(0, 0, 0, 0.05);
-    }
-}
-
 .message-content {
     h2 {
         font-weight: bold;
         text-align: center;
     }
 
-    div.chat-card-custom-container {
+    .card-display-container {
+
+        .card-icons {
+            margin: 5px 2px 5px 0px;
+            flex: 0 0 32px;
+
+            img {
+                display: block;
+                border: none;
+                border-radius: 3px;
+                height: 32px;
+                width: auto;
+            }
+
+            ul {
+                width: fit-content;
+                margin: 0 0;
+                padding: 0 0;
+            }
+
+            li {
+                display: inline-block;
+            }
+        }
+
+        .card-range-info {
+            margin: 5px 2px;
+            flex: 2 0 32px;
+
+            ul {
+                margin: 0;
+                padding: 0;
+            }
+
+            li {
+                display: inline-block;
+                margin: 0 2px 0 0;
+                padding: 0 3px;
+                font-size: var(--font-size-11);
+                line-height: 16px;
+                border: 1px solid #999;
+                border-radius: 3px;
+                background: rgba(0, 0, 0, 0.05);
+            }
+        }
+
+        .card-buttons {
+            flex: 3 0 32px;
+            margin: 5px 0px 5px 2px;
+
+            button {
+                margin: 1px 1px;
+                background-color: grey;
+                border-color: black;
+                color: white;
+                font-size: var(--font-size-12);
+                height: 20px;
+                line-height: inherit;
+
+                &.chat-button-damage {
+                    background-color: @sfrpgRed;
+                }
+
+                &.chat-button-save {
+                    background-color: @sfrpgBlue;
+                }
+
+                &.chat-button-template {
+                    background-color: @sfrpgPurple;
+                }
+            }
+        }
+    }
+    .chat-card {
+        .item {
+            img {
+                margin: 5px;
+                float: left;
+                border: none;
+                border-radius: 10px;
+                width: 30px;
+            }
+
+            p span {
+                display: block;
+                color: black;
+                font-weight: bold;
+            }
+
+            p button {
+                margin: 1px 0px;
+                background-color: grey;
+                border-color: black;
+                color: white;
+                font-size: var(--font-size-12);
+                height: 20px;
+                width: 60px;
+                line-height: inherit;
+            }
+
+            h2 {
+                position: initial;
+            }
+        }
+
+        .token {
+            img {
+                float: left;
+                border: none;
+                width: 32px;
+                margin: 1px 1px;
+            }
+        }
+    }
+
+    div.chat-card-container {
         padding: 3px;
         background-color: rgba(0, 0, 0, 0.05);
         border-radius: 5px;
