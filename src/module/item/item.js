@@ -89,6 +89,23 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     }
 
     /**
+     * True if the item's primary damage section has a healing type selected
+     * @type {boolean}
+     */
+    get primaryDamageIsHealing() {
+        const primaryGroup = this.system.damage.primaryGroup;
+        for (const part of this.system.damage.parts) {
+            if (part.isPrimarySection || part.group === primaryGroup) {
+                const types = part.types;
+                if (types.healing || types.sp || types.sphp || types.tempHP) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
      * The timedEffect object of this item, if any.
      * @returns {SFRPGTimedEffect|undefined}
      */
