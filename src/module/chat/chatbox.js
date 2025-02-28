@@ -52,6 +52,7 @@ export default class SFRPGCustomChatMessage {
         const currentCapacity = item instanceof ItemSFRPG ? item.getCurrentCapacity() : null;
 
         let tokenImg;
+        let tokenName;
         const speaker = data.speaker;
         if (speaker) {
             let setImage = false;
@@ -59,14 +60,15 @@ export default class SFRPGCustomChatMessage {
                 const token = game.scenes.get(speaker.scene)?.tokens?.get(speaker.token);
                 if (token) {
                     tokenImg = token.img;
+                    tokenName = token.name;
                     setImage = true;
                 }
             }
-
             if (speaker.actor && !setImage) {
                 const actor = Actors.instance.get(speaker.actor);
                 if (actor) {
                     tokenImg = actor.img;
+                    tokenName = actor.name;
                 }
             }
         }
@@ -86,6 +88,7 @@ export default class SFRPGCustomChatMessage {
             rollNotes: data.htmlData?.find(x => x.name === "rollNotes")?.value,
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             tokenImg: tokenImg || actor.token?.img || actor.img,
+            tokenName: tokenName,
             actorId: actor.id,
             tokenId: this.getToken(actor),
             breakdown: data.breakdown,

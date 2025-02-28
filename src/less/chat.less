@@ -41,6 +41,43 @@
     .card-display-container {
 
         .card-icons {
+            margin: 2px 2px 2px 2px;
+            flex: 0 1 64px;
+            border-radius: 4px;
+            background: rgba(0, 0, 0, 0.1);
+            position: relative;
+
+            &.owner {
+
+            }
+
+            &.target {
+            }
+
+            img {
+                width: auto;
+            }
+
+            .actor-icon {
+                border: none;
+                border-radius: 4px;
+                height: 64px;
+                z-index: 0;
+            }
+
+            .item-icon {
+                border: 4px;
+                border-radius: 4px;
+                background: rgba(0, 0, 0, 0.5);
+                height: 28px;
+                position: absolute;
+                right: 2px;
+                bottom: 2px;
+                z-index: 1;
+            }
+        }
+
+        .card-deleteme-icons {
             margin: 5px 2px 5px 0px;
             flex: 0 0 32px;
 
@@ -64,7 +101,7 @@
         }
 
         .card-range-info {
-            margin: 5px 2px;
+            margin: 2px 2px;
             flex: 2 0 32px;
 
             ul {
@@ -85,8 +122,7 @@
         }
 
         .card-buttons {
-            flex: 3 0 32px;
-            margin: 5px 0px 5px 2px;
+            margin: 2px 2px 2px 2px;
 
             button {
                 margin: 1px 1px;
@@ -96,6 +132,7 @@
                 font-size: var(--font-size-12);
                 height: 20px;
                 line-height: inherit;
+                white-space: nowrap;
 
                 &.chat-button-damage {
                     background-color: @sfrpgRed;
