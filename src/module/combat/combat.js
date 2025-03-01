@@ -913,20 +913,20 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         activeCombat.renderCombatTypeControls(header);
 
         // Handle button clicks
-        const configureButtonPrev = $(header).find('.combat-type-prev');
-        configureButtonPrev.click(ev => {
+        const configureButtonPrev = header.querySelector('.combat-type-prev');
+        configureButtonPrev.addEventListener('click', ev => {
             ev.preventDefault();
             onConfigClicked(activeCombat, -1);
         });
 
-        const configureButtonNext = $(header).find('.combat-type-next');
-        configureButtonNext.click(ev => {
+        const configureButtonNext = header.querySelector('.combat-type-next');
+        configureButtonNext.addEventListener('click', ev => {
             ev.preventDefault();
             onConfigClicked(activeCombat, 1);
         });
 
-        const beginButton = $(footer).find('.combat-control[data-action=startCombat]');
-        beginButton.click(ev => {
+        const beginButton = footer.querySelector('.combat-control[data-action=startCombat]');
+        beginButton.addEventListener('click', ev => {
             ev.preventDefault();
             activeCombat.begin();
         });
@@ -946,8 +946,8 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         activeCombat.renderDifficulty(diffObject, html);
 
         // Handle button presses
-        const difficultyButton = $(header).find('.combat-difficulty');
-        difficultyButton.click(async ev => {
+        const difficultyButton = header.querySelector('.combat-difficulty');
+        difficultyButton.addEventListener('click', ev => {
             ev.preventDefault();
             diffObject.render(true);
         });

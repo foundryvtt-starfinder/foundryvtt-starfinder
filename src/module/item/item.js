@@ -1744,8 +1744,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let item = chatCardActor.items.get(card.dataset.itemId);
 
         // Adjust item to level, if required
-        if (typeof (message.flags.level) !== 'undefined' && message.flags.level !== item.system.level) {
-            const newItemData = item.toObject;
+        // V13 TODO: Changes to foundry chat messages are removing flags.level from the message
+        if (typeof (message.flags.level) !== 'undefined' && message.flags.level !== item.system.level && Object.keys(message.flags.level).length !== 0) {
+            const newItemData = item.toObject();
             newItemData.system.level = message.flags.level;
 
             item = new ItemSFRPG(newItemData, {parent: item.parent});

@@ -82,39 +82,44 @@ export default class CounterManagement {
                     additionalHtml += "</a>";
                 }
 
-                // V13 TODO: Needs Fixing
+                // V13 TODO: This is still a bit off
                 // Rearrange the items in the combat tracker so they appear in the right places
-                const $combatantHtml = html.find(`.combatant[data-combatant-id="${combatant.id}"]`);
-                $combatantHtml.addClass('counter-image-relative');
+                const $combatantHtml = html.querySelector(`.combatant[data-combatant-id="${combatant.id}"]`);
+                $combatantHtml.classList.add('counter-image-relative');
 
-                $combatantHtml.find('.token-image').before('<div id="foundry-elements-wrapper" class="flexcol"><div id="foundry-elements" class="flexrow"></div></div>');
-                const $div = $combatantHtml.find('#foundry-elements');
+                $combatantHtml.querySelector('.token-image').insertAdjacentHTML('beforebegin', '<div id="foundry-elements-wrapper" class="flexcol"><div id="foundry-elements" class="flexrow"></div></div>');
+                const $div = $combatantHtml.querySelector('#foundry-elements');
+                const $wrapper = $combatantHtml.querySelector('#foundry-elements-wrapper');
 
-                $combatantHtml.find('.token-image').detach()
-                    .appendTo($div);
-                $combatantHtml.find('.token-name').detach()
-                    .appendTo($div);
-                $combatantHtml.find('.token-resource').detach()
-                    .appendTo($combatantHtml);
-                $combatantHtml.find('.token-initiative').detach()
-                    .appendTo($combatantHtml);
-
-                // Add classes to the token resource and initiative divs so they are vertically centered
-                $combatantHtml.find('.token-resource').addClass('flexcol');
-                $combatantHtml.find('.token-initiative').addClass('flexcol');
-                $combatantHtml.find('.resource').addClass('flex0');
-                $combatantHtml.find('.initiative').addClass('flex0');
+                const tokenImage = $combatantHtml.querySelector('.token-image');
+                if (tokenImage) {
+                    tokenImage.remove();
+                    $div.appendChild(tokenImage);
+                }
+                const tokenName = $combatantHtml.querySelector('.token-name');
+                if (tokenName) {
+                    tokenName.remove();
+                    $div.appendChild(tokenName);
+                }
+                const tokenInitiative = $combatantHtml.querySelector('.token-initiative');
+                if (tokenInitiative) {
+                    tokenInitiative.remove();
+                    $div.appendChild(tokenInitiative);
+                }
 
                 // Add the resource displays if they're needed
                 if (additionalHtml.length !== 0) {
-                    $div.after('<div id="counter-tokens" class=""></div>');
-                    const $counterTokens = $combatantHtml.find('#counter-tokens');
-                    $counterTokens.append(additionalHtml);
+                    const counterTokensDiv = document.createElement('div');
+                    counterTokensDiv.id = 'counter-tokens';
+                    counterTokensDiv.classList.add('flexrow');
+                    $wrapper.appendChild(counterTokensDiv);
+                    counterTokensDiv.innerHTML = additionalHtml;
 
-                    html.on('click', '.counter-token', function(event) {
+                    html.addEventListener('click', function(event) {
+                        if (!event.target.closest('.counter-token')) return;
                         event.preventDefault();
 
-                        const counterToken = event.currentTarget;
+                        const counterToken = event.target.closest('.counter-token');
                         const combatantId = counterToken.dataset.combatantId;
 
                         const combatant = game.combat.combatants.get(combatantId);
