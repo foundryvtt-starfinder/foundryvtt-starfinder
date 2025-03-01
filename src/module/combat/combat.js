@@ -694,6 +694,7 @@ export class CombatSFRPG extends Combat {
 
         const rollResult = await DiceSFRPG.createRoll({
             rollContext: rollContext,
+            actorContextKey: "combatant",
             parts: parts,
             event,
             title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
