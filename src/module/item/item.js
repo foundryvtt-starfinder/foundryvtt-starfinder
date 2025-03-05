@@ -1715,6 +1715,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     static chatListeners(html) {
         html.on('click', '.chat-card .card-buttons button', this._onChatCardAction.bind(this));
         html.on('click', '.chat-card .item-name', this._onChatCardToggleContent.bind(this));
+        html.on('click', '.dice-roll', this._onChatCardToggleRollContent.bind(this));
     }
 
     /* -------------------------------------------- */
@@ -1789,6 +1790,20 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const content = card.querySelector('.card-content');
         // content.style.display = content.style.display === 'none' ? 'block' : 'none';
         $(content).slideToggle();
+    }
+
+    /**
+     * Handle toggling the visibility of chat card roll breakdown (tooltip) when the roll is clicked.
+     * @param {Event} event The originating click event
+     */
+    static _onChatCardToggleRollContent(event) {
+        event.preventDefault();
+        const rollContent = event.currentTarget;
+        const result = rollContent.querySelector('.dice-result');
+        const breakdown = result.querySelector('.dice-tooltip');
+        // const roll = card.querySelector('.dice-roll');
+        // content.style.display = content.style.display === 'none' ? 'block' : 'none';
+        $(breakdown).slideToggle();
     }
 
     /* -------------------------------------------- */
