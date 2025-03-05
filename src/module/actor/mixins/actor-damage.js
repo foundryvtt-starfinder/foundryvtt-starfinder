@@ -166,7 +166,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
      * A utility method used to apply damage to any selected tokens when an option
      * is selected from a chat card context menu.
      *
-     * @param {JQuery} html The jQuery object representing the chat card.
+     * @param {HTML} html The HTML object representing the chat card.
      * @param {Number} multiplier A number used to multiply the damage being applied
      * @returns {Promise<any[]>}
      */
@@ -175,8 +175,8 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             return null;
         }
 
-        const diceRollElement = html.find('.sfrpg.dice-roll');
-        const diceTotal = diceRollElement.data("sfrpgDiceTotal");
+        const diceRollElement = html.querySelector('.sfrpg.dice-roll');
+        const diceTotal = diceRollElement?.dataset?.sfrpgDiceTotal;
 
         const shiftKey = game.keyboard.downKeys.has("ShiftLeft") || game.keyboard.downKeys.has("ShiftRight");
         let modifier = 0;
@@ -220,9 +220,9 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                             icon: "<i class='fas fa-check'></i>",
                             label: game.i18n.localize("SFRPG.ChatCard.ContextMenu.Accept"),
                             callback: (html) => {
-                                modifier = parseInt(html[0].querySelector("#modifier").value) || 0;
-                                healingTarget = html[0].querySelector("#apply-healing")?.value || "hp";
-                                bypassStamina = html[0].querySelector("#bypass-stamina")?.checked;
+                                modifier = parseInt(html.querySelector("#modifier").value) || 0;
+                                healingTarget = html.querySelector("#apply-healing")?.value || "hp";
+                                bypassStamina = html.querySelector("#bypass-stamina")?.checked;
                                 if (!modifier && (healingTarget === "hp" || bypassStamina === false)) ui.notifications.warn(game.i18n.localize("SFRPG.ChatCard.ContextMenu.NoDamageModifier"));
                             }
                         }
@@ -234,17 +234,17 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         }
 
-        let rolledAmount = Math.floor((diceTotal ?? Math.floor(parseFloat(html.find('.dice-total').text()))));
-        const isCritical = diceRollElement.data("sfrpgIsCritical") || false;
+        let rolledAmount = Math.floor((diceTotal ?? Math.floor(parseFloat(html.querySelector('.dice-total').text()))));
+        const isCritical = diceRollElement?.dataset?.sfrpgIsCritical || false;
         const properties = [];
 
-        const starshipWeaponProperties = diceRollElement.data("sfrpgStarshipWeaponProperties");
+        const starshipWeaponProperties = diceRollElement?.dataset?.sfrpgStarshipWeaponProperties;
         if (starshipWeaponProperties) {
             properties.push(...starshipWeaponProperties);
         }
 
         let damageTypes = [];
-        const chatMessageId = html[0].dataset?.messageId;
+        const chatMessageId = html.dataset?.messageId;
         const chatMessage = game.messages.get(chatMessageId);
         if (chatMessage) {
             const chatDamageData = chatMessage.flags.damage;

@@ -5,7 +5,7 @@
         </div>
         <div class="chat-card-custom-item">
             {{#if item.img }}<img src="{{item.img}}" />{{/if}}
-            <p class="card-buttons damage">
+            <p class="card-buttons damage flexcol">
                 {{#if item.img }}<span>{{item.name}}</span>{{else}}<h2>{{flavor}}</h2>{{/if}}
                 {{#if hasDamage }}<button type="button" data-action="damage">Damage</button>{{/if}}
                 {{#if hasSave}}<button type="button" class="chat-button-save" data-action="save" data-type="{{item.system.save.type}}">{{item.labels.save}}</button>{{/if}}
