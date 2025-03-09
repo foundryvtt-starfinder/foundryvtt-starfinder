@@ -638,7 +638,7 @@ export class CombatSFRPG extends Combat {
             combatTypeControls.innerHTML = this.getCombatName();
         }
 
-        html.getElementsByClassName('combat-tracker-header')[0].appendChild(combatTypeControls);
+        html.appendChild(combatTypeControls);
     }
 
     renderDifficulty(diffObject, html) {
@@ -900,33 +900,33 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
 
     const combatType = activeCombat.getCombatType();
 
-    const header = html.find('.combat-tracker-header');
-    const footer = html.find('.directory-footer');
+    const header = html.querySelector('.combat-tracker-header');
+    const footer = html.querySelector('.combat-controls');
 
-    if (activeCombat.round) {
+    if (activeCombat.round > 0) {
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
-            activeCombat.renderCombatPhase(html[0]);
+            activeCombat.renderCombatPhase(html);
         }
     } else {
         // Add buttons for switching combat type
-        activeCombat.renderCombatTypeControls(html[0]);
+        activeCombat.renderCombatTypeControls(header);
 
         // Handle button clicks
-        const configureButtonPrev = header.find('.combat-type-prev');
-        configureButtonPrev.click(ev => {
+        const configureButtonPrev = header.querySelector('.combat-type-prev');
+        configureButtonPrev.addEventListener('click', ev => {
             ev.preventDefault();
             onConfigClicked(activeCombat, -1);
         });
 
-        const configureButtonNext = header.find('.combat-type-next');
-        configureButtonNext.click(ev => {
+        const configureButtonNext = header.querySelector('.combat-type-next');
+        configureButtonNext.addEventListener('click', ev => {
             ev.preventDefault();
             onConfigClicked(activeCombat, 1);
         });
 
-        const beginButton = footer.find('.combat-control[data-control=startCombat]');
-        beginButton.click(ev => {
+        const beginButton = footer.querySelector('.combat-control[data-action=startCombat]');
+        beginButton.addEventListener('click', ev => {
             ev.preventDefault();
             activeCombat.begin();
         });
@@ -943,11 +943,11 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         else if (combatType === "starship") diffObject.getStarshipEncounterInfo();
 
         // Display difficulty
-        activeCombat.renderDifficulty(diffObject, html[0]);
+        activeCombat.renderDifficulty(diffObject, html);
 
         // Handle button presses
-        const difficultyButton = header.find('.combat-difficulty');
-        difficultyButton.click(async ev => {
+        const difficultyButton = header.querySelector('.combat-difficulty');
+        difficultyButton.addEventListener('click', ev => {
             ev.preventDefault();
             diffObject.render(true);
         });
