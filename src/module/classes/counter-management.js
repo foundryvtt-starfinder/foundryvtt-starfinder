@@ -82,37 +82,13 @@ export default class CounterManagement {
                     additionalHtml += "</a>";
                 }
 
-                // V13 TODO: This is still a bit off
-                // Rearrange the items in the combat tracker so they appear in the right places
-                const $combatantHtml = html.querySelector(`.combatant[data-combatant-id="${combatant.id}"]`);
-                $combatantHtml.classList.add('counter-image-relative');
-
-                $combatantHtml.querySelector('.token-image').insertAdjacentHTML('beforebegin', '<div id="foundry-elements-wrapper" class="flexcol"><div id="foundry-elements" class="flexrow"></div></div>');
-                const $div = $combatantHtml.querySelector('#foundry-elements');
-                const $wrapper = $combatantHtml.querySelector('#foundry-elements-wrapper');
-
-                const tokenImage = $combatantHtml.querySelector('.token-image');
-                if (tokenImage) {
-                    tokenImage.remove();
-                    $div.appendChild(tokenImage);
-                }
-                const tokenName = $combatantHtml.querySelector('.token-name');
-                if (tokenName) {
-                    tokenName.remove();
-                    $div.appendChild(tokenName);
-                }
-                const tokenInitiative = $combatantHtml.querySelector('.token-initiative');
-                if (tokenInitiative) {
-                    tokenInitiative.remove();
-                    $div.appendChild(tokenInitiative);
-                }
-
                 // Add the resource displays if they're needed
                 if (additionalHtml.length !== 0) {
+                    const $combatantHtml = html.querySelector(`.combatant[data-combatant-id="${combatant.id}"]`);
+                    const $name = $combatantHtml.querySelector('.token-name');
                     const counterTokensDiv = document.createElement('div');
-                    counterTokensDiv.id = 'counter-tokens';
-                    counterTokensDiv.classList.add('flexrow');
-                    $wrapper.appendChild(counterTokensDiv);
+                    counterTokensDiv.classList.add('flexcol-sfrpg');
+                    $name.after(counterTokensDiv);
                     counterTokensDiv.innerHTML = additionalHtml;
 
                     html.addEventListener('click', function(event) {
