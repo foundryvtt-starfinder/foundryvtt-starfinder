@@ -105,7 +105,7 @@ export default class SFRPGCustomChatMessage {
     }
 
     static async _render(roll, data, options) {
-        const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.hbs";
+        const templateName = "systems/sfrpg/templates/chat/attack-card.hbs";
         let rollContent = await roll.render({htmlData: data.htmlData, customTooltip: options.rollDices});
 
         // Insert the damage type string if possible.

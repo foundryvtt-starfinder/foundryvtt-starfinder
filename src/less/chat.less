@@ -32,13 +32,66 @@
     }
 }
 
+.message-header {
+    background-color: rgba(150, 200, 255, 0.4);
+    padding: 2px;
+    z-index: 5;
+
+    h4.message-sender {
+        z-index: 1;
+        color: @sfrpgRed;
+        font-weight: bold;
+    }
+}
+
 .message-content {
     h2 {
         font-weight: bold;
         text-align: center;
     }
 
-    .card-display-container {
+    .chat-card {
+
+        &.attack-card {
+            .card-icons {
+
+                &.owner {
+                }
+
+                &.target {
+                }
+
+                .actor-icon {
+                    border: none;
+                    border-radius: 4px;
+                    height: 64px;
+                    z-index: 0;
+                }
+
+                .item-icon {
+                    border: 4px;
+                    border-radius: 4px;
+                    background: rgba(0, 0, 0, 0.5);
+                    height: 28px;
+                    position: absolute;
+                    right: 2px;
+                    bottom: 2px;
+                    z-index: 1;
+                    box-shadow: 0 0 2px 2px #775434;
+                }
+            }
+        }
+
+        &.item-card {
+            .card-icons {
+                .actor-icon, .item-icon {
+                    border: none;
+                    border-radius: 4px;
+                    height: 64px;
+                    z-index: 0;
+                }
+            }
+        }
 
         .card-icons {
             margin: 2px 2px 2px 2px;
@@ -47,64 +100,20 @@
             background: rgba(0, 0, 0, 0.1);
             position: relative;
 
-            &.owner {
-
-            }
-
-            &.target {
-            }
-
             img {
                 width: auto;
             }
-
-            .actor-icon {
-                border: none;
-                border-radius: 4px;
-                height: 64px;
-                z-index: 0;
-            }
-
-            .item-icon {
-                border: 4px;
-                border-radius: 4px;
-                background: rgba(0, 0, 0, 0.5);
-                height: 28px;
-                position: absolute;
-                right: 2px;
-                bottom: 2px;
-                z-index: 1;
-            }
         }
 
-        .card-deleteme-icons {
-            margin: 5px 2px 5px 0px;
-            flex: 0 0 32px;
-
-            img {
-                display: block;
-                border: none;
-                border-radius: 3px;
-                height: 32px;
-                width: auto;
-            }
-
-            ul {
-                width: fit-content;
-                margin: 0 0;
-                padding: 0 0;
-            }
-
-            li {
-                display: inline-block;
-            }
-        }
-
-        .card-range-info {
+        .card-info {
             margin: 2px 2px;
             flex: 2 0 32px;
 
-            ul {
+            .card-title {
+                text-align: center;
+            }
+
+            ul.card-tags {
                 margin: 0;
                 padding: 0;
             }
@@ -114,7 +123,6 @@
                 margin: 0 2px 0 0;
                 padding: 0 3px;
                 font-size: var(--font-size-11);
-                line-height: 16px;
                 border: 1px solid #999;
                 border-radius: 3px;
                 background: rgba(0, 0, 0, 0.05);
@@ -147,77 +155,69 @@
                 }
             }
         }
-    }
-    .chat-card {
-        .item {
-            img {
-                margin: 5px;
-                float: left;
-                border: none;
-                border-radius: 10px;
-                width: 30px;
-            }
 
-            p span {
-                display: block;
-                color: black;
+        .card-content {
+            margin: 5px 0;
+
+            h3 {
+                font-size: var(--font-size-12);
+                margin: 0;
                 font-weight: bold;
             }
 
-            p button {
-                margin: 1px 0px;
-                background-color: grey;
-                border-color: black;
-                color: white;
+            > * {
+                -webkit-user-select: text;
+                -moz-user-select: text;
+                -ms-user-select: text;
+                user-select: text;
+            }
+        }
+    }
+
+    .card-footer {
+        padding: 3px 0 0;
+        border-top: 2px groove #fff;
+
+        span {
+            border-right: 2px groove #fff;
+            padding: 0 5px 5px 0;
+            font-size: var(--font-size-11);
+
+            &:last-child {
+                border-right: none;
+                padding-right: 0;
+            }
+        }
+    }
+
+    .dice-roll {
+        &.sfrpg {
+            .dice-footer {
+                border-top: 2px groove #fff;
                 font-size: var(--font-size-12);
-                height: 20px;
-                width: 60px;
-                line-height: inherit;
-            }
+                font-style: normal;
+                order: 3;
+                padding: 3px 0 0;
+                margin-top: 5px;
 
-            h2 {
-                position: initial;
+                span {
+                    border-right: 2px groove #fff;
+                    padding: 0 5px 0 0;
+                    font-size: var(--font-size-11);
+
+                    &:last-child {
+                        border-right: none;
+                        padding-right: 0;
+                    }
+                }
             }
         }
 
-        .token {
-            img {
-                float: left;
-                border: none;
-                width: 32px;
-                margin: 1px 1px;
-            }
-        }
-    }
-
-    div.chat-card-container {
-        padding: 3px;
-        background-color: rgba(0, 0, 0, 0.05);
-        border-radius: 5px;
-    }
-
-    div.dice-roll {
         .dice-formula {
             font-weight: bold;
             background-color: rgba(0, 0, 0, 0.5);
             color: white;
         }
-    }
-
-    div.flexrow div h2 {
-        position: initial;
-    }
-}
-
-.message-header {
-    background-color: rgba(150, 200, 255, 0.4);
-    padding: 2px;
-    z-index: 5;
-
-    h4.message-sender {
-        z-index: 1;
-        color: @sfrpgRed;
-        font-weight: bold;
     }
 }
 
@@ -276,23 +276,6 @@
             }
         }
 
-        .card-content {
-            margin: 5px 0;
-
-            h3 {
-                font-size: var(--font-size-12);
-                margin: 0;
-                font-weight: bold;
-            }
-
-            > * {
-                -webkit-user-select: text;
-                -moz-user-select: text;
-                -ms-user-select: text;
-                user-select: text;
-            }
-        }
-
         .card-buttons {
             margin: 5px 0;
 
@@ -312,42 +295,5 @@
             }
         }
 
-        .card-footer {
-            padding: 3px 0 0;
-            border-top: 2px groove #fff;
-
-            span {
-                border-right: 2px groove #fff;
-                padding: 0 5px 5px 0;
-                font-size: var(--font-size-11);
-
-                &:last-child {
-                    border-right: none;
-                    padding-right: 0;
-                }
-            }
-        }
-    }
-
-    &.dice-roll {
-        .dice-footer {
-            border-top: 2px groove #fff;
-            font-size: var(--font-size-12);
-            font-style: normal;
-            order: 3;
-            padding: 3px 0 0;
-            margin-top: 5px;
-
-            span {
-                border-right: 2px groove #fff;
-                padding: 0 5px 0 0;
-                font-size: var(--font-size-11);
-
-                &:last-child {
-                    border-right: none;
-                    padding-right: 0;
-                }
-            }
-        }
     }
 }
