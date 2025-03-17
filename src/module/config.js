@@ -303,6 +303,7 @@ SFRPG.ammunitionTypes = {
     "flare": "SFRPG.Items.Ammunition.Type.Flares",
     "flechettes": "SFRPG.Items.Ammunition.Type.Flechettes",
     "nanite": "SFRPG.Items.Ammunition.Type.Nanites",
+    "junk": "SFRPG.Items.Ammunition.Type.Junk",
     "caustrol": "SFRPG.Items.Ammunition.Type.Caustrol",
     "sclerite": "SFRPG.Items.Ammunition.Type.Sclerites",
     "moodGoo": "SFRPG.Items.Ammunition.Type.MoodGoo",
