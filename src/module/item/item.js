@@ -792,6 +792,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         props.push(
             {name: labels.level, tooltip: null}
         );
+
+        // Spell school
+        if (CONFIG.SFRPG.spellSchools[data.school]) {
+            props.push(
+                {name: game.i18n.localize(SFRPG.spellSchools[data.school]), tooltip: null}
+            );
+        }
     }
 
     /* -------------------------------------------- */
