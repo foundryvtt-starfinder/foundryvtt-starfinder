@@ -43,7 +43,8 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
             parts.unshift(
                 sanitize(folder.name)
                     .replace(/[\s]/g, "_")
-                    .replace(/[,;]/g, "")
+                    .replace(/[\x91\x92\u2018\u2019]/g, "'")
+                    .replace(/[,;\u2122\u2026]/g, "")
                     .toLowerCase()
             );
             if (folder.folder) {
@@ -70,7 +71,8 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
         const jsonOutput = JSONstringifyOrder(cleanItem, 2, "item");
         const filename = sanitize(item.name)
             .replace(/[\s]/g, "_")
-            .replace(/[,;]/g, "")
+            .replace(/[\x91\x92\u2018\u2019]/g, "'")
+            .replace(/[,;\u2122\u2026]/g, "")
             .toLowerCase();
 
         const targetFile = `${outputDirectory}/${filename}.json`;
