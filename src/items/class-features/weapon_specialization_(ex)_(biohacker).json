@@ -79,26 +79,12 @@
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "basicM"
-      },
-      {
-        "_id": "410d6825-220e-4d1a-9c58-e9d22e411485",
-        "name": "Weapon Specialization Biohacker",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
       },
       {
         "_id": "9ece2ee9-6611-441e-985c-429191f803bf",
