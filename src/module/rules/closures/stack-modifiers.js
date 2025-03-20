@@ -115,7 +115,8 @@ export default class StackModifiers extends Closure {
             moraleMods,
             racialMods,
             untypedMods,
-            resistanceMods] = modifiers.reduce((prev, curr) => {
+            resistanceMods,
+            weaponSpecializationMods] = modifiers.reduce((prev, curr) => {
             switch (curr.type) {
                 case SFRPGModifierTypes.ABILITY:
                     prev[0].push(curr);
@@ -150,6 +151,9 @@ export default class StackModifiers extends Closure {
                 case SFRPGModifierTypes.RESISTANCE:
                     prev[11].push(curr);
                     break;
+                case SFRPGModifierTypes.WEAPON_SPECIALIZATION:
+                    prev[12].push(curr);
+                    break;
                 case SFRPGModifierTypes.UNTYPED:
                 default:
                     prev[10].push(curr);
@@ -157,7 +161,7 @@ export default class StackModifiers extends Closure {
             }
 
             return prev;
-        }, [[], [], [], [], [], [], [], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], [], [], [], [], [], [], []]);
 
         const ability = abilityMods?.filter(mod => mod.max > 0)?.sort((a, b) => b.max - a.max)
             ?.shift() ?? null;
@@ -172,6 +176,7 @@ export default class StackModifiers extends Closure {
         const racial = racialMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
         const resistance = resistanceMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
         const untyped = untypedMods?.sort((a, b) => b.max - a.max);
+        const weaponSpecialization = weaponSpecializationMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
 
         return {
             ability,
@@ -185,7 +190,8 @@ export default class StackModifiers extends Closure {
             morale,
             racial,
             resistance,
-            untyped
+            untyped,
+            weaponSpecialization
         };
     }
 }
