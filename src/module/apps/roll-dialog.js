@@ -102,29 +102,6 @@ export default class RollDialog extends Dialog {
         data.damageGroups = this.damageGroups;
 
         for (const modifier of data.availableModifiers) {
-
-            // Make a simplified roll
-            const simplerRoll = Roll.create(modifier.modifier, data.contexts.getRollData()).simplifiedFormula;
-
-            if (modifier.modifier[0] === "+") modifier.modifier = modifier.modifier.slice(1);
-
-            /* If it actually was simplified, append the original modifier for use on the tooltip.
-            *
-            * If the formulas are different with whitespace, that means the original likely has some weird whitespace, so let's correct that, bu we don't need to tell the user.
-            */
-            if (modifier.modifier !== simplerRoll) {
-                modifier.originalFormula = modifier.modifier;
-
-                // If the formulas are still different without whitespace, then FunctionTerms must have been simplifed, so let's tell the user.
-                if (modifier.originalFormula.replace(/\s/g, "") !== simplerRoll.replace(/\s/g, "")) {
-                    modifier.originalFormulaTooltip = true;
-                }
-            }
-
-            // Sign that string
-            const numMod = Number(simplerRoll);
-            modifier.modifier = numMod ? numMod.signedString() : simplerRoll;
-
             if (Object.keys(CONFIG.SFRPG.modifierTypes).includes(modifier.type)) {
                 modifier.localizedType = game.i18n.localize(`${CONFIG.SFRPG.modifierTypes[modifier.type]}`);
             }
