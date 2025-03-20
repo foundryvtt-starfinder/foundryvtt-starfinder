@@ -2179,6 +2179,8 @@ SFRPG.actionTargets = {
     "kac": "SFRPG.Items.Action.ActionTarget.KAC",
     "kac8": "SFRPG.Items.Action.ActionTarget.KAC8",
     "eac": "SFRPG.Items.Action.ActionTarget.EAC",
+    "ac5": "SFRPG.Items.Action.ActionTarget.AC5",
+    "ac15": "SFRPG.Items.Action.ActionTarget.AC15",
     "other": "SFRPG.Items.Action.ActionTarget.Other"
 };
 
