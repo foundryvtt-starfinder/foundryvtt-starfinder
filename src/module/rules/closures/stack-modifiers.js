@@ -16,18 +16,26 @@ export default class StackModifiers extends Closure {
      * @returns {Object}          An object containing only those modifiers allowed
      *                            based on the stacking rules.
      */
-    process(mods, context, options = { actor: null }) {
+    process(mods, context, options = { actor: null, item: null }) {
         const modifiers = mods;
         for (const modifier of modifiers) {
             const actor = options.actor;
+            const item = options.item;
             const formula = String(modifier.modifier);
 
             if (formula && (modifier.modifierType === SFRPGModifierType.CONSTANT)) {
                 try {
-                    const roll = Roll.create(formula, actor?.system);
+                    const data = {};
+                    if (actor?.system) {
+                        Object.assign(data, actor.system);
+                    }
+                    if (item?.system) {
+                        Object.assign(data, {"item": item.system});
+                    }
+                    const roll = Roll.create(formula, data);
                     if (roll.isDeterministic) {
                         const warn = game.settings.get("sfrpg", "warnInvalidRollData") || false;
-                        const simplerFormula = Roll.replaceFormulaData(formula, actor?.system, {missing: 0, warn});
+                        const simplerFormula = Roll.replaceFormulaData(formula, data, {missing: 0, warn});
                         modifier.max = Roll.safeEval(simplerFormula);
                     } else {
                         ui.notifications.error(`Error with modifier: ${modifier.name}. Dice are not available in constant formulas. Please use a situational modifier instead.`);
