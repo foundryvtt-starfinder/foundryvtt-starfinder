@@ -56,6 +56,12 @@
                     {{selectOptions (sfrpg "weaponProperties") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "weapon-category-damage")}}
                     {{selectOptions (sfrpg "weaponCategories") selected=modifier.valueAffected}}
+                {{else if (eq modifier.effectType "weapon-ammo-usage-multiplier")}}
+                    {{selectOptions (sfrpg "weaponTypes") selected=modifier.valueAffected}}
+                {{else if (eq modifier.effectType "weapon-property-ammo-usage-multiplier")}}
+                    {{selectOptions (sfrpg "weaponProperties") selected=modifier.valueAffected}}
+                {{else if (eq modifier.effectType "weapon-category-ammo-usage-multiplier")}}
+                    {{selectOptions (sfrpg "weaponCategories") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "specific-speed")}}
                     {{selectOptions (sfrpg "speeds") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "damage-reduction")}}
