@@ -1,6 +1,6 @@
 {
-  "_id": "10eukdyjSRhaKmRx",
-  "name": "Dark Water Grenade (Hybrid)",
+  "_id": "rmbAib1eKQU6uald",
+  "name": "Shadow pistol, umbral",
   "type": "weapon",
   "_stats": {
     "coreVersion": 12,
@@ -10,24 +10,24 @@
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
     "type": "",
-    "ability": "str",
+    "ability": "dex",
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "",
+    "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
-      "type": "action",
+      "type": "none",
       "condition": "",
-      "cost": 1
+      "cost": null
     },
     "ammunitionType": "",
     "area": {
-      "effect": "burst",
+      "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "ft",
-      "value": 10
+      "units": "none",
+      "value": null
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,18 +43,18 @@
       },
       "hp": {
         "max": "",
-        "value": null
+        "value": 6
       },
       "size": "medium",
-      "sturdy": false
+      "sturdy": true
     },
     "attuned": false,
     "bulk": "L",
     "capacity": {
-      "max": 1,
-      "value": 1
+      "max": 40,
+      "value": 0
     },
-    "chatFlavor": "see text",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": 1,
@@ -66,7 +66,7 @@
             "fusion"
           ],
           "affectsEncumbrance": true,
-          "amount": 6,
+          "amount": 20,
           "subtype": "fusion",
           "weightProperty": "level"
         },
@@ -83,11 +83,19 @@
       ]
     },
     "critical": {
-      "effect": "",
+      "effect": "#Blind",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [
+        {
+          "formula": "5d10",
+          "operator": "",
+          "types": {
+            "Cryo": true
+          }
+        }
+      ]
     },
     "damageNotes": "",
     "description": {
@@ -95,27 +103,27 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>A darkwater grenade contains compressed, altered water molecules like a&nbsp;diaspora&nbsp;wyrm produces. The grenade has a 20-foot range increment and a capacity of drawn, and its explode special property produces a 10-foot-radius spread of light-absorbing mist, obscuring most sight and providing total concealment. This grenade works underwater and in a vacuum. A creature that has darkvision treats the field within 5 feet as if it provides only concealment. Magical light from a source of a higher level or CR than the grenade’s negates the effect if the two interact. The mist lingers for 10 minutes, but a light wind or current disperses it in 1 minute, a moderate in 4 rounds, and strong in 1 round.</p>"
+      "value": ""
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
     "isEquipment": true,
-    "level": 6,
+    "level": 20,
     "modifiers": [],
-    "price": 1400,
-    "proficient": true,
+    "price": 855000,
+    "proficient": false,
     "properties": {
       "aeon": false,
-      "amm": false,
+      "amm": true,
       "analog": false,
       "antibiological": false,
       "archaic": false,
@@ -136,7 +144,7 @@
       "drainCharge": false,
       "echo": false,
       "entangle": false,
-      "explode": true,
+      "explode": false,
       "extinguish": false,
       "feint": false,
       "fiery": false,
@@ -150,7 +158,6 @@
       "guided": false,
       "harrying": false,
       "holyWater": false,
-      "hybrid": true,
       "ignite": false,
       "indirect": false,
       "injection": false,
@@ -176,7 +183,6 @@
       "radioactive": false,
       "reach": false,
       "recall": false,
-      "regrowth": false,
       "relic": false,
       "reposition": false,
       "shape": false,
@@ -191,10 +197,9 @@
       "teleportive": false,
       "thought": false,
       "throttle": false,
-      "thrown": true,
+      "thrown": false,
       "trip": false,
       "two": false,
-      "unbalancing": false,
       "underwater": false,
       "unwieldy": false,
       "variantBoost": false,
@@ -206,15 +211,15 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 20
+      "value": 60
     },
     "rollNotes": "",
     "save": {
-      "type": "reflex",
-      "dc": "13+@abilities.dex.mod",
-      "descriptor": "partial"
+      "type": "",
+      "dc": null,
+      "descriptor": ""
     },
-    "source": "",
+    "source": "AR",
     "special": "",
     "specialMaterials": {},
     "target": {
@@ -223,14 +228,14 @@
     },
     "usage": {
       "per": "shot",
-      "value": 1
+      "value": 4
     },
     "uses": {
       "max": 0,
       "per": "",
-      "value": 0
+      "value": 4
     },
-    "weaponCategory": "",
-    "weaponType": "grenade"
+    "weaponCategory": "cryo",
+    "weaponType": "smallA"
   }
 }

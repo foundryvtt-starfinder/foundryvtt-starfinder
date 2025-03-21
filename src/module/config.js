@@ -303,6 +303,7 @@ SFRPG.ammunitionTypes = {
     "flare": "SFRPG.Items.Ammunition.Type.Flares",
     "flechettes": "SFRPG.Items.Ammunition.Type.Flechettes",
     "nanite": "SFRPG.Items.Ammunition.Type.Nanites",
+    "junk": "SFRPG.Items.Ammunition.Type.Junk",
     "caustrol": "SFRPG.Items.Ammunition.Type.Caustrol",
     "sclerite": "SFRPG.Items.Ammunition.Type.Sclerites",
     "moodGoo": "SFRPG.Items.Ammunition.Type.MoodGoo",
@@ -2178,6 +2179,8 @@ SFRPG.actionTargets = {
     "kac": "SFRPG.Items.Action.ActionTarget.KAC",
     "kac8": "SFRPG.Items.Action.ActionTarget.KAC8",
     "eac": "SFRPG.Items.Action.ActionTarget.EAC",
+    "ac5": "SFRPG.Items.Action.ActionTarget.AC5",
+    "ac15": "SFRPG.Items.Action.ActionTarget.AC15",
     "other": "SFRPG.Items.Action.ActionTarget.Other"
 };
 

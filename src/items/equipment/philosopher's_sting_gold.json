@@ -1,13 +1,13 @@
 {
-  "_id": "vX3ph7TVBVwo63bR",
-  "name": "Rubbish Cannon,Standard",
+  "_id": "cAXay2D0aPLoxfwZ",
+  "name": "Philosopher’s Sting, Gold",
   "type": "weapon",
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
     "systemVersion": "0.28.0"
   },
-  "img": "systems/sfrpg/icons/equipment/weapons/nil-grenade-launcher-merc.jpg",
+  "img": "systems/sfrpg/icons/equipment/weapons/psychic-wave-cannon-2.webp",
   "system": {
     "type": "",
     "ability": "dex",
@@ -17,11 +17,11 @@
     "actionTarget": "kac",
     "actionType": "rwak",
     "activation": {
-      "type": "none",
+      "type": "action",
       "condition": "",
-      "cost": null
+      "cost": 0
     },
-    "ammunitionType": "flare",
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shapable": false,
@@ -32,27 +32,27 @@
     "attackBonus": 0,
     "attributes": {
       "ac": {
-        "value": "5"
+        "value": ""
       },
       "customBuilt": false,
       "dex": {
         "mod": ""
       },
       "hardness": {
-        "value": "7"
+        "value": ""
       },
       "hp": {
-        "max": "18",
-        "value": 18
+        "max": "",
+        "value": 96
       },
       "size": "medium",
       "sturdy": true
     },
     "attuned": false,
-    "bulk": "2",
+    "bulk": "1",
     "capacity": {
-      "max": 1,
-      "value": 6
+      "max": 80,
+      "value": 0
     },
     "chatFlavor": "",
     "container": {
@@ -66,42 +66,32 @@
             "fusion"
           ],
           "affectsEncumbrance": true,
-          "amount": 1,
+          "amount": 17,
           "subtype": "fusion",
           "weightProperty": "level"
         },
         {
           "type": "slot",
           "acceptsType": [
-            "goods"
-          ],
-          "affectsEncumbrance": true,
-          "amount": 1,
-          "subtype": "",
-          "weightMultiplier": 1,
-          "weightProperty": ""
-        },
-        {
-          "type": "slot",
-          "acceptsType": [
             "ammunition"
           ],
-          "affectsEncumbrance": true,
           "amount": 1,
           "subtype": "ammunitionSlot",
+          "weightMultiplier": 1,
           "weightProperty": ""
         }
       ]
     },
     "critical": {
-      "effect": "Knockdown",
+      "effect": "Staggared",
       "parts": []
     },
     "damage": {
       "parts": [
         {
           "name": "",
-          "formula": "2d8",
+          "formula": "14d6",
+          "group": null,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -122,23 +112,23 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>A rubbish cannon is a long metal tube with a trigger, similar to a rocket launcher. Instead of rockets or other mass-produced ammunition, a rubbish cannon is loaded with 1 bulk of junk&nbsp; useless trash found in most urban environments. The inertelectronic equipment used as a target for many of the junk spells (page 58) works best.</p>"
+      "value": "<p>These intricate weapons look less like firearms and more like horizontal wind sculptures. Their interlocking geometric forms lengthen and compress to create sympathetic vibrations between themselves and the target. Once the right frequency is reached, the targeted area is transmuted into a small bolus of foreign material that disrupts the target’s functions, biological or otherwise.</p>\n<p><strong>Special Property:</strong> Sniper (1,000 ft.)</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
     "isEquipment": true,
-    "level": 8,
+    "level": 17,
     "modifiers": [],
-    "price": 9000,
+    "price": 290000,
     "proficient": false,
     "properties": {
       "aeon": false,
@@ -148,7 +138,7 @@
       "archaic": false,
       "aurora": false,
       "automatic": false,
-      "blast": true,
+      "blast": false,
       "block": false,
       "boost": false,
       "breach": false,
@@ -170,7 +160,7 @@
       "fiery": false,
       "firstArc": false,
       "flexibleLine": false,
-      "force": false,
+      "force": true,
       "freeHands": false,
       "fueled": false,
       "gearArray": false,
@@ -180,9 +170,11 @@
       "harrying": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -195,11 +187,12 @@
       "nonlethal": false,
       "one": false,
       "operative": false,
-      "penetrating": false,
+      "penetrating": true,
       "polarize": false,
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -208,11 +201,12 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
       "shatter": false,
       "shells": false,
       "shield": false,
-      "sniper": false,
+      "sniper": true,
       "stun": false,
       "subtle": false,
       "sunder": false,
@@ -227,7 +221,7 @@
       "two": true,
       "unbalancing": false,
       "underwater": false,
-      "unwieldy": false,
+      "unwieldy": true,
       "variantBoost": false,
       "wideLine": false
     },
@@ -237,15 +231,15 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 30
+      "value": 120
     },
     "rollNotes": "",
     "save": {
-      "type": "reflex",
-      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
-      "descriptor": "half"
+      "type": "",
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "SA:JD pg. 57",
+    "source": "GEM pg. 79",
     "special": "",
     "specialMaterials": {
       "abysium": false,
@@ -257,6 +251,7 @@
       "inubrix": false,
       "khefak": false,
       "noqual": false,
+      "nyblantine": false,
       "purplecores": false,
       "siccatite": false,
       "silver": false,
@@ -268,14 +263,14 @@
     },
     "usage": {
       "per": "shot",
-      "value": 1
+      "value": 10
     },
     "uses": {
-      "max": null,
+      "max": 0,
       "per": "",
-      "value": null
+      "value": 0
     },
     "weaponCategory": "uncategorized",
-    "weaponType": "heavy"
+    "weaponType": "sniper"
   }
 }
