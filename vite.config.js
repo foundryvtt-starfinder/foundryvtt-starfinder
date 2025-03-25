@@ -59,7 +59,7 @@ const config = Vite.defineConfig(async ({ command }) => {
                     async handler(code, chunk) {
                         return chunk.fileName.endsWith(".js")
                             ? esbuild.transform(code, {
-                                keepNames: true,
+                                keepNames: false,
                                 minifyIdentifiers: true,
                                 minifySyntax: true,
                                 minifyWhitespace: true,
