@@ -43,6 +43,7 @@ const config = Vite.defineConfig(async ({ command }) => {
             emptyOutDir: false,
             sourcemap: true,
             brotliSize: true,
+            minify: false,
             lib: {
                 name: "sfrpg",
                 entry: path.resolve(__dirname, "index.js"),
@@ -59,7 +60,7 @@ const config = Vite.defineConfig(async ({ command }) => {
                         return chunk.fileName.endsWith(".js")
                             ? esbuild.transform(code, {
                                 keepNames: true,
-                                minifyIdentifiers: false,
+                                minifyIdentifiers: true,
                                 minifySyntax: true,
                                 minifyWhitespace: true,
                                 sourcemap: true
