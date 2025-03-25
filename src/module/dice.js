@@ -187,8 +187,9 @@ export class DiceSFRPG {
 
         const partMapper = (part) => {
             if (part instanceof Object) {
+                const simplifiedFormula = this._simplifyFormula(part.score || "0", rollContext);
                 const explanation = part.explanation ? `[${part.explanation}]` : "";
-                return `${part.score || "0"}${explanation}`;
+                return `${simplifiedFormula}${explanation}`;
             }
             return part;
         };
@@ -458,8 +459,9 @@ export class DiceSFRPG {
                     });
                     part.formula = rollInfo.rolls[0].formula.finalRoll;
                 } else {
+                    const simplifiedFormula = this._simplifyFormula(part.formula || "0", rollContext);
                     const explanation = part.explanation ? `[${part.explanation}]` : "";
-                    finalParts.push(`${part.formula || "0"}${explanation}`);
+                    finalParts.push(`${simplifiedFormula}${explanation}`);
                 }
             } else {
                 finalParts.push(formula);
@@ -991,6 +993,20 @@ export class DiceSFRPG {
         finalFormula.rollDices = rollDices;
 
         return finalFormula;
+    }
+
+    /**
+     * Simplifies a formula using a roll context
+     * @param {string} formula The formula you want to simplify
+     * @param {RollContext} rollContext The roll context to use
+     * @returns {string} A simplified version of the formula
+     */
+    static _simplifyFormula(formula, rollContext) {
+        try {
+            return Roll.create(formula, rollContext.getRollData()).simplifiedFormula;
+        } catch {
+            return formula;
+        }
     }
 
     /**
