@@ -46,8 +46,8 @@
                 <input type="text" class="wide-form-field" name="system.duration.value" value="{{itemData.duration.value}}" data-dtype="String" placeholder="-"/>
                 {{/if}}
                 <select name="system.duration.units">
-                    {{selectOption "text" "SFRPG.Text" selected=itemData.duration.units localize=true}}
                     {{selectOptions (sfrpg "durationTypes") selected=itemData.duration.units}}
+                    {{selectOption "text" "SFRPG.Text" selected=itemData.duration.units localize=true}}
                 </select>
             </div>
         </div>
