@@ -57,7 +57,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
             updateData['system.uses.value'] = Math.max(0, remainingUses - 1);
         }
 
-        updateData['system.isActive'] = active;
+        updateData['system.isActive'] = active && (this.system.duration.units !== "instantaneous");
 
         const updatePromise = this.update(updateData);
 
