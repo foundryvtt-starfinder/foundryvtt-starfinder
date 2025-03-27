@@ -159,6 +159,17 @@ SFRPG.abilityActivationTypes = {
     "special": "SFRPG.AbilityActivationTypesSpecial"
 };
 
+SFRPG.uncountableActivations = Object.freeze([
+    "", // no activation
+    "none", // free
+    "action",
+    "move",
+    "swift",
+    "full",
+    "reaction",
+    "special"
+]);
+
 SFRPG.skillProficiencyLevels = {
     0: "",
     3: "SFRPG.SkillProficiencyLevelClassSkill"

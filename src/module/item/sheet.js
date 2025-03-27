@@ -196,8 +196,11 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         // Determine whether to show calculated totals for fields with formulas
         if (itemData?.activation?.type || data.item.type === "weapon") {
-            data.range = {};
+            data.activation = {
+                hasInput: !SFRPG.uncountableActivations.includes(itemData?.activation?.type ?? "")
+            };
 
+            data.range = {};
             data.range.hasInput = (() => {
                 // C/M/L on spells requires no input
                 if (this.item.type === "spell") return !(["close", "medium", "long", "none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));

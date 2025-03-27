@@ -11,7 +11,9 @@
         <div class="form-group input-select">
             <label>{{ localize "SFRPG.Items.Activation.ActivationCost" }}</label>
             <div class="form-fields">
+                {{#if this.activation.hasInput}}
                 <input type="text" name="system.activation.cost" value="{{itemData.activation.cost}}" data-dtype="Number" placeholder="-"/>
+                {{/if}}
                 <select name="system.activation.type">
                     {{selectOption "" "" selected=itemData.activation.type}}
                     {{selectOptions (sfrpg "abilityActivationTypes") selected=itemData.activation.type}}
