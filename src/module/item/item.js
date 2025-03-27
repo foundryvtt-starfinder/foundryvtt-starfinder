@@ -133,7 +133,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             const act = data.activation;
             labels.featType = data?.damage?.parts?.length && ["mwak", "rwak", "msak", "rsak"].includes(data.actionType)
                 ? game.i18n.localize("SFRPG.Attack")
-                : CONFIG.SFRPG.abilityActivationTypes[act.type] ? game.i18n.localize("SFRPG.Items.Action.TitleAction") : game.i18n.localize("SFRPG.Passive");
+                : act.type ? game.i18n.localize("SFRPG.Items.Action.TitleAction") : game.i18n.localize("SFRPG.Passive");
         }
 
         // Equipment Items

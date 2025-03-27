@@ -15,7 +15,6 @@
                 <input type="text" name="system.activation.cost" value="{{itemData.activation.cost}}" data-dtype="Number" placeholder="-"/>
                 {{/if}}
                 <select name="system.activation.type">
-                    {{selectOption "" "" selected=itemData.activation.type}}
                     {{selectOptions (sfrpg "abilityActivationTypes") selected=itemData.activation.type}}
                 </select>
             </div>

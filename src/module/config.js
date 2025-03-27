@@ -145,6 +145,7 @@ SFRPG.weaponTypeProficiency = {
  * @type {Object}
  */
 SFRPG.abilityActivationTypes = {
+    "": "SFRPG.AbilityActivationTypesNull",
     "none": "SFRPG.AbilityActivationTypesNone",
     "action": "SFRPG.AbilityActivationTypesStandard",
     "move": "SFRPG.AbilityActivationTypesMove",
