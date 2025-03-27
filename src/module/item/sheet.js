@@ -211,7 +211,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
             data.duration = {};
             data.duration.showTotal = !!itemData.duration?.total && (String(itemData.duration?.total) !== String(itemData.duration?.value));
-            data.duration.hasInput = itemData.duration.units !== "instantaneous";
+            data.duration.hasInput = !SFRPG.uncountableDurations.includes(itemData.duration.units);
 
             data.uses = {};
             data.uses.showTotal = !!itemData.uses?.total && (String(itemData.uses?.total) !== String(itemData.uses?.max));
