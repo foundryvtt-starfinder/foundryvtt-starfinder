@@ -389,8 +389,14 @@ SFRPG.turnEventTypes = {
  */
 SFRPG.durationTypes = {
     "instantaneous": "SFRPG.DurationTypesInstantaneous",
-    ...SFRPG.effectDurationTypes
+    ...SFRPG.effectDurationTypes,
+    "text": "SFRPG.Text"
 };
+
+SFRPG.uncountableDurations = Object.freeze([
+    "instantaneous",
+    "permanent"
+]);
 
 SFRPG.targetTypes = {};
 
