@@ -156,7 +156,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             const act = data.activation || {};
             if (act) {
                 if (act.type === "none") {
-                    labels.activation = game.i18n.localize("SFRPG.AbilityActivationTypesNoneButton");
+                    labels.activation = (data.duration?.units === "instantaneous")
+                        ? game.i18n.localize("SFRPG.AbilityActivationButton.Use")
+                        : game.i18n.localize("SFRPG.AbilityActivationButton.Activate");
                 } else if (SFRPG.uncountableActivations.includes(act.type)) {
                     labels.activation = C.abilityActivationTypes[act.type];
                 } else {
