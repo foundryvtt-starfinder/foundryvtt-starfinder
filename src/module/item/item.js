@@ -33,7 +33,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     get hasAttack() {
         if (this.type === "starshipWeapon") return true;
-        return ["mwak", "rwak", "msak", "rsak"].includes(this.system.actionType);
+        return SFRPG.attackActions.includes(this.system.actionType);
     }
 
     get hasOtherFormula() {
@@ -128,7 +128,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Feat Items
         else if (itemData.type === "feat") {
             const act = data.activation;
-            labels.featType = data?.damage?.parts?.length && ["mwak", "rwak", "msak", "rsak"].includes(data.actionType)
+            labels.featType = data?.damage?.parts?.length && SFRPG.attackActions.includes(data.actionType)
                 ? game.i18n.localize("SFRPG.Attack")
                 : act.type ? game.i18n.localize("SFRPG.Items.Action.TitleAction") : game.i18n.localize("SFRPG.Passive");
         }
@@ -1001,7 +1001,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     getAppropriateAttackModifiers(isWeapon) {
         const acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
-        if (["msak", "rsak"].includes(this.system.actionType)) {
+        if (SFRPG.spellAttackActions.includes(this.system.actionType)) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_ATTACKS);
         } else if (this.system.actionType === "rwak") {
             acceptedModifiers.push(SFRPGEffectType.RANGED_ATTACKS);
@@ -1380,7 +1380,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     getAppropriateDamageModifiers(isWeapon) {
         const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
 
-        if (["msak", "rsak"].includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
+        if (SFRPG.spellAttackActions.includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
         } else if (this.system.actionType === "rwak") {
             acceptedModifiers.push(SFRPGEffectType.RANGED_DAMAGE);

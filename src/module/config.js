@@ -933,6 +933,13 @@ SFRPG.itemActionTypes = {
     "other": "SFRPG.ActionOther"
 };
 
+SFRPG.spellAttackActions = Object.freeze([ "msak", "rsak" ]);
+SFRPG.weaponAttackActions = Object.freeze([ "mwak", "rwak" ]);
+SFRPG.attackActions = Object.freeze([
+    ...SFRPG.spellAttackActions,
+    ...SFRPG.weaponAttackActions
+]);
+
 SFRPG.conditionTypes = {
     "asleep": "SFRPG.ConditionsAsleep",
     "bleeding": "SFRPG.ConditionsBleeding",

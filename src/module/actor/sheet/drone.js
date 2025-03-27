@@ -109,7 +109,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                     isOnCooldown: item.system.recharge
                         && !!item.system.recharge.value
                         && item.system.recharge.charged === false,
-                    hasAttack: ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType)
+                    hasAttack: SFRPG.attackActions.includes(item.system.actionType)
                         && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                     hasDamage: item.system.damage?.parts
                         && item.system.damage.parts.length > 0

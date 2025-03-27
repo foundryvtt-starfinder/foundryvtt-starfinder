@@ -1,3 +1,4 @@
+import { SFRPG } from '../../config.js';
 
 export class HotbarSFRPG extends Hotbar {
     constructor(options) {
@@ -25,7 +26,7 @@ export class HotbarSFRPG extends Hotbar {
                 const macroConfig = {
                     item,
                     isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
-                    hasAttack: ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
+                    hasAttack: SFRPG.attackActions.includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                     hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                     hasUses: item.hasUses(),
                     hasActivation: item.canBeActivated(),
