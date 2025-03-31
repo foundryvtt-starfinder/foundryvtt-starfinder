@@ -1086,13 +1086,24 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 }
             } else {
                 /** Create 'fake' actors. */
-                rollContext.addContext("captain", this, actorData.system.crew.npcData.captain);
-                rollContext.addContext("pilot", this, actorData.system.crew.npcData.pilot);
-                rollContext.addContext("gunner", this, actorData.system.crew.npcData.gunner);
-                rollContext.addContext("engineer", this, actorData.system.crew.npcData.engineer);
-                rollContext.addContext("chiefMate", this, actorData.system.crew.npcData.chiefMate);
-                rollContext.addContext("magicOfficer", this, actorData.system.crew.npcData.magicOfficer);
-                rollContext.addContext("scienceOfficer", this, actorData.system.crew.npcData.scienceOfficer);
+                const crewRoles = ["captain", "pilot", "gunner", "engineer", "chiefMate", "magicOfficer", "scienceOfficer"];
+                const populatedRoles = [];
+                crewRoles.forEach((role) => {
+                    if (crewData.npcData[role]?.numberOfUses) {
+                        rollContext.addContext(
+                            role,
+                            { name: game.i18n.localize(SFRPG.starshipRoleNames[role]) },
+                            actorData.system.crew.npcData[role]
+                        );
+                        populatedRoles.push(role);
+                    }
+                });
+                const otherRoles = ["minorCrew", "openCrew"];
+                otherRoles.forEach((role) => {
+                    if (desiredSelectors.includes(role)) {
+                        rollContext.addSelector(role, populatedRoles);
+                    }
+                });
             }
         }
     }

@@ -469,19 +469,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             starshipWeapon:                     game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipWeapons")
         };
 
-        if (!this.actor.system.crew.useNPCCrew) {
-            data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
-        } else {
-            data.actions = {
-                captain: ActorSheetSFRPGStarship.StarshipActionsCache.captain,
-                pilot: ActorSheetSFRPGStarship.StarshipActionsCache.pilot,
-                gunner: ActorSheetSFRPGStarship.StarshipActionsCache.gunner,
-                engineer: ActorSheetSFRPGStarship.StarshipActionsCache.engineer,
-                scienceOfficer: ActorSheetSFRPGStarship.StarshipActionsCache.scienceOfficer,
-                chiefMate: ActorSheetSFRPGStarship.StarshipActionsCache.chiefMate,
-                magicOfficer: ActorSheetSFRPGStarship.StarshipActionsCache.magicOfficer
-            };
-        }
+        data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
     }
 
     _prepareAttackString(item)  {
