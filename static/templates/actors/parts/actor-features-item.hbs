@@ -76,7 +76,7 @@
             <div class="item-detail item-action">
                 {{#if (and item.system.activation.type item.isFeat)}}
                     {{#if item.system.isActive}}
-                    <button type="button" class="tag featDeactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
+                    <button type="button" class="tag featDeactivate">{{item.timeRemainingStr}}</button>
                     {{else}}
                     <button type="button" class="tag featActivate {{ifThen (eq item.system.duration.units "instantaneous") "featInstantaneous" ""}}">{{item.labels.activation}}</button>
                     {{/if}}
