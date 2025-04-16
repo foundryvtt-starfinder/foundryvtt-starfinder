@@ -52,6 +52,17 @@
             </div>
         </div>
 
+        {{#if this.duration.needsEndOn}}
+        <div class="form-group">
+            <label>{{localize "SFRPG.Effect.EndTypesLabel"}}</label>
+            <div class="form-fields">
+                <select name="system.duration.endsOn">
+                    {{selectOptions (sfrpg "effectEndTypes") selected=itemData.duration.endsOn}}
+                </select>
+            </div>
+        </div>
+        {{/if}}
+
         {{!-- Limited Uses --}}
         <div class="form-group uses-per" data-tooltip="<strong>{{ localize "SFRPG.Items.Activation.LimitedUses" }}</strong><br/>@itemData.uses.value<br/>@itemData.uses.max</br/>@itemData.uses.per">
             <label>{{ localize "SFRPG.Items.Activation.LimitedUses" }}</label>

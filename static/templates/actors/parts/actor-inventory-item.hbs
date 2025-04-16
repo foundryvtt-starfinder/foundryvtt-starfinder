@@ -67,7 +67,7 @@
                 {{else if item.system.activation.type}}
                     {{#unless (or (eq item.type "consumable")(and (eq item.system.activation.type "none")(eq item.type "weapon")) ) }} <!-- Don't show action buttons on consumables because it interacts weirdly with their usage -->
                         {{#if item.system.isActive}}
-                        <button type="button" class="tag featDeactivate">{{localize "SFRPG.ActorSheet.Inventory.Item.Deactivate"}}</button>
+                        <button type="button" class="tag featDeactivate">{{item.timeRemainingStr}}</button>
                         {{else}}
                         <button type="button" class="tag featActivate {{ifThen (eq item.system.duration.units "instantaneous") "featInstantaneous" ""}}">{{item.labels.activation}}</button>
                         {{/if}}

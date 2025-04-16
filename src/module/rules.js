@@ -368,7 +368,12 @@ export default function(engine) {
             "calculateSkillDC",
             "calculateActivationDetails",
             {
-                when: { closure: "isItemType", type: "effect" },
+                when: [
+                    { closure: "isItemType", type: "effect" },
+                    { closure: "isItemType", type: "feat" }
+                    // add more item types as they became know to be work with timed effects
+                ],
+                conditionStrategy: "or",
                 then: ["calculateTimedEffects"]
             }
         ]
