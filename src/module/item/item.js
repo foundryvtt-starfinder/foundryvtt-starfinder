@@ -1755,9 +1755,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         // Adjust item to level, if required
         // V13 TODO: Changes to foundry chat messages are removing flags.level from the message
-        if (typeof (message.flags.level) !== 'undefined' && message.flags.level !== item.system.level && Object.keys(message.flags.level).length !== 0) {
+        if (Object.keys(message.flags?.sfrpg?.level ?? {}).length !== 0 && message.flags?.sfrpg?.level !== item.system.level) {
             const newItemData = item.toObject();
-            newItemData.system.level = message.flags.level;
+            newItemData.system.level = message.flags.sfrpg.level;
 
             item = new ItemSFRPG(newItemData, {parent: item.parent});
 
