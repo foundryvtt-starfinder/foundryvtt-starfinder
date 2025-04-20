@@ -444,16 +444,16 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Basic chat message data
         const chatData = {
             author: game.user.id,
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             content: html,
             flags: {
-                level: this.system.level,
                 core: {
                     canPopout: true
                 },
                 sfrpg: {
                     item: this.uuid,
-                    actor: this.actor.uuid
+                    actor: this.actor.uuid,
+                    level: this.system.level
                 }
             },
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
