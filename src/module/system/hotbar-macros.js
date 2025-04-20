@@ -24,13 +24,9 @@ Hooks.on("hotbarDrop", async (bar, data, slot) => {
  * @param {Object} data Macro creation description.
  * @returns {Promise<Macro>}
  */
-function findElseCreateMacro(data) {
-    const existingMacro = game.macros.contents
-        .find(m => (m.name === data.name) && (m.command === data.command));
-
-    return existingMacro
-        ? Promise.resolve(existingMacro)
-        : Macro.create(data, { displaySheet: false });
+async function findElseCreateMacro(data) {
+    return game.macros.find(macro => (macro.name === data.name) && (macro.command === data.command))
+        ?? Macro.create(data, { displaySheet: false });
 }
 
 /**
