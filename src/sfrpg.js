@@ -304,7 +304,7 @@ Hooks.once('init', async function() {
     }
 
     console.log("Starfinder | [INIT] Overriding tooltips");
-    Object.defineProperty(game, "tooltip", {value: new TooltipManagerSFRPG(), configurable: true, enumerable: true});
+    CONFIG.ux.TooltipManager = TooltipManagerSFRPG;
 
     console.log("Starfinder | [INIT] Registering sheets");
     Actors.unregisterSheet("core", ActorSheet);
