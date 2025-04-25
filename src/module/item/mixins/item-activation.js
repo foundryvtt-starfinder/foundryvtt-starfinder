@@ -55,8 +55,6 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
     /**
      * Activate or deactivate this item.
      * @param {!boolean} active True to activate, false to deactivate.
-     * @param {?ActivationEvent} activationEvent Optional activation event to be used in place of an auto-computed one.
-     *        `null` is a valid option, but `undefined` means that an {@linkcode ActivationEvent} will be generated
      * @returns {Promise<Document>} The promise for the async update.
      */
     setActive(active) {

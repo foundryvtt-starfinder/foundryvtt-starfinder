@@ -179,12 +179,12 @@ export default class SFRPGTimedEffect {
     }
 
     /** Update the managed Item with data from this TimedEffect */
-    _updateItem(resetActivationTime = true) {
+    async _updateItem(resetActivationTime = true) {
         // stub
     }
 
     /** Provides the proceedure for updating the managed Item after a {@linkcode poke} */
-    _updateDynamic() {
+    async _updateDynamic() {
         // stub
     }
 
@@ -279,7 +279,7 @@ export default class SFRPGTimedEffect {
 
 class SFRPGTimedEnable extends SFRPGTimedEffect {
     /** override */
-    _updateItem(resetActivationTime = true) {
+    async _updateItem(resetActivationTime = true) {
         // TODO(levirak): think harder about this function
         const item = this.item;
         const delta = {
@@ -302,7 +302,7 @@ class SFRPGTimedEnable extends SFRPGTimedEffect {
     }
 
     /** @override */
-    _updateDynamic() {
+    async _updateDynamic() {
         return this.actor?.updateEmbeddedDocuments('Item', [{
             _id: this.item._id,
             'system.activeDuration.remaining': this.activeDuration.remaining
@@ -369,7 +369,7 @@ class SFRPGTimedEnable extends SFRPGTimedEffect {
 
 class SFRPGTimedActivation extends SFRPGTimedEffect {
     /** @override */
-    _updateItem(resetActivationTime) {
+    async _updateItem(resetActivationTime) {
         const item = this.item;
         const delta = {
             _id: item._id,
@@ -392,7 +392,7 @@ class SFRPGTimedActivation extends SFRPGTimedEffect {
     }
 
     /** @override */
-    _updateDynamic() {
+    async _updateDynamic() {
         return this.actor?.updateEmbeddedDocuments('Item', [{
             _id: this.item._id,
             'system.activationEvent.status': this.activeDuration.remaining.string
