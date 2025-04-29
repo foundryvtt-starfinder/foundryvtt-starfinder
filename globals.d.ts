@@ -1,5 +1,6 @@
 import "@client/global.mjs";
 import Canvas from "@client/canvas/board.mjs";
+import { SFRPG as CONFIGSFRPG } from "./src/module/config";
 
 // This file and the majority of our "typing" is based off of the work of ChaosOS:
 // https://github.com/MetaMorphic-Digital/draw-steel/blob/develop/draw-steel.d.ts
@@ -20,4 +21,17 @@ declare global {
     * The singleton game canvas
     */
     const canvas: Canvas;
+
+    /**
+     * Runtime configuration settings for Foundry VTT which exposes a large number of variables which determine how
+     * aspects of the software behaves.
+     *
+     * Unlike the CONST analog which is frozen and immutable, the CONFIG object may be updated during the course of a
+     * session or modified by system and module developers to adjust how the application behaves.
+     * @module CONFIG
+     */
+    declare namespace CONFIG {
+        var SFRPG: typeof CONFIGSFRPG
+    }
+
 }
