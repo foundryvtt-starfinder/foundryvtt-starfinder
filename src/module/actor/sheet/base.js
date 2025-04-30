@@ -20,9 +20,9 @@ import RollContext from "../../rolls/rollcontext.js";
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
  *
- * @type {ActorSheet}
+ * @extends {foundry.appv1.sheets.ActorSheet}
  */
-export class ActorSheetSFRPG extends ActorSheet {
+export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     constructor(...args) {
         super(...args);
 

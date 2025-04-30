@@ -1,6 +1,7 @@
 import FloatingNumberMenu from "../classes/floating-number-menu.js";
 import { SFRPG } from "../config.js";
 import { ItemSFRPG } from "../item/item.js";
+import { rerenderApps } from "../utils/utilities.js";
 
 export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "disableExperienceTracking", {
@@ -205,7 +206,10 @@ export const registerSystemSettings = function() {
         scope: "client",
         config: true,
         default: false,
-        type: Boolean
+        type: Boolean,
+        onChange: () => {
+            rerenderApps();
+        }
     });
 
     game.settings.register("sfrpg", "warnInvalidRollData", {

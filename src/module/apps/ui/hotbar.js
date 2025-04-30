@@ -1,13 +1,15 @@
 
-export class HotbarSFRPG extends Hotbar {
+export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
     constructor(options) {
         super(options);
     }
 
+    /** @override */
     get template() {
         return "systems/sfrpg/templates/ui/hotbar.hbs";
     }
 
+    /** @override */
     async getData() {
         const data = super.getData();
 

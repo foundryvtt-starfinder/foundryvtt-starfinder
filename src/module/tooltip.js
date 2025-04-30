@@ -2,7 +2,7 @@
  * Override default tooltip class because tooltips appearing immediately when a tooltip is currently visible sucks.
  * Unfortunately the anything worth touching is private so we have to copy a lot of it. :/
  */
-export default class TooltipManagerSFRPG extends TooltipManager {
+export default class TooltipManagerSFRPG extends foundry.helpers.interaction.TooltipManager {
 
     /**
      * Is the tooltip currently active?

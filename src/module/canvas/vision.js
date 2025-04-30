@@ -1,3 +1,6 @@
+const { VisionMode } = foundry.canvas.perception;
+const { ColorAdjustmentsSamplerShader } = foundry.canvas.rendering.shaders;
+
 export default function setupVision() {
     setupVisionModes();
     setDefaultSceneSettings();
@@ -127,4 +130,3 @@ function setupConditions() {
     CONFIG.specialStatusEffects.BLIND = "blinded";
     CONFIG.specialStatusEffects.INVISIBLE = "invisible";
 }
-

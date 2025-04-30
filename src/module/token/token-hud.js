@@ -1,4 +1,4 @@
-export class SFRPGTokenHUD extends TokenHUD {
+export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
 
     /**
      * @override

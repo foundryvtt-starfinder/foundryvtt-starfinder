@@ -51,7 +51,7 @@ import { RPC } from "./module/rpc.js";
 import registerSystemRules from "./module/rules.js";
 import { registerSystemSettings } from "./module/system/settings.js";
 import TooltipManagerSFRPG from "./module/tooltip.js";
-import { generateUUID } from "./module/utils/utilities.js";
+import { generateUUID, rerenderApps } from "./module/utils/utilities.js";
 
 import BaseEnricher from "./module/system/enrichers/base.js";
 import BrowserEnricher from "./module/system/enrichers/browser.js";
@@ -79,6 +79,9 @@ import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
 import { getSpellBrowser } from "./module/packs/spell-browser.js";
 import { getStarshipBrowser } from "./module/packs/starship-browser.js";
 import isObject from './module/utils/is-object.js';
+
+const { Actors, Items } = foundry.documents.collections;
+const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 
 let initTime = null;
 
@@ -392,13 +395,6 @@ Hooks.once('init', async function() {
 
     console.log("Starfinder | [INIT] Adding math functions");
     SFRPGRoll.registerMathFunctions();
-
-    const rerenderApps = () => {
-        const apps = [...Object.values(ui.windows), ...foundry.applications.instances.values(), ui.sidebar];
-        for (const app of apps) {
-            app.render();
-        }
-    };
 
     // Vite HMR for lang and hbs files
     // FIXME: Lang doesn't correctly appear on sheets, but is in game.i18n?
