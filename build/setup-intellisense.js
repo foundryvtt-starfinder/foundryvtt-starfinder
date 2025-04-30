@@ -41,3 +41,5 @@ try {
 } catch (e) {
     if (e.code !== "EEXIST") throw e;
 }
+
+console.log("Done!");
