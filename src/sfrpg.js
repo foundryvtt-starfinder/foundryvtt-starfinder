@@ -419,7 +419,7 @@ Hooks.once('init', async function() {
         import.meta.hot.on("template-update", async ({ path }) => {
             const apply = async () => {
                 delete Handlebars.partials[path];
-                await getTemplate(path);
+                await foundry.applications.handlebars.getTemplate(path);
                 rerenderApps();
             };
             if (game.ready) {
