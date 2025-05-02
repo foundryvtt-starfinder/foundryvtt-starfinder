@@ -1,3 +1,5 @@
+const { Ray } = foundry.canvas.geometry;
+
 // Applies patches to core functions to integrate Starfinder specific measurements.
 export class TemplateLayerSFRPG extends foundry.canvas.layers.TemplateLayer {
     _onDragLeftStart(event) {
@@ -120,8 +122,8 @@ export class MeasuredTemplateSFRPG extends foundry.canvas.placeables.MeasuredTem
         } */
 
         // Get number of rows and columns
-        const nr = Math.ceil((this.document.distance * 1.5) / gridSizeUnits / (gridSizePx / grid.h)),
-            nc = Math.ceil((this.document.distance * 1.5) / gridSizeUnits / (gridSizePx / grid.w));
+        const nr = Math.ceil((this.document.distance * 1.5) / gridSizeUnits / (gridSizePx / grid.sizeY)),
+            nc = Math.ceil((this.document.distance * 1.5) / gridSizeUnits / (gridSizePx / grid.sizeX));
 
         // Get the center of the grid position occupied by the template
         const { x, y } = this.document;

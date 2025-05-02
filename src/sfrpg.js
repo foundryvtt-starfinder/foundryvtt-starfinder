@@ -60,7 +60,6 @@ import IconEnricher from "./module/system/enrichers/icon.js";
 import TemplateEnricher from "./module/system/enrichers/template.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
-import { HotbarSFRPG } from "./module/apps/ui/hotbar.js";
 import AbilityTemplate from "./module/canvas/ability-template.js";
 import setupVision from "./module/canvas/vision.js";
 import { initializeBrowsers } from "./module/packs/browsers.js";
@@ -70,7 +69,6 @@ import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
 import registerCompendiumArt from "./module/system/compendium-art.js";
 import { connectToDocument, rollItemMacro } from "./module/system/item-macros.js";
-import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
 
 import { extendDragData } from "./module/item/drag-data.js";
@@ -213,7 +211,7 @@ Hooks.once('init', async function() {
     CONFIG.MeasuredTemplate.objectClass = MeasuredTemplateSFRPG;
     CONFIG.MeasuredTemplate.defaults.angle = 90; // SF uses 90 degree cones
 
-    CONFIG.ui.hotbar = HotbarSFRPG;
+    //   CONFIG.ui.hotbar = HotbarSFRPG;
 
     CONFIG.fontDefinitions["Exo2"] = {
         editor: true,
@@ -577,7 +575,7 @@ Hooks.once("ready", async () => {
     const readyTime = (new Date()).getTime();
 
     console.log("Starfinder | [READY] Overriding token HUD");
-    canvas.hud.token = new SFRPGTokenHUD();
+    //  canvas.hud.token = new SFRPGTokenHUD();
 
     console.log("Starfinder | [READY] Initializing compendium browsers");
     initializeBrowsers();
