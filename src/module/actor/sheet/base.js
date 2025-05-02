@@ -651,7 +651,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     async _onShowImage(event) {
         const actor = this.actor;
         const title = actor.token?.name ?? actor.prototypeToken?.name ?? actor.name;
-        new ImagePopout(actor.img, { title, uuid: actor.uuid }).render(true);
+        new foundry.applications.apps.ImagePopout({src: actor.img, window: { title }, uuid: actor.uuid }).render(true);
     }
 
     /**
