@@ -9,7 +9,7 @@ const config = Vite.defineConfig(async ({ command }) => {
     if (command === "build") {
         const filesToCopy = ["changelist.md", "README.md", "OGL", "LICENSE"];
 
-        await fs.promises.mkdir("dist/");
+        if (!fs.existsSync("dist/")) await fs.promises.mkdir("dist/");
         await Promise.all([
             fs.promises.cp("src/packs", "dist/packs", { recursive: true }),
             ...filesToCopy.map(file => fs.promises.copyFile(file, `dist/${file}`))
