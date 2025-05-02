@@ -5,13 +5,16 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
     }
 
     /** @override */
-    get template() {
-        return "systems/sfrpg/templates/ui/hotbar.hbs";
-    }
+    static PARTS = {
+        hotbar: {
+            root: true,
+            template: "systems/sfrpg/templates/ui/hotbar.hbs"
+        }
+    };
 
     /** @override */
-    async getData() {
-        const data = super.getData();
+    async _prepareContext() {
+        const data = await super._prepareContext();
 
         for (const slot of data.macros) {
             const macro = slot.macro;

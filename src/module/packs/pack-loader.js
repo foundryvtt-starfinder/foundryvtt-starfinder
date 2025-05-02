@@ -1,4 +1,3 @@
-import Progress from '../progress.js';
 
 export class PackLoader {
     constructor() {
@@ -11,9 +10,8 @@ export class PackLoader {
     async *loadPacks(entityType, packs) {
         if (!this.loadedPacks[entityType]) this.loadedPacks[entityType] = {};
 
-        const progress = new Progress({
-            steps: packs.length
-        });
+        const progress = ui.notifications.notify("Loading packs...", "info", { progress: true });
+        let pct = 0;
 
         const fields = [
             "type",
@@ -58,12 +56,14 @@ export class PackLoader {
 
             }
 
-            progress.advance(`Loading ${pack.metadata.label}`);
+            pct++;
+
+            ui.notifications.update(progress, {message: `Loading ${pack.metadata.label}...`, pct: (pct / packs.length) });
 
             yield data;
         }
 
-        progress.close('Loading complete');
+        ui.notifications.remove(progress);
     }
 
     setCompendiumArt(packName, index) {

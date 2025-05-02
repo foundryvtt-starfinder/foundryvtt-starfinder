@@ -1,6 +1,6 @@
 import "@client/global.mjs";
 import Canvas from "@client/canvas/board.mjs";
-import { SFRPG as CONFIGSFRPG } from "./src/module/config";
+import { SFRPG as CONFIGSFRPG } from "./module/config";
 
 // This file and the majority of our "typing" is based off of the work of ChaosOS:
 // https://github.com/MetaMorphic-Digital/draw-steel/blob/develop/draw-steel.d.ts
