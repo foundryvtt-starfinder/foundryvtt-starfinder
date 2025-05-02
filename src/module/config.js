@@ -1358,7 +1358,8 @@ SFRPG.modifierTypes = {
     "morale": "SFRPG.ModifierTypeMorale",
     "resistance": "SFRPG.ModifierTypeResistance",
     "racial": "SFRPG.ModifierTypeRacial",
-    "untyped": "SFRPG.ModifierTypeUntyped"
+    "untyped": "SFRPG.ModifierTypeUntyped",
+    "weapon-specialization": "SFRPG.ModifierTypeWeaponSpecialization"
 };
 
 // See modules/modifiers/types.js, SFRPGEffectType

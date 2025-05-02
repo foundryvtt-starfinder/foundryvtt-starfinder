@@ -64,7 +64,20 @@ export default class RollNode {
 
                 let existingNode = nodes[modKey];
                 if (!existingNode) {
-                    const childNode = new RollNode(bonus.modifier, this, this.options, {
+                    // Make a simplified roll
+                    let originalFormula = bonus.modifier.trim();
+                    if (originalFormula.startsWith("+")) originalFormula = originalFormula.slice(1);
+                    const simplifiedFormula = Roll.create(originalFormula, contexts.getRollData()).simplifiedFormula;
+
+                    // Store the simplified version to display in the roll dialog, appending a sign for numeric values (e.g. 2 is shown as +2)
+                    const numMod = Number(simplifiedFormula);
+                    bonus.simplifiedFormula = numMod ? numMod.signedString() : simplifiedFormula;
+
+                    // If the formulas are different without whitespace, then FunctionTerms must have been simplified; add a tooltip to the roll dialog showing the original formula
+                    bonus.originalFormulaTooltip = (originalFormula.replace(/\s/g, "") !== simplifiedFormula.replace(/\s/g, ""));
+
+                    // Append child node
+                    const childNode = new RollNode(simplifiedFormula, this, this.options, {
                         referenceModifier: bonus,
                         isEnabled: bonus.enabled
                     });
