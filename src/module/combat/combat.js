@@ -68,7 +68,8 @@ export class CombatSFRPG extends Combat {
         const update = {
             "flags.sfrpg.combatType": this.getCombatType(),
             "flags.sfrpg.phase": 0,
-            "round": 1
+            "round": 1,
+            "turn": 0
         };
 
         await this.update(update);
@@ -751,7 +752,7 @@ export class CombatSFRPG extends Combat {
 
             const preparedRollExplanation = DiceSFRPG.formatFormula(roll.flags.sfrpg.finalFormula.formula);
             const rollContent = await roll.render();
-            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
+            const insertIndex = rollContent.indexOf(`</div>\r\n            <section class="tooltip-part">`);
             const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
 
             rollMode = roll.options?.rollMode ?? rollMode;

@@ -779,6 +779,7 @@ export class DiceSFRPG {
         if (!roll.dice.length) return;
         for (const d of roll.dice) {
             if (d.faces === 20 && d.results.length === 1) {
+                // V13 TODO: classes are not doing anything.
                 if (d.total >= (d.options.critical || 20)) html.find('.dice-total').addClass('success');
                 else if (d.total <= (d.options.fumble || 1)) html.find('.dice-total').addClass('failure');
             }

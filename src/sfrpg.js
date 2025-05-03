@@ -660,14 +660,23 @@ async function migrateOldContainers() {
     }
 }
 
-Hooks.on("renderChatMessage", (app, html, data) => {
-    DiceSFRPG.highlightCriticalSuccessFailure(app, html, data);
-    DiceSFRPG.addDamageTypes(app, html, data);
+Hooks.on("renderChatMessageHTML", (app, html, data) => {
+    DiceSFRPG.highlightCriticalSuccessFailure(app, $(html), data);
+    DiceSFRPG.addDamageTypes(app, $(html), data);
 
-    if (game.settings.get("sfrpg", "autoCollapseItemCards")) html.find('.card-content').hide();
+    if (game.settings.get("sfrpg", "autoCollapseItemCards")) {
+        const cardContent = html.querySelector('.card-content');
+        if (cardContent) {
+            cardContent.style.display = "none";
+        }
+        const diceTooltip = html.querySelector('.dice-tooltip');
+        if (diceTooltip) {
+            diceTooltip.style.display = "none";
+        }
+    }
 });
 
-Hooks.on("getEntryContextChatLog", addChatMessageContextOptions);
+Hooks.on("getChatMessageContextOptions", addChatMessageContextOptions);
 
 Hooks.on("renderAbstractSidebarTab", async (app, html) => {
     if (app.options.id === "settings") {
