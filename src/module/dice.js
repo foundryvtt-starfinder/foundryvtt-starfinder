@@ -743,13 +743,13 @@ export class DiceSFRPG {
     }
 
     static appendTextToRoll(originalRollHTML, textToAppend) {
-        const diceRollHtml = '<h4 class="dice-roll">';
+        const diceRollHtml = '<h3 class="dice-total">';
 
         const diceRollIndex = originalRollHTML.indexOf(diceRollHtml);
         const firstHalf = originalRollHTML.substring(0, diceRollIndex + diceRollHtml.length);
         const splitOffFirstHalf = originalRollHTML.substring(diceRollIndex + diceRollHtml.length);
 
-        const closeTagIndex = splitOffFirstHalf.indexOf('</h4>');
+        const closeTagIndex = splitOffFirstHalf.indexOf('</h3>');
         const rollResultHtml = splitOffFirstHalf.substring(0, closeTagIndex);
         const secondHalf = splitOffFirstHalf.substring(closeTagIndex);
 
