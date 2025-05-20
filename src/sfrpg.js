@@ -391,6 +391,9 @@ Hooks.once('init', async function() {
         "weaponAccessory": "fas fa-gears"
     };
 
+    console.log("Starfinder | [INIT] Overriding chat message duration");
+    CONFIG.ui.chat.NOTIFY_DURATION = game.settings.get("sfrpg", "chatNotificationDuration") ?? 5000; // Default to foundry's 5 seconds;
+
     console.log("Starfinder | [INIT] Adding math functions");
     SFRPGRoll.registerMathFunctions();
 
