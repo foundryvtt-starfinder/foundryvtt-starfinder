@@ -64,10 +64,9 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
     /**
    * Creates a preview of the spell template
    *
-   * @param {Event} event   The initiating click event
    * @returns {Promise<boolean>} Returns true if placed, or false if cancelled
    */
-    async drawPreview(event) {
+    async drawPreview() {
         const initialLayer = canvas.activeLayer;
         await this.draw();
         this.active = true;

@@ -68,10 +68,9 @@ export default class BaseEnricher {
      * Transform the Regex match array into an enriched element, performing validation.
      * @callback EnricherFunction
      * @param {RegExp} match A Regex match array from the inputted text
-     * @param {Object} options
      * @returns {HTMLElement} The enriched element
      */
-    enricherFunc(match, options) {
+    enricherFunc(match) {
         this.match = match;
 
         if (this.match[3]) this.name = this.match[3];
@@ -218,6 +217,7 @@ export default class BaseEnricher {
      * @param {Event} event The DOM event that triggers the listener
      * @returns {void}
      */
+    // eslint-disable-next-line no-unused-vars
     static listener(event) {}
 
     /**

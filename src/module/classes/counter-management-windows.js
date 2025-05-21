@@ -14,7 +14,7 @@ export class CounterManagementWindows extends Dialog {
      */
     static async create(actorId, targetClasses, combatantId) {
 
-        let counterClassesLabel = CONFIG.SFRPG.counterClassesLabel;
+        const counterClassesLabel = CONFIG.SFRPG.counterClassesLabel;
 
         const Actor = game.actors.get(actorId);
         const htmlContent = await renderTemplate("systems/sfrpg/templates/classes/counter-management.hbs", {
@@ -23,10 +23,10 @@ export class CounterManagementWindows extends Dialog {
             currentPosition: Actor.system.counterClasses.values[targetClasses].position,
             classes: targetClasses,
             actorId:actorId,
-            combatantId:combatantId,
+            combatantId:combatantId
         });
 
-        return new Promise((resolve, reject) => {
+        return new Promise(() => {
             this.windows = new this({
                 title: game.i18n.localize('SFRPG.CounterClassesManagementWindowsTitles'),
                 content: htmlContent,
@@ -47,7 +47,7 @@ export class CounterManagementWindows extends Dialog {
     activateListeners(html) {
         super.activateListeners(html);
 
-        let solarianPosition = html.find('.counter-management-position-solarian li div img');
+        const solarianPosition = html.find('.counter-management-position-solarian li div img');
         solarianPosition.click(event => {
             event.preventDefault();
             const dataset = event.currentTarget.dataset;
@@ -69,14 +69,14 @@ export class CounterManagementWindows extends Dialog {
         });
 
         // Button to add 1 to counter
-        let addButton = html.find('.counter-management-button button[name=counter-management-button-add]');
+        const addButton = html.find('.counter-management-button button[name=counter-management-button-add]');
         addButton.click(event => {
             event.preventDefault();
             const dataset = event.currentTarget.dataset;
             const Actor = game.actors.get(dataset.actorId);
             const classesToUpdate = {};
 
-            if (Actor.system.counterClasses.values[dataset.managementClasses].count < 3 || !(dataset.managementClasses == 'solarianAttunement')) {
+            if (Actor.system.counterClasses.values[dataset.managementClasses].count < 3 || !(dataset.managementClasses === 'solarianAttunement')) {
                 const newCounter = Actor.system.counterClasses.values[dataset.managementClasses].count + 1;
                 classesToUpdate[dataset.managementClasses] = {
                     'count': newCounter,
@@ -93,7 +93,7 @@ export class CounterManagementWindows extends Dialog {
         });
 
         // Button to remove 1 to counter
-        let removeButton = html.find('.counter-management-button button[name=counter-management-button-remove]');
+        const removeButton = html.find('.counter-management-button button[name=counter-management-button-remove]');
         removeButton.click(event => {
             event.preventDefault();
             const dataset = event.currentTarget.dataset;

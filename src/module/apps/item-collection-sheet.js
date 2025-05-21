@@ -48,14 +48,14 @@ export class ItemCollectionSheet extends DocumentSheet {
         return super.close(options);
     }
 
-    _handleTokenUpdated(scene, token, options, userId) {
+    _handleTokenUpdated(scene, token) {
         const tokenData = this.document.getFlag("sfrpg", "itemCollection");
         if (token.id === this.itemCollection.id && tokenData.locked && !game.user.isGM) {
             this.close();
         }
     }
 
-    _handleTokenDelete(scene, token, options, userId) {
+    _handleTokenDelete(scene, token) {
         if (token.id === this.itemCollection.id) {
             this.close();
         }
@@ -346,14 +346,14 @@ export class ItemCollectionSheet extends DocumentSheet {
     /* -------------------------------------------- */
 
     /** @override */
-    _canDragStart(selector) {
+    _canDragStart() {
         return true; // flags.sfrpg.itemCollection.locked || game.user.isGM
     }
 
     /* -------------------------------------------- */
 
     /** @override */
-    _canDragDrop(selector) {
+    _canDragDrop() {
         return true; // flags.sfrpg.itemCollection.locked || game.user.isGM
     }
 

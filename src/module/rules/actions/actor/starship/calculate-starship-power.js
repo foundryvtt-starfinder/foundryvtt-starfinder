@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateStarshipPower", (fact, context) => {
+    engine.closures.add("calculateStarshipPower", (fact) => {
         const data = fact.data;
 
         data.attributes.power.value = 0;

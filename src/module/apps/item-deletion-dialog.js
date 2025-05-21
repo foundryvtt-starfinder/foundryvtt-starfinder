@@ -15,7 +15,7 @@ export class ItemDeletionDialog extends Dialog {
     activateListeners(html) {
         super.activateListeners(html);
 
-        let recursiveDeleteCheckbox = html.find('#recursiveDeleteCheckbox');
+        const recursiveDeleteCheckbox = html.find('#recursiveDeleteCheckbox');
         recursiveDeleteCheckbox.click(this._onToggleRecursiveDelete.bind(this));
     }
 
