@@ -9,6 +9,7 @@ const config = Vite.defineConfig(async ({ command }) => {
     if (command === "build") {
         const filesToCopy = ["changelist.md", "README.md", "OGL", "LICENSE"];
 
+        fs.ensureDir("dist");
         fs.promises.cp("src/packs", "dist/packs", {recursive: true});
         for (const file of filesToCopy) {
             fs.copyFile(file, `dist/${file}`);
