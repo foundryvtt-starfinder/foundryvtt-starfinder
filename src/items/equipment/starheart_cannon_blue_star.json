@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.28.0"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/advanced_zero_cannon.webp",
   "system": {
@@ -24,6 +24,7 @@
     "ammunitionType": "charge",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 15
@@ -51,7 +52,7 @@
     "bulk": "2",
     "capacity": {
       "max": 100,
-      "value": 100
+      "value": 0
     },
     "chatFlavor": "",
     "container": {
@@ -114,18 +115,20 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Followers of @UUID[Compendium.sfrpg.setting.VJ0UTIsAggcCQJBu]{Sarenrae} designed these very bright weapons to defend isolated solar outposts from Corpse Fleet marauders.</p>"
+      "value": "<p>Followers of @UUID[Compendium.sfrpg.setting.Item.VJ0UTIsAggcCQJBu]{Sarenrae} designed these very bright weapons to defend isolated solar outposts from Corpse Fleet marauders.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 18,
     "modifiers": [],
     "price": 360000,
@@ -239,8 +242,8 @@
       "value": ""
     },
     "usage": {
-      "per": "round",
-      "value": 5
+      "per": "shot",
+      "value": 10
     },
     "uses": {
       "max": null,

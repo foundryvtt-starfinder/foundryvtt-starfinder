@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.28.0"
   },
   "img": "systems/sfrpg/images/cup/gameplay/soldier.webp",
   "system": {
@@ -23,6 +23,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -42,11 +43,12 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.cCZQpV0NmYE9qZoL]{Soldier}</p>\n<p>You gain @UUID[Compendium.sfrpg.feats.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}as a bonus feat for each weapon type this class grants you proficiency with.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.cCZQpV0NmYE9qZoL]{Soldier}</p>\n<p>You gain @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}as a bonus feat for each weapon type this class grants you proficiency with.</p>"
     },
     "descriptors": [],
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -59,7 +61,7 @@
       {
         "_id": "2cad179e-76e8-4f3f-90ae-88461e031ccc",
         "name": "Weapon Specialization Soldier",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -73,11 +75,11 @@
       {
         "_id": "705ed57e-6be0-4b8d-adeb-1b73c1f684cd",
         "name": "Weapon Specialization Soldier",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -85,28 +87,14 @@
         "valueAffected": "basicM"
       },
       {
-        "_id": "717864d5-5780-40f5-95b4-99f94829ed78",
-        "name": "Weapon Specialization Soldier",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
-      },
-      {
         "_id": "6ef80090-b369-4709-b650-d46d698a033c",
         "name": "Weapon Specialization Soldier",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -116,7 +104,7 @@
       {
         "_id": "972cc776-68fe-424d-a3ae-6fdb077b8c61",
         "name": "Weapon Specialization Soldier",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -131,7 +119,7 @@
       {
         "_id": "4de05472-c977-422d-868e-e39679512259",
         "name": "Weapon Specialization Soldier",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -146,7 +134,7 @@
       {
         "_id": "be857ef3-ca8f-42f7-ba07-7f897ec200db",
         "name": "Weapon Specialization Soldier",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -159,6 +147,7 @@
         "valueAffected": "sniper"
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",

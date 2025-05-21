@@ -327,33 +327,6 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
     }
 
     /**
-     * Delete a modifier from the actor.
-     *
-     * @param {Event} event The originating click event
-     */
-    async _onModifierDelete(event) {
-        event.preventDefault();
-        const target = $(event.currentTarget);
-        const modifierId = target.closest(".item.modifier").data("modifierId");
-
-        await this.actor.deleteModifier(modifierId);
-    }
-
-    /**
-     * Edit a modifier for an actor.
-     *
-     * @param {Event} event The orginating click event
-     */
-    _onModifierEdit(event) {
-        event.preventDefault();
-
-        const target = $(event.currentTarget);
-        const modifierId = target.closest(".item.modifier").data("modifierId");
-
-        this.actor.editModifier(modifierId);
-    }
-
-    /**
      * Repair the drone, calling the relevant repair method on the actor.
      * @param {Event} event The triggering click event
      * @returns {Promise}

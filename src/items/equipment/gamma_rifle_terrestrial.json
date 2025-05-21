@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.28.0"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/gamma-rifle-terrestrial.webp",
   "system": {
@@ -18,22 +18,44 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
     },
     "attackBonus": 0,
+    "attributes": {
+      "ac": {
+        "value": ""
+      },
+      "customBuilt": false,
+      "dex": {
+        "mod": ""
+      },
+      "hardness": {
+        "value": ""
+      },
+      "hp": {
+        "max": "",
+        "value": 6
+      },
+      "size": "medium",
+      "sturdy": true
+    },
     "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 40,
-      "value": 40
+      "value": 0
     },
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -72,20 +94,28 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Flame weapons deal fire damage without using lasers or plasma. This flame damage usually comes via superheated metal coils or gas ignition, but weapon manufacturers may devise other methods as well. Flame weapons often have the ability to set targets on fire, dealing @UUID[Compendium.sfrpg.conditions.8LdyXZl9PeXXFE8O]{Burn} damage in addition to their initial fire damage when they land especially effective hits.</p>\n<p>Most flame weapons rely on a reactive blend of hydrocarbons called petrol for ammunition, rather than batteries.</p>"
+      "value": "<p>Flame weapons deal fire damage without using lasers or plasma. This flame damage usually comes via superheated metal coils or gas ignition, but weapon manufacturers may devise other methods as well. Flame weapons often have the ability to set targets on fire, dealing @UUID[Compendium.sfrpg.conditions.Item.8LdyXZl9PeXXFE8O]{Burn} damage in addition to their initial fire damage when they land especially effective hits.</p>\n<p>Most flame weapons rely on a reactive blend of hydrocarbons called petrol for ammunition, rather than batteries.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
+    "isActive": null,
+    "isEquipment": true,
     "level": 4,
+    "modifiers": [],
     "price": 2120,
     "proficient": false,
     "properties": {
@@ -119,12 +149,14 @@
       "unwieldy": true
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 80
     },
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
@@ -132,12 +164,13 @@
     },
     "source": "Armory",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""
     },
     "usage": {
-      "per": "round",
+      "per": "shot",
       "value": 4
     },
     "uses": {

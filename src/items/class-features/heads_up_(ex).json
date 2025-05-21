@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.28.0"
   },
   "img": "systems/sfrpg/icons/classes/heads_up.webp",
   "system": {
@@ -19,13 +19,14 @@
     "activation": {
       "type": "reaction",
       "condition": "",
-      "cost": 1
+      "cost": null
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -42,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>@Icon[type:language-dependent] @Icon[type:sense-dependent]</p>\n<p>When you succeed at a Perception check, as a reaction, you can signal a single ally within 60 feet. That ally can act as if he had also succeeded at the Perception check with the same result.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>@Icon[type:language-dependent] @Icon[type:sense-dependent]</p>\n<p>When you succeed at a Perception check, as a reaction, you can signal a single ally within 60 feet. That ally can act as if he had also succeeded at the Perception check with the same result.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -66,7 +67,7 @@
       "force": false,
       "good": false,
       "healing": false,
-      "language-dependent": false,
+      "language-dependent": true,
       "lawful": false,
       "light": false,
       "mind-affecting": false,
@@ -75,7 +76,7 @@
       "polymorph": false,
       "radiation": false,
       "scrying": false,
-      "sense-dependent": false,
+      "sense-dependent": true,
       "shadow": false,
       "sonic": false,
       "summoning": false,
@@ -84,41 +85,43 @@
     },
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": "60"
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "6th Level",
+    "requirements": "6th Level (Envoy)",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "Improvisation",
+    "source": "CRB pg. 63",
     "target": {
       "type": "",
-      "value": ""
+      "value": "One Ally"
     },
     "uses": {
-      "max": 0,
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }
