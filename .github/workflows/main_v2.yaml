@@ -1,0 +1,91 @@
+name: Release Module
+
+on:
+  release:
+    types: [published]
+
+jobs:
+
+  pre-build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - uses: actions/checkout@v4
+      # install deps
+      - run: npm ci
+      # Copy localizations
+      - run: npm run copyLocalization
+
+  merge-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Merge development -> staging
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: development
+          target_branch: master
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout
+      - uses: actions/checkout@v4
+      # install deps
+      - run: npm ci
+      # build src into dist
+      - run: npm run build
+
+      # Substitute the Manifest and Download URLs in the module.json
+      - name: Update settings.json url
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: module.json
+          field: url
+          value: https://github.com/${{github.repository}}
+      - name: Update settings.json manifest
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: module.json
+          field: manifest
+          value: https://github.com/${{github.repository}}/releases/latest/download/module.json
+      - name: Update settings.json version
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: module.json
+          field: version
+          value: ${{github.event.release.tag_name}}
+      - name: Update settings.json download
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: module.json
+          field: download
+          value: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/module.zip
+
+      # Create a zip file with all files required by the module to add to the release
+      - run: zip -r ./module.zip module.json LICENSE README.md dist
+
+      # Update the release with the correct files we just generated
+      - name: Update Release with Files
+        id: create_version_release
+        uses: ncipollo/release-action@v1
+        with:
+          makeLatest: false
+          allowUpdates: true # Set this to false if you want to prevent updating existing releases
+          name: ${{ github.event.release.name }}
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          artifacts: "./module.json, ./module.zip"
+          tag: ${{ github.event.release.tag_name }}
+          body: ${{ github.event.release.body }}
+      # POST to the package admin release endpoint
+      #- name: Publish Module to FoundryVTT Website
+      #  id: publish-to-foundry-website
+      #  uses: cs96and/FoundryVTT-release-package@v1
+      #  with:
+      #    package-token: ${{ secrets.PACKAGE_TOKEN }}
+      #    manifest-url: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/module.json
