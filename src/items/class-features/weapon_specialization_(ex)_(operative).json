@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.0"
   },
   "img": "systems/sfrpg/images/cup/gameplay/operative.webp",
   "system": {
@@ -61,7 +61,7 @@
       {
         "_id": "1f5aa774-bf32-40cc-8621-c685b4ed5b30",
         "name": "Weapon Specialization Operative",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -75,11 +75,11 @@
       {
         "_id": "c8df914d-9f1f-4c48-95a7-44629c4c9b48",
         "name": "Weapon Specialization Operative",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -87,23 +87,9 @@
         "valueAffected": "basicM"
       },
       {
-        "_id": "beeef42f-ad98-483f-a4a0-cdf714f68a77",
-        "name": "Weapon Specialization Operative",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
-      },
-      {
         "_id": "2cc1f298-b481-4f2b-aa42-ce280f0192b1",
         "name": "Weapon Specialization Operative",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,

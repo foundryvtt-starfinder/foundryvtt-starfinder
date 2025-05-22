@@ -46,7 +46,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         // Find child item
         const childItems = getChildItems(itemHelper, this);
         const loadedAmmunition = childItems.find(x => x.type === "ammunition");
-        return loadedAmmunition;
+        return loadedAmmunition ?? null;
     }
 
     /**

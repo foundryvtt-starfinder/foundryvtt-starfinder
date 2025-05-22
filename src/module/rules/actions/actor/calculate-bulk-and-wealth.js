@@ -55,7 +55,7 @@ function computeCompoundBulkForItem(item, contents) {
             personalBulk *= packs;
         }
 
-        if (itemData.equipped) {
+        if (itemData.equipped && item.parent.type === "character") {
             let bulkMultiplier = Number.parseInt(itemData.equippedBulkMultiplier);
             if (itemData.armor?.type === 'power') {
                 item.getCurrentCapacity() ? bulkMultiplier = 0 : "";
