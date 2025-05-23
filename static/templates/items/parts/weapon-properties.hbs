@@ -13,33 +13,23 @@
     </h3>
 
     <div class="form-group stacked weapon-properties">
-
         <ul class="traits-list">
+            {{log itemData.properties}}
             {{#each itemData.properties as |property name|}}
                 {{#if (isObject property)}}
                     {{#if property.value}}
-                        <li class="tag {{name}}" data-tooltip='<strong>{{lookup ../config.weaponProperties name}}</strong><br/>{{lookup ../config.weaponPropertiesTooltips name}}'>
-                            {{lookup ../config.weaponProperties name}}
+                        <li class="tag {{name}}" data-tooltip='<strong>{{sfrpg "weaponProperties" name}}</strong><br/>{{sfrpg "weaponPropertiesTooltips" name}}'>
+                            {{sfrpg "weaponProperties" name}}{{#if property.extension}}: {{property.extension}}{{/if}}
                         </li>
                     {{/if}}
                 {{else}}
                     {{#if property}}
-                        <li class="tag {{name}}" data-tooltip='<strong>{{lookup ../config.weaponProperties name}}</strong><br/>{{lookup ../config.weaponPropertiesTooltips name}}'>
-                            {{lookup ../config.weaponProperties name}}
+                        <li class="tag {{name}}" data-tooltip='<strong>{{sfrpg "weaponProperties" name}}</strong><br/>{{sfrpg "weaponPropertiesTooltips" name}}'>
+                            {{sfrpg "weaponProperties" name}}
                         </li>
                     {{/if}}
                 {{/if}}
             {{/each}}
         </ul>
-    <h3 class="bubble-header">{{ localize "SFRPG.Items.Weapon.Properties" }}</h3>
-
-    <!--<div class="form-group stacked weapon-properties bubble-info">
-        <label></label>
-        {{#each (sfrpg "weaponProperties") as |name prop|}} -->
-            <!-- If there's a tooltip entry set for this weapon property we set a Tippy tooltip -->
-<!--            <label class="checkbox" {{#if (sfrpg "weaponPropertiesTooltips" prop)}} data-tooltip='<strong>{{ name }}</strong><br/>{{sfrpg "weaponPropertiesTooltips" prop}}' {{/if}}>
-                <input type="checkbox" name="system.properties.{{prop}}" {{checked (lookup ../itemData.properties prop)}} /> {{ name }}
-            </label>
-        {{/each}}
-    </div> -->
+    </div>
 </div>
