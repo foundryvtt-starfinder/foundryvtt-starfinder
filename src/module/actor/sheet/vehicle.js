@@ -271,7 +271,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             const rawItemData = (await Item.fromDropData(data)).toObject();
 
             if (rawItemData.type === "weapon" || rawItemData.type === "vehicleAttack") {
-                return this.processDroppedData(event, data);
+                return this.processDroppedItems(event, data);
             } else if (rawItemData.type === "starshipExpansionBay" || rawItemData.type === "vehicleSystem" || rawItemData.type === "actorResource") {
                 return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
             }
@@ -512,6 +512,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             content: html
         };
 
+        const rollMode = game.settings.get("core", "rollMode");
+        ChatMessage.applyRollMode(chatData, rollMode);
         await ChatMessage.create(chatData, { displaySheet: false });
     }
 
@@ -555,6 +557,8 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             content: html
         };
 
+        const rollMode = game.settings.get("core", "rollMode");
+        ChatMessage.applyRollMode(chatData, rollMode);
         await ChatMessage.create(chatData, { displaySheet: false });
     }
 }

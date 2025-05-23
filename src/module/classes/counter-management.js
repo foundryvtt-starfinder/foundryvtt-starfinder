@@ -36,42 +36,42 @@ export default class CounterManagement {
                     if (displayedResource.system.combatTracker.visualization) {
                         for (const visualizationEntry of displayedResource.system.combatTracker.visualization) {
                             switch (visualizationEntry.mode) {
-                            case 'eq':
-                                if (resourceValue === visualizationEntry.value) {
-                                    title = visualizationEntry.title || title;
-                                    image = visualizationEntry.image || image;
-                                }
-                                break;
-                            case 'neq':
-                                if (resourceValue !== visualizationEntry.value) {
-                                    title = visualizationEntry.title || title;
-                                    image = visualizationEntry.image || image;
-                                }
-                                break;
-                            case 'gt':
-                                if (resourceValue > visualizationEntry.value) {
-                                    title = visualizationEntry.title || title;
-                                    image = visualizationEntry.image || image;
-                                }
-                                break;
-                            case 'gte':
-                                if (resourceValue >= visualizationEntry.value) {
-                                    title = visualizationEntry.title || title;
-                                    image = visualizationEntry.image || image;
-                                }
-                                break;
-                            case 'lt':
-                                if (resourceValue < visualizationEntry.value) {
-                                    title = visualizationEntry.title || title;
-                                    image = visualizationEntry.image || image;
-                                }
-                                break;
-                            case 'lte':
-                                if (resourceValue <= visualizationEntry.value) {
-                                    title = visualizationEntry.title || title;
-                                    image = visualizationEntry.image || image;
-                                }
-                                break;
+                                case 'eq':
+                                    if (resourceValue === visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'neq':
+                                    if (resourceValue !== visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'gt':
+                                    if (resourceValue > visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'gte':
+                                    if (resourceValue >= visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'lt':
+                                    if (resourceValue < visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
+                                case 'lte':
+                                    if (resourceValue <= visualizationEntry.value) {
+                                        title = visualizationEntry.title || title;
+                                        image = visualizationEntry.image || image;
+                                    }
+                                    break;
                             }
                         }
                     }
@@ -82,45 +82,50 @@ export default class CounterManagement {
                     additionalHtml += "</a>";
                 }
 
-                // If no additional HTML needs to be added, we can exit early. This can happen when the resources are all set to only show for owner and GM, and local user is neither.
-                if (additionalHtml.length === 0) {
-                    continue;
-                }
-
+                // Rearrange the items in the combat tracker so they appear in the right places
                 const $combatantHtml = html.find(`.combatant[data-combatant-id="${combatant.id}"]`);
                 $combatantHtml.addClass('counter-image-relative');
-                $combatantHtml.addClass('flexcol');
-                $combatantHtml.removeClass('flexrow');
 
-                $combatantHtml.find('.token-image').before('<div id="foundry-elements" class="flexrow"></div>');
+                $combatantHtml.find('.token-image').before('<div id="foundry-elements-wrapper" class="flexcol"><div id="foundry-elements" class="flexrow"></div></div>');
                 const $div = $combatantHtml.find('#foundry-elements');
 
                 $combatantHtml.find('.token-image').detach()
                     .appendTo($div);
                 $combatantHtml.find('.token-name').detach()
                     .appendTo($div);
+                $combatantHtml.find('.token-resource').detach()
+                    .appendTo($combatantHtml);
                 $combatantHtml.find('.token-initiative').detach()
-                    .appendTo($div);
+                    .appendTo($combatantHtml);
 
-                $div.after('<div id="counter-tokens" class=""></div>');
-                const $counterTokens = $combatantHtml.find('#counter-tokens');
-                $counterTokens.append(additionalHtml);
+                // Add classes to the token resource and initiative divs so they are vertically centered
+                $combatantHtml.find('.token-resource').addClass('flexcol');
+                $combatantHtml.find('.token-initiative').addClass('flexcol');
+                $combatantHtml.find('.resource').addClass('flex0');
+                $combatantHtml.find('.initiative').addClass('flex0');
 
-                html.on('click', '.counter-token', function(event) {
-                    event.preventDefault();
+                // Add the resource displays if they're needed
+                if (additionalHtml.length !== 0) {
+                    $div.after('<div id="counter-tokens" class=""></div>');
+                    const $counterTokens = $combatantHtml.find('#counter-tokens');
+                    $counterTokens.append(additionalHtml);
 
-                    const counterToken = event.currentTarget;
-                    const combatantId = counterToken.dataset.combatantId;
+                    html.on('click', '.counter-token', function(event) {
+                        event.preventDefault();
 
-                    const combatant = game.combat.combatants.get(combatantId);
-                    if (combatant) {
-                        const actorResourceId = counterToken.dataset.actorResourceId;
-                        const actorResource = combatant.actor.items.get(actorResourceId);
-                        if (actorResource) {
-                            actorResource.sheet.render(true);
+                        const counterToken = event.currentTarget;
+                        const combatantId = counterToken.dataset.combatantId;
+
+                        const combatant = game.combat.combatants.get(combatantId);
+                        if (combatant) {
+                            const actorResourceId = counterToken.dataset.actorResourceId;
+                            const actorResource = combatant.actor.items.get(actorResourceId);
+                            if (actorResource) {
+                                actorResource.sheet.render(true);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         });
     }

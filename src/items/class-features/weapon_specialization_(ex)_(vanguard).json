@@ -5,15 +5,16 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -22,6 +23,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -35,16 +37,18 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.WDvGdJ5mMpAD9cWQ]{Vanguard}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type with which this class grants you proficiency. You also gain a special form of weapon specialization for your entropic strike, allowing you to add a bonus to your damage equal to your vanguard class level plus half of any other class levels you have.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.WDvGdJ5mMpAD9cWQ]{Vanguard}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type with which this class grants you proficiency. You also gain a special form of weapon specialization for your entropic strike, allowing you to add a bonus to your damage equal to your vanguard class level plus half of any other class levels you have.</p>"
     },
     "descriptors": [],
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -57,7 +61,7 @@
       {
         "_id": "9b5a4f11-8c9c-47e2-875b-113a8d7a971e",
         "name": "Weapon Specialization Vanguard",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -71,11 +75,11 @@
       {
         "_id": "1b19f9fd-5e8a-4e9c-8e09-fe60e784d0dc",
         "name": "Weapon Specialization Vanguard",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -83,28 +87,14 @@
         "valueAffected": "basicM"
       },
       {
-        "_id": "8f0c6cf7-403f-4e69-b209-2b66ee75878f",
-        "name": "Weapon Specialization Vanguard",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
-      },
-      {
         "_id": "07da139b-5070-4866-b374-d409ff9b3476",
         "name": "Weapon Specialization Vanguard",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -112,6 +102,7 @@
         "valueAffected": "advancedM"
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -123,6 +114,7 @@
       "value": null
     },
     "requirements": "3rd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,

@@ -157,10 +157,11 @@ export default function(engine) {
             const frame = frames[0];
 
             data.frame = frame;
+            const maneuverability = frame.system.maneuverability;
 
             data.details.frame = frame.name;
             data.details.size = frame.system.size;
-            data.attributes.maneuverability = frame.system.maneuverability;
+            data.attributes.maneuverability = maneuverability;
             data.attributes.damageThreshold = {
                 value: frame.system.damageThreshold.base,
                 tooltip: []
@@ -180,8 +181,23 @@ export default function(engine) {
                 + frame.system.weaponMounts.starboard.lightSlots + frame.system.weaponMounts.starboard.heavySlots + frame.system.weaponMounts.starboard.capitalSlots
                 + frame.system.weaponMounts.turret.lightSlots + frame.system.weaponMounts.turret.heavySlots + frame.system.weaponMounts.turret.capitalSlots;
 
-            data.attributes.turn.value = maneuverabilityMap[data.attributes.maneuverability].turn;
-            data.attributes.turn.tooltip.push(`${data.details.frame}: ${data.attributes.turn.value.signedString()}`);
+            /** Get modifying armour. */
+            const ablativeArmorItems = fact.items.filter(x => x.type === "starshipAblativeArmor");
+            const armorItems = fact.items.filter(x => x.type === "starshipArmor");
+            const armorTurnPenalty = armorItems[0]?.system?.turnDistancePenalty ?? 0;
+            const ablativeArmorTurnPenalty = ablativeArmorItems[0]?.system?.turnDistancePenalty ?? 0;
+            const turnManeuverability = maneuverabilityMap[maneuverability].turn;
+            data.attributes.turn.tooltip.push(`${maneuverability} maneuverability: ${turnManeuverability.signedString()}`);
+
+            if (armorTurnPenalty !== 0) {
+                data.attributes.turn.tooltip.push(`${armorItems[0].name}: ${armorTurnPenalty.signedString()}`);
+            }
+
+            if (ablativeArmorTurnPenalty !== 0) {
+                data.attributes.turn.tooltip.push(`${ablativeArmorItems[0].name}: ${ablativeArmorTurnPenalty.signedString()}`);
+            }
+
+            data.attributes.turn.value = Math.max(0, turnManeuverability + armorTurnPenalty + ablativeArmorTurnPenalty);
         }
 
         /** Ensure pilotingBonus exists. */

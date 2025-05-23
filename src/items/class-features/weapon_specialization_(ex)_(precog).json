@@ -5,9 +5,9 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.28.0"
   },
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
     "ability": null,
@@ -23,6 +23,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -42,11 +43,12 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.0tC4GBpJ0S17VR6a]{Precog}</p>\n<p>You gain @UUID[Compendium.sfrpg.feats.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}&nbsp;as a bonus feat for each weapon type this class grants you proficiency with.</p>\n<p><em>In the modifiers tab, toggle on the modifiers that match your class's selected proficiency. Then delete the unused modifiers.</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.0tC4GBpJ0S17VR6a]{Precog}</p>\n<p>You gain @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}&nbsp;as a bonus feat for each weapon type this class grants you proficiency with.</p>\n<p><em>In the modifiers tab, toggle on the modifiers that match your class's selected proficiency. Then delete the unused modifiers.</em></p>"
     },
     "descriptors": [],
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -59,7 +61,7 @@
       {
         "_id": "2cad179e-76e8-4f3f-90ae-88461e031ccc",
         "name": "Weapon Specialization Precog",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -74,12 +76,12 @@
       {
         "_id": "705ed57e-6be0-4b8d-adeb-1b73c1f684cd",
         "name": "Weapon Specialization Precog",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -87,29 +89,14 @@
         "valueAffected": "basicM"
       },
       {
-        "_id": "717864d5-5780-40f5-95b4-99f94829ed78",
-        "name": "Weapon Specialization Precog",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "max": 0,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
-      },
-      {
         "_id": "6ef80090-b369-4709-b650-d46d698a033c",
         "name": "Weapon Specialization Precog",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -119,7 +106,7 @@
       {
         "_id": "972cc776-68fe-424d-a3ae-6fdb077b8c61",
         "name": "Weapon Specialization Precog",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-attacks",
         "enabled": false,
@@ -134,7 +121,7 @@
       {
         "_id": "be857ef3-ca8f-42f7-ba07-7f897ec200db",
         "name": "Weapon Specialization Precog",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,
@@ -147,6 +134,7 @@
         "valueAffected": "sniper"
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",

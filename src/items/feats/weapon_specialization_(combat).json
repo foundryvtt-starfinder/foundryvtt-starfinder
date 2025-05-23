@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.28.0"
   },
   "img": "systems/sfrpg/icons/feats/weapon_specialization.webp",
   "system": {
@@ -23,6 +23,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": null,
       "value": null
@@ -47,7 +48,8 @@
     "descriptors": [],
     "details": {
       "category": "feat",
-      "combat": true
+      "combat": true,
+      "specialAbilityType": ""
     },
     "duration": {
       "units": "",
@@ -59,7 +61,7 @@
       {
         "_id": "309e09f2-b155-4a7c-ac20-bee89333af65",
         "name": "Weapon Specialization Small Arms",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,
@@ -74,7 +76,7 @@
       {
         "_id": "6ba5c41c-af3b-4f17-a421-72e5440819dd",
         "name": "Weapon Specialization Longarms",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,
@@ -89,12 +91,12 @@
       {
         "_id": "02f9dd0d-0dc7-4e94-b030-ec215da60502",
         "name": "Weapon Specialization Basic Melee",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -104,12 +106,12 @@
       {
         "_id": "69129a34-99cd-470a-814a-d078ac4a58e4",
         "name": "Weapon Specialization Adv Melee",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -119,7 +121,7 @@
       {
         "_id": "2e472393-946b-4979-951d-34426516be6d",
         "name": "Weapon Specialization Heavy",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,
@@ -134,7 +136,7 @@
       {
         "_id": "c78a0e9d-c789-4603-820f-dd5759c35351",
         "name": "Weapon Specialization Sniper",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,
@@ -145,23 +147,9 @@
         "source": "",
         "subtab": "misc",
         "valueAffected": "sniper"
-      },
-      {
-        "_id": "db177db7-a29e-4aa8-80ca-a7e27db8ba97",
-        "name": "Weapon specialization Operative",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": false,
-        "max": 0,
-        "modifier": "-ceil(@details.level.value/2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",

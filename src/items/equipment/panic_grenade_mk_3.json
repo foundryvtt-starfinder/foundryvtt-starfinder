@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.26.1"
+    "systemVersion": "0.28.0"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/frag-grenade.webp",
   "system": {
@@ -14,16 +14,17 @@
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "",
+    "actionTarget": "ac5",
     "actionType": "rwak",
     "activation": {
       "type": "action",
       "condition": "",
-      "cost": 0
+      "cost": 1
     },
     "ammunitionType": "",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 15
@@ -84,18 +85,20 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>When an early attempt at creating synthetic zhufera honey went awry, the resulting hallucinogen was aerosolized and weaponized by the Rising as a method of causing mass chaos in a short period of time. These hybrid grenades assault those in the blast radius with terrifying illusions of disastrous cataclysms, ravenous beasts, and other nightmarish hallucinations, causing those who succumb to the visions to fight, flee, or freeze.</p>\n<p>Those caught in the blast radius of a panic grenade must succeed at a Will save or gain the @UUID[Compendium.sfrpg.conditions.8rIj0ewW4bL8Uph5]{confused} condition for a duration according to the grenade’s type.</p>\n<p><strong>Mk 3 (level 14):</strong> 3 rounds</p>"
+      "value": "<p>When an early attempt at creating synthetic zhufera honey went awry, the resulting hallucinogen was aerosolized and weaponized by the Rising as a method of causing mass chaos in a short period of time. These hybrid grenades assault those in the blast radius with terrifying illusions of disastrous cataclysms, ravenous beasts, and other nightmarish hallucinations, causing those who succumb to the visions to fight, flee, or freeze.</p>\n<p>Those caught in the blast radius of a panic grenade must succeed at a Will save or gain the @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{confused} condition for a duration according to the grenade’s type.</p>\n<p><strong>Mk 3 (level 14):</strong> 3 rounds</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": "1 Round"
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 14,
     "modifiers": [],
     "price": 22400,
@@ -184,7 +187,7 @@
       "teleportive": false,
       "thought": false,
       "throttle": false,
-      "thrown": false,
+      "thrown": true,
       "thruster": false,
       "trip": false,
       "two": false,

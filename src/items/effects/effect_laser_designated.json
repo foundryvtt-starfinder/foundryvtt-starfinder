@@ -1,0 +1,69 @@
+{
+  "_id": "CbC114QwTObgm9Cj",
+  "name": "Effect: Laser Designated",
+  "type": "effect",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.28.0"
+  },
+  "img": "icons/skills/ranged/tracers-triple-orange.webp",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "round",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>Until the start of your next turn, allies who can see the laser gain a +1 circumstance bonus to attack rolls against that target.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "e310e444-1b73-4769-829c-a9fa01003bae",
+        "name": "Laser Designated",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": true,
+        "max": 0,
+        "modifier": "1",
+        "modifierType": "formula",
+        "notes": "attack rolls against that target.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "",
+    "showOnToken": true,
+    "source": "Laser Designator",
+    "turnEvents": []
+  }
+}

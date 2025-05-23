@@ -1,4 +1,5 @@
 import { SFRPG } from "../config.js";
+import SFRPGModifier from "../modifiers/modifier.js";
 import RollContext from "../rolls/rollcontext.js";
 import { WeaponPropertySelectorSFRPG } from "../apps/trait-selectors/weapon-property-selector.js";
 
@@ -114,9 +115,6 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.itemData = data.data.system;
         data.actor = this.document.parent;
         data.labels = this.item.labels;
-
-        // Include CONFIG values
-        data.config = CONFIG.SFRPG;
 
         // Item Type, Status, and Details
         data.itemType = game.i18n.format(`TYPES.Item.${data.item.type}`);
@@ -268,6 +266,12 @@ export class ItemSheetSFRPG extends ItemSheet {
                 turnEvent.noteI = `system.turnEvents.${i}.content`;
             }
         }
+
+        // Similar to actor-modifiers.getAllModifiers()
+        // we need to enforce the type of the modifiers to be SFRPGModifier
+        this.item.system.modifiers = this.item.system.modifiers?.map(mod => {
+            return new SFRPGModifier(mod, {parent: this.item});
+        });
 
         data.modifiers = this.item.system.modifiers;
 
@@ -846,30 +850,30 @@ export class ItemSheetSFRPG extends ItemSheet {
     }
 
     /**
-     * Delete a modifier from the item.
-     *
-     * @param {Event} event The originating click event
-     */
+    * Delete a modifier from the actor.
+    *
+    * @param {Event} event The originating click event
+    */
     async _onModifierDelete(event) {
         event.preventDefault();
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.item.system.modifiers.find(mod => mod._id === modifierId);
 
-        await this.item.deleteModifier(modifierId);
+        return modifier.parentDelete();
     }
-
     /**
-     * Edit a modifier for an item.
-     *
-     * @param {Event} event The orginating click event
-     */
-    _onModifierEdit(event) {
+    * Edit a modifier for an item.
+    * @param {Event} event The orginating click event
+    */
+    async _onModifierEdit(event) {
         event.preventDefault();
 
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.item.system.modifiers.find(mod => mod._id === modifierId);
 
-        this.item.editModifier(modifierId);
+        return modifier.edit();
     }
 
     /**

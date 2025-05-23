@@ -1,4 +1,3 @@
-import SFRPGModifierApplication from "../../apps/modifier-app.js";
 import SFRPGModifier from "../../modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../modifiers/types.js";
 import { getItemContainer } from "../actor-inventory-utils.js";
@@ -77,29 +76,6 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
         }));
 
         await this.update({"system.modifiers": modifiers});
-    }
-
-    /**
-     * Delete a modifier for this Actor.
-     *
-     * @param {String} id The id for the modifier to delete
-     */
-    async deleteModifier(id) {
-        const modifiers = this.system.modifiers.filter(mod => mod._id !== id);
-
-        await this.update({"system.modifiers": modifiers});
-    }
-
-    /**
-     * Edit a modifier for an Actor.
-     *
-     * @param {String} id The id for the modifier to edit
-     */
-    editModifier(id) {
-        const modifiers = this.system.modifiers;
-        const modifier = modifiers.find(mod => mod._id === id);
-
-        new SFRPGModifierApplication(modifier, this).render(true);
     }
 
     /**

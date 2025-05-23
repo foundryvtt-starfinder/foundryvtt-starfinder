@@ -193,7 +193,7 @@ export function canvasHandler(canvas, data) {
             const target = new ActorItemHelper(targetActor.id, tokenId, sceneId);
 
             // Simulate a drop to the sheet
-            targetActor.sheet.processDroppedData({ preventDefault() {} }, data);
+            targetActor.sheet.processDroppedItems({ preventDefault() {} }, data);
             const sourceItem = fromUuidSync(data.uuid);
             if (sourceItem.type !== "effect") {
                 const tokens = target?.token || targetActor.getActiveTokens(true);

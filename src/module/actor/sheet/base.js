@@ -77,8 +77,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             isVehicle: this.document.type === 'vehicle',
             isDrone: this.document.type === 'drone',
             isNPC: this.document.type === 'npc' || this.document.type === 'npc2',
-            isHazard: this.document.type === 'hazard',
-            config: CONFIG.SFRPG
+            isHazard: this.document.type === 'hazard'
         };
 
         data.items = [...this.actor.items.values()];
@@ -309,6 +308,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Effect Toggling
         html.find('.effect-toggle').on('click', this._onToggleEffect.bind(this));
+
+        // Option Toggling
+        html.find('.option-toggle').on('click', this._onToggleOption.bind(this));
     }
 
     /** @override */
@@ -425,7 +427,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             // Remove situational modifiers
             appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null, {actor: actor});
+            let modifiers = stackModifiers.process(appropriateMods, null, {actor: actor, item: item});
 
             modifiers = Object.values(modifiers)
                 .flat()
@@ -458,7 +460,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             // Remove situational modifiers
             appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null, {actor: item.actor});
+            let modifiers = stackModifiers.process(appropriateMods, null, {actor: item.actor, item: item});
 
             modifiers = Object.values(modifiers)
                 .flat()
@@ -510,22 +512,23 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.actor.system.modifiers.find(mod => mod._id === modifierId);
 
-        await this.actor.deleteModifier(modifierId);
+        return modifier.parentDelete();
     }
 
     /**
     * Edit a modifier for an actor.
-    *
     * @param {Event} event The orginating click event
     */
-    _onModifierEdit(event) {
+    async _onModifierEdit(event) {
         event.preventDefault();
 
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.actor.system.modifiers.find(mod => mod._id === modifierId);
 
-        this.actor.editModifier(modifierId);
+        return modifier.edit();
     }
 
     /**
@@ -555,6 +558,32 @@ export class ActorSheetSFRPG extends ActorSheet {
         const effectUuid = target.closest('.item.effect').data('effectUuid');
 
         this.actor.system.timedEffects.get(effectUuid)?.toggle();
+    }
+
+    /**
+	 * Toggles an option on the selected item.
+	 *
+	 * @param {Event} event The originating click event
+	 */
+    async _onToggleOption(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const opt = target.data('optionKey');
+
+        let options = null;
+        if (this.actor.system.options) {
+            options = duplicate(this.actor.system.options);
+        }
+        if (!options) {
+            options = new Map();
+        }
+        if (!options[opt]) {
+            options[opt] = true;
+        } else {
+            options[opt] = false;
+        }
+
+        await this.actor.update({["system.options"]: options});
     }
 
     /**
@@ -773,7 +802,7 @@ export class ActorSheetSFRPG extends ActorSheet {
      * Handle attempting to recharge an item usage by rolling a recharge check
      * @param {Event} event The originating click event
      */
-    _ontItemRecharge(event) {
+    _onItemRecharge(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
@@ -1143,13 +1172,12 @@ export class ActorSheetSFRPG extends ActorSheet {
         const parsedDragData = TextEditor.getDragEventData(event);
         if (!parsedDragData) {
             console.log("Unknown item data");
-            return;
+        } else if (parsedDragData.type === 'Item' || parsedDragData.type === 'ItemCollection') {
+            await this.processDroppedItems(event, parsedDragData);
         }
-
-        return this.processDroppedData(event, parsedDragData);
     }
 
-    async processDroppedData(event, parsedDragData) {
+    async processDroppedItems(event, parsedDragData) {
         const targetActor = new ActorItemHelper(this.actor.id, this.token?.id, this.token?.parent?.id, { actor: this.actor });
         if (!ActorItemHelper.IsValidHelper(targetActor)) {
             ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragToExternalTokenError"));

@@ -193,9 +193,17 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         if (this.type === "character" && game.settings.get("sfrpg", "autoAddUnarmedStrike")) {
             const ITEM_UUID = "Compendium.sfrpg.equipment.AWo4DU0s18agsFtJ"; // Unarmed strike
             const source = (await fromUuid(ITEM_UUID)).toObject();
+            source.system.proficient = true;
             source.flags = foundry.utils.mergeObject(source.flags ?? {}, { core: { sourceId: ITEM_UUID } });
 
             updates.items = [source];
+        }
+
+        // Apply a default icon to the actor based on its type if it doesn't already have an icon selected
+        if (Object.values(SFRPG.foundryDefaultIcons).includes(this.img)) {
+            if (Object.keys(SFRPG.defaultActorIcons).includes(this.type)) {
+                updates.img = ["systems/sfrpg/icons/default/", SFRPG.defaultActorIcons[this.type]].join("");
+            }
         }
 
         this.updateSource(updates);
@@ -527,15 +535,13 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         const skl = this.system.skills[skillId];
 
         if (!this.hasPlayerOwner) {
-            return await this.rollSkillCheck(skillId, skl, options);
-        }
-
-        if (skl.isTrainedOnly && !(skl.ranks > 0)) {
+            await this.rollSkillCheck(skillId, skl, options);
+        } else if (skl.isTrainedOnly && !(skl.ranks > 0)) {
             const content = game.i18n.format(
                 "SFRPG.SkillTrainedOnlyDialog.Content", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], name: this.name }
             );
 
-            return new Promise(resolve => {
+            await new Promise(resolve => {
                 new Dialog({
                     title: game.i18n.format(
                         "SFRPG.SkillTrainedOnlyDialog.Title", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] }
@@ -544,7 +550,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                     buttons: {
                         yes: {
                             label: game.i18n.localize("Yes"),
-                            callback: () => resolve(this.rollSkillCheck(skillId, skl, options))
+                            callback: () => {
+                                this.rollSkillCheck(skillId, skl, options)
+                                    .then(() => resolve());
+                            }
                         },
                         cancel: {
                             label: game.i18n.localize("No")
@@ -554,7 +563,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 }).render(true);
             });
         } else {
-            return await this.rollSkillCheck(skillId, skl, options);
+            await this.rollSkillCheck(skillId, skl, options);
         }
     }
 
@@ -575,7 +584,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         parts.push(`@abilities.${abilityId}.abilityCheckBonus`);
 
-        return await DiceSFRPG.d20Roll({
+        await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -587,7 +596,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
-            }
+            },
+            difficulty: options.dc,
+            displayDifficulty: options.displayDC
         });
     }
 
@@ -597,14 +608,14 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @param {String} saveId The save id (e.g. "will")
      * @param {Object} options Options which configure how saves are rolled
      */
-    rollSave(saveId, options = {}) {
+    async rollSave(saveId, options = {}) {
         const label = CONFIG.SFRPG.saves[saveId];
 
         const rollContext = RollContext.createActorRollContext(this);
 
         const parts = [`@attributes.${saveId}.bonus`];
 
-        return DiceSFRPG.d20Roll({
+        await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -616,7 +627,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
-            }
+            },
+            difficulty: options.dc,
+            displayDifficulty: options.displayDC
         });
     }
 
@@ -628,7 +641,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             ? game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname })
             : game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
 
-        return await DiceSFRPG.d20Roll({
+        await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -643,7 +656,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
-            }
+            },
+            difficulty: options.dc,
+            displayDifficulty: options.displayDC
         });
     }
 
@@ -688,7 +703,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         this.setupRollContexts(rollContext);
 
-        return await DiceSFRPG.d20Roll({
+        await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -712,6 +727,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             return;
         }
 
+        const useNPCCrew = this.system.crew.useNPCCrew;
         const starshipPackKey = game.settings.get("sfrpg", "starshipActionsSource");
         const starshipActions = game.packs.get(starshipPackKey);
         const actionEntryDocument = await starshipActions.getDocument(actionId);
@@ -786,6 +802,12 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             selectedFormula = actionEntry.system.formula.find(x => x.name === results.result.roll);
         }
 
+        // If it is an NPC crew the bonuses are baked into the modifier already
+        // Remove any piloting bonus from the starship
+        if (useNPCCrew) {
+            selectedFormula.formula = selectedFormula.formula.replace(/\s*\+\s*@ship\.attributes\.pilotingBonus\.value/, "");
+        }
+
         const rollContext = new RollContext();
         rollContext.addContext("ship", this);
         rollContext.setMainContext("ship");
@@ -794,18 +816,18 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
         /** Create additional modifiers. */
         const additionalModifiers = [
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: `${this.system?.attributes?.computer?.value ?? 0}`, enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} }
+            {bonus: {_id: "ComputerBonus", name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: `${this.system?.attributes?.computer?.value ?? 0}`, enabled: false} },
+            {bonus: {_id: "CaptainDemand", name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
+            {bonus: {_id: "CaptainEncouragement", name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} }
         ];
         if (actionEntry.system.role === "gunner") {
-            additionalModifiers.push({bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} });
+            additionalModifiers.push({bonus: {_id: "ScienceOfficerLockOn", name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} });
         }
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
 
         let systemBonus = "";
         // Patch and Hold It Together are not affected by critical damage.
-        if (actionEntry.name !== "Patch" && actionEntry.name !== "Hold It Together") {
+        if (!["Patch", "Hold It Together"].includes(actionEntry.name)) {
             // Gunners must select a quadrant.
             if (actionEntry.system.role === "gunner") {
                 if (this.system?.attributes?.systems[`weaponsArray${quadrant}`]?.mod < 0) {
@@ -818,8 +840,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
                 for (const [key, value] of Object.entries(this.system.attributes.systems)) {
                     if (value.affectedRoles && value.affectedRoles[actionEntry.system.role]) {
                         if (key === "powerCore" && actionEntry.system.role !== "engineer") {
-                            systemBonus += ` + @ship.attributes.systems.${key}.modOther`;
-                        } else {
+                            if (this.system.attributes.systems[key].modOther !== 0) {
+                                systemBonus += ` + @ship.attributes.systems.${key}.modOther`;
+                            }
+                        } else if (this.system.attributes.systems[key].mod !== 0) {
                             systemBonus += ` + @ship.attributes.systems.${key}.mod`;
                         }
                     }
@@ -910,7 +934,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             }
         }
 
-        const rollMode = game.settings.get("core", "rollMode");
+        const rollMode = rollResult.roll?.options?.rollMode ?? game.settings.get("core", "rollMode");
         const preparedRollExplanation = DiceSFRPG.formatFormula(rollResult.formula.formula);
         const rollContent = await rollResult.roll.render({ breakdown: preparedRollExplanation });
 
@@ -918,11 +942,10 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
             flavor: flavor,
             speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
             content: rollContent,
-            rollMode: rollMode,
-            roll: rollResult.roll,
-            type: CONST.CHAT_MESSAGE_STYLES.ROLL,
+            rolls: [rollResult.roll],
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
-        });
+        }, { rollMode: rollMode});
     }
 
     levelUp(actorClassId) {
