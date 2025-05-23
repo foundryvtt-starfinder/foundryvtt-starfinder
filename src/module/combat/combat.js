@@ -890,6 +890,10 @@ async function onConfigClicked(combat, direction) {
     await combat.update(update);
 }
 
+Hooks.on('combatStart', (combat) => {
+    combat.begin();
+});
+
 Hooks.on('renderCombatTracker', (app, html, data) => {
     const activeCombat = data.combat;
     if (!activeCombat) {
@@ -921,12 +925,6 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         configureButtonNext.addEventListener('click', ev => {
             ev.preventDefault();
             onConfigClicked(activeCombat, 1);
-        });
-
-        const beginButton = footer.querySelector('.combat-control[data-action=startCombat]');
-        beginButton.addEventListener('click', ev => {
-            ev.preventDefault();
-            activeCombat.begin();
         });
     }
 
