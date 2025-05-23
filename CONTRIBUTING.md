@@ -150,11 +150,7 @@ The steps below indicate step-by-step what to do to release a new version of the
 1. In the `development` branch:
     1. Update `changelist.md` with the changes included in the version and commit them. For major changes, try to indicate the contributor when possible (it's nice to give people credit :D ).
 2. On Github:
-    1. Create a new release with the version number as the tag (don't include a `v` in front of the version number), and target the `development` branch. Include the changelist for this version in the release notes.
+    1. Create a new release with the desired version number of the new release as the tag (don't include a `v` in front of the version number), and target the `development` branch. Include the changelist for this version in the release notes. Make sure the option to set as latest release is selected for a non-beta release. The name of the release can be anything relevant.
     2. Allow the automatic Github actions to run.
-        1. This should take 5-10 minutes and will set all version numbers and url's in `system.json` to the correct values, update the localization files, cook the data packs, build the system, package everything into a .zip file, and then attach `system.json` and the .zip file to the release. It will then push and commit the changes made into `development` (localizations and data pack changes, specifically), and then merge `development` into the `master` branch.
-    3. On the repository's "Actions" tab, select the "Increment Version Number" workflow and run it:
-        1. You will be prompted to enter the version number to increment to before running; enter the next version number *exactly* (don't include a `v` in front of the version number).
-    4. Allow the workflow to complete.
-        1. This should take 5-10 minutes and will set all version numbers and url's in `system.json` to the correct values and cook the data pack files with the new system version number before committing the files to `development`.
+        1. This should take 5-10 minutes and will set all version numbers and url's in `system.json` to the correct values, update the localization files, cook the data packs, build the system, package everything into a .zip file, and then attach `system.json` and the .zip file to the release. It will then push and commit the changes made into `development` (localizations and `json` changes, specifically), and then merge `development` into the `master` branch.
 3. On the Foundry package admin website, add the new system version and the appropriate links. It may also be necessary to update download links for older versions.
