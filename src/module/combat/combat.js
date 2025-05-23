@@ -43,7 +43,7 @@ Vehicle has the following 3 phases: "Pilot Actions", "Chase Progress", and "Comb
 
 */
 
-export class CombatSFRPG extends Combat {
+export class CombatSFRPG extends foundry.documents.Combat {
     static HiddenTurn = 0;
 
     /**
@@ -111,6 +111,8 @@ export class CombatSFRPG extends Combat {
 
     // Override to account for ascending or descending turn order.
     setupTurns() {
+        this.turns ||= [];
+
         const sortMethod = {
             "normal": CombatSFRPG.normalCombat.initiativeSorting,
             "starship": CombatSFRPG.starshipCombat.initiativeSorting,
@@ -122,12 +124,7 @@ export class CombatSFRPG extends Combat {
 
         // Update state tracking
         const c = turns[this.turn];
-        this.current = {
-            round: this.round,
-            turn: this.turn,
-            combatantId: c ? c.id : null,
-            tokenId: c ? c.tokenId : null
-        };
+        this.current = this._getCurrentState(c);
 
         // One-time initialization of the previous state
         if ( !this.previous ) this.previous = this.current;
@@ -147,7 +144,7 @@ export class CombatSFRPG extends Combat {
         const updateOptions = {};
         const currentPhase = this.getCurrentPhase();
         if (currentPhase.resetInitiative) {
-            ui.notifications.error(game.i18n.format(CombatSFRPG.errors.historyLimitedResetInitiative), {permanent: false});
+            ui.notifications.error(CombatSFRPG.errors.historyLimitedResetInitiative, {permanent: false, localize: true});
             return;
         }
 
@@ -176,7 +173,7 @@ export class CombatSFRPG extends Combat {
                 nextPhase = this.getPhases().length - 1;
                 nextRound -= 1;
                 if (nextRound <= 0) {
-                    ui.notifications.error(game.i18n.format(CombatSFRPG.errors.historyLimitedStartOfEncounter), {permanent: false});
+                    ui.notifications.error(CombatSFRPG.errors.historyLimitedStartOfEncounter, {permanent: false, localize: true});
                     return;
                 }
             }
@@ -215,7 +212,7 @@ export class CombatSFRPG extends Combat {
         const phases = this.getPhases();
         const currentPhase = phases[this.flags.sfrpg.phase];
         if (currentPhase.resetInitiative && this.hasCombatantsWithoutInitiative()) {
-            ui.notifications.error(game.i18n.format(CombatSFRPG.errors.missingInitiative), {permanent: false});
+            ui.notifications.error(CombatSFRPG.errors.missingInitiative, {permanent: false, localize: true});
             return;
         }
 

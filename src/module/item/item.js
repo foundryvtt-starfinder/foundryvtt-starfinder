@@ -10,7 +10,8 @@ import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
-export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
+/** @extends {foundry.documents.Item} */
+export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
     constructor(data, context = {}) {
         // Set module art if available. This applies art to items viewed or created from compendiums.

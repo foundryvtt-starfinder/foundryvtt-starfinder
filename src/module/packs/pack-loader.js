@@ -1,3 +1,7 @@
+/**
+ * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
+ * @import Collection from "@common/utils/collection.mjs";
+*/
 
 export class PackLoader {
     constructor() {
@@ -7,6 +11,10 @@ export class PackLoader {
         };
     }
 
+    /**
+     * @param {"Actor"|"Item"} entityType
+     * @param {string[]} packs An array of pack IDs
+     */
     async *loadPacks(entityType, packs) {
         if (!this.loadedPacks[entityType]) this.loadedPacks[entityType] = {};
 
@@ -43,6 +51,7 @@ export class PackLoader {
         for (const packId of packs) {
             let data = this.loadedPacks[entityType][packId];
 
+            /** @type {CompendiumCollection} */
             const pack = data?.pack || game.packs.get(packId);
             if (pack.documentName !== entityType) continue;
 
@@ -66,6 +75,10 @@ export class PackLoader {
         ui.notifications.remove(progress);
     }
 
+    /**
+     * @param {string} packName
+     * @param {Collection[]} index
+     */
     setCompendiumArt(packName, index) {
         if (!packName.startsWith("sfrpg.")) return;
         for (const record of index) {
