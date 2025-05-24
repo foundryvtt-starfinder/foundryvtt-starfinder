@@ -65,7 +65,7 @@ export class SFRPGDamage {
     }
 
     get isHealing() {
-        return this.healSettings != null;
+        return this.healSettings !== null;
     }
 
     negatesDamageReduction(damageReductionNegation) {
@@ -193,7 +193,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                     content: `<form>
                         <p>${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ModifyDamageText")}</p>
                         <div class="form-group">
-                            <input type="number" id="modifier" placeholder=0 autofocus /> 
+                            <input type="number" id="modifier" placeholder=0 autofocus />
                         </div>
                         ${(multiplier < 0) // Is healing
                         ? `
@@ -337,7 +337,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         const actorUpdate = {};
-        const actorData = foundry.utils.duplicate(this.system);
+        const actorData = foundry.utils.deepClone(this.system);
 
         const damagesPerType = [];
         if (damage.damageTypes.length > 0) {
@@ -386,7 +386,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         if (!damage.isHealing) {
             /** Update temp hitpoints */
-            let newTempHP = Math.clamped(originalTempHP - remainingUndealtDamage, 0,
+            let newTempHP = Math.clamp(originalTempHP - remainingUndealtDamage, 0,
                 actorData.attributes.hp.tempmax || actorData.attributes.hp.temp);
             remainingUndealtDamage -= (originalTempHP - newTempHP);
 
@@ -399,14 +399,14 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
             if (!damage?.options?.bypassStamina) {
             /** Update stamina points */
-                const newSP = Math.clamped(originalSP - remainingUndealtDamage, 0, actorData.attributes?.sp?.max || 0);
+                const newSP = Math.clamp(originalSP - remainingUndealtDamage, 0, actorData.attributes?.sp?.max || 0);
                 remainingUndealtDamage -= (originalSP - newSP);
 
                 actorUpdate["system.attributes.sp.value"] = newSP;
             }
 
             /** Update hitpoints */
-            const newHP = Math.clamped(originalHP - remainingUndealtDamage, 0, actorData.attributes.hp.max);
+            const newHP = Math.clamp(originalHP - remainingUndealtDamage, 0, actorData.attributes.hp.max);
             remainingUndealtDamage -= (originalHP - newHP);
 
             actorUpdate["system.attributes.hp.value"] = newHP;
@@ -418,21 +418,21 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             }
         } else {
             if (damage.healSettings.healsHitpoints) {
-                const newHP = Math.clamped(originalHP + remainingUndealtDamage, 0, actorData.attributes.hp.max);
+                const newHP = Math.clamp(originalHP + remainingUndealtDamage, 0, actorData.attributes.hp.max);
                 remainingUndealtDamage -= (newHP - originalHP);
 
                 actorUpdate["system.attributes.hp.value"] = newHP;
             }
 
             if (damage.healSettings.healsStamina) {
-                const newSP = Math.clamped(originalSP + remainingUndealtDamage, 0, actorData.attributes?.sp?.max);
+                const newSP = Math.clamp(originalSP + remainingUndealtDamage, 0, actorData.attributes?.sp?.max);
                 remainingUndealtDamage -= (newSP - originalSP);
 
                 actorUpdate["system.attributes.sp.value"] = newSP;
             }
 
             if (damage.healSettings.healsTemporaryHitpoints) {
-                const newTempHP = Math.clamped(originalTempHP + remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
+                const newTempHP = Math.clamp(originalTempHP + remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
                 remainingUndealtDamage -= (newTempHP - originalTempHP);
 
                 actorUpdate["system.attributes.hp.temp"] = newTempHP;
@@ -574,7 +574,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         const actorUpdate = {};
-        const newData = duplicate(originalData);
+        const newData = foundry.utils.deepClone(originalData);
 
         let remainingUndealtDamage = damage.amount + damage.modifier;
 
@@ -612,7 +612,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         const originalHullPoints = this.system.attributes.hp.value;
-        const newHullPoints = Math.clamped(originalHullPoints - remainingUndealtDamage, 0, this.system.attributes.hp.max);
+        const newHullPoints = Math.clamp(originalHullPoints - remainingUndealtDamage, 0, this.system.attributes.hp.max);
         remainingUndealtDamage -= (originalHullPoints - newHullPoints);
 
         /** Deflector shields only drop in efficiency when the ship takes hull point damage. */
@@ -629,6 +629,9 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
                 // TODO: ..whereas vortex weapons that deal Hull Point damage reduce the target’s deflector shields’ defense value in each quadrant by 1d4.
                 else if (damage.properties.includes('vortex')) {
+                    if (this.options.debug) {
+                        console.log("Vortex Extra Deflector Damage Not Implemented");
+                    }
                 }
             }
 
@@ -657,10 +660,48 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         const originalCT = Math.floor((this.system.attributes.hp.max - originalHullPoints) / this.system.attributes.criticalThreshold.value);
         const newCT = Math.floor((this.system.attributes.hp.max - newHullPoints) / this.system.attributes.criticalThreshold.value);
+        let timesToRoll = 0;
+        const rollMode = this.token?.disposition === -1 && game.settings.get("sfrpg", "hideHostileStarshipCrit")
+            ? CONST.DICE_ROLL_MODES.PRIVATE
+            : game.settings.get("core", "rollMode");
+
         if (newCT > originalCT) {
             const crossedThresholds = newCT - originalCT;
             const warningMessage = game.i18n.format("SFRPG.StarshipSheet.Damage.CrossedCriticalThreshold", {name: this.name, crossedThresholds: crossedThresholds});
+            timesToRoll += crossedThresholds;
             ui.notifications.warn(warningMessage);
+            const chatData = {
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({actor: this}),
+                content: warningMessage,
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+            };
+            ChatMessage.applyRollMode(chatData, rollMode);
+            ChatMessage.create(chatData);
+        }
+
+        if (damage.isCritical && newHullPoints !== originalHullPoints) {
+            timesToRoll++;
+            const warningMessage = game.i18n.format((newCT > originalCT) ?  "SFRPG.StarshipSheet.Damage.Nat20WithThreshold" : "SFRPG.StarshipSheet.Damage.Nat20", {name: this.name});
+            ui.notifications.warn(warningMessage);
+            const chatData = {
+                user: game.user.id,
+                speaker: ChatMessage.getSpeaker({actor: this}),
+                content: warningMessage,
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+            };
+            ChatMessage.applyRollMode(chatData, rollMode);
+            ChatMessage.create(chatData);
+        }
+
+        if (timesToRoll > 0) {
+            if (game.settings.get("sfrpg", "autoRollCritEffect")) {
+                const pack = await game.packs.get('sfrpg.tables');
+                const index = pack.index ?? await pack.getIndex();
+                const obj = index.getName("Starship Critical Damage Effects");
+                const doc = await pack.getDocument(obj._id);
+                doc.drawMany(timesToRoll, { rollMode: rollMode });
+            }
         }
 
         const promise = this.update(actorUpdate);

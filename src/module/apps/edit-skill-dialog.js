@@ -34,7 +34,6 @@ export class AddEditSkillDialog extends Dialog {
         const html = await renderTemplate("systems/sfrpg/templates/apps/add-edit-skill.hbs", {
             skill: skill,
             hasSubName,
-            config: CONFIG.SFRPG,
             canDelete: (skillId.startsWith("pro") && skillId !== "pro") && (game.user.isGM || isOwner) && isEdit,
             isEdit,
             isNpc
