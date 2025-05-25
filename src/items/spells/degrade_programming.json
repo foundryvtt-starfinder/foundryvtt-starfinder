@@ -19,7 +19,7 @@
     "activation": {
       "type": "action",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "allowedClasses": {
       "myst": false,
@@ -44,7 +44,7 @@
     "damage": {
       "parts": [
         {
-          "name": "",
+          "name": "Damage against a construct",
           "formula": "8d12",
           "group": null,
           "isPrimarySection": true,
@@ -69,7 +69,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You rapidly age a computer system, module, or construct, introducing errors, overloading systems, and degrading its software. If you cast this spell on a computer, the computer becomes unreliable and difficult to use. A creature cannot operate the computer unless they succeed at a Computers check (DC = 10 + 1-1/2 × your caster level). If they succeed, they can use the computer for up to 24 hours, though the amount of time required to access or use the computer is doubled (for this purpose, a move action becomes a standard action and a standard action becomes a full action). Alternatively, you can cast this spell on a computer whose modules you can access to destroy one of the modules as though you had root access. The module can attempt to resist this spell using its computer’s saving throw modifier.</p>\n<p>If you cast this spell on a construct, you deal 8d12 acid damage to the construct (Fortitude half). On a failed save, if the construct has the technological subtype, the construct is additionally @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{staggered} for 1 minute.</p>"
+      "value": "<p>You rapidly age a computer system, module, or construct, introducing errors, overloading systems, and degrading its software. If you cast this spell on a computer, the computer becomes unreliable and difficult to use. A creature cannot operate the computer unless they succeed at a Computers Check (DC = 10 + 1-1/2 × your caster level). If they succeed, they can use the computer for up to 24 hours, though the amount of time required to access or use the computer is doubled (for this purpose, a move action becomes a standard action and a standard action becomes a full action). Alternatively, you can cast this spell on a computer whose modules you can access to destroy one of the modules as though you had root access. The module can attempt to resist this spell using its computer’s saving throw modifier.</p>\n<p>If you cast this spell on a construct, you deal 8d12 acid damage to the construct (Fortitude half). On a failed save, if the construct has the technological subtype, the construct is additionally @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} for 1 minute.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -129,6 +129,7 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -138,19 +139,19 @@
     "rollNotes": "",
     "save": {
       "type": "fort",
-      "dc": "Against Construct",
+      "dc": "",
       "descriptor": "half"
     },
     "school": "trs",
     "skillCheck": {
-      "type": "",
-      "dc": ""
+      "type": "com",
+      "dc": "10+1.5*@details.cl.value"
     },
     "source": "EN pg. 122",
     "sr": true,
     "target": {
       "type": "",
-      "value": "one computer or one construct"
+      "value": "One computer or construct"
     },
     "uses": {
       "max": "",
