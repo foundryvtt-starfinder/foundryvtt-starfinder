@@ -809,6 +809,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         props.push(
             {name: labels.level, tooltip: null}
         );
+
+        // Spell school
+        if (CONFIG.SFRPG.spellSchools[data.school]) {
+            props.push(
+                {name: game.i18n.localize(SFRPG.spellSchools[data.school]), tooltip: null}
+            );
+        }
     }
 
     /* -------------------------------------------- */
@@ -1130,13 +1137,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         /** Create additional modifiers. */
         const additionalModifiers = [
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: `${this.actor.system?.attributes?.computer?.value ?? 0}`, enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.SnapShot"), modifier: "-2", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.FireAtWill"), modifier: "-4", enabled: false} },
-            {bonus: { name: game.i18n.format("SFRPG.Rolls.Starship.Broadside"), modifier: "-2", enabled: false} }
+            {bonus: {_id: "ComputerBonus", name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: `${this.actor.system?.attributes?.computer?.value ?? 0}`, enabled: false} },
+            {bonus: {_id: "CaptainDemand", name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
+            {bonus: {_id: "CaptainEncouragement", name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} },
+            {bonus: {_id: "ScienceOfficerLockOn", name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} },
+            {bonus: {_id: "SnapShot", name: game.i18n.format("SFRPG.Rolls.Starship.SnapShot"), modifier: "-2", enabled: false} },
+            {bonus: {_id: "FireAtWill", name: game.i18n.format("SFRPG.Rolls.Starship.FireAtWill"), modifier: "-4", enabled: false} },
+            {bonus: {_id: "Broadside", name: game.i18n.format("SFRPG.Rolls.Starship.Broadside"), modifier: "-2", enabled: false} }
         ];
 
         const attackBonus = parseInt(this.system.attackBonus);
@@ -1643,25 +1650,27 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Deduct consumed charges from the item
         if (itemData.uses.autoUse && !overrideUsage) {
             let quantity = itemData.quantity;
-            const remainingUses = this.getRemainingUses();
+            let remainingUses = Math.max(this.getRemainingUses() - 1, 0);
 
-            // Deduct an item quantity
-            if (remainingUses <= 1 && quantity >= 1) {
-                quantity -= 1;
-                this.update({
-                    'system.quantity': Math.max(quantity, 0),
-                    'system.uses.value': (quantity === 0) ? 0 : this.getMaxUses()
-                });
-            }
-
-            // Optionally destroy the item
-            else if (remainingUses <= 1 && quantity === 0 && itemData.uses.autoDestroy) {
-                this.actor.deleteEmbeddedDocuments("Item", [this.id]);
-            }
-
-            // Deduct the remaining charges
-            else {
-                this.update({'system.uses.value': Math.max(remainingUses - 1, 0) });
+            if (remainingUses < 1) {
+                // Deduct an item quantity
+                quantity = Math.max(quantity - 1, 0);
+                if (quantity < 1 && itemData.uses.autoDestroy) {
+                    // Destroy the item
+                    this.actor.deleteEmbeddedDocuments("Item", [this.id]);
+                } else {
+                    if (quantity > 0) {
+                        // Reset the remaining charges
+                        remainingUses = this.getMaxUses();
+                    }
+                    this.update({
+                        'system.quantity': quantity,
+                        'system.uses.value': remainingUses
+                    });
+                }
+            } else {
+                // Deduct the remaining charges
+                this.update({'system.uses.value': remainingUses});
             }
         }
     }
@@ -1922,9 +1931,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     static async _onScalingCantripsSettingChanges() {
         const d3scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const d6scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-        const npcd3scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d((ternary(gte(@details.cr,7),4,3)))+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
-        const npcd6scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+        const d6scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0))";
+        const npcd3scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d((ternary(gte(@details.cr,7),4,3)))+(ternary(gte(@details.cr,3),floor(@details.cr/2),0))";
+        const npcd6scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cr,3),floor(@details.cr/2),0))";
 
         const setting = game.settings.get("sfrpg", "scalingCantrips");
         let count = 0;
@@ -1995,15 +2004,15 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
         if (item.system.scaling?.d3) {
             const d3scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-            const npcd3scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d((ternary(gte(@details.cr,7),4,3)))+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+            const npcd3scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d((ternary(gte(@details.cr,7),4,3)))+(ternary(gte(@details.cr,3),floor(@details.cr/2),0))";
 
             parts.forEach(i => i.formula = (isNPC) ? npcd3scaling : d3scaling);
 
             console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
 
         } else if (item.system.scaling?.d6) {
-            const d6scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
-            const npcd6scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cr,3),floor(@details.cr/2),0)";
+            const d6scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0))";
+            const npcd6scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cr,3),floor(@details.cr/2),0))";
 
             parts.forEach(i => i.formula = (isNPC) ? npcd6scaling : d6scaling);
 

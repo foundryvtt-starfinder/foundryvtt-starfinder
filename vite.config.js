@@ -9,6 +9,7 @@ const config = Vite.defineConfig(async ({ command }) => {
     if (command === "build") {
         const filesToCopy = ["changelist.md", "README.md", "OGL", "LICENSE"];
 
+        fs.ensureDir("dist");
         fs.promises.cp("src/packs", "dist/packs", {recursive: true});
         for (const file of filesToCopy) {
             fs.copyFile(file, `dist/${file}`);
@@ -43,6 +44,7 @@ const config = Vite.defineConfig(async ({ command }) => {
             emptyOutDir: false,
             sourcemap: true,
             brotliSize: true,
+            minify: false,
             lib: {
                 name: "sfrpg",
                 entry: path.resolve(__dirname, "index.js"),
@@ -59,7 +61,7 @@ const config = Vite.defineConfig(async ({ command }) => {
                         return chunk.fileName.endsWith(".js")
                             ? esbuild.transform(code, {
                                 keepNames: true,
-                                minifyIdentifiers: false,
+                                minifyIdentifiers: true,
                                 minifySyntax: true,
                                 minifyWhitespace: true,
                                 sourcemap: true

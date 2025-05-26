@@ -16,18 +16,26 @@ export default class StackModifiers extends Closure {
      * @returns {Object}          An object containing only those modifiers allowed
      *                            based on the stacking rules.
      */
-    process(mods, context, options = { actor: null }) {
+    process(mods, context, options = { actor: null, item: null }) {
         const modifiers = mods;
         for (const modifier of modifiers) {
             const actor = options.actor;
+            const item = options.item;
             const formula = String(modifier.modifier);
 
             if (formula && (modifier.modifierType === SFRPGModifierType.CONSTANT)) {
                 try {
-                    const roll = Roll.create(formula, actor?.system);
+                    const data = {};
+                    if (actor?.system) {
+                        Object.assign(data, actor.system);
+                    }
+                    if (item?.system) {
+                        Object.assign(data, {"item": item.system});
+                    }
+                    const roll = Roll.create(formula, data);
                     if (roll.isDeterministic) {
                         const warn = game.settings.get("sfrpg", "warnInvalidRollData") || false;
-                        const simplerFormula = Roll.replaceFormulaData(formula, actor?.system, {missing: 0, warn});
+                        const simplerFormula = Roll.replaceFormulaData(formula, data, {missing: 0, warn});
                         modifier.max = Roll.safeEval(simplerFormula);
                     } else {
                         ui.notifications.error(`Error with modifier: ${modifier.name}. Dice are not available in constant formulas. Please use a situational modifier instead.`);
@@ -107,7 +115,8 @@ export default class StackModifiers extends Closure {
             moraleMods,
             racialMods,
             untypedMods,
-            resistanceMods] = modifiers.reduce((prev, curr) => {
+            resistanceMods,
+            weaponSpecializationMods] = modifiers.reduce((prev, curr) => {
             switch (curr.type) {
                 case SFRPGModifierTypes.ABILITY:
                     prev[0].push(curr);
@@ -142,6 +151,9 @@ export default class StackModifiers extends Closure {
                 case SFRPGModifierTypes.RESISTANCE:
                     prev[11].push(curr);
                     break;
+                case SFRPGModifierTypes.WEAPON_SPECIALIZATION:
+                    prev[12].push(curr);
+                    break;
                 case SFRPGModifierTypes.UNTYPED:
                 default:
                     prev[10].push(curr);
@@ -149,7 +161,7 @@ export default class StackModifiers extends Closure {
             }
 
             return prev;
-        }, [[], [], [], [], [], [], [], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], [], [], [], [], [], [], []]);
 
         const ability = abilityMods?.filter(mod => mod.max > 0)?.sort((a, b) => b.max - a.max)
             ?.shift() ?? null;
@@ -164,6 +176,7 @@ export default class StackModifiers extends Closure {
         const racial = racialMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
         const resistance = resistanceMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
         const untyped = untypedMods?.sort((a, b) => b.max - a.max);
+        const weaponSpecialization = weaponSpecializationMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
 
         return {
             ability,
@@ -177,7 +190,8 @@ export default class StackModifiers extends Closure {
             morale,
             racial,
             resistance,
-            untyped
+            untyped,
+            weaponSpecialization
         };
     }
 }

@@ -61,7 +61,7 @@
       {
         "_id": "b9d4b693-b71c-4488-94c1-0a908436ad5d",
         "name": "Weapon Specialization Witchwarper",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -75,30 +75,16 @@
       {
         "_id": "dab11b2b-b61d-433b-b134-5ed34692c756",
         "name": "Weapon Specialization Witchwarper",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "basicM"
-      },
-      {
-        "_id": "53791d87-8f6c-446e-b3c6-76cad8974e43",
-        "name": "Weapon Specialization Witchwarper",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
       }
     ],
     "properties": {},
