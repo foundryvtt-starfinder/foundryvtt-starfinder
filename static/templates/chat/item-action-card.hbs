@@ -16,8 +16,10 @@
     </div>
 
     <p class="card-buttons">
+        {{log this}}
         {{#if hasAttack}}<button type="button" class="chat-button-attack flex1" data-action="attack"><i class="fas fa-gun"></i> {{ localize "SFRPG.Attack" }}</button>{{/if}}
-        {{#if hasDamage}}<button type="button" class="chat-button-damage" data-action="damage" data-tooltip="{{localize "SFRPG.Damage.Damage"}}"><i class="fas fa-droplet"></i> {{localize "SFRPG.Damage.Damage"}}</button>{{/if}}
+        {{#if primaryDamageIsHealing}}<button type="button" class="chat-button-healing flex1" data-action="damage" data-tooltip="{{localize "SFRPG.Healing.Healing"}}"><i class="fas fa-square-plus"></i> {{localize "SFRPG.Healing.Healing"}}</button>
+        {{else if hasDamage}}<button type="button" class="chat-button-damage flex1" data-action="damage" data-tooltip="{{localize "SFRPG.Damage.Damage"}}"><i class="fas fa-droplet"></i> {{localize "SFRPG.Damage.Damage"}}</button>{{/if}}
         {{#if hasSave}}<button type="button" class="chat-button-save" data-action="save" data-type="{{item.system.save.type}}" data-tooltip="{{item.labels.save}}"><i class="fas {{sfrpg "saveIconsShort" item.system.save.type}}"></i> {{localize "SFRPG.Save"}}</button>{{/if}}
         {{#if hasSkill}}<button type="button" class="chat-button-skill" data-action="skill" data-type="{{item.system.skillCheck.type}}" data-tooltip="{{item.labels.skillCheck}}"><i class="fas {{sfrpg "skillIconsShort" item.system.skillCheck.type}}"></i> {{localize "SFRPG.Skill"}}</button>{{/if}}
         {{#if hasArea}}<button type="button" class="chat-button-template" data-action="template" data-type="{{item.system.area.type}}" data-tooltip="{{localize "SFRPG.ChatCard.PlaceAbilityTemplate" label=item.labels.area}}"><i class="fas fa-crosshairs"></i> {{localize "SFRPG.Template"}}</button>{{/if}}

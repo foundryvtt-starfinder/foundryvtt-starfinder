@@ -75,7 +75,8 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                         isVersatile: this.isVersatile,
                         hasSave: this.hasSave,
                         hasSkill: this.hasSkill,
-                        hasArea: this.hasArea
+                        hasArea: this.hasArea,
+                        primaryDamageIsHealing: this.primaryDamageIsHealing
                     }
                     : {
                         actor: this.actor,

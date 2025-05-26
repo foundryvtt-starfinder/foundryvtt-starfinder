@@ -374,7 +374,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             hasSave: this.hasSave,
             hasSkill: this.hasSkill,
             hasArea: this.hasArea && ["ft", "meter"].includes(this.system.area.units) && !["", "other"].includes(this.system.area.shape),
-            hasOtherFormula: this.hasOtherFormula
+            hasOtherFormula: this.hasOtherFormula,
+            primaryDamageIsHealing: this.primaryDamageIsHealing
         };
 
         if (this.type === "spell") {
@@ -1622,7 +1623,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 hasDamage: this.hasDamage,
                 hasSave: this.hasSave,
                 hasArea: this.hasArea,
-                hasOtherFormula: this.hasOtherFormula
+                hasOtherFormula: this.hasOtherFormula,
+                primaryDamageIsHealing: this.primaryDamageIsHealing
             };
 
             const template = `systems/sfrpg/templates/chat/consumed-item-card.hbs`;
