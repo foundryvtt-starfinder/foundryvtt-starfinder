@@ -1,6 +1,6 @@
 /**
  * Override default tooltip class because tooltips appearing immediately when a tooltip is currently visible sucks.
- * Unfortunately the anything worth touching is private so we have to copy a lot of it. :/
+ * Unfortunately anything worth touching is private so we have to copy a lot of it. :/
  */
 export default class TooltipManagerSFRPG extends foundry.helpers.interaction.TooltipManager {
 
@@ -57,7 +57,7 @@ export default class TooltipManagerSFRPG extends foundry.helpers.interaction.Too
      * @param {PointerEvent} event    The initiating pointerenter event
      */
     #onActivate(event) {
-        if (Tour.tourInProgress) return; // Don't activate tooltips during a tour
+        if (foundry.nue.Tour.tourInProgress) return; // Don't activate tooltips during a tour
 
         const element = event.target;
         if (!element.dataset.tooltip && element.getAttribute("aria-label")) {

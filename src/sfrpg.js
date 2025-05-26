@@ -542,7 +542,7 @@ Hooks.once("i18nInit", () => {
         obj.label = game.i18n.localize(obj.label);
     }
 
-    CONFIG.SFRPG.statusEffects.forEach(e => e.label = game.i18n.localize(e.label));
+    CONFIG.SFRPG.statusEffects.forEach(e => e.name = game.i18n.localize(e.name));
 });
 
 Hooks.once("setup", function() {
