@@ -7,8 +7,8 @@
     <div class="card-content">{{{system.description.value}}}</div>
 
     <p class="card-buttons">
-        <button type="button" data-action="weaponAttack">{{localize "SFRPG.Attack"}}</button>
-        {{#if system.damage.value}}<button type="button" class="chat-button-damage" data-action="weaponDamage" data-tooltip="{{localize "SFRPG.Damage.Damage"}}"><i class="fas fa-gun"></i> {{localize "SFRPG.Damage.Damage"}}</button>{{/if}}
+        {{#if hasAttack}}<button type="button" class="chat-button-attack flex1" data-action="attack"><i class="fas fa-gun"></i> {{ localize "SFRPG.Attack" }}</button>{{/if}}
+        {{#if system.damage.value}}<button type="button" class="chat-button-damage" data-action="weaponDamage" data-tooltip="{{localize "SFRPG.Damage.Damage"}}"><i class="fas fa-droplet"></i> {{localize "SFRPG.Damage.Damage"}}</button>{{/if}}
         {{#if system.damage2.value}}<button type="button" class="chat-button-damage" data-action="weaponDamage2" data-tooltip="{{localize "SFRPG.Damage.AltDamage"}}">{{localize "SFRPG.Damage.AltDamage"}}</button>{{/if}}
         {{#if hasSave}}<button type="button" class="chat-button-save" data-action="save" data-type="{{item.system.save.type}}" data-tooltip="{{item.labels.save}}"><i class="fas {{sfrpg "saveIconsShort" item.system.save.type}}"></i> {{localize "SFRPG.Save"}}</button>{{/if}}
         {{#if hasSkill}}<button type="button" class="chat-button-skill" data-action="skill" data-type="{{item.system.skillCheck.type}}" data-tooltip="{{item.labels.skillCheck}}"><i class="fas {{sfrpg "skillIconsShort" item.system.skillCheck.type}}"></i> {{localize "SFRPG.Skill"}}</button>{{/if}}
@@ -18,7 +18,6 @@
     <footer class="card-footer">
         {{#each system.properties}}
         <span>{{this}}</span>
-        {{log this}}
         {{/each}}
     </footer>
 </div>
