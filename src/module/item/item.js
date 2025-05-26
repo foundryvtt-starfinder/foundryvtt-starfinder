@@ -1802,20 +1802,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         $(content).slideToggle();
     }
 
-    /**
-     * Handle toggling the visibility of chat card roll breakdown (tooltip) when the roll is clicked.
-     * @param {Event} event The originating click event
-     */
-    static _onChatCardToggleRollContent(event) {
-        event.preventDefault();
-        const rollContent = event.currentTarget;
-        const result = rollContent.querySelector('.dice-result');
-        const breakdown = result.querySelector('.dice-tooltip');
-        // const roll = card.querySelector('.dice-roll');
-        // content.style.display = content.style.display === 'none' ? 'block' : 'none';
-        $(breakdown).slideToggle();
-    }
-
     /* -------------------------------------------- */
 
     /**
@@ -1929,13 +1915,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         await this.update({["system.modifiers"]: modifiers});
     }
 
-    static async _onScalingCantripsSettingChanges() {
+    static async _onScalingCantripsSettingChanges(setting) {
         const d3scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
         const d6scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0))";
         const npcd3scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d((ternary(gte(@details.cr,7),4,3)))+(ternary(gte(@details.cr,3),floor(@details.cr/2),0))";
         const npcd6scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cr,3),floor(@details.cr/2),0))";
 
-        const setting = game.settings.get("sfrpg", "scalingCantrips");
         let count = 0;
         let actorCount = 0;
 

@@ -672,10 +672,7 @@ Hooks.on("renderChatMessageHTML", (app, html, data) => {
         if (cardContent) {
             cardContent.style.display = "none";
         }
-        const diceTooltip = html.querySelector('.dice-tooltip');
-        if (diceTooltip) {
-            diceTooltip.style.display = "none";
-        }
+
     }
 });
 
