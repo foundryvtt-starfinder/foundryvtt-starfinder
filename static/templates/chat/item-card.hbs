@@ -1,4 +1,3 @@
-{{log this}}
 <div class="chat-card item-card" data-actor-id="{{actor.id}}" data-item-id="{{item._id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}>
     <div class="card-item-details flexrow">
         <div class="card-icons item">
@@ -17,6 +16,7 @@
     </div>
 
     <div class="card-buttons flexrow">
+        {{log this}}
         {{#if hasAttack}}<button type="button" class="chat-button-attack flex1" data-action="attack"><i class="fas fa-gun"></i> {{ localize "SFRPG.Attack" }}</button>{{/if}}
         <!-- TODO-Ian add differentiation between healing and damage buttons -->
         {{#if hasDamage}}<button type="button" class="chat-button-damage flex1" data-action="damage" data-tooltip="{{localize "SFRPG.Damage.Damage"}}"><i class="fas fa-droplet"></i> {{localize "SFRPG.Damage.Damage"}}</button>{{/if}}
