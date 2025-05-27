@@ -1,5 +1,5 @@
 # 0.28.0
-Foundry v13 support is here! This version of sf1e is compatible with Foundry v13 and while we do not fully take advantage of all the v13 features yet, we will be rolling out new features as we complete them. This version also contains a HUGE number of fixes to the data compendiums and the system which should improve user experience.
+Foundry v13 support is here! This version of sf1e is compatible with Foundry v13 and while we do not fully take advantage of all the v13 features yet, we will be rolling out new features as we complete them. This version also contains a HUGE number of fixes to the data compendiums and the system code which should improve user experience.
 
 As there are a number of breaking changes between foundry v12 and v13, this version is unfortunately not compatible with Foundry v12 installs. Please remember to back up your worlds before launching them with this new version, just in case.
 
@@ -26,11 +26,12 @@ As there are a number of breaking changes between foundry v12 and v13, this vers
 - Fix Vite config minification bugs by @danimrath
 
 ## Data Entry
-The big addition this update is the Starfinder Enhanced class features. Thanks very much to @glitchexe for entering these. A large amount of missing class features from the Armory book have been added by @Iankid and @rmorgens. We have also begun an effort to clean up mis-formatted source fields on all items and actors.
+Along with a host of fixes to items and aliens in the compendiums, a big effort has been put forth to update all the system's weapons and grenades to use modern attributes. In addition, more Enhanced data (Themes, Archetypes, and Equipment) has been entered. Big thanks to @ilya-vasiuk, @rmorgens, and @Theleruby for these major contributions!
 
 ### New Data
 - Starfinder Enhanced Archetypes by @ilya-vasiuk
-- Starfinder Enhanced Themse by @ilya-vasiuk
+- Starfinder Enhanced Themes by @ilya-vasiuk
+- Starfinder Enhanced Equipment by @rmorgens
 
 ### Corrections and Updates
 - Fixes to Cherav, Dampen Spell, Nanite Surge, Puncture Veil, Ferrofluid Ooze, and iconic character full body images by @ian612
