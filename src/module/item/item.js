@@ -1725,7 +1725,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     static chatListeners(html) {
         html.on('click', '.chat-card .card-buttons button', this._onChatCardAction.bind(this));
         html.on('click', '.chat-card .item-name', this._onChatCardToggleContent.bind(this));
-        html.on('click', '.dice-roll', this._onChatCardToggleRollContent.bind(this));
     }
 
     /* -------------------------------------------- */
