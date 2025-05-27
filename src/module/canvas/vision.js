@@ -110,7 +110,7 @@ function setDefaultSceneSettings() {
 }
 
 function sceneConfigTooltips() {
-    Hooks.on("renderSceneConfig", (app, [html]) => {
+    Hooks.on("renderSceneConfig", (app, html) => {
         const darknessSlider = html.querySelector("range-picker[name='environment.globalLight.darkness.max']");
         const globalIllumination = html.querySelector("input[name='environment.globalLight.enabled']");
 

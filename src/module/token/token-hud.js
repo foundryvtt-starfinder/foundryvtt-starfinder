@@ -1,23 +1,19 @@
+/** @import {ApplicationRenderContext, ApplicationRenderOptions } from "@client/applications/_types.mjs" */
+
 export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
 
     /**
-     * @override
-     * Calls super then adds a remove all button and optionally reformats the grid with text.
-     */
-    async _render(force, options) {
-        const render = await super._render(force, options);
+   * @param {ApplicationRenderContext} context Prepared context data
+   * @param {ApplicationRenderOptions} options Provided render options
+   */
+    async _onRender(context, options) {
         this.modifyConditions(this.element);
         this.refreshStatusIcons();
-
-        return render;
     }
 
-    /**
-     * @override
-     * Toggles active and overlay classes on the status images.
-     */
+    /** Toggles active and overlay classes on the status images. */
     refreshStatusIcons() {
-        const effects = this.element.find(".status-effects")[0];
+        const effects = this.element.querySelector(".status-effects");
         const statuses = this.object.actor?.system?.conditions;
         if (!statuses) return;
 
@@ -33,9 +29,10 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
     /**
      * Modifies the status effects (conditions) formatting
      * Adds names, classes, and a button to remove all conditions
-     * @param {HTMLFormElement} html - The form element of the Token HUD
      */
-    modifyConditions([html]) {
+    modifyConditions() {
+        const html = this.element;
+
         // Add a button to remove all conditions
         const label = game.i18n.localize("SFRPG.Canvas.TokenHud.RemoveAll");
         const content = game.settings.get('sfrpg', 'tokenConditionLabels') ? `${label} <i class="fas fa-times-circle" />` : `<i class="fas fa-times-circle" />`;
@@ -44,9 +41,9 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
         button.classList.add("remove-all");
         button.setAttribute("title", label);
         button.innerHTML = content;
-        button.addEventListener("click", this.onRemoveAllConditions.bind(this));
+        button.addEventListener("click", this._onRemoveAllConditions.bind(this));
 
-        const gridContainer = $(".status-effects", html);
+        const gridContainer = html.querySelector(".status-effects");
         gridContainer.append(button);
 
         // Optionally reformat the grid
@@ -59,15 +56,15 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
 
         for (const image of allStatusImages) {
             // Replace the img element with a picture element, which can display ::after content and allows child elements.
-            const name = image.dataset.tooltip ?? "";
+            const name = image.dataset.tooltipText ?? "";
             const statusId = image.dataset.statusId ?? "";
 
             const picture = document.createElement("picture");
             picture.classList.add("effect-control");
             picture.dataset.statusId = statusId;
             picture.title = name;
+
             const iconSrc = image.getAttribute("src");
-            picture.setAttribute("src", iconSrc);
             const newIcon = document.createElement("img");
             newIcon.src = iconSrc;
             picture.append(newIcon);
@@ -115,23 +112,20 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
      * Sets all conditions to false
      * @param {Event} event The event
      */
-    async onRemoveAllConditions(event) {
+    async _onRemoveAllConditions(event) {
         event.preventDefault();
         event.stopPropagation();
 
         const statuses = this.object.actor?.system?.conditions;
         if (!statuses) return;
 
-        const promises = [];
-
         for (const [condition, enabled] of Object.entries(statuses)) {
-            if (enabled) promises.push(this.object.actor.setCondition(condition, false));
+            if (enabled) this.object.actor.setCondition(condition, false);
         }
 
         for (const effect of this.object.actor.effects) {
-            promises.push(effect.delete());
+            effect.delete();
         }
 
-        return Promise.all(promises);
     }
 }

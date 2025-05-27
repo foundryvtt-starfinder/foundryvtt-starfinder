@@ -76,6 +76,7 @@ import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js"
 import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
 import { getSpellBrowser } from "./module/packs/spell-browser.js";
 import { getStarshipBrowser } from "./module/packs/starship-browser.js";
+import { SFRPGTokenHUD } from './module/token/token-hud.js';
 import isObject from './module/utils/is-object.js';
 
 const { Actors, Items } = foundry.documents.collections;
@@ -578,7 +579,7 @@ Hooks.once("ready", async () => {
     const readyTime = (new Date()).getTime();
 
     console.log("Starfinder | [READY] Overriding token HUD");
-    //  canvas.hud.token = new SFRPGTokenHUD();
+    canvas.hud.token = new SFRPGTokenHUD();
 
     console.log("Starfinder | [READY] Initializing compendium browsers");
     initializeBrowsers();
