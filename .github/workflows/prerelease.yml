@@ -1,9 +1,9 @@
 # Much of this code yoinked and modified from https://github.com/SR5-FoundryVTT/SR5-FoundryVTT
-name: Release System
+name: Prerelease System
 
 on:
     release:
-        types: [released]
+        types: [prereleased]
 
 jobs:
     build:
@@ -75,29 +75,3 @@ jobs:
                   artifacts: "./package/system.json, ./package/sfrpg-${{github.event.release.tag_name}}.zip"
                   tag: ${{ github.event.release.tag_name }}
                   body: ${{ github.event.release.body }}
-
-            # Commit and push the local changes made to development
-            - name: Commit & Push changes
-              uses: actions-js/push@master
-              with:
-                  message: "Update locales and packs to prep for release"
-                  branch: "development"
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-
-            # Merge development into master
-            - name: Merge development -> master
-              uses: devmasx/merge-branch@master
-              with:
-                  type: now
-                  from_branch: development
-                  target_branch: master
-                  message: "Merge development into master"
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-
-            # POST to the package admin release endpoint
-            #- name: Publish Module to FoundryVTT Website
-            #  id: publish-to-foundry-website
-            #  uses: cs96and/FoundryVTT-release-package@v1
-            #  with:
-            #    package-token: ${{ secrets.PACKAGE_TOKEN }}
-            #    manifest-url: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/module.json
