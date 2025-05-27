@@ -36,7 +36,7 @@
     },
     "attackBonus": 0,
     "chatFlavor": "",
-    "concentration": false,
+    "concentration": true,
     "critical": {
       "effect": "",
       "parts": []
@@ -69,7 +69,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You paralyze the target’s heart, causing intense pain and weakness. When you cast this spell, and each round thereafter that you concentrate to sustain the spell while in range, the target takes 5d6 damage and is @UUID[Compendium.sfrpg.conditions.Item.2XWEujYSyryB4oHm]{dazed} for 1 round. The target can attempt a Fortitude save, and if successful, they take half damage and are @UUID[Compendium.sfrpg.conditions.Item.ZacF0l6IwqBwToTJ]{sickened} rather than dazed for 1 round; a successful saving throw does not end the spell. If the target fails three consecutive saving throws against this spell, their Hit Points are immediately reduced to 0, and they begin dying.</p>\n<p>This spell has no effect against creatures that don’t have an anatomical heart.</p>"
+      "value": "<p>You paralyze the target’s heart, causing intense pain and weakness. When you cast this spell, and each round thereafter that you concentrate to sustain the spell while in range, the target takes 5d6 damage and is @UUID[Compendium.sfrpg.conditions.Item.2XWEujYSyryB4oHm]{Dazed} for 1 round. The target can attempt a Fortitude save, and if successful, they take half damage and are @UUID[Compendium.sfrpg.conditions.Item.ZacF0l6IwqBwToTJ]{Sickened} rather than dazed for 1 round; a successful saving throw does not end the spell. If the target fails three consecutive saving throws against this spell, their Hit Points are immediately reduced to 0, and they begin dying.</p>\n<p>This spell has no effect against creatures that don’t have an anatomical heart.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -111,8 +111,8 @@
     },
     "dismissible": false,
     "duration": {
-      "units": "text",
-      "value": "concentration up to 1 round/level"
+      "units": "round",
+      "value": "@details.cl.value"
     },
     "formula": "",
     "isActive": null,
@@ -129,6 +129,7 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -153,9 +154,9 @@
       "value": "one living creature with a heart"
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }

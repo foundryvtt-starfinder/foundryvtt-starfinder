@@ -28,11 +28,11 @@
       "wysh": false
     },
     "area": {
-      "effect": "",
+      "effect": "burst",
       "shapable": false,
-      "shape": "",
+      "shape": "sphere",
       "units": "ft",
-      "value": ""
+      "value": "(lookupRange(@item.level, 10, 3, 15, 4, 20, 6, 30))"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -44,8 +44,8 @@
     "damage": {
       "parts": [
         {
-          "name": "Spell Level 1-6 Projectile damage",
-          "formula": "lookupRange(@item.level, 1, 2, 2, 3, 4, 4, 6, 5, 8, 6, 10)d10",
+          "name": "Projectile Damage",
+          "formula": "(lookupRange(@item.level, 1, 2, 2, 3, 4, 4, 6, 5, 8, 6, 10))d10",
           "group": null,
           "isPrimarySection": true,
           "types": {
@@ -61,25 +61,8 @@
           }
         },
         {
-          "name": "Exploding Spell Level 1-2",
-          "formula": "lookupRange(@item.level, 1, 2, 2)d4",
-          "group": null,
-          "isPrimarySection": false,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": true,
-            "slashing": false,
-            "sonic": false
-          }
-        },
-        {
-          "name": "Exploding Spell Level 3-6",
-          "formula": "lookupRange(@item.level, 2, 4, 3, 5, 4, 6, 5)d6",
+          "name": "Explosion Damage",
+          "formula": "(lookupRange(@item.level, 1, 2, 2, 3, 2, 4, 3, 5, 4, 6, 5))d(lookupRange(@item.level, 4, 3, 6))6",
           "group": null,
           "isPrimarySection": false,
           "types": {
@@ -163,6 +146,7 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
