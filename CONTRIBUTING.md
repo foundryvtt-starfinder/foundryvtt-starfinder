@@ -48,9 +48,6 @@ The easiest workflow is to work through Foundry, and follow the following steps:
 6. (Optional) Restart Foundry and check one last time all your work looks good.
 7. Submit a pull request if everything looks good. :-)
 
-> [!WARNING]
-> Please don't include database files in your pull request as this can lead to merge conflicts. Obviously you can still cook in order to check everything is in order, but only submit your JSON files as a final cook is performed before every release.
-
 ## Updating existing items
 
 The easiest workflow is to work through Foundry, just simply make the changes to the item in the compendium, then run `npm run unpack` as described in step 4 above.
