@@ -246,6 +246,9 @@ Hooks.once('init', async function() {
         wordWrap: false
     });
 
+    console.log("Starfinder | [INIT] Overriding token HUD");
+    CONFIG.Token.hudClass = SFRPGTokenHUD;
+
     console.log("Starfinder | [INIT] Configuring rules engine");
     registerSystemRules(game.sfrpg.engine);
 
@@ -577,9 +580,6 @@ Hooks.once("setup", function() {
 Hooks.once("ready", async () => {
     console.log(`Starfinder | [READY] Preparing system for operation`);
     const readyTime = (new Date()).getTime();
-
-    console.log("Starfinder | [READY] Overriding token HUD");
-    canvas.hud.token = new SFRPGTokenHUD();
 
     console.log("Starfinder | [READY] Initializing compendium browsers");
     initializeBrowsers();

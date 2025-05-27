@@ -1,11 +1,15 @@
-/** @import {ApplicationRenderContext, ApplicationRenderOptions } from "@client/applications/_types.mjs" */
+/**
+ * @import { ApplicationRenderContext, ApplicationRenderOptions } from "@client/applications/_types.mjs"
+ * @import { ActorSFRPG } from "../actor/actor.js";
+*/
 
 export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
 
     /**
-   * @param {ApplicationRenderContext} context Prepared context data
-   * @param {ApplicationRenderOptions} options Provided render options
-   */
+     * @param {ApplicationRenderContext} context Prepared context data
+     * @param {ApplicationRenderOptions} options Provided render options
+     * @override
+     */
     async _onRender(context, options) {
         this.modifyConditions(this.element);
         this.refreshStatusIcons();
@@ -95,8 +99,9 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
         event.stopPropagation();
 
         const isEnabled = pic.classList.contains('active');
-        const token = this.object;
-        const actor = token?.actor;
+
+        /** @type {ActorSFRPG} */
+        const actor = this.object?.actor;
 
         const conditionId = pic.dataset.statusId;
         if (!(conditionId && actor)) return;
