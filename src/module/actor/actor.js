@@ -170,6 +170,16 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     }
 
     /**
+     * Remove ability to create "NPC V1" from the UI
+     * @inheritdoc
+     */
+    static async createDialog(data, createOptions, dialogOptions) {
+        dialogOptions.types = (dialogOptions?.types ?? this.TYPES).filter(t => t !== "npc");
+
+        return super.createDialog(data, createOptions, dialogOptions);
+    }
+
+    /**
      * Extend preCreate to apply some defaults to newly created characters
      * See the base Actor class for API documentation of this method
      *
