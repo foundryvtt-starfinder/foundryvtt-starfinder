@@ -27,7 +27,7 @@ jobs:
               with:
                   file: static/system.json
                   field: manifest
-                  value: https://github.com/${{github.repository}}/releases/latest/download/system.json
+                  value: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/system.json
 
             - name: Update system.json version number
               uses: jossef/action-set-json-field@v2.1
@@ -69,7 +69,7 @@ jobs:
                   makeLatest: false
                   allowUpdates: true # Set this to false if you want to prevent updating existing releases
                   name: ${{ github.event.release.name }}
-                  draft: true
+                  draft: false
                   prerelease: true
                   token: ${{ secrets.GITHUB_TOKEN }}
                   artifacts: "./package/system.json, ./package/sfrpg-${{github.event.release.tag_name}}.zip"
