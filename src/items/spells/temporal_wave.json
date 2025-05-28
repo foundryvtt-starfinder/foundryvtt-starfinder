@@ -19,7 +19,7 @@
     "activation": {
       "type": "action",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "allowedClasses": {
       "myst": false,
@@ -44,9 +44,9 @@
     "damage": {
       "parts": [
         {
-          "name": "Standard Action",
+          "name": "Standard Action Damage",
           "formula": "3d6",
-          "group": null,
+          "group": 0,
           "isPrimarySection": true,
           "types": {
             "acid": false,
@@ -61,9 +61,9 @@
           }
         },
         {
-          "name": "Cast this spell as a full action",
+          "name": "Full Action Damage",
           "formula": "3d8",
-          "group": null,
+          "group": 0,
           "isPrimarySection": false,
           "types": {
             "acid": false,
@@ -86,7 +86,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You project a wave of temporal disruption that batters and disorients all creatures in the area, dealing 3d6 bludgeoning damage and @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{staggering} affected creatures for 1 round. Creatures in the area can attempt a Fortitude saving throw, reducing the damage by half and negating the staggered condition on a success.</p>\n<p>You can cast this spell as a full action. If you do, the spell’s range increases to 40 feet, and the spell deals 3d8 bludgeoning damage instead of 3d6.</p>"
+      "value": "<p>You project a wave of temporal disruption that batters and disorients all creatures in the area, dealing 3d6 bludgeoning damage and @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggering} affected creatures for 1 round. Creatures in the area can attempt a Fortitude saving throw, reducing the damage by half and negating the staggered condition on a success.</p>\n<p>You can cast this spell as a full action. If you do, the spell’s range increases to 40 feet, and the spell deals 3d8 bludgeoning damage instead of 3d6.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -146,6 +146,7 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -154,7 +155,7 @@
     },
     "rollNotes": "",
     "save": {
-      "type": "reflex",
+      "type": "fort",
       "dc": "",
       "descriptor": "partial"
     },
@@ -170,9 +171,9 @@
       "value": ""
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 0
+      "value": null
     }
   }
 }
