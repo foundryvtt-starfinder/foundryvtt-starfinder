@@ -1,0 +1,87 @@
+{
+  "_id": "XaKrBrKeWccbpLql",
+  "name": "Roll Table: Wall of Warped Time",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.28.0"
+  },
+  "description": "<p><span style=\"font-family:'Exo 2', sans-serif\">The wall tangles the personal timestream of anyone that moves through it, causing one of the randomly determined effects below. A creature can attempt a Fortitude save against most of the effects, with a success negating detrimental effects or enhancing beneficial effects. Once a creature has passed through the wall, they are not subject to additional effects from moving through the wall additional times, whether they succeeded at the saving throw or not.</span></p>",
+  "displayRoll": true,
+  "folder": "nkYJeCbdnHfoQQUe",
+  "formula": "1d10",
+  "img": "systems/sfrpg/icons/spells/terraform.webp",
+  "replacement": true,
+  "results": [
+    {
+      "_id": "jwMkehhetDZjp4NH",
+      "type": "text",
+      "documentId": null,
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "range": [
+        1,
+        2
+      ],
+      "text": "No effect.",
+      "weight": 1
+    },
+    {
+      "_id": "nnhR3mlxYf2WfoV5",
+      "type": "text",
+      "documentId": null,
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "range": [
+        3,
+        4
+      ],
+      "text": "Gains the effects of @UUID[Compendium.sfrpg.spells.Item.PecEOjojT15BJKi9]{Haste} until the end of their next turn. The duration increases by [[/r 1d4]] rounds with a successful Fortitude save.",
+      "weight": 1
+    },
+    {
+      "_id": "3KA8fkg5614mxh6F",
+      "type": "text",
+      "documentId": null,
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "range": [
+        5,
+        6
+      ],
+      "text": "Gains the effects of @UUID[Compendium.sfrpg.spells.Item.4prroV3z26u1cy5y]{Slow} for [[/r 1d4]] rounds (Fortitude negates).",
+      "weight": 1
+    },
+    {
+      "_id": "n7mLeNt8leOrDttg",
+      "type": "text",
+      "documentId": null,
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "range": [
+        7,
+        8
+      ],
+      "text": "Gains the @UUID[Compendium.sfrpg.conditions.Item.LoRydw1D4bqlbkA2]{Nauseated} condition for [[/r 1d4]] rounds (Fortitude negates).",
+      "weight": 1
+    },
+    {
+      "_id": "OIGvMQfEWi7QeYpi",
+      "type": "text",
+      "documentId": null,
+      "drawn": false,
+      "flags": {},
+      "img": "icons/svg/d20-black.svg",
+      "range": [
+        9,
+        10
+      ],
+      "text": "@UUID[Compendium.sfrpg.conditions.Item.NV4qXRDgb7zTNkW2]{Paralyzed} for [[/r 1d4]] rounds immediately after passing through the wall (Fortitude negates). At the end of each of its turns, the creature can attempt a new Fort save, ending the effect if it succeeds.",
+      "weight": 1
+    }
+  ]
+}

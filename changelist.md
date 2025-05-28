@@ -26,12 +26,13 @@ As there are a number of breaking changes between foundry v12 and v13, this vers
 - Fix Vite config minification bugs by @danimrath
 
 ## Data Entry
-Along with a host of fixes to items and aliens in the compendiums, a big effort has been put forth to update all the system's weapons and grenades to use modern attributes. In addition, more Enhanced data (Themes, Archetypes, and Equipment) has been entered. Big thanks to @ilya-vasiuk, @rmorgens, and @Theleruby for these major contributions!
+Along with a host of fixes to items and aliens in the compendiums, a big effort has been put forth to update all the system's weapons and grenades to use modern attributes. In addition, more Enhanced data (Themes, Archetypes, and Equipment) has been entered. Big thanks to @ilya-vasiuk, @joharr79, @rmorgens, and @Theleruby for these major contributions!
 
 ### New Data
+- Starfinder Enhanced Equipment by @rmorgens
 - Starfinder Enhanced Archetypes by @ilya-vasiuk
 - Starfinder Enhanced Themes by @ilya-vasiuk
-- Starfinder Enhanced Equipment by @rmorgens
+- Starfinder Enhanced Spells by @joharr79
 
 ### Corrections and Updates
 - Fixes to Cherav, Dampen Spell, Nanite Surge, Puncture Veil, Ferrofluid Ooze, and iconic character full body images by @ian612
