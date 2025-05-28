@@ -5,6 +5,16 @@
 
 export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
 
+    static DEFAULT_OPTIONS = {
+        actions: {
+            effect: {handler: SFRPGTokenHUD._onClickEffect, buttons: [0, 2]},
+            removeAll: SFRPGTokenHUD._onRemoveAllConditions
+        },
+        form: {
+            closeOnSubmit: false
+        }
+    };
+
     /**
      * @param {ApplicationRenderContext} context Prepared context data
      * @param {ApplicationRenderOptions} options Provided render options
@@ -13,6 +23,8 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
     async _onRender(context, options) {
         this.modifyConditions(this.element);
         this.refreshStatusIcons();
+
+        return super._onRender(context, options);
     }
 
     /** Toggles active and overlay classes on the status images. */
@@ -44,8 +56,8 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
         const button = document.createElement("button");
         button.classList.add("remove-all");
         button.setAttribute("title", label);
+        button.dataset.action = "removeAll";
         button.innerHTML = content;
-        button.addEventListener("click", this._onRemoveAllConditions.bind(this));
 
         const gridContainer = html.querySelector(".status-effects");
         gridContainer.append(button);
@@ -66,6 +78,7 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
             const picture = document.createElement("picture");
             picture.classList.add("effect-control");
             picture.dataset.statusId = statusId;
+            picture.dataset.action = "effect";
             picture.title = name;
 
             const iconSrc = image.getAttribute("src");
@@ -81,30 +94,30 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
 
             picture.append(nameLabel);
 
-            picture.addEventListener("click", (event) => this._onClickEffect(event, picture, false));
-            picture.addEventListener("contextmenu", (event) => this._onClickEffect(event, picture, true));
-
         }
     }
 
     /**
      * Handle creating the condition item, and optionally an overlay effect.
+     * @listens
+     * @this {SFRPGTokenHUD}
      * @param {Event} event The event
-     * @param {HTMLPictureElement} pic The clicked Picture element
-     * @param {Boolean} overlay Whether to also create an overlay status effect as well as a condition item
+     * @param {HTMLPictureElement} target The clicked Picture element
      * @returns {Boolean} Whether the effect is now enabled or not.
      */
-    async _onClickEffect(event, pic, overlay) {
+    static async _onClickEffect(event, target) {
         event.preventDefault();
         event.stopPropagation();
 
-        const isEnabled = pic.classList.contains('active');
+        const isEnabled = target.classList.contains('active');
 
         /** @type {ActorSFRPG} */
         const actor = this.object?.actor;
 
-        const conditionId = pic.dataset.statusId;
+        const conditionId = target.dataset.statusId;
         if (!(conditionId && actor)) return;
+
+        const overlay = event.button === 2;
 
         if (overlay) await actor.toggleStatusEffect(conditionId, {overlay, active: !isEnabled});
 
@@ -113,11 +126,13 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
     }
 
     /**
-     * @listens
      * Sets all conditions to false
+     * @listens
+     * @this {SFRPGTokenHUD}
      * @param {Event} event The event
+     * @param {HTMLButtonElement} target The remove all button
      */
-    async _onRemoveAllConditions(event) {
+    static async _onRemoveAllConditions(event, target) {
         event.preventDefault();
         event.stopPropagation();
 
