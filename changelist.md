@@ -54,6 +54,8 @@ Along with a host of fixes to items and aliens in the compendiums, a big effort 
 - Mark unarmed strike as not equipment by @Theleruby
 - Trick attack formula changed to a lookupRange by @Theleruby
 - Fix Versatile Specialization bonus type and operative damage by @Theleruby
+- Typos corrected on Psychopomps, Defrex Hardiness, and Apocalypse Insight by @ilya-vasiuk
+- Added damage to Days' Weariness spell by @ilya-vasiuk
 
 # 0.27.1
 This update primarily adds some new data (including more Starfinder Enhanced material) and addresses some bugs that popped up in 0.27.0 and before. Some small system improvements have also been made, primarily to the backend.
