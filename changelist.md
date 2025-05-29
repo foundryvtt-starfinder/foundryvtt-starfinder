@@ -13,6 +13,7 @@ As there are a number of breaking changes between foundry v12 and v13, this vers
 - Add spell school display to chat cards by @Theleruby
 - Improved roll simplification on chat cards by @Theleruby
 - A new automated release system has been implemented that will result in easier releases and fewer errors by @ian612
+- Upgraded library dependencies and performed code sanitization to enhance security and maintainability by @ilya-vasiuk
 
 ## Bug Fixes
 - Fix item capacity calculation errors due to undefined return values by @danimrath
