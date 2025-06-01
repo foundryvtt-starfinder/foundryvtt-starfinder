@@ -1254,18 +1254,123 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @returns {Promise<bool>}  `true` if roll was performed, `false` if it was canceled
      */
     async rollDamage({ event } = {}, options = {}) {
-        const itemData  = this.system;
-        const actorData = this.actor.getRollData(); // this.actor.system;
-        const isWeapon  = ["weapon", "shield"].includes(this.type);
-        const isHealing = this.system.actionType === "heal";
-
         if (!this.hasDamage) {
             ui.notifications.error("You may not make a Damage Roll with this Item.");
             return;
         }
 
-        if (this.type === "starshipWeapon") return this._rollStarshipDamage({ event: event });
-        if (this.type === "vehicleAttack") return this._rollVehicleDamage({ event: event});
+        if (this.type === "starshipWeapon") {
+            return this._rollStarshipDamage({ event: event });
+        }
+        else if (this.type === "vehicleAttack") {
+            return this._rollVehicleDamage({ event: event});
+        }
+        else {
+            return this._rollCharacterDamage({ event: event});
+        }
+    }
+
+    async _rollVehicleDamage({ event } = {}, options = {}) {
+        const itemData = this.system;
+
+        if (!this.hasDamage) {
+            ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"));
+        }
+
+        const parts = foundry.utils.deepClone(itemData.damage.parts);
+        for (const part of parts) {
+            part.isDamageSection = true;
+        }
+
+        let title = '';
+        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
+            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
+        } else {
+            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
+        }
+
+        /** Build the roll context */
+        const rollContext = new RollContext();
+        rollContext.addContext("vehicle", this.actor);
+        rollContext.addContext("item", this, this);
+        rollContext.addContext("weapon", this, this);
+        rollContext.setMainContext("");
+
+        return DiceSFRPG.damageRoll({
+            event,
+            parts,
+            rollContext,
+            title,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            chatMessage: options.chatMessage,
+            dialogOptions: {
+                skipUI: true,
+                width: 400,
+                top: event ? event.clientY - 80 : null,
+                left: window.innerWidth - 710
+            },
+            onClose: (roll, formula, finalFormula, isCritical) => {
+                if (roll) {
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                }
+            }
+        });
+    }
+
+    async _rollStarshipDamage({ event } = {}, options = {}) {
+        const itemData = this.system;
+
+        if (!this.hasDamage) {
+            throw new Error("you may not make a Damage Roll with this item");
+        }
+
+        const parts = foundry.utils.deepClone(itemData.damage.parts);
+        for (const part of parts) {
+            part.isDamageSection = true;
+        }
+
+        let title = '';
+        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
+            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
+        } else {
+            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
+        }
+
+        /** Build the roll context */
+        const rollContext = new RollContext();
+        rollContext.addContext("ship", this.actor);
+        rollContext.addContext("item", this, this);
+        rollContext.addContext("weapon", this, this);
+        rollContext.setMainContext("");
+
+        this.actor?.setupRollContexts(rollContext, ["gunner"]);
+
+        return DiceSFRPG.damageRoll({
+            event: event,
+            parts: parts,
+            criticalData: {preventDoubling: true},
+            rollContext: rollContext,
+            title: title,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            chatMessage: options.chatMessage,
+            dialogOptions: {
+                width: 400,
+                top: event ? event.clientY - 80 : null,
+                left: window.innerWidth - 710
+            },
+            onClose: (roll, formula, finalFormula, isCritical) => {
+                if (roll) {
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                }
+            }
+        });
+    }
+
+    async _rollCharacterDamage({event} = {}, options = {}) {
+        const itemData  = this.system;
+        const actorData = this.actor.getRollData(); // this.actor.system;
+        const isWeapon  = ["weapon", "shield"].includes(this.type);
+        const isHealing = this.system.actionType === "heal";
 
         // Determine ability score modifier
         let abl = itemData.ability;
@@ -1437,102 +1542,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         });
 
         return modifiers;
-    }
-
-    async _rollVehicleDamage({ event } = {}, options = {}) {
-        const itemData = this.system;
-
-        if (!this.hasDamage) {
-            ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"));
-        }
-
-        const parts = foundry.utils.deepClone(itemData.damage.parts);
-        for (const part of parts) {
-            part.isDamageSection = true;
-        }
-
-        let title = '';
-        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
-            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
-        } else {
-            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
-        }
-
-        /** Build the roll context */
-        const rollContext = new RollContext();
-        rollContext.addContext("vehicle", this.actor);
-        rollContext.addContext("item", this, this);
-        rollContext.addContext("weapon", this, this);
-        rollContext.setMainContext("");
-
-        return DiceSFRPG.damageRoll({
-            event,
-            parts,
-            rollContext,
-            title,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            chatMessage: options.chatMessage,
-            dialogOptions: {
-                skipUI: true,
-                width: 400,
-                top: event ? event.clientY - 80 : null,
-                left: window.innerWidth - 710
-            },
-            onClose: (roll, formula, finalFormula, isCritical) => {
-                if (roll) {
-                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
-                }
-            }
-        });
-    }
-
-    async _rollStarshipDamage({ event } = {}, options = {}) {
-        const itemData = this.system;
-
-        if (!this.hasDamage) {
-            throw new Error("you may not make a Damage Roll with this item");
-        }
-
-        const parts = foundry.utils.deepClone(itemData.damage.parts);
-        for (const part of parts) {
-            part.isDamageSection = true;
-        }
-
-        let title = '';
-        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
-            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
-        } else {
-            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
-        }
-
-        /** Build the roll context */
-        const rollContext = new RollContext();
-        rollContext.addContext("ship", this.actor);
-        rollContext.addContext("item", this, this);
-        rollContext.addContext("weapon", this, this);
-        rollContext.setMainContext("");
-
-        this.actor?.setupRollContexts(rollContext, ["gunner"]);
-
-        return DiceSFRPG.damageRoll({
-            event: event,
-            parts: parts,
-            criticalData: {preventDoubling: true},
-            rollContext: rollContext,
-            title: title,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            chatMessage: options.chatMessage,
-            dialogOptions: {
-                width: 400,
-                top: event ? event.clientY - 80 : null,
-                left: window.innerWidth - 710
-            },
-            onClose: (roll, formula, finalFormula, isCritical) => {
-                if (roll) {
-                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
-                }
-            }
-        });
     }
 
     /* -------------------------------------------- */
