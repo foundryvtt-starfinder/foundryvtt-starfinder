@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateStarshipAblative", (fact) => {
+    engine.closures.add("calculateStarshipAblative", (fact, context) => {
         const data = fact.data;
 
         const ablativeItems = fact.items.filter(x => x.type === "starshipAblativeArmor");

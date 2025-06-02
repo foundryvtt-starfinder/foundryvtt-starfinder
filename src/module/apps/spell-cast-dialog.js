@@ -1,3 +1,6 @@
+import { ActorSFRPG } from "../actor/actor.js";
+import { ItemSFRPG } from "../item/item.js";
+
 /**
  * A specialized Dialog subclass for casting a spell item at a certain level
  * @type {Dialog}

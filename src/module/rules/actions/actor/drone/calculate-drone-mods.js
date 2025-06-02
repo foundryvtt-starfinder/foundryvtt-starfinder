@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateDroneMods", (fact) => {
+    engine.closures.add("calculateDroneMods", (fact, context) => {
         const data = fact.data;
         const mods = fact.mods;
 
@@ -67,7 +67,7 @@ export default function(engine) {
             }
 
             if (modData.bonusSkill) {
-                const skill = data.skills[modData.bonusSkill];
+                let skill = data.skills[modData.bonusSkill];
 
                 skill.enabled = true;
                 skill.value = 3;

@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateStarshipCrew", (fact) => {
+    engine.closures.add("calculateStarshipCrew", (fact, context) => {
         const data = fact.data;
         const actor = fact.actor;
 

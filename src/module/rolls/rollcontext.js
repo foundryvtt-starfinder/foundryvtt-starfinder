@@ -143,7 +143,7 @@ export default class RollContext {
     }
 
     hasMultipleSelectors() {
-        for (const [, value] of Object.entries(this.selectors)) {
+        for (const [key, value] of Object.entries(this.selectors)) {
             if (value.options?.length > 1) {
                 return true;
             }

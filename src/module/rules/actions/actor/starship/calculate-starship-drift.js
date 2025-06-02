@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateStarshipDrift", (fact) => {
+    engine.closures.add("calculateStarshipDrift", (fact, context) => {
         const data = fact.data;
 
         data.attributes.drift = {

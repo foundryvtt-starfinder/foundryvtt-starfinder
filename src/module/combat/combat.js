@@ -587,7 +587,7 @@ export class CombatSFRPG extends Combat {
     }
 
     hasCombatantsWithoutInitiative() {
-        for (const [, combatant] of this.turns.entries()) {
+        for (const [index, combatant] of this.turns.entries()) {
             if ((!this.settings.skipDefeated || !combatant.defeated) && (combatant.initiative === undefined || combatant.initiative === null)) {
                 return true;
             }
@@ -673,7 +673,7 @@ export class CombatSFRPG extends Combat {
         }
     }
 
-    async _getInitiativeRoll(combatant) {
+    async _getInitiativeRoll(combatant, formula) {
         const rollContext = RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"});
 
         const parts = [];
@@ -704,7 +704,7 @@ export class CombatSFRPG extends Combat {
         return rollResult.roll;
     }
 
-    async rollInitiative(ids, {updateTurn = true, messageOptions = {}} = {}) {
+    async rollInitiative(ids, {formula = null, updateTurn = true, messageOptions = {}} = {}) {
 
         // Structure input data
         ids = typeof ids === "string" ? [ids] : ids;

@@ -4,12 +4,12 @@ export default function(engine) {
         return levels[Math.min(level, levels.length - 1)];
     };
 
-    engine.closures.add("calculateXP", (fact) => {
+    engine.closures.add("calculateXP", (fact, context) => {
         const data = fact.data;
         const level = parseInt(data.details.level.value);
 
         data.details.xp.max = getLevelExp(level || 1);
-        const prior = getLevelExp(level - 1 || 0),
+        let prior = getLevelExp(level - 1 || 0),
             req = data.details.xp.max - prior;
 
         data.details.xp.pct = Math.clamp(((data.details.xp.value - prior) * 100 / req), 0, 99.5);

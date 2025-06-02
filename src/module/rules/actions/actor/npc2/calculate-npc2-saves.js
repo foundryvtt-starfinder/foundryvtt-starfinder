@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateNPC2BaseSaves", (fact) => {
+    engine.closures.add("calculateNPC2BaseSaves", (fact, context) => {
         const data = fact.data;
 
         const fort = data.attributes.fort;

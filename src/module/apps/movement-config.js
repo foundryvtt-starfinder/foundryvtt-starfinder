@@ -24,7 +24,7 @@ export class ActorMovementConfig extends DocumentSheet {
     /* -------------------------------------------- */
 
     /** @override */
-    getData() {
+    getData(options) {
         return this.document;
     }
 }

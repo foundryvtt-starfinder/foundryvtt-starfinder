@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add('calculateBaseSkills', (fact) => {
+    engine.closures.add('calculateBaseSkills', (fact, context) => {
         const data = fact.data;
         const skills = data.skills;
         const theme = fact.theme;

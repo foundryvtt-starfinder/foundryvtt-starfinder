@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateMagicalItemCount", (fact) => {
+    engine.closures.add("calculateMagicalItemCount", (fact, context) => {
         const data = fact.data;
 
         data.magicalItems = {

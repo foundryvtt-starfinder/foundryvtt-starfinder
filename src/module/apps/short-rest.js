@@ -17,7 +17,7 @@ export class ShortRestDialog extends Dialog {
     activateListeners(html) {
         super.activateListeners(html);
 
-        const restoreStaminaCheckbox = html.find('#restoreStaminaCheckbox');
+        let restoreStaminaCheckbox = html.find('#restoreStaminaCheckbox');
         restoreStaminaCheckbox.disabled = this.data.canRestoreStaminaPoints;
         restoreStaminaCheckbox.click(this._onRestoreStaminaPoints.bind(this));
     }
@@ -60,9 +60,10 @@ export class ShortRestDialog extends Dialog {
     /**
    * A helper constructor function which displays the Long Rest confirmation dialog and returns a Promise once it's
    * workflow has been resolved.
+   * @param {ActorSFRPG} actor
    * @return {Promise}
    */
-    static async longRestDialog() {
+    static async longRestDialog({actor} = {}) {
         const content = game.i18n.localize("SFRPG.Rest.Long.Dialog.Description");
 
         return new Promise((resolve, reject) => {

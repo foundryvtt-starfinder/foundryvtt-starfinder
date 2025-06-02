@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateTraits", (fact) => {
+    engine.closures.add("calculateTraits", (fact, context) => {
         const data = fact.data;
 
         /** Update race field, but only if it is left empty. */
@@ -11,7 +11,7 @@ export default function(engine) {
             }
             data.details.race = race;
         } catch (error) {
-            console.error(error);
+
         }
 
         /** Update theme field, but only if it is left empty. */
@@ -20,7 +20,7 @@ export default function(engine) {
                 data.details.theme = fact.theme.name;
             }
         } catch (error) {
-            console.error(error);
+
         }
 
         /** Update proficiencies from classes, but only if they are not set yet by the user. */
@@ -41,7 +41,7 @@ export default function(engine) {
                 }
             }
         } catch (error) {
-            console.error(error);
+
         }
 
         return fact;

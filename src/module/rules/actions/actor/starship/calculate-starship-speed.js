@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateStarshipSpeed", (fact) => {
+    engine.closures.add("calculateStarshipSpeed", (fact, context) => {
         const data = fact.data;
 
         data.attributes.speed.value = 0;

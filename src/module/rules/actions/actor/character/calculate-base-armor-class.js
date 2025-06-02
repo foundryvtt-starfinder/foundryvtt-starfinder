@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateBaseArmorClass", (fact) => {
+    engine.closures.add("calculateBaseArmorClass", (fact, context) => {
         const data = fact.data;
         const armors = fact.armors?.length > 0 ? fact.armors : null;
         const shields = fact.shields;
@@ -17,8 +17,8 @@ export default function(engine) {
 
             // Max dex
             const shieldMinDex = shields?.sort((a, b) => a.system.dex <= b.system.dex ? -1 : 1)[0];
-            const maxShieldDex = shieldMinDex?.system.dex ?? Number.MAX_SAFE_INTEGER;
-            const maxArmorDex = worstDexArmorData?.armor.dex ?? Number.MAX_SAFE_INTEGER;
+            let maxShieldDex = shieldMinDex?.system.dex ?? Number.MAX_SAFE_INTEGER;
+            let maxArmorDex = worstDexArmorData?.armor.dex ?? Number.MAX_SAFE_INTEGER;
 
             const maxDex = Math.min(data.abilities.dex.mod, maxArmorDex, maxShieldDex);
             const maxDexTooltip = game.i18n.format("SFRPG.ACTooltipMaxDex", {
@@ -58,7 +58,7 @@ export default function(engine) {
 
             const actorArmorProf = data.traits?.armorProf?.value || [];
             const bestEACArmor = armors?.reduce((armor, bestArmor) => (armor.system?.armor?.eac || 0) > (bestArmor.system?.armor?.eac || 0) ? armor : bestArmor);
-            const armorEac = {
+            let armorEac = {
                 value: 0,
                 armor: bestEACArmor,
                 name: bestEACArmor?.name
@@ -77,7 +77,7 @@ export default function(engine) {
             }
 
             const bestKACArmor = armors?.reduce((armor, bestArmor) => (armor.system?.armor?.eac || 0) > (bestArmor.system?.armor?.eac || 0) ? armor : bestArmor);
-            const armorKac = {
+            let armorKac = {
                 value: 0,
                 armor: bestKACArmor,
                 name: bestKACArmor?.name
@@ -114,8 +114,8 @@ export default function(engine) {
                 }
             }
 
-            const eacMod = armorEac.value + shieldBonus + maxDex;
-            const kacMod = armorKac.value + shieldBonus + maxDex;
+            let eacMod = armorEac.value + shieldBonus + maxDex;
+            let kacMod = armorKac.value + shieldBonus + maxDex;
 
             // AC
             eac.value = 10 + eacMod;

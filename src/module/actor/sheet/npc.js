@@ -256,7 +256,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         };
 
         if (this.actor.type === "npc2") {
-            const [permanent, temporary] = actorData.modifiers.reduce((arr, modifier) => {
+            const [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
                 if (modifier.subtab === "permanent") arr[0].push(modifier);
                 else if (modifier.subtab === "conditions") arr[3].push(modifier);
                 else arr[1].push(modifier); // Any unspecific categories go into temporary.
@@ -293,7 +293,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         return super._updateObject(event, formData);
     }
 
-    static async _selectActorData({yes, no, render, defaultYes = true, rejectClose = false, options = {width: 600}} = {}) {
+    static async _selectActorData({yes, no, cancel, render, defaultYes = true, rejectClose = false, options = {width: 600}} = {}) {
         return new Promise((resolve, reject) => {
             const dialog = new Dialog({
                 title: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogTitle"),
@@ -318,7 +318,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                     cancel: {
                         icon: '<i class="fas fa-times"></i>',
                         label: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogCancelButton"),
-                        callback: () => {
+                        callback: html => {
                             resolve(null);
                         }
                     }
@@ -334,7 +334,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         });
     }
 
-    async _duplicateAsNewStyleNPC() {
+    async _duplicateAsNewStyleNPC(event) {
         let actorData = this.actor.toObject();
 
         if (this.token && !this.token.actorLink) {
@@ -363,11 +363,11 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         }
 
         // Convert the old user input into the new architecture
-        for (const [, ability] of Object.entries(actorData.system.abilities)) {
+        for (const [abl, ability] of Object.entries(actorData.system.abilities)) {
             ability.base = ability.mod;
         }
 
-        for (const [, skill] of Object.entries(actorData.system.skills)) {
+        for (const [skl, skill] of Object.entries(actorData.system.skills)) {
             if (skill.enabled) {
                 skill.ranks = skill.mod;
             }

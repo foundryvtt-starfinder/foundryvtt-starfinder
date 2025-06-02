@@ -3,6 +3,7 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 export default function(engine) {
     engine.closures.add('calculateSkillModifiers', (fact, context) => {
         const skills = fact.data.skills;
+        const flags = fact.flags;
         const modifiers = fact.modifiers;
 
         const addModifier = (bonus, data, item, localizationKey) => {
@@ -11,7 +12,7 @@ export default function(engine) {
             } else {
                 item.calculatedMods = [{mod: bonus.modifier, bonus: bonus}];
             }
-            const computedBonus = bonus.max || 0;
+            let computedBonus = bonus.max || 0;
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -29,7 +30,7 @@ export default function(engine) {
         });
 
         // Skills
-        for (const [skl, skill] of Object.entries(skills)) {
+        for (let [skl, skill] of Object.entries(skills)) {
             skill.rolledMods = null;
             const mods = context.parameters.stackModifiers.process(filteredMods.filter(mod => {
                 // temporary workaround to fix modifiers with mod "0" if the situational mod is higher.
@@ -50,7 +51,7 @@ export default function(engine) {
                 return false;
             }), context, {actor: fact.actor});
 
-            const accumulator = Object.entries(mods).reduce((sum, mod) => {
+            let accumulator = Object.entries(mods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
