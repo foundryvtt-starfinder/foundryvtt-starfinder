@@ -2,7 +2,7 @@ import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
 
 import { generateUUID } from "../utils/utilities.js";
-import { value_equals } from "../utils/value_equals.js";
+import { valueEquals } from "../utils/value-equals.js";
 
 export function initializeRemoteInventory() {
     RPC.registerCallback("createItemCollection", "gm", onCreateItemCollection);
@@ -16,7 +16,7 @@ export function initializeRemoteInventory() {
  * Will not add child items, those will have to be added manually at a later iteration.
  *
  * @param {ActorItemHelper} targetActor Actor to add the item to.
- * @param {Item} item Item to add.
+ * @param {Item} itemToAdd Item to add.
  * @param {Number} quantity Quantity of the item to add.
  * @param {Item} targetItem (Optional) Item to either merge with, or add as a child to, or find its parent and set as a sibling.
  * @returns {Item} Returns the (possibly newly created) item on the target actor.
@@ -68,12 +68,11 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
  * Removes the specified quantity of a given item from an actor.
  *
  * @param {ActorItemHelper} sourceActor Actor that owns the item.
- * @param {Item} item Item to remove.
+ * @param {Item} itemToRemove Item to remove.
  * @param {Number} quantity Number of items to remove, if quantity is greater than or equal to the item quantity, the item will be removed from the actor.
- * @param {Boolean} recursive (Optional) Recursively remove child items too? Setting this to false puts all items into the deleted item's root. Defaults to false.
  * @returns {Boolean} Returns whether or not an update or removal took place.
  */
-export async function removeItemFromActorAsync(sourceActor, itemToRemove, quantity, recursive = false) {
+export async function removeItemFromActorAsync(sourceActor, itemToRemove, quantity) {
     if (!ActorItemHelper.IsValidHelper(sourceActor) || !itemToRemove) return false;
 
     const sourceItemQuantity = itemToRemove.system.quantity;
@@ -247,7 +246,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
         /** Ensure the original to-move item has the quantity correct. */
         itemData[0].system.quantity = quantity;
 
-        if (itemData.length != items.length) {
+        if (itemData.length !== items.length) {
             console.log(['Mismatch in item count', itemData, items]);
             return;
         }
@@ -261,7 +260,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
             targetActor.token.sheet.stopRendering = false;
         }
 
-        if (createResult.length != items.length) {
+        if (createResult.length !== items.length) {
             console.log(['Mismatch in item count after creating', createResult, items]);
             const deleteIds = createResult.map(x => x.id);
             return targetActor.deleteItem(deleteIds);
@@ -436,8 +435,7 @@ function canMerge(itemA, itemB) {
 
     // TODO: Remove all keys that are not template appropriate given the item type, remove all keys that are not shared?
 
-    const deepEqual = value_equals(itemDataA, itemDataB, false, true);
-    return deepEqual;
+    return valueEquals(itemDataA, itemDataB, false, true);
 }
 
 export function getFirstAcceptableStorageIndex(container, itemToAdd) {
@@ -448,7 +446,7 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
 
     for (const storageOption of container.system.container.storage) {
         index += 1;
-        if (storageOption.amount == 0) {
+        if (storageOption.amount === 0) {
             // console.log(`Skipping storage ${index} because it has a 0 amount.`);
             continue;
         }
@@ -475,7 +473,7 @@ export function getFirstAcceptableStorageIndex(container, itemToAdd) {
                 }
             } else {
                 const storedItems = storedItemLinks.map(x => container.actor?.items.get(x.id)).filter(x => x);
-                const totalStoredAmount = storedItems.reduce((accumulator, currentValue, currentIndex, array) => {
+                const totalStoredAmount = storedItems.reduce((accumulator, currentValue) => {
                     return accumulator + currentValue.system[storageOption.weightProperty];
                 }, itemToAdd.system[storageOption.weightProperty]);
 
@@ -703,9 +701,9 @@ async function onItemCollectionItemDraggedToPlayer(message) {
         const draggedItem = itemsToTest.shift();
         if (draggedItem.system?.container?.contents?.length > 0) {
             draggedItem.system.container.contents = draggedItem.system.container.contents.filter(x => x.id);
-            for (const {id:contentItemId, index:contentItemIndex} of draggedItem.system.container.contents) {
+            for (const {id:contentItemId} of draggedItem.system.container.contents) {
                 if (contentItemId) {
-                    const contentItem = source.token.document.flags.sfrpg.itemCollection.items.find(x => x._id == contentItemId);
+                    const contentItem = source.token.document.flags.sfrpg.itemCollection.items.find(x => x._id === contentItemId);
                     if (contentItem) {
                         data.draggedItems.push(contentItem);
                         itemsToTest.push(contentItem);
@@ -870,13 +868,12 @@ export class ActorItemHelper {
 
         const dataToCreate = itemData instanceof Array ? itemData : [itemData];
         const createResult = await this.actor.createEmbeddedDocuments("Item", dataToCreate, {});
-        const newItem = createResult instanceof Array ? createResult : [createResult];
-
-        return newItem;
+        return createResult instanceof Array ? createResult : [createResult];
     }
 
     /**
      * Wrapper around actor.updateEmbeddedDocuments.
+     * @param {String} itemId ID of item to update.
      * @param {Object} update Data to update with. Must have an id field.
      */
     async updateItem(itemId, update) {
@@ -975,7 +972,7 @@ export class ActorItemHelper {
                         subtype: currentStorage?.subtype || "",
                         amount: currentStorage?.amount ?? itemData.storageCapacity ?? 0,
                         acceptsType: currentStorage?.acceptsType || itemData.acceptedItemTypes ? Object.keys(itemData.acceptedItemTypes) : [],
-                        affectsEncumbrance: currentStorage?.affectsEncumbrance ?? ((itemData.contentBulkMultiplier === 0) ? false : true),
+                        affectsEncumbrance: currentStorage?.affectsEncumbrance ?? ((itemData.contentBulkMultiplier !== 0)),
                         weightProperty: currentStorage?.weightProperty || "bulk"
                     });
                 } else if (item.type === "weapon") {
@@ -1042,7 +1039,7 @@ export class ActorItemHelper {
             if (itemData.container?.storage && itemData.container.storage.length > 0) {
                 for (const storage of itemData.container.storage) {
                     if (storage.hasOwnProperty("weightMultiplier")) {
-                        storage["affectsEncumbrance"] = storage.weightMultiplier === 0 ? false : true;
+                        storage["affectsEncumbrance"] = storage.weightMultiplier !== 0;
                         delete storage.weightMultiplier;
                         isDirty = true;
                     }
@@ -1079,8 +1076,7 @@ export class ActorItemHelper {
         }
 
         if (migrations.length > 0) {
-            const result = this.actor.updateEmbeddedDocuments("Item", migrations);
-            return result;
+            return this.actor.updateEmbeddedDocuments("Item", migrations);
         }
 
         return null;
