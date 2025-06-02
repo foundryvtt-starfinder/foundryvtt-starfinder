@@ -24,6 +24,7 @@ As there are a number of breaking changes between foundry v12 and v13, this vers
 - Fixes for how weapon specialization is calculated by @Theleruby
 - Fix starship roll options by @danimrath
 - Fix Vite config minification bugs by @danimrath
+- Fix item stacks (like ammo) not merging correctly by @ian612
 
 ## Data Entry
 Along with a host of fixes to items and aliens in the compendiums, a big effort has been put forth to update all the system's weapons and grenades to use modern attributes. In addition, more Enhanced data (Themes, Archetypes, and Equipment) has been entered. Big thanks to @ilya-vasiuk, @joharr79, @rmorgens, and @Theleruby for these major contributions!
