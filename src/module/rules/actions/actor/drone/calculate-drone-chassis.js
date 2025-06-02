@@ -1,11 +1,15 @@
 import { SFRPG } from "../../../../config.js";
 
 export default function(engine) {
-    engine.closures.add("calculateDroneChassis", (fact) => {
+    engine.closures.add("calculateDroneChassis", (fact, context) => {
         const data = fact.data;
 
         // We only care about the first chassis
-        const activeChassis = fact.chassis && fact.chassis.length > 0 ? fact.chassis[0] : null;
+        let activeChassis = null;
+        for (const chassis of fact.chassis) {
+            activeChassis = chassis;
+            break;
+        }
 
         if (activeChassis) {
             const chassisData = activeChassis.system;

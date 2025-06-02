@@ -34,7 +34,7 @@ export class ChoiceDialog extends Dialog {
     activateListeners(html) {
         super.activateListeners(html);
 
-        for (const input of Object.keys(this.inputData)) {
+        for (let input of Object.keys(this.inputData)) {
             const inputElement = html.find(`#${input}`);
             inputElement.change(this._onValueChanged.bind(this));
         }

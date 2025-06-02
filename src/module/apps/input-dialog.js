@@ -36,8 +36,8 @@ export class InputDialog extends Dialog {
         super.activateListeners(html);
 
         let focused = false;
-        for (const input of Object.keys(this.inputData)) {
-            const inputElement = html.find(`#${input}`);
+        for (let input of Object.keys(this.inputData)) {
+            let inputElement = html.find(`#${input}`);
             inputElement.change(this._onValueChanged.bind(this));
 
             if (!focused) {
@@ -53,9 +53,9 @@ export class InputDialog extends Dialog {
         const inputValue = InputDialog.values[key];
         inputValue.value = inputElement.value;
         if (inputValue.validator) {
-            const isValid = inputValue.validator(inputValue.value);
+            let isValid = inputValue.validator(inputValue.value);
             if (!isValid) {
-                const message = game.i18n.format("SFRPG.Dialogs.InputDialog.SingleFieldInvalid", { fieldName: inputValue.name });
+                let message = game.i18n.format("SFRPG.Dialogs.InputDialog.SingleFieldInvalid", { fieldName: inputValue.name });
                 ui.notifications.error(message);
                 if (!inputElement.classList.contains("error")) {
                     inputElement.classList.add("error");
@@ -77,7 +77,7 @@ export class InputDialog extends Dialog {
      */
     static async show(title, message, inputData, dialogCallback) {
         InputDialog.values = inputData;
-        for (const key of Object.keys(InputDialog.values)) {
+        for (let key of Object.keys(InputDialog.values)) {
             InputDialog.values[key].value = InputDialog.values[key].placeholder;
         }
 
@@ -95,9 +95,9 @@ export class InputDialog extends Dialog {
                         icon: '<i class="fas fa-check"></i>',
                         label: game.i18n.format("Yes"),
                         callback: () => {
-                            const invalidFields = [];
-                            const returnValues = {};
-                            for (const key of Object.keys(InputDialog.values)) {
+                            let invalidFields = [];
+                            let returnValues = {};
+                            for (let key of Object.keys(InputDialog.values)) {
                                 const value = InputDialog.values[key];
                                 returnValues[key] = value.value;
                                 if (value.validator && !value.validator(value.value)) {
@@ -105,11 +105,11 @@ export class InputDialog extends Dialog {
                                 }
                             }
 
-                            if (invalidFields.length === 0) {
+                            if (invalidFields.length == 0) {
                                 dialogCallback(returnValues);
                             } else {
                                 let errorMessage = "";
-                                for (const invalidField of invalidFields) {
+                                for (let invalidField of invalidFields) {
                                     errorMessage += invalidField + "<br/>";
                                 }
                                 errorMessage = game.i18n.format("SFRPG.Dialogs.InputDialog.MultipleFieldsInvalid", { fieldNames: errorMessage });

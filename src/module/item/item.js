@@ -116,6 +116,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const C = CONFIG.SFRPG;
         const labels = {};
         const itemData = this;
+        const actorData = this.parent ? this.parent.system : {};
         const data = this.system;
 
         // Spell Level,  School, and Components
@@ -250,10 +251,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * These will always be needed from hence forth, so we'll just make sure that they always exist.
      *
      * @param {Object}      data The item data to check against.
+     * @param {String|Null} prop A specific property name to check.
      *
      * @returns {Object}         The modified data object with the modifiers data object added.
      */
-    _ensureHasModifiers(data ) {
+    _ensureHasModifiers(data, prop = null) {
         if (!foundry.utils.hasProperty(data, "modifiers")) {
             console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
@@ -1534,6 +1536,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     async rollFormula(options = {}) {
         const itemData = this.system;
+        const actorData = this.actor.getRollData();
         if (!itemData.formula) {
             throw new Error("This Item does not have a formula to roll!");
         }
@@ -1659,8 +1662,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     /**
      * Perform an ability recharge test for an item which uses the d6 recharge mechanic
+     * @prarm {Object} options
      */
-    async rollRecharge() {
+    async rollRecharge(options = {}) {
         const data = this.system;
         if (!data.recharge.value) return;
 
@@ -1690,7 +1694,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return Promise.all(promises);
     }
 
-    async placeAbilityTemplate() {
+    async placeAbilityTemplate(event) {
         const itemData = this.system;
 
         const type = {
@@ -1842,7 +1846,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * @return {Actor|null}         The Actor entity or null
      * @private
      */
-    static _getChatCardTarget() {
+    static _getChatCardTarget(card) {
         const character = game.user.character;
         const controlled = canvas.tokens?.controlled;
         if (controlled.length === 0) return character || null;

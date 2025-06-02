@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add('calculateNpcLevel', (fact) => {
+    engine.closures.add('calculateNpcLevel', (fact, context) => {
         const data = fact.data;
 
         const cr = data.details.cr;

@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateClassDC", (fact) => {
+    engine.closures.add("calculateClassDC", (fact, context) => {
         // Calculated later because we need ability modifiers, but classes have to be calculated as early as possible.
         const data = fact.data;
         const classes = fact.classes;
@@ -9,7 +9,9 @@ export default function(engine) {
             const classData = cls.system;
             const className = classData.slug || cls.name.slugify({replacement: "_", strict: true});
 
-            data.classes[className].classDC = 10 + Math.floor(classData.levels / 2) + data.abilities[classData.kas || "str"].mod || data.abilities.str.mod;
+            const classDC = 10 + Math.floor(classData.levels / 2) + data.abilities[classData.kas || "str"].mod || data.abilities.str.mod;
+
+            data.classes[className].classDC = classDC;
         }
 
         return fact;

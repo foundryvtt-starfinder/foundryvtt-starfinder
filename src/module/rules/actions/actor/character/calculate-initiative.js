@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateInitiative", (fact) => {
+    engine.closures.add("calculateInitiative", (fact, context) => {
         const data = fact.data;
         const init = data.attributes.init;
 

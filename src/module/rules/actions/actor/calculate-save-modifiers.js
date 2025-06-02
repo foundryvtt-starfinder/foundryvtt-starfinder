@@ -3,6 +3,7 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 export default function(engine) {
     engine.closures.add("calculateSaveModifiers", (fact, context) => {
         const data = fact.data;
+        const flags = fact.flags;
         const fort = data.attributes.fort;
         const reflex = data.attributes.reflex;
         const will = data.attributes.will;
@@ -23,19 +24,19 @@ export default function(engine) {
 
             let saveMod = 0;
             switch (bonus.valueAffected) {
-                case "highest":
-                    if (item.bonus === highest.bonus) {
-                        saveMod = computedBonus;
-                    }
-                    break;
-                case "lowest":
-                    if (item.bonus === lowest.bonus) {
-                        saveMod = computedBonus;
-                    }
-                    break;
-                default:
+            case "highest":
+                if (item.bonus === highest.bonus) {
                     saveMod = computedBonus;
-                    break;
+                }
+                break;
+            case "lowest":
+                if (item.bonus === lowest.bonus) {
+                    saveMod = computedBonus;
+                }
+                break;
+            default:
+                saveMod = computedBonus;
+                break;
             }
             computedBonus = saveMod;
 
@@ -99,7 +100,7 @@ export default function(engine) {
             return false;
         }), context, {actor: fact.actor});
 
-        const fortMod = Object.entries(fortMods).reduce((sum, mod) => {
+        let fortMod = Object.entries(fortMods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
@@ -113,7 +114,7 @@ export default function(engine) {
             return sum;
         }, 0);
 
-        const reflexMod = Object.entries(reflexMods).reduce((sum, mod) => {
+        let reflexMod = Object.entries(reflexMods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
@@ -127,7 +128,7 @@ export default function(engine) {
             return sum;
         }, 0);
 
-        const willMod = Object.entries(willMods).reduce((sum, mod) => {
+        let willMod = Object.entries(willMods).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {

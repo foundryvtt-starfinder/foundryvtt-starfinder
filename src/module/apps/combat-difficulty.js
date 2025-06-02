@@ -88,10 +88,10 @@ export class CombatDifficulty extends Application {
     }
 
     parseShips() {
-        const playerShips = [];
-        const playerShipTiers = [];
-        const enemyShips = [];
-        const enemyShipTiers = [];
+        let playerShips = [];
+        let playerShipTiers = [];
+        let enemyShips = [];
+        let enemyShipTiers = [];
 
         // split combatants into allies and enemies
         for (const combatant of this.combatData.combatants) {
@@ -295,8 +295,8 @@ export class CombatDifficulty extends Application {
     calculateAPL() {
         const average = (array) => array.reduce((total, value) => total + value, 0) / array.length;
 
-        const playerCombatants = [];
-        const playerLevels = [];
+        let playerCombatants = [];
+        let playerLevels = [];
 
         // Find all player-owned PCs and get their levels
         for (const combatant of this.combatData.combatants) {
@@ -325,8 +325,8 @@ export class CombatDifficulty extends Application {
      * @return {[Combatant[], number]}
     */
     calculateEnemyXP() {
-        const enemyCombatants = [];
-        const enemyXP = [];
+        let enemyCombatants = [];
+        let enemyXP = [];
 
         // Find all player-owned PCs and get their levels
         for (const combatant of this.combatData.combatants) {
@@ -370,7 +370,7 @@ export class CombatDifficulty extends Application {
             XParray = CRTable["25"];
             encounterCR = "25";
         } else {
-            for (const [CR, XProw] of Object.entries(CRTable)) {
+            for (let [CR, XProw] of Object.entries(CRTable)) {
                 // Figure out encounter difficulty
                 if (XPtotal <= XProw.totalXP && XPtotal > XProw.minXP) {
                     XParray = XProw;
@@ -446,7 +446,7 @@ export class CombatDifficulty extends Application {
             return "25";
         } else {
             // Find the CR value of the remaining XP, without going over
-            for (const [CR, XProw] of Object.entries(CRTable)) {
+            for (let [CR, XProw] of Object.entries(CRTable)) {
                 if (remainingXP < XProw.nextXP) {
                     if (remainingXP >= XProw.totalXP) {
                         return CR;

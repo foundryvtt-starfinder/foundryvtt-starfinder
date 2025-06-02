@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateStarshipCritThreshold", (fact) => {
+    engine.closures.add("calculateStarshipCritThreshold", (fact, context) => {
         const data = fact.data;
 
         const sizeMultiplierMap = {

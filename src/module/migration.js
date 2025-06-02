@@ -369,7 +369,7 @@ const _migrateActorDamageReductions = function(actor, migratedData) {
         const oldDamageReductionValue = Number(oldDamageReduction.value);
         if (!Number.isNaN(oldDamageReductionValue) && oldDamageReductionValue > 0) {
             let notes = "";
-            if (!oldDamageReduction.negatedBy || oldDamageReduction.negatedBy !== "-") {
+            if (!oldDamageReduction.negatedBy || oldDamageReduction.negatedBy != "-") {
                 notes = oldDamageReduction.negatedBy;
             }
 
@@ -401,7 +401,7 @@ const _migrateActorDamageReductions = function(actor, migratedData) {
     const oldEnergyResistances = Object.entries(actorData.traits?.dr?.value ?? []);
     if (oldEnergyResistances.length > 0 || customEnergyResistances) {
         if (oldEnergyResistances.length > 0) {
-            for (const [, entries] of oldEnergyResistances) {
+            for (const [index, entries] of oldEnergyResistances) {
                 for (const [key, value] of Object.entries(entries)) {
                     const resistanceValue = Number(value);
                     if (Number.isNaN(resistanceValue)) {
@@ -431,7 +431,7 @@ const _migrateActorDamageReductions = function(actor, migratedData) {
             const customResistances = customEnergyResistances.trim().split(';');
             for (const customResistance of customResistances) {
                 const customSplit = customResistance.trim().split(' ');
-                if (customSplit.length === 2) {
+                if (customSplit.length == 2) {
                     const notes = customSplit[0];
                     const resistanceValue = Number(customSplit[1]);
 
@@ -499,7 +499,7 @@ const _migrateDocumentIconToWebP = function(document, data) {
         const newVisualization = foundry.utils.deepClone(document.data.combatTracker.visualization);
         let isDirty = false;
 
-        for (const [, visualization] of Object.entries(newVisualization)) {
+        for (const [key, visualization] of Object.entries(newVisualization)) {
             const visualizationImageType = _imageNeedsReplace(visualization.image);
             if (visualizationImageType) {
                 visualization.image = visualization.image.replace(visualizationImageType, ".webp");
@@ -514,7 +514,7 @@ const _migrateDocumentIconToWebP = function(document, data) {
 
     if (document.data?.description?.value) {
         const description = _migrateStringContentToWebP(document.system.description.value);
-        if (document.data.description.value !== description) {
+        if (document.data.description.value != description) {
             data["system.description.value"] = description;
         }
     }
@@ -526,7 +526,7 @@ const _migrateChatMessageContentToWebP = function(messageData, data) {
 
     if (messageData?.content) {
         const content = _migrateStringContentToWebP(messageData.content);
-        if (messageData.content !== content) {
+        if (messageData.content != content) {
             data["content"] = content;
         }
     }

@@ -36,8 +36,8 @@ export default function(engine) {
             try {
                 const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch (e) {
-                console.error(e);
+            } catch {
+
             }
 
             if (computedBonus !== 0 && localizationKey) {

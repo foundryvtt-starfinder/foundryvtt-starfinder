@@ -1,3 +1,4 @@
+import { SFRPGModifierType } from "../modifiers/types.js";
 import RollTree from "./rolltree.js";
 
 /** Pattern matching exterior characters of a formula that should be trimmed */
@@ -7,7 +8,7 @@ const exteriorPattern = /^\s+|[\s+]+$/g;
 const variablePattern = /@[a-zA-Z.0-9_-]+/g;
 
 /** Pattern matching the square bracket descriptions in roll formulae */
-const bracketPattern = /\[[^\]]*]/g;
+const bracketPattern = /\[[^\]]*\]/g;
 
 /**
  * A data structure for storing data about damage types

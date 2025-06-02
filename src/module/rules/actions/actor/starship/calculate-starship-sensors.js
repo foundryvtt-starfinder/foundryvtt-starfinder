@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateStarshipSensors", (fact) => {
+    engine.closures.add("calculateStarshipSensors", (fact, context) => {
         const data = fact.data;
 
         data.attributes.sensors = {

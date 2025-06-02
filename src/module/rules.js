@@ -2,7 +2,7 @@
 import error from './engine/common/action/error.js';
 import identity from './engine/common/action/identity.js';
 import setResult from './engine/common/action/set-result.js';
-import undefinedClosure from './engine/common/action/undefined.js';
+import undefined from './engine/common/action/undefined.js';
 
 // Common conditions
 import always from './engine/common/condition/always.js';
@@ -107,7 +107,7 @@ export default function(engine) {
     error(engine);
     identity(engine);
     setResult(engine);
-    undefinedClosure(engine);
+    undefined(engine);
     // Actor actions
     clearTooltips(engine);
     calculateBaseAbilityScore(engine);

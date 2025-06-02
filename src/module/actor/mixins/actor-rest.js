@@ -157,7 +157,6 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             try {
                 await ShortRestDialog.longRestDialog(this);
             } catch (err) {
-                console.warn(err);
                 return;
             }
         }

@@ -124,8 +124,8 @@ export default class RollDialog extends Dialog {
                 let typeString = "";
                 if (part.types && !foundry.utils.isEmpty(part.types)) {
                     typeString = Object.entries(part.types)
-                        .filter(([, value]) => value)
-                        .map(([key]) => SFRPG.damageTypes[key])
+                        .filter(([key, value]) => value)
+                        .map(([key, value]) => SFRPG.damageTypes[key])
                         .join(" & ");
                 }
                 part.type = typeString;

@@ -1,3 +1,5 @@
+import { ActorSFRPG } from "../actor/actor.js";
+import { ItemSFRPG } from "../item/item.js";
 import { SFRPGEffectType } from "../modifiers/types.js";
 
 /**

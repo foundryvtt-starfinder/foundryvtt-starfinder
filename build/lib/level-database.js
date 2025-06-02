@@ -37,7 +37,6 @@ export default class LevelDatabase extends ClassicLevel {
             return isObject(source) && "_id" in source;
         };
 
-        await this.#documentDb.open();
         const docBatch = this.#documentDb.batch();
         const embeddedBatch = this.#embeddedDb?.batch();
 

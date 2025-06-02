@@ -3,7 +3,7 @@ import RollContext from "../../../rolls/rollcontext.js";
 import SFRPGTimedEffect from "../../../timedEffect/timedEffect.js";
 
 export default function(engine) {
-    engine.closures.add('calculateTimedEffects', (fact) => {
+    engine.closures.add('calculateTimedEffects', (fact, context) => {
         const { item, itemData } = fact;
         const actor = fact.owner.actor;
         if (!actor || item.type !== "effect") return fact;

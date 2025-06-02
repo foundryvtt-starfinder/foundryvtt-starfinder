@@ -374,21 +374,37 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         if (consumeSpellSlot && spellLevel > 0 && selectedSlot) {
             const actor = this;
             if (selectedSlot.source === "general") {
-                processContext = actor.update({
-                    [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
-                });
+                if (processContext) {
+                    processContext.then(function(result) {
+                        return actor.update({
+                            [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
+                        });
+                    });
+                } else {
+                    processContext = actor.update({
+                        [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
+                    });
+                }
             } else {
                 const selectedLevel = selectedSlot.level;
                 const selectedClass = selectedSlot.source;
 
-                processContext = actor.update({
-                    [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
-                });
+                if (processContext) {
+                    processContext.then(function(result) {
+                        return actor.update({
+                            [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                        });
+                    });
+                } else {
+                    processContext = actor.update({
+                        [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                    });
+                }
             }
         }
 
         if (processContext) {
-            processContext.then(function() {
+            processContext.then(function(result) {
                 return item.roll();
             });
 
@@ -401,8 +417,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
     /**
      * Edit a skill's fields
      * @param {string} skillId The skill id (e.g. "ins")
+     * @param {Object} options Options which configure how the skill is edited
      */
-    async editSkill(skillId) {
+    async editSkill(skillId, options = {}) {
         // Keeping this here for later
         // this.update({"data.skills.-=skillId": null});
         // use this to delete any unwanted skills.
@@ -463,8 +480,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
 
     /**
      * Add a new skill
+     * @param {Object} options Options which configure how the skill is added
      */
-    async addSkill() {
+    async addSkill(options = {}) {
         const skill = {
             ability: "int",
             ranks: 0,
@@ -557,7 +575,11 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      */
     async rollAbility(abilityId, options = {}) {
         const label = CONFIG.SFRPG.abilities[abilityId];
+        const abl = this.system.abilities[abilityId];
+
         const parts = [];
+        const data = this.getRollData();
+
         const rollContext = RollContext.createActorRollContext(this);
 
         parts.push(`@abilities.${abilityId}.abilityCheckBonus`);
@@ -1065,8 +1087,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @param {ActorSFRPG} doc The updated actor, containing the old values
      * @param {Object} diff An update object containing the new values
      * @param {Object} options An object, to which the delta is appended to
+     * @param {String} _userId The ID of the current user
      */
-    floatingHpOnPreUpdate(doc, diff, options) {
+    floatingHpOnPreUpdate(doc, diff, options, _userId) {
         if (!game.settings.get("sfrpg", "floatingHP")) return;
 
         const dhp = this.diffHealth(diff.system, doc.system, doc.type);
@@ -1077,8 +1100,9 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @param {ActorSFRPG} doc
      * @param {Object} diff
      * @param {Object} options
+     * @param {String} _userId
      */
-    floatingHpOnUpdate(actor, _data, options) {
+    floatingHpOnUpdate(actor, _data, options, _userId) {
         const dhp = options._hpDiffs;
         if (!dhp) return;
         const tokens = actor.getActiveTokens();
@@ -1094,7 +1118,7 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
      * @param {String} type The actor's type
      * @return {Object} An object containing the key of the updated value, and the diff
      */
-    diffHealth(actorData, old) {
+    diffHealth(actorData, old, type) {
         if (!actorData) return;
 
         const diff = {};

@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateBaseAttackBonus", (fact) => {
+    engine.closures.add("calculateBaseAttackBonus", (fact, context) => {
         const data = fact.data;
         const classes = fact.classes;
 

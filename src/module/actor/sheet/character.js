@@ -62,7 +62,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         };
 
         let physicalInventoryItems = [];
-        for (const [, value] of Object.entries(inventory)) {
+        for (const [key, value] of Object.entries(inventory)) {
             const datasetType = value.dataset.type;
             const types = datasetType.split(',');
             physicalInventoryItems = physicalInventoryItems.concat(types);
@@ -245,8 +245,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             temporary: { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } }
         };
 
-        // eslint-disable-next-line no-unused-vars
-        const [permanent, temporary, itemModifiers, conditions] = actorData.modifiers.reduce((arr, modifier) => {
+        const [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
             if (modifier.subtab === "permanent") arr[0].push(modifier);
             else if (modifier.subtab === "conditions") arr[3].push(modifier);
             else arr[1].push(modifier); // Any unspecific categories go into temporary.

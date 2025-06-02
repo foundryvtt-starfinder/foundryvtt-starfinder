@@ -1,11 +1,11 @@
 export default function(engine) {
-    engine.closures.add('calculateNPC2BaseSkills', (fact) => {
+    engine.closures.add('calculateNPC2BaseSkills', (fact, context) => {
         const data = fact.data;
         const skills = data.skills;
 
         // Skills
-        for (const [, skill] of Object.entries(skills)) {
-            skill.ranks = parseFloat(skill.ranks || '0');
+        for (const [skl, skill] of Object.entries(skills)) {
+            skill.ranks = parseFloat(skill.ranks || 0);
             skill.mod = skill.ranks;
 
             skill.tooltip = [];
