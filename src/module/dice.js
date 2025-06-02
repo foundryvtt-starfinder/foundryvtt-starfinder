@@ -413,80 +413,38 @@ export class DiceSFRPG {
     * @returns {Promise<bool>}                         `true` if roll was performed, `false` if it was canceled
     */
     static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions }) {
-        flavor = `${title || ""}${(flavor ? " - " + flavor : "")}`;
 
+        // Check if the roll context is valid or not
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
             return false;
         }
 
-        /** New roll formula system */
-        const buttons = {
-            Normal: { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.NormalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalDamageTooltip") },
-            Critical: { id: "critical", label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
-        };
-
-        /** @type {DamageType[]} */
-        const damageTypes = parts.reduce((acc, cur) => {
-            if (cur.types && !foundry.utils.isEmpty(cur.types)) {
-                const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
-                const obj = { types: [], operator: "" };
-
-                for (const type of filteredTypes) {
-                    obj.types.push(type[0]);
-                }
-
-                if (cur.operator) obj.operator = cur.operator;
-
-                if (obj.types.length > 0)
-                    acc.push(obj);
-            }
-
-            return acc;
-        }, []);
-
-        const finalParts = [];
-        const damageSections = [];
+        // Assign an id number to each part for tracking
+        let ct = 0;
         for (const part of parts) {
-            if (part instanceof Object) {
-                if (part.isDamageSection) {
-                    damageSections.push(part);
-
-                    const rollInfo = await RollTree.buildRoll(part.formula, rollContext, {
-                        buttons: buttons,
-                        defaultButton: "normal",
-                        skipUI: true
-                    });
-                    part.formula = rollInfo.rolls[0].formula.finalRoll;
-                } else {
-                    const simplifiedFormula = this._simplifyFormula(part.formula || "0", rollContext);
-                    const explanation = part.explanation ? `[${part.explanation}]` : "";
-                    finalParts.push(`${simplifiedFormula}${explanation}`);
-                }
-            } else {
-                finalParts.push(formula);
-            }
+            part.id = ct;
+            ct += 1;
         }
 
-        const formula = finalParts.join(" + ");
-        const rollInfo = await RollTree.buildRoll(formula, rollContext, {
-            debug: false,
-            buttons: buttons,
-            defaultButton: "normal",
-            title: title,
-            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
-            mainDie: "",
-            dialogOptions: dialogOptions,
-            parts: damageSections,
-            useRawStrings: false
-        });
+        // Build the roll formula and display the dialog box to select damage sections and roll
+        const rollInfo = await this._prepareDamageDialog(event, parts, rollContext, title, dialogOptions);
+
+        // Cancel roll if the cancel button is clicked
         if (rollInfo.button === 'cancel') {
             if (onClose) {
                 onClose(null, null, null, false);
             }
-        } else for (const { formula: finalFormula, node: part } of rollInfo.rolls) {
+        }
+
+        // If the cancel button is not clicked, evaluate the damage roll
+        // TODO-Ian continue from here
+        else for (const { formula: finalFormula, node: part } of rollInfo.rolls) {
+            // const part = roll.part;
+            // const formula = roll.finalFormula;
             /** @type {Tag[]} */
             const tags = [];
+
             /** @type {HtmlData[]} */
             const htmlData = [{ name: "is-damage", value: "true" }];
 
@@ -525,15 +483,6 @@ export class DiceSFRPG {
                 arr.push(obj);
                 return arr;
             }, []);
-
-            // if (damageTypes) {
-            //     for (const damageType of damageTypes) {
-            //         const tag = "damage-type-" + damageType.types.join(`-${damageType.operator}-`);
-            //         const text = damageType.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[damageType.operator]} `);
-
-            //         tags.push({ tag: tag, text: text });
-            //     }
-            // }
 
             const itemContext = rollContext.allContexts['item'];
             if (itemContext) {
@@ -585,6 +534,7 @@ export class DiceSFRPG {
             }
 
             const isCritical = (rollInfo.button === "critical");
+            flavor = `${title || ""}${(flavor ? " - " + flavor : "")}`;
             let finalFlavor = foundry.utils.deepClone(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
@@ -621,9 +571,6 @@ export class DiceSFRPG {
                 if (part.partIndex) {
                     finalFlavor += ` (${part.partIndex})`;
                 }
-                // const originalTypes = foundry.utils.deepClone(damageTypes);
-                // damageTypes = [getDamageTypeForPart(part)];
-                // console.log([originalTypes, damageTypes]);
             }
 
             finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
@@ -647,26 +594,6 @@ export class DiceSFRPG {
                     }
                 } else {
                     tags.push({ tag: "minimum-damage", text: game.i18n.localize("SFRPG.Damage.MinimumDamage") });
-                }
-            }
-
-            // Associate the damage types for this attack to the first DiceTerm
-            // for the roll.
-            const die = roll.dice && roll.dice.length > 0 ? roll.dice[0] : null;
-
-            if (die) {
-                /** @type {boolean} */
-                die.options.isDamageRoll = true;
-                die.options.damageTypes = damageTypes;
-                die.options.damageParts = tempParts;
-
-                if (criticalData) {
-                    die.options.criticalData = criticalData;
-                }
-
-                const properties = rollContext.allContexts["item"]?.data?.properties;
-                if (properties) {
-                    die.options.isModal = properties.modal || properties.double;
                 }
             }
 
@@ -740,6 +667,52 @@ export class DiceSFRPG {
         }
 
         return rollInfo.button !== 'cancel';
+    }
+
+    static async _prepareDamageDialog(event, parts, rollContext, title, dialogOptions) {
+        // Get the labels for the dialog box buttons
+        const buttons = {
+            Normal: { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.NormalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalDamageTooltip") },
+            Critical: { id: "critical", label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
+        };
+
+        // Evaluate all the variables within the formulas to get the final damage roll formula
+        const formulaParts = [];
+        const damageSections = [];
+        for (const part of parts) {
+            if (part instanceof Object) {
+                if (part.isDamageSection) {
+                    damageSections.push(part);
+
+                    const rollInfo = await RollTree.buildRoll(part.formula, rollContext, {
+                        buttons: buttons,
+                        defaultButton: "normal",
+                        skipUI: true
+                    });
+                    part.formula = rollInfo.rolls[0].formula.finalRoll;
+                } else {
+                    const simplifiedFormula = this._simplifyFormula(part.formula || "0", rollContext);
+                    const explanation = part.explanation ? `[${part.explanation}]` : "";
+                    formulaParts.push(`${simplifiedFormula}${explanation}`);
+                }
+            } else {
+                formulaParts.push(formula);
+            }
+        }
+
+        // Build the roll formula and display the dialog box to select damage sections and roll
+        const formula = formulaParts.join(" + ");
+        return await RollTree.buildRoll(formula, rollContext, {
+            debug: false,
+            buttons: buttons,
+            defaultButton: "normal",
+            title: title,
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            mainDie: "",
+            dialogOptions: dialogOptions,
+            parts: damageSections,
+            useRawStrings: false
+        });
     }
 
     static appendTextToRoll(originalRollHTML, textToAppend) {

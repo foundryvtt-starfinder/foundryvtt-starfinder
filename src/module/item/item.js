@@ -1435,18 +1435,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         });
 
         let title = '';
-        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
-            if (isHealing) {
-                title = game.i18n.localize("SFRPG.Rolls.HealingRoll");
-            } else {
-                title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
-            }
+        if (isHealing) {
+            title = game.i18n.localize("SFRPG.Rolls.HealingRoll");
         } else {
-            if (isHealing) {
-                title = game.i18n.format("SFRPG.Rolls.HealingRollFull", {name: this.name});
-            } else {
-                title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
-            }
+            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
         }
 
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData, ownerData: rollData});

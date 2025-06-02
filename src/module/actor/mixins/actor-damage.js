@@ -149,29 +149,11 @@ export class SFRPGDamage {
         if (damageType.constructor !== String) {
             throw `parseDamageType provided with invalid type, received ${damageType.constructor}, expected String.`;
         }
+        const acronymToDamage = Object.entries(CONFIG.SFRPG.damageTypeToAcronym)
+            .reduce((acc, [key, value]) => (acc[value.toLowerCase()] = key, acc), {});
 
-        const acronymToDamageMap = {
-            "a": "acid",
-            "b": "bludgeoning",
-            "c": "cold",
-            "e": "electricity",
-            "f": "fire",
-            "fo": "force",
-            "hp": "healing",
-            "p": "piercing",
-            "r": "radiation",
-            "s": "slashing",
-            "so": "sonic",
-            "sp": "sp",
-            "tmp": "tempHP"
-        };
-
-        const lowerType = damageType.trim().toLowerCase();
-        if (acronymToDamageMap[lowerType]) {
-            return acronymToDamageMap[lowerType];
-        }
-
-        return lowerType;
+        const validDamageType = acronymToDamage[damageType.trim()];
+        return validDamageType || damageType;
     }
 }
 
@@ -321,7 +303,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     }
 
     /**
-     * Applies damage to the Actor.
+     * Applies damage to an Actor.
      *
      * @param {SFRPGDamage} damage The damage object to be applied to this actor.
      */
@@ -330,27 +312,25 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             throw `actor.applyDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
         }
 
-        // console.log(['Applying damage', damage.toString(), damage]);
-
         switch (this.type) {
             case 'starship':
                 return this._applyStarshipDamage(damage);
             case 'vehicle':
                 return this._applyVehicleDamage(damage);
             default:
-                return this._applyActorDamage(damage);
+                return this._applyCharacterDamage(damage);
         }
     }
 
     /**
-    * Apply damage to an Actor.
+    * Apply damage to a Character or NPC.
     *
     * @param {SFRPGDamage} damage A SFRPGDamage object, describing the damage to be dealt.
     * @returns A Promise that resolves to the updated Actor
     */
-    async _applyActorDamage(damage) {
+    async _applyCharacterDamage(damage) {
         if (damage.constructor !== SFRPGDamage) {
-            throw `actor._applyActorDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
+            throw `actor._applyCharacterDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
         }
 
         const actorUpdate = {};
