@@ -286,7 +286,7 @@ export class DiceSFRPG {
                 }
 
                 if (difficulty) {
-                    messageData.flavor = `<span style="color:${roll.total >= difficulty ? 'green' : 'red'}"><h2>${roll.total >= difficulty ? 'Success' : 'Failure'}</h2></span>${messageData.flavor}${displayDifficulty ? ` (DC ${difficulty})` : ''}`;
+                    messageData.flavor = `<span style="color:${roll.total >= difficulty ? 'green' : 'red'}"><h2>${roll.total >= difficulty ? game.i18n.localize("SFRPG.Rolls.Dice.Success") : game.i18n.localize("SFRPG.Rolls.Dice.Failure")}</h2></span>${messageData.flavor}${displayDifficulty ? ` (DC ${difficulty})` : ''}`;
                 }
 
                 // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
