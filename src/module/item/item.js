@@ -987,7 +987,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             critical: critThreshold,
             chatMessage: options.chatMessage,
             rollOptions: rollOptions,
-            difficulty: game.user.targets ? game.user.targets?.first().actor.system.attributes[this.system.actionTarget]?.value : null,
+            difficulty: game.user.targets ? game.user.targets?.first().actor?.system.attributes[this.system.actionTarget]?.value : null,
             displayDifficulty: false,
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
