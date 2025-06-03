@@ -5,7 +5,7 @@
   "_stats": {
     "coreVersion": 12,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.0"
   },
   "img": "systems/sfrpg/images/cup/gameplay/envoy.webp",
   "system": {
@@ -61,7 +61,7 @@
       {
         "_id": "30931067-9189-449c-9263-b3f29ae61dfc",
         "name": "Weapon Specialization Envoy",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -75,30 +75,16 @@
       {
         "_id": "b737925a-61cb-45f0-bc43-85020fb6eaca",
         "name": "Weapon Specialization Envoy",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "basicM"
-      },
-      {
-        "_id": "b0ab1674-5349-4001-9e87-a20b1cdf46b1",
-        "name": "Weapon Specialization Envoy",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
       }
     ],
     "properties": {},

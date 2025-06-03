@@ -1,3 +1,66 @@
+# 0.27.2
+
+The final v12 release is here! This version contains a multitude of fixes and updates. The next version will be for v13 exclusively, so any future bugfixes or updates will require an update to the next system version, 0.28.0 or later.
+
+## Core System Improvements
+
+- Add optional DC parameters to checks by @ilya-vasiuk
+- HUGE update to the roll generation code to simplify it by @levirak
+- Move methods related to modifiers to the Modifier class, make updates and deletions easier by @LebombJames
+- The system build pipeline has been completely rewritten to use the modern Vite instead of the obsolete gulp package by @LebombJames
+- German localization updates by @pixelmonsta
+- Add spell school display to chat cards by @Theleruby
+- Improved roll simplification on chat cards by @Theleruby
+- A new automated release system has been implemented that will result in easier releases and fewer errors by @ian612
+
+## Bug Fixes
+
+- Fix item capacity calculation errors due to undefined return values by @danimrath
+- Fix incorrect usage deduction and destroy on use settings by @Theleruby
+- Fix unicode apostrophe and TM symbols changing to mangled characters on systems without utf-8 filename support by @Theleruby
+- Always mark Unarmed Strke as proficient when added to new characters by @Theleruby
+- Fix scaling cantrip formulas being broken by @Theleruby
+- Add weapon-category-attacks and weapon-category-damage to item modifiers template by @Theleruby
+- Fixes for how weapon specialization is calculated by @Theleruby
+- Fix starship roll options by @danimrath
+- Fix Vite config minification bugs by @danimrath
+- Fix item stacks (like ammo) not merging correctly by @ian612
+
+## Data Entry
+
+Along with a host of fixes to items and aliens in the compendiums, a big effort has been put forth to update all the system's weapons and grenades to use modern attributes. In addition, more Enhanced data (Themes, Archetypes, and Equipment) has been entered. Big thanks to @ilya-vasiuk, @joharr79, @rmorgens, and @Theleruby for these major contributions!
+
+### New Data
+
+- Starfinder Enhanced Equipment by @rmorgens
+- Starfinder Enhanced Archetypes by @ilya-vasiuk
+- Starfinder Enhanced Themes by @ilya-vasiuk
+- Starfinder Enhanced Spells by @joharr79
+
+### Corrections and Updates
+
+- Fixes to Cherav, Dampen Spell, Nanite Surge, Puncture Veil, Ferrofluid Ooze, and iconic character full body images by @ian612
+- Field ration item changed to consumable type by @Theleruby
+- Fix Junk Camouflage price by @Theleruby
+- Rubbish cannon fixes by @Theleruby
+- Junk Drone and Spy Drone battery fixes by @Theleruby
+- Fix laser pistol icons by @Theleruby
+- Fix Prismatic Nimbus DC formula by @Theleruby
+- Add hybrid property to Eoxian Wrackstaff by @Theleruby
+- Remove darkwater grenade and portable altar duplicate items by @Theleruby
+- Fix swift kick tooltip error by @Theleruby
+- Remove range increment from disposable blades by @Theleruby
+- Fix typos in descriptions for several items and English localization by @Theleruby
+- Change Shadow Pistol, Umbral to have a naming scheme consistent with other items by @Theleruby
+- Bulk fixes to almost ALL weapons for ammunition type, capacity, and usage by @Theleruby
+- Bulk fixes to grenade type weapons so they work correctly by @Theleruby
+- Fix all items with mangled apostrophes due to old build process errors by @Theleruby
+- Mark unarmed strike as not equipment by @Theleruby
+- Trick attack formula changed to a lookupRange by @Theleruby
+- Fix Versatile Specialization bonus type and operative damage by @Theleruby
+- Typos corrected on Psychopomps, Defrex Hardiness, and Apocalypse Insight by @ilya-vasiuk
+- Added damage to Days' Weariness spell by @ilya-vasiuk
+
 # 0.27.1
 This update primarily adds some new data (including more Starfinder Enhanced material) and addresses some bugs that popped up in 0.27.0 and before. Some small system improvements have also been made, primarily to the backend.
 
