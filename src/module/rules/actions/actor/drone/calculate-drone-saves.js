@@ -1,15 +1,11 @@
 import { SFRPG } from "../../../../config.js";
 
 export default function(engine) {
-    engine.closures.add("calculateDroneSaves", (fact, context) => {
+    engine.closures.add("calculateDroneSaves", (fact) => {
         const data = fact.data;
 
         // We only care about the first chassis
-        let activeChassis = null;
-        for (const chassis of fact.chassis) {
-            activeChassis = chassis;
-            break;
-        }
+        const activeChassis = fact.chassis && fact.chassis.length > 0 ? fact.chassis[0] : null;
 
         data.attributes.fort.bonus = 0;
         data.attributes.reflex.bonus = 0;
@@ -21,9 +17,9 @@ export default function(engine) {
             let droneLevel = chassisData.levels;
             droneLevel = Math.max(1, Math.min(droneLevel, 20));
 
-            data.attributes.fort.bonus = chassisData.fort == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
-            data.attributes.reflex.bonus = chassisData.ref == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
-            data.attributes.will.bonus = chassisData.will == "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
+            data.attributes.fort.bonus = chassisData.fort === "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
+            data.attributes.reflex.bonus = chassisData.ref === "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
+            data.attributes.will.bonus = chassisData.will === "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
         }
 
         data.attributes.fort.bonus += data.abilities.con.mod;

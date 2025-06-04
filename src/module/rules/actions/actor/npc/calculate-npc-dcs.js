@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateNpcDcs", (fact, context) => {
+    engine.closures.add("calculateNpcDcs", (fact) => {
         const data = fact.data;
 
         const abilityDC = data.attributes.abilityDC;

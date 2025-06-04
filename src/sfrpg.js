@@ -646,7 +646,7 @@ Hooks.on("renderChatMessage", (app, html, data) => {
 
 Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
 
-Hooks.on("renderSidebarTab", async (app, html) => {
+Hooks.on("renderSidebarTab", async (app) => {
     if (app.options.id === "settings") {
         const textToAdd = `<a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
         const gameDetails = document.getElementById("game-details");

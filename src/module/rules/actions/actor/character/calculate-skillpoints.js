@@ -30,7 +30,9 @@ export default function(engine) {
             try {
                 const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -114,7 +116,7 @@ export default function(engine) {
         }
 
         let skillpointsUsed = 0;
-        for (const [key, skill] of Object.entries(data.skills)) {
+        for (const [, skill] of Object.entries(data.skills)) {
             if (Number.isNaN(skill.min) || skill.min < 0) {
                 skill.min = 0;
             }

@@ -235,7 +235,7 @@ export class ActorSheetSFRPG extends ActorSheet {
         /* -------------------------------------------- */
         /*  Spellbook
         /* -------------------------------------------- */
-        html.find('.spell-browse').click(ev => getSpellBrowser().render(true)); // Inventory Browser
+        html.find('.spell-browse').click(() => getSpellBrowser().render(true)); // Inventory Browser
 
         /* -------------------------------------------- */
         /*  Inventory
@@ -648,7 +648,7 @@ export class ActorSheetSFRPG extends ActorSheet {
 
     }
 
-    async _onShowImage(event) {
+    async _onShowImage() {
         const actor = this.actor;
         const title = actor.token?.name ?? actor.prototypeToken?.name ?? actor.name;
         new ImagePopout(actor.img, { title, uuid: actor.uuid }).render(true);

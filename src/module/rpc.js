@@ -17,7 +17,7 @@ export class RPC {
             this.initialized = true;
 
             if (this.messageBuffer.length > 0) {
-                for (let messageData of this.messageBuffer) {
+                for (const messageData of this.messageBuffer) {
                     game.socket.emit('system.sfrpg', messageData);
                 }
                 this.messageBuffer = null;
@@ -30,7 +30,7 @@ export class RPC {
     }
 
     _sendMessage(eventName, ...args) {
-        let messageData = {
+        const messageData = {
             recipient: null,
             sender: game.user.id,
             eventName: eventName,
@@ -49,7 +49,7 @@ export class RPC {
     }
 
     _sendMessageTo(recipient, eventName, payload) {
-        let messageData = {
+        const messageData = {
             recipient: recipient,
             sender: game.user.id,
             eventName: eventName,
@@ -107,12 +107,12 @@ export class RPC {
     }
 
     _registerCallback(eventName, target, callback) {
-        let acceptedTargets = ["gm", "player", "local", "any"];
+        const acceptedTargets = ["gm", "player", "local", "any"];
         if (!acceptedTargets.includes(target)) {
             throw `Invalid target specified (${target}) registering event '${eventName}'! Value must be ${acceptedTargets.join(',')}.`;
         }
 
-        let callbackItem = {
+        const callbackItem = {
             callback: callback,
             target: target
         };
@@ -157,10 +157,10 @@ export class RPC {
 
         // console.log(`> Handling it.`);
         let wasHandled = false;
-        let handlers = this.callbacks[data.eventName];
+        const handlers = this.callbacks[data.eventName];
         if (handlers) {
             const filteredCallbacks = [];
-            for (let callback of handlers) {
+            for (const callback of handlers) {
                 if ((callback.target === "gm" && game.user.isGM)
                     || (callback.target === "player" && !game.user.isGM)
                     || (callback.target === "local" && data.recipient === game.user.id)

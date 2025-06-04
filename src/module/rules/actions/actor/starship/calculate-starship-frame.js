@@ -1,8 +1,7 @@
 
 export default function(engine) {
-    engine.closures.add( "calculateStarshipFrame", (fact, context) => {
+    engine.closures.add( "calculateStarshipFrame", (fact) => {
         const data = fact.data;
-        const modifiers = fact.modifiers;
         const frames = fact.frames;
 
         const maneuverabilityMap = {

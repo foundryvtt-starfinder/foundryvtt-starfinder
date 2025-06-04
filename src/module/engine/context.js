@@ -14,7 +14,7 @@ export class Context {
         this._currentRuleFlowActivated = !!currentRuleFlowActivated;
     }
 
-    initiateFlow(ruleFlow) {
+    initiateFlow() {
         this._currentRuleFlowActivated = false;
     }
 

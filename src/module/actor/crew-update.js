@@ -19,7 +19,7 @@ Hooks.on('afterClosureProcessed', (closure, fact) => {
     }
 });
 
-Hooks.on('deleteActor', async (entity, options, userId) => {
+Hooks.on('deleteActor', async (entity) => {
     if (entity.type === "character" || entity.type === "npc" || entity.type === "npc2" || entity.type === "drone") {
         /** Iterate through crewed actors to see if they need to remove a deleted character or NPC from their crew */
         for (const actor of game.actors.contents) {
@@ -31,7 +31,9 @@ Hooks.on('deleteActor', async (entity, options, userId) => {
                         if (actor.sheet?.rendered) {
                             actor.sheet?.render(false);
                         }
-                    } catch {}
+                    } catch (e) {
+                        console.log(e);
+                    }
                 }
             }
         }

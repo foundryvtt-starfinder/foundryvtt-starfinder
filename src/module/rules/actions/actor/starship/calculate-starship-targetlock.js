@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateStarshipTargetLock", (fact, context) => {
+    engine.closures.add("calculateStarshipTargetLock", (fact) => {
         const data = fact.data;
         const actor = fact.actor;
 

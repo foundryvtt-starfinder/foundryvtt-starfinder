@@ -57,10 +57,8 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
     /**
      * Organize and classify items for hazard sheets.
      * Hazards don't need items, but this function is required because base.js calls it.
-     *
-     * @param {Object} data Data for the sheet
      */
-    _prepareItems(data) {
+    _prepareItems() {
 
     }
 

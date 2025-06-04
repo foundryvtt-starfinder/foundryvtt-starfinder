@@ -51,7 +51,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
     }
 
     _isStatusEffect(name) {
-        return CONFIG.SFRPG.statusEffects.find(effect => effect.id === name) != undefined;
+        return CONFIG.SFRPG.statusEffects.find(effect => effect.id === name) !== undefined;
     }
 
     /**

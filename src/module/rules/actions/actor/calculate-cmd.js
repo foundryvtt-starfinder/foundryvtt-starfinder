@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateCMD", (fact, context) => {
+    engine.closures.add("calculateCMD", (fact) => {
         const cmd = fact.data.attributes.cmd;
         const kac = fact.data.attributes.kac;
 

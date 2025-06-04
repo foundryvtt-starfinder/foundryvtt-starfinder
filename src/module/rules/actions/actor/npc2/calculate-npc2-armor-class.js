@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateNPC2ArmorClass", (fact, context) => {
+    engine.closures.add("calculateNPC2ArmorClass", (fact) => {
         const data = fact.data;
 
         const eac = data.attributes.eac;

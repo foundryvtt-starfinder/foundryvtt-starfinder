@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateClasses", (fact, context) => {
+    engine.closures.add("calculateClasses", (fact) => {
         const data = fact.data;
         const classes = fact.classes;
 

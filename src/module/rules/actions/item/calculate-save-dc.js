@@ -2,7 +2,7 @@ import { DiceSFRPG } from "../../../dice.js";
 import RollContext from "../../../rolls/rollcontext.js";
 
 export default function(engine) {
-    engine.closures.add("calculateSaveDC", (fact, context) => {
+    engine.closures.add("calculateSaveDC", (fact) => {
         const item = fact.item;
         const itemData = item;
         const data = itemData.system;

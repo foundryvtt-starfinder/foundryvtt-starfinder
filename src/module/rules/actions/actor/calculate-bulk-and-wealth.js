@@ -201,7 +201,7 @@ function computeWealthForActor(actor, inventoryWealth) {
 }
 
 export default function(engine) {
-    engine.closures.add("calculateBulkAndWealth", (fact, context) => {
+    engine.closures.add("calculateBulkAndWealth", (fact) => {
         const data = fact.data;
         const actor = fact.actor;
         const actorData = actor.system;

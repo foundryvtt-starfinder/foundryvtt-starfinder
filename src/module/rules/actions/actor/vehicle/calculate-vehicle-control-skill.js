@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateVehicleControlSkill", (fact, context) => {
+    engine.closures.add("calculateVehicleControlSkill", (fact) => {
         const data = fact.data;
 
         // Ensures that all vehicles have hangar bays

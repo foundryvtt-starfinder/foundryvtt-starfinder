@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateStarshipShields", (fact, context) => {
+    engine.closures.add("calculateStarshipShields", (fact) => {
         const data = fact.data;
 
         const shieldItems = fact.items.filter(x => x.type === "starshipShield");

@@ -17,7 +17,7 @@ export class DroneRepairDialog extends Dialog {
     activateListeners(html) {
         super.activateListeners(html);
 
-        let improvedRepairFeatCheckbox = html.find('#improvedRepairFeatCheckbox');
+        const improvedRepairFeatCheckbox = html.find('#improvedRepairFeatCheckbox');
         improvedRepairFeatCheckbox.disabled = this.data.improvedRepairFeatCheckbox;
         improvedRepairFeatCheckbox.click(this._improvedRepairFeat.bind(this));
     }
