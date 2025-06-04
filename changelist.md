@@ -12,6 +12,7 @@ The final v12 release is here! This version contains a multitude of fixes and up
 - Add spell school display to chat cards by @Theleruby
 - Improved roll simplification on chat cards by @Theleruby
 - A new automated release system has been implemented that will result in easier releases and fewer errors by @ian612
+- Upgraded library dependencies and performed code sanitization to enhance security and maintainability by @ilya-vasiuk
 
 ## Bug Fixes
 

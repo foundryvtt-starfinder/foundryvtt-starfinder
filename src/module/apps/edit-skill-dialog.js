@@ -30,7 +30,7 @@ export class AddEditSkillDialog extends Dialog {
      * @returns {Promise}
      */
     static async create(skillId, skill, isEdit = true, isNpc = false, isOwner = false) {
-        let hasSubName = typeof skill.subname !== "undefined" || !isEdit;
+        const hasSubName = typeof skill.subname !== "undefined" || !isEdit;
         const html = await renderTemplate("systems/sfrpg/templates/apps/add-edit-skill.hbs", {
             skill: skill,
             hasSubName,
