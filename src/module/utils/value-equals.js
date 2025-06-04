@@ -100,7 +100,7 @@ export function valueEquals(a, b, enforcePropertiesOrder, cyclic) {
                         : a === a      // a is 0 or -O
                             ? 1 / a === 1 / b    // 1/0 !== 1/-0 because Infinity !== -Infinity
                             : b !== b;        // NaN, the only Number not equal to itself!
-                // [object Number]
+                    // [object Number]
 
                 case "[object RegExp]":
                     return a.source === b.source
@@ -108,11 +108,11 @@ export function valueEquals(a, b, enforcePropertiesOrder, cyclic) {
                         && a.ignoreCase === b.ignoreCase
                         && a.multiline === b.multiline
                         && a.lastIndex === b.lastIndex;
-                // [object RegExp]
+                    // [object RegExp]
 
                 case "[object Function]":
                     return false; // functions should be strictly equal because of closure context
-                // [object Function]
+                    // [object Function]
 
                 case "[object Array]":
                     if (cyclic && (x = referenceEquals(a, b)) !== null) return x; // intentionally duplicated bellow for [object Object]
@@ -127,7 +127,7 @@ export function valueEquals(a, b, enforcePropertiesOrder, cyclic) {
                     }
 
                     return true;
-                // [object Array]
+                    // [object Array]
 
                 case "[object Object]":
                     if (cyclic && (x = referenceEquals(a, b)) !== null) return x; // intentionally duplicated from above for [object Array]
