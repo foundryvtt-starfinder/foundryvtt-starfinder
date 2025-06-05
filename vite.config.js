@@ -49,6 +49,7 @@ const config = Vite.defineConfig(async ({ command }) => {
             sourcemap: true,
             brotliSize: true,
             minify: false,
+            cssMinify: "esbuild",
             lib: {
                 name: "sfrpg",
                 entry: path.resolve(__dirname, "index.js"),
