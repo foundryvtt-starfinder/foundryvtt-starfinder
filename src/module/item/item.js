@@ -1480,6 +1480,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
             },
+            // TODO-Ian: Modify this hook call to use the type of data we want to have
             onClose: (roll, formula, finalFormula, isCritical) => {
                 if (roll) {
                     Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});

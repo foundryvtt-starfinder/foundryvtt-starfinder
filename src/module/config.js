@@ -2149,6 +2149,20 @@ SFRPG.containableTypes = {
     "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
 };
 
+SFRPG.itemsWithActionTypes = [
+    "weapon",
+    "equipment",
+    "consumable",
+    "spell",
+    "feat",
+    "technological",
+    "hybrid",
+    "magic",
+    "upgrade",
+    "augmentation",
+    "mod"
+];
+
 SFRPG.combatTypes = [
     "normal",
     "starship",
