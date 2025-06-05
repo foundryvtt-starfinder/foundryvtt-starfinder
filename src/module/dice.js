@@ -247,9 +247,7 @@ export class DiceSFRPG {
             const itemContext = rollContext.allContexts['item'];
             const htmlData = [{ name: "rollNotes", value: itemContext?.system?.rollNotes }];
 
-            let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
-            let errorToThrow = null;
-            if (useCustomCard && chatMessage) {
+            if (chatMessage) {
                 // Push the roll to the ChatBox
                 const customData = {
                     title: flavor,
@@ -263,42 +261,11 @@ export class DiceSFRPG {
                     rollDices: finalFormula.rollDices
                 };
 
-                try {
-                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
-                } catch (error) {
-                    useCustomCard = false;
-                    errorToThrow = error;
-                }
-            }
-
-            if (!useCustomCard && chatMessage) {
-                const messageData = {
-                    flavor,
-                    speaker,
-                    rolls: [roll],
-                    sound: CONFIG.sounds.dice,
-                    flags: { rollOptions }
-                };
-
-                messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
-                if (rollOptions?.actionTarget) {
-                    messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}));
-                }
-
-                if (difficulty) {
-                    messageData.flavor = `<span style="color:${roll.total >= difficulty ? 'green' : 'red'}"><h2>${roll.total >= difficulty ? 'Success' : 'Failure'}</h2></span>${messageData.flavor}${displayDifficulty ? ` (DC ${difficulty})` : ''}`;
-                }
-
-                // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
-                ChatMessage.create(messageData, { rollMode: rollInfo.mode });
+                SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
             }
 
             if (onClose) {
                 onClose(roll, formula, finalFormula);
-            }
-
-            if (errorToThrow) {
-                throw errorToThrow;
             }
         }
     }
@@ -482,9 +449,7 @@ export class DiceSFRPG {
                 // Do something?
                 const damageTypeString = await this._damageParts(tags, htmlDataFields, itemContext, parts, part);
 
-                let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
-                let errorToThrow = null;
-                if (useCustomCard && chatMessage) {
+                if (chatMessage) {
                     // Push the roll to the ChatBox
                     const customData = {
                         title: flavorText,
@@ -502,41 +467,7 @@ export class DiceSFRPG {
                         customData.specialMaterials = itemContext.entity.system.specialMaterials;
                     }
 
-                    try {
-                        useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
-                    } catch (error) {
-                        useCustomCard = false;
-                        errorToThrow = error;
-                    }
-                }
-
-                if (!useCustomCard && chatMessage) {
-                    const rollContent = await roll.render({ htmlData: htmlDataFields });
-
-                    const messageData = {
-                        flavor: flavorText,
-                        speaker,
-                        content: rollContent,
-                        rolls: [roll],
-                        sound: CONFIG.sounds.dice
-                    };
-
-                    // Insert the damage type string if possible.
-                    if (damageTypeString?.length > 0) {
-                        messageData.content = DiceSFRPG.appendTextToRoll(rollContent, damageTypeString);
-                        messageData.flags = {
-                            damage: {
-                                amount: roll.total,
-                                types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
-                            }
-                        };
-
-                        if (itemContext && itemContext.entity.system.specialMaterials) {
-                            messageData.flags.specialMaterials = itemContext.entity.system.specialMaterials;
-                        }
-                    }
-
-                    ChatMessage.create(messageData, { rollMode: rollInfo.mode });
+                    SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
                 }
 
                 // TODO-Ian: This is just temporary to stop errors
@@ -544,10 +475,6 @@ export class DiceSFRPG {
 
                 if (onClose) {
                     onClose(roll, formula, finalFormula, isCritical);
-                }
-
-                if (errorToThrow) {
-                    throw errorToThrow;
                 }
             }
         }

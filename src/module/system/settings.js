@@ -50,15 +50,6 @@ export const registerSystemSettings = function() {
         type: Number
     });
 
-    game.settings.register("sfrpg", "useCustomChatCards", {
-        name: "SFRPG.Settings.UseCustomChatCard.Name",
-        hint: "SFRPG.Settings.UseCustomChatCard.Hint",
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean
-    });
-
     game.settings.register("sfrpg", "autoAddUnarmedStrike", {
         name: "SFRPG.Settings.AutoAddUnarmedStrike.Name",
         hint: "SFRPG.Settings.AutoAddUnarmedStrike.Hint",

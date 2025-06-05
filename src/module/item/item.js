@@ -962,7 +962,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         itemData.hasCapacity = this.hasCapacity();
 
         rollData.item = itemData;
-        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
         // Warn the user if there is no ammo left
         const usage = itemData.usage?.value || 0;
@@ -995,7 +994,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts: parts,
             actorContextKey: "owner",
             rollContext: rollContext,
-            title: title,
+            title: game.i18n.format("SFRPG.Rolls.AttackRoll"),
             flavor: await TextEditor.enrichHTML(this.system?.chatFlavor, {
                 async: true,
                 rollData: this.actor.getRollData() ?? {},
@@ -1119,7 +1118,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         } else { // If not an ECM weapon and not an NPC, use BAB/Piloting + Dex
             parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
         }
-        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
         // If max capacity is 0, assume the item doesn't have limited fire property
         if (this.hasCapacity() && this.getCurrentCapacity() <= 0 && this.getMaxCapacity() > 0) {
@@ -1172,7 +1170,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             event: options.event,
             parts: parts,
             rollContext: rollContext,
-            title: title,
+            title: game.i18n.format("SFRPG.Rolls.AttackRoll"),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: 20,
             chatMessage: options.chatMessage,
@@ -1208,8 +1206,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // TODO: Take vehicle's negative attack modifiers
         const parts = [];
 
-        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
-
         /** Build the roll context */
         const rollContext = new RollContext();
         rollContext.addContext("ship", this.actor);
@@ -1221,7 +1217,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             event: options.event,
             parts: parts,
             rollContext: rollContext,
-            title: title,
+            title: game.i18n.format("SFRPG.Rolls.AttackRoll"),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: 20,
             chatMessage: options.chatMessage,
@@ -1282,13 +1278,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             part.isDamageSection = true;
         }
 
-        let title = '';
-        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
-            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
-        } else {
-            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
-        }
-
         /** Build the roll context */
         const rollContext = new RollContext();
         rollContext.addContext("vehicle", this.actor);
@@ -1300,7 +1289,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             event,
             parts,
             rollContext,
-            title,
+            title: game.i18n.localize("SFRPG.Rolls.DamageRoll"),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
@@ -1329,13 +1318,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             part.isDamageSection = true;
         }
 
-        let title = '';
-        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
-            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
-        } else {
-            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
-        }
-
         /** Build the roll context */
         const rollContext = new RollContext();
         rollContext.addContext("ship", this.actor);
@@ -1350,7 +1332,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts: parts,
             criticalData: {preventDoubling: true},
             rollContext: rollContext,
-            title: title,
+            title: game.i18n.localize("SFRPG.Rolls.DamageRoll"),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
@@ -1434,13 +1416,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             mod: actorData.abilities[abl].mod
         });
 
-        let title = '';
-        if (isHealing) {
-            title = game.i18n.localize("SFRPG.Rolls.HealingRoll");
-        } else {
-            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
-        }
-
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData, ownerData: rollData});
 
         /** Create additional modifiers. */
@@ -1467,7 +1442,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             parts: parts,
             criticalData: itemData.critical,
             rollContext: rollContext,
-            title: title,
+            title: isHealing ? game.i18n.localize("SFRPG.Rolls.HealingRoll") : game.i18n.localize("SFRPG.Rolls.DamageRoll"),
             flavor: await TextEditor.enrichHTML(options?.flavorOverride || itemData.chatFlavor, {
                 async: true,
                 rollData: this.actor.getRollData() ?? {},
