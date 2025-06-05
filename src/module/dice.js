@@ -402,6 +402,7 @@ export class DiceSFRPG {
             if (onClose) {
                 onClose(null, null, null, false);
             }
+            return false;
         }
         // If the cancel button is not clicked, evaluate the damage roll and generate tags and html data for the chat card
         else {
@@ -477,9 +478,8 @@ export class DiceSFRPG {
                     onClose(roll, formula, finalFormula, isCritical);
                 }
             }
+            return true;
         }
-
-        return rollInfo.button !== 'cancel';
     }
 
     static async _prepareDamageDialog(event, parts, rollContext, title, dialogOptions) {
