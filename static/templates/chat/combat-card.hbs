@@ -5,13 +5,13 @@
     </header>
 
     <div class="card-content">
-        <h2 {{#if body.headerColor}}style="background-color:{{body.headerColor}}"{{/if}}>{{body.header}}</h2>
-        
+        <h2 class="card-label" {{#if body.headerColor}}style="background-color:{{body.headerColor}}"{{/if}}>{{body.header}}</h2>
+
         {{#if body.message}}
             <h3 class="noborder">{{body.message.title}}</h3>
             {{body.message.body}}
         {{/if}}
-        
+
         {{#if body.turn}}
             <h3 class="noborder">{{body.turn.combatantName}}'s Turn</h3>
             {{body.turn.combatantName}} may act now.

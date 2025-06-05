@@ -20,9 +20,9 @@ import RollContext from "../../rolls/rollcontext.js";
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
  *
- * @type {ActorSheet}
+ * @extends {foundry.appv1.sheets.ActorSheet}
  */
-export class ActorSheetSFRPG extends ActorSheet {
+export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     constructor(...args) {
         super(...args);
 
@@ -644,14 +644,14 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         const types = Object.keys(game.model.Item).filter(k => supportedTypes.includes(k));
 
-        ItemSFRPG.createDialog({}, {types, parent: this.actor});
+        getDocumentClass("Item").createDialog({}, {}, {types, parent: this.actor});
 
     }
 
     async _onShowImage(event) {
         const actor = this.actor;
         const title = actor.token?.name ?? actor.prototypeToken?.name ?? actor.name;
-        new ImagePopout(actor.img, { title, uuid: actor.uuid }).render(true);
+        new foundry.applications.apps.ImagePopout({src: actor.img, window: { title }, uuid: actor.uuid }).render(true);
     }
 
     /**

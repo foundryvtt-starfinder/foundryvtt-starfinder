@@ -10,7 +10,8 @@ import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
-export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
+/** @extends {foundry.documents.Item} */
+export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
     constructor(data, context = {}) {
         // Set module art if available. This applies art to items viewed or created from compendiums.
@@ -444,16 +445,16 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Basic chat message data
         const chatData = {
             author: game.user.id,
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             content: html,
             flags: {
-                level: this.system.level,
                 core: {
                     canPopout: true
                 },
                 sfrpg: {
                     item: this.uuid,
-                    actor: this.actor.uuid
+                    actor: this.actor.uuid,
+                    level: this.system.level
                 }
             },
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
@@ -1753,9 +1754,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         let item = chatCardActor.items.get(card.dataset.itemId);
 
         // Adjust item to level, if required
-        if (typeof (message.flags.level) !== 'undefined' && message.flags.level !== item.system.level) {
-            const newItemData = item.toObject;
-            newItemData.system.level = message.flags.level;
+        if (Object.keys(message.flags?.sfrpg ?? {}).length !== 0 && message.flags?.sfrpg?.level !== item.system.level) {
+            const newItemData = item.toObject();
+            newItemData.system.level = message.flags.sfrpg.level;
 
             item = new ItemSFRPG(newItemData, {parent: item.parent});
 
@@ -1912,13 +1913,12 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         await this.update({["system.modifiers"]: modifiers});
     }
 
-    static async _onScalingCantripsSettingChanges() {
+    static async _onScalingCantripsSettingChanges(setting) {
         const d3scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d(ternary(gte(@details.cl.value,7),4,3))+ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0)";
         const d6scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0))";
         const npcd3scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d((ternary(gte(@details.cr,7),4,3)))+(ternary(gte(@details.cr,3),floor(@details.cr/2),0))";
         const npcd6scaling = "(lookupRange(@details.cr,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cr,3),floor(@details.cr/2),0))";
 
-        const setting = game.settings.get("sfrpg", "scalingCantrips");
         let count = 0;
         let actorCount = 0;
 
