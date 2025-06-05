@@ -20,9 +20,9 @@ import RollContext from "../../rolls/rollcontext.js";
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
  *
- * @type {ActorSheet}
+ * @extends {foundry.appv1.sheets.ActorSheet}
  */
-export class ActorSheetSFRPG extends ActorSheet {
+export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     constructor(...args) {
         super(...args);
 
@@ -464,7 +464,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             // Remove situational modifiers
             appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null, {actor: actor});
+            let modifiers = stackModifiers.process(appropriateMods, null, {actor: actor, item: item});
 
             modifiers = Object.values(modifiers)
                 .flat()
@@ -497,7 +497,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             // Remove situational modifiers
             appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null, {actor: item.actor});
+            let modifiers = stackModifiers.process(appropriateMods, null, {actor: item.actor, item: item});
 
             modifiers = Object.values(modifiers)
                 .flat()
@@ -683,14 +683,14 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         const types = Object.keys(game.model.Item).filter(k => supportedTypes.includes(k));
 
-        ItemSFRPG.createDialog({}, {types, parent: this.actor});
+        getDocumentClass("Item").createDialog({}, {}, {types, parent: this.actor});
 
     }
 
     async _onShowImage(event) {
         const actor = this.actor;
         const title = actor.token?.name ?? actor.prototypeToken?.name ?? actor.name;
-        new ImagePopout(actor.img, { title, uuid: actor.uuid }).render(true);
+        new foundry.applications.apps.ImagePopout({src: actor.img, window: { title }, uuid: actor.uuid }).render(true);
     }
 
     /**
@@ -839,7 +839,7 @@ export class ActorSheetSFRPG extends ActorSheet {
      * Handle attempting to recharge an item usage by rolling a recharge check
      * @param {Event} event The originating click event
      */
-    _ontItemRecharge(event) {
+    _onItemRecharge(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);

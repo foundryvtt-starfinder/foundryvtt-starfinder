@@ -19,7 +19,6 @@ if (path.resolve(modulePath) === path.resolve(process.argv[1])) {
     });
 }
 
-const limitToPack = null;
 async function unpack({packName, filePath, outputDirectory, partOfCook = false}) {
     console.log(`> Starting unpack of ${packName} into ${outputDirectory}`);
     fs.mkdir(`${outputDirectory}`, { recursive: true }, (err) => {
@@ -44,7 +43,8 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
             parts.unshift(
                 sanitize(folder.name)
                     .replace(/[\s]/g, "_")
-                    .replace(/[,;]/g, "")
+                    .replace(/[\x91\x92\u2018\u2019]/g, "'")
+                    .replace(/[,;\u2122\u2026]/g, "")
                     .toLowerCase()
             );
             if (folder.folder) {
@@ -71,7 +71,8 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
         const jsonOutput = JSONstringifyOrder(cleanItem, 2, "item");
         const filename = sanitize(item.name)
             .replace(/[\s]/g, "_")
-            .replace(/[,;]/g, "")
+            .replace(/[\x91\x92\u2018\u2019]/g, "'")
+            .replace(/[,;\u2122\u2026]/g, "")
             .toLowerCase();
 
         const targetFile = `${outputDirectory}/${filename}.json`;
@@ -83,6 +84,9 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
 }
 
 export async function unpackPacks(partOfCook = false) {
+    // For now, there is no limitToPack functionality, but the bones of it have been left in
+    // and it could be re-added in the future
+    const limitToPack = null;
     const sourceDir = partOfCook ? "src/packs" : 'dist/packs';
     console.log(chalk.blueBright(`Unpacking ${partOfCook ? "" : "and sanitizing "}all packs from ${sourceDir}`));
 

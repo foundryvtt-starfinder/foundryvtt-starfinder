@@ -40,7 +40,7 @@
                     {{localize "SFRPG.Damage.Types.DamageGroup" group=i}}
                 {{/if}}
             {{/if}}
-            </h3>
+        </h3>
 
         <div class="damage-type-label">
             {{#each this as |part j|}}
@@ -63,9 +63,9 @@
                         </label>
                     </p>
                 {{/if}}
-        {{/each}}
+            {{/each}}
+        </div>
     {{/each}}
-    </div>
 </div>
 
 
@@ -84,11 +84,11 @@
 
         {{#each availableModifiers as |modifier id|}}
         <li class="modifier flexrow toggle-modifier" data-modifier-index="{{id}}" data-modifier-type="{{modifier.type}}" data-modifier-value="{{modifier.max}}" {{#if modifier.notes}}data-tooltip="<b>{{modifier.name}}</b><br/>{{modifier.notes}}"{{/if}}>
-            <a class="modifier-enabled" title="{{modifier.name}}">{{#if modifier.enabled}}<i class="far fa-check-square">{{else}}<i class="far fa-square"></i>{{/if}}</i></a>
+            <a class="modifier-enabled" title="{{modifier.name}}">{{#if modifier.enabled}}<i class="far fa-check-square"></i>{{else}}<i class="far fa-square"></i>{{/if}}</a>
             <h4 class="modifier-name">{{modifier.name}}</h4>
-            <span class="modifier-modifier">{{modifier.modifier}}
+            <span class="modifier-modifier">{{modifier.simplifiedFormula}}
             {{#if modifier.originalFormulaTooltip}}
-                <i class="fas fa-info-circle" data-tooltip="{{localize "SFRPG.Rolls.Dialog.SimplifiedFormulaTooltip" formula=modifier.originalFormula}}"></i>
+                <i class="fas fa-info-circle" data-tooltip="{{localize "SFRPG.Rolls.Dialog.SimplifiedFormulaTooltip" formula=modifier.modifier}}"></i>
             {{/if}}
             </span>
             {{#if modifier.localizedType}}

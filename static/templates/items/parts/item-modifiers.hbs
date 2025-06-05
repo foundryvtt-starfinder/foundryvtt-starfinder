@@ -60,10 +60,14 @@
                         {{sfrpg "weaponTypes" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "weapon-property-attacks")}}
                         {{sfrpg "weaponProperties" modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "weapon-category-attacks")}}
+                        {{sfrpg "weaponCategories" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "weapon-damage")}}
                         {{sfrpg "weaponTypes" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "weapon-property-damage")}}
                         {{sfrpg "weaponProperties" modifier.valueAffected}}
+                    {{else if (eq modifier.effectType "weapon-category-damage")}}
+                        {{sfrpg "weaponCategories" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "specific-speed")}}
                         {{sfrpg "speeds" modifier.valueAffected}}
                     {{else if (eq modifier.effectType "actor-resource")}}

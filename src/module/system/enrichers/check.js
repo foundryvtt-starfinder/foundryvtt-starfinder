@@ -117,6 +117,7 @@ export default class CheckEnricher extends BaseEnricher {
         const a = super.createElement();
 
         if (this.args.dc) a.dataset.dc = parseInt(this.args.dc);
+        if (this.args.displayDC) a.dataset.displayDC = this.args.displayDC === 'true';
         const iconSlug = (this.checkType === "ability") ? CheckNameHelper.longFormNameAbilities(this.args.type) : CheckNameHelper.longFormName(this.args.type);
 
         a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${a.innerHTML}`;
@@ -133,11 +134,16 @@ export default class CheckEnricher extends BaseEnricher {
 
         const actor = _token?.actor ?? game.user?.character;
         if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
+        const options = {
+            event,
+            dc: data.dc,
+            displayDC: data.displayDC
+        };
         const id = CheckNameHelper.shortFormName(data.type);
 
-        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, { event });
-        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, { event });
-        else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, { event });
+        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, options);
+        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, options);
+        else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, options);
 
     }
 

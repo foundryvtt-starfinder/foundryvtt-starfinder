@@ -41,7 +41,7 @@ async function packageBuild() {
         zip.directory('dist/', manifest.file.id);
 
         // Copy the system.json file to the package directory
-        fs.copyFile('src/system.json', 'package/system.json');
+        fs.copyFile('static/system.json', 'package/system.json');
 
         await zip.finalize();
     } catch (err) {

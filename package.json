@@ -9,10 +9,11 @@
     "build": "npx vite build",
     "build:watch": "npx vite serve",
     "copyLocalization": "node build/copy-localization.js",
-    "cook": "node build/cook.js && npx vite build",
+    "cook": "node build/cook.js",
     "clean": "node build/clean.js",
     "unpack": "node build/unpack.js",
-    "link": "node ./build/link.js"
+    "link": "node ./build/link.js",
+    "setupIntellisense": "node build/setup-intellisense.js"
   },
   "repository": {
     "type": "git",
@@ -34,6 +35,7 @@
     "archiver": "^4.0.2",
     "chalk": "^4.1.0",
     "classic-level": "^1.3.0",
+    "esbuild": "^0.25.4",
     "eslint": "^8.28.0",
     "eslint-plugin-json": "^3.1.0",
     "fs-extra": "^9.0.1",

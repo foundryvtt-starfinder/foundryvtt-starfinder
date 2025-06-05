@@ -40,7 +40,7 @@ if (path.resolve(modulePath) === path.resolve(process.argv[1])) {
     process.exit(0);
 }
 
-async function cook() {
+export async function cook() {
     console.log(chalk.blueBright(`Cooking db files`));
 
     for (let i = 3; i < process.argv.length; i++) {
@@ -61,7 +61,7 @@ async function cook() {
 
     for (const directory of directories) {
         const itemSourceDir = `${sourceDir}/${directory}`;
-        const outputDir = `src/packs/${directory}`;
+        const outputDir = `dist/packs/${directory}`;
 
         const loadDir = async (directory) => {
             if (!limitToPack || directory === limitToPack) {
@@ -90,7 +90,7 @@ async function cook() {
 
     for (const directory of directories) {
         const itemSourceDir = `${sourceDir}/${directory}`;
-        const outputDir = `src/packs/${directory}`;
+        const outputDir = `dist/packs/${directory}`;
 
         const parsedFiles = [];
 
@@ -766,4 +766,3 @@ function consistencyCheck(allItems, compendiumMap) {
         }
     }
 }
-
