@@ -206,16 +206,21 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         if (data.hasOwnProperty("actionType")) {
             // Damage
             const damage = data.damage || {};
-            const itemParts = damage.parts;
-            if (itemParts.length > 0) {
+            const itemDamageParts = damage.parts;
+            if (itemDamageParts.length > 0) {
                 labels.damage = damage.parts
                     .map(d => d[0])
                     .join(" + ")
                     .replace(/\+ -/g, "- ");
 
+                // Mark all damage sections as such
+                for (const part of itemDamageParts) {
+                    part.isDamageSection = true;
+                }
+
                 // There must always be one primary damage group or section.
                 // If the primary damage group is set, mark all of the members of that group as primary.
-                const allGroups = itemParts.reduce((arr, part) => {
+                const allGroups = itemDamageParts.reduce((arr, part) => {
                     if (!!part.group || part.group === 0) arr.push(part.group);
                     return arr;
                 }, []);
@@ -224,18 +229,18 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
                     if (!(allGroups.includes(data.damage.primaryGroup)))
                         data.damage.primaryGroup = allGroups.sort()[0];
 
-                    for (const part of itemParts) {
+                    for (const part of itemDamageParts) {
                         if (part.group === data.damage.primaryGroup) part.isPrimarySection = true;
                         else part.isPrimarySection = false;
                     }
 
                 // If the primary group is blank, set the 1st damage section, and any parts in the same group, as primary.
-                } else if (!(itemParts.some(part => part.isPrimarySection))) {
-                    itemParts[0].isPrimarySection = true;
-                    const primaryGroup = itemParts[0].group ?? null;
+                } else if (!(itemDamageParts.some(part => part.isPrimarySection))) {
+                    itemDamageParts[0].isPrimarySection = true;
+                    const primaryGroup = itemDamageParts[0].group ?? null;
 
                     if (primaryGroup !== null) {
-                        for (const part of itemParts) {
+                        for (const part of itemDamageParts) {
                             if (part.group === primaryGroup) part.isPrimarySection = true;
                             else part.isPrimarySection = false;
                         }
@@ -1274,9 +1279,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         const parts = foundry.utils.deepClone(itemData.damage.parts);
-        for (const part of parts) {
-            part.isDamageSection = true;
-        }
 
         /** Build the roll context */
         const rollContext = new RollContext();
@@ -1314,9 +1316,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         }
 
         const parts = foundry.utils.deepClone(itemData.damage.parts);
-        for (const part of parts) {
-            part.isDamageSection = true;
-        }
 
         /** Build the roll context */
         const rollContext = new RollContext();
@@ -1362,9 +1361,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Define Roll parts
         /** @type {DamageParts[]} */
         const parts = foundry.utils.deepClone(itemData.damage.parts);
-        for (const part of parts) {
-            part.isDamageSection = true;
-        }
 
         let modifiers = this.getAppropriateDamageModifiers(isWeapon);
 
