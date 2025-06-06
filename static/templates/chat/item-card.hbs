@@ -13,7 +13,6 @@
     </div>
 
     <div class="card-buttons flexrow">
-        {{log this}}
         {{#if hasAttack}}<button type="button" class="chat-button-attack flex1" data-action="attack"><i class="fas fa-gun"></i> {{ localize "SFRPG.Attack" }}</button>{{/if}}
         {{#if primaryDamageIsHealing}}<button type="button" class="chat-button-healing flex1" data-action="damage" data-tooltip="{{localize "SFRPG.Healing.Healing"}}"><i class="fas fa-square-plus"></i> {{localize "SFRPG.Healing.Healing"}}</button>
         {{else if hasDamage}}<button type="button" class="chat-button-damage flex1" data-action="damage" data-tooltip="{{localize "SFRPG.Damage.Damage"}}"><i class="fas fa-droplet"></i> {{localize "SFRPG.Damage.Damage"}}</button>{{/if}}

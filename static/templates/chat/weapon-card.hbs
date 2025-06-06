@@ -6,7 +6,7 @@
 
     <div class="card-content">{{{system.description.value}}}</div>
 
-    <p class="card-buttons">
+    <p class="card-buttons flexrow">
         {{#if hasAttack}}<button type="button" class="chat-button-attack flex1" data-action="attack"><i class="fas fa-gun"></i> {{ localize "SFRPG.Attack" }}</button>{{/if}}
         {{#if system.damage.value}}<button type="button" class="chat-button-damage" data-action="weaponDamage" data-tooltip="{{localize "SFRPG.Damage.Damage"}}"><i class="fas fa-droplet"></i> {{localize "SFRPG.Damage.Damage"}}</button>{{/if}}
         {{#if system.damage2.value}}<button type="button" class="chat-button-damage" data-action="weaponDamage2" data-tooltip="{{localize "SFRPG.Damage.AltDamage"}}">{{localize "SFRPG.Damage.AltDamage"}}</button>{{/if}}
