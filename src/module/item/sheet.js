@@ -16,9 +16,9 @@ const itemSizeArmorClassModifier = {
 
 /**
  * Override and extend the core ItemSheet implementation to handle SFRPG specific item types
- * @type {ItemSheet}
+ * @extends {foundry.appv1.sheets.ItemSheet}
  */
-export class ItemSheetSFRPG extends ItemSheet {
+export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     constructor(...args) {
         super(...args);
 

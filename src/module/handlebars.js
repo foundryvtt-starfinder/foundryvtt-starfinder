@@ -40,7 +40,7 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/sfrpg/templates/items/parts/effect-turn-events.hbs"
     ];
 
-    return loadTemplates(templatePaths);
+    return foundry.applications.handlebars.loadTemplates(templatePaths);
 };
 
 export function setupHandlebars() {

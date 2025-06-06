@@ -1,284 +1,284 @@
 {
-  "id": "sfrpg",
-  "title": "Starfinder",
-  "description": "A game system for running Starfinder in the Foundry VTT environment.",
-  "version": "0.27.3",
-  "authors": [
-    {
-      "name": "The Starfinder System Developers"
-    }
-  ],
-  "compatibility": {
-    "minimum": 12,
-    "verified": "12.331",
-    "maximum": 12
-  },
-  "url": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder",
-  "manifest": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/latest/download/system.json",
-  "download": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/download/0.27.3/sfrpg-0.27.3.zip",
-  "flags": {
-    "sfrpg": {
-      "schema": 0.009
+    "id": "sfrpg",
+    "title": "Starfinder",
+    "description": "A game system for running Starfinder in the Foundry VTT environment.",
+    "version": "0.28.0",
+    "authors": [
+        {
+            "name": "The Starfinder System Developers"
+        }
+    ],
+    "compatibility": {
+        "minimum": 13,
+        "verified": "13.334",
+        "maximum": 13
     },
-    "hotReload": {
-      "extensions": [
-        "css",
-        "hbs",
-        "json"
-      ],
-      "paths": [
-        "templates",
-        "sfrpg.css",
-        "lang"
-      ]
-    }
-  },
-  "socket": true,
-  "initiative": "1d20 + @attributes.init.value",
-  "grid": {
-    "distance": 5,
-    "units": "ft",
-    "diagonals": 4
-  },
-  "primaryTokenAttribute": "attributes.hp",
-  "secondaryTokenAttribute": "attributes.sp",
-  "media": [
-    {
-      "type": "cover",
-      "url": "https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/src/images/starfinder_cover.webp",
-      "caption": "Starfinder"
+    "url": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder",
+    "manifest": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/latest/download/system.json",
+    "download": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/download/0.28.0/sfrpg-0.28.0.zip",
+    "flags": {
+        "sfrpg": {
+            "schema": 0.009
+        },
+        "hotReload": {
+            "extensions": [
+                "css",
+                "hbs",
+                "json"
+            ],
+            "paths": [
+                "templates",
+                "sfrpg.css",
+                "lang"
+            ]
+        }
     },
-    {
-      "type": "icon",
-      "url": "https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/src/images/starfinder_icon.webp",
-      "caption": "Starfinder"
+    "socket": true,
+    "initiative": "1d20 + @attributes.init.value",
+    "grid": {
+        "distance": 5,
+        "units": "ft",
+        "diagonals": 4
     },
-    {
-      "type": "setup",
-      "url": "https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/src/images/starfinder_icon.webp",
-      "name": "Starfinder"
-    }
-  ],
-  "esmodules": [
-    "sfrpg.js"
-  ],
-  "styles": [
-    "sfrpg.css"
-  ],
-  "packs": [
-    {
-      "name": "archetypes",
-      "label": "Archetypes",
-      "system": "sfrpg",
-      "path": "./packs/archetypes",
-      "type": "Item"
-    },
-    {
-      "label": "Archetype Features",
-      "type": "Item",
-      "name": "archetype-features",
-      "path": "./packs/archetype-features",
-      "system": "sfrpg"
-    },
-    {
-      "name": "characters",
-      "label": "Characters",
-      "system": "sfrpg",
-      "path": "./packs/characters",
-      "type": "Actor"
-    },
-    {
-      "name": "equipment",
-      "label": "Equipment",
-      "system": "sfrpg",
-      "path": "./packs/equipment",
-      "type": "Item"
-    },
-    {
-      "name": "effects",
-      "label": "Effects",
-      "system": "sfrpg",
-      "path": "./packs/effects",
-      "type": "Item"
-    },
-    {
-      "name": "feats",
-      "label": "Feats",
-      "system": "sfrpg",
-      "path": "./packs/feats",
-      "type": "Item"
-    },
-    {
-      "name": "spells",
-      "label": "Spells",
-      "system": "sfrpg",
-      "path": "./packs/spells",
-      "type": "Item"
-    },
-    {
-      "name": "races",
-      "label": "Species",
-      "system": "sfrpg",
-      "path": "./packs/races",
-      "type": "Item"
-    },
-    {
-      "label": "Classes",
-      "type": "Item",
-      "name": "classes",
-      "path": "./packs/classes",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Themes",
-      "type": "Item",
-      "name": "themes",
-      "path": "./packs/themes",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Theme Features",
-      "type": "Item",
-      "name": "theme-features",
-      "path": "./packs/theme-features",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Vehicles",
-      "type": "Actor",
-      "name": "vehicles",
-      "path": "./packs/vehicles",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Starship Components",
-      "type": "Item",
-      "name": "starship-components",
-      "path": "./packs/starship-components",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Starship Actions",
-      "type": "Item",
-      "name": "starship-actions",
-      "path": "./packs/starship-actions",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Setting",
-      "type": "JournalEntry",
-      "name": "setting",
-      "path": "./packs/setting",
-      "system": "sfrpg"
-    },
-    {
-      "label": "SFRPG Rules",
-      "type": "JournalEntry",
-      "name": "rules",
-      "path": "./packs/rules",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Tables",
-      "type": "RollTable",
-      "name": "tables",
-      "path": "./packs/tables",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Conditions",
-      "type": "Item",
-      "name": "conditions",
-      "path": "./packs/conditions",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Class Features",
-      "type": "Item",
-      "name": "class-features",
-      "path": "./packs/class-features",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Species Features",
-      "type": "Item",
-      "name": "racial-features",
-      "path": "./packs/racial-features",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Universal Creature Rules",
-      "type": "Item",
-      "name": "universal-creature-rules",
-      "path": "./packs/universal-creature-rules",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Alien Archives",
-      "type": "Actor",
-      "name": "alien-archives",
-      "path": "./packs/alien-archives",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Hazards",
-      "type": "Actor",
-      "name": "hazards",
-      "path": "./packs/hazards",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Starships",
-      "type": "Actor",
-      "name": "starships",
-      "path": "./packs/starships",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Creature Companions",
-      "type": "Actor",
-      "name": "creature-companions",
-      "path": "./packs/creature-companions",
-      "system": "sfrpg"
-    },
-    {
-      "label": "Macros",
-      "type": "Macro",
-      "name": "macros",
-      "path": "./packs/macros",
-      "system": "sfrpg"
-    }
-  ],
-  "languages": [
-    {
-      "lang": "en",
-      "name": "English",
-      "path": "lang/en.json"
-    },
-    {
-      "lang": "ja",
-      "name": "日本語",
-      "path": "lang/ja.json"
-    },
-    {
-      "lang": "fr",
-      "name": "Français",
-      "path": "lang/fr.json"
-    },
-    {
-      "lang": "de",
-      "name": "Deutsch",
-      "path": "lang/de.json"
-    },
-    {
-      "lang": "it",
-      "name": "Italian",
-      "path": "lang/it.json"
-    },
-    {
-      "lang": "pt-BR",
-      "name": "Português (Brasil)",
-      "path": "lang/pt-BR.json"
-    }
-  ]
+    "primaryTokenAttribute": "attributes.hp",
+    "secondaryTokenAttribute": "attributes.sp",
+    "media": [
+        {
+            "type": "cover",
+            "url": "https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/static/images/starfinder_cover.webp",
+            "caption": "Starfinder"
+        },
+        {
+            "type": "icon",
+            "url": "https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/static/images/starfinder_icon.webp",
+            "caption": "Starfinder"
+        },
+        {
+            "type": "setup",
+            "url": "https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/static/images/starfinder_icon.webp",
+            "name": "Starfinder"
+        }
+    ],
+    "esmodules": [
+        "sfrpg.js"
+    ],
+    "styles": [
+        "sfrpg.css"
+    ],
+    "packs": [
+        {
+            "name": "archetypes",
+            "label": "Archetypes",
+            "system": "sfrpg",
+            "path": "./packs/archetypes",
+            "type": "Item"
+        },
+        {
+            "label": "Archetype Features",
+            "type": "Item",
+            "name": "archetype-features",
+            "path": "./packs/archetype-features",
+            "system": "sfrpg"
+        },
+        {
+            "name": "characters",
+            "label": "Characters",
+            "system": "sfrpg",
+            "path": "./packs/characters",
+            "type": "Actor"
+        },
+        {
+            "name": "equipment",
+            "label": "Equipment",
+            "system": "sfrpg",
+            "path": "./packs/equipment",
+            "type": "Item"
+        },
+        {
+            "name": "effects",
+            "label": "Effects",
+            "system": "sfrpg",
+            "path": "./packs/effects",
+            "type": "Item"
+        },
+        {
+            "name": "feats",
+            "label": "Feats",
+            "system": "sfrpg",
+            "path": "./packs/feats",
+            "type": "Item"
+        },
+        {
+            "name": "spells",
+            "label": "Spells",
+            "system": "sfrpg",
+            "path": "./packs/spells",
+            "type": "Item"
+        },
+        {
+            "name": "races",
+            "label": "Species",
+            "system": "sfrpg",
+            "path": "./packs/races",
+            "type": "Item"
+        },
+        {
+            "label": "Classes",
+            "type": "Item",
+            "name": "classes",
+            "path": "./packs/classes",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Themes",
+            "type": "Item",
+            "name": "themes",
+            "path": "./packs/themes",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Theme Features",
+            "type": "Item",
+            "name": "theme-features",
+            "path": "./packs/theme-features",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Vehicles",
+            "type": "Actor",
+            "name": "vehicles",
+            "path": "./packs/vehicles",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Starship Components",
+            "type": "Item",
+            "name": "starship-components",
+            "path": "./packs/starship-components",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Starship Actions",
+            "type": "Item",
+            "name": "starship-actions",
+            "path": "./packs/starship-actions",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Setting",
+            "type": "JournalEntry",
+            "name": "setting",
+            "path": "./packs/setting",
+            "system": "sfrpg"
+        },
+        {
+            "label": "SFRPG Rules",
+            "type": "JournalEntry",
+            "name": "rules",
+            "path": "./packs/rules",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Tables",
+            "type": "RollTable",
+            "name": "tables",
+            "path": "./packs/tables",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Conditions",
+            "type": "Item",
+            "name": "conditions",
+            "path": "./packs/conditions",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Class Features",
+            "type": "Item",
+            "name": "class-features",
+            "path": "./packs/class-features",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Species Features",
+            "type": "Item",
+            "name": "racial-features",
+            "path": "./packs/racial-features",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Universal Creature Rules",
+            "type": "Item",
+            "name": "universal-creature-rules",
+            "path": "./packs/universal-creature-rules",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Alien Archives",
+            "type": "Actor",
+            "name": "alien-archives",
+            "path": "./packs/alien-archives",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Hazards",
+            "type": "Actor",
+            "name": "hazards",
+            "path": "./packs/hazards",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Starships",
+            "type": "Actor",
+            "name": "starships",
+            "path": "./packs/starships",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Creature Companions",
+            "type": "Actor",
+            "name": "creature-companions",
+            "path": "./packs/creature-companions",
+            "system": "sfrpg"
+        },
+        {
+            "label": "Macros",
+            "type": "Macro",
+            "name": "macros",
+            "path": "./packs/macros",
+            "system": "sfrpg"
+        }
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        },
+        {
+            "lang": "ja",
+            "name": "日本語",
+            "path": "lang/ja.json"
+        },
+        {
+            "lang": "fr",
+            "name": "Français",
+            "path": "lang/fr.json"
+        },
+        {
+            "lang": "de",
+            "name": "Deutsch",
+            "path": "lang/de.json"
+        },
+        {
+            "lang": "it",
+            "name": "Italian",
+            "path": "lang/it.json"
+        },
+        {
+            "lang": "pt-BR",
+            "name": "Português (Brasil)",
+            "path": "lang/pt-BR.json"
+        }
+    ]
 }

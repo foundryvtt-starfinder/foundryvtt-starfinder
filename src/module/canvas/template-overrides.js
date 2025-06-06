@@ -1,6 +1,7 @@
+const { Ray } = foundry.canvas.geometry;
 
 // Applies patches to core functions to integrate Starfinder specific measurements.
-export class TemplateLayerSFRPG extends TemplateLayer {
+export class TemplateLayerSFRPG extends foundry.canvas.layers.TemplateLayer {
     _onDragLeftStart(event) {
 
         if ( !event.shiftKey ) {
@@ -62,7 +63,7 @@ export class TemplateLayerSFRPG extends TemplateLayer {
     }
 }
 
-export class MeasuredTemplateSFRPG extends MeasuredTemplate {
+export class MeasuredTemplateSFRPG extends foundry.canvas.placeables.MeasuredTemplate {
     /**
    * Get an array of points which define top-left grid spaces to highlight for square or hexagonal grids.
    * @returns {Point[]}
@@ -121,8 +122,8 @@ export class MeasuredTemplateSFRPG extends MeasuredTemplate {
         } */
 
         // Get number of rows and columns
-        const nr = Math.ceil((this.document.distance * 1.5) / gridSizeUnits / (gridSizePx / grid.h)),
-            nc = Math.ceil((this.document.distance * 1.5) / gridSizeUnits / (gridSizePx / grid.w));
+        const nr = Math.ceil((this.document.distance * 1.5) / gridSizeUnits / (gridSizePx / grid.sizeY)),
+            nc = Math.ceil((this.document.distance * 1.5) / gridSizeUnits / (gridSizePx / grid.sizeX));
 
         // Get the center of the grid position occupied by the template
         const { x, y } = this.document;

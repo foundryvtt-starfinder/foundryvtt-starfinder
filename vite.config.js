@@ -13,7 +13,7 @@ const config = Vite.defineConfig(async ({ command }) => {
         const filesToCopy = ["changelist.md", "README.md", "OGL", "LICENSE"];
 
         await fs.ensureDir("dist/packs"); // Ensure `dist` and `dist/packs` exist
-        promises.push(filesToCopy.map(file => fs.promises.copyFile(file, `dist/${file}`)));
+        promises.push(...filesToCopy.map(file => fs.promises.copyFile(file, `dist/${file}`)));
 
         if (fs.readdirSync("dist/packs").length === 0) promises.push(cook()); // If we created `dist/packs` just now, run cook
 

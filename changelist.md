@@ -1,4 +1,12 @@
-# 0.27.2
+# 0.28.0
+
+Following closely on the heels of our final v12 release, Foundry v13 support is here! This version of sf1e is compatible with Foundry v13 and while we do not fully take advantage of all the v13 features yet, we will be rolling out new features as we complete them. As there are a number of breaking changes between foundry v12 and v13, this version is unfortunately not compatible with Foundry v12 installs. Please remember to back up your worlds before launching them with this new version, just in case.
+
+## Core System Improvements
+
+- Foundry v13 support has been added by @danimrath, @ian612, and @LebombJames
+
+# 0.27.3
 
 The final v12 release is here! This version contains a multitude of fixes and updates. The next version will be for v13 exclusively, so any future bugfixes or updates will require an update to the next system version, 0.28.0 or later.
 

@@ -1,3 +1,6 @@
+const { VisionMode } = foundry.canvas.perception;
+const { ColorAdjustmentsSamplerShader } = foundry.canvas.rendering.shaders;
+
 export default function setupVision() {
     setupVisionModes();
     setDefaultSceneSettings();
@@ -107,7 +110,7 @@ function setDefaultSceneSettings() {
 }
 
 function sceneConfigTooltips() {
-    Hooks.on("renderSceneConfig", (app, [html]) => {
+    Hooks.on("renderSceneConfig", (app, html) => {
         const darknessSlider = html.querySelector("range-picker[name='environment.globalLight.darkness.max']");
         const globalIllumination = html.querySelector("input[name='environment.globalLight.enabled']");
 
@@ -127,4 +130,3 @@ function setupConditions() {
     CONFIG.specialStatusEffects.BLIND = "blinded";
     CONFIG.specialStatusEffects.INVISIBLE = "invisible";
 }
-
