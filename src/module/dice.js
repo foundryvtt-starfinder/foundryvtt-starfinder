@@ -397,78 +397,78 @@ export class DiceSFRPG {
             }
             return false;
         }
+
         // If the cancel button is not clicked, evaluate the damage roll and generate tags and html data for the chat card
-        else {
-            const isCritical = (rollInfo.button === "critical");
-            for (const rollInstance of rollInfo.rolls) {
-                const finalFormula = rollInstance.formula;
-                const part = rollInstance.node;
-                const tags = [];
-                const htmlDataFields = [{ name: "is-damage", value: "true" }];
+        const isCritical = (rollInfo.button === "critical");
 
-                // Get the item context
-                const itemContext = rollContext.allContexts['item'];
+        for (const rollInstance of rollInfo.rolls) {
+            const finalFormula = rollInstance.formula;
+            const part = rollInstance.node;
+            const tags = [];
+            const htmlDataFields = [{ name: "is-damage", value: "true" }];
 
-                // Get item weapon property tags and special material tags, if they exist
-                if (itemContext) {
-                    this._prepareWeaponPropertyTags(tags, htmlDataFields, itemContext);
-                    this._prepareSpecialMaterialTags(tags, htmlDataFields, itemContext);
-                }
+            // Get the item context
+            const itemContext = rollContext.allContexts['item'];
 
-                // Generate flavor text and critical information for chat cards
-                const flavorText = await this._prepareFlavorText(
-                    tags,
-                    htmlDataFields,
-                    isCritical,
-                    criticalData,
-                    finalFormula,
-                    part,
-                    `${title || ""}${(flavor ? " - " + flavor : "")}`
-                );
-
-                // Format the roll formula correctly
-                finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
-                    .trim();
-                finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
-                const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
-
-                // Evaluate the roll
-                const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
-                const roll = await rollObject.evaluate();
-
-                // Evaluate less than 1 damage as 1 non-lethal damage (CRB pg. 240)
-                this._minimumDamage(tags, itemContext, roll);
-
-                // Do something?
-                const damageTypeString = await this._damageParts(tags, htmlDataFields, itemContext, parts, part);
-
-                // Push the roll to the chat if we're supposed to
-                if (chatMessage) {
-                    const chatCardData = {
-                        title: flavorText,
-                        rollContext:  rollContext,
-                        speaker: speaker,
-                        rollMode: rollInfo.mode,
-                        breakdown: preparedRollExplanation,
-                        tags: tags,
-                        htmlData: htmlDataFields,
-                        rollType: "damage",
-                        damageTypeString: damageTypeString
-                    };
-
-                    if (itemContext && itemContext.entity.system.specialMaterials) {
-                        chatCardData.specialMaterials = itemContext.entity.system.specialMaterials;
-                    }
-
-                    SFRPGCustomChatMessage.renderStandardRoll(roll, chatCardData);
-                }
-
-                if (onClose) {
-                    onClose(roll, null, finalFormula, isCritical);
-                }
+            // Get item weapon property tags and special material tags, if they exist
+            if (itemContext) {
+                this._prepareWeaponPropertyTags(tags, htmlDataFields, itemContext);
+                this._prepareSpecialMaterialTags(tags, htmlDataFields, itemContext);
             }
-            return true;
+
+            // Generate flavor text and critical information for chat cards
+            const flavorText = await this._prepareFlavorText(
+                tags,
+                htmlDataFields,
+                isCritical,
+                criticalData,
+                finalFormula,
+                part,
+                `${title || ""}${(flavor ? " - " + flavor : "")}`
+            );
+
+            // Format the roll formula correctly
+            finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
+                .trim();
+            finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
+            const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
+
+            // Evaluate the roll
+            const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
+            const roll = await rollObject.evaluate();
+
+            // Evaluate less than 1 damage as 1 non-lethal damage (CRB pg. 240)
+            this._minimumDamage(tags, itemContext, roll);
+
+            // Do something?
+            const damageTypeString = await this._damageParts(tags, htmlDataFields, itemContext, parts, part);
+
+            // Push the roll to the chat if we're supposed to
+            if (chatMessage) {
+                const chatCardData = {
+                    title: flavorText,
+                    rollContext:  rollContext,
+                    speaker: speaker,
+                    rollMode: rollInfo.mode,
+                    breakdown: preparedRollExplanation,
+                    tags: tags,
+                    htmlData: htmlDataFields,
+                    rollType: "damage",
+                    damageTypeString: damageTypeString
+                };
+
+                if (itemContext && itemContext.entity.system.specialMaterials) {
+                    chatCardData.specialMaterials = itemContext.entity.system.specialMaterials;
+                }
+
+                SFRPGCustomChatMessage.renderStandardRoll(roll, chatCardData);
+            }
+
+            if (onClose) {
+                onClose(roll, null, finalFormula, isCritical);
+            }
         }
+        return true;
     }
 
     static async _prepareDamageDialog(event, parts, rollContext, title, dialogOptions) {
