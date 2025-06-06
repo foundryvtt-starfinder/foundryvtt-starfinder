@@ -67,9 +67,9 @@ export default class SFRPGRoll extends Roll {
     }
 
     /** @inheritdoc */
-    static CHAT_TEMPLATE = "systems/sfrpg/templates/dice/roll.hbs";
+    static CHAT_TEMPLATE = "systems/sfrpg/templates/chat/roll.hbs";
     /** @inheritdoc */
-    static TOOLTIP_TEMPLATE = "systems/sfrpg/templates/dice/tooltip.hbs";
+    static TOOLTIP_TEMPLATE = "systems/sfrpg/templates/chat/roll-tooltip.hbs";
 
     static MATH_PROXY = new Proxy(Math, {
         has: () => true, // Include everything
