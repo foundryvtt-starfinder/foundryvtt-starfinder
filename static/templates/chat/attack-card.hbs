@@ -1,13 +1,14 @@
 <div class="chat-card attack-card" data-actor-id="{{actorId}}" data-item-id="{{item.id}}" data-token-id="{{tokenId}}">
     <div class="card-item-details flexrow">
         <div class="card-icons owner">
-            <img {{#if tokenImg}}src="{{tokenImg}}"{{else}}src="icons/svg/invisible.svg"{{/if}} class="actor-icon" data-tooltip="{{tokenName}}"/>
+            <img {{#if tokenImg}} src="{{tokenImg}}" {{else if actor.img}} src="{{tokenImg}}" {{else}} src="icons/svg/invisible.svg" {{/if}} class="actor-icon"
+            {{#if tokenName}} data-tooltip="{{tokenName}}" {{else}} data-tooltip="{{actor.name}}" {{/if}} />
             <img {{#if item.img}}src="{{item.img}}"{{else}}src="icons/svg/cancel.svg"{{/if}} class="item-icon" data-tooltip="{{item.name}}"/>
         </div>
         <div class="card-info flexcol">
             <b class="card-title">{{item.name}}</b>
             <ul class="card-tags">
-                {{#if item.labels.range }}<li>{{localize "SFRPG.Range"}} : {{item.labels.range}}</li>{{/if}}
+                {{#if item.labels.range }}<li>{{item.labels.range}}</li>{{/if}}
                 {{#if hasCapacity }}<li>{{localize "SFRPG.Items.Ammunition.Ammo"}} : {{ammoLeft}}/{{item.system.capacity.max}}</li>{{/if}}
             </ul>
         </div>

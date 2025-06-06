@@ -1,11 +1,21 @@
-<div class="sfrpg chat-card item-card" data-actor-id="{{actor.id}}" data-item-id="{{item.id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if sceneId}}data-scene-id="{{sceneId}}"{{/if}}>
-    <header class="card-header flexrow">
-        <img class="action-img" src="{{item.img}}" title="{{item.name}}" />
-        <div class="flexcol">
-            <h3 class="action-name noborder">{{localize action}}</h3>
-            <h3 class="item-name noborder">{{item.name}}</h3>
+<div class="sfrpg chat-card item-action-card" data-actor-id="{{actor.id}}" data-item-id="{{item.id}}" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if sceneId}}data-scene-id="{{sceneId}}"{{/if}}>
+    <div class="card-item-details flexrow">
+        <div class="card-icons owner">
+            <img {{#if tokenImg}} src="{{tokenImg}}" {{else if actor.img}} src="{{tokenImg}}" {{else}} src="icons/svg/invisible.svg" {{/if}} class="actor-icon"
+            {{#if tokenName}} data-tooltip="{{tokenName}}" {{else}} data-tooltip="{{actor.name}}" {{/if}} />
+            <img {{#if item.img}}src="{{item.img}}"{{else}}src="icons/svg/cancel.svg"{{/if}} class="item-icon" data-tooltip="{{item.name}}"/>
         </div>
-    </header>
+        <div class="card-info flexcol">
+            <b class="card-title">{{item.name}}</b>
+            <ul class="card-tags">
+                {{#if item.labels.range }}<li>{{item.labels.range}}</li>{{/if}}
+                {{#if hasCapacity }}<li>{{localize "SFRPG.Items.Ammunition.Ammo"}} : {{ammoLeft}}/{{item.system.capacity.max}}</li>{{/if}}
+            </ul>
+        </div>
+        <div class="card-icons target">
+            <img src="icons/svg/invisible.svg" class="actor-icon" data-tooltip="{{localize "SFRPG.Target.NoTargetSelected"}}"/>
+        </div>
+    </div>
 
     <div class="card-content">
         {{#if item.system.description.short}}
