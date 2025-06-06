@@ -387,13 +387,6 @@ export class DiceSFRPG {
             return false;
         }
 
-        // Assign an id number to each part for tracking
-        let ct = 0;
-        for (const part of parts) {
-            part.id = ct;
-            ct += 1;
-        }
-
         // Build the roll formula and display the dialog box to select damage sections and roll
         const rollInfo = await this._prepareDamageDialog(event, parts, rollContext, title, dialogOptions);
 
@@ -407,11 +400,10 @@ export class DiceSFRPG {
         // If the cancel button is not clicked, evaluate the damage roll and generate tags and html data for the chat card
         else {
             const isCritical = (rollInfo.button === "critical");
-            for (const { formula: finalFormula, node: part } of rollInfo.rolls) {
-                /** @type {Tag[]} */
+            for (const rollInstance of rollInfo.rolls) {
+                const finalFormula = rollInstance.formula;
+                const part = rollInstance.node;
                 const tags = [];
-
-                /** @type {HtmlData[]} */
                 const htmlDataFields = [{ name: "is-damage", value: "true" }];
 
                 // Get the item context
@@ -450,9 +442,9 @@ export class DiceSFRPG {
                 // Do something?
                 const damageTypeString = await this._damageParts(tags, htmlDataFields, itemContext, parts, part);
 
+                // Push the roll to the chat if we're supposed to
                 if (chatMessage) {
-                    // Push the roll to the ChatBox
-                    const customData = {
+                    const chatCardData = {
                         title: flavorText,
                         rollContext:  rollContext,
                         speaker: speaker,
@@ -465,10 +457,10 @@ export class DiceSFRPG {
                     };
 
                     if (itemContext && itemContext.entity.system.specialMaterials) {
-                        customData.specialMaterials = itemContext.entity.system.specialMaterials;
+                        chatCardData.specialMaterials = itemContext.entity.system.specialMaterials;
                     }
 
-                    SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
+                    SFRPGCustomChatMessage.renderStandardRoll(roll, chatCardData);
                 }
 
                 // TODO-Ian: This is just temporary to stop errors
@@ -492,7 +484,10 @@ export class DiceSFRPG {
         // Evaluate all the variables within the formulas to get the final damage roll formula
         const formulaParts = [];
         const damageSections = [];
+        ct = 0;
         for (const part of parts) {
+            part.id = ct;
+            ct += 1;
             if (part instanceof Object) {
                 if (part.isDamageSection) {
                     damageSections.push(part);
