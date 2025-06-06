@@ -463,11 +463,8 @@ export class DiceSFRPG {
                     SFRPGCustomChatMessage.renderStandardRoll(roll, chatCardData);
                 }
 
-                // TODO-Ian: This is just temporary to stop errors
-                const formula = {base: "base", final: "final"};
-
                 if (onClose) {
-                    onClose(roll, formula, finalFormula, isCritical);
+                    onClose(roll, null, finalFormula, isCritical);
                 }
             }
             return true;
@@ -484,27 +481,20 @@ export class DiceSFRPG {
         // Evaluate all the variables within the formulas to get the final damage roll formula
         const formulaParts = [];
         const damageSections = [];
-        ct = 0;
         for (const part of parts) {
-            part.id = ct;
-            ct += 1;
-            if (part instanceof Object) {
-                if (part.isDamageSection) {
-                    damageSections.push(part);
+            if (part.isDamageSection) {
+                damageSections.push(part);
 
-                    const rollInfo = await RollTree.buildRoll(part.formula, rollContext, {
-                        buttons: buttons,
-                        defaultButton: "normal",
-                        skipUI: true
-                    });
-                    part.formula = rollInfo.rolls[0].formula.finalRoll;
-                } else {
-                    const simplifiedFormula = this._simplifyFormula(part.formula || "0", rollContext);
-                    const explanation = part.explanation ? `[${part.explanation}]` : "";
-                    formulaParts.push(`${simplifiedFormula}${explanation}`);
-                }
+                const rollInfo = await RollTree.buildRoll(part.formula, rollContext, {
+                    buttons: buttons,
+                    defaultButton: "normal",
+                    skipUI: true
+                });
+                part.formula = rollInfo.rolls[0].formula.finalRoll;
             } else {
-                formulaParts.push(formula);
+                const simplifiedFormula = this._simplifyFormula(part.formula || "0", rollContext);
+                const explanation = part.explanation ? `[${part.explanation}]` : "";
+                formulaParts.push(`${simplifiedFormula}${explanation}`);
             }
         }
 
