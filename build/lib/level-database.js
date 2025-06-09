@@ -72,7 +72,9 @@ export default class LevelDatabase extends ClassicLevel {
 
         await Promise.all(promises);
 
-        await this.close();
+        await this.compactClassicLevel();
+
+        this.close();
         console.log(chalk.greenBright(`> Finished processing data for ${packName}.`));
     }
 
@@ -135,5 +137,20 @@ export default class LevelDatabase extends ClassicLevel {
             }
         })();
         return { dbKey, embeddedKey };
+    }
+
+    /** Flushes the log of the given database to create compressed binary tables.
+    * @this {ClassicLevel}
+    */
+    async compactClassicLevel() {
+        const forwardIterator = this.keys({ limit: 1, fillCache: false });
+        const firstKey = await forwardIterator.next();
+        forwardIterator.close();
+
+        const backwardIterator = this.keys({ limit: 1, reverse: true, fillCache: false });
+        const lastKey = await backwardIterator.next();
+        backwardIterator.close();
+
+        if (firstKey && lastKey) return this.compactRange(firstKey, lastKey, { keyEncoding: "utf8" });
     }
 }

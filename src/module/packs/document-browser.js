@@ -1,7 +1,9 @@
 /**
  * DocumentBrowserSFRPG forked from ItemBrowserPF2e by Felix Miller aka syl3r86
+ * @import { Collection } from "@common/utils/_module.mjs"
  */
 import { packLoader } from './pack-loader.js';
+const { Collection } = foundry.utils;
 
 export class DocumentBrowserSFRPG extends Application {
     static get defaultOptions() {
@@ -256,7 +258,8 @@ export class DocumentBrowserSFRPG extends Application {
 
     async loadItems() {
         console.log('Starfinder | Compendium Browser | Started loading items');
-        const items = new Map();
+        /** @type {Collection<string, {uuid: string, img: string, name: string, system: object, type: string}>} */
+        const items = new Collection();
         const user = game.user;
         const userPermission = user.isGM ? "GAMEMASTER" : (user.isTrusted ? "TRUSTED" : "PLAYER");
 
@@ -496,10 +499,11 @@ export class DocumentBrowserSFRPG extends Application {
 
     /* -------------------------------------------- */
     getConfigurationProperties() {
-        return {
+        /** @type {const} */
+        return ({
             label: "Compendium Browser",
             settings: "itemBrowser"
-        };
+        });
     }
 
     initializeSettings(defaultAllowedCompendiums = null) {

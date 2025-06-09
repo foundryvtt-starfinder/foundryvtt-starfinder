@@ -1,8 +1,12 @@
 import SFRPGCustomChatMessage from "./chat/chatbox.js";
 import { SFRPG } from "./config.js";
-import RollContext from "./rolls/rollcontext.js";
 import RollTree from "./rolls/rolltree.js";
 import StackModifiers from "./rules/closures/stack-modifiers.js";
+
+/**
+ * @import SFRPGRoll from "./rolls/roll.js";
+ * @import RollContext from "./rolls/rollcontext.js";
+ */
 
 // Type definitions for documentation.
 /**
@@ -79,7 +83,7 @@ import StackModifiers from "./rules/closures/stack-modifiers.js";
  * The results of a Roll
  *
  * @typedef {Object} RollResult
- * @property {Roll}         roll    The data for the roll
+ * @property {SFRPGRoll} roll The data for the roll
  * @property {FinalFormula} formula The finalized formula used in the roll
  */
 
@@ -324,7 +328,7 @@ export class DiceSFRPG {
     * @param {string}             [data.breakdown]   An explanation of the roll modifiers and where they came from.
     * @param {Tag[]}              [data.tags]        Any roll metadata that will be output on the bottom of the chat card.
     * @param {DialogOptions}      data.dialogOptions Modal dialog options
-    * @returns {Promise<RollResult>|Promise} Returns the roll's result or an empty promise.
+    * @returns {Promise<RollResult>|Promise<null>} Returns the roll's result or an empty promise.
     */
     static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, breakdown = "", tags = [], dialogOptions, useRawStrings = false, actorContextKey = "actor" }) {
 
