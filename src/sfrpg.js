@@ -51,7 +51,7 @@ import { RPC } from "./module/rpc.js";
 import registerSystemRules from "./module/rules.js";
 import { registerSystemSettings } from "./module/system/settings.js";
 import TooltipManagerSFRPG from "./module/tooltip.js";
-import { generateUUID } from "./module/utils/utilities.js";
+import { generateUUID, rerenderApps } from "./module/utils/utilities.js";
 
 import BaseEnricher from "./module/system/enrichers/base.js";
 import BrowserEnricher from "./module/system/enrichers/browser.js";
@@ -60,7 +60,6 @@ import IconEnricher from "./module/system/enrichers/icon.js";
 import TemplateEnricher from "./module/system/enrichers/template.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
-import { HotbarSFRPG } from "./module/apps/ui/hotbar.js";
 import AbilityTemplate from "./module/canvas/ability-template.js";
 import setupVision from "./module/canvas/vision.js";
 import { initializeBrowsers } from "./module/packs/browsers.js";
@@ -70,7 +69,6 @@ import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
 import registerCompendiumArt from "./module/system/compendium-art.js";
 import { connectToDocument, rollItemMacro } from "./module/system/item-macros.js";
-import { SFRPGTokenHUD } from "./module/token/token-hud.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
 
 import { extendDragData } from "./module/item/drag-data.js";
@@ -78,7 +76,11 @@ import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js"
 import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
 import { getSpellBrowser } from "./module/packs/spell-browser.js";
 import { getStarshipBrowser } from "./module/packs/starship-browser.js";
+import { SFRPGTokenHUD } from './module/token/token-hud.js';
 import isObject from './module/utils/is-object.js';
+
+const { Actors, Items } = foundry.documents.collections;
+const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 
 let initTime = null;
 
@@ -210,7 +212,7 @@ Hooks.once('init', async function() {
     CONFIG.MeasuredTemplate.objectClass = MeasuredTemplateSFRPG;
     CONFIG.MeasuredTemplate.defaults.angle = 90; // SF uses 90 degree cones
 
-    CONFIG.ui.hotbar = HotbarSFRPG;
+    //   CONFIG.ui.hotbar = HotbarSFRPG;
 
     CONFIG.fontDefinitions["Exo2"] = {
         editor: true,
@@ -244,6 +246,9 @@ Hooks.once('init', async function() {
         wordWrap: false
     });
 
+    console.log("Starfinder | [INIT] Overriding token HUD");
+    CONFIG.Token.hudClass = SFRPGTokenHUD;
+
     console.log("Starfinder | [INIT] Configuring rules engine");
     registerSystemRules(game.sfrpg.engine);
 
@@ -251,31 +256,60 @@ Hooks.once('init', async function() {
     registerSystemSettings();
 
     if (game.settings.get("sfrpg", "sfrpgTheme")) {
-        const setAnvil = () => {
-            const logo = document.querySelector("#logo");
-            logo.loading = "eager";
-            logo.src = "systems/sfrpg/images/starfinder_icon.webp";
-            logo.style.width = "92px";
-            logo.style.height = "92px";
-            logo.style.margin = "0 0 0 9px";
-        };
+        const bod = document.body;
 
-        const dummy = document.createElement("img");
-        dummy.addEventListener("load", setAnvil);
-        dummy.loading = "eager";
-        dummy.src = "systems/sfrpg/images/starfinder_icon.webp";
-
-        const r = document.querySelector(':root');
-        r.style.setProperty("--color-border-highlight-alt", "#0080ff");
-        r.style.setProperty("--color-border-highlight", "#00a0ff");
-        r.style.setProperty("--color-text-hyperlink", "#38b5ff");
-        r.style.setProperty("--color-shadow-primary", "#00a0ff");
-        r.style.setProperty("--color-shadow-highlight", "#00a0ff");
-        r.style.setProperty("--sfrpg-theme-blue", "#235683");
+        // Full set of colors that are available for changing. If left as default, it's commented out
+        bod.style.setProperty("--color-warm-1",    "#00a0ff");
+        bod.style.setProperty("--color-warm-2",    "#0080ff");
+        // bod.style.setProperty("--color-warm-3",    "#5d142b");
+        // bod.style.setProperty("--color-cool-3",    "#584a75");
+        // bod.style.setProperty("--color-cool-4",    "#302831");
+        // bod.style.setProperty("--color-cool-5",    "#0b0a13");
+        // bod.style.setProperty("--color-cool-5-25", "rgba(11, 10, 19, 0.25)");
+        // bod.style.setProperty("--color-cool-5-50", "rgba(11, 10, 19, 0.5)");
+        // bod.style.setProperty("--color-cool-5-75", "rgba(11, 10, 19, 0.75)");
+        // bod.style.setProperty("--color-cool-5-90", "rgba(11, 10, 19, 0.9)");
+        // bod.style.setProperty("--color-light-1",   "#f7f3e8");
+        // bod.style.setProperty("--color-light-2",   "#efe6d8");
+        // bod.style.setProperty("--color-light-3",   "#e7d1b1");
+        // bod.style.setProperty("--color-light-4",   "#d0b8a3");
+        // bod.style.setProperty("--color-light-5",   "#9f8475");
+        // bod.style.setProperty("--color-light-6",   "#816b66");
+        // bod.style.setProperty("--color-dark-1",    "#111");
+        // bod.style.setProperty("--color-dark-2",    "#222");
+        // bod.style.setProperty("--color-dark-3",    "#333");
+        // bod.style.setProperty("--color-dark-4",    "#444");
+        // bod.style.setProperty("--color-dark-5",    "#555");
+        // bod.style.setProperty("--color-dark-6",    "#666");
+        // bod.style.setProperty("--color-level-error",          "#ce0707");
+        // bod.style.setProperty("--color-level-error-bg",       "rgba(105, 0, 8, 0.8)");
+        // bod.style.setProperty("--color-level-error-border",   "#750003");
+        // bod.style.setProperty("--color-level-info",           "#59a1f6");
+        // bod.style.setProperty("--color-level-info-bg",        "rgba(47, 80, 132, 0.8)");
+        // bod.style.setProperty("--color-level-info-border",    "#5c87b9");
+        // bod.style.setProperty("--color-level-success",        "#26b231");
+        // bod.style.setProperty("--color-level-success-bg",     "rgba(26, 107, 34, 0.8)");
+        // bod.style.setProperty("--color-level-success-border", "#1b8f23");
+        // bod.style.setProperty("--color-level-warning",        "#ee9b3a");
+        // bod.style.setProperty("--color-level-warning-bg",     "rgba(214, 150, 0, 0.8)");
+        // bod.style.setProperty("--color-level-warning-border", "#b18404");
+        bod.style.setProperty("--color-scrollbar",            "rgb(240, 100, 0)");
+        // bod.style.setProperty("--color-scrollbar-track",      "transparent");
+        // bod.style.setProperty("--color-scrollbar-border",     "#8d151b");
+        // bod.style.setProperty("--color-text-emphatic",        "var(--color-dark-1)");
+        // bod.style.setProperty("--color-text-primary",         "var(--color-dark-2)");
+        // bod.style.setProperty("--color-text-secondary",       "var(--color-dark-3)");
+        // bod.style.setProperty("--color-text-subtle",          "var(--color-dark-4)");
+        // bod.style.setProperty("--color-text-accent",          "var(--color-warm-1)");
+        // bod.style.setProperty("--color-text-selection",       "var(--color-light-1)");
+        // bod.style.setProperty("--color-text-selection-bg",    "var(--color-dark-6)");
+        // bod.style.setProperty("--color-shadow-dark",          "var(--color-dark-1)");
+        // bod.style.setProperty("--color-shadow-primary",       "var(--color-warm-2)");
+        // bod.style.setProperty("--color-shadow-highlight",     "var(--color-warm-1)");
     }
 
     console.log("Starfinder | [INIT] Overriding tooltips");
-    Object.defineProperty(game, "tooltip", {value: new TooltipManagerSFRPG(), configurable: true, enumerable: true});
+    CONFIG.ux.TooltipManager = TooltipManagerSFRPG;
 
     console.log("Starfinder | [INIT] Registering sheets");
     Actors.unregisterSheet("core", ActorSheet);
@@ -361,15 +395,11 @@ Hooks.once('init', async function() {
         "weaponAccessory": "fas fa-gears"
     };
 
+    console.log("Starfinder | [INIT] Overriding chat message duration");
+    CONFIG.ui.chat.NOTIFY_DURATION = game.settings.get("sfrpg", "chatNotificationDuration") ?? 5000; // Default to foundry's 5 seconds;
+
     console.log("Starfinder | [INIT] Adding math functions");
     SFRPGRoll.registerMathFunctions();
-
-    const rerenderApps = () => {
-        const apps = [...Object.values(ui.windows), ...foundry.applications.instances.values(), ui.sidebar];
-        for (const app of apps) {
-            app.render();
-        }
-    };
 
     // Vite HMR for lang and hbs files
     // FIXME: Lang doesn't correctly appear on sheets, but is in game.i18n?
@@ -394,7 +424,7 @@ Hooks.once('init', async function() {
         import.meta.hot.on("template-update", async ({ path }) => {
             const apply = async () => {
                 delete Handlebars.partials[path];
-                await getTemplate(path);
+                await foundry.applications.handlebars.getTemplate(path);
                 rerenderApps();
             };
             if (game.ready) {
@@ -516,7 +546,7 @@ Hooks.once("i18nInit", () => {
         obj.label = game.i18n.localize(obj.label);
     }
 
-    CONFIG.SFRPG.statusEffects.forEach(e => e.label = game.i18n.localize(e.label));
+    CONFIG.SFRPG.statusEffects.forEach(e => e.name = game.i18n.localize(e.name));
 });
 
 Hooks.once("setup", function() {
@@ -550,9 +580,6 @@ Hooks.once("setup", function() {
 Hooks.once("ready", async () => {
     console.log(`Starfinder | [READY] Preparing system for operation`);
     const readyTime = (new Date()).getTime();
-
-    console.log("Starfinder | [READY] Overriding token HUD");
-    canvas.hud.token = new SFRPGTokenHUD();
 
     console.log("Starfinder | [READY] Initializing compendium browsers");
     initializeBrowsers();
@@ -637,19 +664,25 @@ async function migrateOldContainers() {
     }
 }
 
-Hooks.on("renderChatMessage", (app, html, data) => {
-    DiceSFRPG.highlightCriticalSuccessFailure(app, html, data);
-    DiceSFRPG.addDamageTypes(app, html, data);
+Hooks.on("renderChatMessageHTML", (app, html, data) => {
+    DiceSFRPG.highlightCriticalSuccessFailure(app, $(html), data);
+    DiceSFRPG.addDamageTypes(app, $(html), data);
 
-    if (game.settings.get("sfrpg", "autoCollapseItemCards")) html.find('.card-content').hide();
+    if (game.settings.get("sfrpg", "autoCollapseItemCards")) {
+        const cardContent = html.querySelector('.card-content');
+        if (cardContent) {
+            cardContent.style.display = "none";
+        }
+
+    }
 });
 
-Hooks.on("getChatLogEntryContext", addChatMessageContextOptions);
+Hooks.on("getChatMessageContextOptions", addChatMessageContextOptions);
 
-Hooks.on("renderSidebarTab", async (app, html) => {
+Hooks.on("renderAbstractSidebarTab", async (app, html) => {
     if (app.options.id === "settings") {
         const textToAdd = `<a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
-        const gameDetails = document.getElementById("game-details");
+        const gameDetails = document.getElementById("settings");
         if (gameDetails) {
             const systemSection = gameDetails.getElementsByClassName("system")[0];
             if (systemSection) {
@@ -660,10 +693,12 @@ Hooks.on("renderSidebarTab", async (app, html) => {
 });
 
 // Set this hook up outside of init for the sake of module compatibility.
-Hooks.on("renderPause", () => {
+Hooks.on("renderGamePause", () => {
     if (game.settings.get("sfrpg", "sfrpgTheme")) {
         const paused = document.querySelector("figure#pause");
-        const icon = paused.children[0];
-        icon.src = "systems/sfrpg/images/cup/organizations/starfinder_society.webp";
+        const icon = paused.querySelector("img");
+        if (icon) {
+            icon.src = "systems/sfrpg/images/cup/organizations/starfinder_society.webp";
+        }
     }
 });

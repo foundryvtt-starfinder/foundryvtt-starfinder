@@ -174,10 +174,12 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         };
     }
 
+    /** @type {ActorSFRPG} */
     get actor() {
         return this.parent instanceof ActorSFRPG ? this.parent : this.parent.actor;
     }
 
+    /** @type {ItemSFRPG|null} */
     get item() {
         return this.parent instanceof ItemSFRPG ? this.parent : null;
     }
@@ -186,6 +188,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         return this.actor.isToken ? this.actor.token : this.actor.getActiveTokens(true, true);
     }
 
+    /** @type {Boolean} */
     get hasDamageSection() {
         return this.constructor._hasDamageSection(this);
     }

@@ -87,7 +87,7 @@ export async function unpackPacks(partOfCook = false) {
     // For now, there is no limitToPack functionality, but the bones of it have been left in
     // and it could be re-added in the future
     const limitToPack = null;
-    const sourceDir = partOfCook ? "src/packs" : 'dist/packs';
+    const sourceDir = 'dist/packs';
     console.log(chalk.blueBright(`Unpacking ${partOfCook ? "" : "and sanitizing "}all packs from ${sourceDir}`));
 
     if (!fs.existsSync(sourceDir)) {

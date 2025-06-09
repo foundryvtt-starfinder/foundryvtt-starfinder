@@ -1,8 +1,24 @@
 import FloatingNumberMenu from "../classes/floating-number-menu.js";
 import { SFRPG } from "../config.js";
 import { ItemSFRPG } from "../item/item.js";
+import { rerenderApps } from "../utils/utilities.js";
 
 export const registerSystemSettings = function() {
+    game.settings.register("sfrpg", "chatNotificationDuration", {
+        name: "SFRPG.Settings.ChatNotificationDuration.Name",
+        hint: "SFRPG.Settings.ChatNotificationDuration.Hint",
+        scope: "client",
+        config: true,
+        default: 5000,
+        type: Number,
+        range: {
+            min: 1000,
+            max: 60000,
+            step: 1000
+        },
+        onChange: (value) => CONFIG.ui.chat.NOTIFY_DURATION = value
+    });
+
     game.settings.register("sfrpg", "disableExperienceTracking", {
         name: "SFRPG.Settings.ExperienceTracking.Name",
         hint: "SFRPG.Settings.ExperienceTracking.Hint",
@@ -93,9 +109,7 @@ export const registerSystemSettings = function() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => {
-            ItemSFRPG._onScalingCantripsSettingChanges();
-        }
+        onChange: (value) => ItemSFRPG._onScalingCantripsSettingChanges(value)
     });
 
     game.settings.register("sfrpg", "autoRollCritEffect", {
@@ -205,7 +219,8 @@ export const registerSystemSettings = function() {
         scope: "client",
         config: true,
         default: false,
-        type: Boolean
+        type: Boolean,
+        onChange: () => rerenderApps()
     });
 
     game.settings.register("sfrpg", "warnInvalidRollData", {

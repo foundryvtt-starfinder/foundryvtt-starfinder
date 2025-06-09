@@ -29,10 +29,8 @@ import { } from "./crew-update.js";
  * @property {string}                     operator An operator that determines how damage is split between multiple types.
  */
 
-/**
- * Extend the base :class:`Actor` to implement additional logic specialized for SFRPG
- */
-export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
+/** @extends {foundry.documents.Actor} */
+export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
 
     constructor(data, context) {
         // Set module art if available. This applies art to actors viewed or created from compendiums.
@@ -169,6 +167,16 @@ export class ActorSFRPG extends Mix(Actor).with(ActorConditionsMixin, ActorCrewM
         }
 
         return super.update(data, options);
+    }
+
+    /**
+     * Remove ability to create "NPC V1" from the UI
+     * @inheritdoc
+     */
+    static async createDialog(data, createOptions, dialogOptions) {
+        dialogOptions.types = (dialogOptions?.types ?? this.TYPES).filter(t => t !== "npc");
+
+        return super.createDialog(data, createOptions, dialogOptions);
     }
 
     /**
