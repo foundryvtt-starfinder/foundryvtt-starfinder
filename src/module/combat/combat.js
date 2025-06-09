@@ -753,11 +753,13 @@ export class CombatSFRPG extends foundry.documents.Combat {
             preparedRollExplanationElement.innerHTML = preparedRollExplanation;
 
             // Render the roll, getting the html output and parsing to DOM. Add the roll formula explanation and convert back to HTML text.
+            // const rollContentElement = document.createElement("div");
+            // rollContentElement.innerText = await roll.render();
             const parser = new DOMParser(),
-                rollContent = parser.parseFromString(await roll.render(), "text/html");
-            const tooltipPart = rollContent.getElementsByClassName('tooltip-part')[0];
+                rollContentElement = parser.parseFromString(await roll.render(), "text/html");
+            const tooltipPart = rollContentElement.querySelector(".tooltip-part");
             tooltipPart.prepend(preparedRollExplanationElement);
-            const explainedRollContent = rollContent.getElementsByTagName('body')[0].innerHTML;
+            const explainedRollContent = rollContentElement.querySelector('body').innerHTML;
 
             rollMode = roll.options?.rollMode ?? rollMode;
 
