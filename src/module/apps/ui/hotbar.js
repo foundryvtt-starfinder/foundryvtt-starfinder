@@ -98,25 +98,25 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
     }
 }
 
-Hooks.on("getHotbarEntryContext", (element, li) => {
+function findActorSync(macroId) {
+    let actor = null;
+
+    const flags = game.macros.get(macroId)?.flags?.sfrpg;
+    if (flags) {
+        actor = fromUuidSync(flags.actor)
+            ?? fromUuidSync(flags.itemMacro?.itemUuid)?.actor; // backwards compatibility
+    }
+
+    return actor;
+}
+
+Hooks.on("getHotbarEntryContext", (hotbar, menu) => {
     const viewActor = {
         name: "SFRPG.Macro.ViewActor",
         icon: "<i class=\"fas fa-user\"></i>",
-        condition: (li) => {
-            const macro = game.macros.get(li.data("macro-id"));
-            const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
-            if (itemMacroDetails?.itemUuid) {
-                const item = fromUuidSync(itemMacroDetails?.itemUuid);
-                return !!item?.actor;
-            }
-        },
+        condition: (li) => Boolean(findActorSync(li.data("macro-id"))),
         callback: (li) => {
-            const macro = game.macros.get(li.data("macro-id"));
-            const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
-            if (itemMacroDetails?.itemUuid) {
-                const item = fromUuidSync(itemMacroDetails?.itemUuid);
-                item?.actor.sheet.render(true);
-            }
+            findActorSync(li.data("macro-id"))?.sheet.render(true);
         }
     };
 
@@ -140,5 +140,5 @@ Hooks.on("getHotbarEntryContext", (element, li) => {
         }
     };
 
-    li.push(viewActor, viewItem);
+    menu.push(viewActor, viewItem);
 });

@@ -273,6 +273,45 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             li.addEventListener("dragstart", itemUsageHandler, false);
         });
 
+        html.find('li.skill h4.skill-name').each((idx, el) => {
+            el.setAttribute('draggable', true);
+            el.addEventListener("dragstart", event => {
+                event.stopPropagation();
+
+                const skill = event.currentTarget.closest('li.skill').dataset.skill;
+                event.dataTransfer.setData('text/plain', JSON.stringify({
+                    type: 'SkillCheck',
+                    actor: this.actor.uuid,
+                    skill: skill,
+                    subname: this.actor.system.skills[skill]?.subname
+                }));
+            }, false);
+        });
+
+        html.find('li.save h4.save-name').each((idx, el) => {
+            el.setAttribute('draggable', true);
+            el.addEventListener("dragstart", event => {
+                event.stopPropagation();
+                event.dataTransfer.setData('text/plain', JSON.stringify({
+                    type: 'SaveCheck',
+                    actor: this.actor.uuid,
+                    save: event.currentTarget.closest('li.save').dataset.save
+                }));
+            }, false);
+        });
+
+        html.find('li.ability h4.ability-name').each((idx, el) => {
+            el.setAttribute('draggable', true);
+            el.addEventListener("dragstart", event => {
+                event.stopPropagation();
+                event.dataTransfer.setData('text/plain', JSON.stringify({
+                    type: 'AbilityCheck',
+                    actor: this.actor.uuid,
+                    ability: event.currentTarget.closest('li.ability').dataset.ability
+                }));
+            }, false);
+        });
+
         // Item Rolling
         html.find('.item .item-image').click(event => this._onItemRoll(event));
 
