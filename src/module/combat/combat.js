@@ -747,10 +747,17 @@ export class CombatSFRPG extends foundry.documents.Combat {
                 flags: {"core.initiativeRoll": true}
             }, messageOptions);
 
+            // Prepare roll formula explanation
             const preparedRollExplanation = DiceSFRPG.formatFormula(roll.flags.sfrpg.finalFormula.formula);
-            const rollContent = await roll.render();
-            const insertIndex = rollContent.indexOf(`</div>\r\n            <section class="tooltip-part">`);
-            const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
+            const preparedRollExplanationElement = document.createElement("div");
+            preparedRollExplanationElement.innerHTML = preparedRollExplanation;
+
+            // Render the roll, getting the html output and parsing to DOM. Add the roll formula explanation and convert back to HTML text.
+            const parser = new DOMParser(),
+                rollContent = parser.parseFromString(await roll.render(), "text/html");
+            const tooltipPart = rollContent.getElementsByClassName('tooltip-part')[0];
+            tooltipPart.prepend(preparedRollExplanationElement);
+            const explainedRollContent = rollContent.getElementsByTagName('body')[0].innerHTML;
 
             rollMode = roll.options?.rollMode ?? rollMode;
 
