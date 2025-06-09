@@ -174,22 +174,44 @@ SFRPG.kineticDamageTypes = {
     "slashing": "SFRPG.Damage.Types.Slashing"
 };
 
+SFRPG.otherDamageTypes = {
+    "force": "SFRPG.Damage.Types.Force",
+    "radiation": "SFRPG.Damage.Types.Radiation"
+};
+
+SFRPG.healingTypes = {
+    "healing": "SFRPG.Healing.Types.HP",
+    "sp": "SFRPG.Healing.Types.SP",
+    "tempHP": "SFRPG.Healing.Types.TempHP"
+};
+
 SFRPG.damageTypeToAcronym = {
     "acid": "A",
     "cold": "C",
     "electricity": "E",
     "fire": "F",
+    "force": "Fo",
+    "radiation": "R",
     "sonic": "So",
     "bludgeoning": "B",
     "piercing": "P",
-    "slashing": "S"
+    "slashing": "S",
+    "healing": "HP",
+    "sp": "SP",
+    "tempHP": "Tmp"
 };
 
 SFRPG.damageTypes = {
     ...SFRPG.energyDamageTypes,
     ...SFRPG.kineticDamageTypes,
-    "radiation": "SFRPG.Damage.Types.Radiation",
-    "nonlethal": "SFRPG.Damage.Types.Nonlethal"
+    ...SFRPG.otherDamageTypes
+};
+
+SFRPG.damageAndHealingTypes = {
+    ...SFRPG.energyDamageTypes,
+    ...SFRPG.kineticDamageTypes,
+    ...SFRPG.otherDamageTypes,
+    ...SFRPG.healingTypes
 };
 
 SFRPG.damageTypeOperators = {
@@ -378,11 +400,6 @@ SFRPG.durationTypes = {
 SFRPG.targetTypes = {};
 
 SFRPG.timePeriods = {};
-
-// Healing types
-SFRPG.healingTypes = {
-    "healing": "SFRPG.HealingTypesHealing"
-};
 
 SFRPG.spellPreparationModes = {
     "always": "SFRPG.SpellPreparationModesAlways",
@@ -675,6 +692,9 @@ SFRPG.specialMaterials = {
 // Damage Reductions
 SFRPG.damageReductionTypes = {
     "": "-",
+    "bludgeoning": "SFRPG.Damage.Types.Bludgeoning",
+    "piercing": "SFRPG.Damage.Types.Piercing",
+    "slashing": "SFRPG.Damage.Types.Slashing",
     ...SFRPG.specialMaterials,
     "custom": "SFRPG.Damage.Types.Custom"
 };
@@ -685,6 +705,8 @@ SFRPG.energyResistanceTypes = {
     "cold": "SFRPG.Damage.Types.Cold",
     "electricity": "SFRPG.Damage.Types.Electricity",
     "fire": "SFRPG.Damage.Types.Fire",
+    "force": "SFRPG.Damage.Types.Force",
+    "radiation": "SFRPG.Damage.Types.Radiation",
     "sonic": "SFRPG.Damage.Types.Sonic",
     "custom": "SFRPG.Damage.Types.Custom"
 };
@@ -2127,6 +2149,20 @@ SFRPG.containableTypes = {
     "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
 };
 
+SFRPG.itemsWithActionTypes = [
+    "weapon",
+    "equipment",
+    "consumable",
+    "spell",
+    "feat",
+    "technological",
+    "hybrid",
+    "magic",
+    "upgrade",
+    "augmentation",
+    "mod"
+];
+
 SFRPG.combatTypes = [
     "normal",
     "starship",
@@ -2354,4 +2390,78 @@ SFRPG.defaultItemIcons = {
     "upgrade": "armor-upgrade.svg",
     "weapon": "bolter-gun.svg",
     "weaponAccessory": "gun-stock.svg"
+};
+
+SFRPG.checkIcons = {
+    "acrobatics":       "fa-person-walking",
+    "athletics":        "fa-dumbbell",
+    "bluff":            "fa-comment",
+    "computers":        "fa-computer",
+    "culture":          "fa-flag",
+    "diplomacy":        "fa-handshake",
+    "disguise":         "fa-mask",
+    "engineering":      "fa-gear",
+    "intimidate":       "fa-face-angry",
+    "life-science":     "fa-dna",
+    "medicine":         "fa-syringe",
+    "mysticism":        "fa-hand-sparkles",
+    "perception":       "fa-magnifying-glass",
+    "profession":       "fa-user-tie",
+    "physical-science": "fa-flask",
+    "piloting":         "fa-plane",
+    "sense-motive":     "fa-person-circle-question",
+    "sleight-of-hand":  "fa-hands",
+    "stealth":          "fa-moon",
+    "survival":         "fa-campground",
+
+    "fortitude":        "fa-shield-heart",
+    "reflex":           "fa-person-running",
+    "will":             "fa-brain",
+
+    "strength":         "fa-weight-hanging",
+    "dexterity":        "fa-feather-pointed",
+    "constitution":     "fa-heart-pulse",
+    "intelligence":     "fa-glasses",
+    "wisdom":           "fa-mountain-sun",
+    "charisma":         "fa-people-arrows",
+
+    "caster-level":     "fa-wand-magic-sparkles"
+};
+
+SFRPG.skillIconsShort = {
+    "acr": "fa-person-walking",
+    "ath": "fa-dumbbell",
+    "blu": "fa-comment",
+    "com": "fa-computer",
+    "cul": "fa-flag",
+    "dip": "fa-handshake",
+    "dis": "fa-mask",
+    "eng": "fa-gear",
+    "int": "fa-face-angry",
+    "lsc": "fa-dna",
+    "med": "fa-syringe",
+    "mys": "fa-hand-sparkles",
+    "per": "fa-magnifying-glass",
+    "pro": "fa-user-tie",
+    "phs": "fa-flask",
+    "pil": "fa-plane",
+    "sen": "fa-person-circle-question",
+    "sle": "fa-hands",
+    "ste": "fa-moon",
+    "sur": "fa-campground"
+},
+
+SFRPG.saveIconsShort = {
+    "fort":   "fa-shield-heart",
+    "reflex": "fa-person-running",
+    "will":   "fa-brain"
+},
+
+SFRPG.abilityIconsShort = {
+    "str": "fa-weight-hanging",
+    "dex": "fa-feather-pointed",
+    "con": "fa-heart-pulse",
+    "int": "fa-glasses",
+    "wis": "fa-mountain-sun",
+    "cha": "fa-people-arrows"
 };
