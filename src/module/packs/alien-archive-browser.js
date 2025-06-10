@@ -32,35 +32,43 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
     async loadItems() {
         console.log('Starfinder | Compendium Browser | Started loading actors');
         const items = new Map();
+        const user = game.user;
+        const userPermission = user.isGM ? "GAMEMASTER" : (user.isTrusted ? "TRUSTED" : "PLAYER");
 
         for await (const {pack, content} of packLoader.loadPacks(this.entityType, this._loadedPacks)) {
-            console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
+            const packPermission = pack.ownership;
+            if (!packPermission.TRUSTED) {
+                packPermission.TRUSTED = packPermission["PLAYER"];
+            }
+            if (["OWNER", "OBSERVER", "LIMITED"].includes(packPermission[userPermission]) || user.isGM) {
+                console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
 
-            for (const item of content) {
+                for (const item of content) {
 
-                const itemData = {
-                    uuid: `Compendium.${pack.collection}.${item._id}`,
-                    img: item.img,
-                    name: item.name,
-                    system: item.system,
-                    type: item.type
-                };
+                    const itemData = {
+                        uuid: `Compendium.${pack.collection}.${item._id}`,
+                        img: item.img,
+                        name: item.name,
+                        system: item.system,
+                        type: item.type
+                    };
 
-                // Used for sorting and displaying
-                itemData.system.cr = itemData.system.details?.cr;
-                itemData.system.hp = itemData.system.attributes?.hp.max;
+                    // Used for sorting and displaying
+                    itemData.system.cr = itemData.system.details?.cr;
+                    itemData.system.hp = itemData.system.attributes?.hp.max;
 
-                // 1/3 and 1/2 CR aliens have special strings used to describe their CR rather than using the float value
-                if (itemData.system.details?.cr == (1 / 3)) {
-                    itemData.system.crDisplay = "1/3";
-                } else if (itemData.system.details?.cr == (1 / 2)) {
-                    itemData.system.crDisplay = "1/2";
-                } else {
-                    itemData.system.crDisplay = itemData.system.details?.cr;
-                }
+                    // 1/3 and 1/2 CR aliens have special strings used to describe their CR rather than using the float value
+                    if (itemData.system.details?.cr === (1 / 3)) {
+                        itemData.system.crDisplay = "1/3";
+                    } else if (itemData.system.details?.cr === (1 / 2)) {
+                        itemData.system.crDisplay = "1/2";
+                    } else {
+                        itemData.system.crDisplay = itemData.system.details?.cr;
+                    }
 
-                if (this.allowedItem(item)) {
-                    items.set(itemData.uuid, itemData);
+                    if (this.allowedItem(item)) {
+                        items.set(itemData.uuid, itemData);
+                    }
                 }
             }
         }
@@ -104,7 +112,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
         if (aVal < bVal) return -1;
         if (aVal > bVal) return 1;
 
-        if (aVal == bVal) {
+        if (aVal === bVal) {
             const aName = $(elementA).find('.item-name a')[0].innerHTML;
             const bName = $(elementB).find('.item-name a')[0].innerHTML;
             if (aName < bName) return -1;
@@ -121,7 +129,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
         if (aVal < bVal) return -1;
         if (aVal > bVal) return 1;
 
-        if (aVal == bVal) {
+        if (aVal === bVal) {
             const aName = $(elementA).find('.item-name a')[0].innerHTML;
             const bName = $(elementB).find('.item-name a')[0].innerHTML;
             if (aName < bName) return -1;

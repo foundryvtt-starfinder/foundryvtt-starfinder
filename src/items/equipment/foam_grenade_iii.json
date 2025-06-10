@@ -2,14 +2,19 @@
   "_id": "Rf9XhVvhecyEkvff",
   "name": "Foam Grenade III",
   "type": "weapon",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.28.0"
+  },
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "",
+    "actionTarget": "ac5",
     "actionType": "rwak",
     "activation": {
       "type": "action",
@@ -19,6 +24,7 @@
     "ammunitionType": "",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "",
       "units": "ft",
       "value": 30
@@ -89,18 +95,20 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>A foam grenade explodes on impact to release a burst of fire-suppressant foam akin to that from a fire extinguisher. This foam ends all active fires and removes the @UUID[Compendium.sfrpg.equipment.YvcTRFW7bwMRFw9o]{Burning} condition and the @UUID[Compendium.sfrpg.rules.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#corrode]{corrode} critical hit effect taken by creatures within the area.</p>"
+      "value": "<p>A foam grenade explodes on impact to release a burst of fire-suppressant foam akin to that from a fire extinguisher. This foam ends all active fires and removes the @UUID[Compendium.sfrpg.equipment.Item.YvcTRFW7bwMRFw9o]{Burning} condition and the @UUID[Compendium.sfrpg.rules.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#corrode]{corrode} critical hit effect taken by creatures within the area.</p>"
     },
     "descriptors": [],
     "duration": {
       "units": "",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 15,
     "modifiers": [],
     "price": 26100,
@@ -241,9 +249,9 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": "",
-      "value": 0
+      "max": 1,
+      "per": "charges",
+      "value": 1
     },
     "weaponCategory": "",
     "weaponType": "grenade"

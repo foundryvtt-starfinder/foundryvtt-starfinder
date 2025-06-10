@@ -2,6 +2,11 @@
   "_id": "UnESOXtPCmLvQ5VR",
   "name": "Weapon Specialization (Ex) (Solarian)",
   "type": "feat",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.28.0"
+  },
   "img": "systems/sfrpg/images/cup/gameplay/solarian.webp",
   "system": {
     "type": "",
@@ -9,6 +14,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -17,6 +23,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -30,16 +37,18 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.kuEdVbzv5zXIO4wk]{Solarian}</p>\n<p>You gain the @UUID[Compendium.sfrpg.feats.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}feat as a bonus feat for each weapon type this class grants you proficiency with.If you selected solar weapon as your solar manifestation, it gains the benefit of Weapon Specialization as if it were an advanced melee weapon.&nbsp;</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.kuEdVbzv5zXIO4wk]{Solarian}</p>\n<p>You gain the @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}feat as a bonus feat for each weapon type this class grants you proficiency with.If you selected solar weapon as your solar manifestation, it gains the benefit of Weapon Specialization as if it were an advanced melee weapon.&nbsp;</p>"
     },
     "descriptors": [],
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -52,7 +61,7 @@
       {
         "_id": "5ed4c491-efda-4716-ae6c-22544d419022",
         "name": "Weapon Specialization Solarian",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -66,11 +75,11 @@
       {
         "_id": "eddc907c-4b25-412d-a037-26c6f4ed8d1a",
         "name": "Weapon Specialization Solarian",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -78,28 +87,14 @@
         "valueAffected": "basicM"
       },
       {
-        "_id": "0c5a7a26-2bc7-4d20-a568-23f45ee1eee3",
-        "name": "Weapon Specialization Solarian",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
-      },
-      {
         "_id": "7c30373d-0b3b-4fe6-874d-68afaab64519",
         "name": "Weapon Specialization Solarian",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -107,6 +102,7 @@
         "valueAffected": "advancedM"
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -118,6 +114,7 @@
       "value": null
     },
     "requirements": "3rd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,

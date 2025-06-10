@@ -17,7 +17,7 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
@@ -53,7 +53,7 @@ export default function(engine) {
             for (const cls of fact.classes) {
                 const classData = cls.system;
 
-                let classBonus = Math.floor(classData.levels * classData.hp.value);
+                const classBonus = Math.floor(classData.levels * classData.hp.value);
                 hpMax += classBonus;
 
                 data.attributes.hp.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Header.Hitpoints.ClassTooltip", {
@@ -69,7 +69,7 @@ export default function(engine) {
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 
-        let bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
+        const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {

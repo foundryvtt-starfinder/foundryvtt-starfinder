@@ -1,15 +1,20 @@
 
-export class HotbarSFRPG extends Hotbar {
+export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
     constructor(options) {
         super(options);
     }
 
-    get template() {
-        return "systems/sfrpg/templates/ui/hotbar.hbs";
-    }
+    /** @override */
+    static PARTS = {
+        hotbar: {
+            root: true,
+            template: "systems/sfrpg/templates/ui/hotbar.hbs"
+        }
+    };
 
-    async getData() {
-        const data = super.getData();
+    /** @override */
+    async _prepareContext() {
+        const data = await super._prepareContext();
 
         for (const slot of data.macros) {
             const macro = slot.macro;
@@ -17,12 +22,13 @@ export class HotbarSFRPG extends Hotbar {
 
             const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
             if (itemMacroDetails?.itemUuid) {
-                const item = deepClone(fromUuidSync(itemMacroDetails?.itemUuid));
+                const item = fromUuidSync(itemMacroDetails?.itemUuid);
                 if (!item || !item.actor) continue;
 
                 await item.processData();
 
-                item.macroConfig = {
+                const macroConfig = {
+                    item,
                     isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
                     hasAttack: ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                     hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
@@ -33,16 +39,16 @@ export class HotbarSFRPG extends Hotbar {
 
                 };
 
-                if (item.macroConfig.hasCapacity) {
-                    item.macroConfig.capacityCurrent = item.getCurrentCapacity();
-                    item.macroConfig.capacityMaximum = item.getMaxCapacity();
+                if (macroConfig.hasCapacity) {
+                    macroConfig.capacityCurrent = item.getCurrentCapacity();
+                    macroConfig.capacityMaximum = item.getMaxCapacity();
                 }
 
-                slot.iconClass = this._getIcon(item.macroConfig, itemMacroDetails.macroType);
+                slot.iconClass = this._getIcon(macroConfig, itemMacroDetails.macroType);
                 slot.greyscale = this._getGreyscaleStatus(item, itemMacroDetails.macroType);
-                slot.hasCapacity = itemMacroDetails.macroType === "attack" && item.macroConfig.hasCapacity;
-                slot.activeGlow = itemMacroDetails.macroType === "activate" && item.macroConfig.isActive;
-                slot.hasUses = itemMacroDetails.macroType === "activate" && item.macroConfig.hasUses;
+                slot.hasCapacity = itemMacroDetails.macroType === "attack" && macroConfig.hasCapacity;
+                slot.activeGlow = itemMacroDetails.macroType === "activate" && macroConfig.isActive;
+                slot.hasUses = itemMacroDetails.macroType === "activate" && macroConfig.hasUses;
 
                 slot.tooltip += `
                     <br>
@@ -50,18 +56,18 @@ export class HotbarSFRPG extends Hotbar {
                     <br>
                 `;
                 if (itemMacroDetails.macroType === "activate") {
-                    slot.tooltip += item.macroConfig.isActive ? "Active" : "Inactive";
+                    slot.tooltip += macroConfig.isActive ? "Active" : "Inactive";
                     slot.tooltip += "<br>";
-                    if (item.macroConfig.hasUses) slot.tooltip += `
+                    if (macroConfig.hasUses) slot.tooltip += `
                         ${game.i18n.localize("SFRPG.SpellBook.Uses")}: ${item.system.uses.value}/${item.system.uses.total}
                     `;
-                } else if (itemMacroDetails.macroType === "attack" && item.macroConfig.hasCapacity) {
+                } else if (itemMacroDetails.macroType === "attack" && macroConfig.hasCapacity) {
                     slot.tooltip += `
-                        ${game.i18n.localize("SFRPG.ActorSheet.Inventory.Container.Capacity")}: ${item.macroConfig.capacityCurrent}/${item.macroConfig.capacityMaximum}
+                        ${game.i18n.localize("SFRPG.ActorSheet.Inventory.Container.Capacity")}: ${macroConfig.capacityCurrent}/${macroConfig.capacityMaximum}
                     `;
                 }
 
-                macro.item = item;
+                macro.macroConfig = macroConfig;
                 macro.macroType = itemMacroDetails?.macroType;
 
             }
@@ -92,25 +98,25 @@ export class HotbarSFRPG extends Hotbar {
     }
 }
 
-Hooks.on("getHotbarEntryContext", (element, li) => {
+function findActorSync(macroId) {
+    let actor = null;
+
+    const flags = game.macros.get(macroId)?.flags?.sfrpg;
+    if (flags) {
+        actor = fromUuidSync(flags.actor)
+            ?? fromUuidSync(flags.itemMacro?.itemUuid)?.actor; // backwards compatibility
+    }
+
+    return actor;
+}
+
+Hooks.on("getHotbarEntryContext", (hotbar, menu) => {
     const viewActor = {
         name: "SFRPG.Macro.ViewActor",
         icon: "<i class=\"fas fa-user\"></i>",
-        condition: (li) => {
-            const macro = game.macros.get(li.data("macro-id"));
-            const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
-            if (itemMacroDetails?.itemUuid) {
-                const item = fromUuidSync(itemMacroDetails?.itemUuid);
-                return !!item?.actor;
-            }
-        },
+        condition: (li) => Boolean(findActorSync(li.data("macro-id"))),
         callback: (li) => {
-            const macro = game.macros.get(li.data("macro-id"));
-            const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
-            if (itemMacroDetails?.itemUuid) {
-                const item = fromUuidSync(itemMacroDetails?.itemUuid);
-                item?.actor.sheet.render(true);
-            }
+            findActorSync(li.data("macro-id"))?.sheet.render(true);
         }
     };
 
@@ -134,5 +140,5 @@ Hooks.on("getHotbarEntryContext", (element, li) => {
         }
     };
 
-    li.push(viewActor, viewItem);
+    menu.push(viewActor, viewItem);
 });

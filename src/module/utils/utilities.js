@@ -4,23 +4,9 @@ export function generateUUID() {
     );
 }
 
-export function degtorad(degrees) {
-    return degrees * Math.PI / 180;
-}
-
-export function radtodeg(radians) {
-    return radians / 180 * Math.PI;
-}
-
-/**
- * Determine if an array of terms contains a DiceTerm.
- *
- * @param {RollTerm[]} terms The terms to check
- */
-export function hasDiceTerms(terms) {
-    for (const term of terms) {
-        if (term instanceof DiceTerm) return true;
+export const rerenderApps = () => {
+    const apps = [...Object.values(ui.windows), ...foundry.applications.instances.values(), ui.sidebar];
+    for (const app of apps) {
+        app.render();
     }
-
-    return false;
-}
+};

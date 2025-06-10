@@ -93,9 +93,8 @@ export default class RollDialog extends Dialog {
         const data = await super.getData();
         data.formula = this.formula;
         data.rollMode = this.rollMode;
-        data.rollModes = CONFIG.Dice.rollModes;
         data.additionalBonus = this.additionalBonus;
-        data.availableModifiers = duplicate(this.availableModifiers) || [];
+        data.availableModifiers = foundry.utils.deepClone(this.availableModifiers) || [];
         data.hasModifiers = data.availableModifiers.length > 0;
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
@@ -103,29 +102,6 @@ export default class RollDialog extends Dialog {
         data.damageGroups = this.damageGroups;
 
         for (const modifier of data.availableModifiers) {
-
-            // Make a simplified roll
-            const simplerRoll = Roll.create(modifier.modifier, data.contexts.getRollData()).simplifiedFormula;
-
-            if (modifier.modifier[0] === "+") modifier.modifier = modifier.modifier.slice(1);
-
-            /* If it actually was simplified, append the original modifier for use on the tooltip.
-            *
-            * If the formulas are different with whitespace, that means the original likely has some weird whitespace, so let's correct that, bu we don't need to tell the user.
-            */
-            if (modifier.modifier !== simplerRoll) {
-                modifier.originalFormula = modifier.modifier;
-
-                // If the formulas are still different without whitespace, then MathTerms must have been simplifed, so let's tell the user.
-                if (modifier.originalFormula.replace(/\s/g, "") !== simplerRoll.replace(/\s/g, "")) {
-                    modifier.originalFormulaTooltip = true;
-                }
-            }
-
-            // Sign that string
-            const numMod = Number(simplerRoll);
-            modifier.modifier = numMod ? numMod.signedString() : simplerRoll;
-
             if (Object.keys(CONFIG.SFRPG.modifierTypes).includes(modifier.type)) {
                 modifier.localizedType = game.i18n.localize(`${CONFIG.SFRPG.modifierTypes[modifier.type]}`);
             }
@@ -134,24 +110,23 @@ export default class RollDialog extends Dialog {
         if (this.parts?.length > 0) {
             data.hasDamageTypes = true;
 
-            for (const part of this.parts) {
-                const partIndex = this.parts.indexOf(part);
+            if (this.parts[0].enabled === undefined) {
+                this.parts[0].enabled = true;
+            }
 
+            for (const [partIndex, part] of this.parts.entries()) {
                 // If there is no name, create the placeholder name
                 if (!part.name && this.parts.length > 1) {
                     part.name = game.i18n.format("SFRPG.Items.Action.DamageSection", {section: partIndex});
                 }
 
-                if (partIndex === 0 && part.enabled === undefined) {
-                    part.enabled = true;
-                }
-
                 // Create type string out of localized parts
                 let typeString = "";
                 if (part.types && !foundry.utils.isEmpty(part.types)) {
-                    typeString = `${(Object.entries(part.types).filter(type => type[1])
-                        .map(type => SFRPG.damageTypes[type[0]])
-                        .join(` & `))}`;
+                    typeString = Object.entries(part.types)
+                        .filter(([key, value]) => value)
+                        .map(([key, value]) => SFRPG.damageTypes[key])
+                        .join(" & ");
                 }
                 part.type = typeString;
 
@@ -164,17 +139,17 @@ export default class RollDialog extends Dialog {
                     part.originalFormula = part.formula;
                     part.formula = simplerRoll;
 
-                    // If the formulas are still different without whitespace, then MathTerms must have been simplifed, so let's tell the user.
+                    // If the formulas are still different without whitespace, then FunctionTerms must have been simplifed, so let's tell the user.
                     if (part.originalFormula.replace(/\s/g, "") !== simplerRoll.replace(/\s/g, "")) {
                         part.originalFormulaTooltip = true;
                     }
                 }
             }
 
-            data.formula = this.formula;
-            if (this.parts?.length === 1) {
-                data.formula = this.formula.replace("<damageSection>", this.parts[0].formula);
-            }
+            data.formula = [
+                (this.parts.length === 1) ? this.parts[0].formula : '<Primary Section>',
+                this.formula
+            ].filter(Boolean).join(' + ') || '0';
         }
 
         return data;
@@ -189,7 +164,7 @@ export default class RollDialog extends Dialog {
         super.activateListeners(html);
 
         const additionalBonusTextbox = html.find('input[name=bonus]');
-        additionalBonusTextbox.on('change', this._onAdditionalBonusChanged.bind(this));
+        additionalBonusTextbox.on('keyup', this._onAdditionalBonusChanged.bind(this));
 
         const rollModeCombobox = html.find('select[name=rollMode]');
         rollModeCombobox.on('change', this._onRollModeChanged.bind(this));
@@ -216,28 +191,8 @@ export default class RollDialog extends Dialog {
         const modifierIndex = $(event.currentTarget).data('modifierIndex');
         const modifier = this.availableModifiers[modifierIndex];
 
-        // Non-SFRPGModifier objects
         modifier.enabled = !modifier.enabled;
         this.render(false);
-
-        // SFRPGModifier instances
-        if (modifier._id) {
-            // Toggle modifier object itself
-            modifier.updateSource({"enabled": modifier.enabled});
-
-            const owner = modifier.primaryOwner;
-            if (!owner) return;
-
-            // Find the modifier in the owner and set to the updated object
-            const ownerModifiers = owner.system.modifiers;
-            const index = ownerModifiers.findIndex(x => x._id === modifier._id);
-            if (!index < 0) return;  // Will be -1 if using a global attack modifier
-
-            ownerModifiers[index] = modifier;
-            await owner.update({ "system.modifiers": ownerModifiers });
-            this.render(false);
-
-        }
     }
 
     async _onSelectorChanged(event) {
@@ -248,7 +203,8 @@ export default class RollDialog extends Dialog {
         this.contexts.allContexts[selectorName] = this.contexts.allContexts[selectedValue];
 
         /** Repopulate nodes, might change modifiers because of different selector. */
-        this.availableModifiers = await this.rollTree.populate();
+        this.rollTree.populate(this.contexts);
+        this.availableModifiers = this.rollTree.getRolledModifiers();
 
         this.position.height = "auto";
         this.render(false);
@@ -281,7 +237,7 @@ export default class RollDialog extends Dialog {
 
     submit(button) {
         try {
-            this.rolledButton = button.id ?? button.label;
+            this.rolledButton = button?.id ?? button?.label ?? "normal";
             this.close();
         } catch (err) {
             ui.notifications.error(err);
@@ -296,14 +252,6 @@ export default class RollDialog extends Dialog {
             delete this.data.close;
         }
 
-        if (this._tooltips !== null) {
-            for (const tooltip of this._tooltips) {
-                tooltip.destroy();
-            }
-
-            this._tooltips = null;
-        }
-
         return super.close(options);
     }
 
@@ -316,9 +264,9 @@ export default class RollDialog extends Dialog {
      * @param {Modifier[]} availableModifiers
      * @param {string} mainDie
      * @param {DialogOptions} options
-     * @returns {RollDialog}
+     * @returns {Promise<{button: string, rollMode: string, bonus: string, parts: DamagePart[]}>}
      */
-    static async showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
+    static showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
         return new Promise(resolve => {
             const buttons = options.buttons || { roll: { id: "roll", label: game.i18n.localize("SFRPG.Rolls.Dice.Roll") } };
             const defaultButton = options.defaultButton || (Object.values(buttons)[0].id ?? Object.values(buttons)[0].label);
@@ -335,7 +283,7 @@ export default class RollDialog extends Dialog {
                     buttons: buttons,
                     default: defaultButton,
                     close: (button, rollMode, bonus, parts) => {
-                        resolve({button, rollMode, bonus, parts});
+                        resolve({button, rollMode, bonus: bonus?.trim(), parts});
                     }
                 },
                 options: options.dialogOptions || {}

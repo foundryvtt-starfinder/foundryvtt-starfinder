@@ -2,6 +2,11 @@
   "_id": "U3asgKgSiwpuKteI",
   "name": "Shock pad, aurora",
   "type": "weapon",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.28.0"
+  },
   "img": "systems/sfrpg/icons/equipment/armor/tactical-shield-paragon.webp",
   "system": {
     "type": "",
@@ -16,7 +21,7 @@
       "condition": "",
       "cost": null
     },
-    "ammunitionType": "",
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shapable": false,
@@ -47,7 +52,7 @@
     "bulk": "L",
     "capacity": {
       "max": 20,
-      "value": 20
+      "value": 0
     },
     "chatFlavor": "",
     "container": {
@@ -98,6 +103,7 @@
           "name": "",
           "formula": "2d4 + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -110,7 +116,8 @@
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -125,11 +132,13 @@
       "units": "text",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 6,
     "modifiers": [],
     "price": 4900,

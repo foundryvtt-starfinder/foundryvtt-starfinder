@@ -2,7 +2,12 @@
   "_id": "4kYO0Mhu0ElJf2BL",
   "name": "Living lash",
   "type": "weapon",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 12,
+    "systemId": "sfrpg",
+    "systemVersion": "0.28.0"
+  },
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
     "type": "",
     "ability": "str",
@@ -12,7 +17,7 @@
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
-      "type": "none",
+      "type": "",
       "condition": "",
       "cost": null
     },
@@ -24,7 +29,7 @@
       "units": "ft",
       "value": ""
     },
-    "attackBonus": 0,
+    "attackBonus": null,
     "attributes": {
       "ac": {
         "value": "5"
@@ -47,7 +52,7 @@
     "bulk": "L",
     "capacity": {
       "max": 20,
-      "value": 20
+      "value": 0
     },
     "chatFlavor": "",
     "container": {
@@ -98,6 +103,7 @@
           "name": "",
           "formula": "1d8 + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -110,7 +116,8 @@
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -125,11 +132,13 @@
       "units": "text",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 6,
     "modifiers": [],
     "price": 4150,

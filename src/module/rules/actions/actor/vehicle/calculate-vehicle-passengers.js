@@ -3,7 +3,7 @@ export default function(engine) {
         const data = fact.data;
         const actor = fact.actor;
 
-        data.crew = mergeObject(data.crew ?? {}, {
+        data.crew = foundry.utils.mergeObject(data.crew ?? {}, {
             complement: {
                 limit: 0,
                 actorIds: []
