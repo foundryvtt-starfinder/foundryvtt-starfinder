@@ -1,27 +1,26 @@
 {
-  "_id": "oAkdDFxOksvO88bU",
-  "name": "Cable line, titanium alloy",
-  "type": "technological",
+  "_id": "hGG1ffziqdHaPixz",
+  "name": "Black Lotus Extract",
+  "type": "consumable",
   "_stats": {
     "coreVersion": 13,
     "systemId": "sfrpg",
     "systemVersion": "0.28.1"
   },
-  "img": "systems/sfrpg/icons/equipment/technological%20items/cable-line-titanium-alloy.webp",
+  "img": "systems/sfrpg/icons/equipment/technological%20items/sprayflesh.webp",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "other",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
     },
-    "ammunitionType": "",
     "area": {
       "effect": "",
       "shapable": false,
@@ -43,23 +42,31 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 55
       },
       "size": "medium",
       "sturdy": false
     },
     "attuned": false,
-    "bulk": "L",
-    "capacity": {
-      "max": 0,
-      "value": 0
-    },
+    "bulk": "0",
     "chatFlavor": "",
+    "consumableType": "poison",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": 1,
       "isOpen": true,
-      "storage": []
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "spell"
+          ],
+          "affectsEncumbrance": false,
+          "amount": 0,
+          "subtype": "spellSlot",
+          "weightProperty": "bulk"
+        }
+      ]
     },
     "critical": {
       "effect": "",
@@ -74,24 +81,21 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Industrial-strength cabling is typically woven from hundreds of cords of high-durability plastic that are often coated in metal for added strength, usually adamantine or titanium alloy.</p>\n<p><strong>Price:</strong> 5/10 ft</p>\n<p><strong>Bulk:</strong> 1/10 ft</p>"
+      "value": "<p>&lt;@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poisons}</p>\n<p><strong>Type&nbsp;</strong>&nbsp;poison&nbsp;(contact);&nbsp;<strong>Save&nbsp;</strong> Fortitude DC 26</p>\n<p><strong>Track&nbsp;</strong> Constitution (special);&nbsp;<strong>Onset&nbsp;</strong> 1 minute;&nbsp;<strong>Frequency&nbsp;</strong> 1/round for 6 rounds</p>\n<p><strong>Effect&nbsp;</strong> progression track is Healthy—Weakened—Debilitated—Dead</p>\n<p><strong>Cure</strong>&nbsp;2 consecutive saves</p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "text",
+      "units": "",
       "value": null
     },
     "equippable": false,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
-    "hands": 0,
     "identified": true,
     "isActive": null,
-    "level": 1,
+    "level": 20,
     "modifiers": [],
-    "price": 50,
-    "properties": {},
+    "price": 121000,
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
@@ -102,23 +106,25 @@
     },
     "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "26",
+      "descriptor": "negate"
     },
-    "source": "CRB, p. 219",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "CRB pg. 419",
     "target": {
       "type": "",
       "value": null
     },
-    "usage": {
-      "per": "",
-      "value": 0
-    },
     "uses": {
-      "max": null,
+      "autoDestroy": true,
+      "autoUse": true,
+      "max": 0,
       "per": null,
-      "value": null
+      "value": 0
     }
   }
 }
