@@ -110,9 +110,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -253,9 +255,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -303,11 +307,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Actor.3u7MGtiEa0ManeYf.Item.7F06Pgz7VcxL1SsX"
-        }
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -429,6 +428,7 @@
             "valueAffected": ""
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -469,11 +469,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Actor.3u7MGtiEa0ManeYf.Item.xSCdNF3BipFBPOzS"
-        }
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -564,6 +559,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -601,11 +597,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Actor.3u7MGtiEa0ManeYf.Item.FsrSpf9IapIuD3fw"
-        }
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -696,6 +687,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -762,12 +754,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": true,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
     "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -781,13 +791,23 @@
       "visionMode": "lowLightVisionDarkvision"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
-      "tint": null
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 2
   },

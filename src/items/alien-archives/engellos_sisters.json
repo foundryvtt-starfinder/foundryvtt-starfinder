@@ -114,9 +114,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 95,
@@ -346,9 +348,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 100,
@@ -598,9 +602,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 260,
@@ -822,6 +828,7 @@
             "valueAffected": ""
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -908,6 +915,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1042,6 +1050,7 @@
         },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -1049,6 +1058,7 @@
         "modifiers": [],
         "price": 95,
         "proficient": false,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -1188,9 +1198,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 100,
@@ -1420,9 +1432,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 95,
@@ -1680,9 +1694,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 260,
@@ -1878,6 +1894,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "price": 40,
@@ -1999,11 +2016,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.Item.pwHHxUP8eZckV0s9"
-        }
-      },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
@@ -2090,6 +2102,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -2156,12 +2169,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": true,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
     "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -2175,13 +2206,23 @@
       "visionMode": "darkvision"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
-      "tint": null
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },

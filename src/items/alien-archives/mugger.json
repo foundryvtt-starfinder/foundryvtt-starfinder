@@ -147,10 +147,12 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "icons/weapons/fist/fist-katar-triple-gold-black.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 6,
         "modifiers": [],
@@ -408,9 +410,11 @@
         },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -588,10 +592,12 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "systems/sfrpg/icons/equipment/weapons/diasporan-rifle-elite.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 5,
         "modifiers": [],
@@ -848,6 +854,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -976,6 +983,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1114,6 +1122,7 @@
         },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -1121,6 +1130,7 @@
         "modifiers": [],
         "price": 4720,
         "proficient": false,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -1289,10 +1299,12 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "systems/sfrpg/icons/equipment/weapons/diasporan-rifle-elite.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 5,
         "modifiers": [],
@@ -1499,6 +1511,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
         "price": 330,
@@ -1564,6 +1577,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
         "price": 330,
@@ -1696,11 +1710,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.AIoBhzhn2oxiIYsE"
-        }
-      },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
@@ -1787,6 +1796,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1824,11 +1834,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.Mm6bA47DzaXmQ15W"
-        }
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -1947,6 +1952,7 @@
             "valueAffected": "sur"
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -2031,6 +2037,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
         "price": 330,
@@ -2064,11 +2071,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.kd0EhRYcsi661w5X"
-        }
       },
       "img": "icons/weapons/fist/fist-katar-triple-gold-black.webp",
       "system": {
@@ -2194,10 +2196,12 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "icons/weapons/fist/fist-katar-triple-gold-black.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 6,
         "modifiers": [],
@@ -2359,6 +2363,7 @@
     "name": "Mugger",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -2390,11 +2395,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": true,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -2408,13 +2432,23 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
-      "tint": null
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },

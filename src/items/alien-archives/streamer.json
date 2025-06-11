@@ -34,6 +34,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -105,6 +106,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -161,6 +163,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -238,9 +241,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -305,6 +310,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -339,6 +345,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -380,10 +387,26 @@
       "img": "systems/sfrpg/icons/default/processor.svg",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -408,6 +431,7 @@
           "max": 0,
           "value": 0
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": true,
@@ -415,11 +439,13 @@
           "storage": []
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -427,19 +453,49 @@
           "unidentified": "",
           "value": "<h1>Scanner</h1>\n<p>Scanners are common items that allow you to extend your senses and record your experiences. Some specialized scanners can also provide other senses, such as blindsense or sense through, but these often require ongoing monitoring or impose other restrictions. Common examples include laser microphones, motion detectors, and x-ray visors.</p>\n<p>The most typical scanner is a video camera, which requires one hand to use. A video camera has ordinary sight and is capable of seeing whatever an ordinary @UUID[Compendium.sfrpg.races.AMBcyDZDtJ1OOzh3]{Human} could see, with up to 10 times magnification. A video camera can record up to 4 hours of footage, which can be downloaded and viewed using nearly any computer.</p>\n<p><strong>Capacity&nbsp;</strong> 20;&nbsp;<strong>Usage&nbsp;</strong> 2/hour</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "hands": 1,
         "identified": false,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 275,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "AR pg. 107",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "",
           "value": 0
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
         }
       }
     },
@@ -534,6 +590,7 @@
     "name": "Streamer",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -565,11 +622,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": true,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -583,13 +659,23 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
-      "tint": null
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 2
   },

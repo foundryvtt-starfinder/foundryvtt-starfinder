@@ -132,10 +132,12 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 3,
         "modifiers": [],
@@ -431,10 +433,12 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "systems/sfrpg/icons/equipment/weapons/pulsecaster-pistol.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 5,
         "modifiers": [],
@@ -689,6 +693,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -823,6 +828,7 @@
         },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -830,6 +836,7 @@
         "modifiers": [],
         "price": 2600,
         "proficient": false,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -972,11 +979,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.1QGmBEv3ymiW301f"
-        }
-      },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
@@ -1079,6 +1081,7 @@
             "valueAffected": "electricity"
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1116,11 +1119,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.HkCwclQcOaaigFbs"
-        }
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -1208,6 +1206,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1245,11 +1244,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.t4SBYLIHP0Ea7ZbO"
-        }
       },
       "img": "systems/sfrpg/icons/equipment/weapons/pulsecaster-pistol.webp",
       "system": {
@@ -1376,10 +1370,12 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "systems/sfrpg/icons/equipment/weapons/pulsecaster-pistol.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 5,
         "modifiers": [],
@@ -1545,11 +1541,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.LPA5dc9c6gVjMvPb"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.webp",
       "system": {
         "type": "",
@@ -1664,10 +1655,12 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 3,
         "modifiers": [],
@@ -1833,11 +1826,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.wVqkryVMIaeHne6U"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
       "system": {
         "type": "",
@@ -1884,6 +1872,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
         "price": 330,
@@ -1918,11 +1907,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.wVqkryVMIaeHne6U"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
       "system": {
         "type": "",
@@ -1969,6 +1953,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
         "price": 330,
@@ -1999,6 +1984,7 @@
     "name": "Subject Expert",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -2030,11 +2016,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": true,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -2048,13 +2053,23 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
-      "tint": null
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 2
   },
