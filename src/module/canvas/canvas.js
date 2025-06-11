@@ -8,7 +8,7 @@ Hooks.on('createToken', onTokenCreated);
 Hooks.on('updateToken', onTokenUpdated);
 
 function onCanvasReady(...args) {
-    if (!canvas.initialized) { return; }
+    if (!canvas.initialized) return;
     for (const placeable of canvas.tokens.placeables) {
         if (placeable.document.getFlag("sfrpg", "itemCollection")) {
             setupLootCollectionTokenInteraction(placeable, false);
@@ -16,9 +16,9 @@ function onCanvasReady(...args) {
     }
 }
 
-function onTokenCreated(document, options, userId) {
-    if (!canvas.initialized) { return; }
-    if (getProperty(document, "flags.sfrpg.itemCollection")) {
+function onTokenCreated(document) {
+    if (!canvas.initialized) return;
+    if (foundry.utils.getProperty(document, "flags.sfrpg.itemCollection")) {
         const token = canvas.tokens.placeables.find(x => x.id === document.id);
         if (token) {
             trySetupLootToken(token);
@@ -26,9 +26,9 @@ function onTokenCreated(document, options, userId) {
     }
 }
 
-function onTokenUpdated(document, options, userId) {
-    if (!canvas.initialized) { return; }
-    if (getProperty(document, "flags.sfrpg.itemCollection")) {
+function onTokenUpdated(document) {
+    if (!canvas.initialized) return;
+    if (foundry.utils.getProperty(document, "flags.sfrpg.itemCollection")) {
         const token = canvas.tokens.placeables.find(x => x.id === document.id);
         if (token) {
             trySetupLootToken(token);
@@ -44,64 +44,6 @@ function trySetupLootToken(token) {
         waitForInteraction.then(() => trySetupLootToken(token));
     }
 }
-
-/**
- * Measure the distance between two pixel coordinates
- * See BaseGrid.measureDistance for more details
- *
- * @param segments
- * @param options
- */
-export const measureDistances = (segments, options = {}) => {
-    if (!options.gridSpaces) return BaseGrid.prototype.measureDistances.call(this, segments, options);
-
-    // Track the total number of diagonals
-    const diagonalRule = game.settings.get("sfrpg", "diagonalMovement");
-    const state = { diagonals: 0 };
-
-    // Iterate over measured segments
-    return segments.map((s) => measureDistance(null, null, { ray: s.ray, diagonalRule, state }));
-};
-
-/**
- * Measure distance between two points.
- *
- * @param {Point} p0 Start point on canvas
- * @param {Point} p1 End point on canvas
- * @param {object} options Measuring options.
- * @param {"5105"|"555"} [options.diagonalRule] Used diagonal rule. Defaults to 5/10/5
- * @param {Ray} [options.ray] Pre-generated ray to use instead of the points.
- * @param {MeasureState} [options.state] Optional state tracking across multiple measures.
- *
- * @returns {number} Grid distance between the two points.
- */
-export const measureDistance = (
-    p0,
-    p1,
-    { ray = null, diagonalRule = "5105", state = { diagonals: 0, cells: 0 } } = {}
-) => {
-
-    ray ??= new Ray(p0, p1);
-    const gs = canvas.dimensions.size,
-        nx = Math.ceil(Math.abs(ray.dx / gs)),
-        ny = Math.ceil(Math.abs(ray.dy / gs));
-
-    // Get the number of straight and diagonal moves
-    const nDiagonal = Math.min(nx, ny),
-        nStraight = Math.abs(ny - nx);
-
-    state.diagonals += nDiagonal;
-
-    let cells = 0;
-
-    if (diagonalRule === "5105") {
-        const nd10 = Math.floor(state.diagonals / 2) - Math.floor((state.diagonals - nDiagonal) / 2);
-        cells = nd10 * 2 + (nDiagonal - nd10) + nStraight;
-    } else cells = nStraight + nDiagonal;
-
-    state.cells += cells;
-    return cells * canvas.dimensions.distance;
-};
 
 /**
  * Places an item collection on the canvas as a token for players to interact with.
@@ -182,7 +124,7 @@ async function handleCanvasDropAsync(canvas, data, targetActor) {
     const document = await Item.fromDropData(data);
     let sourceActor = null;
     const sourceItem = document;
-    const sourceItemData = foundry.utils.duplicate(document.system);
+    const sourceItemData = foundry.utils.deepClone(document.system);
 
     if (document?.parent?.isToken ?? false) {
         sourceActor = new ActorItemHelper(document.parent._id, document.parent.parent._id, document.parent.parent.parent._id);
@@ -251,7 +193,7 @@ export function canvasHandler(canvas, data) {
             const target = new ActorItemHelper(targetActor.id, tokenId, sceneId);
 
             // Simulate a drop to the sheet
-            targetActor.sheet.processDroppedData({ preventDefault() {} }, data);
+            targetActor.sheet.processDroppedItems({ preventDefault() {} }, data);
             const sourceItem = fromUuidSync(data.uuid);
             if (sourceItem.type !== "effect") {
                 const tokens = target?.token || targetActor.getActiveTokens(true);
