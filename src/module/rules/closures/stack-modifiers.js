@@ -16,26 +16,33 @@ export default class StackModifiers extends Closure {
      * @returns {Object}          An object containing only those modifiers allowed
      *                            based on the stacking rules.
      */
-    process(mods, context, options = { actor: null }) {
+    process(mods, context, options = { actor: null, item: null }) {
         const modifiers = mods;
-        for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
-            const modifier = modifiers[modifiersI];
+        for (const modifier of modifiers) {
             const actor = options.actor;
+            const item = options.item;
             const formula = String(modifier.modifier);
 
             if (formula && (modifier.modifierType === SFRPGModifierType.CONSTANT)) {
                 try {
-                    const roll = Roll.create(formula, actor?.system);
+                    const data = {};
+                    if (actor?.system) {
+                        Object.assign(data, actor.system);
+                    }
+                    if (item?.system) {
+                        Object.assign(data, {"item": item.system});
+                    }
+                    const roll = Roll.create(formula, data);
                     if (roll.isDeterministic) {
                         const warn = game.settings.get("sfrpg", "warnInvalidRollData") || false;
-                        const simplerFormula = Roll.replaceFormulaData(formula, actor?.system, {missing: 0, warn});
+                        const simplerFormula = Roll.replaceFormulaData(formula, data, {missing: 0, warn});
                         modifier.max = Roll.safeEval(simplerFormula);
                     } else {
                         ui.notifications.error(`Error with modifier: ${modifier.name}. Dice are not available in constant formulas. Please use a situational modifier instead.`);
                         modifier.max = 0;
                     }
                 } catch (error) {
-                    console.warn(`Could not calculate modifier: ${modifier.name} for actor with ID: ${modifier.container.actorUuid}. Setting to zero. ${error}`);
+                    console.warn(`Could not calculate modifier: ${modifier.name} for actor: ${modifier.actor.name}. Setting to zero. ${error}`);
                     modifier.max = 0;
                 }
             } else {
@@ -58,8 +65,7 @@ export default class StackModifiers extends Closure {
     async processAsync(mods, context, options = { actor: null }) {
         const modifiers = mods;
         if (modifiers.length > 0) {
-            for (let modifiersI = 0; modifiersI < modifiers.length; modifiersI++) {
-                const modifier = modifiers[modifiersI];
+            for (const modifier of modifiers) {
                 const actor = options.actor;
                 const formula = String(modifier.modifier);
 
@@ -67,22 +73,22 @@ export default class StackModifiers extends Closure {
                     const roll = Roll.create(formula, actor?.system);
                     let evaluatedRoll = {};
                     try {
-                        evaluatedRoll = await roll.evaluate({async: true});
+                        evaluatedRoll = await roll.evaluate();
                     } catch {
                         evaluatedRoll = {
                             total: 0,
                             dice: []
                         };
                     }
-                    modifiers[modifiersI].max = evaluatedRoll.total;
-                    modifiers[modifiersI].isDeterministic = roll.isDeterministic;
-                    modifiers[modifiersI].dices = [];
+                    modifier.max = evaluatedRoll.total;
+                    modifier.isDeterministic = roll.isDeterministic;
+                    modifier.dices = [];
 
                     if (!roll.isDeterministic) {
                         for (let allDiceI = 0; allDiceI < evaluatedRoll.dice.length; allDiceI++) {
                             const die = evaluatedRoll.dice[allDiceI];
                             if (!die) continue;
-                            modifiers[modifiersI].dices.push({
+                            modifier.dices.push({
                                 formula: `${die.number}d${die.faces}`,
                                 faces: die.faces,
                                 total: die.results.reduce((pv, cv) => pv + cv.result, 0)
@@ -90,7 +96,7 @@ export default class StackModifiers extends Closure {
                         }
                     }
                 } else {
-                    modifiers[modifiersI].max = 0;
+                    modifier.max = 0;
                 }
             }
         }
@@ -109,7 +115,8 @@ export default class StackModifiers extends Closure {
             moraleMods,
             racialMods,
             untypedMods,
-            resistanceMods] = modifiers.reduce((prev, curr) => {
+            resistanceMods,
+            weaponSpecializationMods] = modifiers.reduce((prev, curr) => {
             switch (curr.type) {
                 case SFRPGModifierTypes.ABILITY:
                     prev[0].push(curr);
@@ -144,6 +151,9 @@ export default class StackModifiers extends Closure {
                 case SFRPGModifierTypes.RESISTANCE:
                     prev[11].push(curr);
                     break;
+                case SFRPGModifierTypes.WEAPON_SPECIALIZATION:
+                    prev[12].push(curr);
+                    break;
                 case SFRPGModifierTypes.UNTYPED:
                 default:
                     prev[10].push(curr);
@@ -151,7 +161,7 @@ export default class StackModifiers extends Closure {
             }
 
             return prev;
-        }, [[], [], [], [], [], [], [], [], [], [], [], []]);
+        }, [[], [], [], [], [], [], [], [], [], [], [], [], []]);
 
         const ability = abilityMods?.filter(mod => mod.max > 0)?.sort((a, b) => b.max - a.max)
             ?.shift() ?? null;
@@ -166,6 +176,7 @@ export default class StackModifiers extends Closure {
         const racial = racialMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
         const resistance = resistanceMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
         const untyped = untypedMods?.sort((a, b) => b.max - a.max);
+        const weaponSpecialization = weaponSpecializationMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
 
         return {
             ability,
@@ -179,7 +190,8 @@ export default class StackModifiers extends Closure {
             morale,
             racial,
             resistance,
-            untyped
+            untyped,
+            weaponSpecialization
         };
     }
 }

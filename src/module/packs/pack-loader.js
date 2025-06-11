@@ -1,4 +1,7 @@
-import Progress from '../progress.js';
+/**
+ * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
+ * @import Collection from "@common/utils/collection.mjs";
+*/
 
 export class PackLoader {
     constructor() {
@@ -8,71 +11,74 @@ export class PackLoader {
         };
     }
 
+    /**
+     * @param {"Actor"|"Item"} entityType
+     * @param {string[]} packs An array of pack IDs
+     */
     async *loadPacks(entityType, packs) {
-        if (!this.loadedPacks[entityType]) {
-            this.loadedPacks[entityType] = {};
-        } // TODO: i18n for progress bar
+        if (!this.loadedPacks[entityType]) this.loadedPacks[entityType] = {};
 
-        const progress = new Progress({
-            steps: packs.length
-        });
+        const progress = ui.notifications.notify("Loading packs...", "info", { progress: true });
+        let pct = 0;
+
+        const fields = [
+            "type",
+            "system.level"
+        ];
+        if (entityType === "Actor") {
+            fields.push(
+                "system.details.cr",
+                "system.attributes.hp.max",
+                "system.details.type",
+                "system.traits.size",
+                "system.details.organizationSize",
+                "system.details.alignment"
+            );
+        } else {
+            fields.push(
+                "system.pcu",
+                "system.cost",
+                "system.weaponCategory",
+                "system.class",
+                "system.weaponType",
+                "system.armor",
+                "system.school",
+                "system.type",
+                "system.allowedClasses"
+            );
+        }
 
         for (const packId of packs) {
             let data = this.loadedPacks[entityType][packId];
 
-            if (!data) {
-                const pack = game.packs.get(packId);
-                progress.advance(`Loading ${pack.metadata.label}`);
+            /** @type {CompendiumCollection} */
+            const pack = data?.pack || game.packs.get(packId);
+            if (pack.documentName !== entityType) continue;
 
-                if (pack.documentName === entityType) {
-                    const fields = [
-                        "type",
-                        "system.level"
-                    ];
-                    if (entityType === "Actor") {
-                        fields.push(
-                            "system.details.cr",
-                            "system.attributes.hp.max",
-                            "system.details.type",
-                            "system.traits.size",
-                            "system.details.organizationSize",
-                            "system.details.alignment"
-                        );
-                    } else {
-                        fields.push(
-                            "system.pcu",
-                            "system.cost",
-                            "system.weaponCategory",
-                            "system.class",
-                            "system.weaponType",
-                            "system.armor",
-                            "system.school",
-                            "system.type",
-                            "system.allowedClasses"
-                        );
-                    }
-                    const content = await pack.getIndex({ "fields": fields });
-                    this.setCompendiumArt(pack.collection, content);
-                    data = this.loadedPacks[entityType][packId] = {
-                        pack,
-                        content
-                    };
-                } else {
-                    continue;
-                }
-            } else {
-                const {
-                    pack
-                } = data;
-                progress.advance(`Loading ${pack.metadata.label}`);
+            if (!data) {
+                const content = await pack.getIndex({ fields });
+                this.setCompendiumArt(pack.collection, content);
+                data = this.loadedPacks[entityType][packId] = {
+                    pack,
+                    content
+                };
+
             }
+
+            pct++;
+
+            ui.notifications.update(progress, {message: `Loading ${pack.metadata.label}...`, pct: (pct / packs.length) });
 
             yield data;
         }
 
-        progress.close('Loading complete');
+        ui.notifications.remove(progress);
     }
 
+    /**
+     * @param {string} packName
+     * @param {Collection[]} index
+     */
     setCompendiumArt(packName, index) {
         if (!packName.startsWith("sfrpg.")) return;
         for (const record of index) {

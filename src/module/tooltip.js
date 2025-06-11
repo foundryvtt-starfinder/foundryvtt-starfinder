@@ -1,8 +1,8 @@
 /**
  * Override default tooltip class because tooltips appearing immediately when a tooltip is currently visible sucks.
- * Unfortunately the anything worth touching is private so we have to copy a lot of it. :/
+ * Unfortunately anything worth touching is private so we have to copy a lot of it. :/
  */
-export default class TooltipManagerSFRPG extends TooltipManager {
+export default class TooltipManagerSFRPG extends foundry.helpers.interaction.TooltipManager {
 
     /**
      * Is the tooltip currently active?
@@ -57,10 +57,15 @@ export default class TooltipManagerSFRPG extends TooltipManager {
      * @param {PointerEvent} event    The initiating pointerenter event
      */
     #onActivate(event) {
-        if (Tour.tourInProgress) return; // Don't activate tooltips during a tour
+        if (foundry.nue.Tour.tourInProgress) return; // Don't activate tooltips during a tour
 
         const element = event.target;
-        if (!element.dataset.tooltip) {
+        if (!element.dataset.tooltip && element.getAttribute("aria-label")) {
+            // If the element has an aria-label but no tooltip, set the tooltip to the aria-label value
+            element.setAttribute("data-tooltip", element.getAttribute("aria-label"));
+        }
+
+        if (!element.dataset.tooltip && !element.dataset.tooltipHtml) {
         // Check if the element has moved out from underneath the cursor and pointerenter has fired on a non-child of the
         // tooltipped element.
             if (this.#active && !this.element.contains(element)) this.#startDeactivation();
@@ -148,5 +153,51 @@ export default class TooltipManagerSFRPG extends TooltipManager {
         const {clientX: x, clientY: y} = event;
         const buffer = this.#locked.boundingBox.clone().pad(this.constructor.LOCKED_TOOLTIP_BUFFER_PX);
         if ( !buffer.contains(x, y) ) this.dismissLockedTooltips();
+    }
+
+    /**
+   * Compute the unified bounding box from the set of locked tooltip elements.
+   */
+    #computeLockedBoundingBox() {
+        let bb = null;
+        for ( const element of this.#locked.elements.values() ) {
+            const {x, y, width, height} = element.getBoundingClientRect();
+            const rect = new PIXI.Rectangle(x, y, width, height);
+            if ( bb ) bb.enlarge(rect);
+            else bb = rect;
+        }
+        this.#locked.boundingBox = bb;
+    }
+
+    /**
+   * Lock the current tooltip.
+   * @returns {HTMLElement}
+   */
+    lockTooltip() {
+        const clone = this.tooltip.cloneNode(false);
+        // Steal the content from the original tooltip rather than cloning it, so that listeners are preserved.
+        while ( this.tooltip.firstChild ) clone.appendChild(this.tooltip.firstChild);
+        clone.removeAttribute("id");
+        clone.classList.add("locked-tooltip", "active");
+        document.body.appendChild(clone);
+        this.deactivate();
+        clone.addEventListener("contextmenu", this._onLockedTooltipDismiss.bind(this));
+        this.#locked.elements.add(clone);
+
+        // If the tooltip's contents were injected via setting innerHTML, then immediately requesting the bounding box will
+        // return incorrect values as the browser has not had a chance to reflow yet. For that reason we defer computing the
+        // bounding box until the next frame.
+        requestAnimationFrame(() => this.#computeLockedBoundingBox());
+        return clone;
+    }
+
+    /**
+   * Dismiss the set of active locked tooltips.
+   */
+    dismissLockedTooltips() {
+        for ( const element of this.#locked.elements.values() ) {
+            element.remove();
+        }
+        this.#locked.elements = new Set();
     }
 }
