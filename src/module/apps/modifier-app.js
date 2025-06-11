@@ -1,25 +1,26 @@
+import { ActorSFRPG } from "../actor/actor.js";
+import { ItemSFRPG } from "../item/item.js";
 import { SFRPGEffectType } from "../modifiers/types.js";
 
 /**
  * Application that is used to edit a dynamic modifier.
- *
- * @param {Object} modifier The modifier being edited.
- * @param {Object} target    The actor or item that the modifier belongs to.
- * @param {Object} options  Any options that modify the rendering of the sheet.
- * @param {Object} owningActor    The actor that the target belongs to, if target is an item.
  */
 export default class SFRPGModifierApplication extends FormApplication {
-    constructor(modifier, target, options = {}, owningActor = null) {
+    /**
+     * @param {SFRPGModifier}         modifier The modifier being edited.
+     * @param {ActorSFRPG|ItemSFRPG}  parent   The actor or item that the modifier belongs to.
+     * @param {Object}                options  Any options that modify the rendering of the sheet.
+     */
+    constructor(modifier, parent, options = {}) {
         super(modifier, options);
 
-        this.actor = target;
-        this.owningActor = owningActor;
+        this.parent = parent;
     }
 
     static get defaultOptions() {
         const options = super.defaultOptions;
 
-        return mergeObject(options, {
+        return foundry.utils.mergeObject(options, {
             classes: ["sfrpg", "modifier-app"],
             template: "systems/sfrpg/templates/apps/modifier-app.hbs",
             width: 400,
@@ -70,13 +71,12 @@ export default class SFRPGModifierApplication extends FormApplication {
      */
     getData() {
         const data = {
-            isOwner: this.actor.isOwner,
+            isOwner: this.parent.isOwner,
             modifier: this.modifier,
-            limited: this.actor.limited,
+            limited: this.parent.limited,
             options: this.options,
             editable: this.isEditable,
-            cssClass: this.actor.isOwner ? "editable" : "locked",
-            config: CONFIG.SFRPG
+            cssClass: this.parent.isOwner ? "editable" : "locked"
         };
 
         return data;
@@ -92,10 +92,10 @@ export default class SFRPGModifierApplication extends FormApplication {
         html.find(".modifier-modifier-type select").change(event => {
             const modifierType = event.currentTarget.value;
 
-            const damageSectionDetails = $("section.damage-section-details");
+            const damageSectionDetails = $("fieldset.damage-section-details");
 
-            if (modifierType !== "damageSection") damageSectionDetails.hide();
-            else damageSectionDetails.show();
+            if (modifierType !== "damageSection") damageSectionDetails.prop("disabled", true);
+            else damageSectionDetails.prop("disabled", false);
 
             this.setPosition({ height: "auto" });
         });
@@ -110,15 +110,15 @@ export default class SFRPGModifierApplication extends FormApplication {
             const damageSectionType = $("option[value='damageSection']");
 
             if (!(this.damageEffectTypes.includes(effectType))) {
-                $("section.damage-section-details").hide(); // Damage section details
+                $("fieldset.damage-section-details").prop("disabled", true); // Damage section details
                 damageSectionType.hide(); // Damage section modifier type
             } else {
                 damageSectionType.show();
             }
 
             // Hide limit to setting if modifier doesn't affect an item
-            if (!(this.limitToTypes.includes(effectType))) $("div.modifier-limit-to").hide();
-            else $("div.modifier-limit-to").show();
+            if (!(this.limitToTypes.includes(effectType))) $("fieldset.modifier-limit-to").prop("disabled", true);
+            else $("fieldset.modifier-limit-to").prop("disabled", false);
 
             if (oldValue === SFRPGEffectType.ACTOR_RESOURCE || effectType === SFRPGEffectType.ACTOR_RESOURCE) {
                 const modifierDialog = this;
@@ -251,11 +251,11 @@ export default class SFRPGModifierApplication extends FormApplication {
         const valueAffectedElement = this.element.find(".modifier-value-affected select");
         const modifierTypeElement = this.element.find(".modifier-modifier-type select");
 
-        if (modifierTypeElement.val() === "damageSection") $("section.damage-section-details").show();
+        if (modifierTypeElement.val() === "damageSection") $("fieldset.damage-section-details").prop("disabled", false);
         if (this.damageEffectTypes.includes(effectType)) $("option[value='damageSection']").show();
 
-        if (!(this.limitToTypes.includes(effectType))) $("div.modifier-limit-to").hide();
-        else $("div.modifier-limit-to").show();
+        if (!(this.limitToTypes.includes(effectType))) $("fieldset.modifier-limit-to").prop("disabled", true);
+        else $("fieldset.modifier-limit-to").prop("disabled", false);
 
         switch (effectType) {
             case SFRPGEffectType.ABILITY_SKILLS:
@@ -308,27 +308,6 @@ export default class SFRPGModifierApplication extends FormApplication {
      * @param {Object} formData The data from the form
      */
     _updateObject(event, formData) {
-        return this._updateModifierData(formData);
-    }
-
-    async _updateModifierData(formData) {
-        const modifiers = duplicate(this.actor.system.modifiers);
-        const modifier = modifiers.find(mod => mod._id === this.modifier._id);
-
-        const formula = formData["modifier"];
-        if (formula) {
-            try {
-                const roll = Roll.create(formula, this.owningActor?.system || this.actor.system);
-                modifier.max = await roll.evaluate({ maximize: true }).total;
-            } catch (err) {
-                ui.notifications.error(err);
-            }
-        } else {
-            modifier.max = 0;
-        }
-
-        mergeObject(modifier, formData);
-
-        return this.actor.update({ "system.modifiers": modifiers });
+        return this.modifier.parentUpdate(formData);
     }
 }

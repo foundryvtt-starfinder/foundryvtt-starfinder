@@ -1,0 +1,63 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    {{> "systems/sfrpg/templates/items/parts/item-header.hbs"}}
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-description.hbs"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            {{!-- Common Component Data --}}
+            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs" noPCUCost=true}}
+
+            {{!-- Armor Properties --}}
+            <div class="bubble">
+                <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipArmor.Header" }}</h3>
+
+                <div class="bubble-info">
+                    
+                    {{!-- Armor Bonus --}}
+                    <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipArmor.ArmorBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipArmor.ArmorBonusTooltip" }}">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipArmor.ArmorBonus" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.armorBonus" value="{{itemData.armorBonus}}" data-dtype="Number" placeholder="0" />
+                        </div>
+                    </div>
+
+                    {{!-- Target Lock Penalty --}}
+                    <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipArmor.TargetLockPenalty" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipArmor.TargetLockPenaltyTooltip" }}">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipArmor.TargetLockPenalty" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.targetLockPenalty" value="{{itemData.targetLockPenalty}}" data-dtype="Number" placeholder="0" />
+                        </div>
+                    </div>
+
+                    {{!-- Turn Penalty --}}
+                    <div class="form-group" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipArmor.TurnDistancePenalty" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipArmor.TurnDistancePenaltyTooltip" }}">
+                        <label>{{ localize "SFRPG.ItemSheet.StarshipArmor.TurnDistancePenalty" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.turnDistancePenalty" value="{{itemData.turnDistancePenalty}}" data-dtype="Number" placeholder="0" />
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+
+            {{!-- Special Materials Template --}}
+            {{> "systems/sfrpg/templates/items/parts/item-special-materials.hbs"}}
+
+        </div>
+
+    </section>
+</form>

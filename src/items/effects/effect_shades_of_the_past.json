@@ -1,0 +1,69 @@
+{
+  "_id": "nqxFTcZ4c1mf0GP3",
+  "name": "Effect: Shades of the Past",
+  "type": "effect",
+  "_stats": {
+    "coreVersion": 13,
+    "systemId": "sfrpg",
+    "systemVersion": "0.28.1"
+  },
+  "img": "systems/sfrpg/icons/spells/ghost_sound.webp",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "permanent",
+      "value": "0"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>For the duration of the spell, the ghosts disparage, claw at, and swirl around creatures in the area, negating any miss chance against those creatures due to concealment (but not total concealment) and imposing a –5 penalty to Stealth checks attempted while in the area.</p>\n<p><em>This effect only applies while the target is within the area defined by the spell.</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "ed7d0a33-9058-4ae5-b6b6-0d552ebd80d1",
+        "name": "Stealth Penalty",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 0,
+        "modifier": "-5",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Shades of the Past",
+        "subtab": "misc",
+        "valueAffected": "ste"
+      }
+    ],
+    "requirements": "",
+    "showOnToken": true,
+    "source": "",
+    "turnEvents": []
+  }
+}

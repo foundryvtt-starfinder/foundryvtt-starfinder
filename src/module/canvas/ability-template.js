@@ -1,6 +1,6 @@
 import { MeasuredTemplateSFRPG } from "./template-overrides.js";
 /**
- * A helper class to provide a preview interface for placable templates
+ * A helper class to provide a preview interface for placeable templates
  *
  * @augments MeasuredTemplateSFRPG
  */
@@ -99,8 +99,17 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
                 event.stopPropagation();
                 const now = Date.now(); // Apply a 20ms throttle
                 if (now - moveTime <= 20) return;
-                const center = event.data.getLocalPosition(this.layer);
-                const pos = canvas.grid.getSnappedPosition(center.x, center.y, 2);
+                let pos = event.data.getLocalPosition(this.layer);
+                if ( !event.shiftKey ) {
+                    // Snap the origin to the grid as per the rules
+                    const M = CONST.GRID_SNAPPING_MODES;
+                    let mode = M.VERTEX;
+                    switch (this.document.t) {
+                        case "circle": mode |= M.CENTER; break;
+                        case "ray": mode |= M.SIDE_MIDPOINT; break; // RAW lines come from corners, but that creates 10ft lines
+                    }
+                    pos = canvas.grid.getSnappedPoint({x: pos.x, y: pos.y}, { mode });
+                }
                 this.document.x = pos.x;
                 this.document.y = pos.y;
                 this.refresh();
@@ -117,7 +126,7 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
                 canvas.app.view.onwheel = null;
                 // Clear highlight
                 this.active = false;
-                const hl = canvas.grid.getHighlightLayer(this.highlightId);
+                const hl = canvas.interface.grid.getHighlightLayer(this.highlightId);
                 hl?.clear();
                 _clear();
 
@@ -195,4 +204,3 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
 
     }
 }
-

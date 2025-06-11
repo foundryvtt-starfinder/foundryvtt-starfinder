@@ -1,6 +1,42 @@
 import CheckNameHelper from "../../utils/skill-names.js";
 import BaseEnricher from "./base.js";
 
+export const checkIcons = Object.freeze({
+    "acrobatics": "fa-person-walking",
+    "athletics": "fa-dumbbell",
+    "bluff": "fa-comment",
+    "computers": "fa-computer",
+    "culture": "fa-flag",
+    "diplomacy": "fa-handshake",
+    "disguise": "fa-mask",
+    "engineering": "fa-gear",
+    "intimidate": "fa-face-angry",
+    "life-science": "fa-dna",
+    "medicine": "fa-syringe",
+    "mysticism": "fa-hand-sparkles",
+    "perception": "fa-magnifying-glass",
+    "profession": "fa-user-tie",
+    "physical-science": "fa-flask",
+    "piloting": "fa-plane",
+    "sense-motive": "fa-person-circle-question",
+    "sleight-of-hand": "fa-hands",
+    "stealth": "fa-moon",
+    "survival": "fa-campground",
+
+    "fortitude": "fa-shield-heart",
+    "reflex": "fa-person-running",
+    "will": "fa-brain",
+
+    "strength": "fa-weight-hanging",
+    "dexterity": "fa-feather-pointed",
+    "constitution": "fa-heart-pulse",
+    "intelligence": "fa-glasses",
+    "wisdom": "fa-mountain-sun",
+    "charisma": "fa-people-arrows",
+
+    "caster-level": "fa-wand-magic-sparkles"
+});
+
 /**
  * Roll a specific check
  * @class
@@ -30,41 +66,29 @@ export default class CheckEnricher extends BaseEnricher {
 
     /** @inheritdoc */
     get icons() {
-        return {
-            "acrobatics": "fa-person-walking",
-            "athletics": "fa-dumbbell",
-            "bluff": "fa-comment",
-            "computers": "fa-computer",
-            "culture": "fa-flag",
-            "diplomacy": "fa-handshake",
-            "disguise": "fa-mask",
-            "engineering": "fa-gear",
-            "intimidate": "fa-face-angry",
-            "life-science": "fa-dna",
-            "medicine": "fa-syringe",
-            "mysticism": "fa-hand-sparkles",
-            "perception": "fa-magnifying-glass",
-            "profession": "fa-user-tie",
-            "physical-science": "fa-flask",
-            "piloting": "fa-plane",
-            "sense-motive": "fa-person-circle-question",
-            "sleight-of-hand": "fa-hands",
-            "stealth": "fa-moon",
-            "survival": "fa-campground",
+        return checkIcons;
+    }
 
-            "fortitude": "fa-shield-heart",
-            "reflex": "fa-person-running",
-            "will": "fa-brain",
+    get checkType() {
+        const shortName = CheckNameHelper.shortFormName(this.args.type);
+        const C = CONFIG.SFRPG;
 
-            "strength": "fa-weight-hanging",
-            "dexterity": "fa-feather-pointed",
-            "constitution": "fa-heart-pulse",
-            "intelligence": "fa-glasses",
-            "wisdom": "fa-mountain-sun",
-            "charisma": "fa-people-arrows",
+        if (shortName in C.skills) return "skill";
+        else if (shortName in C.saves) return "save";
+        else if (shortName in C.abilities) return "ability";
+        else return null;
+    }
 
-            "caster-level": "fa-wand-magic-sparkles"
-        };
+    get localizedType() {
+        const C = CONFIG.SFRPG;
+        const type = CheckNameHelper.shortFormName(this.args.type);
+
+        switch (this.checkType) {
+            case "skill": return C.skills[type];
+            case "save": return C.saves[type];
+            case "ability": return C.abilities[type];
+            default: return "";
+        }
     }
 
     /**
@@ -79,6 +103,13 @@ export default class CheckEnricher extends BaseEnricher {
         return true;
     }
 
+    validateName() {
+        const i18nPath = this.checkType === "save" ? "SFRPG.Save" : "SFRPG.Check";
+        const localizedCheck = game.i18n.localize(i18nPath);
+
+        this.name ||= `${this.localizedType} ${localizedCheck}`;
+    }
+
     /**
      * @extends BaseEnricher
      * @returns {HTMLAnchorElement} */
@@ -86,8 +117,10 @@ export default class CheckEnricher extends BaseEnricher {
         const a = super.createElement();
 
         if (this.args.dc) a.dataset.dc = parseInt(this.args.dc);
+        if (this.args.displayDC) a.dataset.displayDC = this.args.displayDC === 'true';
+        const iconSlug = (this.checkType === "ability") ? CheckNameHelper.longFormNameAbilities(this.args.type) : CheckNameHelper.longFormName(this.args.type);
 
-        a.innerHTML = `<i class="fas ${this.icons[this.args.type]}"></i>${a.innerHTML}`;
+        a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${a.innerHTML}`;
 
         return a;
 
@@ -101,11 +134,16 @@ export default class CheckEnricher extends BaseEnricher {
 
         const actor = _token?.actor ?? game.user?.character;
         if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
+        const options = {
+            event,
+            dc: data.dc,
+            displayDC: data.displayDC
+        };
         const id = CheckNameHelper.shortFormName(data.type);
 
-        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(CheckNameHelper.shortFormName(data.type));
-        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(CheckNameHelper.shortFormName(data.type));
-        else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(CheckNameHelper.shortFormName(data.type));
+        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, options);
+        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, options);
+        else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, options);
 
     }
 

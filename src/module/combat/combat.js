@@ -43,7 +43,7 @@ Vehicle has the following 3 phases: "Pilot Actions", "Chase Progress", and "Comb
 
 */
 
-export class CombatSFRPG extends Combat {
+export class CombatSFRPG extends foundry.documents.Combat {
     static HiddenTurn = 0;
 
     /**
@@ -67,7 +67,9 @@ export class CombatSFRPG extends Combat {
     async begin() {
         const update = {
             "flags.sfrpg.combatType": this.getCombatType(),
-            "flags.sfrpg.phase": 0
+            "flags.sfrpg.phase": 0,
+            "round": 1,
+            "turn": 0
         };
 
         await this.update(update);
@@ -107,27 +109,25 @@ export class CombatSFRPG extends Combat {
         super.delete(options);
     }
 
+    // Override to account for ascending or descending turn order.
     setupTurns() {
-        let sortMethod = "desc";
-        switch (this.getCombatType()) {
-            default:
-            case "normal":
-                sortMethod = CombatSFRPG.normalCombat.initiativeSorting;
-                break;
-            case "starship":
-                sortMethod = CombatSFRPG.starshipCombat.initiativeSorting;
-                break;
-            case "vehicleChase":
-                sortMethod = CombatSFRPG.vehicleChase.initiativeSorting;
-                break;
-        }
+        this.turns ||= [];
 
-        const combatants = this.combatants;
-        const scene = game.scenes.get(this.scene);
-        const players = game.users.players;
-        const settings = game.settings.get("core", Combat.CONFIG_SETTING);
+        const sortMethod = {
+            "normal": CombatSFRPG.normalCombat.initiativeSorting,
+            "starship": CombatSFRPG.starshipCombat.initiativeSorting,
+            "vehicleChase": CombatSFRPG.vehicleChase.initiativeSorting
+        }[this.getCombatType()] || "desc";
+
         const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
-        this.turn = Math.clamped(this.turn, CombatSFRPG.HiddenTurn, turns.length - 1);
+        this.turn = Math.clamp(this.turn, CombatSFRPG.HiddenTurn, turns.length - 1);
+
+        // Update state tracking
+        const c = turns[this.turn];
+        this.current = this._getCurrentState(c);
+
+        // One-time initialization of the previous state
+        if ( !this.previous ) this.previous = this.current;
 
         return this.turns = turns;
     }
@@ -144,7 +144,7 @@ export class CombatSFRPG extends Combat {
         const updateOptions = {};
         const currentPhase = this.getCurrentPhase();
         if (currentPhase.resetInitiative) {
-            ui.notifications.error(game.i18n.format(CombatSFRPG.errors.historyLimitedResetInitiative), {permanent: false});
+            ui.notifications.error(CombatSFRPG.errors.historyLimitedResetInitiative, {permanent: false, localize: true});
             return;
         }
 
@@ -173,7 +173,7 @@ export class CombatSFRPG extends Combat {
                 nextPhase = this.getPhases().length - 1;
                 nextRound -= 1;
                 if (nextRound <= 0) {
-                    ui.notifications.error(game.i18n.format(CombatSFRPG.errors.historyLimitedStartOfEncounter), {permanent: false});
+                    ui.notifications.error(CombatSFRPG.errors.historyLimitedStartOfEncounter, {permanent: false, localize: true});
                     return;
                 }
             }
@@ -212,7 +212,7 @@ export class CombatSFRPG extends Combat {
         const phases = this.getPhases();
         const currentPhase = phases[this.flags.sfrpg.phase];
         if (currentPhase.resetInitiative && this.hasCombatantsWithoutInitiative()) {
-            ui.notifications.error(game.i18n.format(CombatSFRPG.errors.missingInitiative), {permanent: false});
+            ui.notifications.error(CombatSFRPG.errors.missingInitiative, {permanent: false, localize: true});
             return;
         }
 
@@ -340,7 +340,7 @@ export class CombatSFRPG extends Combat {
         const eventData = {
             combat: this,
             isNewRound: nextRound !== this.round,
-            isNewPhase: nextRound !== this.round || nextPhase !== this.flags.sfrpg.phase,
+            isNewPhase: nextPhase !== this.flags.sfrpg.phase,
             isNewTurn: (nextRound !== this.round && phases[nextPhase].iterateTurns) || nextTurn !== this.turn,
             oldTurn: this.turn,
             newTurn: nextTurn,
@@ -357,7 +357,7 @@ export class CombatSFRPG extends Combat {
             return;
         }
 
-        await this._notifyBeforeUpdate(eventData);
+        Hooks.callAll("onBeforeUpdateCombat", eventData);
 
         if (!newPhase.iterateTurns) {
             nextTurn = CombatSFRPG.HiddenTurn;
@@ -368,6 +368,8 @@ export class CombatSFRPG extends Combat {
             "flags.sfrpg.phase": nextPhase,
             turn: nextTurn
         };
+
+        updateOptions["eventData"] = eventData;
 
         await this.update(updateData, updateOptions);
 
@@ -384,37 +386,54 @@ export class CombatSFRPG extends Combat {
         }
 
         await this._notifyAfterUpdate(eventData);
-        this._handleTimedEffects(eventData);
     }
 
-    async _notifyBeforeUpdate(eventData) {
-        // console.log(["_notifyBeforeUpdate", eventData]);
-        // console.log([isNewRound, isNewPhase, isNewTurn]);
-        // console.log([this.round, this.flags.sfrpg.phase, this.turn]);
+    _onUpdate(changed, options, userId) {
+        super._onUpdate(changed, options, userId);
 
-        Hooks.callAll("onBeforeUpdateCombat", eventData);
+        // Get an active GM to run events players may not have permissions to do.
+        if (!game.users.activeGM?.isSelf) return;
+
+        // Handle timed events if the event that is occurring is phase/round/turn advance.
+        if (options.eventData) {
+            this._handleTimedEffects(options.eventData);
+        }
+    }
+
+    /**
+     * Run turn start turn events. This runs only for an active GM. If there are no GMs, this isn't run.
+     * @param {Combatant} combatant The Combatant whose turn just started
+     */
+    async _onStartTurn(combatant) {
+        super._onStartTurn(combatant);
+
+        combatant.actor?._onTurnStart();
+    }
+
+    /**
+     * Run turn end turn events. This runs only for an active GM. If there are no GMs, this isn't run.
+     * @param {Combatant} combatant The Combatant whose turn just ended
+     */
+    async _onEndTurn(combatant) {
+        super._onEndTurn(combatant);
+
+        combatant.actor?._onTurnEnd();
     }
 
     async _notifyAfterUpdate(eventData) {
-        // console.log(["_notifyAfterUpdate", eventData]);
-        // console.log([isNewRound, isNewPhase, isNewTurn]);
-        // console.log([this.round, this.flags.sfrpg.phase, this.turn]);
 
         const combatType = this.getCombatType();
         const combatChatSetting = game.settings.get('sfrpg', `${combatType}ChatCards`);
 
         if (eventData.isNewRound && (combatChatSetting !== "disabled" || combatChatSetting === "roundsTurns")) {
-            // console.log(`Starting new round! New phase is ${eventData.newPhase.name}, it is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewRoundChatCard(eventData);
         }
 
         if (eventData.isNewPhase && (combatChatSetting === "enabled" || combatChatSetting === "roundsPhases")) {
-            // console.log(`Starting ${eventData.newPhase.name} phase! It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewPhaseChatCard(eventData);
         }
 
         if (eventData.newCombatant && (combatChatSetting === "enabled" || combatChatSetting === "roundsTurns")) {
-            // console.log(`[${eventData.newPhase.name}] It is now the turn of: ${eventData.newCombatant?.name || "the GM"}!`);
             await this._printNewTurnChatCard(eventData);
         }
 
@@ -429,7 +448,7 @@ export class CombatSFRPG extends Combat {
         const speakerName = game.i18n.format(CombatSFRPG.chatCardsText.speaker.GM);
         const templateData = {
             header: {
-                image: "icons/svg/mystery-man.svg",
+                image: "systems/sfrpg/icons/cards/rolling-dices.svg",
                 name: game.i18n.format(CombatSFRPG.chatCardsText.round.headerName, {round: this.round})
             },
             body: {
@@ -447,7 +466,7 @@ export class CombatSFRPG extends Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -458,12 +477,13 @@ export class CombatSFRPG extends Combat {
     async _printNewPhaseChatCard(eventData) {
         const localizedCombatName = this.getCombatName();
         const localizedPhaseName = game.i18n.format(eventData.newPhase.name);
+        const phaseIcon = CONFIG.SFRPG.phaseIcons[eventData.newPhase.name];
 
         // Basic template rendering data
         const speakerName = game.i18n.format(CombatSFRPG.chatCardsText.speaker.GM);
         const templateData = {
             header: {
-                image: "icons/svg/mystery-man.svg",
+                image: phaseIcon,
                 name: game.i18n.format(CombatSFRPG.chatCardsText.phase.headerName, {phase: localizedPhaseName})
             },
             body: {
@@ -485,7 +505,7 @@ export class CombatSFRPG extends Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -523,7 +543,7 @@ export class CombatSFRPG extends Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             whisper: eventData.newCombatant.hidden ? ChatMessage.getWhisperRecipients("GM") : [],
             content: html
@@ -566,7 +586,7 @@ export class CombatSFRPG extends Combat {
 
     hasCombatantsWithoutInitiative() {
         for (const [index, combatant] of this.turns.entries()) {
-            if ((!this.settings.skipDefeated || !combatant.defeated) && !combatant.initiative) {
+            if ((!this.settings.skipDefeated || !combatant.defeated) && (combatant.initiative === undefined || combatant.initiative === null)) {
                 return true;
             }
         }
@@ -616,7 +636,7 @@ export class CombatSFRPG extends Combat {
             combatTypeControls.innerHTML = this.getCombatName();
         }
 
-        html.getElementsByClassName('combat-tracker-header')[0].appendChild(combatTypeControls);
+        html.appendChild(combatTypeControls);
     }
 
     renderDifficulty(diffObject, html) {
@@ -627,7 +647,8 @@ export class CombatSFRPG extends Combat {
         difficultyContainer.classList.add("combat-difficulty-container");
 
         const difficultyHTML = document.createElement("a");
-        difficultyHTML.classList.add("combat-difficulty", difficulty);
+        difficultyHTML.classList.add("combat-difficulty");
+        if (difficulty) difficultyHTML.classList.add(difficulty);
         if (combatType === 'normal') {
             difficultyHTML.title = `${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.ClickForDetails")}\n\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.PCs")}: ${diffObject.difficultyData.PCs.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.APL")} ${diffObject.difficultyData.APL}]\n${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.HostileNPCs")}: ${diffObject.difficultyData.enemies.length} [${game.i18n.format("SFRPG.Combat.Difficulty.Tooltip.CR")} ${diffObject.difficultyData.CR}]`;
         } else if (combatType === 'starship') {
@@ -641,6 +662,9 @@ export class CombatSFRPG extends Combat {
 
     _getInitiativeFormula(combatant) {
         if (this.getCombatType() === "starship") {
+            if (!combatant.actor.system.crew.useNPCCrew) {
+                return "1d20 + @pilot.skills.pil.mod + @ship.attributes.pilotingBonus.value";
+            }
             return "1d20 + @pilot.skills.pil.mod";
         } else {
             return "1d20 + @combatant.attributes.init.total";
@@ -654,6 +678,10 @@ export class CombatSFRPG extends Combat {
 
         if (this.getCombatType() === "starship") {
             parts.push("@pilot.skills.pil.mod");
+            if (!combatant.actor.system.crew.useNPCCrew) {
+                rollContext.addContext("ship", combatant.actor);
+                parts.push("@ship.attributes.pilotingBonus.value");
+            }
             rollContext.setMainContext("pilot");
         } else {
             parts.push("@combatant.attributes.init.total");
@@ -664,6 +692,7 @@ export class CombatSFRPG extends Combat {
 
         const rollResult = await DiceSFRPG.createRoll({
             rollContext: rollContext,
+            actorContextKey: "combatant",
             parts: parts,
             event,
             title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
@@ -678,7 +707,8 @@ export class CombatSFRPG extends Combat {
         // Structure input data
         ids = typeof ids === "string" ? [ids] : ids;
         const currentId = this.combatant?.id;
-        let rollMode = messageOptions.rollMode || game.settings.get("core", "rollMode");
+        const defaultRollMode = game.settings.get("core", "rollMode");
+        let rollMode = messageOptions.rollMode ?? defaultRollMode;
 
         // Iterate over Combatants, performing an initiative roll for each
         const updates = [];
@@ -689,6 +719,15 @@ export class CombatSFRPG extends Combat {
             const combatant = this.combatants.get(id);
             if ( !combatant?.isOwner ) return results;
 
+            // If starship combat and no pilot initiative is just ship piloting bonuses
+            if (this.getCombatType() === "starship" && combatant.actor.type === "starship"
+                && ((!combatant.actor.system.crew.useNPCCrew && combatant.actor.system.crew.pilot.actorIds.length === 0)
+                    || (combatant.actor.system.crew.useNPCCrew && !combatant.actor.system.crew.npcData.pilot.skills.pil))
+            ) {
+                updates.push({_id: id, initiative: combatant.actor.system.attributes.pilotingBonus.value});
+                continue;
+            }
+
             // Roll initiative
             const roll = await this._getInitiativeRoll(combatant, "");
             if (!roll) {
@@ -697,7 +736,7 @@ export class CombatSFRPG extends Combat {
             updates.push({_id: id, initiative: roll.total});
 
             // Construct chat message data
-            const messageData = mergeObject({
+            const messageData = foundry.utils.mergeObject({
                 speaker: {
                     scene: game.scenes.current?.id,
                     actor: combatant.actor ? combatant.actor.id : null,
@@ -708,10 +747,17 @@ export class CombatSFRPG extends Combat {
                 flags: {"core.initiativeRoll": true}
             }, messageOptions);
 
+            // Prepare roll formula explanation
             const preparedRollExplanation = DiceSFRPG.formatFormula(roll.flags.sfrpg.finalFormula.formula);
-            const rollContent = await roll.render();
-            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-            const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
+            const preparedRollExplanationElement = document.createElement("div");
+            preparedRollExplanationElement.innerHTML = preparedRollExplanation;
+
+            // Created a div with the roll output sent to a div. Add the roll formula explanation to this div and convert back to text.
+            const rollContentElement = document.createElement("div");
+            rollContentElement.innerHTML = await roll.render();
+            const tooltipPart = rollContentElement.querySelector(".tooltip-part");
+            tooltipPart.prepend(preparedRollExplanationElement);
+            const explainedRollContent = rollContentElement.innerHTML;
 
             rollMode = roll.options?.rollMode ?? rollMode;
 
@@ -720,9 +766,9 @@ export class CombatSFRPG extends Combat {
                 speaker: messageData.speaker,
                 flags: messageData.flags,
                 content: explainedRollContent,
-                rollMode: combatant.hidden && (rollMode === "roll") ? "gmroll" : rollMode,
-                roll: roll,
-                type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+                rollMode: combatant.hidden && rollMode === CONST.DICE_ROLL_MODES.PUBLIC && defaultRollMode === CONST.DICE_ROLL_MODES.PUBLIC ? "gmroll" : rollMode,
+                rolls: [roll],
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 sound: CONFIG.sounds.dice
             };
 
@@ -744,7 +790,9 @@ export class CombatSFRPG extends Combat {
         }
 
         // Create multiple chat messages
-        await CONFIG.ChatMessage.documentClass.create(messages);
+        await messages.forEach(message => {
+            ChatMessage.create(message, { rollMode: message.rollMode });
+        });
 
         // Return the updated Combat
         return this;
@@ -783,10 +831,26 @@ export class CombatSFRPG extends Combat {
             const effectFinish = duration.activationEnd;
             const expiryInit = duration.expiryInit || 1000; // If anything goes wrong, expire at the start of the round
             const targetActorId = (() => {
-                if (effect.sourceActorId === "parent") return fromUuidSync(effect.actorUuid).id;
+                /** @type {"parent"|"origin"|"init"|ActorID} */
+                const expiryModeTurn = duration.expiryMode.turn;
+
+                // Expire on the owner's turn
+                if (expiryModeTurn === "parent") {
+                    const id = effect.actor?.id;
+                    if (id) return id;
+                }
+
+                // Expire on the origin actor's turn; fall back to owner
+                else if (expiryModeTurn === "origin") {
+                    const id = effect.origin?.id || effect.actor?.id;
+                    if (id) return id;
+                }
+
                 // Turn closest to initiative to expire on
-                else if (effect.sourceActorId === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actorId;
-                else return effect.sourceActorId;
+                else if (expiryModeTurn === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actorId;
+
+                // Otherwise, an actor id of a specific combatant
+                else return expiryModeTurn;
             })();
 
             if (((worldTime >= effectFinish) && effect.enabled) // If effect has expired
@@ -797,7 +861,7 @@ export class CombatSFRPG extends Combat {
                     continue;
                 }
 
-                if (duration.expiryMode === "turn") {
+                if (duration.expiryMode.type === "turn") {
                     if (duration.endsOn === 'onTurnEnd') {
                         if ((forward && eventData.oldCombatant.actorId === targetActorId) || (!forward && eventData.newCombatant.actorId === targetActorId)) {
                             effect.toggle(false);
@@ -833,6 +897,10 @@ async function onConfigClicked(combat, direction) {
     await combat.update(update);
 }
 
+Hooks.on('combatStart', (combat) => {
+    combat.begin();
+});
+
 Hooks.on('renderCombatTracker', (app, html, data) => {
     const activeCombat = data.combat;
     if (!activeCombat) {
@@ -841,35 +909,29 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
 
     const combatType = activeCombat.getCombatType();
 
-    const header = html.find('.combat-tracker-header');
-    const footer = html.find('.directory-footer');
+    const header = html.querySelector('.combat-tracker-header');
+    const footer = html.querySelector('.combat-controls');
 
-    if (activeCombat.round) {
+    if (activeCombat.round > 0) {
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
-            activeCombat.renderCombatPhase(html[0]);
+            activeCombat.renderCombatPhase(html);
         }
     } else {
         // Add buttons for switching combat type
-        activeCombat.renderCombatTypeControls(html[0]);
+        activeCombat.renderCombatTypeControls(header);
 
         // Handle button clicks
-        const configureButtonPrev = header.find('.combat-type-prev');
-        configureButtonPrev.click(ev => {
+        const configureButtonPrev = header.querySelector('.combat-type-prev');
+        configureButtonPrev.addEventListener('click', ev => {
             ev.preventDefault();
             onConfigClicked(activeCombat, -1);
         });
 
-        const configureButtonNext = header.find('.combat-type-next');
-        configureButtonNext.click(ev => {
+        const configureButtonNext = header.querySelector('.combat-type-next');
+        configureButtonNext.addEventListener('click', ev => {
             ev.preventDefault();
             onConfigClicked(activeCombat, 1);
-        });
-
-        const beginButton = footer.find('.combat-control[data-control=startCombat]');
-        beginButton.click(ev => {
-            ev.preventDefault();
-            activeCombat.begin();
         });
     }
 
@@ -884,11 +946,11 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         else if (combatType === "starship") diffObject.getStarshipEncounterInfo();
 
         // Display difficulty
-        activeCombat.renderDifficulty(diffObject, html[0]);
+        activeCombat.renderDifficulty(diffObject, html);
 
         // Handle button presses
-        const difficultyButton = header.find('.combat-difficulty');
-        difficultyButton.click(async ev => {
+        const difficultyButton = header.querySelector('.combat-difficulty');
+        difficultyButton.addEventListener('click', ev => {
             ev.preventDefault();
             diffObject.render(true);
         });

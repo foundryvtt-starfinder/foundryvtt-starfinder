@@ -200,6 +200,7 @@ SFRPG.damageTypeOperators = {
 SFRPG.descriptors = {
     "acid": "SFRPG.Descriptors.Acid",
     "air": "SFRPG.Descriptors.Air",
+    "auditory": "SFRPG.Descriptors.Auditory",
     "calling": "SFRPG.Descriptors.Calling",
     "chaotic": "SFRPG.Descriptors.Chaotic",
     "charm": "SFRPG.Descriptors.Charm",
@@ -219,6 +220,7 @@ SFRPG.descriptors = {
     "force": "SFRPG.Descriptors.Force",
     "good": "SFRPG.Descriptors.Good",
     "healing": "SFRPG.Descriptors.Healing",
+    "illusion": "SFRPG.Descriptors.Illusion",
     "language-dependent": "SFRPG.Descriptors.LanguageDependent",
     "lawful": "SFRPG.Descriptors.Lawful",
     "light": "SFRPG.Descriptors.Light",
@@ -303,6 +305,7 @@ SFRPG.ammunitionTypes = {
     "flare": "SFRPG.Items.Ammunition.Type.Flares",
     "flechettes": "SFRPG.Items.Ammunition.Type.Flechettes",
     "nanite": "SFRPG.Items.Ammunition.Type.Nanites",
+    "junk": "SFRPG.Items.Ammunition.Type.Junk",
     "caustrol": "SFRPG.Items.Ammunition.Type.Caustrol",
     "sclerite": "SFRPG.Items.Ammunition.Type.Sclerites",
     "moodGoo": "SFRPG.Items.Ammunition.Type.MoodGoo",
@@ -358,6 +361,11 @@ SFRPG.effectDurationFrom = {
     "minute": 60,
     "hour": 3600,
     "day": 86400
+};
+
+SFRPG.turnEventTypes = {
+    "note": "SFRPG.TurnEvent.Types.Note",
+    "roll": "SFRPG.TurnEvent.Types.Roll"
 };
 
 /**
@@ -419,6 +427,13 @@ SFRPG.skills = {
     "sle": "SFRPG.SkillSle",
     "ste": "SFRPG.SkillSte",
     "sur": "SFRPG.SkillSur"
+};
+
+SFRPG.controlSkills = {
+    "pil": "SFRPG.SkillPil",
+    "ath": "SFRPG.SkillAth",
+    "sur": "SFRPG.SkillSur",
+    "none": "SFRPG.None"
 };
 
 // Weapon Types
@@ -945,12 +960,13 @@ SFRPG.languages = {
     "abyssal": "SFRPG.LanguagesAbyssal",
     "aglian": "SFRPG.LanguagesAglian",
     "akan": "SFRPG.LanguagesAkan",
-    "akiton": "SFRPG.LanguagesAkitonian",
+    "akitonian": "SFRPG.LanguagesAkitonian",
     "aklo": "SFRPG.LanguagesAklo",
     "alkainish": "SFRPG.LanguagesAlkainish",
     "anassan": "SFRPG.LanguagesAnassan",
     "aquan": "SFRPG.LanguagesAquan",
     "arkanen": "SFRPG.LanguagesArkanen",
+    "astriapi": "SFRPG.LanguagesAstriapi",
     "ancientDaimalkan": "SFRPG.LanguagesAncientDaimalkan",
     "auran": "SFRPG.LanguagesAuran",
     "azlanti": "SFRPG.LanguagesAzlanti",
@@ -979,11 +995,13 @@ SFRPG.languages = {
     "firstSpeech": "SFRPG.LanguagesFirstSpeech",
     "frujai": "SFRPG.LanguagesFrujai",
     "garaggakal": "SFRPG.LanguagesGaraggakal",
+    "gathol": "SFRPG.LanguagesGathol",
     "ghibran": "SFRPG.LanguagesGhibran",
     "ghoran": "SFRPG.LanguagesGhoran",
     "giant": "SFRPG.LanguagesGiant",
     "gnome": "SFRPG.LanguagesGnome",
     "goblin": "SFRPG.LanguagesGoblin",
+    "gosclaw": "SFRPG.LanguagesGosclaw",
     "grioth": "SFRPG.LanguagesGrioth",
     "gytchean": "SFRPG.LanguagesGytchean",
     "hadrogaan": "SFRPG.LanguagesHadrogaan",
@@ -1021,12 +1039,14 @@ SFRPG.languages = {
     "paralithi": "SFRPG.LanguagesParalithi",
     "perani": "SFRPG.LanguagesPerani",
     "protean": "SFRPG.LanguagesProtean",
+    "psacynoa": "SFRPG.LanguagesPsacynoa",
     "quorlu": "SFRPG.LanguagesQuorlu",
     "raxi": "SFRPG.LanguagesRaxi",
     "reptoid": "SFRPG.LanguagesReptoid",
     "requian": "SFRPG.LanguagesRequian",
     "sarcesian": "SFRPG.LanguagesSarcesian",
     "sazaron": "SFRPG.LanguagesSazaron",
+    "screedreep": "SFRPG.LanguagesScreedreep",
     "scyphozoan": "SFRPG.LanguagesScyphozoan",
     "selamidian": "SFRPG.LanguagesSelamidian",
     "seprevoi": "SFRPG.LanguagesSeprevoi",
@@ -1043,6 +1063,7 @@ SFRPG.languages = {
     "terran": "SFRPG.LanguagesTerran",
     "triaxian": "SFRPG.LanguagesTriaxian",
     "trinir": "SFRPG.LanguagesTrinir",
+    "tromlin": "SFRPG.LanguagesTromlin",
     "urog": "SFRPG.LanguagesUrog",
     "varratana": "SFRPG.LanguagesVarratana",
     "vercite": "SFRPG.LanguagesVercite",
@@ -1050,6 +1071,7 @@ SFRPG.languages = {
     "vlakan": "SFRPG.LanguagesVlakan",
     "vulgarKishaleen": "SFRPG.LanguagesVulgarKishaleen",
     "woiokan": "SFRPG.LanguagesWoiokan",
+    "worlanisi": "SFRPG.LanguagesWorlanisi",
     "wrikreechee": "SFRPG.LanguagesWrikreechee",
     "xaarb": "SFRPG.LanguagesXaarb",
     "ysoki": "SFRPG.LanguagesYsoki"
@@ -1071,7 +1093,8 @@ SFRPG.consumableTypes = {
     "drugs"    : "SFRPG.ConsumableTypes.Drugs",
     "medicne"  : "SFRPG.ConsumableTypes.Medicine",
     "poison"   : "SFRPG.ConsumableTypes.Poison",
-    "foodDrink": "SFRPG.ConsumableTypes.FoodDrink"
+    "foodDrink": "SFRPG.ConsumableTypes.FoodDrink",
+    "other": "SFRPG.ConsumableTypes.Other"
 };
 
 SFRPG.augmentationSystems = {
@@ -1169,12 +1192,14 @@ SFRPG.starshipWeaponClass = {
 
 SFRPG.starshipWeaponProperties = {
     "anchoring" : "SFRPG.ShipSystems.StarshipWeaponProperties.Anchoring", // SOM
+    "antimagic" : "SFRPG.ShipSystems.StarshipWeaponProperties.Antimagic", // PoC
     "array"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Array", // CRB
     "automated" : "SFRPG.ShipSystems.StarshipWeaponProperties.Automated", // SOM
     "broad"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Broad", // CRB
     "bugging"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Bugging", // Near Space
     "burrowing" : "SFRPG.ShipSystems.StarshipWeaponProperties.Burrowing", // Pact Worlds
     "buster"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Buster", // SOM
+    "cacophonous": "SFRPG.ShipSystems.StarshipWeaponProperties.Cacophonous", // PoC
     "connecting": "SFRPG.ShipSystems.StarshipWeaponProperties.Connecting", // The Last Refuge
     "deathField": "SFRPG.ShipSystems.StarshipWeaponProperties.DeathField", // AA 3
     "deployed"  : "SFRPG.ShipSystems.StarshipWeaponProperties.Deployed", // SOM
@@ -1217,6 +1242,7 @@ SFRPG.starshipWeaponProperties = {
     "teleportation": "SFRPG.ShipSystems.StarshipWeaponProperties.Teleportation", // SOM
     "tractor"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Tractor", // CRB
     "transposition": "SFRPG.ShipSystems.StarshipWeaponProperties.Transposition", // SOM
+    "unerring" : "SFRPG.ShipSystems.StarshipWeaponProperties.Unerring", // PoC
     "vandalDrones": "SFRPG.ShipSystems.StarshipWeaponProperties.VandalDrones", // AA 3
     "volatile": "SFRPG.ShipSystems.StarshipWeaponProperties.Volatile", // Empire of Bones
     "vortex"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex" // CRB
@@ -1339,9 +1365,10 @@ SFRPG.modifierTypes = {
     "insight": "SFRPG.ModifierTypeInsight",
     "luck": "SFRPG.ModifierTypeLuck",
     "morale": "SFRPG.ModifierTypeMorale",
-    "racial": "SFRPG.ModifierTypeRacial",
     "resistance": "SFRPG.ModifierTypeResistance",
-    "untyped": "SFRPG.ModifierTypeUntyped"
+    "racial": "SFRPG.ModifierTypeRacial",
+    "untyped": "SFRPG.ModifierTypeUntyped",
+    "weapon-specialization": "SFRPG.ModifierTypeWeaponSpecialization"
 };
 
 // See modules/modifiers/types.js, SFRPGEffectType
@@ -1583,183 +1610,184 @@ SFRPG.difficultyLevels = {
 SFRPG.statusEffects = [
     {
         id: "asleep",
-        label: "SFRPG.ConditionsAsleep",
-        icon: "systems/sfrpg/icons/conditions/asleep.webp"
+        name: "SFRPG.ConditionsAsleep",
+        img: "systems/sfrpg/icons/conditions/asleep.webp"
     },
     {
         id: "bleeding",
-        label: "SFRPG.ConditionsBleeding",
-        icon: "systems/sfrpg/icons/conditions/bleeding.webp"
+        name: "SFRPG.ConditionsBleeding",
+        img: "systems/sfrpg/icons/conditions/bleeding.webp"
     },
     {
         id: "blinded",
-        label: "SFRPG.ConditionsBlinded",
-        icon: "systems/sfrpg/icons/conditions/blinded.webp"
+        name: "SFRPG.ConditionsBlinded",
+        img: "systems/sfrpg/icons/conditions/blinded.webp"
     },
     {
         id: "broken",
-        label: "SFRPG.ConditionsBroken",
-        icon: "systems/sfrpg/icons/conditions/broken.webp"
+        name: "SFRPG.ConditionsBroken",
+        img: "systems/sfrpg/icons/conditions/broken.webp",
+        hud: false
     },
     {
         id: "burning",
-        label: "SFRPG.ConditionsBurning",
-        icon: "systems/sfrpg/icons/conditions/burning.webp"
+        name: "SFRPG.ConditionsBurning",
+        img: "systems/sfrpg/icons/conditions/burning.webp"
     },
     {
         id: "confused",
-        label: "SFRPG.ConditionsConfused",
-        icon: "systems/sfrpg/icons/conditions/confused.webp"
+        name: "SFRPG.ConditionsConfused",
+        img: "systems/sfrpg/icons/conditions/confused.webp"
     },
     {
         id: "cowering",
-        label: "SFRPG.ConditionsCowering",
-        icon: "systems/sfrpg/icons/conditions/cowering.webp"
+        name: "SFRPG.ConditionsCowering",
+        img: "systems/sfrpg/icons/conditions/cowering.webp"
     },
     {
         id: "dazed",
-        label: "SFRPG.ConditionsDazed",
-        icon: "systems/sfrpg/icons/conditions/dazed.webp"
+        name: "SFRPG.ConditionsDazed",
+        img: "systems/sfrpg/icons/conditions/dazed.webp"
     },
     {
         id: "dazzled",
-        label: "SFRPG.ConditionsDazzled",
-        icon: "systems/sfrpg/icons/conditions/dazzled.webp"
+        name: "SFRPG.ConditionsDazzled",
+        img: "systems/sfrpg/icons/conditions/dazzled.webp"
     },
     {
         id: "dead",
-        label: "SFRPG.ConditionsDead",
-        icon: "systems/sfrpg/icons/conditions/dead.webp"
+        name: "SFRPG.ConditionsDead",
+        img: "systems/sfrpg/icons/conditions/dead.webp"
     },
     {
         id: "deafened",
-        label: "SFRPG.ConditionsDeafened",
-        icon: "systems/sfrpg/icons/conditions/deafened.webp"
+        name: "SFRPG.ConditionsDeafened",
+        img: "systems/sfrpg/icons/conditions/deafened.webp"
     },
     {
         id: "dying",
-        label: "SFRPG.ConditionsDying",
-        icon: "systems/sfrpg/icons/conditions/dying.webp"
+        name: "SFRPG.ConditionsDying",
+        img: "systems/sfrpg/icons/conditions/dying.webp"
     },
     {
         id: "encumbered",
-        label: "SFRPG.ConditionsEncumbered",
-        icon: "systems/sfrpg/icons/conditions/encumbered.webp"
+        name: "SFRPG.ConditionsEncumbered",
+        img: "systems/sfrpg/icons/conditions/encumbered.webp"
     },
     {
         id: "entangled",
-        label: "SFRPG.ConditionsEntangled",
-        icon: "systems/sfrpg/icons/conditions/entangled.webp"
+        name: "SFRPG.ConditionsEntangled",
+        img: "systems/sfrpg/icons/conditions/entangled.webp"
     },
     {
         id: "exhausted",
-        label: "SFRPG.ConditionsExhausted",
-        icon: "systems/sfrpg/icons/conditions/exhausted.webp"
+        name: "SFRPG.ConditionsExhausted",
+        img: "systems/sfrpg/icons/conditions/exhausted.webp"
     },
     {
         id: "fascinated",
-        label: "SFRPG.ConditionsFascinated",
-        icon: "systems/sfrpg/icons/conditions/fascinated.webp"
+        name: "SFRPG.ConditionsFascinated",
+        img: "systems/sfrpg/icons/conditions/fascinated.webp"
     },
     {
         id: "fatigued",
-        label: "SFRPG.ConditionsFatigued",
-        icon: "systems/sfrpg/icons/conditions/fatigued.webp"
+        name: "SFRPG.ConditionsFatigued",
+        img: "systems/sfrpg/icons/conditions/fatigued.webp"
     },
     {
         id: "flat-footed",
-        label: "SFRPG.ConditionsFlatFooted",
-        icon: "systems/sfrpg/icons/conditions/flatfooted.webp"
+        name: "SFRPG.ConditionsFlatFooted",
+        img: "systems/sfrpg/icons/conditions/flatfooted.webp"
     },
     {
         id: "frightened",
-        label: "SFRPG.ConditionsFrightened",
-        icon: "systems/sfrpg/icons/conditions/frightened.webp"
+        name: "SFRPG.ConditionsFrightened",
+        img: "systems/sfrpg/icons/conditions/frightened.webp"
     },
     {
         id: "grappled",
-        label: "SFRPG.ConditionsGrappled",
-        icon: "systems/sfrpg/icons/conditions/grappled.webp"
+        name: "SFRPG.ConditionsGrappled",
+        img: "systems/sfrpg/icons/conditions/grappled.webp"
     },
     {
         id: "helpless",
-        label: "SFRPG.ConditionsHelpless",
-        icon: "systems/sfrpg/icons/conditions/helpless.webp"
+        name: "SFRPG.ConditionsHelpless",
+        img: "systems/sfrpg/icons/conditions/helpless.webp"
     },
     {
         id: "invisible",
-        label: "SFRPG.ConditionsInvisible",
-        icon: "systems/sfrpg/icons/conditions/invisible.webp"
+        name: "SFRPG.ConditionsInvisible",
+        img: "systems/sfrpg/icons/conditions/invisible.webp"
     },
     {
         id: "nauseated",
-        label: "SFRPG.ConditionsNauseated",
-        icon: "systems/sfrpg/icons/conditions/nauseated.webp"
+        name: "SFRPG.ConditionsNauseated",
+        img: "systems/sfrpg/icons/conditions/nauseated.webp"
     },
     {
         id: "off-kilter",
-        label: "SFRPG.ConditionsOffKilter",
-        icon: "systems/sfrpg/icons/conditions/offkilter.webp"
+        name: "SFRPG.ConditionsOffKilter",
+        img: "systems/sfrpg/icons/conditions/offkilter.webp"
     },
     {
         id: "off-target",
-        label: "SFRPG.ConditionsOffTarget",
-        icon: "systems/sfrpg/icons/conditions/offtarget.webp"
+        name: "SFRPG.ConditionsOffTarget",
+        img: "systems/sfrpg/icons/conditions/offtarget.webp"
     },
     {
         id: "overburdened",
-        label: "SFRPG.ConditionsOverburdened",
-        icon: "systems/sfrpg/icons/conditions/overburdened.webp"
+        name: "SFRPG.ConditionsOverburdened",
+        img: "systems/sfrpg/icons/conditions/overburdened.webp"
     },
     {
         id: "panicked",
-        label: "SFRPG.ConditionsPanicked",
-        icon: "systems/sfrpg/icons/conditions/panicked.webp"
+        name: "SFRPG.ConditionsPanicked",
+        img: "systems/sfrpg/icons/conditions/panicked.webp"
     },
     {
         id: "paralyzed",
-        label: "SFRPG.ConditionsParalyzed",
-        icon: "systems/sfrpg/icons/conditions/paralyzed.webp"
+        name: "SFRPG.ConditionsParalyzed",
+        img: "systems/sfrpg/icons/conditions/paralyzed.webp"
     },
     {
         id: "pinned",
-        label: "SFRPG.ConditionsPinned",
-        icon: "systems/sfrpg/icons/conditions/pinned.webp"
+        name: "SFRPG.ConditionsPinned",
+        img: "systems/sfrpg/icons/conditions/pinned.webp"
     },
     {
         id: "prone",
-        label: "SFRPG.ConditionsProne",
-        icon: "systems/sfrpg/icons/conditions/prone.webp"
+        name: "SFRPG.ConditionsProne",
+        img: "systems/sfrpg/icons/conditions/prone.webp"
     },
     {
         id: "shaken",
-        label: "SFRPG.ConditionsShaken",
-        icon: "systems/sfrpg/icons/conditions/shaken.webp"
+        name: "SFRPG.ConditionsShaken",
+        img: "systems/sfrpg/icons/conditions/shaken.webp"
     },
     {
         id: "sickened",
-        label: "SFRPG.ConditionsSickened",
-        icon: "systems/sfrpg/icons/conditions/sickened.webp"
+        name: "SFRPG.ConditionsSickened",
+        img: "systems/sfrpg/icons/conditions/sickened.webp"
     },
     {
         id: "stable",
-        label: "SFRPG.ConditionsStable",
-        icon: "systems/sfrpg/icons/conditions/stable.webp"
+        name: "SFRPG.ConditionsStable",
+        img: "systems/sfrpg/icons/conditions/stable.webp"
     },
     {
         id: "staggered",
-        label: "SFRPG.ConditionsStaggered",
-        icon: "systems/sfrpg/icons/conditions/staggered.webp"
+        name: "SFRPG.ConditionsStaggered",
+        img: "systems/sfrpg/icons/conditions/staggered.webp"
     },
     {
         id: "stunned",
-        label: "SFRPG.ConditionsStunned",
-        icon: "systems/sfrpg/icons/conditions/stunned.webp"
+        name: "SFRPG.ConditionsStunned",
+        img: "systems/sfrpg/icons/conditions/stunned.webp"
     },
     {
         id: "unconscious",
-        label: "SFRPG.ConditionsUnconscious",
-        icon: "systems/sfrpg/icons/conditions/unconscious.webp"
+        name: "SFRPG.ConditionsUnconscious",
+        img: "systems/sfrpg/icons/conditions/unconscious.webp"
     }
 ];
 
@@ -1949,6 +1977,12 @@ SFRPG.droneFeatsPerLevel = [1, 1, 2, 2, 2, 3, 3, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7
 SFRPG.droneModsPerLevel = [1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10];
 SFRPG.droneAbilityScoreIncreaseLevels = [4, 7, 10, 13, 16, 19];
 
+SFRPG.droneArmTypes = {
+    "general": "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.General",
+    "melee": "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Melee",
+    "ranged": "SFRPG.DroneSheet.Mod.Details.Arms.ArmType.Ranged"
+};
+
 SFRPG.capacityUsagePer = {
     "action": "SFRPG.Capacity.UsagePer.Action",
     "shot": "SFRPG.Capacity.UsagePer.Shot",
@@ -2108,6 +2142,19 @@ SFRPG.combatTypes = [
     "vehicleChase"
 ];
 
+SFRPG.phaseIcons = {
+    "SFRPG.Combat.Normal.Phases.1.Name": "systems/sfrpg/icons/cards/light-sabers.svg", // Combat
+    "SFRPG.Combat.Starship.Phases.1.Name": "systems/sfrpg/icons/cards/cycle.svg", // Switch Roles
+    "SFRPG.Combat.Starship.Phases.2.Name": "systems/sfrpg/icons/cards/tinker.svg", // Engineering
+    "SFRPG.Combat.Starship.Phases.3.Name": "systems/sfrpg/icons/cards/air-force.svg", // Piloting Check
+    "SFRPG.Combat.Starship.Phases.4.Name": "systems/sfrpg/icons/cards/ship-wheel.svg", // Helm
+    "SFRPG.Combat.Starship.Phases.5.Name": "systems/sfrpg/icons/cards/gunshot.svg", // Gunnery
+    "SFRPG.Combat.Starship.Phases.6.Name": "systems/sfrpg/icons/cards/bullet-impacts.svg", // Damage
+    "SFRPG.Combat.VehicleChase.Phases.1.Name": "systems/sfrpg/icons/cards/air-force.svg", // Pilot Actions
+    "SFRPG.Combat.VehicleChase.Phases.2.Name": "systems/sfrpg/icons/cards/police-car.svg", // Chase Progress
+    "SFRPG.Combat.VehicleChase.Phases.3.Name": "systems/sfrpg/icons/cards/light-sabers.svg" // Combat
+};
+
 /**
  * The supported weapon types for weapon accessories
  */
@@ -2142,6 +2189,8 @@ SFRPG.actionTargets = {
     "kac": "SFRPG.Items.Action.ActionTarget.KAC",
     "kac8": "SFRPG.Items.Action.ActionTarget.KAC8",
     "eac": "SFRPG.Items.Action.ActionTarget.EAC",
+    "ac5": "SFRPG.Items.Action.ActionTarget.AC5",
+    "ac15": "SFRPG.Items.Action.ActionTarget.AC15",
     "other": "SFRPG.Items.Action.ActionTarget.Other"
 };
 
@@ -2244,4 +2293,74 @@ SFRPG.enricherTypes = {
     "Icon": IconEnricher,
     "Check": CheckEnricher,
     "Template": TemplateEnricher
+};
+
+SFRPG.foundryDefaultIcons = {
+    "actor": "icons/svg/mystery-man.svg",
+    "item": "icons/svg/item-bag.svg"
+};
+
+SFRPG.defaultActorIcons = {
+    "character": "astronaut-helmet.svg",
+    "drone": "delivery-drone.svg",
+    "hazard": "mantrap.svg",
+    "npc": "alien-stare.svg",
+    "npc2": "alien-stare.svg",
+    "starship": "starfighter.svg",
+    "vehicle": "bus.svg"
+};
+
+SFRPG.defaultItemIcons = {
+    "archetypes": "toggles.svg",
+    "class": "id-card.svg",
+    "race": "dna2.svg",
+    "theme": "plane-pilot.svg",
+
+    "actorResource": "pie-chart.svg",
+    "feat": "achievement.svg",
+    "spell": "spell-book.svg",
+    "effect": "stopwatch.svg",
+
+    "asi": "upgrade.svg",
+
+    "chassis": "robot-golem.svg",
+    "mod": "auto-repair.svg",
+
+    "starshipAblativeArmor": "metal-plate.svg",
+    "starshipAction": "crosshair.svg",
+    "starshipArmor": "metal-scales.svg",
+    "starshipComputer": "server-rack.svg",
+    "starshipCrewQuarter": "bunk-beds.svg",
+    "starshipDefensiveCountermeasure": "bubble-field.svg",
+    "starshipDriftEngine": "star-gate.svg",
+    "starshipExpansionBay": "cardboard-box-closed.svg",
+    "starshipFortifiedHull": "steel-door.svg",
+    "starshipFrame": "hexagonal-nut.svg",
+    "starshipOtherSystem": "gears.svg",
+    "starshipPowerCore": "power-generator.svg",
+    "starshipReinforcedBulkhead": "metal-scales-plus.svg",
+    "starshipSecuritySystem": "cctv-camera.svg",
+    "starshipSensor": "radar-dish.svg",
+    "starshipShield": "forward-field.svg",
+    "starshipSpecialAbility": "cpu.svg",
+    "starshipThruster": "rocket-thruster.svg",
+    "starshipWeapon": "strafe.svg",
+
+    "vehicleAttack": "reticule.svg",
+    "vehicleSystem": "gear-stick.svg",
+
+    "ammunition": "bullets.svg",
+    "augmentation": "vr-headset.svg",
+    "consumable": "beer-bottle.svg",
+    "container": "briefcase.svg",
+    "equipment": "kevlar-vest.svg",
+    "fusion": "lightning-spanner.svg",
+    "goods": "hand-truck.svg",
+    "hybrid": "energise.svg",
+    "magic": "magick-trick.svg",
+    "shield": "energy-shield.svg",
+    "technological": "processor.svg",
+    "upgrade": "armor-upgrade.svg",
+    "weapon": "bolter-gun.svg",
+    "weaponAccessory": "gun-stock.svg"
 };

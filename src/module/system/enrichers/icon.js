@@ -51,6 +51,7 @@ export default class IconEnricher extends BaseEnricher {
         img.classList.add("icon-enricher");
         img.alt = name;
         img.src = this.icons[this.args.type];
+        img.loading = "lazy";
 
         return img;
     }

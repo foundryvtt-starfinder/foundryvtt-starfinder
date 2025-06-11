@@ -8,8 +8,10 @@ export const SFRPGModifierTypes = Object.freeze({
     INSIGHT: "insight",
     LUCK: "luck",
     MORALE: "morale",
+    RESISTANCE: "resistance",
     RACIAL: "racial",
-    UNTYPED: "untyped"
+    UNTYPED: "untyped",
+    WEAPON_SPECIALIZATION: "weapon-specialization"
 });
 
 export const SFRPGEffectType = Object.freeze({
