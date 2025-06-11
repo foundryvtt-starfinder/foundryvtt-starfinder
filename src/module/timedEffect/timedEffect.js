@@ -124,7 +124,7 @@ export default class SFRPGTimedEffect {
             _id: item._id,
             system: {
                 enabled: this.enabled,
-                modifiers: item.system.modifiers,
+                modifiers: item.system.modifiers.map(modifier => modifier.toObject?.() ?? modifier),
                 activeDuration: item.system.activeDuration
             }
         };
