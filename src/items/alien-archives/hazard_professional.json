@@ -111,9 +111,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 2,
         "modifiers": [],
         "price": 450,
@@ -377,10 +379,12 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-perihelion.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 5,
         "modifiers": [],
@@ -633,6 +637,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -772,6 +777,7 @@
         },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -779,6 +785,7 @@
         "modifiers": [],
         "price": 6900,
         "proficient": false,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -869,6 +876,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "price": 60,
@@ -906,7 +914,23 @@
       "img": "systems/sfrpg/icons/equipment/technological%20items/fire-extinguisher.webp",
       "system": {
         "type": "",
+        "ability": null,
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -931,15 +955,21 @@
           "max": 20,
           "value": 20
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": []
         },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -947,19 +977,49 @@
           "unidentified": "",
           "value": "<p>As a standard action, you can deploy a fire extinguisher to end a burn effect on any one creature or object of Medium or smaller size. Extinguishing a Large creature or object takes 2 rounds, and the number of rounds required doubles with each size category beyond Large. A fire extinguisher can function for 20 rounds (which need not be consecutive) and can be recharged for 10% of the purchase price.</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "hands": 1,
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 15,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "Core Rulebook",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "round",
           "value": 1
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
         }
       }
     },
@@ -975,10 +1035,26 @@
       "img": "systems/sfrpg/icons/classes/stealth_drone.webp",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -1003,6 +1079,7 @@
           "max": 0,
           "value": 0
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": 1,
@@ -1010,11 +1087,13 @@
           "storage": []
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1022,19 +1101,49 @@
           "unidentified": "",
           "value": "<p>A spy drone is a Tiny remote drone designed specifically to make observations at a distance. This acts as the flight drone of a 1st-level mechanic (and you control it as if you were a 1st-level mechanic, using its remote control or a computer with an added module to control the spy drone), except it cannot make any attacks and it has no weapon mounts, no feats, and no ability to add drone mods. Its skill unit is always Stealth. It cannot speak, but it does understand one language (chosen by you at the time of purchase) and allows you to attempt Perception checks using your own bonus when you directly control it (as the master control ability of a mechanic drone).</p>\n<p>A drone can be upgraded with any one of the following technological items by paying 125% of the item’s price: flashlight, grappler, lantern, laser microphone, motion detector, scanner, or X-ray visor. The price of buying and installing one upgrade includes the price of replacing an old upgrade on a drone, if applicable.</p>\n<p><strong>Capacity</strong>&nbsp;20;&nbsp;<strong>Usage&nbsp;</strong> 1/minute</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "hands": 0,
         "identified": false,
+        "isActive": null,
         "level": 6,
         "modifiers": [],
         "price": 4550,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "CRB pg. 219",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "",
           "value": 0
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
         }
       }
     },
@@ -1142,9 +1251,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 95,
@@ -1405,11 +1516,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.BGgNadwCQNgFesXk"
-        }
-      },
       "img": "icons/weapons/clubs/club-baton-blue.webp",
       "system": {
         "type": "",
@@ -1505,9 +1611,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 2,
         "modifiers": [],
         "price": 450,
@@ -1642,11 +1750,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.kaRekJN59nLmyLng"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-perihelion.webp",
       "system": {
         "type": "",
@@ -1771,10 +1874,12 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-perihelion.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 5,
         "modifiers": [],
@@ -1985,6 +2090,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "price": 60,
@@ -2018,11 +2124,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.kCTrWbQcr7WxyAoo"
-        }
       },
       "img": "icons/consumables/potions/potion-bottle-corked-fancy-orange.webp",
       "system": {
@@ -2107,6 +2208,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -2129,6 +2231,7 @@
           }
         ],
         "price": 225,
+        "properties": {},
         "quantity": 2,
         "quantityPerPack": 1,
         "range": {
@@ -2166,20 +2269,31 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.ufNFjEVtymgFqY9Y"
-        }
-      },
       "img": "systems/sfrpg/icons/default/armor-upgrade.svg",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "allowedArmorType": "lightAndHeavy",
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
         "armorType": "lightAndHeavy",
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": "5"
@@ -2204,6 +2318,7 @@
           "max": 40,
           "value": 40
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": 1,
@@ -2211,11 +2326,13 @@
           "storage": []
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -2223,19 +2340,49 @@
           "unidentified": "",
           "value": "<p>You gain a fly speed of 30 feet (average maneuverability). You can use this for “cruising flight” at a usage of only 1 charge per minute, but you are @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-footed} and @UUID[Compendium.sfrpg.conditions.yUtkoIshf4dPruNd]{Off-Target} while doing so. Changing from normal flight to cruising flight or vice versa is a standard action. A jetpack can’t lift you if you’re @UUID[Compendium.sfrpg.conditions.OwZA6flUQPH0jPA0]{Encumbered}.</p>\n<p>This upgrade can be installed only in light or heavy armor.</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 5,
         "modifiers": [],
         "price": 3100,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "slots": 1,
         "source": "CRB pg. 205",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "round",
           "value": 2
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
         }
       }
     },
@@ -2248,18 +2395,29 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.Lvx3XKWVhMGSoj6g"
-        }
-      },
       "img": "systems/sfrpg/icons/default/processor.svg",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -2284,6 +2442,7 @@
           "max": 0,
           "value": 0
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": 1,
@@ -2291,11 +2450,13 @@
           "storage": []
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -2303,19 +2464,49 @@
           "unidentified": "",
           "value": "<p>As radiation is deadly yet undetectable to most creatures’ senses, many races have invented sensors to detect its presence. A common sensor is the radiation sweeper, a handheld device capable of detecting radiation within 120 feet. The sweeper emits warning pings in different tones to indicate the presence of low, medium, high, or severe radiation and displays the areas of radiation on a screen at the top of the device. You must take a move action each round to use the radiation sweeper. A radiation sweeper cannot detect radiation through 3 feet of dirt or wood, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or any force field.</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "hands": 1,
         "identified": false,
+        "isActive": null,
         "level": 2,
         "modifiers": [],
         "price": 500,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "AR pg. 107",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "",
           "value": 0
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
         }
       }
     },
@@ -2328,18 +2519,29 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.JuhA2n7cLAwbvX3o"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/tool-kit.webp",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -2364,6 +2566,7 @@
           "max": null,
           "value": null
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": true,
@@ -2371,11 +2574,13 @@
           "storage": []
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -2383,10 +2588,18 @@
           "unidentified": "",
           "value": "<p>A tool kit is a set of specialized tools and devices not worth purchasing individually, but which as a collection are required for a given task or provide a circumstance bonus to certain skill checks. The types of tool kits are: <strong>trapsmith’s tools</strong> (provides a +4 bonus to Engineering or Mysticism checks to arm or disarm traps).</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "hands": null,
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [
           {
@@ -2421,11 +2634,33 @@
           }
         ],
         "price": 20,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "Core Rulebook",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "",
+          "value": null
+        },
+        "uses": {
+          "max": null,
+          "per": null,
           "value": null
         }
       }
@@ -2439,18 +2674,29 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.NvrgoJ53pmEkacLl"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/chemalyzer.webp",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -2475,6 +2721,7 @@
           "max": 20,
           "value": 20
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": true,
@@ -2482,11 +2729,13 @@
           "storage": []
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -2494,10 +2743,18 @@
           "unidentified": "",
           "value": "<p>This handheld unit includes an extendable wand tipped with a sampling nozzle, and can be easily operated with a single hand. It grants a +4 circumstance bonus to Engineering, Mysticism, and Physical Science checks to identify an unknown @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drug}, medicinal, @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison}, or other chemical substance.</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "hands": 1,
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [
           {
@@ -2547,12 +2804,34 @@
           }
         ],
         "price": 150,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "AR pg. 100",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "",
           "value": 2
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
         }
       }
     },
@@ -2564,11 +2843,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.fHLnkpeRiEsHEHhF"
-        }
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -2736,6 +3010,7 @@
             "valueAffected": "fire"
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -2770,6 +3045,7 @@
     "name": "Hazard Professional",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -2801,11 +3077,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": true,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -2819,13 +3114,23 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
-      "tint": null
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },

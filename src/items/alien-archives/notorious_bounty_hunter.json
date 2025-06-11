@@ -35,6 +35,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -136,9 +137,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 13,
         "modifiers": [],
         "price": 45700,
@@ -317,6 +320,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -392,9 +396,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 0,
         "modifiers": [],
         "price": 0,
@@ -573,6 +579,7 @@
         "ammunitionType": "roundL",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -688,10 +695,12 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "systems/sfrpg/icons/equipment/weapons/pulsecaster-rifle.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 13,
         "modifiers": [],
@@ -868,6 +877,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -902,6 +912,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -953,6 +964,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -987,6 +999,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1041,6 +1054,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -1112,6 +1126,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1167,6 +1182,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -1254,6 +1270,7 @@
         },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -1261,6 +1278,7 @@
         "modifiers": [],
         "price": 60600,
         "proficient": false,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -1308,12 +1326,28 @@
       "img": "systems/sfrpg/icons/default/armor-upgrade.svg",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "allowedArmorType": "lightAndHeavy",
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
         "armorType": "lightAndHeavy",
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": "5"
@@ -1338,6 +1372,7 @@
           "max": 100,
           "value": 100
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": 1,
@@ -1345,11 +1380,13 @@
           "storage": []
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1357,19 +1394,49 @@
           "unidentified": "",
           "value": "<p>A forcepack grants you a fly speed of 60 feet (average maneuverability). You can use this for “cruising flight” at a usage of 1 charge per minute, but you are @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-footed} and @UUID[Compendium.sfrpg.conditions.yUtkoIshf4dPruNd]{Off-Target} while doing so. Changing from normal flight to cruising flight, or back, is a standard action. A forcepack can’t lift you if you’re encumbered.</p>\n<p>This upgrade can be installed only in light or heavy armor.</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "identified": true,
+        "isActive": null,
         "level": 9,
         "modifiers": [],
         "price": 13100,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "slots": 1,
         "source": "CRB pg. 205",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "round",
           "value": 2
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
         }
       }
     },
@@ -1399,6 +1466,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -1500,9 +1568,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 13,
         "modifiers": [],
         "price": 45700,
@@ -1667,10 +1737,26 @@
       "img": "systems/sfrpg/icons/default/energise.svg",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -1695,6 +1781,7 @@
           "max": null,
           "value": null
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": true,
@@ -1713,11 +1800,13 @@
           ]
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1725,22 +1814,52 @@
           "unidentified": "",
           "value": "<p>This bandolier fits over any Medium creature and contains five compartments, each corresponding to a specific type of weapon: melee weapons, small arms, longarms, heavy weapons, and explosives. Each compartment contains an extradimensional space designed to house up to 1 bulk of ammunition or batteries (for this purpose, 10 batteries or pieces of ammunition with no bulk count as having light bulk). The bandolier does not accumulate bulk even as its compartments are filled.</p>\n<p>Each&nbsp;efficient bandolier&nbsp;includes an advanced AI capable of controlling the bandolier’s robotic components to suit your needs. As a swift action, you can command an&nbsp;efficient bandolier&nbsp;to draw up to 1 bulk worth of batteries or ammunition, placing the items directly into one of your hands.</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "hands": 0,
         "identified": false,
         "img": "icons/svg/mystery-man.svg",
+        "isActive": null,
         "isOpen": true,
         "level": 4,
         "limitedWear": true,
         "modifiers": [],
         "price": 2000,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "CRB pg. 226",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "totalWeight": "L",
         "usage": {
           "per": "",
+          "value": null
+        },
+        "uses": {
+          "max": null,
+          "per": null,
           "value": null
         }
       }
@@ -1864,11 +1983,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.9Tgfgec4VaGkNHLR"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/magic%20items/serum-of-healing.webp",
       "system": {
         "type": "",
@@ -1885,6 +1999,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -1968,12 +2083,14 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
         "level": 9,
         "modifiers": [],
         "price": 1950,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -2015,20 +2132,31 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.ak4Q8X3hROM03Pem"
-        }
-      },
       "img": "systems/sfrpg/icons/default/armor-upgrade.svg",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "allowedArmorType": "any",
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
         "armorType": "power",
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -2053,6 +2181,7 @@
           "max": null,
           "value": null
         },
+        "chatFlavor": "",
         "container": {
           "contents": [
             {
@@ -2076,11 +2205,13 @@
           ]
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -2088,21 +2219,51 @@
           "unidentified": "",
           "value": "<p>This armor upgrade has a compartment the size of a small vial. As a full action, you can place a single serum or spell ampule within the compartment. As a move action, you can activate the upgrade to inject the serum into your body, where it affects you as though you had drunk it.</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "identified": true,
         "img": "icons/svg/mystery-man.svg",
+        "isActive": null,
         "isOpen": true,
         "level": 7,
         "modifiers": [],
         "price": 7000,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "slots": 1,
         "source": "AR pg. 80",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "totalWeight": "-",
         "usage": {
           "per": "",
+          "value": null
+        },
+        "uses": {
+          "max": null,
+          "per": null,
           "value": null
         }
       }
@@ -2115,11 +2276,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.9Tgfgec4VaGkNHLR"
-        }
       },
       "img": "systems/sfrpg/icons/equipment/magic%20items/serum-of-healing.webp",
       "system": {
@@ -2137,6 +2293,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -2220,12 +2377,14 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
         "level": 9,
         "modifiers": [],
         "price": 1950,
+        "properties": {},
         "quantity": 2,
         "quantityPerPack": 1,
         "range": {
@@ -2267,18 +2426,29 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.Dc9m2uVNYCwFURSX"
-        }
-      },
       "img": "systems/sfrpg/icons/default/processor.svg",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -2303,6 +2473,7 @@
           "max": 0,
           "value": 0
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": true,
@@ -2310,11 +2481,13 @@
           "storage": []
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -2322,19 +2495,49 @@
           "unidentified": "",
           "value": "<h1>Restraints</h1>\n<p>Binders are simple, single-use, resin-cord restraints that can be placed only on helpless, @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}, or willing creatures (a standard action). A pair of binders immobilizes two limbs of your choice. A creature can escape binders with a successful Acrobatics check (DC = 20 + 1-1/2 × your level).</p>\n<p>Manacles are reusable wrist restraints made of hardened metal or ceramics and keyed to open with a security chip, code, or voice command (determined when they are manufactured). Manacles can be placed only on helpless, @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}, or willing creatures (a standard action). Manacles prevent two arms from holding or using any object. A creature can escape manacles with a successful DC 30 Acrobatics check.</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "hands": 0,
         "identified": false,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 5,
+        "properties": {},
         "quantity": 5,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "CRB pg. 219",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "",
           "value": 0
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
         }
       }
     },
@@ -2346,11 +2549,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.GryU2YyJhAOKfcxi"
-        }
       },
       "img": "systems/sfrpg/icons/equipment/weapons/pulsecaster-rifle.webp",
       "system": {
@@ -2369,6 +2567,7 @@
         "ammunitionType": "roundL",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": null,
           "value": null
@@ -2481,10 +2680,12 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "systems/sfrpg/icons/equipment/weapons/pulsecaster-rifle.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 13,
         "modifiers": [],
@@ -2648,11 +2849,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.Mwko8oiWG2GSkEqO"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/weapons/rounds-longarm-and-sniper.webp",
       "system": {
         "type": "",
@@ -2699,6 +2895,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "price": 75,
@@ -2733,11 +2930,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.AIoBhzhn2oxiIYsE"
-        }
-      },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
@@ -2754,6 +2946,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -2823,6 +3016,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -2861,11 +3055,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.Mm6bA47DzaXmQ15W"
-        }
-      },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
@@ -2882,6 +3071,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -2982,6 +3172,7 @@
             "valueAffected": "sur"
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -3020,11 +3211,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.alien-archives.0EANNReclfEBEDmw.Item.l76FJlbJYpHM22yb"
-        }
-      },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
@@ -3041,6 +3227,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -3133,6 +3320,7 @@
             "valueAffected": ""
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -3171,11 +3359,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.EO1ZrXG0MLJ6LT3e"
-        }
-      },
       "img": "systems/sfrpg/icons/default/gun-stock.svg",
       "system": {
         "type": "",
@@ -3231,6 +3414,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 6,
         "modifiers": [],
@@ -3254,11 +3438,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.EO1ZrXG0MLJ6LT3e"
-        }
-      },
       "img": "systems/sfrpg/icons/default/gun-stock.svg",
       "system": {
         "type": "",
@@ -3314,6 +3493,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 6,
         "modifiers": [],
@@ -3336,11 +3516,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.gkGwFUFAXOfAcReG"
-        }
       },
       "img": "systems/sfrpg/icons/default/gun-stock.svg",
       "system": {
@@ -3413,6 +3588,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "modifiers": [],
@@ -3436,11 +3612,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.plSIRF03kXAd7VRR"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/weapons/nil-grenade-launcher-squad.webp",
       "system": {
         "type": "",
@@ -3458,6 +3629,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -3567,9 +3739,11 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 8,
         "modifiers": [],
         "price": 9400,
@@ -3731,11 +3905,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.EW3MmkJhsJ7jcT8u"
-        }
-      },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
@@ -3753,6 +3922,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "",
           "units": "ft",
           "value": 15
@@ -3840,9 +4010,11 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 7,
         "modifiers": [],
         "price": 1640,
@@ -3977,11 +4149,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.EW3MmkJhsJ7jcT8u"
-        }
-      },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
@@ -3999,6 +4166,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "",
           "units": "ft",
           "value": 15
@@ -4086,9 +4254,11 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 7,
         "modifiers": [],
         "price": 1640,
@@ -4223,11 +4393,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.gkGwFUFAXOfAcReG"
-        }
-      },
       "img": "systems/sfrpg/icons/default/gun-stock.svg",
       "system": {
         "type": "",
@@ -4299,6 +4464,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "modifiers": [],
@@ -4322,11 +4488,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.plSIRF03kXAd7VRR"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/weapons/nil-grenade-launcher-squad.webp",
       "system": {
         "type": "",
@@ -4344,6 +4505,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
           "value": null
@@ -4453,9 +4615,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 8,
         "modifiers": [],
         "price": 9400,
@@ -4617,11 +4781,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.EW3MmkJhsJ7jcT8u"
-        }
-      },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
@@ -4639,6 +4798,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "",
           "units": "ft",
           "value": 15
@@ -4726,9 +4886,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 7,
         "modifiers": [],
         "price": 1640,
@@ -4863,11 +5025,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.EW3MmkJhsJ7jcT8u"
-        }
-      },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
@@ -4885,6 +5042,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "",
           "units": "ft",
           "value": 15
@@ -4972,9 +5130,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 7,
         "modifiers": [],
         "price": 1640,
@@ -5109,11 +5269,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.wXz6VV89340rfGSs"
-        }
-      },
       "img": "icons/commodities/bones/bone-joint-tan.webp",
       "system": {
         "type": "cybernetic",
@@ -5130,6 +5285,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -5184,6 +5340,7 @@
         },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -5206,6 +5363,7 @@
           }
         ],
         "price": 32900,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -5241,11 +5399,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.Mwko8oiWG2GSkEqO"
-        }
       },
       "img": "systems/sfrpg/icons/equipment/weapons/rounds-longarm-and-sniper.webp",
       "system": {
@@ -5293,6 +5446,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "price": 75,
@@ -5323,6 +5477,7 @@
     "name": "Notorious Bounty Hunter",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -5354,11 +5509,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": true,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -5372,13 +5546,23 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
-      "tint": null
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },
