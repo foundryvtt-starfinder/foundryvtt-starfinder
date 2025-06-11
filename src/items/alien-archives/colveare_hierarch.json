@@ -133,9 +133,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 13,
         "modifiers": [],
         "price": 46400,
@@ -390,9 +392,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -571,9 +575,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 12,
         "modifiers": [],
         "price": 32900,
@@ -784,6 +790,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -918,6 +925,7 @@
         },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -925,6 +933,7 @@
         "modifiers": [],
         "price": 71300,
         "proficient": false,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -1015,6 +1024,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "price": 60,
@@ -1151,11 +1161,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.Wrtlsn5z3hpdk8ay"
-        }
-      },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
@@ -1244,6 +1249,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1281,11 +1287,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.V0z8GT3KoRIPY8tA"
-        }
       },
       "img": "icons/weapons/swords/sword-guard-serrated.webp",
       "system": {
@@ -1402,9 +1403,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 13,
         "modifiers": [],
         "price": 46400,
@@ -1567,11 +1570,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.YEJXZWButeJrUnut"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/weapons/caustoject-executioner.webp",
       "system": {
         "type": "",
@@ -1697,9 +1695,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 12,
         "modifiers": [],
         "price": 32900,
@@ -1862,11 +1862,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.RWgwDLKxgOKBfBUC"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/goods/antibiotic-tier-3.webp",
       "system": {
         "type": "",
@@ -1950,12 +1945,14 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
         "level": 10,
         "modifiers": [],
         "price": 2700,
+        "properties": {},
         "quantity": 5,
         "quantityPerPack": 1,
         "range": {
@@ -2039,6 +2036,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "price": 60,
@@ -2069,6 +2067,7 @@
     "name": "Colveare Hierarch",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -2100,11 +2099,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": true,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -2118,13 +2136,23 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
-      "tint": null
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },

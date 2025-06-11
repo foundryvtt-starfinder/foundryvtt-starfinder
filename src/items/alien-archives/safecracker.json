@@ -85,6 +85,7 @@
             "valueAffected": ""
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -228,10 +229,12 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "icons/weapons/axes/axe-broad-worn-blue.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 9,
         "modifiers": [],
@@ -513,10 +516,12 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-azimuth.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 9,
         "modifiers": [],
@@ -790,6 +795,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -922,6 +928,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1056,6 +1063,7 @@
         },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -1063,6 +1071,7 @@
         "modifiers": [],
         "price": 19650,
         "proficient": false,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -1231,10 +1240,12 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-azimuth.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 9,
         "modifiers": [],
@@ -1441,6 +1452,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
         "price": 330,
@@ -1566,11 +1578,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.oqsObKnxzFKUOb5u"
-        }
-      },
       "img": "systems/sfrpg/icons/default/vr-headset.svg",
       "system": {
         "type": "biotech",
@@ -1642,12 +1649,14 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -1683,11 +1692,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.6hAY9u2JfExQdoax"
-        }
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -1775,6 +1779,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1812,11 +1817,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.RYLSMaocgpOtRNUr"
-        }
       },
       "img": "icons/weapons/axes/axe-broad-worn-blue.webp",
       "system": {
@@ -1932,10 +1932,12 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "img": "icons/weapons/axes/axe-broad-worn-blue.webp",
         "isActive": null,
+        "isEquipment": true,
         "isOpen": true,
         "level": 9,
         "modifiers": [],
@@ -2102,15 +2104,26 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.tOtmTsXNEattXits"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/lazer-drill.webp",
       "system": {
         "type": "",
+        "ability": null,
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -2135,15 +2148,21 @@
           "max": 20,
           "value": 20
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": 1,
           "isOpen": true,
           "storage": []
         },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -2151,19 +2170,49 @@
           "unidentified": "",
           "value": "<p>A laser drill is a handheld item that resembles a snub-nosed pistol. As a standard action, you can use the drill to create a hole 1 inch in diameter and 1 inch deep in stationary and unattended materials with a hardness of 15 or less, such as concrete, plastic, or wood. At the GM’s discretion, you might be able to use a laser drill on harder materials as a full action or longer. Detecting a laser drill at work requires a successful DC 15 Perception check. A laser drill isn’t generally useful in combat, but it can deal 1 fire damage with a successful melee attack as an improvised weapon.</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "hands": 1,
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [],
         "price": 200,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "Armory",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "minute",
           "value": 1
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
         }
       }
     },
@@ -2176,18 +2225,29 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.udNcraaEiSx4US0r"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/microgoggles.webp",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -2212,6 +2272,7 @@
           "max": 20,
           "value": 20
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": true,
@@ -2219,11 +2280,13 @@
           "storage": []
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -2231,10 +2294,18 @@
           "unidentified": "",
           "value": "<p>This bulky set of goggles functions as a lighted magnifying glass or microscope, allowing you to see exceptionally small details with adjustable levels of magnification. Microgoggles provide a +2 insight bonus to any skill use that benefits from exceedingly close vision, such as detecting complicated forgeries or crafting @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drugs} or medicinals.</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "hands": null,
         "identified": true,
+        "isActive": null,
         "level": 2,
         "modifiers": [
           {
@@ -2254,12 +2325,34 @@
           }
         ],
         "price": 900,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "CRB pg. 105",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "hour",
           "value": 1
+        },
+        "uses": {
+          "max": null,
+          "per": null,
+          "value": null
         }
       }
     }
@@ -2268,6 +2361,7 @@
     "name": "Safecracker",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -2299,11 +2393,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": true,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -2317,13 +2430,23 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
-      "tint": null
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },

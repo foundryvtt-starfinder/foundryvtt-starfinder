@@ -133,9 +133,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 90,
@@ -428,9 +430,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 2,
         "modifiers": [],
         "price": 790,
@@ -723,9 +727,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 3,
         "modifiers": [],
         "price": 1400,
@@ -978,6 +984,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1112,6 +1119,7 @@
         },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -1119,6 +1127,7 @@
         "modifiers": [],
         "price": 1220,
         "proficient": false,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -1209,6 +1218,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "price": 60,
@@ -1348,11 +1358,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.racial-features.vn2OQ1qVC8rRUTbX"
-        }
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -1521,6 +1526,7 @@
             "valueAffected": "cold"
           }
         ],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -1558,11 +1564,6 @@
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.i8EAI0qrE8sn1iim"
-        }
       },
       "img": "icons/weapons/axes/axe-broad-worn-blue.webp",
       "system": {
@@ -1679,9 +1680,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 90,
@@ -1844,11 +1847,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.4zXUtF3c6g3TmLrN"
-        }
-      },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
@@ -1990,9 +1988,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 3,
         "modifiers": [],
         "price": 1400,
@@ -2155,11 +2155,6 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.y5kwTSKeWufNLosK"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/weapons/hail-pistol-absolute-zero.webp",
       "system": {
         "type": "",
@@ -2285,9 +2280,11 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 2,
         "modifiers": [],
         "price": 790,
@@ -2450,18 +2447,29 @@
         "systemId": "sfrpg",
         "systemVersion": "0.28.1"
       },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.equipment.JuhA2n7cLAwbvX3o"
-        }
-      },
       "img": "systems/sfrpg/icons/equipment/technological%20items/tool-kit.webp",
       "system": {
         "type": "",
+        "ability": null,
         "abilityMods": {
           "parts": []
         },
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
         "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": 0
+        },
+        "attackBonus": 0,
         "attributes": {
           "ac": {
             "value": ""
@@ -2486,6 +2494,7 @@
           "max": null,
           "value": null
         },
+        "chatFlavor": "",
         "container": {
           "contents": [],
           "includeContentsInWealthCalculation": true,
@@ -2493,11 +2502,13 @@
           "storage": []
         },
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -2505,10 +2516,18 @@
           "unidentified": "",
           "value": "<p>A tool kit is a set of specialized tools and devices not worth purchasing individually, but which as a collection are required for a given task or provide a circumstance bonus to certain skill checks. The types of tool kits are: <strong>trapsmith’s tools</strong> (provides a +4 bonus to Engineering or Mysticism checks to arm or disarm traps).</p>"
         },
+        "descriptors": [],
+        "duration": {
+          "units": "text",
+          "value": null
+        },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
         "hands": null,
         "identified": true,
+        "isActive": null,
         "level": 1,
         "modifiers": [
           {
@@ -2543,11 +2562,33 @@
           }
         ],
         "price": 20,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
         "source": "Core Rulebook",
+        "target": {
+          "type": "",
+          "value": null
+        },
         "usage": {
           "per": "",
+          "value": null
+        },
+        "uses": {
+          "max": null,
+          "per": null,
           "value": null
         }
       }
@@ -2607,6 +2648,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "price": 60,
@@ -2687,6 +2729,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "price": 60,
@@ -2717,6 +2760,7 @@
     "name": "Career Ranger",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -2748,11 +2792,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": true,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -2766,13 +2829,23 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
-      "tint": null
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },
