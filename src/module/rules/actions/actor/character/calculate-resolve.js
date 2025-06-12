@@ -17,7 +17,7 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
             } catch {}
 
@@ -35,7 +35,7 @@ export default function(engine) {
         let rpMax = 0; // Max(1, Max(1, Floor(Character Level / 2)) + Key Ability Score Modifier)
 
         // Level bonus
-        let levelBonus = Math.max(1, Math.floor(data.details.level.value / 2));
+        const levelBonus = Math.max(1, Math.floor(data.details.level.value / 2));
         rpMax += levelBonus;
 
         data.attributes.rp.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Header.Resolve.LevelTooltip", {
@@ -60,7 +60,7 @@ export default function(engine) {
                 const classData = cls.system;
 
                 if (!classData.kas) continue;
-                let classScore = fact.data.abilities[classData.kas].mod;
+                const classScore = fact.data.abilities[classData.kas].mod;
                 if (classScore > highestKeyAbilityScoreModifier) {
                     keyAbilityScore = classData.kas;
                     highestKeyAbilityScoreModifier = classScore;
@@ -87,7 +87,7 @@ export default function(engine) {
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 
-        let bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
+        const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
             if (mod[1] === null || mod[1].length < 1) return sum;
 
             if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {

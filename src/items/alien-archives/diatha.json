@@ -2,13 +2,23 @@
   "_id": "z7uS4l9X5ym6atgw",
   "name": "Diatha",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "_stats": {
+    "coreVersion": 13,
+    "systemId": "sfrpg",
+    "systemVersion": "0.28.1"
+  },
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "UeOyR9YohRvXEyds",
       "name": "Bite",
       "type": "weapon",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.1"
+      },
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -22,6 +32,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": 0
@@ -99,9 +110,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -145,7 +158,12 @@
       "_id": "1FU7S4NH2dvlQ2qE",
       "name": "Detonate (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": "",
@@ -161,9 +179,10 @@
         },
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -174,8 +193,9 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6",
-              "operator": "",
+              "group": null,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -198,14 +218,57 @@
           "unidentified": "",
           "value": "<p>While the diatha has 4 or fewer Hit Points, its energy-dense flesh becomes unstable. If, while in this state, the diatha takes acid, electricity, fire, piercing, slashing, or sonic damage, or uses its explosive charge ability, it dies, exploding in a 10-foot-radius burst, dealing 1d6 fire damage (Reflex DC 9 half).</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -220,8 +283,12 @@
         "rollNotes": "",
         "save": {
           "type": "reflex",
-          "dc": "9",
+          "dc": "",
           "descriptor": "half"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -229,7 +296,7 @@
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -239,7 +306,12 @@
       "_id": "cbc9W3mpzaDFFewY",
       "name": "Explosive Charge (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -255,9 +327,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -276,14 +349,57 @@
           "unidentified": "",
           "value": "<p>While the diatha has 4 or fewer Hit Points, as a full action, the creature can move up to double its speed and make a bite attack. Its detonate ability then triggers.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -307,7 +423,7 @@
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -317,7 +433,12 @@
       "_id": "CQfOVxumxh21qF5M",
       "name": "Compression",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -333,6 +454,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -355,6 +477,11 @@
           "value": "<p>(EX)</p>\n<p>The creature can move through an area as small as one-quarter of its space without squeezing or one-eighth its space when squeezing.</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -362,6 +489,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -395,7 +523,12 @@
       "_id": "k9pwt0gtHQrD37MY",
       "name": "Mindless",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.1"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
@@ -411,6 +544,7 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
           "value": null
@@ -430,9 +564,14 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>(EX)</p>\n<p>The creature has no Intelligence score or modifier and is immune to @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Mind-affecting effects}. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</p>\n<p>Guidelines: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>\n<hr />"
+          "value": "<p>(EX)</p>\n<p>The creature has no Intelligence score or modifier and is immune to @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Mind-affecting effects}. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</p>\n<p>Guidelines: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>\n<hr />"
         },
         "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
           "units": "",
           "value": null
@@ -440,6 +579,7 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
@@ -474,6 +614,7 @@
     "name": "Diatha",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -505,31 +646,60 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
-      "brightness": 1,
+      "brightness": 0.75,
       "color": null,
       "contrast": 0,
       "enabled": false,
-      "range": 0,
-      "saturation": 0,
-      "visionMode": "basic"
+      "range": 60,
+      "saturation": -1,
+      "visionMode": "darkvision"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
-      "scaleX": 1,
-      "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "scaleX": 0.8,
+      "scaleY": 0.8,
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },
@@ -580,7 +750,7 @@
     },
     "attributes": {
       "abilityDC": {
-        "base": 0
+        "base": "9"
       },
       "arms": "2",
       "bab": 0,
@@ -590,7 +760,7 @@
         "value": 0
       },
       "baseSpellDC": {
-        "base": 0
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -732,11 +902,12 @@
         "weight": ""
       },
       "class": "",
+      "combatRole": "combatant",
       "cr": 0.5,
       "environment": "any land",
       "organization": "solitary, pair, or rout (3-10)",
       "organizationSize": {
-        "max": null,
+        "max": 10,
         "min": 1
       },
       "race": "",
