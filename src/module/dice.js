@@ -171,7 +171,7 @@ export class DiceSFRPG {
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
         critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor",
-        difficulty = undefined, displayDifficulty = false, tags = new Array()}) {
+        difficulty = undefined, displayDifficulty = false, tags = []}) {
 
         flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
 
