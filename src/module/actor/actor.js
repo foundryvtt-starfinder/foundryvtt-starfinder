@@ -651,12 +651,15 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
         const tags = [];
 
+        if (skill.value) {
+            tags.push({name: "classSkill", text: game.i18n.format("SFRPG.SkillProficiencyLevelClassSkill")});
+        }
+
         if (skill.ranks) {
-            if (skill.value) {tags.push({name: "hasProficiency", text: game.i18n.format("SFRPG.SkillProficiencyLevelClassSkill")});}
-            tags.push({name: "hasRanks", text: game.i18n.format("SFRPG.SkillTrained")});
+            tags.push({name: "hasSkillRanks", text: game.i18n.format("SFRPG.SkillTrained")});
         } else {
             if (skill.isTrainedOnly) {tags.push({name: "isTrainedOnly", text: game.i18n.format("SFRPG.SkillTrainedOnly")});}
-            tags.push({name: "hasRanks", text: game.i18n.format("SFRPG.SkillUntrained")});
+            tags.push({name: "hasSkillRanks", text: game.i18n.format("SFRPG.SkillUntrained")});
         }
 
         await DiceSFRPG.d20Roll({
