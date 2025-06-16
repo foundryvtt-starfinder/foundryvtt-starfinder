@@ -649,6 +649,19 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             ? game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname })
             : game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
 
+        const tags = [];
+
+        if (skill.value) {
+            tags.push({name: "classSkill", text: game.i18n.format("SFRPG.SkillProficiencyLevelClassSkill")});
+        }
+
+        if (skill.ranks) {
+            tags.push({name: "hasSkillRanks", text: game.i18n.format("SFRPG.SkillTrained")});
+        } else {
+            if (skill.isTrainedOnly) {tags.push({name: "isTrainedOnly", text: game.i18n.format("SFRPG.SkillTrainedOnly")});}
+            tags.push({name: "hasSkillRanks", text: game.i18n.format("SFRPG.SkillUntrained")});
+        }
+
         await DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
@@ -666,7 +679,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 top: options.event ? options.event.clientY - 80 : null
             },
             difficulty: options.dc,
-            displayDifficulty: options.displayDC
+            displayDifficulty: options.displayDC,
+            tags: tags
         });
     }
 

@@ -3,20 +3,20 @@
   "name": "Gremlin, Vaigruuk",
   "type": "npc2",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.28.0"
+    "systemVersion": "0.28.1"
   },
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "Sm8ilnQ7T33hwFfo",
-      "name": "Amplified Radiation - 20 Ft.",
+      "name": "Amplified Radiation Aura (Su)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -28,7 +28,7 @@
         "actionTarget": "",
         "actionType": "",
         "activation": {
-          "type": "",
+          "type": "move",
           "condition": "",
           "cost": 0
         },
@@ -36,8 +36,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -54,17 +54,54 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A vaigruuk’s long, dangling ears act as radiation amplifiers. It emits low radiation within 20 feet, which it amplifies from harmless background radiation in the area. When within an area of low radiation, the vaigruuk emits medium radiation. In any environment where there is absolutely no radiation at all, such as certain shielded chambers, this aura doesn’t function. The vaigruuk can suppress its aura by wrapping its ears tightly around its body as a move action, but it is flat-footed during this time. Unwrapping its ears is another move action.</p>"
+          "value": "<p>A vaigruuk’s long, dangling ears act as radiation amplifiers. It emits low @UUID[Compendium.sfrpg.rules.JournalEntry.SfkuzH5kxSAmG4nv.JournalEntryPage.n461i9lDXw303SiY#radiation]{radiation} within 20 feet, which it amplifies from harmless background radiation in the area. When within an area of low radiation, the vaigruuk emits medium radiation. In any environment where there is absolutely no radiation at all, such as certain shielded chambers, this aura doesn’t function. The vaigruuk can suppress its aura by wrapping its ears tightly around its body as a move action, but it is @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{flat-footed} during this time. Unwrapping its ears is another move action.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "details": {
           "category": "feat",
           "combat": false,
-          "specialAbilityType": ""
+          "specialAbilityType": "su"
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "text",
+          "value": ""
         },
         "formula": "",
         "isActive": null,
@@ -73,8 +110,8 @@
         "range": {
           "additional": "",
           "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "recharge": {
           "charged": false,
@@ -90,11 +127,11 @@
         "source": "",
         "target": {
           "type": "",
-          "value": null
+          "value": ""
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -104,9 +141,9 @@
       "name": "Claw",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -249,9 +286,9 @@
       "name": "Caustic Glob (Ex)",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -272,8 +309,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 5,
         "attributes": {
@@ -303,7 +340,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -325,10 +362,19 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4 +2",
-              "operator": "",
+              "group": null,
               "types": {
-                "acid": true
+                "acid": true,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -343,7 +389,7 @@
         },
         "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "equippable": true,
@@ -371,6 +417,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -389,15 +436,19 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
           "harrying": false,
+          "healing": false,
           "holyWater": false,
           "hybrid": false,
+          "hydrodynamic": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
+          "instrumental": false,
           "integrated": false,
           "line": false,
           "living": false,
@@ -415,6 +466,7 @@
           "polymorphic": false,
           "powered": false,
           "professional": false,
+          "propel": false,
           "punchGun": false,
           "qreload": false,
           "radioactive": false,
@@ -423,6 +475,7 @@
           "regrowth": false,
           "relic": false,
           "reposition": false,
+          "scramble": false,
           "shape": false,
           "shatter": false,
           "shells": false,
@@ -437,6 +490,7 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": false,
           "unbalancing": false,
@@ -451,7 +505,7 @@
           "additional": "",
           "per": "",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "rollNotes": "",
         "save": {
@@ -459,9 +513,28 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
+        },
         "source": "",
         "special": "",
-        "specialMaterials": {},
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "nyblantine": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": ""
@@ -471,7 +544,7 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -484,16 +557,19 @@
       "name": "Despoiling Touch (Su)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -523,11 +599,48 @@
           "unidentified": "",
           "value": "<p>When a vaigruuk touches ordinary food in a container no larger than itself, the food becomes rancid and loses all nutritional value.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "details": {
           "category": "feat",
           "combat": false,
-          "specialAbilityType": ""
+          "specialAbilityType": "su"
         },
         "duration": {
           "units": "",
@@ -571,16 +684,19 @@
       "name": "Irradiating Lights (Su)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
         "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -608,13 +724,50 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>The illumination a vaigruuk creates with its dancing lights spell-like ability emits low radiation within the area of their illumination (which is 10 feet for dancing lights) and is always a sickly green color.</p>"
+          "value": "<p>The illumination a vaigruuk creates with its @UUID[Compendium.sfrpg.spells.Item.rSWg5JnN3mxzkatD]{dancing lights} spell-like ability emits low @UUID[Compendium.sfrpg.rules.JournalEntry.SfkuzH5kxSAmG4nv.JournalEntryPage.n461i9lDXw303SiY#radiation]{radiation} within the area of their illumination (which is 10 feet for dancing lights) and is always a sickly green color.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "details": {
           "category": "feat",
           "combat": false,
-          "specialAbilityType": ""
+          "specialAbilityType": "su"
         },
         "duration": {
           "units": "",
@@ -658,9 +811,9 @@
       "name": "Grease (DC 15)",
       "type": "spell",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/spells/grease.webp",
       "system": {
@@ -760,9 +913,9 @@
       "name": "Overheat (DC 15)",
       "type": "spell",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/spells/overheat.webp",
       "system": {
@@ -870,9 +1023,9 @@
       "name": "Dancing Lights (At Will)",
       "type": "spell",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/spells/dancing_light.webp",
       "system": {
@@ -972,9 +1125,9 @@
       "name": "Detect Radiation (At Will)",
       "type": "spell",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/spells/detect_radiation.webp",
       "system": {
@@ -1086,7 +1239,6 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
-    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1113,6 +1265,7 @@
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
     "occludable": {
       "radius": 0
     },
@@ -1150,10 +1303,16 @@
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
-      "scaleX": 1,
-      "scaleY": 1,
+      "scaleX": 0.8,
+      "scaleY": 0.8,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
       "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },
@@ -1204,7 +1363,7 @@
     },
     "attributes": {
       "abilityDC": {
-        "base": 0
+        "base": "0"
       },
       "arms": "2",
       "bab": 0,
@@ -1214,7 +1373,7 @@
         "value": 0
       },
       "baseSpellDC": {
-        "base": 0
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -1356,6 +1515,7 @@
         "weight": ""
       },
       "class": "",
+      "combatRole": "combatant",
       "cr": 2,
       "environment": "any",
       "organization": "solitary",
@@ -1366,6 +1526,7 @@
       "race": "",
       "raceAndGrafts": "",
       "source": "AP #40 pg. 57",
+      "subtype": "",
       "xp": {
         "value": 10
       }
