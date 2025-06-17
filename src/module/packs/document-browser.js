@@ -259,7 +259,7 @@ export class DocumentBrowserSFRPG extends Application {
     async loadItems() {
         console.log('Starfinder | Compendium Browser | Started loading items');
         /** @type {Collection<string, {uuid: string, img: string, name: string, system: object, type: string}>} */
-        const items = new Collection();
+        const items = new Map();
         const user = game.user;
         const userPermission = user.isGM ? "GAMEMASTER" : (user.isTrusted ? "TRUSTED" : "PLAYER");
 
