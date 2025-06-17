@@ -3,9 +3,9 @@
   "name": "Dueling sword, ultrathin",
   "type": "weapon",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.28.0"
+    "systemVersion": "0.28.1"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/dueling-sword.webp",
   "system": {
@@ -57,7 +57,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -69,6 +69,17 @@
           "amount": 11,
           "subtype": "fusion",
           "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -79,10 +90,19 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "3d6 + @abilities.str.mod",
-          "operator": "",
+          "group": null,
           "types": {
-            "slashing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": true,
+            "sonic": false
           }
         }
       ]
@@ -125,6 +145,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -143,15 +164,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -169,6 +194,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -177,7 +203,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -190,6 +218,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -212,9 +241,28 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "CRB pg. 171",
     "special": "",
-    "specialMaterials": {},
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""

@@ -3,9 +3,9 @@
   "name": "Capture pole, apprehension-class",
   "type": "weapon",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.28.0"
+    "systemVersion": "0.28.1"
   },
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
@@ -26,8 +26,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +43,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 36
       },
       "size": "medium",
       "sturdy": true
@@ -57,7 +57,7 @@
     "chatFlavor": "Grapple, injection, reach",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -69,6 +69,17 @@
           "amount": 7,
           "subtype": "fusion",
           "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -78,17 +89,36 @@
         {
           "formula": "",
           "operator": "",
-          "types": {}
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
         }
       ]
     },
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "2d8 + @abilities.str.mod",
-          "operator": "",
+          "group": null,
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": true,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
@@ -99,11 +129,11 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>Built to resemble an ancient pre- Gap weapon used to apprehend prisoners of war, a capture pole consists of a polearm with a twopronged robotic head that snaps shut when its center is pressed against a target during an attack. Designed to lock around a creature’s neck, each of a capture pole’s prongs are outfitted with armor-piercing syringes used to inject a creature with a substance, typically a sedative to make apprehension easier. This occurs on a successful attack roll for a melee attack or grapple combat maneuver. Capture poles are favored weapons among the drow, who use them to capture slaves and discipline their orc servants.</p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "equippable": true,
@@ -131,6 +161,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -149,14 +180,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": true,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
+      "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": true,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -174,14 +210,18 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
       "reach": true,
       "recall": false,
+      "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -194,8 +234,10 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": true,
+      "unbalancing": false,
       "underwater": false,
       "unwieldy": false,
       "variantBoost": false,
@@ -207,17 +249,36 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": null
+      "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "COM",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "COM pg. 122",
     "special": "",
-    "specialMaterials": {},
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -227,7 +288,7 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": null
     },

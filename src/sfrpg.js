@@ -68,7 +68,7 @@ import RollContext from "./module/rolls/rollcontext.js";
 import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
 import registerCompendiumArt from "./module/system/compendium-art.js";
-import { connectToDocument, rollItemMacro } from "./module/system/item-macros.js";
+import { connectToDocument, rollItemMacro } from "./module/system/hotbar-macros.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
 
 import { extendDragData } from "./module/item/drag-data.js";

@@ -139,7 +139,7 @@ export async function cook() {
 
         }
 
-        const parsedFolders = (async () => {
+        const parsedFolders = await (async () => {
             const foldersFile = path.resolve(itemSourceDir, "_folders.json");
             if (fs.existsSync(foldersFile)) {
                 const jsonString = await fs.readFile(foldersFile, "utf-8");
@@ -167,7 +167,7 @@ export async function cook() {
         if (!limitToPack || directory === limitToPack) {
             const packName = path.basename(outputDir);
             const db = new LevelDatabase(outputDir, { packName });
-            promises.push(db.createPack(duplicate(parsedFiles), duplicate(parsedFolders), packName));
+            promises.push(db.createPack(parsedFiles, parsedFolders, packName));
         }
     }
 
