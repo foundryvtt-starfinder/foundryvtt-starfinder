@@ -101,6 +101,10 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         const armorUpgrades = items.filter(item => item.type === "upgrade");
         const asis = items.filter(item => item.type === "asi");
         const actorResources = items.filter(item => item.type === "actorResource");
+        const mechFrame = items.filter(item => item.type === "mechFrame");
+        const mechUpperLimbs = items.filter(item => item.type === "mechLimb" && item.data.data.type === "upper");
+        const mechLowerLimbs = items.filter(item => item.type === "mechLimb" && item.data.data.type === "lower");
+        const mechPowerCore = items.filter(item => item.type === "mechPowerCore");
         return game.sfrpg.engine.process("process-actors", {
             actorId: this.id,
             actor: this,
@@ -121,7 +125,11 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             armorUpgrades,
             asis,
             frames,
-            actorResources
+            actorResources,
+            mechFrame,
+            mechUpperLimbs,
+            mechLowerLimbs,
+            mechPowerCore
         });
     }
 
@@ -988,6 +996,19 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             item._onTurnEnd?.();
         }
     }
+
+    /** Mech Actions */
+
+    async rollMechAbility() {}
+
+    async rollMechWeaponAttack() {}
+
+    async rollMechPPAbility() {}
+
+    async rollMechSave() {}
+
+    async rollMechSkillCheck() {}
+
 
     /** Roll contexts */
     setupRollContexts(rollContext, desiredSelectors = []) {

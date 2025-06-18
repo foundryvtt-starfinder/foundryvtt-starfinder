@@ -75,7 +75,8 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             isVehicle: this.document.type === 'vehicle',
             isDrone: this.document.type === 'drone',
             isNPC: this.document.type === 'npc' || this.document.type === 'npc2',
-            isHazard: this.document.type === 'hazard'
+            isHazard: this.document.type === 'hazard',
+            isMech: this.document.type === 'mech'
         };
 
         data.items = [...this.actor.items.values()];

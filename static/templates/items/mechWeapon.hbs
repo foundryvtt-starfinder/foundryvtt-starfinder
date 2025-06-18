@@ -1,0 +1,160 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    {{> "systems/sfrpg/templates/items/parts/item-header.hbs"}}
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+        <a class="item" data-tab="modifiers">{{ localize "SFRPG.Modifiers" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-description.hbs"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            {{!-- Mech Point Cost --}}
+            {{> "systems/sfrpg/templates/items/parts/mech-points.hbs"}}
+
+            {{!-- Slots Required --}}
+            <h4 class="section-header">{{localize "SFRPG.MechSheet.Slots.Slots"}}</h4>
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Slots.Required"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.slots.number" value="{{itemData.slots.number}}" data-dtype="Number"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Slots.AllowedTypes"}}</label>
+                <div class="form-fields">
+                    <label class="checkbox">
+                        {{localize "SFRPG.Mech.SlotType.Frame"}}
+                        <input type="checkbox" name="system.slots.allowed.frame" {{checked itemData.slots.allowed.frame}}/>
+                    </label>
+                    <label class="checkbox">
+                        {{localize "SFRPG.Mech.SlotType.LowerLimb"}}
+                        <input type="checkbox" name="system.slots.allowed.lowerLimb" {{checked itemData.slots.allowed.lowerLimb}}/>
+                    </label>
+                    <label class="checkbox">
+                        {{localize "SFRPG.Mech.SlotType.UpperLimb"}}
+                        <input type="checkbox" name="system.slots.allowed.upperLimb" {{checked itemData.slots.allowed.upperLimb}}/>
+                    </label>
+                </div>
+            </div>
+
+            {{!-- Weapon Information --}}
+            <h4 class="section-header">{{ localize "SFRPG.MechSheet.Weapon.Info" }}</h4>
+
+            {{!-- Weapon Type --}}
+            <div class="form-group">
+                <label>{{ localize "SFRPG.Items.Weapon.Type" }}</label>
+                <select name="system.weaponType">
+                    {{#select itemData.weaponType}}
+                    {{#each config.mechWeaponTypes as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Weapon Range --}}
+            {{#if (eq itemData.weaponType "ranged")}}
+                <div class="form-group">
+                    <label>{{localize "SFRPG.MechSheet.Weapon.Range"}}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.range.value" value="{{itemData.range.value}}" data-dtype="Number"/>
+                    </div>
+                </div>
+            {{/if}}
+
+            {{!-- Weapon Damage --}}
+            <div class="form-group">
+                <label>{{ localize "SFRPG.MechSheet.Weapon.Damage" }}</label>
+                <select name="system.damageLevel">
+                    {{#select itemData.damageLevel}}
+                    {{#each config.mechWeaponDamageLevels as |name type|}}
+                    <option value="{{type}}">{{localize name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+            </div>
+
+            {{!-- Damage Type(s) --}}
+            <div class="form-group">
+                <label>{{ localize "SFRPG.MechSheet.Weapon.DamageType" }}</label>
+                {{!-- Primary Damage Type --}}
+                <select name="system.damageType.primary">
+                    {{#select itemData.damageType.primary}}
+                    <option value="none">—</option>
+                    {{#each config.kineticDamageTypes as |name type|}}
+                        <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{#each config.energyDamageTypes as |name type|}}
+                        <option value="{{type}}">{{name}}</option>
+                    {{/each}}
+                    {{/select}}
+                </select>
+                {{!-- And/Or Selector --}}
+                <select name="system.damageType.andOr">
+                    {{#select itemData.damageType.andOr}}
+                    <option value="none">—</option>
+                    <option value="and">{{localize "SFRPG.Damage.Types.Operators.And"}}</option>
+                    <option value="or">{{localize "SFRPG.Damage.Types.Operators.Or"}}</option>
+                    {{/select}}
+                </select>
+                {{!-- Secondary Damage Type --}}
+                {{#unless (eq itemData.damageType.andOr "none")}}
+                    <select name="system.damageType.secondary">
+                        {{#select itemData.damageType.secondary}}
+                        <option value="none">—</option>
+                        {{#each config.kineticDamageTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                        {{/each}}
+                        {{#each config.energyDamageTypes as |name type|}}
+                            <option value="{{type}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                {{/unless}}
+            </div>
+
+            {{!-- Special --}}
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Weapon.Special"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.specialEffect" value="{{itemData.specialEffect}}" data-dtype="String"/>
+                </div>
+            </div>
+
+            {{!-- Critical Effect --}}
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Weapon.Critical"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.criticalEffect" value="{{itemData.criticalEffect}}" data-dtype="String"/>
+                </div>
+            </div>
+
+            {{!-- Capacity --}}
+            <div class="form-group">
+                <label>{{localize "SFRPG.MechSheet.Weapon.Capacity"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.capacity" value="{{itemData.capacity}}" data-dtype="Number"/>
+                </div>
+            </div>
+
+            {{!-- Power Point Abilities --}}
+            {{> "systems/sfrpg/templates/items/parts/power-point-ability.hbs" this}}
+
+        </div>
+
+        {{!-- Modifiers Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-modifiers.hbs"}}
+
+    </section>
+</form>
