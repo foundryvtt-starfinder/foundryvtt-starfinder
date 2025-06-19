@@ -14,39 +14,80 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
     static applySFRPGMovementConfig() {
         foundry.utils.mergeObject(CONFIG.Token.movement.actions, {
             burrow: {
-                canSelect: (token) => !(token instanceof TokenDocument) || token.actor.system.attributes.speed.burrowing.value
+                canSelect: (token) => {
+                    if (CONFIG.SFRPG.actorsCharacterScale.includes(token.actor.type)) {
+                        return !(token instanceof TokenDocument) || token.actor.system.attributes.speed.burrowing?.value;
+                    } else if (token.actor.type === "starship") {
+                        return !(token instanceof TokenDocument);
+                    } else {
+                        return true;
+                    }
+                }
             },
             climb: {
-                canSelect: (token) => !(token instanceof TokenDocument) || !token.hasStatusEffect("prone"),
+                canSelect: (token) => {
+                    if (token.actor.type !== "starship") {
+                        return !(token instanceof TokenDocument) || !token.hasStatusEffect("prone");
+                    }
+                    return false;
+                },
                 getCostFunction: (token, _options) => {
-                    if (token.actor.system.attributes.speed.climbing.value) return cost => cost;
+                    if (token.actor.system.attributes.speed.climbing?.value) return cost => cost;
                     else return cost => cost * 2;
                 }
             },
             crawl: {
-                canSelect: (token) => (token instanceof TokenDocument) && token.hasStatusEffect("prone"),
+                canSelect: (token) => {
+                    if (token.actor.type !== "starship") {
+                        return (token instanceof TokenDocument) && token.hasStatusEffect("prone");
+                    }
+                    return false;
+                },
                 getCostFunction: (token, _options) => {
                     return cost => cost;
                 }
             },
             fly: {
-                canSelect: (token) => !(token instanceof TokenDocument) || (!token.hasStatusEffect("prone") && token.actor.system.attributes.speed.flying.value)
+                canSelect: (token) => {
+                    if (CONFIG.SFRPG.actorsCharacterScale.includes(token.actor.type)) {
+                        return !(token instanceof TokenDocument) || (!token.hasStatusEffect("prone") && token.actor.system.attributes.speed.flying?.value);
+                    } else if (token.actor.type === "starship") {
+                        return !(token instanceof TokenDocument) || token.actor.system.attributes.speed.value;
+                    } else {
+                        return true;
+                    }
+                }
             },
             jump: {
-                canSelect: (token) => !(token instanceof TokenDocument) || !token.hasStatusEffect("prone"),
+                canSelect: (token) => {
+                    if (token.actor.type !== "starship") {
+                        return !(token instanceof TokenDocument) || !token.hasStatusEffect("prone");
+                    }
+                    return false;
+                },
                 getCostFunction: (token, _options) => {
                     return cost => cost;
                 }
             },
             swim: {
-                canSelect: (token) => !(token instanceof TokenDocument) || !token.hasStatusEffect("prone"),
+                canSelect: (token) => {
+                    if (token.actor.type !== "starship") {
+                        return !(token instanceof TokenDocument) || !token.hasStatusEffect("prone");
+                    }
+                    return false;
+                },
                 getCostFunction: (token, _options) => {
-                    if (token.actor.system.attributes.speed.swimming.value) return cost => cost;
+                    if (token.actor.system.attributes.speed.swimming?.value) return cost => cost;
                     else return cost => cost * 2;
                 }
             },
             walk: {
-                canSelect: (token) => !(token instanceof TokenDocument) || !token.hasStatusEffect("prone")
+                canSelect: (token) => {
+                    if (token.actor.type !== "starship") {
+                        return !(token instanceof TokenDocument) || !token.hasStatusEffect("prone");
+                    }
+                    return false;
+                }
             }
         }, { performDeletions: true });
     }
@@ -83,20 +124,26 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
     #speedValueStyle(style, waypoint) {
         // color order
         const colors = [0x33BC4E, 0xF1D836, 0xE72124];
+
+        // Calculate the movement available based on the movement type used
         const movementOptionsInverted = Object.fromEntries(
             Object.entries(CONFIG.SFRPG.movementOptions).map(entry => entry.reverse())
         );
         const activeMovementType = movementOptionsInverted[waypoint.action];
-        let value = [];
+        let value = 0;
         switch (waypoint.action) {
             case "crawl":
                 value = 5;
                 break;
             case "jump":
-                value = this.token.actor.system.attributes.speed.land.value;
+                value = this.token.actor.system.attributes.speed.land?.value;
                 break;
             default:
-                value = this.token.actor.system.attributes.speed[activeMovementType].value ?? Infinity;
+                if (this.token.actor.type === "starship") {
+                    value = this.token.actor.system.attributes.speed.value;
+                } else {
+                    value = this.token.actor.system.attributes.speed[activeMovementType]?.value ?? Infinity;
+                }
                 break;
         }
 
