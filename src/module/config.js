@@ -1936,6 +1936,15 @@ SFRPG.conditions = {
 
 SFRPG.conditionsCausingFlatFooted = ["blinded", "cowering", "off-kilter", "pinned", "stunned"];
 
+// Conversion between Starfinder speed names and foundry's speed names
+SFRPG.movementOptions = {
+    burrowing: "burrow",
+    climbing: "climb",
+    flying: "fly",
+    swimming: "swim",
+    land: "walk"
+};
+
 // TODO localize
 SFRPG.characterFlags = {
     /* "solarianAttunement": {
