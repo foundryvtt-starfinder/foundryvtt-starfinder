@@ -1,20 +1,24 @@
 export default class SFRPGTokenDocument extends TokenDocument {
     async _preCreate(data, options, user) {
-        // Set the prototype token's movement type to the main movement defined in the actor's speed
-        const mainMovementAction = CONFIG.SFRPG.movementOptions[this.actor.system.attributes.speed.mainMovement] ?? null;
-        const updates = {};
-        if (this.actor.type === "starship") {
-            updates.movementAction = "fly";
-        } else if (CONFIG.SFRPG.actorsCharacterScale.includes(this.actor.type)) {
-            updates.movementAction = this.hasStatusEffect("prone") ? "crawl" : mainMovementAction;
-        }
+        if (this.actor) {
+            // Set the prototype token's movement type to the main movement defined in the actor's speed
+            const mainMovementAction = CONFIG.SFRPG.movementOptions[this.actor.system.attributes.speed.mainMovement] ?? null;
+            const updates = {};
+            if (this.actor.type === "starship") {
+                updates.movementAction = "fly";
+            } else if (CONFIG.SFRPG.actorsCharacterScale.includes(this.actor.type)) {
+                updates.movementAction = this.hasStatusEffect("prone") ? "crawl" : mainMovementAction;
+            }
 
-        this.updateSource(updates);
+            this.updateSource(updates);
+        }
         return super._preCreate(data, options, user);
     }
 
     async _onUpdateBaseActor(data, options, user) {
-        this.updateMovement();
+        if (this.actor) {
+            this.updateMovement(this.actor);
+        }
         return super._onUpdate(data, options, user);
     }
 
@@ -70,8 +74,8 @@ export default class SFRPGTokenDocument extends TokenDocument {
      * Updates the default and available movement types based on the actor speed settings and
      * whether or not the token has the "prone" condition.
      */
-    updateMovement() {
-        const mainMovement = this.actor.system.attributes.speed.mainMovement;
+    updateMovement(actor) {
+        const mainMovement = actor.system.attributes.speed.mainMovement;
         if (this.hasStatusEffect("prone")) {
             this.update({movementAction: "crawl"});
         } else {

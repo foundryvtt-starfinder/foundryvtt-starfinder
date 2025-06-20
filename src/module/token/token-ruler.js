@@ -8,7 +8,7 @@
 
 export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.TokenRuler {
     /**
-     * Helper function called in `init` hook
+     * Helper function called in `init` hook to apply movement configuration specific to starfinder
      * @internal
      */
     static applySFRPGMovementConfig() {
@@ -131,18 +131,20 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
         );
         const activeMovementType = movementOptionsInverted[waypoint.action];
         let value = 0;
+        const hasActor = this.token.actor ? true : false;
+        const actorSpeed = hasActor ? this.token.actor.system.attributes.speed : false;
         switch (waypoint.action) {
             case "crawl":
-                value = 5;
+                value = hasActor ? 5 : Infinity;
                 break;
             case "jump":
-                value = this.token.actor.system.attributes.speed.land?.value;
+                value = hasActor ? actorSpeed.land?.value : Infinity;
                 break;
             default:
                 if (this.token.actor.type === "starship") {
-                    value = this.token.actor.system.attributes.speed.value;
+                    value = hasActor ? actorSpeed.value : Infinity;
                 } else {
-                    value = this.token.actor.system.attributes.speed[activeMovementType]?.value ?? Infinity;
+                    value = hasActor ? actorSpeed[activeMovementType]?.value ?? Infinity : Infinity;
                 }
                 break;
         }
