@@ -123,7 +123,11 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
      */
     #speedValueStyle(style, waypoint) {
         // color order
-        const colors = [0x33BC4E, 0xF1D836, 0xE72124];
+        const colors = [
+            game.settings.get("sfrpg", "rulerColor0"),
+            game.settings.get("sfrpg", "rulerColor1"),
+            game.settings.get("sfrpg", "rulerColor2")
+        ];
 
         // Calculate the movement available based on the movement type used
         const movementOptionsInverted = Object.fromEntries(
