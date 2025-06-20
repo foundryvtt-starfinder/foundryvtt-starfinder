@@ -23,7 +23,6 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
     async _onRender(context, options) {
         this.modifyConditions(this.element);
         this.refreshStatusIcons();
-        this.updateMovement();
 
         return super._onRender(context, options);
     }
@@ -95,21 +94,6 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
 
             picture.append(nameLabel);
 
-        }
-    }
-
-    /**
-     * Updates the default and available movement types based on the actor speed settings and
-     * whether or not the token has the "prone" condition.
-     */
-    updateMovement() {
-        const token = this.document;
-        const actor = token.actor;
-        const mainMovement = actor.system.attributes.speed.mainMovement;
-        if (token.hasStatusEffect("prone")) {
-            token.update({movementAction: "crawl"});
-        } else {
-            token.update({movementAction: token.movementAction !== "crawl" ? token.movementAction : CONFIG.SFRPG.movementOptions[mainMovement]});
         }
     }
 

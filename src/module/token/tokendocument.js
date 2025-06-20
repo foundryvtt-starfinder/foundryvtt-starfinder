@@ -13,6 +13,11 @@ export default class SFRPGTokenDocument extends TokenDocument {
         return super._preCreate(data, options, user);
     }
 
+    async _onUpdateBaseActor(data, options, user) {
+        this.updateMovement();
+        return super._onUpdate(data, options, user);
+    }
+
     /**
      * Hijack Token health bar rendering to include temporary and temp-max health in the bar display
      *
@@ -59,6 +64,19 @@ export default class SFRPGTokenDocument extends TokenDocument {
 
         // Otherwise null
         return null;
+    }
+
+    /**
+     * Updates the default and available movement types based on the actor speed settings and
+     * whether or not the token has the "prone" condition.
+     */
+    updateMovement() {
+        const mainMovement = this.actor.system.attributes.speed.mainMovement;
+        if (this.hasStatusEffect("prone")) {
+            this.update({movementAction: "crawl"});
+        } else {
+            this.update({movementAction: this.movementAction !== "crawl" ? this.movementAction : CONFIG.SFRPG.movementOptions[mainMovement]});
+        }
     }
 
     /**
