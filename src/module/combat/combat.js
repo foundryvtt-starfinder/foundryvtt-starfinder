@@ -462,7 +462,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Render the chat card template
         const template = `systems/sfrpg/templates/chat/combat-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {
@@ -501,7 +501,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Render the chat card template
         const template = `systems/sfrpg/templates/chat/combat-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {
@@ -539,7 +539,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Render the chat card template
         const template = `systems/sfrpg/templates/chat/combat-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {
