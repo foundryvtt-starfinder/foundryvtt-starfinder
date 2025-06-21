@@ -1210,7 +1210,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             for (const [key, value] of Object.entries(hpDiffs)) {
                 if (value === 0) continue; // Skip deltas of 0
                 const cfg = SFRPG.floatingHPValues[key];
-                const percentMax = Math.clamp(Math.abs(value) / getProperty(t.actor.system, getMaxPath(key)), 0, 1);
+                const percentMax = Math.clamp(Math.abs(value) / foundry.utils.getProperty(t.actor.system, getMaxPath(key)), 0, 1);
                 const sign = (value < 0) ? 'negative' : 'positive';
                 const floaterData = {
                     anchor: CONST.TEXT_ANCHOR_POINTS.CENTER,

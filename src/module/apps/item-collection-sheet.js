@@ -328,7 +328,7 @@ export class ItemCollectionSheet extends DocumentSheet {
      */
     _onEditImage(event) {
         const attr = event.currentTarget.dataset.edit;
-        const current = getProperty(this.document, attr);
+        const current = foundry.utils.getProperty(this.document, attr);
         new FilePicker({
             type: "image",
             current: current,
