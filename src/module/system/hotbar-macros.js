@@ -1,5 +1,5 @@
 import { ActorItemHelper, getChildItems } from "../actor/actor-inventory-utils.js";
-const checkIcons = CONFIG.SFRPG.checkIcons;
+import { checkIcons } from "./enrichers/check.js";
 
 const createMacroFnLookup = {
     Item: createItemMacro,
