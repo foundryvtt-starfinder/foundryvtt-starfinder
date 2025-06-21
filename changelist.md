@@ -1,3 +1,30 @@
+# 0.28.2
+
+This release is primarily to address a bug in the item browsers causing them to not render any items. It also includes a couple of new features from contributors and the addition of some backlogged data from Interstellar Species and the Horizons of the Vast AP.
+
+## Core System Improvements
+
+- Added drag and drop macro creation for character stats by @levirak
+- Descriptive tags are now added to skill rolls by @Imper1um
+
+## Bug Fixes
+
+- Folders in compendiums are now parsed properly by @ian612
+- Document Browsers now show spell, equipment, and starship actions properly by @ian612
+
+## Data Entry
+
+Data entry for this update focused on getting in some backlogged data from older books.
+
+### New Data
+
+- NPCs from Interstellar Species have been added to the compendiums by @Iankid
+- Data from Horizons of the Vast Book 1 has been added by @Iankid
+
+### Corrections and Updates
+
+- Items used by the IS NPCs have been updated by @Iankid
+
 # 0.28.1
 
 Following closely on the heels of our final v12 release, Foundry v13 support is here! This version of sf1e is compatible with Foundry v13 and while we do not fully take advantage of all the v13 features yet, we will be rolling out new features as we complete them. As there are a number of breaking changes between foundry v12 and v13, this version is unfortunately not compatible with Foundry v12 installs. Please remember to back up your worlds before launching them with this new version, just in case.
