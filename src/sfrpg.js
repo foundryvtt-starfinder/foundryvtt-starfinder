@@ -70,6 +70,7 @@ import RollTree from "./module/rolls/rolltree.js";
 import registerCompendiumArt from "./module/system/compendium-art.js";
 import { connectToDocument, rollItemMacro } from "./module/system/hotbar-macros.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
+import SFRPGTokenRuler from "./module/token/token-ruler.js";
 
 import { extendDragData } from "./module/item/drag-data.js";
 import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js";
@@ -206,7 +207,10 @@ Hooks.once('init', async function() {
 
     CONFIG.time.roundTime = 6;
 
+    console.log("Starfinder | [INIT] Overriding token document with Starfinder implementation");
     CONFIG.Token.documentClass = SFRPGTokenDocument;
+    CONFIG.Token.rulerClass = SFRPGTokenRuler;
+    SFRPGTokenRuler.applySFRPGMovementConfig();
 
     CONFIG.Canvas.layers.templates.layerClass = TemplateLayerSFRPG;
     CONFIG.MeasuredTemplate.objectClass = MeasuredTemplateSFRPG;
