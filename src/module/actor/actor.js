@@ -667,7 +667,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             rollContext: rollContext,
             parts: parts,
             title: title,
-            flavor: await TextEditor.enrichHTML(skill.notes, {
+            flavor: await foundry.applications.ux.TextEditor.enrichHTML(skill.notes, {
                 async: true,
                 rollData: this.getRollData() ?? {}
             }),
@@ -928,7 +928,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
             } else {
-                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await TextEditor.enrichHTML(dc.value, {
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await foundry.applications.ux.TextEditor.enrichHTML(dc.value, {
                     async: true,
                     rollData: this.getRollData() ?? {}
                 })}</p>`;
@@ -936,7 +936,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         }
 
         flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
-        flavor += await TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {
+        flavor += await foundry.applications.ux.TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {
             async: true,
             rollData: this.getRollData() ?? {}
         });
@@ -947,7 +947,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             if (critEffectDisplayState !== 'never') {
                 if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
-                    flavor += await TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {
+                    flavor += await foundry.applications.ux.TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {
                         async: true,
                         rollData: this.getRollData() ?? {}
                     });
