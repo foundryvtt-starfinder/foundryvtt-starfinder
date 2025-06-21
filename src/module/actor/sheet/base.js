@@ -683,7 +683,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         const types = Object.keys(game.model.Item).filter(k => supportedTypes.includes(k));
 
-        getDocumentClass("Item").createDialog({}, {}, {types, parent: this.actor});
+        getDocumentClass("Item").createDialog({}, { parent: this.actor }, { types });
 
     }
 
