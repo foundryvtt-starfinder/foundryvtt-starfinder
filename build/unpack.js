@@ -11,10 +11,6 @@ import { JSONstringifyOrder, measureTime } from "./util.js";
  * Unpack existing db files into json files.
  */
 
-// Limit of db items to process at once.
-// This helps limit memory usage to below the default 4 GB allocated to NodeJS
-const dbItemLimit = 32;
-
 // Run only if this file is executed directly
 const modulePath = url.fileURLToPath(import.meta.url);
 if (path.resolve(modulePath) === path.resolve(process.argv[1])) {
@@ -31,7 +27,7 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
     });
 
     const db = new LevelDatabase(filePath, { packName });
-    const { items, folders } = await db.getEntries();
+    const folders = await Array.fromAsync(db.getFolders());
 
     const folderPromises = [];
 
@@ -69,27 +65,23 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
         const folderFilePath = path.resolve(outputDirectory, "_folders.json");
         folderPromises.push(fs.writeFile(folderFilePath, JSONstringifyOrder(folders, 2), "utf-8"));
     }
-    await Promise.all(folderPromises);
 
-    const itemsClone = structuredClone(items);
-    while (itemsClone.length) {
-        const itemsForProcessing = itemsClone.splice(-dbItemLimit);
-        const itemPromises = [];
-        for (const item of itemsForProcessing) {
-            const cleanItem = partOfCook ? item : sanitizeJSON(item);
-            const jsonOutput = JSONstringifyOrder(cleanItem, 2, "item");
-            const filename = sanitize(item.name)
-                .replace(/[\s]/g, "_")
-                .replace(/[\x91\x92\u2018\u2019]/g, "'")
-                .replace(/[,;\u2122\u2026]/g, "")
-                .toLowerCase();
+    const itemPromises = [];
+    for await (const item of db.getItems()) {
+        const cleanItem = partOfCook ? item : sanitizeJSON(item);
+        const jsonOutput = JSONstringifyOrder(cleanItem, 2, "item");
+        const filename = sanitize(item.name)
+            .replace(/[\s]/g, "_")
+            .replace(/[\x91\x92\u2018\u2019]/g, "'")
+            .replace(/[,;\u2122\u2026]/g, "")
+            .toLowerCase();
 
-            const targetFile = `${outputDirectory}/${filename}.json`;
-            itemPromises.push(fs.writeFile(targetFile, jsonOutput, { "flag": "w" }));
-        }
+        const targetFile = `${outputDirectory}/${filename}.json`;
+        itemPromises.push(fs.writeFile(targetFile, jsonOutput, { "flag": "w" }));
 
-        await Promise.all(itemPromises);
     }
+
+    await Promise.all([...itemPromises, ...folderPromises]);
     console.log(chalk.green(`${packName} unpack complete.`));
 }
 
