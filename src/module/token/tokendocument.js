@@ -1,25 +1,27 @@
-export default class SFRPGTokenDocument extends TokenDocument {
+export default class SFRPGTokenDocument extends foundry.documents.TokenDocument {
     async _preCreate(data, options, user) {
+        const updates = {};
+
         if (this.actor) {
             // Set the prototype token's movement type to the main movement defined in the actor's speed
             const mainMovementAction = CONFIG.SFRPG.movementOptions[this.actor.system.attributes.speed.mainMovement] ?? null;
-            const updates = {};
             if (this.actor.type === "starship") {
                 updates.movementAction = "fly";
             } else if (CONFIG.SFRPG.actorsCharacterScale.includes(this.actor.type)) {
                 updates.movementAction = this.hasStatusEffect("prone") ? "crawl" : mainMovementAction;
             }
 
-            this.updateSource(updates);
         }
+
+        this.updateSource(updates);
         return super._preCreate(data, options, user);
     }
 
-    async _onUpdateBaseActor(data, options, user) {
+    _onUpdateBaseActor(update = {}, options = {}) {
         if (this.actor) {
             this.updateMovement(this.actor);
         }
-        return super._onUpdate(data, options, user);
+        return super._onUpdateBaseActor(update, options);
     }
 
     /**
