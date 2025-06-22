@@ -170,7 +170,8 @@ export class DiceSFRPG {
     * @returns {Promise<void>}
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
-        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor", difficulty = undefined, displayDifficulty = false}) {
+        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor",
+        difficulty = undefined, displayDifficulty = false, tags = []}) {
 
         flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
 
@@ -231,7 +232,6 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const tags = [];
             if (rollOptions?.actionTarget) {
                 tags.push({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}) });
             }
@@ -264,7 +264,8 @@ export class DiceSFRPG {
                     htmlData,
                     rollType: "normal",
                     rollOptions,
-                    rollDices: finalFormula.rollDices
+                    rollDices: finalFormula.rollDices,
+                    tags: tags
                 };
 
                 try {
@@ -281,7 +282,8 @@ export class DiceSFRPG {
                     speaker,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    flags: { rollOptions }
+                    flags: { rollOptions },
+                    tags: tags
                 };
 
                 messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });

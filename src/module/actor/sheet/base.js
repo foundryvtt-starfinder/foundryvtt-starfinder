@@ -164,12 +164,12 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
         const secrets = this.actor.isOwner;
-        data.enrichedBiography = await TextEditor.enrichHTML(this.actor.system.details.biography.value, {
+        data.enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.biography.value, {
             async: true,
             rollData: this.actor.getRollData() ?? {},
             secrets
         });
-        data.enrichedGMNotes = await TextEditor.enrichHTML(this.actor.system.details.biography.gmNotes, {
+        data.enrichedGMNotes = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.biography.gmNotes, {
             async: true,
             rollData: this.actor.getRollData() ?? {},
             secrets
@@ -271,6 +271,45 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         html.find(':is(.featActivate, .featDeactivate, .damage, .healing, .attack, .use, .reload)').each((i, li) => {
             li.setAttribute("draggable", true);
             li.addEventListener("dragstart", itemUsageHandler, false);
+        });
+
+        html.find('li.skill h4.skill-name').each((idx, el) => {
+            el.setAttribute('draggable', true);
+            el.addEventListener("dragstart", event => {
+                event.stopPropagation();
+
+                const skill = event.currentTarget.closest('li.skill').dataset.skill;
+                event.dataTransfer.setData('text/plain', JSON.stringify({
+                    type: 'SkillCheck',
+                    actor: this.actor.uuid,
+                    skill: skill,
+                    subname: this.actor.system.skills[skill]?.subname
+                }));
+            }, false);
+        });
+
+        html.find('li.save h4.save-name').each((idx, el) => {
+            el.setAttribute('draggable', true);
+            el.addEventListener("dragstart", event => {
+                event.stopPropagation();
+                event.dataTransfer.setData('text/plain', JSON.stringify({
+                    type: 'SaveCheck',
+                    actor: this.actor.uuid,
+                    save: event.currentTarget.closest('li.save').dataset.save
+                }));
+            }, false);
+        });
+
+        html.find('li.ability h4.ability-name').each((idx, el) => {
+            el.setAttribute('draggable', true);
+            el.addEventListener("dragstart", event => {
+                event.stopPropagation();
+                event.dataTransfer.setData('text/plain', JSON.stringify({
+                    type: 'AbilityCheck',
+                    actor: this.actor.uuid,
+                    ability: event.currentTarget.closest('li.ability').dataset.ability
+                }));
+            }, false);
         });
 
         // Item Rolling
@@ -644,7 +683,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         const types = Object.keys(game.model.Item).filter(k => supportedTypes.includes(k));
 
-        getDocumentClass("Item").createDialog({}, {}, {types, parent: this.actor});
+        getDocumentClass("Item").createDialog({}, { parent: this.actor }, { types });
 
     }
 
