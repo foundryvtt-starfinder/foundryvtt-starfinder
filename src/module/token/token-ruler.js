@@ -1,11 +1,13 @@
 
 /**
+ *  @import { TokenMovementActionConfig, TokenRulerWaypoint } from "@client/_types.mjs"
+ *  @import { DeepReadonly } from "@common/_types.mjs"
+ */
+/**
  * A Starfinder-specific implementation of the token ruler
  * Implementation is heavily based off of and reuses code from the Draw Steel system (June 2025)
  * https://github.com/MetaMorphic-Digital/draw-steel
- *
  */
-
 export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.TokenRuler {
     /**
      * Helper function called in `init` hook to apply movement configuration specific to starfinder
@@ -13,6 +15,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
      */
     static applySFRPGMovementConfig() {
         foundry.utils.mergeObject(CONFIG.Token.movement.actions, {
+            /** @type {TokenMovementActionConfig} */
             burrow: {
                 canSelect: (token) => {
                     if (CONFIG.SFRPG.actorsCharacterScale.includes(token.actor.type)) {
@@ -24,6 +27,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     }
                 }
             },
+            /** @type {TokenMovementActionConfig} */
             climb: {
                 canSelect: (token) => {
                     if (token.actor.type !== "starship") {
@@ -36,6 +40,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     else return cost => cost * 2;
                 }
             },
+            /** @type {TokenMovementActionConfig} */
             crawl: {
                 canSelect: (token) => {
                     if (token.actor.type !== "starship") {
@@ -47,6 +52,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     return cost => cost;
                 }
             },
+            /** @type {TokenMovementActionConfig} */
             fly: {
                 canSelect: (token) => {
                     if (CONFIG.SFRPG.actorsCharacterScale.includes(token.actor.type)) {
@@ -58,6 +64,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     }
                 }
             },
+            /** @type {TokenMovementActionConfig} */
             jump: {
                 canSelect: (token) => {
                     if (token.actor.type !== "starship") {
@@ -69,6 +76,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     return cost => cost;
                 }
             },
+            /** @type {TokenMovementActionConfig} */
             swim: {
                 canSelect: (token) => {
                     if (token.actor.type !== "starship") {
@@ -81,6 +89,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     else return cost => cost * 2;
                 }
             },
+            /** @type {TokenMovementActionConfig} */
             walk: {
                 canSelect: (token) => {
                     if (token.actor.type !== "starship") {
