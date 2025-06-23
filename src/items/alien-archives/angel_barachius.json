@@ -1,18 +1,18 @@
 {
-  "_id": "RXMC0ouK8cmlVoE4",
-  "name": "Atlapak",
+  "_id": "tdFDm4Hw5sdtjPId",
+  "name": "Angel, Barachius",
   "type": "npc2",
   "_stats": {
     "coreVersion": 13,
     "systemId": "sfrpg",
     "systemVersion": "0.28.2"
   },
-  "folder": "nxPHKBP7L4HlILlS",
+  "folder": "jaTjIAGb3Pz5kzaz",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
-      "_id": "ofL4sL6VvGYeBiAe",
-      "name": "Amphibious (Ex)",
+      "_id": "dBUiEKqVgfuC0i1g",
+      "name": "Protective Aura (Su)",
       "type": "feat",
       "_stats": {
         "coreVersion": 13,
@@ -23,11 +23,8 @@
       "system": {
         "type": "",
         "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
-        "actionType": "",
+        "actionType": null,
         "activation": {
           "type": "",
           "condition": "",
@@ -55,7 +52,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>The creature has the aquatic subtype, but it can breathe air and survive on land.</p>"
+          "value": "<p>Any creature within 20 feet of a barachius (including the angel itself) gains a +2 divine bonus to its AC against attacks made by evil creatures and a +4 divine bonus to saving throws against effects created by evil creatures.</p>"
         },
         "descriptors": [],
         "details": {
@@ -101,8 +98,8 @@
       }
     },
     {
-      "_id": "KN9yxs1rYqyFE1aH",
-      "name": "Claw",
+      "_id": "sTzDHz84rCCtbk25",
+      "name": "Holy Sintered Longsword",
       "type": "weapon",
       "_stats": {
         "coreVersion": 13,
@@ -126,9 +123,9 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": null
         },
-        "attackBonus": 18,
+        "attackBonus": 16,
         "attributes": {
           "ac": {
             "value": ""
@@ -165,7 +162,7 @@
                 "fusion"
               ],
               "affectsEncumbrance": true,
-              "amount": 0,
+              "amount": 1,
               "subtype": "fusion",
               "weightProperty": "level"
             }
@@ -178,10 +175,10 @@
         "damage": {
           "parts": [
             {
-              "formula": "2d10+12",
+              "formula": "2d8+12",
               "operator": "",
               "types": {
-                "bludgeoning": true
+                "slashing": true
               }
             }
           ]
@@ -200,7 +197,7 @@
           "value": null
         },
         "equippable": false,
-        "equipped": true,
+        "equipped": false,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
@@ -246,8 +243,8 @@
       }
     },
     {
-      "_id": "uizoEAmE0FDTwhmV",
-      "name": "Sonic Snap (Ex)",
+      "_id": "796bnSLggR2PdYws",
+      "name": "Holy Corona Laser Rifle",
       "type": "weapon",
       "_stats": {
         "coreVersion": 13,
@@ -258,25 +255,22 @@
       "system": {
         "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "eac",
+        "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
-          "type": "action",
+          "type": "",
           "condition": "",
-          "cost": 1
+          "cost": 0
         },
         "ammunitionType": "",
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": "none",
+          "units": "",
           "value": null
         },
-        "attackBonus": 21,
+        "attackBonus": 14,
         "attributes": {
           "ac": {
             "value": ""
@@ -313,23 +307,23 @@
                 "fusion"
               ],
               "affectsEncumbrance": true,
-              "amount": 0,
+              "amount": 1,
               "subtype": "fusion",
               "weightProperty": "level"
             }
           ]
         },
         "critical": {
-          "effect": "Stunned [DC 16]",
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": [
             {
-              "formula": "3d6+9",
+              "formula": "2d6+7",
               "operator": "",
               "types": {
-                "sonic": true
+                "slashing": true
               }
             }
           ]
@@ -340,15 +334,15 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>By cocking and then snapping shut its specialized claw as a standard action, an atlapak can create a sonic burst as a ranged attack. This attack has a range increment of 80 feet, targets EAC, and has the penetrating special property, ignoring 9 points of its target's hardness. This ability doesn't function in environments with no atmosphere.</p>"
+          "value": ""
         },
         "descriptors": [],
         "duration": {
           "units": "",
-          "value": ""
+          "value": null
         },
         "equippable": false,
-        "equipped": true,
+        "equipped": false,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
@@ -358,113 +352,27 @@
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
-        "quantity": null,
+        "properties": {},
+        "quantity": 1,
         "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
-          "units": "ft",
-          "value": 80
+          "units": "",
+          "value": null
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": "",
-          "descriptor": "negate"
+          "dc": null,
+          "descriptor": ""
         },
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
           "type": "",
-          "value": ""
+          "value": null
         },
         "usage": {
           "per": "",
@@ -472,7 +380,7 @@
         },
         "uses": {
           "max": 0,
-          "per": "",
+          "per": null,
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -480,8 +388,8 @@
       }
     },
     {
-      "_id": "MIvT9OVPQ14wY4UE",
-      "name": "Atmospheric Enhancement (Ex)",
+      "_id": "c98g0ZbYDwMNK4mp",
+      "name": "Firewall (Su)",
       "type": "feat",
       "_stats": {
         "coreVersion": 13,
@@ -504,7 +412,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": null
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -521,7 +429,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>An atlapak's sonic snap ability becomes increasingly effective the denser its surroundings. In normal and thicker atmospheric conditions, the range increment increases to 100 feet, and the DC to resist the atlapak's critical hit effect increases by 2. In thick atmosphere or underwater, the sonic snap gains the sniper (250 ft.) weapon property.</p>"
+          "value": "<p>A barachius can summon a wall of digitally empowered divine fury within 30 feet as a standard action. This wall takes the shape of a line 10 feet high and 20 feet long; though it doesn’t need to emanate from the angel, the angel must be able to see every square the wall passes through. The wall lasts until the beginning of the angel’s next turn. An evil creature caught within or that enters one of the wall’s squares takes 2d6 damage (Will DC 17 half). An evil creature with the technological subtype takes twice this amount of damage.</p>"
         },
         "descriptors": [],
         "details": {
@@ -567,8 +475,8 @@
       }
     },
     {
-      "_id": "Ua4UFBkIRfgg2ktK",
-      "name": "Aerial Buoyancy (Ex)",
+      "_id": "7lPK4dfDYyY0LOYp",
+      "name": "Upgrade (Su)",
       "type": "feat",
       "_stats": {
         "coreVersion": 13,
@@ -591,7 +499,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": null
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -608,7 +516,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>An atlapak can inflate its lightweight body and flap its gills to swim through the air. In normal atmosphere, the atlapak moves at half speed with clumsy maneuverability. In thick atmosphere, the atlapak flies at full speed with average maneuverability. It's unable to fly in environments with thin atmosphere or no atmosphere.</p>"
+          "value": "<p>As a standard action, a barachius can touch a willing ally who is wielding a technological weapon or wearing technological armor. That creature receives a +1 divine bonus to attack rolls or to its AC (target’s choice). This bonus last for 3 rounds and cannot be dispelled.</p>"
         },
         "descriptors": [],
         "details": {
@@ -654,37 +562,197 @@
       }
     },
     {
-      "_id": "Ux27BhlRpCQexhta",
-      "name": "Mindless (Ex)",
-      "type": "feat",
+      "_id": "8bqixI4K45b8TNXk",
+      "name": "Holy Corona Laser Rifle",
+      "type": "goods",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.2"
       },
-      "img": "systems/sfrpg/icons/default/achievement.svg",
+      "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "L",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "equippable": false,
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "source": ""
+      }
+    },
+    {
+      "_id": "Q8dHSPffgqFLPQpR",
+      "name": "2 High-Capacity Batteries (40 Charges Each",
+      "type": "goods",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.2"
+      },
+      "img": "systems/sfrpg/icons/default/hand-truck.svg",
+      "system": {
+        "type": "",
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "L",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "equippable": false,
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "quantity": "2",
+        "quantityPerPack": 1,
+        "source": ""
+      }
+    },
+    {
+      "_id": "xyHgsG8Pbd6HXIM8",
+      "name": "Holy Sintered Longsword",
+      "type": "goods",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.2"
+      },
+      "img": "systems/sfrpg/icons/default/hand-truck.svg",
+      "system": {
+        "type": "",
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "attuned": false,
+        "bulk": "L",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "equippable": false,
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 0,
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "source": ""
+      }
+    },
+    {
+      "_id": "qQIFpwHRdHb6rY5V",
+      "name": "Arcing Surge (DC 18) (1/Day)",
+      "type": "spell",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.2"
+      },
+      "img": "systems/sfrpg/icons/spells/arcing_surge.webp",
+      "system": {
+        "type": "",
+        "ability": "",
         "abilityMods": {
           "parts": []
         },
         "actionTarget": "",
-        "actionType": "",
+        "actionType": "save",
         "activation": {
-          "type": "",
+          "type": "action",
           "condition": "",
-          "cost": 0
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": true,
+          "wysh": false
         },
         "area": {
-          "effect": "",
+          "effect": "burst",
           "shapable": false,
-          "shape": "",
-          "units": "",
+          "shape": "line",
+          "units": null,
           "value": null
         },
         "attackBonus": 0,
         "chatFlavor": "",
+        "concentration": false,
         "critical": {
           "effect": "",
           "parts": []
@@ -698,21 +766,128 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>The creature has no Intelligence score or modifier and is immune to mind-affecting effects. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</p>"
+          "value": "<p>You cause an electrical device in your possession to surge in power and unleash a line of electricity from the massive oversurge. This deals 10d6 electricity damage to all creatures and objects in the area.</p>"
         },
         "descriptors": [],
-        "details": {
-          "category": "feat",
-          "combat": false,
-          "specialAbilityType": ""
+        "dismissible": false,
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
         },
+        "formula": "10d6",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 3,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "",
+          "prepared": false
+        },
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "ft",
+          "value": 120
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "reflex",
+          "dc": null,
+          "descriptor": "half"
+        },
+        "school": "evo",
+        "source": "Starfinder Core Rulebook pg. 340",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": ""
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "s0A1GinEiYzQOaGN",
+      "name": "Interplanetary Teleport (Self Only) (1/Day)",
+      "type": "spell",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.2"
+      },
+      "img": "systems/sfrpg/icons/default/spell-book.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": false,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "dismissible": false,
         "duration": {
           "units": "",
           "value": null
         },
         "formula": "",
         "isActive": null,
+        "isVariableLevel": false,
+        "level": 1,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
         "modifiers": [],
+        "preparation": {
+          "mode": null,
+          "prepared": false
+        },
         "properties": {},
         "range": {
           "additional": "",
@@ -720,18 +895,15 @@
           "units": "",
           "value": null
         },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
           "descriptor": ""
         },
+        "school": "",
         "source": "",
+        "sr": false,
         "target": {
           "type": "",
           "value": null
@@ -744,27 +916,30 @@
       }
     },
     {
-      "_id": "Q3bElZPv51jINs3j",
-      "name": "Water Breathing (Ex)",
-      "type": "feat",
+      "_id": "98Gwz2RpsbMYEFaE",
+      "name": "Inject Nanobots (DC 17) (3/Day)",
+      "type": "spell",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
         "systemVersion": "0.28.2"
       },
-      "img": "systems/sfrpg/icons/default/achievement.svg",
+      "img": "systems/sfrpg/icons/default/spell-book.svg",
       "system": {
         "type": "",
         "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
-        "actionType": "",
+        "actionType": null,
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": false,
+          "wysh": false
         },
         "area": {
           "effect": "",
@@ -775,6 +950,7 @@
         },
         "attackBonus": 0,
         "chatFlavor": "",
+        "concentration": false,
         "critical": {
           "effect": "",
           "parts": []
@@ -788,21 +964,29 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>The creature can breathe water. It can’t breathe air unless it has the amphibious special ability (see page 152).</p>"
+          "value": ""
         },
         "descriptors": [],
-        "details": {
-          "category": "feat",
-          "combat": false,
-          "specialAbilityType": ""
-        },
+        "dismissible": false,
         "duration": {
           "units": "",
           "value": null
         },
         "formula": "",
         "isActive": null,
+        "isVariableLevel": false,
+        "level": 3,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
         "modifiers": [],
+        "preparation": {
+          "mode": null,
+          "prepared": false
+        },
         "properties": {},
         "range": {
           "additional": "",
@@ -810,18 +994,114 @@
           "units": "",
           "value": null
         },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
           "dc": null,
           "descriptor": ""
         },
+        "school": "",
         "source": "",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "TXrDN2UdTXlcsy0o",
+      "name": "Microbot Assault (3/Day)",
+      "type": "spell",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.2"
+      },
+      "img": "systems/sfrpg/icons/default/spell-book.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": false,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 3,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": null,
+          "prepared": false
+        },
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "school": "",
+        "source": "",
+        "sr": false,
         "target": {
           "type": "",
           "value": null
@@ -835,7 +1115,7 @@
     }
   ],
   "prototypeToken": {
-    "name": "Atlapak",
+    "name": "Angel, Barachius",
     "actorLink": false,
     "alpha": 1,
     "appendNumber": false,
@@ -930,18 +1210,18 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 0,
+        "base": 2,
         "min": 3,
         "misc": 0,
-        "mod": 0,
-        "value": 10
+        "mod": 2,
+        "value": 14
       },
       "con": {
-        "base": 6,
+        "base": 4,
         "min": 3,
         "misc": 0,
-        "mod": 6,
-        "value": 22
+        "mod": 4,
+        "value": 18
       },
       "dex": {
         "base": 4,
@@ -951,25 +1231,25 @@
         "value": 18
       },
       "int": {
-        "base": 0,
+        "base": 1,
         "min": 3,
         "misc": 0,
-        "mod": 0,
-        "value": 10
+        "mod": 1,
+        "value": 12
       },
       "str": {
-        "base": 3,
+        "base": 5,
         "min": 3,
         "misc": 0,
-        "mod": 3,
-        "value": 16
+        "mod": 5,
+        "value": 20
       },
       "wis": {
-        "base": 0,
+        "base": 2,
         "min": 3,
         "misc": 0,
-        "mod": 0,
-        "value": 10
+        "mod": 2,
+        "value": 14
       }
     },
     "attributes": {
@@ -978,11 +1258,6 @@
       },
       "arms": "2",
       "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
       "baseSpellDC": {
         "base": "0"
       },
@@ -992,25 +1267,25 @@
         "value": 10
       },
       "eac": {
-        "base": 22,
+        "base": 21,
         "min": 0,
         "tooltip": [],
-        "value": 22
+        "value": 21
       },
       "fort": {
-        "base": 13,
-        "bonus": 13,
+        "base": 8,
+        "bonus": 8,
         "misc": 0,
         "tooltip": [],
         "value": 0
       },
       "hp": {
-        "max": 145,
+        "max": 95,
         "min": 0,
         "temp": null,
         "tempmax": null,
         "tooltip": [],
-        "value": 145
+        "value": 95
       },
       "init": {
         "bonus": 0,
@@ -1019,16 +1294,16 @@
         "value": 4
       },
       "kac": {
-        "base": 24,
+        "base": 22,
         "min": 0,
         "tooltip": [],
-        "value": 24
+        "value": 22
       },
       "keyability": "",
       "reach": "10 ft.",
       "reflex": {
-        "base": 11,
-        "bonus": 11,
+        "base": 6,
+        "bonus": 6,
         "misc": 0,
         "tooltip": [],
         "value": 0
@@ -1042,66 +1317,29 @@
           "base": 0
         },
         "flying": {
-          "base": 30,
+          "base": 100,
           "baseManeuverability": "0"
         },
         "land": {
-          "base": 20
+          "base": 50
         },
         "mainMovement": "land",
         "special": "",
         "swimming": {
-          "base": 30
+          "base": 0
         },
         "value": null
       },
       "spellcasting": "",
       "will": {
-        "base": 8,
-        "bonus": 8,
+        "base": 10,
+        "bonus": 10,
         "misc": 0,
         "tooltip": [],
         "value": 0
       }
     },
-    "classes": {},
-    "conditions": {
-      "asleep": false,
-      "bleeding": false,
-      "blinded": false,
-      "broken": false,
-      "burning": false,
-      "confused": false,
-      "cowering": false,
-      "dazed": false,
-      "dazzled": false,
-      "dead": false,
-      "deafened": false,
-      "dying": false,
-      "encumbered": false,
-      "entangled": false,
-      "exhausted": false,
-      "fascinated": false,
-      "fatigued": false,
-      "flat-footed": false,
-      "frightened": false,
-      "grappled": false,
-      "helpless": false,
-      "nauseated": false,
-      "off-kilter": false,
-      "off-target": false,
-      "overburdened": false,
-      "panicked": false,
-      "paralyzed": false,
-      "pinned": false,
-      "prone": false,
-      "shaken": false,
-      "sickened": false,
-      "stable": false,
-      "staggered": false,
-      "stunned": false,
-      "unconscious": false
-    },
+    "conditions": {},
     "counterClasses": {
       "values": {}
     },
@@ -1110,9 +1348,9 @@
       "upb": 0
     },
     "details": {
-      "type": "Vermin",
-      "alignment": "N",
-      "aura": "",
+      "type": "Outsider",
+      "alignment": "NG",
+      "aura": "Protective Aura - 20 Ft.",
       "biography": {
         "age": 0,
         "dateOfBirth": "",
@@ -1123,53 +1361,48 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>Often compared to evolutionarily unrelated mantis shrimp, atlapaks have banded shells that offer considerable mobility. Their eight pairs of legs have evolved for walking and swimming; to perceive their surroundings, they have inquisitive antennae and three compound eyes mounted on movable stalks. These large, amphibious arthropods are also famous for their explosively devastating claws—one pincer designed for grasping and tearing and another capable of opening and snapping shut with incredible speed to generate cavitating sonic blasts.</p>\n<p>Rather than creating a localized explosion, an atlapak can fan its abdominal plates to focus and direct the sonic energy into a distant burst that can stun or outright kill prey hundreds of feet away. The denser the medium—whether liquid or gas—the more effective the blast. Atlapaks can grow as much as 10 feet long, while juveniles are around 5 feet long.</p>\n<p>Atlapaks prefer lurking in sheltered burrows that providecommanding views, such as coral reefs or low hills. From there, the creatures hunt by ambush, waiting for prey toapproach within easy striking range before unleashing several sonic bursts and closing in for the kill. Underwater,atlapaks often cohabitate with colonial tube worms like the pileated tsorkos, which gradually accumulate sandy mounds and tunnels. The atlapaks help watch for danger and often leave food scraps, while the worms provide good hiding spots and vantage points.</p>\n<p>Older atlapaks more often leave the water to seek terrestrial prey, using their natural buoyancy to hover several hundred feet above the surface while scouting for food. Drifting in this way also helps adults find mates, and although atlapaks most often reproduce in water, their eggs can survive in humid terrestrial environments. Some unlucky jungle explorers have fallen prey to the young arthropods when atlapak eggs adhered to the underside of tree branches hatch and drift into convoys.</p>\n<p>Although unintelligent, atlapaks exhibit utterly uncanny ballistics mastery. Their antennae are extremely sensitive to humidity and currents, for which the arthropods adjust their aim. Not only do their questing compound eyes provide exceptional depth perception, but their lenses also help them compensate for the refracting and obscuring qualities of&nbsp;water vapor and other gases, providing them with a clear view of their surroundings even in foggy conditions. Collectively, these features enable atlapaks to pinpoint and strike even fast-moving targets.</p>\n<p>Fresh atlapak meat has a clean taste that appeals to many species, though it acquires a repugnant sliminess within hours of the creature’s death. As a result, connoisseurs often commission live atlapak shipments to their restaurants, despite the danger the cargo presents for most starships. Kalos (Alien Archive 68) are especially partial to atlapak flesh, hunting the animals to near-extinction on their home world, Kalo-Mahoi.</p>\n<h3>SNAP WHIPS</h3>\n<p>Until recently, atlapaks’ exceptional pincers resisted engineers’ efforts to replicate the same mechanics in the form of a reliable weapon. In the past three decades, breakthroughs in materials science have enabled arms manufacturers to create handheld versions of an atlapak claw, which take the form of a semi-flexible, whip-like rod. An assemblage of reinforced metallic percussion plates and high-pressure levers near the rod’s tip creates a focused shock of sonic energy when activated, shattering nearby materials. Artificial ligaments strung throughout the rod translate the kinetic energy of a user’s backswing to rearm the device, priming it to release another sonic burst. Early prototypes of the snap whip directly incorporated atlapak components, though all but the most eccentric versions of such whips are now entirely synthetic and merely borrow the atlapak’s uniquely evolved design.</p>\n<p>The @UUID[Compendium.sfrpg.races.Item.3kLK4WKPqNvFTwIB]{Drow} corporation Arabani Arms ultimately developed the breakthrough technology that created viable snap whips, and it continues to protect the design via patents and ongoing research despite the countless lethal imitations that have appeared on the market. The company’s R&amp;D department has yet to replicate atlapaks’ particular ability to channel sound waves over long distances—a breakthrough that would allow Arabani Arms to create a devastating new sniper weapon—but it has come close on several occasions.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td>WEAPON MODEL</td>\n<td style=\"text-align: center; vertical-align: middle;\">LEVEL</td>\n<td style=\"text-align: center; vertical-align: middle;\">PRICE</td>\n<td style=\"text-align: center; vertical-align: middle;\">DAMAGE</td>\n<td style=\"text-align: center; vertical-align: middle;\">CRITICAL</td>\n<td style=\"text-align: center; vertical-align: middle;\">BULK</td>\n<td style=\"text-align: center; vertical-align: middle;\">SPECIAL</td>\n</tr>\n<tr>\n<td>Snap whip, thunderstrike</td>\n<td style=\"text-align: center; vertical-align: middle;\">3</td>\n<td style=\"text-align: center; vertical-align: middle;\">1,600</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(0, 0, 0, 0.05);\">1d6 So</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">@UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered}</td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n<td style=\"text-align: center; vertical-align: middle;\">Analog, penetrating, reach, sunder</td>\n</tr>\n<tr>\n<td><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Snap whip, LFD</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">8</td>\n<td style=\"text-align: center; vertical-align: middle;\">10,100</td>\n<td style=\"text-align: center; vertical-align: middle;\">2d6 So</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">@UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered}</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Analog, penetrating, reach, sunder</span></td>\n</tr>\n<tr>\n<td>Snap whip, HFD</td>\n<td style=\"text-align: center; vertical-align: middle;\">13</td>\n<td style=\"text-align: center; vertical-align: middle;\">54,000</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(0, 0, 0, 0.05);\">5d6 So</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">@UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned}</td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n<td style=\"text-align: center; vertical-align: middle;\">Analog, penetrating, reach, sunder</td>\n</tr>\n<tr>\n<td><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Snap whip, banshee</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">18</td>\n<td style=\"text-align: center; vertical-align: middle;\">445,000</td>\n<td style=\"text-align: center; vertical-align: middle;\">10d6 So</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">@UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned}</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Analog, penetrating, reach, sunder</span></td>\n</tr>\n</tbody>\n</table>",
+        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>While tools and technology are often considered neutral in their own right, able to be used for good or ill purposes depending on the natures of their wielders, some good-aligned deities have long preached caution regarding those technologies that can allow single individuals to cause great havoc. The ascension of the artificially intelligent god @UUID[Compendium.sfrpg.setting.Item.FYV6RgTjPdg72RF0]{Triune}, who now holds technology and artificial life as its domains, has not eased such fears. Despite @UUID[Compendium.sfrpg.setting.Item.FYV6RgTjPdg72RF0]{Triune}’s claim of neutrality, the ubiquity of technology throughout the Pact Worlds and beyond has spurred many divine powers to keep careful watch over both the ways in which current technology is employed as well as rapid technological progress that could threaten all life.</p>\n<p>As angels have always been the messengers and enactors of the gods’ will, a particular order of angelic beings, known as barachiuses, oversees technological advances and ensures these creations don’t fall into the wrong hands or become twisted to serve evil gods and their minions. Outfitted with divinely blessed armor, weapons, and abilities, barachius angels are tasked with monitoring the planes both to protect mortal existence from technology gone awry and to quash technologically advanced cultures that present an explicit threat to all good creatures and causes. While all angels might be expected to protect the innocent from harm, barachiuses specialize in defending against subtle technological threats that might go unnoticed by the rank-and-file troops of the celestial legions. When a rapidly developing AI suddenly veers into true evil, when a new invention threatens to destroy countless innocents, when Hell’s hacker devils feed insidious viruses into mortal mainframes-these are when barachiuses truly shine.</p>\n<p>A barachius is an imposing figure, standing in what appears to be sleek, glowing armor and wielding a sword that pulses with the light of the stars or a glowing laser rifle. Its wings appear to be made of pure electricity, though a closer look reveals patterns within the feathery arcs that mimic digital arrays and computer wiring. Its face is often hidden behind an elaborate helm, and its voice-when it deigns to speak-is clipped and rapid-fire.</p>\n<p>Yet a barachius’s true strength resides not within its presence or arms but in its near-prescient ability to understand the nature of any technological object or being that it encounters. Exactly how and why the angels deem some technology not just dangerous but immoral is a great mystery, as it’s not based solely on sheer destructive capacity. For instance, barachiuses have been known to hunt down and destroy individual robots with extreme determination while leaving similar models-and silos of nuclear missiles-entirely untouched.</p>\n<p>A barachius might serve its purpose in a wide variety of ways. It could secretly patrol a settlement that is already rife with technology, constantly on the search for malicious computer code, machines run amok, or creatures bent on using technology for nefarious ends. Alternatively, one could be found searching for scientists and laboratories where cutting-edge research is being conducted. Even researchers with the best of intentions may come under the scrutiny of a barachius that deems the ongoing work or latest invention too threatening to the society’s ongoing moral health. Barachiuses also keep watch over some planets and species that lack advanced technology to ensure that they’re not enslaved or annihilated by races with greater resources-though again, why they perform this action for some races and not others is a mystery deeply vexing to scholars and mystics. Many believe their choices are based on an ability to see lines of probability stretching into the future and the angels’ need to make minor course corrections now and then to avoid catastrophe. Rarely, a barachius might take a more redemptive approach. Rather than destroying evil-aligned devices and technological life-forms, it might seek to turn a target to the path of good. Barachiuses minister to androids and robots in particular, hoping that merciful actions might inspire the artificial creatures to similar acts.</p>\n<p>Barachius Helm</p>\n<p>What looks like a magnificent helmet on a barachius is actually an extension of its being, and thus it can never be taken from it by force. On occasion, however, a barachius particularly impressed by a mortal might offer that champion a magical copy of its own helm that’s imbued with a sliver of its essence and grants the wearer some of its own power.</p>\n<p>Extra Content</p>\n<p>The following extra content was found for this creature:</p>\n<p>- Angel (Creature Subtype) Graft Template</p>\n<p>- Angel (Summoning) Graft Template</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any good-aligned planes</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>",
         "weight": ""
       },
       "class": "",
-      "combatRole": "combatant",
-      "cr": 9,
-      "environment": "warm or temperate hills or water",
-      "organization": "solitary, pair, or cacophony (3&ndash;7)",
+      "combatRole": "expert",
+      "cr": 7,
+      "environment": "",
+      "organization": "",
       "organizationSize": {
         "max": null,
         "min": 1
       },
       "race": "",
-      "raceAndGrafts": "",
-      "source": "AA4 pg. 14",
-      "subtype": "Aquatic",
+      "raceAndGrafts": "Angel",
+      "source": "AA1 pg. 12",
+      "subtype": "Angel, Extraplanar, Good",
       "xp": {
-        "value": 6400
+        "value": 3200
       }
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 22,
-        "ranks": 22,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       },
       "ath": {
         "ability": "str",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 17,
-        "ranks": 17,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       },
       "blu": {
@@ -1185,24 +1418,24 @@
       },
       "com": {
         "ability": "int",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
-        "mod": 0,
-        "ranks": 0,
+        "mod": 19,
+        "ranks": 19,
         "value": 0
       },
       "cul": {
         "ability": "int",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
-        "mod": 0,
-        "ranks": 0,
+        "mod": 19,
+        "ranks": 19,
         "value": 0
       },
       "dip": {
@@ -1229,13 +1462,13 @@
       },
       "eng": {
         "ability": "int",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
-        "mod": 0,
-        "ranks": 0,
+        "mod": 19,
+        "ranks": 19,
         "value": 0
       },
       "int": {
@@ -1273,13 +1506,13 @@
       },
       "mys": {
         "ability": "wis",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
-        "mod": 0,
-        "ranks": 0,
+        "mod": 14,
+        "ranks": 14,
         "value": 0
       },
       "per": {
@@ -1289,8 +1522,8 @@
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 17,
-        "ranks": 17,
+        "mod": 14,
+        "ranks": 14,
         "value": 0
       },
       "phs": {
@@ -1329,13 +1562,13 @@
       },
       "sen": {
         "ability": "wis",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 0,
-        "ranks": 0,
+        "mod": 14,
+        "ranks": 14,
         "value": 0
       },
       "sle": {
@@ -1411,24 +1644,28 @@
     },
     "traits": {
       "ci": {
-        "custom": "",
-        "value": [
-          "deafened"
-        ]
+        "custom": "Petrification",
+        "value": []
       },
       "damageReduction": {
         "negatedBy": "",
         "value": 0
       },
       "di": {
-        "custom": "",
-        "value": []
+        "custom": "Petrification",
+        "value": [
+          "acid",
+          "cold"
+        ]
       },
       "dr": {
         "custom": "",
         "value": [
           {
-            "sonic": "10"
+            "electricity": "10"
+          },
+          {
+            "fire": "10"
           }
         ]
       },
@@ -1437,15 +1674,19 @@
         "value": []
       },
       "languages": {
-        "custom": "",
-        "value": []
+        "custom": "Truespeech",
+        "value": [
+          "celestial",
+          "draconic",
+          "infernal"
+        ]
       },
-      "senses": "darkvision 180 ft., sense through (vision [fog only]) 90 ft.",
+      "senses": "darkvision 60 ft., detect alignment, low-light vision",
       "size": "large",
       "spellResistance": {
         "base": 0
       },
-      "sr": 0
+      "sr": 18
     }
   }
 }

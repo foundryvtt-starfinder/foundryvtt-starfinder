@@ -1,22 +1,23 @@
 {
-  "_id": "tdFDm4Hw5sdtjPId",
-  "name": "Barachius",
+  "_id": "7IV9poumQUJCUqRG",
+  "name": "Animated Armor, Lictor Hellknight Plate",
   "type": "npc2",
   "_stats": {
     "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.28.1"
+    "systemVersion": "0.28.2"
   },
+  "folder": "dD46zcVHLOU8fvio",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
-      "_id": "dBUiEKqVgfuC0i1g",
-      "name": "Protective Aura (Su)",
+      "_id": "HVmkUzHPrU34mCeG",
+      "name": "Integrated Weapons",
       "type": "feat",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -51,7 +52,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Any creature within 20 feet of a barachius (including the angel itself) gains a +2 divine bonus to its AC against attacks made by evil creatures and a +4 divine bonus to saving throws against effects created by evil creatures.</p>"
+          "value": "<p>The creature’s weapons are manufactured weapons, not natural weapons, and they are integrated into its frame. A creature can’t be disarmed of these weapons, though they can be removed and used if the creature is @UUID[Compendium.sfrpg.conditions.Item.nEJIWMKbPjqKuelo]{Dead}.</p>\n<p>Guidelines: A manufactured weapon is a weapon with an item level that can be purchased by characters.</p>"
         },
         "descriptors": [],
         "details": {
@@ -84,7 +85,7 @@
           "dc": null,
           "descriptor": ""
         },
-        "source": "",
+        "source": "Alien Archive 3 pg. 152, Alien Archive 2 pg. 151",
         "target": {
           "type": "",
           "value": null
@@ -97,18 +98,21 @@
       }
     },
     {
-      "_id": "sTzDHz84rCCtbk25",
-      "name": "Holy Sintered Longsword",
+      "_id": "y9UmBsihDzaZjL0X",
+      "name": "Slam",
       "type": "weapon",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -124,7 +128,7 @@
           "units": "",
           "value": null
         },
-        "attackBonus": 16,
+        "attackBonus": 15,
         "attributes": {
           "ac": {
             "value": ""
@@ -174,10 +178,10 @@
         "damage": {
           "parts": [
             {
-              "formula": "2d8+12",
+              "formula": "1d6+10",
               "operator": "",
               "types": {
-                "slashing": true
+                "bludgeoning": true
               }
             }
           ]
@@ -206,7 +210,90 @@
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {},
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -219,7 +306,7 @@
         "save": {
           "type": "",
           "dc": null,
-          "descriptor": ""
+          "descriptor": "negate"
         },
         "source": "",
         "special": "",
@@ -242,19 +329,22 @@
       }
     },
     {
-      "_id": "796bnSLggR2PdYws",
-      "name": "Holy Corona Laser Rifle",
+      "_id": "Ynptz83xMuxpi4YL",
+      "name": "Integrated Corona Laser Pistol",
       "type": "weapon",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
-        "actionTarget": "kac",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
           "type": "",
@@ -269,7 +359,7 @@
           "units": "",
           "value": null
         },
-        "attackBonus": 14,
+        "attackBonus": 13,
         "attributes": {
           "ac": {
             "value": ""
@@ -313,16 +403,16 @@
           ]
         },
         "critical": {
-          "effect": "",
+          "effect": "critical burn 1d4",
           "parts": []
         },
         "damage": {
           "parts": [
             {
-              "formula": "2d6+7",
+              "formula": "2d4+5",
               "operator": "",
               "types": {
-                "slashing": true
+                "fire": true
               }
             }
           ]
@@ -351,7 +441,90 @@
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {},
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -364,7 +537,7 @@
         "save": {
           "type": "",
           "dc": null,
-          "descriptor": ""
+          "descriptor": "negate"
         },
         "source": "",
         "special": "",
@@ -387,13 +560,13 @@
       }
     },
     {
-      "_id": "c98g0ZbYDwMNK4mp",
-      "name": "Firewall (Su)",
+      "_id": "AGYJylVnCg0ZV7A1",
+      "name": "Comm (Ex)",
       "type": "feat",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -428,7 +601,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A barachius can summon a wall of digitally empowered divine fury within 30 feet as a standard action. This wall takes the shape of a line 10 feet high and 20 feet long; though it doesn’t need to emanate from the angel, the angel must be able to see every square the wall passes through. The wall lasts until the beginning of the angel’s next turn. An evil creature caught within or that enters one of the wall’s squares takes 2d6 damage (Will DC 17 half). An evil creature with the technological subtype takes twice this amount of damage.</p>"
+          "value": "<p>Animated lictor Hellknight plate can receive wireless communications (and thus commands from its allies and creator) at planetary range. Extra Content The following extra content was found for this creature: - Animated Armor (Other) Graft Template</p>"
         },
         "descriptors": [],
         "details": {
@@ -474,13 +647,13 @@
       }
     },
     {
-      "_id": "7lPK4dfDYyY0LOYp",
-      "name": "Upgrade (Su)",
+      "_id": "pky4846DURBF7Yno",
+      "name": "Mindless",
       "type": "feat",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -515,7 +688,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a standard action, a barachius can touch a willing ally who is wielding a technological weapon or wearing technological armor. That creature receives a +1 divine bonus to attack rolls or to its AC (target’s choice). This bonus last for 3 rounds and cannot be dispelled.</p>"
+          "value": "<p>The creature has no Intelligence score or modifier and is immune to mind-affecting effects. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</p>\n<p>Guidelines: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>"
         },
         "descriptors": [],
         "details": {
@@ -548,7 +721,7 @@
           "dc": null,
           "descriptor": ""
         },
-        "source": "",
+        "source": "Alien Archive 3 pg. 152, Alien Archive pg. 155, Alien Archive 2 pg. 151",
         "target": {
           "type": "",
           "value": null
@@ -561,203 +734,180 @@
       }
     },
     {
-      "_id": "8bqixI4K45b8TNXk",
-      "name": "Holy Corona Laser Rifle",
-      "type": "goods",
+      "_id": "6DOVyY2RL3Plw09c",
+      "name": "Unliving",
+      "type": "feat",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
-      "img": "systems/sfrpg/icons/default/hand-truck.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
+        "ability": null,
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
         },
-        "attuned": false,
-        "bulk": "L",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": ""
+          "value": "<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "identified": true,
-        "level": 1,
+        "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
         "modifiers": [],
-        "price": 0,
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "source": ""
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "Alien Archive 3 pg. 155, Alien Archive pg. 158, Alien Archive 2 pg. 154",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
       }
     },
     {
-      "_id": "Q8dHSPffgqFLPQpR",
-      "name": "2 High-Capacity Batteries (40 Charges Each",
-      "type": "goods",
+      "_id": "P6eQixSvVHADxpn7",
+      "name": "Corona Laser Pistol",
+      "type": "weapon",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
-      "img": "systems/sfrpg/icons/default/hand-truck.svg",
+      "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-corona.webp",
       "system": {
         "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
-        },
-        "attuned": false,
-        "bulk": "L",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "quantity": "2",
-        "quantityPerPack": 1,
-        "source": ""
-      }
-    },
-    {
-      "_id": "xyHgsG8Pbd6HXIM8",
-      "name": "Holy Sintered Longsword",
-      "type": "goods",
-      "_stats": {
-        "coreVersion": 13,
-        "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
-      },
-      "img": "systems/sfrpg/icons/default/hand-truck.svg",
-      "system": {
-        "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
-        },
-        "attuned": false,
-        "bulk": "L",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "source": ""
-      }
-    },
-    {
-      "_id": "qQIFpwHRdHb6rY5V",
-      "name": "Arcing Surge (DC 18) (1/Day)",
-      "type": "spell",
-      "_stats": {
-        "coreVersion": 13,
-        "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
-      },
-      "img": "systems/sfrpg/icons/spells/arcing_surge.webp",
-      "system": {
-        "type": "",
-        "ability": "",
+        "ability": "dex",
         "abilityMods": {
           "parts": []
         },
-        "actionTarget": "",
-        "actionType": "save",
+        "actionTarget": "eac",
+        "actionType": "rwak",
         "activation": {
-          "type": "action",
+          "type": "none",
           "condition": "",
-          "cost": 1
+          "cost": 0
         },
-        "allowedClasses": {
-          "myst": false,
-          "precog": false,
-          "tech": true,
-          "wysh": false
-        },
+        "ammunitionType": "",
         "area": {
-          "effect": "burst",
+          "effect": "",
           "shapable": false,
-          "shape": "line",
+          "shape": "",
           "units": null,
           "value": null
         },
         "attackBonus": 0,
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "attuned": false,
+        "bulk": "L",
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
         "chatFlavor": "",
-        "concentration": false,
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": 1,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 6,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
         "critical": {
-          "effect": "",
+          "effect": "critical burn 1d4",
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [
+            {
+              "formula": "2d4",
+              "operator": "",
+              "types": {
+                "fire": true
+              }
+            }
+          ]
         },
         "damageNotes": "",
         "description": {
@@ -765,100 +915,174 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>You cause an electrical device in your possession to surge in power and unleash a line of electricity from the massive oversurge. This deals 10d6 electricity damage to all creatures and objects in the area.</p>"
+          "value": "<p>The laser pistol is possibly the most common small arm used by explorers, guards, mercenaries, and traders. Laser pistols are light and reliable, yet they still deal a respectable amount of damage.</p>"
         },
         "descriptors": [],
-        "dismissible": false,
         "duration": {
-          "units": "instantaneous",
+          "units": "",
           "value": ""
         },
-        "formula": "10d6",
+        "equippable": false,
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
+        "identified": true,
         "isActive": null,
-        "isVariableLevel": false,
-        "level": 3,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
+        "isEquipment": true,
+        "level": 6,
         "modifiers": [],
-        "preparation": {
-          "mode": "",
-          "prepared": false
+        "price": 4270,
+        "proficient": true,
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": true,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "trip": false,
+          "two": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
         },
-        "properties": {},
+        "quantity": 1,
+        "quantityPerPack": 1,
         "range": {
           "additional": "",
           "per": "",
           "units": "ft",
-          "value": 120
+          "value": 90
         },
         "rollNotes": "",
         "save": {
-          "type": "reflex",
+          "type": "",
           "dc": null,
-          "descriptor": "half"
+          "descriptor": "negate"
         },
-        "school": "evo",
-        "source": "Starfinder Core Rulebook pg. 340",
-        "sr": false,
+        "source": "Core Rulebook, P. 173",
+        "special": "",
+        "specialMaterials": {},
         "target": {
           "type": "",
           "value": ""
+        },
+        "usage": {
+          "per": "round",
+          "value": 1
         },
         "uses": {
           "max": 0,
           "per": "",
           "value": 0
-        }
+        },
+        "weaponCategory": "uncategorized",
+        "weaponType": "smallA"
       }
     },
     {
-      "_id": "s0A1GinEiYzQOaGN",
-      "name": "Interplanetary Teleport (Self Only) (1/Day)",
-      "type": "spell",
+      "_id": "s1mJqaGak4jmsX70",
+      "name": "Jetpack",
+      "type": "goods",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
-      "img": "systems/sfrpg/icons/default/spell-book.svg",
+      "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
         "type": "",
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
         },
-        "allowedClasses": {
-          "myst": false,
-          "precog": false,
-          "tech": false,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
+        "attuned": false,
+        "bulk": "L",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -866,98 +1090,50 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "isVariableLevel": false,
+        "equippable": false,
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "identified": true,
         "level": 1,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
         "modifiers": [],
-        "preparation": {
-          "mode": null,
-          "prepared": false
-        },
-        "properties": {},
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "school": "",
-        "source": "",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
+        "price": 0,
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "source": ""
       }
     },
     {
-      "_id": "98Gwz2RpsbMYEFaE",
-      "name": "Inject Nanobots (DC 17) (3/Day)",
-      "type": "spell",
+      "_id": "6WJL8LJPqED8Ngse",
+      "name": "Mk 1 Thermal Capacitor",
+      "type": "goods",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
-      "img": "systems/sfrpg/icons/default/spell-book.svg",
+      "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
         "type": "",
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
         },
-        "allowedClasses": {
-          "myst": false,
-          "precog": false,
-          "tech": false,
-          "wysh": false
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
+        "attuned": false,
+        "bulk": "L",
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -965,156 +1141,81 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "isVariableLevel": false,
-        "level": 3,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
+        "equippable": false,
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "identified": true,
+        "level": 1,
         "modifiers": [],
-        "preparation": {
-          "mode": null,
-          "prepared": false
-        },
-        "properties": {},
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "school": "",
-        "source": "",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
+        "price": 0,
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "source": ""
       }
     },
     {
-      "_id": "TXrDN2UdTXlcsy0o",
-      "name": "Microbot Assault (3/Day)",
-      "type": "spell",
+      "_id": "IsubyEGYKzK5xUw7",
+      "name": "Battery, Standard",
+      "type": "goods",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
-      "img": "systems/sfrpg/icons/default/spell-book.svg",
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
         "type": "",
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
+        "abilityMods": {
+          "parts": []
         },
-        "allowedClasses": {
-          "myst": false,
-          "precog": false,
-          "tech": false,
-          "wysh": false
+        "attributes": {
+          "ac": {
+            "value": ""
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "",
+            "value": 6
+          },
+          "size": "medium",
+          "sturdy": false
         },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "concentration": false,
+        "attuned": false,
+        "bulk": "-",
         "critical": {
-          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
-        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": ""
+          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "descriptors": [],
-        "dismissible": false,
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "isVariableLevel": false,
-        "level": 3,
-        "materials": {
-          "consumed": false,
-          "cost": 0,
-          "supply": 0,
-          "value": ""
-        },
+        "equippable": false,
+        "equipped": false,
+        "equippedBulkMultiplier": 1,
+        "identified": true,
+        "level": 1,
         "modifiers": [],
-        "preparation": {
-          "mode": null,
-          "prepared": false
-        },
-        "properties": {},
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "school": "",
-        "source": "",
-        "sr": false,
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
+        "price": 60,
+        "quantity": 4,
+        "quantityPerPack": 1,
+        "source": "Core Rulebook"
       }
     }
   ],
   "prototypeToken": {
-    "name": "Barachius",
+    "name": "Animated Armor, Lictor Hellknight Plate",
     "actorLink": false,
     "alpha": 1,
     "appendNumber": false,
@@ -1128,7 +1229,7 @@
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
-    "height": 2,
+    "height": 1,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1204,37 +1305,37 @@
       "mode": 1,
       "src": null
     },
-    "width": 2
+    "width": 1
   },
   "system": {
     "abilities": {
       "cha": {
-        "base": 2,
+        "base": -1,
         "min": 3,
         "misc": 0,
-        "mod": 2,
-        "value": 14
+        "mod": -1,
+        "value": 8
       },
       "con": {
-        "base": 4,
+        "base": 0,
         "min": 3,
         "misc": 0,
-        "mod": 4,
-        "value": 18
+        "mod": 0,
+        "value": 10
       },
       "dex": {
-        "base": 4,
+        "base": 3,
         "min": 3,
         "misc": 0,
-        "mod": 4,
-        "value": 18
+        "mod": 3,
+        "value": 16
       },
       "int": {
-        "base": 1,
+        "base": 0,
         "min": 3,
         "misc": 0,
-        "mod": 1,
-        "value": 12
+        "mod": 0,
+        "value": 10
       },
       "str": {
         "base": 5,
@@ -1244,21 +1345,26 @@
         "value": 20
       },
       "wis": {
-        "base": 2,
+        "base": 0,
         "min": 3,
         "misc": 0,
-        "mod": 2,
-        "value": 14
+        "mod": 0,
+        "value": 10
       }
     },
     "attributes": {
       "abilityDC": {
-        "base": 0
+        "base": "0"
       },
       "arms": "2",
       "bab": 0,
+      "baseAttackBonus": {
+        "rolledMods": [],
+        "tooltip": [],
+        "value": 0
+      },
       "baseSpellDC": {
-        "base": 0
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -1266,48 +1372,48 @@
         "value": 10
       },
       "eac": {
-        "base": 21,
+        "base": 17,
         "min": 0,
         "tooltip": [],
-        "value": 21
+        "value": 17
       },
       "fort": {
-        "base": 8,
-        "bonus": 8,
+        "base": 5,
+        "bonus": 5,
         "misc": 0,
         "tooltip": [],
         "value": 0
       },
       "hp": {
-        "max": 95,
+        "max": 70,
         "min": 0,
         "temp": null,
         "tempmax": null,
         "tooltip": [],
-        "value": 95
+        "value": 70
       },
       "init": {
         "bonus": 0,
         "tooltip": [],
-        "total": 4,
-        "value": 4
+        "total": 3,
+        "value": 3
       },
       "kac": {
-        "base": 22,
+        "base": 19,
         "min": 0,
         "tooltip": [],
-        "value": 22
+        "value": 19
       },
       "keyability": "",
-      "reach": "10 ft.",
+      "reach": "0",
       "reflex": {
-        "base": 6,
-        "bonus": 6,
+        "base": 5,
+        "bonus": 5,
         "misc": 0,
         "tooltip": [],
         "value": 0
       },
-      "space": "10 ft.",
+      "space": "0",
       "speed": {
         "burrowing": {
           "base": 0
@@ -1316,11 +1422,11 @@
           "base": 0
         },
         "flying": {
-          "base": 0,
-          "baseManeuverability": 0
+          "base": 30,
+          "baseManeuverability": "0"
         },
         "land": {
-          "base": "50"
+          "base": 20
         },
         "mainMovement": "land",
         "special": "",
@@ -1331,14 +1437,73 @@
       },
       "spellcasting": "",
       "will": {
-        "base": 10,
-        "bonus": 10,
+        "base": 2,
+        "bonus": 2,
         "misc": 0,
         "tooltip": [],
         "value": 0
       }
     },
-    "conditions": {},
+    "common": {
+      "abilities": {
+        "cha": {
+          "base": 0
+        },
+        "con": {
+          "base": 0
+        },
+        "dex": {
+          "base": 0
+        },
+        "int": {
+          "base": 0
+        },
+        "str": {
+          "base": 0
+        },
+        "wis": {
+          "base": 0
+        }
+      }
+    },
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "counterClasses": {
       "values": {}
     },
@@ -1347,9 +1512,9 @@
       "upb": 0
     },
     "details": {
-      "type": "Outsider (angel, extraplanar, good)",
-      "alignment": "NG",
-      "aura": "Protective Aura - 20 Ft.",
+      "type": "Construct",
+      "alignment": "N",
+      "aura": "",
       "biography": {
         "age": 0,
         "dateOfBirth": "",
@@ -1360,47 +1525,53 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>While tools and technology are often considered neutral in their own right, able to be used for good or ill purposes depending on the natures of their wielders, some good-aligned deities have long preached caution regarding those technologies that can allow single individuals to cause great havoc. The ascension of the artificially intelligent god @UUID[Compendium.sfrpg.setting.Item.FYV6RgTjPdg72RF0]{Triune}, who now holds technology and artificial life as its domains, has not eased such fears. Despite @UUID[Compendium.sfrpg.setting.Item.FYV6RgTjPdg72RF0]{Triune}’s claim of neutrality, the ubiquity of technology throughout the Pact Worlds and beyond has spurred many divine powers to keep careful watch over both the ways in which current technology is employed as well as rapid technological progress that could threaten all life.</p>\n<p>As angels have always been the messengers and enactors of the gods’ will, a particular order of angelic beings, known as barachiuses, oversees technological advances and ensures these creations don’t fall into the wrong hands or become twisted to serve evil gods and their minions. Outfitted with divinely blessed armor, weapons, and abilities, barachius angels are tasked with monitoring the planes both to protect mortal existence from technology gone awry and to quash technologically advanced cultures that present an explicit threat to all good creatures and causes. While all angels might be expected to protect the innocent from harm, barachiuses specialize in defending against subtle technological threats that might go unnoticed by the rank-and-file troops of the celestial legions. When a rapidly developing AI suddenly veers into true evil, when a new invention threatens to destroy countless innocents, when Hell’s hacker devils feed insidious viruses into mortal mainframes-these are when barachiuses truly shine.</p>\n<p>A barachius is an imposing figure, standing in what appears to be sleek, glowing armor and wielding a sword that pulses with the light of the stars or a glowing laser rifle. Its wings appear to be made of pure electricity, though a closer look reveals patterns within the feathery arcs that mimic digital arrays and computer wiring. Its face is often hidden behind an elaborate helm, and its voice-when it deigns to speak-is clipped and rapid-fire.</p>\n<p>Yet a barachius’s true strength resides not within its presence or arms but in its near-prescient ability to understand the nature of any technological object or being that it encounters. Exactly how and why the angels deem some technology not just dangerous but immoral is a great mystery, as it’s not based solely on sheer destructive capacity. For instance, barachiuses have been known to hunt down and destroy individual robots with extreme determination while leaving similar models-and silos of nuclear missiles-entirely untouched.</p>\n<p>A barachius might serve its purpose in a wide variety of ways. It could secretly patrol a settlement that is already rife with technology, constantly on the search for malicious computer code, machines run amok, or creatures bent on using technology for nefarious ends. Alternatively, one could be found searching for scientists and laboratories where cutting-edge research is being conducted. Even researchers with the best of intentions may come under the scrutiny of a barachius that deems the ongoing work or latest invention too threatening to the society’s ongoing moral health. Barachiuses also keep watch over some planets and species that lack advanced technology to ensure that they’re not enslaved or annihilated by races with greater resources-though again, why they perform this action for some races and not others is a mystery deeply vexing to scholars and mystics. Many believe their choices are based on an ability to see lines of probability stretching into the future and the angels’ need to make minor course corrections now and then to avoid catastrophe. Rarely, a barachius might take a more redemptive approach. Rather than destroying evil-aligned devices and technological life-forms, it might seek to turn a target to the path of good. Barachiuses minister to androids and robots in particular, hoping that merciful actions might inspire the artificial creatures to similar acts.</p>\n<p>Barachius Helm</p>\n<p>What looks like a magnificent helmet on a barachius is actually an extension of its being, and thus it can never be taken from it by force. On occasion, however, a barachius particularly impressed by a mortal might offer that champion a magical copy of its own helm that’s imbued with a sliver of its essence and grants the wearer some of its own power.</p>\n<p>Extra Content</p>\n<p>The following extra content was found for this creature:</p>\n<p>- Angel (Creature Subtype) Graft Template</p>\n<p>- Angel (Summoning) Graft Template</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any good-aligned planes</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>",
+        "value": "<p>Spellcasters and engineers have developed techniques to animate suits of armor indefinitely, instilling sentience—or even sapience—into these defensive tools.</p>\n<p>Spellcasters animate armor through various supernatural approaches, including some akin to techniques used for making magic items. Infamously, Hellknight mages cover the inside of the armor with an infernal contract, infusing the creation with a minor devilish being forced into submission. Such armors serve as decorative sentinels in Hellknight facilities or disposable shock troops on the battlefield. The Knights of Golarion and Xenowardens use similar means to infuse armor with quiescent fragments of angelic will, elementals, or nature spirits. Eoxian technomancers instead instill armor with rudimentary unlife, sometimes using the remains of undead too damaged to operate without the artificial casing armor provides.</p>\n<p>More technologically minded factions have similarly diverse approaches to creating animated armor. Technicians at the Qabarat University of Psychic and Technological Excellence have built on the psychically charged circuits of @UUID[Compendium.sfrpg.races.Item.ShWYksP7IwWcqEVa]{Lashunta} mind mail to create a sort of hybrid robot. These suits of mind mail combine artificial intelligence with psychic potential to become animated. Other groups, such as the @UUID[Compendium.sfrpg.races.Item.GHIntVN70xTt2Tlo]{Android} Abolitionist Front, have a fondness for animated and sapient armor. Perceptionist members of the Front claim such armors, among other advanced artificial intelligences, must be protected as created people. One such Perceptionist, a zealot named 8-Karat, has begun liberating these constructs, using violence if necessary.</p>\n<p>On @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton}, VitariTech Industries engages in unmonitored research into animated armor. The company recently claimed a long-abandoned shrine to @UUID[Compendium.sfrpg.setting.Item.FYV6RgTjPdg72RF0]{Triune}, using heavy security forces to keep interlopers out. Rumors indicate the corporation is using what it found within the site to build advanced constructs, including robot-like troops of animated heavy armor led by suits of powered armor. Devotees of various factions faithful to the All-Code want to know what VitariTech is up to within this holy place, as do members of the Perceptionists and the Augmented.</p>",
         "weight": ""
       },
       "class": "",
-      "cr": 7,
-      "environment": "",
-      "organization": "",
+      "combatRole": "combatant",
+      "cr": 5,
+      "environment": "any",
+      "organization": "solitary, pair, or troop (3-6)",
       "organizationSize": {
         "max": null,
         "min": 1
       },
       "race": "",
-      "raceAndGrafts": "",
-      "source": "AA1 pg. 12",
-      "subtype": "Angel, Extraplanar, Good",
+      "raceAndGrafts": "Animated Armor",
+      "source": "AA3 pg. 6",
+      "subtype": "Magical, Technological, Armor",
       "xp": {
-        "value": 3200
+        "value": 1600
       }
     },
     "modifiers": [],
+    "skillpoints": {
+      "max": 0,
+      "tooltip": [],
+      "used": 0
+    },
     "skills": {
       "acr": {
         "ability": "dex",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 0,
-        "ranks": 0,
+        "mod": 11,
+        "ranks": 11,
         "value": 0
       },
       "ath": {
         "ability": "str",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 0,
-        "ranks": 0,
+        "mod": 16,
+        "ranks": 16,
         "value": 0
       },
       "blu": {
@@ -1416,24 +1587,24 @@
       },
       "com": {
         "ability": "int",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
-        "mod": 19,
-        "ranks": 19,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       },
       "cul": {
         "ability": "int",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
-        "mod": 19,
-        "ranks": 19,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       },
       "dip": {
@@ -1460,13 +1631,13 @@
       },
       "eng": {
         "ability": "int",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
-        "mod": 19,
-        "ranks": 19,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       },
       "int": {
@@ -1504,13 +1675,13 @@
       },
       "mys": {
         "ability": "wis",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
-        "mod": 14,
-        "ranks": 14,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       },
       "per": {
@@ -1520,8 +1691,8 @@
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 14,
-        "ranks": 14,
+        "mod": 11,
+        "ranks": 11,
         "value": 0
       },
       "phs": {
@@ -1560,13 +1731,13 @@
       },
       "sen": {
         "ability": "wis",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 14,
-        "ranks": 14,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       },
       "sle": {
@@ -1610,9 +1781,9 @@
         "value": 0
       },
       "spell1": {
-        "max": "0",
+        "max": 0,
         "perClass": {},
-        "value": "0"
+        "value": 0
       },
       "spell2": {
         "max": 0,
@@ -1620,9 +1791,9 @@
         "value": 0
       },
       "spell3": {
-        "max": "0",
+        "max": 0,
         "perClass": {},
-        "value": "0"
+        "value": 0
       },
       "spell4": {
         "max": 0,
@@ -1642,7 +1813,7 @@
     },
     "traits": {
       "ci": {
-        "custom": "Petrification",
+        "custom": "Construct Immunities",
         "value": []
       },
       "damageReduction": {
@@ -1650,20 +1821,17 @@
         "value": 0
       },
       "di": {
-        "custom": "Petrification",
-        "value": [
-          "acid",
-          "cold"
-        ]
+        "custom": "Construct Immunities",
+        "value": []
       },
       "dr": {
         "custom": "",
         "value": [
           {
-            "electricity": "10"
+            "cold": "5"
           },
           {
-            "fire": "10"
+            "fire": "5"
           }
         ]
       },
@@ -1672,19 +1840,15 @@
         "value": []
       },
       "languages": {
-        "custom": "Truespeech",
-        "value": [
-          "celestial",
-          "draconic",
-          "infernal"
-        ]
+        "custom": "",
+        "value": []
       },
-      "senses": "darkvision 60 ft., detect alignment, low-light vision",
-      "size": "large",
+      "senses": "darkvision 60 ft., low-light vision",
+      "size": "medium",
       "spellResistance": {
         "base": 0
       },
-      "sr": 18
+      "sr": 0
     }
   }
 }

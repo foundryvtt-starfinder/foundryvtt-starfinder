@@ -1,114 +1,31 @@
 {
-  "_id": "PbqUhsFZ2a4jUmB9",
-  "name": "Animated Lashunta Mind Mail III",
+  "_id": "0JuM9m7oxudvy49g",
+  "name": "Akata, Void Zombie",
   "type": "npc2",
   "_stats": {
     "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.28.1"
+    "systemVersion": "0.28.2"
   },
+  "folder": "0phLxhERso2qu99D",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
-      "_id": "hhB39VABzhAYToPf",
-      "name": "Integrated Weapons",
-      "type": "feat",
-      "_stats": {
-        "coreVersion": 13,
-        "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
-      },
-      "img": "systems/sfrpg/icons/default/achievement.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>The creature’s weapons are manufactured weapons, not natural weapons, and they are integrated into its frame. A creature can’t be disarmed of these weapons, though they can be removed and used if the creature is @UUID[Compendium.sfrpg.conditions.Item.nEJIWMKbPjqKuelo]{Dead}.</p>\n<p>Guidelines: A manufactured weapon is a weapon with an item level that can be purchased by characters.</p>"
-        },
-        "descriptors": [],
-        "details": {
-          "category": "feat",
-          "combat": false,
-          "specialAbilityType": ""
-        },
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "properties": {},
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "Alien Archive 3 pg. 152, Alien Archive 2 pg. 151",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "2M0YpiyooeSEBIhm",
+      "_id": "b9rv6zwv4npiu8ng",
       "name": "Slam",
       "type": "weapon",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
         "type": "",
         "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -124,7 +41,7 @@
           "units": "",
           "value": null
         },
-        "attackBonus": 28,
+        "attackBonus": 8,
         "attributes": {
           "ac": {
             "value": ""
@@ -152,7 +69,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -174,10 +91,18 @@
         "damage": {
           "parts": [
             {
-              "formula": "6d10+23",
-              "operator": "",
+              "name": "",
+              "formula": "1d6+5",
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -206,7 +131,97 @@
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {},
+        "properties": {
+          "aeon": false,
+          "amm": false,
+          "analog": false,
+          "antibiological": false,
+          "archaic": false,
+          "aurora": false,
+          "automatic": false,
+          "blast": false,
+          "block": false,
+          "boost": false,
+          "breach": false,
+          "breakdown": false,
+          "bright": false,
+          "buttressing": false,
+          "cluster": false,
+          "conceal": false,
+          "deconstruct": false,
+          "deflect": false,
+          "disarm": false,
+          "double": false,
+          "drainCharge": false,
+          "echo": false,
+          "entangle": false,
+          "explode": false,
+          "extinguish": false,
+          "feint": false,
+          "fiery": false,
+          "firstArc": false,
+          "flexibleLine": false,
+          "force": false,
+          "freeHands": false,
+          "fueled": false,
+          "gearArray": false,
+          "grapple": false,
+          "gravitation": false,
+          "guided": false,
+          "harrying": false,
+          "holyWater": false,
+          "hybrid": false,
+          "ignite": false,
+          "indirect": false,
+          "injection": false,
+          "integrated": false,
+          "line": false,
+          "living": false,
+          "lockdown": false,
+          "mind-affecting": false,
+          "mine": false,
+          "mire": false,
+          "modal": false,
+          "necrotic": false,
+          "nonlethal": false,
+          "one": false,
+          "operative": false,
+          "penetrating": false,
+          "polarize": false,
+          "polymorphic": false,
+          "powered": false,
+          "professional": false,
+          "punchGun": false,
+          "qreload": false,
+          "radioactive": false,
+          "reach": false,
+          "recall": false,
+          "regrowth": false,
+          "relic": false,
+          "reposition": false,
+          "shape": false,
+          "shatter": false,
+          "shells": false,
+          "shield": false,
+          "sniper": false,
+          "stun": false,
+          "subtle": false,
+          "sunder": false,
+          "swarm": false,
+          "tail": false,
+          "teleportive": false,
+          "thought": false,
+          "throttle": false,
+          "thrown": false,
+          "thruster": false,
+          "trip": false,
+          "two": false,
+          "unbalancing": false,
+          "underwater": false,
+          "unwieldy": false,
+          "variantBoost": false,
+          "wideLine": false
+        },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
@@ -218,12 +233,26 @@
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": "",
+          "descriptor": "negate"
         },
         "source": "",
         "special": "",
-        "specialMaterials": {},
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": null
@@ -242,13 +271,13 @@
       }
     },
     {
-      "_id": "Jmvxm95LUN6jAqGh",
-      "name": "Integrated Returning Tenor Singing Disk",
+      "_id": "wzobpii7bwqheoku",
+      "name": "Feeding Tendril (plus Blood Drain)",
       "type": "weapon",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -257,7 +286,7 @@
         "abilityMods": {
           "parts": []
         },
-        "actionTarget": "eac",
+        "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
           "type": "",
@@ -272,7 +301,7 @@
           "units": "",
           "value": null
         },
-        "attackBonus": 31,
+        "attackBonus": 8,
         "attributes": {
           "ac": {
             "value": ""
@@ -300,7 +329,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -316,16 +345,24 @@
           ]
         },
         "critical": {
-          "effect": "critical confuse [DC 22]",
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": [
             {
-              "formula": "7d6+23",
-              "operator": "",
+              "name": "",
+              "formula": "1d6+5",
               "types": {
-                "sonic": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": true,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -368,6 +405,7 @@
           "breach": false,
           "breakdown": false,
           "bright": false,
+          "buttressing": false,
           "cluster": false,
           "conceal": false,
           "deconstruct": false,
@@ -386,11 +424,13 @@
           "force": false,
           "freeHands": false,
           "fueled": false,
+          "gearArray": false,
           "grapple": false,
           "gravitation": false,
           "guided": false,
           "harrying": false,
           "holyWater": false,
+          "hybrid": false,
           "ignite": false,
           "indirect": false,
           "injection": false,
@@ -416,9 +456,11 @@
           "radioactive": false,
           "reach": false,
           "recall": false,
+          "regrowth": false,
           "relic": false,
           "reposition": false,
           "shape": false,
+          "shatter": false,
           "shells": false,
           "shield": false,
           "sniper": false,
@@ -431,8 +473,10 @@
           "thought": false,
           "throttle": false,
           "thrown": false,
+          "thruster": false,
           "trip": false,
           "two": false,
+          "unbalancing": false,
           "underwater": false,
           "unwieldy": false,
           "variantBoost": false,
@@ -449,12 +493,26 @@
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "source": "",
         "special": "",
-        "specialMaterials": {},
+        "specialMaterials": {
+          "abysium": false,
+          "adamantine": false,
+          "coldiron": false,
+          "diatha": false,
+          "djezet": false,
+          "horacalcum": false,
+          "inubrix": false,
+          "khefak": false,
+          "noqual": false,
+          "purplecores": false,
+          "siccatite": false,
+          "silver": false,
+          "voidglass": false
+        },
         "target": {
           "type": "",
           "value": null
@@ -473,244 +531,13 @@
       }
     },
     {
-      "_id": "UYAhnlFyF0yNPjnY",
-      "name": "Integrated Returning Tenor Singing Disk",
-      "type": "weapon",
-      "_stats": {
-        "coreVersion": 13,
-        "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
-      },
-      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
-      "system": {
-        "type": "",
-        "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "eac",
-        "actionType": "rwak",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "ammunitionType": "",
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 31,
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": true
-        },
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 0,
-          "value": 0
-        },
-        "chatFlavor": "",
-        "container": {
-          "contents": [],
-          "includeContentsInWealthCalculation": 1,
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 1,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
-        "critical": {
-          "effect": "critical confuse [DC 22]",
-          "parts": []
-        },
-        "damage": {
-          "parts": [
-            {
-              "formula": "7d16+16",
-              "operator": "",
-              "types": {
-                "sonic": true
-              }
-            }
-          ]
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "formula": "",
-        "identified": true,
-        "isActive": null,
-        "isEquipment": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": "negate"
-        },
-        "source": "",
-        "special": "",
-        "specialMaterials": {},
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "usage": {
-          "per": "",
-          "value": 0
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        },
-        "weaponCategory": "uncategorized",
-        "weaponType": "smallA"
-      }
-    },
-    {
-      "_id": "6LPFuB5SA0uMtpyM",
-      "name": "Comm (Ex)",
+      "_id": "ml1o3b1s729371lc",
+      "name": "Mindless",
       "type": "feat",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -745,7 +572,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Animated lashunta mind mail III can receive wireless communications (and thus commands from its allies and creator) at planetary range. Extra Content The following extra content was found for this creature: - Animated Armor (Other) Graft Template</p>"
+          "value": "<p>The creature has no Intelligence score or modifier and is immune to mind-affecting effects. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</p>\n<p>Guidelines: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>"
         },
         "descriptors": [],
         "details": {
@@ -778,7 +605,7 @@
           "dc": null,
           "descriptor": ""
         },
-        "source": "",
+        "source": "Alien Archive 3 pg. 152, Alien Archive pg. 155, Alien Archive 2 pg. 151",
         "target": {
           "type": "",
           "value": null
@@ -791,13 +618,13 @@
       }
     },
     {
-      "_id": "RjO4ryDkGyGxsvqV",
+      "_id": "u32meeurf9f4xvej",
       "name": "Unliving",
       "type": "feat",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -878,212 +705,188 @@
       }
     },
     {
-      "_id": "CRsI0JjEz5LqxClV",
-      "name": "2 Returning Tenor Singing Disks",
-      "type": "goods",
+      "_id": "syul7j6m3iwy916h",
+      "name": "Blood Drain (Ex)",
+      "type": "feat",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
-      "img": "systems/sfrpg/icons/default/hand-truck.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
+        "ability": null,
+        "abilityMods": {
+          "parts": []
         },
-        "attuned": false,
-        "bulk": "L",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": ""
+          "value": "<p>If a void zombie hits a living creature with its feeding tendril, it drains that creature’s blood, dealing 2 Strength damage before the tendril detaches.</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "identified": true,
-        "level": 1,
+        "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
         "modifiers": [],
-        "price": 0,
-        "quantity": "2",
-        "quantityPerPack": 1,
-        "source": ""
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
       }
     },
     {
-      "_id": "hzTUM25OTifYAGMK",
-      "name": "Mk 3 Thermal Capacitor",
-      "type": "goods",
+      "_id": "75p4atsxxtkf6drs",
+      "name": "Susceptible to Salt Water (Ex)",
+      "type": "feat",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
-      "img": "systems/sfrpg/icons/default/hand-truck.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
+        "ability": null,
+        "abilityMods": {
+          "parts": []
         },
-        "attuned": false,
-        "bulk": "L",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": ""
+          "value": "<p>A splash of salt water deals 1d6 damage to an akata, and full immersion in salt water deals 4d6 damage per round.</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "identified": true,
-        "level": 1,
+        "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
         "modifiers": [],
-        "price": 0,
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "source": ""
-      }
-    },
-    {
-      "_id": "PQ2eMyIJOsfaAwiu",
-      "name": "Mk 1 Spell Reflector",
-      "type": "goods",
-      "_stats": {
-        "coreVersion": 13,
-        "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
-      },
-      "img": "systems/sfrpg/icons/default/hand-truck.svg",
-      "system": {
-        "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
         },
-        "attuned": false,
-        "bulk": "L",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": ""
+        "recharge": {
+          "charged": false,
+          "value": null
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "source": ""
-      }
-    },
-    {
-      "_id": "uk9MjU8TCNLglQCo",
-      "name": "Red Force Field",
-      "type": "goods",
-      "_stats": {
-        "coreVersion": 13,
-        "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
-      },
-      "img": "systems/sfrpg/icons/default/hand-truck.svg",
-      "system": {
-        "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
         },
-        "attuned": false,
-        "bulk": "L",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": ""
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "source": ""
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
       }
     }
   ],
   "prototypeToken": {
-    "name": "Animated Lashunta Mind Mail III",
+    "name": "Akata, Void Zombie",
     "actorLink": false,
     "alpha": 1,
     "appendNumber": false,
@@ -1192,25 +995,25 @@
         "value": 10
       },
       "dex": {
-        "base": 10,
+        "base": 2,
         "min": 3,
         "misc": 0,
-        "mod": 10,
-        "value": 30
+        "mod": 2,
+        "value": 14
       },
       "int": {
-        "base": 5,
+        "base": 0,
         "min": 3,
         "misc": 0,
-        "mod": 5,
-        "value": 20
+        "mod": 0,
+        "value": 10
       },
       "str": {
-        "base": 7,
+        "base": 4,
         "min": 3,
         "misc": 0,
-        "mod": 7,
-        "value": 24
+        "mod": 4,
+        "value": 18
       },
       "wis": {
         "base": 0,
@@ -1222,12 +1025,17 @@
     },
     "attributes": {
       "abilityDC": {
-        "base": 0
+        "base": "0"
       },
       "arms": "2",
       "bab": 0,
+      "baseAttackBonus": {
+        "rolledMods": [],
+        "tooltip": [],
+        "value": 0
+      },
       "baseSpellDC": {
-        "base": 0
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -1235,43 +1043,43 @@
         "value": 10
       },
       "eac": {
-        "base": 30,
+        "base": 11,
         "min": 0,
         "tooltip": [],
-        "value": 30
+        "value": 11
       },
       "fort": {
-        "base": 16,
-        "bonus": 16,
+        "base": 3,
+        "bonus": 3,
         "misc": 0,
         "tooltip": [],
         "value": 0
       },
       "hp": {
-        "max": 300,
+        "max": 22,
         "min": 0,
         "temp": null,
         "tempmax": null,
         "tooltip": [],
-        "value": 300
+        "value": 22
       },
       "init": {
         "bonus": 0,
         "tooltip": [],
-        "total": 10,
-        "value": 10
+        "total": 2,
+        "value": 2
       },
       "kac": {
-        "base": 32,
+        "base": 15,
         "min": 0,
         "tooltip": [],
-        "value": 32
+        "value": 15
       },
       "keyability": "",
       "reach": "0",
       "reflex": {
-        "base": 16,
-        "bonus": 16,
+        "base": 3,
+        "bonus": 3,
         "misc": 0,
         "tooltip": [],
         "value": 0
@@ -1289,7 +1097,7 @@
           "baseManeuverability": 0
         },
         "land": {
-          "base": "30"
+          "base": "40"
         },
         "mainMovement": "land",
         "special": "",
@@ -1300,14 +1108,72 @@
       },
       "spellcasting": "",
       "will": {
-        "base": 12,
-        "bonus": 12,
+        "base": 3,
+        "bonus": 3,
         "misc": 0,
         "tooltip": [],
         "value": 0
       }
     },
-    "conditions": {},
+    "common": {
+      "abilities": {
+        "cha": {
+          "base": 0
+        },
+        "con": {
+          "base": 0
+        },
+        "dex": {
+          "base": 0
+        },
+        "int": {
+          "base": 0
+        },
+        "str": {
+          "base": 0
+        },
+        "wis": {
+          "base": 0
+        }
+      }
+    },
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "counterClasses": {
       "values": {}
     },
@@ -1316,8 +1182,8 @@
       "upb": 0
     },
     "details": {
-      "type": "Construct (magical, technological; armor)",
-      "alignment": "N",
+      "type": "Undead",
+      "alignment": "NE",
       "aura": "",
       "biography": {
         "age": 0,
@@ -1329,36 +1195,42 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>Spellcasters and engineers have developed techniques to animate suits of armor indefinitely, instilling sentience—or even sapience—into these defensive tools.</p>\n<p>Spellcasters animate armor through various supernatural approaches, including some akin to techniques used for making magic items. Infamously, Hellknight mages cover the inside of the armor with an infernal contract, infusing the creation with a minor devilish being forced into submission. Such armors serve as decorative sentinels in Hellknight facilities or disposable shock troops on the battlefield. The Knights of Golarion and Xenowardens use similar means to infuse armor with quiescent fragments of angelic will, elementals, or nature spirits. Eoxian technomancers instead instill armor with rudimentary unlife, sometimes using the remains of undead too damaged to operate without the artificial casing armor provides.</p>\n<p>More technologically minded factions have similarly diverse approaches to creating animated armor. Technicians at the Qabarat University of Psychic and Technological Excellence have built on the psychically charged circuits of lashunta mind mail to create a sort of hybrid robot. These suits of mind mail combine artificial intelligence with psychic potential to become animated. Other groups, such as the @UUID[Compendium.sfrpg.races.Item.GHIntVN70xTt2Tlo]{Android} Abolitionist Front, have a fondness for animated and sapient armor. Perceptionist members of the Front claim such armors, among other advanced artificial intelligences, must be protected as created people. One such Perceptionist, a zealot named 8-Karat, has begun liberating these constructs, using violence if necessary.</p>\n<p>On @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton}, VitariTech Industries engages in unmonitored research into animated armor. The company recently claimed a long-abandoned shrine to @UUID[Compendium.sfrpg.setting.Item.FYV6RgTjPdg72RF0]{Triune}, using heavy security forces to keep interlopers out. Rumors indicate the corporation is using what it found within the site to build advanced constructs, including robot-like troops of animated heavy armor led by suits of powered armor. Devotees of various factions faithful to the All-Code want to know what VitariTech is up to within this holy place, as do members of the Perceptionists and the Augmented.</p>",
+        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>Akatas reproduce by implanting their parasitic larval offspring in humanoid hosts. These microscopic larvae cause an infection called void death, which functions as a disease. Those who perish from void death become void zombies. A void zombie looks like a walking rotting corpse, often with a bloated blue-gray “tongue”-the fanged tail of the parasitic larva inside-dangling from its broken skull where its lower jaw once was.</p>\n<p>After a humanoid host dies from void death, the strongest of the akata larvae infesting the corpse worms its way to the host’s brain and undergoes a swift initial gestation within 2d4 hours. This accelerated growth causes the feeler-covered head of the oversized, tadpole-shaped parasite to latch onto the base of its victim’s brain and reenergize the @UUID[Compendium.sfrpg.conditions.Item.4MxAK5uS0zMNWhUK]{Dying} organ, taking control and turning the host into a void zombie.</p>\n<p>Akata larvae require 1d4 weeks as a second gestation before undergoing the transformation into adult akatas. A void zombie bearing an akata larva ready to emerge seeks out a secluded area and vomits the akata’s offspring into a shallow hole or crevice. The void zombie then “dies,” toppling over the disgorged larva. A scant 2d6 hours later, a full-grown akata emerges, usually taking the rotting corpse of its former host as its first meal.</p>\n<p>Extra Content</p>\n<p>The following extra content was found for this creature:</p>\n<p>- Void Zombie (Other) Graft Template</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any</p>\n<h3>Organization</h3>\n<p>any</p>\n</section>",
         "weight": ""
       },
       "class": "",
-      "cr": 16,
-      "environment": "any",
-      "organization": "solitary or pair",
+      "combatRole": "combatant",
+      "cr": 1,
+      "environment": "",
+      "organization": "",
       "organizationSize": {
         "max": null,
         "min": 1
       },
       "race": "",
-      "raceAndGrafts": "",
-      "source": "AA3 pg. 6",
-      "subtype": "Magical, Technological; Armor",
+      "raceAndGrafts": "Void Zombie",
+      "source": "AA2 pg. 8",
+      "subtype": "",
       "xp": {
-        "value": 76800
+        "value": 400
       }
     },
     "modifiers": [],
+    "skillpoints": {
+      "max": 0,
+      "tooltip": [],
+      "used": 0
+    },
     "skills": {
       "acr": {
         "ability": "dex",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 33,
-        "ranks": 33,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       },
       "ath": {
@@ -1368,8 +1240,8 @@
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 28,
-        "ranks": 28,
+        "mod": 10,
+        "ranks": 10,
         "value": 0
       },
       "blu": {
@@ -1473,13 +1345,13 @@
       },
       "mys": {
         "ability": "wis",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
-        "mod": 28,
-        "ranks": 28,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       },
       "per": {
@@ -1489,8 +1361,8 @@
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 28,
-        "ranks": 28,
+        "mod": 5,
+        "ranks": 5,
         "value": 0
       },
       "phs": {
@@ -1611,7 +1483,7 @@
     },
     "traits": {
       "ci": {
-        "custom": "Construct Immunities",
+        "custom": "Undead Immunities",
         "value": []
       },
       "damageReduction": {
@@ -1619,32 +1491,22 @@
         "value": 0
       },
       "di": {
-        "custom": "Construct Immunities",
+        "custom": "Undead Immunities",
         "value": []
       },
       "dr": {
         "custom": "",
-        "value": [
-          {
-            "cold": "15"
-          },
-          {
-            "fire": "15"
-          }
-        ]
+        "value": []
       },
       "dv": {
-        "custom": "",
+        "custom": "Susceptible To Salt Water",
         "value": []
       },
       "languages": {
         "custom": "",
-        "value": [
-          "castrovelian",
-          "common"
-        ]
+        "value": []
       },
-      "senses": "darkvision 60 ft., low-light vision",
+      "senses": "darkvision 60 ft.",
       "size": "medium",
       "spellResistance": {
         "base": 0

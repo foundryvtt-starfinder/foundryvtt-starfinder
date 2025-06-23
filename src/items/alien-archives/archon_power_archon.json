@@ -1,22 +1,23 @@
 {
-  "_id": "7IV9poumQUJCUqRG",
-  "name": "Animated Lictor Hellknight Plate",
+  "_id": "q0lmF5w7wzFINbm0",
+  "name": "Archon, Power Archon",
   "type": "npc2",
   "_stats": {
     "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.28.1"
+    "systemVersion": "0.28.2"
   },
+  "folder": "KKqm5rj3W9YXZwsW",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
-      "_id": "HVmkUzHPrU34mCeG",
-      "name": "Integrated Weapons",
+      "_id": "1yB37iFaZtkHhqbV",
+      "name": "Aura of Menace (Su)",
       "type": "feat",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -51,7 +52,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>The creature’s weapons are manufactured weapons, not natural weapons, and they are integrated into its frame. A creature can’t be disarmed of these weapons, though they can be removed and used if the creature is @UUID[Compendium.sfrpg.conditions.Item.nEJIWMKbPjqKuelo]{Dead}.</p>\n<p>Guidelines: A manufactured weapon is a weapon with an item level that can be purchased by characters.</p>"
+          "value": "<p>Any creature hostile to the power archon within its aura of menace must attempt a Will saving throw. A creature that fails the save takes a -2 penalty to AC, attack rolls, and saving throws for 24 hours or until it deals damage to the archon. When the effect ends for a creature, that creature can’t be affected again by the same archon’s aura for 24 hours.</p>"
         },
         "descriptors": [],
         "details": {
@@ -84,7 +85,7 @@
           "dc": null,
           "descriptor": ""
         },
-        "source": "Alien Archive 3 pg. 152, Alien Archive 2 pg. 151",
+        "source": "",
         "target": {
           "type": "",
           "value": null
@@ -97,13 +98,13 @@
       }
     },
     {
-      "_id": "y9UmBsihDzaZjL0X",
-      "name": "Slam",
+      "_id": "tTfIkEEt7JcJyCay",
+      "name": "Electric Bolt (Su)",
       "type": "weapon",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -112,7 +113,7 @@
         "abilityMods": {
           "parts": []
         },
-        "actionTarget": "kac",
+        "actionTarget": "eac",
         "actionType": "mwak",
         "activation": {
           "type": "",
@@ -127,7 +128,7 @@
           "units": "",
           "value": null
         },
-        "attackBonus": 15,
+        "attackBonus": 13,
         "attributes": {
           "ac": {
             "value": ""
@@ -171,16 +172,16 @@
           ]
         },
         "critical": {
-          "effect": "",
+          "effect": "critical arc 1d4",
           "parts": []
         },
         "damage": {
           "parts": [
             {
-              "formula": "1d6+10",
+              "formula": "1d4+5",
               "operator": "",
               "types": {
-                "bludgeoning": true
+                "electricity": true
               }
             }
           ]
@@ -191,7 +192,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": ""
+          "value": "<p>The power archon can unleash an electric bolt as a melee attack or ranged attack. Both versions can be used to deal nonlethal damage without penalty. The ranged attack has a range increment of 30 feet.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -328,13 +329,13 @@
       }
     },
     {
-      "_id": "Ynptz83xMuxpi4YL",
-      "name": "Integrated Corona Laser Pistol",
+      "_id": "JbCFrICxVvqMN937",
+      "name": "Electric Bolt (Su)",
       "type": "weapon",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -402,16 +403,16 @@
           ]
         },
         "critical": {
-          "effect": "critical burn 1d4",
+          "effect": "critical arc 1d4",
           "parts": []
         },
         "damage": {
           "parts": [
             {
-              "formula": "2d4+5",
+              "formula": "1d4+5",
               "operator": "",
               "types": {
-                "fire": true
+                "electricity": true
               }
             }
           ]
@@ -422,7 +423,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": ""
+          "value": "<p>The power archon can unleash an electric bolt as a melee attack or ranged attack. Both versions can be used to deal nonlethal damage without penalty. The ranged attack has a range increment of 30 feet.</p>"
         },
         "descriptors": [],
         "duration": {
@@ -559,13 +560,13 @@
       }
     },
     {
-      "_id": "AGYJylVnCg0ZV7A1",
-      "name": "Comm (Ex)",
+      "_id": "Dp2AQHWnkmThzCpD",
+      "name": "Remote Operations (Su)",
       "type": "feat",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -600,7 +601,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Animated lictor Hellknight plate can receive wireless communications (and thus commands from its allies and creator) at planetary range. Extra Content The following extra content was found for this creature: - Animated Armor (Other) Graft Template</p>"
+          "value": "<p>A power archon can attempt Computers and Engineering checks at a range of 30 feet. A creature targeted by the archon or a creature attending or observing the archon’s target can discern what the archon is doing with a successful DC 15 Perception check.</p>"
         },
         "descriptors": [],
         "details": {
@@ -646,203 +647,34 @@
       }
     },
     {
-      "_id": "pky4846DURBF7Yno",
-      "name": "Mindless",
-      "type": "feat",
+      "_id": "z8yXg015J6UGGJyS",
+      "name": "Discharge (DC 15) (1/Day)",
+      "type": "spell",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
-      "img": "systems/sfrpg/icons/default/achievement.svg",
+      "img": "systems/sfrpg/icons/spells/discharge.webp",
       "system": {
         "type": "",
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>The creature has no Intelligence score or modifier and is immune to mind-affecting effects. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</p>\n<p>Guidelines: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>"
-        },
-        "descriptors": [],
-        "details": {
-          "category": "feat",
-          "combat": false,
-          "specialAbilityType": ""
-        },
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "properties": {},
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "Alien Archive 3 pg. 152, Alien Archive pg. 155, Alien Archive 2 pg. 151",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "6DOVyY2RL3Plw09c",
-      "name": "Unliving",
-      "type": "feat",
-      "_stats": {
-        "coreVersion": 13,
-        "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
-      },
-      "img": "systems/sfrpg/icons/default/achievement.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>"
-        },
-        "descriptors": [],
-        "details": {
-          "category": "feat",
-          "combat": false,
-          "specialAbilityType": ""
-        },
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "properties": {},
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "Alien Archive 3 pg. 155, Alien Archive pg. 158, Alien Archive 2 pg. 154",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "P6eQixSvVHADxpn7",
-      "name": "Corona Laser Pistol",
-      "type": "weapon",
-      "_stats": {
-        "coreVersion": 13,
-        "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
-      },
-      "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-corona.webp",
-      "system": {
-        "type": "",
-        "ability": "dex",
+        "ability": "",
         "abilityMods": {
           "parts": []
         },
-        "actionTarget": "eac",
-        "actionType": "rwak",
+        "actionTarget": "",
+        "actionType": "save",
         "activation": {
-          "type": "none",
+          "type": "action",
           "condition": "",
-          "cost": 0
+          "cost": 1
         },
-        "ammunitionType": "",
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": true,
+          "wysh": false
+        },
         "area": {
           "effect": "",
           "shapable": false,
@@ -851,59 +683,220 @@
           "value": null
         },
         "attackBonus": 0,
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": true
-        },
-        "attuned": false,
-        "bulk": "L",
-        "capacity": {
-          "max": 20,
-          "value": 20
-        },
         "chatFlavor": "",
-        "container": {
-          "contents": [],
-          "includeContentsInWealthCalculation": 1,
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "fusion"
-              ],
-              "affectsEncumbrance": true,
-              "amount": 6,
-              "subtype": "fusion",
-              "weightProperty": "level"
-            }
-          ]
-        },
+        "concentration": false,
         "critical": {
-          "effect": "critical burn 1d4",
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You can dissipate the charges from one technological object, temporarily depower one electrically powered technological object that does not use charges, or severely hinder a construct with the technological subtype. If the spell targets an object with charges, the object loses all of its remaining charges. If the object is powered by electrical means other than charges, its functions are suppressed for 1d4 rounds. If the spell targets a creature not of the technological subtype, it affects a random charged or electrically powered item in that creature’s possession. If the target is a construct with the technological subtype, it is @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} and cannot use any energy-based attacks for 1d4 rounds. A construct with the technological subtype that is affected by this spell can attempt a Fortitude saving throw at the end of each round to shrug off the effect.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 3,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "",
+          "prepared": false
+        },
+        "properties": {},
+        "range": {
+          "additional": "10",
+          "per": "level",
+          "units": "ft",
+          "value": 100
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "fort",
+          "dc": null,
+          "descriptor": "negate"
+        },
+        "school": "abj",
+        "source": "Core Rulebook",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": "one creature or technological object"
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "8QaGeFtfhoigXuqL",
+      "name": "Recharge (DC 15) (1/Day)",
+      "type": "spell",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.2"
+      },
+      "img": "systems/sfrpg/icons/default/spell-book.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": false,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 1,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": null,
+          "prepared": false
+        },
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "school": "",
+        "source": "",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "uXQo7sv0M1BkmzFP",
+      "name": "Jolting Surge (3/Day)",
+      "type": "spell",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.2"
+      },
+      "img": "systems/sfrpg/icons/spells/jolting_surge.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "msak",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": true,
+          "wysh": true
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "EAC",
+        "concentration": false,
+        "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": [
             {
-              "formula": "2d4",
+              "formula": "4d6",
               "operator": "",
               "types": {
-                "fire": true
+                "electricity": true
               }
             }
           ]
@@ -914,115 +907,35 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>The laser pistol is possibly the most common small arm used by explorers, guards, mercenaries, and traders. Laser pistols are light and reliable, yet they still deal a respectable amount of damage.</p>"
+          "value": "<p>You touch a target with a device you’re holding that uses electricity, requiring a melee attack against the target’s EAC. Alternatively, you can instead touch an electrical device a target is wearing (or a target that is an electrical device, such as a robot) with your hand, gaining a +2 bonus to your attack roll. Either way, if your attack hits, the electrical device surges out of control, dealing 4d6 electricity damage to your target.</p>\n<p>Casting this spell doesn’t provoke attacks of opportunity.</p>"
         },
         "descriptors": [],
+        "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
-        "identified": true,
         "isActive": null,
-        "isEquipment": true,
-        "level": 6,
-        "modifiers": [],
-        "price": 4270,
-        "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": true,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
+        "isVariableLevel": false,
+        "level": 1,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
         },
-        "quantity": 1,
-        "quantityPerPack": 1,
+        "modifiers": [],
+        "preparation": {
+          "mode": "",
+          "prepared": false
+        },
+        "properties": {},
         "range": {
           "additional": "",
           "per": "",
-          "units": "ft",
-          "value": 90
+          "units": "touch",
+          "value": null
         },
         "rollNotes": "",
         "save": {
@@ -1030,191 +943,512 @@
           "dc": null,
           "descriptor": "negate"
         },
-        "source": "Core Rulebook, P. 173",
-        "special": "",
-        "specialMaterials": {},
+        "school": "evo",
+        "source": "Starfinder Core Rulebook pg. 363",
+        "sr": true,
         "target": {
           "type": "",
-          "value": ""
-        },
-        "usage": {
-          "per": "round",
-          "value": 1
+          "value": "one creature or object"
         },
         "uses": {
           "max": 0,
           "per": "",
           "value": 0
-        },
-        "weaponCategory": "uncategorized",
-        "weaponType": "smallA"
+        }
       }
     },
     {
-      "_id": "s1mJqaGak4jmsX70",
-      "name": "Jetpack",
-      "type": "goods",
+      "_id": "ho7R7tMC5JYfyK0e",
+      "name": "Supercharge Weapon (3/Day)",
+      "type": "spell",
       "_stats": {
         "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
+        "systemVersion": "0.28.2"
       },
-      "img": "systems/sfrpg/icons/default/hand-truck.svg",
+      "img": "systems/sfrpg/icons/default/spell-book.svg",
       "system": {
         "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
+        "ability": null,
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
         },
-        "attuned": false,
-        "bulk": "L",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": ""
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": false,
+          "wysh": false
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "source": ""
-      }
-    },
-    {
-      "_id": "6WJL8LJPqED8Ngse",
-      "name": "Mk 1 Thermal Capacitor",
-      "type": "goods",
-      "_stats": {
-        "coreVersion": 13,
-        "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
-      },
-      "img": "systems/sfrpg/icons/default/hand-truck.svg",
-      "system": {
-        "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
         },
-        "attuned": false,
-        "bulk": "L",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": ""
-        },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 0,
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "source": ""
-      }
-    },
-    {
-      "_id": "IsubyEGYKzK5xUw7",
-      "name": "Battery, Standard",
-      "type": "goods",
-      "_stats": {
-        "coreVersion": 13,
-        "systemId": "sfrpg",
-        "systemVersion": "0.28.1"
-      },
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
-      "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
-        },
-        "attuned": false,
-        "bulk": "-",
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
         "critical": {
+          "effect": "",
           "parts": []
         },
         "damage": {
           "parts": []
         },
+        "damageNotes": "",
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
+          "value": ""
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "identified": true,
-        "level": 1,
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 3,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
         "modifiers": [],
-        "price": 60,
-        "quantity": 4,
-        "quantityPerPack": 1,
-        "source": "Core Rulebook"
+        "preparation": {
+          "mode": null,
+          "prepared": false
+        },
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "school": "",
+        "source": "",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "DusfbQKITa3IR3V0",
+      "name": "Detect Tech (At Will)",
+      "type": "spell",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.2"
+      },
+      "img": "systems/sfrpg/icons/default/spell-book.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": false,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 0,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": null,
+          "prepared": false
+        },
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "school": "",
+        "source": "",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "bXUshgYPkJXD16Vb",
+      "name": "Teleport (Self Only) (At Will)",
+      "type": "spell",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.2"
+      },
+      "img": "systems/sfrpg/icons/default/spell-book.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "actionTarget": "",
+        "actionType": null,
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": false,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 0,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": null,
+          "prepared": false
+        },
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "school": "",
+        "source": "",
+        "sr": false,
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "4Wpln7HiuY1MrqdR",
+      "name": "Transfer Charge (DC 13) (At Will)",
+      "type": "spell",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.2"
+      },
+      "img": "systems/sfrpg/icons/spells/transfert_charge.webp",
+      "system": {
+        "type": "",
+        "ability": "",
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "save",
+        "activation": {
+          "type": "action",
+          "condition": "",
+          "cost": 1
+        },
+        "allowedClasses": {
+          "myst": false,
+          "precog": false,
+          "tech": true,
+          "wysh": false
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": null,
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "concentration": false,
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>You can transfer any number of charges from one battery to another battery or from one power cell to another power cell. You can only transfer charges using two objects of the exact same type (two batteries of the same size, two identical power cells, or the like); you transfer charges from the source object to the receiving object.</p>\n<p>You must declare how many charges you are transferring before casting this spell. If you transfer more charges from the source than the receiving item can hold, the receiving item must succeed at a Fortitude saving throw or take 1d6 electricity damage. This spell provides no knowledge of how many charges a receiving item can safely hold, but you can choose to transfer fewer charges than the maximum allowed to reduce the risk.</p>"
+        },
+        "descriptors": [],
+        "dismissible": false,
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": null,
+        "isVariableLevel": false,
+        "level": 0,
+        "materials": {
+          "consumed": false,
+          "cost": 0,
+          "supply": 0,
+          "value": ""
+        },
+        "modifiers": [],
+        "preparation": {
+          "mode": "",
+          "prepared": false
+        },
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "touch",
+          "value": null
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "fort",
+          "dc": null,
+          "descriptor": "object"
+        },
+        "school": "trs",
+        "source": "Starfinder Core Rulebook pg. 383",
+        "sr": true,
+        "target": {
+          "type": "",
+          "value": "two objects of the same type; see text"
+        },
+        "uses": {
+          "max": 0,
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "wcmjkhy4MlCqBNWc",
+      "name": "Electric Bolt (Su)",
+      "type": "feat",
+      "_stats": {
+        "coreVersion": 13,
+        "systemId": "sfrpg",
+        "systemVersion": "0.28.2"
+      },
+      "img": "systems/sfrpg/icons/default/achievement.svg",
+      "system": {
+        "type": "",
+        "ability": null,
+        "abilityMods": {
+          "parts": []
+        },
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": null
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": []
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>The power archon can unleash an electric bolt as a melee attack or ranged attack. Both versions can be used to deal nonlethal damage without penalty. The ranged attack has a range increment of 30 feet.</p>"
+        },
+        "descriptors": [],
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "",
+          "value": null
+        },
+        "formula": "",
+        "isActive": null,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "additional": "",
+          "per": "",
+          "units": "",
+          "value": null
+        },
+        "recharge": {
+          "charged": false,
+          "value": null
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": null,
+          "descriptor": ""
+        },
+        "source": "",
+        "target": {
+          "type": "",
+          "value": null
+        },
+        "uses": {
+          "max": 0,
+          "per": null,
+          "value": 0
+        }
       }
     }
   ],
   "prototypeToken": {
-    "name": "Animated Lictor Hellknight Plate",
+    "name": "Archon, Power Archon",
     "actorLink": false,
     "alpha": 1,
     "appendNumber": false,
@@ -1222,7 +1456,7 @@
       "attribute": "attributes.hp"
     },
     "bar2": {
-      "attribute": ""
+      "attribute": "attributes.rp"
     },
     "detectionModes": [],
     "displayBars": 20,
@@ -1309,11 +1543,11 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": -1,
+        "base": 2,
         "min": 3,
         "misc": 0,
-        "mod": -1,
-        "value": 8
+        "mod": 2,
+        "value": 14
       },
       "con": {
         "base": 0,
@@ -1323,32 +1557,32 @@
         "value": 10
       },
       "dex": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 16
-      },
-      "int": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
-      },
-      "str": {
         "base": 5,
         "min": 3,
         "misc": 0,
         "mod": 5,
         "value": 20
       },
-      "wis": {
+      "int": {
+        "base": 3,
+        "min": 3,
+        "misc": 0,
+        "mod": 3,
+        "value": 16
+      },
+      "str": {
         "base": 0,
         "min": 3,
         "misc": 0,
         "mod": 0,
         "value": 10
+      },
+      "wis": {
+        "base": 2,
+        "min": 3,
+        "misc": 0,
+        "mod": 2,
+        "value": 14
       }
     },
     "attributes": {
@@ -1357,11 +1591,6 @@
       },
       "arms": "2",
       "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
       "baseSpellDC": {
         "base": "0"
       },
@@ -1377,40 +1606,46 @@
         "value": 17
       },
       "fort": {
-        "base": 5,
-        "bonus": 5,
+        "base": 4,
+        "bonus": 4,
         "misc": 0,
         "tooltip": [],
         "value": 0
       },
       "hp": {
-        "max": 70,
+        "max": 65,
         "min": 0,
         "temp": null,
         "tempmax": null,
         "tooltip": [],
-        "value": 70
+        "value": 65
       },
       "init": {
         "bonus": 0,
         "tooltip": [],
-        "total": 3,
-        "value": 3
+        "total": 5,
+        "value": 5
       },
       "kac": {
-        "base": 19,
+        "base": 18,
         "min": 0,
         "tooltip": [],
-        "value": 19
+        "value": 18
       },
       "keyability": "",
       "reach": "0",
       "reflex": {
-        "base": 5,
-        "bonus": 5,
+        "base": 8,
+        "bonus": 8,
         "misc": 0,
         "tooltip": [],
         "value": 0
+      },
+      "rp": {
+        "max": 1,
+        "min": 0,
+        "tooltip": [],
+        "value": 1
       },
       "space": "0",
       "speed": {
@@ -1421,13 +1656,13 @@
           "base": 0
         },
         "flying": {
-          "base": 0,
-          "baseManeuverability": 0
+          "base": 30,
+          "baseManeuverability": "1"
         },
         "land": {
-          "base": "20"
+          "base": 30
         },
-        "mainMovement": "land",
+        "mainMovement": "flying",
         "special": "",
         "swimming": {
           "base": 0
@@ -1436,73 +1671,14 @@
       },
       "spellcasting": "",
       "will": {
-        "base": 2,
-        "bonus": 2,
+        "base": 6,
+        "bonus": 6,
         "misc": 0,
         "tooltip": [],
         "value": 0
       }
     },
-    "common": {
-      "abilities": {
-        "cha": {
-          "base": 0
-        },
-        "con": {
-          "base": 0
-        },
-        "dex": {
-          "base": 0
-        },
-        "int": {
-          "base": 0
-        },
-        "str": {
-          "base": 0
-        },
-        "wis": {
-          "base": 0
-        }
-      }
-    },
-    "conditions": {
-      "asleep": false,
-      "bleeding": false,
-      "blinded": false,
-      "broken": false,
-      "burning": false,
-      "confused": false,
-      "cowering": false,
-      "dazed": false,
-      "dazzled": false,
-      "dead": false,
-      "deafened": false,
-      "dying": false,
-      "encumbered": false,
-      "entangled": false,
-      "exhausted": false,
-      "fascinated": false,
-      "fatigued": false,
-      "flat-footed": false,
-      "frightened": false,
-      "grappled": false,
-      "helpless": false,
-      "invisible": false,
-      "nauseated": false,
-      "off-kilter": false,
-      "off-target": false,
-      "overburdened": false,
-      "panicked": false,
-      "paralyzed": false,
-      "pinned": false,
-      "prone": false,
-      "shaken": false,
-      "sickened": false,
-      "stable": false,
-      "staggered": false,
-      "stunned": false,
-      "unconscious": false
-    },
+    "conditions": {},
     "counterClasses": {
       "values": {}
     },
@@ -1511,9 +1687,9 @@
       "upb": 0
     },
     "details": {
-      "type": "Construct (magical, technological; armor)",
-      "alignment": "N",
-      "aura": "",
+      "type": "Outsider",
+      "alignment": "LG",
+      "aura": "Aura Of Menace - 20 Ft. DC 15",
       "biography": {
         "age": 0,
         "dateOfBirth": "",
@@ -1524,31 +1700,27 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>Spellcasters and engineers have developed techniques to animate suits of armor indefinitely, instilling sentience—or even sapience—into these defensive tools.</p>\n<p>Spellcasters animate armor through various supernatural approaches, including some akin to techniques used for making magic items. Infamously, Hellknight mages cover the inside of the armor with an infernal contract, infusing the creation with a minor devilish being forced into submission. Such armors serve as decorative sentinels in Hellknight facilities or disposable shock troops on the battlefield. The Knights of Golarion and Xenowardens use similar means to infuse armor with quiescent fragments of angelic will, elementals, or nature spirits. Eoxian technomancers instead instill armor with rudimentary unlife, sometimes using the remains of undead too damaged to operate without the artificial casing armor provides.</p>\n<p>More technologically minded factions have similarly diverse approaches to creating animated armor. Technicians at the Qabarat University of Psychic and Technological Excellence have built on the psychically charged circuits of @UUID[Compendium.sfrpg.races.Item.ShWYksP7IwWcqEVa]{Lashunta} mind mail to create a sort of hybrid robot. These suits of mind mail combine artificial intelligence with psychic potential to become animated. Other groups, such as the @UUID[Compendium.sfrpg.races.Item.GHIntVN70xTt2Tlo]{Android} Abolitionist Front, have a fondness for animated and sapient armor. Perceptionist members of the Front claim such armors, among other advanced artificial intelligences, must be protected as created people. One such Perceptionist, a zealot named 8-Karat, has begun liberating these constructs, using violence if necessary.</p>\n<p>On @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton}, VitariTech Industries engages in unmonitored research into animated armor. The company recently claimed a long-abandoned shrine to @UUID[Compendium.sfrpg.setting.Item.FYV6RgTjPdg72RF0]{Triune}, using heavy security forces to keep interlopers out. Rumors indicate the corporation is using what it found within the site to build advanced constructs, including robot-like troops of animated heavy armor led by suits of powered armor. Devotees of various factions faithful to the All-Code want to know what VitariTech is up to within this holy place, as do members of the Perceptionists and the Augmented.</p>",
+        "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>The powers of Heaven have watched technological and magical progress in the mortal realm with skeptical eyes. Knowledge is power, after all, and power corrupts. In this age of advanced science and technomagical prowess, that corrupting influence is more threatening than ever.</p>\n<p>Power archons are servitors of the Outer Planes tasked with tempering mortals’ obsession with technology. These virtuous engineers travel to the Material Plane to disable or destroy technology their celestial masters consider to be too corrupting to leave in the hands of mortals. What warrants such intervention is as mysterious as any other instance of celestial meddling. Once power archons are set on a mission, though little can dissuade them, but they talk first and fight only when they must.</p>\n<p>Power archons can control the energy that powers technological devices, leading some to refer to them as “battery archons.” They are skilled techs and hackers who lend their skills to good causes, including missions led by barachius angels.</p>\n<p>Extra Content</p>\n<p>The following extra content was found for this creature:</p>\n<p>- Archon (Creature Subtype) Graft Template</p>\n<p>- Archon (Summoning) Graft Template</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Heaven)</p>\n<h3>Organization</h3>\n<p>solitary, pair, or team (3-5)</p>\n</section>",
         "weight": ""
       },
       "class": "",
+      "combatRole": "expert",
       "cr": 5,
-      "environment": "any",
-      "organization": "solitary, pair, or troop (3-6)",
+      "environment": "",
+      "organization": "",
       "organizationSize": {
         "max": null,
         "min": 1
       },
       "race": "",
-      "raceAndGrafts": "",
-      "source": "AA3 pg. 6",
-      "subtype": "Magical, Technological; Armor",
+      "raceAndGrafts": "Archon",
+      "source": "AP #9 pg. 55",
+      "subtype": "Archon, Extraplanar, Good, Lawful",
       "xp": {
         "value": 1600
       }
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
@@ -1563,13 +1735,13 @@
       },
       "ath": {
         "ability": "str",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 16,
-        "ranks": 16,
+        "mod": 0,
+        "ranks": 0,
         "value": 0
       },
       "blu": {
@@ -1585,13 +1757,13 @@
       },
       "com": {
         "ability": "int",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
-        "mod": 0,
-        "ranks": 0,
+        "mod": 16,
+        "ranks": 16,
         "value": 0
       },
       "cul": {
@@ -1607,13 +1779,13 @@
       },
       "dip": {
         "ability": "cha",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 0,
-        "ranks": 0,
+        "mod": 11,
+        "ranks": 11,
         "value": 0
       },
       "dis": {
@@ -1629,24 +1801,24 @@
       },
       "eng": {
         "ability": "int",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
         "min": 0,
         "misc": 0,
-        "mod": 0,
-        "ranks": 0,
+        "mod": 16,
+        "ranks": 16,
         "value": 0
       },
       "int": {
         "ability": "cha",
-        "enabled": false,
+        "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "min": 0,
         "misc": 0,
-        "mod": 0,
-        "ranks": 0,
+        "mod": 11,
+        "ranks": 11,
         "value": 0
       },
       "lsc": {
@@ -1811,7 +1983,7 @@
     },
     "traits": {
       "ci": {
-        "custom": "Construct Immunities",
+        "custom": "Petrification",
         "value": []
       },
       "damageReduction": {
@@ -1819,27 +1991,25 @@
         "value": 0
       },
       "di": {
-        "custom": "Construct Immunities",
-        "value": []
+        "custom": "Petrification",
+        "value": [
+          "electricity"
+        ]
       },
       "dr": {
         "custom": "",
-        "value": [
-          {
-            "cold": "5"
-          },
-          {
-            "fire": "5"
-          }
-        ]
+        "value": []
       },
       "dv": {
         "custom": "",
         "value": []
       },
       "languages": {
-        "custom": "",
-        "value": []
+        "custom": "Truespeech",
+        "value": [
+          "celestial",
+          "common"
+        ]
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "medium",
