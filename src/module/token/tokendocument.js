@@ -15,22 +15,12 @@ export default class SFRPGTokenDocument extends foundry.documents.TokenDocument 
     }
 
     // When a linked token's base actor is updated, check if the movement action is correct
-    async _onUpdateBaseActor(update = {}, options = {}) {
-        console.log('Base Actor Updated!');
+    async _onRelatedUpdate(update = {}, operation = {}) {
         if (this.actor) {
-            await this.updateMovement(this.actor, false);
+            await this.updateMovement(this.actor);
         }
-        return super._onUpdateBaseActor(update, options);
+        return super._onRelatedUpdate(update, operation);
     }
-
-    // A second check needs to be completed to get unlinked token movement to update :/
-    /* async _prepareDeltaUpdate(changes = {}, options = {}) {
-        console.log('Token ActorDelta Updated!');
-        if (this.actor) {
-            foundry.utils.mergeObject(changes, this.updateMovement(this.actor, true));
-        }
-        return super._prepareDeltaUpdate(changes, options);
-    } */
 
     /**
      * Hijack Token health bar rendering to include temporary and temp-max health in the bar display
@@ -84,7 +74,7 @@ export default class SFRPGTokenDocument extends foundry.documents.TokenDocument 
      * Updates the default and available movement types based on the actor speed settings and
      * whether or not the token has the "prone" condition.
      */
-    async updateMovement(actor, shouldReturnDelta) {
+    async updateMovement(actor) {
         const mainMovement = actor.system.attributes.speed.mainMovement;
         let update = {};
         if (this.hasStatusEffect("prone") && this.movementAction !== "crawl") {
@@ -94,12 +84,8 @@ export default class SFRPGTokenDocument extends foundry.documents.TokenDocument 
         } else {
             return null;
         }
-
-        if (shouldReturnDelta) {
-            return update;
-        } else {
-            await this.update(update);
-        }
+        console.log('Token conditions changed, updating movement actions.');
+        await this.update(update);
     }
 
     /**
