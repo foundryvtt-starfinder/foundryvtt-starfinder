@@ -214,6 +214,14 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             }
         }
 
+        // Set the prototype token's movement type to the main movement defined in the actor's speed
+        if (this.type === "starship") {
+            updates.prototypeToken = {movementAction: "fly"};
+        } else if (CONFIG.SFRPG.actorsCharacterScale.includes(this.type)) {
+            const mainMovementAction = CONFIG.SFRPG.movementOptions[this.system.attributes.speed.mainMovement] ?? null;
+            updates.prototypeToken = {movementAction: mainMovementAction};
+        }
+
         this.updateSource(updates);
 
         return super._preCreate(data, options, user);

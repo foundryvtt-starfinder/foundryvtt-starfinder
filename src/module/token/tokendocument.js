@@ -3,11 +3,9 @@ export default class SFRPGTokenDocument extends foundry.documents.TokenDocument 
         const updates = {};
 
         if (this.actor) {
-            // Set the prototype token's movement type to the main movement defined in the actor's speed
-            const mainMovementAction = CONFIG.SFRPG.movementOptions[this.actor.system.attributes.speed.mainMovement] ?? null;
-            if (this.actor.type === "starship") {
-                updates.movementAction = "fly";
-            } else if (CONFIG.SFRPG.actorsCharacterScale.includes(this.actor.type)) {
+            // Override the token's movement to "crawl" when placed if the actor has the prone condition
+            updates.movementAction = this.actor.prototypeToken.movementAction;
+            if (CONFIG.SFRPG.actorsCharacterScale.includes(this.actor.type)) {
                 updates.movementAction = this.hasStatusEffect("prone") ? "crawl" : mainMovementAction;
             }
 
