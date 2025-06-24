@@ -4,9 +4,9 @@ export default class SFRPGTokenDocument extends foundry.documents.TokenDocument 
 
         if (this.actor) {
             // Override the token's movement to "crawl" when placed if the actor has the prone condition
-            updates.movementAction = this.actor.prototypeToken.movementAction;
-            if (CONFIG.SFRPG.actorsCharacterScale.includes(this.actor.type)) {
-                updates.movementAction = this.hasStatusEffect("prone") ? "crawl" : mainMovementAction;
+            // updates.movementAction = this.actor.prototypeToken.movementAction;
+            if (CONFIG.SFRPG.actorsCharacterScale.includes(this.actor.type) && this.hasStatusEffect("prone")) {
+                updates.movementAction = "crawl";
             }
 
         }
@@ -77,9 +77,12 @@ export default class SFRPGTokenDocument extends foundry.documents.TokenDocument 
     updateMovement(actor) {
         const mainMovement = actor.system.attributes.speed.mainMovement;
         if (this.hasStatusEffect("prone")) {
-            this.update({movementAction: "crawl"});
+            this.update({_id: this._id, movementAction: "crawl"});
         } else {
-            this.update({movementAction: this.movementAction !== "crawl" ? this.movementAction : CONFIG.SFRPG.movementOptions[mainMovement]});
+            this.update({
+                _id: this._id,
+                movementAction: this.movementAction !== "crawl" ? this.movementAction : CONFIG.SFRPG.movementOptions[mainMovement]
+            });
         }
     }
 
