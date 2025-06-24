@@ -4,7 +4,6 @@ export default class SFRPGTokenDocument extends foundry.documents.TokenDocument 
 
         if (this.actor) {
             // Override the token's movement to "crawl" when placed if the actor has the prone condition
-            // updates.movementAction = this.actor.prototypeToken.movementAction;
             if (CONFIG.SFRPG.actorsCharacterScale.includes(this.actor.type) && this.hasStatusEffect("prone")) {
                 updates.movementAction = "crawl";
             }
@@ -15,12 +14,23 @@ export default class SFRPGTokenDocument extends foundry.documents.TokenDocument 
         return super._preCreate(data, options, user);
     }
 
-    _onUpdateBaseActor(update = {}, options = {}) {
+    // When a linked token's base actor is updated, check if the movement action is correct
+    async _onUpdateBaseActor(update = {}, options = {}) {
+        console.log('Base Actor Updated!');
         if (this.actor) {
-            this.updateMovement(this.actor);
+            await this.updateMovement(this.actor, false);
         }
         return super._onUpdateBaseActor(update, options);
     }
+
+    // A second check needs to be completed to get unlinked token movement to update :/
+    /* async _prepareDeltaUpdate(changes = {}, options = {}) {
+        console.log('Token ActorDelta Updated!');
+        if (this.actor) {
+            foundry.utils.mergeObject(changes, this.updateMovement(this.actor, true));
+        }
+        return super._prepareDeltaUpdate(changes, options);
+    } */
 
     /**
      * Hijack Token health bar rendering to include temporary and temp-max health in the bar display
@@ -74,15 +84,21 @@ export default class SFRPGTokenDocument extends foundry.documents.TokenDocument 
      * Updates the default and available movement types based on the actor speed settings and
      * whether or not the token has the "prone" condition.
      */
-    updateMovement(actor) {
+    async updateMovement(actor, shouldReturnDelta) {
         const mainMovement = actor.system.attributes.speed.mainMovement;
-        if (this.hasStatusEffect("prone")) {
-            this.update({_id: this._id, movementAction: "crawl"});
+        let update = {};
+        if (this.hasStatusEffect("prone") && this.movementAction !== "crawl") {
+            update = {_id: this._id, movementAction: "crawl"};
+        } else if (!this.hasStatusEffect("prone") && this.movementAction === "crawl") {
+            update = {_id: this._id, movementAction: CONFIG.SFRPG.movementOptions[mainMovement]};
         } else {
-            this.update({
-                _id: this._id,
-                movementAction: this.movementAction !== "crawl" ? this.movementAction : CONFIG.SFRPG.movementOptions[mainMovement]
-            });
+            return null;
+        }
+
+        if (shouldReturnDelta) {
+            return update;
+        } else {
+            await this.update(update);
         }
     }
 
