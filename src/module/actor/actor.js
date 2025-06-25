@@ -166,9 +166,12 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             }
         }
 
-        const mainMovement = this.system?.attributes?.speed?.mainMovement;
-        if (data['system.attributes.speed.mainMovement'] !== mainMovement) {
-            data['prototypeToken.movementAction'] = CONFIG.SFRPG.movementOptions[data['system.attributes.speed.mainMovement']];
+        if (!["drone", "starship", "vehicle"].includes(this.type)) {
+            const oldMainMovement = this.system?.attributes?.speed?.mainMovement;
+            const newMainMovement = data['system.attributes.speed.mainMovement'];
+            if (newMainMovement && (newMainMovement !== oldMainMovement)) {
+                data['prototypeToken.movementAction'] = CONFIG.SFRPG.movementOptions[newMainMovement];
+            }
         }
 
         return super.update(data, options);
