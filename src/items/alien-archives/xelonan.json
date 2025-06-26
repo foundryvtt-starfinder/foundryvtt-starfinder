@@ -3,9 +3,9 @@
   "name": "Xelonan",
   "type": "npc2",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.2"
   },
   "folder": "YqjCxaR0MqQ6GNLs",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
@@ -15,9 +15,9 @@
       "name": "Empathy (Su)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/classes/empathy.webp",
       "system": {
@@ -105,9 +105,9 @@
       "name": "Greater Mindlink (Su)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/classes/greater_mindlink.webp",
       "system": {
@@ -195,9 +195,9 @@
       "name": "Second skin",
       "type": "equipment",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/equipment/armor/second-skin.webp",
       "system": {
@@ -295,6 +295,7 @@
         },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -343,9 +344,9 @@
       "name": "Psychic Booster",
       "type": "hybrid",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/energise.svg",
       "system": {
@@ -423,6 +424,7 @@
         },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "hands": 0,
         "identified": false,
@@ -467,9 +469,9 @@
       "name": "Mindlink (At Will)",
       "type": "spell",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/spells/mindlink.webp",
       "system": {
@@ -571,9 +573,9 @@
       "name": "Detect Thoughts (DC 16)",
       "type": "spell",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/spells/detect_thoughts.webp",
       "system": {
@@ -674,9 +676,9 @@
       "name": "Mystic Cure",
       "type": "spell",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/spells/mystic_cure.webp",
       "system": {
@@ -873,9 +875,9 @@
       "name": "Grave Words (At will)",
       "type": "spell",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/spells/grave_word.webp",
       "system": {
@@ -976,9 +978,9 @@
       "name": "Stabilize (At will)",
       "type": "spell",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/spells/stabilize.webp",
       "system": {
@@ -1121,9 +1123,9 @@
       "name": "Loot",
       "type": "container",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
@@ -1211,9 +1213,9 @@
       "name": "Communalism",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -1348,7 +1350,6 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
-    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1375,6 +1376,7 @@
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
     "occludable": {
       "radius": 0
     },
@@ -1416,6 +1418,12 @@
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
       "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },
@@ -1575,7 +1583,7 @@
         "weight": ""
       },
       "class": "Mystic",
-      "combatRole": "",
+      "combatRole": "spellcaster",
       "cr": 3,
       "environment": "",
       "gender": "Male",
