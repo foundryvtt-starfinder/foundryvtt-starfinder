@@ -3,18 +3,18 @@
   "name": "Summoning Grenade, Mk 6 (Hybrid)",
   "type": "weapon",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.1"
   },
-  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
+  "img": "systems/sfrpg/icons/equipment/weapons/shock-grenade.webp",
   "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "",
+    "actionTarget": "ac5",
     "actionType": "rwak",
     "activation": {
       "type": "action",
@@ -27,7 +27,7 @@
       "shapable": false,
       "shape": "",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "attackBonus": 0,
     "attributes": {
@@ -87,7 +87,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -99,11 +100,12 @@
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
@@ -150,11 +152,14 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": true,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -211,13 +216,17 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "partial"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "AR pg. 126",
     "special": "",

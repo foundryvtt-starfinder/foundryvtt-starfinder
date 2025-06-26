@@ -3,9 +3,9 @@
   "name": "Arabuk",
   "type": "npc2",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.1"
   },
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
@@ -14,9 +14,9 @@
       "name": "Territorial Pride (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -141,9 +141,9 @@
       "name": "Bite",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -240,6 +240,7 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -374,9 +375,9 @@
       "name": "Antlers (plus 1d6 So)",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -480,6 +481,7 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -614,9 +616,9 @@
       "name": "[MultiATK] Antlers (plus 1d6 So)",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -720,6 +722,7 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -854,9 +857,9 @@
       "name": "[MultiATK] Bite",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -950,6 +953,7 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -998,9 +1002,9 @@
       "name": "[MultiATK] 2 Claws",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -1097,6 +1101,7 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -1231,9 +1236,9 @@
       "name": "Antler Reverberation (Ex)",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -1330,6 +1335,7 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -1464,9 +1470,9 @@
       "name": "Arctic Guardian (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -1551,9 +1557,9 @@
       "name": "Pounce (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "icons/creatures/abilities/cougar-roar-rush-orange.webp",
       "system": {
@@ -1690,7 +1696,6 @@
     "displayName": 20,
     "disposition": -1,
     "height": 2,
-    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1717,6 +1722,7 @@
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
     "occludable": {
       "radius": 0
     },
@@ -1758,6 +1764,12 @@
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
       "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 2
   },

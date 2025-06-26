@@ -1,0 +1,72 @@
+# Increments the development version to a new one, preparing for another round of development
+name: Increment Version Number
+
+# Controls when the action will run. Workflow runs when manually triggered using the UI
+# or API.
+on:
+  workflow_dispatch:
+    # Inputs the workflow accepts.
+    inputs:
+      version:
+        # Friendly description to be shown in the UI instead of 'name'
+        description: 'Version number to increment development branch to'
+        # Default value if no value is explicitly provided
+        default: ''
+        # Input has to be provided for the workflow to run
+        required: true
+        # The data type of the input
+        type: string
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "increment"
+  increment:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checkout
+      - uses: actions/checkout@v4
+      # install deps
+      - run: npm ci
+
+      # Substitute the Manifest and Download URLs in system.json
+      - name: Update system.json url
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: static/system.json
+          field: url
+          value: https://github.com/${{github.repository}}
+
+      - name: Update system.json manifest link
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: static/system.json
+          field: manifest
+          value: https://github.com/${{github.repository}}/releases/latest/download/system.json
+
+      - name: Update system.json version number
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: static/system.json
+          field: version
+          value: ${{inputs.version}}
+
+      - name: Update system.json download link
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: static/system.json
+          field: download
+          value: https://github.com/${{github.repository}}/releases/download/${{inputs.version}}/sfrpg-${{inputs.version}}.zip
+
+      # cook packs
+      - run: npm run cook
+
+      # Commit and push the local changes made to development
+      - name: Commit & Push changes
+        uses: actions-js/push@master
+        with:
+          message: 'Update item files and packs with new system version'
+          branch: 'development'
+          github_token: ${{ secrets.GITHUB_TOKEN }}

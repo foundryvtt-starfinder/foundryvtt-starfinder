@@ -1,3 +1,157 @@
+# 0.28.2
+
+This release is primarily to address a bug in the item browsers causing them to not render any items. It also includes a couple of new features from contributors and the addition of some backlogged data from Interstellar Species and the Horizons of the Vast AP.
+
+## Core System Improvements
+
+- Added drag and drop macro creation for character stats by @levirak
+- Descriptive tags are now added to skill rolls by @Imper1um
+
+## Bug Fixes
+
+- Folders in compendiums are now parsed properly by @ian612
+- Document Browsers now show spell, equipment, and starship actions properly by @ian612
+
+## Data Entry
+
+Data entry for this update focused on getting in some backlogged data from older books.
+
+### New Data
+
+- NPCs from Interstellar Species have been added to the compendiums by @Iankid
+- Data from Horizons of the Vast Book 1 has been added by @Iankid
+
+### Corrections and Updates
+
+- Items used by the IS NPCs have been updated by @Iankid
+
+# 0.28.1
+
+Following closely on the heels of our final v12 release, Foundry v13 support is here! This version of sf1e is compatible with Foundry v13 and while we do not fully take advantage of all the v13 features yet, we will be rolling out new features as we complete them. As there are a number of breaking changes between foundry v12 and v13, this version is unfortunately not compatible with Foundry v12 installs. Please remember to back up your worlds before launching them with this new version, just in case.
+
+## Core System Improvements
+
+- Foundry v13 support has been added by @danimrath, @ian612, and @LebombJames
+
+# 0.28.0
+
+Beta version, not publicly released.
+
+# 0.27.3
+
+The final v12 release is here! This version contains a multitude of fixes and updates. The next version will be for v13 exclusively, so any future bugfixes or updates will require an update to the next system version, 0.28.0 or later.
+
+## Core System Improvements
+
+- Add optional DC parameters to checks by @ilya-vasiuk
+- HUGE update to the roll generation code to simplify it by @levirak
+- Move methods related to modifiers to the Modifier class, make updates and deletions easier by @LebombJames
+- The system build pipeline has been completely rewritten to use the modern Vite instead of the obsolete gulp package by @LebombJames
+- German localization updates by @pixelmonsta
+- Add spell school display to chat cards by @Theleruby
+- Improved roll simplification on chat cards by @Theleruby
+- A new automated release system has been implemented that will result in easier releases and fewer errors by @ian612
+
+## Bug Fixes
+
+- Fix item capacity calculation errors due to undefined return values by @danimrath
+- Fix incorrect usage deduction and destroy on use settings by @Theleruby
+- Fix unicode apostrophe and TM symbols changing to mangled characters on systems without utf-8 filename support by @Theleruby
+- Always mark Unarmed Strke as proficient when added to new characters by @Theleruby
+- Fix scaling cantrip formulas being broken by @Theleruby
+- Add weapon-category-attacks and weapon-category-damage to item modifiers template by @Theleruby
+- Fixes for how weapon specialization is calculated by @Theleruby
+- Fix starship roll options by @danimrath
+- Fix Vite config minification bugs by @danimrath
+- Fix item stacks (like ammo) not merging correctly by @ian612
+
+## Data Entry
+
+Along with a host of fixes to items and aliens in the compendiums, a big effort has been put forth to update all the system's weapons and grenades to use modern attributes. In addition, more Enhanced data (Themes, Archetypes, and Equipment) has been entered. Big thanks to @ilya-vasiuk, @joharr79, @rmorgens, and @Theleruby for these major contributions!
+
+### New Data
+
+- Starfinder Enhanced Equipment by @rmorgens
+- Starfinder Enhanced Archetypes by @ilya-vasiuk
+- Starfinder Enhanced Themes by @ilya-vasiuk
+- Starfinder Enhanced Spells by @joharr79
+
+### Corrections and Updates
+
+- Fixes to Cherav, Dampen Spell, Nanite Surge, Puncture Veil, Ferrofluid Ooze, and iconic character full body images by @ian612
+- Field ration item changed to consumable type by @Theleruby
+- Fix Junk Camouflage price by @Theleruby
+- Rubbish cannon fixes by @Theleruby
+- Junk Drone and Spy Drone battery fixes by @Theleruby
+- Fix laser pistol icons by @Theleruby
+- Fix Prismatic Nimbus DC formula by @Theleruby
+- Add hybrid property to Eoxian Wrackstaff by @Theleruby
+- Remove darkwater grenade and portable altar duplicate items by @Theleruby
+- Fix swift kick tooltip error by @Theleruby
+- Remove range increment from disposable blades by @Theleruby
+- Fix typos in descriptions for several items and English localization by @Theleruby
+- Change Shadow Pistol, Umbral to have a naming scheme consistent with other items by @Theleruby
+- Bulk fixes to almost ALL weapons for ammunition type, capacity, and usage by @Theleruby
+- Bulk fixes to grenade type weapons so they work correctly by @Theleruby
+- Fix all items with mangled apostrophes due to old build process errors by @Theleruby
+- Mark unarmed strike as not equipment by @Theleruby
+- Trick attack formula changed to a lookupRange by @Theleruby
+- Fix Versatile Specialization bonus type and operative damage by @Theleruby
+- Typos corrected on Psychopomps, Defrex Hardiness, and Apocalypse Insight by @ilya-vasiuk
+- Added damage to Days' Weariness spell by @ilya-vasiuk
+
+# 0.27.2
+
+Beta version, not publicly released.
+
+# 0.27.1
+This update primarily adds some new data (including more Starfinder Enhanced material) and addresses some bugs that popped up in 0.27.0 and before. Some small system improvements have also been made, primarily to the backend.
+
+## Core System Improvements
+- Update combats to start at round 1 instead of 0, and remove unneeded chat card clutter by @danimrath
+- Handelbars `config` variable was replaced with a static handlebars helper by @levirak
+- EquippedBulkModifier added to all physical item sheets by @ian612
+- Optional hot-reloading of `.css`, `.hbs`, and `.json` files by @LebombJames
+- System manifest url location changed to enable more flexible releases by @ian612
+- git settings updated to allow OS-native line endings by @levirak
+- Non-handled document types dropped on actors are now ignored, allowing modules to handle them by @levirak
+- Untrained skills can now be hidden on the actor sheet by @Imper1um
+- Package manifest URL and release process tweaked to make it more flexible by @ian612
+
+## Bug Fixes
+- Power Armor bulk now no longer counts toward inventory weight while worn and charged by @ian612
+- Feature items correctly list themselves as passive, active, or attack features based on activation settings by @danimrath
+- Compendium browsers correctly check user permissions on compendiums before showing their items to players by @ian612
+- Starship weapons targeting TL are no longer assumed to have the Limited Fire property by @ian612
+- New `.svg` icons are modified to work correctly in Firefox by @ian612
+
+## Data Entry
+The big addition this update is the Starfinder Enhanced class features. Thanks very much to @glitchexe for entering these. A large amount of missing class features from the Armory book have been added by @Iankid and @rmorgens. We have also begun an effort to clean up mis-formatted source fields on all items and actors.
+
+### New Data
+- Caustic Fissure spell and Eldritch Deception paradox added by @danimrath
+- Armory technomancer options added by @Iankid
+- Missing mechanic tricks from Armory added by @rmorgens
+- Missing soldier options from Armory added by @Iankid
+- Enhanced Class Features added by @glitchexe
+- Missing Operative Exploits from Armory by @rmorgens
+- Options from Redshift Rally added by @gustavognog
+- Missing Soldier Fighting Styles added by @rmorgens
+
+### Corrections and Updates
+- Several aliens missing KAC values have been updated to include them by @ian612
+- Assorted fixes to compendium source references by @danimrath
+- Around 250 items had their source fields reformatted to the correct syntax by @danimrath
+- Updates to Spell Gem items by @Iankid
+- Across-the-board updates to mechanic trick attributes and source formatting by @rmorgens
+- Updates to soldier class features from Armory by @Iankid
+- Operative Exploits updated to include in-text links and modern attributes by @rmorgens
+- Icons added to many items by @LucD20
+- Added Healing Touch usage by @LucD20
+- Updates to Envoy Improvisations and addition of effects by @rmorgens
+- Fix roll formula error in Megavitamin by @ian612
+
+
 # v0.27.0
 Apologies for the delay in getting this release out, but the team has added a few new maintainers and made some **big** updates and addressed a number of long-standing issues in this one! This includes the first of the Starfinder Enhanced data: enhanced classes and resolve point usage journals. The rest of the endhanced data will follow in the next few updates. Check out the full list of changes below, and remember to please report any bugs or issues you find.
 

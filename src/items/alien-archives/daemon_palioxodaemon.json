@@ -3,9 +3,9 @@
   "name": "Daemon, Palioxodaemon",
   "type": "npc2",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.1"
   },
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
@@ -14,9 +14,9 @@
       "name": "Slash",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -122,6 +122,7 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -279,9 +280,9 @@
       "name": "[MultiATK] 4 Slashes",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -387,6 +388,7 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -544,9 +546,9 @@
       "name": "Cause Mishap (Su)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -692,9 +694,9 @@
       "name": "Space-Time Shuffle (Su)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -819,9 +821,9 @@
       "name": "Teleport (At Will)",
       "type": "spell",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/spells/teleport.webp",
       "system": {
@@ -923,14 +925,9 @@
       "name": "Summon Allies (Sp)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.universal-creature-rules.igwTzBSbO0gN1d0l"
-        }
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -1067,7 +1064,6 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
-    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1094,6 +1090,7 @@
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
     "occludable": {
       "radius": 0
     },
@@ -1135,6 +1132,12 @@
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
       "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },

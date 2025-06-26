@@ -32,7 +32,7 @@ export class TraitSelectorSFRPG extends FormApplication {
      * @returns {Object}
      */
     getData() {
-        const attr = getProperty(this.object, this.attribute);
+        const attr = foundry.utils.getProperty(this.object, this.attribute);
         if (typeof attr.value === "string") attr.value = this.constructor._backCompat(attr.value, this.options.choices);
 
         const choices = foundry.utils.deepClone(this.options.choices);

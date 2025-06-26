@@ -3,9 +3,9 @@
   "name": "Antimagic grenade I (Hybrid)",
   "type": "weapon",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.1"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/smoke-grenade.webp",
   "system": {
@@ -14,7 +14,7 @@
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "eac",
+    "actionTarget": "ac5",
     "actionType": "rwak",
     "activation": {
       "type": "action",
@@ -51,8 +51,8 @@
     "attuned": false,
     "bulk": "L",
     "capacity": {
-      "max": null,
-      "value": 0
+      "max": 1,
+      "value": 1
     },
     "chatFlavor": "",
     "container": {
@@ -95,7 +95,7 @@
       "gmnotes": "",
       "short": "<p>Nicknamed the “hole-maker,” this raw thasteron-packed&nbsp;explosive is a favored room-clearing device for special&nbsp;forces.</p>",
       "unidentified": "",
-      "value": "<p>Anantimagic grenadecreates a temporary field that inhibits magic in its radius. Upon detonation, everything in the grenade’s radius is affected by an area dispel as @UUID[Compendium.sfrpg.spells.Item.1FfFraWlxCu1L4rL]{Dispel Magic, Greater}, using the grenade’s item level as the caster level. Second, each creature in the explosion radius must make a Will save each time they attempt to cast a spell or use a spell-like ability for a number of rounds equal to the grenade’s model number, or lose the spell or spell-like ability. A creature, object, or area can be affected by only oneantimagic grenadeevery 24 hours.</p>"
+      "value": "<p>An antimagic grenade creates a temporary field that inhibits magic in its radius. Upon detonation, everything in the grenade’s radius is affected by an area dispel as @UUID[Compendium.sfrpg.spells.Item.1FfFraWlxCu1L4rL]{Dispel Magic, Greater}, using the grenade’s item level as the caster level. Second, each creature in the explosion radius must make a Will save each time they attempt to cast a spell or use a spell-like ability for a number of rounds equal to the grenade’s model number, or lose the spell or spell-like ability. A creature, object, or area can be affected by only one antimagic grenade every 24 hours.</p>"
     },
     "descriptors": [],
     "duration": {
@@ -104,6 +104,7 @@
     },
     "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
@@ -151,7 +152,7 @@
       "guided": false,
       "harrying": false,
       "holyWater": false,
-      "hybrid": false,
+      "hybrid": true,
       "ignite": false,
       "indirect": false,
       "injection": false,
@@ -165,7 +166,7 @@
       "modal": false,
       "necrotic": false,
       "nonlethal": false,
-      "one": false,
+      "one": true,
       "operative": false,
       "penetrating": false,
       "polarize": false,
@@ -195,7 +196,7 @@
       "teleportive": false,
       "thought": false,
       "throttle": false,
-      "thrown": false,
+      "thrown": true,
       "thruster": false,
       "trip": false,
       "two": false,
@@ -242,8 +243,8 @@
       "value": "Staggered"
     },
     "usage": {
-      "per": "",
-      "value": null
+      "per": "shot",
+      "value": 1
     },
     "uses": {
       "max": 1,

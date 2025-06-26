@@ -16,9 +16,9 @@ const itemSizeArmorClassModifier = {
 
 /**
  * Override and extend the core ItemSheet implementation to handle SFRPG specific item types
- * @type {ItemSheet}
+ * @extends {foundry.appv1.sheets.ItemSheet}
  */
-export class ItemSheetSFRPG extends ItemSheet {
+export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     constructor(...args) {
         super(...args);
 
@@ -258,7 +258,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
             // Turn Events
             for (const [i, turnEvent] of (data.itemData.turnEvents || []).entries()) {
-                turnEvent.enrichedNote = await TextEditor.enrichHTML(turnEvent.content, {
+                turnEvent.enrichedNote = await foundry.applications.ux.TextEditor.enrichHTML(turnEvent.content, {
                     rollData,
                     secrets
                 });
@@ -279,25 +279,25 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Enrich text editors
 
-        data.enrichedDescription = await TextEditor.enrichHTML(this.item.system?.description?.value, {
+        data.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.description?.value, {
             rollData,
             secrets
         });
-        data.enrichedShortDescription = await TextEditor.enrichHTML(this.item.system?.description?.short, {
+        data.enrichedShortDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.description?.short, {
             rollData,
             secrets
         });
-        data.enrichedGMNotes = await TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
+        data.enrichedGMNotes = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
             rollData,
             secrets
         });
 
         if (data?.item?.type === "starshipAction") {
-            data.enrichedEffectNormal = await TextEditor.enrichHTML(this.item.system?.effectNormal, {
+            data.enrichedEffectNormal = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.effectNormal, {
                 rollData,
                 secrets
             });
-            data.enrichedEffectCritical = await TextEditor.enrichHTML(this.item.system?.effectCritical, {
+            data.enrichedEffectCritical = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.effectCritical, {
                 rollData,
                 secrets
             });
@@ -309,13 +309,13 @@ export class ItemSheetSFRPG extends ItemSheet {
                 for (const value of data.itemData.formula) {
                     const effect = {};
 
-                    effect.enrichedEffectNormal = await TextEditor.enrichHTML(value.effectNormal, {
+                    effect.enrichedEffectNormal = await foundry.applications.ux.TextEditor.enrichHTML(value.effectNormal, {
                         rollData,
                         secrets
                     });
                     effect.targetNormal = `system.formula.${ct}.effectNormal`;
 
-                    effect.enrichedEffectCritical = await TextEditor.enrichHTML(value.effectCritical, {
+                    effect.enrichedEffectCritical = await foundry.applications.ux.TextEditor.enrichHTML(value.effectCritical, {
                         rollData,
                         secrets
                     });
@@ -847,30 +847,30 @@ export class ItemSheetSFRPG extends ItemSheet {
     }
 
     /**
-     * Delete a modifier from the item.
-     *
-     * @param {Event} event The originating click event
-     */
+    * Delete a modifier from the actor.
+    *
+    * @param {Event} event The originating click event
+    */
     async _onModifierDelete(event) {
         event.preventDefault();
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.item.system.modifiers.find(mod => mod._id === modifierId);
 
-        await this.item.deleteModifier(modifierId);
+        return modifier.parentDelete();
     }
-
     /**
-     * Edit a modifier for an item.
-     *
-     * @param {Event} event The orginating click event
-     */
-    _onModifierEdit(event) {
+    * Edit a modifier for an item.
+    * @param {Event} event The orginating click event
+    */
+    async _onModifierEdit(event) {
         event.preventDefault();
 
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.item.system.modifiers.find(mod => mod._id === modifierId);
 
-        this.item.editModifier(modifierId);
+        return modifier.edit();
     }
 
     /**

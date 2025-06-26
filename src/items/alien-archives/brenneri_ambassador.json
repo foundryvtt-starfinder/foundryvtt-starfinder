@@ -3,9 +3,9 @@
   "name": "Brenneri Ambassador",
   "type": "npc2",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.1"
   },
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
@@ -14,9 +14,9 @@
       "name": "Sap, medium",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -119,6 +119,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "fusions": [],
         "identified": true,
@@ -251,9 +252,9 @@
       "name": "Laser pistol, corona",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-corona.webp",
       "system": {
@@ -355,6 +356,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "fusions": [],
         "identified": true,
@@ -431,9 +433,9 @@
       "name": "Stationwear, Elite",
       "type": "equipment",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/equipment/armor/stationwear-elite.webp",
       "system": {
@@ -540,6 +542,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -589,9 +592,9 @@
       "name": "Battery, Standard",
       "type": "goods",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
@@ -628,6 +631,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "modifiers": [],
@@ -642,9 +646,9 @@
       "name": "Clever Improvisations (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/classes/clever_improvisation.webp",
       "system": {
@@ -732,9 +736,9 @@
       "name": "Inspiring Boost (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/classes/inspiring_boost.webp",
       "system": {
@@ -822,9 +826,9 @@
       "name": "Long-Range Improvisation (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.1"
       },
       "img": "systems/sfrpg/icons/classes/longue_range_improvisation.webp",
       "system": {
@@ -924,7 +928,6 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
-    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -951,6 +954,7 @@
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
     "occludable": {
       "radius": 0
     },
@@ -992,6 +996,12 @@
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
       "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },

@@ -200,6 +200,7 @@ SFRPG.damageTypeOperators = {
 SFRPG.descriptors = {
     "acid": "SFRPG.Descriptors.Acid",
     "air": "SFRPG.Descriptors.Air",
+    "auditory": "SFRPG.Descriptors.Auditory",
     "calling": "SFRPG.Descriptors.Calling",
     "chaotic": "SFRPG.Descriptors.Chaotic",
     "charm": "SFRPG.Descriptors.Charm",
@@ -219,6 +220,7 @@ SFRPG.descriptors = {
     "force": "SFRPG.Descriptors.Force",
     "good": "SFRPG.Descriptors.Good",
     "healing": "SFRPG.Descriptors.Healing",
+    "illusion": "SFRPG.Descriptors.Illusion",
     "language-dependent": "SFRPG.Descriptors.LanguageDependent",
     "lawful": "SFRPG.Descriptors.Lawful",
     "light": "SFRPG.Descriptors.Light",
@@ -303,6 +305,7 @@ SFRPG.ammunitionTypes = {
     "flare": "SFRPG.Items.Ammunition.Type.Flares",
     "flechettes": "SFRPG.Items.Ammunition.Type.Flechettes",
     "nanite": "SFRPG.Items.Ammunition.Type.Nanites",
+    "junk": "SFRPG.Items.Ammunition.Type.Junk",
     "caustrol": "SFRPG.Items.Ammunition.Type.Caustrol",
     "sclerite": "SFRPG.Items.Ammunition.Type.Sclerites",
     "moodGoo": "SFRPG.Items.Ammunition.Type.MoodGoo",
@@ -957,12 +960,13 @@ SFRPG.languages = {
     "abyssal": "SFRPG.LanguagesAbyssal",
     "aglian": "SFRPG.LanguagesAglian",
     "akan": "SFRPG.LanguagesAkan",
-    "akiton": "SFRPG.LanguagesAkitonian",
+    "akitonian": "SFRPG.LanguagesAkitonian",
     "aklo": "SFRPG.LanguagesAklo",
     "alkainish": "SFRPG.LanguagesAlkainish",
     "anassan": "SFRPG.LanguagesAnassan",
     "aquan": "SFRPG.LanguagesAquan",
     "arkanen": "SFRPG.LanguagesArkanen",
+    "astriapi": "SFRPG.LanguagesAstriapi",
     "ancientDaimalkan": "SFRPG.LanguagesAncientDaimalkan",
     "auran": "SFRPG.LanguagesAuran",
     "azlanti": "SFRPG.LanguagesAzlanti",
@@ -991,11 +995,13 @@ SFRPG.languages = {
     "firstSpeech": "SFRPG.LanguagesFirstSpeech",
     "frujai": "SFRPG.LanguagesFrujai",
     "garaggakal": "SFRPG.LanguagesGaraggakal",
+    "gathol": "SFRPG.LanguagesGathol",
     "ghibran": "SFRPG.LanguagesGhibran",
     "ghoran": "SFRPG.LanguagesGhoran",
     "giant": "SFRPG.LanguagesGiant",
     "gnome": "SFRPG.LanguagesGnome",
     "goblin": "SFRPG.LanguagesGoblin",
+    "gosclaw": "SFRPG.LanguagesGosclaw",
     "grioth": "SFRPG.LanguagesGrioth",
     "gytchean": "SFRPG.LanguagesGytchean",
     "hadrogaan": "SFRPG.LanguagesHadrogaan",
@@ -1033,12 +1039,14 @@ SFRPG.languages = {
     "paralithi": "SFRPG.LanguagesParalithi",
     "perani": "SFRPG.LanguagesPerani",
     "protean": "SFRPG.LanguagesProtean",
+    "psacynoa": "SFRPG.LanguagesPsacynoa",
     "quorlu": "SFRPG.LanguagesQuorlu",
     "raxi": "SFRPG.LanguagesRaxi",
     "reptoid": "SFRPG.LanguagesReptoid",
     "requian": "SFRPG.LanguagesRequian",
     "sarcesian": "SFRPG.LanguagesSarcesian",
     "sazaron": "SFRPG.LanguagesSazaron",
+    "screedreep": "SFRPG.LanguagesScreedreep",
     "scyphozoan": "SFRPG.LanguagesScyphozoan",
     "selamidian": "SFRPG.LanguagesSelamidian",
     "seprevoi": "SFRPG.LanguagesSeprevoi",
@@ -1055,6 +1063,7 @@ SFRPG.languages = {
     "terran": "SFRPG.LanguagesTerran",
     "triaxian": "SFRPG.LanguagesTriaxian",
     "trinir": "SFRPG.LanguagesTrinir",
+    "tromlin": "SFRPG.LanguagesTromlin",
     "urog": "SFRPG.LanguagesUrog",
     "varratana": "SFRPG.LanguagesVarratana",
     "vercite": "SFRPG.LanguagesVercite",
@@ -1062,6 +1071,7 @@ SFRPG.languages = {
     "vlakan": "SFRPG.LanguagesVlakan",
     "vulgarKishaleen": "SFRPG.LanguagesVulgarKishaleen",
     "woiokan": "SFRPG.LanguagesWoiokan",
+    "worlanisi": "SFRPG.LanguagesWorlanisi",
     "wrikreechee": "SFRPG.LanguagesWrikreechee",
     "xaarb": "SFRPG.LanguagesXaarb",
     "ysoki": "SFRPG.LanguagesYsoki"
@@ -1357,7 +1367,8 @@ SFRPG.modifierTypes = {
     "morale": "SFRPG.ModifierTypeMorale",
     "resistance": "SFRPG.ModifierTypeResistance",
     "racial": "SFRPG.ModifierTypeRacial",
-    "untyped": "SFRPG.ModifierTypeUntyped"
+    "untyped": "SFRPG.ModifierTypeUntyped",
+    "weapon-specialization": "SFRPG.ModifierTypeWeaponSpecialization"
 };
 
 // See modules/modifiers/types.js, SFRPGEffectType
@@ -2178,6 +2189,8 @@ SFRPG.actionTargets = {
     "kac": "SFRPG.Items.Action.ActionTarget.KAC",
     "kac8": "SFRPG.Items.Action.ActionTarget.KAC8",
     "eac": "SFRPG.Items.Action.ActionTarget.EAC",
+    "ac5": "SFRPG.Items.Action.ActionTarget.AC5",
+    "ac15": "SFRPG.Items.Action.ActionTarget.AC15",
     "other": "SFRPG.Items.Action.ActionTarget.Other"
 };
 

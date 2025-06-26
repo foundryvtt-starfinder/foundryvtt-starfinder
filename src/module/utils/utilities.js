@@ -3,3 +3,10 @@ export function generateUUID() {
         c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
     );
 }
+
+export const rerenderApps = () => {
+    const apps = [...Object.values(ui.windows), ...foundry.applications.instances.values(), ui.sidebar];
+    for (const app of apps) {
+        app.render();
+    }
+};

@@ -3,9 +3,9 @@
   "name": "Auto-injector",
   "type": "upgrade",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.1"
   },
   "img": "systems/sfrpg/icons/default/armor-upgrade.svg",
   "system": {
@@ -58,9 +58,20 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
-      "storage": []
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "consumable"
+          ],
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
+        }
+      ]
     },
     "critical": {
       "effect": "",
@@ -84,6 +95,7 @@
     },
     "equippable": false,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
@@ -106,7 +118,7 @@
       "descriptor": ""
     },
     "slots": 1,
-    "source": "",
+    "source": "AR pg. 80",
     "target": {
       "type": "",
       "value": null
