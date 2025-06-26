@@ -90,7 +90,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 }
 
                 const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-                const htmlPromise = renderTemplate(template, templateData);
+                const htmlPromise = foundry.applications.handlebars.renderTemplate(template, templateData);
                 htmlPromise.then((html) => {
                     // Create the chat message
                     const chatData = {

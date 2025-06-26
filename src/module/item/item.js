@@ -463,7 +463,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // Render the chat card template
         const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
         const template = `systems/sfrpg/templates/chat/${templateType}-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Basic chat message data
         const chatData = {
@@ -507,12 +507,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const rollData = RollContext.createItemRollContext(this, this.actor).getRollData();
 
         // Rich text description
-        if (data.description.short) data.description.short = await TextEditor.enrichHTML(data.description.short, {
+        if (data.description.short) data.description.short = await foundry.applications.ux.TextEditor.enrichHTML(data.description.short, {
             async,
             secrets,
             rollData
         });
-        data.description.value = await TextEditor.enrichHTML(data.description.value, {
+        data.description.value = await foundry.applications.ux.TextEditor.enrichHTML(data.description.value, {
             async,
             secrets,
             rollData
@@ -1000,8 +1000,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             parts: parts,
             actorContextKey: "owner",
             rollContext: rollContext,
+<<<<<<< damage-updates
             title: game.i18n.format("SFRPG.Rolls.AttackRoll"),
             flavor: await TextEditor.enrichHTML(this.system?.chatFlavor, {
+=======
+            title: title,
+            flavor: await foundry.applications.ux.TextEditor.enrichHTML(this.system?.chatFlavor, {
+>>>>>>> development
                 async: true,
                 rollData: this.actor.getRollData() ?? {},
                 secrets: this.isOwner
@@ -1439,8 +1444,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             parts: parts,
             criticalData: itemData.critical,
             rollContext: rollContext,
+<<<<<<< damage-updates
             title: isHealing ? game.i18n.localize("SFRPG.Rolls.HealingRoll") : game.i18n.localize("SFRPG.Rolls.DamageRoll"),
             flavor: await TextEditor.enrichHTML(options?.flavorOverride || itemData.chatFlavor, {
+=======
+            title: title,
+            flavor: await foundry.applications.ux.TextEditor.enrichHTML(options?.flavorOverride || itemData.chatFlavor, {
+>>>>>>> development
                 async: true,
                 rollData: this.actor.getRollData() ?? {},
                 secrets: this.isOwner
@@ -1602,7 +1612,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             };
 
             const template = `systems/sfrpg/templates/chat/consumed-item-card.hbs`;
-            const html = await renderTemplate(template, templateData);
+            const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
             const flavor = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
 

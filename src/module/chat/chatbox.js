@@ -119,7 +119,7 @@ export default class SFRPGCustomChatMessage {
         }
 
         options = foundry.utils.mergeObject(options, { rollContent });
-        const cardContent = await renderTemplate(templateName, options);
+        const cardContent = await foundry.applications.handlebars.renderTemplate(templateName, options);
         const rollMode = data.rollMode ?? game.settings.get('core', 'rollMode');
 
         // let explainedRollContent = rollContent;
