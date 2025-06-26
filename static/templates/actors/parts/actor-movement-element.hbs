@@ -1,4 +1,13 @@
-<li class="attribute speed" {{#if expand}}style="height: {{expandedSpeedBoxHeight}}px;"{{/if}} data-tooltip="<strong>{{ localize "SFRPG.Speed" }}</strong><br>@attributes.speed.land.value<br>@attributes.speed.flying.value<br>@attributes.speed.flying.maneuverability<br>@attributes.speed.swimming.value<br>@attributes.speed.burrowing.value<br>@attributes.speed.climbing.value<br>@attributes.speed.special{{#if system.attributes.speed.special}}<br><br>{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special"}}: {{system.attributes.speed.special}}{{/if}}<br><br>{{#each system.attributes.speed.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+<li class="attribute speed" {{#if expand}}style="height: {{expandedSpeedBoxHeight}}px;"{{/if}} data-tooltip-class="wide-tooltip" data-tooltip="<strong>{{ localize "SFRPG.Speed" }}</strong><br>
+    {{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land"}} - {{system.attributes.speed.land.value}} {{localize "SFRPG.Units.Speed"}} | @attributes.speed.land.value<br>
+    {{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying"}} - {{system.attributes.speed.flying.value}} {{localize "SFRPG.Units.Speed"}} | @attributes.speed.flying.value<br>
+    {{localize "SFRPG.ActorSheet.Attributes.Speed.FlightManeuverability"}} - {{sfrpg "flightManeuverability" system.attributes.speed.flying.maneuverability}} | @attributes.speed.flying.maneuverability<br>
+    {{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming"}} - {{system.attributes.speed.swimming.value}} {{localize "SFRPG.Units.Speed"}} | @attributes.speed.swimming.value<br>
+    {{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing"}} - {{system.attributes.speed.burrowing.value}} {{localize "SFRPG.Units.Speed"}} | @attributes.speed.burrowing.value<br>
+    {{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing"}} - {{system.attributes.speed.climbing.value}} {{localize "SFRPG.Units.Speed"}} | @attributes.speed.climbing.value<br>
+    {{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special"}} - {{system.attributes.speed.special.value}} | @attributes.speed.special{{#if system.attributes.speed.special}}<br><br>
+    {{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special"}}: {{system.attributes.speed.special}}{{/if}}<br><br>
+    {{#each system.attributes.speed.tooltip as |tip|}}{{tip}}<br>{{/each}}">
     <h4 class="attribute-name box-title">
         {{ localize "SFRPG.Speed" }}
         {{#unless disableEdit}}
