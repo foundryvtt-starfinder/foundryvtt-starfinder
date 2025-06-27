@@ -3,9 +3,9 @@
   "name": "Anacia Render",
   "type": "npc2",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.2"
   },
   "folder": "YqjCxaR0MqQ6GNLs",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
@@ -15,9 +15,9 @@
       "name": "Switchblade, tactical",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.webp",
       "system": {
@@ -114,6 +114,7 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -248,9 +249,9 @@
       "name": "Mobility",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/feats/mobility.webp",
       "system": {
@@ -391,9 +392,9 @@
       "name": "Second skin",
       "type": "equipment",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/equipment/armor/second-skin.webp",
       "system": {
@@ -491,6 +492,7 @@
         },
         "equippable": true,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -539,9 +541,9 @@
       "name": "Tactical SwitchbladeAR",
       "type": "goods",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
@@ -575,6 +577,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "modifiers": [],
@@ -589,9 +592,9 @@
       "name": "Backpack, Consumer",
       "type": "container",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/equipment/goods/backpack-consumer.webp",
       "system": {
@@ -684,9 +687,9 @@
       "name": "Clothing, Environmental",
       "type": "goods",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "icons/equipment/chest/breastplate-sculpted-blue.webp",
       "system": {
@@ -729,6 +732,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "modifiers": [],
@@ -743,9 +747,9 @@
       "name": "Flashlight",
       "type": "goods",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
@@ -779,6 +783,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "modifiers": [],
@@ -793,9 +798,9 @@
       "name": "Loot",
       "type": "container",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
@@ -895,9 +900,9 @@
       "name": "Trick Attack (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/classes/trick_attack.webp",
       "system": {
@@ -1068,9 +1073,9 @@
       "name": "Thief",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/classes/thief.webp",
       "system": {
@@ -1207,7 +1212,6 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
-    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1234,6 +1238,7 @@
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
     "occludable": {
       "radius": 0
     },
@@ -1275,6 +1280,12 @@
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
       "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },
