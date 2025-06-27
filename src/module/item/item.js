@@ -988,6 +988,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             critical: critThreshold,
             chatMessage: options.chatMessage,
             rollOptions: rollOptions,
+            difficulty: game.user.targets ? game.user.targets?.first().actor?.system.attributes[this.system.actionTarget]?.value : null,
+            displayDifficulty: false,
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
