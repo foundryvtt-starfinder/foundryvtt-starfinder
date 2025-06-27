@@ -650,8 +650,12 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         const inputQuantity = formData["system.quantity"];
         if (inputQuantity) {
             const oldValue = this.item?.system?.quantity;
+            let newValue = oldValue;
             const isDelta = inputQuantity.startsWith("+") || inputQuantity.startsWith("-");
-            const newValue = isDelta ? Number(oldValue) + Number(inputQuantity) : Number(inputQuantity);
+            const sanitizedInput = inputQuantity.replace(/[^0-9|+|-]/g, '');
+            if (sanitizedInput) {
+                newValue = isDelta ? Number(oldValue) + Number(sanitizedInput) : Number(sanitizedInput);
+            }
             formData["system.quantity"] = newValue;
         }
 

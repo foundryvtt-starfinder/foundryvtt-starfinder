@@ -187,8 +187,12 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         if (currency) {
             for (const [name, input] of Object.entries(currency)) {
                 const oldValue = this.actor?.system?.currency[name];
+                let newValue = oldValue;
                 const isDelta = input.startsWith("+") || input.startsWith("-");
-                const newValue = isDelta ? Number(oldValue) + Number(input) : Number(input);
+                const sanitizedInput = input.replace(/[^0-9|+|-]/g, '');
+                if (sanitizedInput) {
+                    newValue = isDelta ? Number(oldValue) + Number(sanitizedInput) : Number(sanitizedInput);
+                }
                 data[`system.currency.${name}`] = newValue;
             }
         }
