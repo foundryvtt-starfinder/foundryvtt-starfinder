@@ -178,6 +178,28 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         return data;
     }
 
+    _getSubmitData(updateData = {}) {
+        const data = super._getSubmitData(updateData);
+        const expandedData = foundry.utils.expandObject(data);
+
+        // Allow basic +/- math in currency fields
+        const currency = expandedData.system.currency;
+        if (currency) {
+            for (const [name, input] of Object.entries(currency)) {
+                const oldValue = this.actor?.system?.currency[name];
+                let newValue = oldValue;
+                const isDelta = input.startsWith("+") || input.startsWith("-");
+                const sanitizedInput = input.replace(/[^0-9|+|-]/g, '');
+                if (sanitizedInput) {
+                    newValue = isDelta ? Number(oldValue) + Number(sanitizedInput) : Number(sanitizedInput);
+                }
+                data[`system.currency.${name}`] = newValue;
+            }
+        }
+
+        return data;
+    }
+
     /**
      * Activate event listeners using the prepared sheet HTML
      *
