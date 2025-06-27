@@ -138,7 +138,11 @@ The yin to `cook`'s yang, `unpack` takes Foundry's db files and unpacks them int
 
 # Getting Foundry Intellisense in Visual Studio Code
 
-If you would like some basic Intellisense for the Foundry types when using Visual Studio Code, all you have to do is copy `foundry.js` into the projects root folder. The `foundry.js` can be found in your Foundry installation folder e.g. `\Foundry Virtual Tabletop\resources\app\public\scripts`. Once you do this, restart VS Code, and you should now see proper Intellisense.
+If you would like some basic Intellisense for the Foundry types when using Visual Studio Code, follow the following steps:
+1. Create a copy of `foundry-config.example.json` and rename it to `foundry-config.json`
+2. Edit the `installPath` property of `foundry-config.json` to point to the folder where your Foundry installation is located. This should be the folder containing the "Backups", "Config", "Data", and "Logs" folders.
+3. Navigate your terminal application to your repository's root folder and run `npm run setupIntellisense`
+4. Restart VS Code
 
 # Package Release Process (for maintainers only)
 
