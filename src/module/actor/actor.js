@@ -171,6 +171,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             const newMainMovement = data['system.attributes.speed.mainMovement'];
             if (newMainMovement && (newMainMovement !== oldMainMovement)) {
                 data['prototypeToken.movementAction'] = CONFIG.SFRPG.movementOptions[newMainMovement];
+                console.log(`Starfinder | Updated prototype token movement action on ${this.name} (${this.id}) to '${CONFIG.SFRPG.movementOptions[newMainMovement]}'`);
             }
         }
 

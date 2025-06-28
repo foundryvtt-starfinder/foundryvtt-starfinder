@@ -652,6 +652,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
             const newMainMovement = formData["system.speed.mainMovement"];
             if (oldMainMovement !== newMainMovement) {
                 this.actor.update({'prototypeToken.movementAction': CONFIG.SFRPG.movementOptions[newMainMovement]});
+                console.log(`Starfinder | Updated prototype token movement action on ${this.actor.name} (${this.actor.id}) to '${CONFIG.SFRPG.movementOptions[newMainMovement]}'`);
             }
         }
 
