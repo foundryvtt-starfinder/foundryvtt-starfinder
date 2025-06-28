@@ -7,7 +7,7 @@ import url from "node:url";
 import isObject from "../src/module/utils/is-object.js";
 import LevelDatabase from "./lib/level-database.js";
 import { unpackPacks } from "./unpack.js";
-import { duplicate, getManifest, measureTime } from "./util.js";
+import { getManifest, measureTime } from "./util.js";
 
 let cookErrorCount = 0;
 let cookAborted = false;
@@ -160,14 +160,13 @@ export async function cook() {
             return [];
         })();
 
-        readPromises.push(parsedFolders);
-
         await Promise.all(readPromises); // While this does block the loop, unblocking this causes a "too many files open" error.
 
         if (!limitToPack || directory === limitToPack) {
             const packName = path.basename(outputDir);
             const db = new LevelDatabase(outputDir, { packName });
-            promises.push(db.createPack(parsedFiles, parsedFolders, packName));
+            promises.push(db.createPack(parsedFiles, await parsedFolders, packName));
+
         }
     }
 

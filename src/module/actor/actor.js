@@ -683,7 +683,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             rollContext: rollContext,
             parts: parts,
             title: title,
-            flavor: await TextEditor.enrichHTML(skill.notes, {
+            flavor: await foundry.applications.ux.TextEditor.enrichHTML(skill.notes, {
                 async: true,
                 rollData: this.getRollData() ?? {}
             }),
@@ -944,7 +944,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
             } else {
-                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await TextEditor.enrichHTML(dc.value, {
+                flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await foundry.applications.ux.TextEditor.enrichHTML(dc.value, {
                     async: true,
                     rollData: this.getRollData() ?? {}
                 })}</p>`;
@@ -952,7 +952,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         }
 
         flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.NormalEffect")}: </strong>`;
-        flavor += await TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {
+        flavor += await foundry.applications.ux.TextEditor.enrichHTML(selectedFormula.effectNormal || actionEntry.system.effectNormal, {
             async: true,
             rollData: this.getRollData() ?? {}
         });
@@ -963,7 +963,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             if (critEffectDisplayState !== 'never') {
                 if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
-                    flavor += await TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {
+                    flavor += await foundry.applications.ux.TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {
                         async: true,
                         rollData: this.getRollData() ?? {}
                     });
@@ -1226,7 +1226,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             for (const [key, value] of Object.entries(hpDiffs)) {
                 if (value === 0) continue; // Skip deltas of 0
                 const cfg = SFRPG.floatingHPValues[key];
-                const percentMax = Math.clamp(Math.abs(value) / getProperty(t.actor.system, getMaxPath(key)), 0, 1);
+                const percentMax = Math.clamp(Math.abs(value) / foundry.utils.getProperty(t.actor.system, getMaxPath(key)), 0, 1);
                 const sign = (value < 0) ? 'negative' : 'positive';
                 const floaterData = {
                     anchor: CONST.TEXT_ANCHOR_POINTS.CENTER,

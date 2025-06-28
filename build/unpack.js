@@ -27,9 +27,9 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
     });
 
     const db = new LevelDatabase(filePath, { packName });
-    const { items, folders } = await db.getEntries();
+    const folders = await Array.fromAsync(db.getFolders());
 
-    const promises = [];
+    const folderPromises = [];
 
     if (folders.length) {
         const folderMap = new Map();
@@ -63,10 +63,11 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
             folderMap.set(folder._id, getFolderPath(folder));
         }
         const folderFilePath = path.resolve(outputDirectory, "_folders.json");
-        promises.push(fs.writeFile(folderFilePath, JSONstringifyOrder(folders, 2), "utf-8"));
+        folderPromises.push(fs.writeFile(folderFilePath, JSONstringifyOrder(folders, 2), "utf-8"));
     }
 
-    for (const item of items) {
+    const itemPromises = [];
+    for await (const item of db.getItems()) {
         const cleanItem = partOfCook ? item : sanitizeJSON(item);
         const jsonOutput = JSONstringifyOrder(cleanItem, 2, "item");
         const filename = sanitize(item.name)
@@ -76,10 +77,11 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
             .toLowerCase();
 
         const targetFile = `${outputDirectory}/${filename}.json`;
-        promises.push(fs.writeFile(targetFile, jsonOutput, { "flag": "w" }));
+        itemPromises.push(fs.writeFile(targetFile, jsonOutput, { "flag": "w" }));
+
     }
 
-    await Promise.all(promises);
+    await Promise.all([...itemPromises, ...folderPromises]);
     console.log(chalk.green(`${packName} unpack complete.`));
 }
 

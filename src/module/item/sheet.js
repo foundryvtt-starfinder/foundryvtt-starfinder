@@ -258,7 +258,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
             // Turn Events
             for (const [i, turnEvent] of (data.itemData.turnEvents || []).entries()) {
-                turnEvent.enrichedNote = await TextEditor.enrichHTML(turnEvent.content, {
+                turnEvent.enrichedNote = await foundry.applications.ux.TextEditor.enrichHTML(turnEvent.content, {
                     rollData,
                     secrets
                 });
@@ -279,25 +279,25 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         // Enrich text editors
 
-        data.enrichedDescription = await TextEditor.enrichHTML(this.item.system?.description?.value, {
+        data.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.description?.value, {
             rollData,
             secrets
         });
-        data.enrichedShortDescription = await TextEditor.enrichHTML(this.item.system?.description?.short, {
+        data.enrichedShortDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.description?.short, {
             rollData,
             secrets
         });
-        data.enrichedGMNotes = await TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
+        data.enrichedGMNotes = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
             rollData,
             secrets
         });
 
         if (data?.item?.type === "starshipAction") {
-            data.enrichedEffectNormal = await TextEditor.enrichHTML(this.item.system?.effectNormal, {
+            data.enrichedEffectNormal = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.effectNormal, {
                 rollData,
                 secrets
             });
-            data.enrichedEffectCritical = await TextEditor.enrichHTML(this.item.system?.effectCritical, {
+            data.enrichedEffectCritical = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.effectCritical, {
                 rollData,
                 secrets
             });
@@ -309,13 +309,13 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
                 for (const value of data.itemData.formula) {
                     const effect = {};
 
-                    effect.enrichedEffectNormal = await TextEditor.enrichHTML(value.effectNormal, {
+                    effect.enrichedEffectNormal = await foundry.applications.ux.TextEditor.enrichHTML(value.effectNormal, {
                         rollData,
                         secrets
                     });
                     effect.targetNormal = `system.formula.${ct}.effectNormal`;
 
-                    effect.enrichedEffectCritical = await TextEditor.enrichHTML(value.effectCritical, {
+                    effect.enrichedEffectCritical = await foundry.applications.ux.TextEditor.enrichHTML(value.effectCritical, {
                         rollData,
                         secrets
                     });
@@ -653,6 +653,19 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
             if (oldMainMovement !== newMainMovement) {
                 this.actor.update({'prototypeToken.movementAction': CONFIG.SFRPG.movementOptions[newMainMovement]});
             }
+        }
+
+        // Allow basic +/- math in quantity field
+        const inputQuantity = formData["system.quantity"];
+        if (inputQuantity) {
+            const oldValue = this.item?.system?.quantity;
+            let newValue = oldValue;
+            const isDelta = inputQuantity.startsWith("+") || inputQuantity.startsWith("-");
+            const sanitizedInput = inputQuantity.replace(/[^0-9|+|-]/g, '');
+            if (sanitizedInput) {
+                newValue = isDelta ? Number(oldValue) + Number(sanitizedInput) : Number(sanitizedInput);
+            }
+            formData["system.quantity"] = newValue;
         }
 
         // Update the Item
