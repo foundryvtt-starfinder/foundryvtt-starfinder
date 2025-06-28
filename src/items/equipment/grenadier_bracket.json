@@ -3,9 +3,9 @@
   "name": "Grenadier Bracket",
   "type": "weaponAccessory",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/icons/default/gun-stock.svg",
   "system": {
@@ -40,9 +40,20 @@
     },
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
-      "storage": []
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weapon"
+          ],
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
+        }
+      ]
     },
     "critical": {
       "parts": []
@@ -62,6 +73,7 @@
     },
     "equippable": false,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "identified": true,
     "level": 1,
     "modifiers": [],

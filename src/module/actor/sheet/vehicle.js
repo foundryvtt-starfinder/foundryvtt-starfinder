@@ -33,7 +33,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         this._getHangarBayData(data);
 
         // Encrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.description.value, {
+        data.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.description.value, {
             async: true,
             rollData: this.actor.getRollData() ?? {},
             secrets: this.actor.isOwner
@@ -271,7 +271,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             const rawItemData = (await Item.fromDropData(data)).toObject();
 
             if (rawItemData.type === "weapon" || rawItemData.type === "vehicleAttack") {
-                return this.processDroppedData(event, data);
+                return this.processDroppedItems(event, data);
             } else if (rawItemData.type === "starshipExpansionBay" || rawItemData.type === "vehicleSystem" || rawItemData.type === "actorResource") {
                 return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
             }
@@ -503,7 +503,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {
@@ -548,7 +548,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {

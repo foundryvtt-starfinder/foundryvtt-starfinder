@@ -3,9 +3,9 @@
   "name": "Vermin, Asteroid Louse",
   "type": "npc2",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
@@ -14,9 +14,9 @@
       "name": "Void Adaptation",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -104,9 +104,9 @@
       "name": "Attach",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -194,9 +194,9 @@
       "name": "Bite",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -293,6 +293,7 @@
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -424,9 +425,9 @@
       "name": "Break Objects (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -466,11 +467,48 @@
           "unidentified": "",
           "value": "<p>When attacking an object, an asteroid louse treats that object’s hardness as 10 lower.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "details": {
           "category": "feat",
           "combat": false,
-          "specialAbilityType": ""
+          "specialAbilityType": "ex"
         },
         "duration": {
           "units": "",
@@ -514,19 +552,19 @@
       "name": "Caustic Remains (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
         "type": "",
-        "ability": null,
+        "ability": "",
         "abilityMods": {
           "parts": []
         },
         "actionTarget": "",
-        "actionType": "",
+        "actionType": "other",
         "activation": {
           "type": "",
           "condition": "",
@@ -546,7 +584,40 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [
+            {
+              "name": "",
+              "formula": "1d4",
+              "group": 0,
+              "types": {
+                "acid": true,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            },
+            {
+              "name": "",
+              "formula": "8",
+              "group": 0,
+              "types": {
+                "acid": true,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "piercing": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ]
         },
         "damageNotes": "",
         "description": {
@@ -556,11 +627,48 @@
           "unidentified": "",
           "value": "<p>The remains of an asteroid louse are caustic and stay so for 5 rounds. This acid affects inorganic material and flesh. Creatures or items that touch the remains take 1d4 acid damage that treats hardness as 10 lower than it is. Anything in contact with the acid for a full round instead takes 8 acid damage.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "details": {
           "category": "feat",
           "combat": false,
-          "specialAbilityType": ""
+          "specialAbilityType": "ex"
         },
         "duration": {
           "units": "",
@@ -584,8 +692,12 @@
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": ""
         },
         "source": "",
         "target": {
@@ -604,9 +716,9 @@
       "name": "Consume Objects (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -646,11 +758,48 @@
           "unidentified": "",
           "value": "<p>An asteroid louse can eat objects with a hardness of 10 or lower. It deals 1 damage per minute to an object it’s consuming. An asteroid louse is sated and stops feeding on a given day after dealing 100 damage this way.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "details": {
           "category": "feat",
           "combat": false,
-          "specialAbilityType": ""
+          "specialAbilityType": "ex"
         },
         "duration": {
           "units": "",
@@ -694,9 +843,9 @@
       "name": "Mindless",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -796,7 +945,6 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
-    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -823,6 +971,7 @@
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
     "occludable": {
       "radius": 0
     },
@@ -860,10 +1009,16 @@
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
-      "scaleX": 1,
-      "scaleY": 1,
+      "scaleX": 0.8,
+      "scaleY": 0.8,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
       "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },
@@ -914,12 +1069,12 @@
     },
     "attributes": {
       "abilityDC": {
-        "base": 0
+        "base": "0"
       },
       "arms": "2",
       "bab": 0,
       "baseSpellDC": {
-        "base": 0
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -974,17 +1129,17 @@
           "base": 0
         },
         "climbing": {
-          "base": 0
+          "base": 30
         },
         "flying": {
           "base": 0,
-          "baseManeuverability": 0
+          "baseManeuverability": "0"
         },
         "land": {
           "base": 30
         },
         "mainMovement": "land",
-        "special": "original base: 30 ft.; original special: climb 30 ft.",
+        "special": "",
         "swimming": {
           "base": 0
         },
@@ -1025,16 +1180,18 @@
         "weight": ""
       },
       "class": "",
+      "combatRole": "combatant",
       "cr": 0.5,
-      "environment": "",
-      "organization": "",
+      "environment": "any vacuum",
+      "organization": "solitary, pair, brood (3-9), or infestation (10-40)",
       "organizationSize": {
-        "max": null,
+        "max": 40,
         "min": 1
       },
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 132",
+      "subtype": "",
       "xp": {
         "value": 200
       }

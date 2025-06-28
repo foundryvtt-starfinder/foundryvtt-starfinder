@@ -3,9 +3,9 @@
   "name": "Yithian",
   "type": "npc2",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
@@ -14,9 +14,9 @@
       "name": "Fast Healing 5",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -101,9 +101,9 @@
       "name": "Unflankable",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -188,9 +188,9 @@
       "name": "Pincer",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -287,6 +287,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "DC 18 save",
         "identified": true,
         "isActive": null,
@@ -418,9 +419,9 @@
       "name": "Jolt Storm Coil",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -517,6 +518,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -648,9 +650,9 @@
       "name": "Mind Swap Mastery (Su)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -738,9 +740,9 @@
       "name": "Jolt Storm Coil",
       "type": "goods",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
@@ -774,6 +776,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "modifiers": [],
@@ -788,9 +791,9 @@
       "name": "4 High-Capacity Batteries (40 Charges Each",
       "type": "goods",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
@@ -824,6 +827,7 @@
         },
         "equippable": false,
         "equipped": false,
+        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
         "modifiers": [],
@@ -838,9 +842,9 @@
       "name": "Detect Thoughts (Range 100 Ft. DC 16) (At Will)",
       "type": "spell",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/spells/detect_thoughts.webp",
       "system": {
@@ -940,9 +944,9 @@
       "name": "Mind Swap*",
       "type": "spell",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/spells/mind_swap.webp",
       "system": {
@@ -1042,9 +1046,9 @@
       "name": "Modify Memory*",
       "type": "spell",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/spells/modify_memory.webp",
       "system": {
@@ -1156,7 +1160,6 @@
     "displayName": 20,
     "disposition": -1,
     "height": 2,
-    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1183,6 +1186,7 @@
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
     "occludable": {
       "radius": 0
     },
@@ -1224,6 +1228,12 @@
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
       "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 2
   },

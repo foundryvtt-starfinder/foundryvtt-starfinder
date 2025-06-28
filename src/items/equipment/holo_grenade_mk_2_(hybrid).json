@@ -3,9 +3,9 @@
   "name": "Holo Grenade, Mk 2 (Hybrid)",
   "type": "weapon",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/holo-grenade.webp",
   "system": {
@@ -14,12 +14,12 @@
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "",
+    "actionTarget": "ac5",
     "actionType": "rwak",
     "activation": {
-      "type": "none",
+      "type": "action",
       "condition": "",
-      "cost": null
+      "cost": 1
     },
     "ammunitionType": "",
     "area": {
@@ -27,7 +27,7 @@
       "shapable": false,
       "shape": "",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +43,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 27
       },
       "size": "medium",
       "sturdy": true
@@ -51,8 +51,8 @@
     "attuned": false,
     "bulk": "L",
     "capacity": {
-      "max": 0,
-      "value": 0
+      "max": 1,
+      "value": 1
     },
     "chatFlavor": "",
     "container": {
@@ -89,11 +89,12 @@
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
@@ -140,11 +141,14 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
-      "hybrid": false,
+      "hybrid": true,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -155,7 +159,7 @@
       "modal": false,
       "necrotic": false,
       "nonlethal": false,
-      "one": false,
+      "one": true,
       "operative": false,
       "penetrating": false,
       "polarize": false,
@@ -201,13 +205,17 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "rollNotes": "",
     "save": {
+      "type": "will",
+      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
+      "descriptor": "disbelieve"
+    },
+    "skillCheck": {
       "type": "",
-      "dc": "",
-      "descriptor": "negate"
+      "dc": ""
     },
     "source": "AR pg. 126",
     "special": "",
@@ -232,11 +240,11 @@
       "value": ""
     },
     "usage": {
-      "per": "",
-      "value": 0
+      "per": "shot",
+      "value": 1
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "charges",
       "value": 1
     },

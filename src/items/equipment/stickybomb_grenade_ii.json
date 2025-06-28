@@ -3,9 +3,9 @@
   "name": "Stickybomb grenade II",
   "type": "weapon",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/stickybomb-grenade.webp",
   "system": {
@@ -14,7 +14,7 @@
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "",
+    "actionTarget": "ac5",
     "actionType": "rwak",
     "activation": {
       "type": "action",
@@ -27,7 +27,7 @@
       "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 15
+      "value": "15"
     },
     "attackBonus": 0,
     "attributes": {
@@ -57,7 +57,7 @@
     "chatFlavor": "entangled [[2d4]] rounds",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -95,15 +95,16 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>A stickybomb grenade detonates with a splash of adhesive resin.</p>"
+      "value": "<p>A stickybomb grenade detonates with a splash of adhesive resin.</p>\n<p>@UUID[Compendium.sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled} [[/r 2d4]]{2d4 rounds}</p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
@@ -126,6 +127,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -144,15 +146,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -170,6 +176,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -178,7 +185,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -191,6 +200,7 @@
       "thought": false,
       "throttle": false,
       "thrown": true,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -205,7 +215,7 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "rollNotes": "",
     "save": {
@@ -213,9 +223,28 @@
       "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "CRB pg. 178",
     "special": "",
-    "specialMaterials": {},
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -225,7 +254,7 @@
       "value": 1
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "charges",
       "value": 1
     },

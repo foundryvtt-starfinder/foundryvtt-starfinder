@@ -3,9 +3,9 @@
   "name": "Moonflower Titan",
   "type": "npc2",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
@@ -14,9 +14,9 @@
       "name": "Bite (plus Swallow Whole)",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -122,6 +122,7 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -279,9 +280,9 @@
       "name": "[MultiATK] Bite (plus Swallow Whole)",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -387,6 +388,7 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -544,9 +546,9 @@
       "name": "[MultiATK] 2 Tentacles",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -652,6 +654,7 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
@@ -809,9 +812,9 @@
       "name": "Moon Pulse (Su)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -940,9 +943,9 @@
       "name": "Root Tremor (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -1088,14 +1091,9 @@
       "name": "Pod Spawn (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Actor.9VjHsBZ0t78MROEI.Item.NkmKvxsevd6PqycL"
-        }
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -1237,14 +1235,9 @@
       "name": "Swallow Whole (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.27.1"
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.sfrpg.universal-creature-rules.8mPBT10423cEnTiZ"
-        }
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -1381,7 +1374,6 @@
     "displayName": 20,
     "disposition": -1,
     "height": 4,
-    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -1408,6 +1400,7 @@
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
     "occludable": {
       "radius": 0
     },
@@ -1449,6 +1442,12 @@
       "scaleY": 1,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
       "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 4
   },

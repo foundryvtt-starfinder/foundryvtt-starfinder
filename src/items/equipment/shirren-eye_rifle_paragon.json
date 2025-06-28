@@ -3,9 +3,9 @@
   "name": "Shirren-eye rifle, paragon",
   "type": "weapon",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/shirren-eye-rifle-elite.webp",
   "system": {
@@ -26,8 +26,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -52,7 +52,7 @@
     "bulk": "1",
     "capacity": {
       "max": 6,
-      "value": 6
+      "value": 0
     },
     "chatFlavor": "",
     "container": {
@@ -73,10 +73,10 @@
         {
           "type": "slot",
           "acceptsType": [
-            "goods"
+            "weaponAccessory"
           ],
           "affectsEncumbrance": true,
-          "amount": 1,
+          "amount": 4,
           "subtype": "",
           "weightMultiplier": 1,
           "weightProperty": ""
@@ -102,6 +102,7 @@
         {
           "name": "",
           "formula": "6d10",
+          "group": null,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -126,11 +127,12 @@
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
@@ -177,11 +179,14 @@
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -199,6 +204,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -207,6 +213,7 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
       "shatter": false,
       "shells": false,
@@ -236,13 +243,17 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 80
+      "value": "80"
     },
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": "",
       "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
     },
     "source": "CRB pg. 178",
     "special": "",
@@ -256,6 +267,7 @@
       "inubrix": false,
       "khefak": false,
       "noqual": false,
+      "nyblantine": false,
       "purplecores": false,
       "siccatite": false,
       "silver": false,
@@ -266,11 +278,11 @@
       "value": ""
     },
     "usage": {
-      "per": "round",
+      "per": "shot",
       "value": 1
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },
