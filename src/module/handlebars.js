@@ -40,7 +40,7 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/sfrpg/templates/items/parts/effect-turn-events.hbs"
     ];
 
-    return loadTemplates(templatePaths);
+    return foundry.applications.handlebars.loadTemplates(templatePaths);
 };
 
 export function setupHandlebars() {
@@ -167,7 +167,7 @@ export function setupHandlebars() {
     });
 
     Handlebars.registerHelper('console', function(...args) {
-        let options = args.pop();
+        const options = args.pop();
         console.log(...args);
     });
 
@@ -268,9 +268,9 @@ export function setupHandlebars() {
         const tagParams = [
             `value="${Handlebars.escapeExpression(value)}"`,
             options.hash.hidden && 'hidden',
-            (value === options.hash.selected) && 'selected',
+            (value === options.hash.selected) && 'selected'
         ].filter(Boolean).join(' ');
-        const safeLabel = Handlebars.escapeExpression(options.hash.localize? game.i18n.localize(label): label);
+        const safeLabel = Handlebars.escapeExpression(options.hash.localize ? game.i18n.localize(label) : label);
         return new Handlebars.SafeString(`<option ${tagParams}>${safeLabel}</option>`);
     });
 

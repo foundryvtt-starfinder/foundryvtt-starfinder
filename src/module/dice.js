@@ -1,8 +1,12 @@
 import SFRPGCustomChatMessage from "./chat/chatbox.js";
 import { SFRPG } from "./config.js";
-import RollContext from "./rolls/rollcontext.js";
 import RollTree from "./rolls/rolltree.js";
 import StackModifiers from "./rules/closures/stack-modifiers.js";
+
+/**
+ * @import SFRPGRoll from "./rolls/roll.js";
+ * @import RollContext from "./rolls/rollcontext.js";
+ */
 
 // Type definitions for documentation.
 /**
@@ -79,7 +83,7 @@ import StackModifiers from "./rules/closures/stack-modifiers.js";
  * The results of a Roll
  *
  * @typedef {Object} RollResult
- * @property {Roll}         roll    The data for the roll
+ * @property {SFRPGRoll} roll The data for the roll
  * @property {FinalFormula} formula The finalized formula used in the roll
  */
 
@@ -166,7 +170,8 @@ export class DiceSFRPG {
     * @returns {Promise<void>}
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
-        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor", difficulty = undefined, displayDifficulty = false}) {
+        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor",
+        difficulty = undefined, displayDifficulty = false, tags = []}) {
 
         flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
 
@@ -227,7 +232,6 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const tags = [];
             if (rollOptions?.actionTarget) {
                 tags.push({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}) });
             }
@@ -236,11 +240,20 @@ export class DiceSFRPG {
             rollObject.options.rollOptions = rollOptions;
             const roll = await rollObject.evaluate();
 
-            // Flag critical thresholds
+            // Flag critical thresholds and add Critical hit and effect information
             for (const d of roll.dice) {
                 if (d.faces === 20) {
                     d.options.critical = critical;
                     d.options.fumble = fumble;
+
+                    // Critical Effect flavor and tags
+                    const criticalData = rollContext.allContexts?.item?.data?.critical;
+                    if (d.total === critical) {
+                        flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
+                        if (criticalData.effect.trim()) {
+                            tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
+                        }
+                    }
                 }
             }
 
@@ -260,7 +273,8 @@ export class DiceSFRPG {
                     htmlData,
                     rollType: "normal",
                     rollOptions,
-                    rollDices: finalFormula.rollDices
+                    rollDices: finalFormula.rollDices,
+                    tags: tags
                 };
 
                 try {
@@ -277,7 +291,8 @@ export class DiceSFRPG {
                     speaker,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    flags: { rollOptions }
+                    flags: { rollOptions },
+                    tags: tags
                 };
 
                 messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
@@ -324,7 +339,7 @@ export class DiceSFRPG {
     * @param {string}             [data.breakdown]   An explanation of the roll modifiers and where they came from.
     * @param {Tag[]}              [data.tags]        Any roll metadata that will be output on the bottom of the chat card.
     * @param {DialogOptions}      data.dialogOptions Modal dialog options
-    * @returns {Promise<RollResult>|Promise} Returns the roll's result or an empty promise.
+    * @returns {Promise<RollResult>|Promise<null>} Returns the roll's result or an empty promise.
     */
     static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, breakdown = "", tags = [], dialogOptions, useRawStrings = false, actorContextKey = "actor" }) {
 
@@ -595,14 +610,7 @@ export class DiceSFRPG {
                     finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
                 }
 
-                let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": finalFlavor });
-
                 if (criticalData !== undefined) {
-                    if (criticalData?.effect?.trim().length > 0) {
-                        tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": finalFlavor, "criticalEffect": criticalData.effect });
-                        tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
-                    }
-
                     const critRoll = criticalData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula)
                         .join("+") ?? "";
                     if (critRoll.length > 0) {
@@ -613,7 +621,7 @@ export class DiceSFRPG {
                     htmlData.push({ name: "critical-data", value: JSON.stringify(criticalData) });
                 }
 
-                finalFlavor = tempFlavor;
+                finalFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": finalFlavor });
             }
 
             if (part?.name) {
@@ -743,13 +751,13 @@ export class DiceSFRPG {
     }
 
     static appendTextToRoll(originalRollHTML, textToAppend) {
-        const diceRollHtml = '<h4 class="dice-roll">';
+        const diceRollHtml = '<h3 class="dice-total">';
 
         const diceRollIndex = originalRollHTML.indexOf(diceRollHtml);
         const firstHalf = originalRollHTML.substring(0, diceRollIndex + diceRollHtml.length);
         const splitOffFirstHalf = originalRollHTML.substring(diceRollIndex + diceRollHtml.length);
 
-        const closeTagIndex = splitOffFirstHalf.indexOf('</h4>');
+        const closeTagIndex = splitOffFirstHalf.indexOf('</h3>');
         const rollResultHtml = splitOffFirstHalf.substring(0, closeTagIndex);
         const secondHalf = splitOffFirstHalf.substring(closeTagIndex);
 
@@ -1011,11 +1019,7 @@ export class DiceSFRPG {
 
     /**
      * The below is copied from the DnD5e system on Foundry (https://github.com/foundryvtt/dnd5e/blob/master/module/dice/simplify-roll-formula.mjs) under the MIT License.
-     *
      * Copyright 2021 Andrew Clayton
-     * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-     * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
      */
 
     /**

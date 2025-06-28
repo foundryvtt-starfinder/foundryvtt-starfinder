@@ -3,9 +3,9 @@
   "name": "Coil rifle, precision",
   "type": "weapon",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.28.0"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/icons/equipment/weapons/wraith-sting-rifle-hornet.webp",
   "system": {
@@ -57,7 +57,7 @@
     "chatFlavor": "Sniper (250 ft.)",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -78,6 +78,17 @@
           "affectsEncumbrance": true,
           "amount": 1,
           "subtype": "ammunitionSlot",
+          "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
           "weightProperty": ""
         }
       ]
@@ -262,9 +273,24 @@
       "type": "",
       "dc": ""
     },
-    "source": "AR",
+    "source": "AR pg. 43",
     "special": "",
-    "specialMaterials": {},
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -274,9 +300,9 @@
       "value": 1
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 1
+      "value": null
     },
     "weaponCategory": "projectile",
     "weaponType": "sniper"

@@ -3,9 +3,9 @@
   "name": "Riot Grenade VII",
   "type": "weapon",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.28.0"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
@@ -27,7 +27,7 @@
       "shapable": false,
       "shape": "",
       "units": "ft",
-      "value": 25
+      "value": "25"
     },
     "attackBonus": 0,
     "attributes": {
@@ -57,7 +57,7 @@
     "chatFlavor": "staggered",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -89,10 +89,19 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "6d12",
-          "operator": "",
+          "group": null,
           "types": {
-            "slashing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": true,
+            "sonic": false
           }
         }
       ]
@@ -107,7 +116,7 @@
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": "staggered"
     },
     "equippable": true,
@@ -135,6 +144,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -153,15 +163,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": false,
       "line": false,
       "living": false,
@@ -179,6 +193,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -187,7 +202,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -200,6 +217,7 @@
       "thought": false,
       "throttle": false,
       "thrown": true,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -214,7 +232,7 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "rollNotes": "",
     "save": {
@@ -222,9 +240,28 @@
       "dc": "20+@abilities.dex.mod",
       "descriptor": "partial"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "",
     "special": "",
-    "specialMaterials": {},
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""

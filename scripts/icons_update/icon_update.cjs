@@ -108,7 +108,7 @@ for (const currentPath of itemPaths) {
     const folderPath = pathPrefix + currentPath;
     console.log(`Checking items in folder: ${folderPath}`);
 
-    const files = fs.readdirSync(folderPath);
+    const files = fs.readdirSync(folderPath).filter(e => e !== '_folders.json');
     for (const file of files) {
         const fname = folderPath + '/' + file;
         // console.log(`Opening up the ${fname} file.`);
@@ -125,7 +125,7 @@ for (const currentPath of actorPaths) {
     const folderPath = pathPrefix + currentPath;
     console.log(`Checking items in folder: ${folderPath}`);
 
-    const files = fs.readdirSync(folderPath);
+    const files = fs.readdirSync(folderPath).filter(e => e !== '_folders.json');
     for (const file of files) {
         const fname = folderPath + '/' + file;
         // console.log(`Opening up the ${fname} file.`);

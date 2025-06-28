@@ -3,9 +3,9 @@
   "name": "Trimorphic (Ryphorian)",
   "type": "feat",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.28.0"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
@@ -48,6 +48,7 @@
     "descriptors": {
       "acid": false,
       "air": false,
+      "auditory": false,
       "calling": false,
       "chaotic": false,
       "charm": false,
@@ -73,10 +74,12 @@
       "mind-affecting": false,
       "pain": false,
       "poison": false,
+      "polymorph": false,
       "radiation": false,
       "scrying": false,
       "sense-dependent": false,
       "shadow": false,
+      "sonic": false,
       "summoning": false,
       "teleportation": false,
       "water": false
@@ -95,7 +98,7 @@
     "modifiers": [
       {
         "_id": "15def881-7143-411d-b4c0-94ca9269f580",
-        "name": "Trimorphic - Fire",
+        "name": "Trimorphic - Summerborn",
         "type": "untyped",
         "condition": "",
         "effectType": "energy-resistance",
@@ -110,7 +113,7 @@
       },
       {
         "_id": "a8f60725-f615-4377-9857-9b8b796df751",
-        "name": "Trimorphic - Cold",
+        "name": "Trimorphic - Winterborn",
         "type": "untyped",
         "condition": "",
         "effectType": "energy-resistance",
@@ -122,6 +125,36 @@
         "source": "Racial",
         "subtab": "misc",
         "valueAffected": "cold"
+      },
+      {
+        "_id": "5dbed268-ad0a-4eb4-bd05-5adde0029496",
+        "name": "Trimorphic - Transitional",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Summerborn ryphorians gain fire resistance 5. Winterborn ryphorians gain cold resistance 5. Transitional ryphorians gain cold and fire resistance 2, and when in conditions of severe cold or heat, they have to attempt Fortitude saves only once per hour instead of once every 10 minutes. A ryphorian can stack this natural resistance with one other form of resistance.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "cold"
+      },
+      {
+        "_id": "a3150e4b-b4af-4b67-8c2d-86ce9ed45ad3",
+        "name": "Trimorphic - Transitional",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "energy-resistance",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Summerborn ryphorians gain fire resistance 5. Winterborn ryphorians gain cold resistance 5. Transitional ryphorians gain cold and fire resistance 2, and when in conditions of severe cold or heat, they have to attempt Fortitude saves only once per hour instead of once every 10 minutes. A ryphorian can stack this natural resistance with one other form of resistance.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fire"
       }
     ],
     "properties": {},

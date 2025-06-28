@@ -3,9 +3,9 @@
   "name": "Khefak",
   "type": "npc2",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.28.0"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
@@ -14,9 +14,9 @@
       "name": "Claw",
       "type": "weapon",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
@@ -248,9 +248,9 @@
       "name": "Break Objects (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -335,9 +335,9 @@
       "name": "Consume Objects (Ex)",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -422,9 +422,9 @@
       "name": "Mindless",
       "type": "feat",
       "_stats": {
-        "coreVersion": 12,
+        "coreVersion": 13,
         "systemId": "sfrpg",
-        "systemVersion": "0.28.0"
+        "systemVersion": "0.28.2"
       },
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
@@ -524,7 +524,6 @@
     "displayName": 20,
     "disposition": -1,
     "height": 1,
-    "hexagonalShape": 0,
     "light": {
       "alpha": 0.5,
       "angle": 360,
@@ -551,6 +550,7 @@
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
     "occludable": {
       "radius": 0
     },
@@ -588,10 +588,16 @@
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
-      "scaleX": 1,
-      "scaleY": 1,
+      "scaleX": 0.8,
+      "scaleY": 0.8,
       "src": "systems/sfrpg/icons/default/alien-stare.svg",
       "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },
@@ -642,7 +648,7 @@
     },
     "attributes": {
       "abilityDC": {
-        "base": 0
+        "base": "0"
       },
       "arms": "2",
       "bab": 0,
@@ -652,7 +658,7 @@
         "value": 0
       },
       "baseSpellDC": {
-        "base": 0
+        "base": "0"
       },
       "cmd": {
         "min": 0,
@@ -794,6 +800,7 @@
         "weight": ""
       },
       "class": "",
+      "combatRole": "combatant",
       "cr": 0.3333333333333333,
       "environment": "",
       "organization": "",
@@ -804,6 +811,7 @@
       "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 78",
+      "subtype": "",
       "xp": {
         "value": 10
       }
