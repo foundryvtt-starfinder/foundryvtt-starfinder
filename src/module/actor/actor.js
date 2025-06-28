@@ -166,6 +166,15 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             }
         }
 
+        if (!["drone", "starship", "vehicle"].includes(this.type)) {
+            const oldMainMovement = this.system?.attributes?.speed?.mainMovement;
+            const newMainMovement = data['system.attributes.speed.mainMovement'];
+            if (newMainMovement && (newMainMovement !== oldMainMovement)) {
+                data['prototypeToken.movementAction'] = CONFIG.SFRPG.movementOptions[newMainMovement];
+                console.log(`Starfinder | Updated prototype token movement action on ${this.name} (${this.id}) to '${CONFIG.SFRPG.movementOptions[newMainMovement]}'`);
+            }
+        }
+
         return super.update(data, options);
     }
 
@@ -212,6 +221,14 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             if (Object.keys(SFRPG.defaultActorIcons).includes(this.type)) {
                 updates.img = ["systems/sfrpg/icons/default/", SFRPG.defaultActorIcons[this.type]].join("");
             }
+        }
+
+        // Set the prototype token's movement type to the main movement defined in the actor's speed
+        if (this.type === "starship") {
+            updates.prototypeToken = {movementAction: "fly"};
+        } else if (CONFIG.SFRPG.actorsCharacterScale.includes(this.type)) {
+            const mainMovementAction = CONFIG.SFRPG.movementOptions[this.system.attributes.speed.mainMovement] ?? null;
+            updates.prototypeToken = {movementAction: mainMovementAction};
         }
 
         this.updateSource(updates);
