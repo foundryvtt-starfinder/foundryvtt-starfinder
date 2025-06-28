@@ -5,8 +5,11 @@
     {{#if system.attributes.speed.swimming.value}}{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming"}} - {{system.attributes.speed.swimming.value}} {{localize "SFRPG.Units.Speed"}} | @attributes.speed.swimming.value<br>{{/if}}
     {{#if system.attributes.speed.burrowing.value}}{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing"}} - {{system.attributes.speed.burrowing.value}} {{localize "SFRPG.Units.Speed"}} | @attributes.speed.burrowing.value<br>{{/if}}
     {{#if system.attributes.speed.climbing.value}}{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing"}} - {{system.attributes.speed.climbing.value}} {{localize "SFRPG.Units.Speed"}} | @attributes.speed.climbing.value<br>{{/if}}
-    {{#if system.attributes.speed.special}}{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special"}} - {{system.attributes.speed.special}} | @attributes.speed.special{{/if}}
-    {{#each system.attributes.speed.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+    {{#if system.attributes.speed.special}}{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special"}} - {{system.attributes.speed.special}} | @attributes.speed.special<br>{{/if}}
+    {{#if system.attributes.speed.tooltip}}
+    <br><strong>{{localize "SFRPG.Modifiers"}}</strong><br>
+    {{#each system.attributes.speed.tooltip as |tip|}}{{tip}}<br>{{/each}}
+    {{/if}}">
     <h4 class="attribute-name box-title">
         {{ localize "SFRPG.Speed" }}
         {{#unless disableEdit}}
