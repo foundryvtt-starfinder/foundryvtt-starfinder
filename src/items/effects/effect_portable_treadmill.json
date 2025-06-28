@@ -1,0 +1,69 @@
+{
+  "_id": "ReA5Nw0VZ5xU3KOl",
+  "name": "Effect: Portable Treadmill",
+  "type": "effect",
+  "_stats": {
+    "coreVersion": 13,
+    "systemId": "sfrpg",
+    "systemVersion": "0.28.2"
+  },
+  "img": "systems/sfrpg/icons/default/stopwatch.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "hour",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><span>For every 5 minutes you spend running on the treadmill without interruption, you gain a circumstance bonus to Fortitude saves for 1 hour, up to a maximum of 12 hours. This bonus is +1 and increases to +2 at 10th level.</span></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "eb8a42ff-6976-43e1-adcf-374e762095cc",
+        "name": "Effect - Portable Treadmill",
+        "type": "circumstance",
+        "condition": "",
+        "effectType": "save",
+        "enabled": true,
+        "max": 0,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "fort"
+      }
+    ],
+    "requirements": "",
+    "showOnToken": true,
+    "source": "Portable Treadmill",
+    "turnEvents": []
+  }
+}

@@ -3,9 +3,9 @@
   "name": "Versatile Specialization (Combat)",
   "type": "feat",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/icons/feats/versatile_specialization.webp",
   "system": {
@@ -43,7 +43,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You know how to get full value out of weapon types your class doesn’t normally use.</p>\n<p><strong>Prerequisites</strong>: Weapon Specialization, character level 3rd.</p><hr /><p><strong>Benefit</strong>: You gain specialization (see page 243) in all weapons with which you are proficient that can be selected with Weapon Specialization.</p>\n<p><em>Enable Specialization bonuses in the Modifiers tab. Only enable modifiers you do not have elsewhere.</em></p>"
+      "value": "<p>You know how to get full value out of weapon types your class doesn’t normally use.</p>\n<p><strong>Prerequisites</strong>: Weapon Specialization, character level 3rd.</p><hr /><p><strong>Benefit</strong>: You gain specialization (see page 243) in all weapons with which you are proficient that can be selected with Weapon Specialization.</p>\n<p><em>Enable Specialization bonuses in the Modifiers tab.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -98,7 +98,7 @@
       {
         "_id": "6b305f26-6127-43c3-9f53-8eca4e52723e",
         "name": "Weapon Specialization Longarms",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,
@@ -113,12 +113,12 @@
       {
         "_id": "7f0caf74-d6a4-48b6-913b-0fdb421e3c12",
         "name": "Weapon Specialization Adv Melee",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -128,7 +128,7 @@
       {
         "_id": "16a6c295-3a94-46a6-a63e-28c08eff2c22",
         "name": "Weapon Specialization Heavy",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,
@@ -143,7 +143,7 @@
       {
         "_id": "5b4ef509-d259-4cdb-b9ce-6b709e9986af",
         "name": "Weapon Specialization Sniper",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,

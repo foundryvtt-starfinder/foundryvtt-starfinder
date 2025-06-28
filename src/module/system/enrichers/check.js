@@ -1,6 +1,42 @@
 import CheckNameHelper from "../../utils/skill-names.js";
 import BaseEnricher from "./base.js";
 
+export const checkIcons = Object.freeze({
+    "acrobatics": "fa-person-walking",
+    "athletics": "fa-dumbbell",
+    "bluff": "fa-comment",
+    "computers": "fa-computer",
+    "culture": "fa-flag",
+    "diplomacy": "fa-handshake",
+    "disguise": "fa-mask",
+    "engineering": "fa-gear",
+    "intimidate": "fa-face-angry",
+    "life-science": "fa-dna",
+    "medicine": "fa-syringe",
+    "mysticism": "fa-hand-sparkles",
+    "perception": "fa-magnifying-glass",
+    "profession": "fa-user-tie",
+    "physical-science": "fa-flask",
+    "piloting": "fa-plane",
+    "sense-motive": "fa-person-circle-question",
+    "sleight-of-hand": "fa-hands",
+    "stealth": "fa-moon",
+    "survival": "fa-campground",
+
+    "fortitude": "fa-shield-heart",
+    "reflex": "fa-person-running",
+    "will": "fa-brain",
+
+    "strength": "fa-weight-hanging",
+    "dexterity": "fa-feather-pointed",
+    "constitution": "fa-heart-pulse",
+    "intelligence": "fa-glasses",
+    "wisdom": "fa-mountain-sun",
+    "charisma": "fa-people-arrows",
+
+    "caster-level": "fa-wand-magic-sparkles"
+});
+
 /**
  * Roll a specific check
  * @class
@@ -30,41 +66,7 @@ export default class CheckEnricher extends BaseEnricher {
 
     /** @inheritdoc */
     get icons() {
-        return {
-            "acrobatics": "fa-person-walking",
-            "athletics": "fa-dumbbell",
-            "bluff": "fa-comment",
-            "computers": "fa-computer",
-            "culture": "fa-flag",
-            "diplomacy": "fa-handshake",
-            "disguise": "fa-mask",
-            "engineering": "fa-gear",
-            "intimidate": "fa-face-angry",
-            "life-science": "fa-dna",
-            "medicine": "fa-syringe",
-            "mysticism": "fa-hand-sparkles",
-            "perception": "fa-magnifying-glass",
-            "profession": "fa-user-tie",
-            "physical-science": "fa-flask",
-            "piloting": "fa-plane",
-            "sense-motive": "fa-person-circle-question",
-            "sleight-of-hand": "fa-hands",
-            "stealth": "fa-moon",
-            "survival": "fa-campground",
-
-            "fortitude": "fa-shield-heart",
-            "reflex": "fa-person-running",
-            "will": "fa-brain",
-
-            "strength": "fa-weight-hanging",
-            "dexterity": "fa-feather-pointed",
-            "constitution": "fa-heart-pulse",
-            "intelligence": "fa-glasses",
-            "wisdom": "fa-mountain-sun",
-            "charisma": "fa-people-arrows",
-
-            "caster-level": "fa-wand-magic-sparkles"
-        };
+        return checkIcons;
     }
 
     get checkType() {
@@ -115,6 +117,7 @@ export default class CheckEnricher extends BaseEnricher {
         const a = super.createElement();
 
         if (this.args.dc) a.dataset.dc = parseInt(this.args.dc);
+        if (this.args.displayDC) a.dataset.displayDC = this.args.displayDC === 'true';
         const iconSlug = (this.checkType === "ability") ? CheckNameHelper.longFormNameAbilities(this.args.type) : CheckNameHelper.longFormName(this.args.type);
 
         a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${a.innerHTML}`;
@@ -131,11 +134,16 @@ export default class CheckEnricher extends BaseEnricher {
 
         const actor = _token?.actor ?? game.user?.character;
         if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
+        const options = {
+            event,
+            dc: data.dc,
+            displayDC: data.displayDC
+        };
         const id = CheckNameHelper.shortFormName(data.type);
 
-        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, { event });
-        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, { event });
-        else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, { event });
+        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, options);
+        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, options);
+        else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, options);
 
     }
 

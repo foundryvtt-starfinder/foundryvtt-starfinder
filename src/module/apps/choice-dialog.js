@@ -60,7 +60,7 @@ export class ChoiceDialog extends Dialog {
             ChoiceDialog.output[key] = value.default;
         }
 
-        const html = await renderTemplate("systems/sfrpg/templates/apps/choice-dialog.hbs", {
+        const html = await foundry.applications.handlebars.renderTemplate("systems/sfrpg/templates/apps/choice-dialog.hbs", {
             message: message,
             choices: inputData
         });

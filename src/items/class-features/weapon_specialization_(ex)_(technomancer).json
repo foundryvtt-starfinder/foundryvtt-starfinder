@@ -3,9 +3,9 @@
   "name": "Weapon Specialization (Ex) (Technomancer)",
   "type": "feat",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/images/cup/gameplay/technomancer.webp",
   "system": {
@@ -61,7 +61,7 @@
       {
         "_id": "02ae5b7c-492f-4f98-94d9-ae15d6656084",
         "name": "Weapon Specialization Technomancer",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -75,30 +75,16 @@
       {
         "_id": "4100ca86-eef1-4d66-a8f5-56a1deebd8ce",
         "name": "Weapon Specialization Technomancer",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "basicM"
-      },
-      {
-        "_id": "3ae5b0a0-a7ab-425a-b2f7-5f55740c069c",
-        "name": "Weapon Specialization Technomancer",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
       }
     ],
     "properties": {},

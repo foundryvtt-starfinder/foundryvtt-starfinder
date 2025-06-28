@@ -3,9 +3,9 @@
   "name": "Weapon Specialization (Ex) (Evolutionist)",
   "type": "feat",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
@@ -96,7 +96,7 @@
       {
         "_id": "9b5a4f11-8c9c-47e2-875b-113a8d7a971e",
         "name": "Weapon Specialization Evolutionist",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -111,32 +111,17 @@
       {
         "_id": "1b19f9fd-5e8a-4e9c-8e09-fe60e784d0dc",
         "name": "Weapon Specialization Evolutionist",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "basicM"
-      },
-      {
-        "_id": "8f0c6cf7-403f-4e69-b209-2b66ee75878f",
-        "name": "Weapon Specialization Evolutionist",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "max": 0,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
       }
     ],
     "properties": {},

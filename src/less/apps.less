@@ -5,9 +5,23 @@
 @detailsHeight: 40px;
 
 // Global background style
-button {
+h2 {
     .exo2();
-    font-size: var(--font-size-13);
+    font-size: var(--font-size-24);
+    margin: 1rem 0 1rem;
+}
+
+h3 {
+    .exo2();
+}
+
+h4 {
+    .exo2();
+}
+
+.scene-name {
+    .exo2();
+    font-size: var(--font-size-12);
 }
 
 blockquote.quote {
@@ -94,10 +108,16 @@ img.icon-enricher {
 /* ----------------------------------------- */
 
 .sfrpg {
+
     .window-content {
         font-size: var(--font-size-13);
         color: @colorDark;
         .exo2();
+    }
+    .window-header {
+        .exo2();
+        font-size: var(--font-size-14);
+        align-items: center;
     }
 
     /* ----------------------------------------- */
@@ -144,8 +164,10 @@ img.icon-enricher {
 
     // Buttons
     button {
+        .exo2();
         background: rgba(0, 0, 0, 0.1);
         border: @borderGroove;
+        color: #000;
     }
 
     // Checkbox Labels
@@ -178,7 +200,7 @@ img.icon-enricher {
             font-weight: bold;
         }
         .form-fields {
-            .flexrow();
+            .flexrow-sfrpg();
             > * {
                 margin: 0 3px 0 0;
                 &:last-child {
@@ -355,6 +377,7 @@ img.icon-enricher {
             height: 60px;
             margin: 0;
             padding: 5px;
+            .orbitron();
 
             input {
                 height: 50px;
@@ -542,15 +565,13 @@ img.icon-enricher {
 /* ------------------------------------------- */
 /* Counter Classes Management                  */
 /* ------------------------------------------- */
-#combat-tracker {
-    .counter-image-relative {
-        height: 72px;
-        line-height: 24px;
-    }
+#combat li.combatant {
+    padding-left: 8px;
 }
 
-#combat li.combatant .combatant-control-counter {
-    padding-left: 8px;
+.combatant-control-counter {
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 .counter-token {
@@ -570,57 +591,6 @@ img.icon-enricher {
         padding-left: 4px;
         vertical-align: middle;
         color: #eee;
-    }
-}
-
-#counter-management-position {
-    ul {
-        width: 100%;
-        text-align: center;
-        padding-inline-start: 0px !important;
-        margin: 15px 0px;
-        background-color: rgba(0, 0, 0, 0.3);
-        padding: 15px;
-        border-radius: 5px;
-    }
-
-    ul li {
-        text-decoration: none;
-        display: inline-block;
-        width: 30%;
-        text-align: center;
-        padding: 15px;
-    }
-
-    ul li:hover {
-        background-color: #999999;
-        border-radius: 5px;
-    }
-
-    ul li.active {
-        background-color: #6c8aa5;
-        border-radius: 5px;
-    }
-
-    ul li img {
-        border: none;
-    }
-
-    h3 {
-        font-size: 1.3em;
-        font-weight: bold;
-        color: #8a0303;
-    }
-
-    .counter-management-button button {
-        width: 20%;
-        margin: 10px;
-    }
-
-    .counter-management-info label {
-        display: inline-block;
-        width: 120px;
-        font-weight: bold;
     }
 }
 

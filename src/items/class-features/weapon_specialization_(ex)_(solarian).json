@@ -3,9 +3,9 @@
   "name": "Weapon Specialization (Ex) (Solarian)",
   "type": "feat",
   "_stats": {
-    "coreVersion": 12,
+    "coreVersion": 13,
     "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
+    "systemVersion": "0.28.2"
   },
   "img": "systems/sfrpg/images/cup/gameplay/solarian.webp",
   "system": {
@@ -61,7 +61,7 @@
       {
         "_id": "5ed4c491-efda-4716-ae6c-22544d419022",
         "name": "Weapon Specialization Solarian",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -75,11 +75,11 @@
       {
         "_id": "eddc907c-4b25-412d-a037-26c6f4ed8d1a",
         "name": "Weapon Specialization Solarian",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -87,28 +87,14 @@
         "valueAffected": "basicM"
       },
       {
-        "_id": "0c5a7a26-2bc7-4d20-a568-23f45ee1eee3",
-        "name": "Weapon Specialization Solarian",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
-      },
-      {
         "_id": "7c30373d-0b3b-4fe6-874d-68afaab64519",
         "name": "Weapon Specialization Solarian",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",

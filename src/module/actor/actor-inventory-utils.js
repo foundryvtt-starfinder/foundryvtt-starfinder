@@ -428,10 +428,10 @@ function canMerge(itemA, itemB) {
     }
 
     // Perform deep comparison on item data.
-    const itemDataA = itemA.system.toObject();
+    const itemDataA = foundry.utils.deepClone(itemA.system);
     delete itemDataA.quantity;
 
-    const itemDataB = itemB.system.toObject();
+    const itemDataB = foundry.utils.deepClone(itemB.system);
     delete itemDataB.quantity;
 
     // TODO: Remove all keys that are not template appropriate given the item type, remove all keys that are not shared?
