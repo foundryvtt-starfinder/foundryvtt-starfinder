@@ -68,7 +68,7 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
 
     const itemPromises = [];
     for await (const item of db.getItems()) {
-        const cleanItem = partOfCook ? item : sanitizeJSON(item);
+        const cleanItem = partOfCook ? item : sanitizeJSON(item, partOfCook);
         const jsonOutput = JSONstringifyOrder(cleanItem, 2, "item");
         const filename = sanitize(item.name)
             .replace(/[\s]/g, "_")
