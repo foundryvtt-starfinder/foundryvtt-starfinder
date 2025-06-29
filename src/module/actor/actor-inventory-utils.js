@@ -578,7 +578,7 @@ export async function onCreateItemCollection(message) {
             src: "systems/sfrpg/icons/default/" + SFRPG.defaultItemIcons.container
         },
         hidden: false,
-        locked: true,
+        locked: false,
         disposition: 0,
         flags: {
             "sfrpg": {
