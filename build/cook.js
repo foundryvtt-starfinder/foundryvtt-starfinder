@@ -217,22 +217,12 @@ export async function cook() {
  * @param {Object} jsonInput An object representing the current JSON being unpacked/cooked
  * @returns {Object} A sanitized object
  */
-export function sanitizeJSON(jsonInput, partOfCook = true) {
+export function sanitizeJSON(jsonInput) {
     const manifest = getManifest().file;
 
     const treeShake = (item) => {
         delete item.sort;
         if (!item.folder) delete item.folder;
-
-        if (partOfCook) {
-            item._stats = {
-                coreVersion: manifest.compatibility.minimum,
-                systemId: "sfrpg",
-                systemVersion: manifest.version
-            };
-        } else {
-            delete item._stats;
-        }
 
         delete item.permission;
         delete item.ownership;
@@ -240,6 +230,12 @@ export function sanitizeJSON(jsonInput, partOfCook = true) {
 
         delete item.flags?.exportSource;
         delete item.flags?.sourceId;
+
+        item._stats = {
+            coreVersion: manifest.compatibility.minimum,
+            systemId: "sfrpg",
+            systemVersion: manifest.version
+        };
 
         // Remove leading or trailing spaces
         item.name = item.name.trim();
