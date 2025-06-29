@@ -572,8 +572,9 @@ export async function onCreateItemCollection(message) {
         name: "Item Collection",
         x: payload.position.x,
         y: payload.position.y,
-        // We can make this payload.itemData[0].img to have the image be of the item
-        // If so we should make it also update when you add or remove more items to make it a bag
+        // #TODO - Do we want to make this payload.itemData[0].img to have the image be of the item?
+        // If so we should make it also update when you add or remove more items to make it a container
+        // and also allow dropping the collection straight form the canvas.
         texture: {
             src: "systems/sfrpg/icons/default/" + SFRPG.defaultItemIcons.container
         },
@@ -628,11 +629,11 @@ async function onItemDraggedToCollection(message) {
         const itemIdsToDelete = [data.draggedItemData._id];
 
         const sourceItemData = data.draggedItemData;
-        if (source !== null && sourceItemData.system.container?.contents && sourceItemData.system.container.contents.length > 0) {
+        if (source !== null && sourceItemData.system?.container?.contents && sourceItemData.system.container.contents.length > 0) {
             const containersToTest = [sourceItemData];
             while (containersToTest.length > 0) {
                 const container = containersToTest.shift();
-                const children = source.filterItems(x => container.system.container?.contents.find(y => y.id === x.id));
+                const children = source.filterItems(x => container.system?.container?.contents?.find(y => y.id === x.id));
                 if (children) {
                     for (const child of children) {
                         newItems.push(child);
@@ -655,11 +656,6 @@ async function onItemDraggedToCollection(message) {
         }
     }
 
-    // Seems to be broken you cannot edit a readonly field?
-    // for (const item of newItems) {
-    //     item._id = generateUUID();
-    // }
-
     if (newItems.length > 0) {
         if (targetContainer && targetContainer.system.container?.contents) {
             for (const newItem of newItems) {
@@ -668,7 +664,7 @@ async function onItemDraggedToCollection(message) {
             }
         }
         newItems = items.concat(newItems);
-        // can force updates to the image here potentially. texture.src = "icons/svg/item-bag.svg";
+        // #TODO - This is where we could force updates to the image potentially. texture.src = "systems/sfrpg/icons/default/" + SFRPG.defaultItemIcons.container
         const update = {
             "flags.sfrpg.itemCollection.items": newItems
         };
