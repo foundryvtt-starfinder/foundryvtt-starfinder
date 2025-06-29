@@ -68,7 +68,8 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
 
     const itemPromises = [];
     for await (const item of db.getItems()) {
-        const cleanItem = removeStats(partOfCook ? item : sanitizeJSON(item));
+        const cleanItem = partOfCook ? item : sanitizeJSON(item);
+        removeStats(cleanItem);
         const jsonOutput = JSONstringifyOrder(cleanItem, 2, "item");
         const filename = sanitize(item.name)
             .replace(/[\s]/g, "_")
@@ -133,12 +134,11 @@ export async function unpackPacks(partOfCook = false) {
  * need to be stored.
  *
  * @param {Object} jsonInput An object representing the current JSON being unpacked
- * @returns {Object} A sanitized object
  */
-export async function removeStats(jsonInput) {
+function removeStats(jsonInput) {
     delete jsonInput._stats;
     if (jsonInput.items) {
-        for (const item of items) {
+        for (const item of jsonInput.items) {
             delete item._stats;
         }
     }
