@@ -1,6 +1,6 @@
 {
-  "_id": "QTgRoiJrGQCmiZHO",
-  "name": "Armament of Light (Su)",
+  "_id": "RPyHSxl52JznOmg5",
+  "name": "Physical Presence",
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
@@ -14,14 +14,14 @@
     "activation": {
       "type": "",
       "condition": "",
-      "cost": null
+      "cost": 0
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:photon] Photon Revelation</p>\n<p>Your equipment has been exposed to the glimmering power of photons so thoroughly that you can effortlessly infuse them with light. When you gain an attunement point in photon mode, you can activate one photon revelation that grants one of your wielded weapons a weapon special property (such as @UUID[Compendium.sfrpg.class-features.Item.AJHBDxoH0i3GuKN7]{Luminescent Inquisition (Su)} <sup>COM</sup> or @UUID[Compendium.sfrpg.class-features.Item.PhSbNFa0cr8bKpYf]{Subduing Beams (Su)} <sup>AR</sup>) without spending an action. The revelation must have a level of 8 or lower.</p>"
+      "value": "<p>Your natural physicality causes animals to react to you more deferentially.</p>\n<p><strong>Prerequisites:</strong> Con 11 or Str 11</p><hr /><p><strong>Benefit:</strong> Add your Constitution or Strength modifier (minimum +1) to Survival skill checks to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.UDTsEIldhXTn0VJA#handle-an-animal]{handle} or @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.UDTsEIldhXTn0VJA#ride-a-creature]{ride} an animal or @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.UDTsEIldhXTn0VJA#rear-a-wild-animal-(trained-only)]{rear a wild animal} (in addition to your Wisdom modifier).</p>"
     },
     "descriptors": {
       "acid": false,
@@ -79,43 +79,59 @@
       "water": false
     },
     "details": {
-      "category": "classFeature",
-      "combat": false,
-      "specialAbilityType": "su"
+      "category": "feat",
+      "combat": true,
+      "specialAbilityType": ""
     },
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "94232afb-6770-4a03-88da-9b1ec125b356",
+        "name": "Physical Presence",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 0,
+        "modifier": "max(@abilities.con.mod, @abilities.str.mod)",
+        "modifierType": "formula",
+        "notes": "Add your Constitution or Strength modifier (minimum +1) to Survival skill checks to handle or ride an animal or rear a wild animal (in addition to your Wisdom modifier).",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "sur"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "14th Level (Solarian)",
+    "requirements": "Con 11 or Str 11",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "EN pg. 70",
+    "source": "EN pg. 110",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

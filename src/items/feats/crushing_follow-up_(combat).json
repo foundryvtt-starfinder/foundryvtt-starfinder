@@ -1,27 +1,27 @@
 {
-  "_id": "QTgRoiJrGQCmiZHO",
-  "name": "Armament of Light (Su)",
+  "_id": "2MqhdStPGEVfrHwF",
+  "name": "Crushing Follow-up (Combat)",
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "other",
     "activation": {
       "type": "",
       "condition": "",
-      "cost": null
+      "cost": 0
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +30,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -38,7 +39,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:photon] Photon Revelation</p>\n<p>Your equipment has been exposed to the glimmering power of photons so thoroughly that you can effortlessly infuse them with light. When you gain an attunement point in photon mode, you can activate one photon revelation that grants one of your wielded weapons a weapon special property (such as @UUID[Compendium.sfrpg.class-features.Item.AJHBDxoH0i3GuKN7]{Luminescent Inquisition (Su)} <sup>COM</sup> or @UUID[Compendium.sfrpg.class-features.Item.PhSbNFa0cr8bKpYf]{Subduing Beams (Su)} <sup>AR</sup>) without spending an action. The revelation must have a level of 8 or lower.</p>"
+      "value": "<p>You can bludgeon your foes and send them reeling.</p>\n<p><strong>Prerequisites:</strong> Str 13, base attack bonus +4</p><hr /><p><strong>Benefit:</strong> When you hit with the first attack during a full attack action while wielding a melee weapon that deals bludgeoning damage, you can spend a Resolve Point. If you do, on a hit, your second attack causes your foe to become @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{staggered} for 1 round unless they succeed on a Fortitude Save. The DC is equal to 15 + your base attack bonus.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -79,13 +80,13 @@
       "water": false
     },
     "details": {
-      "category": "classFeature",
-      "combat": false,
-      "specialAbilityType": "su"
+      "category": "feat",
+      "combat": true,
+      "specialAbilityType": ""
     },
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "formula": "",
     "isActive": null,
@@ -94,28 +95,32 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "14th Level (Solarian)",
+    "requirements": "Str 13, base attack bonus +4",
     "rollNotes": "",
     "save": {
-      "type": "",
-      "dc": null,
-      "descriptor": ""
+      "type": "fort",
+      "dc": "15 + @attributes.baseAttackBonus.value",
+      "descriptor": "negate"
     },
-    "source": "EN pg. 70",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "EN pg. 105",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

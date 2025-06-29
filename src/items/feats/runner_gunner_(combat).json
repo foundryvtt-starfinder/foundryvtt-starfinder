@@ -1,6 +1,6 @@
 {
-  "_id": "QTgRoiJrGQCmiZHO",
-  "name": "Armament of Light (Su)",
+  "_id": "h9WBYxQYP1Qut7AA",
+  "name": "Runner Gunner (Combat)",
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
@@ -12,16 +12,16 @@
     "actionTarget": "",
     "actionType": "",
     "activation": {
-      "type": "",
+      "type": "none",
       "condition": "",
-      "cost": null
+      "cost": 0
     },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:photon] Photon Revelation</p>\n<p>Your equipment has been exposed to the glimmering power of photons so thoroughly that you can effortlessly infuse them with light. When you gain an attunement point in photon mode, you can activate one photon revelation that grants one of your wielded weapons a weapon special property (such as @UUID[Compendium.sfrpg.class-features.Item.AJHBDxoH0i3GuKN7]{Luminescent Inquisition (Su)} <sup>COM</sup> or @UUID[Compendium.sfrpg.class-features.Item.PhSbNFa0cr8bKpYf]{Subduing Beams (Su)} <sup>AR</sup>) without spending an action. The revelation must have a level of 8 or lower.</p>"
+      "value": "<p>You are practiced in converting your momentum into deadly efficiency.</p>\n<p><strong>Prerequisites:</strong> Dex 17</p><hr /><p><strong>Benefit:</strong> Once per minute when you use a move action to move at least half your speed toward an enemy, you gain a +1 bonus to your next ranged attack against that enemy. If you move after using a standard action to make a ranged attack, your land speed increases by 5 feet until the end of your turn.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -79,44 +79,75 @@
       "water": false
     },
     "details": {
-      "category": "classFeature",
-      "combat": false,
-      "specialAbilityType": "su"
+      "category": "feat",
+      "combat": true,
+      "specialAbilityType": ""
     },
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "formula": "",
     "isActive": null,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "6e22f55d-ceec-4d3e-948c-34a7d0b6bded",
+        "name": "Runner Gunner (Combat)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "ranged-attacks",
+        "enabled": true,
+        "max": 1,
+        "modifier": "1",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "98431e60-6b0b-46a5-b2f9-465e14029077",
+        "name": "Runner Gunner (Combat)",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "specific-speed",
+        "enabled": true,
+        "max": 5,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "land"
+      }
+    ],
     "properties": {},
     "range": {
       "additional": "",
       "per": "",
-      "units": "",
-      "value": null
+      "units": "none",
+      "value": ""
     },
     "recharge": {
       "charged": false,
       "value": null
     },
-    "requirements": "14th Level (Solarian)",
+    "requirements": "Dex 17",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "EN pg. 70",
+    "source": "EN pg. 111",
     "target": {
       "type": "",
-      "value": null
+      "value": ""
     },
     "uses": {
-      "max": 0,
-      "per": null,
-      "value": 0
+      "max": "",
+      "per": "day",
+      "value": null
     }
   }
 }
