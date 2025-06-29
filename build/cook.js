@@ -103,7 +103,7 @@ export async function cook() {
 
                 if (!limitToPack || directory === limitToPack) {
                 // sanitize the incoming JSON
-                    sanitizeJSON(jsonInput);
+                    sanitizeJSON(jsonInput, true);
 
                     // Fix missing images
                     if (!jsonInput.img && !jsonInput.pages) {
@@ -217,18 +217,22 @@ export async function cook() {
  * @param {Object} jsonInput An object representing the current JSON being unpacked/cooked
  * @returns {Object} A sanitized object
  */
-export function sanitizeJSON(jsonInput) {
+export function sanitizeJSON(jsonInput, partOfCook = true) {
     const manifest = getManifest().file;
 
     const treeShake = (item) => {
         delete item.sort;
         if (!item.folder) delete item.folder;
 
-        item._stats = {
-            coreVersion: manifest.compatibility.minimum,
-            systemId: "sfrpg",
-            systemVersion: manifest.version
-        };
+        if (partOfCook) {
+            item._stats = {
+                coreVersion: manifest.compatibility.minimum,
+                systemId: "sfrpg",
+                systemVersion: manifest.version
+            };
+        } else {
+            delete item._stats;
+        }
 
         delete item.permission;
         delete item.ownership;
