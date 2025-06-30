@@ -569,12 +569,17 @@ export async function onCreateItemCollection(message) {
     }
 
     const createdTokenPromise = canvas.scene.createEmbeddedDocuments("Token", [{
-        name: payload.itemData[0].name,
+        name: "Item Collection",
         x: payload.position.x,
         y: payload.position.y,
-        img: payload.itemData[0].img,
+        // #TODO - Do we want to make this payload.itemData[0].img to have the image be of the item?
+        // If so we should make it also update when you add or remove more items to make it a container
+        // and also allow dropping the collection straight form the canvas.
+        texture: {
+            src: "systems/sfrpg/icons/default/" + SFRPG.defaultItemIcons.container
+        },
         hidden: false,
-        locked: true,
+        locked: false,
         disposition: 0,
         flags: {
             "sfrpg": {
@@ -624,18 +629,18 @@ async function onItemDraggedToCollection(message) {
         const itemIdsToDelete = [data.draggedItemData._id];
 
         const sourceItemData = data.draggedItemData;
-        if (source !== null && sourceItemData.system.container?.contents && sourceItemData.system.container.contents.length > 0) {
+        if (source !== null && sourceItemData.system?.container?.contents && sourceItemData.system.container.contents.length > 0) {
             const containersToTest = [sourceItemData];
             while (containersToTest.length > 0) {
                 const container = containersToTest.shift();
-                const children = source.filterItems(x => container.system.container.contents.find(y => y.id === x.id));
+                const children = source.filterItems(x => container.system?.container?.contents?.find(y => y.id === x.id));
                 if (children) {
                     for (const child of children) {
-                        newItems.push(child.data);
+                        newItems.push(child);
                         itemIdsToDelete.push(child.id);
 
                         if (child.system.container?.contents && child.system.container.contents.length > 0) {
-                            containersToTest.push(child.data);
+                            containersToTest.push(child);
                         }
                     }
                 }
@@ -651,10 +656,6 @@ async function onItemDraggedToCollection(message) {
         }
     }
 
-    for (const item of newItems) {
-        item._id = generateUUID();
-    }
-
     if (newItems.length > 0) {
         if (targetContainer && targetContainer.system.container?.contents) {
             for (const newItem of newItems) {
@@ -663,6 +664,7 @@ async function onItemDraggedToCollection(message) {
             }
         }
         newItems = items.concat(newItems);
+        // #TODO - This is where we could force updates to the image potentially. texture.src = "systems/sfrpg/icons/default/" + SFRPG.defaultItemIcons.container
         const update = {
             "flags.sfrpg.itemCollection.items": newItems
         };
