@@ -418,6 +418,7 @@ export class DiceSFRPG {
     * @param {Object}               data               Parameters passed into the method
     * @param {Event}                [data.event]       The triggering event which initiated the roll
     * @param {DamagePart[]}         data.parts         The dice roll component parts
+    * @param {SFRPGRoll}            linkedAttackRoll   A linked attack roll, passed if damage is automatically rolled with attacks
     * @param {CriticalDamage}       data.criticalData  Critical damage information, in case of a critical hit
     * @param {RollContext}          data.rollContext   The contextual data for this roll
     * @param {String}               data.title         The dice roll UI window title
@@ -427,7 +428,7 @@ export class DiceSFRPG {
     * @param {Object}               data.dialogOptions Modal dialog options
     * @returns {Promise<bool>}                         `true` if roll was performed, `false` if it was canceled
     */
-    static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions }) {
+    static async damageRoll({ event = new Event(''), parts, linkedAttackRoll, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions }) {
         flavor = `${title || ""}${(flavor ? " - " + flavor : "")}`;
 
         if (!rollContext?.isValid()) {
@@ -599,7 +600,7 @@ export class DiceSFRPG {
                 }
             }
 
-            const isCritical = (rollInfo.button === "critical");
+            const isCritical = (rollInfo.button === "critical") || linkedAttackRoll ? DiceSFRPG.isCriticalSuccess(linkedAttackRoll) : false;
             let finalFlavor = foundry.utils.deepClone(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
@@ -785,10 +786,53 @@ export class DiceSFRPG {
 
         const roll = message.rolls[0];
         if (!roll.dice.length) return;
+        if (DiceSFRPG.isCriticalSuccess(roll)) {
+            html.find('.dice-total').addClass('success');
+        }
+        if (DiceSFRPG.isFumble(roll)) {
+            html.find('.dice-total').addClass('failure');
+        }
+    }
+
+    /**
+    * A helper function for determining if a roll was a critical success or not
+    *
+    * @param {Object}       roll        The roll object
+    * @param {Number}       dieSize     The size of the die to look for to  trigger the critical
+    * @param {Number}       critValue   The number needed to roll at or above to trigger the critical
+    * @returns {Boolean}                `true` if a critical success, `false` otherwise
+    */
+    static isCriticalSuccess(roll, dieSize = 20, critValue = 20) {
+        if (!roll.dice.length) {
+            return false;
+        }
         for (const d of roll.dice) {
-            if (d.faces === 20 && d.results.length === 1) {
-                if (d.total >= (d.options.critical || 20)) html.find('.dice-total').addClass('success');
-                else if (d.total <= (d.options.fumble || 1)) html.find('.dice-total').addClass('failure');
+            if (d.faces === dieSize && d.results.length === 1) {
+                if (d.total >= (d.options.critical || critValue)) {
+                    return true;
+                }
+            }
+        }
+    }
+
+    /**
+    * A helper function for determining if a roll was a fumble or not
+    *
+    * @param {Object}       roll        The roll object
+    * @param {Number}       dieSize     The size of the die to look for to  trigger the fumble
+    * @param {Number}       critValue   The number needed to roll at or below to trigger the fumble
+    * @returns {Boolean}                `true` if a fumble, `false` otherwise
+    */
+    static isFumble(roll, dieSize = 20, critValue = 1) {
+        if (!roll.dice.length) {
+            return false;
+        }
+
+        for (const d of roll.dice) {
+            if (d.faces === dieSize && d.results.length === 1) {
+                if (d.total <= (d.options.fumble || critValue)) {
+                    return true;
+                }
             }
         }
     }

@@ -1081,7 +1081,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
         if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
-            this.rollDamage({});
+            this.rollDamage({}, {linkedAttackRoll: roll});
         }
     }
 
@@ -1351,6 +1351,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         return DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
+            linkedAttackRoll: options.linkedAttackRoll ?? false,
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
