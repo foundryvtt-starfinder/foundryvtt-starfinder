@@ -19,7 +19,7 @@ export default function(engine) {
 
                 let dcFormula = skillCheck.dc?.toString();
                 if (!dcFormula) {
-                    const ownerKeyAbilityId = actorData?.attributes.keyability || classes[0]?.system.kas;
+                    const ownerKeyAbilityId = classes[0]?.system.kas ?? false; // TODO-Ian key ability selector appearance
                     const itemKeyAbilityId = data.ability;
 
                     const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
