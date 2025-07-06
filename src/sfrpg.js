@@ -80,6 +80,9 @@ import { getStarshipBrowser } from "./module/packs/starship-browser.js";
 import { SFRPGTokenHUD } from './module/token/token-hud.js';
 import isObject from './module/utils/is-object.js';
 
+// Import DataModel classes
+import * as models from './module/data/_module.mjs';
+
 const { Actors, Items } = foundry.documents.collections;
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 
@@ -215,6 +218,11 @@ Hooks.once('init', async function() {
     CONFIG.Canvas.layers.templates.layerClass = TemplateLayerSFRPG;
     CONFIG.MeasuredTemplate.objectClass = MeasuredTemplateSFRPG;
     CONFIG.MeasuredTemplate.defaults.angle = 90; // SF uses 90 degree cones
+
+    // DataModels definition
+    CONFIG.Item.dataModels = {
+        armor: models.SFRPGItemArmor
+    };
 
     //   CONFIG.ui.hotbar = HotbarSFRPG;
 

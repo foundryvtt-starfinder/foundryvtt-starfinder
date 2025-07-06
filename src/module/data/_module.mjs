@@ -10,4 +10,4 @@ export { default as SFRPGVehicle } from './actor/actor-vehicle.mjs';
 
 // Export Items
 export { default as SFRPGItemBase } from './item/base-item.mjs';
-export { default as SFRPGArmor } from './item-armor.mjs';
+export { default as SFRPGItemArmor } from './item/item-armor.mjs';

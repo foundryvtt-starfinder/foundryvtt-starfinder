@@ -25,21 +25,25 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
             actionType: new fields.StringField(),
             attackBonus: new fields.NumberField(),
             chatFlavor: new fields.StringField(),
+            critical: new fields.SchemaField({
+                effect: new fields.StringField(),
+                parts: new fields.ArrayField(
+                    new fields.NumberField()
+                ) // Might require a custom damage part field as the element?
+            }),
+            damage: new fields.SchemaField({
+                parts: new fields.ArrayField(
+                    new fields.NumberField()
+                ) // Might require a custom damage part field as the element?
+            }),
             damageNotes: new fields.StringField(),
             descriptors: new fields.ObjectField(),
             formula: new fields.StringField(),
             rollNotes: new fields.StringField(),
             properties: new fields.ObjectField(),
-            critical: new fields.SchemaField({
-                effect: new fields.StringField(),
-                parts: new fields.ArrayField() // Might require a custom damage part field as the element?
-            }),
-            damage: new fields.SchemaField({
-                parts: new fields.ArrayField() // Might require a custom damage part field as the element?
-            }),
             save: new fields.SchemaField({
-                dc: fields.StringField(),
-                descriptor: fields.StringField(),
+                dc: new fields.StringField(),
+                descriptor: new fields.StringField(),
                 type: new fields.StringField()
             })
         };
@@ -144,7 +148,9 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
     static modifiersTemplate() {
         const fields = foundry.data.fields;
         return {
-            modifiers: new fields.ArrayField() // Might require a custom ModifierField
+            modifiers: new fields.ArrayField(
+                new fields.NumberField()
+            ) // Might require a custom ModifierField
         };
     }
 
@@ -171,12 +177,14 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
             }),
             attuned: new fields.BooleanField(),
             bulk: new fields.StringField({initial: "L"}),
-            equippable: new fields.BooleanField(),
-            equipped: new fields.BooleanField(),
+            equippable: new fields.BooleanField({initial: true}),
+            equipped: new fields.BooleanField({initial: false}),
             equippedBulkMultiplier: new fields.NumberField({initial: 1}),
-            identified: new fields.BooleanField(),
+            identified: new fields.BooleanField({initial: true}),
+            isEquipment: new fields.BooleanField({initial: true}),
             level: new fields.NumberField({initial: 1}),
             price: new fields.NumberField({min: 0}),
+            proficient: new fields.BooleanField(),
             quantity: new fields.NumberField({initial: 1, min: 0}),
             quantityPerPack: new fields.NumberField({initial: 1, min: 1})
         };
