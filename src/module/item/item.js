@@ -250,6 +250,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /**
      * Check to ensure that this item has a modifiers data object set, if not then set it.
      * These will always be needed from hence forth, so we'll just make sure that they always exist.
+     * TODO: Once DataModels are implemented, this might not be needed. Just make sure modifiers `required` property is true.
      *
      * @param {Object}      data The item data to check against.
      * @param {String|Null} prop A specific property name to check.

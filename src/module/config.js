@@ -174,7 +174,10 @@ SFRPG.currencies = {
     "bp": "SFRPG.Currencies.BPs"
 };
 
-// Damage Types
+/**
+ * The valid energy damage types in SFRPG
+ * @type {Object}
+ */
 SFRPG.energyDamageTypes = {
     "acid": "SFRPG.Damage.Types.Acid",
     "cold": "SFRPG.Damage.Types.Cold",
@@ -183,12 +186,56 @@ SFRPG.energyDamageTypes = {
     "sonic": "SFRPG.Damage.Types.Sonic"
 };
 
+/**
+ * The valid kinetic damage types in SFRPG
+ * @type {Object}
+ */
 SFRPG.kineticDamageTypes = {
     "bludgeoning": "SFRPG.Damage.Types.Bludgeoning",
     "piercing": "SFRPG.Damage.Types.Piercing",
     "slashing": "SFRPG.Damage.Types.Slashing"
 };
 
+/**
+ * Valid damage types that are not kinetic or energy in SFRPG
+ * @type {Object}
+ */
+SFRPG.otherDamageTypes = {
+    "radiation": "SFRPG.Damage.Types.Radiation",
+    "nonlethal": "SFRPG.Damage.Types.Nonlethal"
+};
+
+/**
+ * All valid damage types in SFRPG
+ * @type {Object}
+ */
+SFRPG.damageTypes = {
+    ...SFRPG.energyDamageTypes,
+    ...SFRPG.kineticDamageTypes,
+    ...SFRPG.otherDamageTypes
+};
+
+/**
+ * The valid healing types in SFRPG
+ * @type {Object}
+ */
+SFRPG.healingTypes = {
+    "healing": "SFRPG.HealingTypesHealing"
+};
+
+/**
+ * Combined list of all valid damage and healing types in SFRPG
+ * @type {Object}
+ */
+SFRPG.damageAndHealingTypes = {
+    ...SFRPG.damageTypes,
+    ...SFRPG.healingTypes
+};
+
+/**
+ * Conversions between damage types and an acronym representation
+ * @type {Object}
+ */
 SFRPG.damageTypeToAcronym = {
     "acid": "A",
     "cold": "C",
@@ -198,13 +245,6 @@ SFRPG.damageTypeToAcronym = {
     "bludgeoning": "B",
     "piercing": "P",
     "slashing": "S"
-};
-
-SFRPG.damageTypes = {
-    ...SFRPG.energyDamageTypes,
-    ...SFRPG.kineticDamageTypes,
-    "radiation": "SFRPG.Damage.Types.Radiation",
-    "nonlethal": "SFRPG.Damage.Types.Nonlethal"
 };
 
 SFRPG.damageTypeOperators = {
@@ -395,11 +435,6 @@ SFRPG.durationTypes = {
 SFRPG.targetTypes = {};
 
 SFRPG.timePeriods = {};
-
-// Healing types
-SFRPG.healingTypes = {
-    "healing": "SFRPG.HealingTypesHealing"
-};
 
 SFRPG.spellPreparationModes = {
     "always": "SFRPG.SpellPreparationModesAlways",
@@ -2158,6 +2193,26 @@ SFRPG.containableTypes = {
     "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories",
     "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
     "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
+};
+
+SFRPG.storageIdentifiers = {
+    ""              : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierItem",
+    "armorUpgrade"  : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierArmorUpgrade",
+    "weaponSlot"    : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierWeaponSlot",
+    "fusion"        : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierFusion",
+    "spellSlot"     : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierSpellSlot",
+    "ammunitionSlot": "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierAmmunitionSlot"
+};
+
+SFRPG.storageTypes = {
+    "slot": "SFRPG.ActorSheet.Inventory.Container.StorageTypeSlot",
+    "bulk": "SFRPG.ActorSheet.Inventory.Container.StorageTypeBulk"
+};
+
+SFRPG.storageWeightProperties = {
+    ""     : "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyItems",
+    "slots": "SFRPG.ActorSheet.Inventory.Container.CapacityPropertySlots",
+    "level": "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyLevel"
 };
 
 SFRPG.combatTypes = [
