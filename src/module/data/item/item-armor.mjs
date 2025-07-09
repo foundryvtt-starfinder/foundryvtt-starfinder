@@ -1,11 +1,6 @@
 import SFRPGItemBase from './base-item.mjs';
 
 export default class SFRPGItemArmor extends SFRPGItemBase {
-    static LOCALIZATION_PREFIXES = [
-        'SFRPG.Item.Base',
-        'SFROG.Item.Armor'
-    ];
-
     static defineSchema() {
         const fields = foundry.data.fields;
         const schema = super.defineSchema();
@@ -32,7 +27,9 @@ export default class SFRPGItemArmor extends SFRPGItemBase {
                 speedAdjust: new fields.NumberField()
             }),
             strength: new fields.NumberField(),
-            speed: new fields.StringField(),
+            speed: new fields.SchemaField(
+                SFRPGItemBase.speedTemplate()
+            ),
             reach: new fields.StringField()
         });
 

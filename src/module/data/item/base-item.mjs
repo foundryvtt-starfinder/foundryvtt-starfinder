@@ -333,6 +333,30 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
         };
     }
 
+    static speedTemplate() {
+        const fields = foundry.data.fields;
+        return {
+            land: new fields.SchemaField({
+                base: new fields.NumberField({initial: 0, min: 0})
+            }),
+            flying: new fields.SchemaField({
+                base: new fields.NumberField({initial: 0, min: 0}),
+                baseManeuverability: new fields.NumberField({initial: 0, min: 0})
+            }),
+            swimming: new fields.SchemaField({
+                base: new fields.NumberField({initial: 0, min: 0})
+            }),
+            burrowing: new fields.SchemaField({
+                base: new fields.NumberField({initial: 0, min: 0})
+            }),
+            climbing: new fields.SchemaField({
+                base: new fields.NumberField({initial: 0, min: 0})
+            }),
+            special: new fields.StringField(),
+            mainMovement: new fields.StringField({initial: "land"})
+        };
+    }
+
     static starshipComponentTemplate() {
         const fields = foundry.data.fields;
         return {
