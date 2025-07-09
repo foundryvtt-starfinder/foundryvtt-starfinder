@@ -1,6 +1,12 @@
 import SFRPGItemBase from './base-item.mjs';
 
 export default class SFRPGItemArmor extends SFRPGItemBase {
+
+    static LOCALIZATION_PREFIXES = [
+        'SFRPG.Item.Base',
+        'SFRPG.Item.Armor'
+    ];
+
     static defineSchema() {
         const fields = foundry.data.fields;
         const schema = super.defineSchema();

@@ -1,8 +1,10 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../modifiers/types.js";
+// import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../modifiers/types.js";
+import SFRPGModifier from "../../modifiers/modifier.js";
+
+const { fields } = foundry.data;
 
 export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
     static defineSchema() {
-        const fields = foundry.data.fields;
         const schema = {};
 
         schema.description = new fields.SchemaField({
@@ -20,7 +22,6 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
     }
 
     static actionTemplate() {
-        const fields = foundry.data.fields;
         return {
             ability: new fields.StringField(),
             actionTarget: new fields.StringField(),
@@ -58,7 +59,6 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
     }
 
     static activatedEffectTemplate() {
-        const fields = foundry.data.fields;
         return {
             activation: new fields.SchemaField({
                 cost: new fields.NumberField(),
@@ -96,7 +96,6 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
     }
 
     static containerTemplate() {
-        const fields = foundry.data.fields;
         return {
             container: new fields.SchemaField({
                 contents: new fields.ArrayField(
@@ -122,7 +121,6 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
     }
 
     static damagePartTemplate() {
-        const fields = foundry.data.fields;
         return {
             name: new fields.StringField(),
             formula: new fields.StringField(),
@@ -141,30 +139,7 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
         };
     }
 
-    static modifierDamageTemplate() {
-        const fields = foundry.data.fields;
-        return {
-            damageGroup: new fields.NumberField({
-                initial: null,
-                required: false,
-                nullable: true,
-                integer: true
-            }),
-            damageTypes: new fields.SchemaField(
-                [
-                    ...Object.keys(CONFIG.SFRPG.energyDamageTypes),
-                    ...Object.keys(CONFIG.SFRPG.kineticDamageTypes)
-                ].reduce((obj, type) => {
-                    obj[type] = new fields.BooleanField({ initial: false, required: false });
-                    return obj;
-                }, {}),
-                { required: false }
-            )
-        };
-    }
-
     static itemDurationTemplate() {
-        const fields = foundry.data.fields;
         return {
             activeDuration: new SchemaField({
                 activationTime: new fields.NumberField(),
@@ -181,7 +156,6 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
     }
 
     static itemUsageTemplate() {
-        const fields = foundry.data.fields;
         return {
             ammunitionType: new fields.StringField(),
             capacity: new fields.SchemaField({
@@ -196,102 +170,14 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
     }
 
     static modifiersTemplate() {
-        const fields = foundry.data.fields;
         return {
             modifiers: new fields.ArrayField(
-                new fields.SchemaField(SFRPGItemBase.modifierTemplate())
+                new fields.EmbeddedDataField(SFRPGModifier)
             )
         };
     }
 
-    static modifierTemplate() {
-        const fields = foundry.data.fields;
-        return {
-            _id: new fields.StringField({ initial: "", required: true, readonly: false }),
-            name: new fields.StringField({
-                initial: "New Modifier",
-                required: false,
-                blank: false,
-                label: "SFRPG.ModifierNameLabel",
-                hint: "SFRPG.ModifierNameTooltip"
-            }),
-            modifier: new fields.StringField({
-                initial: "0",
-                required: true,
-                label: "SFRPG.ModifierModifierLabel",
-                hint: "SFRPG.ModifierModifierTooltip"
-            }),
-            max: new fields.NumberField({ initial: 0, integer: true, required: false }),
-            type: new fields.StringField({
-                initial: SFRPGModifierTypes.UNTYPED,
-                required: false,
-                choices: Object.values(SFRPGModifierTypes),
-                label: "SFRPG.ModifierTypeLabel",
-                hint: "SFRPG.ModifierTypeTooltip"
-            }),
-            modifierType: new fields.StringField({
-                initial: SFRPGModifierType.CONSTANT,
-                required: true,
-                choices: Object.values(SFRPGModifierType).concat("damageSection"),
-                label: "SFRPG.ModifierModifierTypeLabel",
-                hint: "SFRPG.ModifierModifierTypeTooltip"
-            }),
-            effectType: new fields.StringField({
-                initial: SFRPGEffectType.SKILL,
-                required: true,
-                choices: Object.values(SFRPGEffectType),
-                label: "SFRPG.ModifierEffectTypeLabel",
-                hint: "SFRPG.ModifierEffectTypeTooltip"
-            }),
-            valueAffected: new fields.StringField({
-                initial: "",
-                required: false,
-                blank: true,
-                label: "SFRPG.ModifierValueAffectedLabel",
-                hint: "SFRPG.ModifierValueAffectedTooltip"
-            }),
-            enabled: new fields.BooleanField({
-                initial: false,
-                required: true,
-                label: "SFRPG.ModifierEnabledLabel",
-                hint: "SFRPG.ModifierEnabledTooltip"
-            }),
-            source: new fields.StringField({
-                initial: "",
-                required: false,
-                label: "SFRPG.ModifierSourceLabel",
-                hint: "SFRPG.ModifierSourceTooltip"
-            }),
-            notes: new fields.HTMLField({
-                initial: "",
-                required: false,
-                label: "SFRPG.ModifierNotesLabel",
-                hint: "SFRPG.ModifierNotesTooltip"
-            }),
-            subtab: new fields.StringField({
-                initial: "misc",
-                required: false,
-                choices: ["permanent", "temporary", "misc", "condition"]
-            }),
-            condition: new fields.StringField({ initial: "", required: false }),
-            damage: new fields.SchemaField(
-                SFRPGItemBase.modifierDamageTemplate(),
-                { required: false, nullable: true }
-            ),
-            limitTo: new fields.StringField({
-                initial: "",
-                required: false,
-                nullable: true,
-                blank: true,
-                choices: ["", "parent", "container"],
-                label: "SFRPG.ModifierLimitToLabel",
-                hint: "SFRPG.ModifierLimitToTooltip"
-            })
-        };
-    }
-
     static physicalItemTemplate() {
-        const fields = foundry.data.fields;
         return {
             attributes: new fields.SchemaField({
                 ac: new fields.SchemaField({
@@ -327,14 +213,12 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
     }
 
     static specialMaterialsTemplate() {
-        const fields = foundry.data.fields;
         return {
             specialMaterials: new fields.ObjectField()
         };
     }
 
     static speedTemplate() {
-        const fields = foundry.data.fields;
         return {
             land: new fields.SchemaField({
                 base: new fields.NumberField({initial: 0, min: 0})
@@ -358,7 +242,6 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
     }
 
     static starshipComponentTemplate() {
-        const fields = foundry.data.fields;
         return {
             cost: new fields.NumberField(),
             costMultipliedBySize: new fields.BooleanField,
