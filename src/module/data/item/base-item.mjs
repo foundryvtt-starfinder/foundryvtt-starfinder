@@ -1,4 +1,3 @@
-// import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../modifiers/types.js";
 import SFRPGModifier from "../../modifiers/modifier.js";
 
 const { fields } = foundry.data;
@@ -23,18 +22,49 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
 
     static actionTemplate() {
         return {
-            ability: new fields.StringField(),
-            actionTarget: new fields.StringField(),
-            actionType: new fields.StringField(),
-            attackBonus: new fields.NumberField(),
-            chatFlavor: new fields.StringField(),
+            ability: new fields.StringField({
+                initial: "",
+                required: false,
+                choices: ["", ...Object.keys(CONFIG.SFRPG.abilities)],
+                blank: true,
+                label: "SFRPG.Items.Action.AbilityModifier"
+            }),
+            actionTarget: new fields.StringField({
+                initial: "",
+                required: false,
+                choices: Object.keys(CONFIG.SFRPG.actionTargets),
+                blank: true,
+                label: "SFRPG.Items.Action.ActionTarget.Title",
+                hint: "SFRPG.Items.Action.ActionTarget.Tooltip"
+            }),
+            actionType: new fields.StringField({
+                initial: "",
+                required: false,
+                choices: ["", ...Object.keys(CONFIG.SFRPG.itemActionTypes)],
+                blank: true,
+                label: "SFRPG.Items.Action.ActionType"
+            }),
+            attackBonus: new fields.NumberField({
+                initial: null,
+                nullable: true,
+                required: false,
+                label: "SFRPG.Items.Action.AttackRollBonus"
+            }),
+            chatFlavor: new fields.StringField({
+                required: false,
+                label: "SFRPG.Items.Action.ChatMessageFlavor"
+            }),
             critical: new fields.SchemaField({
-                effect: new fields.StringField(),
+                effect: new fields.StringField({
+                    required: false,
+                    label: "SFRPG.Items.Action.CriticalEffect"
+                }),
                 parts: new fields.ArrayField(
                     new fields.SchemaField(
                         SFRPGItemBase.damagePartTemplate(),
                         { required: false, nullable: true }
-                    )
+                    ),
+                    {required: true, nullable: true}
                 )
             }),
             damage: new fields.SchemaField({
@@ -42,18 +72,48 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
                     new fields.SchemaField(
                         SFRPGItemBase.damagePartTemplate(),
                         { required: false, nullable: true }
-                    )
+                    ),
+                    {required: true, nullable: true}
                 )
             }),
-            damageNotes: new fields.StringField(),
-            descriptors: new fields.ObjectField(),
-            formula: new fields.StringField(),
-            rollNotes: new fields.StringField(),
-            properties: new fields.ObjectField(),
+            damageNotes: new fields.StringField({
+                required: false,
+                label: "SFRPG.Items.Action.DamageNotes",
+                hint: "SFRPG.Items.Action.DamageNotesTooltip"
+            }),
+            descriptors: new fields.ObjectField(), // detail this type more
+            formula: new fields.StringField({
+                initial: true,
+                required: true,
+                label: "SFRPG.Items.Action.DamageFormula",
+                hint: "SFRPG.Items.Action.DamageFormulaTooltip"
+            }),
+            rollNotes: new fields.StringField({
+                required: false,
+                label: "SFRPG.Items.Action.DamageFormula",
+                hint: "SFRPG.Items.Action.DamageFormulaTooltip"
+            }),
+            properties: new fields.ObjectField(), // detail this type more
             save: new fields.SchemaField({
-                dc: new fields.StringField(),
-                descriptor: new fields.StringField(),
-                type: new fields.StringField()
+                dc: new fields.StringField({
+                    initial: ""
+                }),
+                descriptor: new fields.StringField({
+                    initial: "",
+                    choices: ["", ...Object.keys(CONFIG.SFRPG.saveDescriptors)],
+                    blank: true,
+                    label: "SFRPG.SaveDescriptor"
+                }),
+                type: new fields.StringField({
+                    initial: "",
+                    choices: ["", ...Object.keys(CONFIG.SFRPG.saves)],
+                    blank: true,
+                    label: "SFRPG.Save"
+                })
+            }, {
+                required: true,
+                nullable: true,
+                label: "SFRPG.Items.Action.SavingThrow"
             })
         };
     }
@@ -61,36 +121,102 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
     static activatedEffectTemplate() {
         return {
             activation: new fields.SchemaField({
-                cost: new fields.NumberField(),
-                condition: new fields.StringField(),
-                type: new fields.StringField()
+                cost: new fields.NumberField({
+                    initial: null,
+                    min: 0,
+                    nullable: true,
+                    required: false,
+                    label: "SFRPG.Items.Activation.ActivationCost"
+                }),
+                condition: new fields.StringField({
+                    required: false,
+                    label: "SFRPG.Items.Activation.ActivationCondition"
+                }),
+                type: new fields.StringField({
+                    initial: "none",
+                    choices: Object.keys(CONFIG.SFRPG.abilityActivationTypes),
+                    blank: true,
+                    required: true,
+                    label: "SFRPG.Items.Activation.Activation"
+                })
+            }, {
+                required: true,
+                label: "SFRPG.Items.Activation.Activation"
             }),
             area: new fields.SchemaField({
-                effect: new fields.StringField(),
+                effect: new fields.StringField({
+                    initial: "",
+                    choices: Object.keys(CONFIG.SFRPG.spellAreaEffects),
+                    blank: true
+                }),
                 shapable: new fields.BooleanField(),
-                shape: new fields.StringField(),
-                units: new fields.StringField(),
-                value: new fields.NumberField() // TODO-Ian Might be a string?
+                shape: new fields.StringField({
+                    initial: "",
+                    choices: Object.keys(CONFIG.SFRPG.spellAreaShapes),
+                    blank: true
+                }),
+                units: new fields.StringField({
+                    initial: "",
+                    choices: Object.keys(CONFIG.SFRPG.variableDistanceUnits),
+                    blank: true
+                }),
+                value: new fields.StringField({initial: ""})
+            }, {
+                required: false,
+                label: "SFRPG.Items.Activation.Area"
             }),
             duration: new fields.SchemaField({
-                units: new fields.StringField(),
+                units: new fields.StringField({
+                    initial: "",
+                    choices: ["", ...Object.keys(CONFIG.SFRPG.effectDurationTypes)],
+                    blank: true
+                }),
                 value: new fields.StringField()
+            }, {
+                required: true,
+                label: "SFRPG.Items.Activation.Duration"
             }),
             isActive: new fields.BooleanField(),
             range: new fields.SchemaField({
-                additional: new fields.StringField(),
-                per: new fields.StringField(),
-                units: new fields.StringField(),
-                value: new fields.StringField()
+                units: new fields.StringField({
+                    initial: "",
+                    choices: ["", CONFIG.SFRPG.distanceUnits],
+                    blank: true,
+                    required: true
+                }),
+                total: new fields.NumberField({
+                    min: 0,
+                    nullable: true,
+                    required: false
+                }),
+                value: new fields.StringField({
+                    required: false
+                })
+            }, {
+                required: true,
+                label: "SFRPG.Items.Activation.Range"
             }),
             target: new fields.SchemaField({
-                type: new fields.StringField(),
-                value: new fields.StringField()
+                value: new fields.StringField({nullable: true})
+            }, {
+                required: true,
+                label: "SFRPG.Items.Activation.Target"
             }),
             uses: new fields.SchemaField({
-                max: new fields.StringField(),
-                per: new fields.StringField(),
+                max: new fields.StringField({nullable: true}),
+                per: new fields.StringField({
+                    initial: "",
+                    choices: ["", ...Object.keys(CONFIG.SFRPG.capacityUsagePer)],
+                    blank: true
+                }),
+                total: new fields.NumberField({
+                    nullable: true,
+                    required: false
+                }),
                 value: new fields.NumberField({min: 0})
+            }, {
+                required: true,
+                label: "SFRPG.Items.Activation.LimitedUses"
             })
         };
     }
