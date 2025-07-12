@@ -45,7 +45,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
             if (!obj.limitTo) delete obj.limitTo;
             return obj;
         }
-        return super.toObject(this);
+        return this.constructor.schema.toObject(this);
     }
 
     // Remove empty optional data
