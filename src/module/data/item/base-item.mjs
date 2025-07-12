@@ -185,11 +185,6 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
                     blank: true,
                     required: true
                 }),
-                total: new fields.NumberField({
-                    min: 0,
-                    nullable: true,
-                    required: false
-                }),
                 value: new fields.StringField({
                     required: false
                 })
@@ -209,10 +204,6 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
                     initial: "",
                     choices: ["", ...Object.keys(CONFIG.SFRPG.capacityUsagePer)],
                     blank: true
-                }),
-                total: new fields.NumberField({
-                    nullable: true,
-                    required: false
                 }),
                 value: new fields.NumberField({min: 0})
             }, {
@@ -345,38 +336,81 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
         };
     }
 
-    static physicalItemTemplate() {
+    static physicalItemTemplate(isEquippable = false, isEquipment = true) {
         return {
             attributes: new fields.SchemaField({
                 ac: new fields.SchemaField({
-                    value: new fields.StringField({required: true})
+                    value: new fields.StringField({
+                        initial: ""
+                    })
                 }),
-                customBuilt: new fields.BooleanField(),
+                customBuilt: new fields.BooleanField({
+                    initial: false
+                }),
                 dex: new fields.SchemaField({
-                    mod: new fields.StringField({required: true})
+                    mod: new fields.StringField({
+                        initial: "",
+                        required: true
+                    })
                 }),
                 hardness: new fields.SchemaField({
-                    value: new fields.StringField({required: true})
+                    value: new fields.StringField({
+                        initial: ""
+                    })
                 }),
                 hp: new fields.SchemaField({
-                    max: new fields.StringField({required: true}),
-                    value: new fields.NumberField({min: 0, required: true})
+                    max: new fields.StringField({
+                        initial: "",
+                        required: true
+                    }),
+                    value: new fields.NumberField({
+                        initial: null,
+                        nullable: true,
+                        min: 0,
+                        required: true
+                    })
                 }),
-                size: new fields.StringField({initial: "medium"}),
-                sturdy: new fields.BooleanField()
+                size: new fields.StringField({
+                    initial: "medium",
+                    required: true,
+                    choices: CONFIG.SFRPG.itemSizes
+                }),
+                sturdy: new fields.BooleanField({
+                    initial: false
+                })
             }),
-            attuned: new fields.BooleanField(),
-            bulk: new fields.StringField({initial: "L"}),
-            equippable: new fields.BooleanField({initial: true}),
+            attuned: new fields.BooleanField({initial: false}),
+            bulk: new fields.StringField({
+                initial: "L",
+                required: true
+            }),
+            equippable: new fields.BooleanField({initial: isEquippable}),
             equipped: new fields.BooleanField({initial: false}),
-            equippedBulkMultiplier: new fields.NumberField({initial: 1}),
+            equippedBulkMultiplier: new fields.NumberField({initial: 1, min: 0}),
             identified: new fields.BooleanField({initial: true}),
-            isEquipment: new fields.BooleanField({initial: true}),
-            level: new fields.NumberField({initial: 1}),
-            price: new fields.NumberField({min: 0}),
-            proficient: new fields.BooleanField(),
-            quantity: new fields.NumberField({initial: 1, min: 0}),
-            quantityPerPack: new fields.NumberField({initial: 1, min: 1})
+            isEquipment: new fields.BooleanField({initial: isEquipment}),
+            level: new fields.NumberField({
+                initial: 1,
+                min: 0,
+                required: true
+            }),
+            price: new fields.NumberField({
+                initial: null,
+                min: 0,
+                nullable: true,
+                required: true
+            }),
+            proficient: new fields.BooleanField({initial: false}),
+            quantity: new fields.NumberField({
+                initial: 1,
+                min: 0,
+                required: true
+            }),
+            quantityPerPack: new fields.NumberField({
+                initial: 1,
+                min: 1,
+                required: true
+            })
         };
     }
 
@@ -386,26 +420,27 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
         };
     }
 
+    // TODO: Update all speeds to use this version of the template once migrations are implemented
     static speedTemplate() {
         return {
             land: new fields.SchemaField({
-                base: new fields.NumberField({initial: 0, min: 0})
+                base: new fields.NumberField({initial: 0, min: 0, required: true})
             }),
             flying: new fields.SchemaField({
-                base: new fields.NumberField({initial: 0, min: 0}),
-                baseManeuverability: new fields.NumberField({initial: 0, min: 0})
+                base: new fields.NumberField({initial: 0, min: 0, required: true}),
+                baseManeuverability: new fields.NumberField({initial: 0, min: 0, required: true})
             }),
             swimming: new fields.SchemaField({
-                base: new fields.NumberField({initial: 0, min: 0})
+                base: new fields.NumberField({initial: 0, min: 0, required: true})
             }),
             burrowing: new fields.SchemaField({
-                base: new fields.NumberField({initial: 0, min: 0})
+                base: new fields.NumberField({initial: 0, min: 0, required: true})
             }),
             climbing: new fields.SchemaField({
-                base: new fields.NumberField({initial: 0, min: 0})
+                base: new fields.NumberField({initial: 0, min: 0, required: true})
             }),
-            special: new fields.StringField(),
-            mainMovement: new fields.StringField({initial: "land"})
+            special: new fields.StringField({initial: "", required: true}),
+            mainMovement: new fields.StringField({initial: "land", required: true})
         };
     }
 
