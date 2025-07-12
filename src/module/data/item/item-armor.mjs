@@ -27,7 +27,7 @@ export default class SFRPGItemArmor extends SFRPGItemBase {
             armor: new fields.SchemaField({
                 type: new fields.StringField({
                     initial: "light",
-                    choices: ["", CONFIG.SFRPG.armorTypes],
+                    choices: ["", ...Object.keys(CONFIG.SFRPG.armorTypes)],
                     blank: true,
                     required: true
                 }),
