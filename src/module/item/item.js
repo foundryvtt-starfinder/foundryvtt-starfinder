@@ -1000,13 +1000,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             parts: parts,
             actorContextKey: "owner",
             rollContext: rollContext,
-<<<<<<< damage-updates
             title: game.i18n.format("SFRPG.Rolls.AttackRoll"),
-            flavor: await TextEditor.enrichHTML(this.system?.chatFlavor, {
-=======
-            title: title,
             flavor: await foundry.applications.ux.TextEditor.enrichHTML(this.system?.chatFlavor, {
->>>>>>> development
                 async: true,
                 rollData: this.actor.getRollData() ?? {},
                 secrets: this.isOwner
@@ -1444,13 +1439,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             parts: parts,
             criticalData: itemData.critical,
             rollContext: rollContext,
-<<<<<<< damage-updates
             title: isHealing ? game.i18n.localize("SFRPG.Rolls.HealingRoll") : game.i18n.localize("SFRPG.Rolls.DamageRoll"),
-            flavor: await TextEditor.enrichHTML(options?.flavorOverride || itemData.chatFlavor, {
-=======
-            title: title,
             flavor: await foundry.applications.ux.TextEditor.enrichHTML(options?.flavorOverride || itemData.chatFlavor, {
->>>>>>> development
                 async: true,
                 rollData: this.actor.getRollData() ?? {},
                 secrets: this.isOwner
