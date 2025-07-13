@@ -253,7 +253,7 @@ export class DiceSFRPG {
 
             if (chatMessage) {
                 // Push the roll to the ChatBox
-                const customData = {
+                const chatMessageData = {
                     title: title,
                     flavor: flavor,
                     rollContext,
@@ -267,7 +267,7 @@ export class DiceSFRPG {
                     tags: tags
                 };
 
-                SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
+                SFRPGCustomChatMessage.renderStandardRoll(roll, chatMessageData);
             }
 
             if (onClose) {
@@ -404,12 +404,17 @@ export class DiceSFRPG {
             return false;
         }
 
-        // If the cancel button is not clicked, evaluate the damage roll and generate tags and html data for the chat card
+        // Check if critical button was pressed, update title if so
         const isCritical = (rollInfo.button === "critical");
+        if (isCritical) {
+            title = `${game.i18n.localize("SFRPG.Critical")} ${title}`;
+        }
 
+        // If the cancel button is not clicked, evaluate the damage roll and generate tags and html data for the chat card
         for (const rollInstance of rollInfo.rolls) {
             const finalFormula = rollInstance.formula;
             const part = rollInstance.node;
+            let partTitle = title;
             const tags = [];
             const htmlDataFields = [{ name: "is-damage", value: "true" }];
 
@@ -423,15 +428,15 @@ export class DiceSFRPG {
             }
 
             // Generate flavor text and critical information for chat cards
-            const flavorText = await this._prepareFlavorText(
-                tags,
-                htmlDataFields,
-                isCritical,
-                criticalData,
-                finalFormula,
-                part,
-                `${title || ""}${(flavor ? " - " + flavor : "")}`
-            );
+            const partFlavor = await this._prepareFlavorText(tags, htmlDataFields, isCritical, criticalData, finalFormula, part, flavor);
+
+            // Update title to include damage name
+            if (part?.name) {
+                partTitle += `: ${part.name}`;
+                if (part.partIndex) {
+                    partTitle += ` (${part.partIndex})`;
+                }
+            }
 
             // Format the roll formula correctly
             finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
@@ -452,8 +457,9 @@ export class DiceSFRPG {
             // Push the roll to the chat if we're supposed to
             if (chatMessage) {
                 const chatCardData = {
-                    title: flavorText,
-                    rollContext:  rollContext,
+                    title: partTitle,
+                    flavor: partFlavor,
+                    rollContext: rollContext,
                     speaker: speaker,
                     rollMode: rollInfo.mode,
                     breakdown: preparedRollExplanation,
@@ -560,21 +566,19 @@ export class DiceSFRPG {
 
     static async _prepareFlavorText(tags, htmlDataFields, isCritical, criticalData, finalFormula, part, flavor) {
         // TODO-Ian: This is really doing two separate things, and so should probably be split into separate functions
-        let flavorText = foundry.utils.deepClone(flavor);
         if (isCritical) {
             htmlDataFields.push({ name: "is-critical", value: "true" });
             tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
+            let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
 
             if (!criticalData?.preventDoubling) {
                 finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                 finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
             }
 
-            let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavorText });
-
             if (criticalData !== undefined) {
                 if (criticalData?.effect?.trim().length > 0) {
-                    tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": flavorText, "criticalEffect": criticalData.effect });
+                    tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": flavor, "criticalEffect": criticalData.effect });
                     tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                 }
 
@@ -588,16 +592,10 @@ export class DiceSFRPG {
                 htmlDataFields.push({ name: "critical-data", value: JSON.stringify(criticalData) });
             }
 
-            flavorText = tempFlavor;
+            flavor = tempFlavor;
         }
 
-        if (part?.name) {
-            flavorText += `: ${part.name}`;
-            if (part.partIndex) {
-                flavorText += ` (${part.partIndex})`;
-            }
-        }
-
+        return flavor;
     }
 
     static async _minimumDamage(tags, itemContext, roll) {
