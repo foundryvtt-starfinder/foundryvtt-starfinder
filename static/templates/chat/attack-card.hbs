@@ -6,8 +6,9 @@
             <img {{#if item.img}}src="{{item.img}}"{{else}}src="icons/svg/cancel.svg"{{/if}} class="item-icon" data-tooltip="{{item.name}}"/>
         </div>
         <div class="card-info flexcol">
-            <b class="card-title">{{item.name}}</b>
+            <b class="card-title" data-tooltip="{{item.name}}">{{item.name}}</b>
             <ul class="card-tags">
+                {{#if flavor }}<li data-tooltip="{{flavor}}">{{flavor}}</li>{{/if}}
                 {{#if item.labels.range }}<li>{{item.labels.range}}</li>{{/if}}
                 {{#if hasCapacity }}<li>{{localize "SFRPG.Items.Ammunition.Ammo"}} : {{ammoLeft}}/{{item.system.capacity.max}}</li>{{/if}}
             </ul>

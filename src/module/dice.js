@@ -173,7 +173,7 @@ export class DiceSFRPG {
         critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor",
         difficulty = undefined, displayDifficulty = false, tags = []}) {
 
-        flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
+        // flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
 
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -254,7 +254,8 @@ export class DiceSFRPG {
             if (chatMessage) {
                 // Push the roll to the ChatBox
                 const customData = {
-                    title: flavor,
+                    title: title,
+                    flavor: flavor,
                     rollContext,
                     speaker,
                     rollMode: rollInfo.mode,

@@ -82,6 +82,7 @@ export default class SFRPGCustomChatMessage {
             hasCapacity: hasCapacity,
             ammoLeft: currentCapacity,
             title: data.title ? data.title : 'Roll',
+            flavor: data.flavor,
             rawTitle: data.speaker.alias,
             dataRoll: roll,
             rollType: data.rollType,
@@ -121,12 +122,6 @@ export default class SFRPGCustomChatMessage {
         options = foundry.utils.mergeObject(options, { rollContent });
         const cardContent = await foundry.applications.handlebars.renderTemplate(templateName, options);
         const rollMode = data.rollMode ?? game.settings.get('core', 'rollMode');
-
-        // let explainedRollContent = rollContent;
-        // if (options.breakdown) {
-        //     const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-        //     explainedRollContent = rollContent.substring(0, insertIndex) + options.explanation + rollContent.substring(insertIndex);
-        // }
 
         const messageData = {
             flavor: data.title,
