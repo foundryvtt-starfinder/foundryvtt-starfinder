@@ -1,6 +1,6 @@
 import SFRPGItemBase from './base-item.mjs';
 
-export default class SFRPGItemArmor extends SFRPGItemBase {
+export default class SFRPGItemEquipment extends SFRPGItemBase {
 
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
@@ -18,7 +18,7 @@ export default class SFRPGItemArmor extends SFRPGItemBase {
             ...SFRPGItemBase.containerTemplate(),
             ...SFRPGItemBase.itemUsageTemplate(),
             ...SFRPGItemBase.modifiersTemplate(),
-            ...SFRPGItemBase.physicalItemTemplate(),
+            ...SFRPGItemBase.physicalItemTemplate(true, false),
             ...SFRPGItemBase.specialMaterialsTemplate()
         });
 

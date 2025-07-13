@@ -221,7 +221,7 @@ Hooks.once('init', async function() {
 
     // DataModels definition
     CONFIG.Item.dataModels = {
-        armor: models.SFRPGItemArmor
+        equipment: models.SFRPGItemEquipment
     };
 
     //   CONFIG.ui.hotbar = HotbarSFRPG;

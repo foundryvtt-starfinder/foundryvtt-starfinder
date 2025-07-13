@@ -336,7 +336,7 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
         };
     }
 
-    static physicalItemTemplate(isEquippable = false, isEquipment = true) {
+    static physicalItemTemplate(isEquippable = false, isEquipment = false) {
         return {
             attributes: new fields.SchemaField({
                 ac: new fields.SchemaField({
