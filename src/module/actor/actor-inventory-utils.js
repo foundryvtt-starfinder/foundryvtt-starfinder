@@ -624,7 +624,7 @@ async function onItemDraggedToCollection(message) {
             return;
         }
 
-        newItems.push(data.draggedItemData);
+        newItems.push(data.draggedItemData.toObject());
 
         const itemIdsToDelete = [data.draggedItemData._id];
 
@@ -636,7 +636,7 @@ async function onItemDraggedToCollection(message) {
                 const children = source.filterItems(x => container.system?.container?.contents?.find(y => y.id === x.id));
                 if (children) {
                     for (const child of children) {
-                        newItems.push(child);
+                        newItems.push(child.toObject());
                         itemIdsToDelete.push(child.id);
 
                         if (child.system.container?.contents && child.system.container.contents.length > 0) {
@@ -653,6 +653,23 @@ async function onItemDraggedToCollection(message) {
         if (sidebarItem) {
             const itemData = sidebarItem.toObject();
             newItems.push(itemData);
+        }
+    }
+
+    const itemToItemMapping = {};
+    for (const item of newItems) {
+        const newId = foundry.utils.randomID();
+        itemToItemMapping[item._id] = newId;
+        item._id = newId;
+    }
+
+    for (const item of newItems) {
+        if (item.system?.container?.contents && item.system.container.contents.length > 0) {
+            for (const content of item.system.container.contents) {
+                if (itemToItemMapping[content.id]) {
+                    content.id = itemToItemMapping[content.id];
+                }
+            }
         }
     }
 
