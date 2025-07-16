@@ -606,7 +606,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 top: options.event ? options.event.clientY - 80 : null
             },
             difficulty: options.dc,
-            displayDifficulty: options.displayDC
+            displayDifficulty: options.displayDC,
+            rollType: "ability"
         });
     }
 
@@ -637,7 +638,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 top: options.event ? options.event.clientY - 80 : null
             },
             difficulty: options.dc,
-            displayDifficulty: options.displayDC
+            displayDifficulty: options.displayDC,
+            rollType: "save"
         });
     }
 
@@ -680,7 +682,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             },
             difficulty: options.dc,
             displayDifficulty: options.displayDC,
-            tags: tags
+            tags: tags,
+            rollType: "skill"
         });
     }
 

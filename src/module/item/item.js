@@ -1014,7 +1014,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            onClose: this._onAttackRollClose.bind(this, options)
+            onClose: this._onAttackRollClose.bind(this, options),
+            rollType: "attack"
         });
     }
 
@@ -1199,7 +1200,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
                     Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
-            }
+            },
+            rollType: "attack"
         });
     }
 
@@ -1244,7 +1246,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
                     Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
-            }
+            },
+            rollType: "attack"
         });
     }
 

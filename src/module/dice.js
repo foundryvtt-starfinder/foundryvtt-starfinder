@@ -171,9 +171,7 @@ export class DiceSFRPG {
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
         critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor",
-        difficulty = undefined, displayDifficulty = false, tags = []}) {
-
-        // flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
+        difficulty = undefined, displayDifficulty = false, tags = [], rollType = "normal"}) {
 
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -261,7 +259,7 @@ export class DiceSFRPG {
                     rollMode: rollInfo.mode,
                     breakdown: preparedRollExplanation,
                     htmlData,
-                    rollType: "normal",
+                    rollType,
                     rollOptions,
                     rollDices: finalFormula.rollDices,
                     tags: tags
@@ -428,9 +426,9 @@ export class DiceSFRPG {
             }
 
             // Generate flavor text and critical information for chat cards
-            const partFlavor = await this._prepareFlavorText(tags, htmlDataFields, isCritical, criticalData, finalFormula, part, flavor);
+            const partFlavor = isCritical ? await this._prepareCriticalInfo(tags, htmlDataFields, criticalData, finalFormula, flavor) : flavor;
 
-            // Update title to include damage name
+            // Update title to include damage name and part number
             if (part?.name) {
                 partTitle += `: ${part.name}`;
                 if (part.partIndex) {
@@ -564,38 +562,33 @@ export class DiceSFRPG {
         }
     }
 
-    static async _prepareFlavorText(tags, htmlDataFields, isCritical, criticalData, finalFormula, part, flavor) {
-        // TODO-Ian: This is really doing two separate things, and so should probably be split into separate functions
-        if (isCritical) {
-            htmlDataFields.push({ name: "is-critical", value: "true" });
-            tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
-            let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
+    static async _prepareCriticalInfo(tags, htmlDataFields, criticalData, finalFormula, flavor) {
+        htmlDataFields.push({ name: "is-critical", value: "true" });
+        tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
+        let tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
 
-            if (!criticalData?.preventDoubling) {
-                finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
-                finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
-            }
-
-            if (criticalData !== undefined) {
-                if (criticalData?.effect?.trim().length > 0) {
-                    tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": flavor, "criticalEffect": criticalData.effect });
-                    tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
-                }
-
-                const critRoll = criticalData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula)
-                    .join("+") ?? "";
-                if (critRoll.length > 0) {
-                    finalFormula.finalRoll = finalFormula.finalRoll + " + " + critRoll;
-                    finalFormula.formula = finalFormula.formula + " + " + critRoll;
-                }
-
-                htmlDataFields.push({ name: "critical-data", value: JSON.stringify(criticalData) });
-            }
-
-            flavor = tempFlavor;
+        if (!criticalData?.preventDoubling) {
+            finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
+            finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
         }
 
-        return flavor;
+        if (criticalData !== undefined) {
+            if (criticalData?.effect?.trim().length > 0) {
+                tempFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavorWithEffect", { "title": flavor, "criticalEffect": criticalData.effect });
+                tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
+            }
+
+            const critRoll = criticalData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula)
+                .join("+") ?? "";
+            if (critRoll.length > 0) {
+                finalFormula.finalRoll = finalFormula.finalRoll + " + " + critRoll;
+                finalFormula.formula = finalFormula.formula + " + " + critRoll;
+            }
+
+            htmlDataFields.push({ name: "critical-data", value: JSON.stringify(criticalData) });
+        }
+
+        return tempFlavor;
     }
 
     static async _minimumDamage(tags, itemContext, roll) {
