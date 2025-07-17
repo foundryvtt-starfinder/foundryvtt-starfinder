@@ -29,6 +29,8 @@ import { } from "./crew-update.js";
  * @property {string}                     operator An operator that determines how damage is split between multiple types.
  */
 
+/** @import { RollResult } from '../dice.js' */
+
 /** @extends {foundry.documents.Actor} */
 export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
 
