@@ -6,6 +6,10 @@ import TemplateEnricher from "./system/enrichers/template.js";
 // Namespace SFRPG Configuration Values
 export const SFRPG = {};
 
+/**
+ * The full list of actor types with localization strings
+ * @type {Object}
+ */
 SFRPG.actorTypes = {
     "character": "TYPES.Actor.character",
     "drone": "TYPES.Actor.drone",
@@ -15,6 +19,17 @@ SFRPG.actorTypes = {
     "starship": "TYPES.Actor.starship",
     "vehicle": "TYPES.Actor.vehicle"
 };
+
+/**
+ * The set of actor types who are character scale and use "normal" movement types
+ * @type {Array}
+ */
+SFRPG.actorsCharacterScale = [
+    "character",
+    "drone",
+    "npc",
+    "npc2"
+];
 
 /**
  * The set of ability scores used with the system
@@ -1957,6 +1972,15 @@ SFRPG.conditions = {
 };
 
 SFRPG.conditionsCausingFlatFooted = ["blinded", "cowering", "off-kilter", "pinned", "stunned"];
+
+// Conversion between Starfinder speed names and foundry's speed names
+SFRPG.movementOptions = {
+    burrowing: "burrow",
+    climbing: "climb",
+    flying: "fly",
+    swimming: "swim",
+    land: "walk"
+};
 
 // TODO localize
 SFRPG.characterFlags = {

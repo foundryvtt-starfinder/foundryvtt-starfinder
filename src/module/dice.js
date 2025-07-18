@@ -167,7 +167,7 @@ export class DiceSFRPG {
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
     * @param {difficulty}           data.difficulty    Optional parameter for checks
     * @param {displayDifficulty}    data.displayDifficulty    Optional parameter to display check difficulty
-    * @returns {Promise<void>}
+    * @returns {Promise<RollResult?>}
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
         critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor",
@@ -212,6 +212,7 @@ export class DiceSFRPG {
             if (onClose) {
                 onClose(null, null, null);
             }
+            return null;
         } else {
             let dieRoll = "1d20";
             if (rollInfo.button === "disadvantage") {
@@ -238,11 +239,20 @@ export class DiceSFRPG {
             rollObject.options.rollOptions = rollOptions;
             const roll = await rollObject.evaluate();
 
-            // Flag critical thresholds
+            // Flag critical thresholds and add Critical hit and effect information
             for (const d of roll.dice) {
                 if (d.faces === 20) {
                     d.options.critical = critical;
                     d.options.fumble = fumble;
+
+                    // Critical Effect flavor and tags
+                    const criticalData = rollContext.allContexts?.item?.data?.critical;
+                    if (d.total === critical) {
+                        flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
+                        if (criticalData.effect.trim()) {
+                            tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
+                        }
+                    }
                 }
             }
 
@@ -271,6 +281,8 @@ export class DiceSFRPG {
             if (onClose) {
                 onClose(roll, formula, finalFormula);
             }
+
+            return { roll, finalFormula };
         }
     }
 

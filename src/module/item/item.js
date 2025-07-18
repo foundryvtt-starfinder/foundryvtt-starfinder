@@ -10,6 +10,8 @@ import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
+/** @import { RollResult } from '../dice.js' */
+
 /** @extends {foundry.documents.Item} */
 export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
@@ -882,6 +884,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * Supported options:
      * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
+     *
+     * @returns {Promise<RollResult?>}
      */
     async rollAttack(options = {}) {
         const itemData = this.system;
@@ -995,7 +999,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         parts.push("@additional.modifiers.bonus");
 
         // Call the roll helper utility
-        await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             actorContextKey: "owner",
@@ -1011,6 +1015,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             chatMessage: options.chatMessage,
             rollOptions: rollOptions,
             dialogOptions: {
+                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -1115,6 +1120,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * Supported options:
      * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
+     *
+     * @returns {Promise<RollResult?>}
      */
     async _rollStarshipAttack(options = {}) {
         let parts = [];
@@ -1173,7 +1180,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             parts.push(`@ship.attributes.systems.powerCore.modOther`);
         }
 
-        await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             rollContext: rollContext,
@@ -1182,6 +1189,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             critical: 20,
             chatMessage: options.chatMessage,
             dialogOptions: {
+                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -1208,6 +1216,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /**
      * Place an attack roll for a vehicle using an item.
      * @param {Object} options Options to pass to the attack roll
+     * @returns {Promise<RollResult?>}
      */
     async _rollVehicleAttack(options = {}) {
 
@@ -1221,7 +1230,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.addContext("weapon", this, this);
         rollContext.setMainContext("");
 
-        await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             rollContext: rollContext,
@@ -1230,6 +1239,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             critical: 20,
             chatMessage: options.chatMessage,
             dialogOptions: {
+                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -1451,6 +1461,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
+                skipUI: options.skipUI,
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
@@ -1510,6 +1521,103 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         });
 
         return modifiers;
+    }
+
+    async _rollVehicleDamage({ event } = {}, options = {}) {
+        const itemData = this.system;
+
+        if (!this.hasDamage) {
+            ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"));
+        }
+
+        const parts = foundry.utils.deepClone(itemData.damage.parts);
+        for (const part of parts) {
+            part.isDamageSection = true;
+        }
+
+        let title = '';
+        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
+            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
+        } else {
+            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
+        }
+
+        /** Build the roll context */
+        const rollContext = new RollContext();
+        rollContext.addContext("vehicle", this.actor);
+        rollContext.addContext("item", this, this);
+        rollContext.addContext("weapon", this, this);
+        rollContext.setMainContext("");
+
+        return DiceSFRPG.damageRoll({
+            event,
+            parts,
+            rollContext,
+            title,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            chatMessage: options.chatMessage,
+            dialogOptions: {
+                skipUI: true,
+                width: 400,
+                top: event ? event.clientY - 80 : null,
+                left: window.innerWidth - 710
+            },
+            onClose: (roll, formula, finalFormula, isCritical) => {
+                if (roll) {
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                }
+            }
+        });
+    }
+
+    async _rollStarshipDamage({ event } = {}, options = {}) {
+        const itemData = this.system;
+
+        if (!this.hasDamage) {
+            throw new Error("you may not make a Damage Roll with this item");
+        }
+
+        const parts = foundry.utils.deepClone(itemData.damage.parts);
+        for (const part of parts) {
+            part.isDamageSection = true;
+        }
+
+        let title = '';
+        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
+            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
+        } else {
+            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
+        }
+
+        /** Build the roll context */
+        const rollContext = new RollContext();
+        rollContext.addContext("ship", this.actor);
+        rollContext.addContext("item", this, this);
+        rollContext.addContext("weapon", this, this);
+        rollContext.setMainContext("");
+
+        this.actor?.setupRollContexts(rollContext, ["gunner"]);
+
+        return DiceSFRPG.damageRoll({
+            event: event,
+            parts: parts,
+            criticalData: {preventDoubling: true},
+            rollContext: rollContext,
+            title: title,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            chatMessage: options.chatMessage,
+            dialogOptions: {
+                skipUI: options.skipUI,
+                width: 400,
+                top: event ? event.clientY - 80 : null,
+                left: window.innerWidth - 710
+            },
+            onClose: (roll, formula, finalFormula, isCritical) => {
+                if (roll) {
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                }
+            }
+        });
     }
 
     /* -------------------------------------------- */
