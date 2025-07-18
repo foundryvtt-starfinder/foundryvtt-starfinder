@@ -167,7 +167,7 @@ export class DiceSFRPG {
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
     * @param {difficulty}           data.difficulty    Optional parameter for checks
     * @param {displayDifficulty}    data.displayDifficulty    Optional parameter to display check difficulty
-    * @returns {Promise<void>}
+    * @returns {Promise<RollResult?>}
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
         critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor",
@@ -214,6 +214,7 @@ export class DiceSFRPG {
             if (onClose) {
                 onClose(null, null, null);
             }
+            return null;
         } else {
             let dieRoll = "1d20";
             if (rollInfo.button === "disadvantage") {
@@ -315,6 +316,8 @@ export class DiceSFRPG {
             if (errorToThrow) {
                 throw errorToThrow;
             }
+
+            return { roll, finalFormula };
         }
     }
 

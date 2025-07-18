@@ -10,6 +10,8 @@ import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
+/** @import { RollResult } from '../dice.js' */
+
 /** @extends {foundry.documents.Item} */
 export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
@@ -859,6 +861,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * Supported options:
      * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
+     *
+     * @returns {Promise<RollResult?>}
      */
     async rollAttack(options = {}) {
         const itemData = this.system;
@@ -973,7 +977,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         parts.push("@additional.modifiers.bonus");
 
         // Call the roll helper utility
-        await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             actorContextKey: "owner",
@@ -989,6 +993,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             chatMessage: options.chatMessage,
             rollOptions: rollOptions,
             dialogOptions: {
+                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -1092,6 +1097,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * Supported options:
      * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
+     *
+     * @returns {Promise<RollResult?>}
      */
     async _rollStarshipAttack(options = {}) {
         let parts = [];
@@ -1151,7 +1158,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             parts.push(`@ship.attributes.systems.powerCore.modOther`);
         }
 
-        await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             rollContext: rollContext,
@@ -1160,6 +1167,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             critical: 20,
             chatMessage: options.chatMessage,
             dialogOptions: {
+                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -1185,6 +1193,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /**
      * Place an attack roll for a vehicle using an item.
      * @param {Object} options Options to pass to the attack roll
+     * @returns {Promise<RollResult?>}
      */
     async _rollVehicleAttack(options = {}) {
 
@@ -1200,7 +1209,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.addContext("weapon", this, this);
         rollContext.setMainContext("");
 
-        await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             rollContext: rollContext,
@@ -1209,6 +1218,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             critical: 20,
             chatMessage: options.chatMessage,
             dialogOptions: {
+                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -1362,6 +1372,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
+                skipUI: options.skipUI,
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
@@ -1506,6 +1517,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
+                skipUI: options.skipUI,
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
