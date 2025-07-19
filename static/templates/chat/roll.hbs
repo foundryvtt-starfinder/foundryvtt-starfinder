@@ -34,9 +34,11 @@ data-action="expandRoll">
         </div>
         <h3 class="dice-total">{{total}}</h3>
     </div>
+    {{#if tags}}
     <footer class="dice-footer">
         {{#each tags as |tag|}}
             <span class="{{tag.tag}}"> {{tag.text}}</span>
         {{/each}}
     </footer>
+    {{/if}}
 </div>

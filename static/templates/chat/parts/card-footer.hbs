@@ -1,0 +1,26 @@
+{{#if actionFooter}}
+    <footer class="card-footer">
+        {{#if cost}}
+        <span>{{localize "SFRPG.ChatCard.ItemActivation.Cost" cost=cost}}</span>
+        {{else if item.labels.activation}}
+        <span>{{localize "SFRPG.ChatCard.ItemActivation.Cost" cost=item.labels.activation}}</span>
+        {{else}}
+        {{!-- No charge / activation cost --}}
+        {{/if}}
+        {{#if item.system.duration.value}}<span>{{{localize "SFRPG.ChatCard.ItemActivation.Duration" duration=item.system.duration.value}}}</span>{{/if}}
+        {{#if system.properties}}
+            <br>
+            {{#each system.properties}}
+            <span>{{this}}</span>
+            {{/each}}
+        {{/if}}
+    </footer>
+{{else}}
+    {{#if system.properties}}
+    <footer class="card-footer">
+        {{#each system.properties}}
+        <span data-tooltip="{{#if this.tooltip}}{{this.tooltip}}{{else}}{{this.title}}{{/if}}">{{#if this.title}}<strong>{{this.title}}: </strong>{{/if}}{{this.name}}</span>
+        {{/each}}
+    </footer>
+    {{/if}}
+{{/if}}

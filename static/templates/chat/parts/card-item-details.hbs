@@ -1,0 +1,26 @@
+<div class="card-item-details flexrow">
+    {{#if isActorFocused}}
+        <div class="card-icons owner">
+            <img {{#if tokenImg}} src="{{tokenImg}}" {{else if actor.img}} src="{{tokenImg}}" {{else}} src="icons/svg/invisible.svg" {{/if}} class="actor-icon"
+            {{#if tokenName}} data-tooltip="{{tokenName}}" {{else}} data-tooltip="{{actor.name}}" {{/if}} />
+            <img {{#if item.img}}src="{{item.img}}"{{else}}src="icons/svg/cancel.svg"{{/if}} class="item-icon" data-tooltip="{{item.name}}"/>
+        </div>
+    {{else if isItemFocused}}
+        <div class="card-icons item">
+            <img {{#if item.img}}src="{{item.img}}"{{else}}src="icons/svg/cancel.svg"{{/if}} class="item-icon" data-tooltip="{{item.name}}"/>
+        </div>
+    {{/if}}
+    <div class="card-info flexcol">
+        <b class="card-title">{{item.name}}</b>
+        <ul class="card-tags">
+            {{#if item.labels.range }}<li data-tooltip="{{localize "SFRPG.Items.Activation.RangeIncrement"}}: {{item.labels.range}}">{{localize "SFRPG.Items.Activation.Range"}}: {{item.labels.range}}</li>{{/if}}
+            {{#if hasCapacity }}<li data-tooltip="{{localize "TYPES.Item.ammunition"}}: {{ammoLeft}}/{{item.system.capacity.max}}">{{localize "SFRPG.Items.Ammunition.Ammo"}} : {{ammoLeft}}/{{item.system.capacity.max}}</li>{{/if}}
+            {{#if flavor }}<li data-tooltip="{{flavor}}">{{flavor}}</li>{{/if}}
+        </ul>
+    </div>
+    <!-- Add in once targets are available
+    <div class="card-icons target">
+        <img src="icons/svg/invisible.svg" class="actor-icon" data-tooltip="{{localize "SFRPG.Target.NoTargetSelected"}}"/>
+    </div>
+    -->
+</div>

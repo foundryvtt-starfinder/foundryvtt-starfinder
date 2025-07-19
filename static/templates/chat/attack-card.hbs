@@ -1,28 +1,20 @@
 <div class="chat-card attack-card" data-actor-id="{{actorId}}" data-item-id="{{item.id}}" data-token-id="{{tokenId}}">
-    <div class="card-item-details flexrow">
-        <div class="card-icons owner">
-            <img {{#if tokenImg}} src="{{tokenImg}}" {{else if actor.img}} src="{{tokenImg}}" {{else}} src="icons/svg/invisible.svg" {{/if}} class="actor-icon"
-            {{#if tokenName}} data-tooltip="{{tokenName}}" {{else}} data-tooltip="{{actor.name}}" {{/if}} />
-            <img {{#if item.img}}src="{{item.img}}"{{else}}src="icons/svg/cancel.svg"{{/if}} class="item-icon" data-tooltip="{{item.name}}"/>
-        </div>
-        <div class="card-info flexcol">
-            <b class="card-title" data-tooltip="{{item.name}}">{{item.name}}</b>
-            <ul class="card-tags">
-                {{#if flavor }}<li data-tooltip="{{flavor}}">{{flavor}}</li>{{/if}}
-                {{#if item.labels.range }}<li>{{item.labels.range}}</li>{{/if}}
-                {{#if hasCapacity }}<li>{{localize "SFRPG.Items.Ammunition.Ammo"}} : {{ammoLeft}}/{{item.system.capacity.max}}</li>{{/if}}
-            </ul>
-        </div>
-        <div class="card-icons target">
-            <img src="icons/svg/invisible.svg" class="actor-icon" data-tooltip="{{localize "SFRPG.Target.NoTargetSelected"}}"/>
-        </div>
-    </div>
-    <div class="card-buttons flexrow">
-        {{#if primaryDamageIsHealing}}<button type="button" class="chat-button-healing flex1" data-action="damage" data-tooltip="{{localize "SFRPG.Healing.Healing"}}"><i class="fas fa-square-plus"></i> {{localize "SFRPG.Healing.Healing"}}</button>
-        {{else if hasDamage}}<button type="button" class="chat-button-damage flex1" data-action="damage" data-tooltip="{{localize "SFRPG.Damage.Damage"}}"><i class="fas fa-droplet"></i> {{localize "SFRPG.Damage.Damage"}}</button>{{/if}}
-        {{#if hasSave}}<button type="button" class="chat-button-save flex1" data-action="save" data-type="{{item.system.save.type}}" data-tooltip="{{item.labels.save}}"><i class="fas {{sfrpg "saveIconsShort" item.system.save.type}}"></i> {{localize "SFRPG.Save"}}</button>{{/if}}
-        {{#if hasSkill}}<button type="button" class="chat-button-skill flex1" data-action="skill" data-type="{{item.system.skillCheck.type}}" data-tooltip="{{item.labels.skillCheck}}"><i class="fas {{sfrpg "skillIconsShort" item.system.skillCheck.type}}"></i> {{localize "SFRPG.Skill"}}</button>{{/if}}
-        {{#if hasArea}}<button type="button" class="chat-button-template flex1" data-action="template" data-type="{{item.system.area.type}}" data-tooltip="{{localize "SFRPG.ChatCard.PlaceAbilityTemplate" label=item.labels.area}}"><i class="fas fa-crosshairs"></i> {{localize "SFRPG.Template"}}</button>{{/if}}
-    </div>
+    {{!-- Card Details --}}
+    {{> "systems/sfrpg/templates/chat/parts/card-item-details.hbs" isActorFocused=true}}
+
+    {{!-- Card Buttons --}}
+    {{> "systems/sfrpg/templates/chat/parts/card-buttons.hbs"}}
 </div>
+
+{{!-- Main Roll Content --}}
 {{{rollContent}}}
+
+<!--
+{{#if item.system.properties}}
+<footer class="card-footer">
+    {{#each item.system.properties}}
+    <span data-tooltip="{{#if this.tooltip}}{{this.tooltip}}{{else}}{{this.title}}{{/if}}">{{#if this.title}}<strong>{{this.title}}: </strong>{{/if}}{{this.name}}</span>
+    {{/each}}
+</footer>
+{{/if}}
+-->
