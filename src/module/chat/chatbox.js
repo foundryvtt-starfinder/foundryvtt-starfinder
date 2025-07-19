@@ -50,6 +50,29 @@ export default class SFRPGCustomChatMessage {
 
         const hasCapacity = item instanceof ItemSFRPG ? item.hasCapacity() : null;
         const currentCapacity = item instanceof ItemSFRPG ? item.getCurrentCapacity() : null;
+
+        let tokenImg;
+        let tokenName;
+        const speaker = data.speaker;
+        if (speaker) {
+            let setImage = false;
+            if (speaker.token) {
+                const token = game.scenes.get(speaker.scene)?.tokens?.get(speaker.token);
+                if (token) {
+                    tokenImg = token.img;
+                    tokenName = token.name;
+                    setImage = true;
+                }
+            }
+            if (speaker.actor && !setImage) {
+                const actor = Actors.instance.get(speaker.actor);
+                if (actor) {
+                    tokenImg = actor.img;
+                    tokenName = actor.name;
+                }
+            }
+        }
+
         const options = {
             item: item,
             hasDamage: data.rollType !== "damage" && (item.hasDamage || false),
@@ -59,12 +82,14 @@ export default class SFRPGCustomChatMessage {
             hasCapacity: hasCapacity,
             ammoLeft: currentCapacity,
             title: data.title ? data.title : 'Roll',
+            flavor: data.flavor,
             rawTitle: data.speaker.alias,
             dataRoll: roll,
             rollType: data.rollType,
             rollNotes: data.htmlData?.find(x => x.name === "rollNotes")?.value,
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            tokenImg: actor.token?.img || actor.img,
+            tokenImg: tokenImg || actor.token?.img || actor.img,
+            tokenName: tokenName,
             actorId: actor.id,
             tokenId: this.getToken(actor),
             breakdown: data.breakdown,
@@ -75,32 +100,13 @@ export default class SFRPGCustomChatMessage {
             rollDices: data.rollDices
         };
 
-        const speaker = data.speaker;
-        if (speaker) {
-            let setImage = false;
-            if (speaker.token) {
-                const token = game.scenes.get(speaker.scene)?.tokens?.get(speaker.token);
-                if (token) {
-                    options.tokenImg = token.img;
-                    setImage = true;
-                }
-            }
-
-            if (speaker.actor && !setImage) {
-                const actor = Actors.instance.get(speaker.actor);
-                if (actor) {
-                    options.tokenImg = actor.img;
-                }
-            }
-        }
-
         SFRPGCustomChatMessage._render(roll, data, options);
 
         return true;
     }
 
     static async _render(roll, data, options) {
-        const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.hbs";
+        const templateName = "systems/sfrpg/templates/chat/attack-card.hbs";
         let rollContent = await roll.render({htmlData: data.htmlData, customTooltip: options.rollDices});
 
         // Insert the damage type string if possible.
@@ -116,12 +122,6 @@ export default class SFRPGCustomChatMessage {
         options = foundry.utils.mergeObject(options, { rollContent });
         const cardContent = await foundry.applications.handlebars.renderTemplate(templateName, options);
         const rollMode = data.rollMode ?? game.settings.get('core', 'rollMode');
-
-        // let explainedRollContent = rollContent;
-        // if (options.breakdown) {
-        //     const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-        //     explainedRollContent = rollContent.substring(0, insertIndex) + options.explanation + rollContent.substring(insertIndex);
-        // }
 
         const messageData = {
             flavor: data.title,
