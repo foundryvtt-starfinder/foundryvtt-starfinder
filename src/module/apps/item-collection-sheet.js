@@ -283,7 +283,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         htmlOptions.rollData ||= (this.actor.getRollData() ?? {});
 
         // Rich text description
-        data.system.description.value = await TextEditor.enrichHTML(data.system.description.value, htmlOptions);
+        data.system.description.value = await foundry.applications.ux.TextEditor.enrichHTML(data.system.description.value, htmlOptions);
 
         // Item type specific properties
         const props = [];
@@ -328,7 +328,7 @@ export class ItemCollectionSheet extends DocumentSheet {
      */
     _onEditImage(event) {
         const attr = event.currentTarget.dataset.edit;
-        const current = getProperty(this.document, attr);
+        const current = foundry.utils.getProperty(this.document, attr);
         new FilePicker({
             type: "image",
             current: current,

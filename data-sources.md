@@ -1,5 +1,30 @@
-# Source numbers and labels for APs, Adventures, Starfinder Society, and One-Shots
+# Source numbers and labels for Books, APs, Adventures, Starfinder Society, and One-Shots
 
+## Hardcover Source Books
+To cite a hardcover source book, use formats below, where **x** is the page number.
+
+| Book | Format | Example |
+| --- | --- | --- |
+| Core Rulebook | CRB pg. **x** | CRB pg. **123** |
+| Alien Archive 1 | AA1 pg. **x** | AA1 pg. **123** |
+| Alien Archive 2 | AA2 pg. **x** | AA2 pg. **123** |
+| Alien Archive 3 | AA3 pg. **x** | AA3 pg. **123** |
+| Alien Archive 4 | AA4 pg. **x** | AA4 pg. **123** |
+| Pact Worlds | PW pg. **x** | PW pg. **123** |
+| Armory | AR pg. **x** | AR pg. **123** |
+| Character Operations Manual | COM pg. **x** | COM pg. **123** |
+| Near Space | NS pg. **x** | NS pg. **123** |
+| Starship Operations Manual | SOM pg. **x** | SOM pg. **123** |
+| Galaxy Exploration Manual | GEM pg. **x** | GEM pg. **123** |
+| Tech Revolution | TR pg. **x** | TR pg. **123** |
+| Galactic Magic | GM pg. **x** | GM pg. **123** |
+| Drift Crisis | DC pg. **x** | DC pg. **123** |
+| Interstellar Species | IS pg. **x** | IS pg. **123** |
+| Ports of Call | PoC pg. **x** | PoC pg. **123** |
+| Starfinder Enhanced | EN pg. **x** | pg. **123** |
+| Dead Suns (hardcover compilation) | DS pg. **x** | DS pg. **123** |
+| Scoured Stars (hardcover compilation) | SS pg. **x** | SS pg. **123** |
+| Mechageddon | MG pg. **x** | MG pg. **123** |
 
 ## Adventure Paths
 Citing an Adventure Path is done in the format:
@@ -93,6 +118,11 @@ Citing a Starfinder One-Shot is done in the format:
 | **2** | The Great Grav Train Robbery |
 | **3** | System Takedown |
 | **4** | Before the Storm |
+
+## Angel of the Drift Comics
+Citing an Angel of the Drift Comic is done in the format:
+
+> AotD #**y** pg. **x**
 
 
 ## Starfinder Society

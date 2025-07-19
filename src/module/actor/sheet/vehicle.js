@@ -33,7 +33,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         this._getHangarBayData(data);
 
         // Encrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.description.value, {
+        data.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.description.value, {
             async: true,
             rollData: this.actor.getRollData() ?? {},
             secrets: this.actor.isOwner
@@ -492,7 +492,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {
@@ -537,7 +537,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {

@@ -2,11 +2,6 @@
   "_id": "3XFg5oL5z91TN3yP",
   "name": "Weapon Specialization (Ex) (Precog)",
   "type": "feat",
-  "_stats": {
-    "coreVersion": 12,
-    "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
-  },
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
@@ -61,7 +56,7 @@
       {
         "_id": "2cad179e-76e8-4f3f-90ae-88461e031ccc",
         "name": "Weapon Specialization Precog",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -76,12 +71,12 @@
       {
         "_id": "705ed57e-6be0-4b8d-adeb-1b73c1f684cd",
         "name": "Weapon Specialization Precog",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -89,29 +84,14 @@
         "valueAffected": "basicM"
       },
       {
-        "_id": "717864d5-5780-40f5-95b4-99f94829ed78",
-        "name": "Weapon Specialization Precog",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "max": 0,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
-      },
-      {
         "_id": "6ef80090-b369-4709-b650-d46d698a033c",
         "name": "Weapon Specialization Precog",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -121,7 +101,7 @@
       {
         "_id": "972cc776-68fe-424d-a3ae-6fdb077b8c61",
         "name": "Weapon Specialization Precog",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-attacks",
         "enabled": false,
@@ -136,7 +116,7 @@
       {
         "_id": "be857ef3-ca8f-42f7-ba07-7f897ec200db",
         "name": "Weapon Specialization Precog",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": false,

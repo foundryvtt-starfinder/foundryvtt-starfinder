@@ -20,9 +20,9 @@ import RollContext from "../../rolls/rollcontext.js";
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
  *
- * @type {ActorSheet}
+ * @extends {foundry.appv1.sheets.ActorSheet}
  */
-export class ActorSheetSFRPG extends ActorSheet {
+export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     constructor(...args) {
         super(...args);
 
@@ -75,7 +75,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             isVehicle: this.document.type === 'vehicle',
             isDrone: this.document.type === 'drone',
             isNPC: this.document.type === 'npc' || this.document.type === 'npc2',
-            isHazard: this.document.type === 'hazard',
+            isHazard: this.document.type === 'hazard'
         };
 
         data.items = [...this.actor.items.values()];
@@ -164,16 +164,38 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
         const secrets = this.actor.isOwner;
-        data.enrichedBiography = await TextEditor.enrichHTML(this.actor.system.details.biography.value, {
+        data.enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.biography.value, {
             async: true,
             rollData: this.actor.getRollData() ?? {},
             secrets
         });
-        data.enrichedGMNotes = await TextEditor.enrichHTML(this.actor.system.details.biography.gmNotes, {
+        data.enrichedGMNotes = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.biography.gmNotes, {
             async: true,
             rollData: this.actor.getRollData() ?? {},
             secrets
         });
+
+        return data;
+    }
+
+    _getSubmitData(updateData = {}) {
+        const data = super._getSubmitData(updateData);
+        const expandedData = foundry.utils.expandObject(data);
+
+        // Allow basic +/- math in currency fields
+        const currency = expandedData.system.currency;
+        if (currency) {
+            for (const [name, input] of Object.entries(currency)) {
+                const oldValue = this.actor?.system?.currency[name];
+                let newValue = oldValue;
+                const isDelta = input.startsWith("+") || input.startsWith("-");
+                const sanitizedInput = input.replace(/[^0-9|+|-]/g, '');
+                if (sanitizedInput) {
+                    newValue = isDelta ? Number(oldValue) + Number(sanitizedInput) : Number(sanitizedInput);
+                }
+                data[`system.currency.${name}`] = newValue;
+            }
+        }
 
         return data;
     }
@@ -273,6 +295,45 @@ export class ActorSheetSFRPG extends ActorSheet {
             li.addEventListener("dragstart", itemUsageHandler, false);
         });
 
+        html.find('li.skill h4.skill-name').each((idx, el) => {
+            el.setAttribute('draggable', true);
+            el.addEventListener("dragstart", event => {
+                event.stopPropagation();
+
+                const skill = event.currentTarget.closest('li.skill').dataset.skill;
+                event.dataTransfer.setData('text/plain', JSON.stringify({
+                    type: 'SkillCheck',
+                    actor: this.actor.uuid,
+                    skill: skill,
+                    subname: this.actor.system.skills[skill]?.subname
+                }));
+            }, false);
+        });
+
+        html.find('li.save h4.save-name').each((idx, el) => {
+            el.setAttribute('draggable', true);
+            el.addEventListener("dragstart", event => {
+                event.stopPropagation();
+                event.dataTransfer.setData('text/plain', JSON.stringify({
+                    type: 'SaveCheck',
+                    actor: this.actor.uuid,
+                    save: event.currentTarget.closest('li.save').dataset.save
+                }));
+            }, false);
+        });
+
+        html.find('li.ability h4.ability-name').each((idx, el) => {
+            el.setAttribute('draggable', true);
+            el.addEventListener("dragstart", event => {
+                event.stopPropagation();
+                event.dataTransfer.setData('text/plain', JSON.stringify({
+                    type: 'AbilityCheck',
+                    actor: this.actor.uuid,
+                    ability: event.currentTarget.closest('li.ability').dataset.ability
+                }));
+            }, false);
+        });
+
         // Item Rolling
         html.find('.item .item-image').click(event => this._onItemRoll(event));
 
@@ -306,6 +367,9 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         // Effect Toggling
         html.find('.effect-toggle').on('click', this._onToggleEffect.bind(this));
+
+        // Option Toggling
+        html.find('.option-toggle').on('click', this._onToggleOption.bind(this));
     }
 
     /** @override */
@@ -422,7 +486,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             // Remove situational modifiers
             appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null, {actor: actor});
+            let modifiers = stackModifiers.process(appropriateMods, null, {actor: actor, item: item});
 
             modifiers = Object.values(modifiers)
                 .flat()
@@ -455,7 +519,7 @@ export class ActorSheetSFRPG extends ActorSheet {
             // Remove situational modifiers
             appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null, {actor: item.actor});
+            let modifiers = stackModifiers.process(appropriateMods, null, {actor: item.actor, item: item});
 
             modifiers = Object.values(modifiers)
                 .flat()
@@ -507,22 +571,23 @@ export class ActorSheetSFRPG extends ActorSheet {
         event.preventDefault();
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.actor.system.modifiers.find(mod => mod._id === modifierId);
 
-        await this.actor.deleteModifier(modifierId);
+        return modifier.parentDelete();
     }
 
     /**
     * Edit a modifier for an actor.
-    *
     * @param {Event} event The orginating click event
     */
-    _onModifierEdit(event) {
+    async _onModifierEdit(event) {
         event.preventDefault();
 
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.actor.system.modifiers.find(mod => mod._id === modifierId);
 
-        this.actor.editModifier(modifierId);
+        return modifier.edit();
     }
 
     /**
@@ -552,6 +617,32 @@ export class ActorSheetSFRPG extends ActorSheet {
         const effectUuid = target.closest('.item.effect').data('effectUuid');
 
         this.actor.system.timedEffects.get(effectUuid)?.toggle();
+    }
+
+    /**
+	 * Toggles an option on the selected item.
+	 *
+	 * @param {Event} event The originating click event
+	 */
+    async _onToggleOption(event) {
+        event.preventDefault();
+        const target = $(event.currentTarget);
+        const opt = target.data('optionKey');
+
+        let options = null;
+        if (this.actor.system.options) {
+            options = duplicate(this.actor.system.options);
+        }
+        if (!options) {
+            options = new Map();
+        }
+        if (!options[opt]) {
+            options[opt] = true;
+        } else {
+            options[opt] = false;
+        }
+
+        await this.actor.update({["system.options"]: options});
     }
 
     /**
@@ -614,14 +705,14 @@ export class ActorSheetSFRPG extends ActorSheet {
 
         const types = Object.keys(game.model.Item).filter(k => supportedTypes.includes(k));
 
-        ItemSFRPG.createDialog({}, {types, parent: this.actor});
+        getDocumentClass("Item").createDialog({}, { parent: this.actor }, { types });
 
     }
 
     async _onShowImage(event) {
         const actor = this.actor;
         const title = actor.token?.name ?? actor.prototypeToken?.name ?? actor.name;
-        new ImagePopout(actor.img, { title, uuid: actor.uuid }).render(true);
+        new foundry.applications.apps.ImagePopout({src: actor.img, window: { title }, uuid: actor.uuid }).render(true);
     }
 
     /**
@@ -770,7 +861,7 @@ export class ActorSheetSFRPG extends ActorSheet {
      * Handle attempting to recharge an item usage by rolling a recharge check
      * @param {Event} event The originating click event
      */
-    _ontItemRecharge(event) {
+    _onItemRecharge(event) {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);

@@ -2,11 +2,6 @@
   "_id": "q7uXA1OKmLsfhURE",
   "name": "Junk Drone",
   "type": "technological",
-  "_stats": {
-    "coreVersion": 12,
-    "systemId": "sfrpg",
-    "systemVersion": "0.27.1"
-  },
   "img": "systems/sfrpg/icons/classes/stealth_drone.webp",
   "system": {
     "type": "",
@@ -21,7 +16,7 @@
       "condition": "",
       "cost": 0
     },
-    "ammunitionType": "",
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shapable": false,
@@ -51,7 +46,7 @@
     "attuned": false,
     "bulk": "1",
     "capacity": {
-      "max": 0,
+      "max": 20,
       "value": 0
     },
     "chatFlavor": "",
@@ -59,7 +54,19 @@
       "contents": [],
       "includeContentsInWealthCalculation": true,
       "isOpen": true,
-      "storage": []
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "ammunition"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
+        }
+      ]
     },
     "critical": {
       "effect": "",
@@ -112,8 +119,8 @@
       "value": null
     },
     "usage": {
-      "per": "",
-      "value": 0
+      "per": "minute",
+      "value": 1
     },
     "uses": {
       "max": null,
