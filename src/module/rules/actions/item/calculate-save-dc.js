@@ -19,21 +19,22 @@ export default function(engine) {
 
                 let dcFormula = save.dc?.toString();
                 if (!dcFormula) {
-                    const ownerKeyAbilityId = classes[0]?.system.kas ?? false; // TODO-Ian key ability selector appearance
+                    const ownerKeyAbilityId = classes[0]?.system.kas ?? null;
                     const itemKeyAbilityId = data.ability;
                     const spellbookSpellAbility = actorData?.attributes.spellcasting;
                     const classSpellAbility = classes[0]?.system.spellAbility;
 
                     const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
-                    if (abilityKey) {
-                        if (itemData.type === "spell") {
-                            dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
-                        } else if (itemData.type === "feat") {
-                            dcFormula = `10 + floor(@owner.details.level.value / 2) + @owner.abilities.${abilityKey}.mod`;
-                        } else {
-                            dcFormula = `10 + floor(@item.level / 2) + @owner.abilities.${abilityKey}.mod`;
-                        }
-                    } else if (actor.type === "npc" || actor.type === "npc2") {
+
+                    if (itemData.type === "spell") {
+                        dcFormula = "10 + @item.level" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
+                    } else if (itemData.type === "feat") {
+                        dcFormula = "10 + floor(@owner.details.level.value / 2)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
+                    } else {
+                        dcFormula = "10 + floor(@item.level / 2)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
+                    }
+
+                    if (actor.type === "npc" || actor.type === "npc2") {
                         if (itemData.type === "spell") {
                             dcFormula = `@owner.attributes.baseSpellDC.value + @item.level`;
                         } else {
