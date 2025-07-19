@@ -600,7 +600,16 @@ export class DiceSFRPG {
                 }
             }
 
-            const isCritical = (rollInfo.button === "critical") || linkedAttackRoll ? DiceSFRPG.isCriticalSuccess(linkedAttackRoll) : false;
+            // Determine whether the roll should be a critical damage roll
+            let isCritical = false;
+            if ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) {
+                // if quick roll is selected, determine whether a roll is a critical hit based on the linked attack (if present)
+                // if the control key is pressed, roll critical damage regardless
+                isCritical = event?.ctrlKey ? true : (linkedAttackRoll ? DiceSFRPG.isCriticalSuccess(linkedAttackRoll) : false);
+            } else if (rollInfo.button === "critical") {
+                isCritical = true;
+            }
+
             let finalFlavor = foundry.utils.deepClone(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
@@ -797,15 +806,16 @@ export class DiceSFRPG {
     /**
     * A helper function for determining if a roll was a critical success or not
     *
-    * @param {Object}       roll        The roll object
+    * @param {Object|null}  roll        The roll object
     * @param {Number}       dieSize     The size of the die to look for to  trigger the critical
     * @param {Number}       critValue   The number needed to roll at or above to trigger the critical
     * @returns {Boolean}                `true` if a critical success, `false` otherwise
     */
     static isCriticalSuccess(roll, dieSize = 20, critValue = 20) {
-        if (!roll.dice.length) {
+        if (!roll?.dice?.length) {
             return false;
         }
+
         for (const d of roll.dice) {
             if (d.faces === dieSize && d.results.length === 1) {
                 if (d.total >= (d.options.critical || critValue)) {
@@ -813,6 +823,8 @@ export class DiceSFRPG {
                 }
             }
         }
+
+        return false;
     }
 
     /**
@@ -824,7 +836,7 @@ export class DiceSFRPG {
     * @returns {Boolean}                `true` if a fumble, `false` otherwise
     */
     static isFumble(roll, dieSize = 20, critValue = 1) {
-        if (!roll.dice.length) {
+        if (!roll?.dice?.length) {
             return false;
         }
 
@@ -835,6 +847,8 @@ export class DiceSFRPG {
                 }
             }
         }
+
+        return false;
     }
 
     /**
