@@ -1080,7 +1080,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
 
         const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
-        if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
+        if (rollDamageWithAttack && !DiceSFRPG.isFumble(roll) && !options.disableDamageAfterAttack) {
             this.rollDamage({}, {linkedAttackRoll: roll});
         }
     }
@@ -1351,7 +1351,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         return DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
-            linkedAttackRoll: options.linkedAttackRoll ?? false,
+            linkedAttackRoll: options.linkedAttackRoll ?? null,
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
