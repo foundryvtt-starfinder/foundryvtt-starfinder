@@ -811,15 +811,21 @@ export class DiceSFRPG {
     * @param {Number}       critValue   The number needed to roll at or above to trigger the critical
     * @returns {Boolean}                `true` if a critical success, `false` otherwise
     */
-    static isCriticalSuccess(roll, dieSize = 20, critValue = 20) {
+    static isCriticalSuccess(roll, dieSize = 20, critValue = null) {
         if (!roll?.dice?.length) {
             return false;
         }
 
         for (const d of roll.dice) {
             if (d.faces === dieSize && d.results.length === 1) {
-                if (d.total >= (d.options.critical || critValue)) {
-                    return true;
+                if (critValue === null) {
+                    if (d.total >= d.options.critical) {
+                        return true;
+                    }
+                } else {
+                    if (d.total >= critValue) {
+                        return true;
+                    }
                 }
             }
         }
@@ -830,20 +836,26 @@ export class DiceSFRPG {
     /**
     * A helper function for determining if a roll was a fumble or not
     *
-    * @param {Object}       roll        The roll object
+    * @param {Object|null}  roll        The roll object
     * @param {Number}       dieSize     The size of the die to look for to  trigger the fumble
-    * @param {Number}       critValue   The number needed to roll at or below to trigger the fumble
+    * @param {Number}       fumbleValue The number needed to roll at or below to trigger the fumble
     * @returns {Boolean}                `true` if a fumble, `false` otherwise
     */
-    static isFumble(roll, dieSize = 20, critValue = 1) {
+    static isFumble(roll, dieSize = 20, fumbleValue = null) {
         if (!roll?.dice?.length) {
             return false;
         }
 
         for (const d of roll.dice) {
             if (d.faces === dieSize && d.results.length === 1) {
-                if (d.total <= (d.options.fumble || critValue)) {
-                    return true;
+                if (fumbleValue === null) {
+                    if (d.total <= d.options.fumble) {
+                        return true;
+                    }
+                } else {
+                    if (d.total <= fumbleValue) {
+                        return true;
+                    }
                 }
             }
         }
