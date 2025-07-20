@@ -817,7 +817,7 @@ export class DiceSFRPG {
         }
 
         for (const d of roll.dice) {
-            if (d.faces === dieSize && d.results.length === 1) {
+            if (d.faces === dieSize && d.results.length === 1 && (critValue || d.options.critical)) {
                 if (d.total >= (critValue ?? d.options.critical)) {
                     return true;
                 }
@@ -841,7 +841,7 @@ export class DiceSFRPG {
         }
 
         for (const d of roll.dice) {
-            if (d.faces === dieSize && d.results.length === 1) {
+            if (d.faces === dieSize && d.results.length === 1 && (fumbleValue || d.options.fumble)) {
                 if (d.total <= (fumbleValue ?? d.options.fumble)) {
                     return true;
                 }
