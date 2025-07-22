@@ -25,10 +25,11 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     getConfigurationProperties() {
-        return {
+        /** @type {const} */
+        return ({
             label: game.i18n.format("SFRPG.Browsers.EquipmentBrowser.Title"),
             settings: "equipmentBrowser"
-        };
+        });
     }
 
     getPacksToLoad() {
@@ -119,13 +120,14 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     getTags() {
-        return {
+        /** @type {const} */
+        return ({
             level: {
                 name: game.i18n.localize("SFRPG.Browsers.EquipmentBrowser.BrowserSortMethodLevel"),
                 dataKey: "level",
                 sortValue: "level"
             }
-        };
+        });
     }
 
     onFiltersUpdated(html) {
@@ -204,7 +206,7 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     /**
-     * @typedef  {object} FilterObjectEquipment
+     * @typedef {Object} FilterObjectEquipment
      * @property {string[]} equipmentTypes Drawn from SFRPG.itemTypes
      * @property {string[]} weaponTypes Drawn from SFRPG.weaponTypes
      * @property {string[]} weaponCategories Drawn from SFRPG.weaponCategories

@@ -74,6 +74,7 @@
                         "Clumsy": "Clumsy",
                         "Perfect": "Perfect"
                     },
+                    "FlightManeuverability": "Flight Maneuverability",
                     "MainMovementType": "Main Movement",
                     "MovementSpeedNamedTitle": "Movement Speed: {name}",
                     "MovementSpeedTitle": "Movement Speed",
@@ -802,6 +803,7 @@
         "Descriptors": {
             "Acid": "Acid",
             "Air": "Air",
+            "Auditory": "Auditory",
             "Calling": "Calling",
             "CallingDescription": "A calling effect transports a creature from another plane to the plane you are on. The effect grants the creature the one-time ability to return to its plane of origin, although the effect might limit the circumstances under which this is possible. Creatures who are called die if they are killed on the new plane. A called creature can’t be dispelled, even if it was called by magical means.",
             "Chaotic": "Chaotic",
@@ -827,6 +829,7 @@
             "ForceDescription": "A force effect deals full damage to incorporeal creatures and blocks their movement. It also blocks the sense through ability.",
             "Good": "Good",
             "Healing": "Healing",
+            "Illusion": "Illusion",
             "LanguageDependent": "Language Dependent",
             "LanguageDependentDescription": "A language-dependent effect uses intelligible language (either audible, visual, or telepathic) as a medium for communication. If you cannot communicate with the target or the target cannot understand what you are communicating, the effect fails to affect that target.",
             "Lawful": "Lawful",
@@ -1257,6 +1260,9 @@
                     "SpellsPerDayHeader": "Spells Per Day (by spell level)"
                 }
             },
+            "Common": {
+                "DeltaInputTooltip": "Supports optional delta (+/-) input."
+            },
             "Consumables": {
                 "Category": "Tipo Consumíveis"
             },
@@ -1506,8 +1512,8 @@
             "Action": {
                 "AbilityModifier": "Modificador Habilidade",
                 "ActionTarget": {
-                    "AC5": "AC 5",
                     "AC15": "AC 15",
+                    "AC5": "AC 5",
                     "ChatMessage": " against {actionTarget}",
                     "EAC": "EAC",
                     "KAC": "KAC",
@@ -1860,11 +1866,13 @@
         "LanguagesFirstSpeech": "First Speech",
         "LanguagesFrujai": "Frujai",
         "LanguagesGaraggakal": "Garaggakal",
+        "LanguagesGathol": "Gathol",
         "LanguagesGhibran": "Ghibran",
         "LanguagesGhoran": "Ghoran",
         "LanguagesGiant": "Giant",
         "LanguagesGnome": "Gnômico",
         "LanguagesGoblin": "Goblin",
+        "LanguagesGosclaw": "Gosclaw",
         "LanguagesGrioth": "Grioth",
         "LanguagesGytchean": "Gytchean",
         "LanguagesHadrogaan": "Hadrogaan",
@@ -1902,12 +1910,14 @@
         "LanguagesParalithi": "Paralithi",
         "LanguagesPerani": "Perani",
         "LanguagesProtean": "Protean",
+        "LanguagesPsacynoa": "Psacynoa",
         "LanguagesQuorlu": "Quorlu",
         "LanguagesRaxi": "Raxi",
         "LanguagesReptoid": "Reptoid",
         "LanguagesRequian": "Requian",
         "LanguagesSarcesian": "Sarcesiano",
         "LanguagesSazaron": "Sazaron",
+        "LanguagesScreedreep": "Screedreep",
         "LanguagesScyphozoan": "Scyphozoan",
         "LanguagesSelamidian": "Selamidian",
         "LanguagesSeprevoi": "Seprevoi",
@@ -1924,6 +1934,7 @@
         "LanguagesTerran": "Terran",
         "LanguagesTriaxian": "Triaxiano",
         "LanguagesTrinir": "Trinir",
+        "LanguagesTromlin": "Tromlin",
         "LanguagesUrog": "Urog",
         "LanguagesVarratana": "Varratana",
         "LanguagesVercite": "Vercita",
@@ -1931,6 +1942,8 @@
         "LanguagesVlakan": "Vlakan (signed, spoken, and tactile)",
         "LanguagesVulgarKishaleen": "Vulgar Kishaleen",
         "LanguagesWoiokan": "Woiokan",
+        "LanguagesWorlanisi": "Worlanisi",
+        "LanguagesWorlansi": "Worlansi",
         "LanguagesWrikreechee": "Wrikreechee",
         "LanguagesXaarb": "Xaarb",
         "LanguagesYsoki": "Ysoki",
@@ -2328,6 +2341,10 @@
                 "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
                 "Name": "Automatically roll starship critical damage effects"
             },
+            "ChatNotificationDuration": {
+                "Hint": "How long (in MS) to display chat notifications before they are dismissed.",
+                "Name": "Chat Notification Duration"
+            },
             "CombatCards": {
                 "NormalHint": "Alterar quais cartões de bate-papo de combate devem ser exibidos durante o combate normal.",
                 "NormalName": "Combare Normal",
@@ -2465,6 +2482,16 @@
             "WorldSchemaVersion": {
                 "Hint": "Registra a versão do esquema de dados para o sistema Starfinder. AVISO: não edite este valor a menos que você saiba o que está fazendo!",
                 "Name": "Versão do esquema de dados Starfinder"
+            },
+            "rulerColor0": {
+                "Hint": "Colors for the ruler that appears when tokens are dragged across the canvas.",
+                "Name": "Drag Ruler Primary Color"
+            },
+            "rulerColor1": {
+                "Name": "Drag Ruler Secondary Color"
+            },
+            "rulerColor2": {
+                "Name": "Drag Ruler Tertiary Color"
             }
         },
         "ShipFrameLabel": "Plataforma",
@@ -2647,11 +2674,13 @@
         "SkillTooltipSkillRanks": "Grad Pericias: {ranks}",
         "SkillTooltipThemeMod": "Modificador Tema: {mod}",
         "SkillTooltipTrainedClassSkill": "Modificador Perícia Classe Treinada: {mod}",
+        "SkillTrained": "Trained",
         "SkillTrainedOnly": "Apenas Treinado",
         "SkillTrainedOnlyDialog": {
             "Content": "{skill} is a trained only skill, but {name} is not trained in that skill. Would you like to roll anyway?",
             "Title": "{skill} is trained only"
         },
+        "SkillUntrained": "Untrained",
         "SkillsHeaderAbility": "Abl",
         "SkillsHeaderModifier": "Mod",
         "SkillsHeaderName": "Nome",

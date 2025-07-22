@@ -20,6 +20,7 @@
                 opacity: 0.8;
                 padding-right: calc(100% - 24px);
                 cursor: pointer;
+                display: flex;
 
                 .name-label {
                     cursor: pointer;
@@ -30,9 +31,10 @@
                     overflow: hidden;
                     text-overflow: ellipsis;
                     white-space: nowrap;
-                    max-width: calc(100% - 24px);
-                    display: inline-block;
-                    position: absolute;
+                    display: flex;
+                    flex-grow: 1;
+                    flex-shrink: 0;
+                    flex-basis: fit-content;
                     color: white;
                     line-height: 18px;
                 }

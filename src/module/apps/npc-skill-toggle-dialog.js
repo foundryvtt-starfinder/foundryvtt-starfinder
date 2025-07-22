@@ -35,7 +35,7 @@ export class NpcSkillToggleDialog extends Dialog {
             }
         }
 
-        const html = await renderTemplate("systems/sfrpg/templates/apps/npc-skill-toggle.hbs", {
+        const html = await foundry.applications.handlebars.renderTemplate("systems/sfrpg/templates/apps/npc-skill-toggle.hbs", {
             skillNames,
             skills
         });

@@ -24,7 +24,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
         const data = await super.getData();
 
         // Enrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.description.value, {
+        data.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.description.value, {
             async: true,
             rollData: this.actor.getRollData() ?? {},
             secrets: this.actor.isOwner

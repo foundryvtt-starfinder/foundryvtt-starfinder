@@ -12,7 +12,7 @@ export function extendDragData() {
             const message = game.messages.get(messageId ?? "");
             if (!message) return;
 
-            const actor = ChatMessage.getSpeakerActor(message.speaker);
+            const actor = getDocumentClass("ChatMessage").getSpeakerActor(message.speaker);
             if (!actor) return;
             const roll = message.rolls.at(-1);
 

@@ -2,9 +2,21 @@
     "typeAcquisition": {
         "include": ["jquery", "handlebars", "glob"]
     },
-    "exclude": ["node_modules", "dist"],
-    "include": ["src/**/*"],
+    "exclude": ["node_modules", "dist", "**/node_modules/*"],
+    "include": [
+        "src/**/*",
+        "src/sfrpg.js",
+        "src/globals.d.ts",
+        "foundry/client/client.mjs",
+        "foundry/client/global.d.mts"
+    ],
     "compilerOptions": {
-        "sourceMap": true
-    },
+        "sourceMap": true,
+        "module": "ES2022",
+        "target": "ES2022",
+        "paths": {
+            "@client/*": ["./foundry/client/*"],
+            "@common/*": ["./foundry/common/*"]
+        }
+    }
 }

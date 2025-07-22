@@ -49,18 +49,17 @@
         }
 
         p button {
-            margin: 5px 0px;
+            margin: 2px 0px;
             background-color: @sfrpgRed;
             border-color: #000000;
             color: #ffffff;
             font-size: var(--font-size-12);
             height: 20px;
-            width: 60px;
-            line-height: inherit;
+            width: 100px;
         }
 
         p button.chat-button-save {
-            margin: 5px 0px;
+            margin: 2px 0px;
             background-color: grey;
             border-color: black;
             color: #ffffff;
@@ -108,6 +107,10 @@
     h2 {
         font-weight: bold;
         text-align: center;
+
+        &.card-label {
+            font-size: var(--font-size-20);
+        }
     }
 
     div.chat-card-custom-container {
@@ -118,6 +121,7 @@
     }
 
     div.dice-roll {
+        flex-direction: row;
         .dice-formula {
             font-weight: bold;
             background-color: rgba(0, 0, 0, 0.5);

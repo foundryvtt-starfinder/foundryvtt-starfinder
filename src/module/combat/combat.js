@@ -44,7 +44,7 @@ Vehicle has the following 3 phases: "Pilot Actions", "Chase Progress", and "Comb
 
 */
 
-export class CombatSFRPG extends Combat {
+export class CombatSFRPG extends foundry.documents.Combat {
     static HiddenTurn = 0;
 
     /**
@@ -81,7 +81,8 @@ export class CombatSFRPG extends Combat {
             "flags.sfrpg.startTime": game.time.worldTime,
             "flags.sfrpg.combatType": this.getCombatType(),
             "flags.sfrpg.phase": 0,
-            "round": 1
+            "round": 1,
+            "turn": 0
         };
 
         await this.update(update);
@@ -123,6 +124,8 @@ export class CombatSFRPG extends Combat {
 
     // Override to account for ascending or descending turn order.
     setupTurns() {
+        this.turns ||= [];
+
         const sortMethod = {
             "normal": CombatSFRPG.normalCombat.initiativeSorting,
             "starship": CombatSFRPG.starshipCombat.initiativeSorting,
@@ -134,12 +137,7 @@ export class CombatSFRPG extends Combat {
 
         // Update state tracking
         const c = turns[this.turn];
-        this.current = {
-            round: this.round,
-            turn: this.turn,
-            combatantId: c ? c.id : null,
-            tokenId: c ? c.tokenId : null
-        };
+        this.current = this._getCurrentState(c);
 
         // One-time initialization of the previous state
         if ( !this.previous ) this.previous = this.current;
@@ -159,7 +157,7 @@ export class CombatSFRPG extends Combat {
         const updateOptions = {};
         const currentPhase = this.getCurrentPhase();
         if (currentPhase.resetInitiative) {
-            ui.notifications.error(game.i18n.format(CombatSFRPG.errors.historyLimitedResetInitiative), {permanent: false});
+            ui.notifications.error(CombatSFRPG.errors.historyLimitedResetInitiative, {permanent: false, localize: true});
             return;
         }
 
@@ -188,7 +186,7 @@ export class CombatSFRPG extends Combat {
                 nextPhase = this.getPhases().length - 1;
                 nextRound -= 1;
                 if (nextRound <= 0) {
-                    ui.notifications.error(game.i18n.format(CombatSFRPG.errors.historyLimitedStartOfEncounter), {permanent: false});
+                    ui.notifications.error(CombatSFRPG.errors.historyLimitedStartOfEncounter, {permanent: false, localize: true});
                     return;
                 }
             }
@@ -227,7 +225,7 @@ export class CombatSFRPG extends Combat {
         const phases = this.getPhases();
         const currentPhase = phases[this.flags.sfrpg.phase];
         if (currentPhase.resetInitiative && this.hasCombatantsWithoutInitiative()) {
-            ui.notifications.error(game.i18n.format(CombatSFRPG.errors.missingInitiative), {permanent: false});
+            ui.notifications.error(CombatSFRPG.errors.missingInitiative, {permanent: false, localize: true});
             return;
         }
 
@@ -477,7 +475,7 @@ export class CombatSFRPG extends Combat {
 
         // Render the chat card template
         const template = `systems/sfrpg/templates/chat/combat-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {
@@ -516,7 +514,7 @@ export class CombatSFRPG extends Combat {
 
         // Render the chat card template
         const template = `systems/sfrpg/templates/chat/combat-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {
@@ -554,7 +552,7 @@ export class CombatSFRPG extends Combat {
 
         // Render the chat card template
         const template = `systems/sfrpg/templates/chat/combat-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {
@@ -651,7 +649,7 @@ export class CombatSFRPG extends Combat {
             combatTypeControls.innerHTML = this.getCombatName();
         }
 
-        html.getElementsByClassName('combat-tracker-header')[0].appendChild(combatTypeControls);
+        html.appendChild(combatTypeControls);
     }
 
     renderDifficulty(diffObject, html) {
@@ -762,10 +760,17 @@ export class CombatSFRPG extends Combat {
                 flags: {"core.initiativeRoll": true}
             }, messageOptions);
 
+            // Prepare roll formula explanation
             const preparedRollExplanation = DiceSFRPG.formatFormula(roll.flags.sfrpg.finalFormula.formula);
-            const rollContent = await roll.render();
-            const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-            const explainedRollContent = rollContent.substring(0, insertIndex) + preparedRollExplanation + rollContent.substring(insertIndex);
+            const preparedRollExplanationElement = document.createElement("div");
+            preparedRollExplanationElement.innerHTML = preparedRollExplanation;
+
+            // Created a div with the roll output sent to a div. Add the roll formula explanation to this div and convert back to text.
+            const rollContentElement = document.createElement("div");
+            rollContentElement.innerHTML = await roll.render();
+            const tooltipPart = rollContentElement.querySelector(".tooltip-part");
+            tooltipPart.prepend(preparedRollExplanationElement);
+            const explainedRollContent = rollContentElement.innerHTML;
 
             rollMode = roll.options?.rollMode ?? rollMode;
 
@@ -908,6 +913,10 @@ async function onConfigClicked(combat, direction) {
     await combat.update(update);
 }
 
+Hooks.on('combatStart', (combat) => {
+    combat.begin();
+});
+
 Hooks.on('renderCombatTracker', (app, html, data) => {
     const activeCombat = data.combat;
     if (!activeCombat) {
@@ -916,35 +925,29 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
 
     const combatType = activeCombat.getCombatType();
 
-    const header = html.find('.combat-tracker-header');
-    const footer = html.find('.directory-footer');
+    const header = html.querySelector('.combat-tracker-header');
+    const footer = html.querySelector('.combat-controls');
 
-    if (activeCombat.round) {
+    if (activeCombat.round > 0) {
         const phases = activeCombat.getPhases();
         if (phases.length > 1) {
-            activeCombat.renderCombatPhase(html[0]);
+            activeCombat.renderCombatPhase(html);
         }
     } else {
         // Add buttons for switching combat type
-        activeCombat.renderCombatTypeControls(html[0]);
+        activeCombat.renderCombatTypeControls(header);
 
         // Handle button clicks
-        const configureButtonPrev = header.find('.combat-type-prev');
-        configureButtonPrev.click(ev => {
+        const configureButtonPrev = header.querySelector('.combat-type-prev');
+        configureButtonPrev.addEventListener('click', ev => {
             ev.preventDefault();
             onConfigClicked(activeCombat, -1);
         });
 
-        const configureButtonNext = header.find('.combat-type-next');
-        configureButtonNext.click(ev => {
+        const configureButtonNext = header.querySelector('.combat-type-next');
+        configureButtonNext.addEventListener('click', ev => {
             ev.preventDefault();
             onConfigClicked(activeCombat, 1);
-        });
-
-        const beginButton = footer.find('.combat-control[data-control=startCombat]');
-        beginButton.click(ev => {
-            ev.preventDefault();
-            activeCombat.begin();
         });
     }
 
@@ -959,11 +962,11 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         else if (combatType === "starship") diffObject.getStarshipEncounterInfo();
 
         // Display difficulty
-        activeCombat.renderDifficulty(diffObject, html[0]);
+        activeCombat.renderDifficulty(diffObject, html);
 
         // Handle button presses
-        const difficultyButton = header.find('.combat-difficulty');
-        difficultyButton.click(async ev => {
+        const difficultyButton = header.querySelector('.combat-difficulty');
+        difficultyButton.addEventListener('click', ev => {
             ev.preventDefault();
             diffObject.render(true);
         });

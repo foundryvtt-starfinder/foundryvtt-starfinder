@@ -7,7 +7,7 @@
         {{#if isPhysical}}
         <div class="form-group">
             <label>{{ localize "SFRPG.Items.Description.Quantity" }}</label>
-            <input type="text" name="system.quantity" value="{{itemData.quantity}}" data-dtype="Number"/>
+            <input type="text" name="system.quantity" value="{{itemData.quantity}}" data-dtype="String" data-tooltip="{{localize "SFRPG.ItemSheet.Common.DeltaInputTooltip"}}"/>
         </div>
 
         <div class="form-group flexrow" {{createTippy title="SFRPG.Items.Description.QuantityPerPack" subtitle="SFRPG.Items.Description.QuantityPerPackTooltip"}}>

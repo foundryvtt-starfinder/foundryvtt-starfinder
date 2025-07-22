@@ -121,7 +121,12 @@ export class ItemCollectionSheet extends DocumentSheet {
         // Ensure containers are always open in loot collection tokens
         for (const itemData of data.items) {
             if (itemData.contents && itemData.contents.length > 0) {
-                itemData.item.isOpen = true;
+                itemData.item.config = { "isOpen": true};
+                for (const child of itemData.contents) {
+                    if (child.contents && child.contents.length > 0) {
+                        child.item.config = { "isOpen": true};
+                    }
+                }
             }
         }
 
@@ -283,7 +288,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         htmlOptions.rollData ||= (this.actor.getRollData() ?? {});
 
         // Rich text description
-        data.system.description.value = await TextEditor.enrichHTML(data.system.description.value, htmlOptions);
+        data.system.description.value = await foundry.applications.ux.TextEditor.enrichHTML(data.system.description.value, htmlOptions);
 
         // Item type specific properties
         const props = [];
@@ -328,7 +333,7 @@ export class ItemCollectionSheet extends DocumentSheet {
      */
     _onEditImage(event) {
         const attr = event.currentTarget.dataset.edit;
-        const current = getProperty(this.document, attr);
+        const current = foundry.utils.getProperty(this.document, attr);
         new FilePicker({
             type: "image",
             current: current,

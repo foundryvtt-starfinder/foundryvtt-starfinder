@@ -33,7 +33,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         this._getHangarBayData(data);
 
         // Encrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.description.value, {
+        data.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.description.value, {
             async: true,
             rollData: this.actor.getRollData() ?? {},
             secrets: this.actor.isOwner
@@ -242,21 +242,10 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onDrop(event) {
         event.preventDefault();
 
-        // let data;
-        // try {
-        //     data = JSON.parse(event.dataTransfer.getData('text/plain'));
-        //     if (!data) {
-        //         return false;
-        //     }
-        // } catch (err) {
-        //     return false;
-        // }
-
         const data = TextEditor.getDragEventData(event);
-        if (!data) return false;
-
-        // Case - Dropped Actor
-        if (data.type === "Actor") {
+        if (Hooks.call('dropActorSheetData', this.actor, this, data) === false) {
+            // Further processing halted
+        } else if (data.type === "Actor") {
             const actor = await Actor.fromDropData(data);
 
             // Other vehicles are only acceptable if this vehicle has 1 or more hangar bays
@@ -503,7 +492,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {
@@ -548,7 +537,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {

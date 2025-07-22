@@ -1,24 +1,24 @@
 <form autocomplete="off">
     <p class="notes">{{ localize "SFRPG.ActorSheet.Attributes.Speed.MovementSpeedTitle" }}</p>
-    <div class="form-group">
+    <div class="form-group" data-tooltip-class="wide-tooltip" data-tooltip="{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land"}} | @attributes.speed.land.value">
         <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land" }}</label>
         <div class="form-fields">
             <input name="system.attributes.speed.land.base" type="number" step="0.1" value="{{system.attributes.speed.land.base}}"/>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" data-tooltip-class="wide-tooltip" data-tooltip="{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing"}} | @attributes.speed.burrowing.value">
         <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing" }}</label>
         <div class="form-fields">
             <input name="system.attributes.speed.burrowing.base" type="number" step="0.1" value="{{system.attributes.speed.burrowing.base}}"/>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" data-tooltip-class="wide-tooltip" data-tooltip="{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing"}} | @attributes.speed.climbing.value">
         <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing" }}</label>
         <div class="form-fields">
             <input name="system.attributes.speed.climbing.base" type="number" step="0.1" value="{{system.attributes.speed.climbing.base}}"/>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" data-tooltip-class="wide-tooltip" data-tooltip="{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying"}} | @attributes.speed.flying.value<br>{{localize "SFRPG.ActorSheet.Attributes.Speed.FlightManeuverability"}} | @attributes.speed.flying.maneuverability">
         <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }}</label>
         <div class="form-fields">
             <input name="system.attributes.speed.flying.base" type="number" step="0.1" value="{{system.attributes.speed.flying.base}}"/>
@@ -27,19 +27,19 @@
             </select>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" data-tooltip-class="wide-tooltip" data-tooltip="{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming"}} | @attributes.speed.swimming.value">
         <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming" }}</label>
         <div class="form-fields">
             <input name="system.attributes.speed.swimming.base" type="number" step="0.1" value="{{system.attributes.speed.swimming.base}}"/>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" data-tooltip-class="wide-tooltip" data-tooltip="{{localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special"}} | @attributes.speed.special">
         <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special" }}</label>
         <div class="form-fields">
             <input type="text" class="speed" name="system.attributes.speed.special" value="{{system.attributes.speed.special}}" placeholder="{{ localize 'SFRPG.SpeedSpecial' }}" />
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group"  data-tooltip-class="wide-tooltip" data-tooltip="{{ localize "SFRPG.ActorSheet.Attributes.Speed.MainMovementType" }} | @attributes.speed.mainMovement">
         <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.MainMovementType" }}</label>
         <div class="form-fields">
             <select name="system.attributes.speed.mainMovement">
