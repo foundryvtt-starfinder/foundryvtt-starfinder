@@ -166,7 +166,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
         const activeMovementType = movementOptionsInverted[waypoint.action];
         let value = 0;
         const hasActor = this.token?.actor ? true : false;
-        const actorSpeed = hasActor ? this.token.actor.system.attributes.speed : false;
+        const actorSpeed = hasActor ? (this.token.actor.system.attributes.speed ?? null) : false;
         switch (waypoint.action) {
             case "crawl":
                 value = hasActor ? 5 : Infinity;
@@ -177,8 +177,10 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
             default:
                 if (hasActor && this.token.actor.type === "starship") {
                     value = hasActor ? actorSpeed.value : Infinity;
+                } else if (hasActor && actorSpeed) {
+                    value = actorSpeed[activeMovementType]?.value ?? Infinity;
                 } else {
-                    value = hasActor ? actorSpeed[activeMovementType]?.value ?? Infinity : Infinity;
+                    value = Infinity;
                 }
                 break;
         }
