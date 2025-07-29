@@ -229,8 +229,12 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         if (this.type === "starship") {
             updates.prototypeToken = {movementAction: "fly"};
         } else if (CONFIG.SFRPG.actorsCharacterScale.includes(this.type)) {
-            const mainMovementAction = CONFIG.SFRPG.movementOptions[this.system.attributes.speed.mainMovement] ?? null;
+            const mainMovementAction = CONFIG.SFRPG.movementOptions[this.system.attributes?.speed?.mainMovement] ?? null;
             updates.prototypeToken = {movementAction: mainMovementAction};
+        }
+        if (game.settings.get("sfrpg", "lockArtworkRotationDefault") && CONFIG.SFRPG.actorsCharacterScale.includes(this.type)) {
+            updates.prototypeToken = foundry.utils.mergeObject(updates.prototypeToken ?? {}, { lockRotation : true });
+            console.error(updates);
         }
 
         this.updateSource(updates);

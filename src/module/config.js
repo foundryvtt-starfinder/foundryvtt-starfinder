@@ -28,7 +28,8 @@ SFRPG.actorsCharacterScale = [
     "character",
     "drone",
     "npc",
-    "npc2"
+    "npc2",
+    "hazard"
 ];
 
 /**
