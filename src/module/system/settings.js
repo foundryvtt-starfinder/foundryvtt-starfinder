@@ -336,8 +336,8 @@ export const registerSystemSettings = function() {
         type: Boolean,
         onChange: async (value) => {
             const confirmed = await Dialog.confirm({
-                title: "Artwork Rotation Default",
-                content: "<p>Do you want to apply this setting change to all actors?</p>",
+                title: game.i18n.localize("SFRPG.Settings.LockArtworkRotationDefault.ConfirmationTitle"),
+                content: game.i18n.localize("SFRPG.Settings.LockArtworkRotationDefault.ConfirmationText"),
                 yes: () => true,
                 no: () => false,
                 defaultYes: false

@@ -232,9 +232,10 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             const mainMovementAction = CONFIG.SFRPG.movementOptions[this.system.attributes?.speed?.mainMovement] ?? null;
             updates.prototypeToken = {movementAction: mainMovementAction};
         }
+
+        // Lock artwork rotation if setting is enabled and actor is a character/drone/npc/hazard
         if (game.settings.get("sfrpg", "lockArtworkRotationDefault") && CONFIG.SFRPG.actorsCharacterScale.includes(this.type)) {
             updates.prototypeToken = foundry.utils.mergeObject(updates.prototypeToken ?? {}, { lockRotation : true });
-            console.error(updates);
         }
 
         this.updateSource(updates);
