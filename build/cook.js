@@ -7,7 +7,7 @@ import url from "node:url";
 import isObject from "../src/module/utils/is-object.js";
 import LevelDatabase from "./lib/level-database.js";
 import { unpackPacks } from "./unpack.js";
-import { duplicate, getManifest, measureTime } from "./util.js";
+import { getManifest, measureTime } from "./util.js";
 
 let cookErrorCount = 0;
 let cookAborted = false;
@@ -103,7 +103,7 @@ export async function cook() {
 
                 if (!limitToPack || directory === limitToPack) {
                 // sanitize the incoming JSON
-                    sanitizeJSON(jsonInput);
+                    sanitizeJSON(jsonInput, true);
 
                     // Fix missing images
                     if (!jsonInput.img && !jsonInput.pages) {
@@ -160,14 +160,13 @@ export async function cook() {
             return [];
         })();
 
-        readPromises.push(parsedFolders);
-
         await Promise.all(readPromises); // While this does block the loop, unblocking this causes a "too many files open" error.
 
         if (!limitToPack || directory === limitToPack) {
             const packName = path.basename(outputDir);
             const db = new LevelDatabase(outputDir, { packName });
-            promises.push(db.createPack(parsedFiles, parsedFolders, packName));
+            promises.push(db.createPack(parsedFiles, await parsedFolders, packName));
+
         }
     }
 
@@ -225,18 +224,18 @@ export function sanitizeJSON(jsonInput) {
         delete item.sort;
         if (!item.folder) delete item.folder;
 
-        item._stats = {
-            coreVersion: manifest.compatibility.minimum,
-            systemId: "sfrpg",
-            systemVersion: manifest.version
-        };
-
         delete item.permission;
         delete item.ownership;
         delete item.effects;
 
         delete item.flags?.exportSource;
         delete item.flags?.sourceId;
+
+        item._stats = {
+            coreVersion: manifest.compatibility.minimum,
+            systemId: "sfrpg",
+            systemVersion: manifest.version
+        };
 
         // Remove leading or trailing spaces
         item.name = item.name.trim();

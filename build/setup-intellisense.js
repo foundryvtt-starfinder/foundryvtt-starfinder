@@ -27,17 +27,23 @@ try {
 }
 
 // Javascript files
-for (const p of ["client", "common", "tsconfig.json"]) {
+for (const p of ["client", "common"]) {
     try {
-        await fs.promises.symlink(path.join(fileRoot, p), path.join("foundry", p));
+        await fs.promises.symlink(path.join(fileRoot, p), path.join("foundry", p), 'dir');
     } catch (e) {
         if (e.code !== "EEXIST") throw e;
     }
 }
 
+try {
+    await fs.promises.symlink(path.join(fileRoot, "tsconfig.json"), path.join("foundry", "tsconfig.json"), 'file');
+} catch (e) {
+    if (e.code !== "EEXIST") throw e;
+}
+
 // Language files
 try {
-    await fs.promises.symlink(path.join(fileRoot, "public", "lang"), path.join("foundry", "lang"));
+    await fs.promises.symlink(path.join(fileRoot, "public", "lang"), path.join("foundry", "lang"), 'dir');
 } catch (e) {
     if (e.code !== "EEXIST") throw e;
 }
