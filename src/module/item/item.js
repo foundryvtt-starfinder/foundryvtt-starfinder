@@ -11,9 +11,13 @@ import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
 /** @import { RollResult } from '../dice.js' */
-
 /** @extends {foundry.documents.Item} */
-export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin) {
+
+// Used document classes
+const ChatMessage = foundry.documents.ChatMessage;
+const Item = foundry.documents.Item;
+
+export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
     constructor(data, context = {}) {
         // Set module art if available. This applies art to items viewed or created from compendiums.
@@ -186,23 +190,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             if (tgt.value && tgt.value === "") tgt.value = null;
 
             labels.target = [tgt.value].filterJoin(" ");
-
-            /* let area = data.area || {};
-            if (typeof area.value === 'number' && area.value === 0) area.value = null;
-
-            if (area.units === "text") labels.area = String(area.value || "")?.trim();
-            else labels.area = [area.total || area.value, C.distanceUnits[area.units] || null, C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
-
-            // Range Label
-            /* let rng = data.range || {};
-            labels.range = [rng.value || "", C.distanceUnits[rng.units]].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
-
-            // Duration Label
-            /* let dur = data.duration || {};
-            labels.duration = [dur.value].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
         }
 
         // Item Actions
@@ -387,78 +374,11 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         };
 
         if (this.type === "spell") {
-            let descriptionText = foundry.utils.deepClone(templateData.system.description.short || templateData.system.description.value);
-            if (descriptionText?.length > 0) {
-                // Alter description by removing non-eligble level tags.
-                const levelTags = [
-                    {level: 0, tag: "level_0"},
-                    {level: 1, tag: "level_1"},
-                    {level: 2, tag: "level_2"},
-                    {level: 3, tag: "level_3"},
-                    {level: 4, tag: "level_4"},
-                    {level: 5, tag: "level_5"},
-                    {level: 6, tag: "level_6"}
-                ];
-
-                for (const {level, tag} of levelTags) {
-                    const shouldShowEx = level === this.system.level;
-                    const startTagEx = `[${tag}_only]`;
-                    const endTagEx = `[/${tag}_only]`;
-
-                    const shouldShowInc = level <= this.system.level;
-                    const startTagInc = `[${tag}]`;
-                    const endTagInc = `[/${tag}]`;
-
-                    if (shouldShowEx) {
-                        let tagStartIndex = descriptionText.indexOf(startTagEx);
-                        while (tagStartIndex !== -1) {
-                            descriptionText = descriptionText.replace(startTagEx, "");
-                            tagStartIndex = descriptionText.indexOf(startTagEx);
-                        }
-
-                        let tagEndIndex = descriptionText.indexOf(endTagEx);
-                        while (tagEndIndex !== -1) {
-                            descriptionText = descriptionText.replace(endTagEx, "");
-                            tagEndIndex = descriptionText.indexOf(endTagEx);
-                        }
-                    } else {
-                        let tagStartIndex = descriptionText.indexOf(startTagEx);
-                        let tagEndIndex = descriptionText.indexOf(endTagEx);
-                        while (tagStartIndex !== -1 && tagEndIndex !== -1) {
-                            descriptionText = descriptionText.substr(0, tagStartIndex) + descriptionText.substr(tagEndIndex + endTagEx.length);
-                            tagStartIndex = descriptionText.indexOf(startTagEx);
-                            tagEndIndex = descriptionText.indexOf(endTagEx);
-                        }
-                    }
-
-                    if (shouldShowInc) {
-                        let tagStartIndex = descriptionText.indexOf(startTagInc);
-                        while (tagStartIndex !== -1) {
-                            descriptionText = descriptionText.replace(startTagInc, "");
-                            tagStartIndex = descriptionText.indexOf(startTagInc);
-                        }
-
-                        let tagEndIndex = descriptionText.indexOf(endTagInc);
-                        while (tagEndIndex !== -1) {
-                            descriptionText = descriptionText.replace(endTagInc, "");
-                            tagEndIndex = descriptionText.indexOf(endTagInc);
-                        }
-                    } else {
-                        let tagStartIndex = descriptionText.indexOf(startTagInc);
-                        let tagEndIndex = descriptionText.indexOf(endTagInc);
-                        while (tagStartIndex !== -1 && tagEndIndex !== -1) {
-                            descriptionText = descriptionText.substr(0, tagStartIndex) + descriptionText.substr(tagEndIndex + endTagInc.length);
-                            tagStartIndex = descriptionText.indexOf(startTagInc);
-                            tagEndIndex = descriptionText.indexOf(endTagInc);
-                        }
-                    }
-                }
-
-                if (templateData.system.description.short) {
-                    templateData.system.description.short = descriptionText;
-                } else {
-                    templateData.system.description.value = descriptionText;
-                }
+            const descriptionText = this._getSpellDescriptionText(templateData);
+            if (templateData.system.description.short) {
+                templateData.system.description.short = descriptionText;
+            } else {
+                templateData.system.description.value = descriptionText;
             }
         }
 
@@ -490,6 +410,82 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         // Create the chat message
         return ChatMessage.create(chatData, { displaySheet: false });
+    }
+
+    /**
+     * Helper method for managing descriptive text for spell items sent to chat
+     * @param {Object} templateData     Data for rendering the chat card template
+     * @return {String}
+     */
+    _getSpellDescriptionText(templateData) {
+        let descriptionText = foundry.utils.deepClone(templateData.system.description.short || templateData.system.description.value);
+        if (descriptionText?.length > 0) {
+            // Alter description by removing non-eligble level tags.
+            const levelTags = [
+                {level: 0, tag: "level_0"},
+                {level: 1, tag: "level_1"},
+                {level: 2, tag: "level_2"},
+                {level: 3, tag: "level_3"},
+                {level: 4, tag: "level_4"},
+                {level: 5, tag: "level_5"},
+                {level: 6, tag: "level_6"}
+            ];
+
+            for (const {level, tag} of levelTags) {
+                const shouldShowEx = level === this.system.level;
+                const startTagEx = `[${tag}_only]`;
+                const endTagEx = `[/${tag}_only]`;
+
+                const shouldShowInc = level <= this.system.level;
+                const startTagInc = `[${tag}]`;
+                const endTagInc = `[/${tag}]`;
+
+                if (shouldShowEx) {
+                    let tagStartIndex = descriptionText.indexOf(startTagEx);
+                    while (tagStartIndex !== -1) {
+                        descriptionText = descriptionText.replace(startTagEx, "");
+                        tagStartIndex = descriptionText.indexOf(startTagEx);
+                    }
+
+                    let tagEndIndex = descriptionText.indexOf(endTagEx);
+                    while (tagEndIndex !== -1) {
+                        descriptionText = descriptionText.replace(endTagEx, "");
+                        tagEndIndex = descriptionText.indexOf(endTagEx);
+                    }
+                } else {
+                    let tagStartIndex = descriptionText.indexOf(startTagEx);
+                    let tagEndIndex = descriptionText.indexOf(endTagEx);
+                    while (tagStartIndex !== -1 && tagEndIndex !== -1) {
+                        descriptionText = descriptionText.substr(0, tagStartIndex) + descriptionText.substr(tagEndIndex + endTagEx.length);
+                        tagStartIndex = descriptionText.indexOf(startTagEx);
+                        tagEndIndex = descriptionText.indexOf(endTagEx);
+                    }
+                }
+
+                if (shouldShowInc) {
+                    let tagStartIndex = descriptionText.indexOf(startTagInc);
+                    while (tagStartIndex !== -1) {
+                        descriptionText = descriptionText.replace(startTagInc, "");
+                        tagStartIndex = descriptionText.indexOf(startTagInc);
+                    }
+
+                    let tagEndIndex = descriptionText.indexOf(endTagInc);
+                    while (tagEndIndex !== -1) {
+                        descriptionText = descriptionText.replace(endTagInc, "");
+                        tagEndIndex = descriptionText.indexOf(endTagInc);
+                    }
+                } else {
+                    let tagStartIndex = descriptionText.indexOf(startTagInc);
+                    let tagEndIndex = descriptionText.indexOf(endTagInc);
+                    while (tagStartIndex !== -1 && tagEndIndex !== -1) {
+                        descriptionText = descriptionText.substr(0, tagStartIndex) + descriptionText.substr(tagEndIndex + endTagInc.length);
+                        tagStartIndex = descriptionText.indexOf(startTagInc);
+                        tagEndIndex = descriptionText.indexOf(endTagInc);
+                    }
+                }
+            }
+        }
+        return descriptionText;
     }
 
     /* -------------------------------------------- */
