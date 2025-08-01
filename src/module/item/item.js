@@ -354,7 +354,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
      * @return {Promise}
      */
-    async roll() {
+    async toChat() {
 
         // Basic template rendering data
         const token = this.actor.token;
