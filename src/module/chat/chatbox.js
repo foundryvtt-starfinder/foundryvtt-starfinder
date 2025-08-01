@@ -21,14 +21,15 @@ export default class SFRPGChatMessage {
     /**
      * Render a custom standard roll to chat.
      *
-     * @param {Roll}        roll             The roll data
-     * @param {object}      data             The data for the roll
-     * @param {RollContext} data.rollContent The context for the roll
-     * @param {string}      [data.title]     The chat card title
-     * @param {SpeakerData} [data.speaker]   The speaker for the ChatMesage
-     * @param {string}      [data.rollMode]  The roll mode
-     * @param {string}      [data.breakdown] An explanation for the roll and it's modifiers
-     * @param {Tag[]}       [data.tags]      Any item metadata that will be output at the bottom of the chat card.
+     * @param {Roll}        roll                The roll data
+     * @param {object}      data                The data for the roll
+     * @param {RollContext} data.rollContent    The context for the roll
+     * @param {string}      [data.title]        The chat card title
+     * @param {SpeakerData} [data.speaker]      The speaker for the ChatMesage
+     * @param {string}      [data.rollMode]     The roll mode specified in the roll dialog
+     * @param {string}      [data.breakdown]    An explanation for the roll and it's modifiers
+     * @param {string}      [data.template]     The chat card handlebars filename
+     * @param {Tag[]}       [data.tags]         Any item metadata that will be output at the bottom of the chat card.
      */
     static renderStandardRoll(roll, data) {
         /** Get entities */
@@ -102,13 +103,13 @@ export default class SFRPGChatMessage {
             type: CONST.CHAT_MESSAGE_STYLES.OTHER
         };
 
-        const templateName = "systems/sfrpg/templates/chat/attack-card.hbs";
-        SFRPGChatMessage._render(roll, data, templateName, options);
+        const template = data.template ?? "systems/sfrpg/templates/chat/attack-card.hbs";
+        SFRPGChatMessage._renderRoll(roll, data, template, options);
 
         return true;
     }
 
-    static async _render(roll, data, templateName, options) {
+    static async _renderRoll(roll, data, templateName, options) {
         let rollContent = await roll.render({htmlData: data.htmlData, customTooltip: options.rollDice});
 
         // Insert the damage type string if possible.
@@ -125,10 +126,10 @@ export default class SFRPGChatMessage {
         const cardContent = await foundry.applications.handlebars.renderTemplate(templateName, options);
         const rollMode = data.rollMode ?? game.settings.get('core', 'rollMode');
 
-        const messageData = {
+        let messageData = {
             flavor: data.title,
             speaker: data.speaker,
-            content: cardContent, // + explainedRollContent + (options.additionalContent || ""),
+            content: cardContent,
             rolls: [roll],
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice,
@@ -151,6 +152,7 @@ export default class SFRPGChatMessage {
             messageData.flags.rollOptions = options.rollOptions;
         }
 
-        ChatMessage.create(messageData, { rollMode: rollMode });
+        messageData = ChatMessage.applyRollMode(messageData, rollMode);
+        ChatMessage.create(messageData);
     }
 }

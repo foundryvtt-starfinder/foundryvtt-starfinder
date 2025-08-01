@@ -261,8 +261,8 @@ export class DiceSFRPG {
             if (chatMessage) {
                 // Push the roll to the ChatBox
                 const chatMessageData = {
-                    title: title,
-                    flavor: flavor,
+                    title,
+                    flavor,
                     rollContext,
                     speaker,
                     rollMode: rollInfo.mode,
@@ -271,7 +271,7 @@ export class DiceSFRPG {
                     rollType,
                     rollOptions,
                     rollDice: finalFormula.rollDice,
-                    tags: tags
+                    tags
                 };
 
                 SFRPGChatMessage.renderStandardRoll(roll, chatMessageData);

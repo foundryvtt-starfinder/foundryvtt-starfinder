@@ -9,6 +9,7 @@ import StackModifiers from "../rules/closures/stack-modifiers.js";
 import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
+import SFRPGChatMessage from "../chat/chatbox.js";
 
 /** @import { RollResult } from '../dice.js' */
 /** @extends {foundry.documents.Item} */
@@ -351,7 +352,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     /* -------------------------------------------- */
 
     /**
-     * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
+     * Send the item to chat, creating a chat card which contains follow up attack or damage roll options
      * @return {Promise}
      */
     async toChat() {
@@ -385,13 +386,13 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Render the chat card template
         const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
         const template = `systems/sfrpg/templates/chat/${templateType}-card.hbs`;
-        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
+        const chatCardBodyHtml = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Basic chat message data
-        const chatData = {
+        let chatData = {
             author: game.user.id,
             style: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            content: html,
+            content: chatCardBodyHtml,
             flags: {
                 core: {
                     canPopout: true
@@ -405,11 +406,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
 
-        const rollMode = game.settings.get("core", "rollMode");
-        ChatMessage.applyRollMode(chatData, rollMode);
-
         // Create the chat message
-        return ChatMessage.create(chatData, { displaySheet: false });
+        const rollMode = game.settings.get("core", "rollMode");
+        chatData = ChatMessage.applyRollMode(chatData, rollMode);
+        return ChatMessage.create(chatData);
     }
 
     /**
