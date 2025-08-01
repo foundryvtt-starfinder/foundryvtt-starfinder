@@ -1,10 +1,12 @@
 import { DiceSFRPG } from "../dice.js";
 import { ItemSFRPG } from "../item/item.js";
 
+const ChatMessage = foundry.documents.ChatMessage;
+
 /**
  * Helper class to handle the display of chatBox
  */
-export default class SFRPGCustomChatMessage {
+export default class SFRPGChatMessage {
 
     static getToken(actor) {
         if (actor.token) {
@@ -74,40 +76,40 @@ export default class SFRPGCustomChatMessage {
         }
 
         const options = {
-            item: item,
+            actorId: actor.id,
+            ammoLeft: currentCapacity,
+            breakdown: data.breakdown,
+            damageTypeString: data.damageTypeString,
+            dataRoll: roll,
+            flavor: data.flavor,
             hasDamage: data.rollType !== "damage" && (item.hasDamage || false),
             hasSave: item.hasSave || false,
             hasSkill: item.hasSkill || false,
             hasArea: item.hasArea || false,
             hasCapacity: hasCapacity,
-            ammoLeft: currentCapacity,
-            title: data.title ? data.title : 'Roll',
-            flavor: data.flavor,
+            item: item,
             rawTitle: data.speaker.alias,
-            dataRoll: roll,
-            rollType: data.rollType,
+            rollDice: data.rollDice,
             rollNotes: data.htmlData?.find(x => x.name === "rollNotes")?.value,
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            rollOptions: data.rollOptions,
+            rollType: data.rollType,
+            specialMaterials: data.specialMaterials,
+            tags: data.tags,
+            title: data.title ? data.title : 'Roll',
+            tokenId: this.getToken(actor),
             tokenImg: tokenImg || actor.token?.img || actor.img,
             tokenName: tokenName,
-            actorId: actor.id,
-            tokenId: this.getToken(actor),
-            breakdown: data.breakdown,
-            tags: data.tags,
-            damageTypeString: data.damageTypeString,
-            specialMaterials: data.specialMaterials,
-            rollOptions: data.rollOptions,
-            rollDices: data.rollDices
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER
         };
 
-        SFRPGCustomChatMessage._render(roll, data, options);
+        SFRPGChatMessage._render(roll, data, options);
 
         return true;
     }
 
     static async _render(roll, data, options) {
         const templateName = "systems/sfrpg/templates/chat/attack-card.hbs";
-        let rollContent = await roll.render({htmlData: data.htmlData, customTooltip: options.rollDices});
+        let rollContent = await roll.render({htmlData: data.htmlData, customTooltip: options.rollDice});
 
         // Insert the damage type string if possible.
         const damageTypeString = options?.damageTypeString;

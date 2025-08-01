@@ -1,4 +1,4 @@
-import SFRPGCustomChatMessage from "./chat/chatbox.js";
+import SFRPGChatMessage from "./chat/chatbox.js";
 import { SFRPG } from "./config.js";
 import RollTree from "./rolls/rolltree.js";
 import StackModifiers from "./rules/closures/stack-modifiers.js";
@@ -270,11 +270,11 @@ export class DiceSFRPG {
                     htmlData,
                     rollType,
                     rollOptions,
-                    rollDices: finalFormula.rollDices,
+                    rollDice: finalFormula.rollDice,
                     tags: tags
                 };
 
-                SFRPGCustomChatMessage.renderStandardRoll(roll, chatMessageData);
+                SFRPGChatMessage.renderStandardRoll(roll, chatMessageData);
             }
 
             if (onClose) {
@@ -494,7 +494,7 @@ export class DiceSFRPG {
                     chatCardData.specialMaterials = itemContext.entity.system.specialMaterials;
                 }
 
-                SFRPGCustomChatMessage.renderStandardRoll(roll, chatCardData);
+                SFRPGChatMessage.renderStandardRoll(roll, chatCardData);
             }
 
             if (onClose) {
@@ -902,7 +902,7 @@ export class DiceSFRPG {
 
         let rollString = '';
         let formulaString = '';
-        const rollDices = [];
+        const rollDice = [];
         const stackedModsArray = Object.keys(stackedMods);
         for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
             const stackModifier = stackedMods[stackedModsArray[stackModsI]];
@@ -920,7 +920,7 @@ export class DiceSFRPG {
                         but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
                     */
                     if (!modifier.isDeterministic) {
-                        rollDices.push(...modifier.dices);
+                        rollDice.push(...modifier.dices);
                         formulaString += `${modifier.max.toString()}(${modifier.modifier})[<span>${modifier.name}</span>] + `;
                     } else {
                         formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>] + `;
@@ -935,7 +935,7 @@ export class DiceSFRPG {
                     but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
                 */
                 if (!stackModifier.isDeterministic) {
-                    rollDices.push(...stackModifier.dices);
+                    rollDice.push(...stackModifier.dices);
                     formulaString += `${stackModifier.max.toString()}(${stackModifier.modifier})[<span>${stackModifier.name}</span>] + `;
                 } else {
                     formulaString += `${stackModifier.max.toString()}[<span>${stackModifier.name}</span>] + `;
@@ -959,7 +959,7 @@ export class DiceSFRPG {
             .trim();
         finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
 
-        finalFormula.rollDices = rollDices;
+        finalFormula.rollDice = rollDice;
 
         return finalFormula;
     }

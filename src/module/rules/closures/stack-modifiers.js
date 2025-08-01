@@ -8,7 +8,7 @@ export default class StackModifiers extends Closure {
     /**
      * @override
      *
-     * Note: do not put Situational Modifiers in here. (modifiers that have dices inside the formula)
+     * Note: do not put Situational Modifiers in here. (modifiers that have dice inside the formula)
      *
      * @param {Array}   modifiers The modifiers to stack.
      * @param {Context} context   The context for this closure.
@@ -56,7 +56,7 @@ export default class StackModifiers extends Closure {
     }
 
     /**
-     * In difference to normal "process" "processAsync" can calculate with dices and so it is allowed to take situational modifiers.
+     * In difference to normal "process" "processAsync" can calculate with dice and so it is allowed to take situational modifiers.
      * @param {Array} mods modifiers The modifiers to stack.
      * @param {Context} context The context for this closure.
      * @param {Object} options Some options for this closure. F.e. we can provide the whole actor here.
@@ -82,13 +82,13 @@ export default class StackModifiers extends Closure {
                     }
                     modifier.max = evaluatedRoll.total;
                     modifier.isDeterministic = roll.isDeterministic;
-                    modifier.dices = [];
+                    modifier.dice = [];
 
                     if (!roll.isDeterministic) {
                         for (let allDiceI = 0; allDiceI < evaluatedRoll.dice.length; allDiceI++) {
                             const die = evaluatedRoll.dice[allDiceI];
                             if (!die) continue;
-                            modifier.dices.push({
+                            modifier.dice.push({
                                 formula: `${die.number}d${die.faces}`,
                                 faces: die.faces,
                                 total: die.results.reduce((pv, cv) => pv + cv.result, 0)
