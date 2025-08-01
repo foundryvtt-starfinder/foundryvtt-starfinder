@@ -1,5 +1,7 @@
 import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory-utils.js";
 
+const ChatMessage = foundry.documents.ChatMessage;
+
 export const ItemCapacityMixin = (superclass) => class extends superclass {
     /**
      * Checks if this item has capacity.

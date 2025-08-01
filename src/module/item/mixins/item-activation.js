@@ -1,3 +1,5 @@
+const ChatMessage = foundry.documents.ChatMessage;
+
 export const ItemActivationMixin = (superclass) => class extends superclass {
 
     hasUses() {
