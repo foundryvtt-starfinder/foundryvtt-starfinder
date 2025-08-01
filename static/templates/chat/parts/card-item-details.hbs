@@ -1,3 +1,4 @@
+{{log this}}
 <div class="card-item-details flexrow">
     {{#if isActorFocused}}
         <div class="card-icons owner">
@@ -14,7 +15,8 @@
         <b class="card-title">{{item.name}}</b>
         <ul class="card-tags">
             {{#if item.labels.range }}<li data-tooltip="{{localize "SFRPG.Items.Activation.RangeIncrement"}}: {{item.labels.range}}">{{localize "SFRPG.Items.Activation.Range"}}: {{item.labels.range}}</li>{{/if}}
-            {{#if hasCapacity }}<li data-tooltip="{{localize "TYPES.Item.ammunition"}}: {{ammoLeft}}/{{item.system.capacity.max}}">{{localize "SFRPG.Items.Ammunition.Ammo"}} : {{ammoLeft}}/{{item.system.capacity.max}}</li>{{/if}}
+            {{#if hasCapacity }}<li data-tooltip="{{localize "TYPES.Item.ammunition"}}: {{ammoLeft}}/{{item.system.capacity.max}}">{{localize "SFRPG.Items.Ammunition.Ammo"}} : {{ammoLeft}}/{{item.system.capacity.max}}</li>
+            {{else if item.uses.max}}<li data-tooltip="{{localize "SFRPG.Items.Activation.LimitedUses"}}: {{item.uses.total}}/{{item.uses.max}}">{{localize "SFRPG.Spellbook.Uses"}} : {{item.uses.total}}/{{item.uses.max}}{{/if}}
             {{#if flavor }}<li data-tooltip="{{flavor}}">{{flavor}}</li>{{/if}}
         </ul>
     </div>
