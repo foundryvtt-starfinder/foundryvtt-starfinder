@@ -360,11 +360,11 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                     [`system.uses.value`]: Math.max(item.system.uses.value - 1, 0)
                 });
                 itemUpdatePromise.then(() => {
-                    item.roll();
+                    item.toChat();
                 });
                 return itemUpdatePromise;
             } else {
-                return item.roll();
+                return item.toChat();
             }
         }
 
@@ -437,13 +437,13 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
         if (processContext) {
             processContext.then(function(result) {
-                return item.roll();
+                return item.toChat();
             });
 
             return processContext;
         }
 
-        return item.roll();
+        return item.toChat();
     }
 
     /**
@@ -623,7 +623,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 top: options.event ? options.event.clientY - 80 : null
             },
             difficulty: options.dc,
-            displayDifficulty: options.displayDC
+            displayDifficulty: options.displayDC,
+            rollType: "ability"
         });
     }
 
@@ -656,7 +657,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 top: options.event ? options.event.clientY - 80 : null
             },
             difficulty: options.dc,
-            displayDifficulty: options.displayDC
+            displayDifficulty: options.displayDC,
+            rollType: "save"
         });
     }
 
@@ -708,7 +710,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             },
             difficulty: options.dc,
             displayDifficulty: options.displayDC,
-            tags: tags
+            tags: tags,
+            rollType: "skill"
         });
     }
 

@@ -24,6 +24,15 @@ export class SFRPGHealingSetting {
         return healSetting;
     }
 
+    // Only heals temp HP
+    static get tempOnly() {
+        const healSetting = new SFRPGHealingSetting();
+        healSetting.healsHitpoints = false;
+        healSetting.healsStamina = false;
+        healSetting.healsTemporaryHitpoints = true;
+        return healSetting;
+    }
+
     // Heals health and stamina
     static get staminaAndHealth() {
         const healSetting = new SFRPGHealingSetting();
@@ -140,24 +149,11 @@ export class SFRPGDamage {
         if (damageType.constructor !== String) {
             throw `parseDamageType provided with invalid type, received ${damageType.constructor}, expected String.`;
         }
+        const acronymToDamage = Object.entries(CONFIG.SFRPG.damageTypeToAcronym)
+            .reduce((acc, [key, value]) => (acc[value.toLowerCase()] = key, acc), {});
 
-        const acronymToDamageMap = {
-            "a": "acid",
-            "b": "bludgeoning",
-            "c": "cold",
-            "e": "electricity",
-            "f": "fire",
-            "p": "piercing",
-            "s": "slashing",
-            "so": "sonic"
-        };
-
-        const lowerType = damageType.trim().toLowerCase();
-        if (acronymToDamageMap[lowerType]) {
-            return acronymToDamageMap[lowerType];
-        }
-
-        return lowerType;
+        const validDamageType = acronymToDamage[damageType.trim()];
+        return validDamageType || damageType;
     }
 }
 
@@ -193,7 +189,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                     content: `<form>
                         <p>${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ModifyDamageText")}</p>
                         <div class="form-group">
-                            <input type="number" id="modifier" placeholder=0 autofocus />
+                            ${diceRollTotal} +&nbsp;<input type="number" id="modifier" placeholder=0 autofocus />
                         </div>
                         ${(multiplier < 0) // Is healing
                         ? `
@@ -203,6 +199,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                                     <option value="hp">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.HP")}</option>
                                     <option value="sp">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.SP")}</option>
                                     <option value="both">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.HPAndSP")}</option>
+                                    <option value="temp">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.TempHP")}</option>
                                 </select>
                             </div>
                         `
@@ -264,11 +261,13 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         if (multiplier < 0) {
-            const healingSetting = {
+            const healingOptions = {
                 hp: SFRPGHealingSetting.defaultHealing,
                 sp: SFRPGHealingSetting.staminaOnly,
-                both: SFRPGHealingSetting.staminaAndHealth
-            }[healingTarget] || SFRPGHealingSetting.defaultHealing;
+                both: SFRPGHealingSetting.staminaAndHealth,
+                temp: SFRPGHealingSetting.tempOnly
+            };
+            const healingSetting = healingOptions[healingTarget] || SFRPGHealingSetting.defaultHealing;
 
             const heal = SFRPGDamage.createHeal(rolledAmount, healingSetting);
             heal.modifier = modifier || 0;
@@ -304,7 +303,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     }
 
     /**
-     * Applies damage to the Actor.
+     * Applies damage to an Actor.
      *
      * @param {SFRPGDamage} damage The damage object to be applied to this actor.
      */
@@ -313,27 +312,25 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             throw `actor.applyDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
         }
 
-        // console.log(['Applying damage', damage.toString(), damage]);
-
         switch (this.type) {
             case 'starship':
                 return this._applyStarshipDamage(damage);
             case 'vehicle':
                 return this._applyVehicleDamage(damage);
             default:
-                return this._applyActorDamage(damage);
+                return this._applyCharacterDamage(damage);
         }
     }
 
     /**
-    * Apply damage to an Actor.
+    * Apply damage to a Character or NPC.
     *
     * @param {SFRPGDamage} damage A SFRPGDamage object, describing the damage to be dealt.
     * @returns A Promise that resolves to the updated Actor
     */
-    async _applyActorDamage(damage) {
+    async _applyCharacterDamage(damage) {
         if (damage.constructor !== SFRPGDamage) {
-            throw `actor._applyActorDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
+            throw `actor._applyCharacterDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
         }
 
         const actorUpdate = {};
@@ -432,7 +429,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             }
 
             if (damage.healSettings.healsTemporaryHitpoints) {
-                const newTempHP = Math.clamp(originalTempHP + remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
+                const newTempHP = Math.max(originalTempHP + remainingUndealtDamage, 0);
                 remainingUndealtDamage -= (newTempHP - originalTempHP);
 
                 actorUpdate["system.attributes.hp.temp"] = newTempHP;

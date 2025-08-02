@@ -9,11 +9,16 @@ import StackModifiers from "../rules/closures/stack-modifiers.js";
 import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
+import SFRPGChatMessage from "../chat/chatbox.js";
 
 /** @import { RollResult } from '../dice.js' */
-
 /** @extends {foundry.documents.Item} */
-export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin) {
+
+// Used document classes
+const ChatMessage = foundry.documents.ChatMessage;
+const Item = foundry.documents.Item;
+
+export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
     constructor(data, context = {}) {
         // Set module art if available. This applies art to items viewed or created from compendiums.
@@ -89,6 +94,23 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (!areaData) return false;
 
         return !!(areaData?.value || areaData?.total);
+    }
+
+    /**
+     * True if the item's primary damage section has a healing type selected
+     * @type {boolean}
+     */
+    get primaryDamageIsHealing() {
+        const primaryGroup = this.system.damage.primaryGroup;
+        for (const part of this.system.damage.parts) {
+            if (part.isPrimarySection || part.group === primaryGroup) {
+                const types = part.types;
+                if (types.healing || types.sp || types.sphp || types.tempHP) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -169,39 +191,27 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             if (tgt.value && tgt.value === "") tgt.value = null;
 
             labels.target = [tgt.value].filterJoin(" ");
-
-            /* let area = data.area || {};
-            if (typeof area.value === 'number' && area.value === 0) area.value = null;
-
-            if (area.units === "text") labels.area = String(area.value || "")?.trim();
-            else labels.area = [area.total || area.value, C.distanceUnits[area.units] || null, C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
-
-            // Range Label
-            /* let rng = data.range || {};
-            labels.range = [rng.value || "", C.distanceUnits[rng.units]].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
-
-            // Duration Label
-            /* let dur = data.duration || {};
-            labels.duration = [dur.value].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
         }
 
         // Item Actions
         if (data.hasOwnProperty("actionType")) {
             // Damage
             const damage = data.damage || {};
-            const itemParts = damage.parts;
-            if (itemParts.length > 0) {
+            const itemDamageParts = damage.parts;
+            if (itemDamageParts.length > 0) {
                 labels.damage = damage.parts
                     .map(d => d[0])
                     .join(" + ")
                     .replace(/\+ -/g, "- ");
 
+                // Mark all damage sections as such
+                for (const part of itemDamageParts) {
+                    part.isDamageSection = true;
+                }
+
                 // There must always be one primary damage group or section.
                 // If the primary damage group is set, mark all of the members of that group as primary.
-                const allGroups = itemParts.reduce((arr, part) => {
+                const allGroups = itemDamageParts.reduce((arr, part) => {
                     if (!!part.group || part.group === 0) arr.push(part.group);
                     return arr;
                 }, []);
@@ -210,18 +220,18 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     if (!(allGroups.includes(data.damage.primaryGroup)))
                         data.damage.primaryGroup = allGroups.sort()[0];
 
-                    for (const part of itemParts) {
+                    for (const part of itemDamageParts) {
                         if (part.group === data.damage.primaryGroup) part.isPrimarySection = true;
                         else part.isPrimarySection = false;
                     }
 
                 // If the primary group is blank, set the 1st damage section, and any parts in the same group, as primary.
-                } else if (!(itemParts.some(part => part.isPrimarySection))) {
-                    itemParts[0].isPrimarySection = true;
-                    const primaryGroup = itemParts[0].group ?? null;
+                } else if (!(itemDamageParts.some(part => part.isPrimarySection))) {
+                    itemDamageParts[0].isPrimarySection = true;
+                    const primaryGroup = itemDamageParts[0].group ?? null;
 
                     if (primaryGroup !== null) {
-                        for (const part of itemParts) {
+                        for (const part of itemDamageParts) {
                             if (part.group === primaryGroup) part.isPrimarySection = true;
                             else part.isPrimarySection = false;
                         }
@@ -342,10 +352,10 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /* -------------------------------------------- */
 
     /**
-     * Roll the item to Chat, creating a chat card which contains follow up attack or damage roll options
+     * Send the item to chat, creating a chat card which contains follow up attack or damage roll options
      * @return {Promise}
      */
-    async roll() {
+    async toChat() {
 
         // Basic template rendering data
         const token = this.actor.token;
@@ -360,95 +370,29 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             hasSave: this.hasSave,
             hasSkill: this.hasSkill,
             hasArea: this.hasArea && ["ft", "meter"].includes(this.system.area.units) && !["", "other"].includes(this.system.area.shape),
-            hasOtherFormula: this.hasOtherFormula
+            hasOtherFormula: this.hasOtherFormula,
+            primaryDamageIsHealing: this.primaryDamageIsHealing
         };
 
         if (this.type === "spell") {
-            let descriptionText = foundry.utils.deepClone(templateData.system.description.short || templateData.system.description.value);
-            if (descriptionText?.length > 0) {
-                // Alter description by removing non-eligble level tags.
-                const levelTags = [
-                    {level: 0, tag: "level_0"},
-                    {level: 1, tag: "level_1"},
-                    {level: 2, tag: "level_2"},
-                    {level: 3, tag: "level_3"},
-                    {level: 4, tag: "level_4"},
-                    {level: 5, tag: "level_5"},
-                    {level: 6, tag: "level_6"}
-                ];
-
-                for (const {level, tag} of levelTags) {
-                    const shouldShowEx = level === this.system.level;
-                    const startTagEx = `[${tag}_only]`;
-                    const endTagEx = `[/${tag}_only]`;
-
-                    const shouldShowInc = level <= this.system.level;
-                    const startTagInc = `[${tag}]`;
-                    const endTagInc = `[/${tag}]`;
-
-                    if (shouldShowEx) {
-                        let tagStartIndex = descriptionText.indexOf(startTagEx);
-                        while (tagStartIndex !== -1) {
-                            descriptionText = descriptionText.replace(startTagEx, "");
-                            tagStartIndex = descriptionText.indexOf(startTagEx);
-                        }
-
-                        let tagEndIndex = descriptionText.indexOf(endTagEx);
-                        while (tagEndIndex !== -1) {
-                            descriptionText = descriptionText.replace(endTagEx, "");
-                            tagEndIndex = descriptionText.indexOf(endTagEx);
-                        }
-                    } else {
-                        let tagStartIndex = descriptionText.indexOf(startTagEx);
-                        let tagEndIndex = descriptionText.indexOf(endTagEx);
-                        while (tagStartIndex !== -1 && tagEndIndex !== -1) {
-                            descriptionText = descriptionText.substr(0, tagStartIndex) + descriptionText.substr(tagEndIndex + endTagEx.length);
-                            tagStartIndex = descriptionText.indexOf(startTagEx);
-                            tagEndIndex = descriptionText.indexOf(endTagEx);
-                        }
-                    }
-
-                    if (shouldShowInc) {
-                        let tagStartIndex = descriptionText.indexOf(startTagInc);
-                        while (tagStartIndex !== -1) {
-                            descriptionText = descriptionText.replace(startTagInc, "");
-                            tagStartIndex = descriptionText.indexOf(startTagInc);
-                        }
-
-                        let tagEndIndex = descriptionText.indexOf(endTagInc);
-                        while (tagEndIndex !== -1) {
-                            descriptionText = descriptionText.replace(endTagInc, "");
-                            tagEndIndex = descriptionText.indexOf(endTagInc);
-                        }
-                    } else {
-                        let tagStartIndex = descriptionText.indexOf(startTagInc);
-                        let tagEndIndex = descriptionText.indexOf(endTagInc);
-                        while (tagStartIndex !== -1 && tagEndIndex !== -1) {
-                            descriptionText = descriptionText.substr(0, tagStartIndex) + descriptionText.substr(tagEndIndex + endTagInc.length);
-                            tagStartIndex = descriptionText.indexOf(startTagInc);
-                            tagEndIndex = descriptionText.indexOf(endTagInc);
-                        }
-                    }
-                }
-
-                if (templateData.system.description.short) {
-                    templateData.system.description.short = descriptionText;
-                } else {
-                    templateData.system.description.value = descriptionText;
-                }
+            const descriptionText = this._getSpellDescriptionText(templateData);
+            if (templateData.system.description.short) {
+                templateData.system.description.short = descriptionText;
+            } else {
+                templateData.system.description.value = descriptionText;
             }
         }
 
         // Render the chat card template
         const templateType = ["tool", "consumable"].includes(this.type) ? this.type : "item";
         const template = `systems/sfrpg/templates/chat/${templateType}-card.hbs`;
-        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
+        const chatCardBodyHtml = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Basic chat message data
-        const chatData = {
+        let chatData = {
             author: game.user.id,
             style: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            content: html,
+            content: chatCardBodyHtml,
             flags: {
                 core: {
                     canPopout: true
@@ -462,11 +406,86 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
         };
 
-        const rollMode = game.settings.get("core", "rollMode");
-        ChatMessage.applyRollMode(chatData, rollMode);
-
         // Create the chat message
-        return ChatMessage.create(chatData, { displaySheet: false });
+        const rollMode = game.settings.get("core", "rollMode");
+        chatData = ChatMessage.applyRollMode(chatData, rollMode);
+        return ChatMessage.create(chatData);
+    }
+
+    /**
+     * Helper method for managing descriptive text for spell items sent to chat
+     * @param {Object} templateData     Data for rendering the chat card template
+     * @return {String}
+     */
+    _getSpellDescriptionText(templateData) {
+        let descriptionText = foundry.utils.deepClone(templateData.system.description.short || templateData.system.description.value);
+        if (descriptionText?.length > 0) {
+            // Alter description by removing non-eligble level tags.
+            const levelTags = [
+                {level: 0, tag: "level_0"},
+                {level: 1, tag: "level_1"},
+                {level: 2, tag: "level_2"},
+                {level: 3, tag: "level_3"},
+                {level: 4, tag: "level_4"},
+                {level: 5, tag: "level_5"},
+                {level: 6, tag: "level_6"}
+            ];
+
+            for (const {level, tag} of levelTags) {
+                const shouldShowEx = level === this.system.level;
+                const startTagEx = `[${tag}_only]`;
+                const endTagEx = `[/${tag}_only]`;
+
+                const shouldShowInc = level <= this.system.level;
+                const startTagInc = `[${tag}]`;
+                const endTagInc = `[/${tag}]`;
+
+                if (shouldShowEx) {
+                    let tagStartIndex = descriptionText.indexOf(startTagEx);
+                    while (tagStartIndex !== -1) {
+                        descriptionText = descriptionText.replace(startTagEx, "");
+                        tagStartIndex = descriptionText.indexOf(startTagEx);
+                    }
+
+                    let tagEndIndex = descriptionText.indexOf(endTagEx);
+                    while (tagEndIndex !== -1) {
+                        descriptionText = descriptionText.replace(endTagEx, "");
+                        tagEndIndex = descriptionText.indexOf(endTagEx);
+                    }
+                } else {
+                    let tagStartIndex = descriptionText.indexOf(startTagEx);
+                    let tagEndIndex = descriptionText.indexOf(endTagEx);
+                    while (tagStartIndex !== -1 && tagEndIndex !== -1) {
+                        descriptionText = descriptionText.substr(0, tagStartIndex) + descriptionText.substr(tagEndIndex + endTagEx.length);
+                        tagStartIndex = descriptionText.indexOf(startTagEx);
+                        tagEndIndex = descriptionText.indexOf(endTagEx);
+                    }
+                }
+
+                if (shouldShowInc) {
+                    let tagStartIndex = descriptionText.indexOf(startTagInc);
+                    while (tagStartIndex !== -1) {
+                        descriptionText = descriptionText.replace(startTagInc, "");
+                        tagStartIndex = descriptionText.indexOf(startTagInc);
+                    }
+
+                    let tagEndIndex = descriptionText.indexOf(endTagInc);
+                    while (tagEndIndex !== -1) {
+                        descriptionText = descriptionText.replace(endTagInc, "");
+                        tagEndIndex = descriptionText.indexOf(endTagInc);
+                    }
+                } else {
+                    let tagStartIndex = descriptionText.indexOf(startTagInc);
+                    let tagEndIndex = descriptionText.indexOf(endTagInc);
+                    while (tagStartIndex !== -1 && tagEndIndex !== -1) {
+                        descriptionText = descriptionText.substr(0, tagStartIndex) + descriptionText.substr(tagEndIndex + endTagInc.length);
+                        tagStartIndex = descriptionText.indexOf(startTagInc);
+                        tagEndIndex = descriptionText.indexOf(endTagInc);
+                    }
+                }
+            }
+        }
+        return descriptionText;
     }
 
     /* -------------------------------------------- */
@@ -949,7 +968,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         itemData.hasCapacity = this.hasCapacity();
 
         rollData.item = itemData;
-        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
         // Warn the user if there is no ammo left
         const usage = itemData.usage?.value || 0;
@@ -982,7 +1000,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             parts: parts,
             actorContextKey: "owner",
             rollContext: rollContext,
-            title: title,
+            title: game.i18n.format("SFRPG.Rolls.AttackRoll"),
             flavor: await foundry.applications.ux.TextEditor.enrichHTML(this.system?.chatFlavor, {
                 async: true,
                 rollData: this.actor.getRollData() ?? {},
@@ -997,7 +1015,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            onClose: this._onAttackRollClose.bind(this, options)
+            onClose: this._onAttackRollClose.bind(this, options),
+            rollType: "attack"
         });
     }
 
@@ -1109,7 +1128,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         } else { // If not an ECM weapon and not an NPC, use BAB/Piloting + Dex
             parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
         }
-        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
         // If max capacity is 0, assume the item doesn't have limited fire property
         if (this.hasCapacity() && this.getCurrentCapacity() <= 0 && this.getMaxCapacity() > 0) {
@@ -1162,7 +1180,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             event: options.event,
             parts: parts,
             rollContext: rollContext,
-            title: title,
+            title: game.i18n.format("SFRPG.Rolls.AttackRoll"),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: 20,
             chatMessage: options.chatMessage,
@@ -1186,7 +1204,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
                     Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
-            }
+            },
+            rollType: "attack"
         });
     }
 
@@ -1200,8 +1219,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // TODO: Take vehicle's negative attack modifiers
         const parts = [];
 
-        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
-
         /** Build the roll context */
         const rollContext = new RollContext();
         rollContext.addContext("ship", this.actor);
@@ -1213,7 +1230,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             event: options.event,
             parts: parts,
             rollContext: rollContext,
-            title: title,
+            title: game.i18n.format("SFRPG.Rolls.AttackRoll"),
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             critical: 20,
             chatMessage: options.chatMessage,
@@ -1235,7 +1252,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
                     Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
-            }
+            },
+            rollType: "attack"
         });
     }
 
@@ -1247,18 +1265,103 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * @returns {Promise<bool>}  `true` if roll was performed, `false` if it was canceled
      */
     async rollDamage({ event } = {}, options = {}) {
-        const itemData  = this.system;
-        const actorData = this.actor.getRollData(); // this.actor.system;
-        const isWeapon  = ["weapon", "shield"].includes(this.type);
-        const isHealing = this.system.actionType === "heal";
-
         if (!this.hasDamage) {
             ui.notifications.error("You may not make a Damage Roll with this Item.");
             return;
         }
 
-        if (this.type === "starshipWeapon") return this._rollStarshipDamage({ event: event });
-        if (this.type === "vehicleAttack") return this._rollVehicleDamage({ event: event});
+        if (this.type === "starshipWeapon") {
+            return this._rollStarshipDamage({ event: event }, options);
+        }
+        else if (this.type === "vehicleAttack") {
+            return this._rollVehicleDamage({ event: event}, options);
+        }
+        else {
+            return this._rollCharacterDamage({ event: event}, options);
+        }
+    }
+
+    async _rollVehicleDamage({ event } = {}, options = {}) {
+        const itemData = this.system;
+
+        if (!this.hasDamage) {
+            ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"));
+        }
+
+        const parts = foundry.utils.deepClone(itemData.damage.parts);
+
+        /** Build the roll context */
+        const rollContext = new RollContext();
+        rollContext.addContext("vehicle", this.actor);
+        rollContext.addContext("item", this, this);
+        rollContext.addContext("weapon", this, this);
+        rollContext.setMainContext("");
+
+        return DiceSFRPG.damageRoll({
+            event,
+            parts,
+            rollContext,
+            title: game.i18n.localize("SFRPG.Rolls.DamageRoll"),
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            chatMessage: options.chatMessage,
+            dialogOptions: {
+                skipUI: true,
+                width: 400,
+                top: event ? event.clientY - 80 : null,
+                left: window.innerWidth - 710
+            },
+            onClose: (roll, formula, finalFormula, isCritical) => {
+                if (roll) {
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                }
+            }
+        });
+    }
+
+    async _rollStarshipDamage({ event } = {}, options = {}) {
+        const itemData = this.system;
+
+        if (!this.hasDamage) {
+            throw new Error("you may not make a Damage Roll with this item");
+        }
+
+        const parts = foundry.utils.deepClone(itemData.damage.parts);
+
+        /** Build the roll context */
+        const rollContext = new RollContext();
+        rollContext.addContext("ship", this.actor);
+        rollContext.addContext("item", this, this);
+        rollContext.addContext("weapon", this, this);
+        rollContext.setMainContext("");
+
+        this.actor?.setupRollContexts(rollContext, ["gunner"]);
+
+        return DiceSFRPG.damageRoll({
+            event: event,
+            parts: parts,
+            criticalData: {preventDoubling: true},
+            rollContext: rollContext,
+            title: game.i18n.localize("SFRPG.Rolls.DamageRoll"),
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            chatMessage: options.chatMessage,
+            dialogOptions: {
+                width: 400,
+                top: event ? event.clientY - 80 : null,
+                left: window.innerWidth - 710
+            },
+            onClose: (roll, formula, finalFormula, isCritical) => {
+                if (roll) {
+                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                }
+            }
+        });
+    }
+
+    async _rollCharacterDamage({event} = {}, options = {}) {
+        const itemData  = this.system;
+        const actorData = this.actor.getRollData(); // this.actor.system;
+        const isWeapon  = ["weapon", "shield"].includes(this.type);
+        const isHealing = this.system.actionType === "heal";
 
         // Determine ability score modifier
         let abl = itemData.ability;
@@ -1268,9 +1371,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // Define Roll parts
         /** @type {DamageParts[]} */
         const parts = foundry.utils.deepClone(itemData.damage.parts);
-        for (const part of parts) {
-            part.isDamageSection = true;
-        }
 
         let modifiers = this.getAppropriateDamageModifiers(isWeapon);
 
@@ -1322,21 +1422,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             mod: actorData.abilities[abl].mod
         });
 
-        let title = '';
-        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
-            if (isHealing) {
-                title = game.i18n.localize("SFRPG.Rolls.HealingRoll");
-            } else {
-                title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
-            }
-        } else {
-            if (isHealing) {
-                title = game.i18n.format("SFRPG.Rolls.HealingRollFull", {name: this.name});
-            } else {
-                title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
-            }
-        }
-
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData, ownerData: rollData});
 
         /** Create additional modifiers. */
@@ -1364,7 +1449,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             linkedAttackRoll: options.linkedAttackRoll ?? null,
             criticalData: itemData.critical,
             rollContext: rollContext,
-            title: title,
+            title: isHealing ? game.i18n.localize("SFRPG.Rolls.HealingRoll") : game.i18n.localize("SFRPG.Rolls.DamageRoll"),
             flavor: await foundry.applications.ux.TextEditor.enrichHTML(options?.flavorOverride || itemData.chatFlavor, {
                 async: true,
                 rollData: this.actor.getRollData() ?? {},
@@ -1378,6 +1463,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
             },
+            // TODO-Ian: Modify this hook call to use the type of data we want to have
             onClose: (roll, formula, finalFormula, isCritical) => {
                 if (roll) {
                     Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
@@ -1432,103 +1518,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         });
 
         return modifiers;
-    }
-
-    async _rollVehicleDamage({ event } = {}, options = {}) {
-        const itemData = this.system;
-
-        if (!this.hasDamage) {
-            ui.notifications.error(game.i18n.localize("SFRPG.VehicleAttackSheet.Errors.NoDamage"));
-        }
-
-        const parts = foundry.utils.deepClone(itemData.damage.parts);
-        for (const part of parts) {
-            part.isDamageSection = true;
-        }
-
-        let title = '';
-        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
-            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
-        } else {
-            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
-        }
-
-        /** Build the roll context */
-        const rollContext = new RollContext();
-        rollContext.addContext("vehicle", this.actor);
-        rollContext.addContext("item", this, this);
-        rollContext.addContext("weapon", this, this);
-        rollContext.setMainContext("");
-
-        return DiceSFRPG.damageRoll({
-            event,
-            parts,
-            rollContext,
-            title,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            chatMessage: options.chatMessage,
-            dialogOptions: {
-                skipUI: true,
-                width: 400,
-                top: event ? event.clientY - 80 : null,
-                left: window.innerWidth - 710
-            },
-            onClose: (roll, formula, finalFormula, isCritical) => {
-                if (roll) {
-                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
-                }
-            }
-        });
-    }
-
-    async _rollStarshipDamage({ event } = {}, options = {}) {
-        const itemData = this.system;
-
-        if (!this.hasDamage) {
-            throw new Error("you may not make a Damage Roll with this item");
-        }
-
-        const parts = foundry.utils.deepClone(itemData.damage.parts);
-        for (const part of parts) {
-            part.isDamageSection = true;
-        }
-
-        let title = '';
-        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
-            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
-        } else {
-            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
-        }
-
-        /** Build the roll context */
-        const rollContext = new RollContext();
-        rollContext.addContext("ship", this.actor);
-        rollContext.addContext("item", this, this);
-        rollContext.addContext("weapon", this, this);
-        rollContext.setMainContext("");
-
-        this.actor?.setupRollContexts(rollContext, ["gunner"]);
-
-        return DiceSFRPG.damageRoll({
-            event: event,
-            parts: parts,
-            criticalData: {preventDoubling: true},
-            rollContext: rollContext,
-            title: title,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            chatMessage: options.chatMessage,
-            dialogOptions: {
-                skipUI: options.skipUI,
-                width: 400,
-                top: event ? event.clientY - 80 : null,
-                left: window.innerWidth - 710
-            },
-            onClose: (roll, formula, finalFormula, isCritical) => {
-                if (roll) {
-                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
-                }
-            }
-        });
     }
 
     /* -------------------------------------------- */
@@ -1619,7 +1608,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 hasDamage: this.hasDamage,
                 hasSave: this.hasSave,
                 hasArea: this.hasArea,
-                hasOtherFormula: this.hasOtherFormula
+                hasOtherFormula: this.hasOtherFormula,
+                primaryDamageIsHealing: this.primaryDamageIsHealing
             };
 
             const template = `systems/sfrpg/templates/chat/consumed-item-card.hbs`;
@@ -1862,7 +1852,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     static _getChatCardTarget(card) {
         const character = game.user.character;
-        const controlled = canvas.tokens?.controlled;
+        const controlled = canvas.tokens?.controlled ?? [];
         if (controlled.length === 0) return character || null;
         if (controlled.length === 1) return controlled[0].actor;
         else throw new Error(`You must designate a specific Token as the roll target`);

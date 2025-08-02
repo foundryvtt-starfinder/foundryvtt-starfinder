@@ -853,7 +853,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         if (item.type === "spell") {
             return this.actor.useSpell(item, {configureDialog: !event.shiftKey});
         } else {
-            return item.roll();
+            return item.toChat();
         }
     }
 

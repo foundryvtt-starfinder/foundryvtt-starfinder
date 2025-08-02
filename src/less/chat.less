@@ -32,124 +32,26 @@
     }
 }
 
-.chat-card-custom {
-    .chat-card-custom-item {
-        img {
-            margin: 5px;
-            float: left;
-            border: none;
-            border-radius: 10px;
-            width: 30px;
-        }
+.chat-message {
+    padding: 4px;
 
-        p span {
-            display: block;
-            color: black;
+    .message-header {
+        background-color: rgba(150, 200, 255, 0.4);
+        padding: 2px;
+        z-index: 5;
+
+        h4.message-sender {
+            z-index: 1;
+            color: @sfrpgRed;
             font-weight: bold;
         }
+    }
 
-        p button {
-            margin: 2px 0px;
-            background-color: @sfrpgRed;
-            border-color: #000000;
-            color: #ffffff;
-            font-size: var(--font-size-12);
-            height: 20px;
-            width: 100px;
-        }
-
-        p button.chat-button-save {
-            margin: 2px 0px;
-            background-color: grey;
-            border-color: black;
-            color: #ffffff;
-            font-size: var(--font-size-12);
-            height: 20px;
-            width: auto;
-            line-height: inherit;
-        }
-
+    .message-content {
         h2 {
-            position: initial;
-        }
-    }
-
-    div.chard-card-custom-token {
-        img {
-            float: left;
-            border: none;
-            width: 60px;
-        }
-    }
-}
-
-.chard-card-custom-details {
-    margin-top: 3px;
-
-    ul {
-        margin: 0;
-        padding: 0;
-    }
-
-    li {
-        display: inline-block;
-        margin: 0 2px 0 0;
-        padding: 0 3px;
-        font-size: var(--font-size-11);
-        line-height: 16px;
-        border: 1px solid #999;
-        border-radius: 3px;
-        background: rgba(0, 0, 0, 0.05);
-    }
-}
-
-.message-content {
-    h2 {
-        font-weight: bold;
-        text-align: center;
-
-        &.card-label {
-            font-size: var(--font-size-20);
-        }
-    }
-
-    div.chat-card-custom-container {
-        padding: 3px;
-        background-color: rgba(0, 0, 0, 0.05);
-        margin-bottom: 5px;
-        border-radius: 5px;
-    }
-
-    div.dice-roll {
-        flex-direction: row;
-        .dice-formula {
             font-weight: bold;
-            background-color: rgba(0, 0, 0, 0.5);
-            color: white;
+            text-align: center;
         }
-    }
-
-    div.flexrow div h2 {
-        position: initial;
-    }
-}
-
-.message-header {
-    background-color: rgba(150, 200, 255, 0.4);
-    padding: 2px;
-    z-index: 5;
-
-    h4.message-sender {
-        z-index: 1;
-        color: @sfrpgRed;
-        font-weight: bold;
-    }
-}
-
-.sfrpg {
-    &.chat-card {
-        font-style: normal;
-        font-size: var(--font-size-12);
 
         .card-header {
             padding: 3px 0;
@@ -201,39 +103,152 @@
             }
         }
 
-        .card-content {
-            margin: 5px 0;
+        .chat-card {
+            font-style: normal;
+            font-size: var(--font-size-12);
 
-            h3 {
-                font-size: var(--font-size-12);
-                margin: 0;
-                font-weight: bold;
+            &.attack-card, &.item-action-card {
+                .card-icons {
+
+                    &.owner {
+                    }
+
+                    &.target {
+                    }
+
+                    .actor-icon {
+                        border: none;
+                        border-radius: 4px;
+                        height: 64px;
+                        z-index: 0;
+                    }
+
+                    .item-icon {
+                        border: 4px;
+                        border-radius: 4px;
+                        background: rgba(0, 0, 0, 0.5);
+                        height: 28px;
+                        position: absolute;
+                        right: 2px;
+                        bottom: 2px;
+                        z-index: 1;
+                        box-shadow: 0 0 2px 2px #775434;
+                    }
+                }
             }
 
-            > * {
-                -webkit-user-select: text;
-                -moz-user-select: text;
-                -ms-user-select: text;
-                user-select: text;
+            &.item-card {
+                .card-icons {
+                    .actor-icon, .item-icon {
+                        border: none;
+                        border-radius: 4px;
+                        height: 64px;
+                        z-index: 0;
+                    }
+                }
             }
-        }
 
-        .card-buttons {
-            margin: 5px 0;
+            .card-item-details {
+                align-items: flex-start;
+            }
 
-            span {
-                display: block;
-                line-height: 28px;
+            .card-icons {
+                margin: 2px 2px 2px 2px;
+                flex: 0 1 64px;
+                border-radius: 4px;
+                background: rgba(0, 0, 0, 0.1);
+                position: relative;
+
+                img {
+                    width: auto;
+                }
+            }
+
+            .card-info {
                 text-align: center;
-                border: 1px solid @borderLight;
+                min-height: 0;
+
+                .card-title {
+                    font-size: var(--font-size-13);
+                    margin: 0 0 2px 0;
+                    min-width: 0;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+
+                ul.card-tags {
+                    text-align: center;
+                    margin: auto;
+                    padding: 0;
+                }
+
+                li {
+                    display: inline-block;
+                    margin: 0 2px 0 0;
+                    padding: 0 3px;
+                    font-size: var(--font-size-11);
+                    border: 1px solid #999;
+                    border-radius: 3px;
+                    background: rgba(0, 0, 0, 0.05);
+                    max-width: 140px;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
             }
 
-            button {
-                font-size: var(--font-size-12);
-                height: 24px;
-                line-height: 20px;
-                margin: 2px 0;
-                .exo2();
+            .card-buttons {
+                margin: 2px 0px;
+
+                button {
+                    margin: 1px 1px;
+                    background-color: grey;
+                    border-color: black;
+                    color: white;
+                    font-size: var(--font-size-12);
+                    --button-size: 1.5rem;
+                    height: 24px;
+                    line-height: inherit;
+                    white-space: nowrap;
+
+                    &.chat-button-attack {
+                        background-color: @sfrpgOrange;
+                    }
+
+                    &.chat-button-damage {
+                        background-color: @sfrpgRed;
+                    }
+
+                    &.chat-button-healing {
+                        background-color: @sfrpgGreen;
+                    }
+
+                    &.chat-button-save {
+                        background-color: @sfrpgBlue;
+                    }
+
+                    &.chat-button-template {
+                        background-color: @sfrpgPurple;
+                    }
+                }
+            }
+
+            .card-content {
+                margin: 5px 0;
+
+                h3 {
+                    font-size: var(--font-size-12);
+                    margin: 0;
+                    font-weight: bold;
+                }
+
+                > * {
+                    -webkit-user-select: text;
+                    -moz-user-select: text;
+                    -ms-user-select: text;
+                    user-select: text;
+                }
             }
         }
 
@@ -252,26 +267,34 @@
                 }
             }
         }
-    }
 
-    &.dice-roll {
-        .dice-footer {
-            border-top: 2px groove #fff;
-            font-size: var(--font-size-12);
-            font-style: normal;
-            order: 3;
-            padding: 3px 0 0;
-            margin-top: 5px;
+        .dice-roll {
+            &.sfrpg {
+                .dice-footer {
+                    border-top: 2px groove #fff;
+                    font-size: var(--font-size-12);
+                    font-style: normal;
+                    order: 3;
+                    padding: 3px 0 0;
+                    margin-top: 5px;
 
-            span {
-                border-right: 2px groove #fff;
-                padding: 0 5px 0 0;
-                font-size: var(--font-size-11);
+                    span {
+                        border-right: 2px groove #fff;
+                        padding: 0 5px 0 0;
+                        font-size: var(--font-size-11);
 
-                &:last-child {
-                    border-right: none;
-                    padding-right: 0;
+                        &:last-child {
+                            border-right: none;
+                            padding-right: 0;
+                        }
+                    }
                 }
+            }
+
+            .dice-formula {
+                font-weight: bold;
+                background-color: rgba(0, 0, 0, 0.5);
+                color: white;
             }
         }
     }
