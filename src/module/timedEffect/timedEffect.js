@@ -1,3 +1,31 @@
+import { DiceSFRPG } from "../dice.js";
+import RollContext from "../rolls/rollcontext.js";
+import { SFRPG } from "../config.js";
+
+function mkRemaining({ value, unit, enabled }) {
+    const durFrom = SFRPG.effectDurationFrom;
+    const durTypes = SFRPG.effectDurationTypes;
+
+    let string;
+    if (!Object.hasOwn(durFrom, unit)) {
+        string = `${durTypes[unit]}`;
+    } else if (value >= durFrom.day) {
+        string = `${Math.floor(value / durFrom.day)} ${durTypes.day}`;
+    } else if (value >= durFrom.hour) {
+        string = `${Math.floor(value / durFrom.hour)} ${durTypes.hour}`;
+    } else if (value >= durFrom.minute) {
+        string = `${Math.floor(value / durFrom.minute)} ${durTypes.minute}`;
+    } else if (value >= durFrom.round) {
+        string = `${Math.floor(value / durFrom.round)} ${durTypes.round}`;
+    } else if (enabled) {
+        string = `< 1 ${durTypes.round}`;
+    } else {
+        string = game.i18n.localize("SFRPG.Effect.Expired");
+    }
+
+    return { value, string };
+}
+
 export default class SFRPGTimedEffect {
     /**
      * An object that holds information about a timedEffect
@@ -119,50 +147,59 @@ export default class SFRPGTimedEffect {
 
         if (!item) return ui.notifications.error('Failed to toggle effect, item missing.');
         if (!actor) return ui.notifications.error('Failed to toggle effect, actor missing.');
-        // toggle on actor
-        const updateData = {
-            _id: item._id,
-            system: {
-                enabled: this.enabled,
-                modifiers: item.system.modifiers.map(modifier => modifier.toObject?.() ?? modifier),
-                activeDuration: item.system.activeDuration
-            }
-        };
 
         for (let effectModI = 0; effectModI < item.system.modifiers.length; effectModI++) {
-            updateData.system.modifiers[effectModI].enabled = this.enabled;
             this.modifiers[effectModI].enabled = this.enabled;
         }
 
         // handle activation time
         if (this.enabled && resetActivationTime) {
             this.activeDuration.activationTime = game.time.worldTime;
-            updateData.system.activeDuration.activationTime = game.time.worldTime;
 
             if (game.combat) {
                 this.activeDuration.expiryInit = game.combat.initiative;
-                updateData.system.activeDuration.expiryInit = game.combat.initiative;
             }
-
         } else if (resetActivationTime) {
             this.activeDuration.activationTime = -1;
-            updateData.system.activeDuration.activationTime = -1;
 
             if (game.combat) {
                 this.activeDuration.expiryInit = -1;
-                updateData.system.activeDuration.expiryInit = -1;
             }
-
         }
 
         // update global and actor timedEffect objects
         actor.system.timedEffects.get(this.uuid)?.update(this);
         game.sfrpg.timedEffects.get(this.uuid)?.update(this);
 
-        actor.updateEmbeddedDocuments('Item', [updateData]);
+        // toggle on actor
+        this._updateAfterToggle(resetActivationTime);
 
         if (this.showOnToken) this.createScrollingText(this.enabled);
 
+    }
+
+    /** Update the managed Item with data from this TimedEffect */
+    async _updateAfterToggle(resetActivationTime) {
+        // stub
+    }
+
+    /** Update dynamic data, such as the time remaining */
+    poke() {
+        if (Object.hasOwn(SFRPG.effectDurationFrom, this.activeDuration.unit)) {
+            const duration = this.activeDuration;
+            duration.remaining = mkRemaining({
+                value: duration.activationEnd - game.time.worldTime,
+                unit: duration.unit,
+                enabled: this.enabled
+            });
+
+            this._updateAfterPoke();
+        }
+    }
+
+    /** Update the managed Item after a {@linkcode poke} */
+    async _updateAfterPoke() {
+        // stub
     }
 
     /**
@@ -233,19 +270,186 @@ export default class SFRPGTimedEffect {
         return this.constructor.createScrollingText(this, enabled);
     }
 
+    static fromItem(item, itemData = item.system, actor = item.actor) {
+        return (item.type === "effect")
+            ? SFRPGTimedEnable.fromItem(item, itemData, actor)
+            : SFRPGTimedActivation.fromItem(item, itemData, actor);
+    }
+}
+
+class SFRPGTimedEnable extends SFRPGTimedEffect {
+    /** override */
+    async _updateAfterToggle(resetActivationTime = true) {
+        const item = this.item;
+        const delta = {
+            _id: item._id,
+            'system.enabled': this.enabled,
+            'system.modifiers': item.system.modifiers.map((mod, idx) => {
+                const modifier = mod.toObject?.() ?? { ...mod };
+                modifier.enabled = this.modifiers[idx].enabled;
+                return modifier;
+            }),
+            'system.activeDuration.remaining': this.activeDuration.remaining
+        };
+
+        if (resetActivationTime) {
+            delta['system.activeDuration.activationTime'] = this.activeDuration.activationTime;
+            delta['system.activeDuration.expiryInit'] = this.activeDuration.expiryInit;
+        }
+
+        return this.actor?.updateEmbeddedDocuments('Item', [delta]);
+    }
+
+    /** @override */
+    async _updateAfterPoke() {
+        return this.actor?.updateEmbeddedDocuments('Item', [{
+            _id: this.item._id,
+            'system.activeDuration.remaining': this.activeDuration.remaining
+        }]);
+    }
+
+    static fromItem(item, itemData = item.system, actor = item.actor) {
+        // Construct the roll context of the owning actor and the origin actor/item.
+        const rollContext = new RollContext();
+        rollContext.addContext("owner", actor);
+        rollContext.setMainContext("owner");
+
+        const effectContext = itemData.context;
+        if (effectContext) {
+            const origin = {
+                actor: fromUuidSync(effectContext.origin?.actorUuid)?.getRollData() || null,
+                item: fromUuidSync(effectContext.origin?.itemUuid)?.getRollData() || null
+            };
+
+            rollContext.addContext("origin", null, origin);
+        }
+
+        const calculateWithContext = (formula) => {
+            const stringFormula = String(formula || 0);
+            let total = DiceSFRPG.resolveFormulaWithoutDice(stringFormula, rollContext, { logErrors: false }).total;
+
+            if (!total && total !== 0) {
+                ui.notifications.error(
+                    `Error calculating duration on actor ${actor.name} (${actor.id}), effect item ${item.name} (${item.id}).`
+                );
+                console.log(`${item.name}:`, item);
+                total = 0;
+            }
+
+            return total;
+        };
+
+        const effectData = {
+            itemUuid: item.uuid,
+            actorUuid: item.actor.uuid,
+            uuid: item.uuid,
+            name: item.name,
+            type: itemData.type,
+            enabled: itemData.enabled,
+            context: itemData.context,
+            showOnToken: itemData.showOnToken,
+            modifiers: itemData.modifiers,
+            notes: itemData.description.value,
+            activeDuration: itemData.activeDuration
+        };
+
+        const duration = effectData.activeDuration;
+        duration.total = calculateWithContext(duration.value);
+        duration.activationEnd = duration.activationTime + (duration.total * SFRPG.effectDurationFrom[duration.unit]);
+        duration.remaining = mkRemaining({
+            value: duration.activationEnd - game.time.worldTime,
+            unit: duration.unit,
+            enabled: effectData.enabled
+        });
+
+        return new SFRPGTimedEnable(effectData);
+    }
+}
+
+class SFRPGTimedActivation extends SFRPGTimedEffect {
+    /** @override */
+    async _updateAfterToggle(resetActivationTime) {
+        const item = this.item;
+        const delta = {
+            _id: item._id,
+            'system.isActive': this.enabled,
+            'system.activationEvent.status': this.activeDuration.remaining.string
+        };
+
+        if (resetActivationTime) {
+            delta['system.activationEvent.startTime'] = this.activeDuration.activationTime;
+        }
+
+        return this.actor?.updateEmbeddedDocuments('Item', [delta]);
+    }
+
+    /** @override */
+    async _updateAfterPoke() {
+        return this.actor?.updateEmbeddedDocuments('Item', [{
+            _id: this.item._id,
+            'system.activationEvent.status': this.activeDuration.remaining.string
+        }]);
+    }
+
+    static fromItem(item, itemData = item.system, actor = item.actor) {
+        const {
+            isActive,
+            description,
+            duration,
+            activationEvent,
+            modifiers
+        } = itemData;
+        if (!activationEvent) return null;
+
+        const endTime = activationEvent.endTime;
+        const timedEffect = new SFRPGTimedActivation({
+            itemUuid: item.uuid,
+            actorUuid: item.actor.uuid,
+            uuid: item.uuid,
+            name: item.name,
+            type: item.type,
+            enabled: isActive,
+            context: null,
+            showOnToken: false,
+            modifiers: modifiers,
+            notes: description?.value,
+            activeDuration: {
+                unit: duration.units,
+                value: duration.value,
+                activationTime: activationEvent.startTime,
+                activationEnd: endTime,
+                expiryMode: {
+                    type: "turn",
+                    turn: "parent"
+                },
+                expiryInit: 0,
+                remaining: mkRemaining({
+                    value: endTime - game.time.worldTime,
+                    unit: duration.units,
+                    enabled: isActive
+                }),
+                endsOn: duration.endsOn
+            }
+        });
+
+        return timedEffect;
+    }
 }
 
 Hooks.on("updateWorldTime", (worldTime, dt, options, userId) => {
     const timedEffects = game.sfrpg.timedEffects;
     for (const effect of timedEffects.values()) {
-        if (effect.activeDuration.unit === 'permanent' || effect.actor.inCombat) continue;
-
-        const effectFinish = effect.activeDuration.activationEnd;
+        if (effect.actor.inCombat) continue;
         // handling effects while in combat is handled in combat.js
+
+        const effectStart = effect.activeDuration.activationTime ?? -Infinity;
+        const effectFinish = effect.activeDuration.activationEnd ?? Infinity;
         if ((effectFinish <= worldTime && effect.enabled)
             || (dt < 0 && effectFinish >= worldTime && !effect.enabled)
         ) {
             effect.toggle(false);
+        } else if (effectStart <= worldTime && worldTime <= effectFinish) {
+            effect.poke();
         }
 
     }
