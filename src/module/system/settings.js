@@ -319,4 +319,28 @@ export const registerSystemSettings = function() {
         type: String,
         default: "LIMITED"
     });
+
+    game.settings.register("sfrpg", "lockArtworkRotationDefault", {
+        name: "SFRPG.Settings.LockArtworkRotationDefault.Name",
+        hint: "SFRPG.Settings.LockArtworkRotationDefault.Hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: async (value) => {
+            const confirmed = await Dialog.confirm({
+                title: game.i18n.localize("SFRPG.Settings.LockArtworkRotationDefault.ConfirmationTitle"),
+                content: game.i18n.localize("SFRPG.Settings.LockArtworkRotationDefault.ConfirmationText"),
+                yes: () => true,
+                no: () => false,
+                defaultYes: false
+            });
+            if (!confirmed) return;
+            game.actors.forEach(actor => {
+                if (CONFIG.SFRPG.actorsCharacterScale.includes(actor?.type)) {
+                    actor.update({'prototypeToken.lockRotation': value});
+                }
+            });
+        }
+    });
 };

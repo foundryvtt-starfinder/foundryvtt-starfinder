@@ -165,20 +165,31 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
         );
         const activeMovementType = movementOptionsInverted[waypoint.action];
         let value = 0;
-        const hasActor = this.token?.actor ? true : false;
-        const actorSpeed = hasActor ? this.token.actor.system.attributes.speed : false;
+        const hasSpeed = this.token?.actor?.system?.attributes?.speed ? true : false;
+        const actorSpeed = hasSpeed ? this.token.actor.system.attributes.speed : null;
         switch (waypoint.action) {
             case "crawl":
-                value = hasActor ? 5 : Infinity;
+                value = hasSpeed ? 5 : Infinity;
                 break;
             case "jump":
-                value = hasActor ? actorSpeed.land?.value : Infinity;
+                value = hasSpeed ? actorSpeed.land?.value : Infinity;
+                break;
+            case "blink":
+                value = Infinity;
                 break;
             default:
-                if (hasActor && this.token.actor.type === "starship") {
-                    value = hasActor ? actorSpeed.value : Infinity;
+                // default case handles starship flying and character scale actor walking, swimming, and climbing
+                if (hasSpeed && this.token.actor.type === "starship") {
+                    value = actorSpeed.value;
+                } else if (hasSpeed) {
+                    const selectedSpeed = actorSpeed[activeMovementType]?.value;
+                    if (selectedSpeed > 0) {
+                        value = selectedSpeed;
+                    } else {
+                        value = actorSpeed.land?.value;
+                    }
                 } else {
-                    value = hasActor ? actorSpeed[activeMovementType]?.value ?? Infinity : Infinity;
+                    value = Infinity;
                 }
                 break;
         }

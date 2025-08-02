@@ -1,3 +1,37 @@
+# 0.28.3
+
+This update adds compatibility with some new Foundry v13 features, fixes to item-on-canvas dropping, a new Spanish Translation, and assorted other quality of life improvements.
+
+## Core System Improvements
+
+- Delta (+/-) inputs are now supported on item quantity and actor currency fields by @ian612
+- Starfinder-specific movement types and drag ruler are implemented by @ian612
+- Critical Effects are now displayed on attack roll cards rather than damage by @ian612
+- Full speed details are now displayed in tooltips by @ian612
+- Remaining deprecated namespaces updated for v13 by @ian612
+- remove the `_stats` field from item jsons during `unpack` by @ian612
+- When damage is set to roll automatically, critical damage is now auto-rolled properly by @ian612
+- Spanish language translation added by @GusRPG
+- Setting added to lock artwork rotation by default for characters/NPCs/drones/hazards by @danimrath
+
+## Bug Fixes
+
+- `unpack` no longer throws out of memory errors by @ian612 and @LebombJames
+- Fix create dialog creating items in the sidebar instead of on actors by @LebombJames
+- Fix development intellisense setup bugs by @ian612
+- Fix issues with items being dropped on the canvas and associated item collections by @danimrath
+- In-line check buttons in journals are legible for dark and light mode themes by @ian612
+- RollResult objects returned again from roll methods by @levirak
+
+## Data Entry
+
+Enhanced feats and some Adventure Path data has been added.
+
+### New Data
+
+- Starfinder Enhanced feats by @Iankid
+- Adventure Path #19 NPCs by @Dyark-Mist
+
 # 0.28.2
 
 This release is primarily to address a bug in the item browsers causing them to not render any items. It also includes a couple of new features from contributors and the addition of some backlogged data from Interstellar Species and the Horizons of the Vast AP.
