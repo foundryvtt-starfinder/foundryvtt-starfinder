@@ -103,7 +103,7 @@ export function rollItemMacro(itemUuid, macroType) {
         case "use":
             return item.rollConsumable({ event });
         default:
-            return item.roll();
+            return item.toChat();
     }
 }
 
