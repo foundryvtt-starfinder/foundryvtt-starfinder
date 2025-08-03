@@ -27,21 +27,21 @@ jobs:
               with:
                   file: static/system.json
                   field: manifest
-                  value: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/system.json
+                  value: https://github.com/${{github.repository}}/releases/download/build-test/system.json
 
             - name: Update system.json version number
               uses: jossef/action-set-json-field@v2.1
               with:
                   file: static/system.json
                   field: version
-                  value: ${{github.event.release.tag_name}}
+                  value: 0.0.0
 
             - name: Update system.json download link
               uses: jossef/action-set-json-field@v2.1
               with:
                   file: static/system.json
                   field: download
-                  value: https://github.com/${{github.repository}}/releases/download/${{github.event.release.tag_name}}/sfrpg-${{github.event.release.tag_name}}.zip
+                  value: https://github.com/${{github.repository}}/releases/download/build-test/sfrpg-0.0.0.zip
 
             # copy localizations
             - run: npm run copyLocalization
