@@ -3,7 +3,6 @@
  * @import { Collection } from "@common/utils/_module.mjs"
  */
 import { packLoader } from './pack-loader.js';
-const { Collection } = foundry.utils;
 
 export class DocumentBrowserSFRPG extends Application {
     static get defaultOptions() {

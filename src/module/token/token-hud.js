@@ -130,9 +130,9 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
      * @listens
      * @this {SFRPGTokenHUD}
      * @param {Event} event The event
-     * @param {HTMLButtonElement} target The remove all button
+     // * @param {HTMLButtonElement} target The remove all button
      */
-    static async _onRemoveAllConditions(event, target) {
+    static async _onRemoveAllConditions(event) {
         event.preventDefault();
         event.stopPropagation();
 

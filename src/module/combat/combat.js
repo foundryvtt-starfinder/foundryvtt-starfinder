@@ -910,7 +910,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     const combatType = activeCombat.getCombatType();
 
     const header = html.querySelector('.combat-tracker-header');
-    const footer = html.querySelector('.combat-controls');
+    // const footer = html.querySelector('.combat-controls');
 
     if (activeCombat.round > 0) {
         const phases = activeCombat.getPhases();

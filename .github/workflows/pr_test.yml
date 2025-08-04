@@ -13,6 +13,8 @@ jobs:
             - uses: actions/checkout@v4
             # install deps
             - run: npm ci
+            # run eslint
+            - run: npm run lint
 
             # Substitute the Manifest and Download URLs in system.json
             - name: Update system.json url
