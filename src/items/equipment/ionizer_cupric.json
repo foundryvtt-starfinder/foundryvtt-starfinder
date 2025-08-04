@@ -2,11 +2,6 @@
   "_id": "yphxy4ax0UOTIbSm",
   "name": "Ionizer, cupric",
   "type": "weapon",
-  "_stats": {
-    "coreVersion": 12,
-    "systemId": "sfrpg",
-    "systemVersion": "0.28.0"
-  },
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
     "type": "",
@@ -26,8 +21,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -57,7 +52,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -73,7 +68,7 @@
         {
           "type": "slot",
           "acceptsType": [
-            "goods"
+            "weaponAccessory"
           ],
           "affectsEncumbrance": true,
           "amount": 1,
@@ -100,7 +95,15 @@
           "formula": "1d6",
           "operator": "",
           "types": {
-            "electricity": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
@@ -108,10 +111,19 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "2d4",
-          "operator": "",
+          "group": null,
           "types": {
-            "electricity": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
@@ -122,11 +134,11 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>The ionizer’s beam ionizes a path to its target, which serves as a route for the ensuing electric charge. There are several different elemental ions used in constructing ionizers, with the strength of the output based on the metal used. The most common are cupric, ferric, chromic, and stannic ionizers. Generally, the weapon’s hardware is stored in two upgrade slots of a piece of armor, while a connected wand-like barrel extends from an extremity. Aballon’s anacites designed the first ionizers, but they have long since spread throughout the Pact Worlds and beyond.</p>"
+      "value": "<p>The ionizer’s beam ionizes a path to its target, which serves as a route for the ensuing electric charge. There are several different elemental ions used in constructing ionizers, with the strength of the output based on the metal used. The most common are cupric, ferric, chromic, and stannic ionizers. Generally, the weapon’s hardware is stored in two upgrade slots of a piece of armor, while a connected wand-like barrel extends from an extremity. Aballon’s anacites designed the first ionizers, but they have long since spread throughout the Pact Worlds and beyond.</p>\n<p><strong>Weapon Property:</strong> Integrated (2 slots)</p>"
     },
     "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
     "equippable": true,
@@ -154,6 +166,7 @@
       "breach": false,
       "breakdown": false,
       "bright": false,
+      "buttressing": false,
       "cluster": false,
       "conceal": false,
       "deconstruct": false,
@@ -172,15 +185,19 @@
       "force": false,
       "freeHands": false,
       "fueled": false,
+      "gearArray": false,
       "grapple": false,
       "gravitation": false,
       "guided": false,
       "harrying": false,
+      "healing": false,
       "holyWater": false,
       "hybrid": false,
+      "hydrodynamic": false,
       "ignite": false,
       "indirect": false,
       "injection": false,
+      "instrumental": false,
       "integrated": true,
       "line": false,
       "living": false,
@@ -198,6 +215,7 @@
       "polymorphic": false,
       "powered": false,
       "professional": false,
+      "propel": false,
       "punchGun": false,
       "qreload": false,
       "radioactive": false,
@@ -206,7 +224,9 @@
       "regrowth": false,
       "relic": false,
       "reposition": false,
+      "scramble": false,
       "shape": false,
+      "shatter": false,
       "shells": false,
       "shield": false,
       "sniper": false,
@@ -219,6 +239,7 @@
       "thought": false,
       "throttle": false,
       "thrown": false,
+      "thruster": false,
       "trip": false,
       "two": false,
       "unbalancing": false,
@@ -233,7 +254,7 @@
       "additional": "",
       "per": "",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "rollNotes": "",
     "save": {
@@ -241,9 +262,28 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
     "source": "AR pg. 15",
     "special": "",
-    "specialMaterials": {},
+    "specialMaterials": {
+      "abysium": false,
+      "adamantine": false,
+      "coldiron": false,
+      "diatha": false,
+      "djezet": false,
+      "horacalcum": false,
+      "inubrix": false,
+      "khefak": false,
+      "noqual": false,
+      "nyblantine": false,
+      "purplecores": false,
+      "siccatite": false,
+      "silver": false,
+      "voidglass": false
+    },
     "target": {
       "type": "",
       "value": ""
@@ -253,7 +293,7 @@
       "value": 1
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

@@ -1,4 +1,77 @@
-# 0.27.2
+# 0.28.3
+
+This update adds compatibility with some new Foundry v13 features, fixes to item-on-canvas dropping, a new Spanish Translation, and assorted other quality of life improvements.
+
+## Core System Improvements
+
+- Delta (+/-) inputs are now supported on item quantity and actor currency fields by @ian612
+- Starfinder-specific movement types and drag ruler are implemented by @ian612
+- Critical Effects are now displayed on attack roll cards rather than damage by @ian612
+- Full speed details are now displayed in tooltips by @ian612
+- Remaining deprecated namespaces updated for v13 by @ian612
+- remove the `_stats` field from item jsons during `unpack` by @ian612
+- When damage is set to roll automatically, critical damage is now auto-rolled properly by @ian612
+- Spanish language translation added by @GusRPG
+- Setting added to lock artwork rotation by default for characters/NPCs/drones/hazards by @danimrath
+
+## Bug Fixes
+
+- `unpack` no longer throws out of memory errors by @ian612 and @LebombJames
+- Fix create dialog creating items in the sidebar instead of on actors by @LebombJames
+- Fix development intellisense setup bugs by @ian612
+- Fix issues with items being dropped on the canvas and associated item collections by @danimrath
+- In-line check buttons in journals are legible for dark and light mode themes by @ian612
+- RollResult objects returned again from roll methods by @levirak
+
+## Data Entry
+
+Enhanced feats and some Adventure Path data has been added.
+
+### New Data
+
+- Starfinder Enhanced feats by @Iankid
+- Adventure Path #19 NPCs by @Dyark-Mist
+
+# 0.28.2
+
+This release is primarily to address a bug in the item browsers causing them to not render any items. It also includes a couple of new features from contributors and the addition of some backlogged data from Interstellar Species and the Horizons of the Vast AP.
+
+## Core System Improvements
+
+- Added drag and drop macro creation for character stats by @levirak
+- Descriptive tags are now added to skill rolls by @Imper1um
+
+## Bug Fixes
+
+- Folders in compendiums are now parsed properly by @ian612
+- Document Browsers now show spell, equipment, and starship actions properly by @ian612
+
+## Data Entry
+
+Data entry for this update focused on getting in some backlogged data from older books.
+
+### New Data
+
+- NPCs from Interstellar Species have been added to the compendiums by @Iankid
+- Data from Horizons of the Vast Book 1 has been added by @Iankid
+
+### Corrections and Updates
+
+- Items used by the IS NPCs have been updated by @Iankid
+
+# 0.28.1
+
+Following closely on the heels of our final v12 release, Foundry v13 support is here! This version of sf1e is compatible with Foundry v13 and while we do not fully take advantage of all the v13 features yet, we will be rolling out new features as we complete them. As there are a number of breaking changes between foundry v12 and v13, this version is unfortunately not compatible with Foundry v12 installs. Please remember to back up your worlds before launching them with this new version, just in case.
+
+## Core System Improvements
+
+- Foundry v13 support has been added by @danimrath, @ian612, and @LebombJames
+
+# 0.28.0
+
+Beta version, not publicly released.
+
+# 0.27.3
 
 The final v12 release is here! This version contains a multitude of fixes and updates. The next version will be for v13 exclusively, so any future bugfixes or updates will require an update to the next system version, 0.28.0 or later.
 
@@ -61,6 +134,10 @@ Along with a host of fixes to items and aliens in the compendiums, a big effort 
 - Fix Versatile Specialization bonus type and operative damage by @Theleruby
 - Typos corrected on Psychopomps, Defrex Hardiness, and Apocalypse Insight by @ilya-vasiuk
 - Added damage to Days' Weariness spell by @ilya-vasiuk
+
+# 0.27.2
+
+Beta version, not publicly released.
 
 # 0.27.1
 This update primarily adds some new data (including more Starfinder Enhanced material) and addresses some bugs that popped up in 0.27.0 and before. Some small system improvements have also been made, primarily to the backend.

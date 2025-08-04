@@ -14,7 +14,8 @@
     "unpack": "node build/unpack.js",
     "link": "node ./build/link.js",
     "lint": "eslint src/",
-    "lint:fix": "eslint --fix src/"
+    "lint:fix": "eslint --fix src/",
+    "setupIntellisense": "node build/setup-intellisense.js"
   },
   "repository": {
     "type": "git",
@@ -32,6 +33,7 @@
   },
   "homepage": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder#readme",
   "devDependencies": {
+    "@svgdotjs/svg.js": "^3.2.4",
     "@eslint/js": "^9.27.0",
     "archiver": "^7.0.1",
     "chalk": "^5.4.1",
@@ -46,6 +48,7 @@
     "less": "^4.3.0",
     "prompts": "^2.4.2",
     "sanitize-filename": "^1.6.3",
+    "svgdom": "^0.1.19",
     "vite": "^6.3.5",
     "yargs": "^17.7.2"
   }

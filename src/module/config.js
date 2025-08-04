@@ -6,6 +6,10 @@ import TemplateEnricher from "./system/enrichers/template.js";
 // Namespace SFRPG Configuration Values
 export const SFRPG = {};
 
+/**
+ * The full list of actor types with localization strings
+ * @type {Object}
+ */
 SFRPG.actorTypes = {
     "character": "TYPES.Actor.character",
     "drone": "TYPES.Actor.drone",
@@ -15,6 +19,18 @@ SFRPG.actorTypes = {
     "starship": "TYPES.Actor.starship",
     "vehicle": "TYPES.Actor.vehicle"
 };
+
+/**
+ * The set of actor types who are character scale and use "normal" movement types
+ * @type {Array}
+ */
+SFRPG.actorsCharacterScale = [
+    "character",
+    "drone",
+    "npc",
+    "npc2",
+    "hazard"
+];
 
 /**
  * The set of ability scores used with the system
@@ -200,6 +216,7 @@ SFRPG.damageTypeOperators = {
 SFRPG.descriptors = {
     "acid": "SFRPG.Descriptors.Acid",
     "air": "SFRPG.Descriptors.Air",
+    "auditory": "SFRPG.Descriptors.Auditory",
     "calling": "SFRPG.Descriptors.Calling",
     "chaotic": "SFRPG.Descriptors.Chaotic",
     "charm": "SFRPG.Descriptors.Charm",
@@ -219,6 +236,7 @@ SFRPG.descriptors = {
     "force": "SFRPG.Descriptors.Force",
     "good": "SFRPG.Descriptors.Good",
     "healing": "SFRPG.Descriptors.Healing",
+    "illusion": "SFRPG.Descriptors.Illusion",
     "language-dependent": "SFRPG.Descriptors.LanguageDependent",
     "lawful": "SFRPG.Descriptors.Lawful",
     "light": "SFRPG.Descriptors.Light",
@@ -958,12 +976,13 @@ SFRPG.languages = {
     "abyssal": "SFRPG.LanguagesAbyssal",
     "aglian": "SFRPG.LanguagesAglian",
     "akan": "SFRPG.LanguagesAkan",
-    "akiton": "SFRPG.LanguagesAkitonian",
+    "akitonian": "SFRPG.LanguagesAkitonian",
     "aklo": "SFRPG.LanguagesAklo",
     "alkainish": "SFRPG.LanguagesAlkainish",
     "anassan": "SFRPG.LanguagesAnassan",
     "aquan": "SFRPG.LanguagesAquan",
     "arkanen": "SFRPG.LanguagesArkanen",
+    "astriapi": "SFRPG.LanguagesAstriapi",
     "ancientDaimalkan": "SFRPG.LanguagesAncientDaimalkan",
     "auran": "SFRPG.LanguagesAuran",
     "azlanti": "SFRPG.LanguagesAzlanti",
@@ -992,11 +1011,13 @@ SFRPG.languages = {
     "firstSpeech": "SFRPG.LanguagesFirstSpeech",
     "frujai": "SFRPG.LanguagesFrujai",
     "garaggakal": "SFRPG.LanguagesGaraggakal",
+    "gathol": "SFRPG.LanguagesGathol",
     "ghibran": "SFRPG.LanguagesGhibran",
     "ghoran": "SFRPG.LanguagesGhoran",
     "giant": "SFRPG.LanguagesGiant",
     "gnome": "SFRPG.LanguagesGnome",
     "goblin": "SFRPG.LanguagesGoblin",
+    "gosclaw": "SFRPG.LanguagesGosclaw",
     "grioth": "SFRPG.LanguagesGrioth",
     "gytchean": "SFRPG.LanguagesGytchean",
     "hadrogaan": "SFRPG.LanguagesHadrogaan",
@@ -1034,12 +1055,14 @@ SFRPG.languages = {
     "paralithi": "SFRPG.LanguagesParalithi",
     "perani": "SFRPG.LanguagesPerani",
     "protean": "SFRPG.LanguagesProtean",
+    "psacynoa": "SFRPG.LanguagesPsacynoa",
     "quorlu": "SFRPG.LanguagesQuorlu",
     "raxi": "SFRPG.LanguagesRaxi",
     "reptoid": "SFRPG.LanguagesReptoid",
     "requian": "SFRPG.LanguagesRequian",
     "sarcesian": "SFRPG.LanguagesSarcesian",
     "sazaron": "SFRPG.LanguagesSazaron",
+    "screedreep": "SFRPG.LanguagesScreedreep",
     "scyphozoan": "SFRPG.LanguagesScyphozoan",
     "selamidian": "SFRPG.LanguagesSelamidian",
     "seprevoi": "SFRPG.LanguagesSeprevoi",
@@ -1056,6 +1079,7 @@ SFRPG.languages = {
     "terran": "SFRPG.LanguagesTerran",
     "triaxian": "SFRPG.LanguagesTriaxian",
     "trinir": "SFRPG.LanguagesTrinir",
+    "tromlin": "SFRPG.LanguagesTromlin",
     "urog": "SFRPG.LanguagesUrog",
     "varratana": "SFRPG.LanguagesVarratana",
     "vercite": "SFRPG.LanguagesVercite",
@@ -1063,6 +1087,7 @@ SFRPG.languages = {
     "vlakan": "SFRPG.LanguagesVlakan",
     "vulgarKishaleen": "SFRPG.LanguagesVulgarKishaleen",
     "woiokan": "SFRPG.LanguagesWoiokan",
+    "worlanisi": "SFRPG.LanguagesWorlanisi",
     "wrikreechee": "SFRPG.LanguagesWrikreechee",
     "xaarb": "SFRPG.LanguagesXaarb",
     "ysoki": "SFRPG.LanguagesYsoki"
@@ -1926,6 +1951,15 @@ SFRPG.conditions = {
 };
 
 SFRPG.conditionsCausingFlatFooted = ["blinded", "cowering", "off-kilter", "pinned", "stunned"];
+
+// Conversion between Starfinder speed names and foundry's speed names
+SFRPG.movementOptions = {
+    burrowing: "burrow",
+    climbing: "climb",
+    flying: "fly",
+    swimming: "swim",
+    land: "walk"
+};
 
 // TODO localize
 SFRPG.characterFlags = {

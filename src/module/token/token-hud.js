@@ -1,23 +1,35 @@
-export class SFRPGTokenHUD extends TokenHUD {
+/**
+ * @import { ApplicationRenderContext, ApplicationRenderOptions } from "@client/applications/_types.mjs"
+ * @import { ActorSFRPG } from "../actor/actor.js";
+*/
+
+export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
+
+    static DEFAULT_OPTIONS = {
+        actions: {
+            effect: {handler: SFRPGTokenHUD._onClickEffect, buttons: [0, 2]},
+            removeAll: SFRPGTokenHUD._onRemoveAllConditions
+        },
+        form: {
+            closeOnSubmit: false
+        }
+    };
 
     /**
+     * @param {ApplicationRenderContext} context Prepared context data
+     * @param {ApplicationRenderOptions} options Provided render options
      * @override
-     * Calls super then adds a remove all button and optionally reformats the grid with text.
      */
-    async _render(force, options) {
-        const render = await super._render(force, options);
+    async _onRender(context, options) {
         this.modifyConditions(this.element);
         this.refreshStatusIcons();
 
-        return render;
+        return super._onRender(context, options);
     }
 
-    /**
-     * @override
-     * Toggles active and overlay classes on the status images.
-     */
+    /** Toggles active and overlay classes on the status images. */
     refreshStatusIcons() {
-        const effects = this.element.find(".status-effects")[0];
+        const effects = this.element.querySelector(".status-effects");
         const statuses = this.object.actor?.system?.conditions;
         if (!statuses) return;
 
@@ -33,9 +45,10 @@ export class SFRPGTokenHUD extends TokenHUD {
     /**
      * Modifies the status effects (conditions) formatting
      * Adds names, classes, and a button to remove all conditions
-     * @param {HTMLFormElement} html - The form element of the Token HUD
      */
-    modifyConditions([html]) {
+    modifyConditions() {
+        const html = this.element;
+
         // Add a button to remove all conditions
         const label = game.i18n.localize("SFRPG.Canvas.TokenHud.RemoveAll");
         const content = game.settings.get('sfrpg', 'tokenConditionLabels') ? `${label} <i class="fas fa-times-circle" />` : `<i class="fas fa-times-circle" />`;
@@ -43,10 +56,10 @@ export class SFRPGTokenHUD extends TokenHUD {
         const button = document.createElement("button");
         button.classList.add("remove-all");
         button.setAttribute("title", label);
+        button.dataset.action = "removeAll";
         button.innerHTML = content;
-        button.addEventListener("click", this.onRemoveAllConditions.bind(this));
 
-        const gridContainer = $(".status-effects", html);
+        const gridContainer = html.querySelector(".status-effects");
         gridContainer.append(button);
 
         // Optionally reformat the grid
@@ -59,15 +72,16 @@ export class SFRPGTokenHUD extends TokenHUD {
 
         for (const image of allStatusImages) {
             // Replace the img element with a picture element, which can display ::after content and allows child elements.
-            const name = image.dataset.tooltip ?? "";
+            const name = image.dataset.tooltipText ?? "";
             const statusId = image.dataset.statusId ?? "";
 
             const picture = document.createElement("picture");
             picture.classList.add("effect-control");
             picture.dataset.statusId = statusId;
+            picture.dataset.action = "effect";
             picture.title = name;
+
             const iconSrc = image.getAttribute("src");
-            picture.setAttribute("src", iconSrc);
             const newIcon = document.createElement("img");
             newIcon.src = iconSrc;
             picture.append(newIcon);
@@ -80,29 +94,30 @@ export class SFRPGTokenHUD extends TokenHUD {
 
             picture.append(nameLabel);
 
-            picture.addEventListener("click", (event) => this._onClickEffect(event, picture, false));
-            picture.addEventListener("contextmenu", (event) => this._onClickEffect(event, picture, true));
-
         }
     }
 
     /**
      * Handle creating the condition item, and optionally an overlay effect.
+     * @listens
+     * @this {SFRPGTokenHUD}
      * @param {Event} event The event
-     * @param {HTMLPictureElement} pic The clicked Picture element
-     * @param {Boolean} overlay Whether to also create an overlay status effect as well as a condition item
+     * @param {HTMLPictureElement} target The clicked Picture element
      * @returns {Boolean} Whether the effect is now enabled or not.
      */
-    async _onClickEffect(event, pic, overlay) {
+    static async _onClickEffect(event, target) {
         event.preventDefault();
         event.stopPropagation();
 
-        const isEnabled = pic.classList.contains('active');
-        const token = this.object;
-        const actor = token?.actor;
+        const isEnabled = target.classList.contains('active');
 
-        const conditionId = pic.dataset.statusId;
+        /** @type {ActorSFRPG} */
+        const actor = this.object?.actor;
+
+        const conditionId = target.dataset.statusId;
         if (!(conditionId && actor)) return;
+
+        const overlay = event.button === 2;
 
         if (overlay) await actor.toggleStatusEffect(conditionId, {overlay, active: !isEnabled});
 
@@ -111,27 +126,26 @@ export class SFRPGTokenHUD extends TokenHUD {
     }
 
     /**
-     * @listens
      * Sets all conditions to false
+     * @listens
+     * @this {SFRPGTokenHUD}
      * @param {Event} event The event
+     * @param {HTMLButtonElement} target The remove all button
      */
-    async onRemoveAllConditions(event) {
+    static async _onRemoveAllConditions(event, target) {
         event.preventDefault();
         event.stopPropagation();
 
         const statuses = this.object.actor?.system?.conditions;
         if (!statuses) return;
 
-        const promises = [];
-
         for (const [condition, enabled] of Object.entries(statuses)) {
-            if (enabled) promises.push(this.object.actor.setCondition(condition, false));
+            if (enabled) this.object.actor.setCondition(condition, false);
         }
 
         for (const effect of this.object.actor.effects) {
-            promises.push(effect.delete());
+            effect.delete();
         }
 
-        return Promise.all(promises);
     }
 }

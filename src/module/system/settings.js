@@ -1,8 +1,24 @@
 import FloatingNumberMenu from "../classes/floating-number-menu.js";
 import { SFRPG } from "../config.js";
 import { ItemSFRPG } from "../item/item.js";
+import { rerenderApps } from "../utils/utilities.js";
 
 export const registerSystemSettings = function() {
+    game.settings.register("sfrpg", "chatNotificationDuration", {
+        name: "SFRPG.Settings.ChatNotificationDuration.Name",
+        hint: "SFRPG.Settings.ChatNotificationDuration.Hint",
+        scope: "client",
+        config: true,
+        default: 5000,
+        type: Number,
+        range: {
+            min: 1000,
+            max: 60000,
+            step: 1000
+        },
+        onChange: (value) => CONFIG.ui.chat.NOTIFY_DURATION = value
+    });
+
     game.settings.register("sfrpg", "disableExperienceTracking", {
         name: "SFRPG.Settings.ExperienceTracking.Name",
         hint: "SFRPG.Settings.ExperienceTracking.Hint",
@@ -93,9 +109,7 @@ export const registerSystemSettings = function() {
         config: true,
         default: false,
         type: Boolean,
-        onChange: () => {
-            ItemSFRPG._onScalingCantripsSettingChanges();
-        }
+        onChange: (value) => ItemSFRPG._onScalingCantripsSettingChanges(value)
     });
 
     game.settings.register("sfrpg", "autoRollCritEffect", {
@@ -205,7 +219,8 @@ export const registerSystemSettings = function() {
         scope: "client",
         config: true,
         default: false,
-        type: Boolean
+        type: Boolean,
+        onChange: () => rerenderApps()
     });
 
     game.settings.register("sfrpg", "warnInvalidRollData", {
@@ -242,6 +257,32 @@ export const registerSystemSettings = function() {
         hint: "SFRPG.Settings.FloatingHP.Hint",
         icon: "fas fa-heart",
         type: FloatingNumberMenu
+    });
+
+    // Drag ruler colorization
+    game.settings.register("sfrpg", "rulerColor0", {
+        name: "SFRPG.Settings.rulerColor0.Name",
+        hint: "SFRPG.Settings.rulerColor0.Hint",
+        scope: "client",
+        config: true,
+        default: "#0080FF",
+        type: new foundry.data.fields.ColorField()
+    });
+
+    game.settings.register("sfrpg", "rulerColor1", {
+        name: "SFRPG.Settings.rulerColor1.Name",
+        scope: "client",
+        config: true,
+        default: "#F06400",
+        type: new foundry.data.fields.ColorField()
+    });
+
+    game.settings.register("sfrpg", "rulerColor2", {
+        name: "SFRPG.Settings.rulerColor2.Name",
+        scope: "client",
+        config: true,
+        default: "#80004F",
+        type: new foundry.data.fields.ColorField()
     });
 
     game.settings.register("sfrpg", "floatingHP", {
@@ -284,5 +325,29 @@ export const registerSystemSettings = function() {
         config: false,
         type: String,
         default: "LIMITED"
+    });
+
+    game.settings.register("sfrpg", "lockArtworkRotationDefault", {
+        name: "SFRPG.Settings.LockArtworkRotationDefault.Name",
+        hint: "SFRPG.Settings.LockArtworkRotationDefault.Hint",
+        scope: "world",
+        config: true,
+        default: false,
+        type: Boolean,
+        onChange: async (value) => {
+            const confirmed = await Dialog.confirm({
+                title: game.i18n.localize("SFRPG.Settings.LockArtworkRotationDefault.ConfirmationTitle"),
+                content: game.i18n.localize("SFRPG.Settings.LockArtworkRotationDefault.ConfirmationText"),
+                yes: () => true,
+                no: () => false,
+                defaultYes: false
+            });
+            if (!confirmed) return;
+            game.actors.forEach(actor => {
+                if (CONFIG.SFRPG.actorsCharacterScale.includes(actor?.type)) {
+                    actor.update({'prototypeToken.lockRotation': value});
+                }
+            });
+        }
     });
 };

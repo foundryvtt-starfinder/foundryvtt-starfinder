@@ -1,8 +1,7 @@
 import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
 
-import { generateUUID } from "../utils/utilities.js";
-import { valueEquals } from "../utils/value-equals.js";
+import { value_equals } from "../utils/value_equals.js";
 
 export function initializeRemoteInventory() {
     RPC.registerCallback("createItemCollection", "gm", onCreateItemCollection);
@@ -435,7 +434,7 @@ function canMerge(itemA, itemB) {
 
     // TODO: Remove all keys that are not template appropriate given the item type, remove all keys that are not shared?
 
-    return valueEquals(itemDataA, itemDataB, false, true);
+    return value_equals(itemDataA, itemDataB, false, true);
 }
 
 export function getFirstAcceptableStorageIndex(container, itemToAdd) {
@@ -567,12 +566,17 @@ export async function onCreateItemCollection(message) {
     }
 
     const createdTokenPromise = canvas.scene.createEmbeddedDocuments("Token", [{
-        name: payload.itemData[0].name,
+        name: "Item Collection",
         x: payload.position.x,
         y: payload.position.y,
-        img: payload.itemData[0].img,
+        // #TODO - Do we want to make this payload.itemData[0].img to have the image be of the item?
+        // If so we should make it also update when you add or remove more items to make it a container
+        // and also allow dropping the collection straight form the canvas.
+        texture: {
+            src: "systems/sfrpg/icons/default/" + SFRPG.defaultItemIcons.container
+        },
         hidden: false,
-        locked: true,
+        locked: false,
         disposition: 0,
         flags: {
             "sfrpg": {
@@ -617,23 +621,23 @@ async function onItemDraggedToCollection(message) {
             return;
         }
 
-        newItems.push(data.draggedItemData);
+        newItems.push(data.draggedItemData.toObject());
 
         const itemIdsToDelete = [data.draggedItemData._id];
 
         const sourceItemData = data.draggedItemData;
-        if (source !== null && sourceItemData.system.container?.contents && sourceItemData.system.container.contents.length > 0) {
+        if (source !== null && sourceItemData.system?.container?.contents && sourceItemData.system.container.contents.length > 0) {
             const containersToTest = [sourceItemData];
             while (containersToTest.length > 0) {
                 const container = containersToTest.shift();
-                const children = source.filterItems(x => container.system.container.contents.find(y => y.id === x.id));
+                const children = source.filterItems(x => container.system?.container?.contents?.find(y => y.id === x.id));
                 if (children) {
                     for (const child of children) {
-                        newItems.push(child.data);
+                        newItems.push(child.toObject());
                         itemIdsToDelete.push(child.id);
 
                         if (child.system.container?.contents && child.system.container.contents.length > 0) {
-                            containersToTest.push(child.data);
+                            containersToTest.push(child);
                         }
                     }
                 }
@@ -649,8 +653,21 @@ async function onItemDraggedToCollection(message) {
         }
     }
 
+    const itemToItemMapping = {};
     for (const item of newItems) {
-        item._id = generateUUID();
+        const newId = foundry.utils.randomID();
+        itemToItemMapping[item._id] = newId;
+        item._id = newId;
+    }
+
+    for (const item of newItems) {
+        if (item.system?.container?.contents && item.system.container.contents.length > 0) {
+            for (const content of item.system.container.contents) {
+                if (itemToItemMapping[content.id]) {
+                    content.id = itemToItemMapping[content.id];
+                }
+            }
+        }
     }
 
     if (newItems.length > 0) {
@@ -661,6 +678,7 @@ async function onItemDraggedToCollection(message) {
             }
         }
         newItems = items.concat(newItems);
+        // #TODO - This is where we could force updates to the image potentially. texture.src = "systems/sfrpg/icons/default/" + SFRPG.defaultItemIcons.container
         const update = {
             "flags.sfrpg.itemCollection.items": newItems
         };

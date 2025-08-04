@@ -125,7 +125,7 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
                 canvas.app.view.onwheel = null;
                 // Clear highlight
                 this.active = false;
-                const hl = canvas.grid.getHighlightLayer(this.highlightId);
+                const hl = canvas.interface.grid.getHighlightLayer(this.highlightId);
                 hl?.clear();
                 _clear();
 
@@ -203,4 +203,3 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
 
     }
 }
-

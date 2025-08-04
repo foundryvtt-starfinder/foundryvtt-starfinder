@@ -58,6 +58,7 @@ export default class RollTree {
      * @param {string} request.mode
      * @param {string} [request.bonus]
      * @param {DamagePart[]} [request.enabledParts]
+     * @returns {RollInfo}
      */
     #processRollRequest(request) {
         const result = {

@@ -70,6 +70,7 @@
                         "Clumsy": "Clumsy",
                         "Perfect": "Perfect"
                     },
+                    "FlightManeuverability": "Flight Maneuverability",
                     "MainMovementType": "Main Movement",
                     "MovementSpeedNamedTitle": "Movement Speed: {name}",
                     "MovementSpeedTitle": "Movement Speed",
@@ -798,6 +799,7 @@
         "Descriptors": {
             "Acid": "Acid",
             "Air": "Air",
+            "Auditory": "Auditory",
             "Calling": "Calling",
             "CallingDescription": "A calling effect transports a creature from another plane to the plane you are on. The effect grants the creature the one-time ability to return to its plane of origin, although the effect might limit the circumstances under which this is possible. Creatures who are called die if they are killed on the new plane. A called creature can’t be dispelled, even if it was called by magical means.",
             "Chaotic": "Chaotic",
@@ -823,6 +825,7 @@
             "ForceDescription": "A force effect deals full damage to incorporeal creatures and blocks their movement. It also blocks the sense through ability.",
             "Good": "Good",
             "Healing": "Healing",
+            "Illusion": "Illusion",
             "LanguageDependent": "Language Dependent",
             "LanguageDependentDescription": "A language-dependent effect uses intelligible language (either audible, visual, or telepathic) as a medium for communication. If you cannot communicate with the target or the target cannot understand what you are communicating, the effect fails to affect that target.",
             "Lawful": "Lawful",
@@ -1252,6 +1255,9 @@
                     "SpellsPerDayBonusHeader": "Bonus Spells Per Day (by spell level)",
                     "SpellsPerDayHeader": "Spells Per Day (by spell level)"
                 }
+            },
+            "Common": {
+                "DeltaInputTooltip": "Supports optional delta (+/-) input."
             },
             "Consumables": {
                 "Category": "Consumable Type"
@@ -1856,11 +1862,13 @@
         "LanguagesFirstSpeech": "First Speech",
         "LanguagesFrujai": "Frujai",
         "LanguagesGaraggakal": "Garaggakal",
+        "LanguagesGathol": "Gathol",
         "LanguagesGhibran": "Ghibran",
         "LanguagesGhoran": "Ghoran",
         "LanguagesGiant": "Giant",
         "LanguagesGnome": "ノーム語",
         "LanguagesGoblin": "ゴブリン語",
+        "LanguagesGosclaw": "Gosclaw",
         "LanguagesGrioth": "Grioth",
         "LanguagesGytchean": "Gytchean",
         "LanguagesHadrogaan": "Hadrogaan",
@@ -1898,12 +1906,14 @@
         "LanguagesParalithi": "Paralithi",
         "LanguagesPerani": "Perani",
         "LanguagesProtean": "Protean",
+        "LanguagesPsacynoa": "Psacynoa",
         "LanguagesQuorlu": "Quorlu",
         "LanguagesRaxi": "Raxi",
         "LanguagesReptoid": "Reptoid",
         "LanguagesRequian": "Requian",
         "LanguagesSarcesian": "サルセシア語",
         "LanguagesSazaron": "Sazaron",
+        "LanguagesScreedreep": "Screedreep",
         "LanguagesScyphozoan": "Scyphozoan",
         "LanguagesSelamidian": "Selamidian",
         "LanguagesSeprevoi": "Seprevoi",
@@ -1920,6 +1930,7 @@
         "LanguagesTerran": "地界語",
         "LanguagesTriaxian": "トリアクサス語",
         "LanguagesTrinir": "Trinir",
+        "LanguagesTromlin": "Tromlin",
         "LanguagesUrog": "Urog",
         "LanguagesVarratana": "Varratana",
         "LanguagesVercite": "ヴァーサイト語",
@@ -1927,6 +1938,8 @@
         "LanguagesVlakan": "Vlakan (signed, spoken, and tactile)",
         "LanguagesVulgarKishaleen": "Vulgar Kishaleen",
         "LanguagesWoiokan": "Woiokan",
+        "LanguagesWorlanisi": "Worlanisi",
+        "LanguagesWorlansi": "Worlansi",
         "LanguagesWrikreechee": "Wrikreechee",
         "LanguagesXaarb": "Xaarb",
         "LanguagesYsoki": "イソキ語",
@@ -2324,6 +2337,10 @@
                 "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
                 "Name": "Automatically roll starship critical damage effects"
             },
+            "ChatNotificationDuration": {
+                "Hint": "How long (in MS) to display chat notifications before they are dismissed.",
+                "Name": "Chat Notification Duration"
+            },
             "CombatCards": {
                 "NormalHint": "Change which combat chat cards should be displayed during normal combat.",
                 "NormalName": "Normal combat",
@@ -2417,6 +2434,12 @@
                 "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
                 "Name": "Hide Hostile Starship Critical Message"
             },
+            "LockArtworkRotationDefault": {
+                "ConfirmationText": "Apply one time update to all Character/NPC/Drone/Hazard prototype token settings?</p>This will not affect placed tokens.</p>",
+                "ConfirmationTitle": "Lock Artwork Rotation Setting Change",
+                "Hint": "When enabled, enables Lock Artwork Rotation on character scale actors by default (Characters/NPC/Drones/Hazards). This can be overridden by the actor's prototype token settings.",
+                "Name": "Lock Artwork Rotation by Default"
+            },
             "SFRPGTheme": {
                 "Hint": "When enabled, a few minor tweaks to Foundry's colours will be made to match Starfinder's colour scheme.",
                 "Name": "Custom SFRPG theme"
@@ -2461,6 +2484,16 @@
             "WorldSchemaVersion": {
                 "Hint": "Starfinderシステムのデータ･スキーマ･バージョンを記録します。警告：何をしているかわからない場合は、この値を編集しないでください。",
                 "Name": "Starfinderデータ･スキーマ･バージョン"
+            },
+            "rulerColor0": {
+                "Hint": "Colors for the ruler that appears when tokens are dragged across the canvas.",
+                "Name": "Drag Ruler Primary Color"
+            },
+            "rulerColor1": {
+                "Name": "Drag Ruler Secondary Color"
+            },
+            "rulerColor2": {
+                "Name": "Drag Ruler Tertiary Color"
             }
         },
         "ShipFrameLabel": "フレーム",
@@ -2643,11 +2676,13 @@
         "SkillTooltipSkillRanks": "技能ランク: {ranks}",
         "SkillTooltipThemeMod": "テーマ修正値: {mod}",
         "SkillTooltipTrainedClassSkill": "訓練済技能クラス修正値: {mod}",
+        "SkillTrained": "Trained",
         "SkillTrainedOnly": "訓練時のみ判定可",
         "SkillTrainedOnlyDialog": {
             "Content": "{skill} is a trained only skill, but {name} is not trained in that skill. Would you like to roll anyway?",
             "Title": "{skill} is trained only"
         },
+        "SkillUntrained": "Untrained",
         "SkillsHeaderAbility": "能力値",
         "SkillsHeaderModifier": "修正",
         "SkillsHeaderName": "名前",
