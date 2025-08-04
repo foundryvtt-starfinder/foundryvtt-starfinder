@@ -1,7 +1,7 @@
 import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
 
-import { value_equals } from "../utils/value_equals.js";
+import { valueEquals } from "../utils/value-equals.js";
 
 export function initializeRemoteInventory() {
     RPC.registerCallback("createItemCollection", "gm", onCreateItemCollection);
@@ -434,7 +434,7 @@ function canMerge(itemA, itemB) {
 
     // TODO: Remove all keys that are not template appropriate given the item type, remove all keys that are not shared?
 
-    return value_equals(itemDataA, itemDataB, false, true);
+    return valueEquals(itemDataA, itemDataB, false, true);
 }
 
 export function getFirstAcceptableStorageIndex(container, itemToAdd) {
