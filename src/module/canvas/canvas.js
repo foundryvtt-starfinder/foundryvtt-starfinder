@@ -7,7 +7,7 @@ Hooks.on('canvasReady', onCanvasReady);
 Hooks.on('createToken', onTokenCreated);
 Hooks.on('updateToken', onTokenUpdated);
 
-function onCanvasReady(...args) {
+function onCanvasReady() {
     if (!canvas.initialized) return;
     for (const placeable of canvas.tokens.placeables) {
         if (placeable.document.getFlag("sfrpg", "itemCollection")) {
@@ -104,7 +104,7 @@ function setupLootCollectionTokenInteraction(lootCollectionToken, updateApps = f
     }
 }
 
-function openLootCollectionSheet(event) {
+function openLootCollectionSheet() {
     const relevantToken = this;
     if (relevantToken.document.flags.sfrpg.itemCollection.locked && !game.user.isGM) {
         ui.notifications.info(game.i18n.format("SFRPG.ItemCollectionSheet.ItemCollectionLocked"));
@@ -218,7 +218,7 @@ export function canvasHandler(canvas, data) {
             // If there isn't a target actor, we're creating a loot token. If item piles is enabled, defer to that
             if (game.modules.get("item-piles")?.active) return true;
             else {
-                handleCanvasDropAsync(canvas, data, targetActor).then(_ => {});
+                handleCanvasDropAsync(canvas, data, targetActor);
                 return false;
             }
         }

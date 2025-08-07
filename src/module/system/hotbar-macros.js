@@ -73,15 +73,13 @@ export function rollItemMacro(itemUuid, macroType) {
         /** @todo Remove this at some point */
 
         const speaker = ChatMessage.getSpeaker();
-        const actor = undefined
-            || (speaker.token && game.actors.tokens[speaker.token])
-            || (speaker.actor && game.actors.get(speaker.actor))
-        ;
+        const actor = (speaker.token && game.actors.tokens[speaker.token])
+            || (speaker.actor && game.actors.get(speaker.actor));
 
         if (actor) {
             item = actor.items.find(i => i.name === itemUuid);
             if (item) {
-                foundry.utils.logCompatibilityWarning("You are using an item macro which uses the item's name instead of its UUID. Support for these types of item macros will be removed in a future version of the SFRPG system. It is recommended to delete and re-create this item macro.", {since: "0.25"});
+                foundry.utils.logCompatibilityWarning("You are using an item macro which uses the item's name instead of its UUID. Support for these types of item macros will be removed in a future version of the SFRPG system. It is recommended to delete and re-create this item macro.", { since: "0.25" });
             }
         }
     }
@@ -159,9 +157,9 @@ async function createSkillCheckMacro(data) {
 const saveIconDefault = "icons/svg/d20.svg";
 const saveIconLookup = {
     // NOTE: If you're here because an icon is broken, try running `scripts/fa-svg-update/fa-svg-update.js`
-    fort:   `systems/sfrpg/icons/fa-svg/${checkIcons["fortitude"]}.svg`,
+    fort: `systems/sfrpg/icons/fa-svg/${checkIcons["fortitude"]}.svg`,
     reflex: `systems/sfrpg/icons/fa-svg/${checkIcons["reflex"]}.svg`,
-    will:   `systems/sfrpg/icons/fa-svg/${checkIcons["will"]}.svg`
+    will: `systems/sfrpg/icons/fa-svg/${checkIcons["will"]}.svg`
 };
 
 /**

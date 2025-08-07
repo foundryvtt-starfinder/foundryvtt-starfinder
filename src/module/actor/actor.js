@@ -406,37 +406,21 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         if (consumeSpellSlot && spellLevel > 0 && selectedSlot) {
             const actor = this;
             if (selectedSlot.source === "general") {
-                if (processContext) {
-                    processContext.then(function(result) {
-                        return actor.update({
-                            [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
-                        });
-                    });
-                } else {
-                    processContext = actor.update({
-                        [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
-                    });
-                }
+                processContext = actor.update({
+                    [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
+                });
             } else {
                 const selectedLevel = selectedSlot.level;
                 const selectedClass = selectedSlot.source;
 
-                if (processContext) {
-                    processContext.then(function(result) {
-                        return actor.update({
-                            [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
-                        });
-                    });
-                } else {
-                    processContext = actor.update({
-                        [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
-                    });
-                }
+                processContext = actor.update({
+                    [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                });
             }
         }
 
         if (processContext) {
-            processContext.then(function(result) {
+            processContext.then(function() {
                 return item.roll();
             });
 
@@ -449,12 +433,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     /**
      * Edit a skill's fields
      * @param {string} skillId The skill id (e.g. "ins")
-     * @param {Object} options Options which configure how the skill is edited
      */
-    async editSkill(skillId, options = {}) {
-        // Keeping this here for later
-        // this.update({"data.skills.-=skillId": null});
-        // use this to delete any unwanted skills.
+    async editSkill(skillId) {
 
         const skill = foundry.utils.deepClone(this.system.skills[skillId]);
         const isNpc = this.type === "npc" || this.type === "npc2";
@@ -512,9 +492,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Add a new skill
-     * @param {Object} options Options which configure how the skill is added
      */
-    async addSkill(options = {}) {
+    async addSkill() {
         const skill = {
             ability: "int",
             ranks: 0,
@@ -1139,9 +1118,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * @param {ActorSFRPG} doc The updated actor, containing the old values
      * @param {Object} diff An update object containing the new values
      * @param {Object} options An object, to which the delta is appended to
-     * @param {String} _userId The ID of the current user
      */
-    floatingHpOnPreUpdate(doc, diff, options, _userId) {
+    floatingHpOnPreUpdate(doc, diff, options) {
         if (!game.settings.get("sfrpg", "floatingHP")) return;
 
         const dhp = this.diffHealth(diff.system, doc.system, doc.type);
@@ -1152,9 +1130,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * @param {ActorSFRPG} doc
      * @param {Object} diff
      * @param {Object} options
-     * @param {String} _userId
      */
-    floatingHpOnUpdate(actor, _data, options, _userId) {
+    floatingHpOnUpdate(actor, _data, options) {
         const dhp = options._hpDiffs;
         if (!dhp) return;
         const tokens = actor.getActiveTokens();
@@ -1167,10 +1144,9 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * Build HP diffs.
      * @param {Object} actorData The data of the updated actor, post-update
      * @param {Object} old The data of the updated actor, pre-update
-     * @param {String} type The actor's type
      * @return {Object} An object containing the key of the updated value, and the diff
      */
-    diffHealth(actorData, old, type) {
+    diffHealth(actorData, old) {
         if (!actorData) return;
 
         const diff = {};

@@ -862,7 +862,6 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
      */
     _onModifierCreate(event) {
         event.preventDefault();
-        const target = $(event.currentTarget);
 
         this.item.addModifier({
             name: "New Modifier"
@@ -1105,7 +1104,6 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
         const currentImage = visualization[visualizationIndex].image || this.item.img;
 
-        const attr = event.currentTarget.dataset.edit;
         const fp = new FilePicker({
             type: "image",
             current: currentImage,

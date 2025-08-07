@@ -585,7 +585,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
     }
 
     hasCombatantsWithoutInitiative() {
-        for (const [index, combatant] of this.turns.entries()) {
+        for (const combatant of this.turns.values()) {
             if ((!this.settings.skipDefeated || !combatant.defeated) && (combatant.initiative === undefined || combatant.initiative === null)) {
                 return true;
             }
@@ -671,7 +671,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }
     }
 
-    async _getInitiativeRoll(combatant, formula) {
+    async _getInitiativeRoll(combatant) {
         const rollContext = RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"});
 
         const parts = [];
@@ -702,7 +702,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         return rollResult.roll;
     }
 
-    async rollInitiative(ids, {formula = null, updateTurn = true, messageOptions = {}} = {}) {
+    async rollInitiative(ids, {updateTurn = true, messageOptions = {}} = {}) {
 
         // Structure input data
         ids = typeof ids === "string" ? [ids] : ids;
@@ -910,7 +910,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     const combatType = activeCombat.getCombatType();
 
     const header = html.querySelector('.combat-tracker-header');
-    const footer = html.querySelector('.combat-controls');
+    // const footer = html.querySelector('.combat-controls');
 
     if (activeCombat.round > 0) {
         const phases = activeCombat.getPhases();

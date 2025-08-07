@@ -1,6 +1,6 @@
 
 export default function(engine) {
-    engine.closures.add( "calculateStarshipCriticalStatus", (fact, context) => {
+    engine.closures.add( "calculateStarshipCriticalStatus", (fact) => {
         const data = fact.data;
 
         const critMods = {
