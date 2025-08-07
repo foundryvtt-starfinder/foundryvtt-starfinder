@@ -4,7 +4,7 @@ export default function(engine) {
         const skills = data.skills;
 
         // Skills
-        for (const [, skill] of Object.entries(skills)) {
+        for (const skill of Object.values(skills)) {
             skill.ranks = parseFloat(skill.ranks || '0');
             skill.mod = skill.ranks;
 

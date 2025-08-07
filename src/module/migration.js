@@ -499,7 +499,7 @@ const _migrateDocumentIconToWebP = function(document, data) {
         const newVisualization = foundry.utils.deepClone(document.data.combatTracker.visualization);
         let isDirty = false;
 
-        for (const [, visualization] of Object.entries(newVisualization)) {
+        for (const visualization of Object.values(newVisualization)) {
             const visualizationImageType = _imageNeedsReplace(visualization.image);
             if (visualizationImageType) {
                 visualization.image = visualization.image.replace(visualizationImageType, ".webp");

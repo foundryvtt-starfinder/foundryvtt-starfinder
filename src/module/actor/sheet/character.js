@@ -62,13 +62,12 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         };
 
         let physicalInventoryItems = [];
-        for (const [, value] of Object.entries(inventory)) {
+        for (const value of Object.values(inventory)) {
             const datasetType = value.dataset.type;
             const types = datasetType.split(',');
             physicalInventoryItems = physicalInventoryItems.concat(types);
         }
 
-        //   0      1       2      3        4      5       6           7               8     9
         const [items,
             spells,
             feats,

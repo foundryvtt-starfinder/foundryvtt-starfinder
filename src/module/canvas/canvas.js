@@ -218,7 +218,7 @@ export function canvasHandler(canvas, data) {
             // If there isn't a target actor, we're creating a loot token. If item piles is enabled, defer to that
             if (game.modules.get("item-piles")?.active) return true;
             else {
-                handleCanvasDropAsync(canvas, data, targetActor).then(() => {});
+                handleCanvasDropAsync(canvas, data, targetActor);
                 return false;
             }
         }

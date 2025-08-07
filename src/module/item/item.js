@@ -256,7 +256,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      *
      * @returns {Object}         The modified data object with the modifiers data object added.
      */
-    _ensureHasModifiers(data ) {
+    _ensureHasModifiers(data) {
         if (!foundry.utils.hasProperty(data, "modifiers")) {
             console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
@@ -1852,7 +1852,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     /**
      * Get the Actor which is the author of a chat card
-     * @param {HTMLElement} card    The chat card being used
      * @return {Actor|null}         The Actor entity or null
      * @private
      */

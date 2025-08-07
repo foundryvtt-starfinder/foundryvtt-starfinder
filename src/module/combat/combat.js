@@ -585,7 +585,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
     }
 
     hasCombatantsWithoutInitiative() {
-        for (const [, combatant] of this.turns.entries()) {
+        for (const combatant of this.turns.values()) {
             if ((!this.settings.skipDefeated || !combatant.defeated) && (combatant.initiative === undefined || combatant.initiative === null)) {
                 return true;
             }

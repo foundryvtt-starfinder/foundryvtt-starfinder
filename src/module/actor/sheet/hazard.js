@@ -59,7 +59,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
      * Hazards don't need items, but this function is required because base.js calls it.
      */
     _prepareItems() {
-
+        // pass
     }
 
     async _onFortSaveClicked(event) {

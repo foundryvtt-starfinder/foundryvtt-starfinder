@@ -363,11 +363,11 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         }
 
         // Convert the old user input into the new architecture
-        for (const [, ability] of Object.entries(actorData.system.abilities)) {
+        for (const ability of Object.values(actorData.system.abilities)) {
             ability.base = ability.mod;
         }
 
-        for (const [, skill] of Object.entries(actorData.system.skills)) {
+        for (const skill of Object.values(actorData.system.skills)) {
             if (skill.enabled) {
                 skill.ranks = skill.mod;
             }

@@ -352,14 +352,14 @@ export class ItemCollectionSheet extends DocumentSheet {
 
     /** @override */
     _canDragStart() {
-        return true; // flags.sfrpg.itemCollection.locked || game.user.isGM
+        return true;
     }
 
     /* -------------------------------------------- */
 
     /** @override */
     _canDragDrop() {
-        return true; // flags.sfrpg.itemCollection.locked || game.user.isGM
+        return true;
     }
 
     /* -------------------------------------------- */

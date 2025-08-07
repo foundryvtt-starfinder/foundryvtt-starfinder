@@ -435,9 +435,6 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * @param {string} skillId The skill id (e.g. "ins")
      */
     async editSkill(skillId) {
-        // Keeping this here for later
-        // this.update({"data.skills.-=skillId": null});
-        // use this to delete any unwanted skills.
 
         const skill = foundry.utils.deepClone(this.system.skills[skillId]);
         const isNpc = this.type === "npc" || this.type === "npc2";
@@ -1147,7 +1144,6 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * Build HP diffs.
      * @param {Object} actorData The data of the updated actor, post-update
      * @param {Object} old The data of the updated actor, pre-update
-     * @param {String} type The actor's type
      * @return {Object} An object containing the key of the updated value, and the diff
      */
     diffHealth(actorData, old) {

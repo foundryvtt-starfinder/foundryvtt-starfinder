@@ -82,7 +82,7 @@ export default function(engine) {
 
         // Finally, update classes, if applicable
         if (data.classes) {
-            for (const [, classEntry] of Object.entries(data.classes)) {
+            for (const classEntry of Object.values(data.classes)) {
                 classEntry.keyAbilityMod = data.abilities[classEntry.keyAbilityScore]?.mod || 0;
             }
         }

@@ -116,7 +116,7 @@ export default function(engine) {
         }
 
         let skillpointsUsed = 0;
-        for (const [, skill] of Object.entries(data.skills)) {
+        for (const skill of Object.values(data.skills)) {
             if (Number.isNaN(skill.min) || skill.min < 0) {
                 skill.min = 0;
             }
