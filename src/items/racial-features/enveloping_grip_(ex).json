@@ -1,6 +1,6 @@
 {
-  "_id": "RsBde4RUOEztXBqO",
-  "name": "Adamant Mage",
+  "_id": "jowZ7terzBGcBK56",
+  "name": "Enveloping Grip (Ex)",
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
@@ -38,7 +38,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Dwarves with this trait gain a +2 species bonus to AC against attacks of opportunity provoked by casting a spell and against readied actions triggered by spellcasting.</p>\n<p><strong>This replaces weapon familiarity.</strong></p>\n<p><em></em></p><em></em><p><em>Toggle on/off in the Modifiers tab.</em></p>"
+      "value": "<p>Endiffians gain a +2 species bonus to grapple combat maneuvers and Athletics checks to climb, and they gain a +2 species bonus to AC against disarm combat maneuvers.</p>\n<p><em>Toggle AC bonus against</em><em><span>disarm combat maneuvers in the Modifiers tab.</span></em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -94,7 +94,37 @@
     "modifiers": [
       {
         "_id": "74c07780-7f36-4cd1-899b-4147b1f9b439",
-        "name": "Adamant Mage",
+        "name": "Enveloping Grip",
+        "type": "racial",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Endiffians gain a +2 species bonus to grapple combat maneuvers.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "per"
+      },
+      {
+        "_id": "a0350d1e-d5ca-42d7-b97f-d660b676310d",
+        "name": "Enveloping Grip",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Endiffians gain a +2 species bonus to Athletics checks to climb.",
+        "source": "Racial",
+        "subtab": "misc",
+        "valueAffected": "ath"
+      },
+      {
+        "_id": "8679b594-f691-4c3f-988c-87c4d361eb23",
+        "name": "Enveloping Grip (AC against disarm combat maneuvers)",
         "type": "racial",
         "condition": "",
         "effectType": "ac",
@@ -102,8 +132,8 @@
         "max": 2,
         "modifier": "2",
         "modifierType": "constant",
-        "notes": "Dwarves with this trait gain a +2 species bonus to AC against attacks of opportunity provoked by casting a spell and against readied actions triggered by spellcasting.",
-        "source": "Racial",
+        "notes": "Endiffians gain a +2 species bonus to AC against disarm combat maneuvers.",
+        "source": "",
         "subtab": "misc",
         "valueAffected": "both"
       }
@@ -119,14 +149,14 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Dwarf",
+    "requirements": "Endiffian",
     "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
       "descriptor": ""
     },
-    "source": "COM pg. 30",
+    "source": "EN pg. 22",
     "target": {
       "type": "",
       "value": ""
