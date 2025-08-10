@@ -20,7 +20,7 @@ export class TokenEffect {
         return this.#effect.name;
     }
 
-    get icon() {
+    get img() {
         return this.#effect.img;
     }
 

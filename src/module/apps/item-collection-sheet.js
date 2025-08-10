@@ -18,7 +18,7 @@ export class ItemCollectionSheet extends DocumentSheet {
 
     static get defaultOptions() {
         const defaultOptions = super.defaultOptions;
-        return mergeObject(defaultOptions, {
+        return foundry.utils.mergeObject(defaultOptions, {
             classes: defaultOptions.classes.concat(['sfrpg', 'actor', 'sheet', 'npc']),
             height: 720,
             width: 720,
@@ -48,14 +48,14 @@ export class ItemCollectionSheet extends DocumentSheet {
         return super.close(options);
     }
 
-    _handleTokenUpdated(scene, token, options, userId) {
+    _handleTokenUpdated(scene, token) {
         const tokenData = this.document.getFlag("sfrpg", "itemCollection");
         if (token.id === this.itemCollection.id && tokenData.locked && !game.user.isGM) {
             this.close();
         }
     }
 
-    _handleTokenDelete(scene, token, options, userId) {
+    _handleTokenDelete(scene, token) {
         if (token.id === this.itemCollection.id) {
             this.close();
         }
@@ -81,14 +81,13 @@ export class ItemCollectionSheet extends DocumentSheet {
      */
     getData() {
         const data = super.getData();
-        data.config = CONFIG.SFRPG;
         data.isCharacter = true;
         data.isOwner = game.user.isGM;
         data.isGM = game.user.isGM;
 
         const tokenData = this.document.getFlag("sfrpg", "itemCollection");
 
-        const items = duplicate(tokenData.items);
+        const items = foundry.utils.deepClone(tokenData.items);
         for (const item of items) {
             item.img = item.img || CONST.DEFAULT_TOKEN;
 
@@ -122,7 +121,12 @@ export class ItemCollectionSheet extends DocumentSheet {
         // Ensure containers are always open in loot collection tokens
         for (const itemData of data.items) {
             if (itemData.contents && itemData.contents.length > 0) {
-                itemData.item.isOpen = true;
+                itemData.item.config = { "isOpen": true};
+                for (const child of itemData.contents) {
+                    if (child.contents && child.contents.length > 0) {
+                        child.item.config = { "isOpen": true};
+                    }
+                }
             }
         }
 
@@ -277,14 +281,14 @@ export class ItemCollectionSheet extends DocumentSheet {
 
     async getChatData(itemData, htmlOptions) {
         console.log(itemData);
-        const data = duplicate(itemData);
+        const data = foundry.utils.deepClone(itemData);
         const labels = itemData.labels || {};
 
         htmlOptions.async = true;
         htmlOptions.rollData ||= (this.actor.getRollData() ?? {});
 
         // Rich text description
-        data.system.description.value = await TextEditor.enrichHTML(data.system.description.value, htmlOptions);
+        data.system.description.value = await foundry.applications.ux.TextEditor.enrichHTML(data.system.description.value, htmlOptions);
 
         // Item type specific properties
         const props = [];
@@ -329,7 +333,7 @@ export class ItemCollectionSheet extends DocumentSheet {
      */
     _onEditImage(event) {
         const attr = event.currentTarget.dataset.edit;
-        const current = getProperty(this.document, attr);
+        const current = foundry.utils.getProperty(this.document, attr);
         new FilePicker({
             type: "image",
             current: current,
@@ -347,15 +351,15 @@ export class ItemCollectionSheet extends DocumentSheet {
     /* -------------------------------------------- */
 
     /** @override */
-    _canDragStart(selector) {
-        return true; // flags.sfrpg.itemCollection.locked || game.user.isGM
+    _canDragStart() {
+        return true;
     }
 
     /* -------------------------------------------- */
 
     /** @override */
-    _canDragDrop(selector) {
-        return true; // flags.sfrpg.itemCollection.locked || game.user.isGM
+    _canDragDrop() {
+        return true;
     }
 
     /* -------------------------------------------- */

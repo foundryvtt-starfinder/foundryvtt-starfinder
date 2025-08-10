@@ -17,7 +17,7 @@ export class DroneRepairDialog extends Dialog {
     activateListeners(html) {
         super.activateListeners(html);
 
-        let improvedRepairFeatCheckbox = html.find('#improvedRepairFeatCheckbox');
+        const improvedRepairFeatCheckbox = html.find('#improvedRepairFeatCheckbox');
         improvedRepairFeatCheckbox.disabled = this.data.improvedRepairFeatCheckbox;
         improvedRepairFeatCheckbox.click(this._improvedRepairFeat.bind(this));
     }
@@ -34,7 +34,7 @@ export class DroneRepairDialog extends Dialog {
 
     static async droneRepairDialog({actor, improvedRepairFeat = false} = {}) {
         DroneRepairDialog.restoreStaminaPoints = false;
-        const html = await renderTemplate("systems/sfrpg/templates/apps/drone-repair.hbs");
+        const html = await foundry.applications.handlebars.renderTemplate("systems/sfrpg/templates/apps/drone-repair.hbs");
         return new Promise(resolve => {
             const dlg = new this(actor, {
                 title: game.i18n.format("SFRPG.RepairDroneDialogTitle"),

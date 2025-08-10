@@ -2,13 +2,13 @@
   "_id": "lroZwBvW4KawAUl5",
   "name": "Spy Cruiser",
   "type": "vehicle",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/bus.svg",
   "items": [
     {
       "_id": "eABweQcB2xFNUtjA",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -49,7 +49,7 @@
       "_id": "jXZ0k7hcjcJ6ayIo",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -126,7 +126,7 @@
       "_id": "prna0tDsDWaioY6G",
       "name": "Autopilot",
       "type": "vehicleSystem",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -162,7 +162,7 @@
       "_id": "sEhEHfD25R1xOesX",
       "name": "Stealth (-2)",
       "type": "vehicleSystem",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -251,6 +251,7 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "line",
           "units": "ft",
           "value": 60
@@ -338,9 +339,11 @@
         },
         "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
         "isActive": null,
+        "isEquipment": true,
         "level": 14,
         "modifiers": [],
         "price": 81400,
@@ -472,6 +475,7 @@
     "name": "Spy Cruiser",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -503,11 +507,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -521,13 +544,23 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/bus.svg",
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 3
   },

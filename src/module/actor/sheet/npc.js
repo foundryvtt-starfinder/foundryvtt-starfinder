@@ -17,7 +17,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             classes: options.classes.concat(['sfrpg', 'actor', 'sheet', 'npc']),
             width: 720
             // height: 765
@@ -110,10 +110,10 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 dataset: {},
                 allowAdd: false
             }, */
-            feat: duplicate(CONFIG.SFRPG.featureCategories.feat),
-            classFeature: duplicate(CONFIG.SFRPG.featureCategories.classFeature),
-            speciesFeature: duplicate(CONFIG.SFRPG.featureCategories.speciesFeature),
-            universalCreatureRule: duplicate(CONFIG.SFRPG.featureCategories.universalCreatureRule),
+            feat: foundry.utils.deepClone(CONFIG.SFRPG.featureCategories.feat),
+            classFeature: foundry.utils.deepClone(CONFIG.SFRPG.featureCategories.classFeature),
+            speciesFeature: foundry.utils.deepClone(CONFIG.SFRPG.featureCategories.speciesFeature),
+            universalCreatureRule: foundry.utils.deepClone(CONFIG.SFRPG.featureCategories.universalCreatureRule),
             resources: {
                 category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
                 items: [],
@@ -242,6 +242,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
 
         features.resources.items = actorResources;
 
+        // Add appropriate items to inventory, exclude weapons that are not equipment, like unarmed strikes and natural weapons
         this.processItemContainment(itemsToProcess, function(itemType, itemData) {
             inventory.inventory.items.push(itemData);
         });
@@ -255,7 +256,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         };
 
         if (this.actor.type === "npc2") {
-            const [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
+            const [permanent, temporary] = actorData.modifiers.reduce((arr, modifier) => {
                 if (modifier.subtab === "permanent") arr[0].push(modifier);
                 else if (modifier.subtab === "conditions") arr[3].push(modifier);
                 else arr[1].push(modifier); // Any unspecific categories go into temporary.
@@ -292,7 +293,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         return super._updateObject(event, formData);
     }
 
-    static async _selectActorData({yes, no, cancel, render, defaultYes = true, rejectClose = false, options = {width: 600}} = {}) {
+    static async _selectActorData({yes, no, render, defaultYes = true, rejectClose = false, options = {width: 600}} = {}) {
         return new Promise((resolve, reject) => {
             const dialog = new Dialog({
                 title: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogTitle"),
@@ -317,7 +318,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                     cancel: {
                         icon: '<i class="fas fa-times"></i>',
                         label: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogCancelButton"),
-                        callback: html => {
+                        callback: () => {
                             resolve(null);
                         }
                     }
@@ -333,8 +334,8 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         });
     }
 
-    async _duplicateAsNewStyleNPC(event) {
-        let actorData = duplicate(this.actor);
+    async _duplicateAsNewStyleNPC() {
+        let actorData = this.actor.toObject();
 
         if (this.token && !this.token.actorLink) {
             // If it is an unlinked actor, ask if the user wants to duplicate the original actor, or use the unlinked actor data instead
@@ -356,17 +357,17 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             if (useOriginalActor === true) {
                 const originalActor = game.actors.get(this.token.actor.id);
                 if (originalActor) {
-                    actorData = duplicate(originalActor);
+                    actorData = originalActor.toObject();
                 }
             }
         }
 
         // Convert the old user input into the new architecture
-        for (const [abl, ability] of Object.entries(actorData.system.abilities)) {
+        for (const ability of Object.values(actorData.system.abilities)) {
             ability.base = ability.mod;
         }
 
-        for (const [skl, skill] of Object.entries(actorData.system.skills)) {
+        for (const skill of Object.values(actorData.system.skills)) {
             if (skill.enabled) {
                 skill.ranks = skill.mod;
             }

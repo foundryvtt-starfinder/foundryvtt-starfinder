@@ -28,9 +28,11 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -68,11 +70,11 @@ export default function(engine) {
 
         // Iterate through any modifiers that grant the character additional skillranks distributed for them
         // These always apply to a specific skill
-        let skillRankModifiers = fact.modifiers.filter(mod => {
+        const skillRankModifiers = fact.modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.SKILL_RANKS;
         });
 
-        for (let [key, skill] of Object.entries(skills)) {
+        for (const [key, skill] of Object.entries(skills)) {
             skill.rolledMods = null;
             const mods = context.parameters.stackModifiers.process(skillRankModifiers.filter(mod => {
                 if (mod.effectType !== SFRPGEffectType.SKILL_RANKS) return false;
@@ -81,7 +83,7 @@ export default function(engine) {
                 return true;
             }), context, {actor: fact.actor});
 
-            let accumulator = Object.entries(mods).reduce((sum, mod) => {
+            const accumulator = Object.entries(mods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
@@ -114,7 +116,7 @@ export default function(engine) {
         }
 
         let skillpointsUsed = 0;
-        for (const [key, skill] of Object.entries(data.skills)) {
+        for (const skill of Object.values(data.skills)) {
             if (Number.isNaN(skill.min) || skill.min < 0) {
                 skill.min = 0;
             }

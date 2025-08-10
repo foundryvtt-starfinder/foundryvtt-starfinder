@@ -9,15 +9,17 @@
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "",
+    "actionTarget": "ac5",
     "actionType": "rwak",
     "activation": {
       "type": "action",
       "condition": "",
       "cost": 1
     },
+    "ammunitionType": "",
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
       "value": 10
@@ -44,12 +46,13 @@
     "attuned": false,
     "bulk": "L",
     "capacity": {
-      "max": 0,
-      "value": 0
+      "max": 1,
+      "value": 1
     },
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": 1,
       "isOpen": true,
       "storage": [
         {
@@ -79,8 +82,11 @@
         }
       ]
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Lumocantha dye can be weaponized easily. A creature that fails its Reflex saving throw against a dye grenade takes additional damage from laser weapons equal to half the dye grenade’s item level (minimum 1). This lasts until the dye is removed, usually by changing armor or clothing or by spending 1d4 hours cleaning off the stain.</p>"
     },
@@ -89,10 +95,13 @@
       "units": "",
       "value": ""
     },
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
+    "isEquipment": true,
     "level": 8,
     "modifiers": [],
     "price": 1300,
@@ -148,7 +157,7 @@
       "modal": false,
       "necrotic": false,
       "nonlethal": false,
-      "one": false,
+      "one": true,
       "operative": false,
       "penetrating": false,
       "polarize": false,
@@ -185,12 +194,14 @@
       "wideLine": false
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
       "additional": "",
       "per": "",
       "units": "ft",
       "value": 20
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
@@ -198,13 +209,14 @@
     },
     "source": "AA4 pg. 69",
     "special": "",
+    "specialMaterials": {},
     "target": {
       "type": "",
       "value": ""
     },
     "usage": {
-      "per": "",
-      "value": 0
+      "per": "shot",
+      "value": 1
     },
     "uses": {
       "max": 1,

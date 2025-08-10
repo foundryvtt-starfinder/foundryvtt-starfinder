@@ -1,0 +1,64 @@
+{
+  "_id": "us6YymYxObV06aVv",
+  "name": "Effect: Plan Ahead",
+  "type": "effect",
+  "img": "systems/sfrpg/icons/default/stopwatch.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "hour",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.theme-features.Item.KdXTjNdxizN39Sqy]{Plan Ahead}</p>\n<p><span>Once per day you can spend 10 minutes observing a location. For the next hour, you and your allies gain a +2 bonus to initiative and can still act on their initiative counts in the surprise round even if they failed a Perception check, but only to take the </span>@UUID[Compendium.sfrpg.rules.R33uiOMesYP0ISWl]{Total Defense}<span> action.</span></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "68f44795-d65c-43fe-9d59-ba7ce5e3c229",
+        "name": "Plan Ahead",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "initiative",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "Applies to initiative in the observed location",
+        "source": "Plan Ahead",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "",
+    "showOnToken": true,
+    "source": "",
+    "turnEvents": []
+  }
+}

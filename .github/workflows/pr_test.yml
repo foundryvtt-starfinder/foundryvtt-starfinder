@@ -1,0 +1,53 @@
+# Much of this code yoinked and modified from https://github.com/SR5-FoundryVTT/SR5-FoundryVTT
+name: Build Test
+
+on:
+    pull_request:
+        branches: [ development ]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            # Checkout
+            - uses: actions/checkout@v4
+            # install deps
+            - run: npm ci
+            # run eslint
+            - run: npm run lint
+
+            # Substitute the Manifest and Download URLs in system.json
+            - name: Update system.json url
+              uses: jossef/action-set-json-field@v2.1
+              with:
+                  file: static/system.json
+                  field: url
+                  value: https://github.com/${{github.repository}}
+
+            - name: Update system.json manifest link
+              uses: jossef/action-set-json-field@v2.1
+              with:
+                  file: static/system.json
+                  field: manifest
+                  value: https://github.com/${{github.repository}}/releases/download/build-test/system.json
+
+            - name: Update system.json version number
+              uses: jossef/action-set-json-field@v2.1
+              with:
+                  file: static/system.json
+                  field: version
+                  value: 0.0.0
+
+            - name: Update system.json download link
+              uses: jossef/action-set-json-field@v2.1
+              with:
+                  file: static/system.json
+                  field: download
+                  value: https://github.com/${{github.repository}}/releases/download/build-test/sfrpg-0.0.0.zip
+
+            # copy localizations
+            - run: npm run copyLocalization
+            # build src into dist
+            - run: npm run build
+            # create package
+            - run: npm run package

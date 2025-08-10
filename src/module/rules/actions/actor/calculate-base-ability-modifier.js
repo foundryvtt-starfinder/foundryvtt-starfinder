@@ -18,9 +18,11 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -37,7 +39,7 @@ export default function(engine) {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.ABILITY_MODIFIER, SFRPGEffectType.ABILITY_MODIFIERS].includes(mod.effectType);
         });
 
-        for (let [abl, ability] of Object.entries(data.abilities)) {
+        for (const [abl, ability] of Object.entries(data.abilities)) {
 
             const abilityMods = context.parameters.stackModifiers.process(
                 filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_MODIFIERS),
@@ -53,7 +55,7 @@ export default function(engine) {
             const base = Math.floor((abilityValue - 10) / 2);
             ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityModifierBase", { mod: base.signedString() }));
 
-            let mod = Object.entries(abilityMods).reduce((sum, mod) => {
+            const mod = Object.entries(abilityMods).reduce((sum, mod) => {
                 if (mod[1] === null || mod[1].length < 1) return sum;
 
                 if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
@@ -70,7 +72,7 @@ export default function(engine) {
             let abilityModifier = base + mod;
 
             if (ability.damage) {
-                let damage = -Math.floor(Math.abs(ability.damage) / 2);
+                const damage = -Math.floor(Math.abs(ability.damage) / 2);
                 abilityModifier += damage;
                 ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityDamageTooltip", { mod: damage.signedString() }));
             }
@@ -80,7 +82,7 @@ export default function(engine) {
 
         // Finally, update classes, if applicable
         if (data.classes) {
-            for (const [classId, classEntry] of Object.entries(data.classes)) {
+            for (const classEntry of Object.values(data.classes)) {
                 classEntry.keyAbilityMod = data.abilities[classEntry.keyAbilityScore]?.mod || 0;
             }
         }

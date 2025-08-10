@@ -124,7 +124,7 @@ export default class SFRPGTimedEffect {
             _id: item._id,
             system: {
                 enabled: this.enabled,
-                modifiers: item.system.modifiers,
+                modifiers: item.system.modifiers.map(modifier => modifier.toObject?.() ?? modifier),
                 activeDuration: item.system.activeDuration
             }
         };
@@ -235,7 +235,7 @@ export default class SFRPGTimedEffect {
 
 }
 
-Hooks.on("updateWorldTime", (worldTime, dt, options, userId) => {
+Hooks.on("updateWorldTime", (worldTime, dt) => {
     const timedEffects = game.sfrpg.timedEffects;
     for (const effect of timedEffects.values()) {
         if (effect.activeDuration.unit === 'permanent' || effect.actor.inCombat) continue;

@@ -1,7 +1,5 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
-
 export default function(engine) {
-    engine.closures.add("clearTooltips", (fact, context) => {
+    engine.closures.add("clearTooltips", (fact) => {
         const data = fact.data;
 
         if (data.details.level) {
@@ -25,7 +23,7 @@ export default function(engine) {
         }
 
         if (data.abilities) {
-            for (let [abl, ability] of Object.entries(data.abilities)) {
+            for (const ability of Object.values(data.abilities)) {
                 ability.tooltip = [];
                 ability.modifierTooltip = [];
             }
@@ -64,7 +62,7 @@ export default function(engine) {
         }
 
         if (data.skills) {
-            for (let [skl, skill] of Object.entries(data.skills)) {
+            for (const skill of Object.values(data.skills)) {
                 skill.tooltip = [];
             }
         }

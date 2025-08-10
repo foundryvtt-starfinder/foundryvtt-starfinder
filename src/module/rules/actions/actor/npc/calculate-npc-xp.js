@@ -13,7 +13,7 @@ export default function(engine) {
         return CONFIG.SFRPG.CR_EXP_LEVELS[cr];
     };
 
-    engine.closures.add("calculateNpcXp", (fact, context) => {
+    engine.closures.add("calculateNpcXp", (fact) => {
         fact.data.details.xp.value = getCRExp(fact.data.details.cr.value || fact.data.details.cr);
 
         return fact;

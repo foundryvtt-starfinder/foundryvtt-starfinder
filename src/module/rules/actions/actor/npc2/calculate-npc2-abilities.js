@@ -22,9 +22,11 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             const originalBonus = computedBonus;
             computedBonus = computedBonus > 0 ? Math.floor(computedBonus / 2) : Math.ceil(computedBonus / 2);

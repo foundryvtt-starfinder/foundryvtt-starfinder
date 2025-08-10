@@ -1,24 +1,28 @@
 export default function(engine) {
-    engine.closures.add("calculateSpells", (fact, context) => {
+    engine.closures.add("calculateSpells", (fact) => {
         const data = fact.data;
         const classes = fact.classes;
 
         data.spells.classes = [];
-        const casterData = deepClone(data.spells);
+        const casterData = data.spells;
 
         const computeSpellsPerDay = (spellLevel, classData, spellAbilityMod) => {
             let totalSpells = 0;
 
             try {
                 totalSpells += classData.spellsPerDay[classData.levels][spellLevel] || 0;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             // Only apply bonus spells known if there is a base spells known.
             if (totalSpells > 0) {
                 try {
                     // TODO: If spellAbilityMod is not part of bonusSpellsPerDay's keys, find the nearest key and use that instead.
                     totalSpells += classData.bonusSpellsPerDay[spellAbilityMod][spellLevel] || 0;
-                } catch {}
+                } catch (e) {
+                    console.error(e);
+                }
             }
 
             return totalSpells;
@@ -46,24 +50,15 @@ export default function(engine) {
                     name: cls.name,
                     key: className
                 });
-                casterData.spell1.perClass[className] = {
-                    max: computeSpellsPerDay(1, classData, classInfo.spellAbilityMod)
-                };
-                casterData.spell2.perClass[className] = {
-                    max: computeSpellsPerDay(2, classData, classInfo.spellAbilityMod)
-                };
-                casterData.spell3.perClass[className] = {
-                    max: computeSpellsPerDay(3, classData, classInfo.spellAbilityMod)
-                };
-                casterData.spell4.perClass[className] = {
-                    max: computeSpellsPerDay(4, classData, classInfo.spellAbilityMod)
-                };
-                casterData.spell5.perClass[className] = {
-                    max: computeSpellsPerDay(5, classData, classInfo.spellAbilityMod)
-                };
-                casterData.spell6.perClass[className] = {
-                    max: computeSpellsPerDay(6, classData, classInfo.spellAbilityMod)
-                };
+
+                for (const level of Object.keys(CONFIG.SFRPG.spellLevels).filter((key) => key !== 0)) {
+                    foundry.utils.setProperty(
+                        casterData,
+                        `spell${level}.perClass.${className}.max`,
+                        computeSpellsPerDay(level, classData, classInfo.spellAbilityMod)
+                    );
+                }
+
             }
         }
 
@@ -75,8 +70,6 @@ export default function(engine) {
             medium: 100 + 10 * cl,
             long: 400 + 40 * cl
         };
-
-        data.spells = mergeObject(data.spells, casterData);
 
         return fact;
     });

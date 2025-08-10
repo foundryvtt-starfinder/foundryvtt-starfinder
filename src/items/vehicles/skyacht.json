@@ -2,13 +2,13 @@
   "_id": "oJLSY74xFu5R8IZ6",
   "name": "Skyacht",
   "type": "vehicle",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/bus.svg",
   "items": [
     {
       "_id": "IFQG4V1jH9iw8fZK",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -49,7 +49,7 @@
       "_id": "ZNQw4yfixdMSttws",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -90,7 +90,7 @@
       "_id": "O2g0TK0KrRuiEV8K",
       "name": "Autopilot",
       "type": "vehicleSystem",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
         "type": "",
         "abilityMods": {
@@ -163,6 +163,7 @@
     "name": "Skyacht",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -194,11 +195,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -212,13 +232,23 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/bus.svg",
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 4
   },

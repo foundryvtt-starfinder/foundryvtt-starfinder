@@ -1,0 +1,42 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    {{> "systems/sfrpg/templates/items/parts/item-header.hbs"}}
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-description.hbs"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            {{!-- Common Component Data --}}
+            {{> "systems/sfrpg/templates/items/parts/starship-component.hbs"}}
+
+            {{!-- Countermeasures Properties --}}
+            <div class="bubble">
+                <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.Header" }}</h3>
+
+                <div class="form-group bubble-info" data-tooltip="<b>{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonus" }}</b><br/>{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonusTooltip" }}">
+                    <label>{{ localize "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonus" }}</label>
+                    <div class="form-fields">
+                        <input type="text" name="system.targetLockBonus" value="{{itemData.targetLockBonus}}" data-dtype="Number" placeholder="0" />
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Special Materials Template --}}
+            {{> "systems/sfrpg/templates/items/parts/item-special-materials.hbs"}}
+
+        </div>
+
+    </section>
+</form>

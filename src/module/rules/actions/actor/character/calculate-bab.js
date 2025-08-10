@@ -1,9 +1,9 @@
 export default function(engine) {
-    engine.closures.add("calculateBaseAttackBonus", (fact, context) => {
+    engine.closures.add("calculateBaseAttackBonus", (fact) => {
         const data = fact.data;
         const classes = fact.classes;
 
-        data.attributes.baseAttackBonus = mergeObject(data.attributes.baseAttackBonus, {
+        data.attributes.baseAttackBonus = foundry.utils.mergeObject(data.attributes.baseAttackBonus, {
             value: 0,
             rolledMods: [],
             tooltip: []

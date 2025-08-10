@@ -34,7 +34,7 @@ export class ChoiceDialog extends Dialog {
     activateListeners(html) {
         super.activateListeners(html);
 
-        for (let input of Object.keys(this.inputData)) {
+        for (const input of Object.keys(this.inputData)) {
             const inputElement = html.find(`#${input}`);
             inputElement.change(this._onValueChanged.bind(this));
         }
@@ -60,7 +60,7 @@ export class ChoiceDialog extends Dialog {
             ChoiceDialog.output[key] = value.default;
         }
 
-        const html = await renderTemplate("systems/sfrpg/templates/apps/choice-dialog.hbs", {
+        const html = await foundry.applications.handlebars.renderTemplate("systems/sfrpg/templates/apps/choice-dialog.hbs", {
             message: message,
             choices: inputData
         });

@@ -9,6 +9,7 @@
     "abilityMods": {
       "parts": []
     },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -17,6 +18,7 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
       "value": null
@@ -30,16 +32,18 @@
     "damage": {
       "parts": []
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.bItuvukGHbObTApr]{Mystic}</p>\n<p>You gain @UUID[Compendium.sfrpg.feats.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}as a bonus feat for each weapon type this class grants you proficiency with.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.bItuvukGHbObTApr]{Mystic}</p>\n<p>You gain @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}as a bonus feat for each weapon type this class grants you proficiency with.</p>"
     },
     "descriptors": [],
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
@@ -52,7 +56,7 @@
       {
         "_id": "dd64fe1e-bccd-4645-b30c-0e1451040f73",
         "name": "Weapon Specialization Mystic",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
@@ -66,32 +70,19 @@
       {
         "_id": "3729eb8b-fa2e-4e8a-a919-0d95b7ec5ded",
         "name": "Weapon Specialization Mystic",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
         "valueAffected": "basicM"
-      },
-      {
-        "_id": "424cf9ea-7baf-4831-82ba-ee54edb9ad73",
-        "name": "Weapon Specialization Mystic",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
       }
     ],
+    "properties": {},
     "range": {
       "additional": "",
       "per": "",
@@ -103,6 +94,7 @@
       "value": null
     },
     "requirements": "3rd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
       "dc": null,
