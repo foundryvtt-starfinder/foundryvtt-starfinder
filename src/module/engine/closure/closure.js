@@ -27,6 +27,7 @@ export class Closure {
      *
      * @returns {Object|Promise}          the result or a promise of such a result
      */
+    // eslint-disable-next-line no-unused-vars
     process(fact, context) {
         throw new Error("This is an abstract closure, how did you get to instantiate this?");
     }

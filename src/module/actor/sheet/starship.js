@@ -578,10 +578,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         event.preventDefault();
 
         const data = TextEditor.getDragEventData(event);
-        if (!data) return false;
-
-        // Case - Dropped Actor
-        if (data.type === "Actor") {
+        if (Hooks.call('dropActorSheetData', this.actor, this, data) === false) {
+            // Further processing halted
+        } else if (data.type === "Actor") {
             const actor = await Actor.fromDropData(data);
             return this._onCrewDrop(event, actor.id);
         } else if (data.type === "Item") {

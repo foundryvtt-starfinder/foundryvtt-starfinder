@@ -10,6 +10,8 @@ import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
+/** @import { RollResult } from '../dice.js' */
+
 /** @extends {foundry.documents.Item} */
 export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin) {
 
@@ -117,7 +119,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const C = CONFIG.SFRPG;
         const labels = {};
         const itemData = this;
-        const actorData = this.parent ? this.parent.system : {};
         const data = this.system;
 
         // Spell Level,  School, and Components
@@ -252,11 +253,10 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * These will always be needed from hence forth, so we'll just make sure that they always exist.
      *
      * @param {Object}      data The item data to check against.
-     * @param {String|Null} prop A specific property name to check.
      *
      * @returns {Object}         The modified data object with the modifiers data object added.
      */
-    _ensureHasModifiers(data, prop = null) {
+    _ensureHasModifiers(data) {
         if (!foundry.utils.hasProperty(data, "modifiers")) {
             console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
@@ -859,6 +859,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * Supported options:
      * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
+     *
+     * @returns {Promise<RollResult?>}
      */
     async rollAttack(options = {}) {
         const itemData = this.system;
@@ -973,7 +975,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         parts.push("@additional.modifiers.bonus");
 
         // Call the roll helper utility
-        await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             actorContextKey: "owner",
@@ -989,6 +991,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             chatMessage: options.chatMessage,
             rollOptions: rollOptions,
             dialogOptions: {
+                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -1080,8 +1083,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
 
         const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
-        if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
-            this.rollDamage({});
+        if (rollDamageWithAttack && !DiceSFRPG.isFumble(roll) && !options.disableDamageAfterAttack) {
+            this.rollDamage({}, {linkedAttackRoll: roll});
         }
     }
 
@@ -1092,6 +1095,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * Supported options:
      * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
      * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
+     *
+     * @returns {Promise<RollResult?>}
      */
     async _rollStarshipAttack(options = {}) {
         let parts = [];
@@ -1151,7 +1156,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             parts.push(`@ship.attributes.systems.powerCore.modOther`);
         }
 
-        await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             rollContext: rollContext,
@@ -1160,6 +1165,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             critical: 20,
             chatMessage: options.chatMessage,
             dialogOptions: {
+                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -1185,6 +1191,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /**
      * Place an attack roll for a vehicle using an item.
      * @param {Object} options Options to pass to the attack roll
+     * @returns {Promise<RollResult?>}
      */
     async _rollVehicleAttack(options = {}) {
 
@@ -1200,7 +1207,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.addContext("weapon", this, this);
         rollContext.setMainContext("");
 
-        await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             parts: parts,
             rollContext: rollContext,
@@ -1209,6 +1216,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             critical: 20,
             chatMessage: options.chatMessage,
             dialogOptions: {
+                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -1351,6 +1359,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         return DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
+            linkedAttackRoll: options.linkedAttackRoll ?? null,
             criticalData: itemData.critical,
             rollContext: rollContext,
             title: title,
@@ -1362,6 +1371,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
+                skipUI: options.skipUI,
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
@@ -1506,6 +1516,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
+                skipUI: options.skipUI,
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
@@ -1537,7 +1548,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     async rollFormula(options = {}) {
         const itemData = this.system;
-        const actorData = this.actor.getRollData();
         if (!itemData.formula) {
             throw new Error("This Item does not have a formula to roll!");
         }
@@ -1663,9 +1673,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     /**
      * Perform an ability recharge test for an item which uses the d6 recharge mechanic
-     * @prarm {Object} options
      */
-    async rollRecharge(options = {}) {
+    async rollRecharge() {
         const data = this.system;
         if (!data.recharge.value) return;
 
@@ -1695,7 +1704,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         return Promise.all(promises);
     }
 
-    async placeAbilityTemplate(event) {
+    async placeAbilityTemplate() {
         const itemData = this.system;
 
         const type = {
@@ -1843,11 +1852,10 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     /**
      * Get the Actor which is the author of a chat card
-     * @param {HTMLElement} card    The chat card being used
      * @return {Actor|null}         The Actor entity or null
      * @private
      */
-    static _getChatCardTarget(card) {
+    static _getChatCardTarget() {
         const character = game.user.character;
         const controlled = canvas.tokens?.controlled;
         if (controlled.length === 0) return character || null;

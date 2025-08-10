@@ -257,7 +257,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         /* -------------------------------------------- */
         /*  Spellbook
         /* -------------------------------------------- */
-        html.find('.spell-browse').click(ev => getSpellBrowser().render(true)); // Inventory Browser
+        html.find('.spell-browse').click(() => getSpellBrowser().render(true)); // Inventory Browser
 
         /* -------------------------------------------- */
         /*  Inventory
@@ -709,7 +709,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     }
 
-    async _onShowImage(event) {
+    async _onShowImage() {
         const actor = this.actor;
         const title = actor.token?.name ?? actor.prototypeToken?.name ?? actor.name;
         new foundry.applications.apps.ImagePopout({src: actor.img, window: { title }, uuid: actor.uuid }).render(true);
@@ -1225,8 +1225,8 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
 
         const parsedDragData = TextEditor.getDragEventData(event);
-        if (!parsedDragData) {
-            console.log("Unknown item data");
+        if (Hooks.call('dropActorSheetData', this.actor, this, parsedDragData) === false) {
+            // Further processing halted
         } else if (parsedDragData.type === 'Item' || parsedDragData.type === 'ItemCollection') {
             await this.processDroppedItems(event, parsedDragData);
         }
