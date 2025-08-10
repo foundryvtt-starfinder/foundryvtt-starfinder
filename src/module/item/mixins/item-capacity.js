@@ -226,7 +226,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-        const renderPromise = renderTemplate(template, templateData);
+        const renderPromise = foundry.applications.handlebars.renderTemplate(template, templateData);
         renderPromise.then((html) => {
             // Create the chat message
             const chatData = {

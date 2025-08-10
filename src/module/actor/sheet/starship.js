@@ -43,7 +43,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         this._getCrewData(data);
 
         // Encrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.notes, {
+        data.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.notes, {
             async: true,
             rollData: this.actor.getRollData() ?? {}
         });
@@ -578,10 +578,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         event.preventDefault();
 
         const data = TextEditor.getDragEventData(event);
-        if (!data) return false;
-
-        // Case - Dropped Actor
-        if (data.type === "Actor") {
+        if (Hooks.call('dropActorSheetData', this.actor, this, data) === false) {
+            // Further processing halted
+        } else if (data.type === "Actor") {
             const actor = await Actor.fromDropData(data);
             return this._onCrewDrop(event, actor.id);
         } else if (data.type === "Item") {
@@ -773,7 +772,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             const summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            const desiredDescription = await TextEditor.enrichHTML(content || chatData.description.value, {
+            const desiredDescription = await foundry.applications.ux.TextEditor.enrichHTML(content || chatData.description.value, {
                 async: true,
                 rollData: this.actor.getRollData() ?? {},
                 secrets: this.actor.isOwner

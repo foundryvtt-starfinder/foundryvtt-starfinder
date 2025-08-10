@@ -164,16 +164,38 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
         const secrets = this.actor.isOwner;
-        data.enrichedBiography = await TextEditor.enrichHTML(this.actor.system.details.biography.value, {
+        data.enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.biography.value, {
             async: true,
             rollData: this.actor.getRollData() ?? {},
             secrets
         });
-        data.enrichedGMNotes = await TextEditor.enrichHTML(this.actor.system.details.biography.gmNotes, {
+        data.enrichedGMNotes = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.biography.gmNotes, {
             async: true,
             rollData: this.actor.getRollData() ?? {},
             secrets
         });
+
+        return data;
+    }
+
+    _getSubmitData(updateData = {}) {
+        const data = super._getSubmitData(updateData);
+        const expandedData = foundry.utils.expandObject(data);
+
+        // Allow basic +/- math in currency fields
+        const currency = expandedData.system.currency;
+        if (currency) {
+            for (const [name, input] of Object.entries(currency)) {
+                const oldValue = this.actor?.system?.currency[name];
+                let newValue = oldValue;
+                const isDelta = input.startsWith("+") || input.startsWith("-");
+                const sanitizedInput = input.replace(/[^0-9|+|-]/g, '');
+                if (sanitizedInput) {
+                    newValue = isDelta ? Number(oldValue) + Number(sanitizedInput) : Number(sanitizedInput);
+                }
+                data[`system.currency.${name}`] = newValue;
+            }
+        }
 
         return data;
     }
@@ -235,7 +257,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         /* -------------------------------------------- */
         /*  Spellbook
         /* -------------------------------------------- */
-        html.find('.spell-browse').click(ev => getSpellBrowser().render(true)); // Inventory Browser
+        html.find('.spell-browse').click(() => getSpellBrowser().render(true)); // Inventory Browser
 
         /* -------------------------------------------- */
         /*  Inventory
@@ -683,11 +705,11 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         const types = Object.keys(game.model.Item).filter(k => supportedTypes.includes(k));
 
-        getDocumentClass("Item").createDialog({}, {}, {types, parent: this.actor});
+        getDocumentClass("Item").createDialog({}, { parent: this.actor }, { types });
 
     }
 
-    async _onShowImage(event) {
+    async _onShowImage() {
         const actor = this.actor;
         const title = actor.token?.name ?? actor.prototypeToken?.name ?? actor.name;
         new foundry.applications.apps.ImagePopout({src: actor.img, window: { title }, uuid: actor.uuid }).render(true);
@@ -1203,8 +1225,8 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
 
         const parsedDragData = TextEditor.getDragEventData(event);
-        if (!parsedDragData) {
-            console.log("Unknown item data");
+        if (Hooks.call('dropActorSheetData', this.actor, this, parsedDragData) === false) {
+            // Further processing halted
         } else if (parsedDragData.type === 'Item' || parsedDragData.type === 'ItemCollection') {
             await this.processDroppedItems(event, parsedDragData);
         }

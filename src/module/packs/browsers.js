@@ -3,7 +3,7 @@ import { getEquipmentBrowser } from './equipment-browser.js';
 import { getSpellBrowser } from './spell-browser.js';
 import { getStarshipBrowser } from './starship-browser.js';
 
-Hooks.on('renderCompendiumDirectory', (app, html, data) => {
+Hooks.on('renderCompendiumDirectory', (app, html) => {
     // Browser Buttons
     const grouping = $('<div class="flexrow-sfrpg browser-group"></div>');
 
