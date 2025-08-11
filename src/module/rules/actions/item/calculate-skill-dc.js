@@ -16,6 +16,12 @@ export default function(engine) {
 
             if (data.skillCheck && data.skillCheck.type) {
                 const skillCheck = data.skillCheck || {};
+                const checkLabel = `${CONFIG.SFRPG.skills[skillCheck.type]} ${game.i18n.localize("SFRPG.ChatCard.ItemAction.Check")}`;
+
+                if (skillCheck.variable) {
+                    item.labels.skillCheck = checkLabel;
+                    return fact;
+                }
 
                 let dcFormula = skillCheck.dc?.toString();
                 if (!dcFormula) {
@@ -37,7 +43,7 @@ export default function(engine) {
 
                     const rollResult = DiceSFRPG.resolveFormulaWithoutDice(dcFormula, rollContext, {logErrors: false});
                     if (!rollResult.hadError) {
-                        item.labels.skillCheck = `DC ${rollResult.total >= 0 ? rollResult.total : ""} ${CONFIG.SFRPG.skills[skillCheck.type]} ${game.i18n.localize("SFRPG.ChatCard.ItemAction.Check")}`;
+                        item.labels.skillCheck = `DC ${rollResult.total} ${checkLabel}`;
                         item.labels.skillFormula = dcFormula;
                         computedSkill = true;
                     } else {
