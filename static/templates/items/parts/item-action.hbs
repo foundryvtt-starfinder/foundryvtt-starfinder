@@ -64,13 +64,13 @@
                 <label>{{localize "SFRPG.Items.Action.SkillCheck"}}</label>
                 <div class="form-fields">
                     {{#unless itemData.skillCheck.variable}}
-                        <input type="text" class="wide-form-field" name="system.skillCheck.dc" value="{{itemData.skillCheck.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
+                        <input type="text" class="wide-form-field" name="system.skillCheck.dc" value="{{itemData.skillCheck.dc}}" data-dtype="String" data-tooltip="{{localize "SFRPG.Items.Action.SkillCheckPlaceholderTooltip"}}" placeholder="{{localize "SFRPG.Items.Action.SkillCheckPlaceholderFormula"}}"/>
                     {{/unless}}
                     <select name="system.skillCheck.type">
                         {{selectOption "" "" selected=itemData.skillCheck.type}}
                         {{selectOptions (sfrpg "skills") selected=itemData.skillCheck.type}}
                     </select>
-                    <label class="checkbox">
+                    <label class="checkbox" style="text-wrap: nowrap" data-tooltip="{{localize "SFRPG.Items.Action.VariableDCTooltip"}}">
                         <input type="checkbox" name="system.skillCheck.variable" data-dtype="Boolean" {{checked itemData.skillCheck.variable}}/> {{ localize "SFRPG.Items.Action.VariableDC" }}
                     </label>
                 </div>
