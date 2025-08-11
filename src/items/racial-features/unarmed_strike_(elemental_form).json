@@ -1,18 +1,18 @@
 {
-  "_id": "KfEzPksDco3HYSjz",
-  "name": "Natural Weapons",
+  "_id": "ESFgq41Hl5hZkPcp",
+  "name": "Unarmed Strike (Elemental Form)",
   "type": "weapon",
-  "img": "systems/sfrpg/icons/feats/grappler_pull.webp",
+  "img": "icons/skills/melee/blood-slash-foam-red.webp",
   "system": {
     "type": "",
     "ability": "str",
     "abilityMods": {
       "parts": []
     },
-    "actionTarget": "kac",
+    "actionTarget": "eac",
     "actionType": "mwak",
     "activation": {
-      "type": "action",
+      "type": "none",
       "condition": "",
       "cost": null
     },
@@ -24,30 +24,30 @@
       "units": "ft",
       "value": ""
     },
-    "attackBonus": null,
+    "attackBonus": 0,
     "attributes": {
       "ac": {
-        "value": ""
+        "value": "5"
       },
       "customBuilt": false,
       "dex": {
         "mod": ""
       },
       "hardness": {
-        "value": ""
+        "value": "0"
       },
       "hp": {
-        "max": "",
-        "value": 6
+        "max": "15",
+        "value": 15
       },
       "size": "medium",
       "sturdy": true
     },
     "attuned": false,
-    "bulk": "0",
+    "bulk": "-",
     "capacity": {
-      "max": 0,
-      "value": 0
+      "max": null,
+      "value": null
     },
     "chatFlavor": "",
     "container": {
@@ -63,14 +63,65 @@
     "damage": {
       "parts": [
         {
-          "name": "",
-          "formula": "1d3 + @abilities.str.mod + lookupRange(@details.level.value, 0, 3, floor(@details.level.value / 2))",
-          "group": null,
+          "name": "Auran Form",
+          "formula": "1d3 + @abilities.str.mod + ternary(gte(@details.level.value, 3), floor(@details.level.value / 2), 0)",
+          "group": 0,
           "isPrimarySection": true,
           "types": {
             "acid": false,
-            "bludgeoning": true,
+            "bludgeoning": false,
             "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Terran Form",
+          "formula": "1d4 + @abilities.str.mod + ternary(gte(@details.level.value, 3), floor(@details.level.value / 2), 0)",
+          "group": 0,
+          "isPrimarySection": true,
+          "types": {
+            "acid": true,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Ignan Form",
+          "formula": "1d4 + @abilities.str.mod + ternary(gte(@details.level.value, 3), floor(@details.level.value / 2), 0)",
+          "group": 0,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "Aquan Form",
+          "formula": "1d4 + @abilities.str.mod + ternary(gte(@details.level.value, 3), floor(@details.level.value / 2), 0)",
+          "group": 0,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": true,
             "electricity": false,
             "fire": false,
             "healing": false,
@@ -80,7 +131,7 @@
           }
         }
       ],
-      "primaryGroup": null
+      "primaryGroup": 0
     },
     "damageNotes": "",
     "description": {
@@ -88,24 +139,24 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Natural weapons (and natural attacks) such as acid spit, bite, claw, or slam don’t require ammunition and can’t be disarmed or sundered.</p>\n<p>In addition, a player character with this ability can attack with a special unarmed strike that deals lethal damage, doesn’t count as archaic, and threatens squares. They also gain a special version of the Weapon Specialization feat with this unarmed strike at 3rd level, allowing them to add 1–1/2 × their character level to their damage rolls for this unarmed strike (instead of just adding their character level as usual).</p>\n<p><em>Look to your species Natural Weapon/Attack feature to know how this item's damage type should be set. If no damage type is referenced, it is Bludgeoning, as the Unarmed strike.</em></p>\n<p><em>Damage calculation is already set to account the additional damage of 1/2</em><span><em>× their character level, beyond the damage provided by their normal Weapon Specialization damage.</em></span></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.racial-features.Item.GFbyfuzv25088jYt]{Elemental Form}</p>\n<p><span>Once per day as a standard action, an elanaya can manifest their bonded elemental in their own body, gaining the following powers. Elemental form lasts for a number of minutes per day equal to the elanaya’s level.</span></p><ul><li><p>The elanaya gains a special unarmed strike that deals lethal damage of their associated energy type, doesn’t count as archaic, threatens squares, and targets EAC. They gain a special version of the Weapon Specialization feat with this unarmed strike at 3rd level, allowing them to add 1–1/2 × their character level to their damage rolls for this unarmed strike (instead of just adding their character level, as usual).</p></li></ul>"
     },
     "descriptors": [],
     "duration": {
-      "units": "instantaneous",
+      "units": "text",
       "value": ""
     },
     "equippable": false,
-    "equipped": true,
+    "equipped": false,
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
     "isActive": null,
     "isEquipment": true,
-    "level": 1,
+    "level": 0,
     "modifiers": [],
     "price": 0,
-    "proficient": true,
+    "proficient": false,
     "properties": {
       "aeon": false,
       "amm": false,
@@ -161,7 +212,7 @@
       "mire": false,
       "modal": false,
       "necrotic": false,
-      "nonlethal": false,
+      "nonlethal": true,
       "one": true,
       "operative": false,
       "penetrating": false,
@@ -207,7 +258,7 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
+      "units": "touch",
       "value": null
     },
     "rollNotes": "",
@@ -220,7 +271,7 @@
       "type": "",
       "dc": ""
     },
-    "source": "Species Feature",
+    "source": "EN pg. 20",
     "special": "",
     "specialMaterials": {
       "abysium": false,
@@ -244,12 +295,12 @@
     },
     "usage": {
       "per": "",
-      "value": 0
+      "value": null
     },
     "uses": {
       "max": "",
       "per": "",
-      "value": 0
+      "value": null
     },
     "weaponCategory": "uncategorized",
     "weaponType": "basicM"

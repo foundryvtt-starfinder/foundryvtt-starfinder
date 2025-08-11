@@ -1,11 +1,11 @@
 {
-  "_id": "17KJtkpSw3CqG07C",
-  "name": "Lifebound",
+  "_id": "dTNUOTbvP8M03P4d",
+  "name": "Planar Traveler",
   "type": "feat",
-  "img": "systems/sfrpg/icons/default/achievement.svg",
+  "img": "icons/svg/mystery-man.svg",
   "system": {
     "type": "",
-    "ability": null,
+    "ability": "",
     "abilityMods": {
       "parts": []
     },
@@ -20,8 +20,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +30,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": 0
     },
     "damageNotes": "",
     "description": {
@@ -38,7 +39,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Samsarans gain a +2 species bonus to saving throws against death effects, saving throws to remove negative levels, and Constitution checks for long-term stability.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.races.Item.BKWTWZL2oHm9b6sa]{Elanaya}</p>\n<p>Elanayas are accustomed to socializing with outsiders and possess knowledge of the planes. They gain a +2 species bonus to Mysticism checks and to Diplomacy and Intimidate checks against outsiders.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -86,26 +87,56 @@
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
+      "units": "minute",
       "value": ""
     },
     "formula": "",
     "isActive": null,
     "modifiers": [
       {
-        "_id": "15def881-7143-411d-b4c0-94ca9269f580",
-        "name": "Lifebound",
+        "_id": "7a1ef1ba-dfef-402d-9fed-02b08134b369",
+        "name": "Planar Traveler",
         "type": "racial",
         "condition": "",
-        "effectType": "saves",
+        "effectType": "skill",
+        "enabled": true,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "They gain a +2 species bonus to Mysticism checks and ato Diplomacy and Intimidate checks against outsiders.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "mys"
+      },
+      {
+        "_id": "af060d5e-5fe0-48b5-8510-e1161141d2f3",
+        "name": "Planar Traveler",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
         "enabled": false,
         "max": 2,
         "modifier": "2",
         "modifierType": "formula",
-        "notes": "Samsarans gain a +2 species bonus to saving throws against death effects, saving throws to remove negative levels, and Constitution checks for long-term stability.",
-        "source": "Racial",
+        "notes": "They gain a +2 species bonus to Mysticism checks and ato Diplomacy and Intimidate checks against outsiders.",
+        "source": "",
         "subtab": "misc",
-        "valueAffected": "acr"
+        "valueAffected": "dip"
+      },
+      {
+        "_id": "43a59b47-9bb2-4b4a-bba8-a4ecf8673930",
+        "name": "Planar Traveler",
+        "type": "racial",
+        "condition": "",
+        "effectType": "skill",
+        "enabled": false,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "They gain a +2 species bonus to Mysticism checks and ato Diplomacy and Intimidate checks against outsiders.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "int"
       }
     ],
     "properties": {},
@@ -119,20 +150,24 @@
       "charged": false,
       "value": null
     },
-    "requirements": "Samsaran",
+    "requirements": "Elanaya",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
-      "descriptor": ""
+      "dc": "",
+      "descriptor": "negate"
     },
-    "source": "EN pg. 30",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "EN pg. 20",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }
