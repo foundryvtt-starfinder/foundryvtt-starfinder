@@ -95,6 +95,15 @@ export default function(engine) {
             systemData.modOther = (key === "powerCore") ? critModsOther[systemData.value] : 0;
         }
 
+        data.attributes.systems.weaponsArrayTurret = {
+            mod: Math.min(
+                data.attributes.systems.weaponsArrayForward.mod,
+                data.attributes.systems.weaponsArrayPort.mod,
+                data.attributes.systems.weaponsArrayStarboard.mod,
+                data.attributes.systems.weaponsArrayAft.mod
+            )
+        };
+
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );
 }
