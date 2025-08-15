@@ -300,14 +300,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      */
     async _onDelete(options, userId) {
         for (const item of this.items) {
-            if (item.type === "effect") {
-                const effect = game.sfrpg.timedEffects.get(item.uuid);
-                if (!effect) continue;
-
-                // Need to pass the item since the item has already been deleted from the server
-                effect.delete(item);
-            }
-
+            game.sfrpg.timedEffects.get(item.uuid)?.delete();
         }
 
         return super._onDelete(options, userId);
@@ -333,12 +326,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      */
     _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {
-            if (item.type === 'effect') {
-                const effect = game.sfrpg.timedEffects.get(item.uuid);
-                if (!effect) continue;
-
-                effect.delete();
-            }
+            game.sfrpg.timedEffects.get(item.uuid)?.delete();
         }
 
         return super._onDeleteDescendantDocuments(parent, collection, documents, data, options, userId);

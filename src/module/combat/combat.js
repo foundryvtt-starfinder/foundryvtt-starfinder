@@ -1,6 +1,7 @@
 import { CombatDifficulty } from "../apps/combat-difficulty.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
+import { SFRPG } from "../config.js";
 
 /*
 The following hooks were added:
@@ -56,6 +57,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
     _preCreate(data, options, user) {
         const update = {
+            "flags.sfrpg.startTime": game.time.worldTime,
             "flags.sfrpg.combatType": this.getCombatType(),
             "flags.sfrpg.phase": 0
         };
@@ -66,6 +68,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
     async begin() {
         const update = {
+            "flags.sfrpg.startTime": game.time.worldTime,
             "flags.sfrpg.combatType": this.getCombatType(),
             "flags.sfrpg.phase": 0,
             "round": 1,
@@ -824,11 +827,11 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         for (const effect of timedEffects.values()) {
             const duration = effect.activeDuration;
-            if (duration.unit === 'permanent') continue;
+            if (!Object.hasOwn(SFRPG.effectDurationFrom, duration.unit)) continue;
 
             const worldTime = game.time.worldTime;
-            const effectStart = duration.activationTime;
-            const effectFinish = duration.activationEnd;
+            const effectStart = duration.activationTime ?? -Infinity;
+            const effectFinish = duration.activationEnd ?? Infinity;
             const expiryInit = duration.expiryInit || 1000; // If anything goes wrong, expire at the start of the round
             const targetActorId = (() => {
                 /** @type {"parent"|"origin"|"init"|ActorID} */
@@ -879,10 +882,13 @@ export class CombatSFRPG extends foundry.documents.Combat {
                     }
                 }
 
+            } else if (effectStart <= worldTime && worldTime <= effectFinish) {
+                effect.poke();
             }
 
         }
     }
+
 }
 
 async function onConfigClicked(combat, direction) {

@@ -133,7 +133,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                     && !!item.system.recharge.value
                     && item.system.recharge.charged === false,
                 hasAttack:
-                    ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType)
+                    SFRPG.attackActions.includes(item.system.actionType)
                     && (!["weapon", "shield"].includes(item.type)
                     || item.system.equipped),
                 hasDamage:
