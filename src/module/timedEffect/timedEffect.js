@@ -1,14 +1,13 @@
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
-import { SFRPG } from "../config.js";
 
-function mkRemaining({ value, unit, enabled }) {
-    const durFrom = SFRPG.effectDurationFrom;
-    const durTypes = SFRPG.effectDurationTypes;
+function mkRemaining(value, unit, enabled) {
+    const durFrom = CONFIG.SFRPG.effectDurationFrom;
+    const durTypes = CONFIG.SFRPG.durationTypes;
 
     let string;
     if (!Object.hasOwn(durFrom, unit)) {
-        string = `${durTypes[unit]}`;
+        string = durTypes[unit] ?? game.i18n.localize("SFRPG.ActorSheet.Inventory.Item.Deactivate");
     } else if (value >= durFrom.day) {
         string = `${Math.floor(value / durFrom.day)} ${durTypes.day}`;
     } else if (value >= durFrom.hour) {
@@ -178,28 +177,13 @@ export default class SFRPGTimedEffect {
 
     }
 
-    /** Update the managed Item with data from this TimedEffect */
-    async _updateAfterToggle(resetActivationTime) {
-        // stub
-    }
-
     /** Update dynamic data, such as the time remaining */
     poke() {
-        if (Object.hasOwn(SFRPG.effectDurationFrom, this.activeDuration.unit)) {
+        if (Object.hasOwn(CONFIG.SFRPG.effectDurationFrom, this.activeDuration.unit)) {
             const duration = this.activeDuration;
-            duration.remaining = mkRemaining({
-                value: duration.activationEnd - game.time.worldTime,
-                unit: duration.unit,
-                enabled: this.enabled
-            });
-
+            duration.remaining = mkRemaining(duration.activationEnd - game.time.worldTime, duration.unit, this.enabled);
             this._updateAfterPoke();
         }
-    }
-
-    /** Update the managed Item after a {@linkcode poke} */
-    async _updateAfterPoke() {
-        // stub
     }
 
     /**
@@ -273,13 +257,13 @@ export default class SFRPGTimedEffect {
     static fromItem(item, itemData = item.system, actor = item.actor) {
         return (item.type === "effect")
             ? SFRPGTimedEnable.fromItem(item, itemData, actor)
-            : SFRPGTimedActivation.fromItem(item, itemData, actor);
+            : SFRPGTimedActivation.fromItem(item, itemData);
     }
 }
 
 class SFRPGTimedEnable extends SFRPGTimedEffect {
-    /** override */
-    async _updateAfterToggle(resetActivationTime = true) {
+    /** Update the managed Item with data from this TimedEffect */
+    _updateAfterToggle(resetActivationTime = true) {
         const item = this.item;
         const delta = {
             _id: item._id,
@@ -297,12 +281,12 @@ class SFRPGTimedEnable extends SFRPGTimedEffect {
             delta['system.activeDuration.expiryInit'] = this.activeDuration.expiryInit;
         }
 
-        return this.actor?.updateEmbeddedDocuments('Item', [delta]);
+        this.actor?.updateEmbeddedDocuments('Item', [delta]);
     }
 
-    /** @override */
-    async _updateAfterPoke() {
-        return this.actor?.updateEmbeddedDocuments('Item', [{
+    /** Update the managed Item after a {@linkcode poke} */
+    _updateAfterPoke() {
+        this.actor?.updateEmbeddedDocuments('Item', [{
             _id: this.item._id,
             'system.activeDuration.remaining': this.activeDuration.remaining
         }]);
@@ -355,20 +339,16 @@ class SFRPGTimedEnable extends SFRPGTimedEffect {
 
         const duration = effectData.activeDuration;
         duration.total = calculateWithContext(duration.value);
-        duration.activationEnd = duration.activationTime + (duration.total * SFRPG.effectDurationFrom[duration.unit]);
-        duration.remaining = mkRemaining({
-            value: duration.activationEnd - game.time.worldTime,
-            unit: duration.unit,
-            enabled: effectData.enabled
-        });
+        duration.activationEnd = duration.activationTime + (duration.total * CONFIG.SFRPG.effectDurationFrom[duration.unit]);
+        duration.remaining = mkRemaining(duration.activationEnd - game.time.worldTime, duration.unit, effectData.enabled);
 
         return new SFRPGTimedEnable(effectData);
     }
 }
 
 class SFRPGTimedActivation extends SFRPGTimedEffect {
-    /** @override */
-    async _updateAfterToggle(resetActivationTime) {
+    /** Update the managed Item with data from this TimedEffect */
+    _updateAfterToggle(resetActivationTime) {
         const item = this.item;
         const delta = {
             _id: item._id,
@@ -380,18 +360,18 @@ class SFRPGTimedActivation extends SFRPGTimedEffect {
             delta['system.activationEvent.startTime'] = this.activeDuration.activationTime;
         }
 
-        return this.actor?.updateEmbeddedDocuments('Item', [delta]);
+        this.actor?.updateEmbeddedDocuments('Item', [delta]);
     }
 
-    /** @override */
-    async _updateAfterPoke() {
-        return this.actor?.updateEmbeddedDocuments('Item', [{
+    /** Update the managed Item after a {@linkcode poke} */
+    _updateAfterPoke() {
+        this.actor?.updateEmbeddedDocuments('Item', [{
             _id: this.item._id,
             'system.activationEvent.status': this.activeDuration.remaining.string
         }]);
     }
 
-    static fromItem(item, itemData = item.system, actor = item.actor) {
+    static fromItem(item, itemData = item.system) {
         const {
             isActive,
             description,
@@ -402,7 +382,7 @@ class SFRPGTimedActivation extends SFRPGTimedEffect {
         if (!activationEvent) return null;
 
         const endTime = activationEvent.endTime;
-        const timedEffect = new SFRPGTimedActivation({
+        return new SFRPGTimedActivation({
             itemUuid: item.uuid,
             actorUuid: item.actor.uuid,
             uuid: item.uuid,
@@ -423,16 +403,10 @@ class SFRPGTimedActivation extends SFRPGTimedEffect {
                     turn: "parent"
                 },
                 expiryInit: 0,
-                remaining: mkRemaining({
-                    value: endTime - game.time.worldTime,
-                    unit: duration.units,
-                    enabled: isActive
-                }),
+                remaining: mkRemaining(endTime - game.time.worldTime, duration.units, isActive),
                 endsOn: duration.endsOn
             }
         });
-
-        return timedEffect;
     }
 }
 

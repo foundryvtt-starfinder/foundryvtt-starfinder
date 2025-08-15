@@ -55,16 +55,6 @@ export class CombatSFRPG extends foundry.documents.Combat {
         return this.combatant?.initiative;
     }
 
-    getWorldTime(round = this.round) {
-        const startTime = this.getFlag("sfrpg", "startTime");
-        if (startTime !== undefined) {
-            return startTime + (round - 1) * CONFIG.time.roundTime;
-        } else {
-            // fallback just in case startTime isn't available
-            return game.time.worldTime + (round - this.round) * CONFIG.time.roundTime;
-        }
-    }
-
     _preCreate(data, options, user) {
         const update = {
             "flags.sfrpg.startTime": game.time.worldTime,

@@ -1,4 +1,3 @@
-import { SFRPG } from "../../config.js";
 import { DiceSFRPG } from "../../dice.js";
 import RollContext from "../../rolls/rollcontext.js";
 
@@ -7,7 +6,7 @@ import RollContext from "../../rolls/rollcontext.js";
  * @typedef {object} ActivationEvent
  * @property {?number} startTime - world time at activation, `null` for -Infinity
  * @property {?number} endTime - world time at expected expiration, `null` for Infinity
- * @property {string} endsOn - from {@linkcode SFRPG.effectEndTypes}
+ * @property {string} endsOn - from {@linkcode CONFIG.SFRPG.effectEndTypes}
  * @property {string} status - A status string for `SFRPGTimedEffect` to set
  * @property {?number} deactivatedAt - world time at deactivation
  */
@@ -89,10 +88,10 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
             const worldTime = game.time.worldTime;
 
             let totalTime = null; // permanent or untracked
-            if (Object.hasOwn(SFRPG.effectDurationFrom, duration.units)) {
+            if (Object.hasOwn(CONFIG.SFRPG.effectDurationFrom, duration.units)) {
                 const rollContext = RollContext.createItemRollContext(this, this.actor);
                 const totalUnits = DiceSFRPG.resolveFormulaWithoutDice(String(duration.value || 0), rollContext).total;
-                totalTime = totalUnits * SFRPG.effectDurationFrom[duration.units];
+                totalTime = totalUnits * CONFIG.SFRPG.effectDurationFrom[duration.units];
             }
 
             updateData['system.activationEvent'] = {
