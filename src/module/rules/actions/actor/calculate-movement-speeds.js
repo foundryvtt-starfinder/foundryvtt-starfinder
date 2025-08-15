@@ -32,6 +32,37 @@ export default function(engine) {
             return computedBonus;
         };
 
+        // If power Armor is equipped and has capacity remaining, use that speed as the actor's base land speed
+        // Eventually this should be updated to include other speeds, like flight, swim, etc.
+        let armorIsPowered = false;
+        let hasEquippedPowerArmor = false;
+        let powerArmorBaseValue = 0;
+        if (armors) {
+            for (const armorItem of armors) {
+                if (armorItem.system.armor.type === "power") {
+                    hasEquippedPowerArmor = true;
+                    let tooltipPowered = "";
+                    if (armorItem.getCurrentCapacity()) {
+                        armorIsPowered = true;
+                        powerArmorBaseValue = Number(armorItem.system.speed) || 0;
+                        tooltipPowered = "Powered";
+                    }
+                    else {
+                        powerArmorBaseValue = 0;
+                        tooltipPowered = "Unpowered";
+                    }
+
+                    data.attributes.speed.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.Speed", {
+                        speed: `Power Armor Speed (${tooltipPowered})`,
+                        type: "",
+                        mod: powerArmorBaseValue,
+                        source: armorItem.name
+                    }));
+                    continue;
+                }
+            }
+        }
+
         const slowestArmor = armors?.reduce((armor, worstArmor) => (armor.system?.armor?.speedAdjust || 0) < (worstArmor.system?.armor?.speedAdjust || 0) ? armor : worstArmor);
         const armorSpeed = slowestArmor?.system?.armor?.speedAdjust || 0;
         if (armorSpeed) {
@@ -48,7 +79,17 @@ export default function(engine) {
                 continue;
             }
 
-            const baseValue = Number(data.attributes.speed[speedKey].base);
+            let baseValue = Number(data.attributes.speed[speedKey].base);
+
+            // Replace base land speed value with power armor base speed
+            if (speedKey === "land" && hasEquippedPowerArmor) {
+                baseValue = powerArmorBaseValue;
+                // If unpowered (value set to 0)
+                if (!armorIsPowered) {
+                    data.attributes.speed[speedKey].value = 0;
+                    continue;
+                }
+            }
 
             let filteredModifiers = fact.modifiers.filter(mod => {
                 return (mod.enabled || mod.modifierType === "formula") && (mod.effectType === SFRPGEffectType.ALL_SPEEDS || (mod.effectType === SFRPGEffectType.SPECIFIC_SPEED && mod.valueAffected === speedKey));
