@@ -485,6 +485,7 @@ Hooks.once("i18nInit", () => {
         "constantDistanceUnits",
         "variableDistanceUnits",
         "durationTypes",
+        "effectEndTypes",
         "effectDurationTypes",
         "descriptors",
         "descriptorsTooltips",
@@ -692,7 +693,7 @@ Hooks.on("renderChatMessageHTML", (app, html, data) => {
 
 Hooks.on("getChatMessageContextOptions", addChatMessageContextOptions);
 
-Hooks.on("renderAbstractSidebarTab", async (app, html) => {
+Hooks.on("renderAbstractSidebarTab", async (app) => {
     if (app.options.id === "settings") {
         const textToAdd = `<a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
         const gameDetails = document.getElementById("settings");

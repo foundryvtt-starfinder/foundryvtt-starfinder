@@ -182,7 +182,7 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
                 save: {
                     icon: '<i class="fas fa-check"></i>',
                     label: 'Save',
-                    callback: html => {}
+                    callback: () => {}
                 }
             },
             default: 'save',

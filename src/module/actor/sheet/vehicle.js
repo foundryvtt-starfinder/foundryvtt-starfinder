@@ -127,7 +127,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const [attacks, primarySystems, expansionBays, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             if (!item.config) item.config = {};
-            const hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
+            const hasAttack = SFRPG.attackActions.includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
             const hasDamage = item.system.damage?.parts
                 && item.system.damage.parts.length > 0
                 && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
@@ -242,21 +242,10 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onDrop(event) {
         event.preventDefault();
 
-        // let data;
-        // try {
-        //     data = JSON.parse(event.dataTransfer.getData('text/plain'));
-        //     if (!data) {
-        //         return false;
-        //     }
-        // } catch (err) {
-        //     return false;
-        // }
-
         const data = TextEditor.getDragEventData(event);
-        if (!data) return false;
-
-        // Case - Dropped Actor
-        if (data.type === "Actor") {
+        if (Hooks.call('dropActorSheetData', this.actor, this, data) === false) {
+            // Further processing halted
+        } else if (data.type === "Actor") {
             const actor = await Actor.fromDropData(data);
 
             // Other vehicles are only acceptable if this vehicle has 1 or more hangar bays

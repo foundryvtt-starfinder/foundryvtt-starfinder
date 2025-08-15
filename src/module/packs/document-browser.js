@@ -3,7 +3,6 @@
  * @import { Collection } from "@common/utils/_module.mjs"
  */
 import { packLoader } from './pack-loader.js';
-const { Collection } = foundry.utils;
 
 export class DocumentBrowserSFRPG extends Application {
     static get defaultOptions() {
@@ -28,7 +27,7 @@ export class DocumentBrowserSFRPG extends Application {
                     label: "Settings",
                     class: "configure-sheet",
                     icon: "fas fa-cog",
-                    onclick: ev => this.openSettings()
+                    onclick: () => this.openSettings()
                 }
             ].concat(buttons);
         }
@@ -37,7 +36,7 @@ export class DocumentBrowserSFRPG extends Application {
 
     activateListeners(html) {
         this.resetFilters(html, !!this.filters);
-        html.on('click', '.clear-filters', ev => {
+        html.on('click', '.clear-filters', () => {
             this.resetFilters(html);
             this.filterItems(html.find('li'));
         });
@@ -79,7 +78,7 @@ export class DocumentBrowserSFRPG extends Application {
         });
 
         // toggle hints
-        html.on('mousedown', 'input[name=textFilter]', ev => {
+        html.on('mousedown', 'input[name=textFilter]', () => {
             if (event.which === 3) {
                 $(html.find('.hint')).toggle(100);
             }
@@ -186,7 +185,7 @@ export class DocumentBrowserSFRPG extends Application {
         });
     }
 
-    _onDragStart(event, li) {
+    _onDragStart(event) {
         const itemUuid = $(event.currentTarget).attr('data-entry-uuid');
 
         const rawData = {
@@ -252,7 +251,7 @@ export class DocumentBrowserSFRPG extends Application {
         return {};
     }
 
-    allowedItem(item) {
+    allowedItem() {
         return true;
     }
 
@@ -467,7 +466,7 @@ export class DocumentBrowserSFRPG extends Application {
                 return resolve(document.querySelector(selector));
             }
 
-            const observer = new MutationObserver(mutations => {
+            const observer = new MutationObserver(() => {
                 if (document.querySelector(selector)) {
                     resolve(document.querySelector(selector));
                     observer.disconnect();
@@ -577,7 +576,7 @@ export class DocumentBrowserSFRPG extends Application {
                 save: {
                     icon: '<i class="fas fa-check"></i>',
                     label: 'Save',
-                    callback: html => {
+                    callback: () => {
                     }
                 }
             },

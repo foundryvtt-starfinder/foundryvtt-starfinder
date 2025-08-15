@@ -1,6 +1,7 @@
 import { CombatDifficulty } from "../apps/combat-difficulty.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
+import { SFRPG } from "../config.js";
 
 /*
 The following hooks were added:
@@ -56,6 +57,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
     _preCreate(data, options, user) {
         const update = {
+            "flags.sfrpg.startTime": game.time.worldTime,
             "flags.sfrpg.combatType": this.getCombatType(),
             "flags.sfrpg.phase": 0
         };
@@ -66,6 +68,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
     async begin() {
         const update = {
+            "flags.sfrpg.startTime": game.time.worldTime,
             "flags.sfrpg.combatType": this.getCombatType(),
             "flags.sfrpg.phase": 0,
             "round": 1,
@@ -585,7 +588,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
     }
 
     hasCombatantsWithoutInitiative() {
-        for (const [index, combatant] of this.turns.entries()) {
+        for (const combatant of this.turns.values()) {
             if ((!this.settings.skipDefeated || !combatant.defeated) && (combatant.initiative === undefined || combatant.initiative === null)) {
                 return true;
             }
@@ -671,7 +674,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }
     }
 
-    async _getInitiativeRoll(combatant, formula) {
+    async _getInitiativeRoll(combatant) {
         const rollContext = RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"});
 
         const parts = [];
@@ -702,7 +705,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         return rollResult.roll;
     }
 
-    async rollInitiative(ids, {formula = null, updateTurn = true, messageOptions = {}} = {}) {
+    async rollInitiative(ids, {updateTurn = true, messageOptions = {}} = {}) {
 
         // Structure input data
         ids = typeof ids === "string" ? [ids] : ids;
@@ -824,11 +827,11 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         for (const effect of timedEffects.values()) {
             const duration = effect.activeDuration;
-            if (duration.unit === 'permanent') continue;
+            if (!Object.hasOwn(SFRPG.effectDurationFrom, duration.unit)) continue;
 
             const worldTime = game.time.worldTime;
-            const effectStart = duration.activationTime;
-            const effectFinish = duration.activationEnd;
+            const effectStart = duration.activationTime ?? -Infinity;
+            const effectFinish = duration.activationEnd ?? Infinity;
             const expiryInit = duration.expiryInit || 1000; // If anything goes wrong, expire at the start of the round
             const targetActorId = (() => {
                 /** @type {"parent"|"origin"|"init"|ActorID} */
@@ -879,10 +882,13 @@ export class CombatSFRPG extends foundry.documents.Combat {
                     }
                 }
 
+            } else if (effectStart <= worldTime && worldTime <= effectFinish) {
+                effect.poke();
             }
 
         }
     }
+
 }
 
 async function onConfigClicked(combat, direction) {
@@ -910,7 +916,7 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
     const combatType = activeCombat.getCombatType();
 
     const header = html.querySelector('.combat-tracker-header');
-    const footer = html.querySelector('.combat-controls');
+    // const footer = html.querySelector('.combat-controls');
 
     if (activeCombat.round > 0) {
         const phases = activeCombat.getPhases();

@@ -1,6 +1,6 @@
 import { SFRPG } from "../../../config.js";
 import { DiceSFRPG } from "../../../dice.js";
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType } from "../../../modifiers/types.js";
 import RollContext from "../../../rolls/rollcontext.js";
 
 function tryResolveModifier(modifier, rollContext) {
@@ -17,7 +17,7 @@ function tryResolveModifier(modifier, rollContext) {
 }
 
 export default function(engine) {
-    engine.closures.add("calculateDamageMitigation", (fact, context) => {
+    engine.closures.add("calculateDamageMitigation", (fact) => {
         const data = fact.data;
         const actor = fact.actor;
 
