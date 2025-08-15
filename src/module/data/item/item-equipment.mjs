@@ -4,7 +4,7 @@ export default class SFRPGItemEquipment extends SFRPGItemBase {
 
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
-        'SFRPG.Item.Armor'
+        'SFRPG.Item.Equipment'
     ];
 
     static defineSchema() {
@@ -18,7 +18,7 @@ export default class SFRPGItemEquipment extends SFRPGItemBase {
             ...SFRPGItemBase.containerTemplate(),
             ...SFRPGItemBase.itemUsageTemplate(),
             ...SFRPGItemBase.modifiersTemplate(),
-            ...SFRPGItemBase.physicalItemTemplate(true, false),
+            ...SFRPGItemBase.physicalItemTemplate({isEquippable: true, isEquipment: true}),
             ...SFRPGItemBase.specialMaterialsTemplate()
         });
 
@@ -27,8 +27,8 @@ export default class SFRPGItemEquipment extends SFRPGItemBase {
             armor: new fields.SchemaField({
                 type: new fields.StringField({
                     initial: "light",
-                    choices: ["", ...Object.keys(CONFIG.SFRPG.armorTypes)],
-                    blank: true,
+                    choices: Object.keys(CONFIG.SFRPG.armorTypes),
+                    blank: false,
                     required: true
                 }),
                 eac: new fields.NumberField({

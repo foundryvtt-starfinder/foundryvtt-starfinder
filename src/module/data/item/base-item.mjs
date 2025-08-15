@@ -169,7 +169,7 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
             duration: new fields.SchemaField({
                 units: new fields.StringField({
                     initial: "",
-                    choices: ["text", ...Object.keys(CONFIG.SFRPG.effectDurationTypes)],
+                    choices: ["text", ...Object.keys(CONFIG.SFRPG.durationTypes)],
                     blank: true
                 }),
                 value: new fields.StringField()
@@ -336,7 +336,7 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
         };
     }
 
-    static physicalItemTemplate(isEquippable = false, isEquipment = false) {
+    static physicalItemTemplate({isEquippable = false, isEquipment = false}) {
         return {
             attributes: new fields.SchemaField({
                 ac: new fields.SchemaField({
