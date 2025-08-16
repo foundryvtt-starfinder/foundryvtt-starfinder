@@ -927,18 +927,20 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         // Add buttons for switching combat type
         activeCombat.renderCombatTypeControls(header);
 
-        // Handle button clicks
-        const configureButtonPrev = header.querySelector('.combat-type-prev');
-        configureButtonPrev.addEventListener('click', ev => {
-            ev.preventDefault();
-            onConfigClicked(activeCombat, -1);
-        });
+        if (game.user.isGM) {
+            // Handle button clicks
+            const configureButtonPrev = header.querySelector('.combat-type-prev');
+            configureButtonPrev.addEventListener('click', ev => {
+                ev.preventDefault();
+                onConfigClicked(activeCombat, -1);
+            });
 
-        const configureButtonNext = header.querySelector('.combat-type-next');
-        configureButtonNext.addEventListener('click', ev => {
-            ev.preventDefault();
-            onConfigClicked(activeCombat, 1);
-        });
+            const configureButtonNext = header.querySelector('.combat-type-next');
+            configureButtonNext.addEventListener('click', ev => {
+                ev.preventDefault();
+                onConfigClicked(activeCombat, 1);
+            });
+        }
     }
 
     // Perform difficulty calculations, and display if appropriate
