@@ -566,7 +566,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     _updateObject(event, formData) {
         // Handle Damage Array
         const damage = Object.entries(formData).filter(e => e[0].startsWith("system.damage.parts"));
-        formData["system.damage.parts"] = damage.reduce((arr, entry) => {
+        const damageParts = damage.reduce((arr, entry) => {
             const [i, key, type] = entry[0].split(".").slice(3);
             if (!arr[i]) arr[i] = { name: "", formula: "", types: {}, group: null, isPrimarySection: false };
 
@@ -590,10 +590,13 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
             return arr;
         }, []);
+        if (damageParts.length) {
+            formData["system.damage.parts"] = damageParts;
+        }
 
         // Handle Critical Damage Array
         const criticalDamage = Object.entries(formData).filter(e => e[0].startsWith("system.critical.parts"));
-        formData["system.critical.parts"] = criticalDamage.reduce((arr, entry) => {
+        const criticalDamageParts = criticalDamage.reduce((arr, entry) => {
             const [i, key, type] = entry[0].split(".").slice(3);
             if (!arr[i]) arr[i] = { formula: "", types: {}, operator: "" };
 
@@ -608,15 +611,21 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
             return arr;
         }, []);
+        if (criticalDamageParts.length) {
+            formData["system.critical.parts"] = criticalDamageParts;
+        }
 
         // Handle Ability Adjustments array
         const abilityMods = Object.entries(formData).filter(e => e[0].startsWith("system.abilityMods.parts"));
-        formData["system.abilityMods.parts"] = abilityMods.reduce((arr, entry) => {
+        const abilityModParts = abilityMods.reduce((arr, entry) => {
             const [i, j] = entry[0].split(".").slice(3);
             if (!arr[i]) arr[i] = [];
             arr[i][j] = entry[1];
             return arr;
         }, []);
+        if (abilityModParts.length) {
+            formData["system.abilityMods.parts"] = abilityModParts;
+        }
 
         // Handle Starship Action/Subaction Formulas
         if (this.object.type === "starshipAction") {
