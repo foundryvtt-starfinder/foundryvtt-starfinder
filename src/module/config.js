@@ -385,6 +385,7 @@ SFRPG.effectEndTypes = {
 };
 
 SFRPG.effectDurationFrom = {
+    "turn": 0,
     "round": 6,
     "minute": 60,
     "hour": 3600,
@@ -402,12 +403,14 @@ SFRPG.turnEventTypes = {
  */
 SFRPG.durationTypes = {
     "instantaneous": "SFRPG.DurationTypesInstantaneous",
+    "turn": "SFRPG.DurationTypesTurn",
     ...SFRPG.effectDurationTypes,
     "text": "SFRPG.Text"
 };
 
 SFRPG.uncountableDurations = Object.freeze([
     "instantaneous",
+    "turn",
     "permanent"
 ]);
 
