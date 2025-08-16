@@ -221,6 +221,7 @@ Hooks.once('init', async function() {
 
     // DataModels definition
     CONFIG.Item.dataModels = {
+        consumable: models.SFRPGItemConsumable,
         equipment: models.SFRPGItemEquipment,
         weapon: models.SFRPGItemWeapon
     };

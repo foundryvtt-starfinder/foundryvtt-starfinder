@@ -205,7 +205,7 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
                     choices: ["", ...Object.keys(CONFIG.SFRPG.capacityUsagePer)],
                     blank: true
                 }),
-                value: new fields.NumberField({min: 0})
+                value: new fields.NumberField({min: 0, nullable: true})
             }, {
                 required: true,
                 label: "SFRPG.Items.Activation.LimitedUses"
@@ -336,7 +336,9 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
         };
     }
 
-    static physicalItemTemplate({isEquippable = false, isEquipment = false}) {
+    static physicalItemTemplate(options = {}) {
+        const isEquippable = options.isEquippable ?? false;
+        const isEquipment = options.isEquipment ?? false;
         return {
             attributes: new fields.SchemaField({
                 ac: new fields.SchemaField({
