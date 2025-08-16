@@ -400,7 +400,7 @@ class SFRPGTimedActivation extends SFRPGTimedEffect {
                 activationEnd: endTime,
                 expiryMode: {
                     type: "turn",
-                    turn: "parent"
+                    turn: activationEvent.expiryTurn ?? "parent"
                 },
                 expiryInit: 0,
                 remaining: mkRemaining(endTime - game.time.worldTime, duration.units, isActive),
