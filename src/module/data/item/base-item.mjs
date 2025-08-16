@@ -15,7 +15,6 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
         });
 
         schema.source = new fields.StringField();
-        schema.type = new fields.StringField();
 
         return schema;
     }
@@ -158,7 +157,7 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
                 }),
                 units: new fields.StringField({
                     initial: "",
-                    choices: Object.keys(CONFIG.SFRPG.variableDistanceUnits),
+                    choices: Object.keys(CONFIG.SFRPG.distanceUnits),
                     blank: true
                 }),
                 value: new fields.StringField({initial: ""})
@@ -202,7 +201,7 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
                 max: new fields.StringField({nullable: true}),
                 per: new fields.StringField({
                     initial: "",
-                    choices: ["", ...Object.keys(CONFIG.SFRPG.capacityUsagePer)],
+                    choices: ["", ...Object.keys(CONFIG.SFRPG.limitedUsePeriods)],
                     blank: true
                 }),
                 value: new fields.NumberField({min: 0, nullable: true})
