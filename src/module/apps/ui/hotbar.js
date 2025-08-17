@@ -16,8 +16,7 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
     /** @override */
     async _prepareContext() {
         const data = await super._prepareContext();
-
-        for (const slot of data.macros) {
+        for (const slot of data.slots) {
             const macro = slot.macro;
             if (!macro) continue;
 
@@ -51,6 +50,7 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
                 slot.activeGlow = itemMacroDetails.macroType === "activate" && macroConfig.isActive;
                 slot.hasUses = itemMacroDetails.macroType === "activate" && macroConfig.hasUses;
 
+                slot.tooltip = `<strong>${slot.tooltip}</strong>`;
                 slot.tooltip += `
                     <br>
                     ${game.i18n.localize("DOCUMENT.Actor")}: ${item.actor.name}
