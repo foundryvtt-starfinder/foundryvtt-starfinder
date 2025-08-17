@@ -33,7 +33,7 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
                     hasAttack: SFRPG.attackActions.includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                     hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                     hasUses: item.hasUses(),
-                    hasActivation: item.canBeActivated(),
+                    hasActivation: item.canBeActivated() && item.system.duration?.units !== 'instantaneous',
                     isActive: item.isActive(),
                     hasCapacity: item.hasCapacity()
 
@@ -57,8 +57,10 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
                     <br>
                 `;
                 if (itemMacroDetails.macroType === "activate") {
-                    slot.tooltip += macroConfig.isActive ? "Active" : "Inactive";
-                    slot.tooltip += "<br>";
+                    if (macroConfig.hasActivation) {
+                        slot.tooltip += macroConfig.isActive ? "Active" : "Inactive";
+                        slot.tooltip += "<br>";
+                    }
                     if (macroConfig.hasUses) slot.tooltip += `
                         ${game.i18n.localize("SFRPG.SpellBook.Uses")}: ${item.system.uses.value}/${item.system.uses.total}
                     `;
