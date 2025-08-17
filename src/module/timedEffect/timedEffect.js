@@ -211,8 +211,8 @@ export default class SFRPGTimedEffect {
             const itemData = item.system;
 
             const effectData = {
-                itemId: item.id,
-                actorId: item.actor.id,
+                itemUuid: item.uuid,
+                actorUuid: item.actor.uuid,
                 uuid: item.uuid,
                 name: item.name,
                 type: itemData.type,
