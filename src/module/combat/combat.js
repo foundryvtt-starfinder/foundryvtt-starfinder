@@ -834,7 +834,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             const effectFinish = duration.activationEnd ?? Infinity;
             const expiryInit = duration.expiryInit || 1000; // If anything goes wrong, expire at the start of the round
             const targetActorUuid = (() => {
-                /** @type {"parent"|"origin"|"init"|ActorID} */
+                /** @type {"parent"|"origin"|"init"|ActorID|ActorUUID} */
                 const expiryModeTurn = duration.expiryMode.turn;
 
                 // Expire on the owner's turn
@@ -852,8 +852,14 @@ export class CombatSFRPG extends foundry.documents.Combat {
                 // Turn closest to initiative to expire on
                 else if (expiryModeTurn === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actor.uuid;
 
-                // Otherwise, an actor id of a specific combatant
-                else return expiryModeTurn;
+                else {
+                    // If this is the ID of an actor then we return that actor's uuid
+                    const combatant = this.combatants.find(c => c.actorId === expiryModeTurn);
+                    if (combatant) return combatant.actor.uuid;
+
+                    // Otherwise, an actor uuid of a specific combatant
+                    return expiryModeTurn;
+                }
             })();
 
             if (((worldTime >= effectFinish) && effect.enabled) // If effect has expired

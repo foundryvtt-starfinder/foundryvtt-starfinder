@@ -250,13 +250,13 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
             data.sourceActorChoices = {};
             if (game.combat?.started) {
                 for (const combatant of game.combat.combatants) {
-                    if (combatant.actorId === data.item?.actor?.id) continue;
-                    data.sourceActorChoices[combatant.actorId] = combatant.name;
+                    if (combatant.actor.uuid === data.item?.actor?.uuid) continue;
+                    data.sourceActorChoices[combatant.actor.uuid] = combatant.name;
                 }
             } else {
                 const PCs = game.actors.filter(i => i.type === "character");
                 for (const PC of PCs) {
-                    data.sourceActorChoices[PC.id] = PC.name;
+                    data.sourceActorChoices[PC.uuid] = PC.name;
                 }
             }
 
