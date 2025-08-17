@@ -8,12 +8,16 @@ const createMacroFnLookup = {
     AbilityCheck: createAbilityCheckMacro
 };
 
-Hooks.on("hotbarDrop", async (bar, data, slot) => {
+Hooks.on("hotbarDrop", (bar, data, slot) => {
     const createMacroFn = data && createMacroFnLookup[data.type];
-    if (createMacroFn) {
-        game.user.assignHotbarMacro(await createMacroFn(data), slot);
+    if (!bar.locked && createMacroFn) {
+        createMacroFn(data).then((macro) => {
+            game.user.assignHotbarMacro(macro, slot);
+        });
+        return false;
     } else {
         // silently ignore this hook, just in case someone else will pick it up.
+        return true;
     }
 });
 
