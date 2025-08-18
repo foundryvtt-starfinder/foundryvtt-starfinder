@@ -297,10 +297,14 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Delete any of corresponding timedEffect objects of the actor's items.
+     * Also remove linked hotbar instances from item apps before deleting so the hotbar isn't closed.
      */
     async _onDelete(options, userId) {
         for (const item of this.items) {
             game.sfrpg.timedEffects.get(item.uuid)?.delete();
+        }
+        for (const item of this.items) {
+            item.apps?.hotbar?.delete();
         }
 
         return super._onDelete(options, userId);

@@ -232,13 +232,13 @@ export function connectToDocument(macro) {
     if (itemMacroDetails?.itemUuid) {
         const item = fromUuidSync(itemMacroDetails?.itemUuid);
         if (!item || !item.actor) return false;
-        item.apps[ui.hotbar.appId] = ui.hotbar;
+        item.apps[ui.hotbar.id] = ui.hotbar;
 
         // Attacking with a weapon with ammo triggers an update on the ammo, not the weapon, so listen to the ammo too.
         const childItems = _getChildItems(item);
         if (!childItems?.length) return;
         for (const child of childItems) {
-            child.apps[ui.hotbar.appId] = ui.hotbar;
+            child.apps[ui.hotbar.id] = ui.hotbar;
         }
 
         return true;
