@@ -265,18 +265,18 @@ function _getChildItems(item) {
 
 // Before deleting an item, remove it from the hotbar's apps, so the delete method doesn't close the hotbar.
 Hooks.on("preDeleteItem", (item) => {
-    delete item.apps[ui.hotbar.appId];
+    delete item.apps[ui.hotbar.id];
 });
 
 // Add update listeners to all child items whenever an item is updated, in case any child items were swapped.
 Hooks.on("updateItem", (item) => {
-    if (item.apps[ui.hotbar.appId]) {
+    if (item.apps[ui.hotbar.id]) {
         const childItems = _getChildItems(item);
         if (!childItems?.length) return;
 
         for (const child of childItems) {
-            if (child.apps[ui.hotbar.appId]) continue;
-            child.apps[ui.hotbar.appId] = ui.hotbar;
+            if (child.apps[ui.hotbar.id]) continue;
+            child.apps[ui.hotbar.id] = ui.hotbar;
         }
     }
 });
