@@ -225,6 +225,7 @@ Hooks.once('init', async function() {
         asi: models.SFRPGItemASI,
         consumable: models.SFRPGItemConsumable,
         equipment: models.SFRPGItemEquipment,
+        goods: models.SFRPGItemGoods,
         weapon: models.SFRPGItemWeapon
     };
 
