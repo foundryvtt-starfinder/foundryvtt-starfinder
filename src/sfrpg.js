@@ -33,6 +33,7 @@ import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
+import { HotbarSFRPG } from "./module/apps/ui/hotbar.js";
 import { canvasHandler } from "./module/canvas/canvas.js";
 import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/canvas/template-overrides.js";
 import { addChatMessageContextOptions } from "./module/chat/chat-message-options.js";
@@ -227,7 +228,7 @@ Hooks.once('init', async function() {
         weapon: models.SFRPGItemWeapon
     };
 
-    //   CONFIG.ui.hotbar = HotbarSFRPG;
+    CONFIG.ui.hotbar = HotbarSFRPG;
 
     CONFIG.fontDefinitions["Exo2"] = {
         editor: true,

@@ -833,51 +833,60 @@ export class CombatSFRPG extends foundry.documents.Combat {
             const effectStart = duration.activationTime ?? -Infinity;
             const effectFinish = duration.activationEnd ?? Infinity;
             const expiryInit = duration.expiryInit || 1000; // If anything goes wrong, expire at the start of the round
-            const targetActorId = (() => {
-                /** @type {"parent"|"origin"|"init"|ActorID} */
+            const targetActorUuid = (() => {
+                /** @type {"parent"|"origin"|"init"|ActorID|ActorUUID} */
                 const expiryModeTurn = duration.expiryMode.turn;
 
                 // Expire on the owner's turn
                 if (expiryModeTurn === "parent") {
-                    const id = effect.actor?.id;
+                    const id = effect.actor?.uuid;
                     if (id) return id;
                 }
 
                 // Expire on the origin actor's turn; fall back to owner
                 else if (expiryModeTurn === "origin") {
-                    const id = effect.origin?.id || effect.actor?.id;
+                    const id = effect.origin?.uuid || effect.actor?.uuid;
                     if (id) return id;
                 }
 
                 // Turn closest to initiative to expire on
-                else if (expiryModeTurn === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actorId;
+                else if (expiryModeTurn === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actor.uuid;
 
-                // Otherwise, an actor id of a specific combatant
-                else return expiryModeTurn;
+                else {
+                    // If this is the ID of an actor then we return that actor's uuid
+                    const combatant = this.combatants.find(c => c.actorId === expiryModeTurn);
+                    if (combatant) return combatant.actor.uuid;
+
+                    // Otherwise, an actor uuid of a specific combatant
+                    return expiryModeTurn;
+                }
             })();
 
             if (((worldTime >= effectFinish) && effect.enabled) // If effect has expired
                 || ((effectStart <= worldTime) && (effectFinish >= worldTime) && !effect.enabled)) { // If the current turn has gone back, and the effect has un-expired.
                 if (!eventData.isNewTurn) continue;
-                if (!eventData.combat.combatants.find(combatant => combatant.actorId === targetActorId)) {
+                if (!this.combatants.find(combatant => combatant.actor.uuid === targetActorUuid)) {
                     effect.toggle(false);
                     continue;
                 }
 
+                const oldCombatant = this.combatants.get(eventData.oldCombatant._id);
+                const newCombatant = this.combatants.get(eventData.newCombatant._id);
+
                 if (duration.expiryMode.type === "turn") {
                     if (duration.endsOn === 'onTurnEnd') {
-                        if ((forward && eventData.oldCombatant.actorId === targetActorId) || (!forward && eventData.newCombatant.actorId === targetActorId)) {
+                        if ((forward && oldCombatant.actor.uuid === targetActorUuid) || (!forward && newCombatant.actor.uuid === targetActorUuid)) {
                             effect.toggle(false);
                         }
                     // On turn start
                     } else {
-                        if ((forward && eventData.newCombatant.actorId === targetActorId) || (!forward && eventData.oldCombatant.actorId === targetActorId)) {
+                        if ((forward && newCombatant.actor.uuid === targetActorUuid) || (!forward && oldCombatant.actor.uuid === targetActorUuid)) {
                             effect.toggle(false);
                         }
                     }
                 // Expire by initiative
                 } else {
-                    if ((forward && eventData.oldCombatant.initiative >= expiryInit && eventData.newCombatant.initiative <= expiryInit) || (!forward && eventData.newCombatant.initiative >= expiryInit && eventData.oldCombatant.initiative <= expiryInit)) {
+                    if ((forward && oldCombatant.initiative >= expiryInit && newCombatant.initiative <= expiryInit) || (!forward && newCombatant.initiative >= expiryInit && oldCombatant.initiative <= expiryInit)) {
                         effect.toggle(false);
                     }
                 }
@@ -927,18 +936,20 @@ Hooks.on('renderCombatTracker', (app, html, data) => {
         // Add buttons for switching combat type
         activeCombat.renderCombatTypeControls(header);
 
-        // Handle button clicks
-        const configureButtonPrev = header.querySelector('.combat-type-prev');
-        configureButtonPrev.addEventListener('click', ev => {
-            ev.preventDefault();
-            onConfigClicked(activeCombat, -1);
-        });
+        if (game.user.isGM) {
+            // Handle button clicks
+            const configureButtonPrev = header.querySelector('.combat-type-prev');
+            configureButtonPrev.addEventListener('click', ev => {
+                ev.preventDefault();
+                onConfigClicked(activeCombat, -1);
+            });
 
-        const configureButtonNext = header.querySelector('.combat-type-next');
-        configureButtonNext.addEventListener('click', ev => {
-            ev.preventDefault();
-            onConfigClicked(activeCombat, 1);
-        });
+            const configureButtonNext = header.querySelector('.combat-type-next');
+            configureButtonNext.addEventListener('click', ev => {
+                ev.preventDefault();
+                onConfigClicked(activeCombat, 1);
+            });
+        }
     }
 
     // Perform difficulty calculations, and display if appropriate
