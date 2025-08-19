@@ -66,7 +66,7 @@ export default class SFRPGTimedEffect {
             expiryMode: {
                 /** @type {"turn"|"init"} Expire on a combatant's turn, or a specific init count. */
                 type: "turn",
-                /** @type {"parent"|"origin"|"init"|ActorID} If type is `turn`, which turn to expire on. */
+                /** @type {"parent"|"origin"|"init"|ActorID|ActorUUID} If type is `turn`, which turn to expire on. */
                 turn: "parent"
             },
             expiryInit: 0,
@@ -211,8 +211,8 @@ export default class SFRPGTimedEffect {
             const itemData = item.system;
 
             const effectData = {
-                itemId: item.id,
-                actorId: item.actor.id,
+                itemUuid: item.uuid,
+                actorUuid: item.actor.uuid,
                 uuid: item.uuid,
                 name: item.name,
                 type: itemData.type,
