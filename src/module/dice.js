@@ -251,7 +251,7 @@ export class DiceSFRPG {
                     const criticalData = rollContext.allContexts?.item?.data?.critical;
                     if (d.total === critical) {
                         flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
-                        if (criticalData.effect.trim()) {
+                        if (criticalData?.effect?.trim()) {
                             tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                         }
                     }
