@@ -76,7 +76,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             "turn": combatType === "starship" ? null : 0
         };
         Hooks.callAll("combatStart", this, update);
-        await this.update(update);
+        await this.update(update, {advanceTime: CONFIG.time.roundTime});
 
         const currentPhase = this.getCurrentPhase();
         const eventData = {
