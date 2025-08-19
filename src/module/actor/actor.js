@@ -302,8 +302,6 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     async _onDelete(options, userId) {
         for (const item of this.items) {
             game.sfrpg.timedEffects.get(item.uuid)?.delete();
-        }
-        for (const item of this.items) {
             item.apps?.hotbar?.delete();
         }
 
