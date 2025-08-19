@@ -58,7 +58,7 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
                 `;
                 if (itemMacroDetails.macroType === "activate") {
                     if (macroConfig.hasActivation) {
-                        slot.tooltip += macroConfig.isActive ? "Active" : "Inactive";
+                        slot.tooltip += macroConfig.isActive ? game.i18n.localize("SFRPG.Macro.Active") : game.i18n.localize("SFRPG.Macro.Inactive");
                         slot.tooltip += "<br>";
                     }
                     if (macroConfig.hasUses) slot.tooltip += `

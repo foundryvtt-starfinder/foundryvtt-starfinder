@@ -89,7 +89,7 @@ export function rollItemMacro(itemUuid, macroType) {
     }
 
     if (!item) {
-        return ui.notifications.error(`Cannot find the item associated with this item macro.`);
+        return ui.notifications.error(game.i18n.localize("SFRPG.Macro.ErrorMissingItem"));
     } else switch (macroType) {
         case "attack":
             return item.rollAttack({ event });
