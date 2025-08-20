@@ -45,8 +45,6 @@ Vehicle has the following 3 phases: "Pilot Actions", "Chase Progress", and "Comb
 */
 
 export class CombatSFRPG extends foundry.documents.Combat {
-    static HiddenTurn = 0;
-
     /**
      * The current initiative count of the encounter
      */
@@ -66,15 +64,18 @@ export class CombatSFRPG extends foundry.documents.Combat {
         return super._preCreate(data, options, user);
     }
 
-    async begin() {
+    async startCombat() {
+        this._playCombatSound("startEncounter");
+
+        const combatType = this.getCombatType();
         const update = {
             "flags.sfrpg.startTime": game.time.worldTime,
-            "flags.sfrpg.combatType": this.getCombatType(),
+            "flags.sfrpg.combatType": combatType,
             "flags.sfrpg.phase": 0,
             "round": 1,
-            "turn": 0
+            "turn": combatType === "starship" ? null : 0
         };
-
+        Hooks.callAll("combatStart", this, update);
         await this.update(update);
 
         const currentPhase = this.getCurrentPhase();
@@ -123,7 +124,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }[this.getCombatType()] || "desc";
 
         const turns = this.combatants.contents.sort(sortMethod === "asc" ? this._sortCombatantsAsc : this._sortCombatants);
-        this.turn = Math.clamp(this.turn, CombatSFRPG.HiddenTurn, turns.length - 1);
+        this.turn = this.turn === null ? null : Math.clamp(this.turn, 0, turns.length - 1);
 
         // Update state tracking
         const c = turns[this.turn];
@@ -363,7 +364,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         Hooks.callAll("onBeforeUpdateCombat", eventData);
 
         if (!newPhase.iterateTurns) {
-            nextTurn = CombatSFRPG.HiddenTurn;
+            nextTurn = null;
         }
 
         const updateData = {
@@ -911,10 +912,6 @@ async function onConfigClicked(combat, direction) {
     };
     await combat.update(update);
 }
-
-Hooks.on('combatStart', (combat) => {
-    combat.begin();
-});
 
 Hooks.on('renderCombatTracker', (app, html, data) => {
     const activeCombat = data.combat;
