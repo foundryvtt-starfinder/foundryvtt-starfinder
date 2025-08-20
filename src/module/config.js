@@ -1308,7 +1308,7 @@ SFRPG.starshipWeaponRanges = {
 SFRPG.starshipSpecialCrewRoles = {
     "captain": "SFRPG.StarshipSheet.Role.Captain",
     "pilot": "SFRPG.StarshipSheet.Role.Pilot"
-}
+};
 
 SFRPG.starshipNormalCrewRoles = {
     "gunner": "SFRPG.StarshipSheet.Role.Gunner",
@@ -1316,17 +1316,17 @@ SFRPG.starshipNormalCrewRoles = {
     "scienceOfficer": "SFRPG.StarshipSheet.Role.ScienceOfficer",
     "chiefMate": "SFRPG.StarshipSheet.Role.ChiefMate",
     "magicOfficer": "SFRPG.StarshipSheet.Role.MagicOfficer"
-}
+};
 
 SFRPG.starshipOtherRoles = {
     "minorCrew": "SFRPG.StarshipSheet.Role.MinorCrew",
     "openCrew": "SFRPG.StarshipSheet.Role.OpenCrew"
-}
+};
 
 SFRPG.starshipCrewRoles = {
     ...SFRPG.starshipSpecialCrewRoles,
     ...SFRPG.starshipNormalCrewRoles
-}
+};
 
 SFRPG.starshipRoles = {
     ...SFRPG.starshipCrewRoles,
@@ -1343,7 +1343,7 @@ SFRPG.starshipRoleDisplayOrder = [
     "magicOfficer",
     "openCrew",
     "minorCrew"
-]
+];
 
 // starship value maps
 SFRPG.starshipSystemStatus = {
