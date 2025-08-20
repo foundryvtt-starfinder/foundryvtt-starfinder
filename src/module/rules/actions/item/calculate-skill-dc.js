@@ -29,10 +29,12 @@ export default function(engine) {
                     const itemKeyAbilityId = data.ability;
 
                     const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
-                    dcFormula = "10 + floor(@owner.details.level.value * 1.5)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
                     if (actor.type === "npc" || actor.type === "npc2") {
                         dcFormula = "10 + floor(@owner.details.cr * 1.5)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
+                    } else {
+                        dcFormula = "10 + floor(@owner.details.level.value * 1.5)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
                     }
+
                 }
 
                 let computedSkill = false;
