@@ -111,7 +111,14 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 expiryTurn: expiryTurn
             };
         } else if (this.system.activationEvent) {
-            updateData['system.activationEvent.deactivatedAt'] = game.time.worldTime;
+            updateData['system.activationEvent'] = {
+                startTime: -1,
+                endTime: -1,
+                endsOn: duration.endsOn ?? "onTurnStart",
+                status: null,
+                deactivatedAt: game.time.worldTime,
+                expiryTurn: "parent"
+            };
         }
 
         const updatePromise = this.update(updateData);
