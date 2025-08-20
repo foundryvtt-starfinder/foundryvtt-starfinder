@@ -1,7 +1,7 @@
 export default class CounterManagement {
 
     setup() {
-        Hooks.on('renderCombatTracker', async (app, html, options) => {
+        Hooks.on('renderCombatTracker', async (app, html) => {
             const combatants = this._getCombatants();
 
             for (const combatant of combatants) {

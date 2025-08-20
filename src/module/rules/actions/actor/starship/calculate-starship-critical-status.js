@@ -1,6 +1,6 @@
 
 export default function(engine) {
-    engine.closures.add( "calculateStarshipCriticalStatus", (fact, context) => {
+    engine.closures.add( "calculateStarshipCriticalStatus", (fact) => {
         const data = fact.data;
 
         const critMods = {
@@ -94,6 +94,15 @@ export default function(engine) {
             systemData.mod = modifier;
             systemData.modOther = (key === "powerCore") ? critModsOther[systemData.value] : 0;
         }
+
+        data.attributes.systems.weaponsArrayTurret = {
+            mod: Math.min(
+                data.attributes.systems.weaponsArrayForward.mod,
+                data.attributes.systems.weaponsArrayPort.mod,
+                data.attributes.systems.weaponsArrayStarboard.mod,
+                data.attributes.systems.weaponsArrayAft.mod
+            )
+        };
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );

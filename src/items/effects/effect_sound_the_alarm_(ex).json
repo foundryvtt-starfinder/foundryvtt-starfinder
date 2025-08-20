@@ -1,0 +1,64 @@
+{
+  "_id": "3GlAPAKTkhC9W9Yc",
+  "name": "Effect: Sound the Alarm (Ex)",
+  "type": "effect",
+  "img": "systems/sfrpg/icons/default/stopwatch.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "permanent",
+      "value": "0"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>Poypoiks are always paying attention to what is going on around them. As long as your poypoik is attached to you or your worn or carried equipment and conscious, you gain a +1 insight bonus to initiative. This bonus increases by 1 at 5th level and every 5 levels thereafter.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "1be2580a-e131-4cbe-aa0e-2f1fec9f63f4",
+        "name": "Sound the Alarm",
+        "type": "insight",
+        "condition": "",
+        "effectType": "initiative",
+        "enabled": true,
+        "max": 0,
+        "modifier": "1 + floor(@details.cr/5)",
+        "modifierType": "constant",
+        "notes": "Applies when the Poypoik is attached you you or your worn or carried equipment.",
+        "source": "Poypoik Companion",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "",
+    "showOnToken": false,
+    "source": "",
+    "turnEvents": []
+  }
+}

@@ -20,7 +20,9 @@ export default function(engine) {
             try {
                 const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -80,7 +82,7 @@ export default function(engine) {
 
         // Finally, update classes, if applicable
         if (data.classes) {
-            for (const [classId, classEntry] of Object.entries(data.classes)) {
+            for (const classEntry of Object.values(data.classes)) {
                 classEntry.keyAbilityMod = data.abilities[classEntry.keyAbilityScore]?.mod || 0;
             }
         }

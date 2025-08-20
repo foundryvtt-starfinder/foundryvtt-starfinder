@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateCharacterLevel", (fact, context) => {
+    engine.closures.add("calculateCharacterLevel", (fact) => {
         const data = fact.data;
         const classes = fact.classes;
 
