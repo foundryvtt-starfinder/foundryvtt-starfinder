@@ -29,6 +29,8 @@ import { } from "./crew-update.js";
  * @property {string}                     operator An operator that determines how damage is split between multiple types.
  */
 
+/** @import { RollResult } from '../dice.js' */
+
 /** @extends {foundry.documents.Actor} */
 export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
 
@@ -227,8 +229,13 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         if (this.type === "starship") {
             updates.prototypeToken = {movementAction: "fly"};
         } else if (CONFIG.SFRPG.actorsCharacterScale.includes(this.type)) {
-            const mainMovementAction = CONFIG.SFRPG.movementOptions[this.system.attributes.speed.mainMovement] ?? null;
+            const mainMovementAction = CONFIG.SFRPG.movementOptions[this.system.attributes?.speed?.mainMovement] ?? null;
             updates.prototypeToken = {movementAction: mainMovementAction};
+        }
+
+        // Lock artwork rotation if setting is enabled and actor is a character/drone/npc/hazard
+        if (game.settings.get("sfrpg", "lockArtworkRotationDefault") && CONFIG.SFRPG.actorsCharacterScale.includes(this.type)) {
+            updates.prototypeToken = foundry.utils.mergeObject(updates.prototypeToken ?? {}, { lockRotation : true });
         }
 
         this.updateSource(updates);
@@ -290,17 +297,12 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Delete any of corresponding timedEffect objects of the actor's items.
+     * Also remove linked hotbar instances from item apps before deleting so the hotbar isn't closed.
      */
     async _onDelete(options, userId) {
         for (const item of this.items) {
-            if (item.type === "effect") {
-                const effect = game.sfrpg.timedEffects.get(item.uuid);
-                if (!effect) continue;
-
-                // Need to pass the item since the item has already been deleted from the server
-                effect.delete(item);
-            }
-
+            game.sfrpg.timedEffects.get(item.uuid)?.delete();
+            delete item.apps[ui.hotbar.id];
         }
 
         return super._onDelete(options, userId);
@@ -326,12 +328,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      */
     _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {
-            if (item.type === 'effect') {
-                const effect = game.sfrpg.timedEffects.get(item.uuid);
-                if (!effect) continue;
-
-                effect.delete();
-            }
+            game.sfrpg.timedEffects.get(item.uuid)?.delete();
         }
 
         return super._onDeleteDescendantDocuments(parent, collection, documents, data, options, userId);
@@ -399,37 +396,21 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         if (consumeSpellSlot && spellLevel > 0 && selectedSlot) {
             const actor = this;
             if (selectedSlot.source === "general") {
-                if (processContext) {
-                    processContext.then(function(result) {
-                        return actor.update({
-                            [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
-                        });
-                    });
-                } else {
-                    processContext = actor.update({
-                        [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
-                    });
-                }
+                processContext = actor.update({
+                    [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
+                });
             } else {
                 const selectedLevel = selectedSlot.level;
                 const selectedClass = selectedSlot.source;
 
-                if (processContext) {
-                    processContext.then(function(result) {
-                        return actor.update({
-                            [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
-                        });
-                    });
-                } else {
-                    processContext = actor.update({
-                        [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
-                    });
-                }
+                processContext = actor.update({
+                    [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                });
             }
         }
 
         if (processContext) {
-            processContext.then(function(result) {
+            processContext.then(function() {
                 return item.roll();
             });
 
@@ -442,12 +423,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     /**
      * Edit a skill's fields
      * @param {string} skillId The skill id (e.g. "ins")
-     * @param {Object} options Options which configure how the skill is edited
      */
-    async editSkill(skillId, options = {}) {
-        // Keeping this here for later
-        // this.update({"data.skills.-=skillId": null});
-        // use this to delete any unwanted skills.
+    async editSkill(skillId) {
 
         const skill = foundry.utils.deepClone(this.system.skills[skillId]);
         const isNpc = this.type === "npc" || this.type === "npc2";
@@ -505,9 +482,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Add a new skill
-     * @param {Object} options Options which configure how the skill is added
      */
-    async addSkill(options = {}) {
+    async addSkill() {
         const skill = {
             ability: "int",
             ranks: 0,
@@ -555,18 +531,19 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
      * @param {string} skillId      The skill id (e.g. "ins")
      * @param {Object} options      Options which configure how the skill check is rolled
+     * @returns {Promise<RollResult?>}
      */
     async rollSkill(skillId, options = {}) {
         const skl = this.system.skills[skillId];
 
         if (!this.hasPlayerOwner) {
-            await this.rollSkillCheck(skillId, skl, options);
+            return this.rollSkillCheck(skillId, options);
         } else if (skl.isTrainedOnly && !(skl.ranks > 0)) {
             const content = game.i18n.format(
                 "SFRPG.SkillTrainedOnlyDialog.Content", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], name: this.name }
             );
 
-            await new Promise(resolve => {
+            return new Promise(resolve => {
                 new Dialog({
                     title: game.i18n.format(
                         "SFRPG.SkillTrainedOnlyDialog.Title", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] }
@@ -576,7 +553,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                         yes: {
                             label: game.i18n.localize("Yes"),
                             callback: () => {
-                                this.rollSkillCheck(skillId, skl, options)
+                                this.rollSkillCheck(skillId, options)
                                     .then(() => resolve());
                             }
                         },
@@ -588,7 +565,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 }).render(true);
             });
         } else {
-            await this.rollSkillCheck(skillId, skl, options);
+            return this.rollSkillCheck(skillId, options);
         }
     }
 
@@ -597,28 +574,20 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      *
      * @param {String} abilityId The ability id (e.g. "str")
      * @param {Object} options Options which configure how ability tests are rolled
+     * @returns {Promise<RollResult?>}
      */
     async rollAbility(abilityId, options = {}) {
-        const label = CONFIG.SFRPG.abilities[abilityId];
-        const abl = this.system.abilities[abilityId];
-
-        const parts = [];
-        const data = this.getRollData();
-
-        const rollContext = RollContext.createActorRollContext(this);
-
-        parts.push(`@abilities.${abilityId}.abilityCheckBonus`);
-
-        await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
-            rollContext: rollContext,
-            parts: parts,
-            title:  game.i18n.format("SFRPG.Rolls.Dice.AbilityCheckTitle", {label: label}),
+            rollContext: RollContext.createActorRollContext(this),
+            parts: [ `@abilities.${abilityId}.abilityCheckBonus` ],
+            title:  game.i18n.format("SFRPG.Rolls.Dice.AbilityCheckTitle", {label: CONFIG.SFRPG.abilities[abilityId]}),
             flavor: null,
             speaker: ChatMessage.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
             onClose: options.onClose,
             dialogOptions: {
+                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -632,6 +601,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      *
      * @param {String} saveId The save id (e.g. "will")
      * @param {Object} options Options which configure how saves are rolled
+     * @returns {Promise<RollResult?>}
      */
     async rollSave(saveId, options = {}) {
         const label = CONFIG.SFRPG.saves[saveId];
@@ -640,7 +610,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
         const parts = [`@attributes.${saveId}.bonus`];
 
-        await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -650,6 +620,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             chatMessage: options.chatMessage,
             onClose: options.onClose,
             dialogOptions: {
+                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -658,9 +629,17 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         });
     }
 
-    async rollSkillCheck(skillId, skill, options = {}) {
+    /**
+     * Roll a Skill Check
+     * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+     * @param {string} skillId      The skill id (e.g. "ins")
+     * @param {Object} options      Options which configure how the skill check is rolled
+     * @returns {Promise<RollResult?>}
+     */
+    async rollSkillCheck(skillId, options = {}) {
         const rollContext = RollContext.createActorRollContext(this);
         const parts = [`@skills.${skillId}.mod`];
+        const skill = this.system.skills[skillId];
 
         const title = skillId.includes('pro')
             ? game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname })
@@ -679,7 +658,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             tags.push({name: "hasSkillRanks", text: game.i18n.format("SFRPG.SkillUntrained")});
         }
 
-        await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -692,6 +671,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             chatMessage: options.chatMessage,
             onClose: options.onClose,
             dialogOptions: {
+                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -705,6 +685,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * Roll the Piloting skill of the pilot of a vehicle
      *
      * @param {Object} options Options which configure how saves are rolled
+     * @returns {Promise<RollResult?>}
      */
     async rollVehiclePilotingSkill(role = null, actorId = null, system = null, options = {}) {
 
@@ -742,7 +723,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
         this.setupRollContexts(rollContext);
 
-        await DiceSFRPG.d20Roll({
+        return DiceSFRPG.d20Roll({
             event: options.event,
             rollContext: rollContext,
             parts: parts,
@@ -752,6 +733,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             chatMessage: options.chatMessage,
             onClose: options.onClose,
             dialogOptions: {
+                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             }
@@ -1106,13 +1088,24 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 }
             } else {
                 /** Create 'fake' actors. */
-                rollContext.addContext("captain", this, actorData.system.crew.npcData.captain);
-                rollContext.addContext("pilot", this, actorData.system.crew.npcData.pilot);
-                rollContext.addContext("gunner", this, actorData.system.crew.npcData.gunner);
-                rollContext.addContext("engineer", this, actorData.system.crew.npcData.engineer);
-                rollContext.addContext("chiefMate", this, actorData.system.crew.npcData.chiefMate);
-                rollContext.addContext("magicOfficer", this, actorData.system.crew.npcData.magicOfficer);
-                rollContext.addContext("scienceOfficer", this, actorData.system.crew.npcData.scienceOfficer);
+                const crewRoles = ["captain", "pilot", "gunner", "engineer", "chiefMate", "magicOfficer", "scienceOfficer"];
+                const populatedRoles = [];
+                crewRoles.forEach((role) => {
+                    if (crewData.npcData[role]?.numberOfUses) {
+                        rollContext.addContext(
+                            role,
+                            { name: game.i18n.localize(SFRPG.starshipRoleNames[role]) },
+                            actorData.system.crew.npcData[role]
+                        );
+                        populatedRoles.push(role);
+                    }
+                });
+                const otherRoles = ["minorCrew", "openCrew"];
+                otherRoles.forEach((role) => {
+                    if (desiredSelectors.includes(role)) {
+                        rollContext.addSelector(role, populatedRoles);
+                    }
+                });
             }
         }
     }
@@ -1126,9 +1119,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * @param {ActorSFRPG} doc The updated actor, containing the old values
      * @param {Object} diff An update object containing the new values
      * @param {Object} options An object, to which the delta is appended to
-     * @param {String} _userId The ID of the current user
      */
-    floatingHpOnPreUpdate(doc, diff, options, _userId) {
+    floatingHpOnPreUpdate(doc, diff, options) {
         if (!game.settings.get("sfrpg", "floatingHP")) return;
 
         const dhp = this.diffHealth(diff.system, doc.system, doc.type);
@@ -1139,9 +1131,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * @param {ActorSFRPG} doc
      * @param {Object} diff
      * @param {Object} options
-     * @param {String} _userId
      */
-    floatingHpOnUpdate(actor, _data, options, _userId) {
+    floatingHpOnUpdate(actor, _data, options) {
         const dhp = options._hpDiffs;
         if (!dhp) return;
         const tokens = actor.getActiveTokens();
@@ -1154,10 +1145,9 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * Build HP diffs.
      * @param {Object} actorData The data of the updated actor, post-update
      * @param {Object} old The data of the updated actor, pre-update
-     * @param {String} type The actor's type
      * @return {Object} An object containing the key of the updated value, and the diff
      */
-    diffHealth(actorData, old, type) {
+    diffHealth(actorData, old) {
         if (!actorData) return;
 
         const diff = {};

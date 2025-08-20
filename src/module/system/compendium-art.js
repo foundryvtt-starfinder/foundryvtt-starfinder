@@ -44,7 +44,7 @@ import isObject from "../utils/is-object.js";
  */
 export default async function registerCompendiumArt() {
     game.sfrpg.compendiumArt.map.clear(); // Clear any existing map
-    const activeModules = [...game.modules.entries()].filter(([_key, m]) => m.active); // Get a list of active modules
+    const activeModules = [...game.modules.entries()].filter(([, m]) => m.active); // Get a list of active modules
 
     for (const [moduleKey, foundryModule] of activeModules) {
         const moduleArt = await getArtMap(foundryModule.flags?.[moduleKey]?.["sfrpg-art"]); // Get maps from any active modules

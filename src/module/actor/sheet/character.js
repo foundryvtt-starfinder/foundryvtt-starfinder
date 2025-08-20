@@ -62,13 +62,12 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         };
 
         let physicalInventoryItems = [];
-        for (const [key, value] of Object.entries(inventory)) {
+        for (const value of Object.values(inventory)) {
             const datasetType = value.dataset.type;
             const types = datasetType.split(',');
             physicalInventoryItems = physicalInventoryItems.concat(types);
         }
 
-        //   0      1       2      3        4      5       6           7               8     9
         const [items,
             spells,
             feats,
@@ -84,7 +83,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 isStack: item.system.quantity ? item.system.quantity > 1 : false,
                 isOpen: item.type === "container" ? item.system.container.isOpen : true,
                 isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
-                hasAttack: ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
+                hasAttack: SFRPG.attackActions.includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                 hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                 hasUses: item.canBeUsed(),
                 isCharged: !item.hasUses || item.getRemainingUses() <= 0 || !item.isOnCooldown,
@@ -245,7 +244,8 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             temporary: { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } }
         };
 
-        const [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
+        // eslint-disable-next-line no-unused-vars
+        const [permanent, temporary, itemModifiers, conditions] = actorData.modifiers.reduce((arr, modifier) => {
             if (modifier.subtab === "permanent") arr[0].push(modifier);
             else if (modifier.subtab === "conditions") arr[3].push(modifier);
             else arr[1].push(modifier); // Any unspecific categories go into temporary.

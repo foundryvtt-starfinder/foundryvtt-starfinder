@@ -469,19 +469,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             starshipWeapon:                     game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipWeapons")
         };
 
-        if (!this.actor.system.crew.useNPCCrew) {
-            data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
-        } else {
-            data.actions = {
-                captain: ActorSheetSFRPGStarship.StarshipActionsCache.captain,
-                pilot: ActorSheetSFRPGStarship.StarshipActionsCache.pilot,
-                gunner: ActorSheetSFRPGStarship.StarshipActionsCache.gunner,
-                engineer: ActorSheetSFRPGStarship.StarshipActionsCache.engineer,
-                scienceOfficer: ActorSheetSFRPGStarship.StarshipActionsCache.scienceOfficer,
-                chiefMate: ActorSheetSFRPGStarship.StarshipActionsCache.chiefMate,
-                magicOfficer: ActorSheetSFRPGStarship.StarshipActionsCache.magicOfficer
-            };
-        }
+        data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
     }
 
     _prepareAttackString(item)  {
@@ -578,10 +566,9 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         event.preventDefault();
 
         const data = TextEditor.getDragEventData(event);
-        if (!data) return false;
-
-        // Case - Dropped Actor
-        if (data.type === "Actor") {
+        if (Hooks.call('dropActorSheetData', this.actor, this, data) === false) {
+            // Further processing halted
+        } else if (data.type === "Actor") {
             const actor = await Actor.fromDropData(data);
             return this._onCrewDrop(event, actor.id);
         } else if (data.type === "Item") {

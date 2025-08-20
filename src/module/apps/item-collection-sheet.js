@@ -48,14 +48,14 @@ export class ItemCollectionSheet extends DocumentSheet {
         return super.close(options);
     }
 
-    _handleTokenUpdated(scene, token, options, userId) {
+    _handleTokenUpdated(scene, token) {
         const tokenData = this.document.getFlag("sfrpg", "itemCollection");
         if (token.id === this.itemCollection.id && tokenData.locked && !game.user.isGM) {
             this.close();
         }
     }
 
-    _handleTokenDelete(scene, token, options, userId) {
+    _handleTokenDelete(scene, token) {
         if (token.id === this.itemCollection.id) {
             this.close();
         }
@@ -121,7 +121,12 @@ export class ItemCollectionSheet extends DocumentSheet {
         // Ensure containers are always open in loot collection tokens
         for (const itemData of data.items) {
             if (itemData.contents && itemData.contents.length > 0) {
-                itemData.item.isOpen = true;
+                itemData.item.config = { "isOpen": true};
+                for (const child of itemData.contents) {
+                    if (child.contents && child.contents.length > 0) {
+                        child.item.config = { "isOpen": true};
+                    }
+                }
             }
         }
 
@@ -346,15 +351,15 @@ export class ItemCollectionSheet extends DocumentSheet {
     /* -------------------------------------------- */
 
     /** @override */
-    _canDragStart(selector) {
-        return true; // flags.sfrpg.itemCollection.locked || game.user.isGM
+    _canDragStart() {
+        return true;
     }
 
     /* -------------------------------------------- */
 
     /** @override */
-    _canDragDrop(selector) {
-        return true; // flags.sfrpg.itemCollection.locked || game.user.isGM
+    _canDragDrop() {
+        return true;
     }
 
     /* -------------------------------------------- */

@@ -196,8 +196,11 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         // Determine whether to show calculated totals for fields with formulas
         if (itemData?.activation?.type || data.item.type === "weapon") {
-            data.range = {};
+            data.activation = {
+                hasInput: !SFRPG.uncountableActivations.includes(itemData?.activation?.type ?? "")
+            };
 
+            data.range = {};
             data.range.hasInput = (() => {
                 // C/M/L on spells requires no input
                 if (this.item.type === "spell") return !(["close", "medium", "long", "none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
@@ -211,7 +214,8 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
             data.duration = {};
             data.duration.showTotal = !!itemData.duration?.total && (String(itemData.duration?.total) !== String(itemData.duration?.value));
-            data.duration.hasInput = itemData.duration.units !== "instantaneous";
+            data.duration.hasInput = !SFRPG.uncountableDurations.includes(itemData.duration.units);
+            data.duration.needsEndOn = (itemData.duration?.units === "round");
 
             data.uses = {};
             data.uses.showTotal = !!itemData.uses?.total && (String(itemData.uses?.total) !== String(itemData.uses?.max));
@@ -246,13 +250,13 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
             data.sourceActorChoices = {};
             if (game.combat?.started) {
                 for (const combatant of game.combat.combatants) {
-                    if (combatant.actorId === data.item?.actor?.id) continue;
-                    data.sourceActorChoices[combatant.actorId] = combatant.name;
+                    if (combatant.actor.uuid === data.item?.actor?.uuid) continue;
+                    data.sourceActorChoices[combatant.actor.uuid] = combatant.name;
                 }
             } else {
                 const PCs = game.actors.filter(i => i.type === "character");
                 for (const PC of PCs) {
-                    data.sourceActorChoices[PC.id] = PC.name;
+                    data.sourceActorChoices[PC.uuid] = PC.name;
                 }
             }
 
@@ -862,7 +866,6 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
      */
     _onModifierCreate(event) {
         event.preventDefault();
-        const target = $(event.currentTarget);
 
         this.item.addModifier({
             name: "New Modifier"
@@ -1105,7 +1108,6 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
         const currentImage = visualization[visualizationIndex].image || this.item.img;
 
-        const attr = event.currentTarget.dataset.edit;
         const fp = new FilePicker({
             type: "image",
             current: currentImage,

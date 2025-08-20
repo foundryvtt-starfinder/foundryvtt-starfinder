@@ -276,7 +276,7 @@ export function getAlienArchiveBrowser() {
     return _alienArchiveBrowser;
 }
 
-Hooks.on('ready', e => {
+Hooks.on('ready', () => {
     const browser = getAlienArchiveBrowser();
 
     const defaultAllowedCompendiums = ["alien-archives"];

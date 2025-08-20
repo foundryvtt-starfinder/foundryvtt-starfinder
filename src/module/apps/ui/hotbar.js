@@ -1,3 +1,4 @@
+import { SFRPG } from '../../config.js';
 
 export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
     constructor(options) {
@@ -15,8 +16,7 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
     /** @override */
     async _prepareContext() {
         const data = await super._prepareContext();
-
-        for (const slot of data.macros) {
+        for (const slot of data.slots) {
             const macro = slot.macro;
             if (!macro) continue;
 
@@ -30,10 +30,10 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
                 const macroConfig = {
                     item,
                     isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
-                    hasAttack: ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
+                    hasAttack: SFRPG.attackActions.includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                     hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                     hasUses: item.hasUses(),
-                    hasActivation: item.canBeActivated(),
+                    hasActivation: item.canBeActivated() && item.system.duration?.units !== 'instantaneous',
                     isActive: item.isActive(),
                     hasCapacity: item.hasCapacity()
 
@@ -50,14 +50,17 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
                 slot.activeGlow = itemMacroDetails.macroType === "activate" && macroConfig.isActive;
                 slot.hasUses = itemMacroDetails.macroType === "activate" && macroConfig.hasUses;
 
+                slot.tooltip = `<strong>${slot.tooltip}</strong>`;
                 slot.tooltip += `
                     <br>
                     ${game.i18n.localize("DOCUMENT.Actor")}: ${item.actor.name}
                     <br>
                 `;
                 if (itemMacroDetails.macroType === "activate") {
-                    slot.tooltip += macroConfig.isActive ? "Active" : "Inactive";
-                    slot.tooltip += "<br>";
+                    if (macroConfig.hasActivation) {
+                        slot.tooltip += macroConfig.isActive ? game.i18n.localize("SFRPG.Macro.Active") : game.i18n.localize("SFRPG.Macro.Inactive");
+                        slot.tooltip += "<br>";
+                    }
                     if (macroConfig.hasUses) slot.tooltip += `
                         ${game.i18n.localize("SFRPG.SpellBook.Uses")}: ${item.system.uses.value}/${item.system.uses.total}
                     `;
