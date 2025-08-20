@@ -423,11 +423,10 @@ Hooks.on("updateWorldTime", (worldTime, dt) => {
 
         const effectStart = effect.activeDuration.activationTime ?? -Infinity;
         const effectFinish = effect.activeDuration.activationEnd ?? Infinity;
-        if ((effectFinish <= worldTime && effect.enabled)
-            || (dt < 0 && effectFinish >= worldTime && !effect.enabled)
-        ) {
+        const shouldBeEnabled = effectStart <= worldTime && worldTime <= effectFinish;
+        if (shouldBeEnabled !== effect.enabled) {
             effect.toggle(false);
-        } else if (effectStart <= worldTime && worldTime <= effectFinish) {
+        } else if (shouldBeEnabled) {
             effect.poke();
         }
 
