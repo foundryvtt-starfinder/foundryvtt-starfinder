@@ -248,7 +248,7 @@ export class DiceSFRPG {
                     // Critical Effect flavor and tags
                     const criticalData = rollContext.allContexts?.item?.data?.critical;
                     if (d.total === critical) {
-                        if (criticalData.effect.trim()) {
+                        if (criticalData?.effect?.trim()) {
                             tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                         }
                     }
@@ -693,7 +693,7 @@ export class DiceSFRPG {
      * @param {string[]}    data.whisperTo     A list of user names this message should be sent to
      * @param {string}      [data.borderColor] A border color applied to the chat card
      */
-    static highlightCriticalSuccessFailure(message, html, data) {
+    static highlightCriticalSuccessFailure(message, html) {
         if (!message.isRoll || !message.isContentVisible) return;
 
         const roll = message.rolls[0];
@@ -759,17 +759,8 @@ export class DiceSFRPG {
      *
      * @param {ChatMessage} message            The ChatMessage document being rendered
      * @param {JQuery}      html               The pending HTML as a jQuery object
-     * @param {Object}      data               The input data provided for template rendering
-     * @param {Object}      data.data          The ChatMessage data
-     * @param {User}        data.user          The User that initiated the ChatMessage
-     * @param {User}        data.author        The name of the Actor that created this ChatMessage
-     * @param {string}      data.alias         The alias of the Actor that created this ChatMessage
-     * @param {string[]}    data.cssClass      CSS classes that should be applied to this message
-     * @param {boolean}     data.isWhisper     Should this ChatMessage be sent in a private message
-     * @param {string[]}    data.whisperTo     A list of user names this message should be sent to
-     * @param {string}      [data.borderColor] A border color applied to the chat card
      */
-    static addDamageTypes(message, html, data) {
+    static addDamageTypes(message, html) {
         if (!message.isRoll || !message.isContentVisible) return;
 
         const roll = message.rolls[0];

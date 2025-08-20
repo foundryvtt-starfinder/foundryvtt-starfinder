@@ -2,7 +2,7 @@
 import error from './engine/common/action/error.js';
 import identity from './engine/common/action/identity.js';
 import setResult from './engine/common/action/set-result.js';
-import undefined from './engine/common/action/undefined.js';
+import undefinedClosure from './engine/common/action/undefined.js';
 
 // Common conditions
 import always from './engine/common/condition/always.js';
@@ -107,7 +107,7 @@ export default function(engine) {
     error(engine);
     identity(engine);
     setResult(engine);
-    undefined(engine);
+    undefinedClosure(engine);
     // Actor actions
     clearTooltips(engine);
     calculateBaseAbilityScore(engine);
@@ -368,7 +368,12 @@ export default function(engine) {
             "calculateSkillDC",
             "calculateActivationDetails",
             {
-                when: { closure: "isItemType", type: "effect" },
+                when: [
+                    { closure: "isItemType", type: "effect" },
+                    { closure: "isItemType", type: "feat" }
+                    // add more item types as they became know to be work with timed effects
+                ],
+                conditionStrategy: "or",
                 then: ["calculateTimedEffects"]
             }
         ]

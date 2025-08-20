@@ -41,7 +41,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     get hasAttack() {
         if (this.type === "starshipWeapon") return true;
-        return ["mwak", "rwak", "msak", "rsak"].includes(this.system.actionType);
+        return SFRPG.attackActions.includes(this.system.actionType);
     }
 
     get hasOtherFormula() {
@@ -141,7 +141,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         const C = CONFIG.SFRPG;
         const labels = {};
         const itemData = this;
-        const actorData = this.parent ? this.parent.system : {};
         const data = this.system;
 
         // Spell Level,  School, and Components
@@ -153,9 +152,9 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         // Feat Items
         else if (itemData.type === "feat") {
             const act = data.activation;
-            labels.featType = data?.damage?.parts?.length && ["mwak", "rwak", "msak", "rsak"].includes(data.actionType)
+            labels.featType = data?.damage?.parts?.length && SFRPG.attackActions.includes(data.actionType)
                 ? game.i18n.localize("SFRPG.Attack")
-                : CONFIG.SFRPG.abilityActivationTypes[act.type] ? game.i18n.localize("SFRPG.Items.Action.TitleAction") : game.i18n.localize("SFRPG.Passive");
+                : act.type ? game.i18n.localize("SFRPG.Items.Action.TitleAction") : game.i18n.localize("SFRPG.Passive");
         }
 
         // Equipment Items
@@ -178,7 +177,11 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
             const act = data.activation || {};
             if (act) {
                 if (act.type === "none") {
-                    labels.activation = game.i18n.localize("SFRPG.AbilityActivationTypesNoneButton");
+                    labels.activation = (data.duration?.units === "instantaneous")
+                        ? game.i18n.localize("SFRPG.AbilityActivationButton.Use")
+                        : game.i18n.localize("SFRPG.AbilityActivationButton.Activate");
+                } else if (SFRPG.uncountableActivations.includes(act.type)) {
+                    labels.activation = C.abilityActivationTypes[act.type];
                 } else {
                     labels.activation = [
                         act.cost,
@@ -264,11 +267,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      * These will always be needed from hence forth, so we'll just make sure that they always exist.
      *
      * @param {Object}      data The item data to check against.
-     * @param {String|Null} prop A specific property name to check.
      *
      * @returns {Object}         The modified data object with the modifiers data object added.
      */
-    _ensureHasModifiers(data, prop = null) {
+    _ensureHasModifiers(data) {
         if (!foundry.utils.hasProperty(data, "modifiers")) {
             console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
@@ -1022,7 +1024,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     getAppropriateAttackModifiers(isWeapon) {
         const acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
-        if (["msak", "rsak"].includes(this.system.actionType)) {
+        if (SFRPG.spellAttackActions.includes(this.system.actionType)) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_ATTACKS);
         } else if (this.system.actionType === "rwak") {
             acceptedModifiers.push(SFRPGEffectType.RANGED_ATTACKS);
@@ -1475,7 +1477,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
     getAppropriateDamageModifiers(isWeapon) {
         const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
 
-        if (["msak", "rsak"].includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
+        if (SFRPG.spellAttackActions.includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
         } else if (this.system.actionType === "rwak") {
             acceptedModifiers.push(SFRPGEffectType.RANGED_DAMAGE);
@@ -1539,7 +1541,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
      */
     async rollFormula(options = {}) {
         const itemData = this.system;
-        const actorData = this.actor.getRollData();
         if (!itemData.formula) {
             throw new Error("This Item does not have a formula to roll!");
         }
@@ -1666,9 +1667,8 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     /**
      * Perform an ability recharge test for an item which uses the d6 recharge mechanic
-     * @prarm {Object} options
      */
-    async rollRecharge(options = {}) {
+    async rollRecharge() {
         const data = this.system;
         if (!data.recharge.value) return;
 
@@ -1698,7 +1698,7 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         return Promise.all(promises);
     }
 
-    async placeAbilityTemplate(event) {
+    async placeAbilityTemplate() {
         const itemData = this.system;
 
         const type = {
@@ -1846,11 +1846,10 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
 
     /**
      * Get the Actor which is the author of a chat card
-     * @param {HTMLElement} card    The chat card being used
      * @return {Actor|null}         The Actor entity or null
      * @private
      */
-    static _getChatCardTarget(card) {
+    static _getChatCardTarget() {
         const character = game.user.character;
         const controlled = canvas.tokens?.controlled ?? [];
         if (controlled.length === 0) return character || null;

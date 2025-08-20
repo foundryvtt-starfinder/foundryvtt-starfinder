@@ -146,6 +146,7 @@ SFRPG.weaponTypeProficiency = {
  * @type {Object}
  */
 SFRPG.abilityActivationTypes = {
+    "": "SFRPG.AbilityActivationTypesNull",
     "none": "SFRPG.AbilityActivationTypesNone",
     "action": "SFRPG.AbilityActivationTypesStandard",
     "move": "SFRPG.AbilityActivationTypesMove",
@@ -159,6 +160,17 @@ SFRPG.abilityActivationTypes = {
     "min": "SFRPG.AbilityActivationTypesMinute",
     "special": "SFRPG.AbilityActivationTypesSpecial"
 };
+
+SFRPG.uncountableActivations = Object.freeze([
+    "", // no activation
+    "none", // free
+    "action",
+    "move",
+    "swift",
+    "full",
+    "reaction",
+    "special"
+]);
 
 SFRPG.skillProficiencyLevels = {
     0: "",
@@ -412,8 +424,14 @@ SFRPG.turnEventTypes = {
  */
 SFRPG.durationTypes = {
     "instantaneous": "SFRPG.DurationTypesInstantaneous",
-    ...SFRPG.effectDurationTypes
+    ...SFRPG.effectDurationTypes,
+    "text": "SFRPG.Text"
 };
+
+SFRPG.uncountableDurations = Object.freeze([
+    "instantaneous",
+    "permanent"
+]);
 
 SFRPG.targetTypes = {};
 
@@ -953,6 +971,13 @@ SFRPG.itemActionTypes = {
     "util": "SFRPG.ActionUtil",
     "other": "SFRPG.ActionOther"
 };
+
+SFRPG.spellAttackActions = Object.freeze([ "msak", "rsak" ]);
+SFRPG.weaponAttackActions = Object.freeze([ "mwak", "rwak" ]);
+SFRPG.attackActions = Object.freeze([
+    ...SFRPG.spellAttackActions,
+    ...SFRPG.weaponAttackActions
+]);
 
 SFRPG.conditionTypes = {
     "asleep": "SFRPG.ConditionsAsleep",
