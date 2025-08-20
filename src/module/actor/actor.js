@@ -884,7 +884,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         }
 
         let speakerActor = this;
-        const roleKey = CONFIG.SFRPG.starshipRoleNames[actionEntry.system.role];
+        const roleKey = CONFIG.SFRPG.starshipRoles[actionEntry.system.role];
         let roleName = game.i18n.format(roleKey);
 
         const desiredKey = actionEntry.system.selectorKey;
@@ -899,7 +899,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
             const actorRole = this.getCrewRoleForActor(speakerActor.id);
             if (actorRole) {
-                const actorRoleKey = CONFIG.SFRPG.starshipRoleNames[actorRole];
+                const actorRoleKey = CONFIG.SFRPG.starshipRoles[actorRole];
                 roleName = game.i18n.format(actorRoleKey);
             }
         }
@@ -1039,8 +1039,12 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 }
 
                 /** Add remaining roles if available. */
-                const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
-                const allCrewMates = ["minorCrew", "openCrew"];
+                const crewMates = [
+                    ...Object.keys(CONFIG.SFRPG.starshipNormalCrewRoles),
+                    "passenger",
+                    ...Object.keys(CONFIG.SFRPG.starshipOtherRoles)
+                ];
+                const allCrewMates = Object.keys(CONFIG.SFRPG.starshipOtherRoles);
                 for (const crewType of crewMates) {
                     let crewCount = 1;
                     const crew = [];
@@ -1088,19 +1092,19 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 }
             } else {
                 /** Create 'fake' actors. */
-                const crewRoles = ["captain", "pilot", "gunner", "engineer", "chiefMate", "magicOfficer", "scienceOfficer"];
+                const crewRoles = Object.keys(CONFIG.SFRPG.starshipCrewRoles);
                 const populatedRoles = [];
                 crewRoles.forEach((role) => {
                     if (crewData.npcData[role]?.numberOfUses) {
                         rollContext.addContext(
                             role,
-                            { name: game.i18n.localize(SFRPG.starshipRoleNames[role]) },
+                            { name: game.i18n.localize(SFRPG.starshipRoles[role]) },
                             actorData.system.crew.npcData[role]
                         );
                         populatedRoles.push(role);
                     }
                 });
-                const otherRoles = ["minorCrew", "openCrew"];
+                const otherRoles = Object.keys(CONFIG.SFRPG.starshipOtherRoles);
                 otherRoles.forEach((role) => {
                     if (desiredSelectors.includes(role)) {
                         rollContext.addSelector(role, populatedRoles);
