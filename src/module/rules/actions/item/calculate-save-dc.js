@@ -26,19 +26,19 @@ export default function(engine) {
 
                     const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
 
-                    if (itemData.type === "spell") {
-                        dcFormula = "10 + @item.level" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
-                    } else if (itemData.type === "feat") {
-                        dcFormula = "10 + floor(@owner.details.level.value / 2)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
-                    } else {
-                        dcFormula = "10 + floor(@item.level / 2)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
-                    }
-
                     if (actor.type === "npc" || actor.type === "npc2") {
                         if (itemData.type === "spell") {
                             dcFormula = `@owner.attributes.baseSpellDC.value + @item.level`;
                         } else {
                             dcFormula = `@owner.attributes.abilityDC.value`;
+                        }
+                    } else {
+                        if (itemData.type === "spell") {
+                            dcFormula = "10 + @item.level" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
+                        } else if (itemData.type === "feat") {
+                            dcFormula = "10 + floor(@owner.details.level.value / 2)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
+                        } else {
+                            dcFormula = "10 + floor(@item.level / 2)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
                         }
                     }
                 }
