@@ -549,7 +549,7 @@
             <ol class="crew-list">
                 {{#each system.crew.npcData as |role roleId|}}
                 <li class="flexrow crew-header" data-role="{{roleId}}">
-                    <h3 class="crew-name noborder flexrow">{{localize (sfrpg "starshipRoleNames" roleId)}}</h3>
+                    <h3 class="crew-name noborder flexrow">{{localize (sfrpg "starshipRoles" roleId)}}</h3>
                     <div class="flexrow">
                         <label>{{localize "SFRPG.StarshipSheet.Crew.ActionsPerRound"}}</label>
                         <input type="text" class="crew-role-numberOfUses" value="{{role.numberOfUses}}" data-dtype="Number" placeholder="0" />

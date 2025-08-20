@@ -1304,26 +1304,46 @@ SFRPG.starshipWeaponRanges = {
     "long"  : "SFRPG.ShipSystems.StarshipWeaponRanges.Long"
 };
 
-SFRPG.starshipRoles = {
-    "pilot"          : "SFRPG.ShipSystems.StarshipRoles.Pilot",
-    "captain"        : "SFRPG.ShipSystems.StarshipRoles.Captain",
-    "engineers"      : "SFRPG.ShipSystems.StarshipRoles.Engineers",
-    "gunners"        : "SFRPG.ShipSystems.StarshipRoles.Gunners",
-    "scienceOfficers": "SFRPG.ShipSystems.StarshipRoles.ScienceOfficers",
-    "passengers"     : "SFRPG.ShipSystems.StarshipRoles.Passengers"
-};
-
-SFRPG.starshipRoleNames = {
+// Starship crew roles
+SFRPG.starshipSpecialCrewRoles = {
     "captain": "SFRPG.StarshipSheet.Role.Captain",
-    "pilot": "SFRPG.StarshipSheet.Role.Pilot",
+    "pilot": "SFRPG.StarshipSheet.Role.Pilot"
+}
+
+SFRPG.starshipNormalCrewRoles = {
     "gunner": "SFRPG.StarshipSheet.Role.Gunner",
     "engineer": "SFRPG.StarshipSheet.Role.Engineer",
     "scienceOfficer": "SFRPG.StarshipSheet.Role.ScienceOfficer",
     "chiefMate": "SFRPG.StarshipSheet.Role.ChiefMate",
-    "magicOfficer": "SFRPG.StarshipSheet.Role.MagicOfficer",
+    "magicOfficer": "SFRPG.StarshipSheet.Role.MagicOfficer"
+}
+
+SFRPG.starshipOtherRoles = {
     "minorCrew": "SFRPG.StarshipSheet.Role.MinorCrew",
     "openCrew": "SFRPG.StarshipSheet.Role.OpenCrew"
+}
+
+SFRPG.starshipCrewRoles = {
+    ...SFRPG.starshipSpecialCrewRoles,
+    ...SFRPG.starshipNormalCrewRoles
+}
+
+SFRPG.starshipRoles = {
+    ...SFRPG.starshipCrewRoles,
+    ...SFRPG.starshipOtherRoles
 };
+
+SFRPG.starshipRoleDisplayOrder = [
+    "captain",
+    "pilot",
+    "gunner",
+    "engineer",
+    "scienceOfficer",
+    "chiefMate",
+    "magicOfficer",
+    "openCrew",
+    "minorCrew"
+]
 
 // starship value maps
 SFRPG.starshipSystemStatus = {
