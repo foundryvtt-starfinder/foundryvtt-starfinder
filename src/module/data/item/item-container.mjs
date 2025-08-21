@@ -40,7 +40,7 @@ export default class SFRPGItemContainer extends SFRPGItemBase {
             amount: 0,
             subtype: "",
             type: "bulk",
-            weightProperty: "bulk"
+            weightProperty: ""
         }];
 
         return schema;
