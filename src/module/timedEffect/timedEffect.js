@@ -415,7 +415,10 @@ class SFRPGTimedActivation extends SFRPGTimedEffect {
     }
 }
 
-Hooks.on("updateWorldTime", (worldTime, dt) => {
+Hooks.on("updateWorldTime", (worldTime) => {
+    // Only active GM should be modifying the timed effects
+    if (!game.users.activeGM?.isSelf) return;
+
     const timedEffects = game.sfrpg.timedEffects;
     for (const effect of timedEffects.values()) {
         if (effect.actor.inCombat) continue;
@@ -429,6 +432,5 @@ Hooks.on("updateWorldTime", (worldTime, dt) => {
         } else if (shouldBeEnabled) {
             effect.poke();
         }
-
     }
 });
