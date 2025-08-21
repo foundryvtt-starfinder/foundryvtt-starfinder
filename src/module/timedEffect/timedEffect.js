@@ -158,7 +158,7 @@ export default class SFRPGTimedEffect {
 
             if (game.combat) {
                 this.activeDuration.expiryInit = game.combat.initiative;
-                this.activeDuration.activationTurn = game.combat.combatant.actor.uuid;
+                this.activeDuration.activationTurn = game.combat.combatant?.actor?.uuid || "parent";
             } else {
                 this.activeDuration.activationTurn = "parent";
             }

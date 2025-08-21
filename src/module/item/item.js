@@ -316,7 +316,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             if (t === "effect" && itemData.enabled) {
                 updates['system.activeDuration.activationTime'] = game.time.worldTime;
                 if (game.combat) {
-                    updates['system.activeDuration.activationTurn'] = game.combat.combatant.actor.uuid;
+                    updates['system.activeDuration.activationTurn'] = game.combat.combatant?.actor?.uuid || "parent";
                     updates['system.activeDuration.expiryInit'] = game.combat.initiative;
                 } else {
                     updates['system.activeDuration.activationTurn'] = "parent";

@@ -86,7 +86,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
 
         if (isActive) {
             const worldTime = game.time.worldTime;
-            const activationTurn = game.combat?.started ? game.combat.combatant.actor.uuid : "parent";
+            const activationTurn = game.combat?.combatant?.actor?.uuid || "parent";
             let expiryTurn = "parent";
             let endsOn = duration.endsOn ?? "onTurnStart";
 
@@ -97,9 +97,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 endTime = worldTime + (totalUnits * CONFIG.SFRPG.effectDurationFrom[duration.units]);
                 if (duration.units === "turn") {
                     endsOn = "onTurnEnd";
-                    if (game.combat?.started) {
-                        expiryTurn = game.combat.combatant.actor.uuid;
-                    }
+                    expiryTurn = game.combat?.combatant?.actor?.uuid || "parent";
                 }
             } else {
                 endTime = Infinity;
