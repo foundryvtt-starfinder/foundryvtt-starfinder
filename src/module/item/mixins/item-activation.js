@@ -86,6 +86,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
 
         if (isActive) {
             const worldTime = game.time.worldTime;
+            const activationTurn = game.combat?.started ? game.combat.combatant.actor.uuid : "parent";
             let expiryTurn = "parent";
 
             let totalTime = null; // permanent or untracked
@@ -108,6 +109,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 endsOn: duration.endsOn ?? "onTurnStart",
                 status: null,
                 deactivatedAt: null,
+                activationTurn: activationTurn,
                 expiryTurn: expiryTurn
             };
         } else if (this.system.activationEvent) {
@@ -117,6 +119,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 endsOn: duration.endsOn ?? "onTurnStart",
                 status: null,
                 deactivatedAt: game.time.worldTime,
+                activationTurn: "parent",
                 expiryTurn: "parent"
             };
         }

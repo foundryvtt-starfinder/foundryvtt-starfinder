@@ -315,7 +315,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             // Record current world time and initiative on effects
             if (t === "effect" && itemData.enabled) {
                 updates['system.activeDuration.activationTime'] = game.time.worldTime;
-                if (game.combat) updates['system.activeDuration.expiryInit'] = game.combat.initiative;
+                if (game.combat) {
+                    updates['system.activeDuration.activationTurn'] = game.combat.combatant.actor.uuid;
+                    updates['system.activeDuration.expiryInit'] = game.combat.initiative;
+                } else {
+                    updates['system.activeDuration.activationTurn'] = "parent";
+                }
             }
 
             if (t === "asi") {

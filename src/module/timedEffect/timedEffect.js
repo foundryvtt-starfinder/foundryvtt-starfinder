@@ -63,6 +63,7 @@ export default class SFRPGTimedEffect {
             value: "",
             activationTime: 0,
             activationEnd: 0,
+            activationTurn: "parent",
             expiryMode: {
                 /** @type {"turn"|"init"} Expire on a combatant's turn, or a specific init count. */
                 type: "turn",
@@ -157,6 +158,9 @@ export default class SFRPGTimedEffect {
 
             if (game.combat) {
                 this.activeDuration.expiryInit = game.combat.initiative;
+                this.activeDuration.activationTurn = game.combat.combatant.actor.uuid;
+            } else {
+                this.activeDuration.activationTurn = "parent";
             }
         } else if (resetActivationTime) {
             this.activeDuration.activationTime = -1;
@@ -398,6 +402,7 @@ class SFRPGTimedActivation extends SFRPGTimedEffect {
                 value: duration.value,
                 activationTime: activationEvent.startTime,
                 activationEnd: endTime,
+                activationTurn: activationEvent.activationTurn,
                 expiryMode: {
                     type: "turn",
                     turn: activationEvent.expiryTurn ?? "parent"
