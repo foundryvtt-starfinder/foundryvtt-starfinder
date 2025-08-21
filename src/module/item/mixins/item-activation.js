@@ -88,17 +88,17 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
             const worldTime = game.time.worldTime;
             const activationTurn = game.combat?.started ? game.combat.combatant.actor.uuid : "parent";
             let expiryTurn = "parent";
+            let endsOn = duration.endsOn ?? "onTurnStart";
 
             let endTime;
             if (Object.hasOwn(CONFIG.SFRPG.effectDurationFrom, duration.units)) {
                 const rollContext = RollContext.createItemRollContext(this, this.actor);
                 const totalUnits = DiceSFRPG.resolveFormulaWithoutDice(String(duration.value || 0), rollContext).total;
                 endTime = worldTime + (totalUnits * CONFIG.SFRPG.effectDurationFrom[duration.units]);
-                if (duration.units === "turn" && game.combat?.started) {
-                    for (const combatant of game.combat.combatants) {
-                        if (combatant.actor === this.actor) {
-                            expiryTurn = game.combat.combatant.actor.uuid;
-                        }
+                if (duration.units === "turn") {
+                    endsOn = "onTurnEnd";
+                    if (game.combat?.started) {
+                        expiryTurn = game.combat.combatant.actor.uuid;
                     }
                 }
             } else {
@@ -108,7 +108,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
             updateData['system.activationEvent'] = {
                 startTime: worldTime,
                 endTime: endTime,
-                endsOn: duration.endsOn ?? "onTurnStart",
+                endsOn: endsOn,
                 status: null,
                 deactivatedAt: null,
                 activationTurn: activationTurn,

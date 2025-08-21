@@ -409,7 +409,7 @@ class SFRPGTimedActivation extends SFRPGTimedEffect {
                 },
                 expiryInit: 0,
                 remaining: mkRemaining(endTime - game.time.worldTime, duration.units, isActive),
-                endsOn: duration.endsOn
+                endsOn: activationEvent.endsOn
             }
         });
     }
