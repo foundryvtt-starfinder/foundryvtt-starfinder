@@ -74,7 +74,7 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                 weapon: new fields.ObjectField({ // TODO-Ian: detail this type more
                     required: true,
                     label: "SFRPG.ClassWeaponProf"
-                }),
+                })
             }),
             ref: new fields.StringField({
                 initial: "slow",
