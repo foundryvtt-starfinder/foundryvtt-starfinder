@@ -105,6 +105,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }
 
         Hooks.callAll("onBeginCombat", eventData);
+        this._handleTimedEffects(eventData);
         await this._notifyAfterUpdate(eventData);
     }
 
