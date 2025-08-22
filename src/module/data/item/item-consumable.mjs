@@ -36,7 +36,7 @@ export default class SFRPGItemConsumable extends SFRPGItemBase {
             autoDestroy: new fields.BooleanField({initial: true})
         });
 
-        // Change some initial values specific to weapons
+        // Change some initial values specific to consumables
         /* schema.container.fields.isOpen.initial = true;
         schema.container.fields.storage.initial = [{
             acceptsType: [

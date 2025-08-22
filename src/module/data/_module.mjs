@@ -15,6 +15,7 @@ export { default as SFRPGItemClass } from './item/item-class.mjs';
 export { default as SFRPGItemConsumable } from './item/item-consumable.mjs';
 export { default as SFRPGItemContainer } from './item/item-container.mjs';
 export { default as SFRPGItemEquipment } from './item/item-equipment.mjs';
+export { default as SFRPGItemFeat } from './item/item-feat.mjs';
 export { default as SFRPGItemGoods } from './item/item-goods.mjs';
 export { default as SFRPGItemSpell } from './item/item-spell.mjs';
 export { default as SFRPGItemWeapon } from './item/item-weapon.mjs';

@@ -18,7 +18,7 @@ export default class SFRPGItemSpell extends SFRPGItemBase {
             ...SFRPGItemBase.modifiersTemplate()
         });
 
-        // Armor-specific properties
+        // Spell-specific properties
         foundry.utils.mergeObject(schema, {
             level: new fields.NumberField({
                 initial: 1,

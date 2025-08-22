@@ -227,6 +227,7 @@ Hooks.once('init', async function() {
         consumable: models.SFRPGItemConsumable,
         container: models.SFRPGItemContainer,
         equipment: models.SFRPGItemEquipment,
+        feat: models.SFRPGItemFeat,
         goods: models.SFRPGItemGoods,
         spell: models.SFRPGItemSpell,
         weapon: models.SFRPGItemWeapon
