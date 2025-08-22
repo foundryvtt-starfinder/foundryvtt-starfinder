@@ -4,7 +4,7 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
 
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
-        'SFRPG.Item.Spell'
+        'SFRPG.Item.Feat'
     ];
 
     static defineSchema() {
@@ -40,12 +40,6 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
                     label: "SFRPG.Items.Feat.SpecialAbilityType"
                 })
             }),
-            requirements: new fields.StringField({
-                initial: "",
-                blank: true,
-                required: true,
-                label: "SFRPG.Items.Feat.Requirements"
-            }),
             recharge: new fields.SchemaField({
                 value: new fields.StringField({
                     initial: "",
@@ -57,6 +51,12 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
                     initial: false,
                     label: "SFRPG.Items.Feat.Charged"
                 })
+            }),
+            requirements: new fields.StringField({
+                initial: "",
+                blank: true,
+                required: true,
+                label: "SFRPG.Items.Feat.Requirements"
             })
         });
 
