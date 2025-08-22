@@ -421,7 +421,7 @@ Hooks.on("updateWorldTime", (worldTime) => {
 
     const timedEffects = game.sfrpg.timedEffects;
     for (const effect of timedEffects.values()) {
-        if (effect.actor.inCombat) continue;
+        if (game.combat?.started) continue;
         // handling effects while in combat is handled in combat.js
 
         const effectStart = effect.activeDuration.activationTime ?? -Infinity;
