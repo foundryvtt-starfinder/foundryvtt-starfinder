@@ -1,10 +1,13 @@
-<div class="inventory-filters spellbook-filters">
-    {{#if isNPC}}
+{{#if isNPC}}
+<div class="npc-ability-field">
     <div class="form-group" data-tooltip='<strong>{{localize "SFRPG.NPCSheet.Header.BaseSpellDC"}}</strong><br>"@attributes.baseSpellDC.value"<br><br>{{localize "SFRPG.NPCSheet.Header.BaseSpellDCTooltip"}}'>
-        <label><h3 class="attribute-name box-title">{{localize "SFRPG.NPCSheet.Header.BaseSpellDC"}}</h4></label>
+        <label><h3 class="box-title">{{localize "SFRPG.NPCSheet.Header.BaseSpellDC"}}</h3></label>
         <input type="number" name="system.attributes.baseSpellDC.base" value="{{system.attributes.baseSpellDC.base}}" placeholder=0/>
     </div>
-    {{else}}
+    <hr>
+</div>
+{{else}}
+<div class="inventory-filters spellbook-filters">
     <div class="form-group spellcasting-ability">
         <label><h4 class="attribute-name box-title">{{localize "SFRPG.SpellBook.SpellCastingAbility"}}</h4></label>
         <select name="system.attributes.spellcasting" data-type="String">
@@ -12,8 +15,8 @@
             {{selectOptions (sfrpg "abilities") selected=system.attributes.spellcasting}}
         </select>
     </div>
-    {{/if}}
 </div>
+{{/if}}
 
 <ol class="inventory-list">
 {{#each spellbook as |section|}}
