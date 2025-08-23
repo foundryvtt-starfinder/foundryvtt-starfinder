@@ -383,9 +383,9 @@ export class DiceSFRPG {
         if (mainDie) {
             let dieRoll = "1" + mainDie;
             if (mainDie === "d20") {
-                if (rollInfo.button === "Disadvantage") {
+                if (rollInfo.button === "disadvantage") {
                     dieRoll = "2d20kl";
-                } else if (rollInfo.button === "Advantage") {
+                } else if (rollInfo.button === "advantage") {
                     dieRoll = "2d20kh";
                 }
             }
