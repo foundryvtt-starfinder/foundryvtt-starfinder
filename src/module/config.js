@@ -1345,6 +1345,13 @@ SFRPG.starshipRoleDisplayOrder = [
     "minorCrew"
 ];
 
+SFRPG.starshipSystemPatch = {
+    "unpatched": "SFRPG.StarshipSheet.Critical.Patch.Unpatched",
+    "heldTogether": "SFRPG.StarshipSheet.Critical.Patch.HeldTogether",
+    "patched": "SFRPG.StarshipSheet.Critical.Patch.Patched",
+    "robust": "SFRPG.StarshipSheet.Critical.Patch.Robust"
+};
+
 // starship value maps
 SFRPG.starshipSystemStatus = {
     "nominal": "SFRPG.StarshipSheet.Critical.Status.Nominal",

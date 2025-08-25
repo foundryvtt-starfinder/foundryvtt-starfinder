@@ -10,11 +10,39 @@ export default function(engine) {
             wrecked: -4
         };
 
+        const critModsHeldTogether = {
+            nominal: 0,
+            glitching: 0,
+            malfunctioning: 0,
+            wrecked: -2
+        };
+
+        const critModsPatched = {
+            nominal: 0,
+            glitching: 0,
+            malfunctioning: -2,
+            wrecked: -4
+        };
+
         const critModsOther = {
             nominal: 0,
             glitching: 0,
             malfunctioning: -2,
             wrecked: -4
+        };
+
+        const critModsOtherHeldTogether = {
+            nominal: 0,
+            glitching: 0,
+            malfunctioning: 0,
+            wrecked: 0
+        };
+
+        const critModsOtherPatched = {
+            nominal: 0,
+            glitching: 0,
+            malfunctioning: 0,
+            wrecked: -2
         };
 
         /** Ensure Critical Status data is properly populated. */
@@ -25,6 +53,7 @@ export default function(engine) {
         data.attributes.systems = foundry.utils.mergeObject(data.attributes.systems, {
             lifeSupport: {
                 value: "nominal",
+                patch: "unpatched",
                 affectedRoles: {
                     captain: true
                 },
@@ -32,6 +61,7 @@ export default function(engine) {
             },
             sensors: {
                 value: "nominal",
+                patch: "unpatched",
                 affectedRoles: {
                     scienceOfficer: true
                 },
@@ -39,6 +69,7 @@ export default function(engine) {
             },
             weaponsArrayForward: {
                 value: "nominal",
+                patch: "unpatched",
                 affectedRoles: {
                     gunner: true
                 },
@@ -46,6 +77,7 @@ export default function(engine) {
             },
             weaponsArrayPort: {
                 value: "nominal",
+                patch: "unpatched",
                 affectedRoles: {
                     gunner: true
                 },
@@ -53,6 +85,7 @@ export default function(engine) {
             },
             weaponsArrayStarboard: {
                 value: "nominal",
+                patch: "unpatched",
                 affectedRoles: {
                     gunner: true
                 },
@@ -60,6 +93,7 @@ export default function(engine) {
             },
             weaponsArrayAft: {
                 value: "nominal",
+                patch: "unpatched",
                 affectedRoles: {
                     gunner: true
                 },
@@ -67,6 +101,7 @@ export default function(engine) {
             },
             engines: {
                 value: "nominal",
+                patch: "unpatched",
                 affectedRoles: {
                     pilot: true
                 },
@@ -74,6 +109,7 @@ export default function(engine) {
             },
             powerCore: {
                 value: "nominal",
+                patch: "unpatched",
                 affectedRoles: {
                     captain: true,
                     pilot: true,
@@ -90,9 +126,16 @@ export default function(engine) {
         }, {overwrite: false});
 
         for (const [key, systemData] of Object.entries(data.attributes.systems)) {
-            const modifier = critMods[systemData.value];
-            systemData.mod = modifier;
-            systemData.modOther = (key === "powerCore") ? critModsOther[systemData.value] : 0;
+            if (["patched", "robust"].includes(systemData.patch)) {
+                systemData.mod = critModsPatched[systemData.value];
+                systemData.modOther = (key === "powerCore") ? critModsOtherPatched[systemData.value] : 0;
+            } else if (systemData.patch === "heldTogether") {
+                systemData.mod = critModsHeldTogether[systemData.value];
+                systemData.modOther = (key === "powerCore") ? critModsOtherHeldTogether[systemData.value] : 0;
+            } else {
+                systemData.mod = critMods[systemData.value];
+                systemData.modOther = (key === "powerCore") ? critModsOther[systemData.value] : 0;
+            }
         }
 
         data.attributes.systems.weaponsArrayTurret = {
