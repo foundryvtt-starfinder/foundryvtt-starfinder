@@ -231,6 +231,7 @@ Hooks.once('init', async function() {
         goods: models.SFRPGItemGoods,
         race: models.SFRPGItemRace,
         spell: models.SFRPGItemSpell,
+        theme: models.SFRPGItemTheme,
         weapon: models.SFRPGItemWeapon
     };
 

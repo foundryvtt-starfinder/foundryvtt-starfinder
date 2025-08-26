@@ -274,8 +274,7 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
         };
     }
 
-    // TODO: Move to Effect item when that is created
-    /* static itemDurationTemplate() {
+    static itemDurationTemplate() {
         return {
             activeDuration: new fields.SchemaField({
                 activationTime: new fields.NumberField(),
@@ -289,7 +288,7 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
                 value: new fields.StringField({initial: "0"})
             })
         };
-    } */
+    }
 
     static itemUsageTemplate() {
         return {
