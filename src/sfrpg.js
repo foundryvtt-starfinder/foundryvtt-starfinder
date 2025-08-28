@@ -226,6 +226,7 @@ Hooks.once('init', async function() {
         archetypes: models.SFRPGItemArchetypes,
         asi: models.SFRPGItemASI,
         augmentation: models.SFRPGItemAugmentation,
+        chassis: models.SFRPGItemChassis,
         class: models.SFRPGItemClass,
         consumable: models.SFRPGItemConsumable,
         container: models.SFRPGItemContainer,

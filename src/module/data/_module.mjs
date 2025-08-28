@@ -14,6 +14,7 @@ export { default as SFRPGItemAmmunition } from './item/item-ammunition.mjs';
 export { default as SFRPGItemArchetypes } from './item/item-archetypes.mjs';
 export { default as SFRPGItemASI } from './item/item-asi.mjs';
 export { default as SFRPGItemAugmentation } from './item/item-augmentation.mjs';
+export { default as SFRPGItemChassis } from './item/item-chassis.mjs';
 export { default as SFRPGItemClass } from './item/item-class.mjs';
 export { default as SFRPGItemConsumable } from './item/item-consumable.mjs';
 export { default as SFRPGItemContainer } from './item/item-container.mjs';

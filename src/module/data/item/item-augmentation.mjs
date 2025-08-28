@@ -32,7 +32,7 @@ export default class SFRPGItemAugmentation extends SFRPGItemBase {
             type: new fields.StringField({
                 initial: "cybernetic",
                 choices: Object.keys(CONFIG.SFRPG.augmentationTypes),
-                blank: true,
+                blank: false,
                 required: true,
                 label: "SFRPG.Items.Augmentation.Type"
             })
