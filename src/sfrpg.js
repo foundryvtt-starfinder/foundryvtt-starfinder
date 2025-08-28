@@ -225,6 +225,7 @@ Hooks.once('init', async function() {
         ammunition: models.SFRPGItemAmmunition,
         archetypes: models.SFRPGItemArchetypes,
         asi: models.SFRPGItemASI,
+        augmentation: models.SFRPGItemAugmentation,
         class: models.SFRPGItemClass,
         consumable: models.SFRPGItemConsumable,
         container: models.SFRPGItemContainer,

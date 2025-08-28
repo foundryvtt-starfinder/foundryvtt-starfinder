@@ -23,7 +23,7 @@ export default class SFRPGItemAmmunition extends SFRPGItemBase {
             ammunitionType: new fields.StringField({
                 initial: "",
                 choices: ["", ...Object.keys(CONFIG.SFRPG.ammunitionTypes)],
-                blank: "",
+                blank: true,
                 required: true,
                 label: "SFRPG.Items.Ammunition.AmmunitionType"
             }),
