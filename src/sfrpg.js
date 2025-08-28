@@ -222,6 +222,7 @@ Hooks.once('init', async function() {
 
     // DataModels definition
     CONFIG.Item.dataModels = {
+        archetypes: models.SFRPGItemArchetypes,
         asi: models.SFRPGItemASI,
         class: models.SFRPGItemClass,
         consumable: models.SFRPGItemConsumable,

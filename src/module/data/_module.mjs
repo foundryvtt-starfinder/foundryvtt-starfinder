@@ -10,6 +10,7 @@ export { default as SFRPGVehicle } from './actor/actor-vehicle.mjs';
 
 // Export Items
 export { default as SFRPGItemBase } from './item/base-item.mjs';
+export { default as SFRPGItemArchetypes } from './item/item-archetypes.mjs';
 export { default as SFRPGItemASI } from './item/item-asi.mjs';
 export { default as SFRPGItemClass } from './item/item-class.mjs';
 export { default as SFRPGItemConsumable } from './item/item-consumable.mjs';
