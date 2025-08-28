@@ -230,8 +230,11 @@ Hooks.once('init', async function() {
         equipment: models.SFRPGItemEquipment,
         feat: models.SFRPGItemFeat,
         goods: models.SFRPGItemGoods,
+        hybrid: models.SFRPGItemHybrid,
+        magic: models.SFRPGItemMagic,
         race: models.SFRPGItemRace,
         spell: models.SFRPGItemSpell,
+        technological: models.SFRPGItemTechnological,
         theme: models.SFRPGItemTheme,
         weapon: models.SFRPGItemWeapon
     };
