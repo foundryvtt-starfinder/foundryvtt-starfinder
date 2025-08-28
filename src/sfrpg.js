@@ -236,6 +236,7 @@ Hooks.once('init', async function() {
         goods: models.SFRPGItemGoods,
         hybrid: models.SFRPGItemHybrid,
         magic: models.SFRPGItemMagic,
+        mod: models.SFRPGItemMod,
         race: models.SFRPGItemRace,
         spell: models.SFRPGItemSpell,
         technological: models.SFRPGItemTechnological,

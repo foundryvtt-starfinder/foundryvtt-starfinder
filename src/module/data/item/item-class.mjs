@@ -52,7 +52,7 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                     label: "SFRPG.ClassHPPerLevel"
                 })
             }),
-            isCaster: new fields.BooleanField(),
+            isCaster: new fields.BooleanField({initial: false}),
             levels: new fields.NumberField({
                 initial: 1,
                 min: 1,

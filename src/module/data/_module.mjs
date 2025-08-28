@@ -24,6 +24,7 @@ export { default as SFRPGItemFusion } from './item/item-fusion.mjs';
 export { default as SFRPGItemGoods } from './item/item-goods.mjs';
 export { default as SFRPGItemHybrid } from './item/item-hybrid.mjs';
 export { default as SFRPGItemMagic } from './item/item-magic.mjs';
+export { default as SFRPGItemMod } from './item/item-mod.mjs';
 export { default as SFRPGItemRace } from './item/item-race.mjs';
 export { default as SFRPGItemSpell } from './item/item-spell.mjs';
 export { default as SFRPGItemTechnological } from './item/item-technological.mjs';
