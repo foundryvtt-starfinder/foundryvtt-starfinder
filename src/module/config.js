@@ -1473,7 +1473,17 @@ SFRPG.modifierEffectTypes = {
     "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",
     "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource",
     "damage-reduction": "SFRPG.ActorSheet.Modifiers.EffectTypes.DamageReduction",
-    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance"
+    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance",
+    "starship-hull-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipHullPoints",
+    "starship-hull-points-increment": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipHullPointsIncrement",
+    "starship-forward-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipForwardAC",
+    "starship-port-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipPortAC",
+    "starship-starboard-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipStarboardAC",
+    "starship-aft-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipAftAC",
+    "starship-all-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipAllAC",
+    "starship-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipSpeed",
+    "starship-turn-distance": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipTurnDistance",
+    "starship-piloting-skill": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipPilotingSkill"
 };
 
 SFRPG.modifierType = {
