@@ -17,6 +17,7 @@ export { default as SFRPGItemConsumable } from './item/item-consumable.mjs';
 export { default as SFRPGItemContainer } from './item/item-container.mjs';
 export { default as SFRPGItemEquipment } from './item/item-equipment.mjs';
 export { default as SFRPGItemFeat } from './item/item-feat.mjs';
+export { default as SFRPGItemFusion } from './item/item-fusion.mjs';
 export { default as SFRPGItemGoods } from './item/item-goods.mjs';
 export { default as SFRPGItemHybrid } from './item/item-hybrid.mjs';
 export { default as SFRPGItemMagic } from './item/item-magic.mjs';
