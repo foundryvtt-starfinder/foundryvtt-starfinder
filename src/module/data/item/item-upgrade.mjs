@@ -1,10 +1,10 @@
 import SFRPGItemBase from './base-item.mjs';
 
-export default class SFRPGItemFusion extends SFRPGItemBase {
+export default class SFRPGItemUpgrade extends SFRPGItemBase {
 
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
-        'SFRPG.Item.Fusion'
+        'SFRPG.Item.Upgrade'
     ];
 
     static defineSchema() {
@@ -13,18 +13,29 @@ export default class SFRPGItemFusion extends SFRPGItemBase {
 
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
+            ...SFRPGItemBase.actionTemplate(),
+            ...SFRPGItemBase.activatedEffectTemplate(),
             ...SFRPGItemBase.containerTemplate(),
+            ...SFRPGItemBase.itemUsageTemplate(),
             ...SFRPGItemBase.modifiersTemplate(),
             ...SFRPGItemBase.physicalItemTemplate()
         });
 
-        // Fusion-specific properties
+        // Upgrade-specific properties
         foundry.utils.mergeObject(schema, {
-            level: new fields.NumberField({
+            allowedArmorType: new fields.StringField({
+                initial: "any",
+                choices: ["any", ...Object.keys(CONFIG.SFRPG.allowedArmorTypes)],
+                blank: false,
+                required: true,
+                label: "SFRPG.Items.Upgrade.AllowedArmorType"
+            }),
+            slots: new fields.NumberField({
                 initial: 1,
+                min: 0,
                 nullable: false,
                 required: true,
-                label: "SFRPG.LevelLabelText"
+                label: "SFRPG.Items.Upgrade.Slots"
             })
         });
 

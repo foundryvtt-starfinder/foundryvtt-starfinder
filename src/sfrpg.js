@@ -237,6 +237,7 @@ Hooks.once('init', async function() {
         spell: models.SFRPGItemSpell,
         technological: models.SFRPGItemTechnological,
         theme: models.SFRPGItemTheme,
+        upgrade: models.SFRPGItemUpgrade,
         weapon: models.SFRPGItemWeapon
     };
 

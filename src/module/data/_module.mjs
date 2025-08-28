@@ -25,4 +25,5 @@ export { default as SFRPGItemRace } from './item/item-race.mjs';
 export { default as SFRPGItemSpell } from './item/item-spell.mjs';
 export { default as SFRPGItemTechnological } from './item/item-technological.mjs';
 export { default as SFRPGItemTheme } from './item/item-theme.mjs';
+export { default as SFRPGItemUpgrade } from './item/item-upgrade.mjs';
 export { default as SFRPGItemWeapon } from './item/item-weapon.mjs';
