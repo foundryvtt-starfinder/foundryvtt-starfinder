@@ -19,6 +19,7 @@ export { default as SFRPGItemChassis } from './item/item-chassis.mjs';
 export { default as SFRPGItemClass } from './item/item-class.mjs';
 export { default as SFRPGItemConsumable } from './item/item-consumable.mjs';
 export { default as SFRPGItemContainer } from './item/item-container.mjs';
+export { default as SFRPGItemEffect } from './item/item-effect.mjs';
 export { default as SFRPGItemEquipment } from './item/item-equipment.mjs';
 export { default as SFRPGItemFeat } from './item/item-feat.mjs';
 export { default as SFRPGItemFusion } from './item/item-fusion.mjs';

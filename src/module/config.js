@@ -1491,6 +1491,11 @@ SFRPG.modifierEffectTypes = {
     "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance"
 };
 
+SFRPG.effectTypes = {
+    "effect": "SFRPG.Items.Categories.Effect",
+    "condition": "SFRPG.Condition"
+}
+
 SFRPG.modifierType = {
     "constant": "SFRPG.ModifierTypeConstant",
     "formula": "SFRPG.ModifierTypeFormula"
