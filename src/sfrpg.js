@@ -243,7 +243,8 @@ Hooks.once('init', async function() {
         technological: models.SFRPGItemTechnological,
         theme: models.SFRPGItemTheme,
         upgrade: models.SFRPGItemUpgrade,
-        weapon: models.SFRPGItemWeapon
+        weapon: models.SFRPGItemWeapon,
+        weaponAccessory: models.SFRPGItemWeaponAccessory
     };
 
     CONFIG.ui.hotbar = HotbarSFRPG;
