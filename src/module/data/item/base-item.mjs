@@ -95,21 +95,7 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
             }),
             properties: new fields.ObjectField(), // TODO-Ian: detail this type more
             save: new fields.SchemaField({
-                dc: new fields.StringField({
-                    initial: ""
-                }),
-                descriptor: new fields.StringField({
-                    initial: "",
-                    choices: ["", ...Object.keys(CONFIG.SFRPG.saveDescriptors)],
-                    blank: true,
-                    label: "SFRPG.SaveDescriptor"
-                }),
-                type: new fields.StringField({
-                    initial: "",
-                    choices: ["", ...Object.keys(CONFIG.SFRPG.saves)],
-                    blank: true,
-                    label: "SFRPG.Save"
-                })
+                ...SFRPGItemBase.saveTemplate()
             }, {
                 required: true,
                 nullable: true,
@@ -412,6 +398,28 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
                 required: true
             })
         };
+    }
+
+    static saveTemplate() {;
+        return {
+            dc: new fields.StringField({
+                initial: "",
+                blank: true,
+                label: "SFRPG.ActionSave"
+            }),
+            descriptor: new fields.StringField({
+                initial: "negate",
+                choices: Object.keys(CONFIG.SFRPG.saveDescriptors),
+                blank: true,
+                label: "SFRPG.SaveDescriptor"
+            }),
+            type: new fields.StringField({
+                initial: "",
+                choices: ["", ...Object.keys(CONFIG.SFRPG.saves)],
+                blank: true,
+                label: "SFRPG.Save"
+            })
+        }
     }
 
     static specialMaterialsTemplate() {
