@@ -98,7 +98,7 @@ export default class SFRPGItemActorResource extends SFRPGItemBase {
                 required: true,
                 label: "SFRPG.ItemSheet.ActorResource.Type",
                 hint: "SFRPG.ItemSheet.ActorResource.TypeTooltip"
-            }),
+            })
         });
 
         return schema;
@@ -131,6 +131,6 @@ export default class SFRPGItemActorResource extends SFRPGItemBase {
                 nullable: false,
                 required: false
             })
-        }
+        };
     }
 }

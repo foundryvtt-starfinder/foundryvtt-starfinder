@@ -84,7 +84,7 @@ export default class SFRPGItemMod extends SFRPGItemBase {
                 required: true,
                 label: "SFRPG.DroneSheet.Mod.Details.OtherEffects.WeaponProficiency"
             })
-        })
+        });
 
         // No changes to initial values needed
 

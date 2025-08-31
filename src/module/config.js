@@ -1494,7 +1494,7 @@ SFRPG.modifierEffectTypes = {
 SFRPG.effectTypes = {
     "effect": "SFRPG.Items.Categories.Effect",
     "condition": "SFRPG.Condition"
-}
+};
 
 SFRPG.modifierType = {
     "constant": "SFRPG.ModifierTypeConstant",
@@ -2063,7 +2063,7 @@ SFRPG.counterClassesLabel = {
 SFRPG.rangeModes = {
     "post": "SFRPG.ItemSheet.ActorResource.RangeModePost",
     "immediate": "SFRPG.ItemSheet.ActorResource.RangeModeImmediate"
-}
+};
 
 /**
  * Actor resource calculation stages
@@ -2071,7 +2071,7 @@ SFRPG.rangeModes = {
 SFRPG.calculationStages = {
     "early": "SFRPG.ItemSheet.ActorResource.StageEarly",
     "late": "SFRPG.ItemSheet.ActorResource.StageLate"
-}
+};
 
 /**
  * Mathematical comparators
@@ -2083,7 +2083,7 @@ SFRPG.mathComparators = {
     "lte": "SFRPG.ItemSheet.ActorResource.VisualizationsModeLesserThanEqual",
     "gt": "SFRPG.ItemSheet.ActorResource.VisualizationsModeGreaterThan",
     "gte": "SFRPG.ItemSheet.ActorResource.VisualizationsModeGreaterThanEqual"
-}
+};
 
 SFRPG.droneHitpointsPerLevel = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 190, 210, 230];
 SFRPG.droneResolveMethod = (droneLevel) => { return (droneLevel >= 10 ? Math.floor(droneLevel / 2) : 0); };

@@ -419,7 +419,7 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
                 blank: true,
                 label: "SFRPG.Save"
             })
-        }
+        };
     }
 
     static specialMaterialsTemplate() {
