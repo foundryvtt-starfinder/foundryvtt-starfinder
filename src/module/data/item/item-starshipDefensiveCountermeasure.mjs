@@ -25,8 +25,8 @@ export default class SFRPGItemStarshipDefensiveCountermeasure extends SFRPGItemB
                 initial: 0,
                 nullable: false,
                 min: 0,
-                label: "SFRPG.ItemSheet.StarshipArmor.TargetLockPenalty",
-                hint: "SFRPG.ItemSheet.StarshipArmor.TargetLockPenaltyTooltip"
+                label: "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonus",
+                hint: "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonusTooltip"
             })
         });
 

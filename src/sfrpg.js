@@ -248,6 +248,7 @@ Hooks.once('init', async function() {
         starshipComputer: models.SFRPGItemStarshipComputer,
         starshipCrewQuarter: models.SFRPGItemStarshipCrewQuarter,
         starshipDefensiveCountermeasure: models.SFRPGItemStarshipDefensiveCountermeasure,
+        starshipDriftEngine: models.SFRPGItemStarshipDriftEngine,
         starshipExpansionBay: models.SFRPGItemStarshipExpansionBay,
         starshipOtherSystem: models.SFRPGItemStarshipOtherSystem,
         starshipSecuritySystem: models.SFRPGItemStarshipSecuritySystem,
