@@ -246,6 +246,7 @@ Hooks.once('init', async function() {
         theme: models.SFRPGItemTheme,
         upgrade: models.SFRPGItemUpgrade,
         vehicleAttack: models.SFRPGItemVehicleAttack,
+        vehicleSystem: models.SFRPGItemVehicleSystem,
         weapon: models.SFRPGItemWeapon,
         weaponAccessory: models.SFRPGItemWeaponAccessory
     };

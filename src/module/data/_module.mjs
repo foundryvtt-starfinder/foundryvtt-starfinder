@@ -34,5 +34,6 @@ export { default as SFRPGItemTechnological } from './item/item-technological.mjs
 export { default as SFRPGItemTheme } from './item/item-theme.mjs';
 export { default as SFRPGItemUpgrade } from './item/item-upgrade.mjs';
 export { default as SFRPGItemVehicleAttack } from './item/item-vehicleAttack.mjs';
+export { default as SFRPGItemVehicleSystem } from './item/item-vehicleSystem.mjs';
 export { default as SFRPGItemWeapon } from './item/item-weapon.mjs';
 export { default as SFRPGItemWeaponAccessory } from './item/item-weaponAccessory.mjs';

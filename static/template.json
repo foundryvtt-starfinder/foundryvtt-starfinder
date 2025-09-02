@@ -1198,17 +1198,6 @@
   },
   "Item": {
     "types": [
-      "archetypes",
-      "class",
-      "race",
-      "theme",
-      "actorResource",
-      "feat",
-      "spell",
-      "effect",
-      "asi",
-      "chassis",
-      "mod",
       "starshipAblativeArmor",
       "starshipAction",
       "starshipArmor",
@@ -1227,34 +1216,10 @@
       "starshipShield",
       "starshipSpecialAbility",
       "starshipThruster",
-      "starshipWeapon",
-      "vehicleAttack",
-      "vehicleSystem",
-      "ammunition",
-      "augmentation",
-      "consumable",
-      "container",
-      "equipment",
-      "fusion",
-      "goods",
-      "hybrid",
-      "magic",
-      "shield",
-      "technological",
-      "upgrade",
-      "weapon",
-      "weaponAccessory"
+      "starshipWeapon"
     ],
     "htmlFields": ["description.value", "description.gmnotes", "description.chat", "description.short", "description.unidentified"],
     "templates": {
-      "container": {
-        "container": {
-          "contents": [],
-          "storage": [],
-          "isOpen": true,
-          "includeContentsInWealthCalculation": 1
-        }
-      },
       "itemDescription": {
         "description": {
           "chat": "",
@@ -1265,106 +1230,6 @@
         },
         "source": "",
         "type": ""
-      },
-      "physicalItem": {
-        "quantity": 1,
-        "bulk": "L",
-        "price": 0,
-        "quantityPerPack": 1,
-        "level": 1,
-        "attuned": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "equippable": false,
-        "identified": true,
-        "attributes": {
-          "sturdy": false,
-          "customBuilt": false,
-          "size": "medium",
-          "dex": {
-            "mod": ""
-          },
-          "hp": {
-            "value": 6,
-            "max": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "ac": {
-            "value": ""
-          }
-        }
-      },
-      "activatedEffect": {
-        "activation": {
-          "type": "",
-          "cost": null,
-          "condition": ""
-        },
-        "duration": {
-          "value": null,
-          "units": "instantaneous"
-        },
-        "target": {
-          "value": null,
-          "type": ""
-        },
-        "area": {
-          "value": 0,
-          "units": "",
-          "shape": "",
-          "effect": "",
-          "shapable": false
-        },
-        "range": {
-          "value": null,
-          "units": "",
-          "additional": "",
-          "per": ""
-        },
-        "uses": {
-          "value": null,
-          "max": null,
-          "per": null
-        },
-        "isActive": null
-      },
-      "action": {
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "rollNotes": "",
-        "damageNotes": "",
-        "critical": {
-          "parts": [],
-          "effect": ""
-        },
-        "damage": {
-          "parts": []
-        },
-        "formula": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "descriptors": [],
-        "properties": {}
-      },
-      "descriptors": {},
-      "itemUsage": {
-        "ammunitionType": "",
-        "capacity": {
-          "value": 0,
-          "max": 0
-        },
-        "usage": {
-          "value": 0,
-          "per": ""
-        }
       },
       "modifiers": {
         "modifiers": []
@@ -1377,19 +1242,6 @@
       },
       "specialMaterials": {
         "specialMaterials": {}
-      },
-      "itemDuration": {
-        "activeDuration": {
-          "unit": "round",
-          "value": "0",
-          "activationTime": 0,
-          "expiryMode": {
-            "type": "turn",
-            "turn": "parent"
-          },
-          "expiryInit": 0,
-          "endsOn": "onTurnStart"
-        }
       }
     },
     "starshipAction": {
@@ -1628,21 +1480,6 @@
         "value": null,
         "max": null
       }
-    },
-    "vehicleSystem": {
-      "templates": [
-        "itemDescription"
-      ],
-      "piloting": {
-        "usedAsPilot": false,
-        "piloting": 0
-      },
-      "senses": {
-        "usedForSenses": false,
-        "senses": ""
-      },
-      "canBeActivated": true,
-      "isActive": true
     }
   }
 }
