@@ -457,14 +457,22 @@ export default class SFRPGItemBase extends foundry.abstract.TypeDataModel {
             cost: new fields.NumberField({
                 initial: null,
                 min: 0,
-                nullable: true
+                nullable: true,
+                required: true
             }),
-            costMultipliedBySize: new fields.BooleanField({initial: false}),
-            isPowered: new fields.BooleanField({intial: true}),
+            costMultipliedBySize: new fields.BooleanField({
+                initial: false,
+                required: true
+            }),
+            isPowered: new fields.BooleanField({
+                intial: true,
+                required: false
+            }),
             pcu: new fields.NumberField({
                 initial: null,
                 min: 0,
-                nullable: true
+                nullable: true,
+                required: false
             })
         };
     }
