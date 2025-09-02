@@ -38,6 +38,7 @@ export { default as SFRPGItemStarshipCrewQuarter } from './item/item-starshipCre
 export { default as SFRPGItemStarshipDefensiveCountermeasure } from './item/item-starshipDefensiveCountermeasure.mjs';
 export { default as SFRPGItemStarshipDriftEngine } from './item/item-starshipDriftEngine.mjs';
 export { default as SFRPGItemStarshipExpansionBay } from './item/item-starshipExpansionBay.mjs';
+export { default as SFRPGItemStarshipFortifiedHull } from './item/item-starshipFortifiedHull.mjs';
 export { default as SFRPGItemStarshipOtherSystem } from './item/item-starshipOtherSystem.mjs';
 export { default as SFRPGItemStarshipSecuritySystem } from './item/item-starshipSecuritySystem.mjs';
 export { default as SFRPGItemStarshipSpecialAbility } from './item/item-starshipSpecialAbility.mjs';
