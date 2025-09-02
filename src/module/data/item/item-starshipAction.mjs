@@ -16,13 +16,13 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
         // Starship Action-specific properties
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemStarshipAction.actionDC(),
-            effectCritical: SFRPGItemStarshipAction.effectFieldData(),
-            effectNormal: SFRPGItemStarshipAction.effectFieldData(),
+            effectCritical: SFRPGItemStarshipAction.effectFieldData({label: "SFRPG.ItemSheet.StarshipAction.CriticalEffect"}),
+            effectNormal: SFRPGItemStarshipAction.effectFieldData({label: "SFRPG.ItemSheet.StarshipAction.NormalEffect"}),
             formula: new fields.ArrayField(
                 new fields.SchemaField({
                     ...SFRPGItemStarshipAction.actionDC(),
-                    effectCritical: SFRPGItemStarshipAction.effectFieldData(),
-                    effectNormal: SFRPGItemStarshipAction.effectFieldData(),
+                    effectCritical: SFRPGItemStarshipAction.effectFieldData({label: "SFRPG.ItemSheet.StarshipAction.CriticalEffect"}),
+                    effectNormal: SFRPGItemStarshipAction.effectFieldData({label: "SFRPG.ItemSheet.StarshipAction.NormalEffect"}),
                     formula: new fields.StringField({
                         initial: "",
                         blank: true,
@@ -37,7 +37,8 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
             ),
             isPush: new fields.BooleanField({
                 initial: false,
-                required: true
+                required: true,
+                label: "SFRPG.ItemSheet.StarshipAction.IsPushAction"
             }),
             order: new fields.NumberField({
                 initial: 0,
@@ -48,23 +49,27 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
                 name: new fields.StringField({
                     initial: "",
                     blank: true,
-                    required: false
+                    required: false,
+                    label: "SFRPG.ItemSheet.StarshipAction.Phase"
                 }),
                 tooltip: new fields.StringField({
                     initial: "",
                     blank: true,
-                    required: false
+                    required: false,
+                    label: "SFRPG.ItemSheet.StarshipAction.PhaseTooltip"
                 })
             }),
             resolvePointCost: new fields.NumberField({
                 initial: null,
                 nullable: true,
-                required: true
+                required: true,
+                label: "SFRPG.StarshipSheet.Actions.Header.ResolvePoints"
             }),
             role: new fields.StringField({
                 initial: "",
                 blank: true,
-                required: true
+                required: true,
+                label: "SFRPG.ItemSheet.StarshipAction.CrewRole"
             }),
             selectorKey: SFRPGItemStarshipAction.effectFieldData(),
             selectors: new fields.ArrayField(
@@ -81,23 +86,28 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
             dc: new fields.SchemaField({
                 resolve: new fields.BooleanField({
                     initial: false,
-                    required: false
+                    required: false,
+                    label: "SFRPG.ItemSheet.StarshipAction.ResolveFormulaAutomatically",
+                    hint: "SFRPG.ItemSheet.StarshipAction.ResolveFormulaAutomaticallyTooltip"
                 }),
                 value: new fields.StringField({
                     initial: "",
                     blank: true,
-                    required: false
+                    required: false,
+                    label: "SFRPG.ItemSheet.StarshipAction.ActionDC"
                 })
             }, {nullable: true, required: true}
         )};
     }
 
-    static effectFieldData() {
+    static effectFieldData(options = {}) {
         const fields = foundry.data.fields;
+        const label = options.label ?? "";
         return new fields.StringField({
                 initial: "",
                 blank: true,
-                required: false
+                required: false,
+                label: label
         });
     }
 

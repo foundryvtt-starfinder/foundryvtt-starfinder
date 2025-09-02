@@ -17,7 +17,7 @@ export default class SFRPGItemActorResource extends SFRPGItemBase {
             ...SFRPGItemBase.modifiersTemplate()
         });
 
-        // No Actor Resource-specific properties
+        // Actor Resource-specific properties
         foundry.utils.mergeObject(schema, {
             base: new fields.NumberField({
                 initial: null,
