@@ -30,6 +30,7 @@ export { default as SFRPGItemMod } from './item/item-mod.mjs';
 export { default as SFRPGItemRace } from './item/item-race.mjs';
 export { default as SFRPGItemShield } from './item/item-shield.mjs';
 export { default as SFRPGItemSpell } from './item/item-spell.mjs';
+export { default as SFRPGItemStarshipAction } from './item/item-starshipAction.mjs';
 export { default as SFRPGItemTechnological } from './item/item-technological.mjs';
 export { default as SFRPGItemTheme } from './item/item-theme.mjs';
 export { default as SFRPGItemUpgrade } from './item/item-upgrade.mjs';

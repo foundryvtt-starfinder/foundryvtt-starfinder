@@ -748,11 +748,20 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         // Add a new subaction
         if (a.classList.contains("add-subaction")) {
-            return this.item.update({
-                "system.formula": formula.concat([
-                    { dc: {resolve:false, value:""}, formula: "", name:"", effectNormal:"", effectCritical:"" }
-                ])
-            });
+            if (formula.length > 0) {
+                return this.item.update({
+                    "system.formula": formula.concat([
+                        { dc: {resolve:false, value:""}, formula: "", name:"", effectNormal:"", effectCritical:"" }
+                    ])
+                });
+            }
+            else {
+                return this.item.update({
+                    "system.formula": [
+                        { dc: {resolve:false, value:""}, formula: "", name:"", effectNormal:"", effectCritical:"" }
+                    ]
+                });
+            }
         }
 
         // Remove a subaction

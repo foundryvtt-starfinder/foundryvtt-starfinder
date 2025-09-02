@@ -242,6 +242,7 @@ Hooks.once('init', async function() {
         race: models.SFRPGItemRace,
         shield: models.SFRPGItemShield,
         spell: models.SFRPGItemSpell,
+        starshipAction: models.SFRPGItemStarshipAction,
         technological: models.SFRPGItemTechnological,
         theme: models.SFRPGItemTheme,
         upgrade: models.SFRPGItemUpgrade,
