@@ -37,6 +37,8 @@ export { default as SFRPGItemStarshipComputer } from './item/item-starshipComput
 export { default as SFRPGItemStarshipCrewQuarter } from './item/item-starshipCrewQuarter.mjs';
 export { default as SFRPGItemStarshipExpansionBay } from './item/item-starshipExpansionBay.mjs';
 export { default as SFRPGItemStarshipOtherSystem } from './item/item-starshipOtherSystem.mjs';
+export { default as SFRPGItemStarshipSecuritySystem } from './item/item-starshipSecuritySystem.mjs';
+export { default as SFRPGItemStarshipSpecialAbility } from './item/item-starshipSpecialAbility.mjs';
 export { default as SFRPGItemTechnological } from './item/item-technological.mjs';
 export { default as SFRPGItemTheme } from './item/item-theme.mjs';
 export { default as SFRPGItemUpgrade } from './item/item-upgrade.mjs';
