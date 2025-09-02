@@ -1,4 +1,3 @@
-import { type } from 'jquery';
 import SFRPGItemBase from './base-item.mjs';
 
 export default class SFRPGItemStarshipAblativeArmor extends SFRPGItemBase {

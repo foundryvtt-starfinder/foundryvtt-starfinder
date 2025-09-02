@@ -96,18 +96,19 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
                     required: false,
                     label: "SFRPG.ItemSheet.StarshipAction.ActionDC"
                 })
-            }, {nullable: true, required: true}
-        )};
+            }, { nullable: true, required: true}
+            )
+        };
     }
 
     static effectFieldData(options = {}) {
         const fields = foundry.data.fields;
         const label = options.label ?? "";
         return new fields.StringField({
-                initial: "",
-                blank: true,
-                required: false,
-                label: label
+            initial: "",
+            blank: true,
+            required: false,
+            label: label
         });
     }
 

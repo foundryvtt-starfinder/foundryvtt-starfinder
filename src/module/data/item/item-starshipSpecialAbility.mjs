@@ -1,4 +1,3 @@
-import { type } from 'jquery';
 import SFRPGItemBase from './base-item.mjs';
 
 export default class SFRPGItemStarshipSpecialAbility extends SFRPGItemBase {
@@ -9,7 +8,6 @@ export default class SFRPGItemStarshipSpecialAbility extends SFRPGItemBase {
     ];
 
     static defineSchema() {
-        const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
         // no templates needed

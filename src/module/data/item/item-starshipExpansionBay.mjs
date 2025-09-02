@@ -1,4 +1,3 @@
-import { type } from 'jquery';
 import SFRPGItemBase from './base-item.mjs';
 
 export default class SFRPGItemStarshipExpansionBay extends SFRPGItemBase {
@@ -9,7 +8,6 @@ export default class SFRPGItemStarshipExpansionBay extends SFRPGItemBase {
     ];
 
     static defineSchema() {
-        const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
         // merge schema with templates
