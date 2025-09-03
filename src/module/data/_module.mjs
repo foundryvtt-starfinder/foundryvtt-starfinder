@@ -45,6 +45,7 @@ export { default as SFRPGItemStarshipPowerCore } from './item/item-starshipPower
 export { default as SFRPGItemStarshipReinforcedBulkhead } from './item/item-starshipReinforcedBulkhead.mjs';
 export { default as SFRPGItemStarshipSecuritySystem } from './item/item-starshipSecuritySystem.mjs';
 export { default as SFRPGItemStarshipSensor } from './item/item-starshipSensor.mjs';
+export { default as SFRPGItemStarshipShield } from './item/item-starshipShield.mjs';
 export { default as SFRPGItemStarshipSpecialAbility } from './item/item-starshipSpecialAbility.mjs';
 export { default as SFRPGItemTechnological } from './item/item-technological.mjs';
 export { default as SFRPGItemTheme } from './item/item-theme.mjs';

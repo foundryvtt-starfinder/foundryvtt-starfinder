@@ -19,19 +19,41 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
 
         // Starship Frame-specific properties
         foundry.utils.mergeObject(schema, {
-            size: new fields.StringField({
-                initial: "medium",
-                choices: Object.keys(CONFIG.SFRPG.starshipSizes),
-                blank: false,
-                label: "SFRPG.ItemSheet.StarshipFrame.Details.Size",
-                hint: "SFRPG.ItemSheet.StarshipFrame.Details.SizeTooltip"
+            crew: new fields.SchemaField({
+                minimum: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    nullable: false,
+                    required: true,
+                    label: "SFRPG.ItemSheet.StarshipFrame.Details.CrewMinimum",
+                    hint: "SFRPG.ItemSheet.StarshipFrame.Details.CrewMinimumTooltip"
+                }),
+                maximum: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    nullable: false,
+                    required: true,
+                    label: "SFRPG.ItemSheet.StarshipFrame.Details.CrewMaximum",
+                    hint: "SFRPG.ItemSheet.StarshipFrame.Details.CrewMaximumTooltip"
+                })
             }),
-            maneuverability: new fields.StringField({
-                initial: "average",
-                choices: Object.keys(CONFIG.SFRPG.maneuverability),
-                blank: false,
-                label: "SFRPG.ItemSheet.StarshipFrame.Details.Maneuverability",
-                hint: "SFRPG.ItemSheet.StarshipFrame.Details.ManeuverabilityTooltip"
+            damageThreshold: new fields.SchemaField({
+                base: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    nullable: false,
+                    required: true,
+                    label: "SFRPG.ItemSheet.StarshipFrame.Details.DamageThreshold",
+                    hint: "SFRPG.ItemSheet.StarshipFrame.Details.DamageThresholdTooltip"
+                })
+            }),
+            expansionBays: new fields.NumberField({
+                initial: 0,
+                min: 0,
+                nullable: false,
+                required: true,
+                label: "SFRPG.ItemSheet.StarshipFrame.Details.ExpansionBays",
+                hint: "SFRPG.ItemSheet.StarshipFrame.Details.ExpansionBaysTooltip"
             }),
             hitpoints: new fields.SchemaField({
                 base: new fields.NumberField({
@@ -51,15 +73,19 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
                     hint: "SFRPG.ItemSheet.StarshipFrame.Details.HitPointsIncrementTooltip"
                 })
             }),
-            damageThreshold: new fields.SchemaField({
-                base: new fields.NumberField({
-                    initial: 0,
-                    min: 0,
-                    nullable: false,
-                    required: true,
-                    label: "SFRPG.ItemSheet.StarshipFrame.Details.DamageThreshold",
-                    hint: "SFRPG.ItemSheet.StarshipFrame.Details.DamageThresholdTooltip"
-                })
+            maneuverability: new fields.StringField({
+                initial: "average",
+                choices: Object.keys(CONFIG.SFRPG.maneuverability),
+                blank: false,
+                label: "SFRPG.ItemSheet.StarshipFrame.Details.Maneuverability",
+                hint: "SFRPG.ItemSheet.StarshipFrame.Details.ManeuverabilityTooltip"
+            }),
+            size: new fields.StringField({
+                initial: "medium",
+                choices: Object.keys(CONFIG.SFRPG.starshipSizes),
+                blank: false,
+                label: "SFRPG.ItemSheet.StarshipFrame.Details.Size",
+                hint: "SFRPG.ItemSheet.StarshipFrame.Details.SizeTooltip"
             }),
             weaponMounts: new fields.SchemaField({
                 forward: new fields.SchemaField(SFRPGItemStarshipFrame.frameWeaponSlotData()),
@@ -67,33 +93,7 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
                 port: new fields.SchemaField(SFRPGItemStarshipFrame.frameWeaponSlotData()),
                 starboard: new fields.SchemaField(SFRPGItemStarshipFrame.frameWeaponSlotData()),
                 turret: new fields.SchemaField(SFRPGItemStarshipFrame.frameWeaponSlotData())
-            }),
-            expansionBays: new fields.NumberField({
-                initial: 0,
-                min: 0,
-                nullable: false,
-                required: true,
-                label: "SFRPG.ItemSheet.StarshipFrame.Details.ExpansionBays",
-                hint: "SFRPG.ItemSheet.StarshipFrame.Details.ExpansionBaysTooltip"
-            }),
-            crew: new fields.SchemaField({
-                minimum: new fields.NumberField({
-                    initial: 0,
-                    min: 0,
-                    nullable: false,
-                    required: true,
-                    label: "SFRPG.ItemSheet.StarshipFrame.Details.CrewMinimum",
-                    hint: "SFRPG.ItemSheet.StarshipFrame.Details.CrewMinimumTooltip"
-                }),
-                maximum: new fields.NumberField({
-                    initial: 0,
-                    min: 0,
-                    nullable: false,
-                    required: true,
-                    label: "SFRPG.ItemSheet.StarshipFrame.Details.CrewMaximum",
-                    hint: "SFRPG.ItemSheet.StarshipFrame.Details.CrewMaximumTooltip"
-                })
-            }),
+            })
         });
 
         return schema;
@@ -102,11 +102,11 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
     static frameWeaponSlotData() {
         const fields = foundry.data.fields;
         return {
-            lightSlots: new fields.NumberField({
+            capitalSlots: new fields.NumberField({
                 initial: 0,
                 nullable: false,
                 min: 0,
-                label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeLight",
+                label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeCapital",
             }),
             heavySlots: new fields.NumberField({
                 initial: 0,
@@ -114,11 +114,11 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
                 min: 0,
                 label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeHeavy",
             }),
-            capitalSlots: new fields.NumberField({
+            lightSlots: new fields.NumberField({
                 initial: 0,
                 nullable: false,
                 min: 0,
-                label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeCapital",
+                label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeLight",
             }),
             spinalSlots: new fields.NumberField({
                 initial: 0,

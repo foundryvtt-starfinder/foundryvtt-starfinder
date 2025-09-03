@@ -14,7 +14,7 @@ export default class SFRPGItemStarshipComputer extends SFRPGItemBase {
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.modifiersTemplate(),
-            ...SFRPGItemBase.specialMaterialsTemplate()
+            ...SFRPGItemBase.starshipComponentTemplate()
         });
 
         // Starship Computer-specific properties
