@@ -48,6 +48,7 @@ export { default as SFRPGItemStarshipSensor } from './item/item-starshipSensor.m
 export { default as SFRPGItemStarshipShield } from './item/item-starshipShield.mjs';
 export { default as SFRPGItemStarshipSpecialAbility } from './item/item-starshipSpecialAbility.mjs';
 export { default as SFRPGItemStarshipThruster } from './item/item-starshipThruster.mjs';
+export { default as SFRPGItemStarshipWeapon } from './item/item-starshipWeapon.mjs';
 export { default as SFRPGItemTechnological } from './item/item-technological.mjs';
 export { default as SFRPGItemTheme } from './item/item-theme.mjs';
 export { default as SFRPGItemUpgrade } from './item/item-upgrade.mjs';
