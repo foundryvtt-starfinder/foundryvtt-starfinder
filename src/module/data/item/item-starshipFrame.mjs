@@ -106,25 +106,25 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
                 initial: 0,
                 nullable: false,
                 min: 0,
-                label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeCapital",
+                label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeCapital"
             }),
             heavySlots: new fields.NumberField({
                 initial: 0,
                 nullable: false,
                 min: 0,
-                label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeHeavy",
+                label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeHeavy"
             }),
             lightSlots: new fields.NumberField({
                 initial: 0,
                 nullable: false,
                 min: 0,
-                label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeLight",
+                label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeLight"
             }),
             spinalSlots: new fields.NumberField({
                 initial: 0,
                 nullable: false,
                 min: 0,
-                label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeSpinal",
+                label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeSpinal"
             })
         };
     }
