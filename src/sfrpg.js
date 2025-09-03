@@ -259,6 +259,7 @@ Hooks.once('init', async function() {
         starshipSensor: models.SFRPGItemStarshipSensor,
         starshipShield: models.SFRPGItemStarshipShield,
         starshipSpecialAbility: models.SFRPGItemStarshipSpecialAbility,
+        starshipThruster: models.SFRPGItemStarshipThruster,
         technological: models.SFRPGItemTechnological,
         theme: models.SFRPGItemTheme,
         upgrade: models.SFRPGItemUpgrade,

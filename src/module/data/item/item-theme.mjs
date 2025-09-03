@@ -34,7 +34,8 @@ export default class SFRPGItemTheme extends SFRPGItemBase {
                 })
             }),
             skill: new fields.StringField({
-                initial: "",
+                initial: "acr",
+                choices: Object.keys(CONFIG.SFRPG.skills),
                 blank: true,
                 required: true,
                 label: "SFRPG.Skill"
