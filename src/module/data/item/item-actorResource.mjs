@@ -42,7 +42,7 @@ export default class SFRPGItemActorResource extends SFRPGItemBase {
                 }),
                 visualization: new fields.ArrayField(
                     new fields.SchemaField({
-                        ...SFRPGItemActorResource.visualizationPart()
+                        ...SFRPGItemActorResource.visualizationPartTemplate()
                     }),
                     {
                         required: false,
@@ -103,7 +103,7 @@ export default class SFRPGItemActorResource extends SFRPGItemBase {
         return schema;
     }
 
-    static visualizationPart() {
+    static visualizationPartTemplate() {
         const fields = foundry.data.fields;
 
         return {

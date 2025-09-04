@@ -15,14 +15,14 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
 
         // Starship Action-specific properties
         foundry.utils.mergeObject(schema, {
-            ...SFRPGItemStarshipAction.actionDC(),
-            effectCritical: SFRPGItemStarshipAction.effectFieldData({label: "SFRPG.ItemSheet.StarshipAction.CriticalEffect"}),
-            effectNormal: SFRPGItemStarshipAction.effectFieldData({label: "SFRPG.ItemSheet.StarshipAction.NormalEffect"}),
+            ...SFRPGItemStarshipAction.actionDCTemplate(),
+            effectCritical: SFRPGItemStarshipAction._effectFieldData({label: "SFRPG.ItemSheet.StarshipAction.CriticalEffect"}),
+            effectNormal: SFRPGItemStarshipAction._effectFieldData({label: "SFRPG.ItemSheet.StarshipAction.NormalEffect"}),
             formula: new fields.ArrayField(
                 new fields.SchemaField({
-                    ...SFRPGItemStarshipAction.actionDC(),
-                    effectCritical: SFRPGItemStarshipAction.effectFieldData({label: "SFRPG.ItemSheet.StarshipAction.CriticalEffect"}),
-                    effectNormal: SFRPGItemStarshipAction.effectFieldData({label: "SFRPG.ItemSheet.StarshipAction.NormalEffect"}),
+                    ...SFRPGItemStarshipAction.actionDCTemplate(),
+                    effectCritical: SFRPGItemStarshipAction._effectFieldData({label: "SFRPG.ItemSheet.StarshipAction.CriticalEffect"}),
+                    effectNormal: SFRPGItemStarshipAction._effectFieldData({label: "SFRPG.ItemSheet.StarshipAction.NormalEffect"}),
                     formula: new fields.StringField({
                         initial: "",
                         blank: true,
@@ -71,16 +71,16 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
                 required: true,
                 label: "SFRPG.ItemSheet.StarshipAction.CrewRole"
             }),
-            selectorKey: SFRPGItemStarshipAction.effectFieldData(),
+            selectorKey: SFRPGItemStarshipAction._selectorFieldData(),
             selectors: new fields.ArrayField(
-                SFRPGItemStarshipAction.effectFieldData()
+                SFRPGItemStarshipAction._selectorFieldData()
             )
         });
 
         return schema;
     }
 
-    static actionDC() {
+    static actionDCTemplate() {
         const fields = foundry.data.fields;
         return {
             dc: new fields.SchemaField({
@@ -94,14 +94,14 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
                     initial: "",
                     blank: true,
                     required: false,
-                    label: "SFRPG.ItemSheet.StarshipAction.ActionDC"
+                    label: "SFRPG.ItemSheet.StarshipAction.actionDCTemplate"
                 })
             }, { nullable: true, required: true}
             )
         };
     }
 
-    static effectFieldData(options = {}) {
+    static _effectFieldData(options = {}) {
         const fields = foundry.data.fields;
         const label = options.label ?? "";
         return new fields.StringField({
@@ -112,7 +112,7 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
         });
     }
 
-    static selectorFieldData() {
+    static _selectorFieldData() {
         const fields = foundry.data.fields;
         return new fields.StringField({
             initial: "",

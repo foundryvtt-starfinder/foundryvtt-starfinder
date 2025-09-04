@@ -25,7 +25,7 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                 blank: false,
                 label: "SFRPG.ClassBABProgression"
             }),
-            bonusSpellsPerDay: SFRPGItemClass.bonusSpellsPerDayField(),
+            bonusSpellsPerDay: SFRPGItemClass._bonusSpellsPerDayFieldData(),
             csk: new fields.ObjectField({ // TODO-Ian: detail this type more
                 required: true,
                 label: "SFRPG.ClassSkills"
@@ -125,8 +125,8 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                 blank: true,
                 label: "SFRPG.ClassSpellcastingAbility"
             }),
-            spellsKnown: SFRPGItemClass.spellsKnownField(),
-            spellsPerDay: SFRPGItemClass.spellsPerDayField(),
+            spellsKnown: SFRPGItemClass._spellsKnownFieldData(),
+            spellsPerDay: SFRPGItemClass._spellsPerDayFieldData(),
             will: new fields.StringField({
                 initial: "slow",
                 required: true,
@@ -141,7 +141,7 @@ export default class SFRPGItemClass extends SFRPGItemBase {
         return schema;
     }
 
-    static spellsKnownField() {
+    static _spellsKnownFieldData() {
         const fields = foundry.data.fields;
         return new fields.SchemaField({
             "1": new fields.SchemaField({
@@ -1027,7 +1027,7 @@ export default class SFRPGItemClass extends SFRPGItemBase {
         });
     }
 
-    static spellsPerDayField() {
+    static _spellsPerDayFieldData() {
         const fields = foundry.data.fields;
         return new fields.SchemaField({
             "1": new fields.SchemaField({
@@ -1793,7 +1793,7 @@ export default class SFRPGItemClass extends SFRPGItemBase {
         });
     }
 
-    static bonusSpellsPerDayField() {
+    static _bonusSpellsPerDayFieldData() {
         const fields = foundry.data.fields;
         return new fields.SchemaField({
             "0": new fields.SchemaField({

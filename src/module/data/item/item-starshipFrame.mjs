@@ -88,18 +88,18 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
                 hint: "SFRPG.ItemSheet.StarshipFrame.Details.SizeTooltip"
             }),
             weaponMounts: new fields.SchemaField({
-                forward: new fields.SchemaField(SFRPGItemStarshipFrame.frameWeaponSlotData()),
-                aft: new fields.SchemaField(SFRPGItemStarshipFrame.frameWeaponSlotData()),
-                port: new fields.SchemaField(SFRPGItemStarshipFrame.frameWeaponSlotData()),
-                starboard: new fields.SchemaField(SFRPGItemStarshipFrame.frameWeaponSlotData()),
-                turret: new fields.SchemaField(SFRPGItemStarshipFrame.frameWeaponSlotData())
+                forward: new fields.SchemaField(SFRPGItemStarshipFrame._frameWeaponSlotFieldData()),
+                aft: new fields.SchemaField(SFRPGItemStarshipFrame._frameWeaponSlotFieldData()),
+                port: new fields.SchemaField(SFRPGItemStarshipFrame._frameWeaponSlotFieldData()),
+                starboard: new fields.SchemaField(SFRPGItemStarshipFrame._frameWeaponSlotFieldData()),
+                turret: new fields.SchemaField(SFRPGItemStarshipFrame._frameWeaponSlotFieldData())
             })
         });
 
         return schema;
     }
 
-    static frameWeaponSlotData() {
+    static _frameWeaponSlotFieldData() {
         const fields = foundry.data.fields;
         return {
             capitalSlots: new fields.NumberField({
