@@ -2,20 +2,24 @@ import SFRPGDocumentBase from "../base-document.mjs";
 
 const { fields } = foundry.data;
 
-export default class SFRPGItemBase extends SFRPGDocumentBase {
+export default class SFRPGActorBase extends SFRPGDocumentBase {
     static defineSchema() {
         const schema = super.defineSchema();
-
-        schema.source = new fields.StringField();
-        schema.description = new fields.SchemaField({
-            value: new fields.HTMLField(),
-            chat: new fields.HTMLField(),
-            short: new fields.HTMLField(),
-            unidentified: new fields.HTMLField(),
-            gmnotes: new fields.HTMLField()
-        });
-
         return schema;
+    }
+
+    static commonTemplate(options = {}) {
+        const includeBase = false ?? options.includeBase;
+
+        return {
+            abilities: new fields.SchemaField({}),
+            attributes: new fields.SchemaField({}),
+            currency: new fields.SchemaField({}),
+            details: new fields.SchemaField({}),
+            skills: new fields.SchemaField({}),
+            spells: new fields.SchemaField({}),
+            traits: new fields.SchemaField({})
+        };
     }
 
     static actionTemplate() {
