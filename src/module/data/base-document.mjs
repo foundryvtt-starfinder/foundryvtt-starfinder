@@ -37,7 +37,7 @@ export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
     static speedTemplate() {
         return {
             land: new fields.SchemaField({
-                base: new fields.NumberField({initial: 0, min: 0, required: true})
+                base: new fields.NumberField({initial: 30, min: 0, required: true})
             }),
             flying: new fields.SchemaField({
                 base: new fields.NumberField({initial: 0, min: 0, required: true}),

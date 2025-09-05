@@ -9,425 +9,522 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
     }
 
     static commonTemplate(options = {}) {
-        const includeBase = false ?? options.includeBase;
+        const includeBaseAbilities = options.includeBaseAbilities ?? false;
 
         return {
-            abilities: new fields.SchemaField({}),
-            attributes: new fields.SchemaField({}),
-            currency: new fields.SchemaField({}),
-            details: new fields.SchemaField({}),
-            skills: new fields.SchemaField({}),
-            spells: new fields.SchemaField({}),
-            traits: new fields.SchemaField({})
-        };
-    }
-
-    static actionTemplate() {
-        return {
-            ability: new fields.StringField({
-                initial: "",
-                required: false,
-                choices: ["", ...Object.keys(CONFIG.SFRPG.abilities)],
-                blank: true,
-                label: "SFRPG.Items.Action.AbilityModifier"
+            abilities: new fields.SchemaField({
+                cha: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities)),
+                con: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities)),
+                dex: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities)),
+                int: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities)),
+                str: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities)),
+                wis: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities))
             }),
-            actionTarget: new fields.StringField({
-                initial: "",
-                required: false,
-                choices: Object.keys(CONFIG.SFRPG.actionTargets),
-                blank: true,
-                label: "SFRPG.Items.Action.ActionTarget.Title",
-                hint: "SFRPG.Items.Action.ActionTarget.Tooltip"
-            }),
-            actionType: new fields.StringField({
-                initial: "",
-                required: false,
-                choices: ["", ...Object.keys(CONFIG.SFRPG.itemActionTypes)],
-                blank: true,
-                label: "SFRPG.Items.Action.ActionType"
-            }),
-            attackBonus: new fields.NumberField({
-                initial: null,
-                nullable: true,
-                required: false,
-                label: "SFRPG.Items.Action.AttackRollBonus"
-            }),
-            chatFlavor: new fields.StringField({
-                required: false,
-                label: "SFRPG.Items.Action.ChatMessageFlavor"
-            }),
-            critical: new fields.SchemaField({
-                effect: new fields.StringField({
-                    required: false,
-                    label: "SFRPG.Items.Action.CriticalEffect"
-                }),
-                parts: new fields.ArrayField(
-                    new fields.SchemaField(
-                        SFRPGItemBase.damagePartTemplate(),
-                        {required: false, nullable: true}
-                    ),
-                    {required: true}
-                )
-            }),
-            damage: new fields.SchemaField({
-                parts: new fields.ArrayField(
-                    new fields.SchemaField(
-                        SFRPGItemBase.damagePartTemplate(),
-                        {required: false, nullable: true}
-                    ),
-                    {required: true}
-                )
-            }),
-            damageNotes: new fields.StringField({
-                required: false,
-                label: "SFRPG.Items.Action.DamageNotes",
-                hint: "SFRPG.Items.Action.DamageNotesTooltip"
-            }),
-            descriptors: new fields.ObjectField(), // TODO-Ian: detail this type more
-            formula: new fields.StringField({
-                initial: null,
-                nullable: true,
-                required: true,
-                label: "SFRPG.Items.Action.DamageFormula",
-                hint: "SFRPG.Items.Action.DamageFormulaTooltip"
-            }),
-            rollNotes: new fields.StringField({
-                required: false,
-                label: "SFRPG.Items.Action.DamageFormula",
-                hint: "SFRPG.Items.Action.DamageFormulaTooltip"
-            }),
-            properties: new fields.ObjectField(), // TODO-Ian: detail this type more
-            save: new fields.SchemaField({
-                ...SFRPGItemBase.saveTemplate()
-            }, {
-                required: true,
-                nullable: true,
-                label: "SFRPG.Items.Action.SavingThrow"
-            })
-        };
-    }
-
-    static activatedEffectTemplate() {
-        return {
-            activation: new fields.SchemaField({
-                cost: new fields.NumberField({
-                    initial: null,
-                    min: 0,
-                    nullable: true,
-                    required: false,
-                    label: "SFRPG.Items.Activation.ActivationCost"
-                }),
-                condition: new fields.StringField({
-                    required: false,
-                    label: "SFRPG.Items.Activation.ActivationCondition"
-                }),
-                type: new fields.StringField({
-                    initial: "none",
-                    choices: Object.keys(CONFIG.SFRPG.abilityActivationTypes),
-                    blank: true,
-                    required: true,
-                    label: "SFRPG.Items.Activation.Activation"
-                })
-            }, {
-                required: true,
-                label: "SFRPG.Items.Activation.Activation"
-            }),
-            area: new fields.SchemaField({
-                effect: new fields.StringField({
-                    initial: "",
-                    choices: Object.keys(CONFIG.SFRPG.spellAreaEffects),
-                    blank: true
-                }),
-                shapable: new fields.BooleanField(),
-                shape: new fields.StringField({
-                    initial: "",
-                    choices: Object.keys(CONFIG.SFRPG.spellAreaShapes),
-                    blank: true
-                }),
-                units: new fields.StringField({
-                    initial: "",
-                    choices: Object.keys(CONFIG.SFRPG.distanceUnits),
-                    blank: true
-                }),
-                value: new fields.StringField({initial: ""})
-            }, {
-                required: true,
-                label: "SFRPG.Items.Activation.Area"
-            }),
-            duration: new fields.SchemaField({
-                units: new fields.StringField({
-                    initial: "",
-                    choices: ["text", ...Object.keys(CONFIG.SFRPG.durationTypes)],
-                    blank: true
-                }),
-                value: new fields.StringField()
-            }, {
-                required: true,
-                label: "SFRPG.Items.Activation.Duration"
-            }),
-            isActive: new fields.BooleanField(),
-            range: new fields.SchemaField({
-                units: new fields.StringField({
-                    initial: "",
-                    choices: ["", ...Object.keys(CONFIG.SFRPG.distanceUnits)],
-                    blank: true,
-                    required: true
-                }),
-                value: new fields.StringField({
-                    required: false
-                })
-            }, {
-                required: true,
-                label: "SFRPG.Items.Activation.Range"
-            }),
-            target: new fields.SchemaField({
-                value: new fields.StringField({nullable: true})
-            }, {
-                required: true,
-                label: "SFRPG.Items.Activation.Target"
-            }),
-            uses: new fields.SchemaField({
-                max: new fields.StringField({nullable: true}),
-                per: new fields.StringField({
-                    initial: "",
-                    choices: ["", ...Object.keys(CONFIG.SFRPG.limitedUsePeriods)],
-                    blank: true
-                }),
-                value: new fields.NumberField({min: 0, nullable: true})
-            }, {
-                required: true,
-                label: "SFRPG.Items.Activation.LimitedUses"
-            })
-        };
-    }
-
-    static containerTemplate() {
-        return {
-            container: new fields.SchemaField({
-                contents: new fields.ArrayField(
-                    new fields.SchemaField({
-                        id: new fields.StringField({required: true}),
-                        index: new fields.NumberField({min: 0})
-                    }),
-                    {required: true}
-                ),
-                includeContentsInWealth: new fields.BooleanField({
-                    initial: true,
-                    label: "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculation",
-                    hint: "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculationTooltip"
-                }),
-                isOpen: new fields.BooleanField({initial: true}),
-                storage: new fields.ArrayField(
-                    new fields.SchemaField({
-                        acceptsType: new fields.ArrayField(
-                            new fields.StringField({
-                                choices: Object.keys(CONFIG.SFRPG.containableTypes)
-                            })
-                        ),
-                        affectsEncumbrance: new fields.BooleanField({initial: true}),
-                        amount: new fields.NumberField({min: 0}),
-                        subtype: new fields.StringField({
-                            choices: Object.keys(CONFIG.SFRPG.storageIdentifiers)
-                        }),
-                        type: new fields.StringField({
-                            choices: Object.keys(CONFIG.SFRPG.storageTypes)
-                        }),
-                        weightMultiplier: new fields.NumberField({
-                            min: 0,
-                            nullable: true,
-                            required: false
-                        }),
-                        weightProperty: new fields.StringField({
-                            choices: Object.keys(CONFIG.SFRPG.storageWeightProperties),
-                            blank: true
-                        })
-                    })
-                )
-            })
-        };
-    }
-
-    static itemDurationTemplate() {
-        return {
-            activeDuration: new fields.SchemaField({
-                activationTime: new fields.NumberField(),
-                endsOn: new fields.StringField({initial: "onTurnStart"}),
-                expiryInit: new fields.NumberField({min: 0}),
-                expiryMode: new fields.SchemaField({
-                    turn: new fields.StringField({initial: "parent"}),
-                    type: new fields.StringField({initial: "turn"})
-                }),
-                unit: new fields.StringField({initial: "round"}),
-                value: new fields.StringField({initial: "0"})
-            })
-        };
-    }
-
-    static itemUsageTemplate() {
-        return {
-            ammunitionType: new fields.StringField({
-                initial: "",
-                blank: true,
-                choices: ["", ...Object.keys(CONFIG.SFRPG.ammunitionTypes)],
-                label: "SFRPG.Items.Ammunition.AmmunitionType"
-            }, {required: true}),
-            capacity: new fields.SchemaField({
-                max: new fields.NumberField({
-                    initial: null,
-                    min: 0,
-                    nullable: true
-                }),
-                value: new fields.NumberField({
-                    initial: null,
-                    min: 0,
-                    nullable: true
-                })
-            }, {required: true}),
-            usage: new fields.SchemaField({
-                per: new fields.StringField({
-                    initial: "",
-                    choices: ["", ...Object.keys(CONFIG.SFRPG.capacityUsagePer)],
-                    blank: true
-                }),
-                value: new fields.NumberField({
-                    initial: null,
-                    min: 0,
-                    nullable: true
-                })
-            }, {required: true})
-        };
-    }
-
-    static physicalItemTemplate(options = {}) {
-        const isEquippable = options.isEquippable ?? false;
-        const isEquipment = options.isEquipment ?? false;
-        return {
             attributes: new fields.SchemaField({
-                ac: new fields.SchemaField({
-                    value: new fields.StringField({
-                        initial: ""
-                    })
-                }),
-                customBuilt: new fields.BooleanField({
-                    initial: false
-                }),
-                dex: new fields.SchemaField({
-                    mod: new fields.StringField({
-                        initial: "",
-                        required: true
-                    })
-                }),
-                hardness: new fields.SchemaField({
-                    value: new fields.StringField({
-                        initial: ""
-                    })
-                }),
+                eac: new fields.SchemaField(SFRPGActorBase._defenseFieldData()),
+                kac: new fields.SchemaField(SFRPGActorBase._defenseFieldData()),
+                cmd: new fields.SchemaField(SFRPGActorBase._defenseFieldData()),
                 hp: new fields.SchemaField({
-                    max: new fields.StringField({
-                        initial: "",
+                    ...SFRPGActorBase.tooltipTemplate(),
+                    max: new fields.NumberField({
+                        initial: 10,
+                        min: 0,
+                        nullable: false,
+                        required: true
+                    }),
+                    min: new fields.NumberField({
+                        initial: 0,
+                        min: 0,
+                        nullable: false,
+                        required: true
+                    }),
+                    temp: new fields.NumberField({
+                        initial: null,
+                        min: 0,
+                        nullable: true,
+                        required: true
+                    }),
+                    tempmax: new fields.NumberField({
+                        initial: null,
+                        min: 0,
+                        nullable: true,
                         required: true
                     }),
                     value: new fields.NumberField({
-                        initial: null,
-                        nullable: true,
+                        initial: 0,
                         min: 0,
+                        nullable: false,
                         required: true
                     })
                 }),
-                size: new fields.StringField({
-                    initial: "medium",
-                    required: true,
-                    choices: CONFIG.SFRPG.itemSizes
+                init: new fields.SchemaField({
+                    ...SFRPGActorBase.tooltipTemplate(),
+                    bonus: new fields.NumberField({
+                        initial: 0,
+                        min: 0,
+                        nullable: false,
+                        required: true
+                    }),
+                    total: new fields.NumberField({
+                        initial: 0,
+                        min: 0,
+                        nullable: false,
+                        required: true
+                    }),
+                    value: new fields.NumberField({
+                        initial: 0,
+                        min: 0,
+                        nullable: false,
+                        required: true
+                    })
                 }),
-                sturdy: new fields.BooleanField({
-                    initial: false
+                fort: new fields.SchemaField(SFRPGActorBase._saveFieldData()),
+                reflex: new fields.SchemaField(SFRPGActorBase._saveFieldData()),
+                will: new fields.SchemaField(SFRPGActorBase._saveFieldData()),
+                arms: new fields.NumberField({
+                    initial: 2,
+                    min: 0,
+                    nullable: false,
+                    required: true
+                }),
+                space: new fields.NumberField({
+                    initial: 5,
+                    min: 0,
+                    nullable: false,
+                    required: true
+                }),
+                reach: new fields.NumberField({
+                    initial: 5,
+                    min: 0,
+                    nullable: false,
+                    required: true
+                }),
+                speed: new fields.SchemaField({
+                    ...SFRPGDocumentBase.speedTemplate()
                 })
             }),
-            attuned: new fields.BooleanField({initial: false}),
-            bulk: new fields.StringField({
-                initial: "L",
-                required: true
+            currency: new fields.SchemaField({
+                credit: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    nullable: true,
+                    required: false
+                }),
+                upb: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    nullable: true,
+                    required: false
+                }),
             }),
-            equippable: new fields.BooleanField({initial: isEquippable}),
-            equipped: new fields.BooleanField({initial: false}),
-            equippedBulkMultiplier: new fields.NumberField({initial: 1, min: 0}),
-            identified: new fields.BooleanField({initial: true}),
-            isEquipment: new fields.BooleanField({initial: isEquipment}),
-            level: new fields.NumberField({
-                initial: 1,
-                min: 0,
-                required: true
+            details: new fields.SchemaField({
+                alignment: new fields.StringField({
+                    initial: "",
+                    blank: "",
+                    required: true
+                }),
+                biography: new fields.SchemaField({
+                    age: new fields.NumberField({
+                        initial: null,
+                        min: 0,
+                        nullable: true,
+                        required: false
+                    }),
+                    dateOfBirth: new fields.StringField({
+                        initial: "",
+                        blank: "",
+                        required: false
+                    }),
+                    deity: new fields.StringField({
+                        initial: "",
+                        blank: "",
+                        required: false
+                    }),
+                    fullBodyImage: new fields.FilePathField({
+                        initial: "",
+                        blank: true,
+                        required: false,
+                        categories: ["IMAGE"]
+                    }),
+                    genderPronouns: new fields.StringField({
+                        initial: "",
+                        blank: "",
+                        required: false
+                    }),
+                    height: new fields.StringField({
+                        initial: "",
+                        blank: "",
+                        required: false
+                    }),
+                    homeWorld: new fields.StringField({
+                        initial: "",
+                        blank: "",
+                        required: false
+                    }),
+                    otherVisuals: new fields.StringField({
+                        initial: "",
+                        blank: "",
+                        required: false
+                    }),
+                    public: new fields.StringField({
+                        initial: "",
+                        blank: "",
+                        required: false
+                    }),
+                    value: new fields.StringField({
+                        initial: "",
+                        blank: "",
+                        required: false
+                    }),
+                    weight: new fields.StringField({
+                        initial: "",
+                        blank: "",
+                        required: false
+                    })
+                }),
+                race: new fields.StringField({
+                    initial: "",
+                    blank: "",
+                    required: true
+                })
             }),
-            price: new fields.NumberField({
-                initial: null,
-                min: 0,
-                nullable: true,
-                required: true
+            skills: new fields.SchemaField({
+                acr: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "dex",
+                    isTrainedOnly: false,
+                    hasArmorCheckPenalty: true
+                }), {label: "SFRPG.SkillAcr"}),
+                ath: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "str",
+                    isTrainedOnly: false,
+                    hasArmorCheckPenalty: true
+                }), {label: "SFRPG.SkillAth"}),
+                blu: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "cha",
+                    isTrainedOnly: false,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillBlu"}),
+                com: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "int",
+                    isTrainedOnly: true,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillCom"}),
+                cul: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "int",
+                    isTrainedOnly: true,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillCul"}),
+                dip: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "cha",
+                    isTrainedOnly: false,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillDip"}),
+                dis: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "cha",
+                    isTrainedOnly: false,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillDis"}),
+                eng: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "int",
+                    isTrainedOnly: true,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillEng"}),
+                int: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "cha",
+                    isTrainedOnly: false,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillInt"}),
+                lsc: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "int",
+                    isTrainedOnly: true,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillLsc"}),
+                med: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "int",
+                    isTrainedOnly: true,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillMed"}),
+                mys: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "wis",
+                    isTrainedOnly: true,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillMys"}),
+                per: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "wis",
+                    isTrainedOnly: false,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillPer"}),
+                phs: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "int",
+                    isTrainedOnly: true,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillPhs"}),
+                pil: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "dex",
+                    isTrainedOnly: false,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillPil"}),
+                pro: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "int",
+                    isTrainedOnly: true,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillPro"}),
+                sen: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "wis",
+                    isTrainedOnly: false,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillSen"}),
+                sle: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "dex",
+                    isTrainedOnly: true,
+                    hasArmorCheckPenalty: true
+                }), {label: "SFRPG.SkillSle"}),
+                ste: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "dex",
+                    isTrainedOnly: false,
+                    hasArmorCheckPenalty: true
+                }), {label: "SFRPG.SkillSte"}),
+                sur: new fields.SchemaField(SFRPGActorBase._skillFieldData({
+                    ability: "wis",
+                    isTrainedOnly: false,
+                    hasArmorCheckPenalty: false
+                }), {label: "SFRPG.SkillSur"})
             }),
-            proficient: new fields.BooleanField({initial: false}),
-            quantity: new fields.NumberField({
-                initial: 1,
-                min: 0,
-                required: true
-            }),
-            quantityPerPack: new fields.NumberField({
-                initial: 1,
-                min: 1,
-                required: true
+            spells: new fields.SchemaField({
+                spell0: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
+                spell1: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
+                spell2: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
+                spell3: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
+                spell4: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
+                spell5: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
+                spell6: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false})
+            }, {required: false}),
+            traits: new fields.SchemaField({
+                ci: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.ConImm"}),
+                damageReduction: new fields.SchemaField({
+                    negatedBy: new fields.StringField({
+                        initial: "",
+                        blank: true,
+                        required: false
+                    }),
+                    value: new fields.NumberField({
+                        initial: 0,
+                        nullable: true,
+                        required: false
+                    })
+                }),
+                di: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Immunities"}),
+                dr: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Reduction"}),
+                dv: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Vulnerabilities"}),
+                languages: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Languages"}),
+                senses: new fields.StringField({
+                    initial: "",
+                    blank: true,
+                    required: false,
+                    label: "SFRPG.SensesTypes.Senses"
+                }),
+                size: new fields.StringField({
+                    initial: "medium",
+                    blank: false,
+                    choices: Object.keys(CONFIG.SFRPG.actorSizes),
+                    required: true,
+                    label: "SFRPG.Size"
+                }),
+                spellResistance: new fields.SchemaField({ // TODO: collate this and 'sr' into one field
+                    base: new fields.NumberField({
+                        initial: 0,
+                        nullable: true,
+                        required: false
+                    })
+                }, {label: "SFRPG.SpellResistance"}),
+                sr: new fields.NumberField({ // TODO: collate this and 'spellResistance' into one field
+                    initial: 0,
+                    nullable: false,
+                    required: true,
+                    label: "SFRPG.SpellResistance"
+                })
             })
         };
     }
 
-    static saveTemplate() {;
+    static conditionsTemplate() {
         return {
-            dc: new fields.StringField({
-                initial: "",
-                blank: true,
-                label: "SFRPG.ActionSave"
+            conditions: new fields.ObjectField({}) // TODO-Ian: Detail this field
+        };
+    }
+
+    static _abilityFieldData(includeBase) {
+        const data = {
+            value: new fields.NumberField({
+                initial: 10,
+                min: 0
             }),
-            descriptor: new fields.StringField({
-                initial: "negate",
-                choices: Object.keys(CONFIG.SFRPG.saveDescriptors),
-                blank: true,
-                label: "SFRPG.SaveDescriptor"
+            min: new fields.NumberField({
+                initial: 3,
+                min: 0
             }),
-            type: new fields.StringField({
-                initial: "",
-                choices: ["", ...Object.keys(CONFIG.SFRPG.saves)],
-                blank: true,
-                label: "SFRPG.Save"
+            misc: new fields.NumberField({
+                initial: 3,
+                min: 0
+            }),
+            mod: new fields.NumberField({
+                initial: 3,
+                min: 0
             })
         };
+
+        if (includeBase) {
+            data.base = new fields.NumberField({
+                initial: 10,
+                min: 0
+            });
+        }
+
+        return data;
     }
 
-    static specialMaterialsTemplate() {
+    static _defenseFieldData() {
         return {
-            specialMaterials: new fields.ObjectField() // TODO-Ian: detail this field properly
-        };
-    }
-
-    static starshipComponentTemplate() {
-        return {
-            cost: new fields.NumberField({
-                initial: null,
+            ...SFRPGActorBase.tooltipTemplate(),
+            min: new fields.NumberField({
+                initial: 0,
                 min: 0,
-                nullable: true,
+                nullable: false,
                 required: true
             }),
-            costMultipliedBySize: new fields.BooleanField({
+            value: new fields.NumberField({
+                initial: 10,
+                min: 0,
+                nullable: false,
+                required: true
+            })
+        }
+    }
+
+    static _saveFieldData() {
+        return {
+            ...SFRPGActorBase.tooltipTemplate(),
+            bonus: new fields.NumberField({
+                initial: 0,
+                min: 0,
+                nullable: false,
+                required: true
+            }),
+            misc: new fields.NumberField({
+                initial: 0,
+                min: 0,
+                nullable: false,
+                required: true
+            }),
+            value: new fields.NumberField({
+                initial: 0,
+                min: 0,
+                nullable: false,
+                required: true
+            })
+        }
+    }
+
+    static _skillFieldData(options = {}) {
+        const ability = options.ability ?? "cha";
+        const isTrainedOnly = options.isTrainedOnly ?? false;
+        const hasArmorCheckPenalty = options.hasArmorCheckPenalty ?? false;
+        return {
+            ability: new fields.StringField({
+                initial: ability,
+                blank: false,
+                choices: Object.keys(CONFIG.SFRPG.abilities),
+                required: false
+            }),
+            min: new fields.NumberField({
+                initial: 0,
+                min: 0,
+                nullable: false,
+                required: false
+            }),
+            ranks: new fields.NumberField({
+                initial: 0,
+                min: 0,
+                nullable: false,
+                required: false
+            }),
+            value: new fields.NumberField({
+                initial: 0,
+                min: 0,
+                nullable: false,
+                required: false
+            }),
+            misc: new fields.NumberField({
+                initial: 0,
+                min: 0,
+                nullable: false,
+                required: false
+            }),
+            mod: new fields.NumberField({
+                initial: 0,
+                min: 0,
+                nullable: false,
+                required: false
+            }),
+            enabled: new fields.BooleanField({
                 initial: false,
-                required: true
-            }),
-            isPowered: new fields.BooleanField({
-                intial: true,
                 required: false
             }),
-            pcu: new fields.NumberField({
-                initial: null,
+            isTrainedOnly: new fields.BooleanField({
+                initial: isTrainedOnly,
+                required: false
+            }),
+            hasArmorCheckPenalty: new fields.BooleanField({
+                initial: hasArmorCheckPenalty,
+                required: false
+            })
+        }
+    }
+
+    static _spellFieldData() {
+        return {
+            value: new fields.NumberField({
+                initial: 0,
                 min: 0,
                 nullable: true,
                 required: false
-            })
+            }),
+            max: new fields.NumberField({
+                initial: 0,
+                min: 0,
+                nullable: true,
+                required: false
+            }),
+            perClass: new fields.ObjectField() // TODO-Ian: Detail this field a bit more
+        }
+    }
+
+    static _traitFieldData() {
+        return {
+            custom: new fields.StringField({
+                initial: "",
+                blank: true,
+                required: false
+            }),
+            value: new fields.ArrayField(
+                new fields.StringField({
+                    initial: "",
+                    blank: true,
+                    required: false
+                })
+            )
+        }
+    }
+
+    static tooltipTemplate() {
+        return {
+            tooltip: new fields.ArrayField(
+                new fields.StringField({
+                    initial: "",
+                    required: false,
+                    blank: true
+                }), {required: false}
+            )
         };
     }
 }
