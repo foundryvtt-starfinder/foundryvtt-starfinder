@@ -128,7 +128,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         if (data.system.skills) {
             // Update skill labels
             for (const [s, skl] of Object.entries(data.system.skills)) {
-                skl.ability = data.system.abilities[skl.ability].label.substring(0, 3);
+                skl.abilityLabel = data.system.abilities[skl.ability].label.substring(0, 3);
                 skl.icon = this._getClassSkillIcon(skl.value);
 
                 let skillLabel = CONFIG.SFRPG.skills[s.substring(0, 3)];
