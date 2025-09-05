@@ -490,7 +490,7 @@ SFRPG.skills = {
     "mys": "SFRPG.SkillMys",
     "per": "SFRPG.SkillPer",
     "pro": "SFRPG.SkillPro",
-    "phs": "SFRPG.SkillPsc",
+    "phs": "SFRPG.SkillPhs",
     "pil": "SFRPG.SkillPil",
     "sen": "SFRPG.SkillSen",
     "sle": "SFRPG.SkillSle",
