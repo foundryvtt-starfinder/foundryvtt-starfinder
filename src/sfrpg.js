@@ -221,6 +221,10 @@ Hooks.once('init', async function() {
     CONFIG.MeasuredTemplate.defaults.angle = 90; // SF uses 90 degree cones
 
     // DataModels definition
+    CONFIG.Actor.dataModels = {
+        character: models.SFRPGActorCharacter
+    }
+
     CONFIG.Item.dataModels = {
         actorResource: models.SFRPGItemActorResource,
         ammunition: models.SFRPGItemAmmunition,

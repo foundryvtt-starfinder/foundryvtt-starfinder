@@ -132,12 +132,12 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     }),
                     dateOfBirth: new fields.StringField({
                         initial: "",
-                        blank: "",
+                        blank: true,
                         required: false
                     }),
                     deity: new fields.StringField({
                         initial: "",
-                        blank: "",
+                        blank: true,
                         required: false
                     }),
                     fullBodyImage: new fields.FilePathField({
@@ -148,43 +148,43 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     }),
                     genderPronouns: new fields.StringField({
                         initial: "",
-                        blank: "",
+                        blank: true,
                         required: false
                     }),
                     height: new fields.StringField({
                         initial: "",
-                        blank: "",
+                        blank: true,
                         required: false
                     }),
                     homeWorld: new fields.StringField({
                         initial: "",
-                        blank: "",
+                        blank: true,
                         required: false
                     }),
                     otherVisuals: new fields.StringField({
                         initial: "",
-                        blank: "",
+                        blank: true,
                         required: false
                     }),
                     public: new fields.StringField({
                         initial: "",
-                        blank: "",
+                        blank: true,
                         required: false
                     }),
                     value: new fields.StringField({
                         initial: "",
-                        blank: "",
+                        blank: true,
                         required: false
                     }),
                     weight: new fields.StringField({
                         initial: "",
-                        blank: "",
+                        blank: true,
                         required: false
                     })
                 }),
                 race: new fields.StringField({
                     initial: "",
-                    blank: "",
+                    blank: true,
                     required: true
                 })
             }),
