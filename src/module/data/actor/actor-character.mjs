@@ -133,6 +133,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
 
         // Character-specific fields
         foundry.utils.mergeObject(schema, {
+            resources: new fields.ObjectField(), // TODO-Ian: detail this
             skillpoints: new fields.SchemaField({
                 ...SFRPGActorBase.tooltipTemplate(),
                 max: new fields.NumberField({
@@ -147,7 +148,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            }) // TODO-Ian: detail this
+            })
         });
 
         // Edit initial values as needed

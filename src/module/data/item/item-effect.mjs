@@ -27,6 +27,12 @@ export default class SFRPGItemEffect extends SFRPGItemBase {
                 required: true,
                 label: "SFRPG.Effect.DetailsEnabledLabel"
             }),
+            requirements: new fields.StringField({
+                initial: "",
+                blank: true,
+                required: true,
+                label: "SFRPG.ItemSheet.Header.Requirements"
+            }),
             showOnToken: new fields.BooleanField({
                 initial: true,
                 required: true,

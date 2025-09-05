@@ -120,7 +120,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             details: new fields.SchemaField({
                 alignment: new fields.StringField({
                     initial: "",
-                    blank: "",
+                    blank: true,
                     required: true
                 }),
                 biography: new fields.SchemaField({
@@ -298,7 +298,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 spell4: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
                 spell5: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
                 spell6: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false})
-            }, {required: false}),
+            }, {required: true}),
             traits: new fields.SchemaField({
                 ci: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.ConImm"}),
                 damageReduction: new fields.SchemaField({
@@ -348,9 +348,17 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
     }
 
     static conditionsTemplate() {
-        return {
-            conditions: new fields.ObjectField({}) // TODO-Ian: Detail this field
-        };
+        const conditions = Object.keys(CONFIG.SFRPG.conditionTypes);
+        let conditionFields = {};
+
+        for (const condition of conditions) {
+            conditionFields[condition] = new fields.BooleanField({
+                initial: false,
+                required: true
+            });
+        }
+
+        return {conditions: new fields.SchemaField(conditionFields)};
     }
 
     static _abilityFieldData(includeBase) {
