@@ -115,7 +115,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     min: 0,
                     nullable: true,
                     required: false
-                }),
+                })
             }),
             details: new fields.SchemaField({
                 alignment: new fields.StringField({
@@ -349,7 +349,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
 
     static conditionsTemplate() {
         const conditions = Object.keys(CONFIG.SFRPG.conditionTypes);
-        let conditionFields = {};
+        const conditionFields = {};
 
         for (const condition of conditions) {
             conditionFields[condition] = new fields.BooleanField({
@@ -406,7 +406,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 nullable: false,
                 required: true
             })
-        }
+        };
     }
 
     static _saveFieldData() {
@@ -430,7 +430,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 nullable: false,
                 required: true
             })
-        }
+        };
     }
 
     static _skillFieldData(options = {}) {
@@ -486,7 +486,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 initial: hasArmorCheckPenalty,
                 required: false
             })
-        }
+        };
     }
 
     static _spellFieldData() {
@@ -504,7 +504,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 required: false
             }),
             perClass: new fields.ObjectField() // TODO-Ian: Detail this field a bit more
-        }
+        };
     }
 
     static _traitFieldData() {
@@ -521,7 +521,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     required: false
                 })
             )
-        }
+        };
     }
 
     static tooltipTemplate() {
