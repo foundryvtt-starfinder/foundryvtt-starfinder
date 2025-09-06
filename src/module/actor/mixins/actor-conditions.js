@@ -27,7 +27,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             return undefined;
         }
 
-        const conditionItem = this.items.find(item => item.name.toLowerCase() === conditionName);
+        const conditionItem = this.items.find(item => (item.system.nameSlug === conditionName) || (item.name.toLowerCase() === conditionName)); // TODO: The 'or' is in place for backward compatibility. This should only use nameSlug once DataModels are implemented and migrations can be done easily.
         return conditionItem ?? null;
     }
 
@@ -49,8 +49,9 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
         if (enabled) {
             if (!conditionItem) {
                 const pack = game.packs.get("sfrpg.conditions");
+                const indexKey = CONFIG.SFRPG.statusEffects.find(e => e.id === conditionName).compendiumKey;
                 const index = pack.indexed ? pack.index : await pack.getIndex();
-                const entry = index.find(e => e.name.toLowerCase() === conditionName.toLowerCase());
+                const entry = index.get(indexKey);
 
                 if (entry) {
                     const entity = await pack.getDocument(entry._id);
@@ -76,7 +77,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
         // Since conditions sidestep Foundry status effects, simulate a status effect change.
         const tokens = this.getActiveTokens(true);
         for (const token of tokens) {
-            token._onApplyStatusEffect(conditionName.toLowerCase(), enabled);
+            token._onApplyStatusEffect(conditionName, enabled);
         }
 
         return enabled;
