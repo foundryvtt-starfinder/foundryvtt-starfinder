@@ -1,9 +1,9 @@
 // Export Actors
 export { default as SFRPGActorBase } from './actor/base-actor.mjs';
 export { default as SFRPGActorCharacter } from './actor/actor-character.mjs';
+export { default as SFRPGActorDrone } from './actor/actor-drone.mjs';
 /*
 export { default as SFRPGActorNPC } from './actor/actor-npc.mjs';
-export { default as SFRPGActorDrone } from './actor/actor-drone.mjs';
 export { default as SFRPGActorStarship } from './actor/actor-starship.mjs';
 export { default as SFRPGActorVehicle } from './actor/actor-vehicle.mjs';
 */

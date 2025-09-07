@@ -6,7 +6,12 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
     static defineSchema() {
         const schema = super.defineSchema();
 
-        schema.source = new fields.StringField();
+        schema.source = new fields.StringField({
+            initial: "",
+            blank: true,
+            required: false,
+            label: "SFRPG.SourceBook"
+        });
         schema.description = new fields.SchemaField({
             value: new fields.HTMLField(),
             chat: new fields.HTMLField(),

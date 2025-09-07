@@ -222,7 +222,8 @@ Hooks.once('init', async function() {
 
     // DataModels definition
     CONFIG.Actor.dataModels = {
-        character: models.SFRPGActorCharacter
+        character: models.SFRPGActorCharacter,
+        drone: models.SFRPGActorDrone
     };
 
     CONFIG.Item.dataModels = {
