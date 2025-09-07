@@ -224,6 +224,7 @@ Hooks.once('init', async function() {
     CONFIG.Actor.dataModels = {
         character: models.SFRPGActorCharacter,
         drone: models.SFRPGActorDrone,
+        hazard: models.SFRPGActorHazard,
         npc2: models.SFRPGActorNPC
     };
 

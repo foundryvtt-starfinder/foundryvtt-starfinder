@@ -91,14 +91,14 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 space: new fields.NumberField({
                     initial: 5,
                     min: 0,
-                    nullable: false,
+                    nullable: true,
                     required: true,
                     label: "SFRPG.Space"
                 }),
                 reach: new fields.NumberField({
                     initial: 5,
                     min: 0,
-                    nullable: false,
+                    nullable: true,
                     required: true,
                     label: "SFRPG.Reach"
                 }),
