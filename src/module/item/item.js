@@ -1105,17 +1105,10 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 modsToProcess.push(modValue);
             }
         }
-        const data = {};
-        Object.assign(data, this.actor.getRollData() ?? {});
-        Object.assign(data, {"item": this.system});
+        const rollContext = RollContext.createItemRollContext(this, this.actor);
         for (const mod of modsToProcess) {
-            let computedBonus = 1;
-            try {
-                const roll = Roll.create(mod.modifier.toString(), data).evaluateSync({strict: false});
-                computedBonus = roll.total;
-            } catch {
-                // pass
-            }
+            const rollResult = DiceSFRPG.resolveFormulaWithoutDice(mod.modifier.toString(), rollContext);
+            const computedBonus = !rollResult.hadError ? rollResult.total : 1;
             multiplier *= computedBonus;
         }
         const computedValue = Math.round(value * multiplier);
