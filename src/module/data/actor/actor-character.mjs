@@ -23,7 +23,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            }),
+            }, {label: "SFRPG.BaseAttackBonusTitle"}),
             rp: new fields.SchemaField({
                 ...SFRPGActorBase.tooltipTemplate(),
                 max: new fields.NumberField({
@@ -44,7 +44,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            }),
+            }, {label: "SFRPG.Resolve"}),
             sp: new fields.SchemaField({
                 ...SFRPGActorBase.tooltipTemplate(),
                 max: new fields.NumberField({
@@ -65,7 +65,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            })
+            }, {label: "SFRPG.Stamina"})
         });
 
         foundry.utils.mergeObject(schema.details.fields, {
@@ -74,10 +74,9 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     initial: null,
                     nullable: true,
                     required: true,
-                    min: 0,
-                    label: "SFRPG.ClassLevelLabel"
+                    min: 0
                 })
-            }),
+            }, {label: "SFRPG.ClassLevelLabel"}),
             level: new fields.SchemaField({
                 max: new fields.NumberField({
                     initial: 20,
@@ -97,7 +96,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            }),
+            }, {label: "LevelLabelText"}),
             theme: new fields.StringField({
                 initial: "",
                 blank: true,
@@ -123,7 +122,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            })
+            }, {label: "SFRPG.XP"})
         });
 
         foundry.utils.mergeObject(schema.traits.fields, {
@@ -133,7 +132,9 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
 
         // Character-specific fields
         foundry.utils.mergeObject(schema, {
-            resources: new fields.ObjectField(), // TODO-Ian: detail this
+            resources: new fields.ObjectField({ // TODO-Ian: detail this
+                label: "SFRPG.ActorSheet.Features.Categories.ActorResources"
+            }),
             skillpoints: new fields.SchemaField({
                 ...SFRPGActorBase.tooltipTemplate(),
                 max: new fields.NumberField({
@@ -148,7 +149,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            })
+            }, {label: "SFRPG.SkillPoints"})
         });
 
         // Edit initial values as needed

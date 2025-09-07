@@ -13,17 +13,17 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
 
         return {
             abilities: new fields.SchemaField({
-                cha: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities)),
-                con: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities)),
-                dex: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities)),
-                int: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities)),
-                str: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities)),
-                wis: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities))
+                cha: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities), {label: "SFRPG.AbilityCha"}),
+                con: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities), {label: "SFRPG.AbilityCon"}),
+                dex: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities), {label: "SFRPG.AbilityDex"}),
+                int: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities), {label: "SFRPG.AbilityInt"}),
+                str: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities), {label: "SFRPG.AbilityStr"}),
+                wis: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities), {label: "SFRPG.AbilityWis"})
             }),
             attributes: new fields.SchemaField({
-                eac: new fields.SchemaField(SFRPGActorBase._defenseFieldData()),
-                kac: new fields.SchemaField(SFRPGActorBase._defenseFieldData()),
-                cmd: new fields.SchemaField(SFRPGActorBase._defenseFieldData()),
+                eac: new fields.SchemaField(SFRPGActorBase._defenseFieldData(), {label: "SFRPG.EnergyArmorClass"}),
+                kac: new fields.SchemaField(SFRPGActorBase._defenseFieldData(), {label: "SFRPG.KineticArmorClass"}),
+                cmd: new fields.SchemaField(SFRPGActorBase._defenseFieldData(), {label: "SFRPG.ACvsCombatManeuversTitle"}),
                 hp: new fields.SchemaField({
                     ...SFRPGActorBase.tooltipTemplate(),
                     max: new fields.NumberField({
@@ -56,7 +56,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         nullable: false,
                         required: true
                     })
-                }),
+                }, {label: "SFRPG.Health"}),
                 init: new fields.SchemaField({
                     ...SFRPGActorBase.tooltipTemplate(),
                     bonus: new fields.NumberField({
@@ -77,27 +77,30 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         nullable: false,
                         required: true
                     })
-                }),
-                fort: new fields.SchemaField(SFRPGActorBase._saveFieldData()),
-                reflex: new fields.SchemaField(SFRPGActorBase._saveFieldData()),
-                will: new fields.SchemaField(SFRPGActorBase._saveFieldData()),
+                }, {label: "SFRPG.InitiativeLabel"}),
+                fort: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.FortitudeSave"}),
+                reflex: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.ReflexSave"}),
+                will: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.WillSave"}),
                 arms: new fields.NumberField({
                     initial: 2,
                     min: 0,
                     nullable: false,
-                    required: true
+                    required: true,
+                    label: "SFRPG.NumberOfArms"
                 }),
                 space: new fields.NumberField({
                     initial: 5,
                     min: 0,
                     nullable: false,
-                    required: true
+                    required: true,
+                    label: "SFRPG.Space"
                 }),
                 reach: new fields.NumberField({
                     initial: 5,
                     min: 0,
                     nullable: false,
-                    required: true
+                    required: true,
+                    label: "SFRPG.Reach"
                 }),
                 speed: new fields.SchemaField({
                     ...SFRPGDocumentBase.speedTemplate()
@@ -108,63 +111,75 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     initial: 0,
                     min: 0,
                     nullable: true,
-                    required: false
+                    required: false,
+                    label: "SFRPG.Credits"
                 }),
                 upb: new fields.NumberField({
                     initial: 0,
                     min: 0,
                     nullable: true,
-                    required: false
+                    required: false,
+                    label: "SFRPG.UPBs"
                 })
             }),
             details: new fields.SchemaField({
                 alignment: new fields.StringField({
                     initial: "",
                     blank: true,
-                    required: true
+                    required: true,
+                    label: "SFRPG.AlignmentPlaceHolderText"
                 }),
                 biography: new fields.SchemaField({
                     age: new fields.NumberField({
                         initial: null,
                         min: 0,
                         nullable: true,
-                        required: false
+                        required: false,
+                        label: "SFRPG.ActorSheet.Biography.Age"
                     }),
                     dateOfBirth: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false
+                        required: false,
+                        label: "SFRPG.ActorSheet.Biography.DateOfBirth"
                     }),
                     deity: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false
+                        required: false,
+                        label: "SFRPG.ActorSheet.Biography.Deity"
                     }),
                     fullBodyImage: new fields.FilePathField({
                         initial: "",
                         blank: true,
                         required: false,
-                        categories: ["IMAGE"]
+                        categories: ["IMAGE"],
+                        label: "SFRPG.ActorSheet.Biography.FullBodyImage",
+                        hint: "SFRPG.ActorSheet.Biography.ImageTooltip"
                     }),
                     genderPronouns: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false
+                        required: false,
+                        label: "SFRPG.ActorSheet.Biography.GenderPronouns"
                     }),
                     height: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false
+                        required: false,
+                        label: "SFRPG.ActorSheet.Biography.Height"
                     }),
                     homeWorld: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false
+                        required: false,
+                        label: "SFRPG.ActorSheet.Biography.Homeworld"
                     }),
                     otherVisuals: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false
+                        required: false,
+                        label: "SFRPG.ActorSheet.Biography.OtherVisuals"
                     }),
                     public: new fields.StringField({
                         initial: "",
@@ -179,13 +194,15 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     weight: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false
+                        required: false,
+                        label: "SFRPG.ActorSheet.Biography.Weight"
                     })
                 }),
                 race: new fields.StringField({
                     initial: "",
                     blank: true,
-                    required: true
+                    required: true,
+                    label: "SFRPG.ActorSheet.Features.Categories.Race"
                 })
             }),
             skills: new fields.SchemaField({
@@ -298,7 +315,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 spell4: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
                 spell5: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
                 spell6: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false})
-            }, {required: true}),
+            }, {required: true, label: "SFRPG.Items.Categories.Spells"}),
             traits: new fields.SchemaField({
                 ci: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.ConImm"}),
                 damageReduction: new fields.SchemaField({
@@ -312,7 +329,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         nullable: true,
                         required: false
                     })
-                }),
+                }, {label: "SFRPG.ActorSheet.Modifiers.EffectTypes.DamageReduction"}),
                 di: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Immunities"}),
                 dr: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Reduction"}),
                 dv: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Vulnerabilities"}),

@@ -28,7 +28,7 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            }),
+            }, {label: "SFRPG.DroneSheet.Traits.ArmorSlots"}),
             baseAttackBonus: new fields.SchemaField({
                 ...SFRPGActorBase.tooltipTemplate(),
                 value: new fields.NumberField({
@@ -37,7 +37,7 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            }),
+            }, {label: "SFRPG.BaseAttackBonusTitle"}),
             rp: new fields.SchemaField({
                 ...SFRPGActorBase.tooltipTemplate(),
                 max: new fields.NumberField({
@@ -58,7 +58,7 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            }),
+            }, {label: "SFRPG.Resolve"}),
             weaponMounts: new fields.SchemaField({
                 melee: new fields.SchemaField({
                     current: new fields.NumberField({
@@ -73,7 +73,7 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
                         nullable: false,
                         required: true
                     })
-                }),
+                }, {label: "SFRPG.DroneSheet.Traits.MeleeWeaponMounts"}),
                 ranged: new fields.SchemaField({
                     current: new fields.NumberField({
                         initial: 0,
@@ -87,7 +87,7 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
                         nullable: false,
                         required: true
                     })
-                })
+                }, {label: "SFRPG.DroneSheet.Traits.RangedWeaponMounts"})
             })
         });
 
@@ -117,7 +117,7 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            })
+            }, {label: "SFRPG.LevelLabelText"})
         });
 
         foundry.utils.mergeObject(schema.traits.fields, {
@@ -126,7 +126,9 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
 
         // Character-specific fields
         foundry.utils.mergeObject(schema, {
-            resources: new fields.ObjectField() // TODO-Ian: detail this
+            resources: new fields.ObjectField({ // TODO-Ian: detail this
+                label: "SFRPG.ActorSheet.Features.Categories.ActorResources"
+            })
         });
 
         // Edit initial values as needed
