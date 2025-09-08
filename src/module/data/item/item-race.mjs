@@ -20,14 +20,6 @@ export default class SFRPGItemRace extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             abilityMods: new fields.SchemaField({
                 parts: new fields.ArrayField(
-                    /* new fields.NumberField({
-                        initial: 2,
-                        required: true,
-                        nullable: false
-                    }),
-                    new fields.StringField({
-                        choices: Object.keys(CONFIG.SFRPG.abilities)
-                    }), */
                     new fields.AnyField(), // TODO: Replace this with something that supports the format [[2, con], [2, wis], [-2, int]]
                     { initial: [], required: true, label: "SFRPG.SpeciesAbilityModifier" }
                 )
