@@ -124,13 +124,6 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
             weaponProf: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.TraitWeaponProf"})
         });
 
-        // Character-specific fields
-        foundry.utils.mergeObject(schema, {
-            resources: new fields.ObjectField({ // TODO-Ian: detail this
-                label: "SFRPG.ActorSheet.Features.Categories.ActorResources"
-            })
-        });
-
         // Edit initial values as needed
         schema.skills.fields.acr.fields.enabled.initial = true;
         schema.skills.fields.ath.fields.enabled.initial = true;

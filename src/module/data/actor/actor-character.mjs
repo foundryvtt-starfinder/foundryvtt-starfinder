@@ -137,9 +137,6 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     initial: false
                 })
             }),
-            resources: new fields.ObjectField({ // TODO-Ian: detail this
-                label: "SFRPG.ActorSheet.Features.Categories.ActorResources"
-            }),
             skillpoints: new fields.SchemaField({
                 ...SFRPGActorBase.tooltipTemplate(),
                 max: new fields.NumberField({
