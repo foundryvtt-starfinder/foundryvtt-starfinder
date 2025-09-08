@@ -307,15 +307,6 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     hasArmorCheckPenalty: false
                 }), {label: "SFRPG.SkillSur"})
             }),
-            spells: new fields.SchemaField({
-                spell0: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
-                spell1: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
-                spell2: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
-                spell3: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
-                spell4: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
-                spell5: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false}),
-                spell6: new fields.SchemaField(SFRPGActorBase._spellFieldData(), {required: false})
-            }, {required: true, label: "SFRPG.Items.Categories.Spells"}),
             traits: new fields.SchemaField({
                 ci: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.ConImm"}),
                 damageReduction: new fields.SchemaField({
@@ -443,6 +434,21 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
 
         return {
             crew: new fields.SchemaField(schema)
+        };
+    }
+
+    static spellTemplate(options = {}) {
+        const actorType = options.actorType ?? "npc";
+        return {
+            spells: new fields.SchemaField({
+                spell0: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false}),
+                spell1: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false}),
+                spell2: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false}),
+                spell3: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false}),
+                spell4: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false}),
+                spell5: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false}),
+                spell6: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false})
+            }, {required: true, label: "SFRPG.Items.Categories.Spells"})
         };
     }
 
@@ -630,8 +636,9 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         };
     }
 
-    static _spellFieldData() {
-        return {
+    static _spellFieldData(options = {}) {
+        const actorType = options.actorType ?? "npc";
+        const schema = {
             value: new fields.NumberField({
                 initial: 0,
                 min: 0,
@@ -643,9 +650,24 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 min: 0,
                 nullable: true,
                 required: false
-            }),
-            perClass: new fields.ObjectField() // TODO-Ian: Detail this field a bit more
+            })
         };
+
+        // If an actor is a character, add a per-class field for spell slots
+        if (actorType === "character") {
+            schema.perClass = new fields.TypedObjectField(
+                new fields.SchemaField({
+                    value: new fields.NumberField({
+                        initial: 0,
+                        min: 0,
+                        nullable: true,
+                        required: false
+                    })
+                })
+            );
+        }
+
+        return schema;
     }
 
     static _traitFieldData() {
