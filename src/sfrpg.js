@@ -226,6 +226,7 @@ Hooks.once('init', async function() {
         drone: models.SFRPGActorDrone,
         hazard: models.SFRPGActorHazard,
         npc2: models.SFRPGActorNPC,
+        starship: models.SFRPGActorStarship,
         vehicle: models.SFRPGActorVehicle
     };
 

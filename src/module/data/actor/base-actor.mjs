@@ -205,7 +205,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     label: "SFRPG.ActorSheet.Features.Categories.Race"
                 })
             }),
-            skills: new fields.SchemaField({
+            skills: new fields.SchemaField({ // TODO-Ian: Replace with TypedObjectField and set up these as initial values (to allow professions)
                 acr: new fields.SchemaField(SFRPGActorBase._skillFieldData({
                     ability: "dex",
                     isTrainedOnly: false,
@@ -382,11 +382,11 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         const type = options.type ?? "vehicle";
 
         const schema = {
-            passenger: SFRPGActorBase._crewPCFieldData({
+            passenger: SFRPGActorBase._crewPCField({
                 init: 0,
                 label: "SFRPG.StarshipSheet.Role.Passenger"
             }),
-            pilot: SFRPGActorBase._crewPCFieldData({
+            pilot: SFRPGActorBase._crewPCField({
                 init: 1,
                 label: "SFRPG.StarshipSheet.Role.Pilot"
             }),
@@ -398,17 +398,63 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
 
         if (type === "vehicle") {
             foundry.utils.mergeObject(schema, {
-                complement: SFRPGActorBase._crewPCFieldData({
+                complement: SFRPGActorBase._crewPCField({
                     init: 0,
                     label: "SFRPG.VehicleSheet.Details.OtherAttributes.Complement"
                 })
             });
         } else if (type === "starship") {
-            // pass
+            foundry.utils.mergeObject(schema, {
+                captain: SFRPGActorBase._crewPCField({
+                    init: 1,
+                    label: ""
+                }),
+                chiefMate: SFRPGActorBase._crewPCField({
+                    init: -1,
+                    label: ""
+                }),
+                engineer: SFRPGActorBase._crewPCField({
+                    init: -1,
+                    label: ""
+                }),
+                gunner: SFRPGActorBase._crewPCField({
+                    init: 0,
+                    label: ""
+                }),
+                magicOfficer: SFRPGActorBase._crewPCField({
+                    init: -1,
+                    label: ""
+                }),
+                scienceOfficer: SFRPGActorBase._crewPCField({
+                    init: -1,
+                    label: ""
+                }),
+                npcData: new fields.SchemaField({
+                    captain: SFRPGActorBase._crewNPCField({label: ""}),
+                    chiefMate: SFRPGActorBase._crewNPCField({label: ""}),
+                    engineer: SFRPGActorBase._crewNPCField({label: ""}),
+                    gunner: SFRPGActorBase._crewNPCField({label: ""}),
+                    magicOfficer: SFRPGActorBase._crewNPCField({label: ""}),
+                    pilot: SFRPGActorBase._crewNPCField({label: ""}),
+                    scienceOfficer: SFRPGActorBase._crewNPCField({label: ""})
+                })
+            });
         }
 
         return {
             crew: new fields.SchemaField(schema)
+        };
+    }
+
+    static tooltipTemplate() {
+        return {
+            tooltip: new fields.ArrayField(
+                new fields.StringField({
+                    initial: "",
+                    required: false,
+                    blank: true
+                }), {required: false}
+            )
         };
     }
 
@@ -442,7 +488,23 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         return data;
     }
 
-    static _crewPCFieldData(options = {}) {
+    static _crewNPCField(options = {}) {
+        const label = options.label ?? "";
+        const hint = options.hint ?? "";
+        return new fields.SchemaField({
+            numberOfUses: new fields.NumberField({
+                initial: null,
+                min: 0,
+                nullable: true,
+                label: ""
+            }),
+            skills: new fields.TypedObjectField(
+                new fields.SchemaField(SFRPGActorBase._skillFieldData())
+            )
+        }, {label: label, hint: hint});
+    }
+
+    static _crewPCField(options = {}) {
         const init = options.init ?? 0;
         const label = options.label ?? "";
         const hint = options.hint ?? "";
@@ -518,19 +580,19 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 choices: Object.keys(CONFIG.SFRPG.abilities),
                 required: false
             }),
+            hasArmorCheckPenalty: new fields.BooleanField({
+                initial: hasArmorCheckPenalty,
+                required: false
+            }),
+            isTrainedOnly: new fields.BooleanField({
+                initial: isTrainedOnly,
+                required: false
+            }),
+            enabled: new fields.BooleanField({
+                initial: false,
+                required: false
+            }),
             min: new fields.NumberField({
-                initial: 0,
-                min: 0,
-                nullable: false,
-                required: false
-            }),
-            ranks: new fields.NumberField({
-                initial: 0,
-                min: 0,
-                nullable: false,
-                required: false
-            }),
-            value: new fields.NumberField({
                 initial: 0,
                 min: 0,
                 nullable: false,
@@ -548,16 +610,21 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 nullable: false,
                 required: false
             }),
-            enabled: new fields.BooleanField({
-                initial: false,
+            ranks: new fields.NumberField({
+                initial: 0,
+                min: 0,
+                nullable: false,
                 required: false
             }),
-            isTrainedOnly: new fields.BooleanField({
-                initial: isTrainedOnly,
+            subname: new fields.StringField({
+                initial: "",
+                blank: true,
                 required: false
             }),
-            hasArmorCheckPenalty: new fields.BooleanField({
-                initial: hasArmorCheckPenalty,
+            value: new fields.NumberField({
+                initial: 0,
+                min: 0,
+                nullable: false,
                 required: false
             })
         };
@@ -594,18 +661,6 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     blank: true,
                     required: false
                 })
-            )
-        };
-    }
-
-    static tooltipTemplate() {
-        return {
-            tooltip: new fields.ArrayField(
-                new fields.StringField({
-                    initial: "",
-                    required: false,
-                    blank: true
-                }), {required: false}
             )
         };
     }

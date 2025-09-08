@@ -146,8 +146,10 @@ export default function(engine) {
                 value: 0,
                 tooltip: []
             };
-            data.attributes.complement.min = 0;
-            data.attributes.complement.max = 0;
+            data.attributes.complement = {
+                min: 0,
+                max: 0
+            };
 
             data.attributes.hp.increment = 0;
             data.attributes.hp.max = 0;
@@ -169,8 +171,10 @@ export default function(engine) {
                 value: frame.system.expansionBays,
                 tooltip: []
             };
-            data.attributes.complement.min = frame.system.crew.minimum;
-            data.attributes.complement.max = frame.system.crew.maximum;
+            data.attributes.complement = {
+                min: frame.system.crew.minimum,
+                max: frame.system.crew.maximum
+            };
 
             data.attributes.hp.increment = frame.system.hitpoints.increment;
             data.attributes.hp.max = frame.system.hitpoints.base + Math.floor(data.details.tier / 4) * frame.system.hitpoints.increment;

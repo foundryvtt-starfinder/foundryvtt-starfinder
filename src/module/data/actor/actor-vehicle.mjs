@@ -2,7 +2,7 @@ import SFRPGActorBase from "./base-actor.mjs";
 
 const { fields } = foundry.data;
 
-export default class SFRPGActorCharacter extends SFRPGActorBase {
+export default class SFRPGActorVehicle extends SFRPGActorBase {
     static defineSchema() {
         const schema = super.defineSchema();
 
@@ -166,7 +166,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     })
                 }),
                 type: new fields.StringField({
-                    initial: "medium",
+                    initial: "land",
                     blank: false,
                     choices: Object.keys(CONFIG.SFRPG.vehicleTypes),
                     required: true,
@@ -207,7 +207,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     label: "SFRPG.SourceBook"
                 })
             }),
-            hangarBay: SFRPGActorBase._crewPCFieldData({
+            hangarBay: SFRPGActorBase._crewPCField({
                 init: 0,
                 label: "SFRPG.VehicleSheet.Details.OtherAttributes.HangarBays"
             })
