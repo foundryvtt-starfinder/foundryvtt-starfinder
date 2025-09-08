@@ -407,36 +407,36 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             foundry.utils.mergeObject(schema, {
                 captain: SFRPGActorBase._crewPCField({
                     init: 1,
-                    label: ""
+                    label: "SFRPG.StarshipSheet.Role.Captain"
                 }),
                 chiefMate: SFRPGActorBase._crewPCField({
                     init: -1,
-                    label: ""
+                    label: "SFRPG.StarshipSheet.Role.ChiefMate"
                 }),
                 engineer: SFRPGActorBase._crewPCField({
                     init: -1,
-                    label: ""
+                    label: "SFRPG.StarshipSheet.Role.Engineer"
                 }),
                 gunner: SFRPGActorBase._crewPCField({
                     init: 0,
-                    label: ""
+                    label: "SFRPG.StarshipSheet.Role.Gunner"
                 }),
                 magicOfficer: SFRPGActorBase._crewPCField({
                     init: -1,
-                    label: ""
+                    label: "SFRPG.StarshipSheet.Role.MagicOfficer"
                 }),
                 scienceOfficer: SFRPGActorBase._crewPCField({
                     init: -1,
-                    label: ""
+                    label: "SFRPG.StarshipSheet.Role.ScienceOfficer"
                 }),
                 npcData: new fields.SchemaField({
-                    captain: SFRPGActorBase._crewNPCField({label: ""}),
-                    chiefMate: SFRPGActorBase._crewNPCField({label: ""}),
-                    engineer: SFRPGActorBase._crewNPCField({label: ""}),
-                    gunner: SFRPGActorBase._crewNPCField({label: ""}),
-                    magicOfficer: SFRPGActorBase._crewNPCField({label: ""}),
-                    pilot: SFRPGActorBase._crewNPCField({label: ""}),
-                    scienceOfficer: SFRPGActorBase._crewNPCField({label: ""})
+                    captain: SFRPGActorBase._crewNPCField({label: "SFRPG.StarshipSheet.Role.Captain"}),
+                    chiefMate: SFRPGActorBase._crewNPCField({label: "SFRPG.StarshipSheet.Role.ChiefMate"}),
+                    engineer: SFRPGActorBase._crewNPCField({label: "SFRPG.StarshipSheet.Role.Engineer"}),
+                    gunner: SFRPGActorBase._crewNPCField({label: "SFRPG.StarshipSheet.Role.Gunner"}),
+                    magicOfficer: SFRPGActorBase._crewNPCField({label: "SFRPG.StarshipSheet.Role.MagicOfficer"}),
+                    pilot: SFRPGActorBase._crewNPCField({label: "SFRPG.StarshipSheet.Role.Pilot"}),
+                    scienceOfficer: SFRPGActorBase._crewNPCField({label: "SFRPG.StarshipSheet.Role.ScienceOfficer"})
                 })
             });
         }
@@ -496,7 +496,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 initial: null,
                 min: 0,
                 nullable: true,
-                label: ""
+                label: "SFRPG.StarshipSheet.Crew.NumberOfUses"
             }),
             skills: new fields.TypedObjectField(
                 new fields.SchemaField(SFRPGActorBase._skillFieldData())

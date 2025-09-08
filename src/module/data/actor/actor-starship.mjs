@@ -24,16 +24,16 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                     })
                 }, {label: "SFRPG.Health"}),
                 systems: new fields.SchemaField({
-                    engines: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["pilot"]}), {label: ""}),
-                    lifeSupport: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["captain"]}), {label: ""}),
+                    engines: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["pilot"]}), {label: "SFRPG.StarshipSheet.Critical.Systems.Engines"}),
+                    lifeSupport: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["captain"]}), {label: "SFRPG.StarshipSheet.Critical.Systems.LifeSupport"}),
                     powerCore: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({
                         initialRoles: ["captain", "pilot", "gunner", "engineer", "scienceOfficer", "magicOfficer", "chiefMate", "openCrew", "minorCrew"]
-                    }), {label: ""}),
-                    sensors: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["scienceOfficer"]}), {label: ""}),
-                    weaponsArrayAft: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["gunner"]}), {label: ""}),
-                    weaponsArrayForward: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["gunner"]}), {label: ""}),
-                    weaponsArrayPort: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["gunner"]}), {label: ""}),
-                    weaponsArrayStarboard: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["gunner"]}), {label: ""})
+                    }), {label: "SFRPG.StarshipSheet.Critical.Systems.PowerCore"}),
+                    sensors: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["scienceOfficer"]}), {label: "SFRPG.StarshipSheet.Critical.Systems.Sensors"}),
+                    weaponsArrayAft: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["gunner"]}), {label: "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayAft"}),
+                    weaponsArrayForward: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["gunner"]}), {label: "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayForward"}),
+                    weaponsArrayPort: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["gunner"]}), {label: "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayPort"}),
+                    weaponsArrayStarboard: new fields.SchemaField(SFRPGActorStarship._shipSystemFieldData({initialRoles: ["gunner"]}), {label: "SFRPG.StarshipSheet.Critical.Systems.WeaponsArrayStarboard"})
                 })
             }),
             currency: new fields.SchemaField({
@@ -52,18 +52,18 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                 frame: new fields.StringField({
                     initial: "",
                     blank: true,
-                    label: ""
+                    label: "SFRPG.ShipFrameLabel"
                 }),
                 model: new fields.StringField({
                     initial: "",
                     blank: true,
-                    label: ""
+                    label: "SFRPG.ShipModelLabel"
                 }),
                 notes: new fields.HTMLField(),
                 size: new fields.StringField({
                     initial: "",
                     blank: true,
-                    label: ""
+                    label: "SFRPG.Size"
                 }),
                 tier: new fields.NumberField({
                     initial: 1,
@@ -75,21 +75,21 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
             quadrants: new fields.SchemaField({
                 aft: new fields.SchemaField(
                     SFRPGActorStarship._quadrantFieldData(),
-                    {label: ""}
+                    {label: "SFRPG.Rolls.StarshipActions.Quadrant.Aft"}
                 ),
                 forward: new fields.SchemaField(
                     SFRPGActorStarship._quadrantFieldData(),
-                    {label: ""}
+                    {label: "SFRPG.Rolls.StarshipActions.Quadrant.Forward"}
                 ),
                 port: new fields.SchemaField(
                     SFRPGActorStarship._quadrantFieldData(),
-                    {label: ""}
+                    {label: "SFRPG.Rolls.StarshipActions.Quadrant.Port"}
                 ),
                 starboard: new fields.SchemaField(
                     SFRPGActorStarship._quadrantFieldData(),
-                    {label: ""}
+                    {label: "SFRPG.Rolls.StarshipActions.Quadrant.Starboard"}
                 )
-            })
+            }, {label: "SFRPG.Rolls.StarshipActions.Quadrant.Quadrant"})
         });
 
         return schema;
@@ -110,7 +110,7 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                     nullable: true,
                     required: true
                 })
-            }, {label: ""}),
+            }, {label: "SFRPG.StarshipSheet.Quadrants.AblativeHeader"}),
             ac: new fields.SchemaField({
                 misc: new fields.NumberField({
                     initial: 0,
@@ -124,7 +124,7 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            }, {label: ""}),
+            }, {label: "SFRPG.StarshipSheet.Quadrants.ArmorClass"}),
             shields: new fields.SchemaField({
                 value: new fields.NumberField({
                     initial: null,
@@ -132,7 +132,7 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                     nullable: true,
                     required: true
                 })
-            }, {label: ""}),
+            }, {label: "SFRPG.StarshipSheet.Quadrants.ShieldHeader"}),
             targetLock: new fields.SchemaField({
                 misc: new fields.NumberField({
                     initial: 0,
@@ -146,7 +146,7 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            }, {label: ""})
+            }, {label: "SFRPG.StarshipSheet.Quadrants.TargetLock"})
         };
     }
 
@@ -160,21 +160,21 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
         const fieldData = {
             affectedRoles: new fields.TypedObjectField(
                 new fields.BooleanField({initial: true}),
-                {initial: initialRoleObject, label: ""}
+                {initial: initialRoleObject, label: "SFRPG.StarshipSheet.Critical.AffectedRoles"}
             ),
             patch: new fields.StringField({
                 initial: "unpatched",
                 blank: false,
                 choices: Object.keys(CONFIG.SFRPG.starshipSystemPatch),
                 required: true,
-                label: ""
+                label: "SFRPG.StarshipSheet.Critical.PatchState"
             }),
             value: new fields.StringField({
                 initial: "nominal",
                 blank: false,
                 choices: Object.keys(CONFIG.SFRPG.starshipSystemStatus),
                 required: true,
-                label: ""
+                label: "SFRPG.StarshipSheet.Critical.SystemStatus"
             })
         };
 
