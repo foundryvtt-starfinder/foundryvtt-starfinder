@@ -19,8 +19,19 @@ export default class SFRPGItemEffect extends SFRPGItemBase {
 
         // Effect-specific properties
         foundry.utils.mergeObject(schema, {
-            context: new fields.ObjectField({ // TODO-Ian: fix this with something more specific
-                required: false
+            context: new fields.SchemaField({
+                origin: new fields.SchemaField({
+                    actorUuid: new fields.StringField({
+                        initial: "",
+                        blank: true,
+                        label: "SFRPG.Effect.OriginActorUUID"
+                    }),
+                    itemUuid: new fields.StringField({
+                        initial: "",
+                        blank: true,
+                        label: "SFRPG.Effect.OriginItemUUID"
+                    })
+                })
             }),
             enabled: new fields.BooleanField({
                 initial: true,
@@ -39,8 +50,30 @@ export default class SFRPGItemEffect extends SFRPGItemBase {
                 label: "SFRPG.Effect.DetailsShowOnToken"
             }),
             turnEvents: new fields.ArrayField(
-                new fields.AnyField(), // TODO-Ian: fix this with something more specific
-                {required: false}
+                new fields.SchemaField({ // TODO: migrate this to use the common damage part schema
+                    content: new fields.HTMLField({required: false}),
+                    damageTypes: new fields.TypedObjectField(
+                        new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.damageAndHealingTypes
+                    ),
+                    formula: new fields.StringField({
+                        initial: "",
+                        blank: true
+                    }),
+                    name: new fields.StringField({
+                        initial: "",
+                        blank: true
+                    }),
+                    trigger: new fields.StringField({
+                        initial: "onTurnEnd",
+                        blank: false,
+                        choices: Object.keys(CONFIG.SFRPG.effectEndTypes)
+                    }),
+                    type: new fields.StringField({
+                        initial: "roll",
+                        blank: false,
+                        choices: Object.keys(CONFIG.SFRPG.turnEventTypes)
+                    })
+                })
             ),
             type: new fields.StringField({
                 initial: "effect",

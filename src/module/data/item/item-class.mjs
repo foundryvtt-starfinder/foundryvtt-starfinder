@@ -38,12 +38,6 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                 label: "SFRPG.ClassFortSaveProgression"
             }),
             hp: new fields.SchemaField({
-                min: new fields.NumberField({ // TODO-Ian: Might be unneeded?
-                    initial: 1,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
                 value: new fields.NumberField({
                     initial: 1,
                     min: 0,
@@ -84,12 +78,6 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                 label: "SFRPG.ClassReflexSaveProgression"
             }),
             skillRanks: new fields.SchemaField({
-                min: new fields.NumberField({ // TODO-Ian: Might be unneeded?
-                    initial: 4,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
                 value: new fields.NumberField({
                     initial: 4,
                     min: 0,
