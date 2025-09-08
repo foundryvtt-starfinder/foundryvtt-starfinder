@@ -132,6 +132,11 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
 
         // Character-specific fields
         foundry.utils.mergeObject(schema, {
+            options: new fields.SchemaField({
+                hideUntrained: new fields.BooleanField({
+                    initial: false
+                })
+            }),
             resources: new fields.ObjectField({ // TODO-Ian: detail this
                 label: "SFRPG.ActorSheet.Features.Categories.ActorResources"
             }),
