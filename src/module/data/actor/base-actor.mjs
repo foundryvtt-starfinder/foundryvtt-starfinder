@@ -205,108 +205,10 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     label: "SFRPG.ActorSheet.Features.Categories.Race"
                 })
             }),
-            skills: new fields.SchemaField({ // TODO-Ian: Replace with TypedObjectField and set up these as initial values (to allow professions)
-                acr: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "dex",
-                    isTrainedOnly: false,
-                    hasArmorCheckPenalty: true
-                }), {label: "SFRPG.SkillAcr"}),
-                ath: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "str",
-                    isTrainedOnly: false,
-                    hasArmorCheckPenalty: true
-                }), {label: "SFRPG.SkillAth"}),
-                blu: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "cha",
-                    isTrainedOnly: false,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillBlu"}),
-                com: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "int",
-                    isTrainedOnly: true,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillCom"}),
-                cul: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "int",
-                    isTrainedOnly: true,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillCul"}),
-                dip: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "cha",
-                    isTrainedOnly: false,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillDip"}),
-                dis: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "cha",
-                    isTrainedOnly: false,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillDis"}),
-                eng: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "int",
-                    isTrainedOnly: true,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillEng"}),
-                int: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "cha",
-                    isTrainedOnly: false,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillInt"}),
-                lsc: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "int",
-                    isTrainedOnly: true,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillLsc"}),
-                med: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "int",
-                    isTrainedOnly: true,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillMed"}),
-                mys: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "wis",
-                    isTrainedOnly: true,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillMys"}),
-                per: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "wis",
-                    isTrainedOnly: false,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillPer"}),
-                phs: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "int",
-                    isTrainedOnly: true,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillPhs"}),
-                pil: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "dex",
-                    isTrainedOnly: false,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillPil"}),
-                pro: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "int",
-                    isTrainedOnly: true,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillPro"}),
-                sen: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "wis",
-                    isTrainedOnly: false,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillSen"}),
-                sle: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "dex",
-                    isTrainedOnly: true,
-                    hasArmorCheckPenalty: true
-                }), {label: "SFRPG.SkillSle"}),
-                ste: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "dex",
-                    isTrainedOnly: false,
-                    hasArmorCheckPenalty: true
-                }), {label: "SFRPG.SkillSte"}),
-                sur: new fields.SchemaField(SFRPGActorBase._skillFieldData({
-                    ability: "wis",
-                    isTrainedOnly: false,
-                    hasArmorCheckPenalty: false
-                }), {label: "SFRPG.SkillSur"})
-            }),
+            skills: new fields.TypedObjectField(
+                new fields.SchemaField(SFRPGActorBase._skillFieldData()),
+                SFRPGActorBase._skillsInitial()
+            ),
             traits: new fields.SchemaField({
                 ci: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.ConImm"}),
                 damageReduction: new fields.SchemaField({
@@ -598,12 +500,6 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 initial: false,
                 required: false
             }),
-            min: new fields.NumberField({
-                initial: 0,
-                min: 0,
-                nullable: false,
-                required: false
-            }),
             misc: new fields.NumberField({
                 initial: 0,
                 min: 0,
@@ -634,6 +530,114 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 required: false
             })
         };
+    }
+
+    static _skillsInitial() {
+        const dataObject = {
+            initial: {
+                acr: {
+                    ability: "dex",
+                    hasArmorCheckPenalty: true,
+                    isTrainedOnly: false
+                },
+                ath: {
+                    ability: "str",
+                    hasArmorCheckPenalty: true,
+                    isTrainedOnly: false
+                },
+                blu: {
+                    ability: "cha",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: false
+                },
+                com: {
+                    ability: "int",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: false
+                },
+                cul: {
+                    ability: "int",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: true
+                },
+                dip: {
+                    ability: "cha",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: false
+                },
+                dis: {
+                    ability: "cha",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: false
+                },
+                eng: {
+                    ability: "int",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: true
+                },
+                int: {
+                    ability: "cha",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: false
+                },
+                lsc: {
+                    ability: "int",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: true
+                },
+                med: {
+                    ability: "int",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: true
+                },
+                mys: {
+                    ability: "wis",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: true
+                },
+                per: {
+                    ability: "wis",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: false
+                },
+                phs: {
+                    ability: "int",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: true
+                },
+                pil: {
+                    ability: "dex",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: false
+                },
+                pro: {
+                    ability: "int",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: true
+                },
+                sen: {
+                    ability: "wis",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: false
+                },
+                sle: {
+                    ability: "dex",
+                    hasArmorCheckPenalty: true,
+                    isTrainedOnly: true
+                },
+                ste: {
+                    ability: "dex",
+                    hasArmorCheckPenalty: true,
+                    isTrainedOnly: false
+                },
+                sur: {
+                    ability: "wis",
+                    hasArmorCheckPenalty: false,
+                    isTrainedOnly: false
+                }
+            }
+        };
+        return dataObject;
     }
 
     static _spellFieldData(options = {}) {

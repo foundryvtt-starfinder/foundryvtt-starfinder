@@ -125,12 +125,12 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
         });
 
         // Edit initial values as needed
-        schema.skills.fields.acr.fields.enabled.initial = true;
-        schema.skills.fields.ath.fields.enabled.initial = true;
-        schema.skills.fields.com.fields.enabled.initial = true;
-        schema.skills.fields.eng.fields.enabled.initial = true;
-        schema.skills.fields.per.fields.enabled.initial = true;
-        schema.skills.fields.ste.fields.enabled.initial = true;
+        schema.skills.initial.acr.enabled = true;
+        schema.skills.initial.ath.enabled = true;
+        schema.skills.initial.com.enabled = true;
+        schema.skills.initial.eng.enabled = true;
+        schema.skills.initial.per.enabled = true;
+        schema.skills.initial.ste.enabled = true;
 
         return schema;
     }
