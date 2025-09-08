@@ -84,7 +84,9 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 label: "SFRPG.Items.Action.DamageNotes",
                 hint: "SFRPG.Items.Action.DamageNotesTooltip"
             }),
-            descriptors: new fields.ObjectField(), // TODO-Ian: detail this type more
+            descriptors: new fields.TypedObjectField(
+                new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.descriptors
+            ),
             formula: new fields.StringField({
                 initial: null,
                 nullable: true,
@@ -97,7 +99,9 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 label: "SFRPG.Items.Action.DamageFormula",
                 hint: "SFRPG.Items.Action.DamageFormulaTooltip"
             }),
-            properties: new fields.ObjectField(), // TODO-Ian: detail this type more
+            properties: new fields.TypedObjectField(
+                new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.weaponProperties
+            ),
             save: new fields.SchemaField({
                 ...SFRPGItemBase.saveTemplate()
             }, {
@@ -403,7 +407,9 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
 
     static specialMaterialsTemplate() {
         return {
-            specialMaterials: new fields.ObjectField() // TODO-Ian: detail this field properly
+            specialMaterials: new fields.TypedObjectField(
+                new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.specialMaterials
+            )
         };
     }
 

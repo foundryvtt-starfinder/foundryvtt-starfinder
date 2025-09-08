@@ -26,10 +26,10 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                 label: "SFRPG.ClassBABProgression"
             }),
             bonusSpellsPerDay: SFRPGItemClass._bonusSpellsPerDayFieldData(),
-            csk: new fields.ObjectField({ // TODO-Ian: detail this type more
-                required: true,
-                label: "SFRPG.ClassSkills"
-            }),
+            csk: new fields.TypedObjectField(
+                new fields.BooleanField({initial: false}), // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.skills
+                { required: true, label: "SFRPG.ClassSkills"}
+            ),
             fort: new fields.StringField({
                 initial: "slow",
                 required: true,
@@ -67,14 +67,14 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                 label: "SFRPG.KeyAbility"
             }),
             proficiencies: new fields.SchemaField({
-                armor: new fields.ObjectField({ // TODO-Ian: detail this type more
-                    required: true,
-                    label: "SFRPG.ClassArmorProf"
-                }),
-                weapon: new fields.ObjectField({ // TODO-Ian: detail this type more
-                    required: true,
-                    label: "SFRPG.ClassWeaponProf"
-                })
+                armor: new fields.TypedObjectField(
+                    new fields.BooleanField({initial: false}), // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.armorProficiencies
+                    { required: true, label: "SFRPG.ClassArmorProf"}
+                ),
+                weapon: new fields.TypedObjectField(
+                    new fields.BooleanField({initial: false}), // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.weaponProficiencies
+                    { required: true, label: "SFRPG.ClassWeaponProf"}
+                )
             }),
             ref: new fields.StringField({
                 initial: "slow",
