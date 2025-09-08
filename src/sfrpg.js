@@ -580,6 +580,7 @@ Hooks.once("i18nInit", () => {
         "starshipArcs",
         "starshipRoles",
         "starshipSizes",
+        "starshipSystemPatch",
         "starshipSystemStatus",
         "starshipWeaponClass",
         "starshipWeaponProperties",

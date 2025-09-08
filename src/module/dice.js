@@ -251,7 +251,7 @@ export class DiceSFRPG {
                     const criticalData = rollContext.allContexts?.item?.data?.critical;
                     if (d.total === critical) {
                         flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
-                        if (criticalData.effect.trim()) {
+                        if (criticalData?.effect?.trim()) {
                             tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                         }
                     }
@@ -383,9 +383,9 @@ export class DiceSFRPG {
         if (mainDie) {
             let dieRoll = "1" + mainDie;
             if (mainDie === "d20") {
-                if (rollInfo.button === "Disadvantage") {
+                if (rollInfo.button === "disadvantage") {
                     dieRoll = "2d20kl";
-                } else if (rollInfo.button === "Advantage") {
+                } else if (rollInfo.button === "advantage") {
                     dieRoll = "2d20kh";
                 }
             }

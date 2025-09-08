@@ -25,15 +25,16 @@ export default function(engine) {
 
                 let dcFormula = skillCheck.dc?.toString();
                 if (!dcFormula) {
-                    const ownerKeyAbilityId = actorData?.attributes.keyability || classes[0]?.system.kas;
+                    const ownerKeyAbilityId = classes[0]?.system.kas ?? null;
                     const itemKeyAbilityId = data.ability;
 
                     const abilityKey = itemKeyAbilityId || ownerKeyAbilityId;
-                    if (abilityKey) {
-                        dcFormula = `10 + floor(@owner.details.level.value * 1.5) + @owner.abilities.${abilityKey}.mod`;
-                    } else if (actor.type === "npc" || actor.type === "npc2") {
-                        dcFormula = `10 + floor(@owner.details.cr * 1.5) + @owner.abilities.${abilityKey}.mod`;
+                    if (actor.type === "npc" || actor.type === "npc2") {
+                        dcFormula = "10 + floor(@owner.details.cr * 1.5)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
+                    } else {
+                        dcFormula = "10 + floor(@owner.details.level.value * 1.5)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
                     }
+
                 }
 
                 let computedSkill = false;
