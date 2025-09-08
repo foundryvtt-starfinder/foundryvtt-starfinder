@@ -225,7 +225,8 @@ Hooks.once('init', async function() {
         character: models.SFRPGActorCharacter,
         drone: models.SFRPGActorDrone,
         hazard: models.SFRPGActorHazard,
-        npc2: models.SFRPGActorNPC
+        npc2: models.SFRPGActorNPC,
+        vehicle: models.SFRPGActorVehicle
     };
 
     CONFIG.Item.dataModels = {
@@ -567,7 +568,6 @@ Hooks.once("i18nInit", () => {
         "senses",
         "skillProficiencyLevels",
         "skills",
-        "controlSkills",
         "specialAbilityTypes",
         "specialMaterials",
         "speeds",
@@ -585,6 +585,7 @@ Hooks.once("i18nInit", () => {
         "starshipWeaponRanges",
         "starshipWeaponTypes",
         "turnEventTypes",
+        "vehicleControlSkills",
         "vehicleCoverTypes",
         "vehicleSizes",
         "vehicleTypes",

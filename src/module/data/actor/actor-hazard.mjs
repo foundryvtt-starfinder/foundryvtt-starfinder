@@ -87,10 +87,9 @@ export default class SFRPGActorHazard extends SFRPGActorBase {
                     })
                 }, {label: "SFRPG.HazardSheet.Details.Vitals.Defenses.Hitpoints", hint: "SFRPG.HazardSheet.Details.Vitals.Defenses.HitpointsTooltip"}),
                 init: new fields.SchemaField({
-                    value: new fields.NumberField({
-                        initial: null,
-                        min: 0,
-                        nullable: true,
+                    value: new fields.StringField({
+                        initial: "",
+                        blank: true,
                         required: true
                     })
                 }, {label: "SFRPG.HazardSheet.Details.Attributes.Initiative", hint: "SFRPG.HazardSheet.Details.Attributes.InitiativeTooltip"}),

@@ -378,6 +378,40 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         return {conditions: new fields.SchemaField(conditionFields)};
     }
 
+    static crewTemplate(options = {}) {
+        const type = options.type ?? "vehicle";
+
+        const schema = {
+            passenger: SFRPGActorBase._crewPCFieldData({
+                init: 0,
+                label: "SFRPG.StarshipSheet.Role.Passenger"
+            }),
+            pilot: SFRPGActorBase._crewPCFieldData({
+                init: 1,
+                label: "SFRPG.StarshipSheet.Role.Pilot"
+            }),
+            useNPCCrew: new fields.BooleanField({
+                initial: true,
+                required: true
+            })
+        };
+
+        if (type === "vehicle") {
+            foundry.utils.mergeObject(schema, {
+                complement: SFRPGActorBase._crewPCFieldData({
+                    init: 0,
+                    label: "SFRPG.VehicleSheet.Details.OtherAttributes.Complement"
+                })
+            });
+        } else if (type === "starship") {
+            // pass
+        }
+
+        return {
+            crew: new fields.SchemaField(schema)
+        };
+    }
+
     static _abilityFieldData(includeBase) {
         const data = {
             value: new fields.NumberField({
@@ -406,6 +440,29 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         }
 
         return data;
+    }
+
+    static _crewPCFieldData(options = {}) {
+        const init = options.init ?? 0;
+        const label = options.label ?? "";
+        const hint = options.hint ?? "";
+        return new fields.SchemaField({
+            actorIds: new fields.ArrayField(
+                new fields.StringField({
+                    blank: false,
+                    label: "SFRPG.StarshipSheet.Crew.ActorIDs",
+                    hint: "SFRPG.StarshipSheet.Crew.ActorIDsTooltip"
+                })
+            ),
+            limit: new fields.NumberField({
+                initial: init,
+                min: -1,
+                nullable: false,
+                required: true,
+                label: "SFRPG.StarshipSheet.Crew.RoleLimit",
+                hint: "SFRPG.StarshipSheet.Crew.RoleLimitTooltip"
+            })
+        }, {label: label, hint: hint});
     }
 
     static _defenseFieldData() {

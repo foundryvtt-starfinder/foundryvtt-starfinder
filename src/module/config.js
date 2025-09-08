@@ -498,13 +498,6 @@ SFRPG.skills = {
     "sur": "SFRPG.SkillSur"
 };
 
-SFRPG.controlSkills = {
-    "pil": "SFRPG.SkillPil",
-    "ath": "SFRPG.SkillAth",
-    "sur": "SFRPG.SkillSur",
-    "none": "SFRPG.None"
-};
-
 // Weapon Types
 SFRPG.weaponTypes = {
     "basicM": "SFRPG.WeaponTypesBasicMelee",
@@ -1382,6 +1375,22 @@ SFRPG.starshipSizeMod = {
  * Vehicle properties and values *
  *--------------------------------*/
 
+SFRPG.vehicleControlSkills = {
+    "pil": "SFRPG.SkillPil",
+    "ath": "SFRPG.SkillAth",
+    "sur": "SFRPG.SkillSur",
+    "none": "SFRPG.None"
+};
+
+SFRPG.vehicleCoverTypes = {
+    "none"    : "SFRPG.Vehicles.VehicleCoverTypes.None",
+    "cover"   : "SFRPG.Vehicles.VehicleCoverTypes.Cover",
+    "soft"    : "SFRPG.Vehicles.VehicleCoverTypes.Soft",
+    "partial" : "SFRPG.Vehicles.VehicleCoverTypes.Partial",
+    "improved": "SFRPG.Vehicles.VehicleCoverTypes.Improved",
+    "total"   : "SFRPG.Vehicles.VehicleCoverTypes.Total"
+};
+
 SFRPG.vehicleSizes = {
     "diminutive": "SFRPG.SizeDim",
     "tiny": "SFRPG.SizeTiny",
@@ -1404,15 +1413,6 @@ SFRPG.vehicleTypes = {
     "landAW": "SFRPG.Vehicles.VehicleTypes.Landaw",
     "landT": "SFRPG.Vehicles.VehicleTypes.Landt",
     "landTW": "SFRPG.Vehicles.VehicleTypes.Landtw"
-};
-
-SFRPG.vehicleCoverTypes = {
-    "none"    : "SFRPG.Vehicles.VehicleCoverTypes.None",
-    "cover"   : "SFRPG.Vehicles.VehicleCoverTypes.Cover",
-    "soft"    : "SFRPG.Vehicles.VehicleCoverTypes.Soft",
-    "partial" : "SFRPG.Vehicles.VehicleCoverTypes.Partial",
-    "improved": "SFRPG.Vehicles.VehicleCoverTypes.Improved",
-    "total"   : "SFRPG.Vehicles.VehicleCoverTypes.Total"
 };
 
 /**

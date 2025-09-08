@@ -96,7 +96,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            }, {label: "LevelLabelText"}),
+            }, {label: "SFRPG.LevelLabelText"}),
             theme: new fields.StringField({
                 initial: "",
                 blank: true,
