@@ -441,13 +441,13 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         const actorType = options.actorType ?? "npc";
         return {
             spells: new fields.SchemaField({
-                spell0: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false}),
-                spell1: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false}),
-                spell2: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false}),
-                spell3: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false}),
-                spell4: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false}),
-                spell5: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false}),
-                spell6: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}), {required: false})
+                spell0: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType})),
+                spell1: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType})),
+                spell2: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType})),
+                spell3: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType})),
+                spell4: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType})),
+                spell5: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType})),
+                spell6: new fields.SchemaField(SFRPGActorBase._spellFieldData({actorType}))
             }, {required: true, label: "SFRPG.Items.Categories.Spells"})
         };
     }
@@ -459,7 +459,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     initial: "",
                     required: false,
                     blank: true
-                }), {required: false}
+                }), {required: true}
             )
         };
     }

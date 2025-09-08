@@ -33,12 +33,6 @@ export default class SFRPGItemRace extends SFRPGItemBase {
                 )
             }),
             hp: new fields.SchemaField({
-                min: new fields.NumberField({ // TODO-Ian: Might be unneeded?
-                    initial: 1,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
                 value: new fields.NumberField({
                     initial: 1,
                     min: 0,

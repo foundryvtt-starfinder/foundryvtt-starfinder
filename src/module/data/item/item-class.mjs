@@ -104,12 +104,6 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                 blank: true
             }),
             sp: new fields.SchemaField({
-                min: new fields.NumberField({ // TODO-Ian: Might be unneeded?
-                    initial: 1,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
                 value: new fields.NumberField({
                     initial: 1,
                     min: 0,
