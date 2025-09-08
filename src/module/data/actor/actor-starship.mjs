@@ -160,12 +160,12 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
         const fieldData = {
             affectedRoles: new fields.TypedObjectField(
                 new fields.BooleanField({initial: true}),
-                {initial: initialRoleObject}
+                {initial: initialRoleObject, label: ""}
             ),
             patch: new fields.StringField({
                 initial: "unpatched",
                 blank: false,
-                // choices: Object.keys(CONFIG.SFRPG.starshipSystemPatch), // TODO-Ian: Add this in once patch PR is merged in
+                choices: Object.keys(CONFIG.SFRPG.starshipSystemPatch),
                 required: true,
                 label: ""
             }),

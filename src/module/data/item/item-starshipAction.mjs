@@ -116,7 +116,7 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
         const fields = foundry.data.fields;
         return new fields.StringField({
             initial: "",
-            choices: ["", ...Object.keys(CONFIG.SFRPG.starshipRoleNames)],
+            choices: ["", ...Object.keys(CONFIG.SFRPG.starshipRoles)],
             blank: true,
             required: false
         });
