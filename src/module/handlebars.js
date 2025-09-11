@@ -308,4 +308,17 @@ export function setupHandlebars() {
         const options = args.pop();
         return configHelper(CONFIG.SFRPG, options, ...args);
     });
+
+    /**
+     * Block helper which attempts to lookup the provided UUID, then uses that
+     * as the context for the block.
+     *
+     * Supports the `{{else}}` block for when the UUID is not found. The
+     * context will be `null`, so use `..` to access the prior context. This
+     * was done to provide a uniform interface with the success case.
+     */
+    Handlebars.registerHelper('fromUuid', function(uuid, props) {
+        const item = fromUuidSync(uuid);
+        return item ? props.fn(item) : props.inverse(null);
+    });
 }

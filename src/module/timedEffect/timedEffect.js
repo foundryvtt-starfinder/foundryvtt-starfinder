@@ -348,7 +348,7 @@ class SFRPGTimedEnable extends SFRPGTimedEffect {
 
 class SFRPGTimedActivation extends SFRPGTimedEffect {
     /** Update the managed Item with data from this TimedEffect */
-    _updateAfterToggle(resetActivationTime) {
+    async _updateAfterToggle(resetActivationTime) {
         const item = this.item;
         const delta = {
             _id: item._id,
@@ -360,7 +360,8 @@ class SFRPGTimedActivation extends SFRPGTimedEffect {
             delta['system.activationEvent.startTime'] = this.activeDuration.activationTime;
         }
 
-        this.actor?.updateEmbeddedDocuments('Item', [delta]);
+        await this.actor?.updateEmbeddedDocuments('Item', [delta]);
+        await item._afterSetActive?.(this.enabled);
     }
 
     /** Update the managed Item after a {@linkcode poke} */

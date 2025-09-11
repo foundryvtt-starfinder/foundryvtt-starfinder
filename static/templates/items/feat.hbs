@@ -121,6 +121,41 @@
                     {{!-- Item Action Template --}}
                     {{> "systems/sfrpg/templates/items/parts/item-action.hbs" message="SFRPG.Items.Feat.FeatureAttack"}}
 
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{ localize "SFRPG.Items.Feat.FeatureMacro" }}</h3>
+                        <div class="bubble-info">
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Feat.FeatureMacroAfterActivate" }}</label>
+                                <div class="form-fields dropUuid">
+                                    <input type="text" name="system.activation.macroAfterActivate" value="{{itemData.activation.macroAfterActivate}}"/>
+                                    {{#fromUuid itemData.activation.macroAfterActivate}}
+                                        <a class="content-link{{#unless canExecute}} error{{/unless}}" data-origin-uuid="{{uuid}}">
+                                            {{#if img}}<img src={{img}}/>{{/if}}
+                                            {{name}}
+                                        </a>
+                                    {{/fromUuid}}
+                                </div>
+                            </div>
+                            {{#unless (eq itemData.duration.units "instantaneous")}}
+                            <div class="form-group dropUuid">
+                                <label>{{ localize "SFRPG.Items.Feat.FeatureMacroAfterDeactivate" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.activation.macroAfterDeactivate" value="{{itemData.activation.macroAfterDeactivate}}"/>
+                                    {{#fromUuid itemData.activation.macroAfterDeactivate}}
+                                        <a class="content-link{{#unless canExecute}} error{{/unless}}" data-origin-uuid="{{uuid}}">
+                                            {{#if img}}<img src={{img}}/>{{/if}}
+                                            {{name}}
+                                        </a>
+                                    {{/fromUuid}}
+                                </div>
+                            </div>
+                            {{/unless}}
+                            <p class="notes">
+                                <i class="fas fa-circle-info"></i> {{{ localize "SFRPG.Items.Feat.FeatureMacroHint" }}}
+                            </p>
+                        </div>
+                    </div>
+
                 </div>
 
             </section>

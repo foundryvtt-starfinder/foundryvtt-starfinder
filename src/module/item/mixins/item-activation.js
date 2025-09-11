@@ -105,7 +105,8 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
             updateData['system.activationEvent.deactivatedAt'] = game.time.worldTime;
         }
 
-        const updatePromise = this.update(updateData);
+        const updatePromise = this.update(updateData)
+            .then(() => this._afterSetActive(active));
 
         if (active || duration.value || this.system.uses.max > 0) {
             updatePromise.then(() => {
@@ -161,5 +162,12 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
         }
 
         return updatePromise;
+    }
+
+    async _afterSetActive(active) {
+        const macro = await fromUuid(active ? this.system.activation.macroAfterActivate : this.system.activation.macroAfterDeactivate);
+        if (macro?.canExecute) {
+            await this.executeMacroWithContext(macro);
+        }
     }
 };
