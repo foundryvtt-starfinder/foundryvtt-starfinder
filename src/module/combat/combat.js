@@ -899,6 +899,27 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }
     }
 
+    /**
+     * Changes the combat type when the GM adds a combatant to the appropriate one for that
+     * combatant's actor type.
+     * @param {*} combatant
+     */
+    _onEnter(combatant) {
+        if (game.user.isGM && combatant.actor) {
+            switch (combatant.actor.type) {
+                case "starship":
+                    this.update({"flags.sfrpg.combatType": "starship"});
+                    break;
+                case "vehicle":
+                    this.update({"flags.sfrpg.combatType": "vehicleChase"});
+                    break;
+                default:
+                    this.update({"flags.sfrpg.combatType": "normal"});
+                    break;
+            }
+        }
+    }
+
 }
 
 async function onConfigClicked(combat, direction) {
