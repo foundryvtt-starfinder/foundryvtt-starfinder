@@ -88,17 +88,15 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     required: true,
                     label: "SFRPG.NumberOfArms"
                 }),
-                space: new fields.NumberField({
-                    initial: 5,
-                    min: 0,
-                    nullable: true,
+                space: new fields.StringField({
+                    initial: "",
+                    blank: true,
                     required: true,
                     label: "SFRPG.Space"
                 }),
-                reach: new fields.NumberField({
-                    initial: 5,
-                    min: 0,
-                    nullable: true,
+                reach: new fields.StringField({
+                    initial: "",
+                    blank: true,
                     required: true,
                     label: "SFRPG.Reach"
                 }),
