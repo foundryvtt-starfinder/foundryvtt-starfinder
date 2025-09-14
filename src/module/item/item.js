@@ -1050,6 +1050,71 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         return modifiers;
     }
 
+    getAppropriateAmmoUsageModifiers() {
+        const acceptedModifiers = [
+            SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER,
+            SFRPGEffectType.ALL_AMMO_USAGE_MULTIPLIER,
+            SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER,
+            SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER
+        ];
+
+        let modifiers = this.actor.getAllModifiers();
+        modifiers = modifiers.filter(mod => {
+            // Remove inactive mods and mods that aren't constant (this is only supporting constant mods right now)
+            if (!mod.enabled || mod.modifierType !== SFRPGModifierType.CONSTANT) return false;
+
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
+            if (mod.limitTo === "container") {
+                const parentItem = getItemContainer(this.actor.items, mod.item);
+                if (parentItem?.id !== this.id) return false;
+            }
+
+            if (mod.effectType === SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER) {
+                if (mod.valueAffected !== this.system?.weaponType) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER) {
+                if (!this.system?.properties?.[mod.valueAffected]) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER) {
+                if (this.system?.weaponCategory !== mod.valueAffected) {
+                    return false;
+                }
+            }
+
+            return acceptedModifiers.includes(mod.effectType);
+        });
+
+        return modifiers;
+    }
+
+    _calculateAmmoUsageWithModifiers(value) {
+        let modifiers = this.getAppropriateAmmoUsageModifiers();
+        const stackModifiers = new StackModifiers();
+        modifiers = stackModifiers.process(modifiers, null, {actor: this.actor, item: this});
+        let multiplier = 1.0;
+        const modsToProcess = [];
+        for (const [modType, modValue] of Object.entries(modifiers)) {
+            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(modType)) {
+                for (const bonus of modValue) {
+                    modsToProcess.push(bonus);
+                }
+            }
+            else if (modValue !== null) {
+                modsToProcess.push(modValue);
+            }
+        }
+        const rollContext = RollContext.createItemRollContext(this, this.actor);
+        for (const mod of modsToProcess) {
+            const rollResult = DiceSFRPG.resolveFormulaWithoutDice(mod.modifier.toString(), rollContext);
+            const computedBonus = !rollResult.hadError ? rollResult.total : 1;
+            multiplier *= computedBonus;
+        }
+        const computedValue = Math.round(value * multiplier);
+        return computedValue < 0 ? 0 : computedValue;
+    }
+
     /**
      * Handle updating item capacity when the attack dialog closes.
      *
@@ -1071,12 +1136,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             const usage = itemData.usage;
 
             if (usage.per && ["round", "shot"].includes(usage.per)) {
-                this.consumeCapacity(usage.value);
+                this.consumeCapacity(this._calculateAmmoUsageWithModifiers(usage.value));
             } else if (usage.per && ['minute'].includes(usage.per)) {
                 if (game.combat) {
                     const round = game.combat.current.round || 0;
                     if (round % 10 === 1) {
-                        this.consumeCapacity(usage.value);
+                        this.consumeCapacity(this._calculateAmmoUsageWithModifiers(usage.value));
                     }
                 } else {
                     ui.notifications.info("You currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
