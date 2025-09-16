@@ -72,21 +72,17 @@ export class SpellCastDialog extends Dialog {
         };
         for (let spellLevel = 1; spellLevel <= 6; spellLevel++) {
             const spellsPerLevel = casterData.spells[`spell${spellLevel}`];
-            if (spellsPerLevel) {
-                let hasClasses = false;
-                for (const [key, perClass] of Object.entries(spellsPerLevel.perClass)) {
-                    if (perClass.max > 0) {
-                        hasClasses = true;
-                    }
-
+            const classSpellSlots = spellsPerLevel.perClass;
+            const hasGeneralSpellSlots = spellsPerLevel.max > 0;
+            if (classSpellSlots) {
+                for (const [key, perClass] of Object.entries(classSpellSlots)) {
                     if (perClass.value > 0) {
                         availableSlots[spellLevel].perClass[key] = {class: key, value: perClass.value};
                     }
                 }
-
-                if (!hasClasses) {
-                    availableSlots[spellLevel].general = parseInt(spellsPerLevel.value);
-                }
+            }
+            else if (hasGeneralSpellSlots) {
+                availableSlots[spellLevel].general = parseInt(spellsPerLevel.value);
             }
         }
 
@@ -98,9 +94,9 @@ export class SpellCastDialog extends Dialog {
                 continue;
             }
 
-            let hasClasses = false;
+            let hasClassSpells = false;
             for (const classSlot of Object.values(slotAvailability.perClass)) {
-                hasClasses = true;
+                hasClassSpells = true;
                 if (classSlot.value > 0) {
                     const classEntry = casterData.spells.classes.find(x => x.key === classSlot.class);
                     if (!classEntry) {
@@ -121,7 +117,7 @@ export class SpellCastDialog extends Dialog {
                 }
             }
 
-            if (!hasClasses && slotAvailability.general > 0) {
+            if (!hasClassSpells && slotAvailability.general > 0) {
                 spellLevels.push({
                     source: "general",
                     level: slotLevel,
