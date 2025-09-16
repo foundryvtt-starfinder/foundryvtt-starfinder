@@ -27,6 +27,20 @@ export default class SFRPGItemAmmunition extends SFRPGItemBase {
                 required: true,
                 label: "SFRPG.Items.Ammunition.AmmunitionType"
             }),
+            capacity: new fields.SchemaField({
+                max: new fields.NumberField({
+                    initial: null,
+                    min: 0,
+                    nullable: true,
+                    required: true
+                }),
+                value: new fields.NumberField({
+                    initial: null,
+                    min: 0,
+                    nullable: true,
+                    required: true
+                })
+            }, {label: "SFRPG.Items.Capacity.Capacity"}),
             useCapacity: new fields.BooleanField({
                 required: true,
                 initial: false,
