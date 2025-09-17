@@ -36,7 +36,7 @@ export default class SFRPGItemChassis extends SFRPGItemBase {
             abilityScores: new fields.SchemaField({
                 cha: new fields.NumberField({
                     initial: 6,
-                    min: 0,
+                    min: 3,
                     required: true,
                     label: "SFRPG.AbilityCha"
                 }),
@@ -47,25 +47,25 @@ export default class SFRPGItemChassis extends SFRPGItemBase {
                 }),
                 dex: new fields.NumberField({
                     initial: 10,
-                    min: 0,
+                    min: 3,
                     required: true,
                     label: "SFRPG.AbilityDex"
                 }),
                 int: new fields.NumberField({
                     initial: 6,
-                    min: 0,
+                    min: 3,
                     required: true,
                     label: "SFRPG.AbilityInt"
                 }),
                 str: new fields.NumberField({
                     initial: 10,
-                    min: 0,
+                    min: 3,
                     required: true,
                     label: "SFRPG.AbilityStr"
                 }),
                 wis: new fields.NumberField({
                     initial: 10,
-                    min: 0,
+                    min: 3,
                     required: true,
                     label: "SFRPG.AbilityWis"
                 })
