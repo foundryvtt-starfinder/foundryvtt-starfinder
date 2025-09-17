@@ -263,7 +263,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                     type: new fields.StringField({initial: "turn"})
                 }),
                 unit: new fields.StringField({initial: "round"}),
-                value: new fields.StringField({initial: "0"})
+                value: new fields.StringField({initial: "0", blank: true})
             })
         };
     }
@@ -274,8 +274,9 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 initial: "",
                 blank: true,
                 choices: ["", ...Object.keys(CONFIG.SFRPG.ammunitionTypes)],
-                label: "SFRPG.Items.Ammunition.AmmunitionType"
-            }, {required: true}),
+                label: "SFRPG.Items.Ammunition.AmmunitionType",
+                required: true
+            }),
             capacity: new fields.SchemaField({
                 max: new fields.NumberField({
                     initial: null,
@@ -287,7 +288,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                     min: 0,
                     nullable: true
                 })
-            }, {required: true}),
+            }),
             usage: new fields.SchemaField({
                 per: new fields.StringField({
                     initial: "",
@@ -299,7 +300,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                     min: 0,
                     nullable: true
                 })
-            }, {required: true})
+            })
         };
     }
 
@@ -310,7 +311,9 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             attributes: new fields.SchemaField({
                 ac: new fields.SchemaField({
                     value: new fields.StringField({
-                        initial: ""
+                        initial: "",
+                        blank: true,
+                        required: true
                     })
                 }),
                 customBuilt: new fields.BooleanField({
@@ -319,17 +322,21 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 dex: new fields.SchemaField({
                     mod: new fields.StringField({
                         initial: "",
+                        blank: true,
                         required: true
                     })
                 }),
                 hardness: new fields.SchemaField({
                     value: new fields.StringField({
-                        initial: ""
+                        initial: "",
+                        blank: true,
+                        required: true
                     })
                 }),
                 hp: new fields.SchemaField({
                     max: new fields.StringField({
                         initial: "",
+                        blank: true,
                         required: true
                     }),
                     value: new fields.NumberField({
@@ -342,7 +349,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 size: new fields.StringField({
                     initial: "medium",
                     required: true,
-                    choices: CONFIG.SFRPG.itemSizes
+                    choices: Object.keys(CONFIG.SFRPG.itemSizes)
                 }),
                 sturdy: new fields.BooleanField({
                     initial: false
@@ -351,6 +358,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             attuned: new fields.BooleanField({initial: false}),
             bulk: new fields.StringField({
                 initial: "L",
+                blank: true,
                 required: true
             }),
             equippable: new fields.BooleanField({initial: isEquippable}),
@@ -373,11 +381,13 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             quantity: new fields.NumberField({
                 initial: 1,
                 min: 0,
+                nullable: true,
                 required: true
             }),
             quantityPerPack: new fields.NumberField({
                 initial: 1,
                 min: 1,
+                nullable: true,
                 required: true
             })
         };
