@@ -9,42 +9,23 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
     }
 
     static commonTemplate(options = {}) {
-        const includeBaseAbilities = options.includeBaseAbilities ?? false;
+        const isDrone = options.actorType === "drone" ? true : false;
 
-        return {
+        const schema = {
             abilities: new fields.SchemaField({
-                cha: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities), {label: "SFRPG.AbilityCha"}),
-                con: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities), {label: "SFRPG.AbilityCon"}),
-                dex: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities), {label: "SFRPG.AbilityDex"}),
-                int: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities), {label: "SFRPG.AbilityInt"}),
-                str: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities), {label: "SFRPG.AbilityStr"}),
-                wis: new fields.SchemaField(SFRPGActorBase._abilityFieldData(includeBaseAbilities), {label: "SFRPG.AbilityWis"})
+                cha: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData() : {}, {label: "SFRPG.AbilityCha"}),
+                con: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData() : {}, {label: "SFRPG.AbilityCon"}),
+                dex: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData() : {}, {label: "SFRPG.AbilityDex"}),
+                int: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData() : {}, {label: "SFRPG.AbilityInt"}),
+                str: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData() : {}, {label: "SFRPG.AbilityStr"}),
+                wis: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData() : {}, {label: "SFRPG.AbilityWis"})
             }),
             attributes: new fields.SchemaField({
-                eac: new fields.SchemaField(SFRPGActorBase._defenseFieldData(), {label: "SFRPG.EnergyArmorClass"}),
-                kac: new fields.SchemaField(SFRPGActorBase._defenseFieldData(), {label: "SFRPG.KineticArmorClass"}),
-                cmd: new fields.SchemaField(SFRPGActorBase._defenseFieldData(), {label: "SFRPG.ACvsCombatManeuversTitle"}),
+                cmd: new fields.SchemaField({}, {label: "SFRPG.ACvsCombatManeuversTitle"}),
+                eac: new fields.SchemaField({}, {label: "SFRPG.EnergyArmorClass"}),
+                fort: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.FortitudeSave"}),
                 hp: new fields.SchemaField({
-                    ...SFRPGActorBase.tooltipTemplate(),
-                    max: new fields.NumberField({
-                        initial: 10,
-                        min: 0,
-                        nullable: false,
-                        required: true
-                    }),
-                    min: new fields.NumberField({
-                        initial: 0,
-                        min: 0,
-                        nullable: false,
-                        required: true
-                    }),
                     temp: new fields.NumberField({
-                        initial: null,
-                        min: 0,
-                        nullable: true,
-                        required: true
-                    }),
-                    tempmax: new fields.NumberField({
                         initial: null,
                         min: 0,
                         nullable: true,
@@ -57,52 +38,13 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         required: true
                     })
                 }, {label: "SFRPG.Health"}),
-                init: new fields.SchemaField({
-                    ...SFRPGActorBase.tooltipTemplate(),
-                    bonus: new fields.NumberField({
-                        initial: 0,
-                        min: 0,
-                        nullable: false,
-                        required: true
-                    }),
-                    total: new fields.NumberField({
-                        initial: 0,
-                        min: 0,
-                        nullable: false,
-                        required: true
-                    }),
-                    value: new fields.NumberField({
-                        initial: 0,
-                        min: 0,
-                        nullable: false,
-                        required: true
-                    })
-                }, {label: "SFRPG.InitiativeLabel"}),
-                fort: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.FortitudeSave"}),
+                init: new fields.SchemaField({}, {label: "SFRPG.InitiativeLabel"}),
+                kac: new fields.SchemaField({}, {label: "SFRPG.KineticArmorClass"}),
                 reflex: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.ReflexSave"}),
-                will: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.WillSave"}),
-                arms: new fields.NumberField({
-                    initial: 2,
-                    min: 0,
-                    nullable: false,
-                    required: true,
-                    label: "SFRPG.NumberOfArms"
-                }),
-                space: new fields.StringField({
-                    initial: "",
-                    blank: true,
-                    required: true,
-                    label: "SFRPG.Space"
-                }),
-                reach: new fields.StringField({
-                    initial: "",
-                    blank: true,
-                    required: true,
-                    label: "SFRPG.Reach"
-                }),
                 speed: new fields.SchemaField({
                     ...SFRPGDocumentBase.speedTemplate()
-                })
+                }),
+                will: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.WillSave"})
             }),
             currency: new fields.SchemaField({
                 credit: new fields.NumberField({
@@ -121,12 +63,6 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 })
             }),
             details: new fields.SchemaField({
-                alignment: new fields.StringField({
-                    initial: "",
-                    blank: true,
-                    required: true,
-                    label: "SFRPG.AlignmentPlaceHolderText"
-                }),
                 biography: new fields.SchemaField({
                     age: new fields.NumberField({
                         initial: null,
@@ -195,12 +131,6 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         required: false,
                         label: "SFRPG.ActorSheet.Biography.Weight"
                     })
-                }),
-                race: new fields.StringField({
-                    initial: "",
-                    blank: true,
-                    required: true,
-                    label: "SFRPG.ActorSheet.Features.Categories.Race"
                 })
             }),
             skills: new fields.TypedObjectField(
@@ -208,6 +138,64 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 SFRPGActorBase._skillsInitial()
             ),
             traits: new fields.SchemaField({
+                spellResistance: new fields.SchemaField({ // TODO: collate this and 'sr' into one field
+                    base: new fields.NumberField({
+                        initial: 0,
+                        nullable: true,
+                        required: true
+                    })
+                }, {label: "SFRPG.SpellResistance"}),
+            })
+        };
+
+        if (!isDrone) {
+            foundry.utils.mergeObject(schema.attributes.fields, {
+                arms: new fields.NumberField({
+                    initial: 2,
+                    min: 0,
+                    nullable: false,
+                    required: true,
+                    label: "SFRPG.NumberOfArms"
+                }),
+                reach: new fields.StringField({
+                    initial: "",
+                    blank: true,
+                    required: true,
+                    label: "SFRPG.Reach"
+                }),
+                space: new fields.StringField({
+                    initial: "",
+                    blank: true,
+                    required: true,
+                    label: "SFRPG.Space"
+                })
+            });
+
+            foundry.utils.mergeObject(schema.attributes.fields.init.fields, {
+                value: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    nullable: false,
+                    required: true
+                })
+            });
+
+            foundry.utils.mergeObject(schema.details.fields, {
+                alignment: new fields.StringField({
+                    initial: "",
+                    blank: true,
+                    required: true,
+                    label: "SFRPG.AlignmentPlaceHolderText"
+                }),
+                race: new fields.StringField({
+                    initial: "",
+                    blank: true,
+                    required: true,
+                    label: "SFRPG.ActorSheet.Features.Categories.Race"
+                })
+            });
+
+            foundry.utils.mergeObject(schema.traits.fields, {
                 ci: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.ConImm"}),
                 damageReduction: new fields.SchemaField({
                     negatedBy: new fields.StringField({
@@ -238,21 +226,15 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     required: true,
                     label: "SFRPG.Size"
                 }),
-                spellResistance: new fields.SchemaField({ // TODO: collate this and 'sr' into one field
-                    base: new fields.NumberField({
-                        initial: 0,
-                        nullable: true,
-                        required: false
-                    })
-                }, {label: "SFRPG.SpellResistance"}),
                 sr: new fields.NumberField({ // TODO: collate this and 'spellResistance' into one field
                     initial: 0,
                     nullable: false,
                     required: true,
                     label: "SFRPG.SpellResistance"
                 })
-            })
-        };
+            });
+        }
+        return schema;
     }
 
     static conditionsTemplate() {
@@ -366,7 +348,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
 
     static _abilityFieldData(includeBase) {
         const data = {
-            value: new fields.NumberField({
+            base: new fields.NumberField({
                 initial: 10,
                 min: 0
             }),
@@ -380,6 +362,10 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             }),
             mod: new fields.NumberField({
                 initial: 3,
+                min: 0
+            }),
+            value: new fields.NumberField({
+                initial: 10,
                 min: 0
             })
         };
@@ -433,40 +419,9 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         }, {label: label, hint: hint});
     }
 
-    static _defenseFieldData() {
-        return {
-            ...SFRPGActorBase.tooltipTemplate(),
-            min: new fields.NumberField({
-                initial: 0,
-                min: 0,
-                nullable: false,
-                required: true
-            }),
-            value: new fields.NumberField({
-                initial: 10,
-                min: 0,
-                nullable: false,
-                required: true
-            })
-        };
-    }
-
     static _saveFieldData() {
         return {
-            ...SFRPGActorBase.tooltipTemplate(),
-            bonus: new fields.NumberField({
-                initial: 0,
-                min: 0,
-                nullable: false,
-                required: true
-            }),
             misc: new fields.NumberField({
-                initial: 0,
-                min: 0,
-                nullable: false,
-                required: true
-            }),
-            value: new fields.NumberField({
                 initial: 0,
                 min: 0,
                 nullable: false,

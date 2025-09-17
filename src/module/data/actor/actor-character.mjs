@@ -8,7 +8,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
 
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
-            ...SFRPGActorBase.commonTemplate({includeBaseAbilities: true}),
+            ...SFRPGActorBase.commonTemplate(),
             ...SFRPGActorBase.conditionsTemplate(),
             ...SFRPGActorBase.modifiersTemplate(),
             ...SFRPGActorBase.spellTemplate({actorType: "character"})

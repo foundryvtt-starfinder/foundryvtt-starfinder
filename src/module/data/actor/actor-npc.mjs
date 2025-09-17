@@ -8,7 +8,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
 
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
-            ...SFRPGActorBase.commonTemplate({includeBaseAbilities: true}),
+            ...SFRPGActorBase.commonTemplate(),
             ...SFRPGActorBase.conditionsTemplate(),
             ...SFRPGActorBase.modifiersTemplate(),
             ...SFRPGActorBase.spellTemplate({actorType: "npc"})
@@ -53,6 +53,15 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
                     required: true
                 })
             }, {label: "SFRPG.Resolve"})
+        });
+
+        foundry.utils.mergeObject(schema.attributes.fields.hp.fields, {
+            max: new fields.NumberField({
+                initial: 10,
+                min: 0,
+                nullable: false,
+                required: true
+            }),
         });
 
         schema.attributes.fields.eac.fields.base = new fields.NumberField({
