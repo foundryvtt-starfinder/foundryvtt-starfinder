@@ -141,9 +141,9 @@ export default function(engine) {
             return sum;
         }, 0);
 
-        fort.bonus += fort.misc + fortMod;
-        reflex.bonus += reflex.misc + reflexMod;
-        will.bonus += will.misc + willMod;
+        fort.bonus += (fort.misc ?? 0) + fortMod;
+        reflex.bonus += (reflex.misc ?? 0) + reflexMod;
+        will.bonus += (will.misc ?? 0) + willMod;
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

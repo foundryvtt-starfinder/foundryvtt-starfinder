@@ -8,7 +8,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
 
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
-            ...SFRPGActorBase.commonTemplate(),
+            ...SFRPGActorBase.commonTemplate({actorType: "npc"}),
             ...SFRPGActorBase.conditionsTemplate(),
             ...SFRPGActorBase.modifiersTemplate(),
             ...SFRPGActorBase.spellTemplate({actorType: "npc"})
@@ -33,14 +33,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
                 })
             }, {label: "SFRPG.NPCSheet.Header.BaseSpellDC", hint: "SFRPG.NPCSheet.Header.BaseSpellDCTooltip"}),
             rp: new fields.SchemaField({
-                ...SFRPGActorBase.tooltipTemplate(),
                 max: new fields.NumberField({
-                    initial: 0,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
-                min: new fields.NumberField({
                     initial: 0,
                     min: 0,
                     nullable: false,
@@ -96,6 +89,12 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
         });
 
         foundry.utils.mergeObject(schema.details.fields, {
+            combatRole: new fields.StringField({
+                initial: "",
+                blank: true,
+                choices: ["", ...Object.keys(CONFIG.SFRPG.combatRoles)],
+                label: "SFRPG.CombatRoles.Label"
+            }),
             cr: new fields.NumberField({
                 initial: 1,
                 min: 0,
@@ -118,22 +117,29 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
             organizationSize: new fields.SchemaField({
                 max: new fields.NumberField({
                     initial: null,
-                    min: 0,
-                    nullable: true,
-                    required: true
+                    min: 1,
+                    nullable: true
                 }),
                 min: new fields.NumberField({
-                    initial: 1,
-                    min: 0,
-                    nullable: true,
-                    required: true
+                    initial: null,
+                    min: 1,
+                    nullable: true
                 })
             }, {label: "SFRPG.NPCSheet.Biography.Organization.GroupSize", hint: "SFRPG.NPCSheet.Biography.Organization.GroupSizeTooltip"}),
+            raceAndGrafts: new fields.StringField({
+                initial: "",
+                blank: true,
+                label: "SFRPG.NPCSheet.Header.RaceAndGraftsPlaceHolderText"
+            }),
             source: new fields.StringField({
                 initial: "",
                 blank: true,
-                required: false,
                 label: "SFRPG.SourceBook"
+            }),
+            subtype: new fields.StringField({
+                initial: "",
+                blank: true,
+                label: "SFRPG.NPCSheet.Header.SubtypePlaceHolderText"
             }),
             type: new fields.StringField({
                 initial: "",
@@ -141,39 +147,10 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
                 required: false,
                 label: "SFRPG.NPCSheet.Header.TypePlaceHolderText"
             }),
-            xp: new fields.SchemaField({
-                value: new fields.NumberField({
-                    initial: 10,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                })
-            }, {label: "SFRPG.XP"})
+            xp: new fields.SchemaField({}, {label: "SFRPG.XP"})
         });
 
-        foundry.utils.mergeObject(schema.traits.fields, {
-            armorProf: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.TraitArmorProf"}),
-            weaponProf: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.TraitWeaponProf"})
-        });
-
-        // Character-specific fields
-        foundry.utils.mergeObject(schema, {
-            skillpoints: new fields.SchemaField({
-                ...SFRPGActorBase.tooltipTemplate(),
-                max: new fields.NumberField({
-                    initial: 0,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
-                used: new fields.NumberField({
-                    initial: 0,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                })
-            }, {label: "SFRPG.SkillPoints"})
-        });
+        // No NPC-specific fields
 
         // Edit initial values as needed
         schema.abilities.fields.cha.fields.base.initial = 0;

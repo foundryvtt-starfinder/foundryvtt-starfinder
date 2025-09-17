@@ -10,6 +10,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
 
     static commonTemplate(options = {}) {
         const isDrone = options.actorType === "drone" ? true : false;
+        const isNPC = options.actorType === "npc" ? true : false;
 
         const schema = {
             abilities: new fields.SchemaField({
@@ -21,9 +22,8 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 wis: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData() : {}, {label: "SFRPG.AbilityWis"})
             }),
             attributes: new fields.SchemaField({
-                cmd: new fields.SchemaField({}, {label: "SFRPG.ACvsCombatManeuversTitle"}),
                 eac: new fields.SchemaField({}, {label: "SFRPG.EnergyArmorClass"}),
-                fort: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.FortitudeSave"}),
+                fort: new fields.SchemaField(!isNPC ? SFRPGActorBase._saveFieldData() : {}, {label: "SFRPG.FortitudeSave"}),
                 hp: new fields.SchemaField({
                     temp: new fields.NumberField({
                         initial: null,
@@ -40,11 +40,11 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 }, {label: "SFRPG.Health"}),
                 init: new fields.SchemaField({}, {label: "SFRPG.InitiativeLabel"}),
                 kac: new fields.SchemaField({}, {label: "SFRPG.KineticArmorClass"}),
-                reflex: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.ReflexSave"}),
+                reflex: new fields.SchemaField(!isNPC ? SFRPGActorBase._saveFieldData() : {}, {label: "SFRPG.ReflexSave"}),
                 speed: new fields.SchemaField({
                     ...SFRPGDocumentBase.speedTemplate()
                 }),
-                will: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.WillSave"})
+                will: new fields.SchemaField(!isNPC ? SFRPGActorBase._saveFieldData() : {}, {label: "SFRPG.WillSave"})
             }),
             currency: new fields.SchemaField({
                 credit: new fields.NumberField({
@@ -144,7 +144,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         nullable: true,
                         required: true
                     })
-                }, {label: "SFRPG.SpellResistance"}),
+                }, {label: "SFRPG.SpellResistance"})
             })
         };
 
@@ -171,46 +171,23 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 })
             });
 
-            foundry.utils.mergeObject(schema.attributes.fields.init.fields, {
-                value: new fields.NumberField({
-                    initial: 0,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                })
+            schema.attributes.fields.init.fields.value = new fields.NumberField({
+                initial: 0,
+                min: 0,
+                nullable: false,
+                required: true
             });
 
-            foundry.utils.mergeObject(schema.details.fields, {
-                alignment: new fields.StringField({
-                    initial: "",
-                    blank: true,
-                    required: true,
-                    label: "SFRPG.AlignmentPlaceHolderText"
-                }),
-                race: new fields.StringField({
-                    initial: "",
-                    blank: true,
-                    required: true,
-                    label: "SFRPG.ActorSheet.Features.Categories.Race"
-                })
+            schema.details.fields.alignment = new fields.StringField({
+                initial: "",
+                blank: true,
+                required: true,
+                label: "SFRPG.AlignmentPlaceHolderText"
             });
 
             foundry.utils.mergeObject(schema.traits.fields, {
                 ci: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.ConImm"}),
-                damageReduction: new fields.SchemaField({
-                    negatedBy: new fields.StringField({
-                        initial: "",
-                        blank: true,
-                        required: false
-                    }),
-                    value: new fields.NumberField({
-                        initial: 0,
-                        nullable: true,
-                        required: false
-                    })
-                }, {label: "SFRPG.ActorSheet.Modifiers.EffectTypes.DamageReduction"}),
                 di: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Immunities"}),
-                dr: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Reduction"}),
                 dv: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Vulnerabilities"}),
                 languages: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Languages"}),
                 senses: new fields.StringField({
@@ -346,38 +323,13 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         };
     }
 
-    static _abilityFieldData(includeBase) {
-        const data = {
+    static _abilityFieldData() {
+        return {
             base: new fields.NumberField({
                 initial: 10,
-                min: 0
-            }),
-            min: new fields.NumberField({
-                initial: 3,
-                min: 0
-            }),
-            misc: new fields.NumberField({
-                initial: 3,
-                min: 0
-            }),
-            mod: new fields.NumberField({
-                initial: 3,
-                min: 0
-            }),
-            value: new fields.NumberField({
-                initial: 10,
-                min: 0
+                min: -5
             })
         };
-
-        if (includeBase) {
-            data.base = new fields.NumberField({
-                initial: 10,
-                min: 0
-            });
-        }
-
-        return data;
     }
 
     static _crewNPCField(options = {}) {

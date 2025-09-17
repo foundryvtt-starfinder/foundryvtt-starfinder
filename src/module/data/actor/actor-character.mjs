@@ -8,7 +8,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
 
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
-            ...SFRPGActorBase.commonTemplate(),
+            ...SFRPGActorBase.commonTemplate({actorType: "character"}),
             ...SFRPGActorBase.conditionsTemplate(),
             ...SFRPGActorBase.modifiersTemplate(),
             ...SFRPGActorBase.spellTemplate({actorType: "character"})
@@ -25,6 +25,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     required: true
                 })
             }, {label: "SFRPG.BaseAttackBonusTitle"}),
+            cmd: new fields.SchemaField({}, {label: "SFRPG.ACvsCombatManeuversTitle"}),
             rp: new fields.SchemaField({
                 ...SFRPGActorBase.tooltipTemplate(),
                 max: new fields.NumberField({
@@ -98,6 +99,12 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     required: true
                 })
             }, {label: "SFRPG.LevelLabelText"}),
+            race: new fields.StringField({
+                initial: "",
+                blank: true,
+                required: true,
+                label: "SFRPG.ActorSheet.Features.Categories.Race"
+            }),
             theme: new fields.StringField({
                 initial: "",
                 blank: true,
@@ -105,18 +112,6 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                 label: "SFRPG.ActorSheet.Features.Categories.Theme"
             }),
             xp: new fields.SchemaField({
-                max: new fields.NumberField({
-                    initial: 1300,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
-                min: new fields.NumberField({
-                    initial: 0,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
                 value: new fields.NumberField({
                     initial: 0,
                     min: 0,
