@@ -1,5 +1,7 @@
 import SFRPGItemBase from './base-item.mjs';
 
+const { fields } = foundry.data;
+
 export default class SFRPGItemArchetypes extends SFRPGItemBase {
 
     static LOCALIZATION_PREFIXES = [
@@ -15,7 +17,15 @@ export default class SFRPGItemArchetypes extends SFRPGItemBase {
             ...SFRPGItemBase.modifiersTemplate()
         });
 
-        // No archetype-specific properties
+        // Archetype-specific properties
+        foundry.utils.mergeObject(schema, {
+            requirements: new fields.StringField({
+                initial: "",
+                blank: true,
+                required: true,
+                label: "SFRPG.Items.Feat.Requirements"
+            })
+        });
 
         return schema;
     }

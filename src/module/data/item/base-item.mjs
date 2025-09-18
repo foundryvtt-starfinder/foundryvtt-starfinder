@@ -77,7 +77,12 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                         {required: false, nullable: true}
                     ),
                     {required: true}
-                )
+                ),
+                primaryGroup: new fields.NumberField({
+                    initial: null,
+                    min: 0,
+                    nullable: true
+                })
             }),
             damageNotes: new fields.StringField({
                 required: false,
@@ -98,6 +103,20 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 required: false,
                 label: "SFRPG.Items.Action.DamageFormula",
                 hint: "SFRPG.Items.Action.DamageFormulaTooltip"
+            }),
+            skillCheck: new fields.SchemaField({
+                dc: new fields.StringField({
+                    initial: "",
+                    blank: true
+                }),
+                type: new fields.StringField({
+                    initial: "",
+                    blank: true,
+                    choices: ["", ...Object.keys(CONFIG.SFRPG.skills)]
+                }),
+                variable: new fields.BooleanField({
+                    initial: false
+                })
             }),
             properties: new fields.TypedObjectField(
                 new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.weaponProperties
@@ -161,15 +180,14 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             }),
             duration: new fields.SchemaField({
                 units: new fields.StringField({
-                    initial: "",
-                    choices: ["text", ...Object.keys(CONFIG.SFRPG.durationTypes)],
-                    blank: true
+                    initial: "instantaneous",
+                    choices: [...Object.keys(CONFIG.SFRPG.durationTypes, "text")]
                 }),
-                value: new fields.StringField()
-            }, {
-                required: true,
-                label: "SFRPG.Items.Activation.Duration"
-            }),
+                value: new fields.StringField({
+                    initial: "",
+                    blank: true
+                })
+            }, {label: "SFRPG.Items.Activation.Duration"}),
             isActive: new fields.BooleanField(),
             range: new fields.SchemaField({
                 units: new fields.StringField({
@@ -216,7 +234,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                     }),
                     {required: true}
                 ),
-                includeContentsInWealth: new fields.BooleanField({
+                includeContentsInWealthCalculation: new fields.BooleanField({
                     initial: true,
                     label: "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculation",
                     hint: "SFRPG.ActorSheet.Inventory.Container.IncludeContentsInWealthCalculationTooltip"
@@ -243,7 +261,8 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                             required: false
                         }),
                         weightProperty: new fields.StringField({
-                            choices: Object.keys(CONFIG.SFRPG.storageWeightProperties),
+                            initial: "",
+                            choices: ["bulk", Object.keys(CONFIG.SFRPG.storageWeightProperties)], // TODO: remove old & unused "bulk" option once a migration is implemented to change it to ""
                             blank: true
                         })
                     })
