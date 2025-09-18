@@ -171,14 +171,7 @@ export default class SFRPGActorHazard extends SFRPGActorBase {
                     required: false,
                     label: "SFRPG.NPCSheet.Header.TypePlaceHolderText"
                 }),
-                xp: new fields.SchemaField({
-                    value: new fields.NumberField({
-                        initial: 10,
-                        min: 0,
-                        nullable: false,
-                        required: true
-                    })
-                }, {label: "SFRPG.XP"})
+                xp: new fields.SchemaField({}, {label: "SFRPG.XP"})
             })
         });
 
