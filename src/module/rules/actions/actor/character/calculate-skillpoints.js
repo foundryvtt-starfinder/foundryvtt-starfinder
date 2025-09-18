@@ -6,15 +6,6 @@ export default function(engine) {
         const skills = fact.data.skills;
         const classes = fact.classes;
 
-        /** Fix the skillpoints field if not present. (Old data) */
-        if (!data.skillpoints) {
-            data.skillpoints = {
-                used: 0,
-                max: 0,
-                tooltip: []
-            };
-        }
-
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
                 if (item.rolledMods) {
@@ -100,6 +91,7 @@ export default function(engine) {
             skill.min = accumulator;
         }
 
+        data.skillpoints.tooltip = [];
         let skillpointsMax = 0;
         let totalLevel = 0;
         for (const cls of classes) {

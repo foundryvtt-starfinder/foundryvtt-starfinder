@@ -9,17 +9,18 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
     }
 
     static commonTemplate(options = {}) {
+        const isCharacter = options.actorType === "character" ? true : false;
         const isDrone = options.actorType === "drone" ? true : false;
         const isNPC = options.actorType === "npc" ? true : false;
 
         const schema = {
             abilities: new fields.SchemaField({
-                cha: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData() : {}, {label: "SFRPG.AbilityCha"}),
-                con: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData() : {}, {label: "SFRPG.AbilityCon"}),
-                dex: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData() : {}, {label: "SFRPG.AbilityDex"}),
-                int: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData() : {}, {label: "SFRPG.AbilityInt"}),
-                str: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData() : {}, {label: "SFRPG.AbilityStr"}),
-                wis: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData() : {}, {label: "SFRPG.AbilityWis"})
+                cha: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData(isCharacter) : {}, {label: "SFRPG.AbilityCha"}),
+                con: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData(isCharacter) : {}, {label: "SFRPG.AbilityCon"}),
+                dex: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData(isCharacter) : {}, {label: "SFRPG.AbilityDex"}),
+                int: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData(isCharacter) : {}, {label: "SFRPG.AbilityInt"}),
+                str: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData(isCharacter) : {}, {label: "SFRPG.AbilityStr"}),
+                wis: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData(isCharacter) : {}, {label: "SFRPG.AbilityWis"})
             }),
             attributes: new fields.SchemaField({
                 eac: new fields.SchemaField({}, {label: "SFRPG.EnergyArmorClass"}),
@@ -139,6 +140,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             )
         };
 
+        // Add these in for characters and npcs
         if (!isDrone) {
             foundry.utils.mergeObject(schema, {
                 traits: new fields.SchemaField({
@@ -304,25 +306,32 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         };
     }
 
-    static tooltipTemplate() {
-        return {
-            tooltip: new fields.ArrayField(
-                new fields.StringField({
-                    initial: "",
-                    required: false,
-                    blank: true
-                }), {required: true}
-            )
-        };
-    }
-
-    static _abilityFieldData() {
-        return {
+    static _abilityFieldData(isCharacter) {
+        const dataField = {
             base: new fields.NumberField({
                 initial: 10,
                 min: -5
             })
         };
+
+        if (isCharacter) {
+            foundry.utils.mergeObject(dataField, {
+                damage: new fields.NumberField({
+                    initial: null,
+                    nullable: true
+                }),
+                drain: new fields.NumberField({
+                    initial: null,
+                    nullable: true
+                }),
+                userPenalty: new fields.NumberField({
+                    initial: null,
+                    nullable: true
+                })
+            });
+        }
+
+        return dataField;
     }
 
     static _crewNPCField(options = {}) {
@@ -399,12 +408,6 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 required: false
             }),
             misc: new fields.NumberField({
-                initial: 0,
-                min: 0,
-                nullable: false,
-                required: false
-            }),
-            mod: new fields.NumberField({
                 initial: 0,
                 min: 0,
                 nullable: false,

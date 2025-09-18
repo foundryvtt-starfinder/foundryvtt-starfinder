@@ -16,30 +16,9 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
 
         // Add additional fields needed to template fields
         foundry.utils.mergeObject(schema.attributes.fields, {
-            baseAttackBonus: new fields.SchemaField({
-                ...SFRPGActorBase.tooltipTemplate(),
-                value: new fields.NumberField({
-                    initial: 0,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                })
-            }, {label: "SFRPG.BaseAttackBonusTitle"}),
+            baseAttackBonus: new fields.SchemaField({}, {label: "SFRPG.BaseAttackBonusTitle"}),
             cmd: new fields.SchemaField({}, {label: "SFRPG.ACvsCombatManeuversTitle"}),
             rp: new fields.SchemaField({
-                ...SFRPGActorBase.tooltipTemplate(),
-                max: new fields.NumberField({
-                    initial: 10,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
-                min: new fields.NumberField({
-                    initial: 0,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
                 value: new fields.NumberField({
                     initial: 0,
                     min: 0,
@@ -48,19 +27,6 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                 })
             }, {label: "SFRPG.Resolve"}),
             sp: new fields.SchemaField({
-                ...SFRPGActorBase.tooltipTemplate(),
-                max: new fields.NumberField({
-                    initial: 10,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
-                min: new fields.NumberField({
-                    initial: 0,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
                 value: new fields.NumberField({
                     initial: 0,
                     min: 0,
@@ -78,27 +44,8 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     required: true,
                     min: 0
                 })
-            }, {label: "SFRPG.ClassLevelLabel"}),
-            level: new fields.SchemaField({
-                max: new fields.NumberField({
-                    initial: 20,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
-                min: new fields.NumberField({
-                    initial: 1,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
-                value: new fields.NumberField({
-                    initial: 1,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                })
-            }, {label: "SFRPG.LevelLabelText"}),
+            }, {label: "SFRPG.CasterLevel"}),
+            level: new fields.SchemaField({}, {label: "SFRPG.LevelLabelText"}),
             race: new fields.StringField({
                 initial: "",
                 blank: true,
@@ -133,21 +80,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     initial: false
                 })
             }),
-            skillpoints: new fields.SchemaField({
-                ...SFRPGActorBase.tooltipTemplate(),
-                max: new fields.NumberField({
-                    initial: 0,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                }),
-                used: new fields.NumberField({
-                    initial: 0,
-                    min: 0,
-                    nullable: false,
-                    required: true
-                })
-            }, {label: "SFRPG.SkillPoints"})
+            skillpoints: new fields.SchemaField({}, {label: "SFRPG.SkillPoints"})
         });
 
         // Edit initial values as needed

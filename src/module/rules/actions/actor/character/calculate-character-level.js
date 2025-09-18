@@ -16,9 +16,7 @@ export default function(engine) {
         }
 
         for (const cls of classes) {
-            const classData = cls.system;
-
-            const classLevel = classData.levels;
+            const classLevel = cls.system.levels;
             const tooltip = game.i18n.format("SFRPG.CharacterLevelsTooltip", {
                 class: cls.name.split(',')[0].trim(),
                 levels: classLevel + ` (@classes.${cls.name.toLowerCase().split(',')[0].trim()}.levels)`
@@ -27,7 +25,7 @@ export default function(engine) {
             data.details.level.value += classLevel;
             data.details.level.tooltip.push(tooltip);
 
-            if (classData.isCaster) {
+            if (cls.system.isCaster) {
                 if (data.details.cl.value === null) {
                     data.details.cl.value = 0;
                 }
