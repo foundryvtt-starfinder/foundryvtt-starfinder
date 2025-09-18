@@ -345,7 +345,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 label: "SFRPG.StarshipSheet.Crew.NumberOfUses"
             }),
             skills: new fields.TypedObjectField(
-                new fields.SchemaField(SFRPGActorBase._skillFieldData())
+                new fields.SchemaField(SFRPGActorBase._skillFieldData({forStarship: true}))
             )
         }, {label: label, hint: hint});
     }
@@ -386,51 +386,68 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
 
     static _skillFieldData(options = {}) {
         const ability = options.ability ?? "cha";
-        const isTrainedOnly = options.isTrainedOnly ?? false;
+        const forStarship = options.forStarship ?? false;
         const hasArmorCheckPenalty = options.hasArmorCheckPenalty ?? false;
-        return {
-            ability: new fields.StringField({
-                initial: ability,
-                blank: false,
-                choices: Object.keys(CONFIG.SFRPG.abilities),
-                required: false
-            }),
-            hasArmorCheckPenalty: new fields.BooleanField({
-                initial: hasArmorCheckPenalty,
-                required: false
-            }),
-            isTrainedOnly: new fields.BooleanField({
-                initial: isTrainedOnly,
-                required: false
-            }),
-            enabled: new fields.BooleanField({
-                initial: false,
-                required: false
-            }),
-            misc: new fields.NumberField({
-                initial: 0,
-                min: 0,
-                nullable: false,
-                required: false
-            }),
+        const isTrainedOnly = options.isTrainedOnly ?? false;
+        const dataField = {
             ranks: new fields.NumberField({
-                initial: 0,
-                min: 0,
-                nullable: false,
-                required: false
-            }),
-            subname: new fields.StringField({
-                initial: "",
-                blank: true,
-                required: false
-            }),
-            value: new fields.NumberField({
                 initial: 0,
                 min: 0,
                 nullable: false,
                 required: false
             })
         };
+
+        if (forStarship) {
+            foundry.utils.mergeObject(dataField, {
+                mod: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    nullable: false,
+                    required: false
+                })
+            });
+        } else {
+            foundry.utils.mergeObject(dataField, {
+                ability: new fields.StringField({
+                    initial: ability,
+                    blank: false,
+                    choices: Object.keys(CONFIG.SFRPG.abilities),
+                    required: false
+                }),
+                enabled: new fields.BooleanField({
+                    initial: false,
+                    required: false
+                }),
+                hasArmorCheckPenalty: new fields.BooleanField({
+                    initial: hasArmorCheckPenalty,
+                    required: false
+                }),
+                isTrainedOnly: new fields.BooleanField({
+                    initial: isTrainedOnly,
+                    required: false
+                }),
+                misc: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    nullable: false,
+                    required: false
+                }),
+                subname: new fields.StringField({
+                    initial: "",
+                    blank: true,
+                    required: false
+                }),
+                value: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    nullable: false,
+                    required: false
+                })
+            });
+        }
+
+        return dataField;
     }
 
     static _skillsInitial() {
