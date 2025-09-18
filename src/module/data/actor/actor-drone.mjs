@@ -17,6 +17,7 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
         foundry.utils.mergeObject(schema.attributes.fields, {
             armorSlots: new fields.SchemaField({}, {label: "SFRPG.DroneSheet.Traits.ArmorSlots"}),
             baseAttackBonus: new fields.SchemaField({}, {label: "SFRPG.BaseAttackBonusTitle"}),
+            cmd: new fields.SchemaField({}, {label: "SFRPG.ACvsCombatManeuversTitle"}),
             rp: new fields.SchemaField({
                 value: new fields.NumberField({
                     initial: 0,
@@ -46,6 +47,13 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
 
         foundry.utils.mergeObject(schema, {
             traits: new fields.SchemaField({
+                spellResistance: new fields.SchemaField({ // TODO: collate this and 'sr' into one field
+                    base: new fields.NumberField({
+                        initial: 0,
+                        nullable: true,
+                        required: true
+                    })
+                }, {label: "SFRPG.SpellResistance"}),
                 weaponProf: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.TraitWeaponProf"})
             })
         });

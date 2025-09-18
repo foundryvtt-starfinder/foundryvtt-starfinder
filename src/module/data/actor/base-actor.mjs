@@ -136,19 +136,38 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             skills: new fields.TypedObjectField(
                 new fields.SchemaField(SFRPGActorBase._skillFieldData()),
                 SFRPGActorBase._skillsInitial()
-            ),
-            traits: new fields.SchemaField({
-                spellResistance: new fields.SchemaField({ // TODO: collate this and 'sr' into one field
-                    base: new fields.NumberField({
-                        initial: 0,
-                        nullable: true,
-                        required: true
-                    })
-                }, {label: "SFRPG.SpellResistance"})
-            })
+            )
         };
 
         if (!isDrone) {
+            foundry.utils.mergeObject(schema, {
+                traits: new fields.SchemaField({
+                    ci: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.ConImm"}),
+                    di: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Immunities"}),
+                    dv: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Vulnerabilities"}),
+                    languages: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Languages"}),
+                    senses: new fields.StringField({
+                        initial: "",
+                        blank: true,
+                        required: false,
+                        label: "SFRPG.SensesTypes.Senses"
+                    }),
+                    size: new fields.StringField({
+                        initial: "medium",
+                        blank: false,
+                        choices: Object.keys(CONFIG.SFRPG.actorSizes),
+                        required: true,
+                        label: "SFRPG.Size"
+                    }),
+                    sr: new fields.NumberField({ // TODO: collate this and 'spellResistance' into one field
+                        initial: 0,
+                        nullable: false,
+                        required: true,
+                        label: "SFRPG.SpellResistance"
+                    })
+                })
+            });
+
             foundry.utils.mergeObject(schema.attributes.fields, {
                 arms: new fields.NumberField({
                     initial: 2,
@@ -183,32 +202,6 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 blank: true,
                 required: true,
                 label: "SFRPG.AlignmentPlaceHolderText"
-            });
-
-            foundry.utils.mergeObject(schema.traits.fields, {
-                ci: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.ConImm"}),
-                di: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Immunities"}),
-                dv: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Vulnerabilities"}),
-                languages: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Languages"}),
-                senses: new fields.StringField({
-                    initial: "",
-                    blank: true,
-                    required: false,
-                    label: "SFRPG.SensesTypes.Senses"
-                }),
-                size: new fields.StringField({
-                    initial: "medium",
-                    blank: false,
-                    choices: Object.keys(CONFIG.SFRPG.actorSizes),
-                    required: true,
-                    label: "SFRPG.Size"
-                }),
-                sr: new fields.NumberField({ // TODO: collate this and 'spellResistance' into one field
-                    initial: 0,
-                    nullable: false,
-                    required: true,
-                    label: "SFRPG.SpellResistance"
-                })
             });
         }
         return schema;

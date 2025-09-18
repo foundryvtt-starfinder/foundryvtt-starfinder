@@ -54,7 +54,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
                 min: 0,
                 nullable: false,
                 required: true
-            }),
+            })
         });
 
         schema.attributes.fields.eac.fields.base = new fields.NumberField({
