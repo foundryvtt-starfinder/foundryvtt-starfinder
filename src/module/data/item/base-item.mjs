@@ -304,10 +304,45 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
         };
     }
 
+    static physicalItemBasicsTemplate() {
+        return {
+            bulk: new fields.StringField({
+                initial: "L",
+                blank: true,
+                required: true
+            }),
+            identified: new fields.BooleanField({initial: true}),
+            level: new fields.NumberField({
+                initial: 1,
+                min: 0,
+                required: true
+            }),
+            price: new fields.NumberField({
+                initial: null,
+                min: 0,
+                nullable: true,
+                required: true
+            }),
+            quantity: new fields.NumberField({
+                initial: 1,
+                min: 0,
+                nullable: true,
+                required: true
+            }),
+            quantityPerPack: new fields.NumberField({
+                initial: 1,
+                min: 1,
+                nullable: true,
+                required: true
+            })
+        };
+    }
+
     static physicalItemTemplate(options = {}) {
         const isEquippable = options.isEquippable ?? false;
         const isEquipment = options.isEquipment ?? false;
         return {
+            ...SFRPGItemBase.physicalItemBasicsTemplate(),
             attributes: new fields.SchemaField({
                 ac: new fields.SchemaField({
                     value: new fields.StringField({
@@ -356,40 +391,11 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 })
             }),
             attuned: new fields.BooleanField({initial: false}),
-            bulk: new fields.StringField({
-                initial: "L",
-                blank: true,
-                required: true
-            }),
             equippable: new fields.BooleanField({initial: isEquippable}),
             equipped: new fields.BooleanField({initial: false}),
             equippedBulkMultiplier: new fields.NumberField({initial: 1, min: 0}),
-            identified: new fields.BooleanField({initial: true}),
             isEquipment: new fields.BooleanField({initial: isEquipment}),
-            level: new fields.NumberField({
-                initial: 1,
-                min: 0,
-                required: true
-            }),
-            price: new fields.NumberField({
-                initial: null,
-                min: 0,
-                nullable: true,
-                required: true
-            }),
-            proficient: new fields.BooleanField({initial: false}),
-            quantity: new fields.NumberField({
-                initial: 1,
-                min: 0,
-                nullable: true,
-                required: true
-            }),
-            quantityPerPack: new fields.NumberField({
-                initial: 1,
-                min: 1,
-                nullable: true,
-                required: true
-            })
+            proficient: new fields.BooleanField({initial: false})
         };
     }
 

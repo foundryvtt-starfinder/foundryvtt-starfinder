@@ -13,8 +13,7 @@ export default class SFRPGItemAmmunition extends SFRPGItemBase {
 
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
-            ...SFRPGItemBase.containerTemplate(),
-            ...SFRPGItemBase.physicalItemTemplate(),
+            ...SFRPGItemBase.physicalItemBasicsTemplate(),
             ...SFRPGItemBase.specialMaterialsTemplate()
         });
 
@@ -26,6 +25,26 @@ export default class SFRPGItemAmmunition extends SFRPGItemBase {
                 blank: true,
                 required: true,
                 label: "SFRPG.Items.Ammunition.AmmunitionType"
+            }),
+            attributes: new fields.SchemaField({
+                customBuilt: new fields.BooleanField({
+                    initial: false
+                }),
+                dex: new fields.SchemaField({
+                    mod: new fields.StringField({
+                        initial: "-5",
+                        blank: true,
+                        required: true
+                    })
+                }),
+                size: new fields.StringField({
+                    initial: "medium",
+                    required: true,
+                    choices: Object.keys(CONFIG.SFRPG.itemSizes)
+                }),
+                sturdy: new fields.BooleanField({
+                    initial: false
+                })
             }),
             capacity: new fields.SchemaField({
                 max: new fields.NumberField({
@@ -41,6 +60,7 @@ export default class SFRPGItemAmmunition extends SFRPGItemBase {
                     required: true
                 })
             }, {label: "SFRPG.Items.Capacity.Capacity"}),
+            identified: new fields.BooleanField({initial: true}),
             useCapacity: new fields.BooleanField({
                 required: true,
                 initial: false,
