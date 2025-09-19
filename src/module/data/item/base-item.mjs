@@ -89,9 +89,6 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 label: "SFRPG.Items.Action.DamageNotes",
                 hint: "SFRPG.Items.Action.DamageNotesTooltip"
             }),
-            descriptors: new fields.TypedObjectField(
-                new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.descriptors
-            ),
             formula: new fields.StringField({
                 initial: null,
                 nullable: true,
@@ -262,12 +259,25 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                         }),
                         weightProperty: new fields.StringField({
                             initial: "",
-                            choices: ["bulk", Object.keys(CONFIG.SFRPG.storageWeightProperties)], // TODO: remove old & unused "bulk" option once a migration is implemented to change it to ""
+                            choices: ["bulk", ...Object.keys(CONFIG.SFRPG.storageWeightProperties)], // TODO: remove old & unused "bulk" option once a migration is implemented to change it to ""
                             blank: true
                         })
                     })
                 )
             })
+        };
+    }
+
+    static equipmentStatusTemplate(options = {}) {
+        const isEquippable = options.isEquippable ?? false;
+        const isEquipment = options.isEquipment ?? false;
+
+        return {
+            equippable: new fields.BooleanField({initial: isEquippable}),
+            equipped: new fields.BooleanField({initial: false}),
+            identified: new fields.BooleanField({initial: true}),
+            isEquipment: new fields.BooleanField({initial: isEquipment}),
+            proficient: new fields.BooleanField({initial: false})
         };
     }
 
@@ -323,45 +333,8 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
         };
     }
 
-    static physicalItemBasicsTemplate() {
+    static physicalItemAttributesTemplate() {
         return {
-            bulk: new fields.StringField({
-                initial: "L",
-                blank: true,
-                required: true
-            }),
-            identified: new fields.BooleanField({initial: true}),
-            level: new fields.NumberField({
-                initial: 1,
-                min: 0,
-                required: true
-            }),
-            price: new fields.NumberField({
-                initial: null,
-                min: 0,
-                nullable: true,
-                required: true
-            }),
-            quantity: new fields.NumberField({
-                initial: 1,
-                min: 0,
-                nullable: true,
-                required: true
-            }),
-            quantityPerPack: new fields.NumberField({
-                initial: 1,
-                min: 1,
-                nullable: true,
-                required: true
-            })
-        };
-    }
-
-    static physicalItemTemplate(options = {}) {
-        const isEquippable = options.isEquippable ?? false;
-        const isEquipment = options.isEquipment ?? false;
-        return {
-            ...SFRPGItemBase.physicalItemBasicsTemplate(),
             attributes: new fields.SchemaField({
                 ac: new fields.SchemaField({
                     value: new fields.StringField({
@@ -408,13 +381,48 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 sturdy: new fields.BooleanField({
                     initial: false
                 })
+            })
+        };
+    }
+
+    static physicalItemBasicsTemplate() {
+        return {
+            bulk: new fields.StringField({
+                initial: "L",
+                blank: true,
+                required: true
             }),
-            attuned: new fields.BooleanField({initial: false}),
-            equippable: new fields.BooleanField({initial: isEquippable}),
-            equipped: new fields.BooleanField({initial: false}),
-            equippedBulkMultiplier: new fields.NumberField({initial: 1, min: 0}),
-            isEquipment: new fields.BooleanField({initial: isEquipment}),
-            proficient: new fields.BooleanField({initial: false})
+            level: new fields.NumberField({
+                initial: 1,
+                min: 0,
+                required: true
+            }),
+            price: new fields.NumberField({
+                initial: null,
+                min: 0,
+                nullable: true,
+                required: true
+            }),
+            quantity: new fields.NumberField({
+                initial: 1,
+                min: 0,
+                nullable: true,
+                required: true
+            }),
+            quantityPerPack: new fields.NumberField({
+                initial: 1,
+                min: 1,
+                nullable: true,
+                required: true
+            })
+        };
+    }
+
+    static physicalItemTemplate(options = {}) {
+        return {
+            ...SFRPGItemBase.equipmentStatusTemplate(options),
+            ...SFRPGItemBase.physicalItemAttributesTemplate(),
+            ...SFRPGItemBase.physicalItemBasicsTemplate()
         };
     }
 

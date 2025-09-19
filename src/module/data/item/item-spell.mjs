@@ -20,6 +20,9 @@ export default class SFRPGItemSpell extends SFRPGItemBase {
 
         // Spell-specific properties
         foundry.utils.mergeObject(schema, {
+            descriptors: new fields.TypedObjectField(
+                new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.descriptors
+            ),
             level: new fields.NumberField({
                 initial: 1,
                 min: 0,

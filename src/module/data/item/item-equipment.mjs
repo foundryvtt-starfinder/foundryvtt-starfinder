@@ -59,6 +59,7 @@ export default class SFRPGItemEquipment extends SFRPGItemBase {
                     required: true
                 })
             }),
+            equippedBulkMultiplier: new fields.NumberField({initial: 1, min: 0}),
             strength: new fields.NumberField(),
             // TODO: replace speed with modern speed template (below) once migrations work
             speed: new fields.StringField({

@@ -18,7 +18,8 @@ export default class SFRPGItemUpgrade extends SFRPGItemBase {
             ...SFRPGItemBase.containerTemplate(),
             ...SFRPGItemBase.itemUsageTemplate(),
             ...SFRPGItemBase.modifiersTemplate(),
-            ...SFRPGItemBase.physicalItemTemplate()
+            ...SFRPGItemBase.physicalItemAttributesTemplate(),
+            ...SFRPGItemBase.physicalItemBasicsTemplate()
         });
 
         // Upgrade-specific properties

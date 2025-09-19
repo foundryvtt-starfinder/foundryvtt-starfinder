@@ -20,6 +20,9 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
 
         // Feat-specific properties
         foundry.utils.mergeObject(schema, {
+            descriptors: new fields.TypedObjectField(
+                new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.descriptors
+            ),
             details: new fields.SchemaField({
                 category: new fields.StringField({
                     initial: "feat",
