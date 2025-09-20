@@ -15,9 +15,9 @@ export default class SFRPGItemConsumable extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.actionTemplate(),
             ...SFRPGItemBase.activatedEffectTemplate(),
-            // ...SFRPGItemBase.containerTemplate(),
             ...SFRPGItemBase.modifiersTemplate(),
-            ...SFRPGItemBase.physicalItemTemplate()
+            ...SFRPGItemBase.physicalItemAttributesTemplate(),
+            ...SFRPGItemBase.physicalItemBasicsTemplate()
         });
 
         // Consumable-specific properties
@@ -35,19 +35,6 @@ export default class SFRPGItemConsumable extends SFRPGItemBase {
             autoUse: new fields.BooleanField({initial: true}),
             autoDestroy: new fields.BooleanField({initial: true})
         });
-
-        // Change some initial values specific to consumables
-        /* schema.container.fields.isOpen.initial = true;
-        schema.container.fields.storage.initial = [{
-            acceptsType: [
-                "spell"
-            ],
-            affectsEncumbrance: false,
-            amount: 0,
-            subtype: "spellSlot",
-            type: "slot",
-            weightProperty: "bulk"
-        }]; */
 
         return schema;
     }

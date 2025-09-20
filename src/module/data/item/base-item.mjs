@@ -247,6 +247,8 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                         affectsEncumbrance: new fields.BooleanField({initial: true}),
                         amount: new fields.NumberField({min: 0}),
                         subtype: new fields.StringField({
+                            initial: "",
+                            blank: true,
                             choices: Object.keys(CONFIG.SFRPG.storageIdentifiers)
                         }),
                         type: new fields.StringField({

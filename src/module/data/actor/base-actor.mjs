@@ -42,9 +42,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 init: new fields.SchemaField({}, {label: "SFRPG.InitiativeLabel"}),
                 kac: new fields.SchemaField({}, {label: "SFRPG.KineticArmorClass"}),
                 reflex: new fields.SchemaField(!isNPC ? SFRPGActorBase._saveFieldData() : {}, {label: "SFRPG.ReflexSave"}),
-                speed: new fields.SchemaField({
-                    ...SFRPGDocumentBase.speedTemplate()
-                }),
+                speed: new fields.SchemaField(SFRPGDocumentBase._speedFieldData()),
                 will: new fields.SchemaField(!isNPC ? SFRPGActorBase._saveFieldData() : {}, {label: "SFRPG.WillSave"})
             }),
             currency: new fields.SchemaField({

@@ -13,8 +13,7 @@ export default class SFRPGItemChassis extends SFRPGItemBase {
 
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
-            ...SFRPGItemBase.modifiersTemplate(),
-            ...SFRPGItemBase.speedTemplate()
+            ...SFRPGItemBase.modifiersTemplate()
         });
 
         // Drone Chassis-specific properties
@@ -107,6 +106,7 @@ export default class SFRPGItemChassis extends SFRPGItemBase {
                 required: true,
                 label: "SFRPG.Size"
             }),
+            speed: new fields.SchemaField(SFRPGItemBase._speedFieldData()),
             will: new fields.StringField({
                 initial: "slow",
                 choices: Object.keys(CONFIG.SFRPG.saveProgression),

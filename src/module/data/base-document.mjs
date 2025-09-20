@@ -41,7 +41,7 @@ export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
     }
 
     // TODO: Update all speeds to use this version of the template once migrations are implemented
-    static speedTemplate() {
+    static _speedFieldData() {
         return {
             land: new fields.SchemaField({
                 base: new fields.NumberField({initial: 30, min: 0, required: true})

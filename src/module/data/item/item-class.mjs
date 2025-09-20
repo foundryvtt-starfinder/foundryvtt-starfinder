@@ -1,5 +1,7 @@
 import SFRPGItemBase from './base-item.mjs';
 
+const {fields} = foundry.data;
+
 export default class SFRPGItemClass extends SFRPGItemBase {
 
     static LOCALIZATION_PREFIXES = [
@@ -8,7 +10,6 @@ export default class SFRPGItemClass extends SFRPGItemBase {
     ];
 
     static defineSchema() {
-        const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
         // merge schema with templates
@@ -86,7 +87,7 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                     label: "SFRPG.ClassSkillRanksPerlevel"
                 })
             }),
-            slug: new fields.StringField({
+            slug: new fields.StringField({ // TODO: We should only keep one of slug (used by class items) or nameSlug (used by conditions) eventually
                 initial: "",
                 required: true,
                 blank: true
@@ -123,8 +124,8 @@ export default class SFRPGItemClass extends SFRPGItemBase {
         return schema;
     }
 
+    // TODO: Simplify these so they're generated in a cleaner manner rather than being typed out manually
     static _spellsKnownFieldData() {
-        const fields = foundry.data.fields;
         return new fields.SchemaField({
             "1": new fields.SchemaField({
                 "0": new fields.NumberField({
@@ -1010,7 +1011,6 @@ export default class SFRPGItemClass extends SFRPGItemBase {
     }
 
     static _spellsPerDayFieldData() {
-        const fields = foundry.data.fields;
         return new fields.SchemaField({
             "1": new fields.SchemaField({
                 "1": new fields.NumberField({
@@ -1776,7 +1776,6 @@ export default class SFRPGItemClass extends SFRPGItemBase {
     }
 
     static _bonusSpellsPerDayFieldData() {
-        const fields = foundry.data.fields;
         return new fields.SchemaField({
             "0": new fields.SchemaField({
                 "1": new fields.NumberField({

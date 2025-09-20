@@ -66,9 +66,7 @@ export default class SFRPGItemEquipment extends SFRPGItemBase {
                 initial: "",
                 required: true
             }),
-            /* speed: new fields.SchemaField(
-                SFRPGItemBase.speedTemplate()
-            ), */
+            /* speed: new fields.SchemaField(SFRPGDocumentBase._speedFieldData()), */
             reach: new fields.StringField({
                 initial: "",
                 required: true
