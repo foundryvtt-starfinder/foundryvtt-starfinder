@@ -89,15 +89,6 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         return numericValue;
     }
 
-    async onPlaceholderUpdated(item, newSavingThrowScore) {
-        const placeholders = item.flags.placeholders;
-        if (placeholders.savingThrow.value !== newSavingThrowScore.total) {
-            placeholders.savingThrow.value = newSavingThrowScore.total;
-            await new Promise(resolve => setTimeout(resolve, 500));
-            this.render(false, {editable: this.options.editable});
-        }
-    }
-
     /**
      * Prepare item sheet data
      * Start with the base item data and extending with additional properties for rendering.
@@ -141,45 +132,30 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         // Only physical items have hardness, hp, and their own saving throw when attacked.
         if (data.isPhysicalItem) {
+            let itemLevel = this.parseNumber(itemData.level, 1);
+            let sizeModifier = 0;
+            let dexterityModifier = -5;
             if (itemData.attributes) {
-                const itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
-                const sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
-                const dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
+                itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
+                sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
+                dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
 
                 data.placeholders.hardness = this.parseNumber(itemData.attributes.hardness, itemData.attributes.sturdy ? 5 + (2 * itemLevel) : 5 + itemLevel);
                 data.placeholders.maxHitpoints = this.parseNumber(itemData.attributes.hp?.max, (itemData.attributes.sturdy ? 15 + 3 * itemLevel : 5 + itemLevel) + (itemLevel >= 15 ? 30 : 0));
                 data.placeholders.armorClass = this.parseNumber(itemData.attributes.ac, 10 + sizeModifier + dexterityModifier);
-                data.placeholders.dexterityModifier = dexterityModifier;
-                data.placeholders.sizeModifier = sizeModifier;
-
-                data.placeholders.savingThrow = data.placeholders.savingThrow || {};
-                data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
-                data.placeholders.savingThrow.value = data.placeholders.savingThrow.value ?? 10;
-
-                this.item.flags.placeholders = data.placeholders;
-                this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)
-                    .then((total) => this.onPlaceholderUpdated(this.item, total))
-                    .catch((reason) => console.log(reason));
             } else {
-                const itemLevel = this.parseNumber(itemData.level, 1);
-                const sizeModifier = 0;
-                const dexterityModifier = -5;
-
                 data.placeholders.hardness = 5 + itemLevel;
                 data.placeholders.maxHitpoints = (5 + itemLevel) + (itemLevel >= 15 ? 30 : 0);
                 data.placeholders.armorClass = 10 + sizeModifier + dexterityModifier;
-                data.placeholders.dexterityModifier = dexterityModifier;
-                data.placeholders.sizeModifier = sizeModifier;
-
-                data.placeholders.savingThrow = data.placeholders.savingThrow || {};
-                data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
-                data.placeholders.savingThrow.value = data.placeholders.savingThrow.value ?? 10;
-
-                this.item.flags.placeholders = data.placeholders;
-                this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)
-                    .then((total) => this.onPlaceholderUpdated(this.item, total))
-                    .catch((reason) => console.log(reason));
             }
+
+            data.placeholders.savingThrow = {
+                formula: "max(@item.level, @owner.abilities.X.mod)",
+                value: this._computeItemSaveBonus()
+            };
+            data.placeholders.dexterityModifier = dexterityModifier;
+            data.placeholders.sizeModifier = sizeModifier;
+            this.item.flags.placeholders = data.placeholders;
         }
 
         data.selectedSize = (itemData.attributes && itemData.attributes.size) ? itemData.attributes.size : "medium";
@@ -335,21 +311,18 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
     /* -------------------------------------------- */
 
-    async _computeSavingThrowValue(itemLevel, formula) {
-        try {
-            const rollData = {
-                owner: this.item.actor ? foundry.utils.deepClone(this.item.actor.system) : {abilities: {dex: {mod: 0}}},
-                item: foundry.utils.deepClone(this.item.system),
-                itemLevel: itemLevel
-            };
-            if (!rollData.owner.abilities?.dex?.mod) {
-                rollData.owner.abilities = {dex: {mod: 0}};
-            }
-            const saveRoll = Roll.create(formula, rollData);
-            return saveRoll.evaluate();
-        } catch (err) {
-            console.log(err);
-            return null;
+    _computeItemSaveBonus() {
+        // TODO: Move this into the item's calculation rather than calculating on the sheet
+        const parentItem = this.item;
+        const parentActor = parentItem.actor;
+        const itemLevel = parentItem.system.level;
+        if (parentActor) {
+            const ActorAbilities = parentActor.system.abilities;
+            return `[F: ${Math.max(itemLevel, ActorAbilities.con.mod, 0)}, R: ${Math.max(itemLevel, ActorAbilities.dex.mod, 0)}, W: ${Math.max(itemLevel, ActorAbilities.dex.mod, 0)}]`;
+        } else if (itemLevel < 1) {
+            return 0;
+        } else {
+            return `Max(${itemLevel}, Mod)`;
         }
     }
 

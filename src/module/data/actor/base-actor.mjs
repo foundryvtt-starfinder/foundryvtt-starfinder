@@ -308,7 +308,9 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         const dataField = {
             base: new fields.NumberField({
                 initial: 10,
-                min: -5
+                min: -5, // -5 rather than 0 because npcs use this field directly for their modifiers
+                nullable: false,
+                required: true
             })
         };
 
