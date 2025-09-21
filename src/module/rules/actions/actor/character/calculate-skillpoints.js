@@ -7,13 +7,9 @@ export default function(engine) {
         const classes = fact.classes;
 
         const addModifier = (bonus, data, item, localizationKey) => {
+            if (!item.rolledMods) item.rolledMods = [];
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
-                if (item.rolledMods) {
-                    item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
-                } else {
-                    item.rolledMods = [{mod: bonus.modifier, bonus: bonus}];
-                }
-
+                item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
                 return 0;
             }
 
@@ -25,6 +21,7 @@ export default function(engine) {
                 console.error(e);
             }
 
+            if (!item.tooltip) item.tooltip = [];
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
