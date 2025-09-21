@@ -124,7 +124,7 @@ export default class SFRPGModifierApplication extends FormApplication {
 
                 affectedValue.prop("value", "");
 
-                this._updateModifierData(modifierDialog.object).then(() => {
+                this.modifier.parentUpdate(modifierDialog.object).then(() => {
                     modifierDialog.render();
                 });
                 return;
