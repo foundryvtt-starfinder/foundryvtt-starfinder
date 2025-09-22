@@ -905,7 +905,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
      * @param {*} combatant
      */
     _onEnter(combatant) {
-        if (game.user.isGM && combatant.actor) {
+        if (game.user.isGM && combatant.actor && !this.started) {
             switch (combatant.actor.type) {
                 case "starship":
                     this.update({"flags.sfrpg.combatType": "starship"});
@@ -919,7 +919,6 @@ export class CombatSFRPG extends foundry.documents.Combat {
             }
         }
     }
-
 }
 
 async function onConfigClicked(combat, direction) {
