@@ -48,6 +48,10 @@ export default function(engine) {
     };
 
     const applyPilotingBonusModifiers = (fact, context, data) => {
+        // TODO: System v29 - This currently doesn't work on NPC crew piloting skills and actions. The data structure for those
+        // will need to be rejigged to get them to match the standard 'base' as input, 'mod' as a calculated value format
+        // common to skills. To do this will require migration of actor data on starship actors, which has to wait until
+        // after DataModels have been implemented.
         const pilotingModifiers = fact.modifiers.filter(mod => mod.enabled && mod.effectType === SFRPGEffectType.STARSHIP_PILOTING_SKILL);
 
         if (pilotingModifiers.length > 0) {
