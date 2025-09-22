@@ -5,6 +5,11 @@ const { fields } = foundry.data;
 export default class SFRPGActorBase extends SFRPGDocumentBase {
     static defineSchema() {
         const schema = super.defineSchema();
+
+        foundry.utils.mergeObject(schema, {
+            ...SFRPGDocumentBase.modifiersTemplate()
+        });
+
         return schema;
     }
 

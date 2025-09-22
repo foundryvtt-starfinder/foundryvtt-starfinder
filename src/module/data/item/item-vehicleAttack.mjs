@@ -11,11 +11,6 @@ export default class SFRPGItemVehicleAttack extends SFRPGItemBase {
         const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
-        // merge schema with templates
-        foundry.utils.mergeObject(schema, {
-            ...SFRPGItemBase.modifiersTemplate()
-        });
-
         // Vehicle Attack-specific properties
         foundry.utils.mergeObject(schema, {
             damage: new fields.SchemaField({

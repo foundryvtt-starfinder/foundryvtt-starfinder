@@ -11,11 +11,6 @@ export default class SFRPGItemTheme extends SFRPGItemBase {
         const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
-        // merge schema with templates
-        foundry.utils.mergeObject(schema, {
-            ...SFRPGItemBase.modifiersTemplate()
-        });
-
         // Theme-specific properties
         foundry.utils.mergeObject(schema, {
             abilityMod: new fields.SchemaField({

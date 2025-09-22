@@ -11,11 +11,6 @@ export default class SFRPGItemActorResource extends SFRPGItemBase {
         const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
-        // merge schema with templates
-        foundry.utils.mergeObject(schema, {
-            ...SFRPGItemBase.modifiersTemplate()
-        });
-
         // Actor Resource-specific properties
         foundry.utils.mergeObject(schema, {
             base: new fields.NumberField({

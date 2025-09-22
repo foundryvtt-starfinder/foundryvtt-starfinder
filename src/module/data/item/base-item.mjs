@@ -6,6 +6,10 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
     static defineSchema() {
         const schema = super.defineSchema();
 
+        foundry.utils.mergeObject(schema, {
+            ...SFRPGDocumentBase.modifiersTemplate()
+        });
+
         schema.source = new fields.StringField({
             initial: "",
             blank: true,

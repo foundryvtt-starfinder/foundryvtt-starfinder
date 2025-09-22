@@ -17,7 +17,6 @@ export default class SFRPGItemEquipment extends SFRPGItemBase {
             ...SFRPGItemBase.activatedEffectTemplate(),
             ...SFRPGItemBase.containerTemplate(),
             ...SFRPGItemBase.itemUsageTemplate(),
-            ...SFRPGItemBase.modifiersTemplate(),
             ...SFRPGItemBase.physicalItemTemplate({isEquippable: true, isEquipment: true}),
             ...SFRPGItemBase.specialMaterialsTemplate()
         });

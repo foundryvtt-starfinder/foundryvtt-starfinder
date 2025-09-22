@@ -13,8 +13,7 @@ export default class SFRPGItemEffect extends SFRPGItemBase {
 
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
-            ...SFRPGItemBase.itemDurationTemplate(),
-            ...SFRPGItemBase.modifiersTemplate()
+            ...SFRPGItemBase.itemDurationTemplate()
         });
 
         // Effect-specific properties

@@ -12,11 +12,6 @@ export default class SFRPGItemClass extends SFRPGItemBase {
     static defineSchema() {
         const schema = super.defineSchema();
 
-        // merge schema with templates
-        foundry.utils.mergeObject(schema, {
-            ...SFRPGItemBase.modifiersTemplate()
-        });
-
         // Class-specific properties
         foundry.utils.mergeObject(schema, {
             bab: new fields.StringField({

@@ -9,8 +9,7 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
             ...SFRPGActorBase.commonTemplate({actorType: "drone"}),
-            ...SFRPGActorBase.conditionsTemplate(),
-            ...SFRPGActorBase.modifiersTemplate()
+            ...SFRPGActorBase.conditionsTemplate()
         });
 
         // Add additional fields needed to template fields

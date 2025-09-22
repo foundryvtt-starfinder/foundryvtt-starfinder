@@ -10,7 +10,6 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
         foundry.utils.mergeObject(schema, {
             ...SFRPGActorBase.commonTemplate({actorType: "character"}),
             ...SFRPGActorBase.conditionsTemplate(),
-            ...SFRPGActorBase.modifiersTemplate(),
             ...SFRPGActorBase.spellTemplate({actorType: "character"})
         });
 

@@ -11,8 +11,6 @@ export default class SFRPGItemASI extends SFRPGItemBase {
         const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
-        // No templates needed for this item type
-
         // ASI-specific properties
         foundry.utils.mergeObject(schema, {
             abilities: new fields.TypedObjectField(

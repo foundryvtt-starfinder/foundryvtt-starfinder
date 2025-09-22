@@ -13,7 +13,6 @@ export default class SFRPGItemStarshipDriftEngine extends SFRPGItemBase {
 
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
-            ...SFRPGItemBase.modifiersTemplate(),
             ...SFRPGItemBase.starshipBPTemplate(),
             ...SFRPGItemBase.starshipPowerTemplate()
         });

@@ -15,7 +15,6 @@ export default class SFRPGItemWeaponAccessory extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.containerTemplate(),
             ...SFRPGItemBase.itemUsageTemplate(),
-            ...SFRPGItemBase.modifiersTemplate(),
             ...SFRPGItemBase.physicalItemAttributesTemplate(),
             ...SFRPGItemBase.physicalItemBasicsTemplate()
         });

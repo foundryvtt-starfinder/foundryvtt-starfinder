@@ -11,8 +11,6 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
         const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
-        // no templates needed
-
         // Starship Action-specific properties
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemStarshipAction.actionDCTemplate(),

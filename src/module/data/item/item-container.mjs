@@ -13,7 +13,6 @@ export default class SFRPGItemContainer extends SFRPGItemBase {
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.containerTemplate(),
-            ...SFRPGItemBase.modifiersTemplate(),
             ...SFRPGItemBase.physicalItemTemplate()
         });
 

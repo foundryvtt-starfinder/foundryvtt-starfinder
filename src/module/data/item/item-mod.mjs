@@ -14,8 +14,7 @@ export default class SFRPGItemMod extends SFRPGItemBase {
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.actionTemplate(),
-            ...SFRPGItemBase.activatedEffectTemplate(),
-            ...SFRPGItemBase.modifiersTemplate()
+            ...SFRPGItemBase.activatedEffectTemplate()
         });
 
         // Drone Mod-specific properties

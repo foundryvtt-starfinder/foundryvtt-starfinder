@@ -9,11 +9,6 @@ export default class SFRPGItemStarshipSpecialAbility extends SFRPGItemBase {
 
     static defineSchema() {
         const schema = super.defineSchema();
-
-        // no templates needed
-
-        // No Starship Special Ability-specific properties
-
         return schema;
     }
 }

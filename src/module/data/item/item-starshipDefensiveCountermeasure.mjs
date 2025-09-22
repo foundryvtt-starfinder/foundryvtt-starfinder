@@ -13,7 +13,6 @@ export default class SFRPGItemStarshipDefensiveCountermeasure extends SFRPGItemB
 
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
-            ...SFRPGItemBase.modifiersTemplate(),
             ...SFRPGItemBase.specialMaterialsTemplate(),
             ...SFRPGItemBase.starshipBPTemplate(),
             ...SFRPGItemBase.starshipPowerTemplate()

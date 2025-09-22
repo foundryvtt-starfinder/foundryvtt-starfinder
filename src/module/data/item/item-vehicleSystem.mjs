@@ -11,8 +11,6 @@ export default class SFRPGItemVehicleSystem extends SFRPGItemBase {
         const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
-        // No templates needed
-
         // Vehicle System-specific properties
         foundry.utils.mergeObject(schema, {
             canBeActivated: new fields.BooleanField({

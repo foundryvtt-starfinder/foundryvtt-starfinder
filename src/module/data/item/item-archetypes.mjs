@@ -12,11 +12,6 @@ export default class SFRPGItemArchetypes extends SFRPGItemBase {
     static defineSchema() {
         const schema = super.defineSchema();
 
-        // merge schema with templates
-        foundry.utils.mergeObject(schema, {
-            ...SFRPGItemBase.modifiersTemplate()
-        });
-
         // Archetype-specific properties
         foundry.utils.mergeObject(schema, {
             requirements: new fields.StringField({

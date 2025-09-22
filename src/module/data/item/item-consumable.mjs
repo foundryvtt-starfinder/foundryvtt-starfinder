@@ -15,7 +15,6 @@ export default class SFRPGItemConsumable extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.actionTemplate(),
             ...SFRPGItemBase.activatedEffectTemplate(),
-            ...SFRPGItemBase.modifiersTemplate(),
             ...SFRPGItemBase.physicalItemAttributesTemplate(),
             ...SFRPGItemBase.physicalItemBasicsTemplate()
         });

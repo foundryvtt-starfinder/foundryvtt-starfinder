@@ -6,8 +6,6 @@ export default class SFRPGActorHazard extends SFRPGActorBase {
     static defineSchema() {
         const schema = super.defineSchema();
 
-        // No templates used
-
         // Add additional fields needed to template fields
         foundry.utils.mergeObject(schema, {
             attributes: new fields.SchemaField({

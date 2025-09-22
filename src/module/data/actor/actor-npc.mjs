@@ -10,7 +10,6 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
         foundry.utils.mergeObject(schema, {
             ...SFRPGActorBase.commonTemplate({actorType: "npc"}),
             ...SFRPGActorBase.conditionsTemplate(),
-            ...SFRPGActorBase.modifiersTemplate(),
             ...SFRPGActorBase.spellTemplate({actorType: "npc"})
         });
 

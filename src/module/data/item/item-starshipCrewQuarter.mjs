@@ -12,7 +12,6 @@ export default class SFRPGItemStarshipCrewQuarter extends SFRPGItemBase {
 
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
-            ...SFRPGItemBase.modifiersTemplate(),
             ...SFRPGItemBase.starshipBPTemplate()
         });
 

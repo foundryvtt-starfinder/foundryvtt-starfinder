@@ -16,8 +16,7 @@ export default class SFRPGItemAugmentation extends SFRPGItemBase {
             ...SFRPGItemBase.actionTemplate(),
             ...SFRPGItemBase.activatedEffectTemplate(),
             ...SFRPGItemBase.containerTemplate(),
-            ...SFRPGItemBase.physicalItemTemplate(),
-            ...SFRPGItemBase.modifiersTemplate()
+            ...SFRPGItemBase.physicalItemTemplate()
         });
 
         // Augmentation-specific properties

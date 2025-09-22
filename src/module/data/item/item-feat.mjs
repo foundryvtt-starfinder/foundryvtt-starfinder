@@ -14,8 +14,7 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.actionTemplate(),
-            ...SFRPGItemBase.activatedEffectTemplate(),
-            ...SFRPGItemBase.modifiersTemplate()
+            ...SFRPGItemBase.activatedEffectTemplate()
         });
 
         // Feat-specific properties
