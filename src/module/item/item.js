@@ -463,7 +463,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * @returns {Object} An object containing the item's rollData (including its owners), and chat message properties.
      */
     async getChatData() {
-        const data = foundry.utils.deepClone(this.system);
+        const data = this.system;
         const labels = this.labels;
 
         const async = true;
@@ -1049,7 +1049,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             return;
         }
 
-        const itemData = foundry.utils.deepClone(this.system);
+        const itemData = this.system;
         if (itemData.hasOwnProperty("usage") && !options.disableDeductAmmo) {
             const usage = itemData.usage;
 

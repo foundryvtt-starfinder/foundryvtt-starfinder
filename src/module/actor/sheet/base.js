@@ -63,7 +63,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
-            system: foundry.utils.deepClone(this.actor.system),
+            system: this.actor.system,
             isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.document.limited,
@@ -139,13 +139,6 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                 skl.label = skillLabel;
                 skl.hover = CONFIG.SFRPG.skillProficiencyLevels[skl.value];
             }
-
-            data.system.skills = Object.keys(data.system.skills).sort()
-                .reduce((skills, key) => {
-                    skills[key] = data.system.skills[key];
-
-                    return skills;
-                }, {});
 
             data.system.hasSkills = Object.values(data.system.skills).filter(x => x.enabled).length > 0;
         }

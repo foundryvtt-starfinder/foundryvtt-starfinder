@@ -426,15 +426,25 @@ function canMerge(itemA, itemB) {
     }
 
     // Perform deep comparison on item data.
-    const itemDataA = foundry.utils.deepClone(itemA.system);
+    const itemDataA = itemComparisonPrep(itemA);
+    const itemDataB = itemComparisonPrep(itemB);
     delete itemDataA.quantity;
-
-    const itemDataB = foundry.utils.deepClone(itemB.system);
     delete itemDataB.quantity;
+    delete itemDataA.equipped;
+    delete itemDataB.equipped;
 
     // TODO: Remove all keys that are not template appropriate given the item type, remove all keys that are not shared?
 
     return valueEquals(itemDataA, itemDataB, false, true);
+}
+
+function itemComparisonPrep(item) {
+    const systemObject = {};
+
+    for (const key of Object.keys(item.system)) {
+        systemObject[key] = foundry.utils.deepClone(item.system[key]);
+    }
+    return systemObject;
 }
 
 export function getFirstAcceptableStorageIndex(container, itemToAdd) {
@@ -971,7 +981,7 @@ export class ActorItemHelper {
         const propertiesToTest = ["contents", "storageCapacity", "contentBulkMultiplier", "acceptedItemTypes", "fusions", "armor.upgradeSlots", "armor.upgrades"];
         const migrations = [];
         for (const item of this.actor.items) {
-            const itemData = foundry.utils.deepClone(item.system);
+            const itemData = item.system;
             let isDirty = false;
 
             // Migrate original format
