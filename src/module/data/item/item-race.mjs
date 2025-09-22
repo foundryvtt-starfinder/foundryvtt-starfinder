@@ -47,7 +47,7 @@ export default class SFRPGItemRace extends SFRPGItemBase {
                 label: "SFRPG.ItemSheet.Header.Subtype"
             }),
             type: new fields.StringField({
-                initial: "humanoid",
+                initial: "Humanoid",
                 required: true,
                 blank: true,
                 label: "SFRPG.ItemSheet.Header.Type"

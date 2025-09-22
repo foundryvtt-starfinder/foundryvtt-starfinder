@@ -66,7 +66,12 @@ export default class SFRPGItemStarshipWeapon extends SFRPGItemBase {
                         {required: false, nullable: true}
                     ),
                     {required: true}
-                )
+                ),
+                primaryGroup: new fields.NumberField({
+                    initial: null,
+                    min: 0,
+                    nullable: true
+                })
             }),
             mount: new fields.SchemaField({
                 arc: new fields.StringField({

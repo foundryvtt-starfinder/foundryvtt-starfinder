@@ -16,7 +16,8 @@ export default class SFRPGItemWeaponAccessory extends SFRPGItemBase {
             ...SFRPGItemBase.containerTemplate(),
             ...SFRPGItemBase.itemUsageTemplate(),
             ...SFRPGItemBase.modifiersTemplate(),
-            ...SFRPGItemBase.physicalItemTemplate({isEquippable: false, isEquipment: true})
+            ...SFRPGItemBase.physicalItemAttributesTemplate(),
+            ...SFRPGItemBase.physicalItemBasicsTemplate()
         });
 
         // Weapon Accessory-specific properties
@@ -25,7 +26,6 @@ export default class SFRPGItemWeaponAccessory extends SFRPGItemBase {
                 initial: "any",
                 required: true,
                 choices: Object.keys(CONFIG.SFRPG.weaponAccessoriesSupportedTypes),
-                blank: false,
                 label: "SFRPG.Items.WeaponAccessory.WeaponTypeLabel"
             })
         });

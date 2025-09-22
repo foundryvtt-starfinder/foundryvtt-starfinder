@@ -8,25 +8,16 @@ export default class SFRPGItemFusion extends SFRPGItemBase {
     ];
 
     static defineSchema() {
-        const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.containerTemplate(),
-            ...SFRPGItemBase.modifiersTemplate(),
-            ...SFRPGItemBase.physicalItemTemplate()
+            ...SFRPGItemBase.physicalItemBasicsTemplate(),
+            ...SFRPGItemBase.modifiersTemplate()
         });
 
-        // Fusion-specific properties
-        foundry.utils.mergeObject(schema, {
-            level: new fields.NumberField({
-                initial: 1,
-                nullable: false,
-                required: true,
-                label: "SFRPG.LevelLabelText"
-            })
-        });
+        // No Fusion-specific properties
 
         // No changes to initial values needed
 

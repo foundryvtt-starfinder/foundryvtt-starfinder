@@ -47,7 +47,8 @@ export default class SFRPGItemShield extends SFRPGItemBase {
                 nullable: true,
                 required: true,
                 label: "SFRPG.Items.Shield.AcMaxDexLabel"
-            })
+            }),
+            equippedBulkMultiplier: new fields.NumberField({initial: 1, min: 0})
         });
 
         // Change some initial values specific to shields

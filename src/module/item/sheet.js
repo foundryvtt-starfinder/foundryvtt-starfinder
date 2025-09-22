@@ -207,8 +207,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         // Vehicle Attacks
         if (data.isVehicleAttack) {
-            data.placeholders.savingThrow = {};
-            data.placeholders.savingThrow.value = data.item.system.save.dc;
+            data.placeholders.savingThrow = {value: data.item.system.save.dc};
         }
 
         if (data.item.type === "effect") {

@@ -195,7 +195,7 @@ export default class SFRPGActorVehicle extends SFRPGActorBase {
                     label: "SFRPG.VehicleSheet.Header.Level"
                 }),
                 price: new fields.NumberField({
-                    initial: 1,
+                    initial: 0,
                     min: 0,
                     nullable: true,
                     label: "SFRPG.VehicleSheet.Header.Price",

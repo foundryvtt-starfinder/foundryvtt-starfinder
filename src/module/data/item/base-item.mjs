@@ -400,7 +400,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 required: true
             }),
             price: new fields.NumberField({
-                initial: null,
+                initial: 0,
                 min: 0,
                 nullable: true,
                 required: true
