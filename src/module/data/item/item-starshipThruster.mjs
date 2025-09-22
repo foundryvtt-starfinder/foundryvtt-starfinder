@@ -15,7 +15,8 @@ export default class SFRPGItemStarshipThruster extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.modifiersTemplate(),
             ...SFRPGItemBase.specialMaterialsTemplate(),
-            ...SFRPGItemBase.starshipComponentTemplate()
+            ...SFRPGItemBase.starshipBPTemplate(),
+            ...SFRPGItemBase.starshipPowerTemplate()
         });
 
         // Starship Thruster-specific properties

@@ -15,7 +15,7 @@ export default class SFRPGItemStarshipArmor extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.modifiersTemplate(),
             ...SFRPGItemBase.specialMaterialsTemplate(),
-            ...SFRPGItemBase.starshipComponentTemplate()
+            ...SFRPGItemBase.starshipBPTemplate()
         });
 
         // Starship Armor-specific properties

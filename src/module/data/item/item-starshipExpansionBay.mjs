@@ -13,7 +13,8 @@ export default class SFRPGItemStarshipExpansionBay extends SFRPGItemBase {
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.modifiersTemplate(),
-            ...SFRPGItemBase.starshipComponentTemplate()
+            ...SFRPGItemBase.starshipBPTemplate(),
+            ...SFRPGItemBase.starshipPowerTemplate()
         });
 
         // No Starship Expansion Bay-specific properties

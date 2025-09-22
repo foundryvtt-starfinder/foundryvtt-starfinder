@@ -458,7 +458,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
         };
     }
 
-    static starshipComponentTemplate() {
+    static starshipBPTemplate() {
         return {
             cost: new fields.NumberField({
                 initial: null,
@@ -469,7 +469,12 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             costMultipliedBySize: new fields.BooleanField({
                 initial: false,
                 required: true
-            }),
+            })
+        };
+    }
+
+    static starshipPowerTemplate() {
+        return {
             isPowered: new fields.BooleanField({
                 intial: true,
                 required: false

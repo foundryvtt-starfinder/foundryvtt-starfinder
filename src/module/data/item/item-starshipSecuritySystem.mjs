@@ -13,7 +13,8 @@ export default class SFRPGItemStarshipSecuritySystem extends SFRPGItemBase {
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.modifiersTemplate(),
-            ...SFRPGItemBase.starshipComponentTemplate()
+            ...SFRPGItemBase.starshipBPTemplate(),
+            ...SFRPGItemBase.starshipPowerTemplate()
         });
 
         // No Starship Security System-specific properties

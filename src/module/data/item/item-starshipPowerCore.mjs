@@ -15,11 +15,17 @@ export default class SFRPGItemStarshipPowerCore extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.modifiersTemplate(),
             ...SFRPGItemBase.specialMaterialsTemplate(),
-            ...SFRPGItemBase.starshipComponentTemplate()
+            ...SFRPGItemBase.starshipBPTemplate()
         });
 
         // Starship Power Core-specific properties
         foundry.utils.mergeObject(schema, {
+            pcu: new fields.NumberField({
+                initial: null,
+                min: 0,
+                nullable: true,
+                required: false
+            }),
             supportedSizes: new fields.ArrayField(
                 new fields.StringField({
                     initial: "tiny",

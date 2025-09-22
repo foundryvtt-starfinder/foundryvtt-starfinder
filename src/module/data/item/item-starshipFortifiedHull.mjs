@@ -14,7 +14,7 @@ export default class SFRPGItemStarshipFortifiedHull extends SFRPGItemBase {
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.modifiersTemplate(),
-            ...SFRPGItemBase.starshipComponentTemplate()
+            ...SFRPGItemBase.starshipBPTemplate()
         });
 
         // Starship Fortified Hull-specific properties

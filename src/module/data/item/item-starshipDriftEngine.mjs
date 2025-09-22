@@ -14,7 +14,8 @@ export default class SFRPGItemStarshipDriftEngine extends SFRPGItemBase {
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.modifiersTemplate(),
-            ...SFRPGItemBase.starshipComponentTemplate()
+            ...SFRPGItemBase.starshipBPTemplate(),
+            ...SFRPGItemBase.starshipPowerTemplate()
         });
 
         // Starship Drift Engine-specific properties
@@ -27,8 +28,7 @@ export default class SFRPGItemStarshipDriftEngine extends SFRPGItemBase {
                 hint: "SFRPG.ItemSheet.StarshipDriftEngine.EngineRatingTooltip"
             }),
             maxSize: new fields.StringField({
-                initial: "tiny",
-                blank: false,
+                initial: "medium",
                 choices: Object.keys(CONFIG.SFRPG.starshipSizes),
                 label: "SFRPG.ItemSheet.StarshipDriftEngine.MaxSize",
                 hint: "SFRPG.ItemSheet.StarshipDriftEngine.MaxSizeTooltip"

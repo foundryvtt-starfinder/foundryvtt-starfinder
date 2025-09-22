@@ -15,7 +15,8 @@ export default class SFRPGItemStarshipDefensiveCountermeasure extends SFRPGItemB
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.modifiersTemplate(),
             ...SFRPGItemBase.specialMaterialsTemplate(),
-            ...SFRPGItemBase.starshipComponentTemplate()
+            ...SFRPGItemBase.starshipBPTemplate(),
+            ...SFRPGItemBase.starshipPowerTemplate()
         });
 
         // Starship Defensive Countermeasure-specific properties

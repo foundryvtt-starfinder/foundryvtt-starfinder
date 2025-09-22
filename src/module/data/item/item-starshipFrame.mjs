@@ -14,11 +14,17 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
         // merge schema with templates
         foundry.utils.mergeObject(schema, {
             ...SFRPGItemBase.modifiersTemplate(),
-            ...SFRPGItemBase.starshipComponentTemplate()
+            ...SFRPGItemBase.starshipPowerTemplate()
         });
 
         // Starship Frame-specific properties
         foundry.utils.mergeObject(schema, {
+            cost: new fields.NumberField({
+                initial: null,
+                min: 0,
+                nullable: true,
+                required: true
+            }),
             crew: new fields.SchemaField({
                 minimum: new fields.NumberField({
                     initial: 0,

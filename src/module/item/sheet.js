@@ -282,7 +282,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
             });
 
             // Manage Subactions
-            if (data?.itemData?.formula?.length > 1) {
+            if (data?.itemData?.formula?.length > 0) {
                 data.subactionEditorInfo = [];
                 let ct = 0;
                 for (const value of data.itemData.formula) {
