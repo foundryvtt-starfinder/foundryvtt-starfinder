@@ -5,12 +5,12 @@ const { fields } = foundry.data;
 export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
     static defineSchema() {
         const schema = {};
-        schema.nameSlug = new fields.StringField({
+        schema.slug = new fields.StringField({
             initial: "",
             blank: true,
             required: false,
-            label: "SFRPG.NameSlug",
-            hint: "SFRPG.NameSlugTooltip"
+            label: "SFRPG.Slug",
+            hint: "SFRPG.SlugTooltip"
         });
         return schema;
     }

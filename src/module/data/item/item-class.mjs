@@ -87,7 +87,7 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                     label: "SFRPG.ClassSkillRanksPerlevel"
                 })
             }),
-            slug: new fields.StringField({ // TODO: We should only keep one of slug (used by class items) or nameSlug (used by conditions) eventually
+            slug: new fields.StringField({
                 initial: "",
                 required: true,
                 blank: true
