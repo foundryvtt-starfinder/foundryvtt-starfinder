@@ -27,7 +27,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
             return undefined;
         }
 
-        const conditionItem = this.items.find(item => (item.system.nameSlug === conditionName) || (item.name.toLowerCase() === conditionName)); // TODO: The 'or' is in place for backward compatibility. This should only use nameSlug once DataModels are implemented and migrations can be done easily.
+        const conditionItem = this.items.find(item => (item.system.slug === conditionName) || (item.name.toLowerCase() === conditionName)); // TODO: The 'or' is in place for backward compatibility. This should only use slug once DataModels are implemented and migrations can be done easily.
         return conditionItem ?? null;
     }
 
