@@ -5,23 +5,6 @@ import { getItemContainer } from "../actor-inventory-utils.js";
 export const ActorModifiersMixin = (superclass) => class extends superclass {
 
     /**
-     * Check to ensure that this actor has a modifiers data object set, if not then set it.
-     * These will always be needed from hence forth, so we'll just make sure that they always exist.
-     *
-     * @param {Object}      data The actor data to check against.
-     *
-     * @returns {Object}         The modified data object with the modifiers data object added.
-     */
-    _ensureHasModifiers(data) {
-        if (!foundry.utils.hasProperty(data, "modifiers")) {
-            // console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
-            data.modifiers = [];
-        }
-
-        return data;
-    }
-
-    /**
      * Add a modifier to this actor.
      *
      * @param {Object}        data               The data needed to create the modifier
@@ -55,7 +38,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
         damage = null
     } = {}) {
 
-        const modifiers = this._ensureHasModifiers(this.system).modifiers;
+        const modifiers = this.system.modifiers;
         modifiers.push(new SFRPGModifier({
             name,
             modifier,

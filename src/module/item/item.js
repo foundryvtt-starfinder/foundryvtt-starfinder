@@ -253,24 +253,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     /**
-     * Check to ensure that this item has a modifiers data object set, if not then set it.
-     * These will always be needed from hence forth, so we'll just make sure that they always exist.
-     * TODO: Once DataModels are implemented, this might not be needed. Just make sure modifiers `required` property is true.
-     *
-     * @param {Object}      data The item data to check against.
-     *
-     * @returns {Object}         The modified data object with the modifiers data object added.
-     */
-    _ensureHasModifiers(data) {
-        if (!foundry.utils.hasProperty(data, "modifiers")) {
-            console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
-            data.modifiers = [];
-        }
-
-        return data;
-    }
-
-    /**
      * Extend preCreate to create class name slugs.
      * See the base Actor class for API documentation of this method
      *
@@ -1902,7 +1884,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         damage = null
     } = {}) {
 
-        const modifiers = this._ensureHasModifiers(this.system).modifiers;
+        const modifiers = this.system.modifiers;
         modifiers.push(new SFRPGModifier({
             name,
             modifier,
