@@ -1901,9 +1901,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         limitTo = "",
         damage = null
     } = {}) {
-        const data = this._ensureHasModifiers(foundry.utils.deepClone(this.system));
-        const modifiers = data.modifiers;
 
+        const modifiers = this._ensureHasModifiers(this.system).modifiers;
         modifiers.push(new SFRPGModifier({
             name,
             modifier,
@@ -1920,9 +1919,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             limitTo,
             damage
         }));
-
         console.log("Adding a modifier to the item");
-
         await this.update({["system.modifiers"]: modifiers});
     }
 

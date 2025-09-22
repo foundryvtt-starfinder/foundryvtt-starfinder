@@ -54,9 +54,8 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
         limitTo = "",
         damage = null
     } = {}) {
-        const data = this._ensureHasModifiers(foundry.utils.deepClone(this.system));
-        const modifiers = data.modifiers;
 
+        const modifiers = this._ensureHasModifiers(this.system).modifiers;
         modifiers.push(new SFRPGModifier({
             name,
             modifier,
@@ -73,7 +72,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
             limitTo,
             damage
         }));
-
+        console.log("Adding a modifier to the actor");
         await this.update({"system.modifiers": modifiers});
     }
 
