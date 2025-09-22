@@ -1345,6 +1345,13 @@ SFRPG.starshipRoleDisplayOrder = [
     "minorCrew"
 ];
 
+SFRPG.starshipSystemPatch = {
+    "unpatched": "SFRPG.StarshipSheet.Critical.Patch.Unpatched",
+    "heldTogether": "SFRPG.StarshipSheet.Critical.Patch.HeldTogether",
+    "patched": "SFRPG.StarshipSheet.Critical.Patch.Patched",
+    "robust": "SFRPG.StarshipSheet.Critical.Patch.Robust"
+};
+
 // starship value maps
 SFRPG.starshipSystemStatus = {
     "nominal": "SFRPG.StarshipSheet.Critical.Status.Nominal",
@@ -1467,6 +1474,10 @@ SFRPG.modifierEffectTypes = {
     "all-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackDamage",
     "weapon-property-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyDamage",
     "weapon-category-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponCategoryDamage",
+    "weapon-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAmmoUsageMultiplier",
+    "all-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAmmoUsageMultiplier",
+    "weapon-property-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyAmmoUsageMultiplier",
+    "weapon-category-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponCategoryAmmoUsageMultiplier",
     "bulk": "SFRPG.ActorSheet.Modifiers.EffectTypes.Encumbrance",
     "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
     "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",

@@ -21,7 +21,7 @@ export default class SFRPGModifierApplication extends FormApplication {
         return foundry.utils.mergeObject(options, {
             classes: ["sfrpg", "modifier-app"],
             template: "systems/sfrpg/templates/apps/modifier-app.hbs",
-            width: 400,
+            width: 580,
             height: "auto",
             closeOnSubmit: true
         });
@@ -182,6 +182,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                     break;
                 case SFRPGEffectType.WEAPON_ATTACKS:
                 case SFRPGEffectType.WEAPON_DAMAGE:
+                case SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER:
                     affectedValue.prop('disabled', false);
                     affectedValue.find('option').remove();
                     for (const weapons of Object.entries(CONFIG.SFRPG.weaponTypes)) {
@@ -190,6 +191,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                     break;
                 case SFRPGEffectType.WEAPON_PROPERTY_ATTACKS:
                 case SFRPGEffectType.WEAPON_PROPERTY_DAMAGE:
+                case SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER:
                     affectedValue.prop('disabled', false);
                     affectedValue.find('option').remove();
                     for (const weapons of Object.entries(CONFIG.SFRPG.weaponProperties)) {
@@ -198,6 +200,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                     break;
                 case SFRPGEffectType.WEAPON_CATEGORY_ATTACKS:
                 case SFRPGEffectType.WEAPON_CATEGORY_DAMAGE:
+                case SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER:
                     affectedValue.prop('disabled', false);
                     affectedValue.find('option').remove();
                     for (const weapons of Object.entries(CONFIG.SFRPG.weaponCategories)) {
@@ -285,6 +288,9 @@ export default class SFRPGModifierApplication extends FormApplication {
             case SFRPGEffectType.WEAPON_DAMAGE:
             case SFRPGEffectType.WEAPON_PROPERTY_DAMAGE:
             case SFRPGEffectType.WEAPON_CATEGORY_DAMAGE:
+            case SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER:
+            case SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER:
+            case SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER:
             case SFRPGEffectType.SPECIFIC_SPEED:
             case SFRPGEffectType.DAMAGE_REDUCTION:
             case SFRPGEffectType.ENERGY_RESISTANCE:
