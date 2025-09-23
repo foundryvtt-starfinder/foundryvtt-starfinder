@@ -1,8 +1,8 @@
 import { CombatDifficulty } from "../apps/combat-difficulty.js";
+import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
-import { SFRPG } from "../config.js";
-
+/**  @import Combatant from "@client/documents/combatant.mjs" */
 /*
 The following hooks were added:
 "onBeginCombat", one argument, type object, contains all event data
@@ -902,7 +902,8 @@ export class CombatSFRPG extends foundry.documents.Combat {
     /**
      * Changes the combat type when the GM adds a combatant to the appropriate one for that
      * combatant's actor type.
-     * @param {*} combatant
+     * @param {Combatant} combatant
+     * @override
      */
     _onEnter(combatant) {
         if (game.user.isGM && combatant.actor && !this.started) {
