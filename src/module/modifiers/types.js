@@ -64,7 +64,17 @@ export const SFRPGEffectType = Object.freeze({
     BULK: "bulk",
     BULK_CALCULATION: "bulk-calculation",
     ACTOR_RESOURCE: "actor-resource",
-    ENERGY_RESISTANCE: "energy-resistance"
+    ENERGY_RESISTANCE: "energy-resistance",
+    STARSHIP_HULL_POINTS: "starship-hull-points",
+    STARSHIP_HULL_POINTS_INCREMENT: "starship-hull-points-increment",
+    STARSHIP_FORWARD_AC: "starship-forward-ac",
+    STARSHIP_PORT_AC: "starship-port-ac",
+    STARSHIP_STARBOARD_AC: "starship-starboard-ac",
+    STARSHIP_AFT_AC: "starship-aft-ac",
+    STARSHIP_ALL_AC: "starship-all-ac",
+    STARSHIP_SPEED: "starship-speed",
+    STARSHIP_TURN_DISTANCE: "starship-turn-distance",
+    STARSHIP_PILOTING_SKILL: "starship-piloting-skill"
 });
 
 export const SFRPGModifierType = Object.freeze({

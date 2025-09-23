@@ -327,7 +327,7 @@ export default function(engine) {
             {
                 when: { closure: "isActorType", type: "starship" },
                 then: [
-                    "calculateStarshipFrame",
+                    { closure: "calculateStarshipFrame", stackModifiers: "stackModifiers" },
                     { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     "calculateStarshipCrew",
                     "calculateStarshipCritThreshold",
@@ -336,8 +336,8 @@ export default function(engine) {
                     "calculateStarshipAblative",
                     "calculateStarshipPower",
                     "calculateStarshipSensors",
-                    "calculateStarshipSpeed",
-                    "calculateStarshipArmorClass",
+                    { closure: "calculateStarshipSpeed", stackModifiers: "stackModifiers" },
+                    { closure: "calculateStarshipArmorClass", stackModifiers: "stackModifiers" },
                     "calculateStarshipTargetLock",
                     "calculateStarshipComputer",
                     "calculateStarshipCriticalStatus",
