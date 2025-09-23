@@ -3,6 +3,20 @@ import SFRPGDocumentBase from "../base-document.mjs";
 const { fields } = foundry.data;
 
 export default class SFRPGItemBase extends SFRPGDocumentBase {
+    static migrateData(data) {
+        // Initial DataModels migration for bad data
+        if (data.usage?.per === "Battery charge") data.usage.per = "shot";
+        if (data.usage?.per === "use") data.usage.per = "action";
+        if (data.area?.shape === "shapable") data.area.shape = "";
+        if (data.container?.storage) {
+            for (const storage of data.container.storage) {
+                if (storage.weightProperty === "bulk") storage.weightProperty = "";
+            }
+        }
+
+        return super.migrateData(data);
+    }
+
     static defineSchema() {
         const schema = super.defineSchema();
 
@@ -163,7 +177,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                     choices: Object.keys(CONFIG.SFRPG.spellAreaEffects),
                     blank: true
                 }),
-                shapable: new fields.BooleanField(),
+                shapable: new fields.BooleanField({initial: false}),
                 shape: new fields.StringField({
                     initial: "",
                     choices: Object.keys(CONFIG.SFRPG.spellAreaShapes),
@@ -265,7 +279,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                         }),
                         weightProperty: new fields.StringField({
                             initial: "",
-                            choices: ["bulk", ...Object.keys(CONFIG.SFRPG.storageWeightProperties)], // TODO: remove old & unused "bulk" option once a migration is implemented to change it to ""
+                            choices: Object.keys(CONFIG.SFRPG.storageWeightProperties),
                             blank: true
                         })
                     })
