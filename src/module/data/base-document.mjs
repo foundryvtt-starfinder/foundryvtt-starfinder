@@ -3,13 +3,6 @@ import SFRPGModifier from "../modifiers/modifier.js";
 const { fields } = foundry.data;
 
 export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
-
-    /** @inheritdoc */
-    constructor(data = {}, options = {}) {
-        options.fallback = true;
-        super(data, options);
-    }
-
     static defineSchema() {
         const schema = {};
         schema.slug = new fields.StringField({
