@@ -1,5 +1,7 @@
 import SFRPGItemBase from './base-item.mjs';
 
+const { fields } = foundry.data;
+
 export default class SFRPGItemStarshipExpansionBay extends SFRPGItemBase {
 
     static LOCALIZATION_PREFIXES = [

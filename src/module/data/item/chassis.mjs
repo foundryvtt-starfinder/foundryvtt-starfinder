@@ -1,5 +1,7 @@
 import SFRPGItemBase from './base-item.mjs';
 
+const { fields } = foundry.data;
+
 export default class SFRPGItemChassis extends SFRPGItemBase {
 
     static LOCALIZATION_PREFIXES = [
@@ -8,7 +10,6 @@ export default class SFRPGItemChassis extends SFRPGItemBase {
     ];
 
     static defineSchema() {
-        const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
         // Drone Chassis-specific properties

@@ -446,7 +446,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
         };
     }
 
-    static saveTemplate() {;
+    static saveTemplate() {
         return {
             dc: new fields.StringField({
                 initial: "",

@@ -4,6 +4,8 @@ import { ItemSFRPG } from "../item/item.js";
 import { generateUUID } from "../utils/utilities.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.js";
 
+const { fields } = foundry.data;
+
 /**
  * A data object that hold information about a specific modifier.
  *
@@ -72,7 +74,6 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
     }
 
     static defineSchema() {
-        const fields = foundry.data.fields;
         return {
             _id: new fields.StringField({ initial: "", required: true, readonly: false }),
             name: new fields.StringField({

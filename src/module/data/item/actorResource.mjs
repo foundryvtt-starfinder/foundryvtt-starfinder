@@ -1,5 +1,7 @@
 import SFRPGItemBase from './base-item.mjs';
 
+const { fields } = foundry.data;
+
 export default class SFRPGItemActorResource extends SFRPGItemBase {
 
     static LOCALIZATION_PREFIXES = [
@@ -8,7 +10,6 @@ export default class SFRPGItemActorResource extends SFRPGItemBase {
     ];
 
     static defineSchema() {
-        const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
         // Actor Resource-specific properties
@@ -99,8 +100,6 @@ export default class SFRPGItemActorResource extends SFRPGItemBase {
     }
 
     static visualizationPartTemplate() {
-        const fields = foundry.data.fields;
-
         return {
             image: new fields.FilePathField({
                 initial: "",

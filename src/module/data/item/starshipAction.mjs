@@ -1,5 +1,7 @@
 import SFRPGItemBase from './base-item.mjs';
 
+const { fields } = foundry.data;
+
 export default class SFRPGItemStarshipAction extends SFRPGItemBase {
 
     static LOCALIZATION_PREFIXES = [
@@ -8,7 +10,6 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
     ];
 
     static defineSchema() {
-        const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
         // Starship Action-specific properties
@@ -79,7 +80,7 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
     }
 
     static actionDCTemplate() {
-        const fields = foundry.data.fields;
+
         return {
             dc: new fields.SchemaField({
                 resolve: new fields.BooleanField({
@@ -100,7 +101,7 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
     }
 
     static _effectFieldData(options = {}) {
-        const fields = foundry.data.fields;
+
         const label = options.label ?? "";
         return new fields.StringField({
             initial: "",
@@ -111,7 +112,7 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
     }
 
     static _selectorFieldData() {
-        const fields = foundry.data.fields;
+
         return new fields.StringField({
             initial: "",
             choices: ["", ...Object.keys(CONFIG.SFRPG.starshipRoles)],

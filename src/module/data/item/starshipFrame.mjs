@@ -1,5 +1,7 @@
 import SFRPGItemBase from './base-item.mjs';
 
+const { fields } = foundry.data;
+
 export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
 
     static LOCALIZATION_PREFIXES = [
@@ -8,7 +10,6 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
     ];
 
     static defineSchema() {
-        const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
         // merge schema with templates
@@ -105,7 +106,7 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
     }
 
     static _frameWeaponSlotFieldData() {
-        const fields = foundry.data.fields;
+
         return {
             capitalSlots: new fields.NumberField({
                 initial: 0,

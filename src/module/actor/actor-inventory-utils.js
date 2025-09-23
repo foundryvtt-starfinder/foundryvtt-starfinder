@@ -1,7 +1,7 @@
 import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
-
 import { valueEquals } from "../utils/value-equals.js";
+/** @import ItemSFRPG from "../item/item.js" */
 
 export function initializeRemoteInventory() {
     RPC.registerCallback("createItemCollection", "gm", onCreateItemCollection);
@@ -15,10 +15,10 @@ export function initializeRemoteInventory() {
  * Will not add child items, those will have to be added manually at a later iteration.
  *
  * @param {ActorItemHelper} targetActor Actor to add the item to.
- * @param {Item} itemToAdd Item to add.
+ * @param {ItemSFRPG} itemToAdd Item to add.
  * @param {Number} quantity Quantity of the item to add.
- * @param {Item} targetItem (Optional) Item to either merge with, or add as a child to, or find its parent and set as a sibling.
- * @returns {Item} Returns the (possibly newly created) item on the target actor.
+ * @param {ItemSFRPG} targetItem (Optional) Item to either merge with, or add as a child to, or find its parent and set as a sibling.
+ * @returns {ItemSFRPG} Returns the (possibly newly created) item on the target actor.
  */
 export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targetItem = null, targetItemStorageIndex = null) {
     if (!ActorItemHelper.IsValidHelper(targetActor)) return null;
@@ -67,7 +67,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
  * Removes the specified quantity of a given item from an actor.
  *
  * @param {ActorItemHelper} sourceActor Actor that owns the item.
- * @param {Item} itemToRemove Item to remove.
+ * @param {ItemSFRPG} itemToRemove Item to remove.
  * @param {Number} quantity Number of items to remove, if quantity is greater than or equal to the item quantity, the item will be removed from the actor.
  * @returns {Boolean} Returns whether or not an update or removal took place.
  */
@@ -88,11 +88,11 @@ export async function removeItemFromActorAsync(sourceActor, itemToRemove, quanti
  * Moves an item from one actor to another, adjusting its container settings appropriately.
  *
  * @param {ActorItemHelper} sourceActor The source actor.
- * @param {Item} itemToMove Item to be moved.
+ * @param {ItemSFRPG} itemToMove Item to be moved.
  * @param {ActorItemHelper} targetActor The target actor.
- * @param {Item} targetItem (Optional) Item to add the item to, merge with, or make sibling for.
+ * @param {ItemSFRPG} targetItem (Optional) Item to add the item to, merge with, or make sibling for.
  * @param {Number} quantity (Optional) Amount of item to move, if null will move everything.
- * @returns {Item} Returns the item on the targetActor.
+ * @returns {ItemSFRPG} Returns the item on the targetActor.
  */
 export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetItem = null, quantity = null, targetItemStorageIndex = null) {
     if (!ActorItemHelper.IsValidHelper(targetActor)) {
@@ -355,8 +355,8 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
  * Changes the item's container on an actor.
  *
  * @param {ActorItemHelper} actorItemHelper
- * @param {Item} item
- * @param {Item} container
+ * @param {ItemSFRPG} item
+ * @param {ItemSFRPG} container
  */
 export async function setItemContainer(actorItemHelper, item, container, quantity = null) {
     return await moveItemBetweenActorsAsync(actorItemHelper, item, actorItemHelper, container, quantity);
@@ -365,7 +365,7 @@ export async function setItemContainer(actorItemHelper, item, container, quantit
 /**
  * Tests if a given item contains any items.
  *
- * @param {Item} item Item to test.
+ * @param {ItemSFRPG} item Item to test.
  * @returns {Boolean} Boolean whether or not this item contains anything.
  */
 export function containsItems(item) {
@@ -375,8 +375,8 @@ export function containsItems(item) {
 /**
  * Returns an array of child items for a given item on an actor.
  *
- * @param {Actor} actorItemHelper ActorItemHelper for whom's items to test.
- * @param {Item} item Item to get the children of.
+ * @param {ActorItemHelper} actorItemHelper ActorItemHelper for whom's items to test.
+ * @param {ItemSFRPG} item Item to get the children of.
  * @returns {Array} An array of child items.
  */
 export function getChildItems(actorItemHelper, item) {
@@ -389,8 +389,8 @@ export function getChildItems(actorItemHelper, item) {
  * Returns the containing item for a given item.
  *
  * @param {Array} items Array of items to test, typically actor.items.
- * @param {Item} item Item to find the parent of.
- * @returns {Item} The parent item of the item, or null if not contained.
+ * @param {ItemSFRPG} item Item to find the parent of.
+ * @returns {ItemSFRPG} The parent item of the item, or null if not contained.
  */
 export function getItemContainer(items, item) {
     return items.find(x => x.system.container?.contents?.find(y => y.id === item.id) !== undefined);
@@ -398,8 +398,8 @@ export function getItemContainer(items, item) {
 
 /**
  * Checks if two given items can be merged.
- * @param {Item} itemA
- * @param {Item} itemB
+ * @param {ItemSFRPG} itemA
+ * @param {ItemSFRPG} itemB
  */
 function canMerge(itemA, itemB) {
     if (!itemA || !itemB) {

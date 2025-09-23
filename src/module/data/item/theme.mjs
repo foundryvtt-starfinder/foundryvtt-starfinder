@@ -1,5 +1,7 @@
 import SFRPGItemBase from './base-item.mjs';
 
+const { fields } = foundry.data;
+
 export default class SFRPGItemTheme extends SFRPGItemBase {
 
     static LOCALIZATION_PREFIXES = [
@@ -8,7 +10,6 @@ export default class SFRPGItemTheme extends SFRPGItemBase {
     ];
 
     static defineSchema() {
-        const fields = foundry.data.fields;
         const schema = super.defineSchema();
 
         // Theme-specific properties

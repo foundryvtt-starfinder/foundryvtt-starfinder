@@ -3,6 +3,8 @@ import CheckEnricher from "./system/enrichers/check.js";
 import IconEnricher from "./system/enrichers/icon.js";
 import TemplateEnricher from "./system/enrichers/template.js";
 
+/** @import { ItemSFRPG } from "./item/item.js" */
+
 // Namespace SFRPG Configuration Values
 export const SFRPG = {};
 
@@ -848,9 +850,7 @@ SFRPG.featTypes = {
  * @property {"feat"} type The type of item to create. Features are type "feat", so there is no need to create anything else.
  * @property {String} "*" A data path and a value to be added to the created item.
  */
-/**
- * @type {Object.<string, FeatureCategory>}
- */
+
 SFRPG.featureCategories = {
     "feat": {
         category: "SFRPG.ActorSheet.Features.Categories.Feats",
@@ -905,7 +905,6 @@ SFRPG.specialAbilityTypes = {
 
 /**
  * The avaialbe sizes for an Actor
- * @type {Object}
  */
 SFRPG.actorSizes = {
     "fine": "SFRPG.SizeFine",
