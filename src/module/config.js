@@ -1509,13 +1509,27 @@ SFRPG.modifierEffectTypes = {
     "all-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackDamage",
     "weapon-property-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyDamage",
     "weapon-category-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponCategoryDamage",
+    "weapon-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAmmoUsageMultiplier",
+    "all-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAmmoUsageMultiplier",
+    "weapon-property-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyAmmoUsageMultiplier",
+    "weapon-category-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponCategoryAmmoUsageMultiplier",
     "bulk": "SFRPG.ActorSheet.Modifiers.EffectTypes.Encumbrance",
     "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
     "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
     "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",
     "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource",
     "damage-reduction": "SFRPG.ActorSheet.Modifiers.EffectTypes.DamageReduction",
-    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance"
+    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance",
+    "starship-hull-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipHullPoints",
+    "starship-hull-points-increment": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipHullPointsIncrement",
+    "starship-forward-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipForwardAC",
+    "starship-port-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipPortAC",
+    "starship-starboard-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipStarboardAC",
+    "starship-aft-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipAftAC",
+    "starship-all-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipAllAC",
+    "starship-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipSpeed",
+    "starship-turn-distance": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipTurnDistance",
+    "starship-piloting-skill": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipPilotingSkill"
 };
 
 SFRPG.effectTypes = {
