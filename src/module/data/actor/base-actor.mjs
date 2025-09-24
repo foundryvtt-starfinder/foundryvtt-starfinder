@@ -56,14 +56,12 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 credit: new fields.NumberField({
                     initial: 0,
                     min: 0,
-                    integer: true,
                     nullable: true,
                     label: "SFRPG.Credits"
                 }),
                 upb: new fields.NumberField({
                     initial: 0,
                     min: 0,
-                    integer: true,
                     nullable: true,
                     label: "SFRPG.UPBs"
                 })

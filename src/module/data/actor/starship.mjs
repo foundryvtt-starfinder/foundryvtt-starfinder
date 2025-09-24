@@ -19,6 +19,7 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                     value: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     })
@@ -101,12 +102,14 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                 max: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true,
                     required: true
                 }),
                 value: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true,
                     required: true
                 })
@@ -115,12 +118,14 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                 misc: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true
                 }),
                 value: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true
                 })
@@ -129,6 +134,7 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                 value: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true,
                     required: true
                 })
@@ -137,12 +143,14 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                 misc: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true
                 }),
                 value: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true
                 })

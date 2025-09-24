@@ -19,6 +19,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
                 base: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true,
                     required: true
                 })
@@ -27,6 +28,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
                 base: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true,
                     required: true
                 })
@@ -35,12 +37,14 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
                 max: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true
                 }),
                 value: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true
                 })
@@ -51,6 +55,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
             max: new fields.NumberField({
                 initial: 10,
                 min: 0,
+                integer: true,
                 nullable: false,
                 required: true
             })
@@ -59,30 +64,35 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
         schema.attributes.fields.eac.fields.base = new fields.NumberField({
             initial: 0,
             min: 0,
+            integer: true,
             nullable: false,
             required: true
         });
         schema.attributes.fields.kac.fields.base = new fields.NumberField({
             initial: 0,
             min: 0,
+            integer: true,
             nullable: false,
             required: true
         });
         schema.attributes.fields.fort.fields.base = new fields.NumberField({
             initial: 0,
             min: 0,
+            integer: true,
             nullable: false,
             required: true
         });
         schema.attributes.fields.reflex.fields.base = new fields.NumberField({
             initial: 0,
             min: 0,
+            integer: true,
             nullable: false,
             required: true
         });
         schema.attributes.fields.will.fields.base = new fields.NumberField({
             initial: 0,
             min: 0,
+            integer: true,
             nullable: false,
             required: true
         });
@@ -97,6 +107,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
             cr: new fields.NumberField({
                 initial: 1,
                 min: 0,
+                integer: true,
                 nullable: false,
                 required: true,
                 label: "SFRPG.CR"
