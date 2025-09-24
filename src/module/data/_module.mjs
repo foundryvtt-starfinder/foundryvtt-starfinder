@@ -29,7 +29,7 @@ export { default as SFRPGItemMod } from './item/mod.mjs';
 export { default as SFRPGItemRace } from './item/race.mjs';
 export { default as SFRPGItemShield } from './item/shield.mjs';
 export { default as SFRPGItemSpell } from './item/spell.mjs';
-export { default as SFRPGItemStarshipAblativeArmor } from './item/stahipAblativeArmor.mjs';
+export { default as SFRPGItemStarshipAblativeArmor } from './item/starshipAblativeArmor.mjs';
 export { default as SFRPGItemStarshipAction } from './item/starshipAction.mjs';
 export { default as SFRPGItemStarshipArmor } from './item/starshipArmor.mjs';
 export { default as SFRPGItemStarshipComputer } from './item/starshipComputer.mjs';
