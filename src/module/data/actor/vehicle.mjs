@@ -51,6 +51,7 @@ export default class SFRPGActorVehicle extends SFRPGActorBase {
                     value: new fields.NumberField({
                         initial: 10,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     })
@@ -59,12 +60,14 @@ export default class SFRPGActorVehicle extends SFRPGActorBase {
                     value: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: false
                     })
                 }, {label: "SFRPG.VehicleSheet.Details.OtherAttributes.ExpansionBays"}),
                 hardness: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true,
                     label: "SFRPG.VehicleSheet.Details.Hardness"
@@ -73,18 +76,21 @@ export default class SFRPGActorVehicle extends SFRPGActorBase {
                     max: new fields.NumberField({
                         initial: 10,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     }),
                     threshold: new fields.NumberField({
                         initial: 7,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     }),
                     value: new fields.NumberField({
                         initial: 10,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     })
@@ -93,6 +99,7 @@ export default class SFRPGActorVehicle extends SFRPGActorBase {
                     value: new fields.NumberField({
                         initial: 10,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     })
@@ -101,12 +108,14 @@ export default class SFRPGActorVehicle extends SFRPGActorBase {
                     athletics: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: true,
                         label: "SFRPG.SkillAth"
                     }),
                     attackFullSpeed: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: true,
                         label: "SFRPG.VehicleSheet.Details.Modifiers.AttackFullSpeed",
                         hint: "SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip"
@@ -114,6 +123,7 @@ export default class SFRPGActorVehicle extends SFRPGActorBase {
                     attackMoving: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: true,
                         label: "SFRPG.VehicleSheet.Details.Modifiers.AttackMoving",
                         hint: "SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip"
@@ -121,6 +131,7 @@ export default class SFRPGActorVehicle extends SFRPGActorBase {
                     attackStopped: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: true,
                         label: "SFRPG.VehicleSheet.Details.Modifiers.AttackStopped",
                         hint: "SFRPG.VehicleSheet.Details.Modifiers.AttackTooltip"
@@ -128,12 +139,14 @@ export default class SFRPGActorVehicle extends SFRPGActorBase {
                     piloting: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: true,
                         label: "SFRPG.SkillPil"
                     }),
                     survival: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: true,
                         label: "SFRPG.SkillSur"
                     })
@@ -191,6 +204,7 @@ export default class SFRPGActorVehicle extends SFRPGActorBase {
                 level: new fields.NumberField({
                     initial: 1,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     label: "SFRPG.VehicleSheet.Header.Level"
                 }),

@@ -13,6 +13,7 @@ export default class SFRPGActorHazard extends SFRPGActorBase {
                     value: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     })
@@ -35,6 +36,7 @@ export default class SFRPGActorHazard extends SFRPGActorBase {
                     value: new fields.NumberField({
                         initial: null,
                         min: 0,
+                        integer: true,
                         nullable: true,
                         required: true
                     })
@@ -43,6 +45,7 @@ export default class SFRPGActorHazard extends SFRPGActorBase {
                     value: new fields.NumberField({
                         initial: 10,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     })
@@ -58,6 +61,7 @@ export default class SFRPGActorHazard extends SFRPGActorBase {
                     value: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     })
@@ -66,6 +70,7 @@ export default class SFRPGActorHazard extends SFRPGActorBase {
                     value: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     })
@@ -74,12 +79,14 @@ export default class SFRPGActorHazard extends SFRPGActorBase {
                     max: new fields.NumberField({
                         initial: 10,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     }),
                     value: new fields.NumberField({
                         initial: 10,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     })
@@ -95,6 +102,7 @@ export default class SFRPGActorHazard extends SFRPGActorBase {
                     value: new fields.NumberField({
                         initial: 10,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     })
@@ -103,6 +111,7 @@ export default class SFRPGActorHazard extends SFRPGActorBase {
                     value: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     })
@@ -125,6 +134,7 @@ export default class SFRPGActorHazard extends SFRPGActorBase {
                     value: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     })
