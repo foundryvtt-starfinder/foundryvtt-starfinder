@@ -1,7 +1,5 @@
 import SFRPGItemBase from './base-item.mjs';
 
-const { fields } = foundry.data;
-
 export default class SFRPGItemStarshipCrewQuarter extends SFRPGItemBase {
 
     static LOCALIZATION_PREFIXES = [

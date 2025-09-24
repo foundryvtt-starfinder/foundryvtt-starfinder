@@ -131,7 +131,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 {
                     initial: SFRPGActorBase._skillsInitial(),
                     validateKey: (key) => {
-                        const keyNoNumber = key.replace(/\d+/g, '')
+                        const keyNoNumber = key.replace(/\d+/g, '');
                         const valid = keyNoNumber in CONFIG.SFRPG.skills;
                         return valid;
                     }
@@ -357,7 +357,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 new fields.SchemaField(SFRPGActorBase._skillFieldData({forStarship: true})),
                 {
                     validateKey: (key) => {
-                        const keyNoNumber = key.replace(/\d+/g, '')
+                        const keyNoNumber = key.replace(/\d+/g, '');
                         const valid = keyNoNumber in CONFIG.SFRPG.starshipSkills;
                         return valid;
                     }
