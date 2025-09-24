@@ -23,7 +23,7 @@ const { fields } = foundry.data;
  * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
  * @param {String|null}   data.id            Override a random id with a specific one.
  * @param {Object|null}   data.damage        If this modifier is a damage section modifier, the damage type and group
- * @param {String}        data.limitTo       If this modifier is on an item, should the modifier affect only that item?
+ * @param {""|"parent"|"container"} data.limitTo If this modifier is on an item, should the modifier affect only that item?
  */
 export default class SFRPGModifier extends foundry.abstract.DataModel {
     constructor(data, options = {}) {

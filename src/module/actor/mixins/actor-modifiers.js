@@ -1,6 +1,6 @@
-import SFRPGModifier from "../../modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../modifiers/types.js";
 import { getItemContainer } from "../actor-inventory-utils.js";
+/** @import SFRPGModifier from "../../modifiers/modifier.js" */
 
 export const ActorModifiersMixin = (superclass) => class extends superclass {
 
