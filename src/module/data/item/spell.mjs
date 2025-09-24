@@ -43,7 +43,8 @@ export default class SFRPGItemSpell extends SFRPGItemBase {
                 label: "SFRPG.Items.Spell.Concentration"
             }),
             descriptors: new fields.TypedObjectField(
-                new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.descriptors
+                new fields.BooleanField({initial: false}),
+                {validateKey: (key) => key in CONFIG.SFRPG.descriptors}
             ),
             dismissible: new fields.BooleanField({
                 initial: false,

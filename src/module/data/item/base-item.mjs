@@ -134,15 +134,16 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 })
             }),
             properties: new fields.TypedObjectField(
-                new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.weaponProperties
+                new fields.BooleanField({initial: false}),
+                {validateKey: (key) => key in CONFIG.SFRPG.weaponProperties}
             ),
-            save: new fields.SchemaField({
-                ...SFRPGItemBase.saveTemplate()
-            }, {
-                required: true,
-                nullable: true,
-                label: "SFRPG.Items.Action.SavingThrow"
-            })
+            save: new fields.SchemaField(
+                SFRPGItemBase.saveTemplate(),
+                {
+                    required: true,
+                    nullable: true,
+                    label: "SFRPG.Items.Action.SavingThrow"
+                })
         };
     }
 
@@ -471,7 +472,8 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
     static specialMaterialsTemplate() {
         return {
             specialMaterials: new fields.TypedObjectField(
-                new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.specialMaterials
+                new fields.BooleanField({initial: false}),
+                {validateKey: (key) => Object.keys(CONFIG.SFRPG.specialMaterials).includes(key)}
             )
         };
     }

@@ -23,8 +23,8 @@ export default class SFRPGItemClass extends SFRPGItemBase {
             }),
             bonusSpellsPerDay: SFRPGItemClass._bonusSpellsPerDayFieldData(),
             csk: new fields.TypedObjectField(
-                new fields.BooleanField({initial: false}), // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.skills
-                { required: true, label: "SFRPG.ClassSkills"}
+                new fields.BooleanField({initial: false}),
+                { required: true, label: "SFRPG.ClassSkills", validateKey: (key) => key in CONFIG.SFRPG.skills}
             ),
             fort: new fields.StringField({
                 initial: "slow",
@@ -58,12 +58,12 @@ export default class SFRPGItemClass extends SFRPGItemBase {
             }),
             proficiencies: new fields.SchemaField({
                 armor: new fields.TypedObjectField(
-                    new fields.BooleanField({initial: false}), // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.armorProficiencies
-                    { required: true, label: "SFRPG.ClassArmorProf"}
+                    new fields.BooleanField({initial: false}),
+                    { required: true, label: "SFRPG.ClassArmorProf", validateKey: (key) => Object.keys(CONFIG.SFRPG.armorProficiencies).includes(key)}
                 ),
                 weapon: new fields.TypedObjectField(
-                    new fields.BooleanField({initial: false}), // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.weaponProficiencies
-                    { required: true, label: "SFRPG.ClassWeaponProf"}
+                    new fields.BooleanField({initial: false}),
+                    { required: true, label: "SFRPG.ClassWeaponProf", validateKey: (key) => Object.keys(CONFIG.SFRPG.weaponProficiencies).includes(key)}
                 )
             }),
             ref: new fields.StringField({

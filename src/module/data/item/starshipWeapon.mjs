@@ -98,7 +98,8 @@ export default class SFRPGItemStarshipWeapon extends SFRPGItemBase {
                 hint: "SFRPG.ItemSheet.StarshipWeapon.RangeTooltip"
             }),
             special: new fields.TypedObjectField(
-                new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.starshipWeaponProperties
+                new fields.BooleanField({initial: false}),
+                {validateKey: (key) => key in CONFIG.SFRPG.starshipWeaponProperties}
             ),
             speed: new fields.NumberField({
                 initial: null,

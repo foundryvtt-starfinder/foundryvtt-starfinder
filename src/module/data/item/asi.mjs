@@ -15,7 +15,8 @@ export default class SFRPGItemASI extends SFRPGItemBase {
         // ASI-specific properties
         foundry.utils.mergeObject(schema, {
             abilities: new fields.TypedObjectField(
-                new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.abilities
+                new fields.BooleanField({initial: false}),
+                {validateKey: (key) => key in CONFIG.SFRPG.abilities}
             )
         });
 
