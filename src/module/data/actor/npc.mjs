@@ -79,26 +79,34 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
             })
         });
 
-        schema.attributes.fields.fort.fields.base = new fields.NumberField({
-            initial: 0,
-            min: 0,
-            integer: true,
-            nullable: false,
-            required: true
-        });
-        schema.attributes.fields.reflex.fields.base = new fields.NumberField({
-            initial: 0,
-            min: 0,
-            integer: true,
-            nullable: false,
-            required: true
-        });
-        schema.attributes.fields.will.fields.base = new fields.NumberField({
-            initial: 0,
-            min: 0,
-            integer: true,
-            nullable: false,
-            required: true
+        foundry.utils.mergeObject(schema.attributes.fields, {
+            fort: new fields.SchemaField({
+                base: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    integer: true,
+                    nullable: false,
+                    required: true
+                })
+            }),
+            reflex: new fields.SchemaField({
+                base: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    integer: true,
+                    nullable: false,
+                    required: true
+                })
+            }),
+            will: new fields.SchemaField({
+                base: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    integer: true,
+                    nullable: false,
+                    required: true
+                })
+            })
         });
 
         foundry.utils.mergeObject(schema.details.fields, {

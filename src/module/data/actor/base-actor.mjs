@@ -20,7 +20,6 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
 
         const schema = {
             attributes: new fields.SchemaField({
-                fort: new fields.SchemaField(!isNPC ? SFRPGActorBase._saveFieldData() : {}, {label: "SFRPG.FortitudeSave"}),
                 hp: new fields.SchemaField({
                     temp: new fields.NumberField({
                         initial: null,
@@ -37,9 +36,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         required: true
                     })
                 }, {label: "SFRPG.Health"}),
-                reflex: new fields.SchemaField(!isNPC ? SFRPGActorBase._saveFieldData() : {}, {label: "SFRPG.ReflexSave"}),
-                speed: new fields.SchemaField(SFRPGDocumentBase._speedFieldData()),
-                will: new fields.SchemaField(!isNPC ? SFRPGActorBase._saveFieldData() : {}, {label: "SFRPG.WillSave"})
+                speed: new fields.SchemaField(SFRPGDocumentBase._speedFieldData())
             }),
             currency: new fields.SchemaField({
                 credit: new fields.NumberField({
@@ -204,6 +201,15 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 blank: true,
                 required: true,
                 label: "SFRPG.AlignmentPlaceHolderText"
+            });
+        }
+
+        // Add these in for characters and drones
+        if (!isNPC) {
+            foundry.utils.mergeObject(schema.attributes.fields, {
+                fort: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.FortitudeSave"}),
+                reflex: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.ReflexSave"}),
+                will: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.WillSave"})
             });
         }
         return schema;
