@@ -33,6 +33,24 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
                     required: true
                 })
             }, {label: "SFRPG.NPCSheet.Header.BaseSpellDC", hint: "SFRPG.NPCSheet.Header.BaseSpellDCTooltip"}),
+            eac: new fields.SchemaField({
+                base: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    integer: true,
+                    nullable: false,
+                    required: true
+                })
+            }, {label: "SFRPG.EnergyArmorClass"}),
+            kac: new fields.SchemaField({
+                base: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    integer: true,
+                    nullable: false,
+                    required: true
+                })
+            }, {label: "SFRPG.KineticArmorClass"}),
             rp: new fields.SchemaField({
                 max: new fields.NumberField({
                     initial: 0,
@@ -61,20 +79,6 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
             })
         });
 
-        schema.attributes.fields.eac.fields.base = new fields.NumberField({
-            initial: 0,
-            min: 0,
-            integer: true,
-            nullable: false,
-            required: true
-        });
-        schema.attributes.fields.kac.fields.base = new fields.NumberField({
-            initial: 0,
-            min: 0,
-            integer: true,
-            nullable: false,
-            required: true
-        });
         schema.attributes.fields.fort.fields.base = new fields.NumberField({
             initial: 0,
             min: 0,
@@ -156,8 +160,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
                 blank: true,
                 required: false,
                 label: "SFRPG.NPCSheet.Header.TypePlaceHolderText"
-            }),
-            xp: new fields.SchemaField({}, {label: "SFRPG.XP"})
+            })
         });
 
         // No NPC-specific fields

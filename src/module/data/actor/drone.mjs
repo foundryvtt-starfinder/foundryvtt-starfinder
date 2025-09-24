@@ -14,9 +14,6 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
 
         // Add additional fields needed to template fields
         foundry.utils.mergeObject(schema.attributes.fields, {
-            armorSlots: new fields.SchemaField({}, {label: "SFRPG.DroneSheet.Traits.ArmorSlots"}),
-            baseAttackBonus: new fields.SchemaField({}, {label: "SFRPG.BaseAttackBonusTitle"}),
-            cmd: new fields.SchemaField({}, {label: "SFRPG.ACvsCombatManeuversTitle"}),
             rp: new fields.SchemaField({
                 value: new fields.NumberField({
                     initial: 0,
@@ -25,11 +22,7 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            }, {label: "SFRPG.Resolve"}),
-            weaponMounts: new fields.SchemaField({
-                melee: new fields.SchemaField({}, {label: "SFRPG.DroneSheet.Traits.MeleeWeaponMounts"}),
-                ranged: new fields.SchemaField({}, {label: "SFRPG.DroneSheet.Traits.RangedWeaponMounts"})
-            })
+            }, {label: "SFRPG.Resolve"})
         });
 
         foundry.utils.mergeObject(schema.attributes.fields.hp.fields, {
@@ -40,10 +33,6 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
                 nullable: true,
                 required: true
             })
-        });
-
-        foundry.utils.mergeObject(schema.details.fields, {
-            level: new fields.SchemaField({}, {label: "SFRPG.LevelLabelText"})
         });
 
         foundry.utils.mergeObject(schema, {

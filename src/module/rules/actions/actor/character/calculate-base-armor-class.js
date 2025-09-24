@@ -3,6 +3,9 @@ export default function(engine) {
         const data = fact.data;
         const armors = fact.armors?.length > 0 ? fact.armors : null;
         const shields = fact.shields;
+
+        if (!data.attributes.eac) data.attributes.eac = {tooltip: []};
+        if (!data.attributes.kac) data.attributes.kac = {tooltip: []};
         const eac = data.attributes.eac;
         const kac = data.attributes.kac;
         const baseTooltip = game.i18n.format("SFRPG.ACTooltipBase", { base: "10" });

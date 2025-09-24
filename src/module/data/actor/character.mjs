@@ -15,8 +15,6 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
 
         // Add additional fields needed to template fields
         foundry.utils.mergeObject(schema.attributes.fields, {
-            baseAttackBonus: new fields.SchemaField({}, {label: "SFRPG.BaseAttackBonusTitle"}),
-            cmd: new fields.SchemaField({}, {label: "SFRPG.ACvsCombatManeuversTitle"}),
             rp: new fields.SchemaField({
                 value: new fields.NumberField({
                     initial: 0,
@@ -47,7 +45,6 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                     required: true
                 })
             }, {label: "SFRPG.CasterLevel"}),
-            level: new fields.SchemaField({}, {label: "SFRPG.LevelLabelText"}),
             race: new fields.StringField({
                 initial: "",
                 blank: true,
@@ -82,11 +79,8 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                 hideUntrained: new fields.BooleanField({
                     initial: false
                 })
-            }),
-            skillpoints: new fields.SchemaField({}, {label: "SFRPG.SkillPoints"})
+            })
         });
-
-        // Edit initial values as needed
 
         return schema;
     }

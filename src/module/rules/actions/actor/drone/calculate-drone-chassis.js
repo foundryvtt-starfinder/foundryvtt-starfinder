@@ -4,6 +4,15 @@ export default function(engine) {
     engine.closures.add("calculateDroneChassis", (fact) => {
         const data = fact.data;
 
+        if (!data.abilities) data.abilities = {};
+        if (!data.abilities.cha) data.abilities.cha = {tooltip: []};
+        if (!data.abilities.con) data.abilities.con = {tooltip: []};
+        if (!data.abilities.dex) data.abilities.dex = {tooltip: []};
+        if (!data.abilities.int) data.abilities.int = {tooltip: []};
+        if (!data.abilities.str) data.abilities.str = {tooltip: []};
+        if (!data.abilities.wis) data.abilities.wis = {tooltip: []};
+        if (!data.details.level) data.details.level = {};
+
         // We only care about the first chassis
         const activeChassis = fact.chassis && fact.chassis.length > 0 ? fact.chassis[0] : null;
 
@@ -32,18 +41,14 @@ export default function(engine) {
             const abilityIncreaseStats = [chassisData.abilityIncreaseStats.first, chassisData.abilityIncreaseStats.second];
             const abilityIncreases = SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
 
-            data.abilities.str.base = chassisData.abilityScores.str + (abilityIncreaseStats.includes("str") ? abilityIncreases : 0);
-
+            data.abilities.cha.base = chassisData.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
             data.abilities.dex.base = chassisData.abilityScores.dex + (abilityIncreaseStats.includes("dex") ? abilityIncreases : 0);
+            data.abilities.int.base = chassisData.abilityScores.int + (abilityIncreaseStats.includes("int") ? abilityIncreases : 0);
+            data.abilities.str.base = chassisData.abilityScores.str + (abilityIncreaseStats.includes("str") ? abilityIncreases : 0);
+            data.abilities.wis.base = chassisData.abilityScores.wis + (abilityIncreaseStats.includes("wis") ? abilityIncreases : 0);
 
             data.abilities.con.value = chassisData.abilityScores.con;
             data.abilities.con.mod = 0;
-
-            data.abilities.int.base = chassisData.abilityScores.int + (abilityIncreaseStats.includes("int") ? abilityIncreases : 0);
-
-            data.abilities.wis.base = chassisData.abilityScores.wis + (abilityIncreaseStats.includes("wis") ? abilityIncreases : 0);
-
-            data.abilities.cha.base = chassisData.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
         } else {
             data.abilities.str.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
             data.abilities.dex.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));

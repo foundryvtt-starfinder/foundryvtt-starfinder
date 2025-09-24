@@ -40,6 +40,7 @@ export default function(engine) {
         });
 
         for (const [abl, ability] of Object.entries(data.abilities)) {
+            if (!ability.modifierTooltip) ability.modifierTooltip = [];
 
             const abilityMods = context.parameters.stackModifiers.process(
                 filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_MODIFIERS),

@@ -19,16 +19,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         const isNPC = options.actorType === "npc" ? true : false;
 
         const schema = {
-            abilities: new fields.SchemaField({
-                cha: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData(isCharacter) : {}, {label: "SFRPG.AbilityCha"}),
-                con: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData(isCharacter) : {}, {label: "SFRPG.AbilityCon"}),
-                dex: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData(isCharacter) : {}, {label: "SFRPG.AbilityDex"}),
-                int: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData(isCharacter) : {}, {label: "SFRPG.AbilityInt"}),
-                str: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData(isCharacter) : {}, {label: "SFRPG.AbilityStr"}),
-                wis: new fields.SchemaField(!isDrone ? SFRPGActorBase._abilityFieldData(isCharacter) : {}, {label: "SFRPG.AbilityWis"})
-            }),
             attributes: new fields.SchemaField({
-                eac: new fields.SchemaField({}, {label: "SFRPG.EnergyArmorClass"}),
                 fort: new fields.SchemaField(!isNPC ? SFRPGActorBase._saveFieldData() : {}, {label: "SFRPG.FortitudeSave"}),
                 hp: new fields.SchemaField({
                     temp: new fields.NumberField({
@@ -46,8 +37,6 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         required: true
                     })
                 }, {label: "SFRPG.Health"}),
-                init: new fields.SchemaField({}, {label: "SFRPG.InitiativeLabel"}),
-                kac: new fields.SchemaField({}, {label: "SFRPG.KineticArmorClass"}),
                 reflex: new fields.SchemaField(!isNPC ? SFRPGActorBase._saveFieldData() : {}, {label: "SFRPG.ReflexSave"}),
                 speed: new fields.SchemaField(SFRPGDocumentBase._speedFieldData()),
                 will: new fields.SchemaField(!isNPC ? SFRPGActorBase._saveFieldData() : {}, {label: "SFRPG.WillSave"})
@@ -142,6 +131,14 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         // Add these in for characters and npcs
         if (!isDrone) {
             foundry.utils.mergeObject(schema, {
+                abilities: new fields.SchemaField({
+                    cha: new fields.SchemaField(SFRPGActorBase._abilityFieldData(isCharacter), {label: "SFRPG.AbilityCha"}),
+                    con: new fields.SchemaField(SFRPGActorBase._abilityFieldData(isCharacter), {label: "SFRPG.AbilityCon"}),
+                    dex: new fields.SchemaField(SFRPGActorBase._abilityFieldData(isCharacter), {label: "SFRPG.AbilityDex"}),
+                    int: new fields.SchemaField(SFRPGActorBase._abilityFieldData(isCharacter), {label: "SFRPG.AbilityInt"}),
+                    str: new fields.SchemaField(SFRPGActorBase._abilityFieldData(isCharacter), {label: "SFRPG.AbilityStr"}),
+                    wis: new fields.SchemaField(SFRPGActorBase._abilityFieldData(isCharacter), {label: "SFRPG.AbilityWis"})
+                }),
                 traits: new fields.SchemaField({
                     ci: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.ConImm"}),
                     di: new fields.SchemaField(SFRPGActorBase._traitFieldData(), {label: "SFRPG.Damage.Immunities"}),
@@ -179,6 +176,15 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     required: true,
                     label: "SFRPG.NumberOfArms"
                 }),
+                init: new fields.SchemaField({
+                    value: new fields.NumberField({
+                        initial: 0,
+                        min: 0,
+                        integer: true,
+                        nullable: false,
+                        required: true
+                    })
+                }, {label: "SFRPG.InitiativeLabel"}),
                 reach: new fields.StringField({
                     initial: "",
                     blank: true,
@@ -191,14 +197,6 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     required: true,
                     label: "SFRPG.Space"
                 })
-            });
-
-            schema.attributes.fields.init.fields.value = new fields.NumberField({
-                initial: 0,
-                min: 0,
-                integer: true,
-                nullable: false,
-                required: true
             });
 
             schema.details.fields.alignment = new fields.StringField({

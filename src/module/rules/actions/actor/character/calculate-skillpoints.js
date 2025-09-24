@@ -5,6 +5,7 @@ export default function(engine) {
         const data = fact.data;
         const skills = fact.data.skills;
         const classes = fact.classes;
+        if (!data.skillpoints) data.skillpoints = {};
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (!item.rolledMods) item.rolledMods = [];
