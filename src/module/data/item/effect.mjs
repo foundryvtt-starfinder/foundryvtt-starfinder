@@ -53,7 +53,8 @@ export default class SFRPGItemEffect extends SFRPGItemBase {
                 new fields.SchemaField({ // TODO: migrate this to use the common damage part schema
                     content: new fields.HTMLField({required: false}),
                     damageTypes: new fields.TypedObjectField(
-                        new fields.BooleanField({initial: false}) // TODO: Add validation of these keys to the model based on CONFIG.SFRPG.damageAndHealingTypes
+                        new fields.BooleanField({initial: false}),
+                        {validateKey: (key) => key in CONFIG.SFRPG.damageAndHealingTypes}
                     ),
                     formula: new fields.StringField({
                         initial: "",
