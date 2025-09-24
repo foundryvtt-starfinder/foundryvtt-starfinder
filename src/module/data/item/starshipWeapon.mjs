@@ -31,6 +31,7 @@ export default class SFRPGItemStarshipWeapon extends SFRPGItemBase {
             }),
             attackBonus: new fields.NumberField({
                 initial: null,
+                integer: true,
                 nullable: true,
                 required: false,
                 label: "SFRPG.Items.Action.AttackRollBonus"
@@ -39,12 +40,14 @@ export default class SFRPGItemStarshipWeapon extends SFRPGItemBase {
                 max: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true,
                     hint: "SFRPG.ItemSheet.Capacity.CapacityMaxTooltip"
                 }),
                 value: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true,
                     hint: "SFRPG.ItemSheet.Capacity.CapacityValueTooltip"
                 })
@@ -71,6 +74,7 @@ export default class SFRPGItemStarshipWeapon extends SFRPGItemBase {
                 primaryGroup: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true
                 })
             }),
@@ -104,6 +108,7 @@ export default class SFRPGItemStarshipWeapon extends SFRPGItemBase {
             speed: new fields.NumberField({
                 initial: null,
                 min: 0,
+                integer: true,
                 nullable: true,
                 label: "SFRPG.ItemSheet.StarshipWeapon.Speed",
                 hint: "SFRPG.ItemSheet.StarshipWeapon.SpeedTooltip"

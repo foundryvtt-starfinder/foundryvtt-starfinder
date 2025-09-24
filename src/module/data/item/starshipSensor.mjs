@@ -22,8 +22,9 @@ export default class SFRPGItemStarshipSensor extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             modifier: new fields.NumberField({
                 initial: null,
-                nullable: true,
                 min: 0,
+                integer: true,
+                nullable: true,
                 label: "SFRPG.ItemSheet.StarshipSensor.Modifier",
                 hint: "SFRPG.ItemSheet.StarshipSensor.ModifierTooltip"
             }),

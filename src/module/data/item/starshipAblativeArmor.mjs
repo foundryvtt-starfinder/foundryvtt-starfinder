@@ -21,22 +21,25 @@ export default class SFRPGItemStarshipAblativeArmor extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             ablativeValue: new fields.NumberField({
                 initial: null,
-                nullable: true,
                 min: 0,
+                integer: true,
+                nullable: true,
                 label: "SFRPG.ItemSheet.StarshipAblativeArmor.AblativeValue",
                 hint: "SFRPG.ItemSheet.StarshipAblativeArmor.AblativeValueTooltip"
             }),
             targetLockPenalty: new fields.NumberField({
                 initial: null,
-                nullable: true,
                 min: 0,
+                integer: true,
+                nullable: true,
                 label: "SFRPG.ItemSheet.StarshipAblativeArmor.TargetLockPenalty",
                 hint: "SFRPG.ItemSheet.StarshipAblativeArmor.TargetLockPenaltyTooltip"
             }),
             turnDistancePenalty: new fields.NumberField({
                 initial: null,
-                nullable: true,
                 min: 0,
+                integer: true,
+                nullable: true,
                 label: "SFRPG.ItemSheet.StarshipAblativeArmor.TurnDistancePenalty",
                 hint: "SFRPG.ItemSheet.StarshipAblativeArmor.TurnDistancePenaltyTooltip"
             })

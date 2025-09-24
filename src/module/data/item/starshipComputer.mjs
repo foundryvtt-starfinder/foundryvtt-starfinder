@@ -22,15 +22,15 @@ export default class SFRPGItemStarshipComputer extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             modifier: new fields.NumberField({
                 initial: 0,
-                nullable: false,
                 min: 0,
+                integer: true,
                 label: "SFRPG.ItemSheet.StarshipComputer.Modifier",
                 hint: "SFRPG.ItemSheet.StarshipComputer.ModifierTooltip"
             }),
             nodes: new fields.NumberField({
                 initial: 0,
-                nullable: false,
                 min: 0,
+                integer: true,
                 label: "SFRPG.ItemSheet.StarshipComputer.Nodes",
                 hint: "SFRPG.ItemSheet.StarshipComputer.NodesTooltip"
             })

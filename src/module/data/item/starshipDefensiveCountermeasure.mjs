@@ -23,8 +23,9 @@ export default class SFRPGItemStarshipDefensiveCountermeasure extends SFRPGItemB
         foundry.utils.mergeObject(schema, {
             targetLockBonus: new fields.NumberField({
                 initial: 0,
-                nullable: false,
                 min: 0,
+                integer: true,
+                nullable: true,
                 label: "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonus",
                 hint: "SFRPG.ItemSheet.StarshipDefensiveCountermeasure.TargetLockBonusTooltip"
             })

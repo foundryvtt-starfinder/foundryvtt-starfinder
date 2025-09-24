@@ -41,7 +41,7 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
             }),
             order: new fields.NumberField({
                 initial: 0,
-                nullable: false,
+                integer: true,
                 required: true
             }),
             phase: new fields.SchemaField({
@@ -60,7 +60,7 @@ export default class SFRPGItemStarshipAction extends SFRPGItemBase {
             }),
             resolvePointCost: new fields.NumberField({
                 initial: null,
-                nullable: true,
+                integer: true,
                 required: true,
                 label: "SFRPG.StarshipSheet.Actions.Header.ResolvePoints"
             }),

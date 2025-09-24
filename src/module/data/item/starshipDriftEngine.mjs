@@ -22,8 +22,9 @@ export default class SFRPGItemStarshipDriftEngine extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             engineRating: new fields.NumberField({
                 initial: 0,
-                nullable: false,
                 min: 0,
+                integer: true,
+                nullable: true,
                 label: "SFRPG.ItemSheet.StarshipDriftEngine.EngineRating",
                 hint: "SFRPG.ItemSheet.StarshipDriftEngine.EngineRatingTooltip"
             }),

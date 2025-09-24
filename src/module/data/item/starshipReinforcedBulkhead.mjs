@@ -21,8 +21,9 @@ export default class SFRPGItemStarshipReinforcedBulkhead extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             fortification: new fields.NumberField({
                 initial: null,
-                nullable: true,
                 min: 0,
+                integer: true,
+                nullable: true,
                 label: "SFRPG.ItemSheet.StarshipReinforcedBulkhead.Fortification",
                 hint: "SFRPG.ItemSheet.StarshipReinforcedBulkhead.FortificationTooltip"
             })

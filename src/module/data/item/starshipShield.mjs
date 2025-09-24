@@ -23,6 +23,7 @@ export default class SFRPGItemStarshipShield extends SFRPGItemBase {
             armorBonus: new fields.NumberField({
                 initial: 0,
                 min: 0,
+                integer: true,
                 nullable: false,
                 label: "SFRPG.ItemSheet.StarshipShield.ArmorBonus",
                 hint: "SFRPG.ItemSheet.StarshipShield.ArmorBonusTooltip"
@@ -30,6 +31,7 @@ export default class SFRPGItemStarshipShield extends SFRPGItemBase {
             defenseValue: new fields.NumberField({
                 initial: 0,
                 min: 0,
+                integer: true,
                 nullable: false,
                 label: "SFRPG.ItemSheet.StarshipShield.DefenseValue",
                 hint: "SFRPG.ItemSheet.StarshipShield.DefenseValueTooltip"
@@ -42,6 +44,7 @@ export default class SFRPGItemStarshipShield extends SFRPGItemBase {
             }),
             regeneration: new fields.NumberField({
                 initial: 0,
+                integer: true,
                 nullable: false,
                 label: "SFRPG.ItemSheet.StarshipShield.Regeneration",
                 hint: "SFRPG.ItemSheet.StarshipShield.RegenerationTooltip"
@@ -49,6 +52,7 @@ export default class SFRPGItemStarshipShield extends SFRPGItemBase {
             shieldPoints: new fields.NumberField({
                 initial: 0,
                 min: 0,
+                integer: true,
                 nullable: false,
                 label: "SFRPG.ItemSheet.StarshipShield.ShieldPoints",
                 hint: "SFRPG.ItemSheet.StarshipShield.ShieldPointsTooltip"
@@ -56,6 +60,7 @@ export default class SFRPGItemStarshipShield extends SFRPGItemBase {
             targetLockBonus: new fields.NumberField({
                 initial: 0,
                 min: 0,
+                integer: true,
                 nullable: false,
                 label: "SFRPG.ItemSheet.StarshipShield.TargetLockBonus",
                 hint: "SFRPG.ItemSheet.StarshipShield.TargetLockBonusTooltip"

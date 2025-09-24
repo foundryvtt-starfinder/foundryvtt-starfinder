@@ -33,6 +33,7 @@ export default class SFRPGItemStarshipThruster extends SFRPGItemBase {
             }),
             pilotingModifier: new fields.NumberField({
                 initial: 0,
+                integer: true,
                 nullable: false,
                 label: "SFRPG.ItemSheet.StarshipThruster.PilotingModifier",
                 hint: "SFRPG.ItemSheet.StarshipThruster.PilotingModifierTooltip"
@@ -40,6 +41,7 @@ export default class SFRPGItemStarshipThruster extends SFRPGItemBase {
             speed: new fields.NumberField({
                 initial: 0,
                 min: 0,
+                integer: true,
                 nullable: false,
                 label: "SFRPG.ItemSheet.StarshipThruster.Speed",
                 hint: "SFRPG.ItemSheet.StarshipThruster.SpeedTooltip"

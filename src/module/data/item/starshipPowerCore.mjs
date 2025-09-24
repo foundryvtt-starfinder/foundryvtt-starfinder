@@ -23,6 +23,7 @@ export default class SFRPGItemStarshipPowerCore extends SFRPGItemBase {
             pcu: new fields.NumberField({
                 initial: null,
                 min: 0,
+                integer: true,
                 nullable: true,
                 required: false
             }),

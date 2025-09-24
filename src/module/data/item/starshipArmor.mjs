@@ -22,22 +22,25 @@ export default class SFRPGItemStarshipArmor extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             armorBonus: new fields.NumberField({
                 initial: null,
-                nullable: true,
                 min: 0,
+                integer: true,
+                nullable: true,
                 label: "SFRPG.ItemSheet.StarshipArmor.ArmorBonus",
                 hint: "SFRPG.ItemSheet.StarshipArmor.ArmorBonusTooltip"
             }),
             targetLockPenalty: new fields.NumberField({
                 initial: null,
-                nullable: true,
                 min: 0,
+                integer: true,
+                nullable: true,
                 label: "SFRPG.ItemSheet.StarshipArmor.TargetLockPenalty",
                 hint: "SFRPG.ItemSheet.StarshipArmor.TargetLockPenaltyTooltip"
             }),
             turnDistancePenalty: new fields.NumberField({
                 initial: null,
-                nullable: true,
                 min: 0,
+                integer: true,
+                nullable: true,
                 label: "SFRPG.ItemSheet.StarshipArmor.TurnDistancePenalty",
                 hint: "SFRPG.ItemSheet.StarshipArmor.TurnDistancePenaltyTooltip"
             })

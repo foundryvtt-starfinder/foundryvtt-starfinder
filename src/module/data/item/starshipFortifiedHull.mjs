@@ -21,8 +21,9 @@ export default class SFRPGItemStarshipFortifiedHull extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             criticalThresholdBonus: new fields.NumberField({
                 initial: 0,
-                nullable: false,
                 min: 0,
+                integer: true,
+                nullable: false,
                 label: "SFRPG.ItemSheet.StarshipFortifiedHull.CriticalThresholdBonus",
                 hint: "SFRPG.ItemSheet.StarshipFortifiedHull.CriticalThresholdBonusTooltip"
             })

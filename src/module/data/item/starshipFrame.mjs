@@ -29,6 +29,7 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
                 minimum: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true,
                     label: "SFRPG.ItemSheet.StarshipFrame.Details.CrewMinimum",
@@ -37,6 +38,7 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
                 maximum: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true,
                     label: "SFRPG.ItemSheet.StarshipFrame.Details.CrewMaximum",
@@ -47,6 +49,7 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
                 base: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true,
                     label: "SFRPG.ItemSheet.StarshipFrame.Details.DamageThreshold",
@@ -56,6 +59,7 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
             expansionBays: new fields.NumberField({
                 initial: 0,
                 min: 0,
+                integer: true,
                 nullable: false,
                 required: true,
                 label: "SFRPG.ItemSheet.StarshipFrame.Details.ExpansionBays",
@@ -65,6 +69,7 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
                 base: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true,
                     label: "SFRPG.ItemSheet.StarshipFrame.Details.HitPoints",
@@ -73,6 +78,7 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
                 increment: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true,
                     label: "SFRPG.ItemSheet.StarshipFrame.Details.HitPointsIncrement",
@@ -110,26 +116,30 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
         return {
             capitalSlots: new fields.NumberField({
                 initial: 0,
-                nullable: false,
                 min: 0,
+                integer: true,
+                nullable: false,
                 label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeCapital"
             }),
             heavySlots: new fields.NumberField({
                 initial: 0,
-                nullable: false,
                 min: 0,
+                integer: true,
+                nullable: false,
                 label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeHeavy"
             }),
             lightSlots: new fields.NumberField({
                 initial: 0,
-                nullable: false,
                 min: 0,
+                integer: true,
+                nullable: false,
                 label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeLight"
             }),
             spinalSlots: new fields.NumberField({
                 initial: 0,
-                nullable: false,
                 min: 0,
+                integer: true,
+                nullable: false,
                 label: "SFRPG.ItemSheet.StarshipFrame.Details.WeaponsTypeSpinal"
             })
         };
