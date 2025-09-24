@@ -21,6 +21,7 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
                 value: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true
                 })
@@ -35,6 +36,7 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
             tempmax: new fields.NumberField({
                 initial: null,
                 min: 0,
+                integer: true,
                 nullable: true,
                 required: true
             })
@@ -49,6 +51,7 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
                 spellResistance: new fields.SchemaField({ // TODO: collate this and 'sr' into one field
                     base: new fields.NumberField({
                         initial: 0,
+                        integer: true,
                         nullable: true,
                         required: true
                     })
