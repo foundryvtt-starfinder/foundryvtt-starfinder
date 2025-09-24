@@ -67,6 +67,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             }),
             attackBonus: new fields.NumberField({
                 initial: null,
+                integer: true,
                 nullable: true,
                 required: false,
                 label: "SFRPG.Items.Action.AttackRollBonus"
@@ -98,6 +99,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 ),
                 primaryGroup: new fields.NumberField({
                     initial: null,
+                    integer: true,
                     min: 0,
                     nullable: true
                 })
@@ -152,6 +154,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 cost: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true,
                     required: false,
                     label: "SFRPG.Items.Activation.ActivationCost"
@@ -225,13 +228,21 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 label: "SFRPG.Items.Activation.Target"
             }),
             uses: new fields.SchemaField({
-                max: new fields.StringField({nullable: true}),
+                max: new fields.StringField({
+                    initial: "",
+                    blank: true
+                }),
                 per: new fields.StringField({
                     initial: "",
                     choices: ["", ...Object.keys(CONFIG.SFRPG.limitedUsePeriods)],
                     blank: true
                 }),
-                value: new fields.NumberField({min: 0, nullable: true})
+                value: new fields.NumberField({
+                    initial: null,
+                    min: 0,
+                    integer: true,
+                    nullable: true
+                })
             }, {
                 required: true,
                 label: "SFRPG.Items.Activation.LimitedUses"
@@ -244,8 +255,13 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             container: new fields.SchemaField({
                 contents: new fields.ArrayField(
                     new fields.SchemaField({
-                        id: new fields.StringField({required: true}),
-                        index: new fields.NumberField({min: 0})
+                        id: new fields.StringField({
+                            required: true
+                        }),
+                        index: new fields.NumberField({
+                            min: 0,
+                            integer: true
+                        })
                     }),
                     {required: true}
                 ),
@@ -263,7 +279,10 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                             })
                         ),
                         affectsEncumbrance: new fields.BooleanField({initial: true}),
-                        amount: new fields.NumberField({min: 0}),
+                        amount: new fields.NumberField({
+                            min: 0,
+                            integer: true
+                        }),
                         subtype: new fields.StringField({
                             initial: "",
                             blank: true,
@@ -330,11 +349,13 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 max: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true
                 }),
                 value: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true
                 })
             }),
@@ -347,6 +368,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 value: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true
                 })
             })
@@ -388,8 +410,9 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                     }),
                     value: new fields.NumberField({
                         initial: null,
-                        nullable: true,
                         min: 0,
+                        integer: true,
+                        nullable: true,
                         required: true
                     })
                 }),
@@ -415,6 +438,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             level: new fields.NumberField({
                 initial: 1,
                 min: 0,
+                integer: true,
                 required: true
             }),
             price: new fields.NumberField({

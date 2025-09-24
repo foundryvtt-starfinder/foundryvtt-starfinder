@@ -51,12 +51,14 @@ export default class SFRPGItemAmmunition extends SFRPGItemBase {
                 max: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true,
                     required: true
                 }),
                 value: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true,
                     required: true
                 })

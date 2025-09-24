@@ -16,6 +16,7 @@ export default class SFRPGItemActorResource extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             base: new fields.NumberField({
                 initial: null,
+                integer: true,
                 nullable: true,
                 required: true,
                 label: "SFRPG.ItemSheet.ActorResource.Base"
@@ -121,6 +122,7 @@ export default class SFRPGItemActorResource extends SFRPGItemBase {
             }),
             value: new fields.NumberField({
                 initial: 0,
+                integer: true,
                 nullable: false,
                 required: false
             })
