@@ -66,7 +66,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
 
         // Calculate max, if not already
         try {
-            const roll = Roll.create(this.modifier.toString(), this.parent.system);
+            const roll = Roll.create(this.modifier.toString(), this.owner.system);
             this.max = roll.evaluateSync({strict: false}).total;
         } catch {
             this.max = 0;
