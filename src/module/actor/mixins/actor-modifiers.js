@@ -39,7 +39,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
     } = {}) {
 
         const modifiers = this.system.modifiers;
-        modifiers.push(new SFRPGModifier({
+        modifiers.push({
             name,
             modifier,
             type,
@@ -54,7 +54,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
             id,
             limitTo,
             damage
-        }));
+        });
         console.log("Adding a modifier to the actor");
         await this.update({"system.modifiers": modifiers});
     }
@@ -70,19 +70,11 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
     getAllModifiers(ignoreTemporary = false, ignoreEquipment = false, invalidate = false) {
         if (!invalidate && this.system.allModifiers) return this.system.allModifiers;
 
-        this.system.modifiers = this.system.modifiers.map(mod => {
-            return new SFRPGModifier(mod, {parent: this});
-        }, this);
-
         const allModifiers = this.system.modifiers.filter(mod => (!ignoreTemporary || mod.subtab === "permanent"));
 
         for (const item of this.items) {
             const itemData = item.system;
-
-            // Create each modifier as an SFRPGModifier instance first on the item data.
-            const itemModifiers = itemData.modifiers = itemData?.modifiers?.map(mod => {
-                return new SFRPGModifier(mod, {parent: item});
-            }, this) || [];
+            const itemModifiers = itemData.modifiers;
 
             if (!itemModifiers || itemModifiers.length === 0) continue;
 

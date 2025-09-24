@@ -1950,7 +1950,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     } = {}) {
 
         const modifiers = this.system.modifiers;
-        modifiers.push(new SFRPGModifier({
+        modifiers.push({
             name,
             modifier,
             type,
@@ -1965,7 +1965,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             id,
             limitTo,
             damage
-        }));
+        });
         console.log("Adding a modifier to the item");
         await this.update({["system.modifiers"]: modifiers});
     }

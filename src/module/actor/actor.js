@@ -29,7 +29,7 @@ import { } from "./crew-update.js";
  * @property {string}                     operator An operator that determines how damage is split between multiple types.
  */
 
-/** @import { RollResult } from '../dice.js' */
+/** @import RollResult from '../dice.js' */
 
 /** @extends {foundry.documents.Actor} */
 export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
@@ -190,12 +190,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Extend preCreate to apply some defaults to newly created characters
-     * See the base Actor class for API documentation of this method
-     *
-     * @param {object} data               The initial data object provided to the document creation request
-     * @param {object} options            Additional options which modify the creation request
-     * @param {documents.BaseUser} user   The User requesting the document creation
-     * @returns {boolean|void}         Explicitly return false to prevent creation of this Document
+     * @inheritdoc
      */
     async _preCreate(data, options, user) {
         const autoLinkedTypes = ['character', 'drone'];
@@ -243,13 +238,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Extend preUpdate to clamp certain PC changes
-     * See the base Actor class for API documentation of this method
-     *
-     * Pre-update operations only occur for the client which requested the operation.
-     *
-     * @param {object} changed            The differential data that is changed relative to the documents prior values
-     * @param {object} options            Additional options which modify the update request
-     * @param {documents.BaseUser} user   The User requesting the document update
+     * @inheritdoc
      */
     async _preUpdate(changed, options, user) {
 
@@ -296,6 +285,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     /**
      * Delete any of corresponding timedEffect objects of the actor's items.
      * Also remove linked hotbar instances from item apps before deleting so the hotbar isn't closed.
+     * @inheritdoc
      */
     async _onDelete(options, userId) {
         for (const item of this.items) {
@@ -308,6 +298,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Toggle scrolling text for created effects
+     * @inheritdoc
      */
     _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {
@@ -323,6 +314,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Delete item's corresponding timedEffect objects
+     * @inheritdoc
      */
     _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {
