@@ -128,7 +128,14 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             }),
             skills: new fields.TypedObjectField(
                 new fields.SchemaField(SFRPGActorBase._skillFieldData()),
-                SFRPGActorBase._skillsInitial()
+                {
+                    initial: SFRPGActorBase._skillsInitial(),
+                    validateKey: (key) => {
+                        const keyNoNumber = key.replace(/\d+/g, '')
+                        const valid = keyNoNumber in CONFIG.SFRPG.skills;
+                        return valid;
+                    }
+                }
             )
         };
 
@@ -347,7 +354,14 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 label: "SFRPG.StarshipSheet.Crew.NumberOfUses"
             }),
             skills: new fields.TypedObjectField(
-                new fields.SchemaField(SFRPGActorBase._skillFieldData({forStarship: true}))
+                new fields.SchemaField(SFRPGActorBase._skillFieldData({forStarship: true})),
+                {
+                    validateKey: (key) => {
+                        const keyNoNumber = key.replace(/\d+/g, '')
+                        const valid = keyNoNumber in CONFIG.SFRPG.starshipSkills;
+                        return valid;
+                    }
+                }
             )
         }, {label: label, hint: hint});
     }
@@ -460,107 +474,105 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
 
     static _skillsInitial() {
         const dataObject = {
-            initial: {
-                acr: {
-                    ability: "dex",
-                    hasArmorCheckPenalty: true,
-                    isTrainedOnly: false
-                },
-                ath: {
-                    ability: "str",
-                    hasArmorCheckPenalty: true,
-                    isTrainedOnly: false
-                },
-                blu: {
-                    ability: "cha",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: false
-                },
-                com: {
-                    ability: "int",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: false
-                },
-                cul: {
-                    ability: "int",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: true
-                },
-                dip: {
-                    ability: "cha",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: false
-                },
-                dis: {
-                    ability: "cha",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: false
-                },
-                eng: {
-                    ability: "int",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: true
-                },
-                int: {
-                    ability: "cha",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: false
-                },
-                lsc: {
-                    ability: "int",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: true
-                },
-                med: {
-                    ability: "int",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: true
-                },
-                mys: {
-                    ability: "wis",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: true
-                },
-                per: {
-                    ability: "wis",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: false
-                },
-                phs: {
-                    ability: "int",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: true
-                },
-                pil: {
-                    ability: "dex",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: false
-                },
-                pro: {
-                    ability: "int",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: true
-                },
-                sen: {
-                    ability: "wis",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: false
-                },
-                sle: {
-                    ability: "dex",
-                    hasArmorCheckPenalty: true,
-                    isTrainedOnly: true
-                },
-                ste: {
-                    ability: "dex",
-                    hasArmorCheckPenalty: true,
-                    isTrainedOnly: false
-                },
-                sur: {
-                    ability: "wis",
-                    hasArmorCheckPenalty: false,
-                    isTrainedOnly: false
-                }
+            acr: {
+                ability: "dex",
+                hasArmorCheckPenalty: true,
+                isTrainedOnly: false
+            },
+            ath: {
+                ability: "str",
+                hasArmorCheckPenalty: true,
+                isTrainedOnly: false
+            },
+            blu: {
+                ability: "cha",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: false
+            },
+            com: {
+                ability: "int",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: false
+            },
+            cul: {
+                ability: "int",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: true
+            },
+            dip: {
+                ability: "cha",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: false
+            },
+            dis: {
+                ability: "cha",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: false
+            },
+            eng: {
+                ability: "int",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: true
+            },
+            int: {
+                ability: "cha",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: false
+            },
+            lsc: {
+                ability: "int",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: true
+            },
+            med: {
+                ability: "int",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: true
+            },
+            mys: {
+                ability: "wis",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: true
+            },
+            per: {
+                ability: "wis",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: false
+            },
+            phs: {
+                ability: "int",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: true
+            },
+            pil: {
+                ability: "dex",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: false
+            },
+            pro: {
+                ability: "int",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: true
+            },
+            sen: {
+                ability: "wis",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: false
+            },
+            sle: {
+                ability: "dex",
+                hasArmorCheckPenalty: true,
+                isTrainedOnly: true
+            },
+            ste: {
+                ability: "dex",
+                hasArmorCheckPenalty: true,
+                isTrainedOnly: false
+            },
+            sur: {
+                ability: "wis",
+                hasArmorCheckPenalty: false,
+                isTrainedOnly: false
             }
         };
         return dataObject;

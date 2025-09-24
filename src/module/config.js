@@ -500,6 +500,11 @@ SFRPG.skills = {
     "sur": "SFRPG.SkillSur"
 };
 
+SFRPG.starshipSkills = {
+    ...SFRPG.skills,
+    "gun": "SFRPG.SkillGun"
+}
+
 // Weapon Types
 SFRPG.weaponTypes = {
     "basicM": "SFRPG.WeaponTypesBasicMelee",
