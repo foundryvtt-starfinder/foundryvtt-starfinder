@@ -17,16 +17,27 @@ export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
 
     static damagePartTemplate() {
         return {
-            name: new fields.StringField({initial: null, nullable: true}),
-            formula: new fields.StringField({initial: null, nullable: true}),
+            name: new fields.StringField({
+                initial: "",
+                blank: true
+            }),
+            formula: new fields.StringField({
+                initial: "",
+                blank: true
+            }),
             types: new fields.SchemaField(
                 Object.keys(CONFIG.SFRPG.damageAndHealingTypes).reduce((obj, type) => {
-                    obj[type] = new fields.BooleanField({ initial: false, required: false });
+                    obj[type] = new fields.BooleanField({initial: false, required: false});
                     return obj;
                 }, {}),
-                { required: false }
+                {required: false}
             ),
-            group: new fields.NumberField({initial: null, min: 0, nullable: true}),
+            group: new fields.NumberField({
+                initial: null,
+                min: 0,
+                integer: true,
+                nullable: true
+            }),
             isPrimarySection: new fields.BooleanField()
         };
     }

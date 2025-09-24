@@ -34,12 +34,14 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     temp: new fields.NumberField({
                         initial: null,
                         min: 0,
+                        integer: true,
                         nullable: true,
                         required: true
                     }),
                     value: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: false,
                         required: true
                     })
@@ -54,15 +56,15 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 credit: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: true,
-                    required: false,
                     label: "SFRPG.Credits"
                 }),
                 upb: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: true,
-                    required: false,
                     label: "SFRPG.UPBs"
                 })
             }),
@@ -72,25 +74,21 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         initial: null,
                         min: 0,
                         nullable: true,
-                        required: false,
                         label: "SFRPG.ActorSheet.Biography.Age"
                     }),
                     dateOfBirth: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false,
                         label: "SFRPG.ActorSheet.Biography.DateOfBirth"
                     }),
                     deity: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false,
                         label: "SFRPG.ActorSheet.Biography.Deity"
                     }),
                     fullBodyImage: new fields.FilePathField({
                         initial: "",
                         blank: true,
-                        required: false,
                         categories: ["IMAGE"],
                         label: "SFRPG.ActorSheet.Biography.FullBodyImage",
                         hint: "SFRPG.ActorSheet.Biography.ImageTooltip"
@@ -98,41 +96,34 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     genderPronouns: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false,
                         label: "SFRPG.ActorSheet.Biography.GenderPronouns"
                     }),
                     height: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false,
                         label: "SFRPG.ActorSheet.Biography.Height"
                     }),
                     homeWorld: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false,
                         label: "SFRPG.ActorSheet.Biography.Homeworld"
                     }),
                     otherVisuals: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false,
                         label: "SFRPG.ActorSheet.Biography.OtherVisuals"
                     }),
                     public: new fields.StringField({
                         initial: "",
-                        blank: true,
-                        required: false
+                        blank: true
                     }),
                     value: new fields.StringField({
                         initial: "",
-                        blank: true,
-                        required: false
+                        blank: true
                     }),
                     weight: new fields.StringField({
                         initial: "",
                         blank: true,
-                        required: false,
                         label: "SFRPG.ActorSheet.Biography.Weight"
                     })
                 })
@@ -167,6 +158,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     sr: new fields.NumberField({ // TODO: collate this and 'spellResistance' into one field
                         initial: 0,
                         nullable: false,
+                        integer: true,
                         required: true,
                         label: "SFRPG.SpellResistance"
                     })
@@ -178,6 +170,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     initial: 2,
                     min: 0,
                     nullable: false,
+                    integer: true,
                     required: true,
                     label: "SFRPG.NumberOfArms"
                 }),
@@ -198,6 +191,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             schema.attributes.fields.init.fields.value = new fields.NumberField({
                 initial: 0,
                 min: 0,
+                integer: true,
                 nullable: false,
                 required: true
             });
@@ -314,6 +308,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             base: new fields.NumberField({
                 initial: 10,
                 min: isCharacter ? 3 : -5,
+                integer: true,
                 nullable: false,
                 required: true
             })
@@ -323,14 +318,17 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             foundry.utils.mergeObject(dataField, {
                 damage: new fields.NumberField({
                     initial: null,
+                    integer: true,
                     nullable: true
                 }),
                 drain: new fields.NumberField({
                     initial: null,
+                    integer: true,
                     nullable: true
                 }),
                 userPenalty: new fields.NumberField({
                     initial: null,
+                    integer: true,
                     nullable: true
                 })
             });
@@ -346,6 +344,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             numberOfUses: new fields.NumberField({
                 initial: null,
                 min: 0,
+                integer: true,
                 nullable: true,
                 label: "SFRPG.StarshipSheet.Crew.NumberOfUses"
             }),
@@ -370,6 +369,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             limit: new fields.NumberField({
                 initial: init,
                 min: -1,
+                integer: true,
                 nullable: false,
                 required: true,
                 label: "SFRPG.StarshipSheet.Crew.RoleLimit",
@@ -383,6 +383,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             misc: new fields.NumberField({
                 initial: 0,
                 min: 0,
+                integer: true,
                 nullable: false,
                 required: true
             })
@@ -398,6 +399,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             ranks: new fields.NumberField({
                 initial: 0,
                 min: 0,
+                integer: true,
                 nullable: false,
                 required: false
             })
@@ -408,6 +410,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 mod: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: false
                 })
@@ -435,6 +438,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 misc: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: false
                 }),
@@ -446,6 +450,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 value: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: false
                 })
@@ -569,12 +574,14 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             value: new fields.NumberField({
                 initial: 0,
                 min: 0,
+                integer: true,
                 nullable: true,
                 required: false
             }),
             max: new fields.NumberField({
                 initial: 0,
                 min: 0,
+                integer: true,
                 nullable: true,
                 required: false
             })
@@ -587,6 +594,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     value: new fields.NumberField({
                         initial: 0,
                         min: 0,
+                        integer: true,
                         nullable: true,
                         required: false
                     })

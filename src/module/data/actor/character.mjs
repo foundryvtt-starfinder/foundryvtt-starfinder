@@ -21,6 +21,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                 value: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true
                 })
@@ -29,6 +30,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                 value: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true
                 })
@@ -39,9 +41,10 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
             cl: new fields.SchemaField({
                 value: new fields.NumberField({
                     initial: null,
+                    min: 0,
+                    integer: true,
                     nullable: true,
-                    required: true,
-                    min: 0
+                    required: true
                 })
             }, {label: "SFRPG.CasterLevel"}),
             level: new fields.SchemaField({}, {label: "SFRPG.LevelLabelText"}),
@@ -61,6 +64,7 @@ export default class SFRPGActorCharacter extends SFRPGActorBase {
                 value: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true
                 })
