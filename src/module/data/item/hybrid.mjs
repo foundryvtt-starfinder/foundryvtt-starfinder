@@ -21,10 +21,12 @@ export default class SFRPGItemHybrid extends SFRPGItemBase {
             ...SFRPGItemBase.physicalItemTemplate()
         });
 
-        // Consumable-specific properties
+        // Hybrid Item-specific properties
         foundry.utils.mergeObject(schema, {
             hands: new fields.NumberField({
                 initial: 0,
+                miin: 0,
+                integer: true,
                 nullable: false,
                 required: true,
                 label: "SFRPG.Items.Description.Hands"

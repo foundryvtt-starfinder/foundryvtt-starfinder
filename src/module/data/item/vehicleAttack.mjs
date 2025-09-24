@@ -25,6 +25,7 @@ export default class SFRPGItemVehicleAttack extends SFRPGItemBase {
             }),
             ignoresHardness: new fields.NumberField({
                 initial: 0,
+                integer: true,
                 required: true,
                 nullable: true,
                 label: "SFRPG.VehicleAttackSheet.Details.IgnoresHardness"

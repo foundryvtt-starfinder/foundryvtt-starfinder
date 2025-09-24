@@ -43,6 +43,7 @@ export default class SFRPGItemMod extends SFRPGItemBase {
                 number: new fields.NumberField({
                     initial: 0,
                     min: 0,
+                    integer: true,
                     required: true,
                     label: "SFRPG.DroneSheet.Mod.Details.Arms.Amount"
                 })
@@ -68,12 +69,14 @@ export default class SFRPGItemMod extends SFRPGItemBase {
             maxInstalls: new fields.NumberField({
                 initial: 1,
                 min: 0,
+                integer: true,
                 required: true,
                 label: "SFRPG.DroneSheet.Mod.Details.BaseStatistics.MaxInstalls"
             }),
             spellResistance: new fields.NumberField({
                 initial: 0,
                 min: 0,
+                integer: true,
                 required: true,
                 label: "SFRPG.DroneSheet.Mod.Details.OtherEffects.SpellResistance"
             }),

@@ -24,7 +24,11 @@ export default class SFRPGItemWeapon extends SFRPGItemBase {
 
         // Weapon-specific properties
         foundry.utils.mergeObject(schema, {
-            equippedBulkMultiplier: new fields.NumberField({initial: 1, min: 0}),
+            equippedBulkMultiplier: new fields.NumberField({
+                initial: 1,
+                min: 0,
+                required: true
+            }),
             special: new fields.StringField({
                 initial: "",
                 blank: true,

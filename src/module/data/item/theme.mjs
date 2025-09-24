@@ -25,6 +25,7 @@ export default class SFRPGItemTheme extends SFRPGItemBase {
                 mod: new fields.NumberField({
                     initial: 1,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     label: "SFRPG.ModifierTitle"
                 })

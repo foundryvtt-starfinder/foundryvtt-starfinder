@@ -32,6 +32,7 @@ export default class SFRPGItemChassis extends SFRPGItemBase {
                 cha: new fields.NumberField({
                     initial: 6,
                     min: 3,
+                    integer: true,
                     required: true,
                     label: "SFRPG.AbilityCha"
                 }),
@@ -43,24 +44,28 @@ export default class SFRPGItemChassis extends SFRPGItemBase {
                 dex: new fields.NumberField({
                     initial: 10,
                     min: 3,
+                    integer: true,
                     required: true,
                     label: "SFRPG.AbilityDex"
                 }),
                 int: new fields.NumberField({
                     initial: 6,
                     min: 3,
+                    integer: true,
                     required: true,
                     label: "SFRPG.AbilityInt"
                 }),
                 str: new fields.NumberField({
                     initial: 10,
                     min: 3,
+                    integer: true,
                     required: true,
                     label: "SFRPG.AbilityStr"
                 }),
                 wis: new fields.NumberField({
                     initial: 10,
                     min: 3,
+                    integer: true,
                     required: true,
                     label: "SFRPG.AbilityWis"
                 })
@@ -68,6 +73,7 @@ export default class SFRPGItemChassis extends SFRPGItemBase {
             eac: new fields.NumberField({
                 initial: 1,
                 min: 0,
+                integer: true,
                 required: true,
                 label: "SFRPG.DroneSheet.Chassis.Levels"
             }),
@@ -80,12 +86,14 @@ export default class SFRPGItemChassis extends SFRPGItemBase {
             levels: new fields.NumberField({
                 initial: 1,
                 min: 0,
+                integer: true,
                 required: true,
                 label: "SFRPG.DroneSheet.Chassis.Details.Defence.EAC"
             }),
             kac: new fields.NumberField({
                 initial: 1,
                 min: 0,
+                integer: true,
                 required: true,
                 label: "SFRPG.DroneSheet.Chassis.Details.Defence.KAC"
             }),

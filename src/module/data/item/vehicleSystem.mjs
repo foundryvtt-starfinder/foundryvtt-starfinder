@@ -27,8 +27,9 @@ export default class SFRPGItemVehicleSystem extends SFRPGItemBase {
             piloting: new fields.SchemaField({
                 piloting: new fields.NumberField({
                     initial: null,
-                    required: true,
+                    integer: true,
                     nullable: true,
+                    required: true,
                     label: "SFRPG.VehicleSystemSheet.Piloting",
                     hint: "SFRPG.VehicleSystemSheet.PilotingTooltip"
                 }),

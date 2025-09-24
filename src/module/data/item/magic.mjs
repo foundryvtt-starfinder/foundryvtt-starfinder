@@ -21,7 +21,7 @@ export default class SFRPGItemMagic extends SFRPGItemBase {
             ...SFRPGItemBase.physicalItemTemplate()
         });
 
-        // Consumable-specific properties
+        // Magic Item-specific properties
         foundry.utils.mergeObject(schema, {
             hands: new fields.NumberField({
                 initial: 0,

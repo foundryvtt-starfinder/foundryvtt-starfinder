@@ -26,6 +26,7 @@ export default class SFRPGItemShield extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             acp: new fields.NumberField({
                 initial: null,
+                integer: true,
                 nullable: true,
                 required: true,
                 label: "SFRPG.Items.Shield.ArmorCheckLabel"
@@ -33,22 +34,29 @@ export default class SFRPGItemShield extends SFRPGItemBase {
             bonus: new fields.SchemaField({
                 aligned: new fields.NumberField({
                     initial: 0,
+                    integer: true,
                     nullable: true,
                     label: "SFRPG.Items.Shield.Aligned"
                 }),
                 wielded: new fields.NumberField({
                     initial: 0,
+                    integer: true,
                     nullable: true,
                     label: "SFRPG.Items.Shield.Wielded"
                 })
             }),
             dex: new fields.NumberField({
                 initial: null,
+                integer: true,
                 nullable: true,
                 required: true,
                 label: "SFRPG.Items.Shield.AcMaxDexLabel"
             }),
-            equippedBulkMultiplier: new fields.NumberField({initial: 1, min: 0})
+            equippedBulkMultiplier: new fields.NumberField({
+                initial: 1,
+                min: 0,
+                required: true
+            })
         });
 
         // Change some initial values specific to shields

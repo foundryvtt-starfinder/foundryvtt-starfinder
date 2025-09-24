@@ -25,6 +25,7 @@ export default class SFRPGItemTechnological extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             hands: new fields.NumberField({
                 initial: 0,
+                integer: true,
                 nullable: false,
                 required: true,
                 label: "SFRPG.Items.Description.Hands"

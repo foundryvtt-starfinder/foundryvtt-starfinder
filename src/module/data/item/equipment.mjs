@@ -34,22 +34,26 @@ export default class SFRPGItemEquipment extends SFRPGItemBase {
                 eac: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true,
                     required: true
                 }),
                 kac: new fields.NumberField({
                     initial: null,
                     min: 0,
+                    integer: true,
                     nullable: true,
                     required: true
                 }),
                 dex: new fields.NumberField({
                     initial: null,
+                    integer: true,
                     nullable: true,
                     required: true
                 }),
                 acp: new fields.NumberField({
                     initial: null,
+                    integer: true,
                     nullable: true,
                     required: true
                 }),
@@ -59,8 +63,14 @@ export default class SFRPGItemEquipment extends SFRPGItemBase {
                     required: true
                 })
             }),
-            equippedBulkMultiplier: new fields.NumberField({initial: 1, min: 0}),
-            strength: new fields.NumberField(),
+            equippedBulkMultiplier: new fields.NumberField({
+                initial: 1,
+                min: 0,
+                required: true
+            }),
+            strength: new fields.NumberField({
+                integer: true
+            }),
             // TODO: replace speed with modern speed template (below) once migrations work
             speed: new fields.StringField({
                 initial: "",

@@ -57,6 +57,7 @@ export default class SFRPGItemSpell extends SFRPGItemBase {
             level: new fields.NumberField({
                 initial: 1,
                 min: 0,
+                integer: true,
                 nullable: false,
                 required: false,
                 label: "SFRPG.Items.Spell.Level"
@@ -67,14 +68,14 @@ export default class SFRPGItemSpell extends SFRPGItemBase {
                     label: "SFRPG.Items.Spell.Consumed"
                 }),
                 cost: new fields.NumberField({
-                    initial: 0,
+                    initial: null,
                     min: 0,
                     nullable: true,
                     required: false,
                     label: "SFRPG.Items.Spell.Cost"
                 }),
                 supply: new fields.NumberField({
-                    initial: 0,
+                    initial: null,
                     min: 0,
                     nullable: true,
                     required: false,

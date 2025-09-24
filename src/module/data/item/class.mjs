@@ -37,6 +37,7 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                 value: new fields.NumberField({
                     initial: 1,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true,
                     label: "SFRPG.ClassHPPerLevel"
@@ -46,6 +47,7 @@ export default class SFRPGItemClass extends SFRPGItemBase {
             levels: new fields.NumberField({
                 initial: 1,
                 min: 1,
+                integer: true,
                 nullable: false,
                 required: true
             }),
@@ -77,6 +79,7 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                 value: new fields.NumberField({
                     initial: 4,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true,
                     label: "SFRPG.ClassSkillRanksPerlevel"
@@ -91,6 +94,7 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                 value: new fields.NumberField({
                     initial: 1,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true,
                     label: "SFRPG.ClassSPPerLevel"

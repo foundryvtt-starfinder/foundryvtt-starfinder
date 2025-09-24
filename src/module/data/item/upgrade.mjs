@@ -34,6 +34,7 @@ export default class SFRPGItemUpgrade extends SFRPGItemBase {
             slots: new fields.NumberField({
                 initial: 1,
                 min: 0,
+                integer: true,
                 nullable: false,
                 required: true,
                 label: "SFRPG.Items.Upgrade.Slots"

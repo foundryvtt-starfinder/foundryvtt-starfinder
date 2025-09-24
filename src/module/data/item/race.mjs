@@ -24,6 +24,7 @@ export default class SFRPGItemRace extends SFRPGItemBase {
                 value: new fields.NumberField({
                     initial: 1,
                     min: 0,
+                    integer: true,
                     nullable: false,
                     required: true,
                     label: "SFRPG.RaceHitPoints"
