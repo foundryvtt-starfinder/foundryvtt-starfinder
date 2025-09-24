@@ -1379,7 +1379,7 @@ SFRPG.starshipSystemPatch = {
     "robust": "SFRPG.StarshipSheet.Critical.Patch.Robust"
 };
 
-// starship value maps
+// Starship value maps
 SFRPG.starshipSystemStatus = {
     "nominal": "SFRPG.StarshipSheet.Critical.Status.Nominal",
     "glitching": "SFRPG.StarshipSheet.Critical.Status.Glitching",
@@ -1395,6 +1395,35 @@ SFRPG.starshipSizeMod = {
     "huge": -2,
     "gargantuan": -4,
     "colossal": -8
+};
+
+SFRPG.starshipTierToBuildpoints = {
+    "1/4": 25,
+    "0.25": 25,
+    "1/3": 30,
+    "0.3333333333333333": 30,
+    "1/2": 40,
+    "0.5": 40,
+    "1": 55,
+    "2": 75,
+    "3": 95,
+    "4": 115,
+    "5": 135,
+    "6": 155,
+    "7": 180,
+    "8": 205,
+    "9": 230,
+    "10": 270,
+    "11": 310,
+    "12": 350,
+    "13": 400,
+    "14": 450,
+    "15": 500,
+    "16": 600,
+    "17": 700,
+    "18": 800,
+    "19": 900,
+    "20": 1000
 };
 
 /* --------------------------------*
