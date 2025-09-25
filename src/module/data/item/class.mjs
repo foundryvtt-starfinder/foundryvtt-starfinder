@@ -85,11 +85,6 @@ export default class SFRPGItemClass extends SFRPGItemBase {
                     label: "SFRPG.ClassSkillRanksPerlevel"
                 })
             }),
-            slug: new fields.StringField({
-                initial: "",
-                required: true,
-                blank: true
-            }),
             sp: new fields.SchemaField({
                 value: new fields.NumberField({
                     initial: 1,

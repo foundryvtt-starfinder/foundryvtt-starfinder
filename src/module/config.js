@@ -970,6 +970,13 @@ SFRPG.spellcastingClasses = {
     "wysh": "SFRPG.AllowedClasses.Wysh"
 };
 
+SFRPG.spellcastingClassSlugs = {
+    "myst": "mystic",
+    "precog": "precog",
+    "tech": "technomancer",
+    "wysh": "witchwarper"
+};
+
 SFRPG.itemActionTypes = {
     "mwak": "SFRPG.ActionMWAK",
     "rwak": "SFRPG.ActionRWAK",
