@@ -2132,18 +2132,18 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     /**
      * Execute a macro with the context of this item
-     * @param {Macro} macro The macro to execute
+     * @param {foundry.documents.Macro} macro The macro to execute
      * @param {Record<string, *>} scope Any additional arguments to pass to macro execution
-     * @returns {Promise<*>} The return value of the macro
+     * @returns {Promise<unknown>} The return value of the macro
      */
     async executeMacroWithContext(macro, scope = {}) {
-        if (!(macro instanceof Macro)) {
+        if (!(macro instanceof foundry.documents.Macro)) {
             ui.notifications.error("A macro was not provided!");
             return;
         }
 
         return macro.execute({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
+            speaker: foundry.documents.ChatMessage.implementation.getSpeaker({ actor: this.actor, token: this.actor.token }),
             token: this.actor.token || null,
             actor: this.actor || null,
             item: this,

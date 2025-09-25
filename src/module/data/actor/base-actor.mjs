@@ -54,10 +54,9 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
             }),
             details: new fields.SchemaField({
                 biography: new fields.SchemaField({
-                    age: new fields.NumberField({
-                        initial: null,
-                        min: 0,
-                        nullable: true,
+                    age: new fields.StringField({
+                        initial: "",
+                        blank: "true",
                         label: "SFRPG.ActorSheet.Biography.Age"
                     }),
                     dateOfBirth: new fields.StringField({
