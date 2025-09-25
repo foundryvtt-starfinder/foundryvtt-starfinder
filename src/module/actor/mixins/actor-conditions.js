@@ -12,7 +12,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
         }
 
         const conditionItem = this.getCondition(conditionName);
-        return conditionItem ?? null;
+        return (conditionItem !== null);
     }
 
     /**
