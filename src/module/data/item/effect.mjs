@@ -21,14 +21,14 @@ export default class SFRPGItemEffect extends SFRPGItemBase {
         foundry.utils.mergeObject(schema, {
             context: new fields.SchemaField({
                 origin: new fields.SchemaField({
-                    actorUuid: new fields.StringField({
-                        initial: "",
-                        blank: true,
+                    actorUuid: new fields.DocumentUUIDField({
+                        initial: null,
+                        nullable: true,
                         label: "SFRPG.Effect.OriginActorUUID"
                     }),
-                    itemUuid: new fields.StringField({
-                        initial: "",
-                        blank: true,
+                    itemUuid: new fields.DocumentUUIDField({
+                        initial: null,
+                        nullable: true,
                         label: "SFRPG.Effect.OriginItemUUID"
                     })
                 })
