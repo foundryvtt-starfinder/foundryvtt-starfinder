@@ -612,7 +612,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         nullable: true,
                         required: false
                     })
-                })
+                }), {validateKey: (key) => Object.values(CONFIG.SFRPG.spellcastingClassSlugs).includes(key)}
             );
         }
 
