@@ -460,11 +460,29 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             const actor = item.actor;
             const isWeapon = ["weapon", "shield"].includes(item.type);
 
+            // TODO: This chunk is the same code as in item.js's rollAttack(), probably good practice to combine these into one method somewhere
             let abl = itemData.ability;
-            if (!abl && (actor.type === "npc" || actor.type === "npc2")) abl = "";
-            else if (!abl && (item.type === "spell")) abl = actor.system.attributes.spellcasting || "int";
-            else if (itemData.properties?.operative && actor.system.abilities.dex.value > actor.system.abilities.str.value) abl = "dex";
-            else if (!abl) abl = "str";
+            if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) {
+                abl = "";
+            } else if (!abl && (this.type === "spell")) {
+                if (itemData.actionType === "rsak") {
+                    abl = "dex";
+                } else if (itemData.actionType === "msak") {
+                    abl = "str";
+                } else {
+                    abl = actorData.attributes.spellcasting || "int";
+                }
+            } else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) {
+                abl = "dex";
+            } else if (!abl) {
+                if (itemData.actionType === "rwak" || itemData.actionType === "rsak") {
+                    abl = "dex";
+                } else if (itemData.actionType === "mwak" || itemData.actionType === "msak") {
+                    abl = "str";
+                } else {
+                    abl = "str";
+                }
+            }
 
             // Define Roll parts
             const parts = [];

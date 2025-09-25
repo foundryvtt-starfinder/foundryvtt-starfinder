@@ -880,11 +880,29 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (this.type === "vehicleAttack") return this._rollVehicleAttack(options);
 
         // Determine ability score modifier
+        // TODO: This chunk is the same code as in base.js's _prepareAttackString(), probably good practice to combine these into one method somewhere
         let abl = itemData.ability;
-        if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) abl = "";
-        else if (!abl && (this.type === "spell")) abl = actorData.attributes.spellcasting || "int";
-        else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) abl = "dex";
-        else if (!abl) abl = "str";
+        if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) {
+            abl = "";
+        } else if (!abl && (this.type === "spell")) {
+            if (itemData.actionType === "rsak") {
+                abl = "dex";
+            } else if (itemData.actionType === "msak") {
+                abl = "str";
+            } else {
+                abl = actorData.attributes.spellcasting || "int";
+            }
+        } else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) {
+            abl = "dex";
+        } else if (!abl) {
+            if (itemData.actionType === "rwak" || itemData.actionType === "rsak") {
+                abl = "dex";
+            } else if (itemData.actionType === "mwak" || itemData.actionType === "msak") {
+                abl = "str";
+            } else {
+                abl = "str";
+            }
+        }
 
         // Define Roll parts
         const parts = [];
