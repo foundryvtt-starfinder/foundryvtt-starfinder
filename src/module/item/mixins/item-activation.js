@@ -1,6 +1,8 @@
 import { DiceSFRPG } from "../../dice.js";
 import RollContext from "../../rolls/rollcontext.js";
 
+const ChatMessage = foundry.documents.ChatMessage;
+
 /**
  * The data necessary to track how long an activation has been ongoing.
  * @typedef {object} ActivationEvent
@@ -10,7 +12,6 @@ import RollContext from "../../rolls/rollcontext.js";
  * @property {string} status - A status string for `SFRPGTimedEffect` to set
  * @property {?number} deactivatedAt - world time at deactivation
  */
-
 export const ItemActivationMixin = (superclass) => class extends superclass {
 
     hasUses() {
@@ -121,7 +122,8 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                         isVersatile: this.isVersatile,
                         hasSave: this.hasSave,
                         hasSkill: this.hasSkill,
-                        hasArea: this.hasArea
+                        hasArea: this.hasArea,
+                        primaryDamageIsHealing: this.primaryDamageIsHealing
                     }
                     : {
                         actor: this.actor,
