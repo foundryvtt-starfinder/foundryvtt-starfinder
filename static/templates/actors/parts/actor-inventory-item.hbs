@@ -6,11 +6,12 @@
                     {{#if (and (not (eq item.type "feat")) (or item.config.isStack (getStarfinderBoolean "alwaysShowQuantity")))}}({{item.system.quantity}}) {{/if}}
                     {{item.name}}
                 </h4>
-                {{#if (and isOwner (or (eq item.type "consumable") (or item.config.hasAttack item.config.hasDamage)))}}
+
+                {{#if (and isOwner (or (or (eq item.type "consumable") item.system.usage.per) (or item.config.hasAttack item.config.hasDamage)))}}
                 <div class="item-action {{#if item.parentItem}}flexrow flexnowrap{{else}}flexcol{{/if}}">
                     {{#if (eq item.type "consumable")}}
                         <button type="button" class="tag use">{{localize "SFRPG.Items.Consumable.UseAction"}}</button>
-                    {{else}}
+                    {{else if (or item.config.hasAttack item.config.hasDamage)}}
                         {{#if item.config.hasAttack}}
                         <button type="button" class="tag attack" data-tooltip="{{localize "SFRPG.Attack"}}">{{item.config.attackString}}</button>
                         {{/if}}
@@ -21,6 +22,8 @@
                                 <button type="button" class="tag damage" data-tooltip="{{localize "SFRPG.Damage.Title"}}">{{item.config.damageString}}</button>
                             {{/if}}
                         {{/if}}
+                    {{else}}
+                        <button type="button" class="tag use">{{localize "SFRPG.Items.Consumable.UseAction"}}</button>
                     {{/if}}
                 </div>
                 {{/if}}

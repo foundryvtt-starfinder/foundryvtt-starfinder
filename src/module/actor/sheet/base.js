@@ -816,7 +816,11 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        return item.rollConsumable({event: event});
+        if (item.type === "consumable") {
+            return item.rollConsumable({event: event});
+        } else {
+            return item.useItem({event:event});
+        }
     }
 
     _onItemRollAttack(event) {

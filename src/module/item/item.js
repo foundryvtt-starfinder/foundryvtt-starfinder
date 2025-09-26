@@ -1176,6 +1176,22 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     /**
+     * Handle updating item capacity when an item is used
+     *
+     * @param {Html} html The html from the dailog
+     * @param {Array} parts The parts of the roll
+     * @param {Object} data The data
+     *
+     * Supported options:
+     * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
+     * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
+     */
+    _deductItemCharge() {
+        const usage = this.system.usage;
+        this.consumeCapacity(this._calculateAmmoUsageWithModifiers(usage.value));
+    }
+
+    /**
      * Place an attack roll for a starship using an item.
      * @param {Object} options Options to pass to the attack roll
      *
@@ -1753,6 +1769,62 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 // Deduct the remaining charges
                 this.update({'system.uses.value': remainingUses});
             }
+        }
+    }
+
+    /**
+     * Use an item that has charges per use/hour/day etc.
+     */
+    async useItem(options = {}) {
+        const itemData = this.system;
+        const overrideUsage = !!options?.event?.shiftKey;
+
+        if (itemData.uses.value === 0 && itemData.quantity === 0 && !overrideUsage) {
+            ui.notifications.error(game.i18n.format("SFRPG.Items.Consumable.ErrorNoUses", {name: this.name}));
+            return;
+        }
+
+        const htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this };
+        htmlOptions.rollData.owner = this.actor?.system;
+
+        // Basic template rendering data
+        const token = this.actor.token;
+        const templateData = {
+            actor: this.actor,
+            tokenId: token ? `${token.parent.id}.${token.id}` : null,
+            item: this,
+            data: await this.getChatData(htmlOptions),
+            labels: this.labels,
+            hasAttack: this.hasAttack,
+            hasDamage: this.hasDamage,
+            hasSave: this.hasSave,
+            hasArea: this.hasArea,
+            hasOtherFormula: this.hasOtherFormula
+        };
+
+        const template = `systems/sfrpg/templates/chat/item-card.hbs`;
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
+        const flavor = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
+
+        // Basic chat message data
+        const chatData = {
+            author: game.user.id,
+            flavor: flavor,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            content: html,
+            flags: { level: this.system.level },
+            speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
+        };
+
+        const rollMode = game.settings.get("core", "rollMode");
+        ChatMessage.applyRollMode(chatData, rollMode);
+
+        // Create the chat message
+        ChatMessage.create(chatData, { displaySheet: false });
+
+        // Deduct consumed charges from the item
+        if (!overrideUsage) {
+            this.consumeCapacity(itemData.usage.value);
         }
     }
 
