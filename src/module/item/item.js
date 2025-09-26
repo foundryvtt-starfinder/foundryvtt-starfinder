@@ -1779,7 +1779,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const itemData = this.system;
         const overrideUsage = !!options?.event?.shiftKey;
 
-        if (itemData.uses.value === 0 && itemData.quantity === 0 && !overrideUsage) {
+        let currentCapacity = 0;
+        if (this.hasCapacity()) {
+            currentCapacity = this.getCurrentCapacity();
+        }
+
+        if (!currentCapacity && !overrideUsage) {
             ui.notifications.error(game.i18n.format("SFRPG.Items.Consumable.ErrorNoUses", {name: this.name}));
             return;
         }
@@ -1793,6 +1798,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             actor: this.actor,
             tokenId: token ? `${token.parent.id}.${token.id}` : null,
             item: this,
+            system: itemData,
             data: await this.getChatData(htmlOptions),
             labels: this.labels,
             hasAttack: this.hasAttack,
