@@ -3,6 +3,7 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 export default function(engine) {
     engine.closures.add("calculateResolve", (fact, context) => {
         const data = fact.data;
+        if (!data.attributes.rp.tooltip) data.attributes.rp.tooltip = [];
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {

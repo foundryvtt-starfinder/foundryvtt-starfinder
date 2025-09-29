@@ -3,6 +3,7 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 export default function(engine) {
     engine.closures.add("calculateHitpoints", (fact, context) => {
         const data = fact.data;
+        if (!data.attributes.hp.tooltip) data.attributes.hp.tooltip = [];
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {

@@ -3,6 +3,7 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../..
 export default function(engine) {
     engine.closures.add("calculateStamina", (fact, context) => {
         const data = fact.data;
+        if (!data.attributes.sp.tooltip) data.attributes.sp.tooltip = [];
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {

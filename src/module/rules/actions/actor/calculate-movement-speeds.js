@@ -5,6 +5,7 @@ export default function(engine) {
     engine.closures.add( "calculateMovementSpeeds", (fact, context) => {
         const data = fact.data;
         const armors = fact.armors?.length > 0 ? fact.armors : null;
+        if (!data.attributes.speed.tooltip) data.attributes.speed.tooltip = [];
 
         const addModifier = (bonus, data, item, localizationKey, speedKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
