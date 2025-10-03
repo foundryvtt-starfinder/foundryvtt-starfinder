@@ -40,7 +40,6 @@ for (const currentPath of itemPaths) {
     const files = fs.readdirSync(folderPath).filter(e => e !== '_folders.json');
     for (const file of files) {
         const fname = folderPath + '/' + file;
-        // console.log(`Opening up the ${fname} file.`);
         const json = fs.readFileSync(fname);
         const itemData = JSON.parse(json);
         const [wasUpdated, newItemData] = durationFix(itemData);
@@ -57,7 +56,6 @@ for (const currentPath of actorPaths) {
     const files = fs.readdirSync(folderPath).filter(e => e !== '_folders.json');
     for (const file of files) {
         const fname = folderPath + '/' + file;
-        // console.log(`Opening up the ${fname} file.`);
         const json = fs.readFileSync(fname);
         const actorData = JSON.parse(json);
         const [wasUpdated, newActorData] = actorDurationFix(actorData);
@@ -68,16 +66,15 @@ for (const currentPath of actorPaths) {
 }
 
 function durationFix(itemData) {
-    console.log(itemData.name);
     const duration = itemData.system.duration ?? null;
     if (duration) {
         if (duration.units === "" && !duration.value) {
             duration.units = "instantaneous";
             duration.value = "";
-            return [true, data];
+            return [true, itemData];
         }
     }
-    return [false, data];
+    return [false, itemData];
 }
 
 function actorDurationFix(actorData) {
@@ -85,9 +82,9 @@ function actorDurationFix(actorData) {
 
     // Fix durations in all the actor's items
     for (itemData of actorData.items) {
-        const newItemData = durationFix(defaultItemIcons, itemData);
-        if (newItemData[0]) {
-            itemData = newItemData[1];
+        const [wasUpdated, newItemData] = durationFix(itemData);
+        if (wasUpdated) {
+            itemData = newItemData;
             changed = true;
         }
     }
