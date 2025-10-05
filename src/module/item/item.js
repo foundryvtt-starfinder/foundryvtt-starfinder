@@ -1084,13 +1084,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     modsToProcess.push(bonus);
                 }
             }
-            else if (modValue !== null) {
-                modsToProcess.push(modValue);
+            else if (modValue?.length > 0) {
+                modsToProcess.push(modValue[0]);
             }
         }
         const rollContext = RollContext.createItemRollContext(this, this.actor);
         for (const mod of modsToProcess) {
-            const rollResult = DiceSFRPG.resolveFormulaWithoutDice(mod.modifier.toString(), rollContext);
+            const rollResult = DiceSFRPG.resolveFormulaWithoutDice(mod.modifier?.toString(), rollContext);
             const computedBonus = !rollResult.hadError ? rollResult.total : 1;
             multiplier *= computedBonus;
         }
