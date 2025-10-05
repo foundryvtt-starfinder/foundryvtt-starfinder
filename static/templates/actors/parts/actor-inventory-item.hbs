@@ -23,7 +23,9 @@
                             {{/if}}
                         {{/if}}
                     {{else}}
-                        <button type="button" class="tag use">{{localize "SFRPG.Items.Consumable.UseAction"}}</button>
+                        {{#unless (eq item.type "weapon")}}
+                            <button type="button" class="tag use">{{localize "SFRPG.Items.Consumable.UseAction"}}</button>
+                        {{/unless}}
                     {{/if}}
                 </div>
                 {{/if}}
