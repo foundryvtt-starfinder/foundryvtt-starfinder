@@ -1,4 +1,4 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateSaveModifiers", (fact, context) => {
@@ -100,44 +100,23 @@ export default function(engine) {
         }), context, {actor: fact.actor});
 
         const fortMod = Object.entries(fortMods).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, fort, "SFRPG.SaveModifiersTooltip");
-                }
-            } else {
-                sum += addModifier(mod[1], data, fort, "SFRPG.SaveModifiersTooltip");
+            for (const bonus of mod[1]) {
+                sum += addModifier(bonus, data, fort, "SFRPG.SaveModifiersTooltip");
             }
-
             return sum;
         }, 0);
 
         const reflexMod = Object.entries(reflexMods).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, reflex, "SFRPG.SaveModifiersTooltip");
-                }
-            } else {
-                sum += addModifier(mod[1], data, reflex, "SFRPG.SaveModifiersTooltip");
+            for (const bonus of mod[1]) {
+                sum += addModifier(bonus, data, reflex, "SFRPG.SaveModifiersTooltip");
             }
-
             return sum;
         }, 0);
 
         const willMod = Object.entries(willMods).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, will, "SFRPG.SaveModifiersTooltip");
-                }
-            } else {
-                sum += addModifier(mod[1], data, will, "SFRPG.SaveModifiersTooltip");
+            for (const bonus of mod[1]) {
+                sum += addModifier(bonus, data, will, "SFRPG.SaveModifiersTooltip");
             }
-
             return sum;
         }, 0);
 

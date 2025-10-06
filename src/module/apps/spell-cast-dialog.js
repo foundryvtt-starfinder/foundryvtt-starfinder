@@ -153,8 +153,7 @@ export class SpellCastDialog extends Dialog {
                         })
                     }
                 },
-                default: "cast",
-                close: reject
+                default: "cast"
             });
             dlg.render(true);
         });

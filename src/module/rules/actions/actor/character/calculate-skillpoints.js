@@ -1,4 +1,4 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateSkillpoints", (fact, context) => {
@@ -44,16 +44,9 @@ export default function(engine) {
         skillPointModifiers = context.parameters.stackModifiers.process(skillPointModifiers, context, {actor: fact.actor});
 
         const skillPointModifierBonus = Object.entries(skillPointModifiers).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, data.skillpoints, "SFRPG.ActorSheet.Modifiers.Tooltips.BonusSkillpoints");
-                }
-            } else {
-                sum += addModifier(mod[1], data, data.skillpoints, "SFRPG.ActorSheet.Modifiers.Tooltips.BonusSkillpoints");
+            for (const bonus of mod[1]) {
+                sum += addModifier(bonus, data, data.skillpoints, "SFRPG.ActorSheet.Modifiers.Tooltips.BonusSkillpoints");
             }
-
             return sum;
         }, 0);
 
@@ -73,16 +66,9 @@ export default function(engine) {
             }), context, {actor: fact.actor});
 
             const accumulator = Object.entries(mods).reduce((sum, mod) => {
-                if (mod[1] === null || mod[1].length < 1) return sum;
-
-                if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                    for (const bonus of mod[1]) {
-                        sum += addModifier(bonus, fact.data, skill, "SFRPG.ActorSheet.Modifiers.Tooltips.SkillRank");
-                    }
-                } else {
-                    sum += addModifier(mod[1], fact.data, skill, "SFRPG.ActorSheet.Modifiers.Tooltips.SkillRank");
+                for (const bonus of mod[1]) {
+                    sum += addModifier(bonus, fact.data, skill, "SFRPG.ActorSheet.Modifiers.Tooltips.SkillRank");
                 }
-
                 return sum;
             }, 0);
 

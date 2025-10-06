@@ -1,4 +1,4 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateBaseAbilityModifier", (fact, context) => {
@@ -57,16 +57,9 @@ export default function(engine) {
             ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityModifierBase", { mod: base.signedString() }));
 
             const mod = Object.entries(abilityMods).reduce((sum, mod) => {
-                if (mod[1] === null || mod[1].length < 1) return sum;
-
-                if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                    for (const bonus of mod[1]) {
-                        sum += addModifier(bonus, data, ability, "SFRPG.AbilityModifiersTooltip");
-                    }
-                } else {
-                    sum += addModifier(mod[1], data, ability, "SFRPG.AbilityModifiersTooltip");
+                for (const bonus of mod[1]) {
+                    sum += addModifier(bonus, data, ability, "SFRPG.AbilityModifiersTooltip");
                 }
-
                 return sum;
             }, 0);
 

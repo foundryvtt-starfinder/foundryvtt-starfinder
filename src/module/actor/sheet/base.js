@@ -1259,6 +1259,9 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             const targetId = $(event.target).parents('.item')
                 .attr('data-item-id');
             targetContainer = targetActor.getItem(targetId);
+            if (targetContainer && !targetContainer.system.container?.storage) {
+                targetContainer = null;
+            }
         }
 
         // Handle ItemCollections

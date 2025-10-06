@@ -1,5 +1,5 @@
 import { SFRPG } from "../../../config.js";
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateBaseAbilityScore", (fact, context) => {
@@ -123,16 +123,9 @@ export default function(engine) {
             }
 
             const bonus = Object.entries(abilityMods).reduce((sum, mod) => {
-                if (mod[1] === null || mod[1].length < 1) return sum;
-
-                if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                    for (const bonus of mod[1]) {
-                        sum += addModifier(bonus, data, ability, "SFRPG.AbilityScoreBonusTooltip");
-                    }
-                } else {
-                    sum += addModifier(mod[1], data, ability, "SFRPG.AbilityScoreBonusTooltip");
+                for (const bonus of mod[1]) {
+                    sum += addModifier(bonus, data, ability, "SFRPG.AbilityScoreBonusTooltip");
                 }
-
                 return sum;
             }, 0);
 
