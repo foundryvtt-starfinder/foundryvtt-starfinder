@@ -36,7 +36,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @param {String}        data.source        Where did this modifier come from? An item, ability or something else?
      * @param {String}        data.notes         Any notes or comments about the modifier.
      * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
-     * @param {String|null}   data.id            Override the randomly generated id with this.
+     * @param {?String}   data.id            Override the randomly generated id with this.
      */
     async addModifier({
         name = "",
