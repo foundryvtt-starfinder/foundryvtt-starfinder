@@ -37,8 +37,8 @@ export const ActorRestMixin = (superclass) => class extends superclass {
         }
 
         // Restore resources that reset on short rests
+        const updateData = {};
         if (data.resources) {
-            const updateData = {};
             for (const [k, r] of Object.entries(data.resources)) {
                 if (r.max && r.sr) {
                     updateData[`system.resources.${k}.value`] = r.max;

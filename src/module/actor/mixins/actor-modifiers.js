@@ -55,7 +55,6 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
             limitTo,
             damage
         });
-        console.log("Adding a modifier to the actor");
         await this.update({"system.modifiers": modifiers});
     }
 
