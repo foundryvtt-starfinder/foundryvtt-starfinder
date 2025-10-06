@@ -23,7 +23,7 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
             activationEvent: new fields.SchemaField({
                 deactivatedAt: new fields.NumberField({
                     initial: 0,
-                    nullable: false,
+                    nullable: true,
                     integer: true,
                     required: true
                 }),
