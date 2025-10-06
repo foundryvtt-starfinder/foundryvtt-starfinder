@@ -12,7 +12,7 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
    * @param {number} distance            The distance/size of the template
    * @param {string} color               An optional color for the template to use
    * @param {string} texture             An texture color for the template to use
-   * @returns {AbilityTemplate|null}     The template object, or null if the data does not produce a template
+   * @returns {?AbilityTemplate}     The template object, or null if the data does not produce a template
    */
     static fromData({type, distance, color, texture}) {
         if (!["cone", "circle", "rect", "ray"].includes(type)) return null;

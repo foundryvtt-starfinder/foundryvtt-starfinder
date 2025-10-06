@@ -76,8 +76,8 @@ export default async function registerCompendiumArt() {
 
 /**
  *
- * @param {object|string|null} art Either an art mapping object, or a file path to a JSON.
- * @returns {object|null} An art object, or null
+ * @param {?Object|string} art Either an art mapping object, or a file path to a JSON.
+ * @returns {?Object} An art object, or null
  */
 async function getArtMap(art) {
     if (!art) {
