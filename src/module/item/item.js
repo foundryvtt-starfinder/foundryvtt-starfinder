@@ -1085,7 +1085,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
         const rollContext = RollContext.createItemRollContext(this, this.actor);
         for (const mod of modsToProcess) {
-            const rollResult = DiceSFRPG.resolveFormulaWithoutDice(mod.modifier.toString(), rollContext);
+            const rollResult = DiceSFRPG.resolveFormulaWithoutDice(mod.modifier?.toString(), rollContext);
             const computedBonus = !rollResult.hadError ? rollResult.total : 1;
             multiplier *= computedBonus;
         }
