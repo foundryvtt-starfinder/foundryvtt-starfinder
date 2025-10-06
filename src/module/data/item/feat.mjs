@@ -20,6 +20,37 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
 
         // Feat-specific properties
         foundry.utils.mergeObject(schema, {
+            activationEvent: new fields.SchemaField({
+                deactivatedAt: new fields.NumberField({
+                    initial: 0,
+                    nullable: false,
+                    integer: true,
+                    required: true
+                }),
+                endsOn: new fields.StringField({
+                    initial: "onTurnStart",
+                    choices: Object.keys(CONFIG.SFRPG.effectEndTypes),
+                    required: true
+                }),
+                endTime: new fields.NumberField({
+                    initial: 0,
+                    nullable: false,
+                    integer: true,
+                    required: true
+                }),
+                startTime: new fields.NumberField({
+                    initial: 0,
+                    nullable: false,
+                    integer: true,
+                    required: true
+                }),
+                status: new fields.StringField({
+                    initial: "",
+                    blank: true,
+                    nullable: true,
+                    required: true
+                })
+            }),
             descriptors: new fields.TypedObjectField(
                 new fields.BooleanField({initial: false}),
                 {validateKey: (key) => key in CONFIG.SFRPG.descriptors}
