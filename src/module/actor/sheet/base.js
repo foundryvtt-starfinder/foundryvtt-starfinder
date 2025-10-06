@@ -458,6 +458,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         try {
             const itemData = item.system;
             const actor = item.actor;
+            const actorData = actor.system;
             const isWeapon = ["weapon", "shield"].includes(item.type);
 
             // TODO: This chunk is the same code as in item.js's rollAttack(), probably good practice to combine these into one method somewhere
@@ -518,7 +519,9 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             const roll = Roll.create(preparedFormula, rollData).simplifiedFormula;
             item.config.attackString = Number(roll) >= 0 ? `+${roll}` : roll;
 
-        } catch {
+        } catch (err) {
+            console.debug("Issue with calculating an attack string");
+            console.debug(err);
             item.config.attackString = game.i18n.localize("SFRPG.Attack");
         }
     }
