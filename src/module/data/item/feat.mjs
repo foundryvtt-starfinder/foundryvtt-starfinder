@@ -32,10 +32,9 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
                     choices: Object.keys(CONFIG.SFRPG.effectEndTypes),
                     required: true
                 }),
-                endTime: new fields.NumberField({
+                endTime: new fields.AnyField({ // Temporary fix; should be NumberField but Text and Permanent durations cause issues
                     initial: 0,
-                    nullable: false,
-                    integer: true,
+                    nullable: true,
                     required: true
                 }),
                 startTime: new fields.NumberField({
