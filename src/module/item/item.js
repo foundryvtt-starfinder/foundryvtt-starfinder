@@ -1078,14 +1078,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         modifiers = stackModifiers.process(modifiers, null, {actor: this.actor, item: this});
         let multiplier = 1.0;
         const modsToProcess = [];
-        for (const [modType, modValue] of Object.entries(modifiers)) {
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(modType)) {
-                for (const bonus of modValue) {
-                    modsToProcess.push(bonus);
-                }
-            }
-            else if (modValue !== null) {
-                modsToProcess.push(modValue);
+        for (const modValue of Object.values(modifiers)) {
+            for (const bonus of modValue) {
+                modsToProcess.push(bonus);
             }
         }
         const rollContext = RollContext.createItemRollContext(this, this.actor);
