@@ -868,9 +868,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     async rollAttack(options = {}) {
         const itemData = this.system;
+        const actorData = this.actor.system;
         const isWeapon = ["weapon", "shield"].includes(this.type);
 
-        const actorData = this.actor.system;
         if (!this.hasAttack) {
             ui.notifications.error("You may not make an Attack Roll with this Item.");
             return;
