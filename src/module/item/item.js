@@ -10,7 +10,10 @@ import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
-/** @import { RollResult } from '../dice.js' */
+/**
+ * @import { RollResult } from '../dice.js'
+ * @import { ActorSFRPG } from "../actor/actor.js"
+ */
 
 /** @extends {foundry.documents.Item} */
 export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin) {
@@ -483,6 +486,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         });
 
         // Item type specific properties
+        /** @type {{name: string, tooltip: ?string, title: ?string}[]} */
         const props = [];
         const fn = this[`_${this.type}ChatData`];
         if (fn) fn.bind(this)(data, labels, props);
@@ -851,9 +855,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     async rollAttack(options = {}) {
         const itemData = this.system;
+        const actorData = this.actor.system;
         const isWeapon = ["weapon", "shield"].includes(this.type);
 
-        const actorData = this.actor.system;
         if (!this.hasAttack) {
             ui.notifications.error("You may not make an Attack Roll with this Item.");
             return;
@@ -863,11 +867,29 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (this.type === "vehicleAttack") return this._rollVehicleAttack(options);
 
         // Determine ability score modifier
+        // TODO: This chunk is the same code as in base.js's _prepareAttackString(), probably good practice to combine these into one method somewhere
         let abl = itemData.ability;
-        if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) abl = "";
-        else if (!abl && (this.type === "spell")) abl = actorData.attributes.spellcasting || "int";
-        else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) abl = "dex";
-        else if (!abl) abl = "str";
+        if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) {
+            abl = "";
+        } else if (!abl && (this.type === "spell")) {
+            if (itemData.actionType === "rsak") {
+                abl = "dex";
+            } else if (itemData.actionType === "msak") {
+                abl = "str";
+            } else {
+                abl = actorData.attributes.spellcasting || "int";
+            }
+        } else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) {
+            abl = "dex";
+        } else if (!abl) {
+            if (itemData.actionType === "rwak" || itemData.actionType === "rsak") {
+                abl = "dex";
+            } else if (itemData.actionType === "mwak" || itemData.actionType === "msak") {
+                abl = "str";
+            } else {
+                abl = "str";
+            }
+        }
 
         // Define Roll parts
         const parts = [];
@@ -1861,7 +1883,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /**
      * Get the Actor which is the author of a chat card
      * @param {HTMLElement} card    The chat card being used
-     * @return {Actor|null}         The Actor entity or null
+     * @return {?ActorSFRPG}         The Actor entity or null
      * @private
      */
     static _getChatCardActor(card) {
@@ -1899,7 +1921,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     /**
      * Get the Actor which is the author of a chat card
-     * @return {Actor|null}         The Actor entity or null
+     * @return {?ActorSFRPG}         The Actor entity or null
      * @private
      */
     static _getChatCardTarget() {
@@ -1925,7 +1947,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * @param {String}        data.source        Where did this modifier come from? An item, ability or something else?
      * @param {String}        data.notes         Any notes or comments about the modifier.
      * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
-     * @param {String|null}   data.id            Override the randomly generated id with this.
+     * @param {?String}   data.id            Override the randomly generated id with this.
      */
     async addModifier({
         name = "",
