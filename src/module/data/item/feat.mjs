@@ -21,6 +21,11 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
         // Feat-specific properties
         foundry.utils.mergeObject(schema, {
             activationEvent: new fields.SchemaField({
+                activationTurn: new fields.StringField({ // Ideally this and expiryTurn would use a Uuid field, but sometimes they're set to "parent"
+                    initial: "parent",
+                    blank: true,
+                    required: true
+                }),
                 deactivatedAt: new fields.NumberField({
                     initial: 0,
                     nullable: true,
@@ -35,6 +40,11 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
                 endTime: new fields.AnyField({ // Temporary fix; should be NumberField but Text and Permanent durations cause issues
                     initial: 0,
                     nullable: true,
+                    required: true
+                }),
+                expiryTurn: new fields.StringField({
+                    initial: "parent",
+                    blank: true,
                     required: true
                 }),
                 startTime: new fields.NumberField({
