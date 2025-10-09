@@ -1,4 +1,4 @@
-// This script updates the items in the compendiums to use the new set of default icons
+// This script updates actors in the alien archive compendium to assign them folders
 
 const fs = require('fs');
 
