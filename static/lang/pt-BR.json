@@ -10,13 +10,17 @@
         "ACTooltipShieldACMod": "Modificador Escudo: {shield} ({name})",
         "ACvsCombatManeuversLabel": "CAC + 8",
         "ACvsCombatManeuversTitle": "CA vs Manobras de Combate",
+        "AbilityActivationButton": {
+            "Activate": "Activate",
+            "Use": "Use"
+        },
         "AbilityActivationTypesDay": "Dia",
         "AbilityActivationTypesFull": "Ação Completa",
         "AbilityActivationTypesHour": "Hora",
         "AbilityActivationTypesMinute": "Minuto",
         "AbilityActivationTypesMove": "Ação Mv.",
-        "AbilityActivationTypesNone": "Nenhuma",
-        "AbilityActivationTypesNoneButton": "Activate",
+        "AbilityActivationTypesNone": "Livre",
+        "AbilityActivationTypesNull": "Passive",
         "AbilityActivationTypesOther": "Outras Ações",
         "AbilityActivationTypesReaction": "Reação",
         "AbilityActivationTypesRound": "Round",
@@ -70,6 +74,7 @@
                         "Clumsy": "Clumsy",
                         "Perfect": "Perfect"
                     },
+                    "FlightManeuverability": "Flight Maneuverability",
                     "MainMovementType": "Main Movement",
                     "MovementSpeedNamedTitle": "Movement Speed: {name}",
                     "MovementSpeedTitle": "Movement Speed",
@@ -244,6 +249,7 @@
             "Modifiers": {
                 "EffectTypes": {
                     "ActorResource": "Actor Resource",
+                    "AllAmmoUsageMultiplier": "All Ammo Usage Multiplier",
                     "AllAttackDamage": "Todo dano de Ataque",
                     "AllAttackRolls": "Toda rolagem de Ataque",
                     "AllSpeeds": "All Speeds",
@@ -265,14 +271,27 @@
                     "SkillRanks": "Graduação Perícia",
                     "Skillpoints": "Pontos Perícia",
                     "SpecificSpeed": "Specific Speed",
+                    "SpecificWeaponAmmoUsageMultiplier": "Specific Weapon Ammo Usage Multiplier",
                     "SpecificWeaponAttackDamage": "Dano Arma Especifica",
                     "SpecificWeaponAttackRolls": "Rolagem Ataque Arma Especifica",
                     "SpellAttackDamage": "Dano Magia",
                     "SpellAttackRolls": "Rolagem Ataque Magia",
                     "SpellSaveDC": "Spell Save DC",
                     "Stamina": "Estamina",
+                    "StarshipAftAC": "Starship Aft AC",
+                    "StarshipAllAC": "Starship All AC",
+                    "StarshipForwardAC": "Starship Forward AC",
+                    "StarshipHullPoints": "Starship Hull Points",
+                    "StarshipHullPointsIncrement": "Starship Hull Points Increment",
+                    "StarshipPilotingSkill": "Starship Piloting Skill",
+                    "StarshipPortAC": "Starship Port AC",
+                    "StarshipSpeed": "Starship Speed",
+                    "StarshipStarboardAC": "Starship Starboard AC",
+                    "StarshipTurnDistance": "Starship Turn Distance",
+                    "WeaponCategoryAmmoUsageMultiplier": "Weapon Category Ammo Usage Multiplier",
                     "WeaponCategoryAttackRolls": "Weapon Category Attack Rolls",
                     "WeaponCategoryDamage": "Weapon Category Damage",
+                    "WeaponPropertyAmmoUsageMultiplier": "Weapon Property Ammo Usage Multiplier",
                     "WeaponPropertyAttackRolls": "Rolagem Ataque Propriedade de Arma",
                     "WeaponPropertyDamage": "Dano Propriedade de Arma"
                 },
@@ -501,7 +520,6 @@
         "ClassBABProgression": "Progressão BBA",
         "ClassFortSaveProgression": "Progressão Save Fortitude",
         "ClassHPPerLevel": "PV por Nível",
-        "ClassKeyAbilityScore": "Valor chave Habilidade",
         "ClassLevelLabel": "Níveis Classe",
         "ClassReflexSaveProgression": "Progressão Save Reflexo",
         "ClassSPPerlevel": "Pontos Estamina por nível",
@@ -798,6 +816,7 @@
         "Descriptors": {
             "Acid": "Acid",
             "Air": "Air",
+            "Auditory": "Auditory",
             "Calling": "Calling",
             "CallingDescription": "A calling effect transports a creature from another plane to the plane you are on. The effect grants the creature the one-time ability to return to its plane of origin, although the effect might limit the circumstances under which this is possible. Creatures who are called die if they are killed on the new plane. A called creature can’t be dispelled, even if it was called by magical means.",
             "Chaotic": "Chaotic",
@@ -823,6 +842,7 @@
             "ForceDescription": "A force effect deals full damage to incorporeal creatures and blocks their movement. It also blocks the sense through ability.",
             "Good": "Good",
             "Healing": "Healing",
+            "Illusion": "Illusion",
             "LanguageDependent": "Language Dependent",
             "LanguageDependentDescription": "A language-dependent effect uses intelligible language (either audible, visual, or telepathic) as a medium for communication. If you cannot communicate with the target or the target cannot understand what you are communicating, the effect fails to affect that target.",
             "Lawful": "Lawful",
@@ -1244,7 +1264,6 @@
                     "ClassLevel": "Class Level",
                     "Header": "Spellcasting",
                     "IsCaster": "Spellcaster",
-                    "KeyAbilityScore": "Key Ability Score",
                     "SpellsKnown": "Spells Known",
                     "SpellsKnownHeader": "Spells Known (by spell level)",
                     "SpellsPerDay": "Spells Per Day",
@@ -1252,6 +1271,9 @@
                     "SpellsPerDayBonusHeader": "Bonus Spells Per Day (by spell level)",
                     "SpellsPerDayHeader": "Spells Per Day (by spell level)"
                 }
+            },
+            "Common": {
+                "DeltaInputTooltip": "Supports optional delta (+/-) input."
             },
             "Consumables": {
                 "Category": "Tipo Consumíveis"
@@ -1502,8 +1524,8 @@
             "Action": {
                 "AbilityModifier": "Modificador Habilidade",
                 "ActionTarget": {
-                    "AC5": "AC 5",
                     "AC15": "AC 15",
+                    "AC5": "AC 5",
                     "ChatMessage": " against {actionTarget}",
                     "EAC": "EAC",
                     "KAC": "KAC",
@@ -1541,8 +1563,12 @@
                 "RollNotesTooltip": "The roll notes are displayed on the action roll chat card. This is a great way to put helpful reminders, especially for GMs with complicated NPCs.",
                 "SavingThrow": "Salvamento",
                 "SkillCheck": "Skill Check",
+                "SkillCheckPlaceholderFormula": "e.g. 10 + floor(1.5*@details.cr)",
+                "SkillCheckPlaceholderTooltip": "A formula for the DC of the skill check",
                 "TitleAction": "Action",
-                "TitleActivation": "Activation"
+                "TitleActivation": "Activation",
+                "VariableDC": "Variable DC",
+                "VariableDCTooltip": "Check this to disable automatic skill check DC calculation for abilities with variable DCs."
             },
             "Activation": {
                 "Activation": "Activation",
@@ -1813,7 +1839,7 @@
                 }
             }
         },
-        "KeyAbility": "Valor Chave Habilidade",
+        "KeyAbilityScore": "Valor Chave Habilidade",
         "KineticArmorClass": "CAC",
         "KineticArmorClassShort": "KAC",
         "Languages": "Idiomas",
@@ -1856,11 +1882,13 @@
         "LanguagesFirstSpeech": "First Speech",
         "LanguagesFrujai": "Frujai",
         "LanguagesGaraggakal": "Garaggakal",
+        "LanguagesGathol": "Gathol",
         "LanguagesGhibran": "Ghibran",
         "LanguagesGhoran": "Ghoran",
         "LanguagesGiant": "Giant",
         "LanguagesGnome": "Gnômico",
         "LanguagesGoblin": "Goblin",
+        "LanguagesGosclaw": "Gosclaw",
         "LanguagesGrioth": "Grioth",
         "LanguagesGytchean": "Gytchean",
         "LanguagesHadrogaan": "Hadrogaan",
@@ -1898,12 +1926,14 @@
         "LanguagesParalithi": "Paralithi",
         "LanguagesPerani": "Perani",
         "LanguagesProtean": "Protean",
+        "LanguagesPsacynoa": "Psacynoa",
         "LanguagesQuorlu": "Quorlu",
         "LanguagesRaxi": "Raxi",
         "LanguagesReptoid": "Reptoid",
         "LanguagesRequian": "Requian",
         "LanguagesSarcesian": "Sarcesiano",
         "LanguagesSazaron": "Sazaron",
+        "LanguagesScreedreep": "Screedreep",
         "LanguagesScyphozoan": "Scyphozoan",
         "LanguagesSelamidian": "Selamidian",
         "LanguagesSeprevoi": "Seprevoi",
@@ -1920,6 +1950,7 @@
         "LanguagesTerran": "Terran",
         "LanguagesTriaxian": "Triaxiano",
         "LanguagesTrinir": "Trinir",
+        "LanguagesTromlin": "Tromlin",
         "LanguagesUrog": "Urog",
         "LanguagesVarratana": "Varratana",
         "LanguagesVercite": "Vercita",
@@ -1927,6 +1958,8 @@
         "LanguagesVlakan": "Vlakan (signed, spoken, and tactile)",
         "LanguagesVulgarKishaleen": "Vulgar Kishaleen",
         "LanguagesWoiokan": "Woiokan",
+        "LanguagesWorlanisi": "Worlanisi",
+        "LanguagesWorlansi": "Worlansi",
         "LanguagesWrikreechee": "Wrikreechee",
         "LanguagesXaarb": "Xaarb",
         "LanguagesYsoki": "Ysoki",
@@ -1964,6 +1997,9 @@
         "LocalizationTerminator": "",
         "Long": "Longo",
         "Macro": {
+            "Active": "Active",
+            "ErrorMissingItem": "Cannot find the item associated with this item macro.",
+            "Inactive": "Inactive",
             "ViewActor": "View Actor",
             "ViewItem": "View Item"
         },
@@ -2324,6 +2360,10 @@
                 "Hint": "When applying damage to a starship from a chat card, if the damage crossses a Critical Threshold, the Critical Damage Effects (CRB pg. 320) table will automatically be rolled.",
                 "Name": "Automatically roll starship critical damage effects"
             },
+            "ChatNotificationDuration": {
+                "Hint": "How long (in MS) to display chat notifications before they are dismissed.",
+                "Name": "Chat Notification Duration"
+            },
             "CombatCards": {
                 "NormalHint": "Alterar quais cartões de bate-papo de combate devem ser exibidos durante o combate normal.",
                 "NormalName": "Combare Normal",
@@ -2417,6 +2457,12 @@
                 "Hint": "When posting notifications about starship criticals or thresholds, only post to GM if the ship is a Hostile Token.",
                 "Name": "Hide Hostile Starship Critical Message"
             },
+            "LockArtworkRotationDefault": {
+                "ConfirmationText": "Apply one time update to all Character/NPC/Drone/Hazard prototype token settings?</p>This will not affect placed tokens.</p>",
+                "ConfirmationTitle": "Lock Artwork Rotation Setting Change",
+                "Hint": "When enabled, enables Lock Artwork Rotation on character scale actors by default (Characters/NPC/Drones/Hazards). This can be overridden by the actor's prototype token settings.",
+                "Name": "Lock Artwork Rotation by Default"
+            },
             "SFRPGTheme": {
                 "Hint": "When enabled, a few minor tweaks to Foundry's colours will be made to match Starfinder's colour scheme.",
                 "Name": "Custom SFRPG theme"
@@ -2461,6 +2507,16 @@
             "WorldSchemaVersion": {
                 "Hint": "Registra a versão do esquema de dados para o sistema Starfinder. AVISO: não edite este valor a menos que você saiba o que está fazendo!",
                 "Name": "Versão do esquema de dados Starfinder"
+            },
+            "rulerColor0": {
+                "Hint": "Colors for the ruler that appears when tokens are dragged across the canvas.",
+                "Name": "Drag Ruler Primary Color"
+            },
+            "rulerColor1": {
+                "Name": "Drag Ruler Secondary Color"
+            },
+            "rulerColor2": {
+                "Name": "Drag Ruler Tertiary Color"
             }
         },
         "ShipFrameLabel": "Plataforma",
@@ -2515,14 +2571,6 @@
                 "Port": "Bombordo",
                 "Starboard": "Estibordo",
                 "Turret": "Torreta"
-            },
-            "StarshipRoles": {
-                "Captain": "Capitão",
-                "Engineers": "Engenheiros",
-                "Gunners": "Atiradores",
-                "Passengers": "Passageiros",
-                "Pilot": "Piloto",
-                "ScienceOfficers": "Oficial Ciências"
             },
             "StarshipWeaponClass": {
                 "Capital": "Capital",
@@ -2643,11 +2691,13 @@
         "SkillTooltipSkillRanks": "Grad Pericias: {ranks}",
         "SkillTooltipThemeMod": "Modificador Tema: {mod}",
         "SkillTooltipTrainedClassSkill": "Modificador Perícia Classe Treinada: {mod}",
+        "SkillTrained": "Trained",
         "SkillTrainedOnly": "Apenas Treinado",
         "SkillTrainedOnlyDialog": {
             "Content": "{skill} is a trained only skill, but {name} is not trained in that skill. Would you like to roll anyway?",
             "Title": "{skill} is trained only"
         },
+        "SkillUntrained": "Untrained",
         "SkillsHeaderAbility": "Abl",
         "SkillsHeaderModifier": "Mod",
         "SkillsHeaderName": "Nome",
@@ -2782,6 +2832,12 @@
                 "EditMessage": "Selecionar quais rolagens são afetadas por dano neste sistema.",
                 "EditTitle": "Selecionar Rolagem Afetada",
                 "Header": "Dano Critico",
+                "Patch": {
+                    "HeldTogether": "Held Together",
+                    "Patched": "Patched",
+                    "Robust": "Patched Robustly",
+                    "Unpatched": "―"
+                },
                 "Status": {
                     "Glitching": "Falhando",
                     "Malfunctioning": "Mau Funcionamento",
@@ -2793,10 +2849,10 @@
                     "LifeSupport": "Suporte Vital",
                     "PowerCore": "Núcleo Energia",
                     "Sensors": "Sensores",
-                    "WeaponsArrayAft": "Armas (popa)",
-                    "WeaponsArrayForward": "Armas (proa)",
-                    "WeaponsArrayPort": "Armas (bombordo)",
-                    "WeaponsArrayStarboard": "Armas (estibordo)"
+                    "WeaponsArrayAft": "Popa",
+                    "WeaponsArrayForward": "Proa",
+                    "WeaponsArrayPort": "Bombordo",
+                    "WeaponsArrayStarboard": "Estibordo"
                 }
             },
             "Damage": {

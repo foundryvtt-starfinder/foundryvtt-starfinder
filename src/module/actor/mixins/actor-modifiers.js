@@ -9,11 +9,10 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * These will always be needed from hence forth, so we'll just make sure that they always exist.
      *
      * @param {Object}      data The actor data to check against.
-     * @param {String|Null} prop A specific property name to check.
      *
      * @returns {Object}         The modified data object with the modifiers data object added.
      */
-    _ensureHasModifiers(data, prop = null) {
+    _ensureHasModifiers(data) {
         if (!foundry.utils.hasProperty(data, "modifiers")) {
             // console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
             data.modifiers = [];
@@ -37,7 +36,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @param {String}        data.source        Where did this modifier come from? An item, ability or something else?
      * @param {String}        data.notes         Any notes or comments about the modifier.
      * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
-     * @param {String|null}   data.id            Override the randomly generated id with this.
+     * @param {?String}   data.id            Override the randomly generated id with this.
      */
     async addModifier({
         name = "",

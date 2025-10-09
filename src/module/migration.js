@@ -442,7 +442,7 @@ const _migrateActorDamageReductions = function(actor, migratedData) {
     const oldEnergyResistances = Object.entries(actor.traits?.dr?.value ?? []);
     if (oldEnergyResistances.length > 0 || customEnergyResistances) {
         if (oldEnergyResistances.length > 0) {
-            for (const [index, entries] of oldEnergyResistances) {
+            for (const [, entries] of oldEnergyResistances) {
                 for (const [key, value] of Object.entries(entries)) {
                     const resistanceValue = Number(value);
                     if (Number.isNaN(resistanceValue)) {
@@ -540,7 +540,7 @@ const _migrateDocumentIconToWebP = function(document, data) {
         const newVisualization = foundry.utils.deepClone(document.data.combatTracker.visualization);
         let isDirty = false;
 
-        for (const [key, visualization] of Object.entries(newVisualization)) {
+        for (const visualization of Object.values(newVisualization)) {
             const visualizationImageType = _imageNeedsReplace(visualization.image);
             if (visualizationImageType) {
                 visualization.image = visualization.image.replace(visualizationImageType, ".webp");

@@ -1,0 +1,95 @@
+{
+  "_id": "qk5xua0qlhXh0Xnb",
+  "name": "Effect: Perfect Hindsight",
+  "type": "effect",
+  "img": "systems/sfrpg/icons/spells/arcane_sight.webp",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "minute",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p><span>When you fail an attack roll, ability check, skill check, or saving throw, you can discharge this spell without spending an action to instantly instruct the spell’s targets how they might succeed where you failed. For 1 minute, the next time each of the targets attempts a similar action, check, or saving throw that you failed, they gain a bonus to their roll; they add a +4 insight bonus to a skill check, and for any of the other rolls, they instead roll 1d4 and add the result as an insight bonus to their roll.</span></p>\n<p><span>For this spell, a similar action, check, or saving throw includes performing exactly the same check or save, such as attempting an Engineering check, Reflex save, or ranged attack after you failed an Engineering check, Reflex save, or ranged attack. At the GM’s discretion, a target can instead apply this benefit to a different type of roll as the target attempts to overcome the same obstacle against which the caster failed, such as adding a bonus to their Strength check to break down a door after the caster fails to unlock it with an Engineering check.</span></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "1a413d51-ddd0-4fbc-b2c0-3317bc633ff9",
+        "name": "Perfect Hindsight Skill Check Bonus",
+        "type": "insight",
+        "condition": "",
+        "effectType": "all-skills",
+        "enabled": false,
+        "max": 0,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Perfect Hindsight",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "1d2ea7bc-bb0b-4346-bbb0-42ba0d9e5d8e",
+        "name": "Perfect Hindsight Saving Throw Bonus",
+        "type": "insight",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": false,
+        "max": 0,
+        "modifier": "1d4",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Perfect Hindsight",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "8c27be8a-7b83-4acc-80ec-3ff8b1d7127a",
+        "name": "Perfect Hindsight Attack Bonus",
+        "type": "insight",
+        "condition": "",
+        "effectType": "all-attacks",
+        "enabled": false,
+        "limitTo": "",
+        "max": 0,
+        "modifier": "1d4",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Perfect Hindsight",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "",
+    "showOnToken": true,
+    "source": "",
+    "turnEvents": []
+  }
+}

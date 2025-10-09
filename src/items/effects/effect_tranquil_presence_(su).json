@@ -1,0 +1,64 @@
+{
+  "_id": "j671h6HMWNUI5gtv",
+  "name": "Effect: Tranquil Presence (Su)",
+  "type": "effect",
+  "img": "systems/sfrpg/icons/default/stopwatch.svg",
+  "system": {
+    "type": "effect",
+    "abilityMods": {
+      "parts": []
+    },
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "permanent",
+      "value": "0"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": "",
+        "itemUuid": ""
+      }
+    },
+    "critical": {
+      "parts": []
+    },
+    "damage": {
+      "parts": []
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>Varksis emanate a calming presence, helping steady those that are close to them. As long as your varksi companion is in your space, you gain a +2 morale bonus to saving throws against emotion and fear effects.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "be3fd663-11ad-4d60-a413-4e706d5dff97",
+        "name": "Tranquil Presence",
+        "type": "morale",
+        "condition": "",
+        "effectType": "saves",
+        "enabled": true,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "Applies to emotion and fear effects while your varksi companion is in your space.",
+        "source": "Creature Companion Ability",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "requirements": "",
+    "showOnToken": false,
+    "source": "",
+    "turnEvents": []
+  }
+}

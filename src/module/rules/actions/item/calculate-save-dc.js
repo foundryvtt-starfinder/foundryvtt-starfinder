@@ -2,7 +2,7 @@ import { DiceSFRPG } from "../../../dice.js";
 import RollContext from "../../../rolls/rollcontext.js";
 
 export default function(engine) {
-    engine.closures.add("calculateSaveDC", (fact, context) => {
+    engine.closures.add("calculateSaveDC", (fact) => {
         const item = fact.item;
         const itemData = item;
         const data = itemData.system;
@@ -19,25 +19,26 @@ export default function(engine) {
 
                 let dcFormula = save.dc?.toString();
                 if (!dcFormula) {
-                    const ownerKeyAbilityId = actorData?.attributes.keyability  || classes[0]?.system.kas;
+                    const ownerKeyAbilityId = classes[0]?.system.kas ?? null;
                     const itemKeyAbilityId = data.ability;
                     const spellbookSpellAbility = actorData?.attributes.spellcasting;
                     const classSpellAbility = classes[0]?.system.spellAbility;
 
                     const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
-                    if (abilityKey) {
-                        if (itemData.type === "spell") {
-                            dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
-                        } else if (itemData.type === "feat") {
-                            dcFormula = `10 + floor(@owner.details.level.value / 2) + @owner.abilities.${abilityKey}.mod`;
-                        } else {
-                            dcFormula = `10 + floor(@item.level / 2) + @owner.abilities.${abilityKey}.mod`;
-                        }
-                    } else if (actor.type === "npc" || actor.type === "npc2") {
+
+                    if (actor.type === "npc" || actor.type === "npc2") {
                         if (itemData.type === "spell") {
                             dcFormula = `@owner.attributes.baseSpellDC.value + @item.level`;
                         } else {
                             dcFormula = `@owner.attributes.abilityDC.value`;
+                        }
+                    } else {
+                        if (itemData.type === "spell") {
+                            dcFormula = "10 + @item.level" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
+                        } else if (itemData.type === "feat") {
+                            dcFormula = "10 + floor(@owner.details.level.value / 2)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
+                        } else {
+                            dcFormula = "10 + floor(@item.level / 2)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
                         }
                     }
                 }

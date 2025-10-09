@@ -7,7 +7,7 @@ import url from "node:url";
 import isObject from "../src/module/utils/is-object.js";
 import LevelDatabase from "./lib/level-database.js";
 import { unpackPacks } from "./unpack.js";
-import { duplicate, getManifest, measureTime } from "./util.js";
+import { getManifest, measureTime } from "./util.js";
 
 let cookErrorCount = 0;
 let cookAborted = false;
@@ -40,7 +40,7 @@ if (path.resolve(modulePath) === path.resolve(process.argv[1])) {
     process.exit(0);
 }
 
-async function cook() {
+export async function cook() {
     console.log(chalk.blueBright(`Cooking db files`));
 
     for (let i = 3; i < process.argv.length; i++) {
@@ -61,7 +61,7 @@ async function cook() {
 
     for (const directory of directories) {
         const itemSourceDir = `${sourceDir}/${directory}`;
-        const outputDir = `src/packs/${directory}`;
+        const outputDir = `dist/packs/${directory}`;
 
         const loadDir = async (directory) => {
             if (!limitToPack || directory === limitToPack) {
@@ -90,7 +90,7 @@ async function cook() {
 
     for (const directory of directories) {
         const itemSourceDir = `${sourceDir}/${directory}`;
-        const outputDir = `src/packs/${directory}`;
+        const outputDir = `dist/packs/${directory}`;
 
         const parsedFiles = [];
 
@@ -103,7 +103,7 @@ async function cook() {
 
                 if (!limitToPack || directory === limitToPack) {
                 // sanitize the incoming JSON
-                    sanitizeJSON(jsonInput);
+                    sanitizeJSON(jsonInput, true);
 
                     // Fix missing images
                     if (!jsonInput.img && !jsonInput.pages) {
@@ -139,7 +139,7 @@ async function cook() {
 
         }
 
-        const parsedFolders = (async () => {
+        const parsedFolders = await (async () => {
             const foldersFile = path.resolve(itemSourceDir, "_folders.json");
             if (fs.existsSync(foldersFile)) {
                 const jsonString = await fs.readFile(foldersFile, "utf-8");
@@ -160,14 +160,13 @@ async function cook() {
             return [];
         })();
 
-        readPromises.push(parsedFolders);
-
         await Promise.all(readPromises); // While this does block the loop, unblocking this causes a "too many files open" error.
 
         if (!limitToPack || directory === limitToPack) {
             const packName = path.basename(outputDir);
             const db = new LevelDatabase(outputDir, { packName });
-            promises.push(db.createPack(duplicate(parsedFiles), duplicate(parsedFolders), packName));
+            promises.push(db.createPack(parsedFiles, await parsedFolders, packName));
+
         }
     }
 
@@ -225,18 +224,18 @@ export function sanitizeJSON(jsonInput) {
         delete item.sort;
         if (!item.folder) delete item.folder;
 
-        item._stats = {
-            coreVersion: manifest.compatibility.minimum,
-            systemId: "sfrpg",
-            systemVersion: manifest.version
-        };
-
         delete item.permission;
         delete item.ownership;
         delete item.effects;
 
         delete item.flags?.exportSource;
         delete item.flags?.sourceId;
+
+        item._stats = {
+            coreVersion: manifest.compatibility.minimum,
+            systemId: "sfrpg",
+            systemVersion: manifest.version
+        };
 
         // Remove leading or trailing spaces
         item.name = item.name.trim();
@@ -766,4 +765,3 @@ function consistencyCheck(allItems, compendiumMap) {
         }
     }
 }
-

@@ -5,9 +5,23 @@
 @detailsHeight: 40px;
 
 // Global background style
-button {
+h2 {
     .exo2();
-    font-size: var(--font-size-13);
+    font-size: var(--font-size-24);
+    margin: 1rem 0 1rem;
+}
+
+h3 {
+    .exo2();
+}
+
+h4 {
+    .exo2();
+}
+
+.scene-name {
+    .exo2();
+    font-size: var(--font-size-12);
 }
 
 blockquote.quote {
@@ -51,7 +65,8 @@ a.inline-roll {
 }
 
 a.enriched-link {
-    background: #ddd;
+    background: light-dark(@colorDark, @colorFaint);
+    color: light-dark(@colorFaint, @colorDark);
     padding: 1px 4px;
     border: 1px solid var(--color-border-dark-tertiary);
     border-radius: 2px;
@@ -110,11 +125,11 @@ img.icon-enricher {
                 border: 2px solid #444444;
                 background-color:rgba(128, 128, 128, 0.2);
                 border-radius: 13px;
-    
+
                 .bubble-info {
                     padding: 0.25em 1em 0.25em 1em;
                 }
-    
+
                 .bubble-header {
                     background-color: #444444;
                     color: white;
@@ -150,6 +165,11 @@ img.icon-enricher {
         font-size: var(--font-size-13);
         color: @colorDark;
         .exo2();
+    }
+    .window-header {
+        .exo2();
+        font-size: var(--font-size-14);
+        align-items: center;
     }
 
     /* ----------------------------------------- */
@@ -196,8 +216,10 @@ img.icon-enricher {
 
     // Buttons
     button {
+        .exo2();
         background: rgba(0, 0, 0, 0.1);
         border: @borderGroove;
+        color: #000;
     }
 
     // Checkbox Labels
@@ -230,7 +252,7 @@ img.icon-enricher {
             font-weight: bold;
         }
         .form-fields {
-            .flexrow();
+            .flexrow-sfrpg();
             > * {
                 margin: 0 3px 0 0;
                 &:last-child {
@@ -308,7 +330,7 @@ img.icon-enricher {
                     }
                 }
             }
-            
+
             .trait-list {
                 display: flex;
                 flex-wrap: wrap;
@@ -443,6 +465,7 @@ img.icon-enricher {
             height: 60px;
             margin: 0;
             padding: 5px;
+            .orbitron();
 
             input {
                 height: 50px;
@@ -630,15 +653,13 @@ img.icon-enricher {
 /* ------------------------------------------- */
 /* Counter Classes Management                  */
 /* ------------------------------------------- */
-#combat-tracker {
-    .counter-image-relative {
-        height: 72px;
-        line-height: 24px;
-    }
+#combat li.combatant {
+    padding-left: 8px;
 }
 
-#combat li.combatant .combatant-control-counter {
-    padding-left: 8px;
+.combatant-control-counter {
+    margin-top: 2px;
+    margin-bottom: 2px;
 }
 
 .counter-token {
@@ -658,57 +679,6 @@ img.icon-enricher {
         padding-left: 4px;
         vertical-align: middle;
         color: #eee;
-    }
-}
-
-#counter-management-position {
-    ul {
-        width: 100%;
-        text-align: center;
-        padding-inline-start: 0px !important;
-        margin: 15px 0px;
-        background-color: rgba(0, 0, 0, 0.3);
-        padding: 15px;
-        border-radius: 5px;
-    }
-
-    ul li {
-        text-decoration: none;
-        display: inline-block;
-        width: 30%;
-        text-align: center;
-        padding: 15px;
-    }
-
-    ul li:hover {
-        background-color: #999999;
-        border-radius: 5px;
-    }
-
-    ul li.active {
-        background-color: #6c8aa5;
-        border-radius: 5px;
-    }
-
-    ul li img {
-        border: none;
-    }
-
-    h3 {
-        font-size: 1.3em;
-        font-weight: bold;
-        color: #8a0303;
-    }
-
-    .counter-management-button button {
-        width: 20%;
-        margin: 10px;
-    }
-
-    .counter-management-info label {
-        display: inline-block;
-        width: 120px;
-        font-weight: bold;
     }
 }
 
@@ -836,11 +806,11 @@ img.icon-enricher {
 
 // SFRPG Macro Bar
 
-#hotbar.sfrpg {
-    ol#macro-list {
+#hotbar {
+    menu#action-bar.sfrpg {
         border: none;
 
-        .macro {
+        .slot {
             img {
                 &.greyscale {
                     filter: grayscale(1);
@@ -852,14 +822,16 @@ img.icon-enricher {
                 }
             }
 
-            span.macro-key {
+            span.key {
                 top: 0px;
                 right: 0px;
-                padding: 0 2px;
+                left: auto;
+                padding: 0 2px 2px 2px;
                 z-index: 1;
+                border-radius: 0 8px;
             }
 
-            footer.macro-footer {
+            footer.footer {
                 position: absolute;
                 bottom: 0px;
                 left: 0px;

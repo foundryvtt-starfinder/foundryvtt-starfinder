@@ -6,6 +6,10 @@ import TemplateEnricher from "./system/enrichers/template.js";
 // Namespace SFRPG Configuration Values
 export const SFRPG = {};
 
+/**
+ * The full list of actor types with localization strings
+ * @type {Object}
+ */
 SFRPG.actorTypes = {
     "character": "TYPES.Actor.character",
     "drone": "TYPES.Actor.drone",
@@ -15,6 +19,18 @@ SFRPG.actorTypes = {
     "starship": "TYPES.Actor.starship",
     "vehicle": "TYPES.Actor.vehicle"
 };
+
+/**
+ * The set of actor types who are character scale and use "normal" movement types
+ * @type {Array}
+ */
+SFRPG.actorsCharacterScale = [
+    "character",
+    "drone",
+    "npc",
+    "npc2",
+    "hazard"
+];
 
 /**
  * The set of ability scores used with the system
@@ -130,6 +146,7 @@ SFRPG.weaponTypeProficiency = {
  * @type {Object}
  */
 SFRPG.abilityActivationTypes = {
+    "": "SFRPG.AbilityActivationTypesNull",
     "none": "SFRPG.AbilityActivationTypesNone",
     "action": "SFRPG.AbilityActivationTypesStandard",
     "move": "SFRPG.AbilityActivationTypesMove",
@@ -143,6 +160,17 @@ SFRPG.abilityActivationTypes = {
     "min": "SFRPG.AbilityActivationTypesMinute",
     "special": "SFRPG.AbilityActivationTypesSpecial"
 };
+
+SFRPG.uncountableActivations = Object.freeze([
+    "", // no activation
+    "none", // free
+    "action",
+    "move",
+    "swift",
+    "full",
+    "reaction",
+    "special"
+]);
 
 SFRPG.skillProficiencyLevels = {
     0: "",
@@ -200,6 +228,7 @@ SFRPG.damageTypeOperators = {
 SFRPG.descriptors = {
     "acid": "SFRPG.Descriptors.Acid",
     "air": "SFRPG.Descriptors.Air",
+    "auditory": "SFRPG.Descriptors.Auditory",
     "calling": "SFRPG.Descriptors.Calling",
     "chaotic": "SFRPG.Descriptors.Chaotic",
     "charm": "SFRPG.Descriptors.Charm",
@@ -219,6 +248,7 @@ SFRPG.descriptors = {
     "force": "SFRPG.Descriptors.Force",
     "good": "SFRPG.Descriptors.Good",
     "healing": "SFRPG.Descriptors.Healing",
+    "illusion": "SFRPG.Descriptors.Illusion",
     "language-dependent": "SFRPG.Descriptors.LanguageDependent",
     "lawful": "SFRPG.Descriptors.Lawful",
     "light": "SFRPG.Descriptors.Light",
@@ -372,8 +402,14 @@ SFRPG.turnEventTypes = {
  */
 SFRPG.durationTypes = {
     "instantaneous": "SFRPG.DurationTypesInstantaneous",
-    ...SFRPG.effectDurationTypes
+    ...SFRPG.effectDurationTypes,
+    "text": "SFRPG.Text"
 };
+
+SFRPG.uncountableDurations = Object.freeze([
+    "instantaneous",
+    "permanent"
+]);
 
 SFRPG.targetTypes = {};
 
@@ -914,6 +950,13 @@ SFRPG.itemActionTypes = {
     "other": "SFRPG.ActionOther"
 };
 
+SFRPG.spellAttackActions = Object.freeze([ "msak", "rsak" ]);
+SFRPG.weaponAttackActions = Object.freeze([ "mwak", "rwak" ]);
+SFRPG.attackActions = Object.freeze([
+    ...SFRPG.spellAttackActions,
+    ...SFRPG.weaponAttackActions
+]);
+
 SFRPG.conditionTypes = {
     "asleep": "SFRPG.ConditionsAsleep",
     "bleeding": "SFRPG.ConditionsBleeding",
@@ -958,12 +1001,13 @@ SFRPG.languages = {
     "abyssal": "SFRPG.LanguagesAbyssal",
     "aglian": "SFRPG.LanguagesAglian",
     "akan": "SFRPG.LanguagesAkan",
-    "akiton": "SFRPG.LanguagesAkitonian",
+    "akitonian": "SFRPG.LanguagesAkitonian",
     "aklo": "SFRPG.LanguagesAklo",
     "alkainish": "SFRPG.LanguagesAlkainish",
     "anassan": "SFRPG.LanguagesAnassan",
     "aquan": "SFRPG.LanguagesAquan",
     "arkanen": "SFRPG.LanguagesArkanen",
+    "astriapi": "SFRPG.LanguagesAstriapi",
     "ancientDaimalkan": "SFRPG.LanguagesAncientDaimalkan",
     "auran": "SFRPG.LanguagesAuran",
     "azlanti": "SFRPG.LanguagesAzlanti",
@@ -992,11 +1036,13 @@ SFRPG.languages = {
     "firstSpeech": "SFRPG.LanguagesFirstSpeech",
     "frujai": "SFRPG.LanguagesFrujai",
     "garaggakal": "SFRPG.LanguagesGaraggakal",
+    "gathol": "SFRPG.LanguagesGathol",
     "ghibran": "SFRPG.LanguagesGhibran",
     "ghoran": "SFRPG.LanguagesGhoran",
     "giant": "SFRPG.LanguagesGiant",
     "gnome": "SFRPG.LanguagesGnome",
     "goblin": "SFRPG.LanguagesGoblin",
+    "gosclaw": "SFRPG.LanguagesGosclaw",
     "grioth": "SFRPG.LanguagesGrioth",
     "gytchean": "SFRPG.LanguagesGytchean",
     "hadrogaan": "SFRPG.LanguagesHadrogaan",
@@ -1034,12 +1080,14 @@ SFRPG.languages = {
     "paralithi": "SFRPG.LanguagesParalithi",
     "perani": "SFRPG.LanguagesPerani",
     "protean": "SFRPG.LanguagesProtean",
+    "psacynoa": "SFRPG.LanguagesPsacynoa",
     "quorlu": "SFRPG.LanguagesQuorlu",
     "raxi": "SFRPG.LanguagesRaxi",
     "reptoid": "SFRPG.LanguagesReptoid",
     "requian": "SFRPG.LanguagesRequian",
     "sarcesian": "SFRPG.LanguagesSarcesian",
     "sazaron": "SFRPG.LanguagesSazaron",
+    "screedreep": "SFRPG.LanguagesScreedreep",
     "scyphozoan": "SFRPG.LanguagesScyphozoan",
     "selamidian": "SFRPG.LanguagesSelamidian",
     "seprevoi": "SFRPG.LanguagesSeprevoi",
@@ -1056,6 +1104,7 @@ SFRPG.languages = {
     "terran": "SFRPG.LanguagesTerran",
     "triaxian": "SFRPG.LanguagesTriaxian",
     "trinir": "SFRPG.LanguagesTrinir",
+    "tromlin": "SFRPG.LanguagesTromlin",
     "urog": "SFRPG.LanguagesUrog",
     "varratana": "SFRPG.LanguagesVarratana",
     "vercite": "SFRPG.LanguagesVercite",
@@ -1063,6 +1112,7 @@ SFRPG.languages = {
     "vlakan": "SFRPG.LanguagesVlakan",
     "vulgarKishaleen": "SFRPG.LanguagesVulgarKishaleen",
     "woiokan": "SFRPG.LanguagesWoiokan",
+    "worlanisi": "SFRPG.LanguagesWorlanisi",
     "wrikreechee": "SFRPG.LanguagesWrikreechee",
     "xaarb": "SFRPG.LanguagesXaarb",
     "ysoki": "SFRPG.LanguagesYsoki"
@@ -1254,25 +1304,52 @@ SFRPG.starshipWeaponRanges = {
     "long"  : "SFRPG.ShipSystems.StarshipWeaponRanges.Long"
 };
 
-SFRPG.starshipRoles = {
-    "pilot"          : "SFRPG.ShipSystems.StarshipRoles.Pilot",
-    "captain"        : "SFRPG.ShipSystems.StarshipRoles.Captain",
-    "engineers"      : "SFRPG.ShipSystems.StarshipRoles.Engineers",
-    "gunners"        : "SFRPG.ShipSystems.StarshipRoles.Gunners",
-    "scienceOfficers": "SFRPG.ShipSystems.StarshipRoles.ScienceOfficers",
-    "passengers"     : "SFRPG.ShipSystems.StarshipRoles.Passengers"
+// Starship crew roles
+SFRPG.starshipSpecialCrewRoles = {
+    "captain": "SFRPG.StarshipSheet.Role.Captain",
+    "pilot": "SFRPG.StarshipSheet.Role.Pilot"
 };
 
-SFRPG.starshipRoleNames = {
-    "captain": "SFRPG.StarshipSheet.Role.Captain",
-    "pilot": "SFRPG.StarshipSheet.Role.Pilot",
+SFRPG.starshipNormalCrewRoles = {
     "gunner": "SFRPG.StarshipSheet.Role.Gunner",
     "engineer": "SFRPG.StarshipSheet.Role.Engineer",
     "scienceOfficer": "SFRPG.StarshipSheet.Role.ScienceOfficer",
     "chiefMate": "SFRPG.StarshipSheet.Role.ChiefMate",
-    "magicOfficer": "SFRPG.StarshipSheet.Role.MagicOfficer",
+    "magicOfficer": "SFRPG.StarshipSheet.Role.MagicOfficer"
+};
+
+SFRPG.starshipOtherRoles = {
     "minorCrew": "SFRPG.StarshipSheet.Role.MinorCrew",
     "openCrew": "SFRPG.StarshipSheet.Role.OpenCrew"
+};
+
+SFRPG.starshipCrewRoles = {
+    ...SFRPG.starshipSpecialCrewRoles,
+    ...SFRPG.starshipNormalCrewRoles
+};
+
+SFRPG.starshipRoles = {
+    ...SFRPG.starshipCrewRoles,
+    ...SFRPG.starshipOtherRoles
+};
+
+SFRPG.starshipRoleDisplayOrder = [
+    "captain",
+    "pilot",
+    "gunner",
+    "engineer",
+    "scienceOfficer",
+    "chiefMate",
+    "magicOfficer",
+    "openCrew",
+    "minorCrew"
+];
+
+SFRPG.starshipSystemPatch = {
+    "unpatched": "SFRPG.StarshipSheet.Critical.Patch.Unpatched",
+    "heldTogether": "SFRPG.StarshipSheet.Critical.Patch.HeldTogether",
+    "patched": "SFRPG.StarshipSheet.Critical.Patch.Patched",
+    "robust": "SFRPG.StarshipSheet.Critical.Patch.Robust"
 };
 
 // starship value maps
@@ -1397,13 +1474,27 @@ SFRPG.modifierEffectTypes = {
     "all-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackDamage",
     "weapon-property-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyDamage",
     "weapon-category-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponCategoryDamage",
+    "weapon-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAmmoUsageMultiplier",
+    "all-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAmmoUsageMultiplier",
+    "weapon-property-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyAmmoUsageMultiplier",
+    "weapon-category-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponCategoryAmmoUsageMultiplier",
     "bulk": "SFRPG.ActorSheet.Modifiers.EffectTypes.Encumbrance",
     "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
     "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
     "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",
     "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource",
     "damage-reduction": "SFRPG.ActorSheet.Modifiers.EffectTypes.DamageReduction",
-    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance"
+    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance",
+    "starship-hull-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipHullPoints",
+    "starship-hull-points-increment": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipHullPointsIncrement",
+    "starship-forward-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipForwardAC",
+    "starship-port-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipPortAC",
+    "starship-starboard-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipStarboardAC",
+    "starship-aft-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipAftAC",
+    "starship-all-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipAllAC",
+    "starship-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipSpeed",
+    "starship-turn-distance": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipTurnDistance",
+    "starship-piloting-skill": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipPilotingSkill"
 };
 
 SFRPG.modifierType = {
@@ -1602,17 +1693,20 @@ SFRPG.statusEffects = [
     {
         id: "asleep",
         name: "SFRPG.ConditionsAsleep",
-        img: "systems/sfrpg/icons/conditions/asleep.webp"
+        img: "systems/sfrpg/icons/conditions/asleep.webp",
+        compendiumKey: "3iTdt2NRgIyrychR"
     },
     {
         id: "bleeding",
         name: "SFRPG.ConditionsBleeding",
-        img: "systems/sfrpg/icons/conditions/bleeding.webp"
+        img: "systems/sfrpg/icons/conditions/bleeding.webp",
+        compendiumKey: "v9RNVTqyTyaPchvd"
     },
     {
         id: "blinded",
         name: "SFRPG.ConditionsBlinded",
-        img: "systems/sfrpg/icons/conditions/blinded.webp"
+        img: "systems/sfrpg/icons/conditions/blinded.webp",
+        compendiumKey: "tOpF6qjnlnKc10t7"
     },
     {
         id: "broken",
@@ -1623,162 +1717,194 @@ SFRPG.statusEffects = [
     {
         id: "burning",
         name: "SFRPG.ConditionsBurning",
-        img: "systems/sfrpg/icons/conditions/burning.webp"
+        img: "systems/sfrpg/icons/conditions/burning.webp",
+        compendiumKey: "8LdyXZl9PeXXFE8O"
     },
     {
         id: "confused",
         name: "SFRPG.ConditionsConfused",
-        img: "systems/sfrpg/icons/conditions/confused.webp"
+        img: "systems/sfrpg/icons/conditions/confused.webp",
+        compendiumKey: "8rIj0ewW4bL8Uph5"
     },
     {
         id: "cowering",
         name: "SFRPG.ConditionsCowering",
-        img: "systems/sfrpg/icons/conditions/cowering.webp"
+        img: "systems/sfrpg/icons/conditions/cowering.webp",
+        compendiumKey: "4WXJOFZ4s7TJUW6D"
     },
     {
         id: "dazed",
         name: "SFRPG.ConditionsDazed",
-        img: "systems/sfrpg/icons/conditions/dazed.webp"
+        img: "systems/sfrpg/icons/conditions/dazed.webp",
+        compendiumKey: "2XWEujYSyryB4oHm"
     },
     {
         id: "dazzled",
         name: "SFRPG.ConditionsDazzled",
-        img: "systems/sfrpg/icons/conditions/dazzled.webp"
+        img: "systems/sfrpg/icons/conditions/dazzled.webp",
+        compendiumKey: "YjE6UGzwOTfO9p4g"
     },
     {
         id: "dead",
         name: "SFRPG.ConditionsDead",
-        img: "systems/sfrpg/icons/conditions/dead.webp"
+        img: "systems/sfrpg/icons/conditions/dead.webp",
+        compendiumKey: "nEJIWMKbPjqKuelo"
     },
     {
         id: "deafened",
         name: "SFRPG.ConditionsDeafened",
-        img: "systems/sfrpg/icons/conditions/deafened.webp"
+        img: "systems/sfrpg/icons/conditions/deafened.webp",
+        compendiumKey: "D8JvCEmOiWKe2UDx"
     },
     {
         id: "dying",
         name: "SFRPG.ConditionsDying",
-        img: "systems/sfrpg/icons/conditions/dying.webp"
+        img: "systems/sfrpg/icons/conditions/dying.webp",
+        compendiumKey: "4MxAK5uS0zMNWhUK"
     },
     {
         id: "encumbered",
         name: "SFRPG.ConditionsEncumbered",
-        img: "systems/sfrpg/icons/conditions/encumbered.webp"
+        img: "systems/sfrpg/icons/conditions/encumbered.webp",
+        compendiumKey: "OwZA6flUQPH0jPA0"
     },
     {
         id: "entangled",
         name: "SFRPG.ConditionsEntangled",
-        img: "systems/sfrpg/icons/conditions/entangled.webp"
+        img: "systems/sfrpg/icons/conditions/entangled.webp",
+        compendiumKey: "nFBcsp5FS1Wi46Fc"
     },
     {
         id: "exhausted",
         name: "SFRPG.ConditionsExhausted",
-        img: "systems/sfrpg/icons/conditions/exhausted.webp"
+        img: "systems/sfrpg/icons/conditions/exhausted.webp",
+        compendiumKey: "33ynSbmexuxC3cAQ"
     },
     {
         id: "fascinated",
         name: "SFRPG.ConditionsFascinated",
-        img: "systems/sfrpg/icons/conditions/fascinated.webp"
+        img: "systems/sfrpg/icons/conditions/fascinated.webp",
+        compendiumKey: "7PPRS6krnvaTHbxh"
     },
     {
         id: "fatigued",
         name: "SFRPG.ConditionsFatigued",
-        img: "systems/sfrpg/icons/conditions/fatigued.webp"
+        img: "systems/sfrpg/icons/conditions/fatigued.webp",
+        compendiumKey: "JGFn4MrDZ6X5vrzU"
     },
     {
         id: "flat-footed",
         name: "SFRPG.ConditionsFlatFooted",
-        img: "systems/sfrpg/icons/conditions/flatfooted.webp"
+        img: "systems/sfrpg/icons/conditions/flatfooted.webp",
+        compendiumKey: "MZ8OoH1GE9qDMyCD"
     },
     {
         id: "frightened",
         name: "SFRPG.ConditionsFrightened",
-        img: "systems/sfrpg/icons/conditions/frightened.webp"
+        img: "systems/sfrpg/icons/conditions/frightened.webp",
+        compendiumKey: "DtwiUWi8dpzkq4tM"
     },
     {
         id: "grappled",
         name: "SFRPG.ConditionsGrappled",
-        img: "systems/sfrpg/icons/conditions/grappled.webp"
+        img: "systems/sfrpg/icons/conditions/grappled.webp",
+        compendiumKey: "4AkWDHGM6gHDepHN"
     },
     {
         id: "helpless",
         name: "SFRPG.ConditionsHelpless",
-        img: "systems/sfrpg/icons/conditions/helpless.webp"
+        img: "systems/sfrpg/icons/conditions/helpless.webp",
+        compendiumKey: "RxvbSB9ZgSCBu2jw"
     },
     {
         id: "invisible",
         name: "SFRPG.ConditionsInvisible",
-        img: "systems/sfrpg/icons/conditions/invisible.webp"
+        img: "systems/sfrpg/icons/conditions/invisible.webp",
+        compendiumKey: "ZANamqgukV0AyXBb"
     },
     {
         id: "nauseated",
         name: "SFRPG.ConditionsNauseated",
-        img: "systems/sfrpg/icons/conditions/nauseated.webp"
+        img: "systems/sfrpg/icons/conditions/nauseated.webp",
+        compendiumKey: "LoRydw1D4bqlbkA2"
     },
     {
         id: "off-kilter",
         name: "SFRPG.ConditionsOffKilter",
-        img: "systems/sfrpg/icons/conditions/offkilter.webp"
+        img: "systems/sfrpg/icons/conditions/offkilter.webp",
+        compendiumKey: "QnGpBSHSTiszjPSb"
     },
     {
         id: "off-target",
         name: "SFRPG.ConditionsOffTarget",
-        img: "systems/sfrpg/icons/conditions/offtarget.webp"
+        img: "systems/sfrpg/icons/conditions/offtarget.webp",
+        compendiumKey: "yUtkoIshf4dPruNd"
     },
     {
         id: "overburdened",
         name: "SFRPG.ConditionsOverburdened",
-        img: "systems/sfrpg/icons/conditions/overburdened.webp"
+        img: "systems/sfrpg/icons/conditions/overburdened.webp",
+        compendiumKey: "11k3ObUIXEYFGrg9"
     },
     {
         id: "panicked",
         name: "SFRPG.ConditionsPanicked",
-        img: "systems/sfrpg/icons/conditions/panicked.webp"
+        img: "systems/sfrpg/icons/conditions/panicked.webp",
+        compendiumKey: "BVdjvpucmvQU4cc1"
     },
     {
         id: "paralyzed",
         name: "SFRPG.ConditionsParalyzed",
-        img: "systems/sfrpg/icons/conditions/paralyzed.webp"
+        img: "systems/sfrpg/icons/conditions/paralyzed.webp",
+        compendiumKey: "NV4qXRDgb7zTNkW2"
     },
     {
         id: "pinned",
         name: "SFRPG.ConditionsPinned",
-        img: "systems/sfrpg/icons/conditions/pinned.webp"
+        img: "systems/sfrpg/icons/conditions/pinned.webp",
+        compendiumKey: "XgK4EdO5D3Fj3iWz"
     },
     {
         id: "prone",
         name: "SFRPG.ConditionsProne",
-        img: "systems/sfrpg/icons/conditions/prone.webp"
+        img: "systems/sfrpg/icons/conditions/prone.webp",
+        compendiumKey: "XeRGqHVtcZ7vsgJ0"
     },
     {
         id: "shaken",
         name: "SFRPG.ConditionsShaken",
-        img: "systems/sfrpg/icons/conditions/shaken.webp"
+        img: "systems/sfrpg/icons/conditions/shaken.webp",
+        compendiumKey: "nywSVEeDvp1bk7L3"
     },
     {
         id: "sickened",
         name: "SFRPG.ConditionsSickened",
-        img: "systems/sfrpg/icons/conditions/sickened.webp"
+        img: "systems/sfrpg/icons/conditions/sickened.webp",
+        compendiumKey: "ZacF0l6IwqBwToTJ"
     },
     {
         id: "stable",
         name: "SFRPG.ConditionsStable",
-        img: "systems/sfrpg/icons/conditions/stable.webp"
+        img: "systems/sfrpg/icons/conditions/stable.webp",
+        compendiumKey: "H51jmhxF9XuwDOE7"
     },
     {
         id: "staggered",
         name: "SFRPG.ConditionsStaggered",
-        img: "systems/sfrpg/icons/conditions/staggered.webp"
+        img: "systems/sfrpg/icons/conditions/staggered.webp",
+        compendiumKey: "aAQ6SW6iK0EVq8Ce"
     },
     {
         id: "stunned",
         name: "SFRPG.ConditionsStunned",
-        img: "systems/sfrpg/icons/conditions/stunned.webp"
+        img: "systems/sfrpg/icons/conditions/stunned.webp",
+        compendiumKey: "CvsDp0GvojxiF2jz"
     },
     {
         id: "unconscious",
         name: "SFRPG.ConditionsUnconscious",
-        img: "systems/sfrpg/icons/conditions/unconscious.webp"
+        img: "systems/sfrpg/icons/conditions/unconscious.webp",
+        compendiumKey: "lf8pbezocjYIvR9y"
     }
 ];
 
@@ -1926,6 +2052,15 @@ SFRPG.conditions = {
 };
 
 SFRPG.conditionsCausingFlatFooted = ["blinded", "cowering", "off-kilter", "pinned", "stunned"];
+
+// Conversion between Starfinder speed names and foundry's speed names
+SFRPG.movementOptions = {
+    burrowing: "burrow",
+    climbing: "climb",
+    flying: "fly",
+    swimming: "swim",
+    land: "walk"
+};
 
 // TODO localize
 SFRPG.characterFlags = {

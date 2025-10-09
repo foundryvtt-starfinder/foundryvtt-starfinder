@@ -19,7 +19,9 @@ export default function(engine) {
             try {
                 const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -34,7 +36,7 @@ export default function(engine) {
 
         // Iterate through any modifiers that affect BAB
         let filteredModifiers = fact.modifiers.filter(mod => {
-            return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.BASE_ATTACK_BONUS;
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.BASE_ATTACK_BONUS;
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 

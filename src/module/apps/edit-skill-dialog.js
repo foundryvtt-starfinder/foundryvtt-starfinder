@@ -30,8 +30,8 @@ export class AddEditSkillDialog extends Dialog {
      * @returns {Promise}
      */
     static async create(skillId, skill, isEdit = true, isNpc = false, isOwner = false) {
-        let hasSubName = typeof skill.subname !== "undefined" || !isEdit;
-        const html = await renderTemplate("systems/sfrpg/templates/apps/add-edit-skill.hbs", {
+        const hasSubName = typeof skill.subname !== "undefined" || !isEdit;
+        const html = await foundry.applications.handlebars.renderTemplate("systems/sfrpg/templates/apps/add-edit-skill.hbs", {
             skill: skill,
             hasSubName,
             canDelete: (skillId.startsWith("pro") && skillId !== "pro") && (game.user.isGM || isOwner) && isEdit,

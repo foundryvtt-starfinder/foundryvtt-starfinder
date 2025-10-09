@@ -10,13 +10,17 @@
         "ACTooltipShieldACMod": "Schildmodifikator: {shield} ({name})",
         "ACvsCombatManeuversLabel": "KRK + 8",
         "ACvsCombatManeuversTitle": "RK gegen Kampfmanöver",
+        "AbilityActivationButton": {
+            "Activate": "Aktivieren",
+            "Use": "Benutzen"
+        },
         "AbilityActivationTypesDay": "Tag",
         "AbilityActivationTypesFull": "Volle Aktion",
         "AbilityActivationTypesHour": "Stunde",
         "AbilityActivationTypesMinute": "Minute",
         "AbilityActivationTypesMove": "Bewegungsaktion",
-        "AbilityActivationTypesNone": "Keine",
-        "AbilityActivationTypesNoneButton": "Aktivieren",
+        "AbilityActivationTypesNone": "Frei",
+        "AbilityActivationTypesNull": "Passiv",
         "AbilityActivationTypesOther": "Andere Aktionen",
         "AbilityActivationTypesReaction": "Reaktion",
         "AbilityActivationTypesRound": "Runde",
@@ -70,6 +74,7 @@
                         "Clumsy": "Unbeholfen",
                         "Perfect": "Perfekt"
                     },
+                    "FlightManeuverability": "Flight Maneuverability",
                     "MainMovementType": "Hauptbewegung",
                     "MovementSpeedNamedTitle": "Bewegungsrate: {name}",
                     "MovementSpeedTitle": "Bewegungsrate",
@@ -244,6 +249,7 @@
             "Modifiers": {
                 "EffectTypes": {
                     "ActorResource": "Akteurressource",
+                    "AllAmmoUsageMultiplier": "All Ammo Usage Multiplier",
                     "AllAttackDamage": "Alle Angriffsschäden",
                     "AllAttackRolls": "Alle Angriffswürfe",
                     "AllSpeeds": "Alle Bewegungsraten",
@@ -265,14 +271,27 @@
                     "SkillRanks": "Fertigkeitsränge",
                     "Skillpoints": "Fertigkeitspunkte",
                     "SpecificSpeed": "Spezielle Bewegungsrate",
+                    "SpecificWeaponAmmoUsageMultiplier": "Specific Weapon Ammo Usage Multiplier",
                     "SpecificWeaponAttackDamage": "Schaden mit spezifischer Waffe",
                     "SpecificWeaponAttackRolls": "Angriffswürfe mit spezifischer Waffe",
                     "SpellAttackDamage": "Zauberschaden",
                     "SpellAttackRolls": "Zauberangriffswürfe",
                     "SpellSaveDC": "Zauberrettungswurf",
                     "Stamina": "Ausdauerpunkte",
+                    "StarshipAftAC": "Starship Aft AC",
+                    "StarshipAllAC": "Starship All AC",
+                    "StarshipForwardAC": "Starship Forward AC",
+                    "StarshipHullPoints": "Starship Hull Points",
+                    "StarshipHullPointsIncrement": "Starship Hull Points Increment",
+                    "StarshipPilotingSkill": "Starship Piloting Skill",
+                    "StarshipPortAC": "Starship Port AC",
+                    "StarshipSpeed": "Starship Speed",
+                    "StarshipStarboardAC": "Starship Starboard AC",
+                    "StarshipTurnDistance": "Starship Turn Distance",
+                    "WeaponCategoryAmmoUsageMultiplier": "Weapon Category Ammo Usage Multiplier",
                     "WeaponCategoryAttackRolls": "Angriffswürfe mit Waffenkategorie",
                     "WeaponCategoryDamage": "Schaden durch Waffenkategorie",
+                    "WeaponPropertyAmmoUsageMultiplier": "Weapon Property Ammo Usage Multiplier",
                     "WeaponPropertyAttackRolls": "Angriffswürfe mit Waffeneigenschaft",
                     "WeaponPropertyDamage": "Schaden durch Waffeneigenschaft"
                 },
@@ -501,7 +520,6 @@
         "ClassBABProgression": "Progression des Grundangriffsbonus",
         "ClassFortSaveProgression": "Progression der Zähigkeitsrettungswürfe",
         "ClassHPPerLevel": "Trefferpunkte pro Stufe",
-        "ClassKeyAbilityScore": "Schlüsselattributswert",
         "ClassLevelLabel": "Klassenstufen",
         "ClassReflexSaveProgression": "Progression der Reflexrettungswürfe",
         "ClassSPPerlevel": "Ausdauerpunkte pro Stufe",
@@ -798,6 +816,7 @@
         "Descriptors": {
             "Acid": "Säure",
             "Air": "Luft",
+            "Auditory": "Auditory",
             "Calling": "Herbeirufung",
             "CallingDescription": "Ein Effekt der Kategorie Herbeirufung transportiert eine Kreatur von einer anderen Ebene auf jene Ebene, auf der du dich befindest. Der Effekt verleiht der Kreatur einmalig die Fähigkeit auf ihre Ursprungsebene zurückzukehren. Der Effekt könnte allerdings die Umstände eingrenzen, unter denen diese Rückkehr möglich ist. Herbeigerufene Kreaturen sterben, wenn sie auf der neuen Ebene getötet werden. Eine herbeigerufene Kreatur kann nicht gebannt werden, selbst wenn sie mittels magischer Methoden herbeigerufen wurde.",
             "Chaotic": "Chaotisch",
@@ -823,6 +842,7 @@
             "ForceDescription": "Ein Energieeffekt fügt Körperlosen Kreaturen vollen Schaden zu und blockiert ihre Fortbewegung. Er blockiert zudem die Fähigkeit Hindurchspüren.",
             "Good": "Gut",
             "Healing": "Heilung",
+            "Illusion": "Illusion",
             "LanguageDependent": "Sprachabhängig",
             "LanguageDependentDescription": "Ein Effekt der Kategorie Sprachabhängig nutzt verständliche Sprache als Kommunikationsmedium. Dabei kann es sich um hörbare, sichtbare oder telepathische Sprache handeln. Solltest du mit dem Ziel nicht kommunizieren können oder es nicht verstehen, was du ihm mitteilen willst, so betrifft der Effekt das Ziel nicht.",
             "Lawful": "Rechtschaffend",
@@ -1244,7 +1264,6 @@
                     "ClassLevel": "Klassenstufe",
                     "Header": "Zauberwirken",
                     "IsCaster": "Zauberwirker",
-                    "KeyAbilityScore": "Schlüsselattributwert",
                     "SpellsKnown": "Bekannte Zauber",
                     "SpellsKnownHeader": "Bekannte Zauber (pro Zaubergrad)",
                     "SpellsPerDay": "Zauber pro Tag",
@@ -1252,6 +1271,9 @@
                     "SpellsPerDayBonusHeader": "Bonuszauber pro Tag (pro Zaubergrad)",
                     "SpellsPerDayHeader": "Zauber pro Tag (pro Zaubergrad)"
                 }
+            },
+            "Common": {
+                "DeltaInputTooltip": "Supports optional delta (+/-) input."
             },
             "Consumables": {
                 "Category": "Art des Verbrauchsmaterials"
@@ -1502,8 +1524,8 @@
             "Action": {
                 "AbilityModifier": "Attributsmodifikator",
                 "ActionTarget": {
-                    "AC5": "RK 5",
                     "AC15": "RK 15",
+                    "AC5": "RK 5",
                     "ChatMessage": " gegen {actionTarget}",
                     "EAC": "ERK",
                     "KAC": "KRK",
@@ -1541,8 +1563,12 @@
                 "RollNotesTooltip": "Die Notizen für den Wurf werden auf der Nachricht der Handlung angezeigt. So können Erinnerungen und Notizen angezeigt werden, besonders nützlich bei kompliziereten NSCs.",
                 "SavingThrow": "Rettungswurf",
                 "SkillCheck": "Fertigkeitswurf",
+                "SkillCheckPlaceholderFormula": "e.g. 10 + floor(1.5*@details.cr)",
+                "SkillCheckPlaceholderTooltip": "A formula for the DC of the skill check",
                 "TitleAction": "Handlung",
-                "TitleActivation": "Aktivierung"
+                "TitleActivation": "Aktivierung",
+                "VariableDC": "Variable DC",
+                "VariableDCTooltip": "Check this to disable automatic skill check DC calculation for abilities with variable DCs."
             },
             "Activation": {
                 "Activation": "Aktivierung",
@@ -1813,7 +1839,7 @@
                 }
             }
         },
-        "KeyAbility": "Schlüsselattribut",
+        "KeyAbilityScore": "Schlüsselattributwert",
         "KineticArmorClass": "Kinet. RK",
         "KineticArmorClassShort": "KRK",
         "Languages": "Sprachen",
@@ -1856,11 +1882,13 @@
         "LanguagesFirstSpeech": "Erste Sprache",
         "LanguagesFrujai": "Frujai",
         "LanguagesGaraggakal": "Garaggakal",
+        "LanguagesGathol": "Gathol",
         "LanguagesGhibran": "Ghibran",
         "LanguagesGhoran": "Ghoran",
         "LanguagesGiant": "Giant",
         "LanguagesGnome": "Gnomisch",
         "LanguagesGoblin": "Goblinisch",
+        "LanguagesGosclaw": "Gosclaw",
         "LanguagesGrioth": "Grioth",
         "LanguagesGytchean": "Gytchean",
         "LanguagesHadrogaan": "Hadrogaan",
@@ -1898,12 +1926,14 @@
         "LanguagesParalithi": "Paralithi",
         "LanguagesPerani": "Perani",
         "LanguagesProtean": "Protean",
+        "LanguagesPsacynoa": "Psacynoa",
         "LanguagesQuorlu": "Quorlu",
         "LanguagesRaxi": "Raxi",
         "LanguagesReptoid": "Reptoid",
         "LanguagesRequian": "Requian",
         "LanguagesSarcesian": "Sarkesianisch",
         "LanguagesSazaron": "Sazaron",
+        "LanguagesScreedreep": "Screedreep",
         "LanguagesScyphozoan": "Scyphozoan",
         "LanguagesSelamidian": "Selamidian",
         "LanguagesSeprevoi": "Seprevoi",
@@ -1920,6 +1950,7 @@
         "LanguagesTerran": "Terral",
         "LanguagesTriaxian": "Triaxianisch",
         "LanguagesTrinir": "Trinir",
+        "LanguagesTromlin": "Tromlin",
         "LanguagesUrog": "Urog",
         "LanguagesVarratana": "Varratana",
         "LanguagesVercite": "Vercitisch",
@@ -1927,6 +1958,7 @@
         "LanguagesVlakan": "Vlakan (Gebärden, gesprochen, und Tastgebärden)",
         "LanguagesVulgarKishaleen": "Vulgar Kishaleen",
         "LanguagesWoiokan": "Woiokan",
+        "LanguagesWorlanisi": "Worlanisi",
         "LanguagesWrikreechee": "Wrikreechee",
         "LanguagesXaarb": "Xaarb",
         "LanguagesYsoki": "Ysokisch",
@@ -1964,6 +1996,9 @@
         "LocalizationTerminator": "",
         "Long": "Lang",
         "Macro": {
+            "Active": "Active",
+            "ErrorMissingItem": "Cannot find the item associated with this item macro.",
+            "Inactive": "Inactive",
             "ViewActor": "Akteur zeigen",
             "ViewItem": "Gegenstand zeigen"
         },
@@ -2324,6 +2359,10 @@
                 "Hint": "Wird ein Raumschiff durch eine Chatkarte beschädigt, wird automatisch ein Wurf auf der Tabelle Kritische Schadenseffekte (GRB S. 321) durchgeführt, wenn dieser Schaden eine kritische Schwelle überschreitet.",
                 "Name": "Automatisch kritische Schadenseffekte für Raumschiffe würfeln"
             },
+            "ChatNotificationDuration": {
+                "Hint": "How long (in MS) to display chat notifications before they are dismissed.",
+                "Name": "Chat Notification Duration"
+            },
             "CombatCards": {
                 "NormalHint": "Lege fest, welche Chatkarten für Kämpfe im normalen Kampf angezeigt werden.",
                 "NormalName": "Normale Kämpfe",
@@ -2417,6 +2456,12 @@
                 "Hint": "Gibt es Meldungen über Raumschiffe mit kritischen Werten oder Schwellenwerten und das Schiff ist ein feindlicher Token, werden diese nur an den Spielleiter gepostet.",
                 "Name": "Verstecke kritische Meldungen von feindlichen Raumschiffen"
             },
+            "LockArtworkRotationDefault": {
+                "ConfirmationText": "Apply one time update to all Character/NPC/Drone/Hazard prototype token settings?</p>This will not affect placed tokens.</p>",
+                "ConfirmationTitle": "Lock Artwork Rotation Setting Change",
+                "Hint": "When enabled, enables Lock Artwork Rotation on character scale actors by default (Characters/NPC/Drones/Hazards). This can be overridden by the actor's prototype token settings.",
+                "Name": "Lock Artwork Rotation by Default"
+            },
             "SFRPGTheme": {
                 "Hint": "Wenn ausgewählt werden einige kleinere Anpassungen an den Foundryfarben vorgenommen, um besser zur Starfinder Farbpalette zu passen.",
                 "Name": "Angepasstes SFRPG Thema"
@@ -2461,6 +2506,16 @@
             "WorldSchemaVersion": {
                 "Hint": "Zeichnet die Datenschemaversion für das Starfinder-System auf. WARNUNG: Bearbeite diesen Wert nicht, wenn du nicht weißt, was du tust!",
                 "Name": "Datenschemaversion von Starfinder"
+            },
+            "rulerColor0": {
+                "Hint": "Colors for the ruler that appears when tokens are dragged across the canvas.",
+                "Name": "Drag Ruler Primary Color"
+            },
+            "rulerColor1": {
+                "Name": "Drag Ruler Secondary Color"
+            },
+            "rulerColor2": {
+                "Name": "Drag Ruler Tertiary Color"
             }
         },
         "ShipFrameLabel": "Struktur",
@@ -2515,14 +2570,6 @@
                 "Port": "Backbord",
                 "Starboard": "Steuerbord",
                 "Turret": "Geschützturm"
-            },
-            "StarshipRoles": {
-                "Captain": "Kapitän",
-                "Engineers": "Ingenieure",
-                "Gunners": "Bordschützen",
-                "Passengers": "Passagiere",
-                "Pilot": "Pilot",
-                "ScienceOfficers": "Wissenschaftsoffiziere"
             },
             "StarshipWeaponClass": {
                 "Capital": "Schiffsartillerie",
@@ -2643,11 +2690,13 @@
         "SkillTooltipSkillRanks": "Fertigkeitsränge: {ranks}",
         "SkillTooltipThemeMod": "Charaktermotivmodifikator: {mod}",
         "SkillTooltipTrainedClassSkill": "Modifikator für geübte Klassenfertigkeiten: {mod}",
+        "SkillTrained": "Trained",
         "SkillTrainedOnly": "Nur geübt",
         "SkillTrainedOnlyDialog": {
             "Content": "{skill} ist eine nur-geübte Fertigkeit, aber {name} ist nicht geübt in der Fertigkeit. Trotzdem würfeln?",
             "Title": "{skill} ist nur-geübt"
         },
+        "SkillUntrained": "Untrained",
         "SkillsHeaderAbility": "Attribut",
         "SkillsHeaderModifier": "Mod.",
         "SkillsHeaderName": "Name",
@@ -2782,6 +2831,12 @@
                 "EditMessage": "Auswählen welche Rollen von Schäden an diesem System betroffen sind.",
                 "EditTitle": "Betroffene Rollen auswählen",
                 "Header": "Kritischer Schaden",
+                "Patch": {
+                    "HeldTogether": "Held Together",
+                    "Patched": "Patched",
+                    "Robust": "Patched Robustly",
+                    "Unpatched": "―"
+                },
                 "Status": {
                     "Glitching": "Gestört",
                     "Malfunctioning": "Fehlfunktion",
@@ -2793,10 +2848,10 @@
                     "LifeSupport": "Lebenserhaltung",
                     "PowerCore": "Energiekern",
                     "Sensors": "Sensoren",
-                    "WeaponsArrayAft": "Bewaffnung (Achtern)",
-                    "WeaponsArrayForward": "Bewaffnung (Bug)",
-                    "WeaponsArrayPort": "Bewaffnung (Backbord)",
-                    "WeaponsArrayStarboard": "Bewaffnung (Steuerbord)"
+                    "WeaponsArrayAft": "Achtern",
+                    "WeaponsArrayForward": "Bug",
+                    "WeaponsArrayPort": "Backbord",
+                    "WeaponsArrayStarboard": "Steuerbord"
                 }
             },
             "Damage": {

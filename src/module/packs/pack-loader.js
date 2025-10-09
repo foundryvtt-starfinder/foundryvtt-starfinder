@@ -1,4 +1,9 @@
-import Progress from '../progress.js';
+/**
+ * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs"
+ * @import Collection from "@common/utils/collection.mjs"
+ * @import { ActorSFRPG } from "../actor/actor.js"
+ * @import { ItemSFRPG } from "../item/item.js"
+*/
 
 export class PackLoader {
     constructor() {
@@ -8,12 +13,15 @@ export class PackLoader {
         };
     }
 
+    /**
+     * @param {"Actor"|"Item"} entityType
+     * @param {string[]} packs An array of pack IDs
+     */
     async *loadPacks(entityType, packs) {
         if (!this.loadedPacks[entityType]) this.loadedPacks[entityType] = {};
 
-        const progress = new Progress({
-            steps: packs.length
-        });
+        const progress = ui.notifications.info("Loading packs...", { progress: true });
+        let pct = 0;
 
         const fields = [
             "type",
@@ -45,8 +53,9 @@ export class PackLoader {
         for (const packId of packs) {
             let data = this.loadedPacks[entityType][packId];
 
+            /** @type {CompendiumCollection<ActorSFRPG|ItemSFRPG> | undefined} */
             const pack = data?.pack || game.packs.get(packId);
-            if (pack.documentName !== entityType) continue;
+            if (pack?.documentName !== entityType) continue;
 
             if (!data) {
                 const content = await pack.getIndex({ fields });
@@ -58,14 +67,20 @@ export class PackLoader {
 
             }
 
-            progress.advance(`Loading ${pack.metadata.label}`);
+            pct++;
+
+            ui.notifications.update(progress, {message: `Loading ${pack.metadata.label}...`, pct: (pct / packs.length) });
 
             yield data;
         }
 
-        progress.close('Loading complete');
+        ui.notifications.remove(progress);
     }
 
+    /**
+     * @param {string} packName
+     * @param {Collection[]} index
+     */
     setCompendiumArt(packName, index) {
         if (!packName.startsWith("sfrpg.")) return;
         for (const record of index) {

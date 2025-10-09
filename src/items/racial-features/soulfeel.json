@@ -2,11 +2,6 @@
   "_id": "O4YoIsligAj8ReYF",
   "name": "Soulfeel",
   "type": "feat",
-  "_stats": {
-    "coreVersion": 12,
-    "systemId": "sfrpg",
-    "systemVersion": "0.28.0"
-  },
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "type": "",
@@ -19,14 +14,14 @@
     "activation": {
       "type": "action",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "area": {
       "effect": "",
       "shapable": false,
-      "shape": "cone",
+      "shape": "",
       "units": "ft",
-      "value": 30
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,23 +30,8 @@
       "parts": []
     },
     "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "1d6 + lookupRange(@details.level.value, 0, 3, floor(@details.level.value * 1.5))",
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": true,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -64,6 +44,7 @@
     "descriptors": {
       "acid": false,
       "air": false,
+      "auditory": false,
       "calling": false,
       "chaotic": false,
       "charm": false,
@@ -83,16 +64,19 @@
       "force": false,
       "good": false,
       "healing": false,
+      "illusion": false,
       "language-dependent": false,
       "lawful": false,
       "light": false,
       "mind-affecting": false,
       "pain": false,
       "poison": false,
+      "polymorph": false,
       "radiation": false,
       "scrying": false,
       "sense-dependent": false,
       "shadow": false,
+      "sonic": false,
       "summoning": false,
       "teleportation": false,
       "water": false
@@ -103,8 +87,8 @@
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
-      "value": ""
+      "units": "round",
+      "value": "1"
     },
     "formula": "",
     "isActive": null,
@@ -113,8 +97,8 @@
     "range": {
       "additional": "",
       "per": "",
-      "units": "none",
-      "value": null
+      "units": "ft",
+      "value": "30"
     },
     "recharge": {
       "charged": false,
@@ -123,17 +107,21 @@
     "requirements": "Moyishuu",
     "rollNotes": "",
     "save": {
-      "type": "reflex",
+      "type": "will",
       "dc": "10 + floor(@details.level.value / 2) + @abilities.cha.mod",
       "descriptor": "half"
     },
-    "source": "AP #37 pg. 57",
+    "skillCheck": {
+      "type": "",
+      "dc": ""
+    },
+    "source": "EN pg. 28",
     "target": {
       "type": "",
       "value": ""
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "sr",
       "value": 1
     }

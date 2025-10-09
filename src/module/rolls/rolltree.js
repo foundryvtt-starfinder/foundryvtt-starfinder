@@ -39,7 +39,7 @@ export default class RollTree {
         /** Verify variable contexts, replace bad ones with 0. */
         const variableMatches = new Set(formula.match(/@([a-zA-Z.0-9_-]+)/g));
         for (const variable of variableMatches) {
-            const [context, remainingVariable] = RollNode.getContextForVariable(variable, contexts);
+            const [context] = RollNode.getContextForVariable(variable, contexts);
             if (!context) {
                 console.log(`Cannot find context for variable '${variable}', substituting with a 0.`);
                 formula = formula.replaceAll(variable, "0");
@@ -58,6 +58,7 @@ export default class RollTree {
      * @param {string} request.mode
      * @param {string} [request.bonus]
      * @param {DamagePart[]} [request.enabledParts]
+     * @returns {RollInfo}
      */
     #processRollRequest(request) {
         const result = {

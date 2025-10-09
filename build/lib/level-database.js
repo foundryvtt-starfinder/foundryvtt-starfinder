@@ -37,6 +37,7 @@ export default class LevelDatabase extends ClassicLevel {
             return isObject(source) && "_id" in source;
         };
 
+        await this.#documentDb.open();
         const docBatch = this.#documentDb.batch();
         const embeddedBatch = this.#embeddedDb?.batch();
 
@@ -72,12 +73,13 @@ export default class LevelDatabase extends ClassicLevel {
 
         await Promise.all(promises);
 
+        await this.compactClassicLevel();
+
         await this.close();
         console.log(chalk.greenBright(`> Finished processing data for ${packName}.`));
     }
 
-    async getEntries() {
-        const items = [];
+    async *getItems() {
         for await (const [docId, source] of this.#documentDb.iterator()) {
             const embeddedKey = this.#embeddedKey;
             if (embeddedKey && source[embeddedKey] && this.#embeddedDb) {
@@ -86,15 +88,14 @@ export default class LevelDatabase extends ClassicLevel {
                 );
                 source[embeddedKey] = embeddedDocs.filter(i => !!i);
             }
-            items.push(source);
+            yield source;
         }
-        const folders = [];
-        for await (const [_key, folder] of this.#foldersDb.iterator()) {
-            folders.push(folder);
-        }
-        await this.close();
+    }
 
-        return { items, folders };
+    async *getFolders() {
+        for await (const folder of this.#foldersDb.values()) {
+            yield folder;
+        }
     }
 
     #getDBKeys(packName) {
@@ -135,5 +136,20 @@ export default class LevelDatabase extends ClassicLevel {
             }
         })();
         return { dbKey, embeddedKey };
+    }
+
+    /** Flushes the log of the given database to create compressed binary tables.
+    * @this {ClassicLevel}
+    */
+    async compactClassicLevel() {
+        const forwardIterator = this.keys({ limit: 1, fillCache: false });
+        const firstKey = await forwardIterator.next();
+        await forwardIterator.close();
+
+        const backwardIterator = this.keys({ limit: 1, reverse: true, fillCache: false });
+        const lastKey = await backwardIterator.next();
+        await backwardIterator.close();
+
+        if (firstKey && lastKey) return this.compactRange(firstKey, lastKey, { keyEncoding: "utf8" });
     }
 }

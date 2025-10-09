@@ -1,17 +1,24 @@
+/**
+ * @import { ActorSFRPG } from '../../actor/actor.js'
+ */
 
-export class HotbarSFRPG extends Hotbar {
+export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
     constructor(options) {
         super(options);
     }
 
-    get template() {
-        return "systems/sfrpg/templates/ui/hotbar.hbs";
-    }
+    /** @override */
+    static PARTS = {
+        hotbar: {
+            root: true,
+            template: "systems/sfrpg/templates/ui/hotbar.hbs"
+        }
+    };
 
-    async getData() {
-        const data = super.getData();
-
-        for (const slot of data.macros) {
+    /** @override */
+    async _prepareContext() {
+        const data = await super._prepareContext();
+        for (const slot of data.slots) {
             const macro = slot.macro;
             if (!macro) continue;
 
@@ -25,10 +32,10 @@ export class HotbarSFRPG extends Hotbar {
                 const macroConfig = {
                     item,
                     isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
-                    hasAttack: ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
+                    hasAttack: CONFIG.SFRPG.attackActions.includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                     hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                     hasUses: item.hasUses(),
-                    hasActivation: item.canBeActivated(),
+                    hasActivation: item.canBeActivated() && item.system.duration?.units !== 'instantaneous',
                     isActive: item.isActive(),
                     hasCapacity: item.hasCapacity()
 
@@ -45,14 +52,17 @@ export class HotbarSFRPG extends Hotbar {
                 slot.activeGlow = itemMacroDetails.macroType === "activate" && macroConfig.isActive;
                 slot.hasUses = itemMacroDetails.macroType === "activate" && macroConfig.hasUses;
 
+                slot.tooltip = `<strong>${slot.tooltip}</strong>`;
                 slot.tooltip += `
                     <br>
                     ${game.i18n.localize("DOCUMENT.Actor")}: ${item.actor.name}
                     <br>
                 `;
                 if (itemMacroDetails.macroType === "activate") {
-                    slot.tooltip += macroConfig.isActive ? "Active" : "Inactive";
-                    slot.tooltip += "<br>";
+                    if (macroConfig.hasActivation) {
+                        slot.tooltip += macroConfig.isActive ? game.i18n.localize("SFRPG.Macro.Active") : game.i18n.localize("SFRPG.Macro.Inactive");
+                        slot.tooltip += "<br>";
+                    }
                     if (macroConfig.hasUses) slot.tooltip += `
                         ${game.i18n.localize("SFRPG.SpellBook.Uses")}: ${item.system.uses.value}/${item.system.uses.total}
                     `;
@@ -69,6 +79,16 @@ export class HotbarSFRPG extends Hotbar {
         }
 
         return data;
+    }
+
+    /**
+     * Stop the hotbar closing if an item with an item macro is deleted
+     * @inheritdoc
+     */
+    async close(options = {}) {
+        if (options?.renderData instanceof Item) return;
+
+        return super.close(options);
     }
 
     _getIcon(macroConfig, macroType) {
@@ -91,49 +111,71 @@ export class HotbarSFRPG extends Hotbar {
         else if (item.hasUses()) return !item.canBeUsed();
         return false;
     }
+
+    /**
+     * A helper method used to retrieve a Macro document from a hotbar slot element.
+     * @param {HTMLLIElement} element
+     * @returns {?foundry.documents.Macro}
+     */
+    #getMacroForSlot(element) {
+        const slot = element.dataset.slot;
+        const macroId = game.user.hotbar[slot];
+        if ( !macroId) return null;
+        return game.macros.get(macroId) ?? null;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    _getContextMenuOptions() {
+        const options = super._getContextMenuOptions();
+
+        return options.concat([
+            {
+                name: "SFRPG.Macro.ViewActor",
+                icon: "<i class=\"fas fa-user\"></i>",
+                condition: (li) => Boolean(findActorSync(this.#getMacroForSlot(li))),
+                callback: (li) => findActorSync(this.#getMacroForSlot(li))?.sheet.render(true)
+
+            },
+            {
+                name: "SFRPG.Macro.ViewItem",
+                icon: "<i class=\"fas fa-suitcase\"></i>",
+                condition: (li) => {
+                    const macro = this.#getMacroForSlot(li);
+                    const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
+                    if (itemMacroDetails?.itemUuid) {
+                        return !!fromUuidSync(itemMacroDetails?.itemUuid);
+                    }
+                },
+                callback: (li) => {
+                    const macro = this.#getMacroForSlot(li);
+                    const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
+                    if (itemMacroDetails?.itemUuid) {
+                        const item = fromUuidSync(itemMacroDetails?.itemUuid);
+                        item.sheet.render(true);
+                    }
+                }
+            }
+        ]);
+
+    }
+
 }
 
-Hooks.on("getHotbarEntryContext", (element, li) => {
-    const viewActor = {
-        name: "SFRPG.Macro.ViewActor",
-        icon: "<i class=\"fas fa-user\"></i>",
-        condition: (li) => {
-            const macro = game.macros.get(li.data("macro-id"));
-            const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
-            if (itemMacroDetails?.itemUuid) {
-                const item = fromUuidSync(itemMacroDetails?.itemUuid);
-                return !!item?.actor;
-            }
-        },
-        callback: (li) => {
-            const macro = game.macros.get(li.data("macro-id"));
-            const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
-            if (itemMacroDetails?.itemUuid) {
-                const item = fromUuidSync(itemMacroDetails?.itemUuid);
-                item?.actor.sheet.render(true);
-            }
-        }
-    };
+/**
+ * Get the actor from a macro's flags
+ * @param {foundry.documents.Macro} macro
+ * @returns {?ActorSFRPG}
+ */
+function findActorSync(macro) {
+    let actor = null;
 
-    const viewItem = {
-        name: "SFRPG.Macro.ViewItem",
-        icon: "<i class=\"fas fa-suitcase\"></i>",
-        condition: (li) => {
-            const macro = game.macros.get(li.data("macro-id"));
-            const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
-            if (itemMacroDetails?.itemUuid) {
-                return !!fromUuidSync(itemMacroDetails?.itemUuid);
-            }
-        },
-        callback: (li) => {
-            const macro = game.macros.get(li.data("macro-id"));
-            const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
-            if (itemMacroDetails?.itemUuid) {
-                const item = fromUuidSync(itemMacroDetails?.itemUuid);
-                item.sheet.render(true);
-            }
-        }
-    };
+    const flags = macro?.flags?.sfrpg;
+    if (flags) {
+        actor = fromUuidSync(flags.actor)
+            ?? fromUuidSync(flags.itemMacro?.itemUuid)?.actor; // backwards compatibility
+    }
 
-    li.push(viewActor, viewItem);
-});
+    return actor;
+}

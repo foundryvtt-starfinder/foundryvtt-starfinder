@@ -17,9 +17,9 @@ const itemSizeArmorClassModifier = {
 
 /**
  * Override and extend the core ItemSheet implementation to handle SFRPG specific item types
- * @type {ItemSheet}
+ * @extends {foundry.appv1.sheets.ItemSheet}
  */
-export class ItemSheetSFRPG extends ItemSheet {
+export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     constructor(...args) {
         super(...args);
 
@@ -197,8 +197,11 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Determine whether to show calculated totals for fields with formulas
         if (itemData?.activation?.type || data.item.type === "weapon") {
-            data.range = {};
+            data.activation = {
+                hasInput: !SFRPG.uncountableActivations.includes(itemData?.activation?.type ?? "")
+            };
 
+            data.range = {};
             data.range.hasInput = (() => {
                 // C/M/L on spells requires no input
                 if (this.item.type === "spell") return !(["close", "medium", "long", "none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
@@ -212,7 +215,8 @@ export class ItemSheetSFRPG extends ItemSheet {
 
             data.duration = {};
             data.duration.showTotal = !!itemData.duration?.total && (String(itemData.duration?.total) !== String(itemData.duration?.value));
-            data.duration.hasInput = itemData.duration.units !== "instantaneous";
+            data.duration.hasInput = !SFRPG.uncountableDurations.includes(itemData.duration.units);
+            data.duration.needsEndOn = (itemData.duration?.units === "round");
 
             data.uses = {};
             data.uses.showTotal = !!itemData.uses?.total && (String(itemData.uses?.total) !== String(itemData.uses?.max));
@@ -247,19 +251,19 @@ export class ItemSheetSFRPG extends ItemSheet {
             data.sourceActorChoices = {};
             if (game.combat?.started) {
                 for (const combatant of game.combat.combatants) {
-                    if (combatant.actorId === data.item?.actor?.id) continue;
-                    data.sourceActorChoices[combatant.actorId] = combatant.name;
+                    if (combatant.actor.uuid === data.item?.actor?.uuid) continue;
+                    data.sourceActorChoices[combatant.actor.uuid] = combatant.name;
                 }
             } else {
                 const PCs = game.actors.filter(i => i.type === "character");
                 for (const PC of PCs) {
-                    data.sourceActorChoices[PC.id] = PC.name;
+                    data.sourceActorChoices[PC.uuid] = PC.name;
                 }
             }
 
             // Turn Events
             for (const [i, turnEvent] of (data.itemData.turnEvents || []).entries()) {
-                turnEvent.enrichedNote = await TextEditor.enrichHTML(turnEvent.content, {
+                turnEvent.enrichedNote = await foundry.applications.ux.TextEditor.enrichHTML(turnEvent.content, {
                     rollData,
                     secrets
                 });
@@ -280,25 +284,25 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Enrich text editors
 
-        data.enrichedDescription = await TextEditor.enrichHTML(this.item.system?.description?.value, {
+        data.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.description?.value, {
             rollData,
             secrets
         });
-        data.enrichedShortDescription = await TextEditor.enrichHTML(this.item.system?.description?.short, {
+        data.enrichedShortDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.description?.short, {
             rollData,
             secrets
         });
-        data.enrichedGMNotes = await TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
+        data.enrichedGMNotes = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
             rollData,
             secrets
         });
 
         if (data?.item?.type === "starshipAction") {
-            data.enrichedEffectNormal = await TextEditor.enrichHTML(this.item.system?.effectNormal, {
+            data.enrichedEffectNormal = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.effectNormal, {
                 rollData,
                 secrets
             });
-            data.enrichedEffectCritical = await TextEditor.enrichHTML(this.item.system?.effectCritical, {
+            data.enrichedEffectCritical = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.effectCritical, {
                 rollData,
                 secrets
             });
@@ -310,13 +314,13 @@ export class ItemSheetSFRPG extends ItemSheet {
                 for (const value of data.itemData.formula) {
                     const effect = {};
 
-                    effect.enrichedEffectNormal = await TextEditor.enrichHTML(value.effectNormal, {
+                    effect.enrichedEffectNormal = await foundry.applications.ux.TextEditor.enrichHTML(value.effectNormal, {
                         rollData,
                         secrets
                     });
                     effect.targetNormal = `system.formula.${ct}.effectNormal`;
 
-                    effect.enrichedEffectCritical = await TextEditor.enrichHTML(value.effectCritical, {
+                    effect.enrichedEffectCritical = await foundry.applications.ux.TextEditor.enrichHTML(value.effectCritical, {
                         rollData,
                         secrets
                     });
@@ -647,6 +651,29 @@ export class ItemSheetSFRPG extends ItemSheet {
             formData["system.turnEvents"] = final;
         }
 
+        // Handle prototype token movement changes on drone chassis mainMovement differing from previous value
+        if (this.item && this.actor && this.item?.type === "chassis") {
+            const oldMainMovement = this.item?.system?.speed?.mainMovement;
+            const newMainMovement = formData["system.speed.mainMovement"];
+            if (oldMainMovement !== newMainMovement) {
+                this.actor.update({'prototypeToken.movementAction': CONFIG.SFRPG.movementOptions[newMainMovement]});
+                console.log(`Starfinder | Updated prototype token movement action on ${this.actor.name} (${this.actor.id}) to '${CONFIG.SFRPG.movementOptions[newMainMovement]}'`);
+            }
+        }
+
+        // Allow basic +/- math in quantity field
+        const inputQuantity = formData["system.quantity"];
+        if (inputQuantity) {
+            const oldValue = this.item?.system?.quantity;
+            let newValue = oldValue;
+            const isDelta = inputQuantity.startsWith("+") || inputQuantity.startsWith("-");
+            const sanitizedInput = inputQuantity.replace(/[^0-9|+|-]/g, '');
+            if (sanitizedInput) {
+                newValue = isDelta ? Number(oldValue) + Number(sanitizedInput) : Number(sanitizedInput);
+            }
+            formData["system.quantity"] = newValue;
+        }
+
         // Update the Item
         return super._updateObject(event, formData);
     }
@@ -842,7 +869,6 @@ export class ItemSheetSFRPG extends ItemSheet {
      */
     _onModifierCreate(event) {
         event.preventDefault();
-        const target = $(event.currentTarget);
 
         this.item.addModifier({
             name: "New Modifier"
@@ -1085,7 +1111,6 @@ export class ItemSheetSFRPG extends ItemSheet {
         const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
         const currentImage = visualization[visualizationIndex].image || this.item.img;
 
-        const attr = event.currentTarget.dataset.edit;
         const fp = new FilePicker({
             type: "image",
             current: currentImage,

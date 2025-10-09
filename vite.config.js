@@ -2,27 +2,31 @@ import esbuild from "esbuild";
 import fs from "fs-extra";
 import path from "path";
 import * as Vite from "vite";
+import { cook } from "./build/cook.js";
 
 /** @type {import('vite').UserConfig} */
 const config = Vite.defineConfig(async ({ command }) => {
 
+    const promises = [];
+
     if (command === "build") {
         const filesToCopy = ["changelist.md", "README.md", "OGL", "LICENSE"];
 
-        fs.ensureDir("dist");
-        fs.promises.cp("src/packs", "dist/packs", {recursive: true});
-        for (const file of filesToCopy) {
-            fs.copyFile(file, `dist/${file}`);
-        }
+        await fs.ensureDir("dist/packs"); // Ensure `dist` and `dist/packs` exist
+        promises.push(...filesToCopy.map(file => fs.promises.copyFile(file, `dist/${file}`)));
+
+        if (fs.readdirSync("dist/packs").length === 0) promises.push(cook()); // If we created `dist/packs` just now, run cook
 
     }
 
     // Create dummy files for vite
     const message = "This file is for vite and is not copied to a build";
-    await Promise.all([
+    promises.push([
         fs.writeFile("./index.html", `<h1>${message}</h1>\n`),
         fs.writeFile("./index.js", `/** ${message} */\n\nimport "./src/sfrpg.js";\n`)
     ]);
+
+    await Promise.all(promises);
 
     return {
         root: "src/",
@@ -43,8 +47,8 @@ const config = Vite.defineConfig(async ({ command }) => {
             outDir: path.resolve(__dirname, "dist"),
             emptyOutDir: false,
             sourcemap: true,
-            brotliSize: true,
             minify: false,
+            cssMinify: "esbuild",
             lib: {
                 name: "sfrpg",
                 entry: path.resolve(__dirname, "index.js"),

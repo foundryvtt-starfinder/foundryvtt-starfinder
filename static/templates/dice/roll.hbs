@@ -1,40 +1,42 @@
-<div class="sfrpg dice-roll"
-     data-sfrpg-dice-total="{{total}}"
-     {{#each htmlData}}
-     data-sfrpg-{{this.name}}="{{this.value}}"
-     {{/each}}>
+<div class="sfrpg dice-roll flexrow" data-sfrpg-dice-total="{{total}}"
+    {{#each htmlData}}
+    data-sfrpg-{{this.name}}="{{this.value}}"
+    {{/each}}
+data-action="expandRoll">
     {{#if flavor}}
-    <div class="dice-flavor">{{flavor}}</div>
+        <div class="dice-flavor">{{flavor}}</div>
     {{/if}}
     {{#if rollNotes}}
-    <div style="text-align: left;">{{rollNotes}}</div>
+        <div style="text-align: left;">{{rollNotes}}</div>
     {{/if}}
     <div class="dice-result">
         <div class="dice-formula">{{formula}}</div>
         <div class="dice-tooltip">
-            <div class="dice-formula-breakdown">
-                {{{breakdown}}}
+            <div class="wrapper">
+                <div class="dice-formula-breakdown">
+                    {{{breakdown}}}
+                </div>
+                {{{tooltip}}}
+                {{#each customTooltip}}
+                    <section class="tooltip-part">
+                        <div class="dice">
+                            <header class="part-header flexrow">
+                                <span class="part-formula">{{this.formula}}</span>
+                                <span class="part-total">{{this.total}}</span>
+                            </header>
+                            <ol class="dice-rolls">
+                                <li class="roll die d{{this.faces}}">{{this.total}}</li>
+                            </ol>
+                        </div>
+                    </section>
+                {{/each}}
             </div>
-            {{{tooltip}}}
-            {{#each customTooltip}}
-                <section class="tooltip-part">
-                    <div class="dice">
-                        <header class="part-header flexrow">
-                            <span class="part-formula">{{this.formula}}</span>
-                            <span class="part-total">{{this.total}}</span>
-                        </header>
-                        <ol class="dice-rolls">
-                            <li class="roll die d{{this.faces}}">{{this.total}}</li>
-                        </ol>
-                    </div>
-                </section>
-            {{/each}}
         </div>
-        <h4 class="dice-total">{{total}}</h4>
+        <h3 class="dice-total">{{total}}</h3>
     </div>
     <footer class="dice-footer">
         {{#each tags as |tag|}}
-        <span class="{{tag.tag}}"> {{tag.text}}</span>
+            <span class="{{tag.tag}}"> {{tag.text}}</span>
         {{/each}}
     </footer>
 </div>

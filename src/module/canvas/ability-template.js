@@ -12,7 +12,7 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
    * @param {number} distance            The distance/size of the template
    * @param {string} color               An optional color for the template to use
    * @param {string} texture             An texture color for the template to use
-   * @returns {AbilityTemplate|null}     The template object, or null if the data does not produce a template
+   * @returns {?AbilityTemplate}     The template object, or null if the data does not produce a template
    */
     static fromData({type, distance, color, texture}) {
         if (!["cone", "circle", "rect", "ray"].includes(type)) return null;
@@ -64,10 +64,9 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
     /**
    * Creates a preview of the spell template
    *
-   * @param {Event} event   The initiating click event
    * @returns {Promise<boolean>} Returns true if placed, or false if cancelled
    */
-    async drawPreview(event) {
+    async drawPreview() {
         const initialLayer = canvas.activeLayer;
         await this.draw();
         this.active = true;
@@ -126,7 +125,7 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
                 canvas.app.view.onwheel = null;
                 // Clear highlight
                 this.active = false;
-                const hl = canvas.grid.getHighlightLayer(this.highlightId);
+                const hl = canvas.interface.grid.getHighlightLayer(this.highlightId);
                 hl?.clear();
                 _clear();
 
@@ -204,4 +203,3 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
 
     }
 }
-

@@ -1,6 +1,3 @@
-import { ActorSFRPG } from "../actor/actor.js";
-import { ItemSFRPG } from "../item/item.js";
-
 /**
  * A specialized Dialog subclass for casting a spell item at a certain level
  * @type {Dialog}
@@ -137,7 +134,7 @@ export class SpellCastDialog extends Dialog {
         }
 
         // Render the Spell casting template
-        const html = await renderTemplate("systems/sfrpg/templates/apps/spell-cast.hbs", {
+        const html = await foundry.applications.handlebars.renderTemplate("systems/sfrpg/templates/apps/spell-cast.hbs", {
             item: item,
             hasSlots: spellLevels.length > 0,
             consume: spellLevels.length > 0,
@@ -167,4 +164,3 @@ export class SpellCastDialog extends Dialog {
         });
     }
 }
-

@@ -2,11 +2,6 @@
   "_id": "8qwgKhbzm77VuNgQ",
   "name": "Orders",
   "type": "starshipAction",
-  "_stats": {
-    "coreVersion": 12,
-    "systemId": "sfrpg",
-    "systemVersion": "0.28.0"
-  },
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
     "type": "",
@@ -34,7 +29,7 @@
       },
       {
         "name": "Gunnery",
-        "formula": "max(@captain.attributes.baseAttackBonus.value, @captain.skills.pil.ranks) + @captain.abilities.dex.mod"
+        "formula": "max(@captain.attributes.baseAttackBonus.value, @captain.skills.pil.ranks, @captain.skills.gun.mod) + @captain.abilities.dex.mod"
       },
       {
         "name": "Piloting",

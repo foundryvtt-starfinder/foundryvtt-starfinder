@@ -8,7 +8,6 @@
 @sfrpgYellow: #ecde70;
 
 :root {
-    --sfrpg-theme-blue: #782e22; //This is overriden to @sfrpgBlue if the custom theme is enabled
     --font-primary: "Exo 2", sans-serif;
 }
 
@@ -63,16 +62,22 @@
 /*  Flexbox                                  */
 /* ----------------------------------------- */
 
-.flexrow {
+// V13 TODO: reassess these flexbox styles. I've copied down what seemed to be the immediate ones from foundry2.css
+.flexrow-sfrpg {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: center;
 
     > * {
         flex: 1;
     }
-
+    .noflex {
+        flex: none;
+    }
+    .flex0 {
+        flex: 0;
+    }
     .flex1 {
         flex: 1;
     }
@@ -87,15 +92,21 @@
     }
 }
 
-.flexcol {
+.flexcol-sfrpg {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
 
     > * {
-        flex: 1;
+        flex: none;
     }
 
+    .noflex {
+        flex: none;
+    }
+    .flex0 {
+        flex: 0;
+    }
     .flex1 {
         flex: 1;
     }

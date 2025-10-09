@@ -7,21 +7,26 @@ This is a game system definition of the Starfinder 1st edition RPG for the aweso
 If you have quesions or just want to chat about all things Starfinder, then join us on the official FoundryVTT discord server [here](https://discord.gg/foundryvtt).
 
 ## Version support table
-If you wish to use Starfinder with older versions of FoundryVTT, the following table will help:
-- FoundryVTT v0.5.5 or earlier: The latest supported Starfinder system version is v0.2.2
-- FoundryVTT v0.5.6 till v0.6.6: The latest supported Starfinder system version is v0.5.1
-- FoundryVTT v0.7.0 till v0.7.10: The latest supported Starfinder system version is v0.10.0.0
-- FoundryVTT v0.8.0 till v9.269: The latest supported Starfinder system version is v0.18.3
-- FoundryVTT v9.269 till v9.280: The latest supported Starfinder system version is v0.19.2
-- FoundryVTT v10.282 till v10.291: The latest supported Starfinder system version is v0.23.0
-- FoundryVTT v11.299 till v11.315: The latest supported Starfinder system version is v0.25.3
-- FoundryVTT v12 and up: The latest supported Starfinder system version is [the current version](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/latest)
+If you wish to use Starfinder with older versions of FoundryVTT, the following list will help:
+- FoundryVTT v0.5.5 or earlier: The latest supported Starfinder system version is [v0.2.2](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.2.2)
+- FoundryVTT v0.5.6 to v0.6.6: The latest supported Starfinder system version is [v0.5.1](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.5.1.0)
+- FoundryVTT v0.7.0 to v0.7.10: The latest supported Starfinder system version is [v0.10.0](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.10.0.0)
+- FoundryVTT v0.8.0 to v9.269: The latest supported Starfinder system version is [v0.18.3](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.18.3)
+- FoundryVTT v9.269 to v9.280: The latest supported Starfinder system version is [v0.19.2](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.19.2)
+- FoundryVTT v10 (10.282 to 10.291): The latest supported Starfinder system version is [v0.23.0](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.23.0)
+- FoundryVTT v11 (11.299 to 11.315): The latest supported Starfinder system version is [v0.25.3](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/v0.25.3)
+- FoundryVTT v12 (12.324 to 12.343): The latest supported Starfinder system version is [v0.27.3](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/tag/0.27.3)
+- FoundryVTT v13 (13.341+): The latest supported Starfinder system version is [the latest release](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/latest).
 
 Please keep in mind the Starfinder system identifier changed with Starfinder system version v0.3 from 'starfinder' to 'sfrpg'. If you have a world older than this version, you will have to update your world.json file to reflect this, or your world will not load.
 
 ## Installation
-1. Download the current release that is compatible with your version of Foundry VTT from the [releases tab](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases). Unzip the files and place them in the data folder for your installation. See [https://foundryvtt.com/article/configuration#where-user-data](https://foundryvtt.com/article/configuration#where-user-data) for more details about where your data is stored for Foundry. Make sure to put the files in a folder named `sfrpg` in the `systems` directory. _NOTE: This is no longer the perfered method of installing modules. Please use the module browser within foundry._
-2. Copy this link and use Foundry's Module manager to install it: `https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/src/system.json`
+The preferred installation method is through the Foundry Package Manager. To do this, open Foundry Virtual Tabletop to the Setup page, click "Game Systems" and then "Install System". Type "Starfinder" into the search bar, locate the package, and click the install button. That's it! To get system updates, just use the integrated update feature within Foundry. If you find that your system is not updating to the latest available, make sure that you are using a compatible Foundry version (table above). If so, many times issues with updating can be resolved by uninstalling and then reinstalling the system (this shouldn't affect any of your world data, buut it never hurts to make backups!).
+
+### Alternative installation methods
+You can also install a specific system version rather than the latest one in one of two ways. _NOTE: These are not the preferred installation methods for this package, and so should only be used where use of the package manager is not possible._
+1. Manifest URL Method (only system version 0.27.1 and above): Copy the link to the `system.json` file attached to the [release version](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases) you are trying to install. In the "Install System" window within foundry, paste this link in the "Manifest URL" text box at the bottom of the window and click "Install". If you want the latest version, you can copy [this link](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/latest/download/system.json).
+2. Full Manual Installation (system versions 0.27.0 and below): Download the `.zip` file from the release that is compatible with your version of Foundry VTT from the [releases tab](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases). Unzip the files and place them in the data folder for your installation. See [https://foundryvtt.com/article/configuration#where-user-data](https://foundryvtt.com/article/configuration#where-user-data) for more details about where your data is stored for Foundry. Make sure to put the files in a folder named `sfrpg` in the `systems` directory.
 
 ## Use
 

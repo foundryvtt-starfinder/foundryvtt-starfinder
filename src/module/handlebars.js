@@ -40,7 +40,7 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/sfrpg/templates/items/parts/effect-turn-events.hbs"
     ];
 
-    return loadTemplates(templatePaths);
+    return foundry.applications.handlebars.loadTemplates(templatePaths);
 };
 
 export function setupHandlebars() {
@@ -79,22 +79,22 @@ export function setupHandlebars() {
         return !value;
     });
 
-    Handlebars.registerHelper("add", function(v1, v2, options) {
+    Handlebars.registerHelper("add", function(v1, v2) {
         'use strict';
         return v1 + v2;
     });
 
-    Handlebars.registerHelper("sub", function(v1, v2, options) {
+    Handlebars.registerHelper("sub", function(v1, v2) {
         'use strict';
         return v1 - v2;
     });
 
-    Handlebars.registerHelper("mult", function(v1, v2, options) {
+    Handlebars.registerHelper("mult", function(v1, v2) {
         'use strict';
         return v1 * v2;
     });
 
-    Handlebars.registerHelper("div", function(v1, v2, options) {
+    Handlebars.registerHelper("div", function(v1, v2) {
         'use strict';
         return v1 / v2;
     });
@@ -104,7 +104,7 @@ export function setupHandlebars() {
         return !value;
     });
 
-    Handlebars.registerHelper('greaterThan', function(v1, v2, options) {
+    Handlebars.registerHelper('greaterThan', function(v1, v2) {
         'use strict';
         if (v1 > v2) {
             return true;
@@ -167,7 +167,7 @@ export function setupHandlebars() {
     });
 
     Handlebars.registerHelper('console', function(...args) {
-        let options = args.pop();
+        args.pop();
         console.log(...args);
     });
 
@@ -268,9 +268,9 @@ export function setupHandlebars() {
         const tagParams = [
             `value="${Handlebars.escapeExpression(value)}"`,
             options.hash.hidden && 'hidden',
-            (value === options.hash.selected) && 'selected',
+            (value === options.hash.selected) && 'selected'
         ].filter(Boolean).join(' ');
-        const safeLabel = Handlebars.escapeExpression(options.hash.localize? game.i18n.localize(label): label);
+        const safeLabel = Handlebars.escapeExpression(options.hash.localize ? game.i18n.localize(label) : label);
         return new Handlebars.SafeString(`<option ${tagParams}>${safeLabel}</option>`);
     });
 

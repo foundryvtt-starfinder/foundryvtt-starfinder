@@ -19,8 +19,8 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.
  * @param {String}        data.notes         Any notes that are useful for this modifier.
  * @param {String}        data.subtab        What subtab should this appear on in the character sheet?
  * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
- * @param {String|null}   data.id            Override a random id with a specific one.
- * @param {Object|null}   data.damage        If this modifier is a damage section modifier, the damage type and group
+ * @param {?String}       data.id            Override a random id with a specific one.
+ * @param {?Object}       data.damage        If this modifier is a damage section modifier, the damage type and group
  * @param {String}        data.limitTo       If this modifier is on an item, should the modifier affect only that item?
  */
 export default class SFRPGModifier extends foundry.abstract.DataModel {
@@ -174,10 +174,12 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         };
     }
 
+    /** @type {ActorSFRPG} */
     get actor() {
         return this.parent instanceof ActorSFRPG ? this.parent : this.parent.actor;
     }
 
+    /** @type {?ItemSFRPG} */
     get item() {
         return this.parent instanceof ItemSFRPG ? this.parent : null;
     }
@@ -186,6 +188,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         return this.actor.isToken ? this.actor.token : this.actor.getActiveTokens(true, true);
     }
 
+    /** @type {Boolean} */
     get hasDamageSection() {
         return this.constructor._hasDamageSection(this);
     }

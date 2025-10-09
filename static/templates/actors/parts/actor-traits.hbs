@@ -23,17 +23,6 @@
         {{/if}}
     </div>
 
-    {{!-- Key Ability --}}
-    {{#if (not isDrone)}}
-    <div class="form-group" data-tooltip="<strong>{{localize "SFRPG.KeyAbility"}}</strong><br/>@system.attributes.keyability">
-        <label>{{localize "SFRPG.KeyAbility"}}</label>
-        <select class="actor-keyability" name="system.attributes.keyability">
-            {{selectOption "" "Choose One" selected=system.attributes.keyability}}
-            {{selectOptions (sfrpg "abilities") selected=system.attributes.keyability}}
-        </select>
-    </div>
-    {{/if}}
-
     {{!-- Senses --}}
     <div class="form-group {{#unless system.traits.senses}}inactive{{/unless}}" data-tooltip="<strong>{{localize "SFRPG.SensesTypes.Senses"}}</strong><br/>@system.traits.senses">
         <label>{{localize "SFRPG.SensesTypes.Senses"}}</label>
@@ -236,27 +225,12 @@
 
     {{/if}}
 
-    {{!-- NPC Traits --}}
+    {{!-- Aura (NPC) --}}
     {{#if isNPC}}
-
-        {{!-- Aura (NPC) --}}
         <div class="form-group" data-tooltip="<strong>{{localize "SFRPG.NPCSheet.Header.AuraPlaceHolderText"}}</strong><br/>@system.details.aura">
             <label>{{localize "SFRPG.NPCSheet.Header.AuraPlaceHolderText"}}</label>
             <input type="text" name="system.details.aura" value="{{system.details.aura}}" />
         </div>
-
-        {{!-- Ability DC (NPC) --}}
-        <div class="form-group" {{createTippy title="SFRPG.NPCSheet.Header.AbilityDC" subtitle="@attributes.abilityDC.value" tooltips="SFRPG.NPCSheet.Header.AbilityDCTooltip"}}>
-            <label>{{localize "SFRPG.NPCSheet.Header.AbilityDC"}}</label>
-            <input type="text" name="system.attributes.abilityDC.base" value="{{system.attributes.abilityDC.base}}" placeholder="0"/>
-        </div>
-
-        {{!-- Base Spell DC (NPC) --}}
-        <div class="form-group" {{createTippy title="SFRPG.NPCSheet.Header.BaseSpellDC" subtitle="@attributes.baseSpellDC.value" tooltips="SFRPG.NPCSheet.Header.BaseSpellDCTooltip"}}>
-            <label>{{localize "SFRPG.NPCSheet.Header.BaseSpellDC"}}</label>
-            <input type="text" name="system.attributes.baseSpellDC.base" value="{{system.attributes.baseSpellDC.base}}" placeholder="0"/>
-        </div>
-
     {{/if}}
 
     {{!-- Special Traits --}}
