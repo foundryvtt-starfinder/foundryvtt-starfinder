@@ -164,6 +164,7 @@ export default class SFRPGTimedEffect {
             }
         } else if (resetActivationTime) {
             this.activeDuration.activationTime = -1;
+            this.activeDuration.activationTurn = "parent";
 
             if (game.combat) {
                 this.activeDuration.expiryInit = -1;
@@ -282,6 +283,7 @@ class SFRPGTimedEnable extends SFRPGTimedEffect {
 
         if (resetActivationTime) {
             delta['system.activeDuration.activationTime'] = this.activeDuration.activationTime;
+            delta['system.activeDuration.activationTurn'] = this.activeDuration.activationTurn;
             delta['system.activeDuration.expiryInit'] = this.activeDuration.expiryInit;
         }
 
