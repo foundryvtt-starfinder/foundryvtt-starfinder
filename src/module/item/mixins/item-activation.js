@@ -98,6 +98,12 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 if (duration.units === "turn") {
                     endsOn = "onTurnEnd";
                     expiryTurn = game.combat?.combatant?.actor?.uuid || "parent";
+                } else if (game.combat?.combatant) {
+                    const actorIndex = game.combat.turns.findIndex(combatant => combatant.actor.uuid === this.actor.uuid);
+                    const currentIndex = game.combat.turns.findIndex(combatant => combatant.id === game.combat.combatant.id);
+                    if (actorIndex < currentIndex) {
+                        endTime += CONFIG.SFRPG.effectDurationFrom.round;
+                    }
                 }
             } else {
                 endTime = Infinity;
