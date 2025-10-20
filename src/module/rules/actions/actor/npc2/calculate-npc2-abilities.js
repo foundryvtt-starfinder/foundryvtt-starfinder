@@ -1,4 +1,4 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateNPC2Abilities", (fact, context) => {
@@ -56,21 +56,14 @@ export default function(engine) {
             );
 
             const bonus = Object.entries(abilityMods).reduce((sum, mod) => {
-                if (mod[1] === null || mod[1].length < 1) return sum;
-
-                if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                    for (const bonus of mod[1]) {
-                        sum += addModifier(bonus, data, ability, "SFRPG.AbilityScoreBonusModifiedTooltip");
-                    }
-                } else {
-                    sum += addModifier(mod[1], data, ability, "SFRPG.AbilityScoreBonusModifiedTooltip");
+                for (const bonus of mod[1]) {
+                    sum += addModifier(bonus, data, ability, "SFRPG.AbilityScoreBonusModifiedTooltip");
                 }
-
                 return sum;
             }, 0);
 
             ability.mod += bonus;
-            ability.value = Math.floor(10 + (ability.mod * 2));
+            ability.value = Math.floor(10  + (ability.mod * 2));
         }
 
         return fact;

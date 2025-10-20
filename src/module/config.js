@@ -3,6 +3,8 @@ import CheckEnricher from "./system/enrichers/check.js";
 import IconEnricher from "./system/enrichers/icon.js";
 import TemplateEnricher from "./system/enrichers/template.js";
 
+/** @import { ItemSFRPG } from "./item/item.js" */
+
 // Namespace SFRPG Configuration Values
 export const SFRPG = {};
 
@@ -187,7 +189,10 @@ SFRPG.currencies = {
     "bp": "SFRPG.Currencies.BPs"
 };
 
-// Damage Types
+/**
+ * The valid energy damage types in SFRPG
+ * @type {Object}
+ */
 SFRPG.energyDamageTypes = {
     "acid": "SFRPG.Damage.Types.Acid",
     "cold": "SFRPG.Damage.Types.Cold",
@@ -196,12 +201,56 @@ SFRPG.energyDamageTypes = {
     "sonic": "SFRPG.Damage.Types.Sonic"
 };
 
+/**
+ * The valid kinetic damage types in SFRPG
+ * @type {Object}
+ */
 SFRPG.kineticDamageTypes = {
     "bludgeoning": "SFRPG.Damage.Types.Bludgeoning",
     "piercing": "SFRPG.Damage.Types.Piercing",
     "slashing": "SFRPG.Damage.Types.Slashing"
 };
 
+/**
+ * Valid damage types that are not kinetic or energy in SFRPG
+ * @type {Object}
+ */
+SFRPG.otherDamageTypes = {
+    "radiation": "SFRPG.Damage.Types.Radiation",
+    "nonlethal": "SFRPG.Damage.Types.Nonlethal"
+};
+
+/**
+ * All valid damage types in SFRPG
+ * @type {Object}
+ */
+SFRPG.damageTypes = {
+    ...SFRPG.energyDamageTypes,
+    ...SFRPG.kineticDamageTypes,
+    ...SFRPG.otherDamageTypes
+};
+
+/**
+ * The valid healing types in SFRPG
+ * @type {Object}
+ */
+SFRPG.healingTypes = {
+    "healing": "SFRPG.HealingTypesHealing"
+};
+
+/**
+ * Combined list of all valid damage and healing types in SFRPG
+ * @type {Object}
+ */
+SFRPG.damageAndHealingTypes = {
+    ...SFRPG.damageTypes,
+    ...SFRPG.healingTypes
+};
+
+/**
+ * Conversions between damage types and an acronym representation
+ * @type {Object}
+ */
 SFRPG.damageTypeToAcronym = {
     "acid": "A",
     "cold": "C",
@@ -211,13 +260,6 @@ SFRPG.damageTypeToAcronym = {
     "bludgeoning": "B",
     "piercing": "P",
     "slashing": "S"
-};
-
-SFRPG.damageTypes = {
-    ...SFRPG.energyDamageTypes,
-    ...SFRPG.kineticDamageTypes,
-    "radiation": "SFRPG.Damage.Types.Radiation",
-    "nonlethal": "SFRPG.Damage.Types.Nonlethal"
 };
 
 SFRPG.damageTypeOperators = {
@@ -418,11 +460,6 @@ SFRPG.targetTypes = {};
 
 SFRPG.timePeriods = {};
 
-// Healing types
-SFRPG.healingTypes = {
-    "healing": "SFRPG.HealingTypesHealing"
-};
-
 SFRPG.spellPreparationModes = {
     "always": "SFRPG.SpellPreparationModesAlways",
     "innate": "SFRPG.SpellPreparationModesInnate"
@@ -458,7 +495,7 @@ SFRPG.skills = {
     "mys": "SFRPG.SkillMys",
     "per": "SFRPG.SkillPer",
     "pro": "SFRPG.SkillPro",
-    "phs": "SFRPG.SkillPsc",
+    "phs": "SFRPG.SkillPhs",
     "pil": "SFRPG.SkillPil",
     "sen": "SFRPG.SkillSen",
     "sle": "SFRPG.SkillSle",
@@ -466,11 +503,9 @@ SFRPG.skills = {
     "sur": "SFRPG.SkillSur"
 };
 
-SFRPG.controlSkills = {
-    "pil": "SFRPG.SkillPil",
-    "ath": "SFRPG.SkillAth",
-    "sur": "SFRPG.SkillSur",
-    "none": "SFRPG.None"
+SFRPG.starshipSkills = {
+    ...SFRPG.skills,
+    "gun": "SFRPG.SkillGun"
 };
 
 // Weapon Types
@@ -823,9 +858,7 @@ SFRPG.featTypes = {
  * @property {"feat"} type The type of item to create. Features are type "feat", so there is no need to create anything else.
  * @property {String} "*" A data path and a value to be added to the created item.
  */
-/**
- * @type {Object.<string, FeatureCategory>}
- */
+
 SFRPG.featureCategories = {
     "feat": {
         category: "SFRPG.ActorSheet.Features.Categories.Feats",
@@ -880,7 +913,6 @@ SFRPG.specialAbilityTypes = {
 
 /**
  * The avaialbe sizes for an Actor
- * @type {Object}
  */
 SFRPG.actorSizes = {
     "fine": "SFRPG.SizeFine",
@@ -939,6 +971,13 @@ SFRPG.spellcastingClasses = {
     "precog": "SFRPG.AllowedClasses.Precog",
     "tech": "SFRPG.AllowedClasses.Tech",
     "wysh": "SFRPG.AllowedClasses.Wysh"
+};
+
+SFRPG.spellcastingClassSlugs = {
+    "myst": "mystic",
+    "precog": "precog",
+    "tech": "technomancer",
+    "wysh": "witchwarper"
 };
 
 SFRPG.itemActionTypes = {
@@ -1355,7 +1394,7 @@ SFRPG.starshipSystemPatch = {
     "robust": "SFRPG.StarshipSheet.Critical.Patch.Robust"
 };
 
-// starship value maps
+// Starship value maps
 SFRPG.starshipSystemStatus = {
     "nominal": "SFRPG.StarshipSheet.Critical.Status.Nominal",
     "glitching": "SFRPG.StarshipSheet.Critical.Status.Glitching",
@@ -1373,9 +1412,54 @@ SFRPG.starshipSizeMod = {
     "colossal": -8
 };
 
+SFRPG.starshipTierToBuildpoints = {
+    "1/4": 25,
+    "0.25": 25,
+    "1/3": 30,
+    "0.3333333333333333": 30,
+    "1/2": 40,
+    "0.5": 40,
+    "1": 55,
+    "2": 75,
+    "3": 95,
+    "4": 115,
+    "5": 135,
+    "6": 155,
+    "7": 180,
+    "8": 205,
+    "9": 230,
+    "10": 270,
+    "11": 310,
+    "12": 350,
+    "13": 400,
+    "14": 450,
+    "15": 500,
+    "16": 600,
+    "17": 700,
+    "18": 800,
+    "19": 900,
+    "20": 1000
+};
+
 /* --------------------------------*
  * Vehicle properties and values *
  *--------------------------------*/
+
+SFRPG.vehicleControlSkills = {
+    "pil": "SFRPG.SkillPil",
+    "ath": "SFRPG.SkillAth",
+    "sur": "SFRPG.SkillSur",
+    "none": "SFRPG.None"
+};
+
+SFRPG.vehicleCoverTypes = {
+    "none"    : "SFRPG.Vehicles.VehicleCoverTypes.None",
+    "cover"   : "SFRPG.Vehicles.VehicleCoverTypes.Cover",
+    "soft"    : "SFRPG.Vehicles.VehicleCoverTypes.Soft",
+    "partial" : "SFRPG.Vehicles.VehicleCoverTypes.Partial",
+    "improved": "SFRPG.Vehicles.VehicleCoverTypes.Improved",
+    "total"   : "SFRPG.Vehicles.VehicleCoverTypes.Total"
+};
 
 SFRPG.vehicleSizes = {
     "diminutive": "SFRPG.SizeDim",
@@ -1399,15 +1483,6 @@ SFRPG.vehicleTypes = {
     "landAW": "SFRPG.Vehicles.VehicleTypes.Landaw",
     "landT": "SFRPG.Vehicles.VehicleTypes.Landt",
     "landTW": "SFRPG.Vehicles.VehicleTypes.Landtw"
-};
-
-SFRPG.vehicleCoverTypes = {
-    "none"    : "SFRPG.Vehicles.VehicleCoverTypes.None",
-    "cover"   : "SFRPG.Vehicles.VehicleCoverTypes.Cover",
-    "soft"    : "SFRPG.Vehicles.VehicleCoverTypes.Soft",
-    "partial" : "SFRPG.Vehicles.VehicleCoverTypes.Partial",
-    "improved": "SFRPG.Vehicles.VehicleCoverTypes.Improved",
-    "total"   : "SFRPG.Vehicles.VehicleCoverTypes.Total"
 };
 
 /**
@@ -1498,6 +1573,11 @@ SFRPG.modifierEffectTypes = {
     "starship-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipSpeed",
     "starship-turn-distance": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipTurnDistance",
     "starship-piloting-skill": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipPilotingSkill"
+};
+
+SFRPG.effectTypes = {
+    "effect": "SFRPG.Items.Categories.Effect",
+    "condition": "SFRPG.Condition"
 };
 
 SFRPG.modifierType = {
@@ -2096,6 +2176,34 @@ SFRPG.counterClassesLabel = {
     "solarianAttunement": "SFRPG.CounterClassesSolarian"
 };
 
+/**
+ * Actor resource range modes
+ */
+SFRPG.rangeModes = {
+    "post": "SFRPG.ItemSheet.ActorResource.RangeModePost",
+    "immediate": "SFRPG.ItemSheet.ActorResource.RangeModeImmediate"
+};
+
+/**
+ * Actor resource calculation stages
+ */
+SFRPG.calculationStages = {
+    "early": "SFRPG.ItemSheet.ActorResource.StageEarly",
+    "late": "SFRPG.ItemSheet.ActorResource.StageLate"
+};
+
+/**
+ * Mathematical comparators
+ */
+SFRPG.mathComparators = {
+    "eq": "SFRPG.ItemSheet.ActorResource.VisualizationsModeEqual",
+    "neq": "SFRPG.ItemSheet.ActorResource.VisualizationsModeNotEqual",
+    "lt": "SFRPG.ItemSheet.ActorResource.VisualizationsModeLesserThan",
+    "lte": "SFRPG.ItemSheet.ActorResource.VisualizationsModeLesserThanEqual",
+    "gt": "SFRPG.ItemSheet.ActorResource.VisualizationsModeGreaterThan",
+    "gte": "SFRPG.ItemSheet.ActorResource.VisualizationsModeGreaterThanEqual"
+};
+
 SFRPG.droneHitpointsPerLevel = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170, 190, 210, 230];
 SFRPG.droneResolveMethod = (droneLevel) => { return (droneLevel >= 10 ? Math.floor(droneLevel / 2) : 0); };
 SFRPG.droneACBonusPerLevel = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
@@ -2263,6 +2371,26 @@ SFRPG.containableTypes = {
     "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories",
     "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
     "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
+};
+
+SFRPG.storageIdentifiers = {
+    ""              : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierItem",
+    "armorUpgrade"  : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierArmorUpgrade",
+    "weaponSlot"    : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierWeaponSlot",
+    "fusion"        : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierFusion",
+    "spellSlot"     : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierSpellSlot",
+    "ammunitionSlot": "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierAmmunitionSlot"
+};
+
+SFRPG.storageTypes = {
+    "slot": "SFRPG.ActorSheet.Inventory.Container.StorageTypeSlot",
+    "bulk": "SFRPG.ActorSheet.Inventory.Container.StorageTypeBulk"
+};
+
+SFRPG.storageWeightProperties = {
+    ""     : "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyItems",
+    "slots": "SFRPG.ActorSheet.Inventory.Container.CapacityPropertySlots",
+    "level": "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyLevel"
 };
 
 SFRPG.combatTypes = [

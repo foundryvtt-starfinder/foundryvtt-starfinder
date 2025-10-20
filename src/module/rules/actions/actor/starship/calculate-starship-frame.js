@@ -153,37 +153,9 @@ export default function(engine) {
             delete data.currency.bp;
         }
 
-        const tierToBuildpoints = {
-            "1/4": 25,
-            "0.25": 25,
-            "1/3": 30,
-            "1/2": 40,
-            "0.5": 40,
-            "1": 55,
-            "2": 75,
-            "3": 95,
-            "4": 115,
-            "5": 135,
-            "6": 155,
-            "7": 180,
-            "8": 205,
-            "9": 230,
-            "10": 270,
-            "11": 310,
-            "12": 350,
-            "13": 400,
-            "14": 450,
-            "15": 500,
-            "16": 600,
-            "17": 700,
-            "18": 800,
-            "19": 900,
-            "20": 1000
-        };
-
         data.attributes.bp = {
             value: 0,
-            max: tierToBuildpoints[data.details.tier],
+            max: CONFIG.SFRPG.starshipTierToBuildpoints[data.details.tier],
             tooltip: []
         };
 
@@ -224,8 +196,10 @@ export default function(engine) {
                 value: 0,
                 tooltip: []
             };
-            data.attributes.complement.min = 0;
-            data.attributes.complement.max = 0;
+            data.attributes.complement = {
+                min: 0,
+                max: 0
+            };
 
             data.attributes.hp.increment = 0;
             data.attributes.hp.max = 0;
@@ -247,8 +221,10 @@ export default function(engine) {
                 value: frame.system.expansionBays,
                 tooltip: []
             };
-            data.attributes.complement.min = frame.system.crew.minimum;
-            data.attributes.complement.max = frame.system.crew.maximum;
+            data.attributes.complement = {
+                min: frame.system.crew.minimum,
+                max: frame.system.crew.maximum
+            };
 
             data.attributes.hp.increment = frame.system.hitpoints.increment;
             applyHullPointIncrementModifiers(fact, context, data);

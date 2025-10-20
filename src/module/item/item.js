@@ -256,23 +256,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     /**
-     * Check to ensure that this item has a modifiers data object set, if not then set it.
-     * These will always be needed from hence forth, so we'll just make sure that they always exist.
-     *
-     * @param {Object}      data The item data to check against.
-     *
-     * @returns {Object}         The modified data object with the modifiers data object added.
-     */
-    _ensureHasModifiers(data) {
-        if (!foundry.utils.hasProperty(data, "modifiers")) {
-            console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
-            data.modifiers = [];
-        }
-
-        return data;
-    }
-
-    /**
      * Extend preCreate to create class name slugs.
      * See the base Actor class for API documentation of this method
      *
@@ -488,7 +471,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * @returns {Object} An object containing the item's rollData (including its owners), and chat message properties.
      */
     async getChatData() {
-        const data = foundry.utils.deepClone(this.system);
+        const data = this.system;
         const labels = this.labels;
 
         const async = true;
@@ -1122,19 +1105,14 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         modifiers = stackModifiers.process(modifiers, null, {actor: this.actor, item: this});
         let multiplier = 1.0;
         const modsToProcess = [];
-        for (const [modType, modValue] of Object.entries(modifiers)) {
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(modType)) {
-                for (const bonus of modValue) {
-                    modsToProcess.push(bonus);
-                }
-            }
-            else if (modValue !== null) {
-                modsToProcess.push(modValue);
+        for (const modValue of Object.values(modifiers)) {
+            for (const bonus of modValue) {
+                modsToProcess.push(bonus);
             }
         }
         const rollContext = RollContext.createItemRollContext(this, this.actor);
         for (const mod of modsToProcess) {
-            const rollResult = DiceSFRPG.resolveFormulaWithoutDice(mod.modifier.toString(), rollContext);
+            const rollResult = DiceSFRPG.resolveFormulaWithoutDice(mod.modifier?.toString(), rollContext);
             const computedBonus = !rollResult.hadError ? rollResult.total : 1;
             multiplier *= computedBonus;
         }
@@ -1158,7 +1136,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             return;
         }
 
-        const itemData = foundry.utils.deepClone(this.system);
+        const itemData = this.system;
         if (itemData.hasOwnProperty("usage") && !options.disableDeductAmmo) {
             const usage = itemData.usage;
 
@@ -1992,10 +1970,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         limitTo = "",
         damage = null
     } = {}) {
-        const data = this._ensureHasModifiers(foundry.utils.deepClone(this.system));
-        const modifiers = data.modifiers;
 
-        modifiers.push(new SFRPGModifier({
+        const modifiers = this.system.modifiers;
+        modifiers.push({
             name,
             modifier,
             type,
@@ -2010,10 +1987,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             id,
             limitTo,
             damage
-        }));
-
+        });
         console.log("Adding a modifier to the item");
-
         await this.update({["system.modifiers"]: modifiers});
     }
 
@@ -2179,18 +2154,18 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     /**
      * Execute a macro with the context of this item
-     * @param {Macro} macro The macro to execute
+     * @param {foundry.documents.Macro} macro The macro to execute
      * @param {Record<string, *>} scope Any additional arguments to pass to macro execution
-     * @returns {Promise<*>} The return value of the macro
+     * @returns {Promise<unknown>} The return value of the macro
      */
     async executeMacroWithContext(macro, scope = {}) {
-        if (!(macro instanceof Macro)) {
+        if (!(macro instanceof foundry.documents.Macro)) {
             ui.notifications.error("A macro was not provided!");
             return;
         }
 
         return macro.execute({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
+            speaker: foundry.documents.ChatMessage.implementation.getSpeaker({ actor: this.actor, token: this.actor.token }),
             token: this.actor.token || null,
             actor: this.actor || null,
             item: this,
