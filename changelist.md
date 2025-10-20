@@ -1,3 +1,100 @@
+# 0.29.0
+
+This update is a big one, with some big backend changes that will keep the system functioning on future Foundry release versions. It also includes a big update to feature activations that allows more accurate tracking of which effects are currently active, and restores the hotbar automation and features that were broken in the transition to Foundry v13. In addition, a lot of bugs have been fixed related to timed effects, starship combat, and various other features. Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG, @ian612, @Iankid, @ilya-vasiuk, @LebombJames, @levirak, and @Theleruby (apologies if I missed anyone!).
+
+## Core System Improvements
+
+### General Stuff
+
+- Combat Type is now selected automatically when an actor is added to a not-in-progress combat by a GM
+
+### Character/NPC/Drone Stuff
+
+- Overhaul of how feature activation works
+    - Default duration for features is now `instantaneous`
+    - `instantaneous` features no longer need to be toggled off (these now show up as yellow buttons on the character sheet)
+    - Activation time is now tracked for features, which automatically turn off upon expiry
+    - The `null` and `none` activation types are renamed to "Passive" and "Free" for clarity
+- Nonfunctional key ability score field removed from character sheets
+- NPC ability and spell DCs moved to the relevant tabs to highlight them
+- Ammunition usage multiplier modifier added
+
+### Starship Stuff
+
+- Starship system patch state is now trackable on the starship sheet and automated correctly
+- Support added for a selection of modifiers affecting starship values
+- NPC Crew can now perform minor and open crew actions
+
+### Backend
+
+- Data Models have been added for all actor and item types in the game system, replacing template.json
+- Crew role names and definitions added to `config.js` in place of being hardcoded in code files
+- Bump libraries to latest revisions for security
+- Sanitization of codebase to remove linting errors and warnings
+
+## Bug Fixes
+
+### General Stuff
+
+- Hotbar automations have been restored after being broken by the Foundry v13 upgrade
+- Condition application no longer depends on the name of the condition, allowing them to be localized if desired
+- Decimal values are now allowed in currency and build point fields without causing errors
+- Advantage and Disadvantage buttons now work correctly when rolling
+
+### Character/NPC/Drone Stuff
+
+- Default attack roll bonuses are now correctly calculated based on the attack and weapon type, and actor stats
+- Skill checks that have the "variable DC" box checked no longer display the DC on chat cards
+- Timed Effects are now correctly handled individually for unlinked tokens using the same base actor
+- "Turn" duration added to effects to indicate something lasts until the end of the current turn
+
+### Starship Stuff
+
+- Typo fixed in the starship sheet that prevented an editor from opening
+- Starship combat phases where all combatants act simultaneously no longer highlight the top ship in the turn tracker
+- Turrets are now correctly impacted by critical weapon system damage
+
+### Backend
+
+- Fixed an error thrown for players by the `renderCombatTracker` hook
+- Fix an error being thrown when starship weapon attacks critically hit
+- Various improvements made to improve the quality and consistency of timed effects (Effect items and Features)
+
+## Data Entry & Localization
+
+This update adds the last of the Starfinder Enhanced content to the system, as well as individual items for theme and archetype features.
+
+### New Data
+
+- Remaining data from Starfinder Enhanced has been added
+    - Species have been added
+    - Rules journals for scaling equipment added
+    - Creature Companions added
+    - GM Tools and Rituals have been added to the rules journals from Starfinder Enhanced (and Galactic Magic)
+- Added all archetype features as their own items
+- Theme features have been added as individual items with appropriate modifiers
+- Additional Spanish localizations
+
+### Corrections and Updates
+
+- Folders have been added to the Alien Archive compendium, sorting them by source (and type for adventures, NPC vs Alien)
+- Features have been updated to make the default duration `instantaneous` wherever a pre-existing duration was not found
+- Typos and missing descriptions fixed for plasma guide items, "Baleful Polymorph", "Nanite Array (Ex)", Syringe Stick items, and Syringe Spear items
+- Description updated based on errata for the "Explosive Danger" class feature
+- Fix missing links in the "Field of Study" class feature
+- "Nanite Surge" typo preventing max uses calculating correctly fixed
+- "Nanite Surge" uses corrected to "per day" rather than "charges"
+- The "Biohacks" class feature now tracks uses and calculates max uses correctly, improving usability
+    - Iconic Barsala updated to use the updated "Biohacks" feature
+- "Expanded Cache (Su)" icon path is fixed
+- "Cultural Fascination" action type fixed
+- "Double Tap" now uses the ammo usage multiplier modifier to function correctly
+- Fix some starship action description and effect strings that were missing or had typos
+- Remove errant hash marks from some critical effect strings
+- Starship Actions "Encourage", "Harrying Shot", "Orders", and "Snap Shot" can now be rolled with the NPC gunnery skill
+- Drift engines in compendiums set to not powered by default
+- "Atech Immortal" updated to fix several incorrect fields
+
 # 0.28.3
 
 This update adds compatibility with some new Foundry v13 features, fixes to item-on-canvas dropping, a new Spanish Translation, and assorted other quality of life improvements.
