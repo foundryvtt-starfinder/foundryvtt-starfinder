@@ -21,6 +21,13 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         const schema = {
             attributes: new fields.SchemaField({
                 hp: new fields.SchemaField({
+                    max: new fields.NumberField({ // doesn't need to be here for actors, but token resource bars not functional without storing this
+                        initial: 0,
+                        min: 0,
+                        integer: true,
+                        nullable: false,
+                        required: true
+                    }),
                     temp: new fields.NumberField({
                         initial: null,
                         min: 0,

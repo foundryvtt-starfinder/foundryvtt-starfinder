@@ -15,6 +15,13 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
         // Add additional fields needed to template fields
         foundry.utils.mergeObject(schema.attributes.fields, {
             rp: new fields.SchemaField({
+                max: new fields.NumberField({ // doesn't need to be here for actors, but token resource bars not functional without storing this
+                    initial: 0,
+                    min: 0,
+                    integer: true,
+                    nullable: false,
+                    required: true
+                }),
                 value: new fields.NumberField({
                     initial: 0,
                     min: 0,
