@@ -1,6 +1,8 @@
 # 0.29.0
 
-This update is a big one, with some big backend changes that will keep the system functioning on future Foundry release versions. It also includes a big update to feature activations that allows more accurate tracking of which effects are currently active, and restores the hotbar automation and features that were broken in the transition to Foundry v13. In addition, a lot of bugs have been fixed related to timed effects, starship combat, and various other features. Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG, @ian612, @Iankid, @ilya-vasiuk, @LebombJames, @levirak, and @Theleruby (apologies if I missed anyone!).
+This update is a big one, with some big backend changes that will keep the system functioning on future Foundry release versions. It also includes a big update to feature activations that allows more accurate tracking of which effects are currently active, and restores the hotbar automation and features that were broken in the transition to Foundry v13. In addition, a lot of bugs have been fixed related to timed effects, starship combat, and various other features, and the last remaining Starfinder Enhanced data has been added.
+
+Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG, @ian612, @Iankid, @ilya-vasiuk, @LebombJames, @levirak, and @Theleruby (apologies if I missed anyone!).
 
 ## Core System Improvements
 
