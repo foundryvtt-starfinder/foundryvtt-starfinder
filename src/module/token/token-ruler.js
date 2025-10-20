@@ -22,7 +22,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     if (!hasActor) {
                         return false;
                     } else if (CONFIG.SFRPG.actorsCharacterScale.includes(token.actor.type)) {
-                        return !(token instanceof TokenDocument) || token.actor.system.attributes.speed.burrowing?.value;
+                        return !(token instanceof TokenDocument) || token.actor.system.attributes.speed?.burrowing?.value;
                     } else if (token.actor.type === "starship") {
                         return !(token instanceof TokenDocument);
                     } else {
@@ -42,7 +42,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     return false;
                 },
                 getCostFunction: (token) => {
-                    if (token.actor.system.attributes.speed.climbing?.value) return cost => cost;
+                    if (token.actor.system.attributes.speed?.climbing?.value) return cost => cost;
                     else return cost => cost * 2;
                 }
             },
@@ -68,7 +68,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     if (!hasActor) {
                         return false;
                     } else if (CONFIG.SFRPG.actorsCharacterScale.includes(token.actor.type)) {
-                        return !(token instanceof TokenDocument) || (!token.hasStatusEffect("prone") && token.actor.system.attributes.speed.flying?.value);
+                        return !(token instanceof TokenDocument) || (!token.hasStatusEffect("prone") && token.actor.system.attributes.speed?.flying?.value);
                     } else if (token.actor.type === "starship") {
                         return !(token instanceof TokenDocument) || token.actor.system.attributes.speed.value;
                     } else {
@@ -103,7 +103,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     return false;
                 },
                 getCostFunction: (token) => {
-                    if (token.actor.system.attributes.speed.swimming?.value) return cost => cost;
+                    if (token.actor.system.attributes.speed?.swimming?.value) return cost => cost;
                     else return cost => cost * 2;
                 }
             },
