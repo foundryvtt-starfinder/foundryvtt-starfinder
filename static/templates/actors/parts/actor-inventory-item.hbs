@@ -1,5 +1,7 @@
         <li class="item {{#if (not bigItem)}}small{{/if}}{{#if (eq item.type "container")}}container{{/if}}{{#if (eq item.type "effect")}}effect{{/if}} flexrow"
             data-item-id="{{item._id}}" {{#if (eq item.type "effect")}}data-effect-uuid="{{item.timedEffect.uuid}}"{{/if}}>
+
+            <!-- Name and Image -->
             <div class="item-name flexrow {{#if (not disableRolling)}}rollable{{/if}}">
                 <div class="item-image {{#if (not bigItem)}}small{{/if}}" style="background-image: url({{item.img}})"></div>
                 <h4>
@@ -22,15 +24,12 @@
                                 <button type="button" class="tag damage" data-tooltip="{{localize "SFRPG.Damage.Title"}}">{{item.config.damageString}}</button>
                             {{/if}}
                         {{/if}}
-                    {{else}}
-                        {{#unless (eq item.type "weapon")}}
-                            <button type="button" class="tag use">{{localize "SFRPG.Items.Consumable.UseAction"}}</button>
-                        {{/unless}}
                     {{/if}}
                 </div>
                 {{/if}}
             </div>
 
+            <!-- Bulk -->
             {{#unless onlyControls}}
             {{#if isCharacter}}
             <div class="item-detail item-weight">
@@ -42,6 +41,7 @@
             </div>
             {{/if}}
 
+            <!-- Capacity -->
             <div class="item-detail item-uses">
                 {{#if item.config.hasCapacity}}
                     {{item.config.capacityCurrent}} / {{item.config.capacityMaximum}}
@@ -60,7 +60,8 @@
                 {{/if}}
             </div>
 
-            <div class="item-detail item-action">
+            <!-- Utilization -->
+            <div class="item-detail item-action item-utilisation">
                 {{#if (eq item.type "container")}}
                     {{#if item.config.isOpen}}
                         <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.CloseTooltip"}}"><i class="fas fa-arrow-up"></i> {{localize "SFRPG.ActorSheet.Inventory.Container.Close"}}</a>
@@ -68,7 +69,7 @@
                         <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.OpenTooltip"}}"><i class="fas fa-arrow-down"></i> {{localize "SFRPG.ActorSheet.Inventory.Container.Open"}}</a>
                     {{/if}}
                 {{else if item.system.usage.per}}
-                    {{item.system.usage.value}} / {{item.system.usage.per}}
+                    <button type="button" class="tag use">{{item.system.usage.value}} / {{item.system.usage.per}}</button>
                 {{else if item.system.activation.type}}
                     {{#unless (or (eq item.type "consumable")(and (eq item.system.activation.type "none")(eq item.type "weapon")) ) }} <!-- Don't show action buttons on consumables because it interacts weirdly with their usage -->
                         {{#if item.system.isActive}}
@@ -81,6 +82,7 @@
             </div>
             {{/unless}}
 
+            <!-- Equip/Edit/Delete Controls -->
             {{#if isOwner}}
             <div class="item-controls">
                 {{#if (not disableEquipping)}}
@@ -103,9 +105,9 @@
         </li>
 
         {{#if (and children item.config.isOpen)}}
-        <ol class="item-list-child">
-        {{#each children as |childItem iid|}}
-            {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../this bigItem=false item=childItem.item children=childItem.contents}}
-        {{/each}}
-        </ol>
+            <ol class="item-list-child">
+                {{#each children as |childItem iid|}}
+                    {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../this bigItem=false item=childItem.item children=childItem.contents}}
+                {{/each}}
+            </ol>
         {{/if}}
