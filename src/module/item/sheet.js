@@ -183,6 +183,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
                 else return !(["none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
             })();
             data.range.showTotal = !!itemData.range?.total && (String(itemData.range?.total) !== String(itemData.range?.value));
+            data.range.total = itemData.range?.total;
 
             data.area = {};
             data.area.showTotal = !!itemData.area?.total && (String(itemData.area?.total) !== String(itemData.area?.value));
