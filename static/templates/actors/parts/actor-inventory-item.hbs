@@ -69,7 +69,11 @@
                         <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.OpenTooltip"}}"><i class="fas fa-arrow-down"></i> {{localize "SFRPG.ActorSheet.Inventory.Container.Open"}}</a>
                     {{/if}}
                 {{else if item.system.usage.per}}
-                    <button type="button" class="tag use">{{item.system.usage.value}} / {{item.system.usage.per}}</button>
+                    {{#unless (eq item.type "weapon")}}
+                        <button type="button" class="tag use">{{item.system.usage.value}} / {{item.system.usage.per}}</button>
+                    {{else}}
+                        {{item.system.usage.value}} / {{item.system.usage.per}}
+                    {{/unless}}
                 {{else if item.system.activation.type}}
                     {{#unless (or (eq item.type "consumable")(and (eq item.system.activation.type "none")(eq item.type "weapon")) ) }} <!-- Don't show action buttons on consumables because it interacts weirdly with their usage -->
                         {{#if item.system.isActive}}
