@@ -1,11 +1,14 @@
-import { ActorSFRPG } from "../actor/actor.js";
-import { ItemSFRPG } from "../item/item.js";
 import { SFRPGEffectType } from "../modifiers/types.js";
+/**
+ * @import SFRPGModifier from "../modifiers/modifier.js"
+ * @import ActorSFRPG from "../actor/actor.js"
+ * @import ItemSFRPG from "../item/item.js"
+*/
 
 /**
  * Application that is used to edit a dynamic modifier.
  */
-export default class SFRPGModifierApplication extends FormApplication {
+export default class SFRPGModifierApplication extends foundry.appv1.api.FormApplication {
     /**
      * @param {SFRPGModifier}         modifier The modifier being edited.
      * @param {ActorSFRPG|ItemSFRPG}  parent   The actor or item that the modifier belongs to.
@@ -23,7 +26,7 @@ export default class SFRPGModifierApplication extends FormApplication {
         return foundry.utils.mergeObject(options, {
             classes: ["sfrpg", "modifier-app"],
             template: "systems/sfrpg/templates/apps/modifier-app.hbs",
-            width: 400,
+            width: 580,
             height: "auto",
             closeOnSubmit: true
         });
@@ -36,6 +39,7 @@ export default class SFRPGModifierApplication extends FormApplication {
 
     /**
      * A convenience method for retrieving the modifier being edited.
+     * @type {SFRPGModifier}
      */
     get modifier() {
         return this.object;
@@ -126,7 +130,7 @@ export default class SFRPGModifierApplication extends FormApplication {
 
                 affectedValue.prop("value", "");
 
-                this._updateModifierData(modifierDialog.object).then(() => {
+                this.modifier.parentUpdate(modifierDialog.object).then(() => {
                     modifierDialog.render();
                 });
                 return;
@@ -184,6 +188,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                     break;
                 case SFRPGEffectType.WEAPON_ATTACKS:
                 case SFRPGEffectType.WEAPON_DAMAGE:
+                case SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER:
                     affectedValue.prop('disabled', false);
                     affectedValue.find('option').remove();
                     for (const weapons of Object.entries(CONFIG.SFRPG.weaponTypes)) {
@@ -192,6 +197,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                     break;
                 case SFRPGEffectType.WEAPON_PROPERTY_ATTACKS:
                 case SFRPGEffectType.WEAPON_PROPERTY_DAMAGE:
+                case SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER:
                     affectedValue.prop('disabled', false);
                     affectedValue.find('option').remove();
                     for (const weapons of Object.entries(CONFIG.SFRPG.weaponProperties)) {
@@ -200,6 +206,7 @@ export default class SFRPGModifierApplication extends FormApplication {
                     break;
                 case SFRPGEffectType.WEAPON_CATEGORY_ATTACKS:
                 case SFRPGEffectType.WEAPON_CATEGORY_DAMAGE:
+                case SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER:
                     affectedValue.prop('disabled', false);
                     affectedValue.find('option').remove();
                     for (const weapons of Object.entries(CONFIG.SFRPG.weaponCategories)) {
@@ -287,6 +294,9 @@ export default class SFRPGModifierApplication extends FormApplication {
             case SFRPGEffectType.WEAPON_DAMAGE:
             case SFRPGEffectType.WEAPON_PROPERTY_DAMAGE:
             case SFRPGEffectType.WEAPON_CATEGORY_DAMAGE:
+            case SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER:
+            case SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER:
+            case SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER:
             case SFRPGEffectType.SPECIFIC_SPEED:
             case SFRPGEffectType.DAMAGE_REDUCTION:
             case SFRPGEffectType.ENERGY_RESISTANCE:

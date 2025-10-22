@@ -1,9 +1,8 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateSaveModifiers", (fact, context) => {
         const data = fact.data;
-        const flags = fact.flags;
         const fort = data.attributes.fort;
         const reflex = data.attributes.reflex;
         const will = data.attributes.will;
@@ -24,19 +23,19 @@ export default function(engine) {
 
             let saveMod = 0;
             switch (bonus.valueAffected) {
-            case "highest":
-                if (item.bonus === highest.bonus) {
+                case "highest":
+                    if (item.bonus === highest.bonus) {
+                        saveMod = computedBonus;
+                    }
+                    break;
+                case "lowest":
+                    if (item.bonus === lowest.bonus) {
+                        saveMod = computedBonus;
+                    }
+                    break;
+                default:
                     saveMod = computedBonus;
-                }
-                break;
-            case "lowest":
-                if (item.bonus === lowest.bonus) {
-                    saveMod = computedBonus;
-                }
-                break;
-            default:
-                saveMod = computedBonus;
-                break;
+                    break;
             }
             computedBonus = saveMod;
 
@@ -100,51 +99,30 @@ export default function(engine) {
             return false;
         }), context, {actor: fact.actor});
 
-        let fortMod = Object.entries(fortMods).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, fort, "SFRPG.SaveModifiersTooltip");
-                }
-            } else {
-                sum += addModifier(mod[1], data, fort, "SFRPG.SaveModifiersTooltip");
+        const fortMod = Object.entries(fortMods).reduce((sum, mod) => {
+            for (const bonus of mod[1]) {
+                sum += addModifier(bonus, data, fort, "SFRPG.SaveModifiersTooltip");
             }
-
             return sum;
         }, 0);
 
-        let reflexMod = Object.entries(reflexMods).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, reflex, "SFRPG.SaveModifiersTooltip");
-                }
-            } else {
-                sum += addModifier(mod[1], data, reflex, "SFRPG.SaveModifiersTooltip");
+        const reflexMod = Object.entries(reflexMods).reduce((sum, mod) => {
+            for (const bonus of mod[1]) {
+                sum += addModifier(bonus, data, reflex, "SFRPG.SaveModifiersTooltip");
             }
-
             return sum;
         }, 0);
 
-        let willMod = Object.entries(willMods).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, will, "SFRPG.SaveModifiersTooltip");
-                }
-            } else {
-                sum += addModifier(mod[1], data, will, "SFRPG.SaveModifiersTooltip");
+        const willMod = Object.entries(willMods).reduce((sum, mod) => {
+            for (const bonus of mod[1]) {
+                sum += addModifier(bonus, data, will, "SFRPG.SaveModifiersTooltip");
             }
-
             return sum;
         }, 0);
 
-        fort.bonus += fort.misc + fortMod;
-        reflex.bonus += reflex.misc + reflexMod;
-        will.bonus += will.misc + willMod;
+        fort.bonus += (fort.misc ?? 0) + fortMod;
+        reflex.bonus += (reflex.misc ?? 0) + reflexMod;
+        will.bonus += (will.misc ?? 0) + willMod;
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });

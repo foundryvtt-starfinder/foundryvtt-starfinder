@@ -16,7 +16,42 @@
     <div class="form-group modifier-effect-type">
         <label for="effectType">{{localize "SFRPG.ModifierEffectTypeLabel"}}</label>
         <select name="effectType" data-tooltip="{{localize "SFRPG.ModifierEffectTypeTooltip"}}">
-            {{selectOptions (sfrpg "modifierEffectTypes") selected=modifier.effectType}}
+            <optgroup label={{localize "SFRPG.ModifierEffectLabels.Attack"}}>
+                {{selectOptions (sfrpg "modifierEffectTypesAttack") selected=modifier.effectType}}
+            </optgroup>
+            <optgroup label={{localize "SFRPG.ModifierEffectLabels.Damage"}}>
+                {{selectOptions (sfrpg "modifierEffectTypesDamage") selected=modifier.effectType}}
+            </optgroup>
+            <optgroup label={{localize "SFRPG.ModifierEffectLabels.Ammunition"}}>
+                {{selectOptions (sfrpg "modifierEffectTypesAmmunition") selected=modifier.effectType}}
+            </optgroup>
+            <optgroup label={{localize "SFRPG.ModifierEffectLabels.Defence"}}>
+                {{selectOptions (sfrpg "modifierEffectTypesDefence") selected=modifier.effectType}}
+            </optgroup>
+            <optgroup label={{localize "SFRPG.ModifierEffectLabels.Resource"}}>
+                {{selectOptions (sfrpg "modifierEffectTypesResource") selected=modifier.effectType}}
+            </optgroup>
+            <optgroup label={{localize "SFRPG.ModifierEffectLabels.Ability"}}>
+                {{selectOptions (sfrpg "modifierEffectTypesAbility") selected=modifier.effectType}}
+            </optgroup>
+            <optgroup label={{localize "SFRPG.ModifierEffectLabels.Skill"}}>
+                {{selectOptions (sfrpg "modifierEffectTypesSkill") selected=modifier.effectType}}
+            </optgroup>
+            <optgroup label={{localize "SFRPG.ModifierEffectLabels.Save"}}>
+                {{selectOptions (sfrpg "modifierEffectTypesSave") selected=modifier.effectType}}
+            </optgroup>
+            <optgroup label={{localize "SFRPG.ModifierEffectLabels.DC"}}>
+                {{selectOptions (sfrpg "modifierEffectTypesDC") selected=modifier.effectType}}
+            </optgroup>
+            <optgroup label={{localize "SFRPG.ModifierEffectLabels.Speed"}}>
+                {{selectOptions (sfrpg "modifierEffectTypesSpeed") selected=modifier.effectType}}
+            </optgroup>
+            <optgroup label={{localize "SFRPG.ModifierEffectLabels.Misc"}}>
+                {{selectOptions (sfrpg "modifierEffectTypesMisc") selected=modifier.effectType}}
+            </optgroup>
+            <optgroup label={{localize "SFRPG.ModifierEffectLabels.Starship"}}>
+                {{selectOptions (sfrpg "modifierEffectTypesStarship") selected=modifier.effectType}}
+            </optgroup>
         </select>
     </div>
     <div class="form-group modifier-value-affected">
@@ -55,6 +90,12 @@
                 {{else if (eq modifier.effectType "weapon-property-damage")}}
                     {{selectOptions (sfrpg "weaponProperties") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "weapon-category-damage")}}
+                    {{selectOptions (sfrpg "weaponCategories") selected=modifier.valueAffected}}
+                {{else if (eq modifier.effectType "weapon-ammo-usage-multiplier")}}
+                    {{selectOptions (sfrpg "weaponTypes") selected=modifier.valueAffected}}
+                {{else if (eq modifier.effectType "weapon-property-ammo-usage-multiplier")}}
+                    {{selectOptions (sfrpg "weaponProperties") selected=modifier.valueAffected}}
+                {{else if (eq modifier.effectType "weapon-category-ammo-usage-multiplier")}}
                     {{selectOptions (sfrpg "weaponCategories") selected=modifier.valueAffected}}
                 {{else if (eq modifier.effectType "specific-speed")}}
                     {{selectOptions (sfrpg "speeds") selected=modifier.valueAffected}}

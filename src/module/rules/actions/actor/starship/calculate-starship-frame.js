@@ -1,8 +1,85 @@
 
+import { SFRPGEffectType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
+
 export default function(engine) {
+    const processModifier = (bonus, data) => {
+        let computedBonus = 0;
+        try {
+            const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
+            computedBonus = roll.total;
+        } catch (e) {
+            console.error(e);
+        }
+        return computedBonus;
+    };
+
+    const applyStackedModifiers = (stackedModifiers, data) => {
+        return Object.entries(stackedModifiers).reduce((sum, mod) => {
+            if (mod[1] === null || mod[1].length < 1) return sum;
+
+            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
+                for (const bonus of mod[1]) {
+                    sum += processModifier(bonus, data);
+                }
+            } else {
+                sum += processModifier(mod[1], data);
+            }
+
+            return sum;
+        }, 0);
+    };
+
+    const applyHullPointModifiers = (fact, context, data) => {
+        const hullPointModifiers = fact.modifiers.filter(mod => mod.enabled && mod.effectType === SFRPGEffectType.STARSHIP_HULL_POINTS
+        );
+
+        if (hullPointModifiers.length > 0) {
+            const stackedModifiers = context.parameters.stackModifiers.process(
+                hullPointModifiers,
+                context,
+                {actor: fact.actor}
+            );
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data);
+            data.attributes.hp.max += modifierBonus;
+        }
+    };
+
+    const applyHullPointIncrementModifiers = (fact, context, data) => {
+        const incrementModifiers = fact.modifiers.filter(mod => mod.enabled && mod.effectType === SFRPGEffectType.STARSHIP_HULL_POINTS_INCREMENT
+        );
+
+        if (incrementModifiers.length > 0) {
+            const stackedModifiers = context.parameters.stackModifiers.process(
+                incrementModifiers,
+                context,
+                {actor: fact.actor}
+            );
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data);
+            data.attributes.hp.increment += modifierBonus;
+        }
+    };
+
+    const applyTurnDistanceModifiers = (fact, context, data) => {
+        const turnModifiers = fact.modifiers.filter(mod => mod.enabled && mod.effectType === SFRPGEffectType.STARSHIP_TURN_DISTANCE);
+
+        if (turnModifiers.length > 0) {
+            const stackedModifiers = context.parameters.stackModifiers.process(
+                turnModifiers,
+                context,
+                {actor: fact.actor}
+            );
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data);
+            data.attributes.turn.value = Math.max(0, data.attributes.turn.value + modifierBonus);
+
+            if (modifierBonus !== 0) {
+                const label = game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.MiscModifier") : "Misc Modifier";
+                data.attributes.turn.tooltip.push(`${label}: ${modifierBonus.signedString()}`);
+            }
+        }
+    };
+
     engine.closures.add( "calculateStarshipFrame", (fact, context) => {
         const data = fact.data;
-        const modifiers = fact.modifiers;
         const frames = fact.frames;
 
         const maneuverabilityMap = {
@@ -76,37 +153,9 @@ export default function(engine) {
             delete data.currency.bp;
         }
 
-        const tierToBuildpoints = {
-            "1/4": 25,
-            "0.25": 25,
-            "1/3": 30,
-            "1/2": 40,
-            "0.5": 40,
-            "1": 55,
-            "2": 75,
-            "3": 95,
-            "4": 115,
-            "5": 135,
-            "6": 155,
-            "7": 180,
-            "8": 205,
-            "9": 230,
-            "10": 270,
-            "11": 310,
-            "12": 350,
-            "13": 400,
-            "14": 450,
-            "15": 500,
-            "16": 600,
-            "17": 700,
-            "18": 800,
-            "19": 900,
-            "20": 1000
-        };
-
         data.attributes.bp = {
             value: 0,
-            max: tierToBuildpoints[data.details.tier],
+            max: CONFIG.SFRPG.starshipTierToBuildpoints[data.details.tier],
             tooltip: []
         };
 
@@ -147,8 +196,10 @@ export default function(engine) {
                 value: 0,
                 tooltip: []
             };
-            data.attributes.complement.min = 0;
-            data.attributes.complement.max = 0;
+            data.attributes.complement = {
+                min: 0,
+                max: 0
+            };
 
             data.attributes.hp.increment = 0;
             data.attributes.hp.max = 0;
@@ -170,11 +221,16 @@ export default function(engine) {
                 value: frame.system.expansionBays,
                 tooltip: []
             };
-            data.attributes.complement.min = frame.system.crew.minimum;
-            data.attributes.complement.max = frame.system.crew.maximum;
+            data.attributes.complement = {
+                min: frame.system.crew.minimum,
+                max: frame.system.crew.maximum
+            };
 
             data.attributes.hp.increment = frame.system.hitpoints.increment;
-            data.attributes.hp.max = frame.system.hitpoints.base + Math.floor(data.details.tier / 4) * frame.system.hitpoints.increment;
+            applyHullPointIncrementModifiers(fact, context, data);
+            data.attributes.hp.max = frame.system.hitpoints.base + Math.floor(data.details.tier / 4) * data.attributes.hp.increment;
+
+            applyHullPointModifiers(fact, context, data);
             data.crew.gunner.limit = frame.system.weaponMounts.forward.lightSlots + frame.system.weaponMounts.forward.heavySlots + frame.system.weaponMounts.forward.capitalSlots
                 + frame.system.weaponMounts.aft.lightSlots + frame.system.weaponMounts.aft.heavySlots + frame.system.weaponMounts.aft.capitalSlots
                 + frame.system.weaponMounts.port.lightSlots + frame.system.weaponMounts.port.heavySlots + frame.system.weaponMounts.port.capitalSlots
@@ -285,6 +341,9 @@ export default function(engine) {
             data.attributes.bp.value += bpCost;
             data.attributes.bp.tooltip.push(`${component.name}: ${bpCost}`);
         }
+
+        // Apply turn distance modifiers
+        applyTurnDistanceModifiers(fact, context, data);
 
         return fact;
     }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );

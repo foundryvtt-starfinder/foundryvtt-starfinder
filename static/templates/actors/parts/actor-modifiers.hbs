@@ -124,6 +124,12 @@
                             {{sfrpg "weaponProperties" modifier.valueAffected}}
                         {{else if (eq modifier.effectType "weapon-category-damage")}}
                             {{sfrpg "weaponCategories" modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-ammo-usage-multiplier")}}
+                            {{sfrpg "weaponTypes" modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-property-ammo-usage-multiplier")}}
+                            {{sfrpg "weaponProperties" modifier.valueAffected}}
+                        {{else if (eq modifier.effectType "weapon-category-ammo-usage-multiplier")}}
+                            {{sfrpg "weaponCategories" modifier.valueAffected}}
                         {{else if (eq modifier.effectType "specific-speed")}}
                             {{sfrpg "speeds" modifier.valueAffected}}
                         {{else if (eq modifier.effectType "actor-resource")}}

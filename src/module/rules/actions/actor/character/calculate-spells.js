@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add("calculateSpells", (fact, context) => {
+    engine.closures.add("calculateSpells", (fact) => {
         const data = fact.data;
         const classes = fact.classes;
 
@@ -11,14 +11,18 @@ export default function(engine) {
 
             try {
                 totalSpells += classData.spellsPerDay[classData.levels][spellLevel] || 0;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             // Only apply bonus spells known if there is a base spells known.
-            if (totalSpells > 0) {
+            if (totalSpells > 0 && spellAbilityMod >= 0) {
                 try {
                     // TODO: If spellAbilityMod is not part of bonusSpellsPerDay's keys, find the nearest key and use that instead.
                     totalSpells += classData.bonusSpellsPerDay[spellAbilityMod][spellLevel] || 0;
-                } catch {}
+                } catch (e) {
+                    console.error(e);
+                }
             }
 
             return totalSpells;

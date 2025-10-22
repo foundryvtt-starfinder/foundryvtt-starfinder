@@ -167,7 +167,7 @@ export class DiceSFRPG {
     * @param {DialogOptions}        data.dialogOptions Modal dialog options
     * @param {difficulty}           data.difficulty    Optional parameter for checks
     * @param {displayDifficulty}    data.displayDifficulty    Optional parameter to display check difficulty
-    * @returns {Promise<void>}
+    * @returns {Promise<RollResult?>}
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
         critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor",
@@ -214,6 +214,7 @@ export class DiceSFRPG {
             if (onClose) {
                 onClose(null, null, null);
             }
+            return null;
         } else {
             let dieRoll = "1d20";
             if (rollInfo.button === "disadvantage") {
@@ -250,7 +251,7 @@ export class DiceSFRPG {
                     const criticalData = rollContext.allContexts?.item?.data?.critical;
                     if (d.total === critical) {
                         flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
-                        if (criticalData.effect.trim()) {
+                        if (criticalData?.effect?.trim()) {
                             tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                         }
                     }
@@ -315,6 +316,8 @@ export class DiceSFRPG {
             if (errorToThrow) {
                 throw errorToThrow;
             }
+
+            return { roll, finalFormula };
         }
     }
 
@@ -380,9 +383,9 @@ export class DiceSFRPG {
         if (mainDie) {
             let dieRoll = "1" + mainDie;
             if (mainDie === "d20") {
-                if (rollInfo.button === "Disadvantage") {
+                if (rollInfo.button === "disadvantage") {
                     dieRoll = "2d20kl";
-                } else if (rollInfo.button === "Advantage") {
+                } else if (rollInfo.button === "advantage") {
                     dieRoll = "2d20kh";
                 }
             }
@@ -418,6 +421,7 @@ export class DiceSFRPG {
     * @param {Object}               data               Parameters passed into the method
     * @param {Event}                [data.event]       The triggering event which initiated the roll
     * @param {DamagePart[]}         data.parts         The dice roll component parts
+    * @param {SFRPGRoll}            linkedAttackRoll   A linked attack roll, passed if damage is automatically rolled with attacks
     * @param {CriticalDamage}       data.criticalData  Critical damage information, in case of a critical hit
     * @param {RollContext}          data.rollContext   The contextual data for this roll
     * @param {String}               data.title         The dice roll UI window title
@@ -427,7 +431,7 @@ export class DiceSFRPG {
     * @param {Object}               data.dialogOptions Modal dialog options
     * @returns {Promise<bool>}                         `true` if roll was performed, `false` if it was canceled
     */
-    static async damageRoll({ event = new Event(''), parts, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions }) {
+    static async damageRoll({ event = new Event(''), parts, linkedAttackRoll, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions }) {
         flavor = `${title || ""}${(flavor ? " - " + flavor : "")}`;
 
         if (!rollContext?.isValid()) {
@@ -599,7 +603,16 @@ export class DiceSFRPG {
                 }
             }
 
-            const isCritical = (rollInfo.button === "critical");
+            // Determine whether the roll should be a critical damage roll
+            let isCritical = false;
+            if ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) {
+                // if quick roll is selected, determine whether a roll is a critical hit based on the linked attack (if present)
+                // if the control key is pressed, roll critical damage regardless
+                isCritical = event?.ctrlKey ? true : (linkedAttackRoll ? DiceSFRPG.isCriticalSuccess(linkedAttackRoll) : false);
+            } else if (rollInfo.button === "critical") {
+                isCritical = true;
+            }
+
             let finalFlavor = foundry.utils.deepClone(flavor);
             if (isCritical) {
                 htmlData.push({ name: "is-critical", value: "true" });
@@ -780,17 +793,65 @@ export class DiceSFRPG {
      * @param {string[]}    data.whisperTo     A list of user names this message should be sent to
      * @param {string}      [data.borderColor] A border color applied to the chat card
      */
-    static highlightCriticalSuccessFailure(message, html, data) {
+    static highlightCriticalSuccessFailure(message, html) {
         if (!message.isRoll || !message.isContentVisible) return;
 
         const roll = message.rolls[0];
         if (!roll.dice.length) return;
+        if (DiceSFRPG.isCriticalSuccess(roll)) {
+            html.find('.dice-total').addClass('success');
+        }
+        if (DiceSFRPG.isFumble(roll)) {
+            html.find('.dice-total').addClass('failure');
+        }
+    }
+
+    /**
+    * A helper function for determining if a roll was a critical success or not
+    *
+    * @param {?Object}  roll        The roll object
+    * @param {Number}       dieSize     The size of the die to look for to  trigger the critical
+    * @param {Number}       critValue   The number needed to roll at or above to trigger the critical
+    * @returns {Boolean}                `true` if a critical success, `false` otherwise
+    */
+    static isCriticalSuccess(roll, dieSize = 20, critValue = null) {
+        if (!roll?.dice?.length) {
+            return false;
+        }
+
         for (const d of roll.dice) {
-            if (d.faces === 20 && d.results.length === 1) {
-                if (d.total >= (d.options.critical || 20)) html.find('.dice-total').addClass('success');
-                else if (d.total <= (d.options.fumble || 1)) html.find('.dice-total').addClass('failure');
+            if (d.faces === dieSize && d.results.length === 1 && (critValue || d.options.critical)) {
+                if (d.total >= (critValue ?? d.options.critical)) {
+                    return true;
+                }
             }
         }
+
+        return false;
+    }
+
+    /**
+    * A helper function for determining if a roll was a fumble or not
+    *
+    * @param {Object}  roll        The roll object
+    * @param {Number}       dieSize     The size of the die to look for to  trigger the fumble
+    * @param {Number}       fumbleValue The number needed to roll at or below to trigger the fumble
+    * @returns {Boolean}                `true` if a fumble, `false` otherwise
+    */
+    static isFumble(roll, dieSize = 20, fumbleValue = null) {
+        if (!roll?.dice?.length) {
+            return false;
+        }
+
+        for (const d of roll.dice) {
+            if (d.faces === dieSize && d.results.length === 1 && (fumbleValue || d.options.fumble)) {
+                if (d.total <= (fumbleValue ?? d.options.fumble)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -798,17 +859,8 @@ export class DiceSFRPG {
      *
      * @param {ChatMessage} message            The ChatMessage document being rendered
      * @param {JQuery}      html               The pending HTML as a jQuery object
-     * @param {Object}      data               The input data provided for template rendering
-     * @param {Object}      data.data          The ChatMessage data
-     * @param {User}        data.user          The User that initiated the ChatMessage
-     * @param {User}        data.author        The name of the Actor that created this ChatMessage
-     * @param {string}      data.alias         The alias of the Actor that created this ChatMessage
-     * @param {string[]}    data.cssClass      CSS classes that should be applied to this message
-     * @param {boolean}     data.isWhisper     Should this ChatMessage be sent in a private message
-     * @param {string[]}    data.whisperTo     A list of user names this message should be sent to
-     * @param {string}      [data.borderColor] A border color applied to the chat card
      */
-    static addDamageTypes(message, html, data) {
+    static addDamageTypes(message, html) {
         if (!message.isRoll || !message.isContentVisible) return;
 
         const roll = message.rolls[0];

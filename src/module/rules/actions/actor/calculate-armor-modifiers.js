@@ -1,4 +1,4 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateArmorModifiers", (fact, context) => {
@@ -25,7 +25,9 @@ export default function(engine) {
             try {
                 const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -46,30 +48,16 @@ export default function(engine) {
         const kacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["kac", "both"].includes(mod.valueAffected)), context, {actor: fact.actor});
 
         const eacMod = Object.entries(eacMods).reduce((sum, curr) => {
-            if (curr[1] === null || curr[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
-                for (const bonus of curr[1]) {
-                    sum += addModifier(bonus, data, eac, "SFRPG.ACTooltipBonus");
-                }
-            } else {
-                sum += addModifier(curr[1], data, eac, "SFRPG.ACTooltipBonus");
+            for (const bonus of curr[1]) {
+                sum += addModifier(bonus, data, eac, "SFRPG.ACTooltipBonus");
             }
-
             return sum;
         }, 0);
 
         const kacMod = Object.entries(kacMods).reduce((sum, curr) => {
-            if (curr[1] === null || curr[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
-                for (const bonus of curr[1]) {
-                    sum += addModifier(bonus, data, kac, "SFRPG.ACTooltipBonus");
-                }
-            } else {
-                sum += addModifier(curr[1], data, kac, "SFRPG.ACTooltipBonus");
+            for (const bonus of curr[1]) {
+                sum += addModifier(bonus, data, kac, "SFRPG.ACTooltipBonus");
             }
-
             return sum;
         }, 0);
 

@@ -2,11 +2,6 @@
   "_id": "zSdO7axt0084UMB3",
   "name": "Snap Shot",
   "type": "starshipAction",
-  "_stats": {
-    "coreVersion": 13,
-    "systemId": "sfrpg",
-    "systemVersion": "0.28.2"
-  },
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
     "type": "",
@@ -23,7 +18,7 @@
     "formula": [
       {
         "name": "Gunnery",
-        "formula": "max(@minorCrew.attributes.baseAttackBonus.value, @minorCrew.skills.pil.ranks) + @minorCrew.abilities.dex.mod - 2"
+        "formula": "max(@minorCrew.attributes.baseAttackBonus.value, @minorCrew.skills.pil.ranks, @minorCrew.skills.gun.mod) + @minorCrew.abilities.dex.mod - 2"
       }
     ],
     "isPush": false,

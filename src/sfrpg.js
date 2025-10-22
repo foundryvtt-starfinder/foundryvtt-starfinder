@@ -33,6 +33,7 @@ import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
 import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
+import { HotbarSFRPG } from "./module/apps/ui/hotbar.js";
 import { canvasHandler } from "./module/canvas/canvas.js";
 import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/canvas/template-overrides.js";
 import { addChatMessageContextOptions } from "./module/chat/chat-message-options.js";
@@ -79,6 +80,9 @@ import { getSpellBrowser } from "./module/packs/spell-browser.js";
 import { getStarshipBrowser } from "./module/packs/starship-browser.js";
 import { SFRPGTokenHUD } from './module/token/token-hud.js';
 import isObject from './module/utils/is-object.js';
+
+// Import DataModel classes
+import * as models from './module/data/_module.mjs';
 
 const { Actors, Items } = foundry.documents.collections;
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
@@ -216,7 +220,66 @@ Hooks.once('init', async function() {
     CONFIG.MeasuredTemplate.objectClass = MeasuredTemplateSFRPG;
     CONFIG.MeasuredTemplate.defaults.angle = 90; // SF uses 90 degree cones
 
-    //   CONFIG.ui.hotbar = HotbarSFRPG;
+    // DataModels definition
+    CONFIG.Actor.dataModels = {
+        character: models.SFRPGActorCharacter,
+        drone: models.SFRPGActorDrone,
+        hazard: models.SFRPGActorHazard,
+        npc2: models.SFRPGActorNPC,
+        starship: models.SFRPGActorStarship,
+        vehicle: models.SFRPGActorVehicle
+    };
+
+    CONFIG.Item.dataModels = {
+        actorResource: models.SFRPGItemActorResource,
+        ammunition: models.SFRPGItemAmmunition,
+        archetypes: models.SFRPGItemArchetypes,
+        asi: models.SFRPGItemASI,
+        augmentation: models.SFRPGItemAugmentation,
+        chassis: models.SFRPGItemChassis,
+        class: models.SFRPGItemClass,
+        consumable: models.SFRPGItemConsumable,
+        container: models.SFRPGItemContainer,
+        effect: models.SFRPGItemEffect,
+        equipment: models.SFRPGItemEquipment,
+        feat: models.SFRPGItemFeat,
+        fusion: models.SFRPGItemFusion,
+        goods: models.SFRPGItemGoods,
+        hybrid: models.SFRPGItemHybrid,
+        magic: models.SFRPGItemMagic,
+        mod: models.SFRPGItemMod,
+        race: models.SFRPGItemRace,
+        shield: models.SFRPGItemShield,
+        spell: models.SFRPGItemSpell,
+        starshipAblativeArmor: models.SFRPGItemStarshipAblativeArmor,
+        starshipAction: models.SFRPGItemStarshipAction,
+        starshipArmor: models.SFRPGItemStarshipArmor,
+        starshipComputer: models.SFRPGItemStarshipComputer,
+        starshipCrewQuarter: models.SFRPGItemStarshipCrewQuarter,
+        starshipDefensiveCountermeasure: models.SFRPGItemStarshipDefensiveCountermeasure,
+        starshipDriftEngine: models.SFRPGItemStarshipDriftEngine,
+        starshipExpansionBay: models.SFRPGItemStarshipExpansionBay,
+        starshipFortifiedHull: models.SFRPGItemStarshipFortifiedHull,
+        starshipFrame: models.SFRPGItemStarshipFrame,
+        starshipOtherSystem: models.SFRPGItemStarshipOtherSystem,
+        starshipPowerCore: models.SFRPGItemStarshipPowerCore,
+        starshipReinforcedBulkhead: models.SFRPGItemStarshipReinforcedBulkhead,
+        starshipSecuritySystem: models.SFRPGItemStarshipSecuritySystem,
+        starshipSensor: models.SFRPGItemStarshipSensor,
+        starshipShield: models.SFRPGItemStarshipShield,
+        starshipSpecialAbility: models.SFRPGItemStarshipSpecialAbility,
+        starshipThruster: models.SFRPGItemStarshipThruster,
+        starshipWeapon: models.SFRPGItemStarshipWeapon,
+        technological: models.SFRPGItemTechnological,
+        theme: models.SFRPGItemTheme,
+        upgrade: models.SFRPGItemUpgrade,
+        vehicleAttack: models.SFRPGItemVehicleAttack,
+        vehicleSystem: models.SFRPGItemVehicleSystem,
+        weapon: models.SFRPGItemWeapon,
+        weaponAccessory: models.SFRPGItemWeaponAccessory
+    };
+
+    CONFIG.ui.hotbar = HotbarSFRPG;
 
     CONFIG.fontDefinitions["Exo2"] = {
         editor: true,
@@ -461,6 +524,7 @@ Hooks.once("i18nInit", () => {
         "augmentationSystems",
         "augmentationTypes",
         "babProgression",
+        "calculationStages",
         "capacityUsagePer",
         "combatRoles",
         "combatRolesDescriptions",
@@ -476,9 +540,12 @@ Hooks.once("i18nInit", () => {
         "constantDistanceUnits",
         "variableDistanceUnits",
         "durationTypes",
+        "effectEndTypes",
         "effectDurationTypes",
         "descriptors",
         "descriptorsTooltips",
+        "droneArmTypes",
+        "effectTypes",
         "energyDamageTypes",
         "energyResistanceTypes",
         "featTypes",
@@ -490,17 +557,30 @@ Hooks.once("i18nInit", () => {
         "languages",
         "limitedUsePeriods",
         "maneuverability",
+        "mathComparators",
         "modifierArmorClassAffectedValues",
+        "modifierEffectTypesAttack",
+        "modifierEffectTypesDamage",
+        "modifierEffectTypesAmmunition",
+        "modifierEffectTypesDefence",
+        "modifierEffectTypesResource",
+        "modifierEffectTypesAbility",
+        "modifierEffectTypesSkill",
+        "modifierEffectTypesSave",
+        "modifierEffectTypesDC",
+        "modifierEffectTypesSpeed",
+        "modifierEffectTypesMisc",
+        "modifierEffectTypesStarship",
         "modifierEffectTypes",
         "modifierType",
         "modifierTypes",
+        "rangeModes",
         "saveDescriptors",
         "saveProgression",
         "saves",
         "senses",
         "skillProficiencyLevels",
         "skills",
-        "controlSkills",
         "specialAbilityTypes",
         "specialMaterials",
         "speeds",
@@ -512,13 +592,14 @@ Hooks.once("i18nInit", () => {
         "starshipArcs",
         "starshipRoles",
         "starshipSizes",
+        "starshipSystemPatch",
         "starshipSystemStatus",
         "starshipWeaponClass",
         "starshipWeaponProperties",
         "starshipWeaponRanges",
         "starshipWeaponTypes",
         "turnEventTypes",
-        "droneArmTypes",
+        "vehicleControlSkills",
         "vehicleCoverTypes",
         "vehicleSizes",
         "vehicleTypes",
@@ -683,7 +764,7 @@ Hooks.on("renderChatMessageHTML", (app, html, data) => {
 
 Hooks.on("getChatMessageContextOptions", addChatMessageContextOptions);
 
-Hooks.on("renderAbstractSidebarTab", async (app, html) => {
+Hooks.on("renderAbstractSidebarTab", async (app) => {
     if (app.options.id === "settings") {
         const textToAdd = `<a href="https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/blob/master/changelist.md">Starfinder Patch Notes</a>`;
         const gameDetails = document.getElementById("settings");

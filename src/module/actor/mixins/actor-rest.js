@@ -38,13 +38,14 @@ export const ActorRestMixin = (superclass) => class extends superclass {
 
         // Restore resources that reset on short rests
         const updateData = {};
-        for (const [k, r] of Object.entries(data.resources)) {
-            if (r.max && r.sr) {
-                updateData[`system.resources.${k}.value`] = r.max;
+        if (data.resources) {
+            for (const [k, r] of Object.entries(data.resources)) {
+                if (r.max && r.sr) {
+                    updateData[`system.resources.${k}.value`] = r.max;
+                }
             }
+            await this.update(updateData);
         }
-
-        await this.update(updateData);
 
         // Reset items that restore their uses on a short rest
         const items = this.items.filter(item => item.system.uses && (item.system.uses.per === "sr"));
@@ -150,13 +151,14 @@ export const ActorRestMixin = (superclass) => class extends superclass {
      * @return {Promise}        A Promise which resolves once the long rest workflow has completed
      */
     async longRest({ dialog = true, chat = true } = {}) {
-        const data = foundry.utils.deepClone(this.system);
+        const data = this.system;
         const updateData = {};
 
         if (dialog) {
             try {
                 await ShortRestDialog.longRestDialog(this);
             } catch (err) {
+                console.warn(err);
                 return;
             }
         }
@@ -182,9 +184,11 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             }
         }
 
-        for (const [k, r] of Object.entries(data.resources)) {
-            if (r.max && (r.sr || r.lr)) {
-                updateData[`system.resources.${k}.value`] = r.max;
+        if (data.resources) {
+            for (const [k, r] of Object.entries(data.resources)) {
+                if (r.max && (r.sr || r.lr)) {
+                    updateData[`system.resources.${k}.value`] = r.max;
+                }
             }
         }
 

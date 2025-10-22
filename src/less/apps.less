@@ -65,7 +65,8 @@ a.inline-roll {
 }
 
 a.enriched-link {
-    background: #ddd;
+    background: light-dark(@colorDark, @colorFaint);
+    color: light-dark(@colorFaint, @colorDark);
     padding: 1px 4px;
     border: 1px solid var(--color-border-dark-tertiary);
     border-radius: 2px;
@@ -718,11 +719,11 @@ img.icon-enricher {
 
 // SFRPG Macro Bar
 
-#hotbar.sfrpg {
-    ol#macro-list {
+#hotbar {
+    menu#action-bar.sfrpg {
         border: none;
 
-        .macro {
+        .slot {
             img {
                 &.greyscale {
                     filter: grayscale(1);
@@ -734,14 +735,16 @@ img.icon-enricher {
                 }
             }
 
-            span.macro-key {
+            span.key {
                 top: 0px;
                 right: 0px;
-                padding: 0 2px;
+                left: auto;
+                padding: 0 2px 2px 2px;
                 z-index: 1;
+                border-radius: 0 8px;
             }
 
-            footer.macro-footer {
+            footer.footer {
                 position: absolute;
                 bottom: 0px;
                 left: 0px;

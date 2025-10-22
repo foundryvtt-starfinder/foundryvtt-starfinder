@@ -1,13 +1,11 @@
 export default function(engine) {
-    engine.closures.add("calculateDroneMods", (fact, context) => {
+    engine.closures.add("calculateDroneMods", (fact) => {
         const data = fact.data;
         const mods = fact.mods;
 
         data.attributes.arms = 0;
-        data.attributes.weaponMounts.melee.max = 0;
-        data.attributes.weaponMounts.ranged.max = 0;
-        data.attributes.armorSlots.current = 0;
-        data.attributes.armorSlots.max = 0;
+        data.attributes.weaponMounts = {melee: {max: 0}, ranged: {max: 0}};
+        data.attributes.armorSlots = {current: 0, max: 0};
         data.traits.senses = "";
         data.traits.spellResistance.value = data.traits.spellResistance.base;
         data.traits.spellResistance.tooltip = [];
@@ -67,7 +65,7 @@ export default function(engine) {
             }
 
             if (modData.bonusSkill) {
-                let skill = data.skills[modData.bonusSkill];
+                const skill = data.skills[modData.bonusSkill];
 
                 skill.enabled = true;
                 skill.value = 3;

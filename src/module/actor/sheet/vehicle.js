@@ -1,12 +1,12 @@
-import { SFRPG } from "../../config.js";
+import { ActorSFRPG } from "../actor.js";
 import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     constructor(...args) {
         super(...args);
 
-        this.acceptedItemTypes.push(...SFRPG.vehicleDefinitionItemTypes);
-        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+        this.acceptedItemTypes.push(...CONFIG.SFRPG.vehicleDefinitionItemTypes);
+        this.acceptedItemTypes.push(...CONFIG.SFRPG.physicalItemTypes);
     }
 
     static get defaultOptions() {
@@ -127,7 +127,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const [attacks, primarySystems, expansionBays, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             if (!item.config) item.config = {};
-            const hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
+            const hasAttack = CONFIG.SFRPG.attackActions.includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
             const hasDamage = item.system.damage?.parts
                 && item.system.damage.parts.length > 0
                 && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
@@ -178,7 +178,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Activate event listeners using the prepared sheet HTML
      *
-     * @param {HTML} html The prepared HTML object ready to be rendered into the DOM
+     * @param {JQuery} html The prepared HTML object ready to be rendered into the DOM
      */
     activateListeners(html) {
         super.activateListeners(html);
@@ -242,22 +242,11 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onDrop(event) {
         event.preventDefault();
 
-        // let data;
-        // try {
-        //     data = JSON.parse(event.dataTransfer.getData('text/plain'));
-        //     if (!data) {
-        //         return false;
-        //     }
-        // } catch (err) {
-        //     return false;
-        // }
-
         const data = TextEditor.getDragEventData(event);
-        if (!data) return false;
-
-        // Case - Dropped Actor
-        if (data.type === "Actor") {
-            const actor = await Actor.fromDropData(data);
+        if (Hooks.call('dropActorSheetData', this.actor, this, data) === false) {
+            // Further processing halted
+        } else if (data.type === "Actor") {
+            const actor = await ActorSFRPG.fromDropData(data);
 
             // Other vehicles are only acceptable if this vehicle has 1 or more hangar bays
             if (actor.type === "vehicle") {

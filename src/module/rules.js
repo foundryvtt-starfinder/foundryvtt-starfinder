@@ -2,7 +2,7 @@
 import error from './engine/common/action/error.js';
 import identity from './engine/common/action/identity.js';
 import setResult from './engine/common/action/set-result.js';
-import undefined from './engine/common/action/undefined.js';
+import undefinedClosure from './engine/common/action/undefined.js';
 
 // Common conditions
 import always from './engine/common/condition/always.js';
@@ -35,7 +35,6 @@ import calculateMovementSpeeds from './rules/actions/actor/calculate-movement-sp
 import calculateSaveModifiers from './rules/actions/actor/calculate-save-modifiers.js';
 import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modifiers.js';
 import calculateTimedEffects from "./rules/actions/actor/calculate-timed-effects.js";
-import clearTooltips from './rules/actions/actor/clear-tooltips.js';
 import logToConsole from './rules/actions/log.js';
 import stackModifiers from './rules/actions/modifiers/stack-modifiers.js';
 import isActorType from './rules/conditions/is-actor-type.js';
@@ -107,9 +106,8 @@ export default function(engine) {
     error(engine);
     identity(engine);
     setResult(engine);
-    undefined(engine);
+    undefinedClosure(engine);
     // Actor actions
-    clearTooltips(engine);
     calculateBaseAbilityScore(engine);
     calculateBulkAndWealth(engine);
     calculateActorResources(engine);
@@ -213,7 +211,6 @@ export default function(engine) {
             {
                 when: { closure: "isActorType", type: "character" },
                 then: [
-                    "clearTooltips",
                     "calculateCharacterLevel",
                     "calculateClasses",
                     "calculateTraits",
@@ -252,7 +249,6 @@ export default function(engine) {
             {
                 when: { closure: "isActorType", type: "drone" },
                 then: [
-                    "clearTooltips",
                     "calculateDroneChassis",
                     "calculateDroneMods",
                     "calculateDroneEquipment",
@@ -285,7 +281,6 @@ export default function(engine) {
             {
                 when: { closure: "isActorType", type: "npc" },
                 then: [
-                    "clearTooltips",
                     "calculateNpcXp",
                     "calculateNpcLevel",
                     "calculateNpcDcs",
@@ -302,7 +297,6 @@ export default function(engine) {
             {
                 when: { closure: "isActorType", type: "npc2" },
                 then: [
-                    "clearTooltips",
                     "calculateNpcXp",
                     "calculateNpcLevel",
                     "calculateNpcDcs",
@@ -327,7 +321,7 @@ export default function(engine) {
             {
                 when: { closure: "isActorType", type: "starship" },
                 then: [
-                    "calculateStarshipFrame",
+                    { closure: "calculateStarshipFrame", stackModifiers: "stackModifiers" },
                     { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     "calculateStarshipCrew",
                     "calculateStarshipCritThreshold",
@@ -336,8 +330,8 @@ export default function(engine) {
                     "calculateStarshipAblative",
                     "calculateStarshipPower",
                     "calculateStarshipSensors",
-                    "calculateStarshipSpeed",
-                    "calculateStarshipArmorClass",
+                    { closure: "calculateStarshipSpeed", stackModifiers: "stackModifiers" },
+                    { closure: "calculateStarshipArmorClass", stackModifiers: "stackModifiers" },
                     "calculateStarshipTargetLock",
                     "calculateStarshipComputer",
                     "calculateStarshipCriticalStatus",
@@ -368,7 +362,12 @@ export default function(engine) {
             "calculateSkillDC",
             "calculateActivationDetails",
             {
-                when: { closure: "isItemType", type: "effect" },
+                when: [
+                    { closure: "isItemType", type: "effect" },
+                    { closure: "isItemType", type: "feat" }
+                    // add more item types as they became know to be work with timed effects
+                ],
+                conditionStrategy: "or",
                 then: ["calculateTimedEffects"]
             }
         ]

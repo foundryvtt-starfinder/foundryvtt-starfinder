@@ -2,11 +2,6 @@
   "_id": "JnvLkvtuSdTbSQJ9",
   "name": "Harrying Shot",
   "type": "starshipAction",
-  "_stats": {
-    "coreVersion": 13,
-    "systemId": "sfrpg",
-    "systemVersion": "0.28.2"
-  },
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
     "type": "",
@@ -26,7 +21,7 @@
     "formula": [
       {
         "name": "Gunnery",
-        "formula": "max(@minorCrew.attributes.baseAttackBonus.value, @minorCrew.skills.pil.ranks) + @minorCrew.abilities.dex.mod"
+        "formula": "max(@minorCrew.attributes.baseAttackBonus.value, @minorCrew.skills.pil.ranks, @minorCrew.skills.gun.mod) + @minorCrew.abilities.dex.mod"
       }
     ],
     "isPush": false,

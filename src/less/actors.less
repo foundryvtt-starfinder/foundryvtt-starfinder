@@ -613,6 +613,10 @@
             line-height: 20px;
             font-weight: bold;
             margin: 0;
+
+            &.narrow {
+                flex: 0 0 100px;
+            }
         }
 
         input {
@@ -641,6 +645,30 @@
 
         .value {
             text-align: right;
+        }
+    }
+
+    /* NPC Ability DC field */
+    .npc-ability-field {
+        margin: 0 8px;
+        flex: 0 0 20px;
+        h3 {
+            .exo2();
+            font-size: var(--font-size-16);
+            margin: 0;
+            border: none;
+        }
+        hr {
+            margin: 2px 0px 2px 0px;
+        }
+        .form-group {
+            align-items: left;
+            label, input {
+                flex: 0 0 150px;
+            }
+            input {
+                flex: 0 0 50px;
+            }
         }
     }
 
@@ -925,7 +953,7 @@
                 flex: 0 0 95px;
             }
 
-            flex: 0 0 82px;
+            flex: 0 0 92px;
             font-size: var(--font-size-12);
             color: @colorTan;
             text-align: center;
@@ -951,6 +979,15 @@
                 &:hover,
                 &:focus {
                     box-shadow: 0 0 5px @sfrpgGreen;
+                }
+            }
+
+            .featInstantaneous {
+                background: @sfrpgYellow;
+                color: #000;
+                &:hover,
+                &:focus {
+                    box-shadow: 0 0 5px @sfrpgYellow;
                 }
             }
 

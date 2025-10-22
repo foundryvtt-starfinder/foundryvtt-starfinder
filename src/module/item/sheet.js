@@ -1,5 +1,4 @@
 import { SFRPG } from "../config.js";
-import SFRPGModifier from "../modifiers/modifier.js";
 import RollContext from "../rolls/rollcontext.js";
 
 const itemSizeArmorClassModifier = {
@@ -89,15 +88,6 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         return numericValue;
     }
 
-    async onPlaceholderUpdated(item, newSavingThrowScore) {
-        const placeholders = item.flags.placeholders;
-        if (placeholders.savingThrow.value !== newSavingThrowScore.total) {
-            placeholders.savingThrow.value = newSavingThrowScore.total;
-            await new Promise(resolve => setTimeout(resolve, 500));
-            this.render(false, {editable: this.options.editable});
-        }
-    }
-
     /**
      * Prepare item sheet data
      * Start with the base item data and extending with additional properties for rendering.
@@ -141,45 +131,30 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         // Only physical items have hardness, hp, and their own saving throw when attacked.
         if (data.isPhysicalItem) {
+            let itemLevel = this.parseNumber(itemData.level, 1);
+            let sizeModifier = 0;
+            let dexterityModifier = -5;
             if (itemData.attributes) {
-                const itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
-                const sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
-                const dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
+                itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
+                sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
+                dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
 
                 data.placeholders.hardness = this.parseNumber(itemData.attributes.hardness, itemData.attributes.sturdy ? 5 + (2 * itemLevel) : 5 + itemLevel);
                 data.placeholders.maxHitpoints = this.parseNumber(itemData.attributes.hp?.max, (itemData.attributes.sturdy ? 15 + 3 * itemLevel : 5 + itemLevel) + (itemLevel >= 15 ? 30 : 0));
                 data.placeholders.armorClass = this.parseNumber(itemData.attributes.ac, 10 + sizeModifier + dexterityModifier);
-                data.placeholders.dexterityModifier = dexterityModifier;
-                data.placeholders.sizeModifier = sizeModifier;
-
-                data.placeholders.savingThrow = data.placeholders.savingThrow || {};
-                data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
-                data.placeholders.savingThrow.value = data.placeholders.savingThrow.value ?? 10;
-
-                this.item.flags.placeholders = data.placeholders;
-                this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)
-                    .then((total) => this.onPlaceholderUpdated(this.item, total))
-                    .catch((reason) => console.log(reason));
             } else {
-                const itemLevel = this.parseNumber(itemData.level, 1);
-                const sizeModifier = 0;
-                const dexterityModifier = -5;
-
                 data.placeholders.hardness = 5 + itemLevel;
                 data.placeholders.maxHitpoints = (5 + itemLevel) + (itemLevel >= 15 ? 30 : 0);
                 data.placeholders.armorClass = 10 + sizeModifier + dexterityModifier;
-                data.placeholders.dexterityModifier = dexterityModifier;
-                data.placeholders.sizeModifier = sizeModifier;
-
-                data.placeholders.savingThrow = data.placeholders.savingThrow || {};
-                data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
-                data.placeholders.savingThrow.value = data.placeholders.savingThrow.value ?? 10;
-
-                this.item.flags.placeholders = data.placeholders;
-                this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)
-                    .then((total) => this.onPlaceholderUpdated(this.item, total))
-                    .catch((reason) => console.log(reason));
             }
+
+            data.placeholders.savingThrow = {
+                formula: "max(@item.level, @owner.abilities.X.mod)",
+                value: this._computeItemSaveBonus()
+            };
+            data.placeholders.dexterityModifier = dexterityModifier;
+            data.placeholders.sizeModifier = sizeModifier;
+            this.item.flags.placeholders = data.placeholders;
         }
 
         data.selectedSize = (itemData.attributes && itemData.attributes.size) ? itemData.attributes.size : "medium";
@@ -196,8 +171,11 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         // Determine whether to show calculated totals for fields with formulas
         if (itemData?.activation?.type || data.item.type === "weapon") {
-            data.range = {};
+            data.activation = {
+                hasInput: !SFRPG.uncountableActivations.includes(itemData?.activation?.type ?? "")
+            };
 
+            data.range = {};
             data.range.hasInput = (() => {
                 // C/M/L on spells requires no input
                 if (this.item.type === "spell") return !(["close", "medium", "long", "none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
@@ -211,7 +189,8 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
             data.duration = {};
             data.duration.showTotal = !!itemData.duration?.total && (String(itemData.duration?.total) !== String(itemData.duration?.value));
-            data.duration.hasInput = itemData.duration.units !== "instantaneous";
+            data.duration.hasInput = !SFRPG.uncountableDurations.includes(itemData.duration.units);
+            data.duration.needsEndOn = (itemData.duration?.units === "round");
 
             data.uses = {};
             data.uses.showTotal = !!itemData.uses?.total && (String(itemData.uses?.total) !== String(itemData.uses?.max));
@@ -227,8 +206,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         // Vehicle Attacks
         if (data.isVehicleAttack) {
-            data.placeholders.savingThrow = {};
-            data.placeholders.savingThrow.value = data.item.system.save.dc;
+            data.placeholders.savingThrow = {value: data.item.system.save.dc};
         }
 
         if (data.item.type === "effect") {
@@ -246,13 +224,13 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
             data.sourceActorChoices = {};
             if (game.combat?.started) {
                 for (const combatant of game.combat.combatants) {
-                    if (combatant.actorId === data.item?.actor?.id) continue;
-                    data.sourceActorChoices[combatant.actorId] = combatant.name;
+                    if (combatant.actor.uuid === data.item?.actor?.uuid) continue;
+                    data.sourceActorChoices[combatant.actor.uuid] = combatant.name;
                 }
             } else {
                 const PCs = game.actors.filter(i => i.type === "character");
                 for (const PC of PCs) {
-                    data.sourceActorChoices[PC.id] = PC.name;
+                    data.sourceActorChoices[PC.uuid] = PC.name;
                 }
             }
 
@@ -265,12 +243,6 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
                 turnEvent.noteI = `system.turnEvents.${i}.content`;
             }
         }
-
-        // Similar to actor-modifiers.getAllModifiers()
-        // we need to enforce the type of the modifiers to be SFRPGModifier
-        this.item.system.modifiers = this.item.system.modifiers?.map(mod => {
-            return new SFRPGModifier(mod, {parent: this.item});
-        });
 
         data.modifiers = this.item.system.modifiers;
 
@@ -303,7 +275,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
             });
 
             // Manage Subactions
-            if (data?.itemData?.formula?.length > 1) {
+            if (data?.itemData?.formula?.length > 0) {
                 data.subactionEditorInfo = [];
                 let ct = 0;
                 for (const value of data.itemData.formula) {
@@ -331,21 +303,18 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
     /* -------------------------------------------- */
 
-    async _computeSavingThrowValue(itemLevel, formula) {
-        try {
-            const rollData = {
-                owner: this.item.actor ? foundry.utils.deepClone(this.item.actor.system) : {abilities: {dex: {mod: 0}}},
-                item: foundry.utils.deepClone(this.item.system),
-                itemLevel: itemLevel
-            };
-            if (!rollData.owner.abilities?.dex?.mod) {
-                rollData.owner.abilities = {dex: {mod: 0}};
-            }
-            const saveRoll = Roll.create(formula, rollData);
-            return saveRoll.evaluate();
-        } catch (err) {
-            console.log(err);
-            return null;
+    _computeItemSaveBonus() {
+        // TODO: Move this into the item's calculation rather than calculating on the sheet
+        const parentItem = this.item;
+        const parentActor = parentItem.actor;
+        const itemLevel = parentItem.system.level;
+        if (parentActor) {
+            const ActorAbilities = parentActor.system.abilities;
+            return `[F: ${Math.max(itemLevel, ActorAbilities.con.mod, 0)}, R: ${Math.max(itemLevel, ActorAbilities.dex.mod, 0)}, W: ${Math.max(itemLevel, ActorAbilities.dex.mod, 0)}]`;
+        } else if (itemLevel < 1) {
+            return 0;
+        } else {
+            return `Max(${itemLevel}, Mod)`;
         }
     }
 
@@ -562,7 +531,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     _updateObject(event, formData) {
         // Handle Damage Array
         const damage = Object.entries(formData).filter(e => e[0].startsWith("system.damage.parts"));
-        formData["system.damage.parts"] = damage.reduce((arr, entry) => {
+        const damageParts = damage.reduce((arr, entry) => {
             const [i, key, type] = entry[0].split(".").slice(3);
             if (!arr[i]) arr[i] = { name: "", formula: "", types: {}, group: null, isPrimarySection: false };
 
@@ -586,10 +555,13 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
             return arr;
         }, []);
+        if (damageParts.length) {
+            formData["system.damage.parts"] = damageParts;
+        }
 
         // Handle Critical Damage Array
         const criticalDamage = Object.entries(formData).filter(e => e[0].startsWith("system.critical.parts"));
-        formData["system.critical.parts"] = criticalDamage.reduce((arr, entry) => {
+        const criticalDamageParts = criticalDamage.reduce((arr, entry) => {
             const [i, key, type] = entry[0].split(".").slice(3);
             if (!arr[i]) arr[i] = { formula: "", types: {}, operator: "" };
 
@@ -604,15 +576,21 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
             return arr;
         }, []);
+        if (criticalDamageParts.length) {
+            formData["system.critical.parts"] = criticalDamageParts;
+        }
 
         // Handle Ability Adjustments array
         const abilityMods = Object.entries(formData).filter(e => e[0].startsWith("system.abilityMods.parts"));
-        formData["system.abilityMods.parts"] = abilityMods.reduce((arr, entry) => {
+        const abilityModParts = abilityMods.reduce((arr, entry) => {
             const [i, j] = entry[0].split(".").slice(3);
             if (!arr[i]) arr[i] = [];
             arr[i][j] = entry[1];
             return arr;
         }, []);
+        if (abilityModParts.length) {
+            formData["system.abilityMods.parts"] = abilityModParts;
+        }
 
         // Handle Starship Action/Subaction Formulas
         if (this.object.type === "starshipAction") {
@@ -735,11 +713,20 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         // Add a new subaction
         if (a.classList.contains("add-subaction")) {
-            return this.item.update({
-                "system.formula": formula.concat([
-                    { dc: {resolve:false, value:""}, formula: "", name:"", effectNormal:"", effectCritical:"" }
-                ])
-            });
+            if (formula.length > 0) {
+                return this.item.update({
+                    "system.formula": formula.concat([
+                        { dc: {resolve:false, value:""}, formula: "", name:"", effectNormal:"", effectCritical:"" }
+                    ])
+                });
+            }
+            else {
+                return this.item.update({
+                    "system.formula": [
+                        { dc: {resolve:false, value:""}, formula: "", name:"", effectNormal:"", effectCritical:"" }
+                    ]
+                });
+            }
         }
 
         // Remove a subaction
@@ -862,7 +849,6 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
      */
     _onModifierCreate(event) {
         event.preventDefault();
-        const target = $(event.currentTarget);
 
         this.item.addModifier({
             name: "New Modifier"
@@ -1105,7 +1091,6 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
         const currentImage = visualization[visualizationIndex].image || this.item.img;
 
-        const attr = event.currentTarget.dataset.edit;
         const fp = new FilePicker({
             type: "image",
             current: currentImage,

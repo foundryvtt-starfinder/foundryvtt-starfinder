@@ -1,6 +1,8 @@
 /**
- * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs";
- * @import Collection from "@common/utils/collection.mjs";
+ * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs"
+ * @import Collection from "@common/utils/collection.mjs"
+ * @import { ActorSFRPG } from "../actor/actor.js"
+ * @import { ItemSFRPG } from "../item/item.js"
 */
 
 export class PackLoader {
@@ -18,7 +20,7 @@ export class PackLoader {
     async *loadPacks(entityType, packs) {
         if (!this.loadedPacks[entityType]) this.loadedPacks[entityType] = {};
 
-        const progress = ui.notifications.notify("Loading packs...", "info", { progress: true });
+        const progress = ui.notifications.info("Loading packs...", { progress: true });
         let pct = 0;
 
         const fields = [
@@ -51,9 +53,9 @@ export class PackLoader {
         for (const packId of packs) {
             let data = this.loadedPacks[entityType][packId];
 
-            /** @type {CompendiumCollection} */
+            /** @type {CompendiumCollection<ActorSFRPG|ItemSFRPG> | undefined} */
             const pack = data?.pack || game.packs.get(packId);
-            if (pack.documentName !== entityType) continue;
+            if (pack?.documentName !== entityType) continue;
 
             if (!data) {
                 const content = await pack.getIndex({ fields });

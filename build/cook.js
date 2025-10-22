@@ -103,7 +103,7 @@ export async function cook() {
 
                 if (!limitToPack || directory === limitToPack) {
                 // sanitize the incoming JSON
-                    sanitizeJSON(jsonInput);
+                    sanitizeJSON(jsonInput, true);
 
                     // Fix missing images
                     if (!jsonInput.img && !jsonInput.pages) {
@@ -224,18 +224,18 @@ export function sanitizeJSON(jsonInput) {
         delete item.sort;
         if (!item.folder) delete item.folder;
 
-        item._stats = {
-            coreVersion: manifest.compatibility.minimum,
-            systemId: "sfrpg",
-            systemVersion: manifest.version
-        };
-
         delete item.permission;
         delete item.ownership;
         delete item.effects;
 
         delete item.flags?.exportSource;
         delete item.flags?.sourceId;
+
+        item._stats = {
+            coreVersion: manifest.compatibility.minimum,
+            systemId: "sfrpg",
+            systemVersion: manifest.version
+        };
 
         // Remove leading or trailing spaces
         item.name = item.name.trim();
