@@ -1,4 +1,9 @@
 /**
+ * @import { ActorSFRPG } from "../actor/actor.js"
+ * @import { ItemSFRPG } from "../item/item.js"
+*/
+
+/**
  * @typedef {Object} RollData
  * An object containing relevant data of a document, to be used at roll-time to resolve `@tags` in formulas.
  *
@@ -85,7 +90,7 @@ export default class RollContext {
     /**
      * Given a formula `@tag`, read a value from this RollFormula.
      * @param {FormulaKey} variable
-     * @returns {*|Null} The value, or null if not found
+     * @returns {*|null} The value, or null if not found
      */
     getValue(variable) {
         if (!variable) return null;
@@ -155,7 +160,7 @@ export default class RollContext {
      * Given a formula `@tag`, resolve the formula using the object as roll data.
      * @param {RollData} object An object to be used for lookup.
      * @param {FormulaKey} key The formula to be used as a key on the object.
-     * @returns {*|Null} The data residing at the formula's location in the object, or null if not found.
+     * @returns {*|null} The data residing at the formula's location in the object, or null if not found.
      */
     static _readValue(object, key) {
         // console.log(["_readValue", key, object]);

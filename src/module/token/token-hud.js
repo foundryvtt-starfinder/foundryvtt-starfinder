@@ -140,7 +140,9 @@ export class SFRPGTokenHUD extends foundry.applications.hud.TokenHUD {
         if (!statuses) return;
 
         for (const [condition, enabled] of Object.entries(statuses)) {
-            if (enabled) this.object.actor.setCondition(condition, false);
+            if (enabled) {
+                await this.object.actor.setCondition(condition, false);
+            }
         }
 
         for (const effect of this.object.actor.effects) {

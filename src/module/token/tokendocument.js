@@ -31,38 +31,52 @@ export default class SFRPGTokenDocument extends foundry.documents.TokenDocument 
      * @returns
      */
     getBarAttribute(barName, {alternative} = {}) {
-        const attr = alternative || (barName ? this[barName].attribute : null);
-        if ( !attr || !this.actor ) return null;
-        const data = foundry.utils.getProperty(this.actor.system, attr);
+        const attribute = alternative || (barName ? this[barName].attribute : null);
+        if ( !attribute || !this.actor ) return null;
+        const system = this.actor.system;
+        const isSystemDataModel = system instanceof foundry.abstract.DataModel;
+        const templateModel = game.model.Actor[this.actor.type];
+
+        // Get the current attribute value
+        const data = foundry.utils.getProperty(system, attribute);
         if ( (data === null) || (data === undefined) ) return null;
-        const model = game.model.Actor[this.actor.type];
 
         // Single values
         if ( Number.isNumeric(data) ) {
+            let editable = foundry.utils.hasProperty(templateModel, attribute);
+            if ( isSystemDataModel ) {
+                const field = system.schema.getField(attribute);
+                if ( field ) editable = field instanceof foundry.data.fields.NumberField;
+            }
             return {
                 type: "value",
-                attribute: attr,
+                attribute: attribute,
                 value: Number(data),
-                editable: foundry.utils.hasProperty(model, attr)
+                editable: editable
             };
         }
 
         // Attribute objects
         else if ( ("value" in data) && ("max" in data) ) {
+            let editable = foundry.utils.hasProperty(templateModel, `${attribute}.value`);
+            if ( isSystemDataModel ) {
+                const field = system.schema.getField(`${attribute}.value`);
+                if ( field ) editable = field instanceof foundry.data.fields.NumberField;
+            }
             let value = parseInt(data.value || 0);
             let max = parseInt(data.max || 0);
 
-            if (attr === "attributes.hp") {
+            if (attribute === "attributes.hp") {
                 value += parseInt(data.temp || 0);
                 max += parseInt(data.tempmax || 0);
             }
 
             return {
                 type: "bar",
-                attribute: attr,
+                attribute: attribute,
                 value: value,
                 max: max,
-                editable: foundry.utils.hasProperty(model, `${attr}.value`)
+                editable: editable
             };
         }
 

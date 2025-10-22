@@ -81,6 +81,9 @@ import { getStarshipBrowser } from "./module/packs/starship-browser.js";
 import { SFRPGTokenHUD } from './module/token/token-hud.js';
 import isObject from './module/utils/is-object.js';
 
+// Import DataModel classes
+import * as models from './module/data/_module.mjs';
+
 const { Actors, Items } = foundry.documents.collections;
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 
@@ -216,6 +219,65 @@ Hooks.once('init', async function() {
     CONFIG.Canvas.layers.templates.layerClass = TemplateLayerSFRPG;
     CONFIG.MeasuredTemplate.objectClass = MeasuredTemplateSFRPG;
     CONFIG.MeasuredTemplate.defaults.angle = 90; // SF uses 90 degree cones
+
+    // DataModels definition
+    CONFIG.Actor.dataModels = {
+        character: models.SFRPGActorCharacter,
+        drone: models.SFRPGActorDrone,
+        hazard: models.SFRPGActorHazard,
+        npc2: models.SFRPGActorNPC,
+        starship: models.SFRPGActorStarship,
+        vehicle: models.SFRPGActorVehicle
+    };
+
+    CONFIG.Item.dataModels = {
+        actorResource: models.SFRPGItemActorResource,
+        ammunition: models.SFRPGItemAmmunition,
+        archetypes: models.SFRPGItemArchetypes,
+        asi: models.SFRPGItemASI,
+        augmentation: models.SFRPGItemAugmentation,
+        chassis: models.SFRPGItemChassis,
+        class: models.SFRPGItemClass,
+        consumable: models.SFRPGItemConsumable,
+        container: models.SFRPGItemContainer,
+        effect: models.SFRPGItemEffect,
+        equipment: models.SFRPGItemEquipment,
+        feat: models.SFRPGItemFeat,
+        fusion: models.SFRPGItemFusion,
+        goods: models.SFRPGItemGoods,
+        hybrid: models.SFRPGItemHybrid,
+        magic: models.SFRPGItemMagic,
+        mod: models.SFRPGItemMod,
+        race: models.SFRPGItemRace,
+        shield: models.SFRPGItemShield,
+        spell: models.SFRPGItemSpell,
+        starshipAblativeArmor: models.SFRPGItemStarshipAblativeArmor,
+        starshipAction: models.SFRPGItemStarshipAction,
+        starshipArmor: models.SFRPGItemStarshipArmor,
+        starshipComputer: models.SFRPGItemStarshipComputer,
+        starshipCrewQuarter: models.SFRPGItemStarshipCrewQuarter,
+        starshipDefensiveCountermeasure: models.SFRPGItemStarshipDefensiveCountermeasure,
+        starshipDriftEngine: models.SFRPGItemStarshipDriftEngine,
+        starshipExpansionBay: models.SFRPGItemStarshipExpansionBay,
+        starshipFortifiedHull: models.SFRPGItemStarshipFortifiedHull,
+        starshipFrame: models.SFRPGItemStarshipFrame,
+        starshipOtherSystem: models.SFRPGItemStarshipOtherSystem,
+        starshipPowerCore: models.SFRPGItemStarshipPowerCore,
+        starshipReinforcedBulkhead: models.SFRPGItemStarshipReinforcedBulkhead,
+        starshipSecuritySystem: models.SFRPGItemStarshipSecuritySystem,
+        starshipSensor: models.SFRPGItemStarshipSensor,
+        starshipShield: models.SFRPGItemStarshipShield,
+        starshipSpecialAbility: models.SFRPGItemStarshipSpecialAbility,
+        starshipThruster: models.SFRPGItemStarshipThruster,
+        starshipWeapon: models.SFRPGItemStarshipWeapon,
+        technological: models.SFRPGItemTechnological,
+        theme: models.SFRPGItemTheme,
+        upgrade: models.SFRPGItemUpgrade,
+        vehicleAttack: models.SFRPGItemVehicleAttack,
+        vehicleSystem: models.SFRPGItemVehicleSystem,
+        weapon: models.SFRPGItemWeapon,
+        weaponAccessory: models.SFRPGItemWeaponAccessory
+    };
 
     CONFIG.ui.hotbar = HotbarSFRPG;
 
@@ -462,6 +524,7 @@ Hooks.once("i18nInit", () => {
         "augmentationSystems",
         "augmentationTypes",
         "babProgression",
+        "calculationStages",
         "capacityUsagePer",
         "combatRoles",
         "combatRolesDescriptions",
@@ -481,6 +544,8 @@ Hooks.once("i18nInit", () => {
         "effectDurationTypes",
         "descriptors",
         "descriptorsTooltips",
+        "droneArmTypes",
+        "effectTypes",
         "energyDamageTypes",
         "energyResistanceTypes",
         "featTypes",
@@ -492,17 +557,30 @@ Hooks.once("i18nInit", () => {
         "languages",
         "limitedUsePeriods",
         "maneuverability",
+        "mathComparators",
         "modifierArmorClassAffectedValues",
+        "modifierEffectTypesAttack",
+        "modifierEffectTypesDamage",
+        "modifierEffectTypesAmmunition",
+        "modifierEffectTypesDefence",
+        "modifierEffectTypesResource",
+        "modifierEffectTypesAbility",
+        "modifierEffectTypesSkill",
+        "modifierEffectTypesSave",
+        "modifierEffectTypesDC",
+        "modifierEffectTypesSpeed",
+        "modifierEffectTypesMisc",
+        "modifierEffectTypesStarship",
         "modifierEffectTypes",
         "modifierType",
         "modifierTypes",
+        "rangeModes",
         "saveDescriptors",
         "saveProgression",
         "saves",
         "senses",
         "skillProficiencyLevels",
         "skills",
-        "controlSkills",
         "specialAbilityTypes",
         "specialMaterials",
         "speeds",
@@ -521,7 +599,7 @@ Hooks.once("i18nInit", () => {
         "starshipWeaponRanges",
         "starshipWeaponTypes",
         "turnEventTypes",
-        "droneArmTypes",
+        "vehicleControlSkills",
         "vehicleCoverTypes",
         "vehicleSizes",
         "vehicleTypes",

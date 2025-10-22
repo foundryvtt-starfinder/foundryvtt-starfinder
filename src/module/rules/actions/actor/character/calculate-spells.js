@@ -16,7 +16,7 @@ export default function(engine) {
             }
 
             // Only apply bonus spells known if there is a base spells known.
-            if (totalSpells > 0) {
+            if (totalSpells > 0 && spellAbilityMod >= 0) {
                 try {
                     // TODO: If spellAbilityMod is not part of bonusSpellsPerDay's keys, find the nearest key and use that instead.
                     totalSpells += classData.bonusSpellsPerDay[spellAbilityMod][spellLevel] || 0;

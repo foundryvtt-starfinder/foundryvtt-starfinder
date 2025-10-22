@@ -163,20 +163,22 @@ export default class StackModifiers extends Closure {
             return prev;
         }, [[], [], [], [], [], [], [], [], [], [], [], [], []]);
 
-        const ability = abilityMods?.filter(mod => mod.max > 0)?.sort((a, b) => b.max - a.max)
-            ?.shift() ?? null;
-        const armor = armorMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
-        const base = baseMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
-        const circumstance = circumstanceMods?.sort((a, b) => b.max - a.max);
-        const divine = divineMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
-        const enhancement = enhancementMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
-        const insight = insightMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
-        const luck = luckMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
-        const morale = moraleMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
-        const racial = racialMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
-        const resistance = resistanceMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
-        const untyped = untypedMods?.sort((a, b) => b.max - a.max);
-        const weaponSpecialization = weaponSpecializationMods?.sort((a, b) => b.max - a.max)?.shift() ?? null;
+        const ability = abilityMods.length
+            ? [abilityMods.filter(mod => mod.max > 0).sort((a, b) => b.max - a.max)
+                ?.shift()]
+            : [];
+        const armor = armorMods.length ? [armorMods.sort((a, b) => b.max - a.max).shift()] : [];
+        const base = baseMods.length ? [baseMods.sort((a, b) => b.max - a.max).shift()] : [];
+        const circumstance = circumstanceMods.length ? circumstanceMods?.sort((a, b) => b.max - a.max) : [];
+        const divine = divineMods.length ? [divineMods.sort((a, b) => b.max - a.max).shift()] : [];
+        const enhancement = enhancementMods.length ? [enhancementMods.sort((a, b) => b.max - a.max).shift()] : [];
+        const insight = insightMods.length ? [insightMods.sort((a, b) => b.max - a.max).shift()] : [];
+        const luck = luckMods.length ? [luckMods.sort((a, b) => b.max - a.max).shift()] : [];
+        const morale = moraleMods.length ? [moraleMods.sort((a, b) => b.max - a.max).shift()] : [];
+        const racial = racialMods.length ? [racialMods.sort((a, b) => b.max - a.max).shift()] : [];
+        const resistance = resistanceMods.length ? [resistanceMods.sort((a, b) => b.max - a.max).shift()] : [];
+        const untyped = untypedMods.length ? untypedMods?.sort((a, b) => b.max - a.max) : [];
+        const weaponSpecialization = weaponSpecializationMods.length ? [weaponSpecializationMods.sort((a, b) => b.max - a.max).shift()] : [];
 
         return {
             ability,

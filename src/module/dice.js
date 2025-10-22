@@ -809,7 +809,7 @@ export class DiceSFRPG {
     /**
     * A helper function for determining if a roll was a critical success or not
     *
-    * @param {Object|null}  roll        The roll object
+    * @param {?Object}  roll        The roll object
     * @param {Number}       dieSize     The size of the die to look for to  trigger the critical
     * @param {Number}       critValue   The number needed to roll at or above to trigger the critical
     * @returns {Boolean}                `true` if a critical success, `false` otherwise
@@ -833,7 +833,7 @@ export class DiceSFRPG {
     /**
     * A helper function for determining if a roll was a fumble or not
     *
-    * @param {Object|null}  roll        The roll object
+    * @param {Object}  roll        The roll object
     * @param {Number}       dieSize     The size of the die to look for to  trigger the fumble
     * @param {Number}       fumbleValue The number needed to roll at or below to trigger the fumble
     * @returns {Boolean}                `true` if a fumble, `false` otherwise

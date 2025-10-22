@@ -1,9 +1,14 @@
 import { SFRPGEffectType } from "../modifiers/types.js";
+/**
+ * @import SFRPGModifier from "../modifiers/modifier.js"
+ * @import ActorSFRPG from "../actor/actor.js"
+ * @import ItemSFRPG from "../item/item.js"
+*/
 
 /**
  * Application that is used to edit a dynamic modifier.
  */
-export default class SFRPGModifierApplication extends FormApplication {
+export default class SFRPGModifierApplication extends foundry.appv1.api.FormApplication {
     /**
      * @param {SFRPGModifier}         modifier The modifier being edited.
      * @param {ActorSFRPG|ItemSFRPG}  parent   The actor or item that the modifier belongs to.
@@ -34,6 +39,7 @@ export default class SFRPGModifierApplication extends FormApplication {
 
     /**
      * A convenience method for retrieving the modifier being edited.
+     * @type {SFRPGModifier}
      */
     get modifier() {
         return this.object;
@@ -124,7 +130,7 @@ export default class SFRPGModifierApplication extends FormApplication {
 
                 affectedValue.prop("value", "");
 
-                this._updateModifierData(modifierDialog.object).then(() => {
+                this.modifier.parentUpdate(modifierDialog.object).then(() => {
                     modifierDialog.render();
                 });
                 return;

@@ -26,7 +26,7 @@ Hooks.on("hotbarDrop", (bar, data, slot) => {
  * doesn't already exist. If one does, return that one instead.
  *
  * @param {Object} data Macro creation description.
- * @returns {Promise<Macro>}
+ * @returns {Promise<?foundry.documents.Macro>}
  */
 async function findElseCreateMacro(data) {
     return game.macros.find(macro => (macro.name === data.name) && (macro.command === data.command))
@@ -38,7 +38,7 @@ async function findElseCreateMacro(data) {
  * Get an existing item macro if one exists, otherwise create a new one.
  *
  * @param {Object} data The item data
- * @returns {Promise<Macro|null>}
+ * @returns {Promise<?foundry.documents.Macro>}
  */
 async function createItemMacro(data) {
     let macro = null;
