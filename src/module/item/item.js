@@ -91,7 +91,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const areaData = this.system?.area;
         if (!areaData) return false;
 
-        return !!(areaData?.value || areaData?.total);
+        return !!Number(areaData?.value);
     }
 
     /**
