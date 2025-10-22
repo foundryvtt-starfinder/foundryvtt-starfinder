@@ -43,6 +43,7 @@ Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG,
 - Condition application no longer depends on the name of the condition, allowing them to be localized if desired
 - Decimal values are now allowed in currency and build point fields without causing errors
 - Advantage and Disadvantage buttons now work correctly when rolling
+- Calculation of range on spell sheets fixed for Close/Medium/Long ranges
 
 ### Character/NPC/Drone Stuff
 
