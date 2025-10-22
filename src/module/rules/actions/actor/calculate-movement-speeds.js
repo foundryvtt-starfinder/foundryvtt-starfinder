@@ -33,30 +33,25 @@ export default function(engine) {
             return computedBonus;
         };
 
-        // If power Armor is equipped and has capacity remaining, use that speed as the actor's base land speed
-        // Eventually this should be updated to include other speeds, like flight, swim, etc.
+        // If power Armor is equipped and has capacity remaining, use that speed as the actor's base speed
         let armorIsPowered = false;
         let hasEquippedPowerArmor = false;
-        let powerArmorBaseValue = 0;
+        let powerArmorSpeed = {};
+        let tooltipPowered = "Unpowered";
         if (armors) {
             for (const armorItem of armors) {
                 if (armorItem.system.armor.type === "power") {
                     hasEquippedPowerArmor = true;
-                    let tooltipPowered = "";
+                    powerArmorSpeed = armorItem.system.speed;
                     if (armorItem.getCurrentCapacity()) {
                         armorIsPowered = true;
-                        powerArmorBaseValue = Number(armorItem.system.speed) || 0;
                         tooltipPowered = "Powered";
-                    }
-                    else {
-                        powerArmorBaseValue = 0;
-                        tooltipPowered = "Unpowered";
                     }
 
                     data.attributes.speed.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.Speed", {
                         speed: `Power Armor Speed (${tooltipPowered})`,
                         type: "",
-                        mod: powerArmorBaseValue,
+                        mod: "",
                         source: armorItem.name
                     }));
                     continue;
@@ -83,10 +78,11 @@ export default function(engine) {
             let baseValue = Number(data.attributes.speed[speedKey].base);
 
             // Replace base land speed value with power armor base speed
-            if (speedKey === "land" && hasEquippedPowerArmor) {
-                baseValue = powerArmorBaseValue;
+            if (hasEquippedPowerArmor) {
+                baseValue = powerArmorSpeed[speedKey].base;
                 // If unpowered (value set to 0)
                 if (!armorIsPowered) {
+                    baseValue = 0;
                     data.attributes.speed[speedKey].value = 0;
                     continue;
                 }
@@ -148,7 +144,9 @@ export default function(engine) {
             }
 
             if (speedKey === "flying") {
-                data.attributes.speed[speedKey].maneuverability = data.attributes.speed[speedKey].baseManeuverability;
+                data.attributes.speed[speedKey].maneuverability = (hasEquippedPowerArmor && armorIsPowered)
+                    ? powerArmorSpeed[speedKey].baseManeuverability
+                    : data.attributes.speed[speedKey].baseManeuverability;
             }
         }
 

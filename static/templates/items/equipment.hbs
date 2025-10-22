@@ -160,7 +160,10 @@
                                 <div class="form-group">
                                     <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }}</label>
                                     <div class="form-fields">
-                                        <input type="text" name="system.speed.flying.base" value="{{itemData.speed.flying.base}}" data-dtype="Number"/>
+                                        <input name="system.speed.flying.base" type="text" value="{{itemData.speed.flying.base}}" data-dtype="Number"/>
+                                        <select name="system.speed.flying.baseManeuverability">
+                                            {{selectOptions (sfrpg "flightManeuverability") selected=itemData.speed.flying.baseManeuverability}}
+                                        </select>
                                     </div>
                                 </div>
 
