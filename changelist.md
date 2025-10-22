@@ -9,6 +9,7 @@ Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG,
 ### General Stuff
 
 - Combat Type is now selected automatically when an actor is added to a not-in-progress combat by a GM
+- Modifier effect type dropdown selector now has options organized into logical groupings
 
 ### Character/NPC/Drone Stuff
 
@@ -19,7 +20,7 @@ Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG,
     - The `null` and `none` activation types are renamed to "Passive" and "Free" for clarity
 - Nonfunctional key ability score field removed from character sheets
 - NPC ability and spell DCs moved to the relevant tabs to highlight them
-- Ammunition usage multiplier modifier added
+- Ammunition usage multiplier modifiers added
 
 ### Starship Stuff
 
