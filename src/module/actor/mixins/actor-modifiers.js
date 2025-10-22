@@ -1,25 +1,8 @@
-import SFRPGModifier from "../../modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../modifiers/types.js";
 import { getItemContainer } from "../actor-inventory-utils.js";
+/** @import SFRPGModifier from "../../modifiers/modifier.js" */
 
 export const ActorModifiersMixin = (superclass) => class extends superclass {
-
-    /**
-     * Check to ensure that this actor has a modifiers data object set, if not then set it.
-     * These will always be needed from hence forth, so we'll just make sure that they always exist.
-     *
-     * @param {Object}      data The actor data to check against.
-     *
-     * @returns {Object}         The modified data object with the modifiers data object added.
-     */
-    _ensureHasModifiers(data) {
-        if (!foundry.utils.hasProperty(data, "modifiers")) {
-            // console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
-            data.modifiers = [];
-        }
-
-        return data;
-    }
 
     /**
      * Add a modifier to this actor.
@@ -54,10 +37,9 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
         limitTo = "",
         damage = null
     } = {}) {
-        const data = this._ensureHasModifiers(foundry.utils.deepClone(this.system));
-        const modifiers = data.modifiers;
 
-        modifiers.push(new SFRPGModifier({
+        const modifiers = this.system.modifiers;
+        modifiers.push({
             name,
             modifier,
             type,
@@ -72,8 +54,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
             id,
             limitTo,
             damage
-        }));
-
+        });
         await this.update({"system.modifiers": modifiers});
     }
 
@@ -88,19 +69,11 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
     getAllModifiers(ignoreTemporary = false, ignoreEquipment = false, invalidate = false) {
         if (!invalidate && this.system.allModifiers) return this.system.allModifiers;
 
-        this.system.modifiers = this.system.modifiers.map(mod => {
-            return new SFRPGModifier(mod, {parent: this});
-        }, this);
-
         const allModifiers = this.system.modifiers.filter(mod => (!ignoreTemporary || mod.subtab === "permanent"));
 
         for (const item of this.items) {
             const itemData = item.system;
-
-            // Create each modifier as an SFRPGModifier instance first on the item data.
-            const itemModifiers = itemData.modifiers = itemData?.modifiers?.map(mod => {
-                return new SFRPGModifier(mod, {parent: item});
-            }, this) || [];
+            const itemModifiers = itemData.modifiers;
 
             if (!itemModifiers || itemModifiers.length === 0) continue;
 

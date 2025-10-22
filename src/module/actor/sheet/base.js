@@ -65,7 +65,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
-            system: foundry.utils.deepClone(this.actor.system),
+            system: this.actor.system,
             isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.document.limited,
@@ -130,7 +130,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         if (data.system.skills) {
             // Update skill labels
             for (const [s, skl] of Object.entries(data.system.skills)) {
-                skl.ability = data.system.abilities[skl.ability].label.substring(0, 3);
+                skl.abilityLabel = data.system.abilities[skl.ability]?.label.substring(0, 3) ?? "Err";
                 skl.icon = this._getClassSkillIcon(skl.value);
 
                 let skillLabel = CONFIG.SFRPG.skills[s.substring(0, 3)];
@@ -141,13 +141,6 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                 skl.label = skillLabel;
                 skl.hover = CONFIG.SFRPG.skillProficiencyLevels[skl.value];
             }
-
-            data.system.skills = Object.keys(data.system.skills).sort()
-                .reduce((skills, key) => {
-                    skills[key] = data.system.skills[key];
-
-                    return skills;
-                }, {});
 
             data.system.hasSkills = Object.values(data.system.skills).filter(x => x.enabled).length > 0;
         }
@@ -1293,6 +1286,9 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             const targetId = $(event.target).parents('.item')
                 .attr('data-item-id');
             targetContainer = targetActor.getItem(targetId);
+            if (targetContainer && !targetContainer.system.container?.storage) {
+                targetContainer = null;
+            }
         }
 
         // Handle ItemCollections

@@ -76,7 +76,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             "turn": combatType === "starship" ? null : 0
         };
         Hooks.callAll("combatStart", this, update);
-        await this.update(update);
+        await this.update(update, {advanceTime: CONFIG.time.roundTime});
 
         const currentPhase = this.getCurrentPhase();
         const eventData = {
@@ -105,12 +105,14 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }
 
         Hooks.callAll("onBeginCombat", eventData);
+        this._handleTimedEffects(eventData);
         await this._notifyAfterUpdate(eventData);
     }
 
     async delete(options = {}) {
         Hooks.callAll("onBeforeCombatEnd", this);
         super.delete(options);
+        game.time.advance(CONFIG.time.roundTime);
     }
 
     // Override to account for ascending or descending turn order.
@@ -822,9 +824,36 @@ export class CombatSFRPG extends foundry.documents.Combat {
         return a.tokenId - b.tokenId;
     }
 
+    _getTimedEffectTargetActor(effect, turn, allowInit) {
+        // The owner's turn
+        if (turn === "parent") {
+            const id = effect.actor?.uuid;
+            if (id) return id;
+        }
+
+        // The origin actor's turn; fall back to owner
+        else if (turn === "origin") {
+            const id = effect.origin?.uuid || effect.actor?.uuid;
+            if (id) return id;
+        }
+
+        // Turn closest to initiative
+        else if (allowInit && turn === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actor.uuid;
+
+        else {
+            // If this is the ID of an actor then we return that actor's uuid
+            const combatant = this.combatants.find(c => c.actorId === turn);
+            if (combatant) return combatant.actor.uuid;
+
+            // Otherwise, an actor uuid of a specific combatant
+            return turn;
+        }
+    }
+
     _handleTimedEffects(eventData) {
+        if (!eventData.isNewTurn) return;
+
         const timedEffects = game.sfrpg.timedEffects;
-        const forward = eventData.direction > 0;
 
         for (const effect of timedEffects.values()) {
             const duration = effect.activeDuration;
@@ -833,69 +862,66 @@ export class CombatSFRPG extends foundry.documents.Combat {
             const worldTime = game.time.worldTime;
             const effectStart = duration.activationTime ?? -Infinity;
             const effectFinish = duration.activationEnd ?? Infinity;
-            const expiryInit = duration.expiryInit || 1000; // If anything goes wrong, expire at the start of the round
-            const targetActorUuid = (() => {
-                /** @type {"parent"|"origin"|"init"|ActorID|ActorUUID} */
-                const expiryModeTurn = duration.expiryMode.turn;
+            let targetEnabledState;
+            if (worldTime < effectStart || worldTime > effectFinish) {
+                targetEnabledState = false;
+            } else if (worldTime > effectStart && worldTime < effectFinish) {
+                targetEnabledState = true;
+            } else {
+                const startActorUuid = this._getTimedEffectTargetActor(effect, duration.activationTurn, false);
+                const startCombatant = this.combatants.find(combatant => combatant.actor.uuid === startActorUuid);
+                const startPosition = startCombatant ? this.turns.findIndex(combatant => combatant.id === startCombatant.id) : -1;
+                const startInit = startCombatant?.initiative || 1000;
 
-                // Expire on the owner's turn
-                if (expiryModeTurn === "parent") {
-                    const id = effect.actor?.uuid;
-                    if (id) return id;
-                }
+                const expiryActorUuid = this._getTimedEffectTargetActor(effect, duration.expiryMode.turn, true);
+                const expiryCombatant = this.combatants.find(combatant => combatant.actor.uuid === expiryActorUuid);
+                const expiryPosition = expiryCombatant ? this.turns.findIndex(combatant => combatant.id === expiryCombatant.id) : -1;
+                const expiryInit = duration.expiryInit || 1000;
 
-                // Expire on the origin actor's turn; fall back to owner
-                else if (expiryModeTurn === "origin") {
-                    const id = effect.origin?.uuid || effect.actor?.uuid;
-                    if (id) return id;
-                }
-
-                // Turn closest to initiative to expire on
-                else if (expiryModeTurn === "init") return this.combatants.contents.sort(this._sortCombatants).find(c => c.initiative <= expiryInit).actor.uuid;
-
-                else {
-                    // If this is the ID of an actor then we return that actor's uuid
-                    const combatant = this.combatants.find(c => c.actorId === expiryModeTurn);
-                    if (combatant) return combatant.actor.uuid;
-
-                    // Otherwise, an actor uuid of a specific combatant
-                    return expiryModeTurn;
-                }
-            })();
-
-            if (((worldTime >= effectFinish) && effect.enabled) // If effect has expired
-                || ((effectStart <= worldTime) && (effectFinish >= worldTime) && !effect.enabled)) { // If the current turn has gone back, and the effect has un-expired.
-                if (!eventData.isNewTurn) continue;
-                if (!this.combatants.find(combatant => combatant.actor.uuid === targetActorUuid)) {
-                    effect.toggle(false);
-                    continue;
-                }
-
-                const oldCombatant = this.combatants.get(eventData.oldCombatant._id);
-                const newCombatant = this.combatants.get(eventData.newCombatant._id);
+                const newCombatantPosition = eventData.newCombatant ? this.turns.findIndex(combatant => combatant.id === eventData.newCombatant._id) : -1;
+                const newCombatantInit = eventData.newCombatant?.initiative || 1000;
 
                 if (duration.expiryMode.type === "turn") {
-                    if (duration.endsOn === 'onTurnEnd') {
-                        if ((forward && oldCombatant.actor.uuid === targetActorUuid) || (!forward && newCombatant.actor.uuid === targetActorUuid)) {
-                            effect.toggle(false);
+                    // Expire by turn
+                    if (worldTime === effectStart && worldTime === effectFinish) {
+                        if (duration.endsOn === 'onTurnEnd') {
+                            targetEnabledState = newCombatantPosition >= startPosition && newCombatantPosition <= expiryPosition;
+                        } else {
+                            targetEnabledState = newCombatantPosition >= startPosition && newCombatantPosition < expiryPosition;
                         }
-                    // On turn start
-                    } else {
-                        if ((forward && newCombatant.actor.uuid === targetActorUuid) || (!forward && oldCombatant.actor.uuid === targetActorUuid)) {
-                            effect.toggle(false);
+                    } else if (worldTime === effectStart) {
+                        targetEnabledState = newCombatantPosition >= startPosition;
+                    } else { // worldTime === effectFinish
+                        if (duration.endsOn === 'onTurnEnd') {
+                            targetEnabledState = newCombatantPosition <= expiryPosition;
+                        } else { // onTurnStart
+                            targetEnabledState = newCombatantPosition < expiryPosition;
                         }
                     }
-                // Expire by initiative
                 } else {
-                    if ((forward && oldCombatant.initiative >= expiryInit && newCombatant.initiative <= expiryInit) || (!forward && newCombatant.initiative >= expiryInit && oldCombatant.initiative <= expiryInit)) {
-                        effect.toggle(false);
+                    // Expire by initiative
+                    if (worldTime === effectStart && worldTime === effectFinish) {
+                        if (duration.endsOn === 'onTurnEnd') {
+                            targetEnabledState = newCombatantInit >= startInit && newCombatantInit <= expiryInit;
+                        } else {
+                            targetEnabledState = newCombatantInit >= startInit && newCombatantInit < expiryInit;
+                        }
+                    } else if (worldTime === effectStart) {
+                        targetEnabledState = newCombatantInit <= startInit;
+                    } else { // worldTime === effectFinish
+                        if (duration.endsOn === 'onTurnEnd') {
+                            targetEnabledState = expiryInit < newCombatantInit;
+                        } else { // onTurnStart
+                            targetEnabledState = expiryInit <= newCombatantInit;
+                        }
                     }
                 }
-
-            } else if (effectStart <= worldTime && worldTime <= effectFinish) {
+            }
+            if (effect.enabled !== targetEnabledState) {
+                effect.toggle(false);
+            } else if (effect.enabled) {
                 effect.poke();
             }
-
         }
     }
 

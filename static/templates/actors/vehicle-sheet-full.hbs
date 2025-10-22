@@ -140,10 +140,10 @@
                 <div class="flexrow">
                     <div class="flexcol">
                         <div class="form-group">
-                            <label>Control</label>
+                            <label>{{localize "SFRPG.VehicleSheet.Details.Modifiers.ControlSkill"}}</label>
                             <div class="form-fields">
                                 <select name="system.attributes.controlSkill">
-                                    {{selectOptions (sfrpg "controlSkills") selected=system.attributes.controlSkill}}
+                                    {{selectOptions (sfrpg "vehicleControlSkills") selected=system.attributes.controlSkill}}
                                 </select>
                                 {{#if (eq system.attributes.controlSkill "pil")}}
                                 <input type="text" name="system.attributes.modifiers.piloting" value="{{system.attributes.modifiers.piloting}}" />
