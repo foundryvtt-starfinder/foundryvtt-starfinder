@@ -84,10 +84,13 @@ export class TraitSelectorSFRPG extends FormApplication {
      */
     activateListeners(html) {
 
+        // footer html (for searching)
+        const footer = html.find(".trait-footer");
+
         // activating or deactivating filters
         html.on('change keyup paste', 'input[name=textFilter]', ev => {
             this.searchTerm = ev.target.value;
-            this.filterTraits(html.find('li'));
+            this.filterTraits(footer.find('li'));
         });
 
         // Shuffle all checkboxes around based on whether or not they're checked

@@ -557,9 +557,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             }
         }
 
-        // Filter properties and return {!CHANGED!}
+        // Filter properties and return
         data.properties = props.filter(p => !!p.value && !!p.name);
-        console.log(data);
         return data;
     }
 
@@ -606,7 +605,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /* -------------------------------------------- */
 
     /**
-     * Prepare chat card data for weapon type items {!CHANGED!}
+     * Prepare chat card data for weapon type items
      * @private
      */
     _weaponChatData(data, labels, props) {
@@ -875,25 +874,27 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // Determine ability score modifier
         // TODO: This chunk is the same code as in base.js's _prepareAttackString(), probably good practice to combine these into one method somewhere
         let abl = itemData.ability;
-        if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) {
-            abl = "";
-        } else if (!abl && (this.type === "spell")) {
-            if (itemData.actionType === "rsak") {
+        if (!abl) {
+            if (this.actor.type === "npc" || this.actor.type === "npc2") {
+                abl = "";
+            } else if (this.type === "spell") {
+                if (itemData.actionType === "rsak") {
+                    abl = "dex";
+                } else if (itemData.actionType === "msak") {
+                    abl = "str";
+                } else {
+                    abl = actorData.attributes.spellcasting || "int";
+                }
+            } else if (itemData.properties?.operative?.value && actorData.abilities.dex.value > actorData.abilities.str.value) {
                 abl = "dex";
-            } else if (itemData.actionType === "msak") {
-                abl = "str";
             } else {
-                abl = actorData.attributes.spellcasting || "int";
-            }
-        } else if (itemData.properties?.operative?.value && actorData.abilities.dex.value > actorData.abilities.str.value) {
-            abl = "dex";
-        } else if (!abl) {
-            if (itemData.actionType === "rwak" || itemData.actionType === "rsak") {
-                abl = "dex";
-            } else if (itemData.actionType === "mwak" || itemData.actionType === "msak") {
-                abl = "str";
-            } else {
-                abl = "str";
+                if (itemData.actionType === "rwak" || itemData.actionType === "rsak") {
+                    abl = "dex";
+                } else if (itemData.actionType === "mwak" || itemData.actionType === "msak") {
+                    abl = "str";
+                } else {
+                    abl = "str";
+                }
             }
         }
 
@@ -1046,8 +1047,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_ATTACKS) {
-                console.log(this, mod);
-                if (!this.system?.properties?.[mod.valueAffected].value) { // {!CHANGED!}
+                if (!this.system?.properties?.[mod.valueAffected]?.value) {
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_ATTACKS) {
@@ -1416,7 +1416,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         /** Create additional modifiers. */
         const additionalModifiers = [];
 
-        if (itemData.properties?.archaic.value && isWeapon) { // {!CHANGED!}
+        if (itemData.properties?.archaic?.value && isWeapon) {
             additionalModifiers.push({bonus: { name: game.i18n.format("SFRPG.WeaponPropertiesArchaic"), modifier: "-5", enabled: true, notes: game.i18n.format("SFRPG.WeaponPropertiesArchaicTooltip") } });
         }
 
@@ -1494,7 +1494,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
-                if (!this.system.properties[mod.valueAffected].value) { // {!CHANGED!}
+                if (!this.system.properties[mod.valueAffected]?.value) {
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_DAMAGE) {

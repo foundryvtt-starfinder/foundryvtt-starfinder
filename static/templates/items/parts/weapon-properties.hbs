@@ -16,18 +16,10 @@
         <ul class="traits-list">
             {{log itemData.properties}}
             {{#each itemData.properties as |property name|}}
-                {{#if (isObject property)}}
-                    {{#if property.value}}
-                        <li class="tag {{name}}" data-tooltip='<strong>{{sfrpg "weaponProperties" name}}</strong><br/>{{sfrpg "weaponPropertiesTooltips" name}}'>
-                            {{sfrpg "weaponProperties" name}}{{#if property.extension}}: {{property.extension}}{{/if}}
-                        </li>
-                    {{/if}}
-                {{else}}
-                    {{#if property}}
-                        <li class="tag {{name}}" data-tooltip='<strong>{{sfrpg "weaponProperties" name}}</strong><br/>{{sfrpg "weaponPropertiesTooltips" name}}'>
-                            {{sfrpg "weaponProperties" name}}
-                        </li>
-                    {{/if}}
+                {{#if property.value}}
+                    <li class="tag {{name}}" data-tooltip='<strong>{{sfrpg "weaponProperties" name}}</strong><br/>{{sfrpg "weaponPropertiesTooltips" name}}'>
+                        {{sfrpg "weaponProperties" name}}{{#if property.extension}}: {{property.extension}}{{/if}}
+                    </li>
                 {{/if}}
             {{/each}}
         </ul>

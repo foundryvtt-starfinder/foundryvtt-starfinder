@@ -321,8 +321,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         }
 
         // Filter properties and return
-        console.log(data);
-        data.properties = props.filter(p => !!p.value && !!p.name); // {!CHANGED!}
+        data.properties = props.filter(p => !!p.value && !!p.name);
         return data;
     }
 
