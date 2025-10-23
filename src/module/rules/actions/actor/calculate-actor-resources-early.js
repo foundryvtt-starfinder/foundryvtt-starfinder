@@ -73,16 +73,9 @@ export default function(engine) {
                 if (resourceData.range.mode === "post") {
                     // First apply all modifiers
                     const resourceMod = Object.entries(processedMods).reduce((sum, curr) => {
-                        if (curr[1] === null || curr[1].length < 1) return sum;
-
-                        if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
-                            for (const bonus of curr[1]) {
-                                sum += addModifier(bonus, data, finalActorResource, "SFRPG.ACTooltipBonus");
-                            }
-                        } else {
-                            sum += addModifier(curr[1], data, finalActorResource, "SFRPG.ACTooltipBonus");
+                        for (const bonus of curr[1]) {
+                            sum += addModifier(bonus, data, finalActorResource, "SFRPG.ACTooltipBonus");
                         }
-
                         return sum;
                     }, 0);
 

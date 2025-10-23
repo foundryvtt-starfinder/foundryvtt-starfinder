@@ -372,10 +372,16 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                 skill.ranks = skill.mod;
             }
         }
+        if (!actorData.system.attributes.eac) actorData.system.attributes.eac = {};
+        if (!actorData.system.attributes.kac) actorData.system.attributes.kac = {};
+        if (!actorData.system.attributes.init) actorData.system.attributes.init = {};
         actorData.system.attributes.eac.base = actorData.system.attributes.eac.value;
         actorData.system.attributes.kac.base = actorData.system.attributes.kac.value;
         actorData.system.attributes.init.value = actorData.system.attributes.init.total;
 
+        if (!actorData.system.attributes.fort) actorData.system.attributes.fort = {};
+        if (!actorData.system.attributes.reflex) actorData.system.attributes.reflex = {};
+        if (!actorData.system.attributes.will) actorData.system.attributes.will = {};
         actorData.system.attributes.fort.base = actorData.system.attributes.fort.bonus;
         actorData.system.attributes.reflex.base = actorData.system.attributes.reflex.bonus;
         actorData.system.attributes.will.base = actorData.system.attributes.will.bonus;

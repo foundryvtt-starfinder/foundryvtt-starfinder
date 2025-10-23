@@ -81,8 +81,7 @@ export class ShortRestDialog extends Dialog {
                         callback: reject
                     }
                 },
-                default: 'rest',
-                close: reject
+                default: 'rest'
             }, {classes: ["sfrpg", "dialog"]}).render(true);
         });
     }

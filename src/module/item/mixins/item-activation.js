@@ -86,23 +86,48 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
 
         if (isActive) {
             const worldTime = game.time.worldTime;
+            const activationTurn = game.combat?.combatant?.actor?.uuid || "parent";
+            let expiryTurn = "parent";
+            let endsOn = duration.endsOn ?? "onTurnStart";
 
-            let totalTime = null; // permanent or untracked
+            let endTime;
             if (Object.hasOwn(CONFIG.SFRPG.effectDurationFrom, duration.units)) {
                 const rollContext = RollContext.createItemRollContext(this, this.actor);
                 const totalUnits = DiceSFRPG.resolveFormulaWithoutDice(String(duration.value || 0), rollContext).total;
-                totalTime = totalUnits * CONFIG.SFRPG.effectDurationFrom[duration.units];
+                endTime = worldTime + (totalUnits * CONFIG.SFRPG.effectDurationFrom[duration.units]);
+                if (duration.units === "turn") {
+                    endsOn = "onTurnEnd";
+                    expiryTurn = game.combat?.combatant?.actor?.uuid || "parent";
+                } else if (game.combat?.combatant) {
+                    const actorIndex = game.combat.turns.findIndex(combatant => combatant.actor.uuid === this.actor.uuid);
+                    const currentIndex = game.combat.turns.findIndex(combatant => combatant.id === game.combat.combatant.id);
+                    if (actorIndex < currentIndex) {
+                        endTime += CONFIG.SFRPG.effectDurationFrom.round;
+                    }
+                }
+            } else {
+                endTime = Infinity;
             }
 
             updateData['system.activationEvent'] = {
                 startTime: worldTime,
-                endTime: worldTime + totalTime,
-                endsOn: duration.endsOn ?? "onTurnStart",
+                endTime: endTime,
+                endsOn: endsOn,
                 status: null,
-                deactivatedAt: null
+                deactivatedAt: null,
+                activationTurn: activationTurn,
+                expiryTurn: expiryTurn
             };
         } else if (this.system.activationEvent) {
-            updateData['system.activationEvent.deactivatedAt'] = game.time.worldTime;
+            updateData['system.activationEvent'] = {
+                startTime: -1,
+                endTime: -1,
+                endsOn: duration.endsOn ?? "onTurnStart",
+                status: null,
+                deactivatedAt: game.time.worldTime,
+                activationTurn: "parent",
+                expiryTurn: "parent"
+            };
         }
 
         const updatePromise = this.update(updateData);

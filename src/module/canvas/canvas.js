@@ -124,7 +124,7 @@ async function handleCanvasDropAsync(canvas, data, targetActor) {
     const document = await Item.fromDropData(data);
     let sourceActor = null;
     const sourceItem = document;
-    const sourceItemData = foundry.utils.deepClone(document.system);
+    const sourceItemData = document.system;
 
     if (document?.parent?.isToken ?? false) {
         sourceActor = new ActorItemHelper(document.parent._id, document.parent.parent._id, document.parent.parent.parent._id);
@@ -136,7 +136,7 @@ async function handleCanvasDropAsync(canvas, data, targetActor) {
     if (targetActor === null) {
         const transferringItems = [sourceItem];
         if (sourceActor !== null && sourceItemData.container?.contents && sourceItemData.container.contents.length > 0) {
-            const containersToTest = [sourceItemData.container];
+            const containersToTest = [foundry.utils.deepClone(sourceItemData.container)];
             while (containersToTest.length > 0) {
                 const container = containersToTest.shift();
                 const children = sourceActor.filterItems(x => container.contents?.find(y => y.id === x.id));

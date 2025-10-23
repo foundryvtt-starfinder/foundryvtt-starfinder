@@ -29,7 +29,7 @@ import { } from "./crew-update.js";
  * @property {string}                     operator An operator that determines how damage is split between multiple types.
  */
 
-/** @import { RollResult } from '../dice.js' */
+/** @import RollResult from '../dice.js' */
 
 /** @extends {foundry.documents.Actor} */
 export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
@@ -81,10 +81,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     prepareData() {
         super.prepareData();
 
-        this._ensureHasModifiers(this.system);
-        const modifiers = this.getAllModifiers(false, false, true);
-
         // Store all modifiers, from the actor and from items, on the actor in an instantiated state.
+        const modifiers = this.getAllModifiers(false, false, true);
         this.system.allModifiers = modifiers;
 
         // const timedEffects = SFRPGTimedEffect.getAllTimedEffects(this);
@@ -192,12 +190,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Extend preCreate to apply some defaults to newly created characters
-     * See the base Actor class for API documentation of this method
-     *
-     * @param {object} data               The initial data object provided to the document creation request
-     * @param {object} options            Additional options which modify the creation request
-     * @param {documents.BaseUser} user   The User requesting the document creation
-     * @returns {boolean|void}         Explicitly return false to prevent creation of this Document
+     * @inheritdoc
      */
     async _preCreate(data, options, user) {
         const autoLinkedTypes = ['character', 'drone'];
@@ -245,13 +238,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Extend preUpdate to clamp certain PC changes
-     * See the base Actor class for API documentation of this method
-     *
-     * Pre-update operations only occur for the client which requested the operation.
-     *
-     * @param {object} changed            The differential data that is changed relative to the documents prior values
-     * @param {object} options            Additional options which modify the update request
-     * @param {documents.BaseUser} user   The User requesting the document update
+     * @inheritdoc
      */
     async _preUpdate(changed, options, user) {
 
@@ -298,6 +285,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     /**
      * Delete any of corresponding timedEffect objects of the actor's items.
      * Also remove linked hotbar instances from item apps before deleting so the hotbar isn't closed.
+     * @inheritdoc
      */
     async _onDelete(options, userId) {
         for (const item of this.items) {
@@ -310,6 +298,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Toggle scrolling text for created effects
+     * @inheritdoc
      */
     _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {
@@ -325,6 +314,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Delete item's corresponding timedEffect objects
+     * @inheritdoc
      */
     _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {
@@ -884,7 +874,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         }
 
         let speakerActor = this;
-        const roleKey = CONFIG.SFRPG.starshipRoleNames[actionEntry.system.role];
+        const roleKey = CONFIG.SFRPG.starshipRoles[actionEntry.system.role];
         let roleName = game.i18n.format(roleKey);
 
         const desiredKey = actionEntry.system.selectorKey;
@@ -899,7 +889,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
             const actorRole = this.getCrewRoleForActor(speakerActor.id);
             if (actorRole) {
-                const actorRoleKey = CONFIG.SFRPG.starshipRoleNames[actorRole];
+                const actorRoleKey = CONFIG.SFRPG.starshipRoles[actorRole];
                 roleName = game.i18n.format(actorRoleKey);
             }
         }
@@ -1039,8 +1029,12 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 }
 
                 /** Add remaining roles if available. */
-                const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
-                const allCrewMates = ["minorCrew", "openCrew"];
+                const crewMates = [
+                    ...Object.keys(CONFIG.SFRPG.starshipNormalCrewRoles),
+                    "passenger",
+                    ...Object.keys(CONFIG.SFRPG.starshipOtherRoles)
+                ];
+                const allCrewMates = Object.keys(CONFIG.SFRPG.starshipOtherRoles);
                 for (const crewType of crewMates) {
                     let crewCount = 1;
                     const crew = [];
@@ -1088,19 +1082,19 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 }
             } else {
                 /** Create 'fake' actors. */
-                const crewRoles = ["captain", "pilot", "gunner", "engineer", "chiefMate", "magicOfficer", "scienceOfficer"];
+                const crewRoles = Object.keys(CONFIG.SFRPG.starshipCrewRoles);
                 const populatedRoles = [];
                 crewRoles.forEach((role) => {
                     if (crewData.npcData[role]?.numberOfUses) {
                         rollContext.addContext(
                             role,
-                            { name: game.i18n.localize(SFRPG.starshipRoleNames[role]) },
+                            { name: game.i18n.localize(SFRPG.starshipRoles[role]) },
                             actorData.system.crew.npcData[role]
                         );
                         populatedRoles.push(role);
                     }
                 });
-                const otherRoles = ["minorCrew", "openCrew"];
+                const otherRoles = Object.keys(CONFIG.SFRPG.starshipOtherRoles);
                 otherRoles.forEach((role) => {
                     if (desiredSelectors.includes(role)) {
                         rollContext.addSelector(role, populatedRoles);

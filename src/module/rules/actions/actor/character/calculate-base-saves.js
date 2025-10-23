@@ -10,6 +10,9 @@ export default function(engine) {
         const fort = data.attributes.fort;
         const reflex = data.attributes.reflex;
         const will = data.attributes.will;
+        if (!fort.tooltip) fort.tooltip = [];
+        if (!reflex.tooltip) reflex.tooltip = [];
+        if (!will.tooltip) will.tooltip = [];
 
         for (const cls of classes) {
             const classData = cls.system;

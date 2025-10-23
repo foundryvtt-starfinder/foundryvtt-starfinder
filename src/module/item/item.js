@@ -10,7 +10,10 @@ import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 
-/** @import { RollResult } from '../dice.js' */
+/**
+ * @import { RollResult } from '../dice.js'
+ * @import { ActorSFRPG } from "../actor/actor.js"
+ */
 
 /** @extends {foundry.documents.Item} */
 export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin) {
@@ -253,23 +256,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     /**
-     * Check to ensure that this item has a modifiers data object set, if not then set it.
-     * These will always be needed from hence forth, so we'll just make sure that they always exist.
-     *
-     * @param {Object}      data The item data to check against.
-     *
-     * @returns {Object}         The modified data object with the modifiers data object added.
-     */
-    _ensureHasModifiers(data) {
-        if (!foundry.utils.hasProperty(data, "modifiers")) {
-            console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
-            data.modifiers = [];
-        }
-
-        return data;
-    }
-
-    /**
      * Extend preCreate to create class name slugs.
      * See the base Actor class for API documentation of this method
      *
@@ -312,7 +298,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             // Record current world time and initiative on effects
             if (t === "effect" && itemData.enabled) {
                 updates['system.activeDuration.activationTime'] = game.time.worldTime;
-                if (game.combat) updates['system.activeDuration.expiryInit'] = game.combat.initiative;
+                if (game.combat) {
+                    updates['system.activeDuration.activationTurn'] = game.combat.combatant?.actor?.uuid || "parent";
+                    updates['system.activeDuration.expiryInit'] = game.combat.initiative;
+                } else {
+                    updates['system.activeDuration.activationTurn'] = "parent";
+                }
             }
 
             if (t === "asi") {
@@ -480,7 +471,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * @returns {Object} An object containing the item's rollData (including its owners), and chat message properties.
      */
     async getChatData() {
-        const data = foundry.utils.deepClone(this.system);
+        const data = this.system;
         const labels = this.labels;
 
         const async = true;
@@ -500,6 +491,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         });
 
         // Item type specific properties
+        /** @type {{name: string, tooltip: ?string, title: ?string}[]} */
         const props = [];
         const fn = this[`_${this.type}ChatData`];
         if (fn) fn.bind(this)(data, labels, props);
@@ -868,9 +860,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     async rollAttack(options = {}) {
         const itemData = this.system;
+        const actorData = this.actor.system;
         const isWeapon = ["weapon", "shield"].includes(this.type);
 
-        const actorData = this.actor.system;
         if (!this.hasAttack) {
             ui.notifications.error("You may not make an Attack Roll with this Item.");
             return;
@@ -880,11 +872,29 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (this.type === "vehicleAttack") return this._rollVehicleAttack(options);
 
         // Determine ability score modifier
+        // TODO: This chunk is the same code as in base.js's _prepareAttackString(), probably good practice to combine these into one method somewhere
         let abl = itemData.ability;
-        if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) abl = "";
-        else if (!abl && (this.type === "spell")) abl = actorData.attributes.spellcasting || "int";
-        else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) abl = "dex";
-        else if (!abl) abl = "str";
+        if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) {
+            abl = "";
+        } else if (!abl && (this.type === "spell")) {
+            if (itemData.actionType === "rsak") {
+                abl = "dex";
+            } else if (itemData.actionType === "msak") {
+                abl = "str";
+            } else {
+                abl = actorData.attributes.spellcasting || "int";
+            }
+        } else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) {
+            abl = "dex";
+        } else if (!abl) {
+            if (itemData.actionType === "rwak" || itemData.actionType === "rsak") {
+                abl = "dex";
+            } else if (itemData.actionType === "mwak" || itemData.actionType === "msak") {
+                abl = "str";
+            } else {
+                abl = "str";
+            }
+        }
 
         // Define Roll parts
         const parts = [];
@@ -1050,6 +1060,66 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         return modifiers;
     }
 
+    getAppropriateAmmoUsageModifiers() {
+        const acceptedModifiers = [
+            SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER,
+            SFRPGEffectType.ALL_AMMO_USAGE_MULTIPLIER,
+            SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER,
+            SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER
+        ];
+
+        let modifiers = this.actor.getAllModifiers();
+        modifiers = modifiers.filter(mod => {
+            // Remove inactive mods and mods that aren't constant (this is only supporting constant mods right now)
+            if (!mod.enabled || mod.modifierType !== SFRPGModifierType.CONSTANT) return false;
+
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
+            if (mod.limitTo === "container") {
+                const parentItem = getItemContainer(this.actor.items, mod.item);
+                if (parentItem?.id !== this.id) return false;
+            }
+
+            if (mod.effectType === SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER) {
+                if (mod.valueAffected !== this.system?.weaponType) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER) {
+                if (!this.system?.properties?.[mod.valueAffected]) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER) {
+                if (this.system?.weaponCategory !== mod.valueAffected) {
+                    return false;
+                }
+            }
+
+            return acceptedModifiers.includes(mod.effectType);
+        });
+
+        return modifiers;
+    }
+
+    _calculateAmmoUsageWithModifiers(value) {
+        let modifiers = this.getAppropriateAmmoUsageModifiers();
+        const stackModifiers = new StackModifiers();
+        modifiers = stackModifiers.process(modifiers, null, {actor: this.actor, item: this});
+        let multiplier = 1.0;
+        const modsToProcess = [];
+        for (const modValue of Object.values(modifiers)) {
+            for (const bonus of modValue) {
+                modsToProcess.push(bonus);
+            }
+        }
+        const rollContext = RollContext.createItemRollContext(this, this.actor);
+        for (const mod of modsToProcess) {
+            const rollResult = DiceSFRPG.resolveFormulaWithoutDice(mod.modifier?.toString(), rollContext);
+            const computedBonus = !rollResult.hadError ? rollResult.total : 1;
+            multiplier *= computedBonus;
+        }
+        const computedValue = Math.round(value * multiplier);
+        return computedValue < 0 ? 0 : computedValue;
+    }
+
     /**
      * Handle updating item capacity when the attack dialog closes.
      *
@@ -1066,17 +1136,17 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             return;
         }
 
-        const itemData = foundry.utils.deepClone(this.system);
+        const itemData = this.system;
         if (itemData.hasOwnProperty("usage") && !options.disableDeductAmmo) {
             const usage = itemData.usage;
 
             if (usage.per && ["round", "shot"].includes(usage.per)) {
-                this.consumeCapacity(usage.value);
+                this.consumeCapacity(this._calculateAmmoUsageWithModifiers(usage.value));
             } else if (usage.per && ['minute'].includes(usage.per)) {
                 if (game.combat) {
                     const round = game.combat.current.round || 0;
                     if (round % 10 === 1) {
-                        this.consumeCapacity(usage.value);
+                        this.consumeCapacity(this._calculateAmmoUsageWithModifiers(usage.value));
                     }
                 } else {
                     ui.notifications.info("You currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
@@ -1818,7 +1888,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /**
      * Get the Actor which is the author of a chat card
      * @param {HTMLElement} card    The chat card being used
-     * @return {Actor|null}         The Actor entity or null
+     * @return {?ActorSFRPG}         The Actor entity or null
      * @private
      */
     static _getChatCardActor(card) {
@@ -1856,7 +1926,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     /**
      * Get the Actor which is the author of a chat card
-     * @return {Actor|null}         The Actor entity or null
+     * @return {?ActorSFRPG}         The Actor entity or null
      * @private
      */
     static _getChatCardTarget() {
@@ -1882,7 +1952,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * @param {String}        data.source        Where did this modifier come from? An item, ability or something else?
      * @param {String}        data.notes         Any notes or comments about the modifier.
      * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
-     * @param {String|null}   data.id            Override the randomly generated id with this.
+     * @param {?String}   data.id            Override the randomly generated id with this.
      */
     async addModifier({
         name = "",
@@ -1900,10 +1970,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         limitTo = "",
         damage = null
     } = {}) {
-        const data = this._ensureHasModifiers(foundry.utils.deepClone(this.system));
-        const modifiers = data.modifiers;
 
-        modifiers.push(new SFRPGModifier({
+        const modifiers = this.system.modifiers;
+        modifiers.push({
             name,
             modifier,
             type,
@@ -1918,10 +1987,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             id,
             limitTo,
             damage
-        }));
-
+        });
         console.log("Adding a modifier to the item");
-
         await this.update({["system.modifiers"]: modifiers});
     }
 
@@ -2087,18 +2154,18 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     /**
      * Execute a macro with the context of this item
-     * @param {Macro} macro The macro to execute
+     * @param {foundry.documents.Macro} macro The macro to execute
      * @param {Record<string, *>} scope Any additional arguments to pass to macro execution
-     * @returns {Promise<*>} The return value of the macro
+     * @returns {Promise<unknown>} The return value of the macro
      */
     async executeMacroWithContext(macro, scope = {}) {
-        if (!(macro instanceof Macro)) {
+        if (!(macro instanceof foundry.documents.Macro)) {
             ui.notifications.error("A macro was not provided!");
             return;
         }
 
         return macro.execute({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token }),
+            speaker: foundry.documents.ChatMessage.implementation.getSpeaker({ actor: this.actor, token: this.actor.token }),
             token: this.actor.token || null,
             actor: this.actor || null,
             item: this,

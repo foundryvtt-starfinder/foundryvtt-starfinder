@@ -27,9 +27,6 @@ export const ActorInventoryMixin = (superclass) => class extends superclass {
             Promise.all(promises).then(x => { return new Promise(resolve => setTimeout(() => resolve(x), 1)); })
                 .then(() => {
                     Hooks.callAll("afterItemsProcessed", {actor: actor});
-                    if (actor.sheet?.rendered) {
-                        actor.sheet?.render(false);
-                    }
                 });
         }
     }

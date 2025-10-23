@@ -112,7 +112,7 @@ export default function(engine) {
             {
                 const duration = data.duration;
 
-                if (!(["instantaneous", "text"].includes(duration.units))) {
+                if (!(["instantaneous", "turn", "text"].includes(duration.units))) {
                     duration.total = calculateWithContext(duration.value);
 
                     item.labels.duration = [
@@ -121,7 +121,7 @@ export default function(engine) {
                         data.dismissible ? "(D)" : ""
                     ].filterJoin(" ");
                 } else {
-                    const label = duration.units === "instantaneous" ? C.durationTypes[duration.units] : duration.value;
+                    const label = ["instantaneous", "turn"].includes(duration.units) ? C.durationTypes[duration.units] : duration.value;
                     item.labels.duration = label || "";
                 }
 

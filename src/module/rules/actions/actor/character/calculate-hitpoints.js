@@ -1,8 +1,9 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateHitpoints", (fact, context) => {
         const data = fact.data;
+        if (!data.attributes.hp.tooltip) data.attributes.hp.tooltip = [];
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -72,16 +73,9 @@ export default function(engine) {
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 
         const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, data.attributes.hp, "SFRPG.AbilityScoreBonusTooltip");
-                }
-            } else {
-                sum += addModifier(mod[1], data, data.attributes.hp, "SFRPG.AbilityScoreBonusTooltip");
+            for (const bonus of mod[1]) {
+                sum += addModifier(bonus, data, data.attributes.hp, "SFRPG.AbilityScoreBonusTooltip");
             }
-
             return sum;
         }, 0);
 
