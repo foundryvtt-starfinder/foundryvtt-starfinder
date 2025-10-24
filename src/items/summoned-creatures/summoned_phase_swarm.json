@@ -1,6 +1,6 @@
 {
   "_id": "WtQvpTnTlHClBSpx",
-  "name": "Electromagnetic Swarm",
+  "name": "Summoned Phase Swarm",
   "type": "npc2",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
@@ -283,7 +283,7 @@
           "parts": [
             {
               "name": "Swarm Damage",
-              "formula": "lookupRange(@details.cr, 6, 17, 7, 20, 8)d6",
+              "formula": "lookupRange(@resources.parentStat.technomancerLevel.value, 6, 17, 7, 20, 8)d6",
               "group": null,
               "isPrimarySection": true,
               "types": {
@@ -293,7 +293,9 @@
                 "electricity": true,
                 "fire": true,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -489,10 +491,43 @@
           "value": 0
         }
       }
+    },
+    {
+      "_id": "EGuWMaMIZUUISlkF",
+      "name": "Technomancer Level",
+      "type": "actorResource",
+      "img": "systems/sfrpg/icons/default/pie-chart.svg",
+      "system": {
+        "type": "parentStat",
+        "base": 14,
+        "combatTracker": {
+          "displayAbsoluteValue": false,
+          "show": true,
+          "showOwnerAndGMOnly": true
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "enabled": true,
+        "modifiers": [],
+        "range": {
+          "max": "20",
+          "min": "14",
+          "mode": "post"
+        },
+        "slug": "",
+        "source": "",
+        "stage": "early",
+        "subType": "technomancerLevel"
+      }
     }
   ],
   "prototypeToken": {
-    "name": "Electromagnetic Swarm",
+    "name": "Summoned Phase Swarm",
     "actorLink": false,
     "alpha": 1,
     "appendNumber": false,
