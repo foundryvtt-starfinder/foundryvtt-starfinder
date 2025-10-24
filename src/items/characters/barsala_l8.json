@@ -3309,149 +3309,6 @@
       }
     },
     {
-      "_id": "OnRLGqugrQ5hMc2p",
-      "name": "Weapon Specialization (Ex) (Biohacker)",
-      "type": "feat",
-      "img": "systems/sfrpg/icons/default/achievement.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with. For weapons you have gained proficiency with only through the injection expert class feature, rather than the normal Weapon Specialization benefit, you instead add half your character level to damage you deal with those weapons.</p>"
-        },
-        "descriptors": [],
-        "details": {
-          "category": "classFeature",
-          "combat": false,
-          "specialAbilityType": "ex"
-        },
-        "duration": {
-          "units": "instantaneous",
-          "value": ""
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [
-          {
-            "_id": "cc614091-2af3-42c0-8233-6a315250158c",
-            "name": "Weapon Specialization Biohacker",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-damage",
-            "enabled": true,
-            "modifier": "floor(@details.level.value / 2)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "smallA"
-          },
-          {
-            "_id": "ec540e20-bbf8-45b6-9e11-b7e3ab38ea99",
-            "name": "Weapon Specialization Biohacker",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-damage",
-            "enabled": true,
-            "modifier": "@details.level.value",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "basicM"
-          },
-          {
-            "_id": "410d6825-220e-4d1a-9c58-e9d22e411485",
-            "name": "Weapon Specialization Biohacker",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-property-damage",
-            "enabled": true,
-            "modifier": "-ceil(@details.level.value / 2)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "operative"
-          },
-          {
-            "_id": "9ece2ee9-6611-441e-985c-429191f803bf",
-            "name": "Weapon Specialization (Injection Expert)",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-property-damage",
-            "enabled": true,
-            "max": 0,
-            "modifier": "floor(@details.level.value/2)",
-            "modifierType": "formula",
-            "notes": "Enable only if you gained proficiency with this weapon from Injection Expert (Ex) and from nowhere else.<br>(E.g you would disable this for a Small Arm, but not a Longarm, as the Biohacker class provides proficiency with the former, but not the latter.)",
-            "source": "Weapon Specialization",
-            "subtab": "misc",
-            "valueAffected": "injection"
-          }
-        ],
-        "properties": {},
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "3rd Level",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "Biohacker",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
       "_id": "kxP11KnpDGudsEdn",
       "name": "Painful Injection (Ex)",
       "type": "feat",
@@ -6163,6 +6020,190 @@
           "max": "1 + @classes.biohacker.keyAbilityMod",
           "per": "sr",
           "value": 6
+        }
+      }
+    },
+    {
+      "_id": "fLSJJlLKneiXusE4",
+      "name": "Weapon Specialization (Ex) (Biohacker)",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
+      "system": {
+        "ability": "",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": ""
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with. For weapons you have gained proficiency with only through the injection expert class feature, rather than the normal Weapon Specialization benefit, you instead add half your character level to damage you deal with those weapons.</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "auditory": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "illusion": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": false,
+        "modifiers": [
+          {
+            "_id": "cc614091-2af3-42c0-8233-6a315250158c",
+            "name": "Weapon Specialization Biohacker",
+            "type": "weapon-specialization",
+            "condition": "",
+            "damage": null,
+            "effectType": "weapon-damage",
+            "enabled": true,
+            "limitTo": null,
+            "max": 0,
+            "modifier": "floor(@details.level.value / 2)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "smallA"
+          },
+          {
+            "_id": "ec540e20-bbf8-45b6-9e11-b7e3ab38ea99",
+            "name": "Weapon Specialization Biohacker",
+            "type": "weapon-specialization",
+            "condition": "",
+            "damage": null,
+            "effectType": "weapon-damage",
+            "enabled": true,
+            "limitTo": null,
+            "max": 0,
+            "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "basicM"
+          },
+          {
+            "_id": "9ece2ee9-6611-441e-985c-429191f803bf",
+            "name": "Weapon Specialization Biohacker",
+            "type": "weapon-specialization",
+            "condition": "",
+            "damage": null,
+            "effectType": "weapon-property-damage",
+            "enabled": true,
+            "limitTo": null,
+            "max": 0,
+            "modifier": "floor(@details.level.value/2)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "injection"
+          }
+        ],
+        "properties": {},
+        "range": {
+          "units": ""
+        },
+        "recharge": {
+          "charged": false,
+          "value": ""
+        },
+        "requirements": "3rd Level",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": ""
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "Biohacker",
+        "target": {
+          "value": null
+        },
+        "uses": {
+          "max": "0",
+          "per": "",
+          "value": 0
         }
       }
     }
