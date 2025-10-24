@@ -74,6 +74,9 @@ This update adds the last of the Starfinder Enhanced content to the system, as w
     - Species have been added
     - Rules journals for scaling equipment added
     - Creature Companions added
+    - Summoned creatures for Singularity Servant, Solar Summoner, and Phase Swarm added
+    - Roll table added for Chaos Ammo
+    - Effects added for Enhance Defense and Enhance Energy Save
     - GM Tools and Rituals have been added to the rules journals from Starfinder Enhanced (and Galactic Magic)
 - Added all archetype features as their own items
 - Theme features have been added as individual items with appropriate modifiers
