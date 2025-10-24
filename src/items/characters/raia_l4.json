@@ -1231,134 +1231,6 @@
       }
     },
     {
-      "_id": "0nRcIVTMR0jNAeUc",
-      "name": "Weapon Specialization (Ex) (Technomancer)",
-      "type": "feat",
-      "img": "systems/sfrpg/images/cup/gameplay/technomancer.webp",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>You gain the @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}feat as a bonus feat for each weapon type this class grants you proficiency with.</p>"
-        },
-        "descriptors": [],
-        "details": {
-          "category": "classFeature",
-          "combat": false,
-          "specialAbilityType": "ex"
-        },
-        "duration": {
-          "units": "instantaneous",
-          "value": ""
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [
-          {
-            "_id": "02ae5b7c-492f-4f98-94d9-ae15d6656084",
-            "name": "Weapon Specialization Technomancer",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-damage",
-            "enabled": true,
-            "modifier": "floor(@details.level.value / 2)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "smallA"
-          },
-          {
-            "_id": "4100ca86-eef1-4d66-a8f5-56a1deebd8ce",
-            "name": "Weapon Specialization Technomancer",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-damage",
-            "enabled": true,
-            "modifier": "@details.level.value",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "basicM"
-          },
-          {
-            "_id": "3ae5b0a0-a7ab-425a-b2f7-5f55740c069c",
-            "name": "Weapon Specialization Technomancer",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-property-damage",
-            "enabled": true,
-            "modifier": "-ceil(@details.level.value / 2)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "operative"
-          }
-        ],
-        "properties": {},
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "3rd Level",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "Technomancer",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
       "_id": "6fYSwOOXpVAe4zaF",
       "name": "Empowered Weapon (Su)",
       "type": "feat",
@@ -6343,6 +6215,134 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
+      }
+    },
+    {
+      "_id": "QI2LDqDHzsxbWGs7",
+      "name": "Weapon Specialization (Ex) (Technomancer)",
+      "type": "feat",
+      "img": "systems/sfrpg/images/cup/gameplay/technomancer.webp",
+      "system": {
+        "ability": "",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": ""
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>You gain the @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}feat as a bonus feat for each weapon type this class grants you proficiency with.</p>"
+        },
+        "descriptors": {},
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": false,
+        "modifiers": [
+          {
+            "_id": "02ae5b7c-492f-4f98-94d9-ae15d6656084",
+            "name": "Weapon Specialization Technomancer",
+            "type": "weapon-specialization",
+            "condition": "",
+            "damage": null,
+            "effectType": "weapon-damage",
+            "enabled": true,
+            "limitTo": null,
+            "max": 0,
+            "modifier": "floor(@details.level.value / 2)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "smallA"
+          },
+          {
+            "_id": "4100ca86-eef1-4d66-a8f5-56a1deebd8ce",
+            "name": "Weapon Specialization Technomancer",
+            "type": "weapon-specialization",
+            "condition": "",
+            "damage": null,
+            "effectType": "weapon-damage",
+            "enabled": true,
+            "limitTo": null,
+            "max": 0,
+            "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "basicM"
+          }
+        ],
+        "properties": {},
+        "range": {
+          "units": ""
+        },
+        "recharge": {
+          "charged": false,
+          "value": ""
+        },
+        "requirements": "3rd Level",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": ""
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "Technomancer",
+        "target": {
+          "value": null
+        },
+        "uses": {
+          "max": "0",
+          "per": "",
+          "value": 0
+        }
       }
     }
   ],
