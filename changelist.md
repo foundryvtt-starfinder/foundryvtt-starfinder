@@ -87,6 +87,7 @@ This update adds the last of the Starfinder Enhanced content to the system, as w
 - Folders have been added to the Alien Archive compendium, sorting them by source (and type for adventures, NPC vs Alien)
 - Features have been updated to make the default duration `instantaneous` wherever a pre-existing duration was not found
 - Iconic characters updated to use modern version of Weapon Specialization feat
+- Binary `lookupRange` formulas replaced with `ternary` in compendiums
 - Typos and missing descriptions fixed for plasma guide items, "Baleful Polymorph", "Nanite Array (Ex)", Syringe Stick items, and Syringe Spear items
 - Description updated based on errata for the "Explosive Danger" class feature
 - Fix missing links in the "Field of Study" class feature
