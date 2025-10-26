@@ -1,32 +1,67 @@
 
-import { SFRPGEffectType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
+import { SFRPGEffectType } from "../../../../modifiers/types.js";
 
 export default function(engine) {
-    const processModifier = (bonus, data) => {
+    const processModifier = (bonus, data, tooltip) => {
         let computedBonus = 0;
         try {
             const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
             computedBonus = roll.total;
+            tooltip.push(`${bonus.name}: ${bonus.effectType === SFRPGEffectType.STARSHIP_MULTIPLY_BUILD_POINTS ? 'x' : (computedBonus >= 0 ? '+' : '')}${String(computedBonus)}`);
         } catch (e) {
             console.error(e);
         }
         return computedBonus;
     };
 
-    const applyStackedModifiers = (stackedModifiers, data) => {
+    const applyStackedModifiers = (stackedModifiers, data, tooltip) => {
         return Object.entries(stackedModifiers).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += processModifier(bonus, data);
-                }
-            } else {
-                sum += processModifier(mod[1], data);
+            if (mod[1].length === 0) return sum;
+            for (const bonus of mod[1]) {
+                sum += processModifier(bonus, data, tooltip);
             }
-
             return sum;
         }, 0);
+    };
+
+    const applyStackedMultipliers = (stackedModifiers, data, tooltip) => {
+        return Object.entries(stackedModifiers).reduce((product, mod) => {
+            if (mod[1].length === 0) return product;
+            for (const bonus of mod[1]) {
+                product *= processModifier(bonus, data, tooltip);
+            }
+            return product;
+        }, 1);
+    };
+
+    const applyBuildPointModifiers = (fact, context, data) => {
+        const buildPointModifiers = fact.modifiers.filter(mod => {
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.STARSHIP_BUILD_POINTS;
+        });
+        const multiplyBuildPointModifiers = fact.modifiers.filter(mod => {
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.STARSHIP_MULTIPLY_BUILD_POINTS;
+        });
+
+        if (buildPointModifiers.length > 0) {
+            const stackedModifiers = context.parameters.stackModifiers.process(
+                buildPointModifiers,
+                context,
+                {actor: fact.actor}
+            );
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data, data.attributes.bp.maxTooltip);
+            data.attributes.bp.max += modifierBonus;
+        }
+
+        if (multiplyBuildPointModifiers.length > 0) {
+            const stackedModifiers = context.parameters.stackModifiers.process(
+                multiplyBuildPointModifiers,
+                context,
+                {actor: fact.actor}
+            );
+            const modifierBonus = applyStackedMultipliers(stackedModifiers, data, data.attributes.bp.maxTooltip);
+            data.attributes.bp.max *= modifierBonus;
+        }
+        data.attributes.bp.max = Math.floor(data.attributes.bp.max);
     };
 
     const applyHullPointModifiers = (fact, context, data) => {
@@ -39,7 +74,7 @@ export default function(engine) {
                 context,
                 {actor: fact.actor}
             );
-            const modifierBonus = applyStackedModifiers(stackedModifiers, data);
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data, data.attributes.hp.tooltip);
             data.attributes.hp.max += modifierBonus;
         }
     };
@@ -54,7 +89,7 @@ export default function(engine) {
                 context,
                 {actor: fact.actor}
             );
-            const modifierBonus = applyStackedModifiers(stackedModifiers, data);
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data, data.attributes.hp.tooltip);
             data.attributes.hp.increment += modifierBonus;
         }
     };
@@ -68,7 +103,7 @@ export default function(engine) {
                 context,
                 {actor: fact.actor}
             );
-            const modifierBonus = applyStackedModifiers(stackedModifiers, data);
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data, data.attributes.turn.tooltip);
             data.attributes.turn.value = Math.max(0, data.attributes.turn.value + modifierBonus);
 
             if (modifierBonus !== 0) {
@@ -156,7 +191,8 @@ export default function(engine) {
         data.attributes.bp = {
             value: 0,
             max: CONFIG.SFRPG.starshipTierToBuildpoints[data.details.tier],
-            tooltip: []
+            tooltip: [],
+            maxTooltip: []
         };
 
         /** If galactic trade is enabled, max spent BP per tier is 5% higher. */
@@ -200,9 +236,11 @@ export default function(engine) {
                 min: 0,
                 max: 0
             };
-
-            data.attributes.hp.increment = 0;
-            data.attributes.hp.max = 0;
+            data.attributes.hp = {
+                increment: 0,
+                max: 0,
+                tooltip: []
+            };
             data.crew.gunner.limit = 0;
         } else {
             const frame = frames[0];
@@ -226,11 +264,12 @@ export default function(engine) {
                 max: frame.system.crew.maximum
             };
 
+            data.attributes.hp.tooltip = [];
             data.attributes.hp.increment = frame.system.hitpoints.increment;
             applyHullPointIncrementModifiers(fact, context, data);
             data.attributes.hp.max = frame.system.hitpoints.base + Math.floor(data.details.tier / 4) * data.attributes.hp.increment;
-
             applyHullPointModifiers(fact, context, data);
+
             data.crew.gunner.limit = frame.system.weaponMounts.forward.lightSlots + frame.system.weaponMounts.forward.heavySlots + frame.system.weaponMounts.forward.capitalSlots
                 + frame.system.weaponMounts.aft.lightSlots + frame.system.weaponMounts.aft.heavySlots + frame.system.weaponMounts.aft.capitalSlots
                 + frame.system.weaponMounts.port.lightSlots + frame.system.weaponMounts.port.heavySlots + frame.system.weaponMounts.port.capitalSlots
@@ -333,6 +372,10 @@ export default function(engine) {
         }
 
         /** Compute BP */
+
+        // Apply build point maximum modifiers
+        applyBuildPointModifiers(fact, context, data);
+
         const sizeModifier = sizeModifierMap[data.details.size] || 0;
         const starshipComponents = fact.items.filter(x => x.type.startsWith("starship"));
         for (const component of starshipComponents) {
