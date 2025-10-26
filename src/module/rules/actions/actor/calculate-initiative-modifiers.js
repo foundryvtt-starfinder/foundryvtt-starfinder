@@ -1,4 +1,4 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateInitiativeModifiers", (fact, context) => {
@@ -43,16 +43,10 @@ export default function(engine) {
         }), context, {actor: fact.actor});
 
         const mod = Object.entries(mods).reduce((prev, curr) => {
-            if (curr[1] === null || curr[1].length < 1) return prev;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
-                for (const bonus of curr[1]) {
-                    prev += addModifier(bonus, data, init, "SFRPG.InitiativeModiferTooltip");
-                }
-            } else {
-                prev += addModifier(curr[1], data, init, "SFRPG.InitiativeModiferTooltip");
+            if (!curr[1].length) return prev;
+            for (const bonus of curr[1]) {
+                prev += addModifier(bonus, data, init, "SFRPG.InitiativeModiferTooltip");
             }
-
             return prev;
         }, 0);
 
