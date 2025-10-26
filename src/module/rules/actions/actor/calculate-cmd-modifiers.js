@@ -42,7 +42,6 @@ export default function(engine) {
         const mods = context.parameters.stackModifiers.process(filteredMods, context, {actor: fact.actor});
 
         const cmdMod = Object.entries(mods).reduce((prev, curr) => {
-            if (!curr[1].length) return prev;
             for (const bonus of curr[1]) {
                 prev += addModifier(bonus, fact.data, cmd, "SFRPG.CMDModiferTooltip");
             }

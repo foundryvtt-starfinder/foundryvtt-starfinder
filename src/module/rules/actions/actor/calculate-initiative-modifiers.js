@@ -43,7 +43,6 @@ export default function(engine) {
         }), context, {actor: fact.actor});
 
         const mod = Object.entries(mods).reduce((prev, curr) => {
-            if (!curr[1].length) return prev;
             for (const bonus of curr[1]) {
                 prev += addModifier(bonus, data, init, "SFRPG.InitiativeModiferTooltip");
             }

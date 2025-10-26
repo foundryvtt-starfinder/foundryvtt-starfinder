@@ -927,7 +927,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         };
 
         Object.entries(modifiers).reduce((sum, mod) => {
-            if (!mod[1].length) return 0;
             for (const bonus of mod[1]) {
                 addModifier(bonus, parts);
             }
@@ -1369,7 +1368,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         };
 
         Object.entries(modifiers).reduce((sum, mod) => {
-            if (!mod[1].length) return 0;
             for (const bonus of mod[1]) {
                 addModifier(bonus, parts);
             }
