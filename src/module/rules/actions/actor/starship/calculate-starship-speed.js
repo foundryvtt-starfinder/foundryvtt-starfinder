@@ -1,29 +1,24 @@
-import { SFRPGEffectType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
+import { SFRPGEffectType } from "../../../../modifiers/types.js";
 
 export default function(engine) {
-    const processModifier = (bonus, data) => {
+    const processModifier = (bonus, data, tooltip) => {
         let computedBonus = 0;
         try {
             const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
             computedBonus = roll.total;
+            tooltip.push(`${bonus.name}: ${computedBonus.signedString()}`);
         } catch (e) {
             console.error(e);
         }
         return computedBonus;
     };
 
-    const applyStackedModifiers = (stackedModifiers, data) => {
+    const applyStackedModifiers = (stackedModifiers, data, tooltip) => {
         return Object.entries(stackedModifiers).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += processModifier(bonus, data);
-                }
-            } else {
-                sum += processModifier(mod[1], data);
+            if (mod[1].length === 0) return sum;
+            for (const bonus of mod[1]) {
+                sum += processModifier(bonus, data, tooltip);
             }
-
             return sum;
         }, 0);
     };
@@ -37,13 +32,8 @@ export default function(engine) {
                 context,
                 {actor: fact.actor}
             );
-            const modifierBonus = applyStackedModifiers(stackedModifiers, data);
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data, data.attributes.speed.tooltip);
             data.attributes.speed.value += modifierBonus;
-
-            if (modifierBonus !== 0) {
-                const label = game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.MiscModifier") : "Misc Modifier";
-                data.attributes.speed.tooltip.push(`${label}: ${modifierBonus.signedString()}`);
-            }
         }
     };
 
