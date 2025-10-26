@@ -1,4 +1,4 @@
-import { SFRPGEffectType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
+import { SFRPGEffectType } from "../../../../modifiers/types.js";
 
 export default function(engine) {
     const processModifier = (bonus, data) => {
@@ -14,16 +14,9 @@ export default function(engine) {
 
     const applyStackedModifiers = (stackedModifiers, data) => {
         return Object.entries(stackedModifiers).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += processModifier(bonus, data);
-                }
-            } else {
-                sum += processModifier(mod[1], data);
+            for (const bonus of mod[1]) {
+                sum += processModifier(bonus, data);
             }
-
             return sum;
         }, 0);
     };
