@@ -285,6 +285,10 @@ export default function(engine) {
             // console.log(`> ${item.name} has a total weight of ${itemBulk}, bringing the sum to ${totalWeight}`);
         }
 
+        // Calculate bulk of UPBs
+        const upbWeight = Math.floor((data.currency?.upb ?? 0) / 1000) * 10; // 1000 UPBs per bulk, but multiply by 10 for integer-space bulk calculation
+        totalWeight += upbWeight;
+
         actorData.bulk = Math.floor(totalWeight / 10); // Divide bulk by 10 to correct for integer-space bulk calculation.
         actorData.wealth = computeWealthForActor(actor, totalWealth);
 
