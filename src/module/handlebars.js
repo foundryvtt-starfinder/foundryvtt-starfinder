@@ -152,6 +152,15 @@ export function setupHandlebars() {
         return value.capitalize();
     });
 
+    Handlebars.registerHelper('signedNumber', function(value) {
+        const numValue = Number(value);
+        if (numValue !== undefined || !isNaN(numValue)) {
+            return numValue >= 0 ? "+" + String(numValue) : String(numValue);
+        } else {
+            return null;
+        }
+    });
+
     Handlebars.registerHelper('contains', function(container, value) {
         if (!container || !value) return false;
 
@@ -166,6 +175,7 @@ export function setupHandlebars() {
         return false;
     });
 
+    // TODO: this might be unnecessary, as {{log args}} seems to do the same thing and is built in
     Handlebars.registerHelper('console', function(...args) {
         args.pop();
         console.log(...args);
