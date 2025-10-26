@@ -98,7 +98,7 @@
         "effectType": "ranged-attacks",
         "enabled": true,
         "max": 0,
-        "modifier": "(lookupRange(@resources.solarian.stellarMode.value, 2, 0, 0))",
+        "modifier": "(ternary(lt(@resources.solarian.stellarMode.value, 0), 2, 0))",
         "modifierType": "formula",
         "notes": "While attuned or fully attuned, you gain a +2 insight bonus to combat maneuvers attempted at range using this stellar revelation.",
         "source": "",
