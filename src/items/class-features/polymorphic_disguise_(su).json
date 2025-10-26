@@ -98,7 +98,7 @@
         "effectType": "skill",
         "enabled": false,
         "max": 6,
-        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifier": "1d(ternary(gte(@classes.envoy.levels, 13), 8, 6))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
         "modifierType": "formula",
         "notes": "You add your expertise die to Disguise checks to change your appearance to your chosen form.",
         "source": "",

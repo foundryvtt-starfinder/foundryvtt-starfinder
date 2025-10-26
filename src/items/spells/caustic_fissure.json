@@ -40,7 +40,7 @@
       "parts": [
         {
           "name": "Caustic Fissure",
-          "formula": "lookupRange(@item.level, 2, 2, 4, 3, 6, 4, 6, 5, 8, 6, 10)d(lookupRange(@item.level, 4, 6, 6))",
+          "formula": "lookupRange(@item.level, 2, 2, 4, 3, 6, 4, 6, 5, 8, 6, 10)d(ternary(gte(@item.level, 6), 6, 4))",
           "group": null,
           "isPrimarySection": true,
           "types": {

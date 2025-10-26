@@ -77,7 +77,7 @@
         "effectType": "ranged-attacks",
         "enabled": true,
         "max": 0,
-        "modifier": "(lookupRange(@resources.solarian.stellarMode.value, 0, 1, 2))",
+        "modifier": "(ternary(gt(@resources.solarian.stellarMode.value, 0), 2, 0))",
         "modifierType": "constant",
         "notes": "",
         "source": "",
