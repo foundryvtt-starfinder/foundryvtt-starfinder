@@ -16,7 +16,6 @@ export default function(engine) {
 
     const applyStackedModifiers = (stackedModifiers, data, tooltip) => {
         return Object.entries(stackedModifiers).reduce((sum, mod) => {
-            if (mod[1].length === 0) return sum;
             for (const bonus of mod[1]) {
                 sum += processModifier(bonus, data, tooltip);
             }

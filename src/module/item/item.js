@@ -927,16 +927,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         };
 
         Object.entries(modifiers).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return 0;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    addModifier(bonus, parts);
-                }
-            } else {
-                addModifier(mod[1], parts);
+            for (const bonus of mod[1]) {
+                addModifier(bonus, parts);
             }
-
             return 0;
         }, 0);
 
@@ -1375,16 +1368,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         };
 
         Object.entries(modifiers).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return 0;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    addModifier(bonus, parts);
-                }
-            } else {
-                addModifier(mod[1], parts);
+            for (const bonus of mod[1]) {
+                addModifier(bonus, parts);
             }
-
             return 0;
         }, 0);
 
