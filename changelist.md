@@ -6,29 +6,31 @@ Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG,
 
 ## Core System Improvements
 
-### General Stuff
+### General Improvements
 
 - Combat Type is now selected automatically when an actor is added to a not-in-progress combat by a GM
 - Modifier effect type dropdown selector now has options organized into logical groupings
 
-### Character/NPC/Drone Stuff
+### Character/NPC/Drone Improvements
 
 - Overhaul of how feature activation works
-    - Default duration for features is now `instantaneous`
-    - `instantaneous` features no longer need to be toggled off (these now show up as yellow buttons on the character sheet)
-    - Activation time is now tracked for features, which automatically turn off upon expiry
-    - The `null` and `none` activation types are renamed to "Passive" and "Free" for clarity
+  - Default duration for features is now `instantaneous`
+  - `instantaneous` features no longer need to be toggled off (these now show up as yellow buttons on the character sheet)
+  - Activation time is now tracked for features, which automatically turn off upon expiry
+  - The `null` and `none` activation types are renamed to "Passive" and "Free" for clarity
 - Nonfunctional key ability score field removed from character sheets
 - NPC ability and spell DCs moved to the relevant tabs to highlight them
 - Ammunition usage multiplier modifiers added
+- Same-type Spell Save DC bonuses now stack correctly
 
-### Starship Stuff
+### Starship Improvements
 
 - Starship system patch state is now trackable on the starship sheet and automated correctly
 - Support added for a selection of modifiers affecting starship values
 - NPC Crew can now perform minor and open crew actions
+- New modifiers added to modify Build Point maximum
 
-### Backend
+### Backend Improvements
 
 - Data Models have been added for all actor and item types in the game system, replacing template.json
 - Crew role names and definitions added to `config.js` in place of being hardcoded in code files
@@ -37,7 +39,7 @@ Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG,
 
 ## Bug Fixes
 
-### General Stuff
+### General Fixes
 
 - Hotbar automations have been restored after being broken by the Foundry v13 upgrade
 - Condition application no longer depends on the name of the condition, allowing them to be localized if desired
@@ -45,20 +47,21 @@ Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG,
 - Advantage and Disadvantage buttons now work correctly when rolling
 - Calculation of range on spell sheets fixed for Close/Medium/Long ranges
 
-### Character/NPC/Drone Stuff
+### Character/NPC/Drone Fixes
 
 - Default attack roll bonuses are now correctly calculated based on the attack and weapon type, and actor stats
 - Skill checks that have the "variable DC" box checked no longer display the DC on chat cards
 - Timed Effects are now correctly handled individually for unlinked tokens using the same base actor
 - "Turn" duration added to effects to indicate something lasts until the end of the current turn
+- UPB weight is now correctly calculated (1 bulk per 1000 UPBs)
 
-### Starship Stuff
+### Starship Fixes
 
 - Typo fixed in the starship sheet that prevented an editor from opening
 - Starship combat phases where all combatants act simultaneously no longer highlight the top ship in the turn tracker
 - Turrets are now correctly impacted by critical weapon system damage
 
-### Backend
+### Backend Fixes
 
 - Fixed an error thrown for players by the `renderCombatTracker` hook
 - Fix an error being thrown when starship weapon attacks critically hit
@@ -71,13 +74,13 @@ This update adds the last of the Starfinder Enhanced content to the system, as w
 ### New Data
 
 - Remaining data from Starfinder Enhanced has been added
-    - Species have been added
-    - Rules journals for scaling equipment added
-    - Creature Companions added
-    - Summoned creatures for Singularity Servant, Solar Summoner, and Phase Swarm added
-    - Roll table added for Chaos Ammo
-    - Effects added for Enhance Defense and Enhance Energy Save
-    - GM Tools and Rituals have been added to the rules journals from Starfinder Enhanced (and Galactic Magic)
+  - Species have been added
+  - Rules journals for scaling equipment added
+  - Creature Companions added
+  - Summoned creatures for Singularity Servant, Solar Summoner, and Phase Swarm added
+  - Roll table added for Chaos Ammo
+  - Effects added for Enhance Defense and Enhance Energy Save
+  - GM Tools and Rituals have been added to the rules journals from Starfinder Enhanced (and Galactic Magic)
 - Added all archetype features as their own items
 - Theme features have been added as individual items with appropriate modifiers
 - Additional Spanish localizations
@@ -94,7 +97,7 @@ This update adds the last of the Starfinder Enhanced content to the system, as w
 - "Nanite Surge" typo preventing max uses calculating correctly fixed
 - "Nanite Surge" uses corrected to "per day" rather than "charges"
 - The "Biohacks" class feature now tracks uses and calculates max uses correctly, improving usability
-    - Iconic Barsala updated to use the updated "Biohacks" feature
+  - Iconic Barsala updated to use the updated "Biohacks" feature
 - "Expanded Cache (Su)" icon path is fixed
 - "Cultural Fascination" action type fixed
 - "Double Tap" now uses the ammo usage multiplier modifier to function correctly
