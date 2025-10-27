@@ -11,11 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -29,7 +25,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 10,
         "attributes": {
@@ -50,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -84,6 +79,7 @@
               "name": "",
               "formula": "1d4 +5",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": true,
@@ -91,12 +87,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -106,7 +105,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -116,7 +114,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -220,10 +218,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -231,6 +226,12 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {
@@ -250,7 +251,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -258,8 +258,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -272,21 +272,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -295,7 +303,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -305,7 +314,7 @@
           "unidentified": "",
           "value": "<p>As a standard action, a talrepi recombinator sets up a special energy field that adheres three-dimensional creatures and objects together. The talrepi recombinator chooses a square within 30 feet. All creatures within 20 feet of that square must succeed at a DC 14 Fortitude save or be pulled 10 feet toward the chosen square (kathrepi and talrepi, as well as any other creature that exists simultaneously in the fourth dimension, can automatically succeed at this save). Unsecured, unattended items of 1 bulk or less are also affected and automatically fail this save. A creature who fails this save and ends its forced movement adjacent to another creature that failed the same save is entangled for 1 round but can escape the entangle effect early by taking a move action and succeeding at a DC 14 Acrobatics or Strength check.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -316,34 +325,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -354,11 +365,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -366,12 +373,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -380,7 +396,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -438,33 +455,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -476,11 +496,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -488,12 +504,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -502,7 +527,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -560,34 +586,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -598,11 +626,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -610,12 +634,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -624,7 +657,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -634,7 +668,7 @@
           "unidentified": "",
           "value": "<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as @UUID[Compendium.sfrpg.spells.Item.fiFr41dYjlAxJlwn]{Make Whole} can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or @UUID[Compendium.sfrpg.conditions.Item.3iTdt2NRgIyrychR]{Sleep}. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<p><em>Format</em>:<strong>Other Abilities</strong> unliving.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -645,34 +679,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA1 pg. 158",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -683,11 +719,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -695,12 +727,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -709,7 +750,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -719,7 +761,7 @@
           "unidentified": "",
           "value": "<p>Constructs are immune to the following effects, unless the effect specifies that it works against constructs.</p>\n<ul>\n<li>\n<p>@UUID[Compendium.sfrpg.conditions.Item.v9RNVTqyTyaPchvd]{Bleed}, @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Death effects}, @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease}, @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Mind-affecting effects}, necromancy effects, @UUID[Compendium.sfrpg.conditions.Item.NV4qXRDgb7zTNkW2]{Paralysis}, @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}, @UUID[Compendium.sfrpg.conditions.Item.3iTdt2NRgIyrychR]{Sleep}, and @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunning}.</p>\n</li>\n<li>\n<p>Ability damage, ability drain, energy drain, @UUID[Compendium.sfrpg.conditions.Item.33ynSbmexuxC3cAQ]{Exhaustion}, @UUID[Compendium.sfrpg.conditions.Item.JGFn4MrDZ6X5vrzU]{Fatigue}, negative levels, and nonlethal damage.</p>\n</li>\n<li>\n<p>Any effect that requires a Fortitude save (unless the effect works on objects or is harmless).</p>\n</li>\n</ul>\n<p><em>Format</em>:<strong>Immunities</strong> construct immunities.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -730,34 +772,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA1 pg. 153",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }

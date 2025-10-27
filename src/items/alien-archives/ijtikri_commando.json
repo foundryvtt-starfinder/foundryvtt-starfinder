@@ -11,21 +11,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -34,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -44,7 +53,7 @@
           "unidentified": "",
           "value": "<p>An ijtikri reduces the damage they take from any critical hit by 7, to a minimum of 1 (unless reduced by other means).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -55,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -93,11 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -111,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 11,
         "attributes": {
@@ -132,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -141,7 +147,7 @@
         "chatFlavor": "Analog, trip",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -160,10 +166,22 @@
           "effect": "Bleed",
           "parts": [
             {
+              "name": "",
               "formula": "1d4",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
           ]
@@ -171,13 +189,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d8+6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -187,7 +218,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -197,7 +227,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 3,
         "modifiers": [],
@@ -290,22 +320,24 @@
         "quantity": null,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "ft",
-          "value": null
+          "units": "ft"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -313,7 +345,7 @@
           "value": null
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": null
         },
@@ -327,11 +359,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/diasporan-rifle-elite.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -344,8 +372,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 12,
         "attributes": {
@@ -366,7 +394,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": 40,
@@ -380,7 +407,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -409,9 +436,21 @@
           "effect": "Deafen [DC",
           "parts": [
             {
+              "name": "",
               "formula": "13]",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
                 "sonic": true
               }
             }
@@ -420,13 +459,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d10+2",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
                 "sonic": true
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -436,7 +488,6 @@
           "unidentified": "",
           "value": "<p>A sonic rifle fires a blast that is loud enough to deafen targets in addition to damaging them. Sonic rifles have snub-nosed barrels and typically incorporate U-shaped prongs to improve beam stability.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -446,7 +497,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 5,
         "modifiers": [],
@@ -542,10 +593,8 @@
         "quantity": null,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 50
+          "value": "50"
         },
         "rollNotes": "",
         "save": {
@@ -553,11 +602,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 177",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -565,7 +619,7 @@
           "value": 2
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -579,11 +633,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/fighting_style.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -591,12 +641,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -605,7 +664,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -615,7 +675,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.cCZQpV0NmYE9qZoL]{Soldier}</p>\n<p>You have a preferred fighting style that represents the type of soldier you are. Each fighting style is composed of various style techniques that you learn as you gain experience. You must pick one fighting style upon taking your first soldier level, and once made, this choice cannot be changed. Descriptions of the fighting styles you can choose from appear on pages 112–115.<em>(Or Below)</em></p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.wqpDgnxCVh0K1pbU]{Ambusher}</h2>\n<p>The ambusher fighting style focuses on stealth, tactical positioning, and superior reflexes to gain an edge. You must have Stealth as a class skill to select this fighting style.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.33fxlqpShtqndjry]{Arcane Assailant}</h2>\n<p>The arcane assailant fighting style supplements its combat effectiveness with magic powers, drawing on traditions of warrior-wizards dating back to well before the Gap. This allows you to use magic runes to augment your weapons and call on legendary powers, giving you access to arcane options even when you don’t have a magic weapon in your possession.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.DAMcKQ3EGXdh8CGe]{Armor Storm}</h2>\n<p>The armor storm fighting style focuses on using armor as a weapon by maximizing the damage of armor-based weapons while withstanding enemy fire. You learn to increase the effectiveness of attacks made with your armor and to add equipment normally beyond your armor’s capacity.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.oo4MlB56sziHi0lB]{Battlemaster}</h2>\n<p>The battlemaster fighting style focuses on adapting your natural advantages to new dangers and situations as they arise. By anticipating particular threats or adjusting mid-combat to deal with specific foes, you can assure your survival and gain the advantage. The following soldier fighting style is an adaptation of this technique that has made its way to the Pact Worlds. You must have the armor savant and natural weapons species traits to take this fighting style.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.AKI0TQ3pSwmU5twg]{Blitz}</h2>\n<p>The blitz fighting style is all about using speed and aggression to get into the thick of melee. You increase your speed and responsiveness, gain abilities that make you better at melee combat than your enemies, and keep on fighting even when surrounded by foes.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.YHaMYdptLi3fXfVH]{Bombard}</h2>\n<p>The bombard fighting style emphasizes attacking multiple targets, often using grenades, and leverages substantial physical strength to control large weapons with significant recoil. At higher levels, you can use launchers, missiles, and other heavy weapons.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.qjAwXnudUtBHdZCe]{Fourfold Tactician}</h2>\n<p>A fourfold tactician is a master of making use of multiple weapons and still having a spare hand. You must have four or more arms to select or use this fighting style.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.oHKHSbFfmBgFfvW8]{Guard}</h2>\n<p>The guard fighting style focuses on defense. You become adept at wearing armor, protecting against attacks, and enduring damage and other setbacks from attacks that get through your defenses.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.Jba9qeZX5QgjZvwQ]{Hit-and-Run}</h2>\n<p>The hit-and-run fighting style focuses on tactical movement as you move in and out of combat. You use ranged weapons but fight close up, and you can even mix ranged and melee attacks. Your abilities allow you to move even when you make full attacks and to avoid getting locked down by your enemies.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.GvubHqBOlV1CsWvz]{Hunter}</h2>\n<p>You’re a master of hunting all sorts of creatures, from big-game animals to runaway criminals and similar marks. You may use this expertise as a sniper, trophy hunter, sport enthusiast, or fugitive tracer. Far more focused on skills than other soldiers, your unique talents combine experience in the field with refined combat ability.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.2C2NBundSvw79yKG]{Qi Adept}</h2>\n<p>You are able to tap into your personal life force, enabling you to unleash incredible strikes upon your foes. Whether you’ve discovered these techniques on your own or studied at ancient monasteries and temples devoted to these lost arts, yours is a power cultivated through intense training and skill.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.PSAr1JTGPZQ9g1j8]{Sharpshoot}</h2>\n<p>The sharpshoot fighting style enables you to excel at making accurate attacks, usually with ranged weapons at a long distance. You can ignore cover and other impediments to your shots, and your attacks are improved by your intense focus.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.f34cpBT3OiXKXssf]{Squad}</h2>\n<p>Soldiers in large organizations, such as the Stewards, learn to fight effectively together in small squads. You have mastered these techniques, and your combat skills focus on aiding your allies. Halfelves epitomize the cooperative spirit this style taps into.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.HiI3JMXX6crpsWDN]{Wrathful Warrior}</h2>\n<p>The wrathful warrior style draws upon your emotions—specifically your rage and wrath—to enable devastating attacks. You may have trained yourself to intentionally overload your fight-or-flight adrenaline response, or may just come from a long line of berserker warriors. At higher levels, you’re able to use your anger to ignore damage and strike with impudence.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -626,34 +686,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Soldier",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -664,8 +726,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/kip_up.webp",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -673,12 +734,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -687,7 +757,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -697,7 +768,7 @@
           "unidentified": "",
           "value": "<p>You can stand up from prone in a hurry.</p>\n<p><strong>Prerequisites</strong>: Acrobatics 1 rank.</p>\n<hr />\n<p><strong>Benefit</strong>: You can stand from prone as a swift action, rather than a move action.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -708,34 +779,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -746,11 +819,7 @@
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-rivited-red.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -764,7 +833,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -793,7 +862,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -802,7 +870,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -823,7 +891,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -833,7 +902,6 @@
           "unidentified": "",
           "value": "<p>Made from the hide of a ferocious mammal native to Vesk-2, this light armor is popular among vesk but less often worn by other races. Tanned stretches of the creature’s thick hide are stitched together with metal wires, and the suits are reinforced with metal studs or scales.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -843,7 +911,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 4,
         "modifiers": [],
         "price": 2250,
@@ -852,25 +921,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 197",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -878,8 +948,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -890,7 +960,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -909,11 +978,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -923,13 +988,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 4,
         "modifiers": [],
         "price": 330,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook"
       }
     },
@@ -939,11 +1006,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/keen_senses.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -961,8 +1024,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -972,7 +1035,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -982,14 +1046,14 @@
           "unidentified": "",
           "value": "<p>The target gains a +2 insight bonus to Perception checks and gains low-light vision. Targets that have low-light vision double the distance they can see under the effects of this spell.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -1005,10 +1069,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1017,14 +1078,19 @@
           "descriptor": "harmless"
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 363",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -1036,7 +1102,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -1055,11 +1120,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1069,13 +1130,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 4,
         "modifiers": [],
         "price": 330,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook"
       }
     },
@@ -1085,11 +1148,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/sniper_aim.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1097,12 +1156,21 @@
           "condition": "",
           "cost": null
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1111,7 +1179,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1121,7 +1190,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.PSAr1JTGPZQ9g1j8]{Sharpshoot}</p>\n<p>When you make a ranged attack against a target with cover, reduce the AC bonus from cover by 2. You can’t use sniper’s aim against an enemy with total cover.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1132,33 +1201,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Technique",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Sharpshoot",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": 1
         }

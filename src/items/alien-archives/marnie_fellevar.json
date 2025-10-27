@@ -11,11 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/aurora_shock_caster.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "mwak",
         "activation": {
@@ -50,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 40,
@@ -110,6 +105,7 @@
               "name": "",
               "formula": "2d4 +7",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -117,12 +113,15 @@
                 "electricity": true,
                 "fire": true,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -132,7 +131,6 @@
           "unidentified": "",
           "value": "<p>Though generally recognized as tools, welders are so commonly used as improvised weapons that some ysoki manufacturers have begun designing them to serve equally well in both roles. A welder is often little more than a battery casing and an exposed plasma conduit. Utility welders are simple and straightforward, and industrial welders are more powerful and built to be more comfortable for more regular use. Starship welders are versatile and relatively compact for their output, while offensive welders are intended for combat first and maintenance only as an afterthought.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -141,9 +139,8 @@
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
-        "id": "2OYsqqhjnRNtX12E",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 5,
         "modifiers": [],
@@ -248,10 +245,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -261,8 +255,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "AR pg. 10",
         "special": "",
         "specialMaterials": {
@@ -281,18 +277,7 @@
           "silver": false,
           "voidglass": false
         },
-        "system": {
-          "container": {
-            "contents": [
-              {
-                "id": "weQH1v0ARGLwPokM",
-                "index": 0
-              }
-            ]
-          }
-        },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -314,7 +299,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "",
         "actionType": "mwak",
@@ -329,7 +313,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 10,
         "attributes": {
@@ -350,7 +334,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -359,7 +342,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -381,13 +364,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4 +7",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -397,17 +393,16 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "equippable": true,
         "equipped": false,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -417,22 +412,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -440,8 +437,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -454,11 +451,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/semi-auto-pistol-tactical.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -493,7 +486,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 9,
@@ -548,6 +540,7 @@
               "name": "",
               "formula": "1d6 +3",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -555,12 +548,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": true,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -570,7 +566,6 @@
           "unidentified": "",
           "value": "<p>The semiautomatic mechanism of this pistol discharges spent cartridges and reloads fresh ones in the barrel, provided a cartridge remains in the magazine.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -580,7 +575,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -685,8 +680,6 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
           "value": "30"
         },
@@ -698,8 +691,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 173",
         "special": "",
         "specialMaterials": {
@@ -719,7 +714,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -741,17 +735,22 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/overload.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "action",
           "condition": "",
           "cost": 1
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
@@ -767,7 +766,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -825,18 +825,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "3rd Level",
         "rollNotes": "",
@@ -847,11 +844,12 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "Mechanic",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
@@ -867,17 +865,22 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "move",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
@@ -893,7 +896,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -951,16 +955,17 @@
           "value": ""
         },
         "formula": "",
-        "id": "yQ6o80qoOgltWIyt",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "23bfccb5-7868-44a7-95fd-af328357b191",
             "name": "Target Tracking (Ex)",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "all-attacks",
             "enabled": false,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "formula",
@@ -972,35 +977,28 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "none",
           "value": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "source": "",
-        "system": {
-          "container": {
-            "contents": [
-              {
-                "id": "1K8uMw4jBg5sogt6",
-                "index": 0
-              }
-            ]
-          }
-        },
-        "target": {
+        "skillCheck": {
           "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "",
+        "target": {
           "value": ""
         },
         "uses": {
@@ -1016,11 +1014,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/artificial_intelligence.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1028,12 +1022,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1042,7 +1045,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1052,7 +1056,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>You construct an artificial intelligence (or AI), a sophisticated program of self-motivated code that you can access for help in a variety of endeavors. This AI is the product of your own genius, far more advanced and complicated than any available for sale to consumers (though it falls short of being truly self-aware), and only you know the secrets of its creation and operation. Your AI can take one of two forms: a drone or an exocortex. You must pick one of these forms upon taking your first level of mechanic, and once this choice is made, it cannot be changed.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.cA0NuGh484BwlDjX]{Drone}</h2>\n<p>You begin play with a powerful robotic drone to house your AI. You build and control this drone, which accompanies you on your adventures and is capable of combat, espionage, and other specialized tasks. As you gain levels, your drone advances in sophistication and gain additional abilities. While the value of your drone is immense, only you, with your extensive knowledge of its quirks and security measures, can ever hope to operate or repair it. Drones are detailed in Drones beginning on page 74.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.cM54UpNXExgDSbq4]{Exocortex}</h2>\n<p>You begin play with an exocortex, an artificial processor that interacts with and augments your biological brain’s cognitive functions, which can aid you in a variety of tasks, from combat to digital infiltration. Your exocortex is implanted within your physical body or brain, similar to a piece of cybernetic hardware, allowing your AI to access your mind and feed you information. As you gain levels, your exocortex advances in sophistication and processing power—see Exocortex on page 79. Only you can access or interact with your exocortex.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "classFeature",
           "combat": false,
@@ -1063,34 +1067,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Mechanic",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1101,11 +1107,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/custom_rig.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1113,12 +1115,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1127,7 +1138,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1137,7 +1149,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>You have created a customized toolkit you can use to hack systems and items. Your custom rig can be configured to take up an upgrade slot on your armor or can be installed as a cybernetic augmentation system in your brain (though it can be combined with a datajack for the same price as installing a datajack normally), your eyes, or an arm. For more information on augmentations, see Chapter 7: Equipment. Alternatively, you can configure it to be a handheld device, meaning that you must retrieve it and hold it to use it effectively. While using this rig, you always count as having the appropriate tool or basic kit for any Computers or Engineering skill check you attempt. Some @UUID[Compendium.sfrpg.class-features.YMGOKoZtKgJqIsAD]{Mechanic Trick} (see page 71) and drone mods (see page 77) require the use of a custom rig. In addition, you can use your custom rig as a @UUID[Compendium.sfrpg.equipment.5GM9QlhUd1EB1LjJ]{Comm Unit, Personal} (see page 218). Finally, if you have a drone, you can use your custom rig to communicate over an encrypted channel with your drone to issue commands to its AI or directly control it at a range of 2,500 feet.</p>\n<p>If your custom rig is damaged, destroyed, lost, or stolen, you can kitbash a new one from any engineering kit, hacking kit, or other technological toolkit, reconfiguring the materials into a new custom rig with 1 hour of work. You can have only one custom rig at a time. If you create a new custom rig, your old one functions as a normal toolkit of whatever type you made it from and can no longer be used with your mechanic tricks.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "classFeature",
           "combat": false,
@@ -1148,45 +1160,36 @@
           "value": ""
         },
         "formula": "",
-        "id": "g92CRBecHnQD5D0k",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "source": "Mechanic",
-        "system": {
-          "container": {
-            "contents": [
-              {
-                "id": "5hMRfc0RimrrrO9I",
-                "index": 0
-              }
-            ]
-          }
-        },
-        "target": {
+        "skillCheck": {
           "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "Mechanic",
+        "target": {
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1197,11 +1200,7 @@
       "type": "feat",
       "img": "icons/magic/unholy/hand-grasping-green.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1209,12 +1208,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1223,7 +1231,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1281,34 +1290,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA1 pg. 158",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1319,11 +1330,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/semi-auto-pistol-tactical.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -1337,7 +1344,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1358,7 +1365,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 9,
@@ -1367,7 +1373,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1410,13 +1416,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1426,7 +1445,6 @@
           "unidentified": "",
           "value": "<p>The semiautomatic mechanism of this pistol discharges spent cartridges and reloads fresh ones in the barrel, provided a cartridge remains in the magazine.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1435,9 +1453,8 @@
         "equipped": false,
         "equippedBulkMultiplier": 1,
         "formula": "",
-        "id": "i3AAsp5sEKNmIgJl",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -1533,10 +1550,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "rollNotes": "",
         "save": {
@@ -1544,21 +1559,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 173",
         "special": "",
         "specialMaterials": {},
-        "system": {
-          "container": {
-            "contents": [
-              {
-                "id": "7zc3IaFkV5RA7TX6",
-                "index": 2
-              }
-            ]
-          }
-        },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1566,7 +1576,7 @@
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -1580,7 +1590,6 @@
       "type": "container",
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -1599,7 +1608,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [
@@ -1620,7 +1628,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1644,7 +1652,7 @@
               "affectsEncumbrance": true,
               "amount": 1000,
               "subtype": "",
-              "weightProperty": "bulk"
+              "weightProperty": ""
             }
           ]
         },
@@ -1657,13 +1665,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1673,40 +1683,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 40,
           "value": 40
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1715,14 +1704,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 40</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
+        "modifiers": [],
         "price": 330,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {
           "abysium": false,
@@ -1749,40 +1737,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/rounds-small-arm.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "roundS",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
           "value": 0
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1791,14 +1758,13 @@
           "unidentified": "",
           "value": "<p>Cased rounds are housed in magazines, which can be fitted into the appropriate weapon.</p>\n<p><strong>Capacity:</strong> 30</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 40,
         "quantity": 18,
         "quantityPerPack": 30,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {
           "abysium": false,
@@ -1826,10 +1792,7 @@
       "img": "systems/sfrpg/icons/equipment/augmentations/datajack-standard.webp",
       "system": {
         "type": "cybernetic",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1842,7 +1805,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "attributes": {
@@ -1863,7 +1826,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "chatFlavor": "",
         "container": {
@@ -1877,7 +1839,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1887,54 +1850,46 @@
           "unidentified": "",
           "value": "<p>This cybernetic includes a programmable data port that allows you to access different types of computers and digital storage media. Any handheld computer can be inserted directly into the port, while larger systems need to be connected by an adapter cable. Having the system connected directly to your nervous system obviates the need for an interface to access data on a system. Actually operating the system requires you to use the @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.IqOCYDKd9NgBwowp]{Computers} skill as usual. Some closed systems don’t allow data access or require you to do some rewiring to connect with a datajack (usually an @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4]{Engineering} check).</p>\n<p>Advanced datajacks make it easier to process and send information through the datajack. With a high-density datajack, you gain a +1 circumstance bonus to Computer checks when accessing a system via your datajack. An accelerated datajack instead provides a +2 bonus.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "equippable": true,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
-        "id": "weQH1v0ARGLwPokM",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 2,
         "modifiers": [],
         "price": 625,
+        "proficient": false,
         "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "source": "CRB pg. 209",
-        "system": {
-          "container": {
-            "contents": [
-              {
-                "id": "TVlkWFhbfcyrOONE",
-                "index": 0
-              }
-            ]
-          }
-        },
-        "target": {
+        "skillCheck": {
           "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "CRB pg. 209",
+        "system": "none",
+        "target": {
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1946,10 +1901,7 @@
       "img": "systems/sfrpg/icons/default/vr-headset.svg",
       "system": {
         "type": "cybernetic",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1962,7 +1914,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "attributes": {
@@ -1983,7 +1935,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "chatFlavor": "",
         "container": {
@@ -2021,7 +1972,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2031,17 +1983,16 @@
           "unidentified": "",
           "value": "<p>This compartment is hidden inside one of your limbs. You can conceal items inside and protect them with a simple passcode. The compartment can hold items of negligible bulk and items of light bulk that are either relatively small or can be folded or contracted to fit. A hideaway in a leg (in a @UUID[Compendium.sfrpg.races.AMBcyDZDtJ1OOzh3]{Human}) can hold more than one in an arm, and the creature’s size also adjusts the capacity. The GM decides what can fit.</p>\n<p>When the compartment is closed, the seam in your flesh is difficult to detect. You gain a +2 bonus to Sleight of Hand checks to conceal items in a hideaway limb. Though this compartment can usually foil a simple pat down, most security checkpoints include a scan that can detect such devices. Retrieving an item from a hideaway limb is a move action instead of a standard action. This type of augmentation is for Small and Medium creatures only. Hideaway limbs for creatures larger than Medium typically cost more but can hold items of greater size or bulk.</p>\n<p>If you have a quickdraw hideaway limb, the compartment is integrated with a specific weapon. This allows you to draw the weapon as a swift action or as part of making an attack or full attack (similar to using the Quick Draw feat). A quickdraw hideaway limb works only if the limb is one you can normally aim and attack with, typically an arm. You can’t, for example, put a quickdraw hideaway limb in your leg and have the weapon spring into your hand.</p>\n<p>You can have a mount installed in a quickdraw limb that holds the weapon in place while you shoot. You still can’t use your hand for other purposes, but you gain a +2 bonus to KAC against @UUID[Compendium.sfrpg.rules.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#disarm]{disarm} attempts. The mount can’t hold a weapon that requires more than one hand to operate. You can’t hide other objects inside a quickdraw hideaway limb—there’s room for only the weapon.</p>\n<p>Nothing stored in a hideaway limb is considered part of the cybernetic, and the stored item does not gain the cybernetic’s immunity to attacks affecting technological devices.</p>\n<p><em>Change system in the details tab to use Arm or Leg.</em></p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "equippable": true,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [
           {
@@ -2049,8 +2000,10 @@
             "name": "Hideaway Limb, Standard",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "skill",
             "enabled": false,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "formula",
@@ -2061,30 +2014,33 @@
           }
         ],
         "price": 150,
+        "proficient": false,
         "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 209",
         "system": "arm",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -2095,11 +2051,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/aurora_shock_caster.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "mwak",
         "activation": {
@@ -2134,7 +2086,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 40,
@@ -2189,6 +2140,7 @@
               "name": "",
               "formula": "2d4 + @abilities.str.mod",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -2196,12 +2148,15 @@
                 "electricity": true,
                 "fire": true,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2211,7 +2166,6 @@
           "unidentified": "",
           "value": "<p>Though generally recognized as tools, welders are so commonly used as improvised weapons that some ysoki manufacturers have begun designing them to serve equally well in both roles. A welder is often little more than a battery casing and an exposed plasma conduit. Utility welders are simple and straightforward, and industrial welders are more powerful and built to be more comfortable for more regular use. Starship welders are versatile and relatively compact for their output, while offensive welders are intended for combat first and maintenance only as an afterthought.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -2221,7 +2175,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 5,
         "modifiers": [],
@@ -2326,10 +2280,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -2339,8 +2290,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "AR pg. 10",
         "special": "",
         "specialMaterials": {
@@ -2360,7 +2313,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -2382,40 +2334,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 40,
           "value": 40
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -2424,14 +2355,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 40</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
+        "modifiers": [],
         "price": 330,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {
           "abysium": false,
@@ -2458,17 +2388,22 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/energy_shield.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "action",
           "condition": "",
           "cost": 1
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
@@ -2484,7 +2419,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2542,18 +2478,15 @@
           "value": "4"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "2nd Level",
         "rollNotes": "",
@@ -2564,11 +2497,12 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "Mechanic",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
@@ -2584,11 +2518,7 @@
       "type": "feat",
       "img": "icons/magic/death/undead-skeleton-worn-blue.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2596,12 +2526,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2610,7 +2549,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2668,34 +2608,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA1 pg. 158",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }

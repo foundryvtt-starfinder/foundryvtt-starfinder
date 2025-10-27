@@ -11,11 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/dagger.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -28,8 +24,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 27,
         "attributes": {
@@ -50,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -59,7 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -81,13 +76,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "6d4+22",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -97,7 +105,6 @@
           "unidentified": "",
           "value": "<p>The thinness and lightness of daggers make them easy to carry or conceal. Ultrathin daggers have sharp, double-edged blades. Zero-edge daggers have blades - crafted with quantum technology - that are so fine, their edges blur. The blade of a molecular rift dagger looks translucent, as if it's made of glass, and its vibrating particles allow the dagger to slice through almost any substance. Most daggers are available with fixed, folding, or retractable blades.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -107,7 +114,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 14,
         "modifiers": [],
@@ -203,22 +210,24 @@
         "quantity": null,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook, P. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -226,7 +235,7 @@
           "value": null
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -240,8 +249,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/cleave.webp",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -249,12 +257,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -263,7 +280,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -273,7 +291,7 @@
           "unidentified": "",
           "value": "<p>You can strike two adjacent foes with a single swing.</p>\n<p><strong>Prerequisites</strong>: Str 13, base attack bonus +1.</p>\n<hr />\n<p><strong>Benefit</strong>: As a standard action, you can make a single melee attack against a foe within reach. If you hit, you deal damage normally and can make an additional melee attack (using your full base attack bonus) against a foe that is adjacent to the first and also within reach. You can make only one additional attack per round with this feat. When you use this feat, you take a –2 penalty to your Armor Class until your next turn.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -284,34 +302,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -322,7 +342,6 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/great_cleave.webp",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "",
         "actionType": "",
@@ -331,12 +350,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -345,7 +373,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -355,7 +384,7 @@
           "unidentified": "",
           "value": "<p>You can strike many adjacent foes with a single blow.</p>\n<p><strong>Prerequisites</strong>: Str 13, Cleave, base attack bonus +4.</p>\n<hr />\n<p><strong>Benefit</strong>: If you strike a second target with the Cleave feat, you can spend 1 Resolve Point to make a melee attack against each subsequent foe that is both adjacent to the last target and within your reach, as long as you hit the previous foe. You can’t attack an individual foe more than once during this attack action.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -366,33 +395,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -404,8 +435,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/lunge.webp",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -413,12 +443,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -427,7 +466,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -437,7 +477,7 @@
           "unidentified": "",
           "value": "<p>You can strike foes that would normally be out of reach.</p>\n<p><strong>Prerequisites</strong>: Base attack bonus +6.</p>\n<hr />\n<p><strong>Benefit</strong>: You can increase the reach of your melee attacks by 5 feet until the end of your turn by taking a –2 penalty to your Armor Class until the beginning of your next turn. You must decide to use this ability before making any attacks in the round.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -448,34 +488,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -486,7 +528,6 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/mobility.webp",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "",
         "actionType": "",
@@ -495,12 +536,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -509,7 +559,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -519,7 +570,7 @@
           "unidentified": "",
           "value": "<p>You can easily move past dangerous foes.</p>\n<p><strong>Prerequisites</strong>: Dex 13.</p>\n<hr />\n<p><strong>Benefit</strong>: You gain a +4 bonus to your Armor Class against attacks of opportunity that you provoke by leaving a threatened square.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -530,33 +581,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -568,8 +621,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/sidestep.webp",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -577,12 +629,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -591,7 +652,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -601,7 +663,7 @@
           "unidentified": "",
           "value": "<p>You can reposition yourself after a foe’s missed swing.</p>\n<p><strong>Prerequisites</strong>: Dex 15, Mobility or trick attack class feature.</p>\n<hr />\n<p><strong>Benefit</strong>: Whenever an opponent misses you with a melee attack, you can take a guarded step as a reaction, as long as you remain within that opponent’s threatened area. If you take this step, you can’t take a guarded step during your next turn. If you take an action to move during your next turn, subtract 5 feet from your total movement.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -612,34 +674,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -650,8 +714,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/spring_attack.webp",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -659,12 +722,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -673,7 +745,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -683,7 +756,7 @@
           "unidentified": "",
           "value": "<p>You can deftly move up to a foe, strike, and withdraw before it can react.</p>\n<p><strong>Prerequisites</strong>: Dex 15, Mobility, base attack bonus +4.</p>\n<hr />\n<p><strong>Benefit</strong>: As a full action, you can move up to your speed and make a single melee attack or combat maneuver without provoking any attacks of opportunity from the target of your attack. You can move both before and after the attack, but you must move at least 10 feet before the attack, and the total distance that you move cannot be greater than your speed. You cannot use this ability to attack a foe that is adjacent to you at the start of your turn. If you have the trick attack class feature, you can take your movement from trick attack at any time during a trick attack with a melee weapon (instead of only before), without provoking any attacks of opportunity from the target of your attack.</p>\n<p><strong>Normal</strong>: You can move only before or after an attack, not both.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -694,34 +767,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -732,21 +807,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -755,7 +838,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -765,7 +849,7 @@
           "unidentified": "",
           "value": "<p>A rogue drone has a number of mods equal to the number it would have as a drone built by a mechanic of a level equal to the rogue drone’s CR.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -776,34 +860,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -814,11 +900,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -826,12 +908,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -840,7 +931,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -850,7 +942,7 @@
           "unidentified": "",
           "value": "<p>(EX)</p>\n<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -861,34 +953,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -899,7 +993,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-super-capacity.webp",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -918,11 +1011,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -932,13 +1021,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 4,
         "modifiers": [],
         "price": 390,
-        "quantity": "1",
+        "proficient": false,
+        "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook"
       }
     },
@@ -948,10 +1039,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "attributes": {
           "ac": {
             "value": ""
@@ -970,14 +1057,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -987,13 +1067,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1003,11 +1085,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -1020,8 +1098,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 24,
         "attributes": {
@@ -1042,7 +1120,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": 80,
@@ -1056,7 +1133,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1078,11 +1155,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "6d8+14",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1092,7 +1184,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1102,7 +1193,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 13,
         "modifiers": [],
@@ -1198,22 +1289,25 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 80
+          "value": "80"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1221,7 +1315,7 @@
           "value": 5
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 5
         },
@@ -1235,35 +1329,12 @@
       "type": "fusion",
       "img": "systems/sfrpg/icons/equipment/weapons/weapon-fusions-5.webp",
       "system": {
-        "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
-        },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1272,15 +1343,12 @@
           "unidentified": "",
           "value": "<p>A weapon with the <em>obscuring</em> fusion emits mist, smoke, or a similar obscuring vapor when wielded. After attacking with the weapon, as a move action you can cause the weapon to emit enough vapor to conceal you until the start of your next turn. This effect ends immediately if you move for any reason from where you made your attack. This concealment does not interfere with your attacks or benefit others, even if they move into the space you attacked from, and you can’t use it to hide. Conditions such as strong wind or vacuum that quickly disperse vapors negate this concealment. Only projectile weapons or those that deal cold or fire damage can benefit from this fusion.</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
-        "identified": true,
         "level": 5,
         "modifiers": [],
         "price": 0,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Armory"
       }
     }

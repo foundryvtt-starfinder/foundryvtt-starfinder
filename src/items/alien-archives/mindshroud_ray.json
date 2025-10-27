@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "icons/skills/wounds/injury-stapled-flesh-tan.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -23,12 +19,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -37,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -95,34 +101,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -133,11 +141,7 @@
       "type": "weapon",
       "img": "icons/creatures/claws/claw-hooked-curved.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "mwak",
         "activation": {
@@ -151,7 +155,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 10,
         "attributes": {
@@ -172,7 +176,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -206,6 +209,7 @@
               "name": "",
               "formula": "1d6 +4",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -213,12 +217,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": true,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -228,7 +235,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -238,7 +244,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -343,10 +349,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -356,8 +359,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {
@@ -377,7 +382,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -385,8 +389,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -399,11 +403,7 @@
       "type": "feat",
       "img": "icons/magic/control/fear-fright-shadow-monster-red.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "other",
         "activation": {
@@ -411,12 +411,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -430,6 +439,7 @@
               "name": "",
               "formula": "2d6",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -437,12 +447,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "Nonlethal damage",
         "description": {
@@ -500,18 +513,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -522,16 +532,17 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -542,11 +553,7 @@
       "type": "feat",
       "img": "icons/magic/control/fear-fright-monster-red.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "other",
         "activation": {
@@ -554,12 +561,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -573,6 +589,7 @@
               "name": "",
               "formula": "5",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -580,12 +597,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": true,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -643,18 +663,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -665,16 +682,17 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -685,11 +703,7 @@
       "type": "feat",
       "img": "icons/creatures/slimes/slime-giant-face-eyes.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -697,12 +711,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -711,7 +734,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -769,34 +793,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA1 pg. 153",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -807,11 +833,7 @@
       "type": "feat",
       "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -819,12 +841,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -833,7 +864,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -891,34 +923,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }

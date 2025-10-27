@@ -11,11 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -29,7 +25,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 2,
         "attributes": {
@@ -50,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -59,7 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -81,13 +76,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -97,7 +105,6 @@
           "unidentified": "",
           "value": "<p>These light blades can be used for both mundane tasks and combat. A typical survival knife has a fixed, single-edged, carbonsteel or ceramic blade and is treated against corrosion. Tactical knives have large, double-edged blades, often with a section of serrated blade near the haft, and they come in both fixed and folding-blade designs; users may prefer one style or the other, but the two are identical in terms of price, weight, and damage dealt.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -107,7 +114,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -203,10 +210,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -214,11 +219,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -226,7 +236,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -240,11 +250,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/pulsecaster-pistol.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -257,8 +263,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 4,
         "attributes": {
@@ -279,7 +285,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -293,7 +298,7 @@
               "index": 2
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -335,13 +340,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "electricity": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -351,7 +369,6 @@
           "unidentified": "",
           "value": "<p>A smaller version of an arc pistol, the pulsecaster sends a lowenergy blast at its target. This blast stuns the target without dealing serious damage.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -361,10 +378,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "img": "systems/sfrpg/icons/equipment/weapons/pulsecaster-pistol.webp",
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
-        "isOpen": true,
         "level": 1,
         "modifiers": [],
         "price": 250,
@@ -459,10 +474,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "rollNotes": "",
         "save": {
@@ -470,20 +483,24 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 173",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
-        "totalWeight": "L",
         "usage": {
           "per": "shot",
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -497,11 +514,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/smoke-grenade.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rwak",
         "activation": {
@@ -515,7 +528,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 4,
         "attributes": {
@@ -536,7 +549,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 1,
@@ -575,7 +587,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -585,9 +598,8 @@
           "unidentified": "",
           "value": "<p>A smoke grenade deals no damage; instead, it releases a cloud of dense smoke. Each character who inhales smoke must succeed at a Fortitude saving throw each round (DC = 15 + 1 per previous check) or spend that round choking and coughing; he can do nothing else. A character who chokes for 2 consecutive rounds takes 1d6 nonlethal damage. (Active environmental protection from a suit of armor prevents this effect altogether.) Regardless of the armor a character wears, smoke obscures vision, granting concealment to anyone within it.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "1 minute"
         },
         "equippable": true,
@@ -595,7 +607,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -699,10 +711,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -712,8 +722,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 177",
         "special": "",
         "specialMaterials": {
@@ -733,7 +745,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -741,7 +752,7 @@
           "value": 1
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "value": 1
         },
@@ -755,11 +766,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -767,12 +774,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -781,7 +797,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -839,19 +856,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "609dff14-2e3b-478f-8c88-f98eeba68d27",
             "name": "Practiced Liar (Ex)",
             "type": "circumstance",
             "condition": "",
-            "container": {
-              "actorId": "G9xumWMV9z0ppjLG",
-              "itemId": "Dkp1HVatk98rVtho"
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": false,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "formula",
@@ -863,30 +878,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -897,11 +914,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/stationwear-flight-suit.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -915,7 +928,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -944,7 +957,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -953,7 +965,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -974,7 +986,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -984,7 +997,6 @@
           "unidentified": "",
           "value": "<p>Many types of reinforced clothing afford protection without sacrificing comfort or fashion. The prevalence of this kind of light armor on @UUID[Compendium.sfrpg.setting.hepqXl6gFvs5sDQu]{Absalom Station} has led to the colloquial term “stationwear.” Stationwear ranges in style from casual wear to business suits and more formal garb. The usual @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg]{Environmental protections} of armor are concealed in the design of these outfits. The grades of armor—business, casual, elite, and flight suit—refer to the quality of the garments, not the style.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -994,7 +1006,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 95,
@@ -1003,25 +1016,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 197",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -1029,8 +1043,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1041,11 +1055,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/pulsecaster-pistol.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -1058,8 +1068,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1080,7 +1090,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -1089,7 +1098,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1131,13 +1140,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "electricity": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1147,7 +1169,6 @@
           "unidentified": "",
           "value": "<p>A smaller version of an arc pistol, the pulsecaster sends a lowenergy blast at its target. This blast stuns the target without dealing serious damage.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1157,10 +1178,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "img": "systems/sfrpg/icons/equipment/weapons/pulsecaster-pistol.webp",
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
-        "isOpen": true,
         "level": 1,
         "modifiers": [],
         "price": 250,
@@ -1255,10 +1274,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "rollNotes": "",
         "save": {
@@ -1266,20 +1283,24 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 173",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
-        "totalWeight": "L",
         "usage": {
           "per": "shot",
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -1293,40 +1314,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1335,14 +1335,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {
           "abysium": false,
@@ -1369,11 +1368,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -1387,7 +1382,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1408,7 +1403,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -1417,7 +1411,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1439,13 +1433,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4 + @abilities.str.mod",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1455,7 +1462,6 @@
           "unidentified": "",
           "value": "<p>These light blades can be used for both mundane tasks and combat. A typical survival knife has a fixed, single-edged, carbonsteel or ceramic blade and is treated against corrosion. Tactical knives have large, double-edged blades, often with a section of serrated blade near the haft, and they come in both fixed and folding-blade designs; users may prefer one style or the other, but the two are identical in terms of price, weight, and damage dealt.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1465,7 +1471,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -1561,10 +1567,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -1572,11 +1576,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1584,7 +1593,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -1598,11 +1607,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/smoke-grenade.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rwak",
         "activation": {
@@ -1616,7 +1621,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "attributes": {
@@ -1637,7 +1642,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 1,
@@ -1676,7 +1680,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1686,9 +1691,8 @@
           "unidentified": "",
           "value": "<p>A smoke grenade deals no damage; instead, it releases a cloud of dense smoke. Each character who inhales smoke must succeed at a Fortitude saving throw each round (DC = 15 + 1 per previous check) or spend that round choking and coughing; he can do nothing else. A character who chokes for 2 consecutive rounds takes 1d6 nonlethal damage. (Active environmental protection from a suit of armor prevents this effect altogether.) Regardless of the armor a character wears, smoke obscures vision, granting concealment to anyone within it.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "1 minute"
         },
         "equippable": false,
@@ -1696,7 +1700,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -1800,10 +1804,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -1813,8 +1815,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 177",
         "special": "",
         "specialMaterials": {
@@ -1834,7 +1838,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1842,7 +1845,7 @@
           "value": 1
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "value": 1
         },
@@ -1856,7 +1859,6 @@
       "type": "container",
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -1875,7 +1877,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [
@@ -1904,7 +1905,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1928,7 +1929,7 @@
               "affectsEncumbrance": true,
               "amount": 1000,
               "subtype": "",
-              "weightProperty": "bulk"
+              "weightProperty": ""
             }
           ]
         },
@@ -1941,13 +1942,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1957,11 +1960,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1969,12 +1968,21 @@
           "condition": "1 Resolve Point",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1983,7 +1991,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2039,33 +2048,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Vlaka",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA2 pg. 134",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "sr",
           "value": 1
         }
@@ -2077,11 +2089,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2089,12 +2097,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2103,7 +2120,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2159,15 +2177,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "396b222c-40b7-4fce-ae62-534c06ca3c91",
             "name": "Cold Resistance",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": true,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -2179,29 +2199,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Vlaka",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA2 pg. 134",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -2213,11 +2235,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2225,12 +2243,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2239,7 +2266,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2295,15 +2323,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "396b222c-40b7-4fce-ae62-534c06ca3c91",
             "name": "Cooperative",
             "type": "racial",
             "condition": "",
+            "damage": null,
             "effectType": "all-skills",
             "enabled": false,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "formula",
@@ -2317,8 +2347,10 @@
             "name": "Cooperative",
             "type": "racial",
             "condition": "",
+            "damage": null,
             "effectType": "ranged-attacks",
             "enabled": false,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "formula",
@@ -2330,29 +2362,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Vlaka",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA2 pg. 134",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -2364,11 +2398,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/smoke-grenade.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rwak",
         "activation": {
@@ -2382,7 +2412,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "attributes": {
@@ -2403,7 +2433,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 1,
@@ -2442,7 +2471,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2452,9 +2482,8 @@
           "unidentified": "",
           "value": "<p>A smoke grenade deals no damage; instead, it releases a cloud of dense smoke. Each character who inhales smoke must succeed at a Fortitude saving throw each round (DC = 15 + 1 per previous check) or spend that round choking and coughing; he can do nothing else. A character who chokes for 2 consecutive rounds takes 1d6 nonlethal damage. (Active environmental protection from a suit of armor prevents this effect altogether.) Regardless of the armor a character wears, smoke obscures vision, granting concealment to anyone within it.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "1 minute"
         },
         "equippable": false,
@@ -2462,7 +2491,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -2563,13 +2592,11 @@
           "variantBoost": false,
           "wideLine": false
         },
-        "quantity": "1",
+        "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -2579,8 +2606,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 177",
         "special": "",
         "specialMaterials": {
@@ -2600,7 +2629,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -2608,7 +2636,7 @@
           "value": 1
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "value": 1
         },
@@ -2622,40 +2650,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -2664,14 +2671,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {
           "abysium": false,

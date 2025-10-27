@@ -11,21 +11,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -34,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -44,7 +53,7 @@
           "unidentified": "",
           "value": "<p>Scavenger slimes build protective shells for themselves out of refuse and their own natural resin, incorporating bits of repaired technology as they go. A scavenger slime’s shell grants the ooze DR 5/adamantine and resistance 10 to a random energy type depending on the technology it has incorporated, and also includes life-support systems similar to those in commercial armor, allowing it to survive in the vacuum of space. A scavenger slime can also incorporate weapons: one heavy weapon of an item level no greater than its Challenge Rating (9 for the typical scavenger slime), and either two longarms or three small arms each of an item level no greater than its CR - 1. A scavenger slime gains proficiency in whatever weapons it incorporates into its shell and powers these weapons naturally with the energy it produces. A weapon in a scavenger slime’s shell can be sundered as if it were an item with an item level equal to the slime’s CR. The scavenger slime listed here is resistant to fire and has incorporated an aphelion artillery laser, a dual crossbolter, and a red star plasma rifle.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -55,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -93,22 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "acceptedItemTypes": {
-          "augmentation": false,
-          "consumable": false,
-          "container": false,
-          "equipment": false,
-          "fusion": true,
-          "goods": false,
-          "technological": false,
-          "upgrade": false,
-          "weapon": false
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -122,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 18,
         "attributes": {
@@ -143,17 +139,15 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
           "value": 0
         },
         "chatFlavor": "",
-        "containedItemIds": [],
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -175,13 +169,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d10+13",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -191,7 +198,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -201,7 +207,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -294,22 +300,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -317,8 +325,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -331,22 +339,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/artillery-laser-aphelion.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "acceptedItemTypes": {
-          "augmentation": false,
-          "consumable": false,
-          "container": false,
-          "equipment": false,
-          "fusion": true,
-          "goods": false,
-          "technological": false,
-          "upgrade": false,
-          "weapon": false
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -359,8 +352,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 21,
         "attributes": {
@@ -381,17 +374,15 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "3",
         "capacity": {
           "max": 40,
           "value": 40
         },
         "chatFlavor": "",
-        "containedItemIds": [],
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -413,13 +404,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d8+9",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -429,7 +433,6 @@
           "unidentified": "",
           "value": "<p>Artillery lasers are heavy weapons designed to be effective against hardened targets such as vehicles and enemy bunkers.</p>\n<h3 class=\"framing\"><strong>Laser Weapons</strong></h3>\n<hr />\n<p>Laser weapons emit highly focused beams of light that deal fire damage. These beams can pass through glass and other transparent physical barriers, dealing damage to such barriers as they pass through. Barriers of energy or magical force block lasers. Invisible creatures don’t take damage from lasers, as the beams pass through them harmlessly. Fog, smoke, and other clouds provide both cover and concealment from laser attacks. Lasers can penetrate darkness, but they don’t provide any illumination.</p>\n<p>Laser weapons use various means to concentrate beams of light into deadly intensity. Some focus light through a faceted crystal, while others focus the beam through a chemical cloud or ionized gas.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -439,7 +442,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 9,
         "modifiers": [],
@@ -480,22 +483,25 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 120
+          "value": "120"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -503,7 +509,7 @@
           "value": 4
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -517,22 +523,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "acceptedItemTypes": {
-          "augmentation": false,
-          "consumable": false,
-          "container": false,
-          "equipment": false,
-          "fusion": true,
-          "goods": false,
-          "technological": false,
-          "upgrade": false,
-          "weapon": false
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -545,8 +536,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 21,
         "attributes": {
@@ -567,17 +558,15 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": 4,
           "value": 4
         },
         "chatFlavor": "",
-        "containedItemIds": [],
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -599,13 +588,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d10+9",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -615,7 +617,6 @@
           "unidentified": "",
           "value": "<p>This weapon resembles a rifle with a crossbeam near the end of the barrel. A crossbolter uses mechanical power to fire arrows along the barrel. Grenade arrows can also be fired with a crossbolter.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -625,7 +626,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 8,
         "modifiers": [],
@@ -718,22 +719,25 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 70
+          "value": "70"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "SCR",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -741,7 +745,7 @@
           "value": 2
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -755,22 +759,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "acceptedItemTypes": {
-          "augmentation": false,
-          "consumable": false,
-          "container": false,
-          "equipment": false,
-          "fusion": true,
-          "goods": false,
-          "technological": false,
-          "upgrade": false,
-          "weapon": false
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -783,8 +772,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 21,
         "attributes": {
@@ -805,17 +794,15 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": 40,
           "value": 40
         },
         "chatFlavor": "Burn [[1d4]]",
-        "containedItemIds": [],
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -837,14 +824,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d10+9",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
                 "electricity": true,
-                "fire": true
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -854,7 +853,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -864,7 +862,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 6,
         "modifiers": [],
@@ -957,22 +955,25 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 40
+          "value": "40"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "PHB",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -980,7 +981,7 @@
           "value": 4
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -994,21 +995,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1017,7 +1026,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1027,7 +1037,7 @@
           "unidentified": "",
           "value": "<p>Scavenger slimes have an intuitive understanding of technology and how to use and repair it, despite their otherwise mindless nature. An ooze has a +22 bonus to Engineering checks to repair mechanical and technological items. A scavenger slime can form its body into any tool required for this repair work.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1038,34 +1048,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }

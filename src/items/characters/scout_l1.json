@@ -10,11 +10,7 @@
       "type": "mod",
       "img": "systems/sfrpg/icons/classes/camera.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -29,7 +25,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "arms": {
           "armType": "general",
@@ -43,7 +39,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -53,40 +50,40 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>Your drone has a camera that you can see through using your custom rig as long as your drone is within range. The camera has ordinary sight, and is capable of seeing whatever an ordinary @UUID[Compendium.sfrpg.races.Item.AMBcyDZDtJ1OOzh3]{Human} could see. The camera can also record up to 1 hour of footage, which can be downloaded and viewed using your custom rig.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isArmorSlot": false,
         "isFree": true,
         "maxInstalls": 1,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "shieldProficiency": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "spellResistance": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponProficiency": ""
@@ -98,13 +95,9 @@
       "type": "chassis",
       "img": "systems/sfrpg/icons/classes/hover_drone.webp",
       "system": {
-        "type": "",
         "abilityIncreaseStats": {
           "first": "dex",
           "second": "wis"
-        },
-        "abilityMods": {
-          "parts": []
         },
         "abilityScores": {
           "cha": 6,
@@ -113,12 +106,6 @@
           "int": 6,
           "str": 6,
           "wis": 8
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -134,6 +121,7 @@
         "modifiers": [],
         "ref": "fast",
         "size": "tiny",
+        "slug": "",
         "source": "",
         "speed": {
           "burrowing": {
@@ -143,18 +131,17 @@
             "base": 0
           },
           "flying": {
-            "base": 30
+            "base": 30,
+            "baseManeuverability": 0
           },
           "land": {
             "base": 30
           },
           "mainMovement": "land",
-          "movementType": "flying",
           "special": "",
           "swimming": {
             "base": 0
-          },
-          "value": null
+          }
         },
         "will": "slow"
       }
@@ -165,11 +152,7 @@
       "type": "mod",
       "img": "systems/sfrpg/icons/classes/flight_system.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -184,7 +167,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "arms": {
           "armType": "general",
@@ -198,7 +181,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -208,13 +192,12 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.cQtmz297P5g6g5xv]{Advanced Mods}</p>\n<p>Your drone gains a fly speed equal to half its land speed with average maneuverability for up to 10 minutes per day. This duration need not be continuous, but it must be used in 1-minute increments. You can select this mod a second time; in this case, the drone’s fly speed increases to its full land speed, its maneuverability increases to perfect, and there is no limit on the amount of time it can fly.</p>\n<p><em>If selected a second time, edit the modifier to reflect full speed.</em></p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isArmorSlot": false,
         "isFree": true,
         "maxInstalls": 1,
@@ -224,12 +207,10 @@
             "name": "Flight System (Ex)",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "p8fKpkIdYG0Grx6L",
-              "itemId": "aySk23BUv5vlst84"
-            },
+            "damage": null,
             "effectType": "specific-speed",
             "enabled": true,
+            "limitTo": null,
             "max": 30,
             "modifier": "@attributes.speed.land.value",
             "modifierType": "constant",
@@ -241,27 +222,28 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "shieldProficiency": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB, pg. 78",
         "spellResistance": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponProficiency": ""
@@ -273,11 +255,7 @@
       "type": "mod",
       "img": "systems/sfrpg/icons/classes/weapon_mount.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -292,7 +270,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "arms": {
           "armType": "ranged",
@@ -306,7 +284,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -316,40 +295,40 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.QsCRXffpsDoMvPnT]{Basic Mods}</p>\n<p>You can affix a small arm or another one-handed ranged weapon on your drone, allowing it to wield that weapon and attack with it. This weapon cannot be disarmed. Mounting a longarm, a heavy weapon, or another two-handed ranged weapon requires two weapon mounts. A weapon mount can hold up to two batteries, two magazines, or two of another type of ammunition for the affixed weapon, provided this ammunition is of light bulk or less. Multiple weapon mounts used to affix a single two-handed weapon count as a single weapon mount for the purpose of how much ammunition it can hold. The drone reloads these batteries or magazines automatically, which takes the usual amount of time for the weapon. Spent batteries or magazines are stored within the drone. You can replace all of a weapon mount’s batteries or magazines as a move action. You must purchase separately or already have the weapon and ammunition for use with a weapon mount. You can replace the weapon with any other weapon that meets the criteria for your mount (for example, if you have two weapon mounts, you could replace a longarm with a heavy weapon). Swapping out a weapon in a weapon mount requires use of your custom rig and 1 hour of work. You can select this mod multiple times, each time adding an additional weapon mount to the drone.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isArmorSlot": false,
         "isFree": false,
         "maxInstalls": 1,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "shieldProficiency": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "spellResistance": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponProficiency": ""
@@ -361,11 +340,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/weapon_focus.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -373,12 +348,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -387,7 +371,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -445,15 +430,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "d647bc9f-f4a8-405b-b65d-9bd57647bfeb",
             "name": "Weapon Focus (Combat)",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "weapon-attacks",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "ternary(gte((@details.level.value - @attributes.baseAttackBonus.value),3),2,1)",
             "modifierType": "constant",
@@ -465,29 +452,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -499,11 +488,7 @@
       "type": "mod",
       "img": "systems/sfrpg/icons/classes/skill_unit.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -518,7 +503,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "arms": {
           "armType": "general",
@@ -532,7 +517,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -542,40 +528,40 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.cA0NuGh484BwlDjX]{Drone}</p>\n<p>Choose one of the following skills: Acrobatics, Athletics, Computers, Engineering, Perception, or Stealth. This is a class skill for your drone, and it gains a number of ranks in the chosen skill equal to your class level. Your drone can use this skill when not under your direct control. You can change your drone’s skill unit whenever you rebuild your drone from scratch. Additionally, whenever you are directly controlling your drone, it can use any of your skill ranks if you wish, assuming it has the appropriate tools to do so (a drone without manipulator arms cannot use Engineering to disable a device, for example).</p>\n<p><em>On Details page, select one of the skills listed above as the Bonus Skill</em></p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isArmorSlot": false,
         "isFree": true,
         "maxInstalls": 1,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "shieldProficiency": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "spellResistance": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponProficiency": ""
@@ -587,11 +573,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/semi-auto-pistol-tactical.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -605,7 +587,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -626,7 +608,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 9,
@@ -640,7 +621,7 @@
               "index": 2
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -682,13 +663,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -698,9 +692,7 @@
           "unidentified": "",
           "value": "<p>The semiautomatic mechanism of this pistol discharges spent cartridges and reloads fresh ones in the barrel, provided a cartridge remains in the magazine.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "total": 0,
           "units": "instantaneous",
           "value": ""
         },
@@ -709,10 +701,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "img": "systems/sfrpg/icons/equipment/weapons/semi-auto-pistol-tactical.webp",
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
-        "isOpen": true,
         "level": 1,
         "modifiers": [],
         "price": 260,
@@ -807,11 +797,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "total": 30,
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "rollNotes": "",
         "save": {
@@ -819,22 +806,25 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 173",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
-        "totalWeight": "L",
         "usage": {
           "per": "shot",
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
-          "total": 0,
           "value": null
         },
         "weaponCategory": "projectile",
@@ -847,34 +837,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/rounds-small-arm.webp",
       "system": {
-        "type": "",
         "ammunitionType": "roundS",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
           "value": 0
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -883,14 +858,13 @@
           "unidentified": "",
           "value": "<p>Cased rounds are housed in magazines, which can be fitted into the appropriate weapon.</p>\n<p><strong>Capacity:</strong> 30</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 40,
         "quantity": 9,
         "quantityPerPack": 30,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": false

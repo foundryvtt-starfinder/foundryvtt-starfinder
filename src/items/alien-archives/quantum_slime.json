@@ -11,11 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "mwak",
         "activation": {
@@ -29,7 +25,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 24,
         "attributes": {
@@ -50,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -59,7 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -81,14 +76,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d6+22",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
                 "electricity": true,
-                "fire": true
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -98,7 +105,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -108,7 +114,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -204,22 +210,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -227,8 +235,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -241,11 +249,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -253,12 +257,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -267,7 +280,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -277,7 +291,7 @@
           "unidentified": "",
           "value": "<p>(EX)</p>\n<p>The creature can move through an area as small as one-quarter of its space without squeezing or one-eighth its space when squeezing.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -288,34 +302,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -326,11 +342,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -338,12 +350,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -352,7 +373,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -362,7 +384,7 @@
           "unidentified": "",
           "value": "<p>(EX)</p>\n<p>The creature has no Intelligence score or modifier and is immune to mind-affecting effects. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</p>\n<p>Guidelines: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -373,34 +395,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -411,21 +435,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -434,7 +466,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -444,7 +477,7 @@
           "unidentified": "",
           "value": "<p>Three times per day as a move action, a quantum slime can form a quantum-entangled copy of itself within 15 feet. The copy is identical to the original slime, including any ongoing bonuses, penalties, or effects with the same remaining duration, and the two slimes share a single pool of Hit Points, uses of spell-like abilities per day, and initiative count. The two slimes count as a single creature for the number of actions they can perform each round, and share the total number of actions between themselves (for instance, one slime can take a move action to move while the other slime takes a standard action to attack); if the slimes take a full action to make a full attack, each slime can attack once with the standard -4 penalty. If a foe attempts to cast a spell that affects both slimes, it must attempt to overcome the spell resistance of each slime, as if the slimes were two different creatures; if the foe fails to overcome the spell resistance of one of the slimes, neither is affected by the spell. If the two slimes are caught in an area effect that doesn’t allow for spell resistance, each one attempts a saving throw (if allowed), and the two slimes use the result of the highest saving throw, though if the spell deals damage, the slimes take damage only once. Any condition successfully imposed on one slime or action taken by one slime to affect itself (such as fighting defensively) affects both copies. When one slime is about to take damage, the quantum slime can “dismiss” that copy as a reaction; this negates the damage and causes the attack (if any) to miss. The remaining quantum slime becomes the “true” version of the creature. The two copies must remain within 200 feet of one another; if they are moved farther apart than that, one random copy of the slime is dismissed as above. Neither copy of the quantum slime can use this ability again while it is active.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -455,34 +488,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -493,11 +528,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/call_cosmos.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -516,7 +547,7 @@
           "shapable": false,
           "shape": "cylinder",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -526,7 +557,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -536,14 +568,14 @@
           "unidentified": "",
           "value": "<p>You evoke a vertical column of dangerous material from across the universe that rains down upon creatures in the area. This matter is made up of bits of burning stars and chunks of frozen comets, and it deals 4d6 fire damage and 3d6 cold damage to every creature in the area. This damage occurs only once, when the spell is cast. For the spell’s remaining duration, the fallen starstuff makes the entire area difficult terrain, and thick, swirling clouds of particulate space matter magically block vision. This obscures all sight beyond 5 feet, including darkvision and other vision-based senses (including vision-based blindsight and sense through), but doesn’t prevent blindsense. A creature within 5 feet of its attacker has concealment (attacks have a 20% miss chance). Creatures farther away have total concealment (50% miss chance, and the attacker can’t use sight to locate the target). Additionally, the swirling cosmic particles are distracting to spellcasters in the area, who have a 20% chance of losing any spell they attempt to cast in the area. At the end of the duration, the starstuff disappears, leaving no aftereffects (other than the damage dealt).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -559,26 +591,29 @@
         },
         "properties": {},
         "range": {
-          "additional": "40",
-          "per": "level",
           "units": "ft",
-          "value": 400
+          "value": "400"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 342",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -590,11 +625,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/displel_magic_greater.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -612,8 +643,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -623,7 +654,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -633,14 +665,14 @@
           "unidentified": "",
           "value": "<p>This spell functions like <em>dispel magic</em>, except it can end more than one spell on a target and it can be used to target multiple creatures. You choose to use <em>greater dispel magic</em> in one of three ways: a targeted dispel, an area dispel, or a counter.</p>\n<p><strong>Targeted Dispel</strong>: This functions as a targeted <em>dispel magic</em>, but you can dispel one spell for every 4 caster levels you have, attempting a separate dispel check for each spell. Additionally,<em>greater dispel magic</em> has a chance to dispel any curse that <em>remove affliction</em> can remove, even if <em>dispel magic</em> can’t dispel that effect. The DC of this check is equal to the curse’s DC.</p>\n<p><strong>Area Dispel</strong>: When <em>greater dispel magic</em> is used in this way, the spell affects everything within a 20-foot-radius burst. Attempt one dispel check and apply that check to each creature or object in the area, as if it were targeted by <em>dispel magic</em>. If you don’t specify spells and there is more than one possible spell on the target, your targeted dispel attempts to dispel spells at random. Magic items themselves are not affected by an area dispel but additional magical effects on them may be dispelled.</p>\n<p>For each ongoing spell effect whose point of origin is within the area of the <em>greater dispel magic</em> spell, apply the result of the dispel check to dispel the spell. For each ongoing spell whose area overlaps that of the <em>greater dispel magic</em> spell, apply the result of the dispel check to end the effect, but only within the overlapping area.</p>\n<p>If an object or a creature that is the effect of an ongoing spell is in the area, apply the result of the dispel check to end the spell that conjured that object or creature (returning it whence it came) in addition to attempting to dispel one spell targeting the creature or object.</p>\n<p>You can choose to automatically succeed at your dispel check against any spell you have cast.</p>\n<p><strong>Counter</strong>: This functions as countering with <em>dispel magic</em>, but you receive a +4 bonus to your dispel check to counter the other spellcaster’s spell.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -656,10 +688,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "10 ft",
-          "per": "level",
           "units": "medium",
-          "value": 100
+          "value": "100"
         },
         "rollNotes": "",
         "save": {
@@ -668,14 +698,19 @@
           "descriptor": "partial"
         },
         "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one creature, object, spell, or spellcaster; or a 20-ft.-radius burst"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -687,11 +722,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/cosmic_eddy.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -710,7 +741,7 @@
           "shapable": false,
           "shape": "other",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -720,7 +751,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -730,14 +762,14 @@
           "unidentified": "",
           "value": "<p>You pull dormant mystical energy from the land and objects around you and use it to create a swirling eddy that batters your foes and can hinder their movement. The eddy deals 4d6 bludgeoning damage to each creature in the area. Additionally, creatures in the area are knocked @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone} and are reduced to half speed while the spell is in effect. A creature that succeeds at a Reflex save takes only half damage and is not knocked @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone}, but it is still reduced to half speed. Flying creatures within the eddy’s area must attempt an Acrobatics check to fly (DC equals the spell’s save DC) each round. Failure means the creature cannot move for that round.</p>\n<p>The spell deals damage and knocks creatures @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone} only once. However, if a creature leaves the spell’s area and then returns, it is subject to the damage and other effects described above again (and can attempt another Reflex saving throw). Similarly, if a creature is not in this spell’s area when it is first cast but later moves into it, it is subject to the damage and other effects described above.</p>\n<p>Small, unattended items (no more than light bulk) are also thrown around in the eddy’s area. At the end of the spell’s duration, such items land in a randomly determined space within the spell’s area.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -753,10 +785,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "10",
-          "per": "level",
           "units": "ft",
-          "value": 100
+          "value": "100"
         },
         "rollNotes": "",
         "save": {
@@ -765,14 +795,19 @@
           "descriptor": "negate"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 346",
         "sr": true,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -784,11 +819,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/creation.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -806,8 +837,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -817,7 +848,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -825,16 +857,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>You create a nonmagical, nontechnological, unattended object of nonliving matter. The volume of the item created can’t exceed 1 cubic foot (or 1 bulk) per caster level. You must succeed at an appropriate Engineering or Profession check to make a complex item, and you can’t create a consumable item.</p>\n<p><strong>4th</strong>: When you cast creation as a 4th-level spell, it creates an object made out of vegetable matter (such as wood) that has an item level no greater than one-third your caster level. The duration is 1 hour per caster level.</p>\n<p><strong>5th</strong>: When you cast creation as a 5th-level spell, it creates an object made out of vegetable matter or material of a mineral nature: crystal, metal, stone, or the like. The object can’t have an item level greater than half your caster level. The duration depends on the hardness and rarity of the created object, as indicated on the following table.</p>\n<table border=\"1\">\n<tbody style=\"box-sizing: border-box; user-select: text;\">\n<tr style=\"box-sizing: border-box; user-select: text; height: 17px;\">\n<td style=\"box-sizing: border-box; user-select: text; height: 17px; background-color: #34495e; text-align: center;\">\n<p style=\"box-sizing: border-box; user-select: text; color: white;\">CASTER LEVEL</p>\n</td>\n<td style=\"box-sizing: border-box; user-select: text; height: 17px; width: 198px; text-align: center; background-color: #34495e;\">\n<p style=\"box-sizing: border-box; user-select: text; color: white;\">RADIATION LEVEL</p>\n</td>\n</tr>\n<tr style=\"box-sizing: border-box; user-select: text; height: 17px;\">\n<td style=\"box-sizing: border-box; user-select: text; height: 17px; width: 198px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"box-sizing: border-box; user-select: text; color: white;\">6th or lower</p>\n</td>\n<td style=\"box-sizing: border-box; user-select: text; height: 17px; width: 198px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"box-sizing: border-box; user-select: text; color: white;\">Low</p>\n</td>\n</tr>\n<tr style=\"box-sizing: border-box; user-select: text; height: 17px;\">\n<td style=\"box-sizing: border-box; user-select: text; height: 17px; width: 198px; text-align: center; background-color: #34495e;\">\n<p style=\"box-sizing: border-box; user-select: text; color: white;\">7th-9th</p>\n</td>\n<td style=\"box-sizing: border-box; user-select: text; height: 17px; width: 198px; text-align: center; background-color: #34495e;\">\n<p style=\"box-sizing: border-box; user-select: text; color: white;\">Medium</p>\n</td>\n</tr>\n<tr style=\"box-sizing: border-box; user-select: text; height: 17px;\">\n<td style=\"box-sizing: border-box; user-select: text; height: 17px; width: 198px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"box-sizing: border-box; user-select: text; color: white;\">10th-16th</p>\n</td>\n<td style=\"box-sizing: border-box; user-select: text; height: 17px; width: 198px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"box-sizing: border-box; user-select: text; color: white;\">High</p>\n</td>\n</tr>\n<tr style=\"box-sizing: border-box; user-select: text; height: 17px;\">\n<td style=\"box-sizing: border-box; user-select: text; height: 17px; width: 198px; text-align: center; background-color: #34495e;\">\n<p style=\"box-sizing: border-box; user-select: text; color: white;\">17th or higher</p>\n</td>\n<td style=\"box-sizing: border-box; user-select: text; height: 17px; width: 198px; text-align: center; background-color: #34495e;\">\n<p style=\"box-sizing: border-box; user-select: text; color: white;\">Severe</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>* Includes adamantine, alchemical silver, mithral, and skymetal alloys. You can’t use a 5th-level <em>creation</em> spell to create a cold iron item.</p>"
+          "value": "<p>You create a nonmagical, nontechnological, unattended object of nonliving matter. The volume of the item created can’t exceed 1 cubic foot (or 1 bulk) per caster level. You must succeed at an appropriate Engineering or Profession check to make a complex item, and you can’t create a consumable item.</p>\n<p><strong>4th</strong>: When you cast creation as a 4th-level spell, it creates an object made out of vegetable matter (such as wood) that has an item level no greater than one-third your caster level. The duration is 1 hour per caster level.</p>\n<p><strong>5th</strong>: When you cast creation as a 5th-level spell, it creates an object made out of vegetable matter or material of a mineral nature: crystal, metal, stone, or the like. The object can’t have an item level greater than half your caster level. The duration depends on the hardness and rarity of the created object, as indicated on the following table.</p>\n<table border=\"1\">\n<tbody style=\"box-sizing:border-box;user-select:text\">\n<tr style=\"box-sizing:border-box;user-select:text;height:17px\">\n<td style=\"box-sizing:border-box;user-select:text;height:17px;background-color:#34495e;text-align:center\">\n<p style=\"box-sizing:border-box;user-select:text;color:white\">CASTER LEVEL</p>\n</td>\n<td style=\"box-sizing:border-box;user-select:text;height:17px;width:198px;text-align:center;background-color:#34495e\">\n<p style=\"box-sizing:border-box;user-select:text;color:white\">RADIATION LEVEL</p>\n</td>\n</tr>\n<tr style=\"box-sizing:border-box;user-select:text;height:17px\">\n<td style=\"box-sizing:border-box;user-select:text;height:17px;width:198px;text-align:center;background-color:#7e8c8d\">\n<p style=\"box-sizing:border-box;user-select:text;color:white\">6th or lower</p>\n</td>\n<td style=\"box-sizing:border-box;user-select:text;height:17px;width:198px;text-align:center;background-color:#7e8c8d\">\n<p style=\"box-sizing:border-box;user-select:text;color:white\">Low</p>\n</td>\n</tr>\n<tr style=\"box-sizing:border-box;user-select:text;height:17px\">\n<td style=\"box-sizing:border-box;user-select:text;height:17px;width:198px;text-align:center;background-color:#34495e\">\n<p style=\"box-sizing:border-box;user-select:text;color:white\">7th-9th</p>\n</td>\n<td style=\"box-sizing:border-box;user-select:text;height:17px;width:198px;text-align:center;background-color:#34495e\">\n<p style=\"box-sizing:border-box;user-select:text;color:white\">Medium</p>\n</td>\n</tr>\n<tr style=\"box-sizing:border-box;user-select:text;height:17px\">\n<td style=\"box-sizing:border-box;user-select:text;height:17px;width:198px;text-align:center;background-color:#7e8c8d\">\n<p style=\"box-sizing:border-box;user-select:text;color:white\">10th-16th</p>\n</td>\n<td style=\"box-sizing:border-box;user-select:text;height:17px;width:198px;text-align:center;background-color:#7e8c8d\">\n<p style=\"box-sizing:border-box;user-select:text;color:white\">High</p>\n</td>\n</tr>\n<tr style=\"box-sizing:border-box;user-select:text;height:17px\">\n<td style=\"box-sizing:border-box;user-select:text;height:17px;width:198px;text-align:center;background-color:#34495e\">\n<p style=\"box-sizing:border-box;user-select:text;color:white\">17th or higher</p>\n</td>\n<td style=\"box-sizing:border-box;user-select:text;height:17px;width:198px;text-align:center;background-color:#34495e\">\n<p style=\"box-sizing:border-box;user-select:text;color:white\">Severe</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>* Includes adamantine, alchemical silver, mithral, and skymetal alloys. You can’t use a 5th-level <em>creation</em> spell to create a cold iron item.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "see text"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -850,26 +882,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "ft",
-          "value": null
+          "units": "ft"
         },
         "rollNotes": "",
         "save": {
           "type": "reflex",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 347",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -881,11 +915,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/dimension-door.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -903,8 +933,8 @@
           "effect": "burst",
           "shapable": false,
           "shape": "cone",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -914,7 +944,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -924,14 +955,14 @@
           "unidentified": "",
           "value": "<p>You instantly transfer yourself from your current location to any other spot within range. You always arrive at exactly the spot desired—whether by simply visualizing the area or by stating its direction. You can bring along objects as long as their weight doesn’t exceed your maximum load. You can also bring up to four additional willing or @UUID[Compendium.sfrpg.conditions.Item.lf8pbezocjYIvR9y]{Unconscious} Medium or smaller creatures (carrying gear or objects up to their maximum load) or their equivalent. A Large creature counts as two Medium creatures, and a Huge creature counts as two Large creatures. All creatures to be transported must be in contact with one another, and at least one of those creatures must be in contact with you. After using this spell, you can’t take any other actions until your next turn (and each creature traveling with you can’t take any other actions until its next turn).</p>\n<p>If you arrive in a place that is already occupied by a solid body, you and each creature traveling with you each take 1d6 damage and are shunted to a random open space on a suitable surface within 100 feet of the intended location. If there is no free space within 100 feet, you and each creature traveling with you take 2d6 additional damage and are shunted to a free space within 1,000 feet. If there is no free space within 1,000 feet, you and each creature traveling with you take 4d6 additional damage and the spell simply fails.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -947,10 +978,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "40",
-          "per": "level",
           "units": "ft",
-          "value": 400
+          "value": "400"
         },
         "rollNotes": "",
         "save": {
@@ -959,14 +988,19 @@
           "descriptor": "negate"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 349",
         "sr": true,
         "target": {
-          "type": "",
           "value": "you and touched objects or touched willing or unconscious creatures"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -978,11 +1012,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/enervation.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rsak",
         "activation": {
@@ -1000,8 +1030,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 22,
         "chatFlavor": "",
@@ -1011,7 +1041,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1021,14 +1052,14 @@
           "unidentified": "",
           "value": "<p>You shoot a black ray at a target, making a ranged attack against the target’s EAC. If you hit, the target gains 2 temporary negative levels. Negative levels stack. If the target survives, it recovers from negative levels after a number of hours equal to your caster level (maximum 15 hours). An undead creature struck by the ray gains 10 temporary Hit Points for 1 hour.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1044,26 +1075,29 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "nec",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 353",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1075,11 +1109,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/bestow_curse.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1098,7 +1128,7 @@
           "shapable": false,
           "shape": "",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1108,7 +1138,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1118,14 +1149,14 @@
           "unidentified": "",
           "value": "<p>You place a terrible curse on the target, stealing either its overall competency or its ability to think and act on its feet. Choose one of the following.</p>\n<ul>\n<li>The target takes a –4 penalty to ability checks, attack rolls, saving throws, and skill checks.</li>\n<li>Each turn, the target has a 50% chance to act normally; otherwise, it takes no action.</li>\n</ul>\n<p>You can also invent your own curse (see @UUID[Compendium.sfrpg.rules.Item.JaRMioj4isNp7r1P]{Afflictions} for a few ideas), but it should be no more powerful than those described above. The curse bestowed by this spell cannot be dispelled, but it can be removed with a <em>break enchantment</em>, <em>miracle</em>, <em>remove affliction</em>, or <em>wish</em> spell.</p>\n<p>Casting this spell doesn’t provoke attacks of opportunity. <em>Bestow curse</em> counters <em>remove affliction</em>.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "permanent"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -1141,10 +1172,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1153,14 +1181,19 @@
           "descriptor": "harmless"
         },
         "school": "nec",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 341",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1172,11 +1205,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/displacement.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1194,8 +1223,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1205,7 +1234,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1215,14 +1245,14 @@
           "unidentified": "",
           "value": "<p>The target of this spell appears to be about 2 feet away from its true location. The creature benefits from a 50% miss chance as if it had total concealment. Unlike actual total concealment,<em>displacement</em> doesn’t prevent enemies from targeting the creature normally. True seeing reveals the target’s true location and negates the miss chance. If a creature with blindsense can also see the displaced creature, the visual and blindsense information combined are enough for the creature with blindsense to attack the displaced creature without a miss chance, unlike normal for blindsense.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -1238,26 +1268,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
           "type": "fort",
-          "dc": null,
+          "dc": "",
           "descriptor": "partial"
         },
         "school": "ill",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 352",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1269,11 +1301,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1281,12 +1309,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1295,7 +1332,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1305,7 +1343,7 @@
           "unidentified": "",
           "value": "<p>When a quantum slime scores a critical hit with its quantum tendril, it teleports the target to a space within 30 feet of its original position that the slime has line of effect to. The target can attempt a DC 23 Will saving throw to negate this effect; if the slime is attempting to teleport the target into a harmful position (such as into a square that is on fire or filled with a cloud of acid), the target receives a +4 circumstance bonus to the saving throw.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1316,34 +1354,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }

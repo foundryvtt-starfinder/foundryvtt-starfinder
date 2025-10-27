@@ -10,21 +10,10 @@
       "type": "starshipFrame",
       "img": "systems/sfrpg/icons/default/hexagonal-nut.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
-        "costMultipliedBySize": false,
         "crew": {
           "maximum": 0,
           "minimum": 0
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "damageThreshold": {
           "base": 5
@@ -46,6 +35,7 @@
         "modifiers": [],
         "pcu": null,
         "size": "huge",
+        "slug": "",
         "source": "",
         "weaponMounts": {
           "aft": {
@@ -87,19 +77,9 @@
       "type": "starshipShield",
       "img": "systems/sfrpg/icons/default/forward-field.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 0,
         "cost": 8,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "defenseValue": 0,
         "description": {
           "chat": "",
@@ -114,6 +94,7 @@
         "pcu": 20,
         "regeneration": 2,
         "shieldPoints": 60,
+        "slug": "",
         "source": "CRB pg. 302",
         "targetLockBonus": 0
       }
@@ -124,12 +105,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -137,17 +114,29 @@
         "class": "heavy",
         "cost": 25,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "10d6",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -159,12 +148,12 @@
         "isPowered": true,
         "modifiers": [],
         "mount": {
-          "activated": false,
           "arc": "turret",
           "mounted": true
         },
         "pcu": 40,
         "range": "long",
+        "slug": "",
         "source": "CRB pg. 302",
         "special": {
           "anchoring": false,
@@ -245,19 +234,9 @@
       "type": "starshipArmor",
       "img": "systems/sfrpg/icons/default/metal-scales.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 4,
         "cost": 5,
         "costMultipliedBySize": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -265,9 +244,8 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
-        "pcu": null,
+        "slug": "",
         "source": "CRB pg. 297",
         "specialMaterials": {},
         "targetLockPenalty": 0,
@@ -280,18 +258,8 @@
       "type": "starshipDefensiveCountermeasure",
       "img": "systems/sfrpg/icons/default/bubble-field.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 6,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -302,6 +270,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": 3,
+        "slug": "",
         "source": "CRB pg. 297",
         "specialMaterials": {},
         "targetLockBonus": 4
@@ -313,18 +282,8 @@
       "type": "starshipPowerCore",
       "img": "systems/sfrpg/icons/default/power-generator.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -332,9 +291,9 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
         "pcu": 150,
+        "slug": "",
         "source": "",
         "specialMaterials": {
           "abysium": false,
@@ -361,18 +320,8 @@
       "type": "starshipThruster",
       "img": "systems/sfrpg/icons/default/rocket-thruster.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 8,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -386,6 +335,7 @@
         "modifiers": [],
         "pcu": 140,
         "pilotingModifier": 0,
+        "slug": "",
         "source": "CRB pg. 297",
         "specialMaterials": {
           "abysium": false,
@@ -413,16 +363,6 @@
       "type": "starshipSpecialAbility",
       "img": "systems/sfrpg/icons/default/cpu.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -430,6 +370,8 @@
           "unidentified": "",
           "value": "<p>A photonic anomaly is a living creature so immense that it functions as a starship (and thus engages only in starship combat). It has no crew, but it can still take engineer, gunner, and pilot actions using the skill bonuses, ranks, and level listed above. Modifiers for its size, speed, and maneuverability have already been factored into its statistics. Critical damage is rolled so that results are applied as follows (with normal effects per the table @UUID[Compendium.sfrpg.tables.Item.RkDign75n1xFBsdK]{here}): 1–33, weapons array; 34–66, engines; 67–100, power core.</p>"
         },
+        "modifiers": [],
+        "slug": "",
         "source": ""
       }
     },
@@ -439,16 +381,6 @@
       "type": "starshipSpecialAbility",
       "img": "systems/sfrpg/icons/default/cpu.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -456,6 +388,8 @@
           "unidentified": "",
           "value": "<p>If a science officer successfully uses the @UUID[Compendium.sfrpg.starship-actions.Item.ML6Dh5dRr3XItvZx]{Lock On} crew action against a photonic anomaly before it moves, the creature’s quantum movement is temporarily disabled, and it can’t move during that round.</p>"
         },
+        "modifiers": [],
+        "slug": "",
         "source": ""
       }
     },
@@ -465,16 +399,6 @@
       "type": "starshipSpecialAbility",
       "img": "systems/sfrpg/icons/default/cpu.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -482,6 +406,8 @@
           "unidentified": "",
           "value": "<p>During the helm phase of starship combat, a photonic anomaly cannot use pilot actions to move and instead moves randomly. Choose one side of its hex and roll 1d6 to determine the direction it moves (1 is toward the chosen side, 2 is the next side going clockwise, and so on). Then roll 1d8 to determine the distance the anomaly moves. If the anomaly would end its movement in the same hex as another starship, it instead moves back 1 hex to an empty hex closer to its starting point. When the anomaly chooses to break off combat, it can move in a straight line away from its foes at a speed of 8 hexes per round. However, if it wants to change direction, it must move randomly for 1 round before starting to move in a straight line again the next round.</p>"
         },
+        "modifiers": [],
+        "slug": "",
         "source": ""
       }
     },
@@ -491,16 +417,6 @@
       "type": "starshipSpecialAbility",
       "img": "systems/sfrpg/icons/default/cpu.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -508,6 +424,8 @@
           "unidentified": "",
           "value": "<p>A photonic anomaly takes half damage from starship laser weapons. In addition, the anomaly’s erratic movement makes it difficult to scan. The DCs of target system and lock on science officer actions increase by 5 when used against a photonic anomaly.</p>"
         },
+        "modifiers": [],
+        "slug": "",
         "source": ""
       }
     },
@@ -517,16 +435,6 @@
       "type": "starshipSpecialAbility",
       "img": "systems/sfrpg/icons/default/cpu.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -534,6 +442,8 @@
           "unidentified": "",
           "value": "<p>The creature can survive within a star despite the luminance, pressure, radiation, and convection currents. In addition, while within a star, the creature can move as if it had a supernatural fly speed equal to its fastest speed.</p>"
         },
+        "modifiers": [],
+        "slug": "",
         "source": ""
       }
     }

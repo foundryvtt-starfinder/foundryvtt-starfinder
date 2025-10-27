@@ -11,17 +11,22 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
           "type": "move",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
@@ -37,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -95,29 +101,32 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "none",
           "value": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
@@ -133,7 +142,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -148,7 +156,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 3,
         "attributes": {
@@ -169,7 +177,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -178,7 +185,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -200,13 +207,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4 +1",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -216,7 +236,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -226,7 +245,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -236,22 +255,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -259,8 +280,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -273,11 +294,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -312,7 +329,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -346,6 +362,7 @@
               "name": "",
               "formula": "1d4 +2",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": true,
                 "bludgeoning": false,
@@ -353,12 +370,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -368,7 +388,6 @@
           "unidentified": "",
           "value": "<p>As a ranged attack that targets EAC, a vaigruuk can spit a glob of nauseating @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison} at a single creature within 30 feet. The acid damage from this glob results from vapors that eat away at a creature’s tissues and sinuses like a fast-acting toxin; creatures immune to @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{poison} take no damage from the vaigruuk’s caustic glob.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -378,7 +397,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -483,8 +502,6 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
           "value": "30"
         },
@@ -496,8 +513,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {
@@ -517,7 +536,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -539,11 +557,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -551,12 +565,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -565,7 +588,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -623,34 +647,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -661,11 +687,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -673,12 +695,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -687,7 +718,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -745,34 +777,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -783,11 +817,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/grease.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -806,7 +836,7 @@
           "shapable": false,
           "shape": "other",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -816,7 +846,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -826,14 +857,14 @@
           "unidentified": "",
           "value": "<p>You cover a solid surface with a layer of slippery grease. Any creature in the area when the spell is cast must succeed at a Reflex save or fall @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone}. A creature can walk within or through the area of grease at half normal speed with a successful DC 10 Acrobatics check. Failure means the creature can’t move that round and must then succeed at a Reflex save or fall @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone}, while failure by 5 or more means it falls @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone} (see the Acrobatics skill on page 135 for details). A creature that doesn’t move on its turn doesn’t need to attempt this check and isn’t considered @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-footed}. The spell can also be used to create a greasy coating on an item. Unattended material objects are always affected by this spell. If you attempt to affect an object in a creature’s possession, the creature can attempt a Reflex save to negate the effect. If the creature fails the initial saving throw, it immediately drops the item and must attempt a new save each round it attempts to pick up, hold, or use the item. A creature wearing greased armor or clothing gains a +5 circumstance bonus to Acrobatics checks to escape a grapple and a +2 circumstance bonus to its AC against grapple combat maneuvers.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -849,10 +880,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -861,14 +890,19 @@
           "descriptor": "partial"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 357",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one 10 ft. square or one object"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -880,11 +914,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/overheat.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -903,7 +933,7 @@
           "shapable": false,
           "shape": "cone",
           "units": "ft",
-          "value": 15
+          "value": "15"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -915,13 +945,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -931,14 +974,14 @@
           "unidentified": "",
           "value": "<p>You collect the heat generated by nearby bodies and devices and vent it outward in a thermal wave, dealing 2d8 fire damage to creatures and objects in the area.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -954,10 +997,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -966,14 +1006,19 @@
           "descriptor": "half"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 367",
         "sr": true,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -985,11 +1030,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/dancing_light.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1007,8 +1048,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1018,7 +1059,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1028,14 +1070,14 @@
           "unidentified": "",
           "value": "<p>You create up to four lights that resemble small headlights or flashlights. The dancing lights must stay within a 10-foot-radius area in relation to each other but otherwise move as you desire: forward or back, up or down, straight or turning corners, or the like. The lights can move up to 100 feet per round. A light winks out if the distance between you and it exceeds the spell’s range.</p>\n<p>You can have only one <em>dancing lights</em> spell active at a time. If you cast this spell while another casting is still in effect, the previous casting is dispelled.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "minute",
           "value": "1"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -1051,26 +1093,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
           "type": "fort",
-          "dc": null,
+          "dc": "",
           "descriptor": "partial"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 347",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1082,11 +1126,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/detect_radiation.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1105,7 +1145,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 120
+          "value": "120"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1115,7 +1155,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1125,14 +1166,14 @@
           "unidentified": "",
           "value": "<p>You detect radiation in the surrounding area, and you can determine the specific intensity of the radiation of one area or object within the spell’s area each round without taking an action (see Radiation on page 403 for more details). The spell can penetrate barriers, but 3 feet of dirt or wood, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or any force field blocks it.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value*10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -1148,26 +1189,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 348",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }

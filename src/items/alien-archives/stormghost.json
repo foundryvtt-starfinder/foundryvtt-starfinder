@@ -11,21 +11,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -34,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -44,7 +53,7 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -55,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -93,21 +104,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -116,7 +135,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -126,7 +146,7 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -137,34 +157,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -175,7 +197,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -190,7 +211,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 29,
         "attributes": {
@@ -211,7 +232,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -220,7 +240,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -242,13 +262,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "8d6+24",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -258,7 +291,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -268,7 +300,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -278,22 +310,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -301,8 +335,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -315,7 +349,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -330,7 +363,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 23,
         "attributes": {
@@ -351,7 +384,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -360,7 +392,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -382,13 +414,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d12+24",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -398,7 +443,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -408,7 +452,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -418,22 +462,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -441,8 +487,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -455,7 +501,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -470,7 +515,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 23,
         "attributes": {
@@ -491,7 +536,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -500,7 +544,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -522,13 +566,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d12+24",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -538,7 +595,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -548,7 +604,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -558,22 +614,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -581,8 +639,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -595,11 +653,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -607,12 +661,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -623,13 +686,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d8+24",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -639,7 +715,7 @@
           "unidentified": "",
           "value": "<p>As a full action, a stormghost can leap up to 30 feet and land adjacent to a target that is at least one size smaller than themself and impale the victim with their spiky legs. The target must succeed at a DC 21 Reflex save or take 4d8+24 points of piercing damage and gain the @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pinned} condition until the beginning of the stormghost’s next turn, at which point the stormghost can attempt to renew the @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pinned} condition with a grapple combat maneuver as normal.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -650,18 +726,16 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -670,13 +744,18 @@
           "dc": "21",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -688,11 +767,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -700,12 +775,21 @@
           "condition": "Once every 1d4 rounds",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "line",
           "units": "ft",
-          "value": 40
+          "value": "40"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -716,13 +800,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "8d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "electricity": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -732,7 +829,7 @@
           "unidentified": "",
           "value": "<p>Crackling electricity surrounds a stormghost. As a standard action once every 1d4 rounds, a stormghost can focus this static charge into a bolt, releasing it in a 40-foot line that deals 8d6 electricity damage. A successful DC 20 Reflex save halves this damage.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -743,18 +840,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -763,13 +857,18 @@
           "dc": "20",
           "descriptor": "half"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -781,11 +880,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/invisibility_greater.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -803,8 +898,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -814,7 +909,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -824,14 +920,14 @@
           "unidentified": "",
           "value": "<p>This spell functions like&nbsp;invisibility, except it doesn’t end if the target attacks.</p>\n<h2>Invisibility</h2>\n<p>The creature or object touched becomes invisible (see page 264). If the target is a creature, any gear it is carrying vanishes as well. If you cast the spell on someone else, neither you nor your allies can see the target unless you can normally see invisible things or you employ magic to do so.</p>\n<p>The spell ends if the target attacks any creature. For purposes of this spell, an attack includes any spell or harmful effect targeting a foe or whose area or effect includes a foe. Actions directed at unattended objects don’t break the spell. Spells that specifically affect allies but not foes are not attacks for this purpose, even when they include foes in their area. Causing harm indirectly is not an attack. Thus, an invisible being can open doors, talk, eat, climb stairs, summon security forces and have them attack, start a trash compactor with foes inside, remotely trigger traps, and so forth.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -847,10 +943,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -859,14 +952,19 @@
           "descriptor": "harmless"
         },
         "school": "ill",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 362",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -878,11 +976,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/ray_of_exhaustion.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rsak",
         "activation": {
@@ -900,8 +994,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -911,7 +1005,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -921,14 +1016,14 @@
           "unidentified": "",
           "value": "<p>You create an enervating ray of magic. You must make a ranged attack against your opponent’s EAC. On a hit, the target is immediately exhausted for the spell’s duration. A creature that succeeds at a Fortitude saving throw is only fatigued, unless it is already fatigued, in which case it instead becomes exhausted despite the saving throw.</p>\n<p>This spell has no effect on a creature that is already exhausted. Unlike normal exhaustion or fatigue, the effect ends as soon as the spell’s duration expires.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -944,10 +1039,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -956,14 +1048,19 @@
           "descriptor": "partial"
         },
         "school": "nec",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 371",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -975,11 +1072,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -987,12 +1080,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1001,7 +1103,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1011,7 +1114,7 @@
           "unidentified": "",
           "value": "<p>A stormghost can see perfectly through dust, fog, mist, rain, heavy snow, and smoke. They ignore concealment and penalties to Perception checks from such effects.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1022,34 +1125,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1060,11 +1165,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/feats/focused_sense.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1083,7 +1184,7 @@
           "shapable": false,
           "shape": "cylinder",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1095,20 +1196,45 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "6d8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "cold": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": true,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             },
             {
+              "name": "",
               "formula": "7d8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1118,14 +1244,14 @@
           "unidentified": "",
           "value": "<p>A barrage of fist-sized hailstones pelts the area. Creatures that enter or start their turn in the area during the first round of the spell take 6d8 cold damage and 7d8 bludgeoning damage. For the remaining duration of the spell, heavy snow and sleet rain down in the area. Until the spell is dismissed or until the end of the duration, this area provides concealment, creatures inside it take a –4 penalty to Perception checks, and the entire area is considered difficult terrain.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -1141,10 +1267,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "long",
-          "value": null
+          "units": "long"
         },
         "rollNotes": "",
         "save": {
@@ -1153,14 +1276,19 @@
           "descriptor": "half"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA4 pg. 119",
         "sr": true,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -1172,11 +1300,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/controle_atmosphere.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1195,7 +1319,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1205,7 +1329,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1215,14 +1340,14 @@
           "unidentified": "",
           "value": "<p>You can alter the atmosphere within the spell’s area to cause it to become more like the atmosphere of another planet. You can alter one aspect of the atmosphere—its corrosiveness, density, or toxicity. The possible effects of each of these changes are detailed below.</p>\n<p><strong>Corrosiveness</strong>: You can make the atmosphere corrosive. Each creature and object in the area when you cast the spell must succeed at a Fortitude save or take [[/r 5d6 acid]] damage. Creatures and objects that remain in the area take [[/r 3d6]] additional acid damage every 10 minutes (Fortitude half).</p>\n<p>Alternatively, you can make a normally corrosive atmosphere noncorrosive. In this case, the atmosphere within the spell’s area deals no acid damage for the duration of the spell.</p>\n<p><strong>Density</strong>: You can make the atmosphere in the area one step thinner (going from severely thick to thick, thick to normal, normal to thin, or thin to severely thin) or thicker (going from severely thin to thin, thin to normal, normal to thick, or thick to severely thick). The spell cannot make an atmosphere thicker than severely thick or thinner than severely thin.</p>\n<p>In addition to the normal long-term effects of being in an atmosphere thinner or thicker than a creature is acclimated to, each creature in the area of the spell when it is cast must succeed at a Fortitude save or suffer the immediate effects described below. This is true even for creatures with environmental protection from equipment (such as armor), as the air within the armor is affected on a failed saving throw. Creatures that do not need to breathe are not affected by changes in atmospheric density.</p>\n<p>If the air is thicker than a creature is acclimated to, on a failed saving throw, that creature becomes sickened. For every step beyond the first that the air is thicker than the target’s acclimation, it takes a –1 penalty to its save against this effect. If the air is thinner than a creature is acclimated to, on a failed saving throw, it is fatigued. For every step beyond the first that the air is thinner than the target’s acclimation, it takes a –1 penalty to its saving throw against this effect. The effect ends if the creature moves out of the area, and it is not required to attempt a new saving throw upon reentering the area (instead it is subject only to the normal dangers of thicker or thinner air).</p>\n<p><strong>Toxicity</strong>: You can make the atmosphere toxic. Each creature in the area of the spell when it is cast must succeed at a Fortitude save or suffer the immediate effects described below. Creatures with environmental protection from equipment already active (such as armor) are not exposed to the toxic atmosphere. A creature that fails its save contracts bubonic plague (no save) and immediately moves to the weakened state. Creatures that enter the area of toxic atmosphere later are exposed to inhaled bubonic plague and follow the normal @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{disease} rules for contracting the @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{disease} and progressing on the physical @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{disease} track. The @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{disease} is nonmagical, and those infected are still infected when the spell’s duration ends.</p>\n<p>Alternatively, you can make a normally toxic atmosphere nontoxic. In this case, the atmosphere within the spell’s area does not expose those who breathe it to any toxic @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{disease} for the duration of the spell.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value*10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1238,10 +1363,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -1250,14 +1372,19 @@
           "descriptor": "partial"
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "PW pg. 204",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }

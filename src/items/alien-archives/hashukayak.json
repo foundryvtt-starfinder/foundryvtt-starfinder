@@ -11,11 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -50,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -67,8 +62,10 @@
           "effect": "",
           "parts": [
             {
+              "name": "",
               "formula": "",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": true,
@@ -76,7 +73,9 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -97,7 +96,9 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -113,7 +114,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -123,7 +123,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": false,
         "level": 1,
         "modifiers": [],
@@ -228,8 +228,6 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "none",
           "value": ""
         },
@@ -241,8 +239,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {
@@ -262,7 +262,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -270,8 +269,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -284,11 +283,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -323,7 +318,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -351,8 +345,10 @@
           "effect": "Bleed",
           "parts": [
             {
+              "name": "",
               "formula": "1d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -360,7 +356,9 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": true,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -381,7 +379,9 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": true,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -397,7 +397,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -407,7 +406,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": false,
         "level": 1,
         "modifiers": [],
@@ -512,8 +511,6 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "none",
           "value": ""
         },
@@ -525,8 +522,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {
@@ -546,7 +545,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -554,8 +552,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -568,11 +566,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -580,12 +574,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -594,7 +597,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -652,15 +656,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "6e4f5225-8e06-49b7-84f3-415eef2fb22a",
             "name": "Male - KAC Bonus",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "ac",
             "enabled": false,
+            "limitTo": null,
             "max": 0,
             "modifier": "1",
             "modifierType": "constant",
@@ -674,8 +680,10 @@
             "name": "Male - Intimidate Checks",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "skill",
             "enabled": false,
+            "limitTo": null,
             "max": 0,
             "modifier": "15",
             "modifierType": "constant",
@@ -689,8 +697,10 @@
             "name": "Female - EAC Bonus",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "ac",
             "enabled": false,
+            "limitTo": null,
             "max": 0,
             "modifier": "1",
             "modifierType": "constant",
@@ -704,8 +714,10 @@
             "name": "Female - Land Speed Bonus",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "specific-speed",
             "enabled": false,
+            "limitTo": null,
             "max": 0,
             "modifier": "10",
             "modifierType": "constant",
@@ -719,8 +731,10 @@
             "name": "Female - Survival Bonus",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "skill",
             "enabled": false,
+            "limitTo": null,
             "max": 0,
             "modifier": "10",
             "modifierType": "constant",
@@ -732,30 +746,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -766,17 +782,22 @@
       "type": "feat",
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "full",
           "condition": "",
           "cost": 1
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
@@ -805,7 +826,9 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -869,18 +892,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -891,11 +911,12 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "AA1 pg. 157",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {

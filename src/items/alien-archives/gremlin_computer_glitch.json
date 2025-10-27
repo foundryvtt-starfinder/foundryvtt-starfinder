@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -23,12 +19,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -37,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -47,7 +53,7 @@
           "unidentified": "",
           "value": "<p>When gathered in groups, computer glitch gremlins share their magic. As long as a computer glitch gremlin is within 30 feet of another of its kind, it gains concealment thanks to erratic holograms that falteringly appear near it and emulate the appearance of surrounding objects. Groups of computer glitch goblins can also use more potent spell-like abilities; each gremlin in the group except for one takes a standard action to prepare the spell-like ability, and the final gremlin actually uses it. Two computer glitch gremlins can use implant data or logic bomb (DC 15), four can use holographic image (3rd level, DC 16) or instant virus (DC 16), and six can use destruction protocol (DC 17).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -58,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -96,11 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -114,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 2,
         "attributes": {
@@ -135,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -144,7 +147,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -166,13 +169,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -182,7 +198,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -192,7 +207,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -289,10 +304,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -300,11 +312,16 @@
           "dc": "10",
           "descriptor": "partial"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -312,8 +329,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -326,11 +343,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -338,12 +351,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -352,7 +374,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -362,7 +385,7 @@
           "unidentified": "",
           "value": "<p>When a glitch gremlin succeeds at a Computers check to access a system or hits a foe with an attack or spell, the accessed system or one random computer held or carried by the struck creature glitches. An attended computer (including any computer on a creature hit by a computer glitch gremlin’s attack or spell) negate this effect by succeeding at a DC 10 Will save. The glitch causes one of the following effects, which functions as if the system had the indicated countermeasure (DC = 16 + the number of glitch gremlins within 30 feet when the glitch was added): a fake shell countermeasure that obstructs all users, an alarm that plays a loud and potentially embarrassing audio or holographic file when accessed by any user unless the user succeeds at a Computers check as if hacking the system, or one randomly determined countermeasure that applies even to users with root access. Disabling or removing this glitch requires a Computers check as if disabling or removing a module. A disabled glitch reactivates after 1d10 minutes if not removed. A system can have no more than one glitch per module.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -373,34 +396,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -411,11 +436,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/erase.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -434,7 +455,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -444,7 +465,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -454,14 +476,14 @@
           "unidentified": "",
           "value": "<p>Erase&nbsp;removes writings of either magical or mundane nature from any written storage, including paper, computers, or similar devices. You remove up to 1,500 words worth of text (for computer files, this could be a 1,500-word data file or 1,500 words of computer code). With this spell, you can remove magic runes and glyphs created by spells of 3rd-level and lower.</p>\n<p>Nonmagical writing in a book or manual is automatically erased if you touch it and no one else is holding it. Magical writing and computer programs must be touched (either directly or by touching the physical drive that holds the file) to be erased, and you must also succeed at a caster level check (1d20 + caster level) with a DC equal to 11 + the caster level for the magical writing or the item level of the computer’s drive. Computers generally keep backups on a round-by-round basis, and when you erase code from a computer, it takes 1 round for the computer to access its backups. If you erase a file that stores continuous data (like a camera feed), the computer won’t be able to recover the missing round. A natural 1 is always a failure on this check. If you fail to erase writing that is part of a trap (magical or otherwise), you set off that trap.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -477,26 +499,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 353",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one written data set"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -508,11 +532,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/jolting_surge.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "msak",
         "activation": {
@@ -531,7 +551,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 1,
         "chatFlavor": "",
@@ -543,13 +563,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "electricity": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -559,14 +592,14 @@
           "unidentified": "",
           "value": "<p>You touch a target with a device you’re holding that uses electricity, requiring a melee attack against the target’s EAC. Alternatively, you can instead touch an electrical device a target is wearing (or a target that is an electrical device, such as a robot) with your hand, gaining a +2 bonus to your attack roll. Either way, if your attack hits, the electrical device surges out of control, dealing 4d6 electricity damage to your target.</p>\n<p>Casting this spell doesn’t provoke attacks of opportunity.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -582,10 +615,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -594,14 +624,19 @@
           "descriptor": "negate"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 363",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature or object"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -613,11 +648,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/energy_ray.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rsak",
         "activation": {
@@ -636,7 +667,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 1,
         "chatFlavor": "",
@@ -648,13 +679,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d3",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "electricity": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -664,14 +708,14 @@
           "unidentified": "",
           "value": "<p>When you cast this spell, choose acid, cold, electricity, or fire; the spell gains that descriptor. You fire a ray at the target, and you must make a ranged attack against its EAC. On a hit, the ray deals 1d3 damage of the chosen energy type.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -687,10 +731,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -699,14 +740,19 @@
           "descriptor": "negate"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 353",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature or object"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -718,11 +764,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/ghost_sound.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -741,7 +783,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -751,7 +793,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -761,14 +804,14 @@
           "unidentified": "",
           "value": "<p>You create a volume of sound that rises, falls, recedes, approaches, or remains fixed. You choose what type of sound this spell creates when casting it and cannot thereafter change the sound’s basic character.</p>\n<p>The volume of sound created can produce as much noise as 20 normal humans. Thus, you can create shouting, singing, talking, marching, running, or walking sounds, as well as sounds of battle or small explosions. You can make noises that sound like machines, the general chatter of distant conversation, or the roar of an alien predator, but you can’t make specific sounds such as intelligible speech or the exact hum of a particular starship’s engines.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -784,10 +827,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -796,14 +836,19 @@
           "descriptor": "disbelieve"
         },
         "school": "ill",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 356",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -815,11 +860,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/transfert_charge.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -837,8 +878,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -848,7 +889,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -858,14 +900,14 @@
           "unidentified": "",
           "value": "<p>You can transfer any number of charges from one battery to another battery or from one power cell to another power cell. You can only transfer charges using two objects of the exact same type (two batteries of the same size, two identical power cells, or the like); you transfer charges from the source object to the receiving object.</p>\n<p>You must declare how many charges you are transferring before casting this spell. If you transfer more charges from the source than the receiving item can hold, the receiving item must succeed at a Fortitude saving throw or take 1d6 electricity damage. This spell provides no knowledge of how many charges a receiving item can safely hold, but you can choose to transfer fewer charges than the maximum allowed to reduce the risk.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -881,10 +923,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -893,14 +932,19 @@
           "descriptor": "object"
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 383",
         "sr": true,
         "target": {
-          "type": "",
           "value": "two objects of the same type; see text"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -912,11 +956,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/detect_tech.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -935,7 +975,7 @@
           "shapable": false,
           "shape": "cone",
           "units": "ft",
-          "value": 60
+          "value": "60"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -945,7 +985,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -955,14 +996,14 @@
           "unidentified": "",
           "value": "<p>You detect all technological items (even hybrid items) with charges or that replenish charges in the area, including batteries, power cells, and generators (as well as such items that are on creatures you can see, even if the creatures have hidden those items on themselves). You can’t determine if there are technological items in areas you can’t see, nor can you detect technological traps in this way.</p>\n<p>The information this spell provides allows you to differentiate between charged items and items that replenish charges, but it does not provide any further information nor does it tell you, for example, how many charges an item currently has or how many maximum charges it can hold. This spell can penetrate barriers, but 3 feet of dirt or wood, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or any force field blocks it.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -978,26 +1019,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 349",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1009,11 +1052,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1021,12 +1060,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1035,7 +1083,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1045,7 +1094,7 @@
           "unidentified": "",
           "value": "<p>A computer glitch gremlin can communicate telepathically only with digital devices and with other creatures that can do so (such as other computer glitch gremlins). This allows the glitch gremlin to attempt Computers checks to access any computer within the telepathy’s range.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1056,34 +1105,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }

@@ -11,11 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "mwak",
         "activation": {
@@ -29,7 +25,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 28,
         "attributes": {
@@ -50,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -84,6 +79,7 @@
               "name": "",
               "formula": "6d10 +25",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -91,12 +87,15 @@
                 "electricity": true,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -106,17 +105,16 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "equippable": true,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -221,10 +219,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -234,8 +229,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {
@@ -255,7 +252,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -263,8 +259,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -277,11 +273,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rwak",
         "activation": {
@@ -295,7 +287,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 30,
         "attributes": {
@@ -316,7 +308,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -350,6 +341,7 @@
               "name": "",
               "formula": "6d10 +20",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -357,12 +349,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": true
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -372,17 +367,16 @@
           "unidentified": "",
           "value": "<p>As a standard action, a divine avatar can speak a destructive word as a ranged attack with a range increment of 60 feet.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "equippable": true,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -487,10 +481,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -500,8 +491,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {
@@ -521,7 +514,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -529,8 +521,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -543,17 +535,22 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "other",
         "activation": {
           "type": "none",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
@@ -569,7 +566,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -635,8 +633,10 @@
             "name": "Ascendant (Ex)",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "spell-save-dc",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -650,8 +650,10 @@
             "name": "Ascendant (Ex)",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "ac",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -665,8 +667,10 @@
             "name": "Ascendant (Ex)",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "all-attacks",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -680,8 +684,10 @@
             "name": "Ascendant (Ex)",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "saves",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -695,8 +701,10 @@
             "name": "Ascendant (Ex)",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "all-skills",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -708,14 +716,12 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "none",
           "value": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -726,11 +732,12 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
@@ -746,12 +753,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/enshrining_refuge.webp",
       "system": {
-        "name": "Enshrining Refuge (DC 29)",
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -770,7 +772,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 40
+          "value": "40"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -780,7 +782,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -790,14 +793,14 @@
           "unidentified": "",
           "value": "<p>All creatures within a 40-foot radius of the spell’s point of origin are protected from violence. Any opponent attempting to directly attack a warded creature, even with a targeted spell, must attempt a Will saving throw. If the opponent succeeds, it can attack that creature normally, though it takes a –2 penalty to attacks against that creature for the duration of the spell. On a failed save, the opponent can’t follow through with the attack, loses that action, and can’t directly attack the warded creature for the duration of the spell. Those not attempting to attack a warded creature remain unaffected.</p>\n<p>This spell doesn’t prevent warded creatures from being affected by an attack with an area of effect, though a warded creature receives a +2 bonus to saving throws against such attacks.</p>\n<p>Each warded creature can breathe normally, no matter the surrounding atmosphere, and it suffers no harm from being in a hot or cold environment. A warded creature can’t attack without breaking the spell for itself, but it can use harmless spells and abilities that don’t require attack rolls, and it can act otherwise.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "1 round/level (D)"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 6,
         "materials": {
@@ -811,13 +814,10 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "5 ft.",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -826,14 +826,19 @@
           "descriptor": "negate"
         },
         "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 353",
         "sr": false,
         "target": {
-          "type": "",
           "value": "all creatures in a 40 ft. radius burst"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -845,12 +850,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/inflic_pain_mass.webp",
       "system": {
-        "name": "Mass Inflict Pain (DC 29)",
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -869,7 +869,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -879,7 +879,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -889,14 +890,14 @@
           "unidentified": "",
           "value": "<p>This spell functions as @UUID[Compendium.sfrpg.spells.2AYPwSy7I0Ar8yAH]{Inflict Pain}, except as noted above.</p>\n<h2>@UUID[Compendium.sfrpg.spells.2AYPwSy7I0Ar8yAH]{Inflict Pain}</h2>\n<p>You telepathically rack the target’s mind and body with agonizing pain that imposes a –2 penalty to ability checks, attack rolls, and skill checks. A target that succeeds at a Will saving throw reduces the duration to 1 round.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "1 round/level"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 6,
         "materials": {
@@ -910,13 +911,10 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "5 ft.",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -925,14 +923,19 @@
           "descriptor": "partial"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 361",
         "sr": true,
         "target": {
-          "type": "",
           "value": "up to one creature/level, no two of which can be more than 30 ft. apart"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -944,12 +947,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mystic_cure_mass.webp",
       "system": {
-        "name": "Mass Mystic Cure (6th Level)",
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "heal",
         "activation": {
@@ -983,6 +981,7 @@
               "name": "Healing",
               "formula": "lookupRange(@item.level, 0, 5, 3, 6, 5)d8 + @abilities.wis.mod",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -990,12 +989,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": true,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "Choose one of these targets within 10 feet of you; if that target regains all of its Hit Points as a result of this healing, you can apply the remaining healing to yourself, as long as you are a living creature. On the other hand, if this isn’t enough to restore all of that target’s Hit Points, you can transfer any number of your own Hit Points to that target, healing the target that amount.",
         "description": {
@@ -1050,7 +1052,7 @@
           "value": "instantaneous"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": true,
         "level": 6,
         "materials": {
@@ -1064,11 +1066,8 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "5 ft.",
-          "per": "2 levels",
           "units": "ft",
           "value": "25"
         },
@@ -1081,12 +1080,13 @@
         "school": "con",
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 367",
         "sr": true,
         "target": {
-          "type": "",
           "value": "up to one creature/level, no two of which can be more than 30 ft. apart"
         },
         "uses": {
@@ -1102,12 +1102,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/shadow_walk.webp",
       "system": {
-        "name": "Shadow Walk (DC 29)",
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1136,7 +1131,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1191,7 +1187,7 @@
           "value": "1 hour/level (D)"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 6,
         "materials": {
@@ -1205,13 +1201,9 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1222,12 +1214,13 @@
         "school": "ill",
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 376",
         "sr": true,
         "target": {
-          "type": "",
           "value": "up to one medium creature or vehicle/level"
         },
         "uses": {
@@ -1243,12 +1236,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/break_enchantment.webp",
       "system": {
-        "name": "Break Enchantment",
-        "type": "",
         "ability": "wis",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1267,7 +1255,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1277,7 +1265,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1287,14 +1276,14 @@
           "unidentified": "",
           "value": "<p>This spell frees victims from curses, enchantments, and transmutations.<em>Break enchantment</em> can reverse even an instantaneous effect. For each such effect, you attempt a caster level check (1d20 + your caster level, maximum +15) against a DC equal to 11 + the caster level of the effect. Success means that the creature is free of the spell, curse, or effect. For a cursed magic item, the DC of the caster level check is equal to the DC of the curse.</p>\n<p>If the spell is one that can’t be dispelled by @UUID[Compendium.sfrpg.spells.KQ4vSfG9tq8EJxir]{Dispel Magic},<em>break enchantment</em> works only if that spell is 5th level or lower. If the effect comes from a permanent magic item,<em>break enchantment</em> doesn’t remove the curse from the item but it does free the victim from the item’s effects.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "instantaneous"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -1308,29 +1297,31 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "5 ft.",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 341",
         "sr": false,
         "target": {
-          "type": "",
           "value": "up to one creature per level, no two of which can be more than 30 ft. apart"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1342,12 +1333,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/call_cosmos.webp",
       "system": {
-        "name": "Call Cosmos",
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1366,7 +1352,7 @@
           "shapable": false,
           "shape": "cylinder",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1378,20 +1364,45 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             },
             {
+              "name": "",
               "formula": "3d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "cold": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": true,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1401,14 +1412,14 @@
           "unidentified": "",
           "value": "<p>You evoke a vertical column of dangerous material from across the universe that rains down upon creatures in the area. This matter is made up of bits of burning stars and chunks of frozen comets, and it deals 4d6 fire damage and 3d6 cold damage to every creature in the area. This damage occurs only once, when the spell is cast. For the spell’s remaining duration, the fallen starstuff makes the entire area difficult terrain, and thick, swirling clouds of particulate space matter magically block vision. This obscures all sight beyond 5 feet, including darkvision and other vision-based senses (including vision-based blindsight and sense through), but doesn’t prevent blindsense. A creature within 5 feet of its attacker has concealment (attacks have a 20% miss chance). Creatures farther away have total concealment (50% miss chance, and the attacker can’t use sight to locate the target). Additionally, the swirling cosmic particles are distracting to spellcasters in the area, who have a 20% chance of losing any spell they attempt to cast in the area. At the end of the duration, the starstuff disappears, leaving no aftereffects (other than the damage dealt).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "1 round/level (D)"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -1422,29 +1433,31 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "40 ft.",
-          "per": "levellevel",
           "units": "ft",
-          "value": 400
+          "value": "400"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 342",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1456,12 +1469,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/displel_magic_greater.webp",
       "system": {
-        "name": "Greater Dispel Magic",
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1480,7 +1488,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1490,7 +1498,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1500,14 +1509,14 @@
           "unidentified": "",
           "value": "<p>This spell functions like @UUID[Compendium.sfrpg.spells.KQ4vSfG9tq8EJxir]{Dispel Magic}, except it can end more than one spell on a target and it can be used to target multiple creatures. You choose to use <em>greater dispel magic</em> in one of three ways: a targeted dispel, an area dispel, or a counter.</p>\n<p><strong>Targeted Dispel</strong>: This functions as a targeted <em>dispel magic</em>, but you can dispel one spell for every 4 caster levels you have, attempting a separate dispel check for each spell. Additionally,<em>greater dispel magic</em> has a chance to dispel any curse that <em>remove affliction</em> can remove, even if <em>dispel magic</em> can’t dispel that effect. The DC of this check is equal to the curse’s DC.</p>\n<p><strong>Area Dispel</strong>: When <em>greater dispel magic</em> is used in this way, the spell affects everything within a 20-foot-radius burst. Attempt one dispel check and apply that check to each creature or object in the area, as if it were targeted by <em>dispel magic</em>. If you don’t specify spells and there is more than one possible spell on the target, your targeted dispel attempts to dispel spells at random. Magic items themselves are not affected by an area dispel but additional magical effects on them may be dispelled.</p>\n<p>For each ongoing spell effect whose point of origin is within the area of the <em>greater dispel magic</em> spell, apply the result of the dispel check to dispel the spell. For each ongoing spell whose area overlaps that of the <em>greater dispel magic</em> spell, apply the result of the dispel check to end the effect, but only within the overlapping area.</p>\n<p>If an object or a creature that is the effect of an ongoing spell is in the area, apply the result of the dispel check to end the spell that conjured that object or creature (returning it whence it came) in addition to attempting to dispel one spell targeting the creature or object.</p>\n<p>You can choose to automatically succeed at your dispel check against any spell you have cast.</p>\n<p><strong>Counter</strong>: This functions as countering with <em>dispel magic</em>, but you receive a +4 bonus to your dispel check to counter the other spellcaster’s spell.</p>\n<h2>@UUID[Compendium.sfrpg.spells.KQ4vSfG9tq8EJxir]{Dispel Magic}</h2>\n<p>You can use dispel magic to end one ongoing spell that has been cast on a creature or object, to temporarily suppress the magical abilities of a magic item, or to counter another spellcaster’s spell. A dispelled spell ends as if its duration had expired. Some spells, as detailed in their descriptions, can’t be defeated by dispel magic. Dispel magic can dispel (but not counter) spell-like abilities just as it does spells. The effect of a spell with an instantaneous duration can’t be dispelled.</p>\n<p>You choose to use dispel magic in one of two ways: as a targeted dispel or as a counter.</p>\n<p><strong>Targeted Dispel</strong>: One creature, object, or spell is the target of the dispel magic spell. You can also use a targeted dispel to specifically end one spell affecting the target or one spell affecting an area (such as zone of truth). You must name the specific spell effect to be targeted in this way or otherwise uniquely identify it (such as “that burning wall” or “the spell that’s giving him those duplicates”). Attempt a dispel check (1d20 + your caster level) with a DC equal to 11 + the spell’s caster level. If you succeed, the spell ends. If you don’t specify a spell and there is more than one possible spell on the target, your targeted dispel attempts to dispel a spell at random.</p>\n<p>If you target a force, an object, or a creature that is the effect of an ongoing spell (such as unseen servant), you attempt a dispel check to end the spell that conjured the object or creature.</p>\n<p>If the object that you target is a magic item, you attempt a dispel check against the item level (DC = 11 + the item level). If you succeed, all the item’s magical properties are suppressed for 1d4 rounds, after which the item recovers its magical properties. A suppressed item becomes nonmagical for the duration of the effect. A magic item’s nonmagical physical properties are unchanged: a suppressed holy laser pistol is still a laser pistol. Artifacts and deities are unaffected by mortal magic such as this.</p>\n<p>You can choose to automatically succeed at your dispel check against any spell you have cast.</p>\n<p><strong>Counter</strong>: You can use the energy of&nbsp;dispel magic&nbsp;to disrupt the casting of other spells. First, select an opponent and take the ready action (see page 249) to cast&nbsp;dispel magic&nbsp;when that target casts a spell. This is considered a purely defensive action. When that readied action is triggered, you cast&nbsp;dispel magic&nbsp;and must attempt a dispel check (1d20 + your caster level) to counter the other spellcaster’s spell. The DC is equal to 11 + the other spellcaster’s caster level. If the check is successful and the target is in range, the spell fails and has no result.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "instantaneous"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -1521,13 +1530,10 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "10 ft",
-          "per": "level",
           "units": "medium",
-          "value": 100
+          "value": "100"
         },
         "rollNotes": "",
         "save": {
@@ -1536,14 +1542,19 @@
           "descriptor": "partial"
         },
         "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 352",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one creature, object, spell, or spellcaster; or a 20-ft.-radius burst"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1555,12 +1566,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/discern-lies.webp",
       "system": {
-        "name": "Discern Lies (DC 25)",
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1589,7 +1595,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1644,7 +1651,7 @@
           "value": "concentration, up to 1 round/level"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1658,11 +1665,8 @@
           "mode": "always",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "5 ft.",
-          "per": "2 levels",
           "units": "ft",
           "value": "25"
         },
@@ -1675,12 +1679,13 @@
         "school": "div",
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 349",
         "sr": false,
         "target": {
-          "type": "",
           "value": "up to one creature/level, no two of which can be more than 30 ft. apart"
         },
         "uses": {
@@ -1696,12 +1701,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mind_thrust.webp",
       "system": {
-        "name": "Mind Thrust (4th Level, DC 25)",
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1735,6 +1735,7 @@
               "name": "Untyped Damage",
               "formula": "lookupRange(@item.level, 2, 2, 4, 3, 7, 4, 10, 5, 15, 6, 17)d10",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -1742,12 +1743,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1802,7 +1806,7 @@
           "value": "instantaneous"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": true,
         "level": 4,
         "materials": {
@@ -1816,11 +1820,8 @@
           "mode": "always",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "5 ft.",
-          "per": "2 levels",
           "units": "ft",
           "value": "25"
         },
@@ -1833,12 +1834,13 @@
         "school": "div",
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 365",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
@@ -1854,11 +1856,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1866,12 +1864,21 @@
           "condition": "1 Resolve Point",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1880,7 +1887,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1936,33 +1944,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Vlaka",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA2 pg. 134",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "sr",
           "value": 1
         }

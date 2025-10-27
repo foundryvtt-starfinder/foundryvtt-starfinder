@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -23,12 +19,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -37,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -47,7 +53,7 @@
           "unidentified": "",
           "value": "<p>A thorgothrel’s internal armatures create an invisible field around it just like the shield provided by a gray force field armor upgrade, except that it has unlimited charges. Its internal force field generator cannot be removed or targeted by spells or effects unless the thorgothrel is slain or expels it. When the number of temporary Hit Points supplied by the thorgothrel’s integrated force field is reduced to 0, the thorgothrel can spend 1 Resolve Point as a reaction to regain the 20 temporary Hit Points supplied by the force field.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -58,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -96,11 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -114,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 19,
         "attributes": {
@@ -135,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -144,7 +147,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -166,13 +169,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d4+14",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -182,7 +198,6 @@
           "unidentified": "",
           "value": "<h3><strong>Atavistic Resequencing</strong></h3>\n<p><strong>Type</strong>&nbsp;@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poisons (injury)};&nbsp;<strong>Save</strong>&nbsp;Fortitude DC 18</p>\n<p><strong>Track</strong>&nbsp;@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Intelligence (special)};&nbsp;<strong>Frequency</strong>&nbsp;1/round for 6 rounds</p>\n<p><strong>Effect</strong>&nbsp;progression track is @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Healthy}–@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Weakened}–@UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Impaired}–Animalistic–Animalistic. The second animalistic functions as an end state, and at the second animalistic state, the effects of the state are permanent until the victim benefits from a&nbsp;restoration&nbsp;spell.</p>\n<p>Cure&nbsp;2 consecutive saves</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -191,9 +206,8 @@
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
-        "fusions": [],
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -286,22 +300,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -309,8 +325,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -323,11 +339,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -341,7 +353,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 16,
         "attributes": {
@@ -362,7 +374,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -371,7 +382,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -393,13 +404,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d8+8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "electricity": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -409,7 +433,6 @@
           "unidentified": "",
           "value": "<p>As standard action, a thorgothrel can reduce its integrated force field’s temporary Hit Points by 2 to unleash an electrical blast at a single target within 100 feet. As a full action, it can reduce the Hit Points of its integrated force field by 6 to unleash its electrical blast at up to 3 separate targets within 100 feet. The thorgothrel can’t use this ability if its integrated force field lacks enough temporary Hit Points to spend.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -418,9 +441,8 @@
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
-        "fusions": [],
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -513,22 +535,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -536,8 +560,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -550,11 +574,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -562,12 +582,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -576,7 +605,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -586,7 +616,7 @@
           "unidentified": "",
           "value": "<p>A thorgothrel’s natural substance boils away painfully when it isn’t protected by its integrated force field. A thorgothrel that begins its turn with 0 temporary Hit Points from its force field loses 4d4 Hit Points and is @UUID[Compendium.sfrpg.conditions.Item.yUtkoIshf4dPruNd]{Off-Target} until the end of its turn. Sublimation does not occur within a vacuum or within carefully modulated environments that mimic the atmosphere of the thorgothrel’s poisonous home world.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -597,34 +627,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }

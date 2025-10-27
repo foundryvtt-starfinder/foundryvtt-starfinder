@@ -11,21 +11,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -34,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -44,7 +53,7 @@
           "unidentified": "",
           "value": "<p>Despite being true devils, levalochs have a number of immunities common to constructs. They are immune to ability damage, ability drain, death effects, @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{disease}, energy drain, exhaustion, fatigue, necromancy effects, negative levels, nonlethal damage, paralysis, sleep, and stunning.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -55,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -93,11 +104,7 @@
       "type": "weapon",
       "img": "icons/weapons/polearms/trident-silver-blue.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -111,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 17,
         "attributes": {
@@ -132,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": null,
@@ -141,7 +147,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -163,13 +169,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d8 +12",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -179,7 +198,6 @@
           "unidentified": "",
           "value": "<p>Levalochs study weapon technology of the mortal realm with&nbsp;keen interest. The devils have wielded trident-like weapons for&nbsp;millennia, but using fiendish ingenuity and information gained&nbsp;via infernal pacts with mortal weapon researchers, levalochs&nbsp;have developed ways to integrate modern technology into&nbsp;their tridents, combining cutting-edge science with ancient&nbsp;tradition. The tridents included in the table above are examples&nbsp;of levaloch successes in this area and are now common in the&nbsp;hands of levalochs throughout the planes.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -189,7 +207,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 7,
         "modifiers": [],
@@ -285,10 +303,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -296,11 +312,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA2 pg. 37",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -308,7 +329,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -322,7 +343,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -337,7 +357,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 17,
         "attributes": {
@@ -358,7 +378,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -367,7 +386,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -389,13 +408,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6 +12",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -405,7 +437,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -415,7 +446,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -425,22 +456,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -448,8 +481,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -462,11 +495,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/laser-rifle-azimuth.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -479,8 +508,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 15,
         "attributes": {
@@ -501,7 +530,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": 40,
@@ -510,7 +538,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -552,13 +580,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d6 +7",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -568,7 +609,6 @@
           "unidentified": "",
           "value": "<p>With its snub, squared barrel and internal reinforcements, a laser rifle is sturdy and dependable.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -578,7 +618,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 6,
         "modifiers": [],
@@ -674,10 +714,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 120
+          "value": "120"
         },
         "rollNotes": "",
         "save": {
@@ -685,12 +723,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 176",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
-          "units": "",
           "value": ""
         },
         "usage": {
@@ -698,7 +740,7 @@
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -712,11 +754,7 @@
       "type": "weapon",
       "img": "icons/tools/fishing/net-gold.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -730,7 +768,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 15,
         "attributes": {
@@ -751,7 +789,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": 1,
@@ -760,7 +797,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -790,7 +827,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -800,7 +838,6 @@
           "unidentified": "",
           "value": "<p>Created from specialized nylon fibers that contract in response to struggle, nyfiber nets are weighted along the edges to more effectively entangle their targets. Attacks with the net target KAC.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -810,7 +847,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 2,
         "modifiers": [],
@@ -906,10 +943,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "rollNotes": "",
         "save": {
@@ -917,11 +952,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 179",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -929,7 +969,7 @@
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -943,11 +983,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -955,12 +991,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -969,7 +1014,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -979,7 +1025,7 @@
           "unidentified": "",
           "value": "<p>If a levaloch hits an entangled foe with an attack, the target takes 2d6 additional damage of the same type.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -990,19 +1036,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "a2e5dfe0-d906-4ef3-9ccb-d0a1009e25eb",
             "name": "Merciless Blow",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "MpqJR93Lz4jejv6Y",
-              "itemId": "8lny3DmuRw3KXF1e"
-            },
+            "damage": null,
             "effectType": "all-damage",
             "enabled": false,
+            "limitTo": null,
             "max": 12,
             "modifier": "2d6",
             "modifierType": "formula",
@@ -1014,30 +1058,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1048,21 +1094,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1071,7 +1125,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1081,7 +1136,7 @@
           "unidentified": "",
           "value": "<p>Difficult terrain doesn’t hamper a levaloch’s movement.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1092,34 +1147,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1130,11 +1187,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1142,12 +1195,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1156,7 +1218,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1166,7 +1229,7 @@
           "unidentified": "",
           "value": "<p>Devils gain a +1 morale bonus to attack rolls and AC while adjacent to a levaloch.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1177,19 +1240,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "e4937094-b63b-4bfc-8abc-441eed8130e2",
             "name": "Phalanx",
             "type": "morale",
             "condition": "",
-            "container": {
-              "actorId": "MpqJR93Lz4jejv6Y",
-              "itemId": "d8qRrEdlBJIzSmx3"
-            },
+            "damage": null,
             "effectType": "ac",
             "enabled": false,
+            "limitTo": null,
             "max": 1,
             "modifier": "1",
             "modifierType": "formula",
@@ -1203,12 +1264,10 @@
             "name": "Phalanx",
             "type": "morale",
             "condition": "",
-            "container": {
-              "actorId": "MpqJR93Lz4jejv6Y",
-              "itemId": "d8qRrEdlBJIzSmx3"
-            },
+            "damage": null,
             "effectType": "all-attacks",
             "enabled": false,
+            "limitTo": null,
             "max": 1,
             "modifier": "1",
             "modifierType": "formula",
@@ -1220,30 +1279,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1254,11 +1315,7 @@
       "type": "weapon",
       "img": "icons/weapons/polearms/trident-silver-blue.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -1272,7 +1329,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1293,7 +1350,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": null,
@@ -1302,7 +1358,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1324,13 +1380,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d8 + @mod",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1340,7 +1409,6 @@
           "unidentified": "",
           "value": "<p>Levalochs study weapon technology of the mortal realm with&nbsp;keen interest. The devils have wielded trident-like weapons for&nbsp;millennia, but using fiendish ingenuity and information gained&nbsp;via infernal pacts with mortal weapon researchers, levalochs&nbsp;have developed ways to integrate modern technology into&nbsp;their tridents, combining cutting-edge science with ancient&nbsp;tradition. The tridents included in the table above are examples&nbsp;of levaloch successes in this area and are now common in the&nbsp;hands of levalochs throughout the planes.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1350,7 +1418,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 7,
         "modifiers": [],
@@ -1446,10 +1514,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -1457,11 +1523,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA2 pg. 37",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1469,7 +1540,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -1483,11 +1554,7 @@
       "type": "weapon",
       "img": "icons/tools/fishing/net-gold.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -1501,7 +1568,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1522,7 +1589,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": 1,
@@ -1531,7 +1597,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1561,7 +1627,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1571,7 +1638,6 @@
           "unidentified": "",
           "value": "<p>Created from specialized nylon fibers that contract in response to struggle, nyfiber nets are weighted along the edges to more effectively entangle their targets. Attacks with the net target KAC.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1581,7 +1647,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 2,
         "modifiers": [],
@@ -1677,10 +1743,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "rollNotes": "",
         "save": {
@@ -1688,11 +1752,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 179",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1700,7 +1769,7 @@
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -1714,10 +1783,9 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/default/spell-book.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "none",
           "condition": "",
@@ -1734,7 +1802,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1744,7 +1812,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1754,14 +1823,14 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -1777,26 +1846,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "school": "",
+        "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "sr": false,
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -1808,11 +1879,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/teleport.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1830,8 +1897,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1841,7 +1908,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1849,16 +1917,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This spell instantly transports you to a designated destination within 2,000 miles. Interplanar and interplanetary travel is not possible, and neither is travel between two moving starships during combat, though you might be able to teleport to a planet’s surface from an orbiting starship. You can bring along objects as long as their weight doesn’t exceed your maximum bulk limit. You can also bring up to five additional willing or unconscious Medium or smaller creatures (carrying gear or objects up to its maximum load) or their equivalent. A Large creature counts as two Medium creatures, and a Huge creature counts as four Medium creatures. All creatures to be transported must be in contact with one another, and at least one of those creatures must be in contact with you. As the caster, you need not attempt a saving throw, nor is spell resistance applicable to you. Only objects held or in use by another creature receive saving throws and benefit from spell resistance.</p>\n<p>You must have some clear idea of the location and layout of the destination. The clearer your mental image, the more likely the teleportation works. Areas of strong physical or magical energy can make teleportation more hazardous or even impossible. To see how well the teleportation works, roll d% and consult Table 10–1. Refer to the following information for definitions of the terms on the table.</p>\n<p><strong>Familiarity:</strong> “Very familiar” describes a place you have been very often and where you feel at home. “Studied carefully” describes a place you know well, either because you can currently physically see it or because you’ve been there often. “Seen casually” describes a place you have been to more than once but with which you are not very familiar. “Viewed once” describes a place you have seen once in person or have extensively studied through scrying magic, remote cameras, or recorded images (for a remote-viewed location, you still need to have a clear idea of the location; you can’t teleport to an unknown location that you’ve seen in a holovid).</p>\n<p>“False destination” describes a place that doesn’t truly exist, or if you are teleporting to an otherwise familiar location, it is a place that no longer exists as such or has been so completely altered as to no longer be familiar to you. When traveling to a false destination, roll 1d20+80 to obtain results on the table, rather than rolling d%, since there is no real destination for you to hope to arrive at or even be off target from.</p>\n<p><strong>On Target:</strong> You appear where you want to be.</p>\n<p><strong>Off Target:</strong> You appear safely a random distance away from the destination in a random direction. The distance off target is d% of the distance that was to be traveled. The direction off target is determined randomly.</p>\n<p><strong>Similar Area:</strong> You wind up in an area that’s visually or thematically similar to the target area. Generally, you appear in the closest similar place within range. If no such area exists within the spell’s range, the spell simply fails instead.</p>\n<p><strong>Mishap:</strong> You and anyone else teleporting with you have gotten “scrambled.” You each take 2d10 damage, and you reroll on the chart to see where you wind up. For these rerolls, roll 1d20+80. Each time “mishap” comes up, the creatures take more damage and must reroll.</p>\n<table>\n<tbody>\n<tr>\n<td style=\"width: 114.683px; text-align: center;\"><strong>Familiarity</strong></td>\n<td style=\"width: 66.9833px; text-align: center;\"><strong>On Target</strong></td>\n<td style=\"width: 68.8333px; text-align: center;\"><strong>Off Target</strong></td>\n<td style=\"width: 85.1333px; text-align: center;\"><strong>Similar Area</strong></td>\n<td style=\"width: 53.3667px; text-align: center;\"><strong>Mishap</strong></td>\n</tr>\n<tr>\n<td style=\"width: 114.683px; text-align: center;\">Very familiar</td>\n<td style=\"width: 66.9833px; text-align: center;\">1–97</td>\n<td style=\"width: 68.8333px; text-align: center;\">98–99</td>\n<td style=\"width: 85.1333px; text-align: center;\">100</td>\n<td style=\"width: 53.3667px; text-align: center;\">—</td>\n</tr>\n<tr>\n<td style=\"width: 114.683px; text-align: center;\">Studied carefully</td>\n<td style=\"width: 66.9833px; text-align: center;\">1–94</td>\n<td style=\"width: 68.8333px; text-align: center;\">95–97</td>\n<td style=\"width: 85.1333px; text-align: center;\">98–99</td>\n<td style=\"width: 53.3667px; text-align: center;\">100</td>\n</tr>\n<tr>\n<td style=\"width: 114.683px; text-align: center;\">Seen casually</td>\n<td style=\"width: 66.9833px; text-align: center;\">1–88</td>\n<td style=\"width: 68.8333px; text-align: center;\">89–94</td>\n<td style=\"width: 85.1333px; text-align: center;\">95–98</td>\n<td style=\"width: 53.3667px; text-align: center;\">99–100</td>\n</tr>\n<tr>\n<td style=\"width: 114.683px; text-align: center;\">Viewed once</td>\n<td style=\"width: 66.9833px; text-align: center;\">1–76</td>\n<td style=\"width: 68.8333px; text-align: center;\">77–88</td>\n<td style=\"width: 85.1333px; text-align: center;\">89–96</td>\n<td style=\"width: 53.3667px; text-align: center;\">97–100</td>\n</tr>\n<tr>\n<td style=\"width: 114.683px; text-align: center;\">False destination</td>\n<td style=\"width: 66.9833px; text-align: center;\">—</td>\n<td style=\"width: 68.8333px; text-align: center;\">—</td>\n<td style=\"width: 85.1333px; text-align: center;\">81–92</td>\n<td style=\"width: 53.3667px; text-align: center;\">93–100</td>\n</tr>\n</tbody>\n</table>"
+          "value": "<p>This spell instantly transports you to a designated destination within 2,000 miles. Interplanar and interplanetary travel is not possible, and neither is travel between two moving starships during combat, though you might be able to teleport to a planet’s surface from an orbiting starship. You can bring along objects as long as their weight doesn’t exceed your maximum bulk limit. You can also bring up to five additional willing or unconscious Medium or smaller creatures (carrying gear or objects up to its maximum load) or their equivalent. A Large creature counts as two Medium creatures, and a Huge creature counts as four Medium creatures. All creatures to be transported must be in contact with one another, and at least one of those creatures must be in contact with you. As the caster, you need not attempt a saving throw, nor is spell resistance applicable to you. Only objects held or in use by another creature receive saving throws and benefit from spell resistance.</p>\n<p>You must have some clear idea of the location and layout of the destination. The clearer your mental image, the more likely the teleportation works. Areas of strong physical or magical energy can make teleportation more hazardous or even impossible. To see how well the teleportation works, roll d% and consult Table 10–1. Refer to the following information for definitions of the terms on the table.</p>\n<p><strong>Familiarity:</strong> “Very familiar” describes a place you have been very often and where you feel at home. “Studied carefully” describes a place you know well, either because you can currently physically see it or because you’ve been there often. “Seen casually” describes a place you have been to more than once but with which you are not very familiar. “Viewed once” describes a place you have seen once in person or have extensively studied through scrying magic, remote cameras, or recorded images (for a remote-viewed location, you still need to have a clear idea of the location; you can’t teleport to an unknown location that you’ve seen in a holovid).</p>\n<p>“False destination” describes a place that doesn’t truly exist, or if you are teleporting to an otherwise familiar location, it is a place that no longer exists as such or has been so completely altered as to no longer be familiar to you. When traveling to a false destination, roll 1d20+80 to obtain results on the table, rather than rolling d%, since there is no real destination for you to hope to arrive at or even be off target from.</p>\n<p><strong>On Target:</strong> You appear where you want to be.</p>\n<p><strong>Off Target:</strong> You appear safely a random distance away from the destination in a random direction. The distance off target is d% of the distance that was to be traveled. The direction off target is determined randomly.</p>\n<p><strong>Similar Area:</strong> You wind up in an area that’s visually or thematically similar to the target area. Generally, you appear in the closest similar place within range. If no such area exists within the spell’s range, the spell simply fails instead.</p>\n<p><strong>Mishap:</strong> You and anyone else teleporting with you have gotten “scrambled.” You each take 2d10 damage, and you reroll on the chart to see where you wind up. For these rerolls, roll 1d20+80. Each time “mishap” comes up, the creatures take more damage and must reroll.</p>\n<table>\n<tbody>\n<tr>\n<td style=\"width:114.683px;text-align:center\"><strong>Familiarity</strong></td>\n<td style=\"width:66.9833px;text-align:center\"><strong>On Target</strong></td>\n<td style=\"width:68.8333px;text-align:center\"><strong>Off Target</strong></td>\n<td style=\"width:85.1333px;text-align:center\"><strong>Similar Area</strong></td>\n<td style=\"width:53.3667px;text-align:center\"><strong>Mishap</strong></td>\n</tr>\n<tr>\n<td style=\"width:114.683px;text-align:center\">Very familiar</td>\n<td style=\"width:66.9833px;text-align:center\">1–97</td>\n<td style=\"width:68.8333px;text-align:center\">98–99</td>\n<td style=\"width:85.1333px;text-align:center\">100</td>\n<td style=\"width:53.3667px;text-align:center\">—</td>\n</tr>\n<tr>\n<td style=\"width:114.683px;text-align:center\">Studied carefully</td>\n<td style=\"width:66.9833px;text-align:center\">1–94</td>\n<td style=\"width:68.8333px;text-align:center\">95–97</td>\n<td style=\"width:85.1333px;text-align:center\">98–99</td>\n<td style=\"width:53.3667px;text-align:center\">100</td>\n</tr>\n<tr>\n<td style=\"width:114.683px;text-align:center\">Seen casually</td>\n<td style=\"width:66.9833px;text-align:center\">1–88</td>\n<td style=\"width:68.8333px;text-align:center\">89–94</td>\n<td style=\"width:85.1333px;text-align:center\">95–98</td>\n<td style=\"width:53.3667px;text-align:center\">99–100</td>\n</tr>\n<tr>\n<td style=\"width:114.683px;text-align:center\">Viewed once</td>\n<td style=\"width:66.9833px;text-align:center\">1–76</td>\n<td style=\"width:68.8333px;text-align:center\">77–88</td>\n<td style=\"width:85.1333px;text-align:center\">89–96</td>\n<td style=\"width:53.3667px;text-align:center\">97–100</td>\n</tr>\n<tr>\n<td style=\"width:114.683px;text-align:center\">False destination</td>\n<td style=\"width:66.9833px;text-align:center\">—</td>\n<td style=\"width:68.8333px;text-align:center\">—</td>\n<td style=\"width:85.1333px;text-align:center\">81–92</td>\n<td style=\"width:53.3667px;text-align:center\">93–100</td>\n</tr>\n</tbody>\n</table>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -1874,10 +1942,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "mi",
-          "value": 2000
+          "value": "2000"
         },
         "rollNotes": "",
         "save": {
@@ -1886,14 +1952,19 @@
           "descriptor": "object"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 381",
         "sr": true,
         "target": {
-          "type": "",
           "value": "you and touched objects and other touched willing or unconscious creatures"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1905,7 +1976,6 @@
       "type": "container",
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -1924,7 +1994,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [
@@ -1945,7 +2014,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1969,7 +2038,7 @@
               "affectsEncumbrance": true,
               "amount": 1000,
               "subtype": "",
-              "weightProperty": "bulk"
+              "weightProperty": ""
             }
           ]
         },
@@ -1982,13 +2051,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1998,11 +2069,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/laser-rifle-azimuth.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -2015,8 +2082,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -2037,7 +2104,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": 40,
@@ -2051,7 +2117,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -2093,13 +2159,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2109,7 +2188,6 @@
           "unidentified": "",
           "value": "<p>With its snub, squared barrel and internal reinforcements, a laser rifle is sturdy and dependable.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -2119,7 +2197,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 6,
         "modifiers": [],
@@ -2215,10 +2293,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 120
+          "value": "120"
         },
         "rollNotes": "",
         "save": {
@@ -2226,12 +2302,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 176",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
-          "units": "",
           "value": ""
         },
         "usage": {
@@ -2239,7 +2319,7 @@
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -2253,34 +2333,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 40,
           "value": 40
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -2289,14 +2354,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 40</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
+        "modifiers": [],
         "price": 330,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true
@@ -2308,34 +2372,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 40,
           "value": 40
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -2344,14 +2393,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 40</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
+        "modifiers": [],
         "price": 330,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true
@@ -2363,11 +2411,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2375,12 +2419,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2389,7 +2442,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2399,7 +2453,7 @@
           "unidentified": "",
           "value": "<p>(SP)</p>\n<p>The creature can attempt to summon creatures of the same creature type as itself as a full action. The summoned ally returns to the place from which it came after 1 hour.</p>\n<p>Guidelines: Choose either a creature of the same CR as the monster (with a 35% chance of success) or a creature with a CR no greater than the monster’s — 5 (with a 60% chance of success).</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -2410,34 +2464,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }

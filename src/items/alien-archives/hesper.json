@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -23,12 +19,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -37,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -47,7 +53,7 @@
           "unidentified": "",
           "value": "<p>If a hesper spends 1 hour in close contact with a starship’s power core or another large power source (such as a fusion reactor), it can form a long-term bond. A hesper can merge with its bonded reactor, gaining fast healing 5 while it remains merged. A merged hesper is aware of what happens in the reactor’s immediate vicinity, but if the reactor is broken or suffers the wrecked critical damage condition, the hesper is immediately expelled and takes 3d6 damage. If the reactor is destroyed while the hesper is merged with it, the hesper is slain instantly (Fortitude DC 15 negates). A hesper can bond with only one reactor at a time, and forming a new bond severs its previous bond.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -58,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -96,11 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "mwak",
         "activation": {
@@ -114,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 3,
         "attributes": {
@@ -135,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -144,7 +147,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -164,7 +167,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -172,9 +176,8 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A hesper can deliver an enormous dose of radiation with a touch, triggering sudden mutations and pain in living creatures. With a successful attack against a living creature’s KAC, a hesper causes the target to sprout tumors that erupt at the beginning of its next turn, causing a random mutation (roll 1d20 on the table below) that persists for 24 hours. An affected creature can negate this transformation with a successful DC 13 Fortitude saving throw. Once a creature has been affected by a hesper’s mutating touch, it becomes immune to that particular fey’s mutating touch for 24 hours.</p>\n<h2>Mutating Touch</h2>\n<table class=\"inner\" style=\"width: 534px;\">\n<tbody>\n<tr>\n<td><strong>D20</strong></td>\n<td><strong>Mutation</strong></td>\n<td><strong>Effect</strong></td>\n</tr>\n<tr>\n<td>1</td>\n<td>Additional eyes</td>\n<td>Target gains light blindness and a +4 bonus to sight-based Perception checks</td>\n</tr>\n<tr>\n<td>2–3</td>\n<td>Autonomous parasite</td>\n<td>Target takes 1d6 slashing damage as a parasite emerges</td>\n</tr>\n<tr>\n<td>4–5</td>\n<td>Bioelectric cells</td>\n<td>Technological items held by the target gain the broken condition for as long as the target holds them</td>\n</tr>\n<tr>\n<td>6–7</td>\n<td>Claws, spines, or teeth on one limb</td>\n<td>Target gains a natural melee attack that deals 1d3+Str piercing damage for Medium creatures, but it takes a –2 penalty to attacks with two-handed weapons</td>\n</tr>\n<tr>\n<td>8–9</td>\n<td>Glowing tumors</td>\n<td>Target sheds light as a lantern and takes a –5 penalty to Stealth checks</td>\n</tr>\n<tr>\n<td>10</td>\n<td>Gills</td>\n<td>Target gains the amphibious ability, but takes a –2 penalty to Fortitude saving throws</td>\n</tr>\n<tr>\n<td>11</td>\n<td>Hypertrichosis</td>\n<td>Target gains a +1 bonus to its AC, but the max Dex bonus of armor it wears decreases by 1</td>\n</tr>\n<tr>\n<td>12–13</td>\n<td>Musk gland</td>\n<td>Target gains a 30-foot aura that nauseates living creatures within it (Fortitude DC = 10 + half the target’s level or CR + the target’s Con modifier)</td>\n</tr>\n<tr>\n<td>14–15</td>\n<td>Secondary ears</td>\n<td>Target gains vulnerability to sonic damage and a +4 bonus to hearing-based Perception checks</td>\n</tr>\n<tr>\n<td>16–17</td>\n<td>Vestigial limb</td>\n<td>Target grows a useless extra limb that imparts a –2 penalty to Dexterity-based skill checks</td>\n</tr>\n<tr>\n<td>18–19</td>\n<td>Weeping sores</td>\n<td>Target takes a –2 penalty to Charisma-based skill checks</td>\n</tr>\n<tr>\n<td>20</td>\n<td>Wracking pain</td>\n<td>Target is sickened</td>\n</tr>\n</tbody>\n</table>"
+          "value": "<p>A hesper can deliver an enormous dose of radiation with a touch, triggering sudden mutations and pain in living creatures. With a successful attack against a living creature’s KAC, a hesper causes the target to sprout tumors that erupt at the beginning of its next turn, causing a random mutation (roll 1d20 on the table below) that persists for 24 hours. An affected creature can negate this transformation with a successful DC 13 Fortitude saving throw. Once a creature has been affected by a hesper’s mutating touch, it becomes immune to that particular fey’s mutating touch for 24 hours.</p>\n<h2>Mutating Touch</h2>\n<table class=\"inner\" style=\"width:534px\">\n<tbody>\n<tr>\n<td><strong>D20</strong></td>\n<td><strong>Mutation</strong></td>\n<td><strong>Effect</strong></td>\n</tr>\n<tr>\n<td>1</td>\n<td>Additional eyes</td>\n<td>Target gains light blindness and a +4 bonus to sight-based Perception checks</td>\n</tr>\n<tr>\n<td>2–3</td>\n<td>Autonomous parasite</td>\n<td>Target takes 1d6 slashing damage as a parasite emerges</td>\n</tr>\n<tr>\n<td>4–5</td>\n<td>Bioelectric cells</td>\n<td>Technological items held by the target gain the broken condition for as long as the target holds them</td>\n</tr>\n<tr>\n<td>6–7</td>\n<td>Claws, spines, or teeth on one limb</td>\n<td>Target gains a natural melee attack that deals 1d3+Str piercing damage for Medium creatures, but it takes a –2 penalty to attacks with two-handed weapons</td>\n</tr>\n<tr>\n<td>8–9</td>\n<td>Glowing tumors</td>\n<td>Target sheds light as a lantern and takes a –5 penalty to Stealth checks</td>\n</tr>\n<tr>\n<td>10</td>\n<td>Gills</td>\n<td>Target gains the amphibious ability, but takes a –2 penalty to Fortitude saving throws</td>\n</tr>\n<tr>\n<td>11</td>\n<td>Hypertrichosis</td>\n<td>Target gains a +1 bonus to its AC, but the max Dex bonus of armor it wears decreases by 1</td>\n</tr>\n<tr>\n<td>12–13</td>\n<td>Musk gland</td>\n<td>Target gains a 30-foot aura that nauseates living creatures within it (Fortitude DC = 10 + half the target’s level or CR + the target’s Con modifier)</td>\n</tr>\n<tr>\n<td>14–15</td>\n<td>Secondary ears</td>\n<td>Target gains vulnerability to sonic damage and a +4 bonus to hearing-based Perception checks</td>\n</tr>\n<tr>\n<td>16–17</td>\n<td>Vestigial limb</td>\n<td>Target grows a useless extra limb that imparts a –2 penalty to Dexterity-based skill checks</td>\n</tr>\n<tr>\n<td>18–19</td>\n<td>Weeping sores</td>\n<td>Target takes a –2 penalty to Charisma-based skill checks</td>\n</tr>\n<tr>\n<td>20</td>\n<td>Wracking pain</td>\n<td>Target is sickened</td>\n</tr>\n</tbody>\n</table>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -184,7 +187,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -281,10 +284,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -292,11 +292,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -304,8 +309,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -318,11 +323,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/energy_ray.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rsak",
         "activation": {
@@ -340,8 +341,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 5,
         "chatFlavor": "",
@@ -353,11 +354,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d3",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -367,14 +383,14 @@
           "unidentified": "",
           "value": "<p>When you cast this spell, choose acid, cold, electricity, or fire; the spell gains that descriptor. You fire a ray at the target, and you must make a ranged attack against its EAC. On a hit, the ray deals 1d3 damage of the chosen energy type.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -390,26 +406,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 353",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature or object"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -421,11 +439,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/jolting_surge.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "msak",
         "activation": {
@@ -443,8 +457,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -456,13 +470,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "electricity": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -472,14 +499,14 @@
           "unidentified": "",
           "value": "<p>You touch a target with a device you’re holding that uses electricity, requiring a melee attack against the target’s EAC. Alternatively, you can instead touch an electrical device a target is wearing (or a target that is an electrical device, such as a robot) with your hand, gaining a +2 bonus to your attack roll. Either way, if your attack hits, the electrical device surges out of control, dealing 4d6 electricity damage to your target.</p>\n<p>Casting this spell doesn’t provoke attacks of opportunity.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -495,26 +522,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 363",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature or object"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -526,11 +555,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/overheat.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -549,7 +574,7 @@
           "shapable": false,
           "shape": "cone",
           "units": "ft",
-          "value": 15
+          "value": "15"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -561,13 +586,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -577,14 +615,14 @@
           "unidentified": "",
           "value": "<p>You collect the heat generated by nearby bodies and devices and vent it outward in a thermal wave, dealing 2d8 fire damage to creatures and objects in the area.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -600,10 +638,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -612,14 +647,19 @@
           "descriptor": "half"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 367",
         "sr": true,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -631,11 +671,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/energy_ray.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rsak",
         "activation": {
@@ -653,8 +689,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -666,11 +702,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d3",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -680,14 +731,14 @@
           "unidentified": "",
           "value": "<p>When you cast this spell, choose acid, cold, electricity, or fire; the spell gains that descriptor. You fire a ray at the target, and you must make a ranged attack against its EAC. On a hit, the ray deals 1d3 damage of the chosen energy type.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -703,26 +754,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 353",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature or object"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -734,11 +787,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mending.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "heal",
         "activation": {
@@ -756,8 +805,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -769,13 +818,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "healing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": true,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -785,14 +847,14 @@
           "unidentified": "",
           "value": "<p>This spell repairs damaged objects and constructs, restoring 1d4 Hit Points. If the object has the broken condition, this condition is removed if the object is restored to at least half its original Hit Points. All of the pieces of an object must be present for this spell to function. A construct can benefit from this spell only once per day. Magic items can be repaired by this spell, but magic items that are destroyed don’t have their magic abilities restored. This spell doesn’t reverse effects that warp or otherwise transmute items, but it can still repair damage dealt to such items.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -808,10 +870,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "rollNotes": "",
         "save": {
@@ -820,14 +880,19 @@
           "descriptor": "negate"
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 364",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one object of up to 1 bulk or one construct of up to Medium size"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -839,11 +904,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/detect_radiation.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -862,7 +923,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 120
+          "value": "120"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -872,7 +933,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -882,14 +944,14 @@
           "unidentified": "",
           "value": "<p>You detect radiation in the surrounding area, and you can determine the specific intensity of the radiation of one area or object within the spell’s area each round without taking an action (see Radiation on page 403 for more details). The spell can penetrate barriers, but 3 feet of dirt or wood, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or any force field blocks it.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value*10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -905,26 +967,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 348",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }

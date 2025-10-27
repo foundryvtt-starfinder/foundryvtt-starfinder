@@ -11,21 +11,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -34,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -44,7 +53,7 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -55,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -93,11 +104,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -105,12 +112,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -119,7 +135,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -129,7 +146,7 @@
           "unidentified": "",
           "value": "<p>(EX)</p>\n<p>Flanking the creature does not grant any bonuses, and abilities that function only against a creature that is flanked do not function against it.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -140,34 +157,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -178,7 +197,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -193,7 +211,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 30,
         "attributes": {
@@ -214,7 +232,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -223,7 +240,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -245,13 +262,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "9d8+30",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -261,7 +291,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -271,7 +300,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -281,22 +310,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -304,8 +335,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -318,11 +349,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -336,7 +363,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 28,
         "attributes": {
@@ -357,7 +384,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -366,7 +392,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -388,11 +414,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "5d10+19",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -402,7 +443,6 @@
           "unidentified": "",
           "value": "<p>A many-miened one’s energy beam has a range increment of 80 feet. When making its first energy beam attack of its turn, the construct can give the attack the line and unwieldy special weapon properties. The damage type dealt by the energy beam is based on the construct’s current phase (see Change Phase on page 70).</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -412,7 +452,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -508,10 +548,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 80
+          "value": "80"
         },
         "rollNotes": "",
         "save": {
@@ -519,11 +557,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -531,7 +574,7 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -545,11 +588,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -557,12 +596,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -571,7 +619,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -581,7 +630,7 @@
           "unidentified": "",
           "value": "<p>(SU)</p>\n<p>As a standard action, the creature can create a 20-foot-radius area of darkness centered on itself, which negates the effects of all nonmagical light sources in that area. This darkness lasts for a number of minutes equal to the creature’s CR, and the creature can dismiss the effect as a standard action. The darkness doesn’t move with the creature. Unless otherwise noted, any magic source of light can increase the light level in the area as normal.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -592,34 +641,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -630,21 +681,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -653,7 +712,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -663,7 +723,7 @@
           "unidentified": "",
           "value": "<p>A many-miened one can cause its slam attack or any weapon it wields to deal half its damage as another type of damage based on the construct’s current phase: acid (half), cold (new), electricity (crescent), fire (full), or sonic (gibbous).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -674,34 +734,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -712,11 +774,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -724,12 +782,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -738,7 +805,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -748,7 +816,7 @@
           "unidentified": "",
           "value": "<p>A many-miened one has a multitude of faces spaced about its floating head, and once per round it can rotate its head to display a different face representing one of five lunar phases: crescent, full, gibbous, half, or new. Each phase grants the construct one or more special abilities, a skill with a +32 bonus, and immunity to one damage type. Most phases also grant several spell-like abilities, and a many-miened one can cast its 6th-level spell-like abilities four times per day in any combination. A many-miened one’s phase continues until the construct changes its phase again, at which point it loses its earlier phase benefits and gains the new phase benefits immediately.</p>\n<p><strong>Crescent</strong>: The crescent moon phase grants the construct destructive speed. The phase’s damage is electricity, the skill is Intimidate, and the spell-like abilities are chain surge and dimension door. The many-miened one gains the multiattack ability usable with its slam and energy beam attacks. It also gains a +3 bonus to Reflex saving throws and a +10-foot enhancement bonus to its speed.</p>\n<p><strong>Full</strong>: The full moon phase grants the construct blazing combat power. The phase’s damage is fire, the skill is Athletics, and the phase grants no spell-like abilities. The many-miened one gains a +2 enhancement bonus to its attack rolls, Fortitude saving throws, and AC. In addition, it gains the Cleave, Deadly Aim, Great Cleave, and Penetrating attack feats.</p>\n<p><strong>Gibbous</strong>: The gibbous moon phase grants the construct powerful telepathic abilities. The phase’s damage is sonic, the skill is Bluff, and the spell-like abilities are @UUID[Compendium.sfrpg.spells.Item.wSeE9HyAmM7lTdpo]{Confusion} and mind thrust (6th level). The many-miened one gains telepathy and blindsight (thought) with ranges of 200 feet each. It can also apply the blast special weapon property to its energy beam attack, reducing the range increment for such attacks to 60 feet.</p>\n<p><strong>Half</strong>: The half moon phase grants the construct poise and gravity powers. The phase’s damage is acid, the skill is Acrobatics, and the spell-like abilities are control gravity, gravitational singularity, and gravity well. The many-miened one gains the Deflect Projectiles feat as well as a fly speed of 60 feet with perfect maneuverability.</p>\n<p><strong>New</strong>: The new moon phase grants the construct stealth and suppression abilities. The phase’s damage is cold, the skill is Stealth, and the spell-like abilities are greater invisibility and veil. The many-miened one gains spell resistance 30 and the Dispelling Strike feat.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -759,34 +827,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -797,11 +867,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -809,12 +875,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -823,7 +898,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -833,7 +909,7 @@
           "unidentified": "",
           "value": "<p>(SU)</p>\n<p>The creature can fly through space at standard navigation and astrogation speeds (Core Rulebook 290) using Piloting to navigate. If it uses a skill other than Piloting for skill checks to astrogate, that skill is listed in parentheses.</p>\n<p>Guidelines: Most creatures with spaceflight also have @UUID[Compendium.sfrpg.universal-creature-rules.Item.Zo5poFuFlNvLYMwh]{Void Adaptation}.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -844,34 +920,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -882,11 +960,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -894,12 +968,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -908,7 +991,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -918,7 +1002,7 @@
           "unidentified": "",
           "value": "<p>(EX)</p>\n<p>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -929,34 +1013,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -967,11 +1053,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/confusion.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -990,7 +1072,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 15
+          "value": "15"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1000,7 +1082,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1008,16 +1091,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This spell causes @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confusion} in all creatures in the area, making them unable to determine their actions. Any confused creature that is attacked automatically attacks or attempts to attack its attackers on its next turn, as long as it is still confused at the start of its next turn. Note that a confused creature will not make attacks of opportunity against any foe that it is not already devoted to attacking (either because of its most recent action or because it has just been attacked). For confused creatures that have not been attacked, roll on the following table at the start of each affected creature’s turn each round to see what it does in that round.</p>\n<table style=\"width: 403px; height: 85px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; background-color: #34495e; text-align: center; width: 44px;\">\n<p style=\"color: white;\">D%</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">1-25</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">26-50</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">51-75</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">76-100</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>A confused creature that can’t carry out the indicated action does nothing but babble incoherently. Attackers are not at any special advantage when attacking a confused target.</p>"
+          "value": "<p>This spell causes @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confusion} in all creatures in the area, making them unable to determine their actions. Any confused creature that is attacked automatically attacks or attempts to attack its attackers on its next turn, as long as it is still confused at the start of its next turn. Note that a confused creature will not make attacks of opportunity against any foe that it is not already devoted to attacking (either because of its most recent action or because it has just been attacked). For confused creatures that have not been attacked, roll on the following table at the start of each affected creature’s turn each round to see what it does in that round.</p>\n<table style=\"width:403px;height:85px\" border=\"1\">\n<tbody>\n<tr style=\"height:17px\">\n<td style=\"height:17px;background-color:#34495e;text-align:center;width:44px\">\n<p style=\"color:white\">D%</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">1-25</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">26-50</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">51-75</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">76-100</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>A confused creature that can’t carry out the indicated action does nothing but babble incoherently. Attackers are not at any special advantage when attacking a confused target.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "1d100",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1033,10 +1116,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -1045,14 +1125,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 344",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1064,11 +1149,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/dimension-door.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1087,7 +1168,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1097,7 +1178,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1107,14 +1189,14 @@
           "unidentified": "",
           "value": "<p>You instantly transfer yourself from your current location to any other spot within range. You always arrive at exactly the spot desired—whether by simply visualizing the area or by stating its direction. You can bring along objects as long as their weight doesn’t exceed your maximum load. You can also bring up to four additional willing or @UUID[Compendium.sfrpg.conditions.Item.lf8pbezocjYIvR9y]{Unconscious} Medium or smaller creatures (carrying gear or objects up to their maximum load) or their equivalent. A Large creature counts as two Medium creatures, and a Huge creature counts as two Large creatures. All creatures to be transported must be in contact with one another, and at least one of those creatures must be in contact with you. After using this spell, you can’t take any other actions until your next turn (and each creature traveling with you can’t take any other actions until its next turn).</p>\n<p>If you arrive in a place that is already occupied by a solid body, you and each creature traveling with you each take 1d6 damage and are shunted to a random open space on a suitable surface within 100 feet of the intended location. If there is no free space within 100 feet, you and each creature traveling with you take 2d6 additional damage and are shunted to a free space within 1,000 feet. If there is no free space within 1,000 feet, you and each creature traveling with you take 4d6 additional damage and the spell simply fails.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1130,10 +1212,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "long",
-          "value": null
+          "units": "long"
         },
         "rollNotes": "",
         "save": {
@@ -1142,14 +1221,19 @@
           "descriptor": "object"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 349",
         "sr": false,
         "target": {
-          "type": "",
           "value": "you and touched objects or touched willing or unconscious creatures"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1161,11 +1245,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/chain_surge.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1184,7 +1264,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1196,13 +1276,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "13d12",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "electricity": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1212,14 +1305,14 @@
           "unidentified": "",
           "value": "<p>Choose a primary target as well as up to 10 secondary targets within 30 feet of the primary target. The primary target must be carrying or wielding some kind of equipment that uses electricity. This spell causes the primary target’s electrical equipment to surge with deadly electricity, which arcs out to strike the secondary targets, dealing 13d12 electricity damage to all targets chosen.</p>\n<p>If the primary target fails its Reflex save, the spell also shorts out one of that target’s electrical items (your choice) for 1 round, meaning the primary target can’t use it for that period. If the primary target negates the effect entirely (such as with evasion), the secondary targets also suffer no effects.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 6,
         "materials": {
@@ -1235,10 +1328,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "long",
-          "value": null
+          "units": "long"
         },
         "rollNotes": "",
         "save": {
@@ -1247,14 +1337,19 @@
           "descriptor": "half"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 342",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one primary target and up to 10 secondary targets, no two of which can be more than 30 ft. from the primary target"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1266,11 +1361,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/control_gravity.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1289,7 +1380,7 @@
           "shapable": true,
           "shape": "cube",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1299,7 +1390,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1309,14 +1401,14 @@
           "unidentified": "",
           "value": "<p>You can control gravity in an area, causing it to reverse, become zero-g, or become extremely strong. A creature or object within the area that succeeds at its saving throw is unaffected (though if it stays in the area, it must succeed at a new save each round or become affected), but it might still suffer secondary effects (such as an object flying up from reversed gravity, or an object falling upon it when the spell ends). You choose how to have this spell affect gravity when you cast it, and you cannot change it without recasting the spell. If two <em>control gravity</em> spells affect the same area, they negate each other in the area of overlap.</p>\n<p>If you reverse gravity in an area, you cause unattached objects and creatures in the area to fall upward and reach the top of the affected area in 1 round. If a solid object (such as a ceiling) is encountered in this fall, falling objects and creatures strike it in the same manner as they would during a normal downward fall. If an object or creature reaches the top of the spell’s area without striking anything, it remains there, oscillating slightly, until the spell ends. At the end of the spell’s duration, affected objects and creatures fall downward. Creatures who can fly or levitate can keep themselves from falling in either direction.</p>\n<p>If you increase gravity in the area, creatures and objects weigh twice as much as normal, move at half speed, can jump only half as far as normal, and can lift and carry only half as much as normal. Any flying target has its maneuverability worsened by one step (from average to clumsy, for example; minimum clumsy) and plummets to the ground unless it succeeds at a DC 25 Acrobatics check to fly to remain in the air.</p>\n<p>An area of zero-g works like the zero-g environment (see page 402). You can also use this spell to make areas of zero-g, heavy gravity, or light gravity act as normal gravity for the duration (see page 402).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value*10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 6,
         "materials": {
@@ -1332,10 +1424,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -1344,14 +1433,19 @@
           "descriptor": "negate"
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 345",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1363,11 +1457,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/gravitational_singularity.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1386,7 +1476,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1396,7 +1486,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1406,14 +1497,14 @@
           "unidentified": "",
           "value": "<p>You call into being a tiny particle of mass with infinite density. You must conjure the singularity in a square that is unoccupied by any creatures or objects. When you finish casting this spell, the singularity immediately draws all Medium and smaller creatures and unattended objects of no more than light bulk within 30 feet toward it. Each round on your turn, the singularity makes a single special combat maneuver against creatures within 30 feet with an attack bonus equal to 4 + your caster level + your key ability modifier. Compare the result to each creature’s KAC + 8. If the singularity is successful, that creature is moved 5 feet toward the singularity plus 5 additional feet for every 5 by which the result exceeds a target’s KAC + 8. Unattended objects are automatically moved 10 feet toward the singularity each round. If a creature or object is moved into the square that contains the singularity, it is sucked inside it and takes 12d6 damage at the end of its turn each round it remains within that space.</p>\n<p>A creature drawn into the singularity can take no actions except a full action to try to escape (it still takes damage during the rounds it attempts to escape). A creature must succeed at either an Athletics check (DC = 15 + 1-1/2 × your mystic level) or a DC 22 Strength check to escape the singularity. The singularity can hold up to four Medium creatures or objects (two Small creatures or objects count as one Medium creature, and so on); if it would pull in additional creatures, those creatures are simply pulled into a square adjacent to the singularity.</p>\n<p>A creature within 50 feet of the singularity has its speed reduced by half when it moves away from the singularity. However, it can move at double its normal speed when moving toward the singularity. If a creature moves within 30 feet of the singularity at any point in its movement, it is subject to the combat maneuver described above. A creature that moves neither toward nor away from the singularity moves at its normal speed.</p>\n<p>When this spell ends, the singularity disappears, and creatures and objects that were sucked into the singularity appear in the space where you conjured it (or as close as possible to that space, if they can’t all fit within it).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 6,
         "materials": {
@@ -1429,26 +1520,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 357",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1460,11 +1553,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mind_thrust.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1483,7 +1572,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1495,11 +1584,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "17d10",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1509,14 +1613,14 @@
           "unidentified": "",
           "value": "<p>You divine the most vulnerable portion of your opponent’s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.</p>\n<ul>\n<li><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n<li><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n<li><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n<li><strong>th:</strong> When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is fatigued for 1 round if it fails its saving throw.</li>\n<li><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is exhausted for 1 round if it fails its save and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n<li><strong>6th:</strong> When you cast&nbsp;mind thrust&nbsp;as a 6th-level spell, it deals 17d10 damage to the target. The target is exhausted and @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n</ul>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 6,
         "materials": {
@@ -1532,10 +1636,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -1544,14 +1645,19 @@
           "descriptor": "half"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 365",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1563,11 +1669,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/veil.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1586,7 +1688,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1596,7 +1698,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1606,14 +1709,14 @@
           "unidentified": "",
           "value": "<p>You instantly change the appearance of the targets and then maintain that appearance for the spell’s duration. You can make the targets appear to be anything you wish. The targets look, feel, and smell just like what the spell makes them resemble. Affected creatures return to their normal appearances if slain. You must succeed at a Disguise check to duplicate the appearance of a specific individual. This spell gives you a +10 bonus to such a check (since it counts as altering your form).</p>\n<p>An unwilling target can negate the spell’s effect on it by succeeding at a Will saving throw or by relying on spell resistance. Those who interact with the targets can attempt Will saving throws to disbelieve the illusion, but spell resistance doesn’t help pierce the illusion.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "concentration + 1 hour/level (D)"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 6,
         "materials": {
@@ -1629,10 +1732,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "long",
-          "value": null
+          "units": "long"
         },
         "rollNotes": "",
         "save": {
@@ -1641,14 +1741,19 @@
           "descriptor": "negate"
         },
         "school": "ill",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 384",
         "sr": true,
         "target": {
-          "type": "",
           "value": "up to one or more creatures, no two of which can be more than 30 ft. apart"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1660,11 +1765,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/gravity-well.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1683,7 +1784,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1693,7 +1794,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1703,14 +1805,14 @@
           "unidentified": "",
           "value": "<p>You alter the gravity in an area, making a central point of high gravity that pulls creatures toward it. Each creature in the area when the spell takes effect is knocked @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{@UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone}} unless it succeeds at a Reflex saving throw. Any creature that starts its turn in the area must succeed at a Reflex saving throw or be drawn 15 feet closer to the center of the area. This movement provokes attacks of opportunity. Creatures adjacent to the spell’s origin point take a –2 penalty to the save to avoid being pulled.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1726,10 +1828,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -1738,14 +1837,19 @@
           "descriptor": "negate"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "COM pg. 135",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1757,11 +1861,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/invisibility_greater.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1780,7 +1880,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1790,7 +1890,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1800,14 +1901,14 @@
           "unidentified": "",
           "value": "<p>This spell functions like&nbsp;invisibility, except it doesn’t end if the target attacks.</p>\n<h2>Invisibility</h2>\n<p>The creature or object touched becomes invisible (see page 264). If the target is a creature, any gear it is carrying vanishes as well. If you cast the spell on someone else, neither you nor your allies can see the target unless you can normally see invisible things or you employ magic to do so.</p>\n<p>The spell ends if the target attacks any creature. For purposes of this spell, an attack includes any spell or harmful effect targeting a foe or whose area or effect includes a foe. Actions directed at unattended objects don’t break the spell. Spells that specifically affect allies but not foes are not attacks for this purpose, even when they include foes in their area. Causing harm indirectly is not an attack. Thus, an invisible being can open doors, talk, eat, climb stairs, summon security forces and have them attack, start a trash compactor with foes inside, remotely trigger traps, and so forth.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1823,10 +1924,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1835,14 +1933,19 @@
           "descriptor": "harmless"
         },
         "school": "ill",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 362",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }

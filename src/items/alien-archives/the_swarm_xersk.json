@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -23,12 +19,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -37,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -47,7 +53,7 @@
           "unidentified": "",
           "value": "<h3>&nbsp;(EX)</h3>\n<h3>Members of the Swarm are bound together into a singular hive mind by a blend of exuded pheromones, imperceptible movements of antennae and limbs, electrostatic fields, and telepathic communication. All Swarm creatures with 30 feet of each other are in constant communication; if one is aware of a threat, all are. (Such awareness can spread along a “chain” of Swarm creatures under appropriate circumstances, potentially alerting distant Swarm creatures). In addition, once per round when within 30 feet of another Swarm creature, a Swarm creature can roll twice and take the better result on a saving throw against a mindaffecting effect.</h3>\n<hr />\n<h3>&nbsp;</h3>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -58,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -96,11 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -114,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 25,
         "attributes": {
@@ -135,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -144,7 +147,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -166,13 +169,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "6d8+19",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -182,7 +198,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -191,9 +206,8 @@
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
-        "fusions": [],
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -286,22 +300,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -309,8 +325,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -323,11 +339,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -335,12 +347,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -349,7 +370,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -359,7 +381,7 @@
           "unidentified": "",
           "value": "<p>A Swarm xersk’s numerous unblinking eyes sow doubt in the minds of creatures that look into them. A non-Swarm creature within 60 feet of the Swarm xersk that fails a DC 24 Will saving throw gains the @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken} condition for 1 round. This is a mind-affecting effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -370,34 +392,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -408,11 +432,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -420,12 +440,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -436,11 +465,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d6",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -450,7 +494,7 @@
           "unidentified": "",
           "value": "<p>As a standard action, a Swarm xersk can establish a parasitic psychic connection to a single creature with the @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken}, frightened, or @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked} condition. A target creature must succeed at a DC 24 Will saving throw or the Swarm xersk latches onto it mentally and begins siphoning the victim’s fear; if the creature gained the condition from one of the Swarm xersk’s spells or abilities, it takes an additional -2 penalty to this save. At the beginning of an affected target’s turn, it takes 2d6 damage, and the Swarm xersk regains Hit Points equal to half that amount (minimum 1). A Swarm xersk can be simultaneously attached to a number of victims equal to half its Wisdom modifier (5 for most Swarm xersks). An affected creature can attempt a new saving throw at the end of each of its turns to break the psychic connection and end the ability’s effects. The effects of siphon fear end automatically if an attached creature’s condition is removed. This is a mind-affecting effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -461,33 +505,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": 24,
+          "dc": "24",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -499,11 +545,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/inflic_pain_mass.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -521,8 +563,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -532,7 +574,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -542,14 +585,14 @@
           "unidentified": "",
           "value": "<p>You telepathically rack the target’s mind and body with agonizing pain that imposes a –2 penalty to ability checks, attack rolls, and skill checks. A target that succeeds at a Will saving throw reduces the duration to 1 round.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 6,
         "materials": {
@@ -565,26 +608,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": 26,
+          "dc": "26",
           "descriptor": "partial"
         },
         "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "sr": false,
         "target": {
-          "type": "",
           "value": "up to one creature/level, no two of which can be more than 30 ft. apart"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -596,11 +641,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mind_thrust.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -618,8 +659,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "The target is exhausted and stunned for 1 round if it fails its save, and it is fatigued for 1 round if it succeeds at its saving throw.",
@@ -631,11 +672,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "17d10",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -645,14 +701,14 @@
           "unidentified": "",
           "value": "<p>You divine the most vulnerable portion of your opponent’s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.</p>\n<ul>\n<li><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n<li><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n<li><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n<li><strong>th:</strong> When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is fatigued for 1 round if it fails its saving throw.</li>\n<li><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is @UUID[Compendium.sfrpg.conditions.Item.33ynSbmexuxC3cAQ]{Exhausted} for 1 round if it fails its save and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n<li><strong>6th:</strong> When you cast&nbsp;mind thrust&nbsp;as a 6th-level spell, it deals 17d10 damage to the target. The target is @UUID[Compendium.sfrpg.conditions.Item.33ynSbmexuxC3cAQ]{Exhausted} and @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n</ul>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -668,26 +724,29 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": 26,
+          "dc": "26",
           "descriptor": "half"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 365",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -699,11 +758,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/crush_skull.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rsak",
         "activation": {
@@ -721,8 +776,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 22,
         "chatFlavor": "4d8 on fail.",
@@ -734,11 +789,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "18d8",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -748,14 +818,14 @@
           "unidentified": "",
           "value": "<p>You manipulate the energy that swirls around the target’s head, pulling it inward and potentially crushing its skull. You must make a ranged attack against the target’s EAC to ensure this spell hits the necessary weak spots in the target’s head, but you can add your key ability score modifier to this attack roll instead of your Dexterity modifier if it is higher. If you hit and the target fails a Fortitude saving throw, it takes 18d8 damage. If the target succeeds at its saving throw, it instead takes 4d8 damage. The target might die from damage even if it succeeds at its saving throw; in this case, the spell is not a death effect. This spell has no effect against living creatures that don’t have an anatomical head.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -771,26 +841,29 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
           "type": "fort",
-          "dc": 25,
+          "dc": "25",
           "descriptor": "partial"
         },
         "school": "nec",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 347",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -802,11 +875,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/feeblemind.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rsak",
         "activation": {
@@ -824,8 +893,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 22,
         "chatFlavor": "",
@@ -835,7 +904,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -845,14 +915,14 @@
           "unidentified": "",
           "value": "<p>You fire a scintillating ray at your target, making a ranged attack against your target’s EAC, but you can add your key ability score bonus to this attack instead of your Dexterity modifier if it is higher. If you hit and your target fails its Will saving throw, the target creature’s Intelligence and Charisma scores each drop to 1 (a modifier of –5). The affected creature is unable to use Intelligence- or Charisma-based skills, cast spells, understand language, or communicate coherently. It still knows who its friends are and can follow them and even protect them. The target remains in this state until a&nbsp;miracle,&nbsp;psychic surgery,&nbsp;wish, or similar spell is used to cancel the effect. It can’t be removed by effects like&nbsp;break enchantment.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -868,26 +938,29 @@
         },
         "properties": {},
         "range": {
-          "additional": "10",
-          "per": "level",
           "units": "ft",
-          "value": 100
+          "value": "100"
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": 25,
+          "dc": "25",
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 354",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -899,11 +972,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/command_greater.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -921,8 +990,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -932,7 +1001,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -942,14 +1012,14 @@
           "unidentified": "",
           "value": "<p>This spell functions like <em>command</em>, except you can affect up to one creature per level and the targets continue the specified activity beyond 1 round. At the start of each commanded creature’s action after the first, it can attempt another Will saving throw to break free from the spell. Each creature must receive the same command.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -965,26 +1035,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": 25,
+          "dc": "25",
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -996,11 +1068,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/synaptic_pulse_greater.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1019,7 +1087,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1029,7 +1097,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1039,14 +1108,14 @@
           "unidentified": "",
           "value": "<p>You stun all creatures in range for 1d4 rounds. With a successful Will saving throw, a creature is instead sickened for 1 round.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "1d4",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -1062,26 +1131,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "ft",
-          "value": null
+          "units": "ft"
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": 25,
+          "dc": "25",
           "descriptor": "partial"
         },
         "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1093,11 +1164,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/fear.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1116,7 +1183,7 @@
           "shapable": false,
           "shape": "cone",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1126,7 +1193,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1136,14 +1204,14 @@
           "unidentified": "",
           "value": "<p>With a single mental nudge, you can unlock one or more targets’ deepest nightmares. A target that succeeds at its Will saving throw against this spell is @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken} for 1 round.</p>\n<ul>\n<li><strong>1st:</strong> When you cast fear as a 1st-level spell, it affects one living creature of CR 4 or lower at close range (25 feet + 5 feet/2 levels). The target must succeed at a Will saving throw or be frightened for 1d4 rounds.</li>\n<li><strong>2nd:</strong> When you cast fear as a 2nd-level spell, it affects one living creature of CR 4 or lower per 3 caster levels at medium range (100 feet + 10 feet/level), no two of which can be more than 30 feet apart. Each target must succeed at a Will saving throw or be frightened for 1 minute.</li>\n<li><strong>3rd:</strong> When you cast fear as 3rd-level spell, it affects all living creatures of CR 8 or lower in 30-foot cone-shaped burst. Each target must succeed at a Will save or become @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked} for 1 minute. If cornered, a @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked} creature begins cowering.</li>\n<li><strong>4th:</strong> When you cast&nbsp;fear&nbsp;as 4th-level spell, it affects all living creatures in 30-foot cone-shaped burst regardless of CR. Each target must succeed at a Will save or become @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked} for 1 minute. If cornered, a @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked} creature begins cowering.</li>\n</ul>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -1159,26 +1227,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": 24,
+          "dc": "24",
           "descriptor": "partial"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 354",
         "sr": true,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1190,11 +1260,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/see_invisibility.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1213,7 +1279,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1223,7 +1289,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1233,14 +1300,14 @@
           "unidentified": "",
           "value": "<p>You can see any invisible or ethereal objects or beings within your range of vision, as if they were normally visible. Such creatures are visible to you as translucent shapes, allowing you easily to discern the difference between visible and invisible or ethereal creatures.</p>\n<p>The spell doesn’t reveal the method used to obtain invisibility, doesn’t reveal illusions or enable you to see through opaque objects, and doesn’t reveal creatures that are simply concealed, hiding, or otherwise hard to see.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1256,27 +1323,29 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 376",
         "sr": false,
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1287,11 +1356,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mind_thrust.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1309,8 +1374,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1322,11 +1387,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "10d10",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1336,14 +1416,14 @@
           "unidentified": "",
           "value": "<p>You divine the most vulnerable portion of your opponent’s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.</p>\n<ul>\n<li><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n<li><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n<li><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n<li><strong>th:</strong> When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is fatigued for 1 round if it fails its saving throw.</li>\n<li><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is @UUID[Compendium.sfrpg.conditions.Item.33ynSbmexuxC3cAQ]{Exhausted} for 1 round if it fails its save and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n<li><strong>6th:</strong> When you cast&nbsp;mind thrust&nbsp;as a 6th-level spell, it deals 17d10 damage to the target. The target is @UUID[Compendium.sfrpg.conditions.Item.33ynSbmexuxC3cAQ]{Exhausted} and @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n</ul>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -1359,26 +1439,29 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": 24,
+          "dc": "24",
           "descriptor": "half"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 365",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }

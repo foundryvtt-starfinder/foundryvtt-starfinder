@@ -11,11 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -29,7 +25,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 8,
         "attributes": {
@@ -50,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -59,7 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -81,13 +76,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4 +3",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -97,7 +105,6 @@
           "unidentified": "",
           "value": "<p>This blade looks much like a single-edged survival knife when opened, but the blade can be folded or collapsed to fit within the grip, making it easier to conceal. A switch on the knife means the blade can be folded or extended as a swift action, or as part of making an attack or full attack. Most weapon manufacturers that offer daggers also produce switchblades, which are made in the same models: tactical, ultrathin, zero-edge, and molecular rift.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -107,7 +114,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 3,
         "modifiers": [],
@@ -203,10 +210,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -214,11 +218,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR pg. 8",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -226,7 +235,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -240,7 +249,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "",
         "actionType": "mwak",
@@ -255,7 +263,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 8,
         "attributes": {
@@ -276,7 +284,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -285,7 +292,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -307,13 +314,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4 +3",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -323,17 +343,16 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "equippable": true,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -343,22 +362,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -366,8 +387,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -380,11 +401,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/sonic-pistol-banshee.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -419,7 +436,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 5,
@@ -478,6 +494,7 @@
               "name": "",
               "formula": "1d6",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -485,12 +502,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": true,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -500,7 +520,6 @@
           "unidentified": "",
           "value": "<p>Popular among the @UUID[Compendium.sfrpg.races.3kLK4WKPqNvFTwIB]{Drow} on @UUID[Compendium.sfrpg.setting.psZBx1kcx9pHsLrz]{Apostae}, this needle gun can deliver deadly @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poisons}. The weapon is so small you gain a +2 bonus to Sleight of Hand checks to hide it on your person.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -510,10 +529,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "img": "systems/sfrpg/icons/equipment/weapons/sonic-pistol-banshee.webp",
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
-        "isOpen": true,
         "level": 3,
         "modifiers": [
           {
@@ -521,12 +538,10 @@
             "name": "Nightarch needler",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "MisBEA8rNDFsw7nP",
-              "itemId": "6oYtNK39K0qHql4x"
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": false,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "formula",
@@ -637,9 +652,6 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "total": 30,
           "units": "ft",
           "value": "30"
         },
@@ -651,8 +663,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "PW pg. 192",
         "special": "",
         "specialMaterials": {
@@ -672,10 +686,8 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
-        "totalWeight": "L",
         "usage": {
           "per": "shot",
           "value": 1
@@ -683,7 +695,6 @@
         "uses": {
           "max": "",
           "per": "",
-          "total": 0,
           "value": null
         },
         "weaponCategory": "uncategorized",
@@ -696,11 +707,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -708,12 +715,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -722,7 +738,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -777,37 +794,39 @@
         },
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -818,11 +837,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/stationwear-casual.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -836,7 +851,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -865,7 +880,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -874,7 +888,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -895,7 +909,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -905,7 +920,6 @@
           "unidentified": "",
           "value": "<p>Many types of reinforced clothing afford protection without sacrificing comfort or fashion. The prevalence of this kind of light armor on @UUID[Compendium.sfrpg.setting.hepqXl6gFvs5sDQu]{Absalom Station} has led to the colloquial term “stationwear.” Stationwear ranges in style from casual wear to business suits and more formal garb. The usual @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg]{Environmental protections} of armor are concealed in the design of these outfits. The grades of armor—business, casual, elite, and flight suit—refer to the quality of the garments, not the style.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -915,7 +929,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 3,
         "modifiers": [],
         "price": 1300,
@@ -924,25 +939,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 197",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -950,8 +966,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -962,40 +978,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/darts.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "dart",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
           "value": 0
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1004,14 +999,13 @@
           "unidentified": "",
           "value": "<p>These light metal shafts each have a pointed tip and a reservoir to hold toxins or other appropriate substances that are typically liquid or viscous. While most combatants rely on darts to deliver toxins to enemies, particularly desperate or overworked field medics sometimes employ darts to conveniently deliver antitoxins, healing serums, and other beneficial @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drugs} across a crowded battlefield. In these cases, medics often practice to improve their aim to ensure that this strategy is effective when employed.</p>\n<p><strong>Capacity:</strong> 25</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 20,
         "quantity": 5,
         "quantityPerPack": 25,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {
           "abysium": false,
@@ -1038,7 +1032,6 @@
       "type": "container",
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -1057,7 +1050,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [
@@ -1078,7 +1070,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1102,7 +1094,7 @@
               "affectsEncumbrance": true,
               "amount": 1000,
               "subtype": "",
-              "weightProperty": "bulk"
+              "weightProperty": ""
             }
           ]
         },
@@ -1115,13 +1107,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1131,11 +1125,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1143,12 +1133,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1157,7 +1156,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1215,33 +1215,35 @@
           "value": "10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Astriapi",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA4 pg. 12",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -1253,11 +1255,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/survival-knife.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -1271,7 +1269,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1292,7 +1290,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -1301,7 +1298,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1323,13 +1320,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4 + @abilities.str.mod",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1339,7 +1349,6 @@
           "unidentified": "",
           "value": "<p>This blade looks much like a single-edged survival knife when opened, but the blade can be folded or collapsed to fit within the grip, making it easier to conceal. A switch on the knife means the blade can be folded or extended as a swift action, or as part of making an attack or full attack. Most weapon manufacturers that offer daggers also produce switchblades, which are made in the same models: tactical, ultrathin, zero-edge, and molecular rift.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1349,7 +1358,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 3,
         "modifiers": [],
@@ -1445,10 +1454,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1456,11 +1462,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR pg. 8",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1468,7 +1479,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -1482,11 +1493,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/sonic-pistol-banshee.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -1521,7 +1528,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 5,
@@ -1575,6 +1581,7 @@
               "name": "",
               "formula": "1d6",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -1582,12 +1589,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": true,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1597,7 +1607,6 @@
           "unidentified": "",
           "value": "<p>Popular among the @UUID[Compendium.sfrpg.races.3kLK4WKPqNvFTwIB]{Drow} on @UUID[Compendium.sfrpg.setting.psZBx1kcx9pHsLrz]{Apostae}, this needle gun can deliver deadly @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poisons}. The weapon is so small you gain a +2 bonus to Sleight of Hand checks to hide it on your person.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -1607,10 +1616,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "img": "systems/sfrpg/icons/equipment/weapons/sonic-pistol-banshee.webp",
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
-        "isOpen": true,
         "level": 3,
         "modifiers": [
           {
@@ -1618,8 +1625,10 @@
             "name": "Nightarch needler",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "skill",
             "enabled": false,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "formula",
@@ -1730,9 +1739,6 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "total": 30,
           "units": "ft",
           "value": "30"
         },
@@ -1744,8 +1750,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "PW pg. 192",
         "special": "",
         "specialMaterials": {
@@ -1765,10 +1773,8 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
-        "totalWeight": "L",
         "usage": {
           "per": "shot",
           "value": 1
@@ -1776,7 +1782,6 @@
         "uses": {
           "max": "",
           "per": "",
-          "total": 0,
           "value": null
         },
         "weaponCategory": "uncategorized",
@@ -1789,40 +1794,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/darts.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "dart",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
           "value": 0
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1831,14 +1815,13 @@
           "unidentified": "",
           "value": "<p>These light metal shafts each have a pointed tip and a reservoir to hold toxins or other appropriate substances that are typically liquid or viscous. While most combatants rely on darts to deliver toxins to enemies, particularly desperate or overworked field medics sometimes employ darts to conveniently deliver antitoxins, healing serums, and other beneficial @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drugs} across a crowded battlefield. In these cases, medics often practice to improve their aim to ensure that this strategy is effective when employed.</p>\n<p><strong>Capacity:</strong> 25</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 20,
         "quantity": 5,
         "quantityPerPack": 25,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {
           "abysium": false,

@@ -10,21 +10,10 @@
       "type": "starshipFrame",
       "img": "systems/sfrpg/icons/default/hexagonal-nut.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
-        "costMultipliedBySize": false,
         "crew": {
           "maximum": 6,
           "minimum": 1
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "damageThreshold": {
           "base": 0
@@ -46,6 +35,7 @@
         "modifiers": [],
         "pcu": null,
         "size": "medium",
+        "slug": "",
         "source": "",
         "weaponMounts": {
           "aft": {
@@ -87,18 +77,8 @@
       "type": "starshipThruster",
       "img": "systems/sfrpg/icons/default/rocket-thruster.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 5,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -112,6 +92,7 @@
         "modifiers": [],
         "pcu": 70,
         "pilotingModifier": 0,
+        "slug": "",
         "source": "CRB pg. 297",
         "specialMaterials": {},
         "speed": 10,
@@ -124,19 +105,9 @@
       "type": "starshipShield",
       "img": "systems/sfrpg/icons/default/forward-field.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 0,
         "cost": 12,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "defenseValue": 0,
         "description": {
           "chat": "",
@@ -151,6 +122,7 @@
         "pcu": 30,
         "regeneration": 2,
         "shieldPoints": 80,
+        "slug": "",
         "source": "CRB pg. 302",
         "targetLockBonus": 0
       }
@@ -161,12 +133,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "tl",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": 5,
           "value": 5
@@ -174,17 +142,29 @@
         "class": "heavy",
         "cost": 10,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "8d8",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -201,6 +181,7 @@
         },
         "pcu": 15,
         "range": "long",
+        "slug": "",
         "source": "NS pg. 115",
         "special": {
           "anchoring": false,
@@ -281,18 +262,8 @@
       "type": "starshipDriftEngine",
       "img": "systems/sfrpg/icons/default/star-gate.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 2,
         "costMultipliedBySize": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -305,6 +276,7 @@
         "maxSize": "superColossal",
         "modifiers": [],
         "pcu": 75,
+        "slug": "",
         "source": "CRB pg. 298"
       }
     },
@@ -314,18 +286,8 @@
       "type": "starshipComputer",
       "img": "systems/sfrpg/icons/default/server-rack.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -338,6 +300,7 @@
         "modifiers": [],
         "nodes": 0,
         "pcu": null,
+        "slug": "",
         "source": "CRB pg. 297"
       }
     },
@@ -347,18 +310,8 @@
       "type": "starshipSensor",
       "img": "systems/sfrpg/icons/default/radar-dish.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 6,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -366,11 +319,10 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifier": 0,
         "modifiers": [],
-        "pcu": null,
         "range": "long",
+        "slug": "",
         "source": "CRB pg. 301",
         "specialMaterials": {}
       }
@@ -381,19 +333,9 @@
       "type": "starshipArmor",
       "img": "systems/sfrpg/icons/default/metal-scales.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 4,
         "cost": 5,
         "costMultipliedBySize": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -401,9 +343,8 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
-        "pcu": null,
+        "slug": "",
         "source": "CRB pg. 297",
         "specialMaterials": {},
         "targetLockPenalty": 0,
@@ -416,18 +357,8 @@
       "type": "starshipDefensiveCountermeasure",
       "img": "systems/sfrpg/icons/default/bubble-field.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 8,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -438,6 +369,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": 4,
+        "slug": "",
         "source": "CRB pg. 297",
         "specialMaterials": {},
         "targetLockBonus": 5
@@ -449,18 +381,8 @@
       "type": "starshipSecuritySystem",
       "img": "systems/sfrpg/icons/default/cctv-camera.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 5,
         "costMultipliedBySize": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -471,6 +393,7 @@
         "isPowered": false,
         "modifiers": [],
         "pcu": null,
+        "slug": "",
         "source": "CRB pg. 300"
       }
     },
@@ -480,18 +403,8 @@
       "type": "starshipExpansionBay",
       "img": "systems/sfrpg/icons/default/cardboard-box-closed.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 0,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -502,6 +415,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": 0,
+        "slug": "",
         "source": "CRB pg. 300"
       }
     },
@@ -511,18 +425,8 @@
       "type": "starshipPowerCore",
       "img": "systems/sfrpg/icons/default/power-generator.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -530,9 +434,9 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
         "pcu": 150,
+        "slug": "",
         "source": "",
         "specialMaterials": {
           "abysium": false,
@@ -559,12 +463,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -572,17 +472,29 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "6d6",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -599,6 +511,7 @@
         },
         "pcu": null,
         "range": "medium",
+        "slug": "",
         "source": "",
         "special": {
           "anchoring": false,
@@ -679,13 +592,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "allowadd": "true",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -693,17 +601,29 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "4d6",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -720,6 +640,7 @@
         },
         "pcu": null,
         "range": "short",
+        "slug": "",
         "source": "",
         "special": {
           "anchoring": false,
@@ -800,23 +721,15 @@
       "type": "starshipSpecialAbility",
       "img": "systems/sfrpg/icons/default/cpu.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A volocoth is a living creature so immense it functions as a starship (and thus engages only in starship combat). It has no crew, but it can still take engineer, gunner, pilot, and science officer actions using the skill bonuses, ranks, and level listed above. Modifiers for its size, speed, and maneuverability have already been factored into its statistics. Use the following table to determine the effects when a volocoth takes critical damage.</p><table style=\"width: 100%; height: 85px;\" border=\"1\"><tbody><tr style=\"height: 17px;\"><td style=\"text-align: center; height: 17px;\"><strong>d%</strong></td><td style=\"text-align: center; height: 17px;\"><strong>System</strong></td><td style=\"text-align: center; height: 17px;\"><strong>Effect</strong></td></tr><tr style=\"height: 17px;\"><td style=\"text-align: center; height: 17px;\"><strong>1-10</strong></td><td style=\"height: 17px; text-align: center;\">Head</td><td style=\"height: 17px;\">Condition applies to gunner actions using the turret.</td></tr><tr style=\"height: 17px;\"><td style=\"text-align: center; height: 17px;\"><strong>11-40</strong></td><td style=\"height: 17px; text-align: center;\">Maw</td><td style=\"height: 17px;\">Condition applies to gunner actions using weapons in the forward arc. If this system is malfunctioning or worse, the volocoth can't hold a starship with its serrated mandibles</td></tr><tr style=\"height: 17px;\"><td style=\"text-align: center; height: 17px;\"><strong>41-70</strong></td><td style=\"height: 17px; text-align: center;\">Core</td><td style=\"height: 17px;\">Condition applies to all engineer actions, except when patching or repairing the core.</td></tr><tr style=\"height: 17px;\"><td style=\"text-align: center; height: 17px;\"><strong>71-100</strong></td><td style=\"height: 17px; text-align: center;\">Propulsion</td><td style=\"height: 17px;\">Condition applies to all pilot actions.</td></tr></tbody></table>"
+          "value": "<p>A volocoth is a living creature so immense it functions as a starship (and thus engages only in starship combat). It has no crew, but it can still take engineer, gunner, pilot, and science officer actions using the skill bonuses, ranks, and level listed above. Modifiers for its size, speed, and maneuverability have already been factored into its statistics. Use the following table to determine the effects when a volocoth takes critical damage.</p><table style=\"width:100%;height:85px\" border=\"1\"><tbody><tr style=\"height:17px\"><td style=\"text-align:center;height:17px\"><strong>d%</strong></td><td style=\"text-align:center;height:17px\"><strong>System</strong></td><td style=\"text-align:center;height:17px\"><strong>Effect</strong></td></tr><tr style=\"height:17px\"><td style=\"text-align:center;height:17px\"><strong>1-10</strong></td><td style=\"height:17px;text-align:center\">Head</td><td style=\"height:17px\">Condition applies to gunner actions using the turret.</td></tr><tr style=\"height:17px\"><td style=\"text-align:center;height:17px\"><strong>11-40</strong></td><td style=\"height:17px;text-align:center\">Maw</td><td style=\"height:17px\">Condition applies to gunner actions using weapons in the forward arc. If this system is malfunctioning or worse, the volocoth can't hold a starship with its serrated mandibles</td></tr><tr style=\"height:17px\"><td style=\"text-align:center;height:17px\"><strong>41-70</strong></td><td style=\"height:17px;text-align:center\">Core</td><td style=\"height:17px\">Condition applies to all engineer actions, except when patching or repairing the core.</td></tr><tr style=\"height:17px\"><td style=\"text-align:center;height:17px\"><strong>71-100</strong></td><td style=\"height:17px;text-align:center\">Propulsion</td><td style=\"height:17px\">Condition applies to all pilot actions.</td></tr></tbody></table>"
         },
+        "modifiers": [],
+        "slug": "",
         "source": ""
       }
     },
@@ -826,16 +739,6 @@
       "type": "starshipSpecialAbility",
       "img": "systems/sfrpg/icons/default/cpu.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -843,6 +746,8 @@
           "unidentified": "",
           "value": "<p>A volocoth gains a +2 bonus to its AC and TL against direct-fire weapons with “laser” in the name and weapons with the smoldering special property (Near Space 115). After being successfully hit by a smoldering weapon, the volocoth takes no additional damage the following round.</p>"
         },
+        "modifiers": [],
+        "slug": "",
         "source": ""
       }
     },
@@ -852,16 +757,6 @@
       "type": "starshipSpecialAbility",
       "img": "systems/sfrpg/icons/default/cpu.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -869,6 +764,8 @@
           "unidentified": "",
           "value": "<p>A volocoth can use its serrated mandibles only against a ship in an adjacent hex. If the volocoth deals damage with this attack to a ship of its size or smaller, it holds that ship in place. As an action, the pilot of the held starship can attempt a DC 24 Piloting check to break free of the jaws. While holding a starship in its mandibles, the volocoth can’t move, turn, or use weapons in its forward arc except to attack the held ship. The volocoth and the ship it’s holding take a –2 penalty to AC and TL, and to Piloting checks to determine movement order during starship combat.</p>"
         },
+        "modifiers": [],
+        "slug": "",
         "source": ""
       }
     },
@@ -878,16 +775,6 @@
       "type": "starshipSpecialAbility",
       "img": "systems/sfrpg/icons/default/cpu.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -895,6 +782,8 @@
           "unidentified": "",
           "value": "<p>Numerous creatures are inured to the void of outer space. A creature with void adaptation has the following abilities.</p><ul><li>Immunity to cosmic rays.</li><li>Immunity to the environmental effects of vacuum.</li><li>@UUID[Compendium.sfrpg.universal-creature-rules.Item.BKv2DLiWN9G5XMyc]{No Breath (Ex)} (see page 152).</li></ul>"
         },
+        "modifiers": [],
+        "slug": "",
         "source": ""
       }
     }

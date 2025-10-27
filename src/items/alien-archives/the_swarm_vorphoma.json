@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -23,12 +19,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -37,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -47,7 +53,7 @@
           "unidentified": "",
           "value": "<p>Members of the Swarm are bound together into a singular hive mind by a blend of exuded pheromones, imperceptible movements of antennae and limbs, electrostatic fields, and telepathic communication. All Swarm creatures with 30 feet of each other are in constant communication; if one is aware of a threat, all are. (Such awareness can spread along a “chain” of Swarm creatures under appropriate circumstances, potentially alerting distant Swarm creatures). In addition, once per round when within 30 feet of another Swarm creature, a Swarm creature can roll twice and take the better result on a saving throw against a mind-affecting effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -58,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -96,11 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -114,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 3,
         "attributes": {
@@ -135,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -144,7 +147,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -166,13 +169,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4+2",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -182,7 +198,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -191,9 +206,8 @@
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
-        "fusions": [],
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -286,22 +300,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -309,8 +325,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -323,11 +339,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -341,7 +353,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 3,
         "attributes": {
@@ -362,7 +374,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -371,7 +382,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -393,13 +404,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6+2",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -409,7 +433,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -418,9 +441,8 @@
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
-        "fusions": [],
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -513,22 +535,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -536,8 +560,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -550,11 +574,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -567,8 +587,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 5,
         "attributes": {
@@ -589,7 +609,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -598,7 +617,7 @@
         "chatFlavor": "DC 12 Fort of be sickened for [[/3 1d3 rounds]]",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -620,13 +639,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4+1",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -636,7 +668,6 @@
           "unidentified": "",
           "value": "<p>As a ranged attack, a vorphoma can shoot a finger-sized barb from one of its arms with a range increment of 60 feet. A vorphoma can shoot a total of 8 barbs before it must take 10 minutes to regrow them.</p>\n<p><strong>Venom (Ex)</strong>&nbsp;A living creature that takes damage from an arm barb must succeed at a DC 12 Fortitude save or be sickened for 1d3 rounds.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -645,9 +676,8 @@
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
-        "fusions": [],
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -740,22 +770,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "fort",
-          "dc": 12,
+          "dc": "12",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -763,7 +795,7 @@
           "value": 0
         },
         "uses": {
-          "max": 10,
+          "max": "10",
           "per": "sr",
           "value": 10
         },
@@ -777,11 +809,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/fear.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -799,8 +827,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -810,7 +838,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -820,14 +849,14 @@
           "unidentified": "",
           "value": "<p>With a single mental nudge, you can unlock one or more targets’ deepest nightmares. A target that succeeds at its Will saving throw against this spell is @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken} for 1 round.</p>\n<ul>\n<li><strong>1st:</strong> When you cast fear as a 1st-level spell, it affects one living creature of CR 4 or lower at close range (25 feet + 5 feet/2 levels). The target must succeed at a Will saving throw or be frightened for 1d4 rounds.</li>\n<li><strong>2nd:</strong> When you cast fear as a 2nd-level spell, it affects one living creature of CR 4 or lower per 3 caster levels at medium range (100 feet + 10 feet/level), no two of which can be more than 30 feet apart. Each target must succeed at a Will saving throw or be frightened for 1 minute.</li>\n<li><strong>3rd:</strong> When you cast fear as 3rd-level spell, it affects all living creatures of CR 8 or lower in 30-foot cone-shaped burst. Each target must succeed at a Will save or become @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked} for 1 minute. If cornered, a @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked} creature begins cowering.</li>\n<li><strong>4th:</strong> When you cast&nbsp;fear&nbsp;as 4th-level spell, it affects all living creatures in 30-foot cone-shaped burst regardless of CR. Each target must succeed at a Will save or become @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked} for 1 minute. If cornered, a @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked} creature begins cowering.</li>\n</ul>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "1d4",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -843,26 +872,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": 14,
+          "dc": "14",
           "descriptor": "partial"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 354",
         "sr": true,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -874,11 +905,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/confusion_lesser.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -896,8 +923,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -907,7 +934,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -915,16 +943,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This spell causes a single creature to become confused (as per the <em>@UUID[Compendium.sfrpg.spells.Item.wSeE9HyAmM7lTdpo]{Confusion}</em> spell) for 1 round.</p>\n<table style=\"width: 403px; height: 85px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; background-color: #34495e; text-align: center; width: 44px;\">\n<p style=\"color: white;\">D%</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">1-25</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">26-50</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">51-75</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">76-100</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>"
+          "value": "<p>This spell causes a single creature to become confused (as per the <em>@UUID[Compendium.sfrpg.spells.Item.wSeE9HyAmM7lTdpo]{Confusion}</em> spell) for 1 round.</p>\n<table style=\"width:403px;height:85px\" border=\"1\">\n<tbody>\n<tr style=\"height:17px\">\n<td style=\"height:17px;background-color:#34495e;text-align:center;width:44px\">\n<p style=\"color:white\">D%</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">1-25</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">26-50</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">51-75</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">76-100</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "1"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -940,26 +968,29 @@
         },
         "properties": {},
         "range": {
-          "additional": "5 ft",
-          "per": "level",
           "units": "close",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": 14,
+          "dc": "14",
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -971,11 +1002,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/ghost_sound.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -993,8 +1020,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1004,7 +1031,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1014,14 +1042,14 @@
           "unidentified": "",
           "value": "<p>You create a volume of sound that rises, falls, recedes, approaches, or remains fixed. You choose what type of sound this spell creates when casting it and cannot thereafter change the sound’s basic character.</p>\n<p>The volume of sound created can produce as much noise as 20 normal humans. Thus, you can create shouting, singing, talking, marching, running, or walking sounds, as well as sounds of battle or small explosions. You can make noises that sound like machines, the general chatter of distant conversation, or the roar of an alien predator, but you can’t make specific sounds such as intelligible speech or the exact hum of a particular starship’s engines.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -1037,26 +1065,29 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": 13,
+          "dc": "13",
           "descriptor": "disbelieve"
         },
         "school": "ill",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 356",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -1068,11 +1099,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/daze.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1090,8 +1117,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1101,7 +1128,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1111,14 +1139,14 @@
           "unidentified": "",
           "value": "<p>This spell short-circuits the mind of a humanoid creature with a CR of 3 or lower so that it is dazed (unable to take actions, but taking no penalty to AC). Humanoids of CR 4 or higher are not affected. After a creature has been dazed by this spell, it is immune to it for 1 minute.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "1"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -1134,26 +1162,29 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": 13,
+          "dc": "13",
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 347",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one humanoid creature of CR 3 or lower"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }

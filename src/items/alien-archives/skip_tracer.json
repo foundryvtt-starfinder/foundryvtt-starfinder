@@ -11,11 +11,7 @@
       "type": "weapon",
       "img": "icons/weapons/staves/staff-simple.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -29,7 +25,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 4,
         "attributes": {
@@ -50,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -59,7 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -70,13 +65,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4 +1",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -86,7 +94,6 @@
           "unidentified": "",
           "value": "<p>A baton is a thin, solid metal shaft, usually with a textured rubber grip. A tactical baton can be used to inflict precise bludgeoning blows. An advanced baton, used by elite mercenary and security companies, often has an additional shaft, as well as a weighted end that can be powered to connect with substantially more force than a tactical baton.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -96,7 +103,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -192,10 +199,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -203,11 +208,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -215,7 +225,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -229,11 +239,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -246,8 +252,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 6,
         "attributes": {
@@ -268,7 +274,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -327,6 +332,7 @@
               "name": "",
               "formula": "1d6",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -334,12 +340,15 @@
                 "electricity": true,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -349,7 +358,6 @@
           "unidentified": "",
           "value": "<p>Arc pistols fire deadly, stunning blasts of electricity at ranged targets. They have a two-pronged emitter that directs the electrical blast and a bulky chamber that holds the capacitor.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -358,12 +366,9 @@
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
-        "id": "uLYBLnBzeFlZledH",
         "identified": true,
-        "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
-        "isOpen": true,
         "level": 2,
         "modifiers": [],
         "price": 750,
@@ -466,10 +471,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 50
+          "value": "50"
         },
         "rollNotes": "",
         "save": {
@@ -477,6 +480,12 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 173",
         "special": "",
         "specialMaterials": {
@@ -495,31 +504,15 @@
           "silver": false,
           "voidglass": false
         },
-        "system": {
-          "container": {
-            "contents": [
-              {
-                "id": "z5LCYOWYQnKMk0yA",
-                "index": 2
-              },
-              {
-                "id": "N0zYdA5KvQndYaq6",
-                "index": 0
-              }
-            ]
-          }
-        },
         "target": {
-          "type": "",
           "value": ""
         },
-        "totalWeight": "L",
         "usage": {
           "per": "shot",
           "value": 2
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -533,11 +526,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -545,12 +534,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -559,7 +557,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -617,37 +616,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "source": "",
-        "system": {
-          "quantity": null
-        },
-        "target": {
+        "skillCheck": {
           "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "",
+        "target": {
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -658,11 +656,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/second-skin.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -676,7 +670,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -705,7 +699,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -719,7 +712,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -740,7 +733,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -750,7 +744,6 @@
           "unidentified": "",
           "value": "<p>This flexible body stocking fits tightly against its wearer and can be worn under ordinary clothes. If a second skin matches the wearerâ€™s skin tone, this type of light armor can be difficult to detect. A second skin can also accept upgrades, making it popular for celebrities, diplomats, and other individuals who want protection without appearing to wear armor.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -760,7 +753,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 250,
@@ -769,25 +763,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 197",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -795,8 +790,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -807,11 +802,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -824,8 +815,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -846,7 +837,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -894,8 +884,10 @@
           "effect": "Arc 2",
           "parts": [
             {
+              "name": "",
               "formula": "2",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -903,7 +895,9 @@
                 "electricity": true,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -915,6 +909,8 @@
             {
               "name": "",
               "formula": "1d6",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -922,12 +918,15 @@
                 "electricity": true,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -937,7 +936,6 @@
           "unidentified": "",
           "value": "<p>Arc pistols fire deadly, stunning blasts of electricity at ranged targets. They have a two-pronged emitter that directs the electrical blast and a bulky chamber that holds the capacitor.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -947,10 +945,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
-        "isOpen": true,
         "level": 2,
         "modifiers": [],
         "price": 750,
@@ -1051,10 +1047,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 50
+          "value": "50"
         },
         "rollNotes": "",
         "save": {
@@ -1062,6 +1056,12 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 173",
         "special": "",
         "specialMaterials": {
@@ -1081,16 +1081,14 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
-        "totalWeight": "L",
         "usage": {
           "per": "shot",
           "value": 2
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -1104,34 +1102,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1140,14 +1123,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true
@@ -1159,11 +1141,7 @@
       "type": "weapon",
       "img": "icons/weapons/staves/staff-simple.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -1177,7 +1155,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1198,7 +1176,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -1207,7 +1184,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -1218,13 +1195,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4 + @abilities.str.mod",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1234,7 +1224,6 @@
           "unidentified": "",
           "value": "<p>A baton is a thin, solid metal shaft, usually with a textured rubber grip. A tactical baton can be used to inflict precise bludgeoning blows. An advanced baton, used by elite mercenary and security companies, often has an additional shaft, as well as a weighted end that can be powered to connect with substantially more force than a tactical baton.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1244,7 +1233,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -1340,10 +1329,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -1351,11 +1338,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1363,7 +1355,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -1377,7 +1369,6 @@
       "type": "container",
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -1396,7 +1387,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [
@@ -1421,7 +1411,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1445,7 +1435,7 @@
               "affectsEncumbrance": true,
               "amount": 1000,
               "subtype": "",
-              "weightProperty": "bulk"
+              "weightProperty": ""
             }
           ]
         },
@@ -1458,13 +1448,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1474,34 +1466,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1510,14 +1487,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true
@@ -1529,13 +1505,9 @@
       "type": "upgrade",
       "img": "systems/sfrpg/icons/default/armor-upgrade.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -1548,9 +1520,8 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
-        "armorType": "any",
         "attackBonus": 0,
         "attributes": {
           "ac": {
@@ -1570,7 +1541,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -1579,7 +1549,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -1588,7 +1558,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1598,17 +1569,12 @@
           "unidentified": "",
           "value": "<p>This articulated compartment can hold a one-handed weapon of no more than light bulk. You can activate this upgrade as a swift action to put the item in your hand as though you’d drawn it.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
-        "identified": true,
-        "isActive": null,
+        "isActive": false,
         "level": 1,
         "modifiers": [],
         "price": 325,
@@ -1616,21 +1582,23 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
         "slots": 1,
+        "slug": "",
         "source": "CRB pg. 205",
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -1638,8 +1606,8 @@
           "value": 0
         },
         "uses": {
-          "max": null,
-          "per": null,
+          "max": "",
+          "per": "",
           "value": null
         }
       }
@@ -1650,13 +1618,9 @@
       "type": "technological",
       "img": "systems/sfrpg/icons/default/processor.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -1668,7 +1632,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "attributes": {
@@ -1689,7 +1653,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 0,
@@ -1707,7 +1670,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1717,39 +1681,41 @@
           "unidentified": "",
           "value": "<h1>Restraints</h1>\n<p>Binders are simple, single-use, resin-cord restraints that can be placed only on helpless, @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}, or willing creatures (a standard action). A pair of binders immobilizes two limbs of your choice. A creature can escape binders with a successful Acrobatics check (DC = 20 + 1-1/2 × your level).</p>\n<p>Manacles are reusable wrist restraints made of hardened metal or ceramics and keyed to open with a security chip, code, or voice command (determined when they are manufactured). Manacles can be placed only on helpless, @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}, or willing creatures (a standard action). Manacles prevent two arms from holding or using any object. A creature can escape manacles with a successful DC 30 Acrobatics check.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
         "hands": 0,
         "identified": false,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 5,
+        "proficient": false,
         "properties": {},
         "quantity": 5,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 219",
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -1757,8 +1723,8 @@
           "value": 0
         },
         "uses": {
-          "max": null,
-          "per": null,
+          "max": "",
+          "per": "",
           "value": null
         }
       }
@@ -1769,11 +1735,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1781,12 +1743,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1795,7 +1766,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1853,19 +1825,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "15def881-7143-411d-b4c0-94ca9269f580",
             "name": "Dragon Scaled - Black, Copper, Green",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "Q30e2DcopsrGzQgN",
-              "itemId": "xSp4ToJDn2oaS3NL"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": false,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -1879,12 +1849,10 @@
             "name": "Dragon Scaled - Blue, Bronze",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "Q30e2DcopsrGzQgN",
-              "itemId": "xSp4ToJDn2oaS3NL"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": true,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -1898,12 +1866,10 @@
             "name": "Dragon Scaled - Red, Brass, Gold",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "Q30e2DcopsrGzQgN",
-              "itemId": "xSp4ToJDn2oaS3NL"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": false,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -1917,12 +1883,10 @@
             "name": "Dragon Scaled - White, Silver",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "Q30e2DcopsrGzQgN",
-              "itemId": "xSp4ToJDn2oaS3NL"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": false,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -1934,29 +1898,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Kobold",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "ACD",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1969,10 +1935,7 @@
       "img": "systems/sfrpg/icons/equipment/augmentations/voice-amplifier.webp",
       "system": {
         "type": "cybernetic",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1985,7 +1948,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -2006,7 +1969,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "chatFlavor": "",
         "container": {
@@ -2020,7 +1982,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2030,17 +1993,16 @@
           "unidentified": "",
           "value": "<p>A vocal modulator includes a series of miniature actuators built specifically to reshape your voice box, along with miniature hyper-resonant chambers that dynamically close or open. This allows you to change the pitch, timbre, and tone of your voice. You can more easily imitate accents or pronounce alien languages. When using Disguise to change your appearance, you gain a +2 circumstance bonus if the change in your voice also helps your disguise (at the GM’s discretion).</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "equippable": true,
         "equipped": true,
-        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [
           {
@@ -2048,8 +2010,10 @@
             "name": "Voice Modulator",
             "type": "circumstance",
             "condition": "",
+            "damage": null,
             "effectType": "skill",
             "enabled": false,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "formula",
@@ -2060,29 +2024,32 @@
           }
         ],
         "price": 125,
+        "proficient": false,
         "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 209",
         "system": "throat",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }

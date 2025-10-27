@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -23,12 +19,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -37,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -47,7 +53,7 @@
           "unidentified": "",
           "value": "<p>As a move action in any illumination other than direct sunlight, a shadow giant can cloak itself in moving shadows that grant it concealment (20% miss chance) for 1d6+6 rounds. It can use this ability three times per day.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -58,33 +64,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -96,11 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/spells/slithering_chain.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "mwak",
         "activation": {
@@ -114,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 26,
         "attributes": {
@@ -135,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": null,
@@ -144,7 +147,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -166,13 +169,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "9d4 +21",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "cold": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": true,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -182,7 +198,6 @@
           "unidentified": "",
           "value": "<p>Worshipers of Zon-Kuthon developed the first shadow chains using cutting-edge heat-transfer technology, but outsiders rapidly reverse-engineered the weapons, constructing functional facsimiles from their own tech. Shadow chains’ links rapidly absorb heat, while their heavily insulated handle protect their wieldersfrom direct exposure to the freezing darkness. Many adherents of the Midnight Lord make use of the follower, acolyte, and penitent shadow chains, while only the most devout can afford the more powerful ecclesiastic and devotional shadow chains.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -192,7 +207,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 14,
         "modifiers": [],
@@ -289,10 +304,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "rollNotes": "",
         "save": {
@@ -300,11 +313,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR pg. 12",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -312,7 +330,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -326,11 +344,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -344,7 +358,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 23,
         "attributes": {
@@ -365,7 +379,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": 40,
@@ -374,7 +387,7 @@
         "chatFlavor": "Antibiological",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -403,10 +416,22 @@
           "effect": "Suffocate [DC",
           "parts": [
             {
+              "name": "",
               "formula": "19]",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "cold": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": true,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -414,13 +439,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d10 +13",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "cold": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": true,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -430,7 +468,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -440,7 +477,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 11,
         "modifiers": [],
@@ -533,22 +570,25 @@
         "quantity": null,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 80
+          "value": "80"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -556,7 +596,7 @@
           "value": 2
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 2
         },
@@ -570,7 +610,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "kac",
         "actionType": "rwak",
@@ -585,7 +624,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 23,
         "attributes": {
@@ -606,7 +645,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -615,7 +653,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -637,13 +675,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "6d6 +13",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -653,7 +704,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -663,7 +713,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -673,22 +723,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -696,8 +748,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -710,8 +762,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/deadly_aim.webp",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -719,12 +770,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -733,7 +793,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -743,7 +804,7 @@
           "unidentified": "",
           "value": "<p>Your can strike your enemies’ weak points and deal more damage.</p>\n<p><strong>Prerequisites</strong>: Base attack bonus +1.</p>\n<hr />\n<p><strong>Benefit</strong>: When you take the attack or full attack action with weapons (including a solarian’s solar manifestation, but not spells or other special abilities of any kind), you can take a –2 penalty to your attack rolls. If you do, those attacks deal additional damage equal to half your base attack bonus (minimum 1).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -754,19 +815,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "aa55be0b-608b-405b-8ec2-96088e5cbba2",
             "name": "Deadly Aim (Combat)",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "OBr55AMenkfdhVpb",
-              "itemId": "KKLlKYgjnWs4ijRE"
-            },
+            "damage": null,
             "effectType": "all-attacks",
             "enabled": false,
+            "limitTo": null,
             "max": -2,
             "modifier": "-2",
             "modifierType": "formula",
@@ -780,12 +839,10 @@
             "name": "Deadly Aim (Combat)",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "OBr55AMenkfdhVpb",
-              "itemId": "KKLlKYgjnWs4ijRE"
-            },
+            "damage": null,
             "effectType": "all-damage",
             "enabled": false,
+            "limitTo": null,
             "max": 1,
             "modifier": "max(1, @attributes.bab/2)",
             "modifierType": "formula",
@@ -797,30 +854,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -831,7 +890,6 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/improved_combat_maneuver.webp",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "",
         "actionType": "",
@@ -840,12 +898,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -854,7 +921,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -864,7 +932,7 @@
           "unidentified": "",
           "value": "<p>You are particularly skilled with a specific combat maneuver.</p>\n<p><strong>Prerequisites</strong>: Base attack bonus +1.</p>\n<hr />\n<p><strong>Benefit</strong>: Choose one combat maneuver (bull rush, dirty trick, disarm, grapple, reposition, sunder, or trip). You gain a +4 bonus to your attack roll to resolve that combat maneuver.</p>\n<p><strong>Special</strong>: You can take Improved Combat Maneuver multiple times. The effects don’t stack. Each time you take the feat, it applies to a new combat maneuver.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -875,19 +943,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "0b1ed051-9f1b-4c37-9ece-7c59ef4abf8b",
             "name": "Improved Combat Maneuver",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "R8aq5LrJgS9dXlid",
-              "itemId": "zefFV2dqssQbB2eI"
-            },
+            "damage": null,
             "effectType": "all-attacks",
             "enabled": false,
+            "limitTo": null,
             "max": 4,
             "modifier": "4",
             "modifierType": "formula",
@@ -899,29 +965,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -933,11 +1001,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/iridishell-superior.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -951,7 +1015,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "heavy",
@@ -980,7 +1044,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": 0,
@@ -989,7 +1052,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1010,7 +1073,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1020,7 +1084,6 @@
           "unidentified": "",
           "value": "<p>These gleaming metal plates lock together to form a suit of heavy armor reminiscent of an insect’s shell. Although the iridishell was initially designed for shirrens, its beauty combined and functionality makes it a popular choice for many. More expensive suits of iridishell not only offer more protection but feature elaborate designs with gold or silver trim and embedded jewels.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1030,7 +1093,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 12,
         "modifiers": [],
         "price": 42250,
@@ -1039,25 +1103,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 198",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -1065,8 +1130,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1077,34 +1142,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 40,
           "value": 40
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1113,14 +1163,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 40</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
+        "modifiers": [],
         "price": 330,
-        "quantity": "1",
+        "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true
@@ -1132,11 +1181,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1144,12 +1189,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1158,7 +1212,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1168,7 +1223,7 @@
           "unidentified": "",
           "value": "<p>When ending a flying or jumping movement, the creature can land on targets that are at least three size categories smaller than itself. Targets can make a Reflex save (DC 10 + half the creature's CR + the creature's Strength modifier). Targets who succeed take half the listed damage and move to the closest open square (this movement does not provoke attacks opportunity). Targets who fail are knocked @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone}, take the listed damage, and are @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pinned}. Each crushed target can attempt to escape the pin normally on its turn, and the pin ends automatically if the crushing creature moves off the target’s square. A crushed target does not take damage from the crush more than once, unless the crushing creature moves fully off that creature and then back onto it.</p>\n<p><em>Format</em>: <strong>Offensive Abilities</strong> crush (4d6+8 B).</p>\n<p><em>Guidelines</em>: Use the same damage amount as for the creature’s standard melee attack.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1179,34 +1234,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1217,11 +1274,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1229,12 +1282,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1243,7 +1305,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1253,7 +1316,7 @@
           "unidentified": "",
           "value": "<p>(SU)</p>\n<p>A successful energy drain attack inflicts one or more negative levels (as described in the ability). If an attack that includes an energy drain scores a critical hit, it inflicts twice the listed number of negative levels. Unless otherwise specified in the draining creature’s description, it gains 5 temporary Hit Points for each negative level it inflicts on an opponent. These temporary Hit Points last for a maximum of 1 hour. Negative levels from energy drain remain until 24 hours have passed or until they are removed with magic or technology. If a negative level isn’t removed before 24 hours have passed, the affected target must attempt a Fortitude saving throw (the exact DC is given in the creature’s stat block). On a success, the negative level goes away. On a failure, the negative level becomes permanent. A separate saving throw is required for each negative level. See page 252 of the Starfinder Core Rulebook for more about negative levels.</p>\n<p>Offensive Abilities energy drain (2 levels, DC 22).</p>\n<hr />\n<p>A shadow giant inflicts its energy drain attack no more than once per round via its first successful melee attack or via hurl debris.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1264,34 +1327,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }

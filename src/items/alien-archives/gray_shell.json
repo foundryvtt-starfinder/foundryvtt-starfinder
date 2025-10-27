@@ -11,21 +11,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -34,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -44,7 +53,7 @@
           "unidentified": "",
           "value": "<p>When a gray shell is reduced to fewer than half its Hit Points, its corporeal exterior falls away, revealing the incorporeal gray-shaped animating force within. The gray shell’s size is reduced to Small, it loses its vulnerability to acid and the ability to use its gear, gains the incorporeal subtype, and gains a supernatural fly speed of 30 with perfect maneuverability.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -55,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -93,11 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/battleglove.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -111,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 20,
         "attributes": {
@@ -132,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": 20,
@@ -146,7 +152,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -186,10 +192,22 @@
           "effect": "",
           "parts": [
             {
-              "formula": null,
-              "operator": "",
+              "name": "",
+              "formula": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -197,13 +215,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "5d6 +14",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -213,7 +244,6 @@
           "unidentified": "",
           "value": "<p>When a pulse gauntlet strikes its target, it releases a surge of sonic energy that can knock the target down. Pulse gauntlets are made of heavy-duty nylon with reinforced pads over the items' knuckles.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -223,7 +253,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 12,
         "modifiers": [],
@@ -319,10 +349,7 @@
         "quantity": null,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -330,11 +357,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -342,7 +374,7 @@
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -356,11 +388,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/diasporan-rifle-elite.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -374,7 +402,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 22,
         "attributes": {
@@ -395,7 +423,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": 40,
@@ -409,7 +436,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -449,9 +476,21 @@
           "effect": "Deafen [DC",
           "parts": [
             {
+              "name": "",
               "formula": "21]",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
                 "sonic": true
               }
             }
@@ -460,13 +499,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d10 +13",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
                 "sonic": true
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -476,7 +528,6 @@
           "unidentified": "",
           "value": "<p>A sonic rifle fires a blast that is loud enough to @UUID[Compendium.sfrpg.rules.Item.O5GDQUKPCJ9Zbnfj]{Deafen} targets in addition to damaging them. Sonic rifles have snub-nosed barrels and typically incorporate U-shaped prongs to improve beam stability.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -486,7 +537,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 10,
         "modifiers": [],
@@ -582,10 +633,8 @@
         "quantity": null,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 50
+          "value": "50"
         },
         "rollNotes": "",
         "save": {
@@ -593,11 +642,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 177",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -605,7 +659,7 @@
           "value": 2
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -619,21 +673,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -642,7 +704,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -652,7 +715,7 @@
           "unidentified": "",
           "value": "<p>A gray shell appears as a member of a humanoid or monstrous humanoid race, gaining a +10 species bonus to Disguise checks to appear as that type of creature. However, a creature that succeeds at a DC 30 Medicine check when providing long-term care or long-term stability to a gray shell notices the strange hollowness of many of its internal organs.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -663,34 +726,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -701,21 +766,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -724,7 +797,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -734,7 +808,7 @@
           "unidentified": "",
           "value": "<p>The animating force within a gray shell can pull its body out of phase temporarily. A gray shell can pass through walls or material objects (but not corporeal creatures) as long as it begins and ends its turn outside of any wall or obstacle.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -745,34 +819,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -783,11 +859,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/abadarcorp_travel_suit_platinium.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -801,7 +873,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -830,7 +902,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -839,7 +910,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -860,7 +931,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -870,7 +942,6 @@
           "unidentified": "",
           "value": "<p>Executives popularized these light armor business suits for boardrooms and diplomatic meetings. Contingent force fields and concealed rebreathers protect the wearer in hostile environmental conditions. Higher grades of travel suits offer more protection—along with a designer label.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -880,7 +951,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 12,
         "modifiers": [],
         "price": 34600,
@@ -889,25 +961,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 197",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -915,8 +988,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -927,34 +1000,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -963,14 +1021,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
-        "quantity": "1",
+        "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true
@@ -982,34 +1039,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 40,
           "value": 40
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1018,14 +1060,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 40</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
+        "modifiers": [],
         "price": 330,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true
@@ -1037,11 +1078,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/dominate_person.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rsak",
         "activation": {
@@ -1060,7 +1097,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 22,
         "chatFlavor": "",
@@ -1070,7 +1107,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1080,14 +1118,14 @@
           "unidentified": "",
           "value": "<p>You fire a bright purple ray at your target, making a ranged attack against your target’s EAC, but you can add your key ability score bonus to this attack instead of your Dexterity modifier if it is higher.</p>\n<p>If you hit and your target fails its Will saving throw, you establish a telepathic link with the target’s mind and can control its actions. If you and the target have a common language, you can generally force the target to perform as you desire, within the limits of its abilities. If no common language exists, you can communicate only basic commands, such as “Come here,” “Go there,” “Fight,” and “Stand still.” You know what the target is experiencing, but you don’t receive direct sensory input from it, nor can it communicate with you telepathically. Once you have given a dominated creature a command, it continues to attempt to carry out that command to the exclusion of all other activities except those necessary for day-to-day survival (such as sleeping, eating, and so forth). Changing your orders or giving a dominated creature a new command is a move action.</p>\n<p>By concentrating fully on the spell (a standard action), you can receive full sensory input as interpreted by the mind of the target, though it still can’t communicate with you. You don’t actually see through the target’s eyes, but you still get a good idea of what’s going on.</p>\n<p>The target resists this control, and any target forced to take actions against its nature can attempt a new saving throw with a +2 bonus. Obviously self-destructive orders are not carried out. Once control is established, the range at which it can be exercised is unlimited as long as you and the target are on the same plane. You don’t need to see the target to control it.</p>\n<p>If you don’t spend at least 1 round concentrating on the spell each following day, the target can attempt a new saving throw to throw off the domination. You can be prevented from exercising control or using the telepathic link while the target is under the effects of some spells, but such effects don’t automatically dispel the domination.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "1 day/level; see text"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -1103,10 +1141,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -1115,14 +1150,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 352",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one humanoid"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -1134,11 +1174,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/modify_memory.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1157,7 +1193,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1167,7 +1203,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1177,14 +1214,14 @@
           "unidentified": "",
           "value": "<p>You reach into the target’s mind and modify up to 5 minutes of its memories in one of the following ways.</p>\n<ul>\n<li>Eliminate all memory of an event the target actually experienced. This spell cannot negate&nbsp;@UUID[Compendium.sfrpg.spells.Item.3nFCrisRp2GIjbR3]{Charm Person},&nbsp;suggestion, or similar spells.</li>\n<li>Allow the target to recall with perfect clarity an event it actually experienced.</li>\n<li>Change the details of an event the target actually experienced.</li>\n<li>Implant a memory of an event the target never experienced.</li>\n</ul>\n<p>Casting the spell takes 1 round. If the target fails its saving throw, you proceed with the spell by spending as much as 5 minutes (a period of time equal to the amount of memory you want to modify) visualizing the memory you wish to modify in the target. If your concentration is disturbed before the visualization is complete, or if the target moves beyond the spell’s range at any point during this time, the spell fails.</p>\n<p>A modified memory does not necessarily affect the target’s actions, particularly if it contradicts the creature’s natural inclinations. An illogical modified memory is usually dismissed as a bad dream, a hallucination, or another similar excuse.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "permanent"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -1200,10 +1237,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -1212,14 +1246,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 366",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -1231,11 +1270,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/confusion.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1254,7 +1289,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 15
+          "value": "15"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1264,7 +1299,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1272,16 +1308,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This spell causes @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confusion} in all creatures in the area, making them unable to determine their actions. Any @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature that is attacked automatically attacks or attempts to attack its attackers on its next turn, as long as it is still @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} at the start of its next turn. Note that a @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature will not make attacks of opportunity against any foe that it is not already devoted to attacking (either because of its most recent action or because it has just been attacked). For @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creatures that have not been attacked, roll on the following table at the start of each affected creature’s turn each round to see what it does in that round.</p>\n<table style=\"width: 403px; height: 85px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; background-color: #34495e; text-align: center; width: 44px;\">\n<p style=\"color: white;\">D%</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">1-25</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">26-50</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">51-75</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">76-100</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>A @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature that can’t carry out the indicated action does nothing but babble incoherently. Attackers are not at any special advantage when attacking a @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} target.</p>"
+          "value": "<p>This spell causes @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confusion} in all creatures in the area, making them unable to determine their actions. Any @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature that is attacked automatically attacks or attempts to attack its attackers on its next turn, as long as it is still @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} at the start of its next turn. Note that a @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature will not make attacks of opportunity against any foe that it is not already devoted to attacking (either because of its most recent action or because it has just been attacked). For @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creatures that have not been attacked, roll on the following table at the start of each affected creature’s turn each round to see what it does in that round.</p>\n<table style=\"width:403px;height:85px\" border=\"1\">\n<tbody>\n<tr style=\"height:17px\">\n<td style=\"height:17px;background-color:#34495e;text-align:center;width:44px\">\n<p style=\"color:white\">D%</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">1-25</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">26-50</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">51-75</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">76-100</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>A @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature that can’t carry out the indicated action does nothing but babble incoherently. Attackers are not at any special advantage when attacking a @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} target.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "1d100",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1297,10 +1333,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -1309,14 +1342,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 344",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1328,11 +1366,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/discern-lies.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1351,7 +1385,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1361,7 +1395,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1371,14 +1406,14 @@
           "unidentified": "",
           "value": "<p>Each round, you concentrate on one target within range. You know if the target deliberately and knowingly speaks a lie by discerning disturbances in its aura caused by lying. The spell does not reveal the truth or uncover unintentional inaccuracies, and it doesn’t necessarily reveal evasions. Each round, you can concentrate on a different target.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "concentration, up to 1 round/level"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1394,10 +1429,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -1406,14 +1438,19 @@
           "descriptor": "negate"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 349",
         "sr": false,
         "target": {
-          "type": "",
           "value": "up to one creature/level, no two of which can be more than 30 ft. apart"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1425,11 +1462,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/hold_monster.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1448,7 +1481,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1458,7 +1491,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1468,14 +1502,14 @@
           "unidentified": "",
           "value": "<p>This spell functions as&nbsp;hold person, except it can target any living creature.</p>\n<h2>Hold Person</h2>\n<p>The target becomes @UUID[Compendium.sfrpg.conditions.Item.NV4qXRDgb7zTNkW2]{Paralyzed} and freezes in place. It is aware and breathes normally but can’t take any physical actions, even speech. A held creature can’t cast spells. Each round on its turn, the target can spend a full action to attempt a new saving throw to end the effect. This does not provoke attacks of opportunity. A winged creature that is @UUID[Compendium.sfrpg.conditions.Item.NV4qXRDgb7zTNkW2]{Paralyzed} can’t flap its wings and falls. A swimmer can’t swim and may drown.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1491,10 +1525,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -1503,14 +1534,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 359",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1522,11 +1558,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mind-probe.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1545,7 +1577,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1555,7 +1587,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1565,14 +1598,14 @@
           "unidentified": "",
           "value": "<p>You gain access to the target’s memories and knowledge, and you can pry the information you want from them involuntarily.</p>\n<p>You can attempt to learn the answer to one question of your choice per round; after each question, the target can attempt a Will saving throw to end the spell. If it fails, the creature can attempt a Bluff check with a DC equal to 11 + your Sense Motive modifier. If it fails its Bluff check, you gain the answer you desire. If it succeeds at its check, you gain no information. If it succeeds by 5 or more, it answers however it chooses and you believe that wrong answer to be the truth. Your questions are purely telepathic inquiries, and the answers to those questions are imparted directly into your mind. You and the target don’t need to speak the same language, though less intelligent creatures may yield up only appropriate sensory images in answer to your questions.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1588,10 +1621,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -1600,14 +1630,19 @@
           "descriptor": "negate"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 365",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1619,11 +1654,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/deep_slumber.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1642,7 +1673,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1652,7 +1683,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1662,14 +1694,14 @@
           "unidentified": "",
           "value": "<p>This spell causes living creatures in the area to fall into a magical sleep, gaining the @UUID[Compendium.sfrpg.conditions.Item.3iTdt2NRgIyrychR]{Asleep} condition (except normal noise doesn’t wake up the sleeping creatures). Creatures with the lowest CR are affected first. Among creatures of equal CR, those who are closest to the spell’s point of origin are affected first.<em>Deep slumber</em> doesn’t affect unconscious creatures, constructs, or undead creatures.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -1685,10 +1717,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -1697,14 +1726,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 348",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one or more living creatures with a total CR of 8 or lower, all within a 10 ft.-radius burst"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1716,11 +1750,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mind_thrust.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1739,7 +1769,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1751,11 +1781,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "10d10",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1765,14 +1810,14 @@
           "unidentified": "",
           "value": "<p>You divine the most vulnerable portion of your opponent’s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.</p>\n<ul>\n<li><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n<li><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n<li><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n<li><strong>4th:</strong> When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is fatigued for 1 round if it fails its saving throw.</li>\n<li><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is @UUID[Compendium.sfrpg.conditions.Item.33ynSbmexuxC3cAQ]{Exhausted} for 1 round if it fails its save and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n<li><strong>6th:</strong> When you cast&nbsp;mind thrust&nbsp;as a 6th-level spell, it deals 17d10 damage to the target. The target is @UUID[Compendium.sfrpg.conditions.Item.33ynSbmexuxC3cAQ]{Exhausted} and @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n</ul>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1788,10 +1833,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -1800,14 +1842,19 @@
           "descriptor": "half"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 365",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1819,34 +1866,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 40,
           "value": 40
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1855,14 +1887,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 40</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 4,
+        "modifiers": [],
         "price": 330,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true

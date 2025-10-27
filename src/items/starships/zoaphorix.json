@@ -10,21 +10,10 @@
       "type": "starshipFrame",
       "img": "systems/sfrpg/icons/default/hexagonal-nut.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
-        "costMultipliedBySize": false,
         "crew": {
-          "maximum": null,
-          "minimum": null
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
+          "maximum": 0,
+          "minimum": 0
         },
         "damageThreshold": {
           "base": 5
@@ -39,13 +28,14 @@
         "expansionBays": 0,
         "hitpoints": {
           "base": 300,
-          "increment": null
+          "increment": 0
         },
         "isPowered": true,
         "maneuverability": "poor",
         "modifiers": [],
         "pcu": null,
         "size": "huge",
+        "slug": "",
         "source": "SOM, p. 131",
         "weaponMounts": {
           "aft": {
@@ -87,18 +77,8 @@
       "type": "starshipThruster",
       "img": "systems/sfrpg/icons/default/rocket-thruster.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -112,6 +92,7 @@
         "modifiers": [],
         "pcu": null,
         "pilotingModifier": 0,
+        "slug": "",
         "source": "",
         "specialMaterials": {
           "abysium": false,
@@ -139,19 +120,9 @@
       "type": "starshipShield",
       "img": "systems/sfrpg/icons/default/forward-field.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 0,
         "cost": 20,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "defenseValue": 0,
         "description": {
           "chat": "",
@@ -164,8 +135,9 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": 45,
-        "regeneration": null,
+        "regeneration": 0,
         "shieldPoints": 180,
+        "slug": "",
         "source": "CRB pg. 302",
         "targetLockBonus": 0
       }
@@ -176,18 +148,8 @@
       "type": "starshipPowerCore",
       "img": "systems/sfrpg/icons/default/power-generator.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -195,9 +157,9 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
         "pcu": 400,
+        "slug": "",
         "source": "",
         "specialMaterials": {
           "abysium": false,
@@ -226,18 +188,8 @@
       "type": "starshipOtherSystem",
       "img": "systems/sfrpg/icons/default/gears.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -248,6 +200,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": null,
+        "slug": "",
         "source": ""
       }
     },
@@ -257,18 +210,8 @@
       "type": "starshipOtherSystem",
       "img": "systems/sfrpg/icons/default/gears.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -279,6 +222,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": null,
+        "slug": "",
         "source": ""
       }
     },
@@ -288,18 +232,8 @@
       "type": "starshipOtherSystem",
       "img": "systems/sfrpg/icons/default/gears.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -310,6 +244,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": null,
+        "slug": "",
         "source": ""
       }
     },
@@ -319,13 +254,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "allowadd": "true",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -333,17 +263,29 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "4d6",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -360,6 +302,7 @@
         },
         "pcu": null,
         "range": "medium",
+        "slug": "",
         "source": "",
         "special": {
           "anchoring": false,
@@ -440,13 +383,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "allowadd": "true",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -454,17 +392,29 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "4d6",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -481,6 +431,7 @@
         },
         "pcu": null,
         "range": "medium",
+        "slug": "",
         "source": "",
         "special": {
           "anchoring": false,
@@ -561,13 +512,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "allowadd": "true",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -575,17 +521,29 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "4d6",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -602,6 +560,7 @@
         },
         "pcu": null,
         "range": "medium",
+        "slug": "",
         "source": "",
         "special": {
           "anchoring": false,
@@ -682,13 +641,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "allowadd": "true",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -696,17 +650,29 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "4d6",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -723,6 +689,7 @@
         },
         "pcu": null,
         "range": "medium",
+        "slug": "",
         "source": "",
         "special": {
           "anchoring": false,
@@ -803,13 +770,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "allowadd": "true",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -817,17 +779,29 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "(1d8)*10",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -844,6 +818,7 @@
         },
         "pcu": null,
         "range": "medium",
+        "slug": "",
         "source": "",
         "special": {
           "anchoring": false,
@@ -924,13 +899,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "allowadd": "true",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -938,17 +908,29 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "(1d8)*10",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -965,6 +947,7 @@
         },
         "pcu": null,
         "range": "medium",
+        "slug": "",
         "source": "",
         "special": {
           "anchoring": false,
@@ -1045,19 +1028,9 @@
       "type": "starshipArmor",
       "img": "systems/sfrpg/icons/default/metal-scales.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 4,
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1065,9 +1038,8 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
-        "pcu": null,
+        "slug": "",
         "source": "",
         "specialMaterials": {
           "abysium": false,
@@ -1095,18 +1067,8 @@
       "type": "starshipDefensiveCountermeasure",
       "img": "systems/sfrpg/icons/default/bubble-field.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1117,6 +1079,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": null,
+        "slug": "",
         "source": "",
         "specialMaterials": {
           "abysium": false,
@@ -1143,13 +1106,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "allowadd": "true",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -1157,11 +1115,9 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -1178,6 +1134,7 @@
         },
         "pcu": null,
         "range": "short",
+        "slug": "",
         "source": "",
         "special": {
           "anchoring": false,
@@ -1258,18 +1215,8 @@
       "type": "starshipOtherSystem",
       "img": "systems/sfrpg/icons/default/gears.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1280,6 +1227,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": null,
+        "slug": "",
         "source": ""
       }
     },
@@ -1289,18 +1237,8 @@
       "type": "starshipOtherSystem",
       "img": "systems/sfrpg/icons/default/gears.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1311,6 +1249,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": null,
+        "slug": "",
         "source": "AA1 pg. 158"
       }
     },
@@ -1320,13 +1259,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
-        "allowadd": "true",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -1334,17 +1268,29 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "3d6",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -1361,6 +1307,7 @@
         },
         "pcu": null,
         "range": "none",
+        "slug": "",
         "source": "",
         "special": {
           "anchoring": false,

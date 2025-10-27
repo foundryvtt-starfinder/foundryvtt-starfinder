@@ -11,21 +11,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -34,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -44,7 +53,7 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -55,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -93,21 +104,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -116,7 +135,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -126,7 +146,7 @@
           "unidentified": "",
           "value": "<p>The mind and spirit of a hallajin is so convoluted and energetic that direct contact with it via abilities like detect thoughts, mind link, or other spells or abilities that charm or dominate causes feedback of psychic energy. The creature contacting the hallajin’s mind takes 4d8+8 psychic damage (Will DC 24 half). This damage occurs each round a creature remains in contact with the hallajin’s mind. A hallajin using its telepathy on a creature doesn’t affect it in this way.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -137,34 +157,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -175,7 +197,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "eac",
         "actionType": "mwak",
@@ -190,7 +211,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 25,
         "attributes": {
@@ -211,7 +232,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -220,7 +240,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -242,13 +262,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "8d6+17",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -258,7 +291,6 @@
           "unidentified": "",
           "value": "<p>A hallajin can concentrate its glowing form into deadly flaming energy to make either melee or ranged attacks. Its ranged energy surge attack has a range increment of 100 feet.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -268,7 +300,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -278,22 +310,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -301,8 +335,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -315,21 +349,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -338,7 +380,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -348,7 +391,7 @@
           "unidentified": "",
           "value": "<p>As a full action, a hallajin can teleport (as per teleport), except it can’t leave or enter an area enclosed by barriers of electrical energy.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -359,34 +402,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -397,21 +442,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -420,7 +473,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -430,7 +484,7 @@
           "unidentified": "",
           "value": "<p>A hallajin sheds light as per a beacon.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -441,34 +495,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -479,11 +535,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/control_gravity.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -501,7 +553,7 @@
           "effect": "",
           "shapable": true,
           "shape": "cube",
-          "units": "text",
+          "units": "",
           "value": "up to one 10-ft. cube/2 levels (S)"
         },
         "attackBonus": 0,
@@ -512,7 +564,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -522,14 +575,14 @@
           "unidentified": "",
           "value": "<p>You can control gravity in an area, causing it to reverse, become zero-g, or become extremely strong. A creature or object within the area that succeeds at its saving throw is unaffected (though if it stays in the area, it must succeed at a new save each round or become affected), but it might still suffer secondary effects (such as an object flying up from reversed gravity, or an object falling upon it when the spell ends). You choose how to have this spell affect gravity when you cast it, and you cannot change it without recasting the spell. If two <em>control gravity</em> spells affect the same area, they negate each other in the area of overlap.</p>\n<p>If you reverse gravity in an area, you cause unattached objects and creatures in the area to fall upward and reach the top of the affected area in 1 round. If a solid object (such as a ceiling) is encountered in this fall, falling objects and creatures strike it in the same manner as they would during a normal downward fall. If an object or creature reaches the top of the spell’s area without striking anything, it remains there, oscillating slightly, until the spell ends. At the end of the spell’s duration, affected objects and creatures fall downward. Creatures who can fly or levitate can keep themselves from falling in either direction.</p>\n<p>If you increase gravity in the area, creatures and objects weigh twice as much as normal, move at half speed, can jump only half as far as normal, and can lift and carry only half as much as normal. Any flying target has its maneuverability worsened by one step (from average to clumsy, for example; minimum clumsy) and plummets to the ground unless it succeeds at a DC 25 Acrobatics check to fly to remain in the air.</p>\n<p>An area of zero-g works like the zero-g environment (see page 402). You can also use this spell to make areas of zero-g, heavy gravity, or light gravity act as normal gravity for the duration (see page 402).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value*10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 6,
         "materials": {
@@ -545,10 +598,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -557,14 +607,19 @@
           "descriptor": "negate"
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 345",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -576,11 +631,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/gravitational_singularity.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -598,8 +649,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -609,7 +660,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -619,14 +671,14 @@
           "unidentified": "",
           "value": "<p>You call into being a tiny particle of mass with infinite density. You must conjure the singularity in a square that is unoccupied by any creatures or objects. When you finish casting this spell, the singularity immediately draws all Medium and smaller creatures and unattended objects of no more than light bulk within 30 feet toward it. Each round on your turn, the singularity makes a single special combat maneuver against creatures within 30 feet with an attack bonus equal to 4 + your caster level + your key ability modifier. Compare the result to each creature’s KAC + 8. If the singularity is successful, that creature is moved 5 feet toward the singularity plus 5 additional feet for every 5 by which the result exceeds a target’s KAC + 8. Unattended objects are automatically moved 10 feet toward the singularity each round. If a creature or object is moved into the square that contains the singularity, it is sucked inside it and takes 12d6 damage at the end of its turn each round it remains within that space.</p>\n<p>A creature drawn into the singularity can take no actions except a full action to try to escape (it still takes damage during the rounds it attempts to escape). A creature must succeed at either an Athletics check (DC = 15 + 1-1/2 × your mystic level) or a DC 22 Strength check to escape the singularity. The singularity can hold up to four Medium creatures or objects (two Small creatures or objects count as one Medium creature, and so on); if it would pull in additional creatures, those creatures are simply pulled into a square adjacent to the singularity.</p>\n<p>A creature within 50 feet of the singularity has its speed reduced by half when it moves away from the singularity. However, it can move at double its normal speed when moving toward the singularity. If a creature moves within 30 feet of the singularity at any point in its movement, it is subject to the combat maneuver described above. A creature that moves neither toward nor away from the singularity moves at its normal speed.</p>\n<p>When this spell ends, the singularity disappears, and creatures and objects that were sucked into the singularity appear in the space where you conjured it (or as close as possible to that space, if they can’t all fit within it).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 6,
         "materials": {
@@ -642,26 +694,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 357",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -673,11 +727,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/synaptic_pulse_greater.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -696,7 +746,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -706,7 +756,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -716,14 +767,14 @@
           "unidentified": "",
           "value": "<p>You stun all creatures in range for [[1d4]] rounds. With a successful Will saving throw, a creature is instead sickened for 1 round.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "1d4 rounds"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -739,10 +790,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
@@ -751,14 +799,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 380",
         "sr": true,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -770,11 +823,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/retrocognition.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -792,8 +841,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -803,7 +852,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -811,16 +861,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This spell allows you to gain psychic impressions from past events that occurred in your current location.&nbsp;Retrocognition&nbsp;reveals psychic impressions from events that occurred over the course of the last hour throughout the first minute of the spell’s duration, followed by impressions from the next hour back throughout the next minute you concentrate, and so on. If a psychically traumatic or turbulent event happened during that period, you must succeed at a Will saving throw (<strong>DC = 15, 20, or 25, depending on the severity of the traumatic or turbulent event</strong>) or lose your concentration on the spell. If you fail this saving throw, the spell ends.</p>\n<p>At mystic level 16th and higher, you can choose to collect impressions from over the course of a longer interval of time than an hour, beginning at 1 week per minute of concentration (as listed on the table below). The amount of detail you receive diminishes, so this eventually makes it harder to distinguish impressions left by anything but the most major events. In most circumstances, you can’t glean information about what occurred during the Gap with this spell.</p>\n<table style=\"height: 68px;\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 149.867px; text-align: center;\"><strong>Mystic Level</strong></td>\n<td style=\"height: 17px; width: 245.133px; text-align: center;\"><strong>Period</strong></td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 149.867px; text-align: center;\">16th–17th</td>\n<td style=\"height: 17px; width: 245.133px; text-align: center;\">1 week per minute</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 149.867px; text-align: center;\">18th–19th</td>\n<td style=\"height: 17px; width: 245.133px; text-align: center;\">1 year per minute</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 149.867px; text-align: center;\">20th</td>\n<td style=\"height: 17px; width: 245.133px; text-align: center;\">1 decade per minute</td>\n</tr>\n</tbody>\n</table>"
+          "value": "<p>This spell allows you to gain psychic impressions from past events that occurred in your current location.&nbsp;Retrocognition&nbsp;reveals psychic impressions from events that occurred over the course of the last hour throughout the first minute of the spell’s duration, followed by impressions from the next hour back throughout the next minute you concentrate, and so on. If a psychically traumatic or turbulent event happened during that period, you must succeed at a Will saving throw (<strong>DC = 15, 20, or 25, depending on the severity of the traumatic or turbulent event</strong>) or lose your concentration on the spell. If you fail this saving throw, the spell ends.</p>\n<p>At mystic level 16th and higher, you can choose to collect impressions from over the course of a longer interval of time than an hour, beginning at 1 week per minute of concentration (as listed on the table below). The amount of detail you receive diminishes, so this eventually makes it harder to distinguish impressions left by anything but the most major events. In most circumstances, you can’t glean information about what occurred during the Gap with this spell.</p>\n<table style=\"height:68px\">\n<tbody>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:149.867px;text-align:center\"><strong>Mystic Level</strong></td>\n<td style=\"height:17px;width:245.133px;text-align:center\"><strong>Period</strong></td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:149.867px;text-align:center\">16th–17th</td>\n<td style=\"height:17px;width:245.133px;text-align:center\">1 week per minute</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:149.867px;text-align:center\">18th–19th</td>\n<td style=\"height:17px;width:245.133px;text-align:center\">1 year per minute</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:149.867px;text-align:center\">20th</td>\n<td style=\"height:17px;width:245.133px;text-align:center\">1 decade per minute</td>\n</tr>\n</tbody>\n</table>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "concentration, up to 1 minute/level"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -836,26 +886,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 375",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -867,11 +919,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/synapse_overload.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "msak",
         "activation": {
@@ -889,8 +937,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -902,11 +950,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "18d8",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -916,14 +979,14 @@
           "unidentified": "",
           "value": "<p>To affect the target, you must hit with a melee attack against its EAC; you can add your key ability score modifier to this attack roll instead of your Strength modifier if it is higher. You then overload the target’s mind, causing the target’s synapses to violently trigger. The target takes 18d8 damage and is @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} for 1 minute. A target can negate the @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} effect with a successful Fortitude saving throw, but still takes full damage.</p>\n<p>Casting this spell doesn’t provoke attacks of opportunity.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -939,10 +1002,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -951,14 +1011,19 @@
           "descriptor": "partial"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 380",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -970,11 +1035,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/telekinesis.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -992,8 +1053,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": null,
         "chatFlavor": "",
@@ -1003,7 +1064,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1013,14 +1075,14 @@
           "unidentified": "",
           "value": "<p>You move objects or creatures by concentrating on them. Depending on your desired effect (choose one from below), the spell can perform a variety of combat maneuvers, provide a gentle, sustained force, or exert a single short, violent thrust.</p>\n<p><strong>Combat Maneuver:</strong> Once per round, you can use&nbsp;telekinesis&nbsp;to perform a ranged attack that acts as a bull rush, disarm, grapple (including pin), or trip combat maneuver. Resolve these attempts as normal, but use your caster level plus your key ability score modifier as your attack bonus. No saving throw is allowed against these attempts, but spell resistance applies normally. This version of the spell can last 1 round per caster level, but it ends if you cease concentrating.</p>\n<p><strong>Sustained Force:</strong> A sustained force moves an object of no more than 25 pounds or 2 bulk per caster level up to 20 feet per round in any direction (including up or down). A creature can negate the effect on an object it holds with a successful Will save or with spell resistance. This version of the spell lasts 1 round per caster level, but it ends if you cease concentrating. The spell ends if the object is forced beyond the spell’s range.</p>\n<p>You can telekinetically manipulate an object as if with one hand. For example, a lever can be pulled, a key turned, a button pushed, an object rotated, and so on if the force required is within the weight limitation. You might even be able to untie simple knots, though a delicate activity such as this requires a successful DC 15 Intelligence check.</p>\n<p><strong>Violent Thrust:</strong> The spell energy can be spent in a single round. You can hurl up to 15 objects or creatures that are within range (no two of which can be more than 10 feet apart) toward any target within 150 feet of all the objects. You can hurl up to a total weight of 400 pounds or 40 bulk. You must make attack rolls (one per creature or object thrown) to hit the target with the items, using your base attack bonus plus your key ability score modifier as your attack bonus. All objects cause damage ranging from 1 damage per 25 pounds or 2 bulk (for less dangerous objects) to 1d10 damage per 25 pounds or 2 bulk (for extremely dangerous objects, such as weapons or bladed or spiked objects). Objects and creatures that miss the target land in a square adjacent to the target. Creatures that fall within the weight capacity of the spell can be hurled, but they can attempt Will saving throws (or rely on spell resistance) to negate the effect, as can those whose held possessions are targeted by the spell. If a thrown creature is hurled against a solid surface, it takes 1d6 damage as if it had fallen 10 feet.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "concentration (up to 1 round/level) or instantaneous; see text"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -1036,10 +1098,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "long",
-          "value": null
+          "units": "long"
         },
         "rollNotes": "",
         "save": {
@@ -1048,14 +1107,19 @@
           "descriptor": "object"
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 380",
         "sr": true,
         "target": {
-          "type": "",
           "value": "see text"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1067,11 +1131,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/confusion.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1090,7 +1150,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 15
+          "value": "15"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1100,7 +1160,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1108,16 +1169,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This spell causes @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confusion} in all creatures in the area, making them unable to determine their actions. Any confused creature that is attacked automatically attacks or attempts to attack its attackers on its next turn, as long as it is still confused at the start of its next turn. Note that a confused creature will not make attacks of opportunity against any foe that it is not already devoted to attacking (either because of its most recent action or because it has just been attacked). For confused creatures that have not been attacked, roll on the following table at the start of each affected creature’s turn each round to see what it does in that round.</p>\n<table style=\"width: 403px; height: 85px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; background-color: #34495e; text-align: center; width: 44px;\">\n<p style=\"color: white;\">D%</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">1-25</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">26-50</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">51-75</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">76-100</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>A confused creature that can’t carry out the indicated action does nothing but babble incoherently. Attackers are not at any special advantage when attacking a confused target.</p>"
+          "value": "<p>This spell causes @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confusion} in all creatures in the area, making them unable to determine their actions. Any confused creature that is attacked automatically attacks or attempts to attack its attackers on its next turn, as long as it is still confused at the start of its next turn. Note that a confused creature will not make attacks of opportunity against any foe that it is not already devoted to attacking (either because of its most recent action or because it has just been attacked). For confused creatures that have not been attacked, roll on the following table at the start of each affected creature’s turn each round to see what it does in that round.</p>\n<table style=\"width:403px;height:85px\" border=\"1\">\n<tbody>\n<tr style=\"height:17px\">\n<td style=\"height:17px;background-color:#34495e;text-align:center;width:44px\">\n<p style=\"color:white\">D%</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">1-25</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">26-50</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">51-75</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">76-100</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>A confused creature that can’t carry out the indicated action does nothing but babble incoherently. Attackers are not at any special advantage when attacking a confused target.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "1d100",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1133,10 +1194,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -1145,14 +1203,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 344",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1164,11 +1227,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mind-probe.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1186,8 +1245,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1197,7 +1256,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1207,14 +1267,14 @@
           "unidentified": "",
           "value": "<p>You gain access to the target’s memories and knowledge, and you can pry the information you want from them involuntarily.</p>\n<p>You can attempt to learn the answer to one question of your choice per round; after each question, the target can attempt a Will saving throw to end the spell. If it fails, the creature can attempt a Bluff check with a DC equal to 11 + your Sense Motive modifier. If it fails its Bluff check, you gain the answer you desire. If it succeeds at its check, you gain no information. If it succeeds by 5 or more, it answers however it chooses and you believe that wrong answer to be the truth. Your questions are purely telepathic inquiries, and the answers to those questions are imparted directly into your mind. You and the target don’t need to speak the same language, though less intelligent creatures may yield up only appropriate sensory images in answer to your questions.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -1230,10 +1290,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -1242,14 +1299,19 @@
           "descriptor": "negate"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 365",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }

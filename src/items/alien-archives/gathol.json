@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "icons/magic/control/silhouette-hold-beam-blue.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -23,12 +19,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -37,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -95,33 +101,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "2nd Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Vanguard",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -133,11 +141,7 @@
       "type": "weapon",
       "img": "icons/creatures/claws/claw-hooked-curved.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "mwak",
         "activation": {
@@ -151,7 +155,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 11,
         "attributes": {
@@ -172,7 +176,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -206,6 +209,7 @@
               "name": "",
               "formula": "1d4 +5",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -213,12 +217,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": true,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -228,7 +235,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -238,7 +244,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -343,10 +349,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -356,8 +359,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {
@@ -377,7 +382,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -385,8 +389,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -399,11 +403,7 @@
       "type": "weapon",
       "img": "icons/skills/melee/strike-blade-knife-white-red.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "mwak",
         "activation": {
@@ -417,7 +417,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 11,
         "attributes": {
@@ -438,7 +438,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -472,6 +471,7 @@
               "name": "",
               "formula": "1d4 +4",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": true,
                 "bludgeoning": true,
@@ -479,12 +479,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "Damage is A or B",
         "description": {
@@ -494,7 +497,6 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.WDvGdJ5mMpAD9cWQ]{Vanguard}</p>\n<p><em>Damage formula for weapons is provided as a secondary damage forumla in the Details tab. This formula is only for copying to weapons as a secondary damage formula, and should not be used within this item.</em></p>\n<p>You can focus the power of entropy into a forceful attack. Though you must touch your target to damage it, the damage is not from the impact but from focused waves of entropic energy that unbind and dissolve your target, crush it, or both. Your entropic strike is a magical one-handed advanced melee weapon with the operative weapon special property that targets EAC (even when dealing bludgeoning damage). You can make this attack with nearly any body part and do not need a hand free to use this ability. Using your entropic strike does not require any additional action to use beyond the action you take to make an attack (for example, it can be used to make an attack of opportunity.) For any calculation that requires the item level of your entropic strike, treat your vanguard level as your entropic strike’s item level.</p>\n<p>You can also deliver an entropic strike with any melee weapon, or any shield that allows you to make unarmed attacks (replacing the normal attack with your entropic strike). The attack’s damage is equal to the entropic strike damage of a vanguard of either your class level or a class level equal to the weapon’s item level, whichever is lower. When you use this option, your entropic strike is considered to be made of whatever material the weapon or shield is made of (such as for the purposes of bypassing DR or creature weaknesses). Additionally, you can apply any weapon special property, critical hit effect, or weapon fusion the melee weapon or shield has to your entropic strike as long as the effect can be applied to a one-handed advanced melee weapon that deals acid or bludgeoning damage, doesn’t use additional ammunition or charges, and doesn’t require information beyond that specified for your entropic strike to function. If the weapon special property, critical hit effect, or weapon fusion requires information provided for your weapon (such as the amount of a @UUID[Compendium.sfrpg.conditions.Item.v9RNVTqyTyaPchvd]{Bleed} critical hit effect), use the value for the weapon you are gaining the effect from.</p>\n<p>At 1st level, your entropic strike deals damage equal to 1d3 + your Constitution modifier, but you do not add your Strength modifier (unlike most melee attacks). For each attack, you can deal acid damage, bludgeoning damage, or both. This damage increases as you gain levels (see Table below). At 10th level, you also add your Strength modifier to the damage of your entropic strike. At 5th level, when you use any combat maneuver for which you have Improved Combat Maneuver, you can target a foe’s EAC + 8 (rather than KAC + 8) to determine success, and you also determine the level of success (such as how far you push a foe with a successful bull rush) using EAC.</p><table class=\"inner\" style=\"width:141px\"><tbody><tr><td style=\"width:35px\"><strong>Level</strong></td><td style=\"width:106px\"><strong>Entropic Strike Damage</strong></td></tr><tr><td style=\"width:35px\">1st</td><td style=\"width:106px\">1d3</td></tr><tr><td style=\"width:35px\">2nd</td><td style=\"width:106px\">1d3</td></tr><tr><td style=\"width:35px\">3rd</td><td style=\"width:106px\">1d4</td></tr><tr><td style=\"width:35px\">4th</td><td style=\"width:106px\">1d4</td></tr><tr><td style=\"width:35px\">5th</td><td style=\"width:106px\">1d6</td></tr><tr><td style=\"width:35px\">6th</td><td style=\"width:106px\">2d6</td></tr><tr><td style=\"width:35px\">7th</td><td style=\"width:106px\">2d6</td></tr><tr><td style=\"width:35px\">8th</td><td style=\"width:106px\">2d6</td></tr><tr><td style=\"width:35px\">9th</td><td style=\"width:106px\">3d6</td></tr><tr><td style=\"width:35px\">10th</td><td style=\"width:106px\">3d6</td></tr><tr><td style=\"width:35px\">11th</td><td style=\"width:106px\">3d6</td></tr><tr><td style=\"width:35px\">12th</td><td style=\"width:106px\">4d6</td></tr><tr><td style=\"width:35px\">13th</td><td style=\"width:106px\">5d6</td></tr><tr><td style=\"width:35px\">14th</td><td style=\"width:106px\">6d6</td></tr><tr><td style=\"width:35px\">15th</td><td style=\"width:106px\">7d6</td></tr><tr><td style=\"width:35px\">16th</td><td style=\"width:106px\">8d6</td></tr><tr><td style=\"width:35px\">17th</td><td style=\"width:106px\">9d6</td></tr><tr><td style=\"width:35px\">18th</td><td style=\"width:106px\">10d6</td></tr><tr><td style=\"width:35px\">19th</td><td style=\"width:106px\">11d6</td></tr><tr><td style=\"width:35px\">20th</td><td style=\"width:106px\">12d6</td></tr></tbody></table>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -504,7 +506,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -609,10 +611,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -622,8 +621,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {
@@ -643,7 +644,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -651,8 +651,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -665,11 +665,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/incapacitator.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -683,7 +679,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 9,
         "attributes": {
@@ -704,7 +700,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -763,6 +758,7 @@
               "name": "",
               "formula": "1d6 +3",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -770,12 +766,15 @@
                 "electricity": false,
                 "fire": true,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -785,7 +784,6 @@
           "unidentified": "",
           "value": "<p>With a wider beam than typical lasers, the compliance ray is designed for crowd control and other nonmilitary uses. Although these rays are legal for civilians to own, most models are themed to fit in with the local constabulary’s armor; the Stewards’ blue-and-gold models are common throughout the Pact Worlds. Shots from these pistols cause intense discomfort, and a hit to the eyes can cause temporary blindness. Models begin with the flash designation and increase&nbsp;in intensity as follows: flare, strobe, starburst, and sunspot.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -795,10 +793,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "img": "systems/sfrpg/icons/equipment/weapons/incapacitator.webp",
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
-        "isOpen": true,
         "level": 3,
         "modifiers": [],
         "price": 1400,
@@ -902,10 +898,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 60
+          "value": "60"
         },
         "rollNotes": "",
         "save": {
@@ -915,8 +909,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "AR pg. 14",
         "special": "",
         "specialMaterials": {
@@ -936,16 +932,14 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
-        "totalWeight": "L",
         "usage": {
           "per": "shot",
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -959,11 +953,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/diehard.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -971,12 +961,21 @@
           "condition": "When dying.",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -985,7 +984,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1043,34 +1043,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1081,11 +1083,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/improved_combat_maneuver.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1093,12 +1091,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1107,7 +1114,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1165,19 +1173,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "0b1ed051-9f1b-4c37-9ece-7c59ef4abf8b",
             "name": "Improved Combat Maneuver (Trip)",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "pYspC170OLsl3qDg",
-              "itemId": "4DP5QCFgqeR2XBeE"
-            },
+            "damage": null,
             "effectType": "all-attacks",
             "enabled": false,
+            "limitTo": null,
             "max": 4,
             "modifier": "4",
             "modifierType": "formula",
@@ -1189,29 +1195,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1223,11 +1231,7 @@
       "type": "feat",
       "img": "icons/magic/movement/abstract-ribbons-red-orange.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1235,12 +1239,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1249,7 +1262,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1307,34 +1321,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "3rd Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Vanguard",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1345,34 +1361,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1381,14 +1382,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true
@@ -1400,40 +1400,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1442,14 +1421,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {
           "abysium": false,
@@ -1476,11 +1454,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/hardlight_squad.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1494,7 +1468,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -1523,7 +1497,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -1568,7 +1541,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1578,7 +1552,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1588,7 +1561,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 3,
         "modifiers": [],
         "price": 1450,
@@ -1597,19 +1571,21 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR pg. 71",
         "specialMaterials": {
           "abysium": false,
@@ -1630,7 +1606,6 @@
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -1638,8 +1613,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1650,13 +1625,9 @@
       "type": "upgrade",
       "img": "icons/commodities/tech/smoke-spout-blue.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -1669,9 +1640,8 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
-        "armorType": "lightAndHeavy",
         "attackBonus": 0,
         "attributes": {
           "ac": {
@@ -1691,7 +1661,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -1709,7 +1678,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1719,17 +1689,12 @@
           "unidentified": "",
           "value": "<p>You can activate jump jets as part of a move action in order to fly during your movement. You can fly up to 30 feet (average maneuverability) with a maximum height of 10 feet, or you can fly up to 20 feet straight up. You must land at the end of your move action. Jump jets can’t lift you if you’re @UUID[Compendium.sfrpg.conditions.Item.OwZA6flUQPH0jPA0]{Encumbered}.</p>\n<p>This upgrade can be installed only in light or heavy armor.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
-        "identified": true,
-        "isActive": null,
+        "isActive": false,
         "level": 2,
         "modifiers": [],
         "price": 1000,
@@ -1737,21 +1702,23 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
         "slots": 1,
+        "slug": "",
         "source": "CRB pg. 205",
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -1759,8 +1726,8 @@
           "value": 2
         },
         "uses": {
-          "max": null,
-          "per": null,
+          "max": "",
+          "per": "",
           "value": null
         }
       }
@@ -1771,11 +1738,7 @@
       "type": "shield",
       "img": "systems/sfrpg/icons/equipment/armor/tactical-shield-basic.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "acp": 0,
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -1790,7 +1753,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1811,7 +1774,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bonus": {
           "aligned": 1,
           "wielded": 0
@@ -1859,6 +1821,8 @@
             {
               "name": "",
               "formula": "1d3 + @abilities.str.mod",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": true,
@@ -1866,12 +1830,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1881,7 +1848,6 @@
           "unidentified": "",
           "value": "<p>A tactical shield is a small, mobile defensive plate you carry on one limb and can maneuver to intercept attacks against you. A hand wielding a tactical shield can still hold another object and be used to reload weapons, but it cannot wield weapons or other shields. You can use a tactical shield to make a special unarmed strike that does not count as archaic.</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\"></span></p>"
         },
-        "descriptors": [],
         "dex": null,
         "duration": {
           "units": "instantaneous",
@@ -1892,7 +1858,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 250,
@@ -1993,10 +1960,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -2004,6 +1968,12 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Character Operation Manual",
         "specialMaterials": {
           "abysium": false,
@@ -2022,7 +1992,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -2030,8 +1999,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -2042,40 +2011,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -2084,14 +2032,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {
           "abysium": false,
@@ -2118,11 +2065,7 @@
       "type": "feat",
       "img": "icons/commodities/biological/shell-ribbed-grey.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2130,12 +2073,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2144,7 +2096,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2202,15 +2155,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "74c07780-7f36-4cd1-899b-4147b1f9b439",
             "name": "Stony Plates - DR",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "damage-reduction",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "1",
             "modifierType": "constant",
@@ -2224,8 +2179,10 @@
             "name": "Stone Plates - ER Acid",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "1",
             "modifierType": "constant",
@@ -2239,8 +2196,10 @@
             "name": "Stone Plates - ER Cold",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": true,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -2254,8 +2213,10 @@
             "name": "Stony Plates - ER Electricity",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "1",
             "modifierType": "constant",
@@ -2269,8 +2230,10 @@
             "name": "Stony Plates  - ER Fire",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "1",
             "modifierType": "constant",
@@ -2284,8 +2247,10 @@
             "name": "Stony Plates - ER Sonic",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "1",
             "modifierType": "constant",
@@ -2297,29 +2262,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Gathol",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "SA:tLoL-1 pg. 60",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -2331,11 +2298,7 @@
       "type": "feat",
       "img": "icons/skills/melee/strike-sword-gray.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2343,12 +2306,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2357,7 +2329,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2415,15 +2388,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "c5e3c7af-ace2-4a0e-a2ed-ea5157b8c367",
             "name": "Exergy Insight",
             "type": "insight",
             "condition": "",
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -2435,30 +2410,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Aspect Insight",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Exergy",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -2470,21 +2447,12 @@
       "img": "icons/magic/unholy/strike-body-explode-disintegrate.webp",
       "system": {
         "type": "vanguard",
-        "abilityMods": {
-          "parts": []
-        },
         "base": 0,
         "combatTracker": {
           "displayAbsoluteValue": false,
           "show": true,
           "showOwnerAndGMOnly": false,
           "visualization": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -2500,8 +2468,10 @@
             "name": "Entropic Pool",
             "type": "enhancement",
             "condition": "",
+            "damage": null,
             "effectType": "ac",
             "enabled": true,
+            "limitTo": null,
             "max": 0,
             "modifier": "sign(@resources.vanguard.entropicPool.value)",
             "modifierType": "constant",
@@ -2512,10 +2482,11 @@
           }
         ],
         "range": {
-          "max": 3,
-          "min": 0,
+          "max": "3",
+          "min": "0",
           "mode": "immediate"
         },
+        "slug": "",
         "source": "COM pg. 50",
         "stage": "early",
         "subType": "entropicPool"
@@ -2527,11 +2498,7 @@
       "type": "feat",
       "img": "icons/creatures/abilities/wolf-heads-swirl-purple.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2539,12 +2506,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2553,7 +2529,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2611,34 +2588,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "2nd Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Vanguard Dscipline",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -2649,11 +2628,7 @@
       "type": "weapon",
       "img": "icons/weapons/misc/whip-red-yellow.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "mwak",
         "activation": {
@@ -2667,7 +2642,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 11,
         "attributes": {
@@ -2688,7 +2663,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -2747,6 +2721,7 @@
               "name": "",
               "formula": "1d6 + @abilities.str.mod",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": true,
                 "bludgeoning": false,
@@ -2754,12 +2729,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2769,9 +2747,7 @@
           "unidentified": "",
           "value": "<p>A disintegration lash is a marvel of bioengineering—a technological living organism that feeds on matter by breaking it down with its own high-energy proton-decoupling field. The result is a black, snakelike lash crackling with red-tinged energy, making this a weapon commonly wielded by those looking to intimidate their foes. Disintegration lashes are designated in the standard method for disintegrator weapons: liquidator, decimator, executioner, and eradicator.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "total": 0,
           "units": "instantaneous",
           "value": ""
         },
@@ -2780,10 +2756,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "img": "icons/weapons/misc/whip-red-yellow.webp",
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
-        "isOpen": true,
         "level": 3,
         "modifiers": [],
         "price": 1450,
@@ -2887,11 +2861,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "total": 10,
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "rollNotes": "",
         "save": {
@@ -2901,8 +2872,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "AR pg. 10",
         "special": "",
         "specialMaterials": {
@@ -2922,18 +2895,15 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
-        "totalWeight": "L",
         "usage": {
           "per": "minute",
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
-          "total": 0,
           "value": null
         },
         "weaponCategory": "disintegrator",

@@ -11,11 +11,7 @@
       "type": "weapon",
       "img": "icons/commodities/cloth/ribbon-green.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -50,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": null,
@@ -95,6 +90,7 @@
               "name": "",
               "formula": "5d8 +23",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -102,12 +98,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": true,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -117,7 +116,6 @@
           "unidentified": "",
           "value": "<p>The battleflowers of Ning have been using battle ribbons in ritualized combat for millennia, their use dating back to long before the Gap. The weapon is a 10-foot-long ribbon and about 3 inches wide with sharpened edges, and is employed in rippling and flowing motions around the user. Battle ribbons are difficult to use without training, so most who take up the battle ribbon seek apprenticeship with the famous battleflowers of Ning to learn the elaborate performance art—though acquiring such a mentor is difficult, as they take students only rarely. Battle ribbon varieties start with modern materials used in a traditional blade, then proceed to the innovations of the microedge and zero-edge battle ribbons.</p>\n<p><strong>Special Property:</strong> professional (dancer)</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -127,7 +125,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 12,
         "modifiers": [],
@@ -232,10 +230,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -245,8 +240,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "AR pg. 13",
         "special": "",
         "specialMaterials": {
@@ -266,7 +263,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -288,11 +284,7 @@
       "type": "weapon",
       "img": "icons/equipment/hand/gauntlet-simple-leather-brown-gold.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -306,7 +298,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 30,
         "attributes": {
@@ -327,7 +319,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": null,
@@ -336,7 +327,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -347,13 +338,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "6d10 +23",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -363,7 +367,6 @@
           "unidentified": "",
           "value": "<p>An unarmed strike can be dealt with any limb or appendage. Unarmed strikes deal nonlethal damage, and the damage from an unarmed strike is considered weapon damage for the purposes of effects that give you a bonus to weapon damage rolls.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -373,7 +376,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 0,
         "modifiers": [],
@@ -469,10 +472,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -480,11 +480,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -492,7 +497,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -506,11 +511,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -518,12 +519,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -532,7 +542,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -588,37 +599,39 @@
         },
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -629,11 +642,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/improved_combat_maneuver.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -641,12 +650,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -655,7 +673,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -714,19 +733,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "0b1ed051-9f1b-4c37-9ece-7c59ef4abf8b",
             "name": "Improved Combat Maneuver",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "R8aq5LrJgS9dXlid",
-              "itemId": "zefFV2dqssQbB2eI"
-            },
+            "damage": null,
             "effectType": "all-attacks",
             "enabled": false,
+            "limitTo": null,
             "max": 4,
             "modifier": "4",
             "modifierType": "formula",
@@ -738,29 +755,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -772,11 +791,7 @@
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-rivited-red.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -790,7 +805,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -819,7 +834,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -859,7 +873,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -869,7 +884,6 @@
           "unidentified": "",
           "value": "<p>Even juvenile defrex hide has layers of cartilaginous fibers that resist tearing, allowing for basic defrex hide. Adult defrex hide contains osteoderms that can deflect high-speed projectiles. Chemical treatments and modern materials can reinforce the hide to an even stronger degree.</p>\n<p><strong>Dermal Plating:</strong> A dermal plating augmentation can be installed in defrex hide armor, taking up one upgrade slot. The augmentation’s level must be equal to or lower than the armor’s item level.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -879,7 +893,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 16,
         "modifiers": [],
         "price": 142000,
@@ -888,19 +903,21 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA3 pg. 13",
         "specialMaterials": {
           "abysium": false,
@@ -921,7 +938,6 @@
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -929,8 +945,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -941,11 +957,7 @@
       "type": "shield",
       "img": "systems/sfrpg/icons/default/energy-shield.svg",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "acp": 0,
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -960,7 +972,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -981,7 +993,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bonus": {
           "aligned": 3,
           "wielded": 1
@@ -1028,6 +1039,8 @@
             {
               "name": "",
               "formula": "1d3 + @abilities.str.mod",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": true,
@@ -1035,12 +1048,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1050,7 +1066,6 @@
           "unidentified": "",
           "value": "<p>Manufactured by Veskarium engineers for quick deployment, irising shields are cited by vesk soldiers to be life-saving implements of battle. An irising shield is made of flexible, lightweight material that can be compressed into a small, rectangular container worn on your forearm (usually attached to the outside of your armor). You wield an irising shield by deploying it from its container as a swift action, and it can be stored with another swift action. While you have an irising shield deployed, you can’t switch it to another hand. A hand wielding an irising shield can hold another object, but it can’t wield weapons or other shields. An irising shield is an object of light bulk when not deployed but increases to 1 bulk when deployed. You can use an irising shield to make a special unarmed attack that does not count as archaic.</p>"
         },
-        "descriptors": [],
         "dex": null,
         "duration": {
           "units": "instantaneous",
@@ -1061,7 +1076,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 16,
         "modifiers": [],
         "price": 175000,
@@ -1162,10 +1178,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -1173,6 +1186,12 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "NS pg. 151",
         "specialMaterials": {
           "abysium": false,
@@ -1191,7 +1210,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -1199,8 +1217,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1211,11 +1229,7 @@
       "type": "weapon",
       "img": "icons/commodities/cloth/ribbon-green.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -1250,7 +1264,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": null,
@@ -1295,6 +1308,7 @@
               "name": "",
               "formula": "5d8 + @abilities.str.mod",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -1302,12 +1316,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": true,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1317,7 +1334,6 @@
           "unidentified": "",
           "value": "<p>The battleflowers of Ning have been using battle ribbons in ritualized combat for millennia, their use dating back to long before the Gap. The weapon is a 10-foot-long ribbon and about 3 inches wide with sharpened edges, and is employed in rippling and flowing motions around the user. Battle ribbons are difficult to use without training, so most who take up the battle ribbon seek apprenticeship with the famous battleflowers of Ning to learn the elaborate performance art—though acquiring such a mentor is difficult, as they take students only rarely. Battle ribbon varieties start with modern materials used in a traditional blade, then proceed to the innovations of the microedge and zero-edge battle ribbons.</p>\n<p><strong>Special Property:</strong> professional (dancer)</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -1327,7 +1343,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 12,
         "modifiers": [],
@@ -1432,10 +1448,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1445,8 +1458,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "AR pg. 13",
         "special": "",
         "specialMaterials": {
@@ -1466,7 +1481,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1488,7 +1502,6 @@
       "type": "container",
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -1507,7 +1520,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [
@@ -1524,7 +1536,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1548,7 +1560,7 @@
               "affectsEncumbrance": true,
               "amount": 1000,
               "subtype": "",
-              "weightProperty": "bulk"
+              "weightProperty": ""
             }
           ]
         },
@@ -1561,13 +1573,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1577,11 +1591,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1589,12 +1599,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1603,7 +1622,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1662,19 +1682,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "15def881-7143-411d-b4c0-94ca9269f580",
             "name": "Trimorphic - Summerborn",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "Vd9YNOlluo9NmG2n",
-              "itemId": "TMQKPHkuVbSadS96"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": false,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -1688,12 +1706,10 @@
             "name": "Trimorphic - Winterborn",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "Vd9YNOlluo9NmG2n",
-              "itemId": "TMQKPHkuVbSadS96"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": false,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -1707,12 +1723,10 @@
             "name": "Trimorphic - Transitional",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "Vd9YNOlluo9NmG2n",
-              "itemId": "TMQKPHkuVbSadS96"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -1726,12 +1740,10 @@
             "name": "Trimorphic - Transitional",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "Vd9YNOlluo9NmG2n",
-              "itemId": "TMQKPHkuVbSadS96"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -1743,29 +1755,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Ryphorian",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA1 pg. 96",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }

@@ -11,11 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/plasma-pistol-red-star.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -50,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -92,6 +87,7 @@
               "acceptsType": [
                 "weaponAccessory"
               ],
+              "affectsEncumbrance": true,
               "amount": 1,
               "subtype": "",
               "weightMultiplier": 1,
@@ -109,6 +105,7 @@
               "name": "",
               "formula": "3d4 +8",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -116,12 +113,15 @@
                 "electricity": false,
                 "fire": true,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -131,7 +131,6 @@
           "unidentified": "",
           "value": "<p>A dragon pistol features a wide muzzle that is often shaped like a dragon’s maw. The weapon discharges discrete orbs of flaming petrol that can cling to targets. A wyrmling dragon pistol casts small petrol globules, while drake and wyvern dragon pistols have increased outputs. The true dragon pistol is as devastating as it is rare.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -141,7 +140,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 10,
         "modifiers": [],
@@ -246,8 +245,6 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
           "value": "30"
         },
@@ -259,8 +256,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "AR pg. 14",
         "special": "",
         "specialMaterials": {
@@ -280,7 +279,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -302,17 +300,22 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
           "type": "reaction",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
@@ -328,7 +331,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -386,18 +390,16 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "none",
           "value": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -408,11 +410,12 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
@@ -428,11 +431,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/estex-suit-3.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -446,7 +445,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -475,7 +474,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": 0,
@@ -484,7 +482,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -505,7 +503,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -515,7 +514,6 @@
           "unidentified": "",
           "value": "<p>Estex is a thick, durable fabric most often used to make flight suits and environmental suits. Estex suits cover the wearer from the neck down and can be modified with armor upgrades as needed. Higher-quality estex suits grant a better level of protection and allow for more upgrades, though they are often bulkier than comparable suits of light armor.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -525,7 +523,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 7,
         "modifiers": [],
         "price": 5500,
@@ -534,25 +533,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 197",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -560,8 +560,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -572,11 +572,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/smoke-grenade.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rwak",
         "activation": {
@@ -611,7 +607,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 1,
@@ -650,7 +645,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -660,7 +656,6 @@
           "unidentified": "",
           "value": "<p>A smoke grenade deals no damage; instead, it releases a cloud of dense smoke. Each character who inhales smoke must succeed at a Fortitude saving throw each round (DC = 15 + 1 per previous check) or spend that round choking and coughing; he can do nothing else. A character who chokes for 2 consecutive rounds takes 1d6 nonlethal damage. (Active environmental protection from a suit of armor prevents this effect altogether.) Regardless of the armor a character wears, smoke obscures vision, granting concealment to anyone within it.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "minute",
           "value": "1"
@@ -670,7 +665,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -775,8 +770,6 @@
         "quantity": 2,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
           "value": "20"
         },
@@ -788,8 +781,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 177",
         "special": "",
         "specialMaterials": {
@@ -809,7 +804,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -831,7 +825,6 @@
       "type": "container",
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -850,7 +843,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [
@@ -867,7 +859,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -891,7 +883,7 @@
               "affectsEncumbrance": true,
               "amount": 1000,
               "subtype": "",
-              "weightProperty": "bulk"
+              "weightProperty": ""
             }
           ]
         },
@@ -904,13 +896,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -920,11 +914,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -932,12 +922,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -946,7 +945,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1004,19 +1004,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "15def881-7143-411d-b4c0-94ca9269f580",
             "name": "Dragon Scaled - Black, Copper, Green",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "RKeDEWNfxVooFP0v",
-              "itemId": "DG89VVtAflnJP0eh"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": false,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -1030,12 +1028,10 @@
             "name": "Dragon Scaled - Blue, Bronze",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "RKeDEWNfxVooFP0v",
-              "itemId": "DG89VVtAflnJP0eh"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": false,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -1049,12 +1045,10 @@
             "name": "Dragon Scaled - Red, Brass, Gold",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "RKeDEWNfxVooFP0v",
-              "itemId": "DG89VVtAflnJP0eh"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": true,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -1068,12 +1062,10 @@
             "name": "Dragon Scaled - White, Silver",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "RKeDEWNfxVooFP0v",
-              "itemId": "DG89VVtAflnJP0eh"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": false,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -1085,29 +1077,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Kobold",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "ACD",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1119,11 +1113,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/smoke-grenade.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rwak",
         "activation": {
@@ -1158,7 +1148,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -1197,7 +1186,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1207,7 +1197,6 @@
           "unidentified": "",
           "value": "<p>A smoke grenade deals no damage; instead, it releases a cloud of dense smoke. Each character who inhales smoke must succeed at a Fortitude saving throw each round (DC = 15 + 1 per previous check) or spend that round choking and coughing; he can do nothing else. A character who chokes for 2 consecutive rounds takes 1d6 nonlethal damage. (Active environmental protection from a suit of armor prevents this effect altogether.) Regardless of the armor a character wears, smoke obscures vision, granting concealment to anyone within it.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "minute",
           "value": "1"
@@ -1217,7 +1206,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -1322,8 +1311,6 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
           "value": "20"
         },
@@ -1335,8 +1322,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 177",
         "special": "",
         "specialMaterials": {
@@ -1356,7 +1345,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1378,11 +1366,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/plasma-pistol-red-star.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -1417,7 +1401,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -1454,6 +1437,7 @@
               "acceptsType": [
                 "weaponAccessory"
               ],
+              "affectsEncumbrance": true,
               "amount": 1,
               "subtype": "",
               "weightMultiplier": 1,
@@ -1471,6 +1455,7 @@
               "name": "",
               "formula": "3d4",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -1478,12 +1463,15 @@
                 "electricity": false,
                 "fire": true,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1493,7 +1481,6 @@
           "unidentified": "",
           "value": "<p>A dragon pistol features a wide muzzle that is often shaped like a dragon’s maw. The weapon discharges discrete orbs of flaming petrol that can cling to targets. A wyrmling dragon pistol casts small petrol globules, while drake and wyvern dragon pistols have increased outputs. The true dragon pistol is as devastating as it is rare.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -1503,7 +1490,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 10,
         "modifiers": [],
@@ -1608,8 +1595,6 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
           "value": "30"
         },
@@ -1621,8 +1606,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "AR pg. 14",
         "special": "",
         "specialMaterials": {
@@ -1642,7 +1629,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1664,34 +1650,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/petrol-tank.webp",
       "system": {
-        "type": "",
         "ammunitionType": "fuel",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1700,14 +1671,13 @@
           "unidentified": "",
           "value": "<p>Petrol is a highly flammable blend of hydrocarbons that is used in flame weapons (and petrol is occasionally used by desperate adventurers as fuel or for other various utilitarian purposes). A petrol tank snaps easily into the housing of weapons that are specifically petrol-powered.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "",
         "specialMaterials": {},
         "useCapacity": true

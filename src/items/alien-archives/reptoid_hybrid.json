@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/share_pain.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -23,12 +19,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -37,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -47,7 +53,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.6zrV67znbGCh4EjF]{Mindbreaker}</p>\n<p>Whenever a foe deals damage to you, you can spend 1 Resolve Point as a reaction to shift some of the pain back onto that foe. Unless the foe succeeds at a Will save, reduce the damage you take from the attack by your mystic level (to a maximum of the attack’s damage), and the foe takes an equal amount of damage. This is a mind-affecting pain effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -58,18 +64,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
@@ -78,13 +81,18 @@
           "dc": "18",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Mindbreaker Connection",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -96,11 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -113,8 +117,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 14,
         "attributes": {
@@ -135,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -144,7 +147,7 @@
         "chatFlavor": "Analog",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -163,10 +166,22 @@
           "effect": "Bleed",
           "parts": [
             {
+              "name": "",
               "formula": "1d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
           ]
@@ -174,13 +189,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d8+9",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -190,7 +218,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -200,7 +227,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 7,
         "modifiers": [],
@@ -296,22 +323,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -319,7 +348,7 @@
           "value": null
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": null
         },
@@ -333,11 +362,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -350,8 +375,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 14,
         "attributes": {
@@ -372,7 +397,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -381,7 +405,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -403,13 +427,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d10+8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "acid": true
+                "acid": true,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -419,7 +456,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -429,7 +465,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 6,
         "modifiers": [],
@@ -525,22 +561,25 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 15
+          "value": "15"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -548,7 +587,7 @@
           "value": 2
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": null
         },
@@ -562,11 +601,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -579,8 +614,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 14,
         "attributes": {
@@ -601,7 +636,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -610,7 +644,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -629,10 +663,22 @@
           "effect": "Arc",
           "parts": [
             {
+              "name": "",
               "formula": "1d10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "electricity": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -640,13 +686,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d10+8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "electricity": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -656,7 +715,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -666,7 +724,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 7,
         "modifiers": [],
@@ -762,22 +820,25 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 40
+          "value": "40"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -785,7 +846,7 @@
           "value": 2
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": null
         },
@@ -799,11 +860,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/backlash.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -811,12 +868,21 @@
           "condition": "",
           "cost": null
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -825,7 +891,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -835,7 +902,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.6zrV67znbGCh4EjF]{Mindbreaker}</p>\n<p>Whenever a foe succeeds at a Will save against one of your spells and completely negates the effect, that foe takes 1 nonlethal damage for each mystic level you have. This is a mind-affecting pain effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -846,33 +913,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "3rd Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Mindbreaker Connection",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -884,11 +953,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/sow_doubt.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -896,12 +961,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -910,7 +984,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -920,7 +995,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.6zrV67znbGCh4EjF]{Mindbreaker}</p>\n<p>As a standard action, you can spend 1 Resolve Point to create uncertainty in the mind of a foe within 30 feet. You choose whether the target becomes @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed}, becomes @UUID[Compendium.sfrpg.conditions.Item.yUtkoIshf4dPruNd]{Off-Target}, takes a –2 penalty to saving throws, or takes a –2 penalty to skill checks. The effect lasts for a number of rounds equal to half your mystic level, unless the target succeeds at a Will save to reduce the duration to just 1 round. A creature can be affected only by one sow doubt effect. If you use this ability on the same creature again, the new effect replaces the old effect. This is a mind-affecting effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -931,18 +1006,16 @@
           "value": "4"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "6th Level",
         "rollNotes": "",
@@ -951,13 +1024,18 @@
           "dc": "18",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Mindbreaker Connection",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -969,11 +1047,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -981,12 +1055,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -995,7 +1078,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1005,7 +1089,7 @@
           "unidentified": "",
           "value": "<p>Kasathas can move through nonmagical difficult terrain in deserts, hills, and mountains at their normal speed.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1016,34 +1100,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1054,21 +1140,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1077,7 +1171,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1087,7 +1182,7 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1098,34 +1193,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1136,11 +1233,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/kasatha-microcord-3.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1154,7 +1247,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -1183,7 +1276,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": 0,
@@ -1192,7 +1284,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1223,7 +1315,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1233,7 +1326,6 @@
           "unidentified": "",
           "value": "<p>These suits of ribbed protective fabric are slightly less advanced than comparable light armor but still provide good-quality protection at an affordable price. Kasatha-made microcord suits are typically one-piece outfits of dark colors, sometimes with glowing trim, but other manufacturers produce such suits in a variety of colors and styles.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1243,7 +1335,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 8,
         "modifiers": [],
         "price": 9000,
@@ -1252,25 +1345,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -1278,8 +1372,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1290,10 +1384,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "attributes": {
           "ac": {
             "value": ""
@@ -1312,14 +1402,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1329,13 +1412,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 2,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1345,10 +1430,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "attributes": {
           "ac": {
             "value": ""
@@ -1367,14 +1448,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1384,13 +1458,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 2,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1400,10 +1476,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "attributes": {
           "ac": {
             "value": ""
@@ -1422,14 +1494,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1439,13 +1504,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 2,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1455,11 +1522,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/psychokinetic_strangulation.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1477,8 +1540,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1490,13 +1553,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1506,14 +1582,14 @@
           "unidentified": "",
           "value": "<p>You manipulate the mystical energy around a creature’s throat into a viselike grip, potentially choking the life out of your victim.</p>\n<p>Each round you concentrate on this spell, it deals 3d8 bludgeoning damage and immobilizes the target. A creature immobilized in this way cannot move and must hold its breath (see page 404). The creature can still attack with any of its weapons (except any bite attacks), cast spells, and so on. Each round the spell affects the target, the target can attempt a Fortitude saving throw to halve the damage and avoid being immobilized.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "8"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -1529,10 +1605,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -1541,14 +1615,19 @@
           "descriptor": "partial"
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 370",
         "sr": true,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1560,11 +1639,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/slow.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1582,8 +1657,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1593,7 +1668,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1603,14 +1679,14 @@
           "unidentified": "",
           "value": "<p>An affected creature moves and attacks at a drastically slowed rate. Creatures affected by this spell are @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} and can take only a single move action or standard action each turn, but not both, and it can’t take full actions. A slowed creature moves at half its normal speed (round down to the next 5-foot increment). Multiple slow effects don’t stack.&nbsp;Slow&nbsp;counters and negates&nbsp;haste.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -1626,10 +1702,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -1638,14 +1712,19 @@
           "descriptor": "negate"
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 377",
         "sr": true,
         "target": {
-          "type": "",
           "value": "up to 8 creatures, no two of which can be more than 30 ft. apart"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1657,11 +1736,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/hold_person.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1679,8 +1754,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1690,7 +1765,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1700,14 +1776,14 @@
           "unidentified": "",
           "value": "<p>The target becomes paralyzed and freezes in place. It is aware and breathes normally but can’t take any physical actions, even speech. A held creature can’t cast spells. Each round on its turn, the target can spend a full action to attempt a new saving throw to end the effect. This does not provoke attacks of opportunity. A winged creature that is paralyzed can’t flap its wings and falls. A swimmer can’t swim and may drown.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1723,10 +1799,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "10",
-          "per": "level",
           "units": "ft",
-          "value": 100
+          "value": "100"
         },
         "rollNotes": "",
         "save": {
@@ -1735,14 +1809,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 359",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1754,11 +1833,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/inflict_pain.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1776,8 +1851,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1787,7 +1862,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1797,14 +1873,14 @@
           "unidentified": "",
           "value": "<p>You telepathically rack the target’s mind and body with agonizing pain that imposes a –2 penalty to ability checks, attack rolls, and skill checks. A target that succeeds at a Will saving throw reduces the duration to 1 round.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1820,10 +1896,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -1832,14 +1906,19 @@
           "descriptor": "partial"
         },
         "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1851,11 +1930,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mind_thrust.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1873,8 +1948,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1886,11 +1961,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d10",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1900,14 +1990,14 @@
           "unidentified": "",
           "value": "<p>You divine the most vulnerable portion of your opponent’s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.</p>\n<ul>\n<li><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n<li><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n<li><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n<li><strong>th:</strong> When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is @UUID[Compendium.sfrpg.conditions.Item.JGFn4MrDZ6X5vrzU]{Fatigued} for 1 round if it fails its saving throw.</li>\n<li><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is exhausted for 1 round if it fails its save and it is @UUID[Compendium.sfrpg.conditions.Item.JGFn4MrDZ6X5vrzU]{Fatigued} for 1 round if it succeeds at its saving throw.</li>\n<li><strong>6th:</strong> When you cast&nbsp;mind thrust&nbsp;as a 6th-level spell, it deals 17d10 damage to the target. The target is exhausted and @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is @UUID[Compendium.sfrpg.conditions.Item.JGFn4MrDZ6X5vrzU]{Fatigued} for 1 round if it succeeds at its saving throw.</li>\n</ul>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1923,10 +2013,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -1935,14 +2023,19 @@
           "descriptor": "half"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 365",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1954,11 +2047,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/spider_climb.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1976,8 +2065,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1987,7 +2076,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1997,14 +2087,14 @@
           "unidentified": "",
           "value": "<p>The target can climb and travel on vertical surfaces or even traverse ceilings as well as a spider does. An affected creature with four limbs must have three limbs free (not holding equipment or being used to perform skills and so on) to climb in this manner. A creature with six limbs needs only four available. In general, other creatures must have 75% of their limbs available to benefit from this spell. The target gains a climb speed of 20 feet (and the +8 species bonus to Athletics checks to climb granted by that climb speed); furthermore, it doesn’t need to attempt Athletics checks to climb to traverse a vertical or horizontal surface (even upside down). An affected creature climbing in this way is not @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed} while climbing, and opponents get no special bonus to their attacks against it. The creature, however, can’t use the run action while climbing.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "80 min"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -2020,26 +2110,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 378",
         "sr": true,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -2051,11 +2143,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/charm_person.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -2073,8 +2161,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2084,7 +2172,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2094,14 +2183,14 @@
           "unidentified": "",
           "value": "<p>This charm makes a humanoid creature regard you as its trusted friend and ally (treat the target’s attitude as friendly). If the creature is currently being threatened or attacked by you or your allies, however, it receives a +5 bonus to its saving throw.</p>\n<p>The spell does not enable you to control the charmed creature as if it were an automaton. It is unlikely to attempt to harm you, but it is also unlikely to attack any of its true friends or allies. You can try to give the target suggestions, but you must succeed at an opposed Charisma check to convince it to do anything it wouldn’t ordinarily do. (Retries of this check are not allowed.) An affected creature never obeys suicidal or obviously harmful suggestions. Any act by you or your apparent allies that threatens the charmed creature breaks the spell. You must speak the creature’s language to communicate your suggestions, or else be good at pantomiming.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "hour",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -2117,10 +2206,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -2129,14 +2216,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 342",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one humanoid creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -2148,11 +2240,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/confusion_lesser.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -2171,7 +2259,7 @@
           "shapable": false,
           "shape": "",
           "units": "ft",
-          "value": 15
+          "value": "15"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2181,7 +2269,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2189,16 +2278,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This spell causes a single creature to become confused (as per the <em>@UUID[Compendium.sfrpg.spells.Item.wSeE9HyAmM7lTdpo]{Confusion}</em> spell) for 1 round.</p>\n<table style=\"width: 403px; height: 85px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; background-color: #34495e; text-align: center; width: 44px;\">\n<p style=\"color: white;\">D%</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">1-25</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">26-50</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">51-75</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">76-100</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>"
+          "value": "<p>This spell causes a single creature to become confused (as per the <em>@UUID[Compendium.sfrpg.spells.Item.wSeE9HyAmM7lTdpo]{Confusion}</em> spell) for 1 round.</p>\n<table style=\"width:403px;height:85px\" border=\"1\">\n<tbody>\n<tr style=\"height:17px\">\n<td style=\"height:17px;background-color:#34495e;text-align:center;width:44px\">\n<p style=\"color:white\">D%</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">1-25</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">26-50</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">51-75</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">76-100</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "1"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -2214,10 +2303,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "5 ft",
-          "per": "level",
           "units": "close",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -2226,14 +2313,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -2245,7 +2337,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -2264,11 +2355,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -2278,13 +2365,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 60,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook"
       }
     },
@@ -2294,11 +2383,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mindlink.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -2317,7 +2402,7 @@
           "shapable": false,
           "shape": "",
           "units": "touch",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2327,7 +2412,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2337,14 +2423,14 @@
           "unidentified": "",
           "value": "<p>You link your mind to that of a touched creature to swiftly communicate a large amount of complex information in an instant. You decide what the target learns, limited to any amount of information that otherwise could be communicated in 10 minutes. This information comes in a series of visual images and emotional sensations, and it isn’t @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Language-dependent}.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -2360,10 +2446,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -2372,14 +2455,19 @@
           "descriptor": "harmless"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 365",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }

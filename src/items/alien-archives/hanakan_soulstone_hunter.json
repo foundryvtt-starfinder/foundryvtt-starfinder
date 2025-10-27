@@ -11,21 +11,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -34,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -44,7 +53,7 @@
           "unidentified": "",
           "value": "<p>Hanakans’ exposure to a variety of atmospheres has made them immune to inhaled @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poisons} and acclimated to thin and thick atmospheres.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -55,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -93,11 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -111,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 20,
         "attributes": {
@@ -132,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -141,7 +147,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -160,10 +166,22 @@
           "effect": "",
           "parts": [
             {
+              "name": "",
               "formula": "",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
           ]
@@ -171,13 +189,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d4+14",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -187,7 +218,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -197,7 +227,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -294,10 +324,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -305,11 +332,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -317,8 +349,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -331,7 +363,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "eac",
         "actionType": "rwak",
@@ -346,7 +377,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 17,
         "attributes": {
@@ -367,7 +398,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -376,7 +406,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -396,7 +426,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -406,7 +437,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -416,7 +446,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -426,22 +456,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -449,8 +481,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -463,11 +495,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/solar_manifestation.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -475,12 +503,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -489,7 +526,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -499,7 +537,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.kuEdVbzv5zXIO4wk]{Solarian}</p>\n<p>At 1st level, you gain a physical manifestation of your stellar power. The base form of your solar manifestation, when not actively in use, is a mote of stellar energy slightly smaller than your fist that hovers near your head. Beyond the solar mote, your manifestation can take one of two additional forms: armor or a weapon. You must pick one solar manifestation (either armor or a weapon) upon taking your first level of solarian. You also choose whether your solar manifestation (in any form) either glows brightly with one color common to stars (including blue, red, white, or yellow) or is the perfect darkness of a black hole. A glowing solar manifestation, regardless of its form, sheds dim light in a 20-foot radius. You can shut off the light or darkness as a standard action in order to blend in or assist in stealth, but whenever you enter a stellar mode (see page 102), the glow or darkness returns immediately. Once made, these choices cannot be changed.</p>\n<p>Only you can interact with your solar manifestation, whether in mote, armor, or weapon form. No other creature or effect can affect your solar manifestation in any way, including disarming or sundering it.</p>\n<h3>@UUID[Compendium.sfrpg.class-features.Item.zM7oc1qiNLAPoH1J]{Solar Armor}</h3>\n<p>@UUID[Compendium.sfrpg.class-features.Item.kCvI3xvm0Q1slajx]{Solar Flare}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.ylRInRfOfx6nsbUv]{Solar Shield}</p>\n<h3>@UUID[Compendium.sfrpg.class-features.Item.WWHUAfgpvk6uIgY0]{Solar Weapon}</h3>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -510,34 +548,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Solarian",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -548,11 +588,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -560,12 +596,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -574,7 +619,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -584,7 +630,7 @@
           "unidentified": "",
           "value": "<p>(SU)</p>\n<p>The creature is aligned to the cycles of solar systems. Creatures with stellar alignment usually have stellar revelations and zenith revelations, either ones from the solarian class or ones unique to the creature. When using stellar revelations, the creature is always considered attuned. However, it’s not always considered fully attuned, so it normally can’t always use zenith powers. When you roll initiative for the creature, roll 1d3. Once that many rounds have elapsed, the creature is considered fully attuned and gains access to its zenith powers. After it uses a zenith power, it’s no longer fully attuned, and you roll 1d3 again to see how many rounds it will take to recharge.</p>\n<p>If a creature has stellar alignment (graviton) or stellar alignment (photon), it’s considered to be attuned only in the indicated mode and can become fully attuned only in the indicated mode, as described above.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -595,34 +641,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -633,13 +681,9 @@
       "type": "hybrid",
       "img": "icons/commodities/gems/gem-faceted-round-black.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -651,7 +695,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "attributes": {
@@ -672,7 +716,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 0,
@@ -681,7 +724,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -690,7 +733,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -700,27 +744,29 @@
           "unidentified": "",
           "value": "<p>Graviton crystals accelerate the impact of a weapon, dealing extra damage and potentially knocking down targets.</p>\n<h3>Solarian Weapon Crystals (pg. 170)</h3>\n<p>A solarian weapon crystal adds damage to a solarian’s solar weapon. The solarian can place the crystal inside his mote as a standard action. While within a mote, a crystal applies its effects any time that mote is in a solar weapon form. A crystal within a mote can’t be interacted with in any way other than via abilities that specifically target a mote. The solarian can remove the crystal from his mote as a standard action, and the crystal falls loose if the mote is deactivated in any way. A solarian can’t have more than one crystal in his mote at a given time.</p>\n<p>A solarian weapon crystal doesn’t give a solarian the option to create a solar weapon if he did not choose that option for his solar manifestation. Most weapon crystals increase the amount of damage attacks with the solar weapon deal. This increased damage is normally the same type of damage the solarian weapon deals (typically bludgeoning, piercing, or slashing). If a solarian crystal’s damage entry lists an abbreviation after the damage, however, the additional damage the solar weapon deals is of the indicated type.</p>\n<p>Even if a solarian weapon crystal’s extra damage is a type of energy damage, attacks with the solar weapon still target KAC, not EAC. If a solarian crystal lists a critical effect, that critical effect applies to any critical hit the solar weapon makes while the solarian crystal is within the solarian’s mote. For example, a solarian with a minor photon crystal and a base solar weapon damage of 2d6 deals 2d6 bludgeoning, piercing, or slashing damage, plus 1d6 fire damage, on a hit with his solar weapon.</p>\n<p>A solarian weapon crystal is a hybrid item that blends magic and technology. When a weapon crystal is within a mote and the solarian uses the mote in solar weapon form, the solar weapon is considered magic for the purpose of overcoming damage reduction.</p>\n<ul>\n<li><strong>Broken Solarian Crystals</strong>: If a solarian weapon crystal with the broken condition is inside a solarian’s solar mote, the solarian takes a –2 penalty to attack and damage rolls with the solar weapon, and the solar weapon can’t deal extra critical effects. Both effects last until the crystal is repaired. As hybrid items, solarian crystals can be repaired using the make whole or mending spells, or with the Engineering or Mysticism skills, as described in the Skills chapter.</li>\n</ul>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
         "hands": 0,
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 8,
         "limitedWear": false,
         "modifiers": [
           {
+            "_id": "ae53be13-6a2f-4904-94fe-6ea65fe69197",
             "name": "Graviton Crystal, minor",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "all-damage",
             "enabled": true,
+            "limitTo": null,
             "max": 6,
             "modifier": "1d6",
             "modifierType": "formula",
@@ -731,24 +777,27 @@
           }
         ],
         "price": 9200,
+        "proficient": false,
         "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 180",
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -756,8 +805,8 @@
           "value": 0
         },
         "uses": {
-          "max": null,
-          "per": null,
+          "max": "",
+          "per": "",
           "value": null
         }
       }
@@ -768,11 +817,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/wisp_ally.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -790,8 +835,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -801,7 +846,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -811,14 +857,14 @@
           "unidentified": "",
           "value": "<p>You draw forth otherworldly energy to create a small, spherical, floating wisp that can distract your enemies in combat. This wisp can move 60 feet per round in any direction, and you can direct it as a move action on your turn. If the wisp occupies the same space as an enemy, the wisp provides your choice of either harrying fire or covering fire (see pages 246–247) against the enemy each round on your turn, and it follows that enemy within range automatically unless you direct it to change targets. The wisp is made of pure light and energy and can’t be damaged in combat, though it can be dispelled as normal.</p>\n<p>In addition to the function described above, the wisp sheds light in a 20-foot radius in a color of your choice (chosen when you cast the spell).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -834,26 +880,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 385",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one distracting, glowing servant"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -865,11 +913,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/detect_magic.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -888,7 +932,7 @@
           "shapable": false,
           "shape": "cone",
           "units": "ft",
-          "value": 60
+          "value": "60"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -898,7 +942,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -908,14 +953,14 @@
           "unidentified": "",
           "value": "<p>You detect all magic spells, effects, items, and objects (including those on or affecting creatures you can see), as well as hybrid items, in the area. You can’t detect magical traps in this way, as they are created with additional magic that wards them from this common spell. Each round you concentrate on the same area, you can determine if one magic source you detect is from a spell, magic item, or other effect, and the caster level (or item level) of the effect. You can’t determine if there are magic sources in areas you can’t see, or if there was a magic source in an area at one time but that has since expired.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "concentration, up to 1 minute/level"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -931,26 +976,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 348",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -962,11 +1009,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/token_spell.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -984,8 +1027,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -995,7 +1038,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1005,14 +1049,14 @@
           "unidentified": "",
           "value": "<p>Token spells are often some of the first minor changes that spellcasters produce when they begin experimenting with magic. Once cast,&nbsp;token spell&nbsp;enables you to perform simple magical effects for 1 hour. The effects are minor and have severe limitations. You can slowly lift one item of light bulk. You can alter items in a 1-foot cube each round, coloring, cleaning, soiling, cooling, warming, or flavoring them. You can create small objects, but they look artificial and are extremely fragile (they can’t be used as tools or weapons). You can illuminate an object to shed dim light in a 30-foot radius.</p>\n<p>Token spell&nbsp;lacks the power to duplicate any other spell effects. Any actual change to an object (beyond moving, cleaning, or soiling it) persists for only 1 hour.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "1 Hour"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -1028,26 +1072,29 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 382",
         "sr": true,
         "target": {
-          "type": "",
           "value": "Targets, Effect, or Area see text"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1059,7 +1106,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-high-capacity.webp",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -1078,11 +1124,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1092,13 +1134,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 4,
         "modifiers": [],
         "price": 330,
-        "quantity": "2",
+        "proficient": false,
+        "quantity": 2,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook"
       }
     },
@@ -1108,11 +1152,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/blackhole.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1120,12 +1160,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1134,7 +1183,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1144,7 +1194,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>When you’re fully graviton-attuned, as a standard action, you can pull any number of creatures within 20 feet of you closer. You choose which creatures are affected and which ones aren’t. Each target must succeed at a Fortitude save or be pulled 10 feet toward you. The range of this revelation and the distance pulled increase by 5 feet at 5th level and every 4 levels thereafter. Solid objects do not block this ability, but any creature that runs into a solid object ceases moving closer to you. Creatures moved by this ability do not provoke attacks of opportunity from this movement. After you use this revelation, you immediately become unattuned. Black hole functions as a zenith revelation for the purposes of abilities that reference them.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1155,33 +1205,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Solarian",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1193,11 +1245,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/corona.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1205,12 +1253,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1219,7 +1276,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1229,7 +1287,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>As a standard action, you can surround your body with an envelope of fiery plasma. You gain cold resistance 10, and any adjacent creature that hits you with a natural weapon or a melee weapon takes 2d6 fire damage. The corona lasts for 1 round or until you leave photon mode. At 12th level, the damage increases to 3d6 and the cold resistance increases to 15. At 18th level, the damage increases to 4d6 and the cold resistance increases to 20.</p>\n<p>When you are attuned or fully attuned, any creature that starts its turn adjacent to you while your corona is in effect takes fire damage equal to half your solarian level.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1240,33 +1298,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "6th Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Solarian",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1278,11 +1338,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/defy_gravity.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1290,12 +1346,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1304,7 +1369,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1314,7 +1380,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>As a move action, you can fly up to your speed. You must end this movement on solid ground or you fall. At 12th level or higher, you don’t have to land if you immediately follow your flight with another move action to use defy gravity. On your last move action of the turn, you still have to land or fall.</p>\n<p>When you are attuned or fully attuned, your fly speed from this revelation increases by 10 feet.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1325,33 +1391,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "6th Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Solarian",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1363,11 +1431,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/supernova.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1375,12 +1439,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1389,7 +1462,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1399,7 +1473,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>When you’re fully photon-attuned, as a standard action, you can deal 1d6 fire damage plus 1d6 additional fire damage per solarian level to all creatures within 10 feet of you. A creature that succeeds at a Reflex save takes half damage. At 9th level, you can increase the radius to 15 feet, and at 17th level, you can increase the radius to 20 feet. After you use this revelation, you immediately become unattuned. Supernova functions as a zenith revelation for the purposes of abilities that reference them.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1410,33 +1484,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Solarian",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1448,11 +1524,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/flashing_strikes.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1460,12 +1532,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1474,7 +1555,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1484,7 +1566,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.kuEdVbzv5zXIO4wk]{Solarian}</p>\n<p>Your mastery of melee combat allows you to make multiple attacks more accurately. When making a full attack entirely with melee weapons, you take a –3 penalty to each attack roll instead of the normal –4 penalty.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1495,34 +1577,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "7th Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Solarian",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1533,11 +1617,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/solar_weapon.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1545,12 +1625,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1559,7 +1648,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1567,9 +1657,9 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.7ilyZdE0yZi2F3SQ]{Solar Manifestation (Su)}</p>\n<p>You can seize your solar mote in one hand to form a melee weapon out of stellar energy. This weapon appears to be made out of glowing light or solid darkness, as determined by the appearance of your solar manifestation, but it can be whatever general shape you choose. Normal melee weapons like axes, swords, and spears are most common, but other shapes, such as a large rune of stellar energy, a mass of writhing energy tendrils, or an energized fist that fits over your own hand, are possible as well. Your solar weapon’s general design has no impact on its function, and doesn’t give the weapon any special abilities such as reach. Once you’ve selected the general design, you can’t change it until you gain a new solarian level.</p>\n<p>Your solar weapon functions as a one-handed kinetic advanced melee weapon, and you’re automatically proficient with it. At 1st level, choose whether your solar weapon deals bludgeoning, piercing, or slashing damage. You can change the damage type each time you gain a new solarian level. Your solar weapon deals damage equal to 1d6 + your Strength modifier. This damage increases by 1d6 at 6th level, 9th level, 12th level, and every level thereafter. Solarian weapon crystals (see page 170) can increase your solar weapon’s damage.</p>\n<p>Forming or dismissing a solar weapon is a move action that takes the same amount of effort as drawing or sheathing a weapon (and can be combined with a move as a single move action or used with the Quick Draw feat). Your solar weapon is automatically dismissed if it ever leaves your hand.</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\"></span></p>\n <table class=\"inner\" style=\"width: 86px;\">\n <tbody>\n <tr>\n <td style=\"width: 35px;\"><strong>Level</strong></td>\n <td style=\"width: 51px;\"><strong>Solar Weapon</strong></td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">1st</td>\n <td style=\"width: 51px;\">1d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">2nd</td>\n <td style=\"width: 51px;\">1d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">3rd</td>\n <td style=\"width: 51px;\">1d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">4th</td>\n <td style=\"width: 51px;\">1d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">5th</td>\n <td style=\"width: 51px;\">1d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">6th</td>\n <td style=\"width: 51px;\">2d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">7th</td>\n <td style=\"width: 51px;\">2d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">8th</td>\n <td style=\"width: 51px;\">2d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">9th</td>\n <td style=\"width: 51px;\">3d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">10th</td>\n <td style=\"width: 51px;\">3d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">11th</td>\n <td style=\"width: 51px;\">3d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">12th</td>\n <td style=\"width: 51px;\">4d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">13th</td>\n <td style=\"width: 51px;\">5d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">14th</td>\n <td style=\"width: 51px;\">6d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">15th</td>\n <td style=\"width: 51px;\">7d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">16th</td>\n <td style=\"width: 51px;\">8d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">17th</td>\n <td style=\"width: 51px;\">9d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">18th</td>\n <td style=\"width: 51px;\">10d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">19th</td>\n <td style=\"width: 51px;\">11d6</td>\n </tr>\n <tr>\n <td style=\"width: 35px;\">20th</td>\n <td style=\"width: 51px;\">12d6</td>\n </tr>\n </tbody>\n </table>\n <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\"></span></p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.7ilyZdE0yZi2F3SQ]{Solar Manifestation (Su)}</p>\n<p>You can seize your solar mote in one hand to form a melee weapon out of stellar energy. This weapon appears to be made out of glowing light or solid darkness, as determined by the appearance of your solar manifestation, but it can be whatever general shape you choose. Normal melee weapons like axes, swords, and spears are most common, but other shapes, such as a large rune of stellar energy, a mass of writhing energy tendrils, or an energized fist that fits over your own hand, are possible as well. Your solar weapon’s general design has no impact on its function, and doesn’t give the weapon any special abilities such as reach. Once you’ve selected the general design, you can’t change it until you gain a new solarian level.</p>\n<p>Your solar weapon functions as a one-handed kinetic advanced melee weapon, and you’re automatically proficient with it. At 1st level, choose whether your solar weapon deals bludgeoning, piercing, or slashing damage. You can change the damage type each time you gain a new solarian level. Your solar weapon deals damage equal to 1d6 + your Strength modifier. This damage increases by 1d6 at 6th level, 9th level, 12th level, and every level thereafter. Solarian weapon crystals (see page 170) can increase your solar weapon’s damage.</p>\n<p>Forming or dismissing a solar weapon is a move action that takes the same amount of effort as drawing or sheathing a weapon (and can be combined with a move as a single move action or used with the Quick Draw feat). Your solar weapon is automatically dismissed if it ever leaves your hand.</p>\n<p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\"></span></p>\n <table class=\"inner\" style=\"width:86px\">\n <tbody>\n <tr>\n <td style=\"width:35px\"><strong>Level</strong></td>\n <td style=\"width:51px\"><strong>Solar Weapon</strong></td>\n </tr>\n <tr>\n <td style=\"width:35px\">1st</td>\n <td style=\"width:51px\">1d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">2nd</td>\n <td style=\"width:51px\">1d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">3rd</td>\n <td style=\"width:51px\">1d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">4th</td>\n <td style=\"width:51px\">1d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">5th</td>\n <td style=\"width:51px\">1d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">6th</td>\n <td style=\"width:51px\">2d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">7th</td>\n <td style=\"width:51px\">2d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">8th</td>\n <td style=\"width:51px\">2d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">9th</td>\n <td style=\"width:51px\">3d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">10th</td>\n <td style=\"width:51px\">3d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">11th</td>\n <td style=\"width:51px\">3d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">12th</td>\n <td style=\"width:51px\">4d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">13th</td>\n <td style=\"width:51px\">5d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">14th</td>\n <td style=\"width:51px\">6d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">15th</td>\n <td style=\"width:51px\">7d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">16th</td>\n <td style=\"width:51px\">8d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">17th</td>\n <td style=\"width:51px\">9d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">18th</td>\n <td style=\"width:51px\">10d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">19th</td>\n <td style=\"width:51px\">11d6</td>\n </tr>\n <tr>\n <td style=\"width:35px\">20th</td>\n <td style=\"width:51px\">12d6</td>\n </tr>\n </tbody>\n </table>\n <p><span id=\"ctl00_MainContent_DataListClasses_ctl00_LabelName\"></span></p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1580,33 +1670,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Solarian",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }

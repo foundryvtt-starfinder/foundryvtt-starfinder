@@ -11,21 +11,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -34,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -44,7 +53,7 @@
           "unidentified": "",
           "value": "<p>An epokasite naturally resists contemporary technology, including technological traps, most weapons, technomancer spells, hybrid gear, and the natural attacks of creatures with the technological subtype. Any damage the epokasite takes from such sources is reduced by the listed amount (minimum 0), which doesn’t stack with other resistances the epokasite has. Natural hazards, weapons with the archaic special weapon property, and other forms of magic bypass this defense.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -55,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -93,11 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/club.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -111,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 12,
         "attributes": {
@@ -132,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -141,7 +147,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -152,14 +158,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d6 +9",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
                 "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
                 "sonic": true
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -169,7 +187,6 @@
           "unidentified": "",
           "value": "<p>A club is any sort of blunt, oblong instrument with a haft suitable for gripping. Clubs can be made of stone, wood, or similar materials. Metal clubs exist as well, and they are usually hollow to keep them from being too heavy. Some Free Captains refer to clubs as belaying pins, though those archaic items are not required on starships.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -179,7 +196,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 0,
         "modifiers": [],
@@ -275,10 +292,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "rollNotes": "",
         "save": {
@@ -286,11 +301,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -298,7 +318,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -312,21 +332,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -335,7 +363,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -345,7 +374,7 @@
           "unidentified": "",
           "value": "<p>Any damage an epokasite deals with an archaic weapon is never reduced as a result of that property. Any archaic weapon an epokasite wields typically deals additional damage or has additional weapon properties, equivalent to a basic melee weapon or small arm of a level equal to the fey’s CR.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -356,34 +385,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -394,11 +425,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -406,12 +433,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -420,7 +456,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -430,7 +467,7 @@
           "unidentified": "",
           "value": "<p>As a standard action, an epokasite runner can focus their gaze on a technological or hybrid item within 30 feet whose level doesn’t exceed the runner’s level + 2. Unless it succeeds at a DC 18 Fortitude save, the item transforms into an anachronistic analogue of itself, such as a rifle turning into a musket or steamoperated crossbow. This transformation lasts for 1d6+2 rounds, during which time the item gains the archaic property, functions as if it had the broken condition, and any checks made to manipulate the item (such as operating a now-antiquated computer) take a -2 penalty. If the target is a weapon or armor that fails the save by 5 or more, it changes so dramatically that any user is treated as not proficient with the item. The runner can affect items of size Large or smaller with this ability, including terminals and vehicles. Once an item has saved against this ability, it’s immune to that runner’s regressing glare for 24 hours. An epokasite ignores all of a regressed item’s drawbacks listed above when using the item.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -441,18 +478,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -461,13 +495,18 @@
           "dc": "18",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -479,11 +518,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/club.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -497,7 +532,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -518,7 +553,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -527,7 +561,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -538,13 +572,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6 + @abilities.str.mod",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -554,7 +601,6 @@
           "unidentified": "",
           "value": "<p>A club is any sort of blunt, oblong instrument with a haft suitable for gripping. Clubs can be made of stone, wood, or similar materials. Metal clubs exist as well, and they are usually hollow to keep them from being too heavy. Some Free Captains refer to clubs as belaying pins, though those archaic items are not required on starships.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -564,7 +610,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 0,
         "modifiers": [],
@@ -660,10 +706,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "rollNotes": "",
         "save": {
@@ -671,11 +715,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -683,7 +732,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -697,11 +746,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -709,12 +754,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -723,7 +777,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -733,7 +788,7 @@
           "unidentified": "",
           "value": "<p>An epokasite fixer radiates an aura that drains active technological items. While in the area, each item whose level is no more than twice the fixer’s CR (level 7 for most fixers) doubles its usage (if it uses charges to function), reduces the saving throw DCs of any effects it creates by 2, and increases the DC of all checks to use the item by 2. If the item’s level is lower than the fixer’s CR, it instead triples its usage, reduces its saving throw DCs by 3, and increases the check DCs by 3.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -744,34 +799,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -782,11 +839,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/discharge.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -805,7 +858,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -815,7 +868,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -825,14 +879,14 @@
           "unidentified": "",
           "value": "<p>You can dissipate the charges from one technological object, temporarily depower one electrically powered technological object that does not use charges, or severely hinder a construct with the technological subtype. If the spell targets an object with charges, the object loses all of its remaining charges. If the object is powered by electrical means other than charges, its functions are suppressed for 1d4 rounds. If the spell targets a creature not of the technological subtype, it affects a random charged or electrically powered item in that creature’s possession. If the target is a construct with the technological subtype, it is @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} and cannot use any energy-based attacks for 1d4 rounds. A construct with the technological subtype that is affected by this spell can attempt a Fortitude saving throw at the end of each round to shrug off the effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -848,10 +902,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -860,14 +911,19 @@
           "descriptor": "object"
         },
         "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 350",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one creature or technological object"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -879,11 +935,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/caustic_conversion.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rsak",
         "activation": {
@@ -902,7 +954,7 @@
           "shapable": false,
           "shape": "cylinder",
           "units": "medium",
-          "value": 100
+          "value": "100"
         },
         "attackBonus": 15,
         "chatFlavor": "",
@@ -914,8 +966,10 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d4",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": true,
                 "bludgeoning": false,
@@ -923,12 +977,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -938,14 +995,14 @@
           "unidentified": "",
           "value": "<p>You fling magical nanites that convert water vapor around your target into deadly acid. Make a ranged attack roll against your target’s EAC. If you hit, the target takes 4d4 acid damage and it takes 5 additional acid damage at the end of its turn each round for the spell’s duration.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "1+floor(@details.cl.value/3)"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -961,10 +1018,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -973,14 +1027,19 @@
           "descriptor": "negate"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 342",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature or object"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -992,11 +1051,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/feats/dispelling_strike.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "other",
         "activation": {
@@ -1014,8 +1069,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1027,11 +1082,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6*@cl",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1041,14 +1111,14 @@
           "unidentified": "",
           "value": "<p>When you take damage from an effect, you can create a defensive conduit between yourself and one technological object, non-archaic armor, or non‑archaic weapon you’re carrying or wearing that’s 3 Bulk or less. The chosen object takes damage equal to 1d6 times your caster level, ignoring the object’s hardness. You reduce the damage you take from the triggering attack by half this result, though you can’t reduce the damage by more than 3 times the item’s level.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1064,26 +1134,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA4 pg. 37",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one technological object, non-archaic armor, or non-archaic weapon you're carrying or wearing that's 3 Bulk or less"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1095,11 +1167,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/holographic_image.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1118,7 +1186,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1128,7 +1196,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1138,14 +1207,14 @@
           "unidentified": "",
           "value": "<p>You weave nearby photons into illusory holograms that can take almost any form you can imagine. These holograms are usually effective against cameras, robots, and living creatures.</p>\n<ul>\n<li><strong>1st:</strong> When you cast holographic image as a 1st-level spell, it produces a purely visual hologram at long range (400 feet + 40 feet/level). The image has no sound, smell, texture, or temperature. The image can’t extend beyond four 10-foot cubes plus one 10-foot cube per caster level. The image lasts for as long as you concentrate. You can move the image within the limits of the size of the effect.</li>\n<li><strong>2nd:</strong> When you cast holographic image as a 2nd-level spell, it produces a hologram as per the 1st-level version of the spell, except the hologram can include minor sounds, but not understandable speech. The image lasts for as long as you concentrate plus 2 additional rounds.</li>\n<li><strong>3rd:</strong> When you cast holographic image as a 3rd-level spell, it produces a hologram as per the 1st-level version of the spell, except the hologram can include sound, smell, and thermal illusions (but not speech). The image disappears when it is struck by an opponent, unless you cause the hologram to react appropriately. The image lasts for as long as you concentrate plus 3 additional rounds.</li>\n<li><strong>4th:</strong> When you cast holographic image as a 4th-level spell, it produces a hologram as per the 3rd-level version of the spell, except the hologram follows a script determined by you. It follows that script for 1 minute per level without you having to concentrate on it. The hologram can include intelligible speech, if you wish.</li>\n<li><strong>5th:</strong> When you cast holographic image as a 5th-level spell, it produces a hologram as per the 4th-level version of the spell, except the size of the hologram can’t extend beyond a 20-foot cube plus one 10-foot cube per caster level. You can choose to make the hologram permanent at the time of casting. By concentrating, you can move the image within the limits of the range, but it is static while you are not concentrating. Alternatively, you can have the hologram activate when a specific condition (which you set at the time of casting) occurs. The event that triggers the hologram can be as general or as specific and detailed as desired, but it must be based on an audible, olfactory, tactile, or visual trigger. The trigger can’t be based on some quality not normally obvious to the senses, such as alignment. The spell lasts until it is triggered, and then the hologram lasts for 1 round per caster level.</li>\n<li><strong>6th:</strong> When you cast holographic image as a 6th-level spell, it creates a quasi-real, illusory version of yourself at medium range (100 feet + 10 feet/level). This hologram looks, sounds, and smells like you, but it is intangible. The hologram mimics your actions (including speech) unless you use a move action to direct it to act differently. You can see through its eyes and hear through its ears as if you were standing where it is, and during your turn you can switch from using its senses to using your own, or back again, as a move action. While you are using its senses, your body is considered @UUID[Compendium.sfrpg.conditions.Item.tOpF6qjnlnKc10t7]{Blinded} and @UUID[Compendium.sfrpg.conditions.Item.D8JvCEmOiWKe2UDx]{Deafened}.If you desire, any spell you cast with a range of touch or greater can originate from the hologram instead of from you. The hologram can’t cast spells on itself except for illusion spells. Spells cast in this manner affect other targets normally, despite originating from the hologram. An object isn’t deceived by illusions (treat as if it had succeeded at its Will saving throw). The hologram remains for 1 round per level, and you must maintain line of effect to the hologram at all times. If your line of effect is obstructed, the spell ends. If you use&nbsp;dimension door,&nbsp;plane shift,&nbsp;teleport, or a similar spell that breaks your line of effect, even momentarily, the spell ends. This casting of the spell is a shadow effect.</li>\n</ul>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "see text"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1161,10 +1230,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -1173,14 +1239,19 @@
           "descriptor": "disbelieve"
         },
         "school": "ill",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 360",
         "sr": false,
         "target": {
-          "type": "",
           "value": "see text"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1192,11 +1263,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/make_whole.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "heal",
         "activation": {
@@ -1214,8 +1281,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1227,13 +1294,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "5d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "healing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": true,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1243,14 +1323,14 @@
           "unidentified": "",
           "value": "<p>This spell functions as&nbsp;mending, except it restores 5d6 Hit Points when cast on an object or construct creature.</p>\n<p>Make whole&nbsp;can fix destroyed magic items, and it restores the magic properties of the item if your technomancer level is at least twice the item’s level. Items with charges (such as batteries) and single-use items (such as potions and grenades) can’t be repaired in this way. When you cast&nbsp;make whole&nbsp;on a construct, the spell bypasses any immunity to magic as if the spell did not allow spell resistance.</p>\n<h2>Mending</h2>\n<p>This spell repairs damaged objects and constructs, restoring 1d4 Hit Points. If the object has the broken condition, this condition is removed if the object is restored to at least half its original Hit Points. All of the pieces of an object must be present for this spell to function. A construct can benefit from this spell only once per day. Magic items can be repaired by this spell, but magic items that are destroyed don’t have their magic abilities restored. This spell doesn’t reverse effects that warp or otherwise transmute items, but it can still repair damage dealt to such items.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1266,10 +1346,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -1278,14 +1355,19 @@
           "descriptor": "object"
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 364",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one object of up to 1 bulk/level or one construct of any size"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1297,11 +1379,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/manipulate_tech.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1319,8 +1397,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1330,7 +1408,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1340,14 +1419,14 @@
           "unidentified": "",
           "value": "<p>You can briefly align your will to the circuitry or structure of an unattended technological weapon or a technological item with a usage entry, provided the target has an item level equal to or lower than your caster level + 3. The target can even have the broken condition. When you do so, you can cause the item to act as if you activated it without moving it from its space. If the target is a weapon, you can cause it to fire or activate for the rest of your turn. Then, you can make one attack against a creature in range using your ranged attack bonus plus your Intelligence modifier or your melee attack bonus plus your Intelligence modifier, whichever is applicable for the weapon you activate. If the target is a technological item with a usage entry, the item activates for the time listed in that usage entry. This spell provides any charges or ammunition used by your activation.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1363,26 +1442,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "COM pg. 138",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one piece of unattended technology; see text"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1394,11 +1475,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/identify.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1416,8 +1493,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1427,7 +1504,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1437,14 +1515,14 @@
           "unidentified": "",
           "value": "<p>This spell allows you to attempt to identify the function of a magic item (with Mysticism) or technological device (with Engineering) each round. You gain a +10 insight bonus to skill checks to identify the properties and command words or passwords of items targeted when using this spell. This spell does not allow you to identify artifacts.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -1460,26 +1538,29 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 5
+          "value": "5"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 361",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one magic or technological object"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1491,11 +1572,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/incompetence.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1513,8 +1590,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1524,7 +1601,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1534,14 +1612,14 @@
           "unidentified": "",
           "value": "<p>You cause all targets of this spell to lose proficiency with one class of weapons of your choice (basic or advanced melee weapons, small arms, longarms, heavy weapons, grenades, or natural weapons) and suffer the normal penalties for attacks made with weapons they are not proficient with.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -1557,10 +1635,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -1569,14 +1644,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR pg. 157",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one creature/level"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1588,11 +1668,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/jolting_surge.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "msak",
         "activation": {
@@ -1611,7 +1687,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 15,
         "chatFlavor": "",
@@ -1623,8 +1699,10 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -1632,12 +1710,15 @@
                 "electricity": true,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1647,14 +1728,14 @@
           "unidentified": "",
           "value": "<p>You touch a target with a device you’re holding that uses electricity, requiring a melee attack against the target’s EAC. Alternatively, you can instead touch an electrical device a target is wearing (or a target that is an electrical device, such as a robot) with your hand, gaining a +2 bonus to your attack roll. Either way, if your attack hits, the electrical device surges out of control, dealing 4d6 electricity damage to your target.</p>\n<p>Casting this spell doesn’t provoke attacks of opportunity.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -1670,10 +1751,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1682,14 +1760,19 @@
           "descriptor": "negate"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 363",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature or object"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1701,7 +1784,6 @@
       "type": "container",
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -1720,7 +1802,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [
@@ -1737,7 +1818,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1761,7 +1842,7 @@
               "affectsEncumbrance": true,
               "amount": 1000,
               "subtype": "",
-              "weightProperty": "bulk"
+              "weightProperty": ""
             }
           ]
         },
@@ -1774,13 +1855,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1790,40 +1873,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/petrol-tank.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "fuel",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1832,14 +1894,13 @@
           "unidentified": "",
           "value": "<p>Petrol is a highly flammable blend of hydrocarbons that is used in flame weapons (and petrol is occasionally used by desperate adventurers as fuel or for other various utilitarian purposes). A petrol tank snaps easily into the housing of weapons that are specifically petrol-powered.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "",
         "specialMaterials": {},
         "useCapacity": true
@@ -1851,11 +1912,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/flame-pistol.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -1869,7 +1926,7 @@
           "shapable": false,
           "shape": "line",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 14,
         "attributes": {
@@ -1890,7 +1947,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -1936,8 +1992,10 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d4 + 8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -1945,12 +2003,15 @@
                 "electricity": false,
                 "fire": true,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1960,7 +2021,6 @@
           "unidentified": "",
           "value": "<p>Inventive manufacturers have developed more effective versions of the classic flame pistol, resulting in the blaze, inferno, and solar flare models. Like other flame pistols, the more advanced models fire lines of ignited petrol from their barrels, but they work at higher pressure and include nanotechnology that breaks down the petrol into more volatile compounds as the weapon is fired.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1970,7 +2030,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 7,
         "modifiers": [],
@@ -2070,10 +2130,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -2081,11 +2138,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR pg. 14",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -2093,7 +2155,7 @@
           "value": 5
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -2107,11 +2169,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/flame-pistol.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -2125,7 +2183,7 @@
           "shapable": false,
           "shape": "line",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "attributes": {
@@ -2146,7 +2204,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -2187,8 +2244,10 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d4",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -2196,12 +2255,15 @@
                 "electricity": false,
                 "fire": true,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2211,7 +2273,6 @@
           "unidentified": "",
           "value": "<p>Inventive manufacturers have developed more effective versions of the classic flame pistol, resulting in the blaze, inferno, and solar flare models. Like other flame pistols, the more advanced models fire lines of ignited petrol from their barrels, but they work at higher pressure and include nanotechnology that breaks down the petrol into more volatile compounds as the weapon is fired.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -2221,7 +2282,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 7,
         "modifiers": [],
@@ -2321,10 +2382,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -2332,11 +2390,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR pg. 14",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -2344,7 +2407,7 @@
           "value": 5
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -2358,40 +2421,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/petrol-tank.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "fuel",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -2400,14 +2442,13 @@
           "unidentified": "",
           "value": "<p>Petrol is a highly flammable blend of hydrocarbons that is used in flame weapons (and petrol is occasionally used by desperate adventurers as fuel or for other various utilitarian purposes). A petrol tank snaps easily into the housing of weapons that are specifically petrol-powered.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "",
         "specialMaterials": {},
         "useCapacity": true

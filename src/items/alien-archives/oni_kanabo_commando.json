@@ -11,21 +11,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -34,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -44,7 +53,7 @@
           "unidentified": "",
           "value": "<p>Kanabo have an innate mastery of the use of armor. When wearing armor, they gain a +1 species bonus to AC. When wearing heavy armor, their armor check penalty is 1 less severe than normal.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -55,34 +64,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -93,11 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -111,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 12,
         "attributes": {
@@ -132,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -141,7 +147,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -160,10 +166,22 @@
           "effect": "Bleed 1d6",
           "parts": [
             {
+              "name": "",
               "formula": "1d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
           ]
@@ -171,13 +189,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d10+7",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -187,7 +218,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -197,7 +227,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -293,10 +323,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -304,11 +331,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -316,8 +348,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -330,11 +362,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -347,8 +375,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 9,
         "attributes": {
@@ -369,7 +397,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": 10,
@@ -378,7 +405,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -410,13 +437,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6+3",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -426,7 +466,6 @@
           "unidentified": "",
           "value": "<p>An automatic model of the basic rifle, autotarget rifles fire continuously for as long as the trigger is depressed and fresh rounds are available in the magazine.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -436,7 +475,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 2,
         "modifiers": [],
@@ -532,10 +571,8 @@
         "quantity": null,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 60
+          "value": "60"
         },
         "rollNotes": "",
         "save": {
@@ -543,11 +580,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "SCR",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -555,7 +597,7 @@
           "value": 1
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -569,11 +611,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rwak",
         "activation": {
@@ -587,7 +625,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 5
+          "value": "5"
         },
         "attackBonus": 9,
         "attributes": {
@@ -608,7 +646,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 1,
@@ -617,7 +654,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -647,7 +684,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -657,9 +695,8 @@
           "unidentified": "",
           "value": "<p>When detonated, a flash grenade releases a pulse of intense radiance.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "blinded 1d4 rounds"
         },
         "equippable": false,
@@ -667,7 +704,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 2,
         "modifiers": [],
@@ -763,10 +800,8 @@
         "quantity": null,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -774,11 +809,16 @@
           "dc": "11+@abilities.dex.mod",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -786,11 +826,11 @@
           "value": 1
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
-        "weaponCategory": "",
+        "weaponCategory": "uncategorized",
         "weaponType": "grenade"
       }
     },
@@ -800,11 +840,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/rune_of_the_eldrith_knight.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -812,12 +848,21 @@
           "condition": "",
           "cost": null
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -826,7 +871,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -836,7 +882,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.33fxlqpShtqndjry]{Arcane Assailant}</p>\n<p>You can imbue a weapon with a magic sigil, the rune of the eldritch knight, allowing the weapon to act as a magic weapon for the purposes of bypassing DR and affecting incorporeal creatures. This takes 10 minutes, and you can imbue only a single weapon at a time. If you imbue a new weapon with the rune of the eldritch knight, any previously imbued weapon loses this benefit. When calculating the Hit Points and hardness of a weapon imbued with the rune of the eldritch knight, treat its item level as 5 higher.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -847,33 +893,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Technique",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Arcane Assailant",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -885,11 +933,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/golemforged-plating-2.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -903,7 +947,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "heavy",
@@ -932,7 +976,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "3",
         "capacity": {
           "max": 0,
@@ -972,7 +1015,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -982,7 +1026,6 @@
           "unidentified": "",
           "value": "<p>An economical choice for many mercenaries, golemforged plating is one of the universe’s most popular heavy armors. Golemforged plating consists of a close-fitting polycarbonate suit fitted with ports and sockets to fit most armor customization options. Suits of golemforged plating include flexible boots and gloves as well as a standard helmet with a clear visor.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -992,7 +1035,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 3,
         "modifiers": [],
         "price": 1610,
@@ -1001,19 +1045,21 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {
           "abysium": false,
@@ -1034,7 +1080,6 @@
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -1042,8 +1087,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1054,10 +1099,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/default/hand-truck.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "attributes": {
           "ac": {
             "value": ""
@@ -1076,14 +1117,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1093,13 +1127,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1109,11 +1145,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/disguise_self.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1132,7 +1164,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1142,7 +1174,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1152,14 +1185,14 @@
           "unidentified": "",
           "value": "<p>You make yourself—and any clothing, armor, weapons, and equipment on you—look different. You can seem up to 1 foot shorter or taller, thin, fat, or in between. You can’t change your creature type (although you can appear as another subtype). Otherwise, the extent of the apparent change is up to you. You could merely add or obscure a minor feature, or you could look like an entirely different person or gender.</p>\n<p>The spell does not provide the abilities or mannerisms of the chosen form nor does it alter the perceived tactile (touch) or audible (sound) properties of you or your equipment. If you use this spell to create a disguise, you gain a +10 circumstance bonus to the Disguise check (since it counts as altering your form). A creature that interacts with you directly can attempt a Will saving throw to recognize your appearance as an illusion.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value*10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -1175,10 +1208,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
@@ -1187,14 +1217,19 @@
           "descriptor": "negate"
         },
         "school": "ill",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 350",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -1206,11 +1241,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/supercharge_weapon.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "other",
         "activation": {
@@ -1229,7 +1260,7 @@
           "shapable": false,
           "shape": "",
           "units": "touch",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1241,11 +1272,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d6",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1253,16 +1299,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p style=\"text-align: justify;\">You supercharge the target weapon. If the weapon’s next attack hits (provided it is made before the end of the next round), the attack deals 4d6 additional damage if the weapon is a single target attack or 2d6 additional damage if the weapon attacks all creatures in an area. This bonus damage is of the same type as the weapon’s normal damage.</p>"
+          "value": "<p style=\"text-align:justify\">You supercharge the target weapon. If the weapon’s next attack hits (provided it is made before the end of the next round), the attack deals 4d6 additional damage if the weapon is a single target attack or 2d6 additional damage if the weapon attacks all creatures in an area. This bonus damage is of the same type as the weapon’s normal damage.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "see text"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -1278,26 +1324,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 379",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one weapon"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -1309,11 +1357,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/arcane_assailant.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1321,12 +1365,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1335,7 +1388,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1345,7 +1399,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.oKlwvc1HcIsg7Q7a]{Fighting Style}</p>\n<p>The arcane assailant fighting style supplements its combat effectiveness with magic powers, drawing on traditions of warrior-wizards dating back to well before the Gap. This allows you to use magic runes to augment your weapons and call on legendary powers, giving you access to arcane options even when you don’t have a magic weapon in your possession.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.5FhYKMqOjwIFJJlQ]{Rune of the Eldritch Knight (Su) (1st)}</h2>\n<p>You can imbue a weapon with a magic sigil, the rune of the eldritch knight, allowing the weapon to act as a magic weapon for the purposes of bypassing DR and affecting incorporeal creatures. This takes 10 minutes, and you can imbue only a single weapon at a time. If you imbue a new weapon with the rune of the eldritch knight, any previously imbued weapon loses this benefit. When calculating the Hit Points and hardness of a weapon imbued with the rune of the eldritch knight, treat its item level as 5 higher.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.eJ3llvKb8nmO8lb0]{Secret of the Magi (Su) (2nd)}</h2>\n<p>When you imbue a weapon with the rune of the eldritch knight, in addition to its normal benefits, the rune grants the weapon one of the following weapon fusions of your choice: <em>ethereal</em>, <em>flaming</em>, <em>frost</em>, <em>merciful</em>, or <em>shock</em>. The weapon can’t gain a fusion it already has, and this bonus fusion doesn’t count toward the maximum total level of fusions the weapon can have at once. The bonus fusion ends when the weapon ceases to be imbued with the rune of the eldritch knight. For more information on fusions, see page 191.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.SGPPU23Z2VIKJtGH]{Power of Legend (Su) (3rd)}</h2>\n<p>You can call on the link between you and the legendary heroes who wielded powerful magic weapons eons ago to overcome adversity. As a move action when wielding a magic weapon or a weapon imbued with the rune of the eldritch knight, you can spend 1 Resolve Point to end one of the following conditions affecting you: bleeding, burning, confused, exhausted, fatigued, @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed}, off-target, @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken}, or sickened. Alternatively, you can spend 1 Resolve Point to change the cowering condition to the frightened condition or change the frightened condition to the @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken} condition. In this case, the new condition lasts for the same duration the original condition would have and can’t be further affected by this ability.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.pCfJfn8TQKboG6ni]{Secret of the Archmagi (Su) (4th)}</h2>\n<p>You can imbue two weapons with the rune of the eldritch knight. If you attempt to imbue a third weapon, the weapon infused first loses its rune and all benefits. In addition to the normal benefits, the runes grant the weapons one or more of the following weapon fusions (see page 191) of your choice: <em>bane</em>, <em>corrosive</em>, <em>ethereal</em>, <em>flaming</em>, <em>frost</em>, <em>holy</em>, <em>merciful</em>, <em>shock</em>, <em>thundering</em>, or <em>unholy</em>. You can grant no more than 10 total levels’ worth of fusions between the two weapons, and the bane fusion counts as a 10th-level fusion for this purpose.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.mB0V4cPLp7OI9MgN]{Arcane Attack (Su) (5th)}</h2>\n<p>As a standard action, you can spend 1 Resolve Point to use a weapon imbued with the rune of the eldritch knight to make an attack that strikes true. This attack ignores all cover and concealment, including total concealment (though you must at least be aware of a creature’s presence to target it with this attack). If the attack is a ranged attack, the target must be within the first range increment. The attack only affects your selected target, even if it normally affects an area or multiple targets. You still must make a normal attack roll, and if your attack misses, it has no effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1356,34 +1410,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Fighting Style",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }

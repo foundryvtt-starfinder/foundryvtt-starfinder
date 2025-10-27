@@ -11,11 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -29,7 +25,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 20,
         "attributes": {
@@ -50,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -83,6 +78,8 @@
             {
               "name": "",
               "formula": "2d12 +13",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -90,12 +87,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": true,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -105,7 +105,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -115,7 +114,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -215,10 +214,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -226,6 +222,12 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {
@@ -244,7 +246,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -252,8 +253,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -266,11 +267,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -284,7 +281,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 18,
         "attributes": {
@@ -305,7 +302,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -338,6 +334,8 @@
             {
               "name": "",
               "formula": "2d8 +12",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -345,12 +343,15 @@
                 "electricity": true,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -360,7 +361,6 @@
           "unidentified": "",
           "value": "<p>As an attack, an asteray can unleash an electrical blast with a range increment of 70 feet at a single target.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -370,7 +370,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -470,10 +470,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 70
+          "value": "70"
         },
         "rollNotes": "",
         "save": {
@@ -481,6 +479,12 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {
@@ -499,7 +503,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -507,7 +510,7 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -521,11 +524,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -533,12 +532,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -547,7 +555,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -557,7 +566,7 @@
           "unidentified": "",
           "value": "<p>The creature doesn’t breathe, and it is immune to effects that require breathing (such as inhaled @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}). This does not give it immunity to cloud or gas attacks that don’t require breathing.</p>\n<p><em>Format</em>:<strong>Other Abilities</strong> no breath.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -568,34 +577,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA1 pg. 155",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -606,21 +617,29 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
           "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
         },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -629,7 +648,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -639,7 +659,7 @@
           "unidentified": "",
           "value": "<p>By touching a starship, an asteray can bond to the energy wake it leaves as it travels. This allows the fey to match speeds with the starship and ride along with it, treating the ship as if it were the “ground” so long as it remains within 100 feet. If the starship enters the Drift, the asteray can choose to accompany the ship into the Drift, or it can disengage as a reaction and remain behind.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -650,34 +670,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -688,11 +710,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -700,12 +718,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -714,7 +741,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -724,7 +752,7 @@
           "unidentified": "",
           "value": "<p>An asteray can “sing” electronic signals that mask or mimic sensor readings. As a standard action, an asteray can create a false image of an object as if it had cast the 4th-level version of the spell @UUID[Compendium.sfrpg.spells.Item.kDFNOMx78KU1GGol]{Holographic Image} (CL 12th). This false reading affects only electronic sensors. Multiple asterays can sing together, increasing the caster level by 1 for each asteray beyond the first singer for the purposes of determining the spell’s range and area affected.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -735,34 +763,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -773,11 +803,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/confusion.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -796,7 +822,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 15
+          "value": "15"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -806,7 +832,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -814,16 +841,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This spell causes @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confusion} in all creatures in the area, making them unable to determine their actions. Any @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature that is attacked automatically attacks or attempts to attack its attackers on its next turn, as long as it is still @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} at the start of its next turn. Note that a @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature will not make attacks of opportunity against any foe that it is not already devoted to attacking (either because of its most recent action or because it has just been attacked). For @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creatures that have not been attacked, roll on the following table at the start of each affected creature’s turn each round to see what it does in that round.</p>\n<table style=\"width: 403px; height: 85px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; background-color: #34495e; text-align: center; width: 44px;\">\n<p style=\"color: white;\">D%</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">1-25</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">26-50</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">51-75</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">76-100</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>A @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature that can’t carry out the indicated action does nothing but babble incoherently. Attackers are not at any special advantage when attacking a @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} target.</p>"
+          "value": "<p>This spell causes @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confusion} in all creatures in the area, making them unable to determine their actions. Any @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature that is attacked automatically attacks or attempts to attack its attackers on its next turn, as long as it is still @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} at the start of its next turn. Note that a @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature will not make attacks of opportunity against any foe that it is not already devoted to attacking (either because of its most recent action or because it has just been attacked). For @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creatures that have not been attacked, roll on the following table at the start of each affected creature’s turn each round to see what it does in that round.</p>\n<table style=\"width:403px;height:85px\" border=\"1\">\n<tbody>\n<tr style=\"height:17px\">\n<td style=\"height:17px;background-color:#34495e;text-align:center;width:44px\">\n<p style=\"color:white\">D%</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">1-25</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">26-50</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">51-75</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">76-100</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>\n<p>A @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature that can’t carry out the indicated action does nothing but babble incoherently. Attackers are not at any special advantage when attacking a @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} target.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "1d100",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -837,13 +864,9 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -852,14 +875,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 344",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -871,11 +899,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/overload_system.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "msak",
         "activation": {
@@ -894,7 +918,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -904,7 +928,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -914,14 +939,14 @@
           "unidentified": "",
           "value": "<p>By touching the target (usually requiring a melee attack roll against the target’s EAC, but you can add your key ability score modifier instead of your Strength modifier if it is higher), you flood the target’s body with random jolts of electricity or other interference. On a failed Fortitude save, the target is overwhelmed and potentially unable to perform tasks as normal. While this spell is in effect, whenever the target takes any action or reaction, there is a 50% chance that the target simply takes no action instead. Roll this chance separately for each action the target would take. For example, if the target wishes to move and attack during its turn, it would roll d% twice to determine whether it could take those actions—once before each action it wishes to take. Each attack of a full attack action counts as separate action.</p>\n<p>This spell is effective against living and unliving creatures, and casting it doesn’t provoke attacks of opportunity.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -935,13 +960,9 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -950,14 +971,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 368",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -969,11 +995,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/arcane_sight.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -991,8 +1013,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1002,7 +1024,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1012,14 +1035,14 @@
           "unidentified": "",
           "value": "<p>This spell allows you to see magic sources within 120 feet of you. The effect is similar to that of a detect magic spell, but arcane sight does not require concentration and discerns information more quickly.</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\"></span></p>\n<p>You know the location and caster level of all magic sources within your sight. If the magic sources are in line of sight, you can attempt a DC 28 Mysticism check (one check per source) to determine the school of magic involved in each source.</p>\n<p>If you concentrate on a specific creature within 120 feet of you as a standard action, you can determine whether it has any spellcasting or spell-like abilities and the caster level of the most powerful spell or spell-like ability the creature currently has available for use.</p>\n<p>As with detect magic, you can use this spell to identify the properties of magic items, but not of artifacts.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -1033,29 +1056,30 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 340",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1067,11 +1091,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/charm_monster.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1090,7 +1110,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1100,7 +1120,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1110,14 +1131,14 @@
           "unidentified": "",
           "value": "<p>This spell functions like @UUID[Compendium.sfrpg.spells.Item.3nFCrisRp2GIjbR3]{Charm Person}, except the effect is not restricted by creature type.</p>\n<h2>@UUID[Compendium.sfrpg.spells.Item.3nFCrisRp2GIjbR3]{Charm Person}</h2>\n<p>This charm makes a humanoid creature regard you as its trusted friend and ally (treat the target’s attitude as friendly). If the creature is currently being threatened or attacked by you or your allies, however, it receives a +5 bonus to its saving throw.</p>\n<p>The spell does not enable you to control the charmed creature as if it were an automaton. It is unlikely to attempt to harm you, but it is also unlikely to attack any of its true friends or allies. You can try to give the target suggestions, but you must succeed at an opposed Charisma check to convince it to do anything it wouldn’t ordinarily do. (Retries of this check are not allowed.) An affected creature never obeys suicidal or obviously harmful suggestions. Any act by you or your apparent allies that threatens the charmed creature breaks the spell. You must speak the creature’s language to communicate your suggestions, or else be good at pantomiming.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "day",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -1131,13 +1152,9 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -1146,14 +1163,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 342",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1165,11 +1187,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/discharge.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1187,8 +1205,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1198,7 +1216,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1208,14 +1227,14 @@
           "unidentified": "",
           "value": "<p>You can dissipate the charges from one technological object, temporarily depower one electrically powered technological object that does not use charges, or severely hinder a construct with the technological subtype. If the spell targets an object with charges, the object loses all of its remaining charges. If the object is powered by electrical means other than charges, its functions are suppressed for 1d4 rounds. If the spell targets a creature not of the technological subtype, it affects a random charged or electrically powered item in that creature’s possession. If the target is a construct with the technological subtype, it is @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} and cannot use any energy-based attacks for 1d4 rounds. A construct with the technological subtype that is affected by this spell can attempt a Fortitude saving throw at the end of each round to shrug off the effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -1229,13 +1248,9 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -1244,14 +1259,19 @@
           "descriptor": "object"
         },
         "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 350",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one creature or technological object"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1263,11 +1283,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/nondetection.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1286,7 +1302,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1296,7 +1312,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1306,14 +1323,14 @@
           "unidentified": "",
           "value": "<p>The warded creature or object becomes difficult to detect by divination spells such as clairaudience/clairvoyance and spells with the word “detect” in their names. Nondetection also prevents location by magic items such as crystal balls and technological items such as cameras and surveillance systems. Casting this spell places significant stress on you, and requires you to spend 1 Resolve Point.</p>\n<p>If a magic divination is attempted against the warded creature or item, the caster of the divination must succeed at a caster level check (1d20 + caster level) against a DC equal to 11 + your caster level. If surveillance is attempted with remote cameras or sensors, the viewer must succeed at a Perception check against a DC equal to 11 + your caster level to see the target. If you cast nondetection on yourself or on an item currently in your possession, the DC for each these checks is equal to 15 + your caster level. If cast on a creature, nondetection wards the creature’s gear as well as the creature itself.</p>\n<p>Nondetection&nbsp;protects the target only from discovery by items and remote sensors, not by creatures. A camera mounted to a wall and monitored from a security booth is subject to&nbsp;nondetection, but a camera in a creature (including constructs) is not.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "hour",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -1327,13 +1344,9 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1342,14 +1355,19 @@
           "descriptor": "harmless"
         },
         "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 367",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature or object"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -1361,11 +1379,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/holographic_image.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1384,7 +1398,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1394,7 +1408,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1404,14 +1419,14 @@
           "unidentified": "",
           "value": "<p>You weave nearby photons into illusory holograms that can take almost any form you can imagine. These holograms are usually effective against cameras, robots, and living creatures.</p>\n<p><strong>1st</strong>: When you cast holographic image as a 1st-level spell, it produces a purely visual hologram at long range (400 feet + 40 feet/level). The image has no sound, smell, texture, or temperature. The image can’t extend beyond four 10-foot cubes plus one 10-foot cube per caster level. The image lasts for as long as you concentrate. You can move the image within the limits of the size of the effect.</p>\n<p><strong>2nd</strong>: When you cast holographic image as a 2nd-level spell, it produces a hologram as per the 1st-level version of the spell, except the hologram can include minor sounds, but not understandable speech. The image lasts for as long as you concentrate plus 2 additional rounds.</p>\n<p><strong>3rd</strong>: When you cast holographic image as a 3rd-level spell, it produces a hologram as per the 1st-level version of the spell, except the hologram can include sound, smell, and thermal illusions (but not speech). The image disappears when it is struck by an opponent, unless you cause the hologram to react appropriately. The image lasts for as long as you concentrate plus 3 additional rounds.</p>\n<p><strong>4th</strong>: When you cast holographic image as a 4th-level spell, it produces a hologram as per the 3rd-level version of the spell, except the hologram follows a script determined by you. It follows that script for 1 minute per level without you having to concentrate on it. The hologram can include intelligible speech, if you wish.</p>\n<p><strong>5th</strong>: When you cast holographic image as a 5th-level spell, it produces a hologram as per the 4th-level version of the spell, except the size of the hologram can’t extend beyond a 20-foot cube plus one 10-foot cube per caster level. You can choose to make the hologram permanent at the time of casting. By concentrating, you can move the image within the limits of the range, but it is static while you are not concentrating. Alternatively, you can have the hologram activate when a specific condition (which you set at the time of casting) occurs. The event that triggers the hologram can be as general or as specific and detailed as desired, but it must be based on an audible, olfactory, tactile, or visual trigger. The trigger can’t be based on some quality not normally obvious to the senses, such as alignment. The spell lasts until it is triggered, and then the hologram lasts for 1 round per caster level.</p>\n<p><strong>6th</strong>: When you cast holographic image as a 6th-level spell, it creates a quasi-real, illusory version of yourself at medium range (100 feet + 10 feet/level). This hologram looks, sounds, and smells like you, but it is intangible. The hologram mimics your actions (including speech) unless you use a move action to direct it to act differently. You can see through its eyes and hear through its ears as if you were standing where it is, and during your turn you can switch from using its senses to using your own, or back again, as a move action. While you are using its senses, your body is considered @UUID[Compendium.sfrpg.conditions.Item.tOpF6qjnlnKc10t7]{Blinded} and @UUID[Compendium.sfrpg.conditions.Item.D8JvCEmOiWKe2UDx]{Deafened}.If you desire, any spell you cast with a range of touch or greater can originate from the hologram instead of from you. The hologram can’t cast spells on itself except for illusion spells. Spells cast in this manner affect other targets normally, despite originating from the hologram. An object isn’t deceived by illusions (treat as if it had succeeded at its Will saving throw). The hologram remains for 1 round per level, and you must maintain line of effect to the hologram at all times. If your line of effect is obstructed, the spell ends. If you use&nbsp;dimension door,&nbsp;plane shift,&nbsp;teleport, or a similar spell that breaks your line of effect, even momentarily, the spell ends. This casting of the spell is a shadow effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "see text"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": true,
         "level": 1,
         "materials": {
@@ -1425,13 +1440,9 @@
           "mode": "always",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -1440,14 +1451,19 @@
           "descriptor": "disbelieve"
         },
         "school": "ill",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 360",
         "sr": false,
         "target": {
-          "type": "",
           "value": "see text"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1459,11 +1475,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/spider_climb.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1481,8 +1493,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1492,7 +1504,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1502,14 +1515,14 @@
           "unidentified": "",
           "value": "<p>The target can climb and travel on vertical surfaces or even traverse ceilings as well as a spider does. An affected creature with four limbs must have three limbs free (not holding equipment or being used to perform skills and so on) to climb in this manner. A creature with six limbs needs only four available. In general, other creatures must have 75% of their limbs available to benefit from this spell. The target gains a climb speed of 20 feet (and the +8 species bonus to Athletics checks to climb granted by that climb speed); furthermore, it doesn’t need to attempt Athletics checks to climb to traverse a vertical or horizontal surface (even upside down). An affected creature climbing in this way is not @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-footed} while climbing, and opponents get no special bonus to their attacks against it. The creature, however, can’t use the run action while climbing.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value*10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1523,13 +1536,9 @@
           "mode": "always",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1538,14 +1547,19 @@
           "descriptor": "harmless"
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 378",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1557,11 +1571,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1569,12 +1579,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1583,7 +1602,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1593,7 +1613,7 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -1604,19 +1624,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "7238d5dc-56ad-4c32-a274-c95454cb17b2",
             "name": "Perception check in space",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "cVUHLseQHMgP8Sfc",
-              "itemId": "ZBx8ibCylXSU0d38"
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 8,
             "modifier": "8",
             "modifierType": "formula",
@@ -1628,30 +1646,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }

@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/share_pain.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -23,12 +19,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -37,7 +42,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -47,7 +53,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.6zrV67znbGCh4EjF]{Mindbreaker}</p>\n<p>Whenever a foe deals damage to you, you can spend 1 Resolve Point as a reaction to shift some of the pain back onto that foe. Unless the foe succeeds at a Will save, reduce the damage you take from the attack by your mystic level (to a maximum of the attack’s damage), and the foe takes an equal amount of damage. This is a mind-affecting pain effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -58,18 +64,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
@@ -78,13 +81,18 @@
           "dc": "18",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Mindbreaker Connection",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -96,11 +104,7 @@
       "type": "weapon",
       "img": "icons/weapons/staves/staff-simple-gold.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -114,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 14,
         "attributes": {
@@ -135,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": null,
@@ -144,7 +147,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -166,13 +169,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d8 +9",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -182,7 +198,6 @@
           "unidentified": "",
           "value": "<p>Staves are long and flexible, weighted on the end to provide extra striking power. Most staves are made from aluminum or fiberglass, though some are still made from wood.</p>\n<p>Sentinel and repeller staves are made of conductive metal and deliver a painful, low-voltage charge that can stun opponents. The hardlight staff uses a core of unstable photonic gel to dramatically increase its mass every time it strikes a surface.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -192,7 +207,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 7,
         "modifiers": [],
@@ -288,10 +303,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -299,11 +311,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -311,7 +328,7 @@
           "value": null
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -325,11 +342,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/plasma-pistol-yellow-star.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -343,7 +356,7 @@
           "shapable": false,
           "shape": "line",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 14,
         "attributes": {
@@ -364,7 +377,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -373,7 +385,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -415,14 +427,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d8 +8",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
                 "electricity": true,
-                "fire": true
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -432,7 +456,6 @@
           "unidentified": "",
           "value": "<p>Plasma pistols fire a line of ionized plasma out to a relatively short range. The plasma can continue to burn after contact.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -442,7 +465,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 7,
         "modifiers": [],
@@ -538,10 +561,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -549,11 +569,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 173",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -561,7 +586,7 @@
           "value": 4
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -575,11 +600,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/backlash.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -587,12 +608,21 @@
           "condition": "",
           "cost": null
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -601,7 +631,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -611,7 +642,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.6zrV67znbGCh4EjF]{Mindbreaker}</p>\n<p>Whenever a foe succeeds at a Will save against one of your spells and completely negates the effect, that foe takes 1 nonlethal damage for each mystic level you have. This is a mind-affecting pain effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -622,33 +653,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "3rd Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Mindbreaker Connection",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -660,11 +693,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/sow_doubt.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -672,12 +701,21 @@
           "condition": "",
           "cost": 1
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -686,7 +724,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -696,7 +735,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.6zrV67znbGCh4EjF]{Mindbreaker}</p>\n<p>As a standard action, you can spend 1 Resolve Point to create uncertainty in the mind of a foe within 30 feet. You choose whether the target becomes @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-footed}, becomes off-target, takes a –2 penalty to saving throws, or takes a –2 penalty to skill checks. The effect lasts for a number of rounds equal to half your mystic level, unless the target succeeds at a Will save to reduce the duration to just 1 round. A creature can be affected only by one sow doubt effect. If you use this ability on the same creature again, the new effect replaces the old effect. This is a mind-affecting effect.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -707,18 +746,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "6th Level",
         "rollNotes": "",
@@ -727,13 +763,18 @@
           "dc": "18",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Mindbreaker Connection",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -745,11 +786,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -757,12 +794,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -771,7 +817,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -781,7 +828,7 @@
           "unidentified": "",
           "value": "<p>Shirrens are used to working with others as part of a team. Once per day, as long as an ally is within 10 feet, a shirren can roll a single attack roll or skill check twice and take the higher result.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -792,34 +839,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -830,11 +879,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/abadarcorp_travel_suit_silver.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -848,7 +893,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -877,7 +922,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -886,7 +930,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -907,7 +951,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -917,7 +962,6 @@
           "unidentified": "",
           "value": "<p>Executives popularized these light armor business suits for boardrooms and diplomatic meetings. Contingent force fields and concealed rebreathers protect the wearer in hostile environmental conditions. Higher grades of travel suits offer more protection—along with a designer label.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -927,7 +971,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 7,
         "modifiers": [],
         "price": 7250,
@@ -936,25 +981,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 197",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -962,8 +1008,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -974,11 +1020,7 @@
       "type": "weapon",
       "img": "icons/weapons/staves/staff-simple-gold.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -992,7 +1034,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1013,7 +1055,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": null,
@@ -1022,7 +1063,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1044,13 +1085,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d8 + @abilities.str.mod",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1060,7 +1114,6 @@
           "unidentified": "",
           "value": "<p>Staves are long and flexible, weighted on the end to provide extra striking power. Most staves are made from aluminum or fiberglass, though some are still made from wood.</p>\n<p>Sentinel and repeller staves are made of conductive metal and deliver a painful, low-voltage charge that can stun opponents. The hardlight staff uses a core of unstable photonic gel to dramatically increase its mass every time it strikes a surface.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1070,7 +1123,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 7,
         "modifiers": [],
@@ -1166,10 +1219,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -1177,11 +1227,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1189,7 +1244,7 @@
           "value": null
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -1203,11 +1258,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/plasma-pistol-yellow-star.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -1221,7 +1272,7 @@
           "shapable": false,
           "shape": "line",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "attributes": {
@@ -1242,7 +1293,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -1295,6 +1345,8 @@
             {
               "name": "",
               "formula": "1d8",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -1302,12 +1354,15 @@
                 "electricity": true,
                 "fire": true,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1317,7 +1372,6 @@
           "unidentified": "",
           "value": "<p>Plasma pistols fire a line of ionized plasma out to a relatively short range. The plasma can continue to burn after contact.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1327,7 +1381,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 7,
         "modifiers": [],
@@ -1427,10 +1481,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -1438,6 +1489,12 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 173",
         "special": "",
         "specialMaterials": {
@@ -1456,7 +1513,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1464,7 +1520,7 @@
           "value": 4
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -1478,34 +1534,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1514,14 +1555,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
-        "quantity": "2",
+        "quantity": 2,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true
@@ -1533,11 +1573,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mindlink.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1556,7 +1592,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1566,7 +1602,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1576,14 +1613,14 @@
           "unidentified": "",
           "value": "<p>You link your mind to that of a touched creature to swiftly communicate a large amount of complex information in an instant. You decide what the target learns, limited to any amount of information that otherwise could be communicated in 10 minutes. This information comes in a series of visual images and emotional sensations, and it isn’t @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Language-dependent}.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -1597,13 +1634,9 @@
           "mode": "always",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1612,14 +1645,19 @@
           "descriptor": "harmless"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 365",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1631,11 +1669,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/fear.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1654,7 +1688,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1664,7 +1698,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1674,14 +1709,14 @@
           "unidentified": "",
           "value": "<p>With a single mental nudge, you can unlock one or more targets’ deepest nightmares. A target that succeeds at its Will saving throw against this spell is @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken} for 1 round.</p>\n<p><strong>1st</strong>: When you cast fear as a 1st-level spell, it affects one living creature of CR 4 or lower at close range (25 feet + 5 feet/2 levels). The target must succeed at a Will saving throw or be @UUID[Compendium.sfrpg.conditions.Item.DtwiUWi8dpzkq4tM]{Frightened} for 1d4 rounds.</p>\n<p><strong>2nd</strong>: When you cast fear as a 2nd-level spell, it affects one living creature of CR 4 or lower per 3 caster levels at medium range (100 feet + 10 feet/level), no two of which can be more than 30 feet apart. Each target must succeed at a Will saving throw or be @UUID[Compendium.sfrpg.conditions.Item.DtwiUWi8dpzkq4tM]{Frightened} for 1 minute.</p>\n<p><strong>3rd</strong>: When you cast fear as 3rd-level spell, it affects all living creatures of CR 8 or lower in 30-foot cone-shaped burst. Each target must succeed at a Will save or become @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked} for 1 minute. If cornered, a @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked} creature begins @UUID[Compendium.sfrpg.conditions.Item.4WXJOFZ4s7TJUW6D]{Cowering}.</p>\n<p><strong>4th</strong>: When you cast&nbsp;fear&nbsp;as 4th-level spell, it affects all living creatures in 30-foot cone-shaped burst regardless of CR. Each target must succeed at a Will save or become @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked} for 1 minute. If cornered, a @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked} creature begins @UUID[Compendium.sfrpg.conditions.Item.4WXJOFZ4s7TJUW6D]{Cowering}.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "see text"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": true,
         "level": 3,
         "materials": {
@@ -1692,16 +1727,12 @@
         },
         "modifiers": [],
         "preparation": {
-          "mode": null,
+          "mode": "",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -1710,14 +1741,19 @@
           "descriptor": "partial"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 354",
         "sr": true,
         "target": {
-          "type": "",
           "value": "see text"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1729,11 +1765,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mind_thrust.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1751,8 +1783,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1764,11 +1796,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "(@item.level*2+max(sign(@item.level-2), 0)+max(sign(@item.level-3), 0)+max(sign(@item.level-4), 0)*3)d10",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1778,14 +1825,14 @@
           "unidentified": "",
           "value": "<p>You divine the most vulnerable portion of your opponent’s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.</p>\n<p>[level_1_only]</p>\n<ul>\n<li><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n</ul>\n<p>[/level_1_only]</p>\n<p>[level_2_only]</p>\n<ul>\n<li><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n</ul>\n<p>[/level_2_only]</p>\n<p>[level_3_only]</p>\n<ul>\n<li><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n</ul>\n<p>[/level_3_only]</p>\n<p>[level_4_only]</p>\n<ul>\n<li><strong>4th:</strong> When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is fatigued for 1 round if it fails its saving throw.</li>\n</ul>\n<p>[/level_4_only]</p>\n<p>[level_5_only]</p>\n<ul>\n<li><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is @UUID[Compendium.sfrpg.conditions.Item.33ynSbmexuxC3cAQ]{Exhausted} for 1 round if it fails its save and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n</ul>\n<p>[/level_5_only]</p>\n<p>[level_6_only]</p>\n<ul>\n<li><strong>6th:</strong> When you cast&nbsp;mind thrust&nbsp;as a 6th-level spell, it deals 17d10 damage to the target. The target is @UUID[Compendium.sfrpg.conditions.Item.33ynSbmexuxC3cAQ]{Exhausted} and @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n</ul>\n<p>[/level_6_only]</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": true,
         "level": 3,
         "materials": {
@@ -1796,16 +1843,12 @@
         },
         "modifiers": [],
         "preparation": {
-          "mode": null,
+          "mode": "",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -1814,14 +1857,19 @@
           "descriptor": "half"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 365",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1833,11 +1881,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/fog_cloud.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1856,7 +1900,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1866,7 +1910,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1876,14 +1921,14 @@
           "unidentified": "",
           "value": "<p>A bank of fog billows out from the point you designate. The fog obscures all sight, including darkvision, beyond 5 feet. Adjacent creatures are granted concealment against one another (attacks have a 20% miss chance). Otherwise, this fog provides total concealment (50% miss chance, and attackers can’t use sight to locate targets).</p>\n<p>A moderate wind (11+ mph) disperses the fog in 4 rounds; a strong wind (21+ mph) disperses the fog in 1 round.</p>\n<p>This spell doesn’t function underwater or in a vacuum.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value*10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1894,32 +1939,33 @@
         },
         "modifiers": [],
         "preparation": {
-          "mode": null,
+          "mode": "",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 356",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1931,11 +1977,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/hold_person.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1953,8 +1995,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1964,7 +2006,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1974,14 +2017,14 @@
           "unidentified": "",
           "value": "<p>The target becomes @UUID[Compendium.sfrpg.conditions.Item.NV4qXRDgb7zTNkW2]{Paralyzed} and freezes in place. It is aware and breathes normally but can’t take any physical actions, even speech. A held creature can’t cast spells. Each round on its turn, the target can spend a full action to attempt a new saving throw to end the effect. This does not provoke attacks of opportunity. A winged creature that is @UUID[Compendium.sfrpg.conditions.Item.NV4qXRDgb7zTNkW2]{Paralyzed} can’t flap its wings and falls. A swimmer can’t swim and may drown.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1992,16 +2035,13 @@
         },
         "modifiers": [],
         "preparation": {
-          "mode": null,
+          "mode": "",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "ft.10",
-          "per": "level",
           "units": "ft",
-          "value": 100
+          "value": "100"
         },
         "rollNotes": "",
         "save": {
@@ -2010,14 +2050,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 359",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one humanoid creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -2029,11 +2074,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/inflict_pain.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -2052,7 +2093,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2062,7 +2103,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2072,14 +2114,14 @@
           "unidentified": "",
           "value": "<p>You telepathically rack the target’s mind and body with agonizing pain that imposes a –2 penalty to ability checks, attack rolls, and skill checks. A target that succeeds at a Will saving throw reduces the duration to 1 round.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -2090,16 +2132,12 @@
         },
         "modifiers": [],
         "preparation": {
-          "mode": null,
+          "mode": "",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -2108,14 +2146,19 @@
           "descriptor": "partial"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 361",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -2127,11 +2170,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/status.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -2150,7 +2189,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2160,7 +2199,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2170,14 +2210,14 @@
           "unidentified": "",
           "value": "<p>When you need to keep track of comrades who get separated, status allows you to mentally monitor their relative positions and general conditions. You are aware of the direction of and distance to the creatures and any conditions or states affecting them: @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused}, diseased, @UUID[Compendium.sfrpg.conditions.Item.4MxAK5uS0zMNWhUK]{Dying}, @UUID[Compendium.sfrpg.conditions.Item.LoRydw1D4bqlbkA2]{Nauseated}, @UUID[Compendium.sfrpg.conditions.Item.BVdjvpucmvQU4cc1]{Panicked}, poisoned, @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered}, @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned}, @UUID[Compendium.sfrpg.conditions.Item.lf8pbezocjYIvR9y]{Unconscious}, unharmed, wounded, wounded and out of Stamina points, and the like. Once the spell has been cast upon the targets, the distance between them and the caster does not affect the spell as long as they are on the same plane of existence. If a target leaves the plane (including via Drift travel) or dies, the spell ceases to function for that creature.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "hour",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -2188,16 +2228,12 @@
         },
         "modifiers": [],
         "preparation": {
-          "mode": null,
+          "mode": "",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -2206,14 +2242,19 @@
           "descriptor": "harmless"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 379",
         "sr": true,
         "target": {
-          "type": "",
           "value": "up to one living creature touched/3 levels"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -2225,11 +2266,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/charm_person.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -2247,8 +2284,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2258,7 +2295,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2268,14 +2306,14 @@
           "unidentified": "",
           "value": "<p>This charm makes a humanoid creature regard you as its trusted friend and ally (treat the target’s attitude as friendly). If the creature is currently being threatened or attacked by you or your allies, however, it receives a +5 bonus to its saving throw.</p>\n<p>The spell does not enable you to control the charmed creature as if it were an automaton. It is unlikely to attempt to harm you, but it is also unlikely to attack any of its true friends or allies. You can try to give the target suggestions, but you must succeed at an opposed Charisma check to convince it to do anything it wouldn’t ordinarily do. (Retries of this check are not allowed.) An affected creature never obeys suicidal or obviously harmful suggestions. Any act by you or your apparent allies that threatens the charmed creature breaks the spell. You must speak the creature’s language to communicate your suggestions, or else be good at pantomiming.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "hour",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -2289,13 +2327,9 @@
           "mode": "always",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -2304,14 +2338,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 342",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one humanoid creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -2323,11 +2362,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/confusion_lesser.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -2346,7 +2381,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2356,7 +2391,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2364,16 +2400,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This spell causes a single creature to become @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} (as per the @UUID[Compendium.sfrpg.spells.Item.wSeE9HyAmM7lTdpo]{Confusion} spell) for 1 round.</p>\n<table style=\"width: 403px; height: 85px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; background-color: #34495e; text-align: center; width: 44px;\">\n<p style=\"color: white;\">D%</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">1-25</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">26-50</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">51-75</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #7e8c8d;\">\n<p style=\"color: white;\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 44px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">76-100</p>\n</td>\n<td style=\"height: 17px; width: 352px; text-align: center; background-color: #34495e;\">\n<p style=\"color: white;\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>\n<h2>@UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused}</h2>\n<p>This spell causes confusion in all creatures in the area, making them unable to determine their actions. Any @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature that is attacked automatically attacks or attempts to attack its attackers on its next turn, as long as it is still @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} at the start of its next turn. Note that a @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature will not make attacks of opportunity against any foe that it is not already devoted to attacking (either because of its most recent action or because it has just been attacked). For @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creatures that have not been attacked, roll on the following table at the start of each affected creature’s turn each round to see what it does in that round.</p>"
+          "value": "<p>This spell causes a single creature to become @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} (as per the @UUID[Compendium.sfrpg.spells.Item.wSeE9HyAmM7lTdpo]{Confusion} spell) for 1 round.</p>\n<table style=\"width:403px;height:85px\" border=\"1\">\n<tbody>\n<tr style=\"height:17px\">\n<td style=\"height:17px;background-color:#34495e;text-align:center;width:44px\">\n<p style=\"color:white\">D%</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\"><strong>Behavior</strong></p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">1-25</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Act normally</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">26-50</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Do nothing but babble incoherently</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">51-75</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#7e8c8d\">\n<p style=\"color:white\">Deal 1d8 + Str modifier damage to self with item in hand</p>\n</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:44px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">76-100</p>\n</td>\n<td style=\"height:17px;width:352px;text-align:center;background-color:#34495e\">\n<p style=\"color:white\">Attack nearest creature</p>\n</td>\n</tr>\n</tbody>\n</table>\n<h2>@UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused}</h2>\n<p>This spell causes confusion in all creatures in the area, making them unable to determine their actions. Any @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature that is attacked automatically attacks or attempts to attack its attackers on its next turn, as long as it is still @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} at the start of its next turn. Note that a @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creature will not make attacks of opportunity against any foe that it is not already devoted to attacking (either because of its most recent action or because it has just been attacked). For @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{Confused} creatures that have not been attacked, roll on the following table at the start of each affected creature’s turn each round to see what it does in that round.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "1"
         },
         "formula": "1d100",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -2387,13 +2423,10 @@
           "mode": "always",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "5 ft.",
-          "per": "2 levels",
           "units": "close",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -2402,14 +2435,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 344",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -2421,7 +2459,6 @@
       "type": "container",
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -2440,7 +2477,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [
@@ -2461,7 +2497,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -2485,7 +2521,7 @@
               "affectsEncumbrance": true,
               "amount": 1000,
               "subtype": "",
-              "weightProperty": "bulk"
+              "weightProperty": ""
             }
           ]
         },
@@ -2498,13 +2534,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -2514,11 +2552,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/mindbreaker.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2526,12 +2560,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2540,7 +2583,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2550,7 +2594,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.SdlB9viiKckPr0LZ]{Connection}</p>\n<p>You use your raw will and understanding of the mind’s structure to crush and demoralize your enemies. You might be a special ops assassin, a psychic interrogator, or a righteous military crusader breaking the enemy’s spirit on the battlefield.</p>\n<p><strong>Associated Deities</strong>: @UUID[Compendium.sfrpg.setting.Item.cO4BD8W8nUCLjvSE]{Besmara}, @UUID[Compendium.sfrpg.setting.Item.pq08s1mZZyi97PBA]{Damoritosh}, @UUID[Compendium.sfrpg.setting.Item.npmy97Y5pefRTHx1]{Iomedae}, @UUID[Compendium.sfrpg.setting.Item.JpQpQbdXNOX6aTVG]{The Devourer}, @UUID[Compendium.sfrpg.setting.Item.anZKSsgV81lZ49ew]{Urgathoa}, @UUID[Compendium.sfrpg.setting.Item.NCjMqGMqprKIe33d]{Zon-Kuthon}</p>\n<p><strong>Associated Skills</strong>: Bluff and Intimidate</p>\n<p><strong>Spells</strong>: 1st-6th @UUID[Compendium.sfrpg.spells.Item.7XJ6x5BZv1k1eBBz]{Mind Thrust}; replaced by 1st - @UUID[Compendium.sfrpg.spells.Item.infpQZm0h1FzN7YX]{Confusion, Lesser}, 2nd - @UUID[Compendium.sfrpg.spells.Item.2AYPwSy7I0Ar8yAH]{Inflict Pain}, 3rd - @UUID[Compendium.sfrpg.spells.Item.rHscFpMmXkZOOkgV]{Synaptic Pulse}, 4th - @UUID[Compendium.sfrpg.spells.Item.wSeE9HyAmM7lTdpo]{Confusion}, 5th - @UUID[Compendium.sfrpg.spells.Item.wKYmjm8OFwa5L0vX]{Feeblemind}</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.nrxvApxevr02w8xN]{Share Pain (Su) - 1st Level}</h2>\n<p>Whenever a foe deals damage to you, you can spend 1 Resolve Point as a reaction to shift some of the pain back onto that foe. Unless the foe succeeds at a Will save, reduce the damage you take from the attack by your mystic level (to a maximum of the attack’s damage), and the foe takes an equal amount of damage. This is a mind-affecting pain effect.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.fJaOQRjC3akqSGuS]{Backlash (Su) - 3rd Level}</h2>\n<p>Whenever a foe succeeds at a Will save against one of your spells and completely negates the effect, that foe takes 1 nonlethal damage for each mystic level you have. This is a mind-affecting pain effect.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.SPVCK9LRLC0L38if]{Sow Doubt (Su) - 6th Level}</h2>\n<p>As a standard action, you can spend 1 Resolve Point to create uncertainty in the mind of a foe within 30 feet. You choose whether the target becomes @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed}, becomes off-target, takes a –2 penalty to saving throws, or takes a –2 penalty to skill checks. The effect lasts for a number of rounds equal to half your mystic level, unless the target succeeds at a Will save to reduce the duration to just 1 round. A creature can be affected only by one sow doubt effect. If you use this ability on the same creature again, the new effect replaces the old effect. This is a mind-affecting effect.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.tpjIM8Rd3RgCcrcF]{Mental Anguish (Su) - 9th Level}</h2>\n<p>As a standard action, you can tweak the pain centers in the brain of a foe within 60 feet, causing it to suffer intense agony. The target must succeed at a Will save or be nauseated for 1 round. Regardless of the save, the creature becomes immune to this ability for 24 hours. This is a mindaffecting pain effect.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.arLGYNQaTfu5qyuu]{Mindbreaking Link (Su) - 12th Level}</h2>\n<p>Whenever you or an ally linked by your telepathic bond class feature scores a critical hit against a foe, you can spend 1 Resolve Point as a reaction to confuse that foe. The foe must succeed at a Will save or become confused for 1 round. Whether or not it succeeds at this save, the target is affected by your sow doubt ability for 1 round. This is a mind-affecting effect.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.RUiWaTxe7SsUJYXo]{Mindkiller (Su) - 15th Level}</h2>\n<p>As a standard action, you can mold the subconscious fear of a foe within 60 feet into a psychic image of the most disturbing creature imaginable to the target. Only the target can see the mindkiller, and if the target succeeds at a Will save to recognize the image as unreal, the mindkiller has no effect. If the target fails this Will save, the mindkiller touches the target, which must then succeed at a Fortitude save or die from fear. On a successful Fortitude save, the target instead takes 3d6 damage. Once a creature succeeds at either save against this ability, it becomes immune to this ability for 24 hours. This is a mind-affecting fear effect.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.lyg8K6wUyB7x73AR]{Explode Head (Su) - 18th Level}</h2>\n<p>You can spend 1 Resolve Point as a standard action to psychically assault the brain of a foe within 60 feet, causing incredible pressure to build in its head. If the target has 20 Hit Points or fewer, its head explodes, instantly killing the target and spreading debris in a 10-foot radius. Each creature in the area must succeed at a Reflex saving throw or take 2d6 slashing damage from the flying debris. A target with more than 20 Hit Points takes 1d6 damage per mystic level you have (maximum 20d6), but can attempt a Fortitude save to take only half damage. If this damage would reduce the target to 0 HP, the target’s head explodes as described above. This ability works only on a creature that has a head and would die from the loss of a head.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -2561,34 +2605,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Connection",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
