@@ -358,7 +358,7 @@ export default function(engine) {
         name: "process-items",
         description: "Take all of the item data and process it.",
         rules: [
-            "calculateSaveDC",
+            { closure: "calculateSaveDC", stackModifiers: "stackModifiers" },
             "calculateSkillDC",
             "calculateActivationDetails",
             {
