@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
       "cost": null
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +94,17 @@
       "value": "Until the beginning of your next turn."
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "097ece81-b31d-4506-8876-17f9a650d61e",
         "name": "Team Triage - Treat Deadly Wounds or Disease",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "- @skills.med.mod + @skills.com.mod",
         "modifierType": "formula",
@@ -108,25 +116,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "8th Level (Mechanic)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 48",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

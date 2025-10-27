@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/weapons/staves/staff-ornate-red.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 0,
@@ -76,6 +71,8 @@
         {
           "name": "",
           "formula": "13d8",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -83,12 +80,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -98,7 +98,6 @@
       "unidentified": "",
       "value": "<p>This unique two-handed basic melee weapon is an ornate, bejeweled magic battle staff of exceptional make. The staff deals 13d8 points of bludgeoning damage, and it has the analog, block, and reach special weapon properties, as well as the bind critical hit effect. The staff also functions as a @UUID[Compendium.sfrpg.equipment.Item.fAiROO9yi0vJLVNg]{pulsar captive-star amulet} (Starfinder Armory 120) but with two free uses per day. Fire, gravity, solar forces, and similar environmental conditions cannot damage this weapon.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -108,7 +107,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 20,
     "modifiers": [],
@@ -210,10 +209,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
@@ -221,6 +217,12 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #18 pg. 45",
     "special": "",
     "specialMaterials": {
@@ -240,7 +242,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -248,8 +249,8 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     },
     "weaponCategory": "uncategorized",

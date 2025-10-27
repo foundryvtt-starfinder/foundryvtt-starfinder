@@ -1772,108 +1772,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 5,
-        "value": 10
+        "base": 5
       },
       "con": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "dex": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       },
       "int": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 10
+        "base": 1
       },
       "str": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "wis": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 10
+        "base": 2
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 17,
-        "min": 0,
-        "tooltip": [],
-        "value": 17
+        "base": 17
       },
       "fort": {
-        "base": 7,
-        "bonus": 7,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 7
       },
       "hp": {
         "max": 75,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 75
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 3,
         "value": 3
       },
       "kac": {
-        "base": 18,
-        "min": 0,
-        "tooltip": [],
-        "value": 18
+        "base": 18
       },
-      "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 7,
-        "bonus": 7,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 7
       },
       "space": "",
       "speed": {
@@ -1894,16 +1838,10 @@
         "special": "original base: 30 ft; original special: particle Step",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 9,
-        "bonus": 9,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 9
       }
     },
     "conditions": {
@@ -1928,6 +1866,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1943,9 +1882,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1953,9 +1889,8 @@
     "details": {
       "type": "Fey",
       "alignment": "CN",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1967,7 +1902,7 @@
         "value": "<p>A glaiad belongs to the nymph family: fey with deep intrinsic bonds to a particular feature of nature. Ancient legends told only of dryads, naiads, and similar creatures tied to terrestrial features—but in those days, few knew of the nymphs who forged their bonds not with a single tree or river, but with the glorious ring systems surrounding a distant planet or moon. Like most nymphs, glaiads fiercely protect their bonded ring systems, defending them at all costs. This position has drawn some glaiads into diplomatic contact with other peoples while working to preserve their homes; however, others have become embittered and violent, feeling that’s their only recourse against unbridled disruption of their bonded planets.Although it might seem difficult—if not impossible—for a single creature to look after something that stretches for thousands of miles, a glaiad’s bond with their ring grants them the ability to teleport from one particle in it to another in a matter of seconds, allowing them a wide range of movement.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 6,
       "environment": "Space (planetary rings)",
       "organization": "solitary",
@@ -1975,20 +1910,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AP #35 pg. 58",
-      "xp": {
-        "value": 10
-      }
+      "subtype": ""
     },
     "modifiers": [
       {
+        "_id": "5058a070-11ce-4111-a7f4-cc115c12567a",
         "name": "Damage Reduction",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "5",
         "modifierType": "constant",
@@ -1998,21 +1933,15 @@
         "valueAffected": "cold iron"
       }
     ],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -2020,10 +1949,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -2031,10 +1959,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -2042,10 +1969,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -2053,10 +1979,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -2064,10 +1989,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 13,
         "ranks": 13,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -2075,10 +1999,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -2086,10 +2009,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -2097,10 +2019,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -2108,10 +2029,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 18,
         "ranks": 18,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -2119,10 +2039,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -2130,10 +2049,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -2141,10 +2059,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 13,
         "ranks": 13,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -2152,10 +2069,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -2163,10 +2079,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -2174,9 +2089,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -2186,10 +2099,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -2197,10 +2109,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -2208,10 +2119,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -2219,47 +2129,40 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 13,
         "ranks": 13,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
-        "max": "3",
-        "perClass": {},
-        "value": "3"
+        "max": 3,
+        "value": 3
       },
       "spell2": {
-        "max": "1",
-        "perClass": {},
-        "value": "1"
+        "max": 1,
+        "value": 1
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -2268,19 +2171,11 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "cold iron",
-        "value": 5
-      },
       "di": {
         "custom": "",
         "value": [
           "cold"
         ]
-      },
-      "dr": {
-        "custom": "",
-        "value": []
       },
       "dv": {
         "custom": "",
@@ -2294,9 +2189,6 @@
       },
       "senses": "low-light vision",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

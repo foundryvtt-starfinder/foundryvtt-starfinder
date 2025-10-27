@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/bodyguard.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "reaction",
       "condition": "",
       "cost": null
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,29 +94,32 @@
       "value": "Ally: against next attack. Self: until the beginning of your next turn."
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "CRB pg. 155",
     "target": {
-      "type": "",
       "value": "1 adjacent ally"
     },
     "uses": {

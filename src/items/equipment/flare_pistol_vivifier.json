@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 6,
@@ -76,6 +71,8 @@
         {
           "name": "",
           "formula": "2d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -83,12 +80,15 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -98,7 +98,6 @@
       "unidentified": "",
       "value": "<p>A more compact version of the flare rifle series, these pistols are especially useful for forays into the Shadow Plane.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -108,7 +107,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 9,
     "modifiers": [],
@@ -210,10 +209,8 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 50
+      "value": "50"
     },
     "rollNotes": "",
     "save": {
@@ -221,6 +218,12 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "DC pg. 50",
     "special": "",
     "specialMaterials": {
@@ -240,7 +243,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -248,7 +250,7 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     },

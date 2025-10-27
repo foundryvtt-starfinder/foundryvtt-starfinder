@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "icons/magic/air/fog-gas-smoke-swirling-white.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "util",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": true,
       "shape": "cube",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -41,6 +37,8 @@
         {
           "name": "Within 5 feet",
           "formula": "2d4",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -48,7 +46,9 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -56,6 +56,8 @@
         {
           "name": "Between 5-10 feet",
           "formula": "1d4",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -63,12 +65,15 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -78,14 +83,14 @@
       "unidentified": "",
       "value": "<p>This spell functions as @UUID[Compendium.sfrpg.spells.Item.RXSW72w5lzUFpaCq]{Wall of Fog}, except you can select one side of the wall to give off searing steam. Creatures within 5 feet of this side of the wall take 2d4 fire damage, and those beyond 5 feet but within 10 feet take 1d4 fire damage. The wall deals this damage when it appears and on your turn each subsequent round. In addition, the wall deals 3d4 fire damage to any creature passing through it. If you conjure the wall&nbsp;so that it appears where creatures are, each creature takes damage as if passing through the wall.</p>\n<p>The steam can be dispersed as awall of fogcan. Also, if any 5-foot length of wall takes 10 or more cold damage in 1 round, that length crystallizes and melts away, disappearing.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": "1 minute/level; see text"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 2,
     "materials": {
@@ -101,10 +106,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "close",
-      "value": null
+      "units": "close"
     },
     "rollNotes": "",
     "save": {
@@ -113,14 +115,19 @@
       "descriptor": "negate"
     },
     "school": "con",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GM pg. 86",
     "sr": false,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

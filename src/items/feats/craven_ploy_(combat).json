@@ -4,8 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/craven_ploy.webp",
   "system": {
-    "type": "",
-    "ability": null,
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -13,12 +12,21 @@
       "condition": "Attacked while adjacent to an ally.",
       "cost": 1
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -27,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,45 +46,47 @@
       "unidentified": "",
       "value": "<p>When the going gets tough, you hide behind allies.</p>\n<p><strong>Prerequisites</strong>: Cha 13.</p>\n<hr />\n<p><strong>Benefit</strong>: As a reaction when you are attacked while adjacent to an ally, if that ally is willing to take a –2 penalty to her Armor Class until the beginning of her next turn, you gain a +2 circumstance bonus to your AC against that attack.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "feat",
       "combat": true,
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": "Ally: until beginning of her next turn. Self: that attack."
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "The Diaspora Strain",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

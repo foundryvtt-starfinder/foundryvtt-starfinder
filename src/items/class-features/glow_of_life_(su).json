@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/classes/glow_of_life.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "other",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "",
       "cost": 1
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,6 +39,8 @@
         {
           "name": "",
           "formula": "(lookupRange(@resources.solarian.stellarMode.value, (@classes.solarian.levels * 2), 1, (@classes.solarian.levels * 3)))",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -41,12 +48,15 @@
             "electricity": false,
             "fire": false,
             "healing": true,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -56,7 +66,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:photon] Photon Revelation</p>\n<p>As a move action, you can spend 1 Resolve Point to recover a number of Hit Points equal to twice your solarian level. Once you use this revelation, you can’t use it again until the next time you regain Stamina Points after a 10-minute rest.</p>\n<p>When you are attuned or fully attuned, increase the amount you heal with this revelation to three times your solarian level.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -67,18 +77,15 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "6th Level",
     "rollNotes": "",
@@ -87,13 +94,18 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Solarian",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

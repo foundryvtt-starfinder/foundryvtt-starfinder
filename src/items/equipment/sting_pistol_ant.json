@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 20,
@@ -97,6 +92,8 @@
         {
           "name": "",
           "formula": "1d8",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": true,
             "bludgeoning": false,
@@ -104,12 +101,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -119,7 +119,6 @@
       "unidentified": "",
       "value": "<p>Sting pistols are living weapons based on samples of Swarm technology recovered during the last century. The chitinous weapon converts power to internally generate and shoot acidslicked needles that can cause lasting damage to the target. Ant models are sturdy and commonplace, though yellow jacket and wasp sting pistols are more powerful. Hornet models are the heaviest and most potent of these weapons.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -129,7 +128,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 4,
     "modifiers": [],
@@ -231,10 +230,8 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "rollNotes": "",
     "save": {
@@ -242,6 +239,12 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AR pg. 16",
     "special": "",
     "specialMaterials": {
@@ -261,7 +264,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -269,7 +271,7 @@
       "value": 5
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

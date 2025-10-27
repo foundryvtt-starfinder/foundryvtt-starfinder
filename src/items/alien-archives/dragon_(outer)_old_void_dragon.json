@@ -2109,108 +2109,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       },
       "con": {
-        "base": 8,
-        "min": 3,
-        "misc": 0,
-        "mod": 8,
-        "value": 10
+        "base": 8
       },
       "dex": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       },
       "int": {
-        "base": 6,
-        "min": 3,
-        "misc": 0,
-        "mod": 6,
-        "value": 10
+        "base": 6
       },
       "str": {
-        "base": 11,
-        "min": 3,
-        "misc": 0,
-        "mod": 11,
-        "value": 10
+        "base": 11
       },
       "wis": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 32,
-        "min": 0,
-        "tooltip": [],
-        "value": 32
+        "base": 32
       },
       "fort": {
-        "base": 18,
-        "bonus": 18,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 18
       },
       "hp": {
         "max": 350,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 350
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 7,
         "value": 7
       },
       "kac": {
-        "base": 33,
-        "min": 0,
-        "tooltip": [],
-        "value": 33
+        "base": 33
       },
-      "keyability": "",
       "reach": "15 ft. (20 ft. with bite)",
       "reflex": {
-        "base": 18,
-        "bonus": 18,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 18
       },
       "space": "20 ft.",
       "speed": {
@@ -2222,7 +2166,7 @@
         },
         "flying": {
           "base": 250,
-          "baseManeuverability": -1
+          "baseManeuverability": 0
         },
         "land": {
           "base": 40
@@ -2231,16 +2175,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 22,
-        "bonus": 22,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 22
       }
     },
     "conditions": {
@@ -2265,6 +2203,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -2280,9 +2219,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -2290,9 +2226,8 @@
     "details": {
       "type": "Dragon",
       "alignment": "NE",
-      "aura": "Alien Presence (240 ft., sickened 2d4 rounds, DC 25)",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -2304,7 +2239,7 @@
         "value": "<h2>Dragon (Outer)</h2>\n<p>Rarer than chromatic and metallic dragons, outer dragons are born and live in the vast depths of space, generally serving either their own inscrutable interests or those of some unknowable galactic force. As such, their actions can be especially frightening to the everyday citizens of the Pact Worlds and beyond. Even the methods by which outer dragons are born are shrouded in mystery. Some believe that outer dragons burst forth fully formed from the galaxy’s stars, with the void’s magic and energy coalescing into one mighty creature in an instantaneous moment of creation. Others think that outer dragons are manifestations of the universe’s will and come into being slowly, over the course of centuries, like a mote of matter might eventually become a star.</p>\n<p>Outer dragons have forms similar to those of other true dragons, though their bodies are covered with more spiky protrusions, and their coloration patterns fluctuate as they move. Outer dragons have wings that allow them to move through vacuums and areas of no gravity with ease, thanks to some supernatural process that has yet to be fully understood.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 18,
       "environment": "any vacuum",
       "organization": "solitary",
@@ -2312,21 +2247,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 42",
-      "subtype": "",
-      "xp": {
-        "value": 10
-      }
+      "subtype": ""
     },
     "modifiers": [
       {
+        "_id": "5a0816ca-fced-4aab-b104-1ea497872bdf",
         "name": "Damage Reduction",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "15",
         "modifierType": "constant",
@@ -2336,21 +2270,15 @@
         "valueAffected": "magic"
       }
     ],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 31,
         "ranks": 31,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -2358,10 +2286,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -2369,10 +2296,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 31,
         "ranks": 31,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -2380,10 +2306,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 31,
         "ranks": 31,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -2391,10 +2316,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 36,
         "ranks": 36,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -2402,10 +2326,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 36,
         "ranks": 36,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -2413,10 +2336,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -2424,10 +2346,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -2435,10 +2356,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -2446,10 +2366,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -2457,10 +2376,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -2468,10 +2386,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 36,
         "ranks": 36,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -2479,10 +2396,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 31,
         "ranks": 31,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -2490,10 +2406,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -2501,10 +2416,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 31,
         "ranks": 31,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -2512,9 +2426,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -2524,10 +2436,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 31,
         "ranks": 31,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -2535,10 +2446,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -2546,10 +2456,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -2557,47 +2466,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -2608,19 +2510,11 @@
           "asleep"
         ]
       },
-      "damageReduction": {
-        "negatedBy": "magic",
-        "value": 15
-      },
       "di": {
         "custom": "Confusion; Insanity; Paralysis",
         "value": [
           "cold"
         ]
-      },
-      "dr": {
-        "custom": "",
-        "value": []
       },
       "dv": {
         "custom": "",
@@ -2641,9 +2535,6 @@
       },
       "senses": "blindsense (vibration) 60 ft., darkvision 120 ft., low-light vision, see in darkness",
       "size": "gargantuan",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 29
     }
   }

@@ -4,8 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/enhanced_communalism.webp",
   "system": {
-    "type": "",
-    "ability": null,
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -13,12 +12,21 @@
       "condition": "Ally within 10 feet of you attempts an attack roll or a skill check.",
       "cost": 1
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -27,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,7 +46,7 @@
       "unidentified": "",
       "value": "<p>You’re able to benefit from your allies’ presence more often.</p>\n<p><strong>Prerequisites</strong>: Character level 5th, communalism species trait.</p>\n<hr />\n<p><strong>Benefit</strong>: You can use the communalism species trait multiple times per day. Each time you use it after the first, you must spend 1 Resolve Point to do so. Additionally, you can use communalism as a reaction when an ally within 10 feet of you attempts an attack roll or a skill check, allowing the ally to roll the triggering attack roll or skill check twice and use the higher result.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "feat",
       "combat": false,
@@ -48,34 +57,37 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Character Operations Manual",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

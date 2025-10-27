@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/pulsecaster-rifle.webp",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "2",
     "capacity": {
       "max": 36,
@@ -98,6 +93,7 @@
           "name": "",
           "formula": "6d8",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -105,12 +101,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -120,7 +119,6 @@
       "unidentified": "",
       "value": "<p>The magnetar rifle uses magnetic fields to accelerate metallic rounds to high speeds. With few moving parts that can break down, it’s a workhorse automatic rifle popular among planetary explorers.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -130,7 +128,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 16,
     "modifiers": [],
@@ -235,8 +233,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "120"
     },
@@ -248,8 +244,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "CRB pg. 176",
     "special": "",
     "specialMaterials": {
@@ -269,7 +267,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

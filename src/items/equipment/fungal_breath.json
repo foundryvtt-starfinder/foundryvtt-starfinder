@@ -6,9 +6,6 @@
   "system": {
     "type": "biotech",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "util",
     "activation": {
@@ -21,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -42,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -56,7 +52,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -66,28 +63,26 @@
       "unidentified": "",
       "value": "<p>Autopsies on dycepskian hosts have revealed victims whose lungs have been genetically altered. These biotech lungs are large, delicate white sacs with trailing wisps of mycelia. Once implanted, they produce modified dycepskian spores and stimulate growth of a mycelial network that snakes up the throat to expel the spores with great force. Once per day as a standard action, you can use your fungal breath on a creature within 15 feet. Unless it is immune to @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{disease}, the target is @UUID[Compendium.sfrpg.conditions.Item.ZacF0l6IwqBwToTJ]{sickened} for 1 day and, if it fails a Fortitude save, is @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{stunned} for 1 round. Creatures sickened by this effect who spend Resolve to regain Stamina Points can attempt the saving throw again, ending the condition on a success.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 8,
     "modifiers": [],
     "price": 9000,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 15
+      "value": "15"
     },
     "rollNotes": "",
     "save": {
@@ -95,14 +90,19 @@
       "dc": "10 + floor(@details.level.value / 2) + @abilities.con.mod",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #28 pg. 52",
     "system": "lungsAndThroat",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "day",
       "value": 1
     }

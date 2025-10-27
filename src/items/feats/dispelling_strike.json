@@ -4,7 +4,6 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/dispelling_strike.webp",
   "system": {
-    "type": "",
     "ability": "str",
     "actionTarget": "",
     "actionType": "",
@@ -13,12 +12,21 @@
       "condition": "Wielding a magic weapon.",
       "cost": 1
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -27,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,7 +46,7 @@
       "unidentified": "",
       "value": "<p>You can stab, slice, or smash the magic right off of something— or someone.</p>\n<p><strong>Prerequisites</strong>: Base attack bonus +10, Mysticism 10 ranks.</p>\n<hr />\n<p><strong>Benefit</strong>: When you are wielding a magic weapon (normally a weapon with a weapon fusion, but anything that bypasses DR/magic qualifies), as a standard action you can spend 1 Resolve Point to cast dispel magic for the targeted dispel function. You can use this only against an adjacent target. Once you have used this ability, you cannot do so again until you regain Stamina Points after a 10-minute rest.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "feat",
       "combat": false,
@@ -48,33 +57,35 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Character Operations Manual",
     "target": {
-      "type": "",
       "value": "1 adjacent target"
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "sr",
       "value": 1
     }

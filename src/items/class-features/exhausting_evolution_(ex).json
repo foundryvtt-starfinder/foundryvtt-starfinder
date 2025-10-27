@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
       "condition": "Immediately after you damage an enemy with your Adaptive Strike (Ex), you can spend 2 or more MP",
       "cost": 1
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -89,18 +94,15 @@
       "value": "Number of rounds equal to the MP you spent - 1"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "10th Level (Evolutionist)",
     "rollNotes": "",
@@ -111,11 +113,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 44",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

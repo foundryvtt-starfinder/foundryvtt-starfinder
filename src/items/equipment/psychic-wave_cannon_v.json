@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/psychic-wave-cannon-5.webp",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "2",
     "capacity": {
       "max": 20,
@@ -86,6 +81,8 @@
         {
           "name": "",
           "formula": "7d12",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -93,12 +90,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -108,7 +108,6 @@
       "unidentified": "",
       "value": "<p>Unlike weapons that rely on physical projectiles or various energy forms to damage a target, a psychic-wave cannon targets a creature’s mind. The cannon contains an organic neural matrix that converts charges into a mental blast, damaging creatures with overwhelming psychic output. The numeral of a psychicwave cannon’s model indicates the strength of its output, but the weapon can’t harm objects and mindless creatures, as well as those immune to mind-affecting effects.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -118,7 +117,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 20,
     "modifiers": [],
@@ -220,10 +219,8 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 60
+      "value": "60"
     },
     "rollNotes": "",
     "save": {
@@ -231,6 +228,12 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Armory",
     "special": "",
     "specialMaterials": {
@@ -250,7 +253,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -258,7 +260,7 @@
       "value": 4
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     },

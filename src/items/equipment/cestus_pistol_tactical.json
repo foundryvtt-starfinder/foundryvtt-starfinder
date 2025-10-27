@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "",
     "capacity": {
       "max": 1,
@@ -81,8 +76,10 @@
       "effect": "",
       "parts": [
         {
+          "name": "",
           "formula": "",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -90,7 +87,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -102,6 +101,8 @@
         {
           "name": "",
           "formula": "1d4",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -109,12 +110,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -124,7 +128,6 @@
       "unidentified": "",
       "value": ""
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -134,7 +137,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 1,
     "modifiers": [],
@@ -236,10 +239,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "ft",
-      "value": null
+      "units": "ft"
     },
     "rollNotes": "",
     "save": {
@@ -247,6 +247,12 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "COM",
     "special": "",
     "specialMaterials": {
@@ -266,7 +272,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -274,7 +279,7 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 1
     },

@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 40,
@@ -92,8 +87,10 @@
       "effect": "Burn",
       "parts": [
         {
+          "name": "",
           "formula": "3d4",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -101,7 +98,9 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -114,6 +113,7 @@
           "name": "",
           "formula": "7d4",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -121,12 +121,15 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -136,7 +139,6 @@
       "unidentified": "",
       "value": "<p>This elongated laser rifle contains additional lenses that further focus its output, creating a powerful beam that can punch through many substances at ranges far greater than those of a typical laser rifle. Dual, triple, and quad focus rifles use increasing numbers of focusing lenses, intensifying the laser but compounding the price. A compound focus rifle’s lenses are specially made of a rare form of glass, creating the most powerful output currently possible for such weapons.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -146,7 +148,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 13,
     "modifiers": [],
@@ -251,8 +253,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "120"
     },
@@ -264,8 +264,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 40",
     "special": "",
     "specialMaterials": {
@@ -285,7 +287,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/classes/not_in_the_face.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "move",
       "condition": "",
       "cost": 1
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -89,18 +94,16 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "60"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level (Envoy)",
     "rollNotes": "",
@@ -111,11 +114,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "CRB pg. 62",
     "target": {
-      "type": "",
       "value": "One Enemy"
     },
     "uses": {

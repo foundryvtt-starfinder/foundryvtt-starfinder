@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/weapons/thrown/bomb-fuse-brown.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 1,
@@ -85,7 +80,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -101,7 +98,6 @@
       "unidentified": "",
       "value": "<p>The sticky, caustic substance that sputters from this device burns skin and armor alike. On a failed Reflex saving throw, for [[/r 1d4]] rounds, any creature with the @UUID[Compendium.sfrpg.universal-creature-rules.Item.aLJuzmdGypXmboQG]{swarm defenses} universal creature rule takes half damage from single target attacks or effects that it would normally be immune to. On a failed Reflex saving throw, for 1d4 rounds, any creature with the @UUID[Compendium.sfrpg.universal-creature-rules.Item.RGhtMUrPmlP8IF9v]{troop defenses} ability receives full damage from single target attacks, and can be targeted by effects that target a specific number of creatures.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -111,7 +107,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 1,
     "modifiers": [],
@@ -216,8 +212,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "20"
     },
@@ -229,8 +223,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 164",
     "special": "",
     "specialMaterials": {
@@ -250,7 +246,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

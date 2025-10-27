@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/classes/channel_skill.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "",
       "cost": 0
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,7 +46,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.bItuvukGHbObTApr]{Mystic}</p>\n<p>You draw strange feelings, instincts, knowledge, and urges from your connection, augmenting your prowess in certain tasks. Each connection has two skills associated with it. You gain a +1 insight bonus to skill checks with your connection’s associated skills. This bonus increases by 1 at 5th level and every 3 levels thereafter.</p>\n<p><em>Within the Modifiers tab, change the two modifier's Specific Effect Value to the two associated skills</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -51,15 +57,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "3d95111e-3c97-4999-b894-b83b7346f45b",
         "name": "Channel Skill (Su)",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "lookupRange(@classes.mystic.levels, 0, 2, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
         "modifierType": "constant",
@@ -73,8 +81,10 @@
         "name": "Channel Skill (Su)",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "lookupRange(@classes.mystic.levels, 0, 2, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)",
         "modifierType": "constant",
@@ -86,30 +96,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "2nd Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Mystic",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

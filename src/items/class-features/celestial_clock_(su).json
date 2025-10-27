@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
       "cost": null
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "db8256cf-e721-4244-add4-bfc03486fdea",
         "name": "Celestial Clock",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": false,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "constant",
@@ -108,14 +116,12 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "2nd Level Solarian",
     "rollNotes": "",
@@ -126,11 +132,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AP #41 pg. 52",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

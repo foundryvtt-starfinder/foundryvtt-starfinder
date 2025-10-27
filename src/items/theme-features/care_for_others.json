@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/divine_blessing.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "heal",
     "activation": {
       "type": "action",
       "condition": "",
       "cost": 0
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -43,7 +48,9 @@
             "electricity": false,
             "fire": false,
             "healing": true,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -107,18 +114,15 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "12th Level (Crisis Refugee)",
     "rollNotes": "",
@@ -129,11 +133,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "DC pg. 38",
     "target": {
-      "type": "",
       "value": "one living creature"
     },
     "uses": {

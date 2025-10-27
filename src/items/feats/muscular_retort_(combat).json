@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "none",
       "condition": "",
       "cost": 0
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "d4ab5d80-3ad2-4139-89ca-e560b89dc2aa",
         "name": "Muscular Retort (Combat)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": false,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "constant",
@@ -108,25 +116,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Str 15.",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "PoC pg. 43",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

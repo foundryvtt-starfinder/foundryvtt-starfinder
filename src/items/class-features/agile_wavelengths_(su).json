@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/images/cup/gameplay/graviton.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "",
       "cost": null
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "ef003263-fd3a-46e2-a1b3-1c19c997b6f4",
         "name": "Agile Wavelengths (Su)",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "ranged-attacks",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "(ternary(lt(@resources.solarian.stellarMode.value, 0), 2, 0))",
         "modifierType": "formula",
@@ -108,29 +116,31 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": null,
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "2nd Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Solarian",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

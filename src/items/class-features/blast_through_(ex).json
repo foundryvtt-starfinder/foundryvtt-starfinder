@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "icons/skills/melee/shield-damaged-broken-orange.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "",
       "cost": 0
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,7 +46,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.Dysu4F8licjEb2FY]{Vanguard Discipline}</p>\n<p>When you take a full action to line up a shot to smash an object, your weapon gains the penetrating weapon special property. If your weapon already has that weapon special property, using this discipline instead adds half your vanguard level to your weapon’s item level for the purpose of calculating the amount of hardness that the penetrating special weapon property bypasses. When destroying an object with sudden force (Core Rulebook 409), you gain a bonus to the Strength check equal to your Constitution bonus. You must have @UUID[Compendium.sfrpg.feats.Item.0Pq35gvSI2JlD682]{Improved Combat Maneuver (Combat)} (sunder) to select this vanguard discipline.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -51,15 +57,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "15bb9d4a-ac88-45ef-8ad9-5be2774a60d7",
         "name": "Blast Through - Sudden Force",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ability-check",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@abilities.con.mod",
         "modifierType": "formula",
@@ -71,30 +79,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "6th Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GEM pg. 30",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

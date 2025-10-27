@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "reaction",
       "condition": "Wielding Shield",
       "cost": 1
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "a5a11e67-ffe7-495e-836b-8bda84893fc1",
         "name": "Unyielding Force (Su) - AC Bonus",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": false,
+        "limitTo": null,
         "max": 4,
         "modifier": "+4",
         "modifierType": "constant",
@@ -110,8 +118,10 @@
         "name": "Unyielding Force (Su) - Saving Throw Bonus",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": false,
+        "limitTo": null,
         "max": 4,
         "modifier": "+4",
         "modifierType": "constant",
@@ -123,25 +133,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "6th Level (Vanguard)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 84",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

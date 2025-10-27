@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "icons/creatures/mammals/cat-hunched-glowing-red.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "other",
     "activation": {
@@ -26,7 +22,7 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "text",
+      "units": "",
       "value": "spherical emanation"
     },
     "attackBonus": null,
@@ -42,6 +38,7 @@
           "name": "",
           "formula": "4d6",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -49,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -108,7 +108,7 @@
       "value": "1 minute or until expended (D)"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 3,
     "materials": {
@@ -124,8 +124,6 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "30"
     },
@@ -138,12 +136,13 @@
     "school": "con",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "PoC pg. 123",
     "sr": true,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

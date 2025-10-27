@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "skill",
     "activation": {
       "type": "reaction",
       "condition": "When you would activate a trap with a  proximity trigger, you can spend 1 Resolve Point",
       "cost": 1
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -89,18 +94,16 @@
       "value": "1"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "10th Level (Vanguard)",
     "rollNotes": "",
@@ -111,11 +114,12 @@
     },
     "skillCheck": {
       "type": "ste",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 84",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

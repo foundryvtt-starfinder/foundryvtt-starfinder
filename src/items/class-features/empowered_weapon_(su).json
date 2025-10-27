@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/classes/empowered_weapon.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "move",
       "condition": "",
       "cost": 1
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "5c346daa-f0f0-49b1-ae6b-8d6a94c5d6bc",
         "name": "Empowered Weapon (Su) (1st)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "formula",
@@ -110,8 +118,10 @@
         "name": "Empowered Weapon (Su) (2nd)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "formula",
@@ -125,8 +135,10 @@
         "name": "Empowered Weapon (Su) (3rd)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 3,
         "modifier": "3",
         "modifierType": "formula",
@@ -140,8 +152,10 @@
         "name": "Empowered Weapon (Su) (4th)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 4,
         "modifier": "4",
         "modifierType": "formula",
@@ -155,8 +169,10 @@
         "name": "Empowered Weapon (Su) (5th)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "formula",
@@ -170,8 +186,10 @@
         "name": "Empowered Weapon (Su) (6th)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 6,
         "modifier": "6",
         "modifierType": "formula",
@@ -185,8 +203,10 @@
         "name": "Empowered Weapon (Su) (1st)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 6,
         "modifier": "1d6",
         "modifierType": "formula",
@@ -200,8 +220,10 @@
         "name": "Empowered Weapon (Su) (2nd)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 12,
         "modifier": "2d6",
         "modifierType": "formula",
@@ -215,8 +237,10 @@
         "name": "Empowered Weapon (Su) (3rd)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 18,
         "modifier": "3d6",
         "modifierType": "formula",
@@ -230,8 +254,10 @@
         "name": "Empowered Weapon (Su) (4th)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 24,
         "modifier": "4d6",
         "modifierType": "formula",
@@ -245,8 +271,10 @@
         "name": "Empowered Weapon (Su) (5th)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 30,
         "modifier": "5d6",
         "modifierType": "formula",
@@ -260,8 +288,10 @@
         "name": "Empowered Weapon (Su) (6th)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 36,
         "modifier": "6d6",
         "modifierType": "formula",
@@ -273,25 +303,27 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "2nd Level Technomancer",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "CRB pg. 121",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

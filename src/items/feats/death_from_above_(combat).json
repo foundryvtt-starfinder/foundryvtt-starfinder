@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
       "condition": "",
       "cost": 0
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "7b4f5393-bb4d-4432-93dd-d41e2646a74f",
         "name": "Death From Above (Combat) - 1-handed weapon",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "melee-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@abilities.str.mod",
         "modifierType": "formula",
@@ -110,8 +118,10 @@
         "name": "Death From Above (Combat) - 2-handed weapon",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "melee-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "(@abilities.str.mod * 2)",
         "modifierType": "formula",
@@ -123,25 +133,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Base attack bonus +6",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 105",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

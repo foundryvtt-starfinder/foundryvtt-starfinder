@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 0,
@@ -74,7 +69,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -91,7 +88,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -108,7 +107,9 @@
             "electricity": true,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -125,7 +126,9 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -142,7 +145,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": true
           }
@@ -158,17 +163,16 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.NWphw9C290AbJBm7]{Chaoskin}</p>\n<p>Energy bolt (1d6, 40-foot range increment); roll 1d10 to determine the energy bolt’s damage type when you assume this form: acid (1–2), cold (3–4), electricity (5–6), fire (7–8), or sonic (9–10).</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "equippable": false,
     "equipped": false,
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": false,
     "level": 1,
     "modifiers": [],
@@ -273,8 +277,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "40"
     },
@@ -286,8 +288,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 89",
     "special": "",
     "specialMaterials": {
@@ -307,7 +311,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -315,8 +318,8 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     },
     "weaponCategory": "uncategorized",

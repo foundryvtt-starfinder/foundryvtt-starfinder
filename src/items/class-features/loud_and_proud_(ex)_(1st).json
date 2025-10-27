@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "icons/skills/social/intimidation-impressing.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
       "condition": "",
       "cost": 1
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "7cc8b8bf-2c56-4d30-a3de-bfca9acae5ea",
         "name": "Blinding and Deafening Effects",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "formula",
@@ -108,25 +116,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level Soldier",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AR pg. 155",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

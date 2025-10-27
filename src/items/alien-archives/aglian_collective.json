@@ -661,108 +661,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 10
+        "base": 1
       },
       "con": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 10
+        "base": 2
       },
       "dex": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 5,
-        "value": 10
+        "base": 5
       },
       "int": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 10
+        "base": 2
       },
       "str": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "wis": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 17,
-        "min": 0,
-        "tooltip": [],
-        "value": 17
+        "base": 17
       },
       "fort": {
-        "base": 6,
-        "bonus": 6,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 6
       },
       "hp": {
         "max": 65,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 65
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 5,
         "value": 5
       },
       "kac": {
-        "base": 18,
-        "min": 0,
-        "tooltip": [],
-        "value": 18
+        "base": 18
       },
-      "keyability": "",
       "reach": "0 ft.",
       "reflex": {
-        "base": 6,
-        "bonus": 6,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 6
       },
       "space": "10 ft.",
       "speed": {
@@ -783,16 +727,10 @@
         "special": "original base: swim 40 ft.; original special: +19 Athletics to swim",
         "swimming": {
           "base": 40
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 8,
-        "bonus": 8,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 8
       }
     },
     "conditions": {
@@ -817,6 +755,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -832,9 +771,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -842,9 +778,8 @@
     "details": {
       "type": "animal (swarm)",
       "alignment": "CN",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -856,7 +791,7 @@
         "value": "<p>Each of these tiny eel-like natives of the aquatic world of @UUID[Compendium.sfrpg.setting.Item.tvbcahAbnqDGepHf]{Entha} has a limited individual consciousness focused around a single idea—usually a broad theoretical concept but sometimes a specifific object or action like coral, bedrock, swim, or search. An aglian’s coloration varies based on the content and complexity of their particular thought, from dull gray for those that concentrate on narrow concepts to rainbow hues for those that embody curiosity or truth.</p>\n<div>\n<p>While individual aglians can function in perfunctory ways, they are usually found in schools, telepathically linking with each other like neurons in a brain to form a new consciousness. EJ Corp scientists have dismissed the species as nonsapient, but the large schools in which most aglians spend their time are indeed sapient. Each member contributes and receives each other’s concept, building a collective yet individual personhood for each aglian in the school.</p>\n<p>When aglians reproduce, two or more parents contribute genetic material, and the offffspring, called an elver, has an equal chance to embody either the same concept as a parent or an entirely new thought resulting from the experiences of each. In this way, the aglian population of @UUID[Compendium.sfrpg.setting.Item.tvbcahAbnqDGepHf]{Entha}&nbsp;has grown to embody extremely specifific and refifined concepts. Their recent interactions with EJ Corp employees, however limited and scattered, have already begun to produce elvers that embody concepts like wonder, dismissal, and greed.</p>\n</div>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 5,
       "environment": "any water",
       "organization": "solitary or intellection (6-12)",
@@ -864,30 +799,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AP #36 pg. 56",
-      "subtype": "Swarm",
-      "xp": {
-        "value": 10
-      }
+      "subtype": "Swarm"
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 16,
         "ranks": 16,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -895,10 +820,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 11,
         "ranks": 11,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -906,10 +830,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -917,10 +840,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -928,10 +850,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -939,10 +860,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -950,10 +870,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -961,10 +880,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -972,10 +890,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -983,10 +900,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -994,10 +910,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1005,10 +920,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1016,10 +930,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 11,
         "ranks": 11,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1027,10 +940,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1038,10 +950,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1049,9 +960,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1062,7 +971,6 @@
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "misc": 19,
-        "mod": 19,
         "ranks": 19,
         "subname": "Swim",
         "value": 0
@@ -1072,10 +980,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1083,10 +990,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1094,10 +1000,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1105,47 +1010,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1154,21 +1052,9 @@
         "custom": "Swarm Immunities",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "Swarm Immunities",
         "value": []
-      },
-      "dr": {
-        "custom": "",
-        "value": [
-          {
-            "cold": "5"
-          }
-        ]
       },
       "dv": {
         "custom": "",
@@ -1184,9 +1070,6 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "tiny",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 16
     }
   }

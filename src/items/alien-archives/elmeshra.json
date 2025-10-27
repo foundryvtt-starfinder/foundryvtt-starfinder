@@ -875,108 +875,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": -2,
-        "min": 3,
-        "misc": 0,
-        "mod": -2,
-        "value": 10
+        "base": -2
       },
       "con": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 10
+        "base": 4
       },
       "dex": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 10
+        "base": 2
       },
       "int": {
-        "base": -4,
-        "min": 3,
-        "misc": 0,
-        "mod": -4,
-        "value": 10
+        "base": -4
       },
       "str": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 5,
-        "value": 10
+        "base": 5
       },
       "wis": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 10
+        "base": 1
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 19,
-        "min": 0,
-        "tooltip": [],
-        "value": 19
+        "base": 19
       },
       "fort": {
-        "base": 11,
-        "bonus": 11,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 11
       },
       "hp": {
         "max": 105,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 105
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 2,
         "value": 2
       },
       "kac": {
-        "base": 21,
-        "min": 0,
-        "tooltip": [],
-        "value": 21
+        "base": 21
       },
-      "keyability": "",
       "reach": "10 ft.",
       "reflex": {
-        "base": 11,
-        "bonus": 11,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 11
       },
       "space": "10 ft.",
       "speed": {
@@ -997,16 +941,10 @@
         "special": "",
         "swimming": {
           "base": 40
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 6,
-        "bonus": 6,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 6
       }
     },
     "conditions": {
@@ -1031,6 +969,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1046,9 +985,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1056,9 +992,8 @@
     "details": {
       "type": "Animal",
       "alignment": "N",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1070,7 +1005,7 @@
         "value": "<h2>Description</h2>\n<p>Elmeshras are large six-legged amphibians native to @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}. They are omnivorous, eating fish, smaller aquatic animals, and fruit in equal quantity. While elmeshras might seem lethargic, floating calmly with their eyes just above the surface, they are surprisingly quick to act, especially if provoked or when a tempting bit of prey swims too close. Elmeshras tend to eat close to their weight in food every day. They spawn in shallow pools and marshes during @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}’s summer, and the handful that survive to reach the winter hibernate through it, storing fertilized eggs to release as the weather improves. A typical elmeshra is over 12 feet long and weighs 3,000 pounds.</p>\n<p>Before the Gap, it was common for dragons and rhyphorians to dig up the massive amphibians throughout the winter. Their carcasses provided meat for lean winter days, but also elmeshra oil-originally drained from the creature’s flesh and extracted chemically-which protected against fatal freezing. Triaxians no longer rely on elmeshras for survival, but elmeshra steaks are still considered a delicacy by certain long-lived dragons, and the oil is often used as an ingredient in high-end perfumes.</p>\n<p>On @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}, hibernating elmeshras can occasionally be found buried in ice floes, but it’s more common to find living versions on other planets. The ease of shipping frozen elmeshras makes them a common animal attraction in zoos and a popular quarry in hunting expeditions across many systems. However, outside of their natural environment, elmeshras engage in frequent cycles of spawning that can rapidly cause ecological blight.</p>\n<p>Elmeshra eggs are found clustered in spheres up to 10 feet in diameter and hatch based on the weather. When they finally spring forth, hundreds of elmeshra spawn surge across land and sea alike. These spawn sometimes overwhelm larger animals, especially those still adjusting to the changing season.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 7,
       "environment": "temperate aquatic and marsh (Triaxus)",
       "organization": "solitary or pair",
@@ -1078,30 +1013,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AP #30 pg. 56",
-      "subtype": "Aquatic",
-      "xp": {
-        "value": 10
-      }
+      "subtype": "Aquatic"
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1109,10 +1034,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 19,
         "ranks": 19,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1120,10 +1044,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1131,10 +1054,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1142,10 +1064,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1153,10 +1074,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1164,10 +1084,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1175,10 +1094,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1186,10 +1104,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1197,10 +1114,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1208,10 +1124,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1219,10 +1134,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1230,10 +1144,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 14,
         "ranks": 14,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1241,10 +1154,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1252,10 +1164,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1263,9 +1174,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1275,10 +1184,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1286,10 +1194,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1297,10 +1204,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1308,47 +1214,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1357,21 +1256,9 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "",
         "value": []
-      },
-      "dr": {
-        "custom": "",
-        "value": [
-          {
-            "fire": "10"
-          }
-        ]
       },
       "dv": {
         "custom": "Hot-Blooded",
@@ -1383,9 +1270,6 @@
       },
       "senses": "blindsight (heat) 60 ft., low-light vision",
       "size": "large",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

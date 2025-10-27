@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "reaction",
       "condition": "Spend 2 Resolve Points (1 if the attack was a critical hit)",
       "cost": 1
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -89,15 +94,17 @@
       "value": "Until the end of your next turn"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "34eb1671-5143-46dd-adda-3426e82e9d18",
         "name": "Spell Siphon (Su)",
         "type": "enhancement",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "constant",
@@ -111,8 +118,10 @@
         "name": "Spell Siphon (Su)",
         "type": "enhancement",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "constant",
@@ -124,14 +133,12 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "30"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "5th Technique",
     "rollNotes": "",
@@ -142,11 +149,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "GM pg. 32",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

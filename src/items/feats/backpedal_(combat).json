@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "icons/skills/melee/shield-block-bash-blue.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "action",
       "condition": "",
       "cost": 0
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "2a6214c5-b8a7-4b48-a2de-54c0e1b92940",
         "name": "Backpedal",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "constant",
@@ -108,25 +116,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Acrobatics 5 ranks",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 104",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/polar_vortex.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "cylinder",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -41,6 +37,8 @@
         {
           "name": "",
           "formula": "3d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -48,7 +46,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -56,6 +56,8 @@
         {
           "name": "",
           "formula": "6d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -63,12 +65,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -78,14 +83,14 @@
       "unidentified": "",
       "value": "<p>You generate an arctic storm of harsh winds and battering hail and snow. Creatures that enter or start their turn in the area during the first round of the spell take 3d6 cold damage plus 6d6 bludgeoning damage and are affected by freezing, hurricane-strength winds. For the duration of the spell, creatures flying in the area must succeed at an Acrobatics check to fly in dangerous wind conditions, and terrain within the spell’s area is covered with ice and snow, causing it to become difficult terrain.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "round",
       "value": "1 + @details.cl.value"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 3,
     "materials": {
@@ -101,10 +106,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "medium",
-      "value": null
+      "units": "medium"
     },
     "rollNotes": "",
     "save": {
@@ -113,14 +115,19 @@
       "descriptor": "negate"
     },
     "school": "evo",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "NS pg. 156",
     "sr": false,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

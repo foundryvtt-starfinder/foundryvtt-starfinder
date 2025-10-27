@@ -2594,108 +2594,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       },
       "con": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 5,
-        "value": 10
+        "base": 5
       },
       "dex": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "int": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       },
       "str": {
-        "base": 8,
-        "min": 3,
-        "misc": 0,
-        "mod": 8,
-        "value": 10
+        "base": 8
       },
       "wis": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 24,
-        "min": 0,
-        "tooltip": [],
-        "value": 24
+        "base": 24
       },
       "fort": {
-        "base": 15,
-        "bonus": 15,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 15
       },
       "hp": {
         "max": 183,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 183
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 4,
         "value": 4
       },
       "kac": {
-        "base": 26,
-        "min": 0,
-        "tooltip": [],
-        "value": 26
+        "base": 26
       },
-      "keyability": "",
       "reach": "10 ft. (15 ft. with bite)",
       "reflex": {
-        "base": 13,
-        "bonus": 13,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 13
       },
       "space": "15 ft.",
       "speed": {
@@ -2707,7 +2651,7 @@
         },
         "flying": {
           "base": 200,
-          "baseManeuverability": -1
+          "baseManeuverability": 0
         },
         "land": {
           "base": 40
@@ -2716,16 +2660,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 13,
-        "bonus": 13,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 13
       }
     },
     "conditions": {
@@ -2750,6 +2688,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -2765,9 +2704,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -2775,9 +2711,8 @@
     "details": {
       "type": "Dragon",
       "alignment": "LE",
-      "aura": "Frightful Presence",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -2789,7 +2724,7 @@
         "value": "<h2>Dragon (Chromatic)</h2>\n<p>Dragons are powerful, reptilian creatures of high intelligence and ingenuity. The vast majority of dragons fall into one of two categories: chromatic or metallic (though other categories exist). Chromatic dragons (see below) are usually evil, while metallic dragons are generally good and strive to better society. Some dragons develop the ability to take on the form of a humanoid or other biped to better integrate themselves into a surrounding community. After hatching from large eggs, dragons mature through 12 age categories: wyrmling (CR 3—4), very young (CR 5—6), young (CR 7–8), juvenile (CR 9—10), young adult (CR 11—12), adult (CR 13—14), mature adult (CR 15—16), old (CR 17—18), very old (CR 19—20), ancient (CR 21—22), wyrm (CR 23—24), and great wyrm (CR 25).</p>\n<p>Dragons in the Drakelands of @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus} enjoy positions of rulership (often as CEOs) over the second-class humanoid citizens. Inveterate schemers, Triaxian dragons are always thinking ahead, and the risks involved in working for these dragons are matched only by the potential for lavish rewards.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 11,
       "environment": "any",
       "organization": "solitary",
@@ -2797,21 +2732,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA1 pg. 38",
-      "subtype": "Earth",
-      "xp": {
-        "value": 10
-      }
+      "subtype": "Earth"
     },
     "modifiers": [
       {
+        "_id": "043676c7-da91-46f7-806d-1ed7af992b4a",
         "name": "Damage Reduction",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "5",
         "modifierType": "constant",
@@ -2821,21 +2755,15 @@
         "valueAffected": "magic"
       }
     ],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 25,
         "ranks": 25,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -2843,10 +2771,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -2854,10 +2781,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 25,
         "ranks": 25,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -2865,10 +2791,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 20,
         "ranks": 20,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -2876,10 +2801,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -2887,10 +2811,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -2898,10 +2821,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -2909,10 +2831,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 20,
         "ranks": 20,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -2920,10 +2841,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -2931,10 +2851,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -2942,10 +2861,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -2953,10 +2871,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 20,
         "ranks": 20,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -2964,10 +2881,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 20,
         "ranks": 20,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -2975,10 +2891,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -2986,10 +2901,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -2997,9 +2911,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -3009,10 +2921,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -3020,10 +2931,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -3031,10 +2941,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -3042,47 +2951,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -3093,19 +2995,11 @@
           "asleep"
         ]
       },
-      "damageReduction": {
-        "negatedBy": "magic",
-        "value": 5
-      },
       "di": {
         "custom": "Paralysis",
         "value": [
           "electricity"
         ]
-      },
-      "dr": {
-        "custom": "",
-        "value": []
       },
       "dv": {
         "custom": "",
@@ -3122,9 +3016,6 @@
       },
       "senses": "blindsense 60 ft., darkvision 120 ft.",
       "size": "huge",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

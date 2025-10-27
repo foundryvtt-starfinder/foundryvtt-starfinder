@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "icons/creatures/birds/corvid-flying-wings-purple.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "none",
       "condition": "",
       "cost": 0
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "8572f9d6-c9e6-47c0-81b8-f1ea32c1ba3e",
         "name": "Aerial Evasion (Combat)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": true,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "constant",
@@ -108,25 +116,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Fly speed with average maneuverability or better",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 104",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/classes/spell_cache.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "",
       "cost": 0
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,7 +46,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>As the culmination of your early study of the fundamental forces of the galaxy, you have created a spell cache that allows you to store and access spells. Your spell cache could be a device such as a handheld computer or technological implant; an item such as a ring or staff; or a symbol such as a brand, tattoo, or other permanent modification to your body. While you don’t need your spell cache to cast your spells, once per day, you can activate your spell cache to cast any one spell you know and are capable of casting, even if you’ve expended all your spell slots for that spell’s level.</p>\n<p>If your spell cache is damaged, it is restored to full Hit Points the next time you regain your daily allotment of spell slots. If the spell cache is lost or destroyed, you can replace it after 1 week with a special ritual that takes 8 hours to complete.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -51,34 +57,36 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Technomancer",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

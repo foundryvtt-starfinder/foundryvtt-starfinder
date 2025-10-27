@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
       "cost": 0
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,28 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "28dbbbfd-2250-4d58-86a7-c1acdaa80549",
         "name": "Backstabber (Ex)",
         "type": "untyped",
         "condition": "",
-        "damageGroup": null,
-        "damageTypes": {
-          "acid": false,
-          "bludgeoning": false,
-          "cold": false,
-          "electricity": false,
-          "fire": false,
-          "healing": false,
-          "piercing": false,
-          "slashing": false,
-          "sonic": false
-        },
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
-        "limitTo": "",
+        "limitTo": null,
         "max": 8,
         "modifier": "1d8",
         "modifierType": "formula",
@@ -121,25 +116,27 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "12th Level - Espionage Specialist",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "COM pg. 101",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

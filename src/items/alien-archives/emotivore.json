@@ -1757,108 +1757,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 6,
-        "min": 3,
-        "misc": 0,
-        "mod": 6,
-        "value": 10
+        "base": 6
       },
       "con": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "dex": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       },
       "int": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 10
+        "base": 1
       },
       "str": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "wis": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 10
+        "base": 4
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 21,
-        "min": 0,
-        "tooltip": [],
-        "value": 21
+        "base": 21
       },
       "fort": {
-        "base": 8,
-        "bonus": 8,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 8
       },
       "hp": {
         "max": 120,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 120
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 3,
         "value": 3
       },
       "kac": {
-        "base": 22,
-        "min": 0,
-        "tooltip": [],
-        "value": 22
+        "base": 22
       },
-      "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 8,
-        "bonus": 8,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 8
       },
       "space": "5",
       "speed": {
@@ -1879,16 +1823,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 12,
-        "bonus": 12,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 12
       }
     },
     "conditions": {
@@ -1913,6 +1851,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1928,9 +1867,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1938,9 +1874,8 @@
     "details": {
       "type": "Undead",
       "alignment": "NE",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1952,7 +1887,7 @@
         "value": "<h2>Emotivore</h2>\n<p>Emotivores are undead that come into being when someone dies in the throes of intense feelings, especially among a large group of people experiencing similar emotions. An emotivore can take on a variety of anthropoid shapes, but its true form is a gaunt version of the creature whose death triggered its birth.</p>\n<p>An emotivore manipulates and deceives to evoke feelings it can psychically feed upon. It chooses its appearance based on information it gleans from potential victims, assuming a shape that evokes a passionate response.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 9,
       "environment": "any",
       "organization": "solitary, pair, or clique (3-6)",
@@ -1960,21 +1895,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA2 pg. 50",
-      "subtype": "Shapechanger",
-      "xp": {
-        "value": 10
-      }
+      "subtype": "Shapechanger"
     },
     "modifiers": [
       {
+        "_id": "a9651199-b277-4857-afda-1a6615c8260b",
         "name": "Damage Reduction",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "5",
         "modifierType": "constant",
@@ -1984,21 +1918,15 @@
         "valueAffected": "magic"
       }
     ],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -2006,10 +1934,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -2017,10 +1944,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 22,
         "ranks": 22,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -2028,10 +1954,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -2039,10 +1964,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -2050,10 +1974,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -2061,10 +1984,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -2072,10 +1994,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -2083,10 +2004,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -2094,10 +2014,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -2105,10 +2024,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -2116,10 +2034,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -2127,10 +2044,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -2138,10 +2054,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -2149,10 +2064,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -2160,9 +2074,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -2172,10 +2084,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -2183,10 +2094,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -2194,10 +2104,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -2205,47 +2114,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -2254,21 +2156,9 @@
         "custom": "Undead Immunities",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "magic",
-        "value": 5
-      },
       "di": {
         "custom": "Undead Immunities",
         "value": []
-      },
-      "dr": {
-        "custom": "",
-        "value": [
-          {
-            "cold": "5"
-          }
-        ]
       },
       "dv": {
         "custom": "",
@@ -2282,9 +2172,6 @@
       },
       "senses": "blindsense (emotion) 60 ft., darkvision 60 ft., low-light vision",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/classes/gravity_boost.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "",
       "cost": null
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,7 +46,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:graviton] Graviton Revelation</p>\n<p>You can increase or reduce the gravitational attraction between yourself and the terrain around you. You can add a bonus equal to one-third your solarian level (minimum +1) to Athletics checks to climb, jump, or swim as part of the action you take to attempt the skill check. In addition, as a reaction when you are falling, you can reduce the falling damage you take by half. At 6th level, you can move along vertical surfaces and even upside down along ceilings for 1 round. This functions as spider climb, but it leaves your hands free and you can also run. You must end your movement on a surface that can support you normally. If you end your movement while you are standing on a vertical surface or ceiling, you fall unless you succeed at an Athletics check to climb to remain in position.</p>\n<p>When you are attuned or fully attuned, the bonus you gain from this revelation to checks to climb, jump, or swim doubles.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -51,19 +57,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "cd964b3c-5a14-4514-8f7e-8e5bf8adf9dc",
         "name": "Gravity Boost (Su)",
         "type": "untyped",
         "condition": "",
-        "container": {
-          "actorId": "Qs2gOWidvlhDWFVK",
-          "itemId": "XFLwZMa0SSAe6heF"
-        },
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 6,
         "modifier": "(max(1, floor(@classes.solarian.levels / 3))) * (ternary(lt(@resources.solarian.stellarMode.value, 0), 2, 1))",
         "modifierType": "formula",
@@ -75,29 +79,31 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "2nd Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Solarian",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

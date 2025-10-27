@@ -1326,108 +1326,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 10
+        "base": 4
       },
       "con": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "dex": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 10
+        "base": 2
       },
       "int": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 10
+        "base": 1
       },
       "str": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 5,
-        "value": 10
+        "base": 5
       },
       "wis": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 10
+        "base": 1
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 17,
-        "min": 0,
-        "tooltip": [],
-        "value": 17
+        "base": 17
       },
       "fort": {
-        "base": 7,
-        "bonus": 7,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 7
       },
       "hp": {
         "max": 70,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 70
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 2,
         "value": 2
       },
       "kac": {
-        "base": 19,
-        "min": 0,
-        "tooltip": [],
-        "value": 19
+        "base": 19
       },
-      "keyability": "",
       "reach": "",
       "reflex": {
-        "base": 7,
-        "bonus": 7,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 7
       },
       "space": "",
       "speed": {
@@ -1448,16 +1392,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 6,
-        "bonus": 6,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 6
       }
     },
     "conditions": {
@@ -1482,6 +1420,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1497,9 +1436,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1507,9 +1443,8 @@
     "details": {
       "type": "Undead (shapechanger)",
       "alignment": "CE",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1521,7 +1456,7 @@
         "value": "<h2>Description</h2>\n<p>A ghul is a rare form of undead that arises when a jann dies while cursed. A ghul has a skeletal visage, with desiccated skin covering most of its body and the remainder taking the form of translucent, fiery energy. Motivated by a fierce hatred of the appearance of its feet, which resemble donkey’s hooves, a ghul often conceals this evidence of its cursed nature with clothing. Some ghuls even wear full suits of armor covered with an additional layer of robes and other formal garb that completely hides their forms, claiming to be aliens from distant worlds in need of extensive environmental protections to survive.</p>\n<p>As part of their undead rebirth, ghuls crave the flesh of sapient beings. They often lurk near funerals and battlegrounds, hoping to feed on the corpses of the young and brave, for they find the taste of healthy, virtuous flesh far superior to that of the old, sick, or sinful. Ghuls feast on the living as well, but they are cunning enough to try to limit their victims to those who won’t be easily missed.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 5,
       "environment": "any",
       "organization": "solitary or pack (2-8)",
@@ -1529,21 +1464,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AP #15 pg. 56",
-      "subtype": "Shapechanger",
-      "xp": {
-        "value": 10
-      }
+      "subtype": "Shapechanger"
     },
     "modifiers": [
       {
+        "_id": "52f0079e-7c8d-459c-8069-7f240d41575c",
         "name": "Damage Reduction",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "5",
         "modifierType": "constant",
@@ -1553,21 +1487,15 @@
         "valueAffected": "good"
       }
     ],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1575,10 +1503,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 11,
         "ranks": 11,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1586,10 +1513,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 16,
         "ranks": 16,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1597,10 +1523,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1608,10 +1533,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1619,10 +1543,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1630,10 +1553,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 11,
         "ranks": 11,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1641,10 +1563,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1652,10 +1573,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1663,10 +1583,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1674,10 +1593,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1685,10 +1603,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1696,10 +1613,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 11,
         "ranks": 11,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1707,10 +1623,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1718,10 +1633,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1729,9 +1643,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1741,10 +1653,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1752,10 +1663,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1763,10 +1673,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 11,
         "ranks": 11,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1774,47 +1683,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1823,21 +1725,9 @@
         "custom": "Undead Immunities",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "good",
-        "value": 5
-      },
       "di": {
         "custom": "Undead Immunities",
         "value": []
-      },
-      "dr": {
-        "custom": "",
-        "value": [
-          {
-            "fire": "10"
-          }
-        ]
       },
       "dv": {
         "custom": "",
@@ -1855,9 +1745,6 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

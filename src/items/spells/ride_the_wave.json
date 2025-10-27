@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/enervation.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -41,6 +37,8 @@
         {
           "name": "",
           "formula": "5d8",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -48,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -63,14 +64,14 @@
       "unidentified": "",
       "value": "<p>You briefly become a miniature River Between, coursing across the landscape in an instant.</p>\n<p>When you cast this spell, you transform into a stream of water and can move up to 120 feet with a supernatural fly speed (perfect maneuverability). This movement can pass through (but can’t end in) enemy spaces and doesn’t provoke attacks of opportunity. The transformation ends at the end ofyour movement. Creatures and objects whose space you pass through take 5d8 bludgeoning damage. A creature or object takes this damage only once even if you pass through its space multiple times</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 4,
     "materials": {
@@ -86,10 +87,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "personal",
-      "value": null
+      "units": "personal"
     },
     "rollNotes": "",
     "save": {
@@ -98,14 +96,19 @@
       "descriptor": "negate"
     },
     "school": "evo",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "DC pg. 123",
     "sr": false,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

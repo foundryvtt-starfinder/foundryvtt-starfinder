@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/peacemaker.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 20,
@@ -52,7 +47,7 @@
     "chatFlavor": "Burn [[2d4]]",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -95,7 +90,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -111,7 +108,6 @@
       "unidentified": "",
       "value": "<p>This looks like a normal tactical baton, except it is much thinner and lighter. The baton has passive nanoengineering such that swinging it hard enough through any atmosphere creates an electromagnetic force.</p>\n<p>The damage from this weapon counts as a force effect when wielded by a character with at least 12 Strength. Note, this does not mean the weapon deals force damage, only that it counts as a force effect for overcoming certain defenses such as incorporeal.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -121,7 +117,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 2,
     "modifiers": [],
@@ -226,8 +222,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
@@ -239,13 +233,14 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

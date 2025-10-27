@@ -5,10 +5,7 @@
   "img": "systems/sfrpg/icons/spells/acid_rain.webp",
   "system": {
     "type": "biotech",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -42,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -56,7 +52,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -66,17 +63,16 @@
       "unidentified": "",
       "value": "<p>Your respiratory system has been modified to create acidic breath when you exhale. You gain a +2 circumstance bonus to Intimidate checks against creatures within 10 feet. Additionally, once per day, you can spend 1 minute breathing on an object to reduce its break DC by 5.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
     },
     "equippable": false,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 5,
     "modifiers": [
       {
@@ -84,8 +80,10 @@
         "name": "Acid Breath",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "formula",
@@ -96,25 +94,29 @@
       }
     ],
     "price": 3300,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "10"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 148",
     "system": "lungs",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

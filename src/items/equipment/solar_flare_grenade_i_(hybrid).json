@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "ac5",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 1,
@@ -52,7 +47,7 @@
     "chatFlavor": "see text",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -84,14 +79,26 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d10",
-          "operator": "and",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
             "electricity": true,
-            "fire": true
+            "fire": true,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -101,7 +108,6 @@
       "unidentified": "",
       "value": "<p>Crafted using strange metals ejected by the sun and infused with magic from the Plane of Fire, solar flare grenades unleash the power of a star. When a solar flare grenade explodes, it sends out a lash of plasma. Creatures within the grenade’s area take the listed electricity and fire damage; each creature that succeeds at a Reflex save takes half damage. In addition, a solar flare grenade also sends out an electromagnetic pulse following the plasma wave. Within the same area, all technological objects that use charges, technological objects that do not use charges but are powered by electricity, and constructs with the technological subtype must each attempt a Fortitude saving throw. If a technological object with charges fails the save, it loses a number of charges equal to the grenade’s mark. If a technological object that is powered by electrical means other than charge fails the save, its functions are suppressed for a number of rounds according to the grenade’s type (see below). If a construct with the technological subtype fails the save, it is staggered for a number of rounds according to the grenade’s type (see below); such a construct can attempt an additional Fortitude save at the end of each round to shrug off the effect.</p>\n<ul>\n<li><strong>Solar Flare Grenade I:</strong>&nbsp;1 round.</li>\n<li><strong>Solar Flare Grenade II:</strong>&nbsp;1 round.</li>\n<li><strong>Solar Flare Grenade III:</strong>&nbsp;2 rounds.</li>\n<li><strong>Solar Flare Grenade IV:</strong>&nbsp;2 rounds.</li>\n<li><strong>Solar Flare Grenade V:</strong>&nbsp;3 rounds.</li>\n</ul>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -111,7 +117,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 3,
     "modifiers": [],
@@ -207,10 +213,8 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "rollNotes": "",
     "save": {
@@ -218,11 +222,16 @@
       "dc": "11+@abilities.dex.mod",
       "descriptor": "partial"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -230,11 +239,11 @@
       "value": 1
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "charges",
       "value": 1
     },
-    "weaponCategory": "",
+    "weaponCategory": "uncategorized",
     "weaponType": "grenade"
   }
 }

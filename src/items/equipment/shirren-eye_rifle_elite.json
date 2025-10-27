@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/shirren-eye-rifle-elite.webp",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "2",
     "capacity": {
       "max": 6,
@@ -98,6 +93,7 @@
           "name": "",
           "formula": "4d10",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -105,12 +101,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -120,7 +119,6 @@
       "unidentified": "",
       "value": "<p>Shirren-eye rifles are named for their compound sights, which resemble the eyes of the insectile race, but are rarely manufactured by @UUID[Compendium.sfrpg.races.Item.VIJ6pdOVTJle3vJx]{Shirren} companies. Shirren-eye rifles are extremely accurate and favored by snipers and sharpshooters.</p>\n<p>Sniper (750 ft.)</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -130,7 +128,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 13,
     "modifiers": [],
@@ -235,8 +233,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "80"
     },
@@ -248,8 +244,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "CRB pg. 178",
     "special": "",
     "specialMaterials": {
@@ -269,7 +267,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

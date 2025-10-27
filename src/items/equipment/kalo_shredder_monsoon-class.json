@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/diasporan-rifle-tactical.webp",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 48,
@@ -95,7 +90,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
@@ -111,7 +108,6 @@
       "unidentified": "",
       "value": "<p>Favored by the much-romanticized kalo hunters of Kalo-Mahoi, kalo shredders fire razor-sharp flechettes with nearly silent magnetism. The gun’s distinctive organic design is grown from magnetic coral that grants you a +2 bonus to KAC against disarm combat maneuvers.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -121,7 +117,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 17,
     "modifiers": [
@@ -130,8 +126,10 @@
         "name": "KAC bonus against Disarm",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "cmd",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "formula",
@@ -242,8 +240,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "60"
     },
@@ -255,8 +251,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "PW pg. 193",
     "special": "",
     "specialMaterials": {
@@ -276,7 +274,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

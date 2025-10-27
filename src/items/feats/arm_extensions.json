@@ -4,8 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/arm_extensions.webp",
   "system": {
-    "type": "",
-    "ability": null,
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -13,12 +12,21 @@
       "condition": "",
       "cost": 1
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -27,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,26 +46,28 @@
       "unidentified": "",
       "value": "<p>You have special devices installed into your arms that allow you to extend them great distances.</p>\n<p><strong>Prerequisites</strong>: Constructed species trait or construct type.</p>\n<hr />\n<p><strong>Benefit</strong>: As a move action, you can extend your natural reach to 10 feet, retaining this benefit until you retract your reach to normal as another move action. While your arms are extended, you take a −2 penalty to attack rolls with weapons wielded in your hands and to Dexterity- and Strength-based ability checks and skill checks. You can use this ability to grab an object or surface and pull yourself to that item or surface as a full action, or you can anchor yourself where you are to lower yourself to another surface. When doing so, you move 15 feet as if using a fly speed with perfect maneuverability, ending your movement in a square adjacent to the chosen object or surface. If your movement does not end on solid ground, you either fall or must begin climbing the surface you grabbed (your choice).</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "feat",
       "combat": false,
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": "Until ended as a move action."
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
+        "_id": "43c94510-0b73-4c10-b9c4-3d3b6549f971",
         "name": "Arm Extensions",
         "type": "untyped",
         "condition": "",
-        "container": {},
+        "damage": null,
         "effectType": "ability-check",
         "enabled": false,
+        "limitTo": null,
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
@@ -66,12 +77,14 @@
         "valueAffected": "str"
       },
       {
+        "_id": "ebb849c1-04a8-4b05-b652-318b953c67b9",
         "name": "Arm Extensions",
         "type": "untyped",
         "condition": "",
-        "container": {},
+        "damage": null,
         "effectType": "ability-check",
         "enabled": false,
+        "limitTo": null,
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
@@ -81,12 +94,14 @@
         "valueAffected": "dex"
       },
       {
+        "_id": "53ff10eb-fcb3-40b4-99fb-a27ff2b024e1",
         "name": "Arm Extensions",
         "type": "untyped",
         "condition": "",
-        "container": {},
+        "damage": null,
         "effectType": "ability-skills",
         "enabled": false,
+        "limitTo": null,
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
@@ -96,12 +111,14 @@
         "valueAffected": "str"
       },
       {
+        "_id": "65afed9a-623c-4546-9e29-17fd78ef2db1",
         "name": "Arm Extensions",
         "type": "untyped",
         "condition": "",
-        "container": {},
+        "damage": null,
         "effectType": "ability-skills",
         "enabled": false,
+        "limitTo": null,
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
@@ -113,30 +130,33 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Character Operations Manual",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

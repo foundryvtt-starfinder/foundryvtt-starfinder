@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "icons/environment/wilderness/terrain-river-road-gray.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "skill",
     "activation": {
       "type": "move",
       "condition": "",
       "cost": 1
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -89,18 +94,15 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "2nd Level (Envoy)",
     "rollNotes": "",
@@ -111,11 +113,12 @@
     },
     "skillCheck": {
       "type": "sur",
-      "dc": "15"
+      "dc": "15",
+      "variable": false
     },
+    "slug": "",
     "source": "GEM pg. 16",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

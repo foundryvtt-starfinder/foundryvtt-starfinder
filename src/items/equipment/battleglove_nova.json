@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/battleglove.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 20,
@@ -98,6 +93,7 @@
           "name": "",
           "formula": "3d10 + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -105,12 +101,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -120,7 +119,6 @@
       "unidentified": "",
       "value": "<p>Battlegloves are popular, economical choices for mercenaries and guards. These durable nylon-web or para-aramid gloves hold a weighted plate over the wearer's knuckles. You can hold other objects or weapons in a hand wearing a glove, but you can't use the glove to make attacks while doing so.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -130,7 +128,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 13,
     "modifiers": [],
@@ -235,10 +233,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
@@ -248,8 +243,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "CRB pg. 171",
     "special": "",
     "specialMaterials": {
@@ -269,7 +266,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

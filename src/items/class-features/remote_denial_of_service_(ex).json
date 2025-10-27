@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "skill",
     "activation": {
       "type": "action",
       "condition": "Spend 1 Resolve Point",
       "cost": 1
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -89,18 +94,16 @@
       "value": "Until the end of that enemy’s next turn"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "60"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "8th Level (Mechanic)",
     "rollNotes": "",
@@ -111,11 +114,12 @@
     },
     "skillCheck": {
       "type": "eng",
-      "dc": "15 + (@target.item.details.level.value / 2)"
+      "dc": "15 + (@target.item.details.level.value / 2)",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 47",
     "target": {
-      "type": "",
       "value": "One technological weapon, piece of  equipment, or armor upgrade carried by an enemy"
     },
     "uses": {

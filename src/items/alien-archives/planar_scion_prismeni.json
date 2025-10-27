@@ -2640,119 +2640,55 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 1
       },
       "con": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "dex": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 3
       },
       "int": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 5
       },
       "str": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "wis": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 1
       }
     },
     "attributes": {
       "abilityDC": {
-        "base": "0"
+        "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
-        "base": "0"
-      },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 0
       },
       "eac": {
-        "base": 15,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 15
       },
       "fort": {
-        "base": 4,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 4
       },
       "hp": {
         "max": 43,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 43
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 0,
         "value": 3
       },
       "kac": {
-        "base": 16,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 16
       },
-      "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 4,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 4
       },
       "rp": {
         "max": 10,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 10,
-        "min": 0,
-        "tooltip": [],
         "value": 0
       },
       "space": "5",
@@ -2774,38 +2710,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
-      },
-      "spellcasting": "int",
-      "will": {
-        "base": 8,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
-      }
-    },
-    "common": {
-      "abilities": {
-        "cha": {
-          "base": 0
-        },
-        "con": {
-          "base": 0
-        },
-        "dex": {
-          "base": 0
-        },
-        "int": {
-          "base": 0
-        },
-        "str": {
-          "base": 0
-        },
-        "wis": {
-          "base": 0
         }
+      },
+      "will": {
+        "base": 8
       }
     },
     "conditions": {
@@ -2846,9 +2754,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -2856,9 +2761,8 @@
     "details": {
       "type": "Outsider",
       "alignment": "NG",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -2870,7 +2774,7 @@
         "value": "<p>Prismenis are planar scions touched by the Drift, the spectra native to that plane, or @UUID[Compendium.sfrpg.setting.Item.FYV6RgTjPdg72RF0]{Triune}. While they look much like their mortal parent species, they have odd features that set them apart from their peers, such as metallic gray eyes, rainbow-colored locks, thick cords or wire for hair, or flesh that shimmers with different colors in various light.</p>\n<p>Most prismenis were born in the Drift. Others found themselves transformed into a prismeni after prolonged close contact with a spectra or being present at a spectra gathering. Very rarely, prismenis are naturally born to prominent or particularly devout Triunites, or else spontaneously transformed into a prismeni after performing a dangerous task on behalf of Triune.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 4,
       "environment": "any",
       "organization": "solitary, pair, or family (3-6)",
@@ -2878,13 +2782,9 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AP #49 pg. 60",
-      "subtype": "Native",
-      "xp": {
-        "value": 10
-      }
+      "subtype": "Native"
     },
     "modifiers": [
       {
@@ -2892,14 +2792,12 @@
         "name": "Energy Resistance",
         "type": "untyped",
         "condition": "",
-        "container": {
-          "actorId": null,
-          "itemId": null
-        },
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": true,
+        "limitTo": null,
         "max": 5,
-        "modifier": 5,
+        "modifier": "5",
         "modifierType": "constant",
         "notes": "",
         "source": "Migration",
@@ -2907,21 +2805,15 @@
         "valueAffected": "electricity"
       }
     ],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -2929,10 +2821,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -2940,10 +2831,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -2951,10 +2841,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 15,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -2962,10 +2851,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -2973,10 +2861,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -2984,10 +2871,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -2995,10 +2881,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 10,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -3006,10 +2891,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -3017,10 +2901,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -3028,10 +2911,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -3039,10 +2921,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 15,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -3050,10 +2931,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 10,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -3061,10 +2941,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -3072,10 +2951,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -3083,9 +2961,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -3095,10 +2971,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -3106,10 +2981,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -3117,10 +2991,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -3128,47 +3001,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
-        "max": "6",
-        "perClass": {},
-        "value": "6"
+        "max": 6,
+        "value": 6
       },
       "spell2": {
-        "max": "3",
-        "perClass": {},
-        "value": "3"
+        "max": 3,
+        "value": 3
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -3177,15 +3043,7 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
-        "custom": "",
-        "value": []
-      },
-      "dr": {
         "custom": "",
         "value": []
       },
@@ -3201,9 +3059,6 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

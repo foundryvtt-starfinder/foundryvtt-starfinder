@@ -4,11 +4,7 @@
   "type": "equipment",
   "img": "systems/sfrpg/icons/default/kevlar-vest.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "armor": {
       "type": "power",
@@ -51,7 +47,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "20",
     "capacity": {
       "max": 20,
@@ -107,6 +102,7 @@
           "name": "",
           "formula": "2d10 +(@abilities.str.mod)",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -114,12 +110,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -129,7 +128,6 @@
       "unidentified": "",
       "value": "<p>Constructed with the aid of mad cultists who revere inhuman, unknowable entities from the most distant corners of reality, this metallic armor defies conventional geometry. Its flat planes appear strangely curved upon close inspection, and its contours bend and blur. Your opponents can’t keep a clear sight on the armor’s shape or position, even when looking directly at it. If you have @UUID[Compendium.sfrpg.rules.Kjba2E3Ad5oMJ7hV.JournalEntryPage.nyB6pt2dd6iVQGmS]{Concealment} from an attacker from any source, increase the miss chance from concealment by 10% (normally to 30%). If you do not have concealment from an attacker, the armor’s warped shape grants you concealment but with only a 10% miss chance. This armor has no effect on attacks against you when you have total concealment. Wearing the armor has a deleterious effect on mortal sanity; when you remove the armor, you must succeed at a Will save (DC = 10 plus 1 per full hour spent wearing the extradimensional armor) or take a –2 penalty to Will saves and Wisdom-based ability checks and skill checks for 24 hours.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -139,7 +137,8 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 17,
     "modifiers": [],
     "price": 278200,
@@ -148,10 +147,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "reach": "10 ft.",
     "rollNotes": "",
@@ -160,11 +156,12 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "medium",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 75",
     "specialMaterials": {
       "abysium": false,
@@ -185,7 +182,6 @@
     "speed": "30 ft.",
     "strength": 26,
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -193,8 +189,8 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

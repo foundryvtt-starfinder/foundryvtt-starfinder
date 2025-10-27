@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "",
       "cost": 0
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,7 +46,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.nT7Vm4iuPmWBqRvQ]{Immortal Tutor (Su) - Elemental}</p>\n<p>When you cast a 1st-level or higher technomancer spell, you can gain the tutor’s first lesson for a number of rounds equal to your Intelligence modifier. After you do so, you can’t use the first lesson again until you have rested 10 minutes to regain Stamina Points.</p>\n<p><strong>First Lesson:&nbsp;</strong> You gain a special movement speed based on your patron’s type. Air grants a 20-foot fly speed (average maneuverability). Earth grants a 15-foot burrow speed. Fire grants a +20-foot enhancement bonus to your land speed. Water grants a 30-foot swim speed.</p>\n<p><em></em></p><em></em><p><em>Activate relevent modifier in the Modifier tab.</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -51,15 +57,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "59ec378d-ff1b-4e94-95a9-f01ff9f212a2",
         "name": "Elemental - First Lesson - Air",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "specific-speed",
         "enabled": false,
+        "limitTo": null,
         "max": 20,
         "modifier": "20",
         "modifierType": "constant",
@@ -73,8 +81,10 @@
         "name": "Elemental - First Lesson - Earth",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "specific-speed",
         "enabled": false,
+        "limitTo": null,
         "max": 15,
         "modifier": "15",
         "modifierType": "constant",
@@ -88,8 +98,10 @@
         "name": "Elemental - First Lesson - Fire",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "specific-speed",
         "enabled": false,
+        "limitTo": null,
         "max": 20,
         "modifier": "20",
         "modifierType": "constant",
@@ -103,8 +115,10 @@
         "name": "Elemental - First Lesson - water",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "specific-speed",
         "enabled": false,
+        "limitTo": null,
         "max": 30,
         "modifier": "30",
         "modifierType": "constant",
@@ -116,29 +130,31 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "6th Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GM pg. 34",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "sr",
       "value": 1
     }

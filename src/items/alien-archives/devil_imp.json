@@ -1078,108 +1078,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 10
+        "base": 2
       },
       "con": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "dex": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 10
+        "base": 4
       },
       "int": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 10
+        "base": 1
       },
       "str": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "wis": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 12,
-        "min": 0,
-        "tooltip": [],
-        "value": 12
+        "base": 12
       },
       "fort": {
-        "base": 1,
-        "bonus": 1,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 1
       },
       "hp": {
         "max": 18,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 18
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 4,
         "value": 4
       },
       "kac": {
-        "base": 13,
-        "min": 0,
-        "tooltip": [],
-        "value": 13
+        "base": 13
       },
-      "keyability": "",
       "reach": "0 ft.",
       "reflex": {
-        "base": 5,
-        "bonus": 5,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 5
       },
       "space": "2-1/2 ft.",
       "speed": {
@@ -1200,16 +1144,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 3,
-        "bonus": 3,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 3
       }
     },
     "conditions": {
@@ -1234,6 +1172,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1249,9 +1188,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1259,9 +1195,8 @@
     "details": {
       "type": "Outsider",
       "alignment": "LE",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1273,7 +1208,7 @@
         "value": "<h2>Description</h2>\n<p>Imps are among the lowest-ranked of the fiends of Hell. However, they serve an important role in corrupting mortals. Easy to summon to the Material Plane, imps willingly form bonds with spellcasters who call them. While on the Material Plane, an imp influences anyone it can to perform diabolical deeds. If serving a mortal master, the imp plays the part of a loyal servant, offering advice, infernal foresight, and even mystic tutelage. The imp’s true goal, however, is the delivery of as many souls as possible into damnation.</p>\n<p>An imp is also the devil most likely to be found freely roaming the Material Plane. Without help, an imp has no means of returning to Hell. Therefore, a masterless imp remains and continues its Hell-bound duties. The creature insinuates itself into a new situation, either with a different master or a group of wicked mortals. Among weaker creatures, an imp might rise to a leadership role. But such a fiend is more likely to be a dark influence on a stronger leader. In this way, the imp can direct a group toward depravity but take no blame for any failings.</p>\n<p>An imp is about 2 feet tall and weighs nearly 13 pounds.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 2,
       "environment": "any (Hell)",
       "organization": "solitary, pair, or murder (3-10)",
@@ -1281,21 +1216,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AP #13 pg. 56",
-      "subtype": "Devil, Evil, Extraplanar, Lawful",
-      "xp": {
-        "value": 10
-      }
+      "subtype": "Devil, Evil, Extraplanar, Lawful"
     },
     "modifiers": [
       {
+        "_id": "b9d33bdd-0671-4f6c-bc7d-8a8e5caa7b1d",
         "name": "Damage Reduction",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "5",
         "modifierType": "constant",
@@ -1305,21 +1239,15 @@
         "valueAffected": "good or silver"
       }
     ],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 7,
         "ranks": 7,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1327,10 +1255,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1338,10 +1265,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 12,
         "ranks": 12,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1349,10 +1275,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1360,10 +1285,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1371,10 +1295,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1382,10 +1305,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1393,10 +1315,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1404,10 +1325,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1415,10 +1335,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1426,10 +1345,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1437,10 +1355,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 7,
         "ranks": 7,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1448,10 +1365,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 7,
         "ranks": 7,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1459,10 +1375,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1470,10 +1385,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1481,9 +1395,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1494,7 +1406,6 @@
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "misc": 14,
-        "mod": 15,
         "ranks": 15,
         "subname": "To fly",
         "value": 0
@@ -1504,10 +1415,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1515,10 +1425,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1526,10 +1435,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1537,47 +1445,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1586,25 +1487,10 @@
         "custom": "Poison",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "good or silver",
-        "value": 5
-      },
       "di": {
         "custom": "Poison",
         "value": [
           "fire"
-        ]
-      },
-      "dr": {
-        "custom": "",
-        "value": [
-          {
-            "acid": "10"
-          },
-          {
-            "cold": "10"
-          }
         ]
       },
       "dv": {
@@ -1620,9 +1506,6 @@
       },
       "senses": "darkvision 60 ft., detect magic, see in darkness",
       "size": "tiny",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

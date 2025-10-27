@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "1 Resolve Point",
       "cost": 0
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,6 +39,8 @@
         {
           "name": "",
           "formula": "floor(classes.mystic.level / 2)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": true,
             "bludgeoning": false,
@@ -41,12 +48,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -102,18 +112,15 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Level 9",
     "rollNotes": "",
@@ -122,13 +129,18 @@
       "dc": "10 + abilities.wis.mod + floor(classes.mystic.level / 2)",
       "descriptor": "half"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "DC pg. 42",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/transfert_consciousness.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -42,6 +38,7 @@
           "name": "",
           "formula": "2d8",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -49,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -108,7 +108,7 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": true,
     "level": 2,
     "materials": {
@@ -124,8 +124,6 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "close",
       "value": ""
     },
@@ -138,12 +136,13 @@
     "school": "div",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "PoC pg. 123",
     "sr": true,
     "target": {
-      "type": "",
       "value": "1 primary target and 1 secondary target/spell level, no two of which can be more than 30 ft. from the primary target"
     },
     "uses": {

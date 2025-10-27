@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/classes/thief.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "",
       "cost": 0
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,7 +46,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.PU3uwrAcmGXMGo2n]{Specialization}</p>\n<p>You specialize in acquisition, from quick swipes to complex heists.</p>\n<p><strong>Associated Skills</strong>: @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.gZlg2ZKze0erNLmP]{Perception} and @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.qVEW9HjXQN0ok879]{Sleight of Hand}. You can use Sleight of Hand to make a trick attack by concealing your weapons and motions.</p>\n<p><strong>Specialization Exploit</strong>: @UUID[Compendium.sfrpg.class-features.Item.YjDe1a16TvdF232b]{Holographic Distraction (Ex)}</p>\n<p><strong>@UUID[Compendium.sfrpg.class-features.Item.cavdd5NioOHJmAcv]{Contingency Plan (Ex)}:</strong> At 11th level, you’ve performed enough heists to realize that things never go exactly as you had planned. When something unexpected happens during a heist or infiltration, you can spend 2 Resolve Points and specify a contingency plan that you had set up in advance for this eventuality, either having the right prop (such as an ID or a computer file, but not a particularly valuable item), having the right information, or having hired a confederate to perform a single task at the right time. You then attempt a skill check. The appropriate skill and the DC are at the GM’s discretion, with a higher DC for a more elaborate or unlikely contingency (see Skill DCs on page 392 for more information on setting skill DCs). If you succeed, you have the item or knowledge, or the confederate performs the task as specified. If you fail, either you don’t have what you need or your plan fails.</p>\n<p><em>Free Skill Ranks from Specialization's associated skills are auto applied in the modifiers tab</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -51,15 +57,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "2085727b-8787-47e2-ab0b-2df80f70d6d6",
         "name": "Specialization",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill-ranks",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "@classes.operative.levels",
         "modifierType": "constant",
@@ -73,8 +81,10 @@
         "name": "Specialization",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill-ranks",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "@classes.operative.levels",
         "modifierType": "constant",
@@ -86,30 +96,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Specialization",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

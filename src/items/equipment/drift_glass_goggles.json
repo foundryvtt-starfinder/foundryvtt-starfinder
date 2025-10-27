@@ -4,13 +4,9 @@
   "type": "technological",
   "img": "systems/sfrpg/icons/default/processor.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 20,
@@ -60,6 +55,7 @@
           "acceptsType": [
             "ammunition"
           ],
+          "affectsEncumbrance": true,
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightMultiplier": 1,
@@ -72,7 +68,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -82,18 +79,17 @@
       "unidentified": "",
       "value": "<p>Drift glass is a pinkish-brown crystalline substance harvested from areas where Drift architects have worked. They crumble to dust with any attempt to shape them, so they’re awkwardly mounted whole in bulky goggles. While wearing Drift glass goggles, you have a –4 penalty to any vision-based skill or attack roll, but can see as if under the effects of a @UUID[Compendium.sfrpg.spells.Item.5aW793TGgd3Kd4Fe]{See Invisibility}spell. They also allow you to determine whether a creature normally visible to you is incorporeal.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 0,
     "identified": false,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 8,
     "modifiers": [
       {
@@ -101,8 +97,10 @@
         "name": "Drift glass goggles",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-skills",
         "enabled": false,
+        "limitTo": null,
         "max": -4,
         "modifier": "-4",
         "modifierType": "formula",
@@ -116,8 +114,10 @@
         "name": "Drift glass goggles",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": -4,
         "modifier": "-4",
         "modifierType": "formula",
@@ -128,24 +128,27 @@
       }
     ],
     "price": 9100,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "DC pg. 53",
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -153,8 +156,8 @@
       "value": 1
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }

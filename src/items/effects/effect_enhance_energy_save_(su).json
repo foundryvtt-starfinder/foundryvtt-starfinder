@@ -5,9 +5,6 @@
   "img": "systems/sfrpg/icons/default/stopwatch.svg",
   "system": {
     "type": "effect",
-    "abilityMods": {
-      "parts": []
-    },
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
@@ -21,15 +18,9 @@
     },
     "context": {
       "origin": {
-        "actorUuid": "",
-        "itemUuid": ""
+        "actorUuid": null,
+        "itemUuid": null
       }
-    },
-    "critical": {
-      "parts": []
-    },
-    "damage": {
-      "parts": []
     },
     "description": {
       "chat": "",
@@ -45,8 +36,10 @@
         "name": "Effect: Enhance Energy Save (Su)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "lookupRange(@origin.actor.details.level.value, 0, 2, 2, 8, 3, 14, 4)",
         "modifierType": "formula",
@@ -58,6 +51,7 @@
     ],
     "requirements": "2nd Level (Technomancer)",
     "showOnToken": true,
+    "slug": "",
     "source": "EN pg. 78",
     "turnEvents": []
   }

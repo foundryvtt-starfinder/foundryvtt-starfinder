@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/telepathic_spy.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "skill",
     "activation": {
       "type": "",
       "condition": "",
       "cost": null
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -89,15 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "27d89c50-e2ea-4240-a147-001b54166818",
         "name": "Trap Spotter (Ex)",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "(1+floor((@classes.operative.levels + 1) / 4)) * 2",
         "modifierType": "formula",
@@ -109,14 +116,11 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "2nd Level -  Operative",
     "rollNotes": "",
@@ -127,16 +131,17 @@
     },
     "skillCheck": {
       "type": "per",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 150",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

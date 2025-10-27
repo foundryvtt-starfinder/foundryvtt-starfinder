@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 0,
@@ -85,7 +80,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -102,7 +99,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -119,7 +118,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
@@ -135,7 +136,6 @@
       "unidentified": "",
       "value": "<p>This dense silver cane is a thicker, more imposing version of the lesser magecane and sometimes serves as a status symbol for those who want to demonstrate their affinity and talent for magic. A standard magecane is a basic two-handed melee weapon that deals 2d6 bludgeoning, slashing, or piercing damage (your choice) as it manifests blades or spikes at will. It also has the block weapon special property. In addition, you can take a swift action three times per day to gain the benefits of the @UUID[Compendium.sfrpg.feats.Item.5NfmwyEg2XBpzbCS]{Greater Spell Penetration} feat until the end of your turn.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -145,7 +145,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 9,
     "modifiers": [],
@@ -250,8 +250,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
@@ -263,8 +261,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 155",
     "special": "",
     "specialMaterials": {
@@ -284,7 +284,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/agile_casting.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "",
       "cost": 0
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,7 +46,7 @@
       "unidentified": "",
       "value": "<p>You're a storm of grasping limbs or winding coils, ensnaring foes in underhanded ways.</p>\n<p><strong>Prerequisites</strong>:&nbsp; @UUID[Compendium.sfrpg.feats.Item.0Pq35gvSI2JlD682]{Improved Combat Maneuver (Combat)} (dirty trick); constrictor’s grasp, enveloping grip, grappler, or snag species trait).</p>\n<hr />\n<p><strong>Benefit</strong>:When you perform a successful dirty trick combat maneuver as a melee attack and the target gains the @UUID[Compendium.sfrpg.conditions.Item.nFBcsp5FS1Wi46Fc]{Entangled} condition as a result, you can choose to have the affected target be unable to move from its square until it takes the move action to end the condition, but the condition ends immediately if the target is no longer within your reach. In addition, you gain a +4 circumstance bonus to grapple a creature @UUID[Compendium.sfrpg.conditions.Item.nFBcsp5FS1Wi46Fc]{Entangled} due to your dirty trick.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "feat",
       "combat": false,
@@ -51,33 +57,35 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": null,
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Improved Combat Maneuver (dirty trick); constrictor’s grasp, enveloping grip, grappler, or snag species trait",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #35 pg. 54",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

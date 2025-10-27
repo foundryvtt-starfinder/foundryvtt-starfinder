@@ -4,13 +4,9 @@
   "type": "upgrade",
   "img": "systems/sfrpg/icons/default/armor-upgrade.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
@@ -23,7 +19,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -44,7 +40,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "-",
     "capacity": {
       "max": 10,
@@ -53,7 +48,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": []
     },
@@ -62,7 +57,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -72,17 +68,12 @@
       "unidentified": "",
       "value": "<p>Haze fields were developed on Akiton to mimic the thick haze that forms from the dust of the dry seabeds of that world. You can activate a haze field as a move action, and its benefits last until you spend another move action to deactivate it or it runs out of charges. While active, the field creates a visual haze centered on you. This has no impact on visibility at short range, but you take a –2 penalty to all attack rolls and Perception checks against targets 30 or more feet away, and creatures 30 or more feet away take the same penalties to attacks and Perception checks against you. A haze field’s charges replenish each day.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
-    "equippable": false,
-    "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
-    "identified": true,
-    "isActive": null,
+    "isActive": false,
     "level": 9,
     "modifiers": [
       {
@@ -90,8 +81,10 @@
         "name": "Haze field",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
@@ -105,8 +98,10 @@
         "name": "Haze field",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
@@ -121,21 +116,23 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
     "slots": 1,
+    "slug": "",
     "source": "PW pg. 197",
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -143,8 +140,8 @@
       "value": 1
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }

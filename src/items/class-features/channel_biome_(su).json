@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "icons/magic/nature/leaf-juggle-humanoid-green.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "other",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "",
       "cost": 1
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "burst",
       "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,6 +39,8 @@
         {
           "name": "Airborne",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -41,7 +48,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -49,6 +58,8 @@
         {
           "name": "Aquatic",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -56,7 +67,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -64,6 +77,8 @@
         {
           "name": "Arctic",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -71,7 +86,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": true
           }
@@ -79,6 +96,8 @@
         {
           "name": "Desert",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -86,7 +105,9 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
@@ -94,6 +115,8 @@
         {
           "name": "Marsh",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": true,
             "bludgeoning": false,
@@ -101,7 +124,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -109,6 +134,8 @@
         {
           "name": "Mountain",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -116,7 +143,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": true
           }
@@ -124,6 +153,8 @@
         {
           "name": "Other (acid)",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": true,
             "bludgeoning": false,
@@ -131,7 +162,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -139,6 +172,8 @@
         {
           "name": "Other (electricity)",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -146,7 +181,9 @@
             "electricity": true,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -154,6 +191,8 @@
         {
           "name": "Plains",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -161,7 +200,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -169,6 +210,8 @@
         {
           "name": "Space (cold)",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -176,7 +219,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -184,6 +229,8 @@
         {
           "name": "Space (force)",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -191,7 +238,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -199,6 +248,8 @@
         {
           "name": "Subterranean",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": true,
             "bludgeoning": true,
@@ -206,7 +257,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -214,6 +267,8 @@
         {
           "name": "Urban",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -221,7 +276,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": true
           }
@@ -229,6 +286,8 @@
         {
           "name": "Weird (force)",
           "formula": "(@classes.mystic.levels)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -236,12 +295,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -251,7 +313,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.B2i7KSug0gRIlgT0]{Trailblazer}</p>\n<p>While in your bonded biome, you can spend 1 Resolve Point as a standard action to channel the biome into a violent blast in a 20-foot-radius burst with a range of 100 feet, dealing 1d6 damage per mystic level (Reflex half).</p>\n<p>The damage type or types are based on your biome:</p>\n<ul>\n<li>Airborne: bludgeoning;</li>\n<li>Aquatic: cold and piercing;</li>\n<li>Arctic: cold and sonic;</li>\n<li>Desert: slashing and fire;</li>\n<li>Forest: slashing;</li>\n<li>Marsh: acid;</li>\n<li>Mountain: sonic;</li>\n<li>Other: piercing, acid, or electricity;</li>\n<li>Plains: electricity;</li>\n<li>Space: cold or force;</li>\n<li>Subterranean: acid and bludgeoning;</li>\n<li>Urban: piercing and sonic;</li>\n<li>Weird: force.</li>\n</ul>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -262,18 +324,16 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 100
+      "value": "100"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "12th Level",
     "rollNotes": "",
@@ -282,13 +342,18 @@
       "dc": "10+floor(@classes.mystic.levels/2)+@abilities.wis.mod",
       "descriptor": "half"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GEM pg. 20",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

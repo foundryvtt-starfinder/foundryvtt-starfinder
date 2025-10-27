@@ -4,13 +4,9 @@
   "type": "hybrid",
   "img": "systems/sfrpg/icons/default/energise.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "capacity": {
       "max": 1,
@@ -61,7 +56,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -71,18 +67,17 @@
       "unidentified": "",
       "value": "<h1>Prescient Lenses</h1>\n<p>Prescient lenses blend quantum computing and divination magic to model, extrapolate, and display events happening in the next few seconds as translucent holograms. A pair of lenses has one charge, which is refreshed each day, and a creature can benefit from a single use of prescient lenses each day (with any subsequent attempt showing the same few seconds of time as the first daily use). Prescient lenses were originally as optical enhancements for the robotic anacites of @UUID[Compendium.sfrpg.setting.Item.Gxsy07AQwteFkPhh]{Aballon} and can be integrated into a robot for the listed price. Alternatively, they can be installed as a cybernetic eye augmentation for 1,000 additional credits.</p>\n<p>Mk 1: You can study the image in the lenses as a move action and gain a +1 insight bonus to a single attack roll, ability check, or skill check attempted before the start of your next turn. Attempting an attack roll or check expends the charge.</p>\n<p>Mk 2: These function as mk 1 prescient lenses, but you can instead roll the attack roll or check twice and take the better of the two results.</p>\n<p>Mk 3: These function as mk 2 prescient lenses, but as a reaction you can instead reroll a failed attack roll, ability check, or skill check.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 0,
     "identified": false,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 14,
     "limitedWear": true,
     "modifiers": [
@@ -91,8 +86,10 @@
         "name": "Prescient Lenses, Mk 3",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "formula",
@@ -106,8 +103,10 @@
         "name": "Prescient Lenses, Mk 3",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "ability-checks",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "formula",
@@ -121,8 +120,10 @@
         "name": "Prescient Lenses, Mk 3",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-skills",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "formula",
@@ -133,24 +134,27 @@
       }
     ],
     "price": 77000,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "PW pg. 203",
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -158,8 +162,8 @@
       "value": 1
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }

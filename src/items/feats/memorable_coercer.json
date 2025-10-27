@@ -4,8 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/memorable_coercer.webp",
   "system": {
-    "type": "",
-    "ability": null,
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -13,12 +12,21 @@
       "condition": "",
       "cost": 0
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -27,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,7 +46,7 @@
       "unidentified": "",
       "value": "<p>You know how to use coercion to change people’s minds without suffering the consequences.</p>\n<p><strong>Prerequisites</strong>: Intimidate 1 rank.</p>\n<hr />\n<p><strong>Benefit</strong>: You gain a +1 insight bonus to Intimidate checks. In addition, when you successfully use Intimidate to bully an opponent, the target must attempt a Will saving throw once the intimidation wears off. The DC is equal to 10 + your number of ranks in Intimidate. If the target fails this save, their attitude toward you becomes indifferent and they won’t report you to any authorities.</p>\n<p><strong>Normal</strong>: The target of a successful Intimidate check to bully is unfriendly to you after the duration of the attitude change ends.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "feat",
       "combat": false,
@@ -48,15 +57,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "8bd04e70-e83d-406d-9b33-160c4882b13e",
         "name": "Memorable Coercer",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "constant",
@@ -68,30 +79,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "The Chimera Mystery",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

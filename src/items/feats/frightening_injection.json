@@ -4,7 +4,6 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/frightening_injection.webp",
   "system": {
-    "type": "",
     "ability": "",
     "actionTarget": "",
     "actionType": "",
@@ -13,12 +12,21 @@
       "condition": "Successfully inject a creature with a substance using a weapon that has the injection special property.",
       "cost": 1
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -27,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,7 +46,7 @@
       "unidentified": "",
       "value": "<p>You accompany your injections with a promise of terrible effects that shakes your target’s resolve.</p>\n<p><strong>Prerequisites</strong>: Intimidate 3 ranks.</p>\n<hr />\n<p><strong>Benefit</strong>: When you successfully inject a creature with a substance (including a biohacker’s biohack) using a weapon that has the injection special property, you can attempt an Intimidate check to demoralize that creature as a move action before the end of your turn. A creature can be affected by this ability only once per day.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "feat",
       "combat": false,
@@ -48,33 +57,35 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": null,
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Character Operation Manual",
     "target": {
-      "type": "",
       "value": "Injected target."
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

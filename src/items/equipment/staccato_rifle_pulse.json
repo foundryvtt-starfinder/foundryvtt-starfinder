@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "2",
     "capacity": {
       "max": 40,
@@ -92,8 +87,10 @@
       "effect": "Deafen",
       "parts": [
         {
+          "name": "",
           "formula": "",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -101,7 +98,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -114,6 +113,7 @@
           "name": "",
           "formula": "1d10",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -121,12 +121,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": true
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -136,7 +139,6 @@
       "unidentified": "",
       "value": "<p>A baffled tube on the underside of a staccato rifle produces and modulates discrete blasts of sonic frequencies. The rifle’s unique construction enables a fully automatic mode, producing a sound like drumming. The frequencies can leave a target’s auditory senses overwhelmed. Pulse staccato rifles have the shortest sonic projector for reliable repetitive shots with less power usage. Surge, drum, and hammer staccato rifles require more charge for a harder hit.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -146,7 +148,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 4,
     "modifiers": [],
@@ -251,8 +253,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "40"
     },
@@ -264,8 +264,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 51",
     "special": "",
     "specialMaterials": {
@@ -285,7 +287,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

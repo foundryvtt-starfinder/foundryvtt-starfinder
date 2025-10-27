@@ -944,108 +944,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "con": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       },
       "dex": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 10
+        "base": 4
       },
       "int": {
-        "base": -2,
-        "min": 3,
-        "misc": 0,
-        "mod": -2,
-        "value": 10
+        "base": -2
       },
       "str": {
-        "base": 6,
-        "min": 3,
-        "misc": 0,
-        "mod": 6,
-        "value": 10
+        "base": 6
       },
       "wis": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 10
+        "base": 2
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 22,
-        "min": 0,
-        "tooltip": [],
-        "value": 22
+        "base": 22
       },
       "fort": {
-        "base": 13,
-        "bonus": 13,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 13
       },
       "hp": {
         "max": 145,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 145
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 4,
         "value": 4
       },
       "kac": {
-        "base": 24,
-        "min": 0,
-        "tooltip": [],
-        "value": 24
+        "base": 24
       },
-      "keyability": "",
       "reach": "10 ft.",
       "reflex": {
-        "base": 13,
-        "bonus": 13,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 13
       },
       "space": "10 ft.",
       "speed": {
@@ -1066,16 +1010,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 10,
-        "bonus": 10,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 10
       }
     },
     "conditions": {
@@ -1100,6 +1038,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1115,9 +1054,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1125,9 +1061,8 @@
     "details": {
       "type": "Dragon",
       "alignment": "CE",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1139,7 +1074,7 @@
         "value": "<h2>Description</h2>\n<p>Radiation drakes are mighty and dangerous predators found on worlds with extensive radioactivity, such as natural deposits of radioactive ores or irradiated wastelands left by atomic warfare. These drakes are also common on worlds with kaiju-enormous creatures that exist outside the world’s ecosystem. It’s a mystery whether a link between radiation drakes and kaiju exists that leads to their overlapping presence on some planets, but it’s worth noting that when kaiju and radiation drakes meet, they are likely to ignore each other. However, some radiation drakes live in symbiotic relationships with specific kaiju, feeding on parasites that infest the massive monsters, cleaning up after their kills, and sometimes dwelling among young kaiju and protecting them from predators. It has been suggested that radiation drakes are the offspring of some dragon kaiju, though there is little evidence to support this. Radiation drakes are capable of speech and advanced planning, but primarily act out of instinct.</p>\n<p>A radiation drake is dark in coloration, most often black or dull green, but it has bright crystalline teeth and spikes running along its spine. The drake has a draconic appearance, long neck and tail, wings, and powerful hind legs, but no front legs. In addition to its bite, a radiation drake is able to unleash radioactive fire breath in either singletarget bolts or a wide cone of irradiated flames. A split second before unleashing this breath weapon, the crystal spikes along a radiation drake’s spines glow with the white-hot light of a nuclear fire.</p>\n<p>A typical radiation drake is 15 feet long from nose to tail tip and weighs 1,000 pounds.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 9,
       "environment": "any",
       "organization": "solitary, pair, or rad (3-9)",
@@ -1147,21 +1082,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AP #8 pg. 56",
-      "subtype": "",
-      "xp": {
-        "value": 10
-      }
+      "subtype": ""
     },
     "modifiers": [
       {
+        "_id": "f64ec435-c05b-4ba6-916e-5d7b2fb1602c",
         "name": "Damage Reduction",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "5",
         "modifierType": "constant",
@@ -1171,21 +1105,15 @@
         "valueAffected": "magic"
       }
     ],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1193,10 +1121,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1204,10 +1131,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1215,10 +1141,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1226,10 +1151,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1237,10 +1161,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1248,10 +1171,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1259,10 +1181,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1270,10 +1191,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 22,
         "ranks": 22,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1281,10 +1201,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1292,10 +1211,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1303,10 +1221,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1314,10 +1231,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1325,10 +1241,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1336,10 +1251,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1347,9 +1261,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1359,10 +1271,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1370,10 +1281,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1381,10 +1291,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1392,47 +1301,40 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1443,19 +1345,11 @@
           "asleep"
         ]
       },
-      "damageReduction": {
-        "negatedBy": "magic",
-        "value": 5
-      },
       "di": {
         "custom": "Paralysis",
         "value": [
           "radiation"
         ]
-      },
-      "dr": {
-        "custom": "",
-        "value": []
       },
       "dv": {
         "custom": "",
@@ -1469,9 +1363,6 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "large",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

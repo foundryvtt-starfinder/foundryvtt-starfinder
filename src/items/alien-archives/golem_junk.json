@@ -763,108 +763,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": -3,
-        "min": 3,
-        "misc": 0,
-        "mod": -3,
-        "value": 10
+        "base": -3
       },
       "con": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "dex": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       },
       "int": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "str": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 5,
-        "value": 10
+        "base": 5
       },
       "wis": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 16,
-        "min": 0,
-        "tooltip": [],
-        "value": 16
+        "base": 16
       },
       "fort": {
-        "base": 4,
-        "bonus": 4,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 4
       },
       "hp": {
         "max": 50,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 50
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 3,
         "value": 3
       },
       "kac": {
-        "base": 18,
-        "min": 0,
-        "tooltip": [],
-        "value": 18
+        "base": 18
       },
-      "keyability": "",
       "reach": "10 ft.",
       "reflex": {
-        "base": 4,
-        "bonus": 4,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 4
       },
       "space": "10 ft.",
       "speed": {
@@ -885,16 +829,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 1,
-        "bonus": 1,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 1
       }
     },
     "conditions": {
@@ -919,6 +857,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -934,9 +873,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -944,9 +880,8 @@
     "details": {
       "type": "Construct (magical, technological)",
       "alignment": "N",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -958,7 +893,7 @@
         "value": "<h2>Description</h2>\n<p>Junk golems are constructed using random metal and electronic scrap found in junkyards, such as rusted pieces of vehicles, broken vidscreens, and discarded food tins. They’re favored by certain tribes of space goblins, who find their ingenuity in building these hulking constructs matched only by their prudence in making a hasty retreat when the golem inevitably goes berserk.</p>\n<h2>Golem</h2>\n<p>These automatons, created by powerful spellcasters, differ from most robots in that each has an elemental spirit bound within. Properly binding this spirit, which is usually from an earth elemental, is the most important part of creating a golem. As the spirit is only semiconscious, the golem exists in a mindless state and acts only to defend itself or to follow orders from its creator. In some golems, injury causes the elemental spirit to stir in its artificial shell. As it gains awareness, it rages at its imprisonment.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 4,
       "environment": "any",
       "organization": "solitary or gang (2-4)",
@@ -966,21 +901,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "SA:JD pg. 61",
-      "subtype": "Magical, Technological",
-      "xp": {
-        "value": 10
-      }
+      "subtype": "Magical, Technological"
     },
     "modifiers": [
       {
+        "_id": "cf3ab5f9-cb5a-4c83-b255-d532dc9fd3dd",
         "name": "Damage Reduction",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "5",
         "modifierType": "constant",
@@ -990,21 +924,15 @@
         "valueAffected": "adamantine"
       }
     ],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1012,10 +940,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1023,10 +950,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1034,10 +960,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1045,10 +970,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1056,10 +980,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1067,10 +990,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1078,10 +1000,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1089,10 +1010,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1100,10 +1020,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1111,10 +1030,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1122,10 +1040,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1133,10 +1050,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 10,
         "ranks": 10,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1144,10 +1060,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1155,10 +1070,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1166,9 +1080,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1178,10 +1090,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1189,10 +1100,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1200,10 +1110,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1211,47 +1120,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1260,16 +1162,8 @@
         "custom": "Construct Immunities; Magic",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "adamantine",
-        "value": 5
-      },
       "di": {
         "custom": "Construct Immunities; Magic",
-        "value": []
-      },
-      "dr": {
-        "custom": "",
         "value": []
       },
       "dv": {
@@ -1282,9 +1176,6 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "large",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

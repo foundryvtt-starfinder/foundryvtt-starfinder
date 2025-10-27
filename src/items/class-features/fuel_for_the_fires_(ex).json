@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "other",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "",
       "cost": 0
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,6 +39,8 @@
         {
           "name": "Single damage",
           "formula": "(lookupRange(@classes.nanocyte.levels, 0, 5, 1, 9, 2, 13, 3, 17, 4))d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -41,7 +48,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -49,6 +58,8 @@
         {
           "name": "Area damage",
           "formula": "(lookupRange(@classes.nanocyte.levels, 0, 5, 1, 9, 2, 13, 3, 17, 4))d4",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -56,12 +67,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -71,7 +85,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.N5460NEe031AoP29]{Absorption}</p>\n<p>You repurpose incoming damage, using it to make your own attacks deadlier. When you use your defensive dispersal ability to reduce the damage you take from an effect, you enhance the next attack you make with a weapon created by your gear array made before the end of your next turn. If the attack hits, it deals 1d6 additional damage (or 1d4 additional damage if the weapon attacks all creatures in an area). This additional damage increases by 1d6 (or 1d4 for attacks against an area) at 9th level, 13th level, and 17th level. Alternatively, when a creature in your cloud array takes damage before the end of your next turn, you can expend your absorbed energy to increase the damage the creature takes by 1d6 (increased to 2d6 at 9th level, 3d6 at 13th level, and 4d6 at 17th level). Either form of additional damage is of the same type as the attack’s normal damage.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -82,18 +96,15 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "5th Level",
     "rollNotes": "",
@@ -102,14 +113,19 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GM pg. 26",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

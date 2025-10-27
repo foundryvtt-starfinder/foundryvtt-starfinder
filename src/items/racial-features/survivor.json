@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "",
       "cost": 0
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -86,19 +92,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "b72ed770-256b-4b68-a5d0-be4c647348a4",
         "name": "Survivor",
         "type": "racial",
         "condition": "",
-        "container": {
-          "actorId": "Qs2gOWidvlhDWFVK",
-          "itemId": "RoOyQ4ab1rOMmyHm"
-        },
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "constant",
@@ -112,12 +116,10 @@
         "name": "Survivor",
         "type": "racial",
         "condition": "",
-        "container": {
-          "actorId": "Qs2gOWidvlhDWFVK",
-          "itemId": "RoOyQ4ab1rOMmyHm"
-        },
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "constant",
@@ -131,12 +133,10 @@
         "name": "Survivor (Underground)",
         "type": "racial",
         "condition": "",
-        "container": {
-          "actorId": "Qs2gOWidvlhDWFVK",
-          "itemId": "RoOyQ4ab1rOMmyHm"
-        },
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 3,
         "modifier": "3",
         "modifierType": "constant",
@@ -150,12 +150,10 @@
         "name": "Survivor (Underground)",
         "type": "racial",
         "condition": "",
-        "container": {
-          "actorId": "Qs2gOWidvlhDWFVK",
-          "itemId": "RoOyQ4ab1rOMmyHm"
-        },
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 3,
         "modifier": "3",
         "modifierType": "constant",
@@ -167,29 +165,31 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Damai",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AA2 pg. 32",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "day",
       "value": null
     }

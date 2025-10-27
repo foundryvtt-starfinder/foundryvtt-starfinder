@@ -4,13 +4,9 @@
   "type": "magic",
   "img": "systems/sfrpg/icons/default/magick-trick.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 1,
@@ -61,7 +56,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -71,18 +67,17 @@
       "unidentified": "",
       "value": "<p>This tiny ornamental copper lantern draws inspiration from the Eldest known as the Lantern King, a notorious trickster fey. The lantern is typically worn as a necklace or belt bauble, and its interior dances with a magic red flame that sheds no appreciable heat or light. While wearing the lantern, you’re aware of any magic that would discern or prohibit your lying, even if it has failed to affect you, and you gain a +2 resistance bonus to saving throws against such effects. Once per hour when a creature within 30 feet of you rolls a natural 1 when attempting a skill check or saving throw, you can intensify their failure as a reaction, causing additional minor mishaps that give the target your choice of the @UUID[Compendium.sfrpg.conditions.Item.v9RNVTqyTyaPchvd]{Bleeding 1d8}, @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed}, or @UUID[Compendium.sfrpg.conditions.Item.yUtkoIshf4dPruNd]{Off-Target} conditions in addition to any other effects of failure. The flat-footed and off-target effects last 1 round, and the bleeding effect ends after 1d4+1 rounds if not stopped earlier.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "equippable": false,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 0,
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 6,
     "limitedWear": true,
     "modifiers": [
@@ -91,8 +86,10 @@
         "name": "New Lantern’s laughing lie",
         "type": "resistance",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": true,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "formula",
@@ -103,24 +100,27 @@
       }
     ],
     "price": 4300,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GM pg. 51",
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -128,8 +128,8 @@
       "value": 1
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }

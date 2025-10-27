@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/classes/analyst.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -16,12 +12,21 @@
       "condition": "",
       "cost": 1
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,7 +46,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.yXBlDiVu3PiTBexY]{Delusion}</p>\n<p>You can reach into others' minds and distort their perceptions of friend or foe. As a standard action, select a creature within 30 feet and choose paranoia or conviviality. That creature must succeed at a Will save or suffer the chosen perceptual warp. If you chose paranoia, the target treats all other creatures as enemies and only itself as an ally, must attempt attacks of opportunity whenever any creature provokes them, and is shaken while adjacent to more than one creature. If you chose conviviality, the target treats all creatures as allies and can’t attack or take hostile actions against any creature; whenever a creature affected by conviviality is attacked, it can attempt an additional saving throw against this effect. This perceptual warp lasts for 1 round, plus 1 round for every 5 mystic levels you have. Once a creature succeeds at its saving throw against this ability, it is immune to further uses for 24 hours.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -51,33 +57,35 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Delusion Connection",
     "target": {
-      "type": "",
       "value": "A creature"
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

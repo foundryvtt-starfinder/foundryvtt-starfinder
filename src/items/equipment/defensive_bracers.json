@@ -4,11 +4,7 @@
   "type": "magic",
   "img": "icons/equipment/wrist/bracer-burnished-steel-purple.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 0,
@@ -61,7 +56,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -71,18 +67,17 @@
       "unidentified": "",
       "value": "<p>These thin yet sturdy metallic bracers have a surprising heft to them. You can wear defensive bracers only if you are wearing light or no armor. As a reaction when you are targeted by an attack or are in the area of effect of an effect that allows a Reflex save to avoid damage, you can activate the bracers to gain a +2 insight bonus to your AC and Reflex saves against that attack or effect. You can’t use this ability again until you spend 1 Resolve Point to regain Stamina Points after a 10-minute rest</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 0,
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 6,
     "limitedWear": true,
     "modifiers": [
@@ -91,8 +86,10 @@
         "name": "Defensive Bracers",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "constant",
@@ -106,8 +103,10 @@
         "name": "Defensive Bracers",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "save",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "constant",
@@ -118,24 +117,28 @@
       }
     ],
     "price": 4200,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 154",
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

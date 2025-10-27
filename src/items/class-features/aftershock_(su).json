@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "none",
       "condition": "Use a zenith revelation",
       "cost": null
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "2ada0f71-6b3c-494a-9dd1-7f6d7b090c65",
         "name": "Aftershock (Su) - AC +1",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "+1",
         "modifierType": "constant",
@@ -110,8 +118,10 @@
         "name": "Aftershock (Su) - Cha AC",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "- @abilities.dex.mod + @abilities.cha.mod",
         "modifierType": "constant",
@@ -125,8 +135,10 @@
         "name": "Aftershock (Su) - Str to Cha Attack",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "- @abilities.str.mod + @abilities.cha.mod",
         "modifierType": "formula",
@@ -140,8 +152,10 @@
         "name": "Aftershock (Su) - Dex to Cha Attack",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "- @abilities.dex.mod + @abilities.cha.mod",
         "modifierType": "formula",
@@ -155,8 +169,10 @@
         "name": "Aftershock (Su) - Str to Cha Damage",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "- @abilities.str.mod + @abilities.cha.mod",
         "modifierType": "formula",
@@ -170,8 +186,10 @@
         "name": "Aftershock (Su) - Dex to Cha Damage",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "- @abilities.dex.mod + @abilities.cha.mod",
         "modifierType": "formula",
@@ -185,8 +203,10 @@
         "name": "Aftershock (Su) - Cha Damage bonus",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "+ @abilities.cha.mod",
         "modifierType": "formula",
@@ -198,25 +218,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "8th Level Solarian Enhanced",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 67",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

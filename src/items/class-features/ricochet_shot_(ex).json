@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "",
     "activation": {
       "type": "none",
       "condition": "",
       "cost": null
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -89,15 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "25dd483c-eb61-42da-8736-08cdc7ba0a83",
         "name": "Ricochet Shot (Second Shot)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ranged-attacks",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "-6",
         "modifierType": "formula",
@@ -204,14 +211,12 @@
       "wideLine": false
     },
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "6th Level Operative",
     "rollNotes": "",
@@ -222,11 +227,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 151",
     "target": {
-      "type": "",
       "value": "Within line of sight of the first target"
     },
     "uses": {

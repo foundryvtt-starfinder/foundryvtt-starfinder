@@ -4,17 +4,22 @@
   "type": "feat",
   "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "move",
       "condition": "",
       "cost": null
+    },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
     },
     "area": {
       "effect": "",
@@ -30,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +94,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "2c8d17b4-0888-4a91-90d2-804537898725",
         "name": "Planar Radiance (Su)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 6,
         "modifier": "1d6",
         "modifierType": "formula",
@@ -108,14 +116,11 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "6th Level Solarian",
     "rollNotes": "",
@@ -124,9 +129,14 @@
       "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "DC pg. 45",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

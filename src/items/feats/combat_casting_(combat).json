@@ -4,8 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/combat_casting.webp",
   "system": {
-    "type": "",
-    "ability": null,
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -13,12 +12,21 @@
       "condition": "",
       "cost": 0
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -27,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,7 +46,7 @@
       "unidentified": "",
       "value": "<p>You leave fewer openings when casting a spell.</p>\n<p><strong>Prerequisites</strong>: Ability to cast 2nd-level spells.</p>\n<hr />\n<p><strong>Benefit</strong>: You gain a +2 bonus to your Armor Class and saving throws against attacks of opportunity you provoked by casting a spell and against readied actions triggered by your spellcasting.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "feat",
       "combat": true,
@@ -48,19 +57,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "156fb977-60f1-4595-8dcc-728a2f462efe",
         "name": "Combat Casting",
         "type": "untyped",
         "condition": "",
-        "container": {
-          "actorId": "OBr55AMenkfdhVpb",
-          "itemId": "iE7TyeiY8cU2FDba"
-        },
+        "damage": null,
         "effectType": "saves",
         "enabled": false,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "formula",
@@ -72,30 +79,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Core Rulebook",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

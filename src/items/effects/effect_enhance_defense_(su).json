@@ -5,9 +5,6 @@
   "img": "systems/sfrpg/icons/default/stopwatch.svg",
   "system": {
     "type": "effect",
-    "abilityMods": {
-      "parts": []
-    },
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
@@ -21,15 +18,9 @@
     },
     "context": {
       "origin": {
-        "actorUuid": "",
-        "itemUuid": ""
+        "actorUuid": null,
+        "itemUuid": null
       }
-    },
-    "critical": {
-      "parts": []
-    },
-    "damage": {
-      "parts": []
     },
     "description": {
       "chat": "",
@@ -45,11 +36,13 @@
         "name": "Effect: Enhance Defense (Su)",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "lookupRange(@origin.actor.details.level.value, 0, 2, 1, 8, 2, 14, 3)",
-        "modifierType": "situational",
+        "modifierType": "constant",
         "notes": "",
         "source": "",
         "subtab": "misc",
@@ -58,6 +51,7 @@
     ],
     "requirements": "2nd Level (Technomancer)",
     "showOnToken": true,
+    "slug": "",
     "source": "EN pg. 78",
     "turnEvents": []
   }

@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "ac5",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 1,
@@ -52,7 +47,7 @@
     "chatFlavor": "staggered",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -72,7 +67,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -82,9 +78,8 @@
       "unidentified": "",
       "value": "<p>Disruption grenades work in a way similar to the rifles and pistols. Temporal disruption grenades, on the other hand, slow down the rate of subatomic movement, halting those affected by it for a short period of time but not otherwise damaging those within the blast.</p>\n<p>The radius of a disruption grenade’s explosion is reduced to 10 feet if it used on any plane other than the Material Plane. If used in @UUID[Compendium.sfrpg.setting.Item.nb5A5e7HqTnvVjtX]{The Drift}, those caught in the blast radius can roll their saving throws twice and take the better result when attempting to halve the amount of damage taken or negate any secondary effects.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": "Stunned 1 round"
     },
     "equippable": true,
@@ -92,7 +87,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 10,
     "modifiers": [],
@@ -189,10 +184,8 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "rollNotes": "",
     "save": {
@@ -200,11 +193,16 @@
       "dc": "15+@abilities.dex.mod",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -212,11 +210,11 @@
       "value": 1
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "charges",
       "value": 1
     },
-    "weaponCategory": "",
+    "weaponCategory": "uncategorized",
     "weaponType": "grenade"
   }
 }

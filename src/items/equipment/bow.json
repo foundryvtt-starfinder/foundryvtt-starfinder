@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/weapons/bows/bow-ornamental-silver-black.webp",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 1,
@@ -98,6 +93,7 @@
           "name": "",
           "formula": "1d6",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -105,12 +101,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -120,7 +119,6 @@
       "unidentified": "",
       "value": "<p>Modern compound bows are made of aluminum alloys, for superior lightness and durability. The string is made of high- performance polyethylene. Bows fire arrows as ammunition, and they can also be used with grenade arrows for more customized damage and effects.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -130,7 +128,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 1,
     "modifiers": [],
@@ -235,8 +233,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "60"
     },
@@ -248,8 +244,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "CRB pg. 179",
     "special": "",
     "specialMaterials": {
@@ -269,7 +267,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

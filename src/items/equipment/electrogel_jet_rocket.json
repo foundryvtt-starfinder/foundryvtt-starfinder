@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -21,8 +17,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 40,
@@ -52,7 +47,7 @@
     "chatFlavor": "mire 1 round",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -84,14 +79,26 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "3d8",
-          "operator": "and",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": true,
-            "electricity": true
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": true,
+            "fire": false,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -101,9 +108,8 @@
       "unidentified": "",
       "value": "<p>Lethal Innovations developed this weapon with assistance from a barathu consulting firm. An electrogel jet is a bulbous, blue creature with pulsing veins and soft tentacles that grasp the wielder’s arm to help support the weapon’s heavy weight. The creature’s bulbous sacs synthesize an electrical gel that shocks and burns targets before falling to the ground, where it forms a sticky layer. Owners who wish to refill an electrogel jet without waiting for the weapon to grow its own fuel can substitute caustrol, a synthetic acid with the same price and container size as petrol.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": "mire 1 round"
     },
     "equippable": true,
@@ -111,7 +117,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 11,
     "modifiers": [],
@@ -207,22 +213,25 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 50
+      "value": "50"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AR",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -230,7 +239,7 @@
       "value": 4
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 2
     },

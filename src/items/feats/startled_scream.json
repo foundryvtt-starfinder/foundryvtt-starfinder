@@ -4,8 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/startled_scream.webp",
   "system": {
-    "type": "",
-    "ability": null,
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -13,12 +12,21 @@
       "condition": "Scream before initiative is rolled during an encounter.",
       "cost": 0
     },
+    "activationEvent": {
+      "activationTurn": "parent",
+      "deactivatedAt": 0,
+      "endTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryTurn": "parent",
+      "startTime": 0,
+      "status": ""
+    },
     "area": {
       "effect": "",
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -27,7 +35,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,26 +46,28 @@
       "unidentified": "",
       "value": "<p>When something bad is about to go down, you scream to let everyone know.</p>\n<hr />\n<p><strong>Benefit</strong>: Before initiative is rolled during an encounter, you can scream as part of<a href=\"https://www.aonsrd.com/Rules.aspx?Name=Other%20Actions&amp;Category=Actions%20in%20Combat\">combat banter</a>even if you’re surprised. If you do, allies who are surprised but can hear you don’t gain the @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-footed} condition, while allies who aren’t surprised gain a +1 insight bonus to initiative checks. You gain the appropriate benefit depending on whether you are surprised or not. However, your scream is loud, possibly drawing the attention of foes that can hear you and alerting others within earshot. You’re also @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken} until the end of your next turn.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "feat",
       "combat": false,
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": "Until the end of your next turn."
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "80b8430e-79ec-4f41-b813-e12e40567b68",
         "name": "Startled Scream",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "initiative",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "formula",
@@ -68,30 +79,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "The Diaspora Strain",
     "target": {
-      "type": "",
       "value": "Allies within earshot."
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

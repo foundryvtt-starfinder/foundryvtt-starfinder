@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/weapons/swords/sword-hooked.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 20,
@@ -52,7 +47,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -95,14 +90,26 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "2d6 + @abilities.str.mod",
-          "operator": "and",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": true
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -112,7 +119,6 @@
       "unidentified": "",
       "value": "<p>Velstracs wield flensers —blades designed to slice skin from muscle and muscle from bone—sometimes mounting these knives on rifles as bayonets. Flensers are honed to supernatural sharpness and powered to vibrate with the rhythms of the wielder’s body. Velstracs have mastered the art of using these advanced melee weapons to inflict wounds while keeping targets alive. The table above shows an array of flensers, which can be purchased only in the darkest corners of the galaxy.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -122,7 +128,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 7,
     "modifiers": [],
@@ -218,10 +224,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
@@ -229,11 +232,16 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AA2 pg. 129",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -241,7 +249,7 @@
       "value": 1
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

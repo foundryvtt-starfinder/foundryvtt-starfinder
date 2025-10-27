@@ -4,7 +4,6 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/caustolance-liquidator.webp",
   "system": {
-    "type": "",
     "ability": "dex",
     "actionTarget": "eac",
     "actionType": "rwak",
@@ -40,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 20,
@@ -95,6 +93,7 @@
           "name": "",
           "formula": "1d6",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": true,
             "bludgeoning": false,
@@ -102,12 +101,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -117,7 +119,6 @@
       "unidentified": "",
       "value": "<p>Drawing upon the same design and inspirations as the caustoject, this larger weapon is designed to resemble an assault rifle rather than a pistol. As with its smaller cousin, a caustolance uses its battery to generate an acidic field to inject directly into its targets, but it can also handle and discharge other substances that are poured into a special tank that is attached to the weapon’s barrel.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -127,7 +128,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 1,
     "modifiers": [],
@@ -232,8 +233,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "60"
     },
@@ -245,8 +244,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "COM pg. 123",
     "special": "",
     "specialMaterials": {
@@ -266,7 +267,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

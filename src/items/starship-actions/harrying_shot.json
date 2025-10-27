@@ -4,7 +4,6 @@
   "type": "starshipAction",
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": {
       "resolve": false,
       "value": "10 + Enemy Pilot's ranks in Piloting"
@@ -21,10 +20,14 @@
     "formula": [
       {
         "name": "Gunnery",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "max(@minorCrew.attributes.baseAttackBonus.value, @minorCrew.skills.pil.ranks, @minorCrew.skills.gun.mod) + @minorCrew.abilities.dex.mod"
       }
     ],
     "isPush": false,
+    "modifiers": [],
     "order": 31,
     "phase": {
       "name": "Gunnery phase",
@@ -36,6 +39,7 @@
     "selectors": [
       "minorCrew"
     ],
+    "slug": "",
     "source": "CRB"
   }
 }

@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 20,
@@ -52,7 +47,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -84,13 +79,26 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "3d10 + @abilities.str.mod",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
-            "fire": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -100,7 +108,6 @@
       "unidentified": "",
       "value": "<p>A flame spinner consists of two weighted balls attached to a length of cable; the pair is spun in an elegant, showy dance of spinning fire. Fireball and immolation flame spinners use petrol to generate a flaming nimbus around the ball’s metal casing, while supernova and fission flame spinners dispense with the casing and instead compress the petrol to generate a dense mass of blazing heat in place of each ball. Using a flame spinner effectively is difficult due to the complex handling required, and kasathas and other races with additional limbs find they have a substantial advantage in that regard.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -110,7 +117,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 12,
     "modifiers": [],
@@ -206,10 +213,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
@@ -217,11 +221,16 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AR pg. 12",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -229,7 +238,7 @@
       "value": 1
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

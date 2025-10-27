@@ -2406,103 +2406,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 16
+        "base": 3
       },
       "con": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 16
+        "base": 3
       },
       "dex": {
-        "base": 6,
-        "min": 3,
-        "misc": 0,
-        "mod": 6,
-        "value": 22
+        "base": 6
       },
       "int": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 18
+        "base": 4
       },
       "str": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 12
+        "base": 1
       },
       "wis": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 14
+        "base": 2
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 22,
-        "min": 0,
-        "tooltip": [],
-        "value": 22
+        "base": 22
       },
       "fort": {
-        "base": 8,
-        "bonus": 8,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 8
       },
       "hp": {
         "max": 135,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 135
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 9,
         "value": 9
       },
       "kac": {
-        "base": 23,
-        "min": 0,
-        "tooltip": [],
-        "value": 23
+        "base": 23
       },
-      "keyability": "",
       "reach": "0",
       "reflex": {
-        "base": 11,
-        "bonus": 11,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 11
       },
       "space": "0",
       "speed": {
@@ -2523,21 +2472,49 @@
         "special": "original base: 50 ft.",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 12,
-        "bonus": 12,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 12
       }
     },
-    "conditions": {},
-    "counterClasses": {
-      "values": {}
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
     },
     "currency": {
       "credit": 0,
@@ -2546,9 +2523,8 @@
     "details": {
       "type": "Fey",
       "alignment": "LE",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -2560,7 +2536,7 @@
         "value": "<p>Exiled aeons ago from the First World for unspeakable crimes against other fey, svartalfars fled to the Shadow Plane. When @UUID[Compendium.sfrpg.setting.Item.FYV6RgTjPdg72RF0]{Triune} bestowed Drift technology to the universe, svartalfars channeled their vengeful energies away from the fey who expelled them to focus on an inscrutable endgame spanning both the galaxy and the planes. Many of these calculating killers have realized that the universal currencies of money and power can advance their race further than can the arcane knowledge they once sought as payment for their services.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 9,
       "environment": "any (Shadow Plane)",
       "organization": "solitary, pair, cabal (3-10), or clan (11-30)",
@@ -2568,21 +2544,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AP #11 pg. 60",
-      "subtype": "Extraplanar",
-      "xp": {
-        "value": 6400
-      }
+      "subtype": "Extraplanar"
     },
     "modifiers": [
       {
+        "_id": "6c241047-65be-4b42-9506-e740ca899984",
         "name": "Damage Reduction",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "10",
         "modifierType": "constant",
@@ -2598,10 +2573,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 23,
         "ranks": 23,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -2609,10 +2583,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -2620,10 +2593,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -2631,10 +2603,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -2642,10 +2613,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -2653,10 +2623,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -2664,10 +2633,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -2675,10 +2643,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -2686,10 +2653,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 18,
         "ranks": 18,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -2697,10 +2663,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -2708,10 +2673,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -2719,10 +2683,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 18,
         "ranks": 18,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -2730,10 +2693,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 18,
         "ranks": 18,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -2741,10 +2703,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -2752,10 +2713,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -2763,9 +2723,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -2775,10 +2733,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -2786,10 +2743,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 23,
         "ranks": 23,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -2797,10 +2753,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 23,
         "ranks": 23,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -2808,47 +2763,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
-        "max": "1",
-        "perClass": {},
-        "value": "1"
+        "max": 1,
+        "value": 1
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -2857,24 +2805,9 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "cold iron",
-        "value": 10
-      },
       "di": {
         "custom": "",
         "value": []
-      },
-      "dr": {
-        "custom": "",
-        "value": [
-          {
-            "cold": "10"
-          },
-          {
-            "electricity": "10"
-          }
-        ]
       },
       "dv": {
         "custom": "Light Blindness",
@@ -2890,9 +2823,6 @@
       },
       "senses": "darkvision 120 ft., low-light vision",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 20
     }
   }

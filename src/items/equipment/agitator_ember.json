@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "2",
     "capacity": {
       "max": 20,
@@ -52,7 +47,7 @@
     "chatFlavor": "Boost 1d4",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -81,10 +76,22 @@
       "effect": "Burn",
       "parts": [
         {
+          "name": "",
           "formula": "1d4",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
-            "fire": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
           }
         }
       ]
@@ -92,13 +99,26 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d8",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
-            "fire": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -108,7 +128,6 @@
       "unidentified": "",
       "value": ""
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -118,7 +137,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 1,
     "modifiers": [],
@@ -211,22 +230,25 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 60
+      "value": "60"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AR",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -234,7 +256,7 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 1
     },

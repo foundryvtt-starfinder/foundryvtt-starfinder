@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/weapons/daggers/dagger-notched-blackened.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "mwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 20,
@@ -98,6 +93,7 @@
           "name": "",
           "formula": "4d4 + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -105,12 +101,15 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -120,7 +119,6 @@
       "unidentified": "",
       "value": "<p>The mirage dagger is an elegant one-handed blade that expels an aura of superheated air that causes visible distortions in the air around it. This minor displacement effect makes it easier to catch enemies off guard with it. A wide, circular guard protects the wielder’s hand while the blade is active. Distortion mirage daggers are the standard model; hallucination and illusion mirage daggers feature increased damage capabilities.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -130,7 +128,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 13,
     "modifiers": [],
@@ -235,10 +233,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
@@ -248,8 +243,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 10",
     "special": "",
     "specialMaterials": {
@@ -269,7 +266,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

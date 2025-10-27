@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "icons/magic/light/explosion-star-orange.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "msak",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -41,6 +37,8 @@
         {
           "name": "Miss",
           "formula": "6d10",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -48,7 +46,9 @@
             "electricity": true,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -56,6 +56,8 @@
         {
           "name": "Hit",
           "formula": "20d10",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -63,12 +65,15 @@
             "electricity": true,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -78,14 +83,14 @@
       "unidentified": "",
       "value": "<p>You attempt to form a miniature star's core inside your target. Choose a point that adjoins the target’s space and is within your reach. Then, attempt a melee attack against the target’s EAC, adding the higher of your key ability modifier or your Strength modifier to the attack roll. On a miss, the effect fills a 5-foot-radius spread, and creatures in the area must attempt Fortitude saving throws. Creatures that fail take 6d10 electricity and fire damage and fall prone. Those that succeed take only half the electricity and fire damage. Medium radiation fills the area, spreading in normal increments, for 1 minute. On a hit, the target must attempt a Fortitude saving throw, taking 20d10 electricity and fire damage and falling prone on a failure. On a success, the target rejects the star core, and the effect is as if you missed. If the damage reduces the hit target to 0 Hit Points, or the target is an object, it (or a cube of the object with edges within 5 feet of the chosen point, a 10-foot cube total) collapses into a tiny orb of luminous plasma at the chosen point. Any nonmagical objects a target creature wears or carries are destroyed. High radiation then fills the area from the chosen point, spreading in normal increments, for 1 minute.</p>\n<p>Casting this spell doesn’t provoke attacks of opportunity.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 6,
     "materials": {
@@ -101,10 +106,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
@@ -113,14 +115,19 @@
       "descriptor": "partial"
     },
     "school": "evo",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GM pg. 82",
     "sr": true,
     "target": {
-      "type": "",
       "value": "one creature or object"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }
