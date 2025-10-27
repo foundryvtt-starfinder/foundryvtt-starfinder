@@ -152,15 +152,6 @@ export function setupHandlebars() {
         return value.capitalize();
     });
 
-    Handlebars.registerHelper('signedNumber', function(value) {
-        const numValue = Number(value);
-        if (numValue !== undefined || !isNaN(numValue)) {
-            return numValue >= 0 ? "+" + String(numValue) : String(numValue);
-        } else {
-            return null;
-        }
-    });
-
     Handlebars.registerHelper('contains', function(container, value) {
         if (!container || !value) return false;
 
