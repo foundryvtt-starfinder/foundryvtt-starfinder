@@ -1595,6 +1595,8 @@ SFRPG.modifierEffectTypesMisc = {
 };
 
 SFRPG.modifierEffectTypesStarship = {
+    "starship-build-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipBuildPoints",
+    "starship-multiply-build-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipMultiplyBuildPoints",
     "starship-hull-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipHullPoints",
     "starship-hull-points-increment": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipHullPointsIncrement",
     "starship-forward-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipForwardAC",

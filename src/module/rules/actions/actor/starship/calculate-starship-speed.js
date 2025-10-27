@@ -1,21 +1,22 @@
 import { SFRPGEffectType } from "../../../../modifiers/types.js";
 
 export default function(engine) {
-    const processModifier = (bonus, data) => {
+    const processModifier = (bonus, data, tooltip) => {
         let computedBonus = 0;
         try {
             const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
             computedBonus = roll.total;
+            tooltip.push(`${bonus.name}: ${computedBonus.signedString()}`);
         } catch (e) {
             console.error(e);
         }
         return computedBonus;
     };
 
-    const applyStackedModifiers = (stackedModifiers, data) => {
+    const applyStackedModifiers = (stackedModifiers, data, tooltip) => {
         return Object.entries(stackedModifiers).reduce((sum, mod) => {
             for (const bonus of mod[1]) {
-                sum += processModifier(bonus, data);
+                sum += processModifier(bonus, data, tooltip);
             }
             return sum;
         }, 0);
@@ -30,13 +31,8 @@ export default function(engine) {
                 context,
                 {actor: fact.actor}
             );
-            const modifierBonus = applyStackedModifiers(stackedModifiers, data);
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data, data.attributes.speed.tooltip);
             data.attributes.speed.value += modifierBonus;
-
-            if (modifierBonus !== 0) {
-                const label = game?.i18n ? game.i18n.localize("SFRPG.StarshipSheet.Modifiers.MiscModifier") : "Misc Modifier";
-                data.attributes.speed.tooltip.push(`${label}: ${modifierBonus.signedString()}`);
-            }
         }
     };
 

@@ -32,7 +32,7 @@
             </ul>
 
             <ul class="attributes flexrow">
-                <li class="attribute health" data-tooltip="{{ localize "SFRPG.HullPoints" }}<br />@attributes.hp.value<br />@attributes.hp.max">
+                <li class="attribute health" data-tooltip="<strong>{{ localize "SFRPG.HullPoints" }}</strong><br />@attributes.hp.value<br />@attributes.hp.max{{#if (length system.attributes.hp.tooltip)}}<br /><strong>{{localize "SFRPG.Modifiers"}}:</strong><br />{{#each system.attributes.hp.tooltip as |tip|}}{{tip}}<br/>{{/each}}{{/if}}">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.HullPoints" }}</h4>
                     <div class="attribute-value multiple">
                         <input name="system.attributes.hp.value" type="text" value="{{system.attributes.hp.value}}"
@@ -61,7 +61,7 @@
                             <label class="error" style="flex: 3; font-size: 12px;">{{localize "SFRPG.StarshipSheet.Attributes.PowerMissing"}}</label>
                             {{/if}}
                         </li>
-                        <li class="flexrow" data-tooltip="{{ localize "SFRPG.StarshipSheet.Attributes.BuildPoints" }}<br/>@attributes.bp.value<br/>@attributes.bp.max<br/><br/>{{ localize "SFRPG.StarshipSheet.Attributes.BuildPointsUsage" }}:<br/>{{#each system.attributes.bp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <li class="flexrow" data-tooltip="<strong>{{ localize "SFRPG.StarshipSheet.Attributes.BuildPoints" }}</strong><br/>@attributes.bp.value<br/>@attributes.bp.max<br/>{{#if (length system.attributes.bp.maxTooltip)}}<br/><strong>{{ localize "SFRPG.StarshipSheet.Attributes.BuildPointsMax" }}:</strong><br/>{{#each system.attributes.bp.maxTooltip as |tip|}}{{tip}}<br/>{{/each}}{{/if}}<br/><strong>{{ localize "SFRPG.StarshipSheet.Attributes.BuildPointsUsage" }}:</strong><br/>{{#each system.attributes.bp.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                             <label>{{localize "SFRPG.StarshipSheet.Header.BP"}}</label>
                             <label>{{system.attributes.bp.value}}</label>
                             <label>{{system.attributes.bp.max}}</label>
@@ -93,11 +93,11 @@
                             <label></label>
                             <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                         </li>
-                        <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}<br/>@attributes.speed.value<br/><br/>{{#each system.attributes.speed.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <li class="flexrow" data-tooltip="<strong>{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}</strong><br/>@attributes.speed.value<br/>{{#if (length system.attributes.speed.tooltip)}}<br/>{{#each system.attributes.speed.tooltip as |tip|}}{{tip}}<br/>{{/each}}{{/if}}">
                             <label>{{localize "SFRPG.StarshipSheet.Header.Movement.Speed"}}</label>
                             <label>{{system.attributes.speed.value}}</label>
                         </li>
-                        <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Header.Movement.Turn"}}<br/>@attributes.turn.value<br/><br/>{{#each system.attributes.turn.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                        <li class="flexrow" data-tooltip="<strong>{{localize "SFRPG.StarshipSheet.Header.Movement.Turn"}}</strong><br/>@attributes.turn.value<br/>{{#if (length system.attributes.turn.tooltip)}}<br/>{{#each system.attributes.turn.tooltip as |tip|}}{{tip}}<br/>{{/each}}{{/if}}">
                             <label>{{localize "SFRPG.StarshipSheet.Header.Movement.Turn"}}</label>
                             <label>{{system.attributes.turn.value}}</label>
                         </li>
