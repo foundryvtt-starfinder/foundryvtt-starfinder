@@ -15,7 +15,7 @@ import { JSONstringifyOrder, measureTime } from "./util.js";
 const modulePath = url.fileURLToPath(import.meta.url);
 if (path.resolve(modulePath) === path.resolve(process.argv[1])) {
     measureTime(async () => {
-        await unpackPacks(false);
+        await unpackPacks(false, {limitToPack: process.env.npm_config_pack ?? null});
     });
 }
 
@@ -86,10 +86,8 @@ async function unpack({packName, filePath, outputDirectory, partOfCook = false})
     console.log(chalk.green(`${packName} unpack complete.`));
 }
 
-export async function unpackPacks(partOfCook = false) {
-    // For now, there is no limitToPack functionality, but the bones of it have been left in
-    // and it could be re-added in the future
-    const limitToPack = null;
+export async function unpackPacks(partOfCook = false, options = {}) {
+    const limitToPack = options.limitToPack ?? null;
     const sourceDir = 'dist/packs';
     console.log(chalk.blueBright(`Unpacking ${partOfCook ? "" : "and sanitizing "}all packs from ${sourceDir}`));
 
