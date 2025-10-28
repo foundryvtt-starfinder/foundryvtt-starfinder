@@ -114,7 +114,7 @@ The following are the various scripts used for the development of the system, wh
 To run these, run `npm run SCRIPT_NAME` in your command promt while in your local repo's folder. Alternatively VSCode has a handy NPM Scripts toolbar you can enable that lets you run them all at a click of a button.
 
 ## `build`
-Perform a one time build of the system. Checks whether the system compendiums exist, and cooks them if they do not. Then takes the necessary files from the `src/` and `static/` folders for the system to work and copies them into the `dist/` folder.
+Perform a one time build of the system, using Vite's build functionality. Checks whether the system compendiums exist, and cooks them if they do not. Then takes the necessary files from the `src/` and `static/` folders for the system to work and copies them into the `dist/` folder.
 
 ## `build:watch`
 Like `build` but `build:watch` automatically rebuilds the system quickly whenever you make changes to system files (.js, .less, .hbs). Runs via Vite's `serve` functionality, so must be connected to on `http://localhost:30001` rather than at the normal port (`http://localhost:30000` by default). Very useful for code development.
@@ -165,9 +165,9 @@ If you would like some basic Intellisense for the Foundry types when using Visua
 3. Navigate your terminal application to your repository's root folder and run `npm run setupIntellisense`
 4. Restart VS Code
 
-# Enabling Debugging with the VS Code Debugger
+# Enabling Debugging with the VS Code Debugger & Google Chrome
 
-If you would like to debug the system code using the VS Code debugger and breakpoints, you can do so by setting up a correctly configured `launch.json` file in the `.vscode/` folder. To do so, create a copy of `launch.example.json` in the `.vscode/` folder, and rename it `launch.json`.
+If you would like to debug the system code using the VS Code debugger and breakpoints via the Google Chrome browser, you can do so by setting up a correctly configured `launch.json` file in the `.vscode/` folder. To do so, create a copy of `launch.example.json` in the `.vscode/` folder, and rename it `launch.json`.
 
 You should now see options to run and debug the code on VS Code's *Run and Debug* tab. Make sure to build the source code using `build` or `build:watch` before starting debugging.
 
