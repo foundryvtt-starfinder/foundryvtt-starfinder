@@ -1,0 +1,30 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Debug Foundry in Chrome",
+            "url": "http://localhost:30000",
+            "webRoot": "${workspaceFolder}/src",
+            "sourceMapPathOverrides":{
+                "${url}/systems/sfrpg/sfrpg.js": "${webRoot}/sfrpg.js",
+                "${url}/systems/sfrpg/**/*": "${webRoot}/**/*"
+            }
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Build Watch Debug in Chrome",
+            "url": "http://localhost:30001",
+            "webRoot": "${workspaceFolder}/src",
+            "sourceMapPathOverrides":{
+                "${url}/systems/sfrpg/sfrpg.js": "${webRoot}/sfrpg.js",
+                "${url}/systems/sfrpg/**/*": "${webRoot}/**/*"
+            }
+        }
+    ]
+}
