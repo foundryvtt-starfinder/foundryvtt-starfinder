@@ -36,6 +36,9 @@ Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG,
 - Crew role names and definitions added to `config.js` in place of being hardcoded in code files
 - Bump libraries to latest revisions for security
 - Sanitization of codebase to remove linting errors and warnings
+- When cooking and unpacking compendium files, can now limit the operation to a single compendium if desired with the `--pack` option
+- Added an example `launch.json` file to enable debugging in Chrome & VS Code
+- Updated `CONTRIBUTING.md` with up-to-date documentation
 
 ## Bug Fixes
 
