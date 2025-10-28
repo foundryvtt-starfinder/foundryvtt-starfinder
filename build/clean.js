@@ -25,8 +25,8 @@ const files = [
     "README.md",
     "OGL",
     "LICENSE",
-    "changelist.md"
-
+    "changelist.md",
+    "n"
 ];
 
 console.log(chalk.yellow("Files to clean: "), chalk.blueBright(files.join(", ")));
