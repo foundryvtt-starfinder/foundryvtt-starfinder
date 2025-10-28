@@ -4,7 +4,7 @@ If you would like to contribute to the project then I welcome any contributions.
 
 ## In order to set up your development environment, we need to ensure that a few things are in place:
 
-1. You'll need `node` installed on your system. You will need a version of `node` that is at least 14.x or greater. To install it, go to [the Node.js downloads page](https://nodejs.org/en/download/) and choose an installer for your operating system. The current LTS is probably a good choice, though the current version works just as well.
+1. You'll need `node` installed on your system. You will need a version of `node` that is at least 20.x or greater (22.x or later recommended). To install it, go to [the Node.js downloads page](https://nodejs.org/en/download/) and choose an installer for your operating system. The current LTS is probably a good choice, though the current version works just as well.
 2. You'll also need a `git` client installed; whether that is the [command line tool](https://cli.github.com) or something like [Sourcetree](https://www.sourcetreeapp.com) or [GitKraken](https://www.gitkraken.com) is up to you.
 Your integrated development environment (IDE) may also include git integration; please refer to the documentation available for the IDE for how to set this up.
 
@@ -44,7 +44,11 @@ The easiest workflow is to work through Foundry, and follow the following steps:
 > Ensure links point to the item in the compendium, *not* to the item in the sidebar!
 
 4. Run `npm run unpack` to unpack the changes from your local system install's DB files into JSON files in your git repo.
+    1. You can also unpack a single compendium rather than all of them by adding the `--pack=XXX` option, where `XXX` is the name of the pack in the `src/items` folder.
+    2. e.g. to only unpack the Equipment compendium, you would run `npm run unpack --pack=equipment`
 5. Once you've finished making changes, run `npm run cook` to check you haven't made any formatting errors, and to run some final sanitization on the JSON files.
+    1. You can also cook a single compendium rather than all of them by adding the `--pack=XXX` option, where `XXX` is the name of the pack in the `src/items` folder.
+    2. e.g. to only cook the Equipment compendium, you would run `npm run cook --pack=equipment`
 6. (Optional) Restart Foundry and check one last time all your work looks good.
 7. Submit a pull request if everything looks good. :-)
 
@@ -109,40 +113,65 @@ The following are the various scripts used for the development of the system, wh
 
 To run these, run `npm run SCRIPT_NAME` in your command promt while in your local repo's folder. Alternatively VSCode has a handy NPM Scripts toolbar you can enable that lets you run them all at a click of a button.
 
-## `package`
-Packs the contents of the `dist` folder into a ZIP. You shouldn't need to run this as it's only used by the system maintainer to package a new release when an update happens.
-
 ## `build`
-Perform a one time build of the system. Takes the neccesary files from the `src/` folder and copies them into the `dist/` folder, as well as to your Foundry data folder if you set that up in step 2 of the initial setup.
+Perform a one time build of the system. Checks whether the system compendiums exist, and cooks them if they do not. Then takes the necessary files from the `src/` and `static/` folders for the system to work and copies them into the `dist/` folder.
 
 ## `build:watch`
-Like `build` but `build:watch` automatically rebuilds the system quickly whenever you make changes to system files (.js, .less, .hbs). Very useful for code development
+Like `build` but `build:watch` automatically rebuilds the system quickly whenever you make changes to system files (.js, .less, .hbs). Runs via Vite's `serve` functionality, so must be connected to on `http://localhost:30001` rather than at the normal port (`http://localhost:30000` by default). Very useful for code development.
+
+> Note that `build:watch` can only be used while a Foundry server instance is running, or else it will error.
 
 ## `clean`
-Deletes the contents of the `dist/` folder and the sym-link in your Foundry data folder if you set that up.
+Deletes the contents of the `dist/` folder.
 
 ## `cook`
-Everyone's favourite, `cook` takes the contents of the `src/items` and cooks them up into pretty little .db files usable with Foundry. Cook runs sanitization on JSONs to remove superfluous data to keep pack sizes down, and can find unlinked references to conditions, and if you've made any glaring formatting errors.
+Everyone's favourite, `cook` takes the contents of the `src/items` and cooks them up into pretty little .db files usable with Foundry. Cook runs sanitization on JSONs to remove superfluous data to keep pack sizes down, finds unlinked references to conditions (*currently non-working, v0.29.0*), and checks if you've made any glaring formatting errors (*currently non-working, v0.29.0*).
 
-Sometimes you are only making changes to a single compendium, such as `alien-archives`. Having to wait for the entire project to cook each time, even though nothing changed outside the alien-archives compendium data folder takes longer and just wastes electricity. You can speed up the process by only cooking the specific compendium as follows: `npm run cook -- --pack alien-archives`.
+Sometimes you are only making changes to a single compendium, such as `alien-archives`. Having to wait for the entire project to cook each time, even though nothing changed outside the alien-archives compendium data folder, takes longer and just wastes electricity. You can speed up the process by only cooking the specific compendium as follows: `npm run cook --pack=alien-archives`.
 
-This also works for other compendiums, naturally. Just replace `alien-archives` with another pack.
-This also only works with 1 pack at a time; adding more pack arguments will be ignored. If this is desired functionality, you can request it in Discord.
+This also works for other compendiums; just replace `alien-archives` with another pack. Currently, this only works with 1 pack at a time; additional pack arguments will be ignored.
 
 ## `copyLocalization`
 
 Automatically sorts localization files and copies any new strings from the edited file to the others. This means you only have to do localizations once (and you don't need to be too precise with where you put them), then you run the script, and the others are taken care of, ready for a kind contributor to translate them into that language into the future.
 
-## `unpack`
-The yin to `cook`'s yang, `unpack` takes Foundry's db files and unpacks them into nice, human-readable JSONs, ready for you to make edits to. You'll run this after you've made new items/changes in Foundry.
+## `link`
 
-# Getting Foundry Intellisense in Visual Studio Code
+Prompts the user for the installation location of their Foundry data folder, and creates a symbolic link for the sfrpg system to the `dist/` folder in the code repository folder.
+
+## `lint`
+
+Checks the system code for style violations, and reports warnings and errors in the console.
+
+## `package`
+Packs the contents of the `dist/` folder into a .zip file. You shouldn't need to run this as it's only used by the system maintainers to package a new release when an update happens.
+
+## `setupIntellisense`
+
+Link to your foundry installation to add some basic Intellisense support for the Foundry types when using Visual Studio Code. Requires a specific set of steps to implement, see the **Getting Foundry Intellisense in Visual Studio Code** section below for instructions.
+
+## `unpack`
+The yin to `cook`'s yang, `unpack` takes Foundry's compendium files and unpacks them into nice, human-readable JSONs, ready for you to make edits to. You'll run this after you've made new items/changes in Foundry. Similar to `cook`, you can unpack just a single compendium by adding the `--pack=XXX` option, where `XXX` is the name of the pack as found in the `src/items` folder.
+
+# Visual Studio Code Integration
+
+Visual Studio Code (VS Code) is the most commonly used IDE by the system developers, and so a few handy integrations have been added in the past. You may find these helpful.
+
+## Getting Foundry Intellisense in Visual Studio Code
 
 If you would like some basic Intellisense for the Foundry types when using Visual Studio Code, follow the following steps:
 1. Create a copy of `foundry-config.example.json` and rename it to `foundry-config.json`
 2. Edit the `installPath` property of `foundry-config.json` to point to the folder where your Foundry installation is located. This should be the folder containing the "Backups", "Config", "Data", and "Logs" folders.
 3. Navigate your terminal application to your repository's root folder and run `npm run setupIntellisense`
 4. Restart VS Code
+
+# Enabling Debugging with the VS Code Debugger
+
+If you would like to debug the system code using the VS Code debugger and breakpoints, you can do so by setting up a correctly configured `launch.json` file in the `.vscode/` folder. To do so, create a copy of `launch.example.json` in the `.vscode/` folder, and rename it `launch.json`.
+
+You should now see options to run and debug the code on VS Code's *Run and Debug* tab. Make sure to build the source code using `build` or `build:watch` before starting debugging.
+
+> There are two versions of the debugging, one for if the system has been built most recently using the `build` command, and one for if `build:watch` is currently running (to connect to the proxy served by Vite at `http://localhost:30001`). If the debugging isn't working as expected, make sure you're using the correct debug method!
 
 # Package Release Process (for maintainers only)
 
