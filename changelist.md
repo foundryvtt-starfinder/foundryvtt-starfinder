@@ -29,6 +29,7 @@ Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG,
 - Support added for a selection of modifiers affecting starship values
 - NPC Crew can now perform minor and open crew actions
 - New modifiers added to modify Build Point maximum
+- Starship size is now localized and AC & TL modifier is displayed next to it
 
 ### Backend Improvements
 
