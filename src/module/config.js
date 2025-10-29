@@ -934,7 +934,7 @@ SFRPG.starshipSizes = {
     "huge": "SFRPG.SizeHuge",
     "gargantuan": "SFRPG.SizeGargantuan",
     "colossal": "SFRPG.SizeColossal",
-    "superColossal": "SFRPG.ShipSystems.Size.Supercolossal"
+    "supercolossal": "SFRPG.SizeSupercolossal"
 };
 
 SFRPG.itemSizes = {
@@ -963,7 +963,8 @@ SFRPG.tokenSizes = {
     "large": 2,
     "huge": 3,
     "gargantuan": 4,
-    "colossal": 6
+    "colossal": 6,
+    "supercolossal": 6
 };
 
 SFRPG.spellcastingClasses = {
@@ -1409,7 +1410,8 @@ SFRPG.starshipSizeMod = {
     "large": -1,
     "huge": -2,
     "gargantuan": -4,
-    "colossal": -8
+    "colossal": -8,
+    "supercolossal": -8
 };
 
 SFRPG.starshipTierToBuildpoints = {
