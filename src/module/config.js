@@ -47,6 +47,19 @@ SFRPG.abilities = {
     "cha": "SFRPG.AbilityCha"
 };
 
+/**
+ * The order in which ability scores should appear on character sheets
+ * @type {Array}
+ */
+SFRPG.abilityDisplayOrder = [
+    "str",
+    "dex",
+    "con",
+    "int",
+    "wis",
+    "cha"
+];
+
 SFRPG.acpEffectingArmorType = {
     "acp-all": "SFRPG.ModifierACPEffectingArmorTypeAll",
     "acp-light": "SFRPG.ModifierACPEffectingArmorTypeLight",
