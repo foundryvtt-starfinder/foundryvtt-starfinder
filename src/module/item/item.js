@@ -1672,18 +1672,23 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /* -------------------------------------------- */
 
     /**
-     * Use a consumable item
+     * Use an item that has charges per use/hour/day etc. or a consumable item.
      */
-    async rollConsumable(options = {}) {
+    async useItem(options = {}) {
         const itemData = this.system;
         const overrideUsage = !!options?.event?.shiftKey;
 
-        if (itemData.uses.value === 0 && itemData.quantity === 0 && !overrideUsage) {
+        let currentCapacity = 0;
+        if (this.hasCapacity()) {
+            currentCapacity = this.getCurrentCapacity();
+        }
+
+        if (!currentCapacity && !overrideUsage) {
             ui.notifications.error(game.i18n.format("SFRPG.Items.Consumable.ErrorNoUses", {name: this.name}));
             return;
         }
 
-        if (itemData.actionType && itemData.actionType !== "save") {
+        if (this.type === "consumable" && itemData.actionType && itemData.actionType !== "save") {
             options.flavorOverride = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
 
             if (!await this.rollDamage({}, options)) {
@@ -1700,6 +1705,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 actor: this.actor,
                 tokenId: token ? `${token.parent.id}.${token.id}` : null,
                 item: this,
+                system: itemData,
                 data: await this.getChatData(htmlOptions),
                 labels: this.labels,
                 hasAttack: this.hasAttack,
@@ -1709,9 +1715,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 hasOtherFormula: this.hasOtherFormula
             };
 
-            const template = `systems/sfrpg/templates/chat/consumed-item-card.hbs`;
+            const template = `systems/sfrpg/templates/chat/item-card.hbs`;
             const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
-
             const flavor = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
 
             // Basic chat message data
@@ -1732,92 +1737,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         // Deduct consumed charges from the item
-        if (itemData.uses.autoUse && !overrideUsage) {
-            let quantity = itemData.quantity;
-            let remainingUses = Math.max(this.getRemainingUses() - 1, 0);
-
-            if (remainingUses < 1) {
-                // Deduct an item quantity
-                quantity = Math.max(quantity - 1, 0);
-                if (quantity < 1 && itemData.uses.autoDestroy) {
-                    // Destroy the item
-                    this.actor.deleteEmbeddedDocuments("Item", [this.id]);
-                } else {
-                    if (quantity > 0) {
-                        // Reset the remaining charges
-                        remainingUses = this.getMaxUses();
-                    }
-                    this.update({
-                        'system.quantity': quantity,
-                        'system.uses.value': remainingUses
-                    });
-                }
-            } else {
-                // Deduct the remaining charges
-                this.update({'system.uses.value': remainingUses});
-            }
-        }
-    }
-
-    /**
-     * Use an item that has charges per use/hour/day etc.
-     */
-    async useItem(options = {}) {
-        const itemData = this.system;
-        const overrideUsage = !!options?.event?.shiftKey;
-
-        let currentCapacity = 0;
-        if (this.hasCapacity()) {
-            currentCapacity = this.getCurrentCapacity();
-        }
-
-        if (!currentCapacity && !overrideUsage) {
-            ui.notifications.error(game.i18n.format("SFRPG.Items.Consumable.ErrorNoUses", {name: this.name}));
-            return;
-        }
-
-        const htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this };
-        htmlOptions.rollData.owner = this.actor?.system;
-
-        // Basic template rendering data
-        const token = this.actor.token;
-        const templateData = {
-            actor: this.actor,
-            tokenId: token ? `${token.parent.id}.${token.id}` : null,
-            item: this,
-            system: itemData,
-            data: await this.getChatData(htmlOptions),
-            labels: this.labels,
-            hasAttack: this.hasAttack,
-            hasDamage: this.hasDamage,
-            hasSave: this.hasSave,
-            hasArea: this.hasArea,
-            hasOtherFormula: this.hasOtherFormula
-        };
-
-        const template = `systems/sfrpg/templates/chat/item-card.hbs`;
-        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
-        const flavor = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
-
-        // Basic chat message data
-        const chatData = {
-            author: game.user.id,
-            flavor: flavor,
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            content: html,
-            flags: { level: this.system.level },
-            speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
-        };
-
-        const rollMode = game.settings.get("core", "rollMode");
-        ChatMessage.applyRollMode(chatData, rollMode);
-
-        // Create the chat message
-        ChatMessage.create(chatData, { displaySheet: false });
-
-        // Deduct consumed charges from the item
         if (!overrideUsage) {
-            this.consumeCapacity(itemData.usage.value);
+            this.consumeCapacity(this.type === "consumable" ? 1 : itemData.usage.value);
         }
     }
 
@@ -1944,8 +1865,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // Saving Throw
         else if (action === "save" && targetActor) await targetActor.rollSave(button.dataset.type, { event });
 
-        // Consumable usage
-        else if (action === "consume") await item.rollConsumable({ event });
+        // Item capacity and consumable usage
+        else if (action === "use") await item.useItem({ event });
     }
 
     /**

@@ -9,15 +9,13 @@
                     {{item.name}}
                 </h4>
 
-                {{#if (and isOwner (or (or (eq item.type "consumable") item.system.usage.per) (or item.config.hasAttack item.config.hasDamage)))}}
+                {{#if (and isOwner (or item.system.usage.per (or item.config.hasAttack item.config.hasDamage)))}}
                 <div class="item-action {{#if item.parentItem}}flexrow flexnowrap{{else}}flexcol{{/if}}">
-                    {{#if (eq item.type "consumable")}}
-                        <button type="button" class="tag use">{{localize "SFRPG.Items.Consumable.UseAction"}}</button>
-                    {{else if (or item.config.hasAttack item.config.hasDamage)}}
+                    {{#if (or item.config.hasAttack item.config.hasDamage)}}
                         {{#if item.config.hasAttack}}
                         <button type="button" class="tag attack" data-tooltip="{{localize "SFRPG.Attack"}}">{{item.config.attackString}}</button>
                         {{/if}}
-                        {{#if item.config.hasDamage}}
+                        {{#if (and item.config.hasDamage (not (eq item.type "consumable")))}}
                             {{#if (eq item.system.actionType "heal")}}
                                 <button type="button" class="tag healing" data-tooltip="{{localize "SFRPG.ActionHeal"}}">{{item.config.damageString}}</button>
                             {{else}}
@@ -68,8 +66,10 @@
                     {{else}}
                         <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.OpenTooltip"}}"><i class="fas fa-arrow-down"></i> {{localize "SFRPG.ActorSheet.Inventory.Container.Open"}}</a>
                     {{/if}}
+                {{else if (and isOwner (eq item.type "consumable"))}}
+                    <button type="button" class="tag use">{{localize "SFRPG.Items.Consumable.UseAction"}}</button>
                 {{else if item.system.usage.per}}
-                    {{#unless (eq item.type "weapon")}}
+                    {{#unless (and isOwner (eq item.type "weapon"))}}
                         <button type="button" class="tag use">{{item.system.usage.value}} / {{item.system.usage.per}}</button>
                     {{else}}
                         {{item.system.usage.value}} / {{item.system.usage.per}}
