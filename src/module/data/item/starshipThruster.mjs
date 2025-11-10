@@ -3,6 +3,12 @@ import SFRPGItemBase from './base-item.mjs';
 const { fields } = foundry.data;
 
 export default class SFRPGItemStarshipThruster extends SFRPGItemBase {
+    static migrateData(data) {
+        // Initial DataModels migration for bad data (v0.29.0)
+        if (data.supportedSize === "superColossal") data.supportedSize = "supercolossal";
+
+        return super.migrateData(data);
+    };
 
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
