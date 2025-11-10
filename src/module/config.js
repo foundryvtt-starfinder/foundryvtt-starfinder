@@ -1427,6 +1427,26 @@ SFRPG.starshipSizeMod = {
     "supercolossal": -8
 };
 
+SFRPG.starshipSizeMultiplierMap = {
+    "n/a": 0,
+    "tiny": 1,
+    "small": 2,
+    "medium": 3,
+    "large": 4,
+    "huge": 5,
+    "gargantuan": 6,
+    "colossal": 7,
+    "supercolossal": 8
+};
+
+SFRPG.starshipManeuverabilityMap = {
+    "clumsy" : { pilotingBonus: -2, turn: 4 },
+    "poor"   : { pilotingBonus: -1, turn: 3 },
+    "average": { pilotingBonus: 0, turn: 2 },
+    "good"   : { pilotingBonus: 1, turn: 1 },
+    "perfect": { pilotingBonus: 2, turn: 0 }
+};
+
 SFRPG.starshipTierToBuildpoints = {
     "1/4": 25,
     "0.25": 25,

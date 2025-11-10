@@ -116,26 +116,6 @@ export default function(engine) {
         const data = fact.data;
         const frames = fact.frames;
 
-        const maneuverabilityMap = {
-            "clumsy" : { pilotingBonus: -2, turn: 4 },
-            "poor"   : { pilotingBonus: -1, turn: 3 },
-            "average": { pilotingBonus: 0, turn: 2 },
-            "good"   : { pilotingBonus: 1, turn: 1 },
-            "perfect": { pilotingBonus: 2, turn: 0 }
-        };
-
-        const sizeModifierMap = {
-            "n/a": 0,
-            "tiny": 1,
-            "small": 2,
-            "medium": 3,
-            "large": 4,
-            "huge": 5,
-            "gargantuan": 6,
-            "colossal": 7,
-            "superColossal": 8
-        };
-
         if (!data.crew) {
             data.crew = {
                 captain: {
@@ -280,7 +260,7 @@ export default function(engine) {
             const armorItems = fact.items.filter(x => x.type === "starshipArmor");
             const armorTurnPenalty = armorItems[0]?.system?.turnDistancePenalty ?? 0;
             const ablativeArmorTurnPenalty = ablativeArmorItems[0]?.system?.turnDistancePenalty ?? 0;
-            const turnManeuverability = maneuverabilityMap[maneuverability].turn;
+            const turnManeuverability = CONFIG.SFRPG.starshipManeuverabilityMap[maneuverability].turn;
             data.attributes.turn.tooltip.push(`${maneuverability} maneuverability: ${turnManeuverability.signedString()}`);
 
             if (armorTurnPenalty !== 0) {
@@ -296,7 +276,7 @@ export default function(engine) {
 
         /** Ensure pilotingBonus exists. */
         data.attributes.pilotingBonus = {
-            value: maneuverabilityMap[data.attributes.maneuverability].pilotingBonus,
+            value: CONFIG.SFRPG.starshipManeuverabilityMap[data.attributes.maneuverability].pilotingBonus,
             tooltip: [game.i18n.format("SFRPG.StarshipSheet.Header.Movement.ManeuverabilityTooltip", {maneuverability: data.attributes.maneuverability})]
         };
 
@@ -375,11 +355,11 @@ export default function(engine) {
         // Apply build point maximum modifiers
         applyBuildPointModifiers(fact, context, data);
 
-        const sizeModifier = sizeModifierMap[data.details.size] || 0;
+        const sizeMultiplier = CONFIG.SFRPG.starshipSizeMultiplierMap[data.details.size] || 0;
         const starshipComponents = fact.items.filter(x => x.type.startsWith("starship"));
         for (const component of starshipComponents) {
             const componentData = component.system;
-            const bpCost = componentData.costMultipliedBySize ? sizeModifier * componentData.cost : componentData.cost;
+            const bpCost = componentData.costMultipliedBySize ? sizeMultiplier * componentData.cost : componentData.cost;
             data.attributes.bp.value += bpCost;
             data.attributes.bp.tooltip.push(`${component.name}: ${bpCost}`);
         }
