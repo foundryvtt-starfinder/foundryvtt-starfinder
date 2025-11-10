@@ -123,6 +123,44 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
     }
 
     /**
+     * Increases capacity by some amount.
+     */
+    increaseCapacity(increaseAmount) {
+        if (this.requiresCapacityItem()) {
+            const capacityItem = this.getCapacityItem();
+            return capacityItem?.increaseCapacity(increaseAmount);
+        }
+
+        // Attempt to retrieve current capacity. If it is null, exit early.
+        const currentCapacity = this.getCurrentCapacity();
+        if (!currentCapacity) {
+            return;
+        }
+
+        // Get max capacity
+        const maxCapacity = this.getMaxCapacity();
+        const updatedCapacity = currentCapacity + increaseAmount;
+
+        if (this.type === "ammunition" && !this.system.useCapacity) {
+            return this.update({'system.quantity': Math.min(updatedCapacity, maxCapacity)});
+        } else if (this.type === "consumable") {
+            if (updatedCapacity > maxCapacity) {
+                const capacityOvershoot = (updatedCapacity - maxCapacity) % maxCapacity;
+                const quantityOvershoot = Math.ceil(updatedCapacity / maxCapacity) - 1;
+                this.update({
+                    'system.quantity': this.system.quantity + quantityOvershoot,
+                    'system.uses.value': capacityOvershoot
+                });
+            } else {
+                // Add charges
+                this.update({'system.uses.value': Math.min(updatedCapacity, maxCapacity)});
+            }
+        } else {
+            return this.update({'system.capacity.value': Math.min(updatedCapacity, maxCapacity)});
+        }
+    }
+
+    /**
      * Returns the maximum capacity of the item.
      * Can return null if there is no maximum capacity.
      */

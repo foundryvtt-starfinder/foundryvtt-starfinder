@@ -1669,6 +1669,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     async useItem(options = {}) {
         const itemData = this.system;
         const overrideUsage = !!options?.event?.shiftKey;
+        const overrideAddCapacity = options?.event?.altKey;
+
+        // Instead of activating the item, add charges to it
+        if (overrideAddCapacity) {
+            this.increaseCapacity(this.type === "consumable" ? 1 : itemData.usage.value);
+            return;
+        }
 
         let currentCapacity = 0;
         if (this.hasCapacity()) {
