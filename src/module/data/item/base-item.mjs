@@ -4,7 +4,7 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemBase extends SFRPGDocumentBase {
     static migrateData(data) {
-        // Initial DataModels migration for bad data
+        // Initial DataModels migration for bad data (v0.29.0)
         if (data.usage?.per === "Battery charge") data.usage.per = "shot";
         if (data.usage?.per === "use") data.usage.per = "action";
         if (data.area?.shape === "shapable") data.area.shape = "";
@@ -12,6 +12,11 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             for (const storage of data.container.storage) {
                 if (storage.weightProperty === "bulk") storage.weightProperty = "";
             }
+        }
+        if (!(this.name === 'SFRPGItemAugmentation')) {
+            if (data.system) delete data.system; // Augmentations have a system property, which is... unfortunate
+        } else if (typeof data.system !== "string") {
+            data.system = "none";
         }
 
         return super.migrateData(data);
@@ -189,7 +194,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 }),
                 units: new fields.StringField({
                     initial: "",
-                    choices: Object.keys(CONFIG.SFRPG.distanceUnits),
+                    choices: [...Object.keys(CONFIG.SFRPG.distanceUnits), "text"],
                     blank: true
                 }),
                 value: new fields.StringField({initial: ""})

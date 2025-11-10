@@ -26,8 +26,8 @@
                 <li data-tooltip="{{localize "SFRPG.ShipFrameLabel"}}<br />@details.frame">
                     {{#if activeFrame}}<span>{{activeFrame.name}}</span>{{else}}<span class="no-frame">{{localize "SFRPG.StarshipSheet.Header.FrameMissing"}}</span>{{/if}}
                 </li>
-                <li data-tooltip="{{ localize "SFRPG.Size"}}<br />@details.size">
-                    <span>{{localize "SFRPG.StarshipSheet.Header.Size" size=system.details.size}}</span>
+                <li data-tooltip="{{localize "SFRPG.StarshipSheet.Header.Size" size=(sfrpg "starshipSizes" system.details.size)}}<br/><small>({{numberFormat (sfrpg "starshipSizeMod" system.details.size) sign=true}} {{localize "SFRPG.Items.Action.ActionTarget.StarshipAC"}} &amp; {{localize "SFRPG.Items.Action.ActionTarget.StarshipTL"}})</small><br />@details.size">
+                    <span>{{localize "SFRPG.StarshipSheet.Header.Size" size=(sfrpg "starshipSizes" system.details.size)}} ({{numberFormat (sfrpg "starshipSizeMod" system.details.size) sign=true}})</span>
                 </li>
             </ul>
 

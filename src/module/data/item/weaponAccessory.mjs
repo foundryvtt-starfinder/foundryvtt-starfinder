@@ -3,6 +3,15 @@ import SFRPGItemBase from './base-item.mjs';
 const { fields } = foundry.data;
 
 export default class SFRPGItemWeaponAccessory extends SFRPGItemBase {
+    static migrateData(data) {
+        // Initial DataModels migration for bad data (v0.29.0)
+        if (data.data?.weaponType) {
+            data.weaponType = data.data?.weaponType ?? "any";
+            delete data.data;
+        }
+
+        return super.migrateData(data);
+    }
 
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
