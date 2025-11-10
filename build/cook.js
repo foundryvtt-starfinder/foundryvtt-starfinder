@@ -81,10 +81,10 @@ export async function cook(options = {}) {
         return compendiumMap[a].length - compendiumMap[b].length;
     });
 
+    const idList = [];
     for (const directory of directories) {
         const itemSourceDir = `${sourceDir}/${directory}`;
         const outputDir = `dist/packs/${directory}`;
-
         const parsedFiles = [];
 
         const loadFile = async (file) => {
@@ -104,6 +104,12 @@ export async function cook(options = {}) {
                         jsonInput.img = "icons/svg/mystery-man.svg";
                     }
 
+                    // Check for duplicate _id's on items
+                    if (idList.indexOf(jsonInput._id) !== -1) {
+                        throw new Error(`duplicate _id ${jsonInput._id}`);
+                    } else {
+                        idList.push(jsonInput._id);
+                    }
                 }
 
                 compendiumMap[directory][jsonInput._id] = jsonInput;
@@ -117,7 +123,12 @@ export async function cook(options = {}) {
                 if (!(directory in packErrors)) {
                     packErrors[directory] = [];
                 }
-                packErrors[directory].push(`${chalk.bold(filePath)}: Error parsing file: ${err}`);
+                packErrors[directory].push(
+                    `Error parsing file '${filePath.substring(
+                        filePath.indexOf("items/") + 6,
+                        filePath.lastIndexOf(".json") + 5
+                    )}' | ${err}`
+                );
                 cookErrorCount++;
                 return;
             }
@@ -127,9 +138,7 @@ export async function cook(options = {}) {
         const readPromises = [];
         for (const file of compendiumMap[directory].values()) {
             if (file === "_folders.json") continue;
-
             readPromises.push(loadFile(file));
-
         }
 
         const parsedFolders = await (async () => {
