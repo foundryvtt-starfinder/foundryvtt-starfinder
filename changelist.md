@@ -22,6 +22,7 @@ Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG,
 - NPC ability and spell DCs moved to the relevant tabs to highlight them
 - Ammunition usage multiplier modifiers added
 - Same-type Spell Save DC bonuses now stack correctly
+- Charges can now be consumed from items with ammunition via a Use Item button in the item's inventory listing
 
 ### Starship Improvements
 
