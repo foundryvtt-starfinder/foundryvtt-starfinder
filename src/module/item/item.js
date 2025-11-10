@@ -956,7 +956,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // Add hasSave to roll
         itemData.hasSave = this.hasSave;
         itemData.hasSkill = this.hasSkill;
-        itemData.hasArea = this.hasSkill;
+        itemData.hasArea = this.hasArea;
         itemData.hasDamage = this.hasDamage;
         itemData.hasCapacity = this.hasCapacity();
 
@@ -1164,14 +1164,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     /**
      * Handle updating item capacity when an item is used
-     *
-     * @param {Html} html The html from the dailog
-     * @param {Array} parts The parts of the roll
-     * @param {Object} data The data
-     *
-     * Supported options:
-     * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
-     * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
      */
     _deductItemCharge() {
         const usage = this.system.usage;
@@ -1688,12 +1680,21 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             return;
         }
 
-        if (this.type === "consumable" && itemData.actionType && itemData.actionType !== "save") {
+        if (this.type === "consumable" && itemData.actionType) {
             options.flavorOverride = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
 
-            if (!await this.rollDamage({}, options)) {
-                // Roll was cancelled, don't consume.
-                return;
+            // Roll damage/attack or place template if needed. Do this here for the case where the item is consumed on use.
+            if (this.hasAttack) {
+                const rolled = await this.rollAttack({}, options);
+                if (!rolled) return; // Roll was cancelled, don't consume.
+            }
+            if (this.hasDamage) {
+                const rolled = await this.rollDamage({}, options);
+                if (!rolled) return; // Roll was cancelled, don't consume.
+            }
+            if (this.hasArea) {
+                const placed = await this.placeAbilityTemplate();
+                if (!placed) return; // Roll was cancelled, don't consume.
             }
         } else {
             const htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this };
@@ -1799,6 +1800,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         const placed = await template.drawPreview();
         if (placed) template.place(); // If placement is confirmed
+        return placed;
 
     }
 
