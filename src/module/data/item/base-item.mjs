@@ -13,7 +13,11 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 if (storage.weightProperty === "bulk") storage.weightProperty = "";
             }
         }
-        if (!(this.name === 'SFRPGItemAugmentation') && data.system) delete data.system; // Augmentations have a system property, which is... unfortunate
+        if (!(this.name === 'SFRPGItemAugmentation')) {
+            if (data.system) delete data.system; // Augmentations have a system property, which is... unfortunate
+        } else if (typeof data.system !== "string") {
+            data.system = "none";
+        }
 
         return super.migrateData(data);
     }
