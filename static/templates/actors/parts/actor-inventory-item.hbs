@@ -67,13 +67,17 @@
                         <a class="item-control toggle-container" title="{{localize "SFRPG.ActorSheet.Inventory.Container.OpenTooltip"}}"><i class="fas fa-arrow-down"></i> {{localize "SFRPG.ActorSheet.Inventory.Container.Open"}}</a>
                     {{/if}}
                 {{else if (and isOwner (eq item.type "consumable"))}}
-                    <button type="button" class="tag use">{{localize "SFRPG.Items.Consumable.UseAction"}}</button>
+                    <button type="button" class="tag use" data-tooltip="{{localize "SFRPG.ActorSheet.Inventory.Item.UseItemTooltip"}}">
+                        {{localize "SFRPG.Items.Consumable.UseAction"}}
+                    </button>
                 {{else if item.system.usage.per}}
-                    {{#unless (and isOwner (eq item.type "weapon"))}}
-                        <button type="button" class="tag use">{{item.system.usage.value}} / {{item.system.usage.per}}</button>
+                    {{#if (and isOwner (not (eq item.type "weapon")))}}
+                        <button type="button" class="tag use" data-tooltip="{{localize "SFRPG.ActorSheet.Inventory.Item.UseItemTooltip"}}">
+                            {{item.system.usage.value}} / {{item.system.usage.per}}
+                        </button>
                     {{else}}
                         {{item.system.usage.value}} / {{item.system.usage.per}}
-                    {{/unless}}
+                    {{/if}}
                 {{else if item.system.activation.type}}
                     {{#unless (or (eq item.type "consumable")(and (eq item.system.activation.type "none")(eq item.type "weapon")) ) }} <!-- Don't show action buttons on consumables because it interacts weirdly with their usage -->
                         {{#if item.system.isActive}}
