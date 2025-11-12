@@ -33,7 +33,7 @@
       "parts": [
         {
           "name": "",
-          "formula": "(lookupRange(@classes.operative.levels, 1, 5, 3, 7, 4, 9, 5, 11, 6, 13, 7, 15, 8, 17, 9, 19, 10))d(lookupRange(@classes.operative.levels, 4, 3, 6))",
+          "formula": "(lookupRange(@classes.operative.levels, 1, 5, 3, 7, 4, 9, 5, 11, 6, 13, 7, 15, 8, 17, 9, 19, 10))d(ternary(gte(@classes.operative.levels, 3), 6, 4))",
           "types": {
             "acid": true,
             "bludgeoning": false,

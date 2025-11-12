@@ -33,7 +33,7 @@
       "parts": [
         {
           "name": "Bleed damage",
-          "formula": "(lookupRange(@attributes.baseAttackBonus.value, 1, 13, 2))d8 + @details.level.value",
+          "formula": "(ternary(gte(@attributes.baseAttackBonus.value, 13), 2, 1))d8 + @details.level.value",
           "types": {
             "acid": false,
             "bludgeoning": false,

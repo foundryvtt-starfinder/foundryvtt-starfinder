@@ -98,7 +98,7 @@
         "effectType": "specific-speed",
         "enabled": true,
         "max": 10,
-        "modifier": "lookupRange(@classes.operative.levels, 10, 9, 20)",
+        "modifier": "ternary(gte(@classes.operative.levels, 9), 20, 10)",
         "modifierType": "constant",
         "notes": "",
         "source": "",

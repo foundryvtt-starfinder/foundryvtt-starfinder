@@ -61,6 +61,17 @@ export default class SFRPGRoll extends Roll {
                 }
                 return new terms.NumericTerm({number: total});
             }
+            if (t instanceof terms.Die) {
+                if (t._number.isDeterministic) {
+                    let total = 0;
+                    try {
+                        total = t?.total || Roll.safeEval(t._number);
+                    } catch {
+                        total = Roll.safeEval(t._number);
+                    }
+                    return new terms.Die({faces: t.faces, number: total});
+                }
+            }
             return t;
         });
         return DiceSFRPG.simplifyRollFormula(Roll.fromTerms(newterms).formula) || "0";

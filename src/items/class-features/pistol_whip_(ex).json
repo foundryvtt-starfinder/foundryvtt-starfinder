@@ -33,7 +33,7 @@
       "parts": [
         {
           "name": "",
-          "formula": "lookupRange(@details.cl.value, 1, 4, 0)d3 + lookupRange(@details.cl.value, 0, 4, 1, 8, 2, 12, 3, 15, 5, 20, 7)d6 + @abilities.str.mod",
+          "formula": "ternary(gte(@details.cl.value, 4), 0, 1)d3 + lookupRange(@details.cl.value, 0, 4, 1, 8, 2, 12, 3, 15, 5, 20, 7)d6 + @abilities.str.mod",
           "group": null,
           "isPrimarySection": true,
           "types": {

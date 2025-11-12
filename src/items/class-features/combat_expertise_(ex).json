@@ -98,7 +98,7 @@
         "effectType": "all-damage",
         "enabled": false,
         "max": 6,
-        "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+        "modifier": "1d(ternary(gte(@classes.envoy.levels, 13), 8, 6))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
         "modifierType": "formula",
         "notes": "As a standard action, you can make an expertise attack as an attack action. Prior to your attack roll, attempt a skill check using the chosen skill with a DC equal to 15 + 1-1/2 × your target’s CR. If you succeed at the check and your attack hits, you roll your expertise die and add the result to your damage roll, and the target is Shaken for 1 round.",
         "source": "",

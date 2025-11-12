@@ -65,7 +65,7 @@
         "effectType": "skill",
         "enabled": true,
         "max": 6,
-        "modifier": "(max(1, floor(@classes.solarian.levels / 3))) * (lookupRange(@resources.solarian.stellarMode.value, 2, 0, 1))",
+        "modifier": "(max(1, floor(@classes.solarian.levels / 3))) * (ternary(lt(@resources.solarian.stellarMode.value, 0), 2, 1))",
         "modifierType": "formula",
         "notes": "You can add this bonus to Athletics checks to climb, jump, or swim as part of the action you take to attempt the skill check.",
         "source": "",

@@ -833,7 +833,7 @@
             "effectType": "skill",
             "enabled": true,
             "max": 6,
-            "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+            "modifier": "1d(ternary(gte(@classes.envoy.levels, 13), 8, 6))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
             "modifierType": "formula",
             "notes": "At 1st level, when attempting a Sense Motive check, you can roll 1d6 (your expertise die) and add the result of the roll to your check as an insight bonus. You can use this and other expertise abilities as long as you have at least 1 Resolve Point remaining. At 5th level, anytime you roll your expertise die, you gain a +1 bonus to the result. At 9th, 17th, and 20th levels, this bonus increases by 1. At 13th level, you roll 1d8 as your expertise die instead of 1d6.",
             "source": "Expertise",
@@ -865,7 +865,7 @@
             "enabled": true,
             "limitTo": "",
             "max": 6,
-            "modifier": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+            "modifier": "1d(ternary(gte(@classes.envoy.levels, 13), 8, 6))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
             "modifierType": "formula",
             "notes": "At 1st level, when attempting a Bluff check, you can roll 1d6 (your expertise die) and add the result of the roll to your check as an insight bonus. You can use this and other expertise abilities as long as you have at least 1 Resolve Point remaining. At 5th level, anytime you roll your expertise die, you gain a +1 bonus to the result. At 9th, 17th, and 20th levels, this bonus increases by 1. At 13th level, you roll 1d8 as your expertise die instead of 1d6.",
             "source": "",
@@ -1080,134 +1080,6 @@
         "formula": "",
         "isActive": null,
         "modifiers": [],
-        "properties": {},
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "3rd Level",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "Envoy",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "I91lHYueiq2OCBpe",
-      "name": "Weapon Specialization (Ex) (Envoy)",
-      "type": "feat",
-      "img": "systems/sfrpg/images/cup/gameplay/envoy.webp",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.fqYiP2f9oSfcmrwC]{Envoy}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type with which this class grants you proficiency.</p>"
-        },
-        "descriptors": [],
-        "details": {
-          "category": "classFeature",
-          "combat": false,
-          "specialAbilityType": "ex"
-        },
-        "duration": {
-          "units": "instantaneous",
-          "value": ""
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [
-          {
-            "_id": "30931067-9189-449c-9263-b3f29ae61dfc",
-            "name": "Weapon Specialization Envoy",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-damage",
-            "enabled": true,
-            "modifier": "floor(@details.level.value / 2)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "smallA"
-          },
-          {
-            "_id": "b737925a-61cb-45f0-bc43-85020fb6eaca",
-            "name": "Weapon Specialization Envoy",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-damage",
-            "enabled": true,
-            "modifier": "@details.level.value",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "basicM"
-          },
-          {
-            "_id": "b0ab1674-5349-4001-9e87-a20b1cdf46b1",
-            "name": "Weapon Specialization Envoy",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-property-damage",
-            "enabled": true,
-            "modifier": "-ceil(@details.level.value / 2)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "operative"
-          }
-        ],
         "properties": {},
         "range": {
           "additional": "",
@@ -5454,6 +5326,134 @@
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
+      }
+    },
+    {
+      "_id": "XaIEXYWumqS4geNY",
+      "name": "Weapon Specialization (Ex) (Envoy)",
+      "type": "feat",
+      "img": "systems/sfrpg/images/cup/gameplay/envoy.webp",
+      "system": {
+        "ability": "",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": ""
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.fqYiP2f9oSfcmrwC]{Envoy}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type with which this class grants you proficiency.</p>"
+        },
+        "descriptors": {},
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": false,
+        "modifiers": [
+          {
+            "_id": "30931067-9189-449c-9263-b3f29ae61dfc",
+            "name": "Weapon Specialization Envoy",
+            "type": "weapon-specialization",
+            "condition": "",
+            "damage": null,
+            "effectType": "weapon-damage",
+            "enabled": true,
+            "limitTo": null,
+            "max": 0,
+            "modifier": "floor(@details.level.value / 2)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "smallA"
+          },
+          {
+            "_id": "b737925a-61cb-45f0-bc43-85020fb6eaca",
+            "name": "Weapon Specialization Envoy",
+            "type": "weapon-specialization",
+            "condition": "",
+            "damage": null,
+            "effectType": "weapon-damage",
+            "enabled": true,
+            "limitTo": null,
+            "max": 0,
+            "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "basicM"
+          }
+        ],
+        "properties": {},
+        "range": {
+          "units": ""
+        },
+        "recharge": {
+          "charged": false,
+          "value": ""
+        },
+        "requirements": "3rd Level",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": ""
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "Envoy",
+        "target": {
+          "value": null
+        },
+        "uses": {
+          "max": "0",
+          "per": "",
+          "value": 0
+        }
       }
     }
   ],

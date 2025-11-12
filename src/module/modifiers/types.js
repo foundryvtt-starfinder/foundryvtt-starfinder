@@ -65,6 +65,8 @@ export const SFRPGEffectType = Object.freeze({
     BULK_CALCULATION: "bulk-calculation",
     ACTOR_RESOURCE: "actor-resource",
     ENERGY_RESISTANCE: "energy-resistance",
+    STARSHIP_BUILD_POINTS: "starship-build-points",
+    STARSHIP_MULTIPLY_BUILD_POINTS: "starship-multiply-build-points",
     STARSHIP_HULL_POINTS: "starship-hull-points",
     STARSHIP_HULL_POINTS_INCREMENT: "starship-hull-points-increment",
     STARSHIP_FORWARD_AC: "starship-forward-ac",

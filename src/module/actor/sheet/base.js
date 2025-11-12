@@ -815,8 +815,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
-
-        return item.rollConsumable({event: event});
+        return item.useItem({event:event});
     }
 
     _onItemRollAttack(event) {
@@ -1287,7 +1286,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         if (event) {
             const targetId = $(event.target).parents('.item')
                 .attr('data-item-id');
-            targetContainer = targetActor.getItem(targetId);
+            targetContainer = targetActor.getItem(targetId) ?? null;
             if (targetContainer && !targetContainer.system.container?.storage) {
                 targetContainer = null;
             }
@@ -1315,10 +1314,10 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         // Handle trading between actors
         } else if (parsedDragData.uuid.includes("Actor")) {
             const actor = fromUuidSync(parsedDragData.uuid)?.actor || await fromUuid(parsedDragData.uuid)?.actor;
-
             const tokenId = actor.isToken ? actor.token.id : null;
             const sceneId = actor.isToken ? actor.token.parent.id : null;
             const sourceActor = new ActorItemHelper(actor.id, tokenId, sceneId);
+
             if (!ActorItemHelper.IsValidHelper(sourceActor)) {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
                 return;
@@ -1410,7 +1409,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                     const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
                     newContents.push({ id: addedItem.id, index: preferredStorageIndex });
 
-                    const update = { id: targetContainer.id, "system.container.contents": newContents };
+                    const update = { id: targetContainer.id, "container.contents": newContents };
                     await targetActor.updateItem(targetContainer.id, update);
                 }
 

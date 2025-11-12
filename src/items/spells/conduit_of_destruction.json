@@ -27,7 +27,7 @@
       "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": "(lookupRange(@item.level, 5, 5, 10))"
+      "value": "(ternary(gte(@item.level, 5), 10, 5)))"
     },
     "attackBonus": 0,
     "chatFlavor": "",

@@ -1170,13 +1170,12 @@
       }
     },
     {
-      "_id": "SfCReJdTlHHG9kQ0",
+      "_id": "yLoYvxNGxdyQelMl",
       "name": "Weapon Specialization (Ex) (Mechanic)",
       "type": "feat",
       "img": "systems/sfrpg/images/cup/gameplay/mechanic.webp",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1184,12 +1183,21 @@
           "condition": "",
           "cost": 0
         },
+        "activationEvent": {
+          "activationTurn": "parent",
+          "deactivatedAt": 0,
+          "endTime": 0,
+          "endsOn": "onTurnStart",
+          "expiryTurn": "parent",
+          "startTime": 0,
+          "status": ""
+        },
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1198,7 +1206,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1208,7 +1217,46 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with.</p>"
         },
-        "descriptors": [],
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "auditory": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "illusion": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
         "details": {
           "category": "classFeature",
           "combat": false,
@@ -1219,15 +1267,18 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "309e09f2-b155-4a7c-ac20-bee89333af65",
             "name": "Weapon Specialization Mechanic",
-            "type": "untyped",
+            "type": "weapon-specialization",
             "condition": "",
+            "damage": null,
             "effectType": "weapon-damage",
             "enabled": true,
+            "limitTo": null,
+            "max": 0,
             "modifier": "floor(@details.level.value / 2)",
             "modifierType": "constant",
             "notes": "",
@@ -1237,59 +1288,50 @@
           },
           {
             "_id": "e9fd3a0e-d5eb-4338-b43e-6e9d90f25b8f",
-            "name": "Weapon Specialization Mech.",
-            "type": "untyped",
+            "name": "Weapon Specialization Mechanic",
+            "type": "weapon-specialization",
             "condition": "",
+            "damage": null,
             "effectType": "weapon-damage",
             "enabled": true,
-            "modifier": "@details.level.value",
+            "limitTo": null,
+            "max": 0,
+            "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
             "modifierType": "constant",
             "notes": "",
             "source": "",
             "subtab": "misc",
             "valueAffected": "basicM"
-          },
-          {
-            "_id": "73455d1d-1f74-43b9-9068-3ceb77462dc4",
-            "name": "Weapon Specialization Mech.",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-property-damage",
-            "enabled": true,
-            "modifier": "-ceil(@details.level.value / 2)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "operative"
           }
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "3rd Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Mechanic",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1590,7 +1632,7 @@
         "age": 0,
         "dateOfBirth": "",
         "deity": "",
-        "fullBodyImage": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
         "genderPronouns": "",
         "gmNotes": null,
         "height": "",

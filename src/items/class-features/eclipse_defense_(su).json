@@ -61,7 +61,7 @@
         "effectType": "all-attacks",
         "enabled": true,
         "max": 0,
-        "modifier": "(lookupRange(@resources.solarian.stellarMode.value, 4, 0, 0))",
+        "modifier": "(ternary(lt(@resources.solarian.stellarMode.value, 0), 4, 0))",
         "modifierType": "constant",
         "notes": "",
         "source": "",

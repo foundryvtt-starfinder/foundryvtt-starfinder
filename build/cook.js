@@ -12,7 +12,6 @@ import { getManifest, measureTime } from "./util.js";
 let cookErrorCount = 0;
 let cookAborted = false;
 const packErrors = {};
-let limitToPack = null;
 const runFormattingCheck = true;
 
 const sizeLookup = {
@@ -31,24 +30,18 @@ const sizeLookup = {
 const modulePath = url.fileURLToPath(import.meta.url);
 if (path.resolve(modulePath) === path.resolve(process.argv[1])) {
     await measureTime(async () => {
-        await cook();
+        await cook({limitToPack: process.env.npm_config_pack ?? null});
         console.log(`---`);
 
-        await unpackPacks(true);
+        await unpackPacks(true, {limitToPack: process.env.npm_config_pack ?? null});
     });
 
     process.exit(0);
 }
 
-export async function cook() {
+export async function cook(options = {}) {
     console.log(chalk.blueBright(`Cooking db files`));
-
-    for (let i = 3; i < process.argv.length; i++) {
-        if (process.argv[i] === '--pack') {
-            limitToPack = process.argv[i + 1];
-            i++;
-        }
-    }
+    const limitToPack = options.limitToPack ?? null;
 
     const compendiumMap = {};
     const allItems = [];
@@ -146,7 +139,7 @@ export async function cook() {
                 const foldersSource = (() => {
                     try {
                         return JSON.parse(jsonString);
-                    } catch (error) {
+                    } catch (err) {
                         if (!(directory in packErrors)) {
                             packErrors[directory] = [];
                         }
