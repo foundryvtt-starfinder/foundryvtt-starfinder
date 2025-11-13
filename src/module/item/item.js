@@ -944,16 +944,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             rollOptions.actionTargetSource = SFRPG.actionTargets;
         }
 
-        // Define Roll Data
-        const rollData = foundry.utils.deepClone(actorData);
-        // Add hasSave to roll
+        // Add has__ properties to itemData
         itemData.hasSave = this.hasSave;
         itemData.hasSkill = this.hasSkill;
         itemData.hasArea = this.hasArea;
         itemData.hasDamage = this.hasDamage;
         itemData.hasCapacity = this.hasCapacity();
 
-        rollData.item = itemData;
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
         // Warn the user if there is no ammo left
@@ -1382,12 +1379,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             return 0;
         }, 0);
 
-        // Define Roll Data
-        const rollData = foundry.utils.mergeObject(foundry.utils.deepClone(actorData), {
-            item: itemData,
-            mod: actorData.abilities[abl].mod
-        });
-
         let title = '';
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
             if (isHealing) {
@@ -1403,7 +1394,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             }
         }
 
-        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData, ownerData: rollData});
+        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
 
         /** Create additional modifiers. */
         const additionalModifiers = [];
