@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/speak_with_dead.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -37,7 +33,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -47,14 +44,14 @@
       "unidentified": "",
       "value": "<p>You grant the semblance of life to a corpse, allowing it to answer questions. You can ask up to six questions. The corpse’s knowledge is limited to what it knew during life, including the languages it spoke. Answers are brief, cryptic, or repetitive, especially if the creature would have opposed you in life.</p>\n<p>If the @UUID[Compendium.sfrpg.conditions.Item.nEJIWMKbPjqKuelo]{Dead} creature was friendly or helpful toward you in life, the spell works automatically. Otherwise, the corpse can attempt a Will saving throw to resist the spell as if it were alive. On a successful save, the corpse can refuse to answer your questions or attempt to deceive you using its Bluff skill. The target can speak only about what it knew in life. It can’t answer any questions that pertain to events that occurred after its death.</p>\n<p>If the corpse has been subjected to&nbsp;speak with @UUID[Compendium.sfrpg.conditions.Item.nEJIWMKbPjqKuelo]{Dead}&nbsp;within the past week, this spell fails. You can cast this spell on a corpse that has been deceased for any amount of time, but the body must be mostly intact to be able to respond. A damaged corpse might be able to give partial answers or partially correct answers, but it must have at least a mouth in order to speak at all. This spell does not affect a corpse that has been turned into an undead creature.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "minute",
       "value": "@details.cl.value"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 3,
     "materials": {
@@ -70,10 +67,8 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
     "rollNotes": "",
     "save": {
@@ -82,14 +77,19 @@
       "descriptor": "negate"
     },
     "school": "nec",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "CRB pg. 378",
     "sr": false,
     "target": {
-      "type": "",
       "value": "one dead creature"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "icons/magic/fire/explosion-fireball-medium-red-orange.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -42,6 +38,7 @@
           "name": "Piercing",
           "formula": "(lookupRange(@item.level, 1, 2, 2, 3, 4, 4, 6, 5, 8, 6, 11))d6",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -49,7 +46,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -58,6 +57,7 @@
           "name": "Acid",
           "formula": "(lookupRange(@item.level, 1, 2, 2, 3, 4, 4, 6, 5, 8, 6, 11))d4",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": true,
             "bludgeoning": false,
@@ -65,7 +65,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -74,6 +76,7 @@
           "name": "Cold",
           "formula": "(lookupRange(@item.level, 1, 2, 2, 3, 4, 4, 6, 5, 8, 6, 11))d4",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -81,7 +84,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -90,6 +95,7 @@
           "name": "Electricity",
           "formula": "(lookupRange(@item.level, 1, 2, 2, 3, 4, 4, 6, 5, 8, 6, 11))d4",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -97,7 +103,9 @@
             "electricity": true,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -106,6 +114,7 @@
           "name": "Fire",
           "formula": "(lookupRange(@item.level, 1, 2, 2, 3, 4, 4, 6, 5, 8, 6, 11))d4",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -113,7 +122,9 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -122,6 +133,7 @@
           "name": "",
           "formula": "",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -129,12 +141,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -188,7 +203,7 @@
       "value": "10*@details.cl.value"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": true,
     "level": 1,
     "materials": {
@@ -204,8 +219,6 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "touch",
       "value": ""
     },
@@ -218,12 +231,13 @@
     "school": "trs",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "PoC pg. 83",
     "sr": false,
     "target": {
-      "type": "",
       "value": "1 bulk of inert electronic equipment"
     },
     "uses": {

@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "0",
     "capacity": {
       "max": 0,
@@ -76,6 +71,8 @@
         {
           "name": "",
           "formula": "(lookupRange(@item.level, 1, 9, 2, 11, 3, 13, 4, 15, 5, 17, 6, 19, 7))d8",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -83,12 +80,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -98,7 +98,6 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.fye3M3ljr28YNyb8]{Lethal Near and Far (Ex) (3rd)}</p>\n<p>While you’re adept at sniping, you’ve also turned your gun into a deadly improvised weapon. You increase the sniper weapon special property range increment of any weapon you wield by 20%. You can also attack with any sniper weapon of at least 1 bulk as though it were a two-handed basic melee weapon with the block weapon special property and the @UUID[Compendium.sfrpg.rules.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#knockdown]{knockdown} critical hit effect that deals bludgeoning damage based on its item level; if the sniper weapon’s item level is 7 or lower, it deals 1d8 damage, and this damage increases by 1d8 at item level 9 and every 2 item levels thereafter (maximum 7d8 at item level 19).</p>\n<p><em>Edit item level to match your sniper weapon's item level.</em></p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -108,7 +107,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 1,
     "modifiers": [],
@@ -211,10 +210,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
@@ -222,6 +218,12 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "IS, pg. 32",
     "special": "",
     "specialMaterials": {
@@ -241,7 +243,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -249,8 +250,8 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     },
     "weaponCategory": "uncategorized",

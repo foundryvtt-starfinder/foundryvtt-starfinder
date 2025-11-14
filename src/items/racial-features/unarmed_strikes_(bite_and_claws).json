@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/skills/melee/blood-slash-foam-red.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "-",
     "capacity": {
       "max": null,
@@ -65,6 +60,8 @@
         {
           "name": "Piercing",
           "formula": "1d3 + @abilities.str.mod",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -72,7 +69,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -80,6 +79,8 @@
         {
           "name": "Slashing",
           "formula": "1d3 + @abilities.str.mod",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -87,12 +88,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -102,7 +106,6 @@
       "unidentified": "",
       "value": "<p>A tromlin bloodseeker can make unarmed attacks with its bite or the claws on its feet, dealing 1d3 piercing or slashing damage, respectively.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -112,7 +115,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 0,
     "modifiers": [],
@@ -214,10 +217,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
@@ -225,6 +225,12 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "SA:tLoL-1 pg. 63",
     "special": "",
     "specialMaterials": {
@@ -244,7 +250,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -252,7 +257,7 @@
       "value": null
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

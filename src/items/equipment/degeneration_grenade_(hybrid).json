@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "ac5",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "ft",
-      "value": 5
+      "value": "5"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 1,
@@ -52,7 +47,7 @@
     "chatFlavor": "see text",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -71,23 +66,49 @@
       "effect": "",
       "parts": [
         {
+          "name": "",
           "formula": "",
-          "operator": "",
-          "types": {}
+          "group": null,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
+          }
         }
       ]
     },
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "11d6",
-          "operator": "and",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": true,
-            "slashing": true
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": true,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -97,7 +118,6 @@
       "unidentified": "",
       "value": "<p>Degeneration grenades were standard equipment among sivv soldiers. They create a powerful degeneration wave that affects creatures and objects at the subatomic level. Creatures caught in the explosion of a degeneration grenade must attempt a Fortitude saving throw as their cells begin to collapse; on a failure, the creature takes 5d6 fire damage at the beginning of each of their turns and is fatigued. At the end of each of their turns, the creature can attempt a new Fortitude save to end this effect with a cumulative +1 bonus.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "round",
       "value": "3"
@@ -107,7 +127,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "+5d6 Fire",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 17,
     "modifiers": [],
@@ -204,10 +224,8 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "rollNotes": "",
     "save": {
@@ -215,11 +233,16 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #33 pg. 48",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -227,11 +250,11 @@
       "value": 1
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "charges",
       "value": 1
     },
-    "weaponCategory": "",
+    "weaponCategory": "uncategorized",
     "weaponType": "grenade"
   }
 }

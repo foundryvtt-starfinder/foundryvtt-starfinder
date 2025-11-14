@@ -5,21 +5,12 @@
   "img": "icons/magic/unholy/strike-body-explode-disintegrate.webp",
   "system": {
     "type": "vanguard",
-    "abilityMods": {
-      "parts": []
-    },
     "base": 0,
     "combatTracker": {
       "displayAbsoluteValue": false,
       "show": true,
       "showOwnerAndGMOnly": false,
       "visualization": []
-    },
-    "critical": {
-      "parts": []
-    },
-    "damage": {
-      "parts": []
     },
     "description": {
       "chat": "",
@@ -35,8 +26,10 @@
         "name": "Entropic Pool",
         "type": "enhancement",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "sign(@resources.vanguard.entropicPool.value)",
         "modifierType": "constant",
@@ -47,10 +40,11 @@
       }
     ],
     "range": {
-      "max": 3,
-      "min": 0,
+      "max": "3",
+      "min": "0",
       "mode": "immediate"
     },
+    "slug": "",
     "source": "COM pg. 50",
     "stage": "early",
     "subType": "entropicPool"

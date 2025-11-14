@@ -1,14 +1,10 @@
 {
-  "_id": "OK9G2BvJj0Ys7Hh0",
+  "_id": "0hH7sY0jJvB2G9KO",
   "name": "Breath Weapon",
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "cone",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,6 +30,8 @@
         {
           "name": "",
           "formula": "1d6 + lookupRange(@details.level.value, 0, 3, floor(@details.level.value * 1.5))",
+          "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -41,12 +39,15 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -59,6 +60,7 @@
     "descriptors": {
       "acid": false,
       "air": false,
+      "auditory": false,
       "calling": false,
       "chaotic": false,
       "charm": false,
@@ -78,16 +80,19 @@
       "force": false,
       "good": false,
       "healing": false,
+      "illusion": false,
       "language-dependent": false,
       "lawful": false,
       "light": false,
       "mind-affecting": false,
       "pain": false,
       "poison": false,
+      "polymorph": false,
       "radiation": false,
       "scrying": false,
       "sense-dependent": false,
       "shadow": false,
+      "sonic": false,
       "summoning": false,
       "teleportation": false,
       "water": false
@@ -102,18 +107,15 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Dragonkin",
     "rollNotes": "",
@@ -122,13 +124,18 @@
       "dc": "10 + floor(@details.level.value / 2) + @abilities.con.mod",
       "descriptor": "half"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AA1 pg. 40",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "sr",
       "value": 1
     }

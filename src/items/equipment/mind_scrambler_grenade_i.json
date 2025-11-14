@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/weapons/thrown/bomb-metal-brown.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 1,
@@ -85,7 +80,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -101,7 +98,6 @@
       "unidentified": "",
       "value": "<p>This device is covered with LEDs and other lights. When activated, this device flashes bright colors in an arrhythmic pattern while also emitting strange sounds. The net effect is disconcerting to creatures in the area, who must succeed at a Will saving throw or gain the @UUID[Compendium.sfrpg.conditions.Item.8rIj0ewW4bL8Uph5]{confused} condition for the listed number of rounds.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "round",
       "value": "1"
@@ -111,7 +107,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 12,
     "modifiers": [],
@@ -216,8 +212,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "20"
     },
@@ -229,8 +223,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 164",
     "special": "",
     "specialMaterials": {
@@ -250,7 +246,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

@@ -4,11 +4,7 @@
   "type": "consumable",
   "img": "icons/consumables/potions/potion-bottle-labeled-medicine-capped-red-black.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "heal",
     "activation": {
@@ -42,27 +38,9 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "consumableType": "serum",
-    "container": {
-      "contents": [],
-      "includeContentsInWealthCalculation": 1,
-      "isOpen": true,
-      "storage": [
-        {
-          "type": "slot",
-          "acceptsType": [
-            "spell"
-          ],
-          "affectsEncumbrance": false,
-          "amount": 0,
-          "subtype": "spellSlot",
-          "weightProperty": "bulk"
-        }
-      ]
-    },
     "critical": {
       "effect": "",
       "parts": []
@@ -81,7 +59,9 @@
             "electricity": false,
             "fire": false,
             "healing": true,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -97,17 +77,12 @@
       "unidentified": "",
       "value": "<p>A serum of rejuvenation provides a quick boost of energy. The primary effects of drinking a serum of rejuvenation occur instantaneously, with a secondary effect lasting for 1 hour.</p>\n<p><strong>Mk 1 (Level 3; 260 credits)</strong>: When you drink a mk 1 serum of rejuvenation, you restore 1d8 Stamina Points. For 1 hour after drinking this serum, you gain a +1 circumstance bonus to saving throws to avoid becoming @UUID[Compendium.sfrpg.conditions.Item.JGFn4MrDZ6X5vrzU]{fatigued} or @UUID[Compendium.sfrpg.conditions.Item.33ynSbmexuxC3cAQ]{exhausted}.</p>\n<p><strong>Mk 2 (Level 6; 675 credits)</strong>: When you drink a mk 2 serum of rejuvenation, you restore 3d8 Stamina Points. Additionally, if you’re currently suffering from the @UUID[Compendium.sfrpg.conditions.Item.JGFn4MrDZ6X5vrzU]{fatigued} condition when you drink this serum, and the effect allows a saving throw to negate, you can immediately attempt a new saving throw against that affect. For 1 hour after drinking this serum, you gain a +2 circumstance bonus to saving throws to avoid becoming fatigued or exhausted.</p>\n<p><strong>Mk 3 (Level 10; 2,680 credits)</strong>: When you drink a mk 3 serum of rejuvenation, you restore 5d8 Stamina Points. Additionally, if you currently have the fatigued or exhausted condition when you drink this serum, and the effect allows a saving throw to negate, you can immediately attempt a new saving throw against that effect. For 1 hour after drinking this serum, you gain a +3 circumstance bonus to saving throws to avoid becoming fatigued or exhausted.</p>\n<p><strong>Mk 4 (Level 16; 26,000 credits)</strong>: When you drink a mk 4 serum of rejuvenation, you restore 9d8 Stamina Points. For 1 hour after drinking this serum, you become immune to the fatigued and exhausted conditions. If you already have one of these conditions when you drink this serum, you ignore those conditions for the serum’s duration. The duration of the serum counts against the duration of the original effect.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "hour",
       "value": "1"
     },
-    "equippable": false,
-    "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
-    "identified": true,
-    "isActive": null,
+    "isActive": false,
     "level": 10,
     "modifiers": [
       {
@@ -115,8 +90,10 @@
         "name": "Serum of Rejuvenation",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "3",
         "modifierType": "formula",
@@ -131,8 +108,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
@@ -144,11 +119,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN p. 168",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

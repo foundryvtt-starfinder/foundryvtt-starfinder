@@ -6,9 +6,6 @@
   "system": {
     "type": "speciesGraft",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "util",
     "activation": {
@@ -21,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -42,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -56,7 +52,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -66,28 +63,25 @@
       "unidentified": "",
       "value": "<p>@UUID[Compendium.sfrpg.races.Item.x6MY66wPIYnFwrDZ]{Varculaks} are undead beings, amnesiac souls locked away in barely living bodies. With undead flesh grafted onto your hands (or similar appendages) or arcane mechanisms generating negative energy installed in your palms, your melee weapons become wreathed in darkness. You impart the @UUID[Compendium.sfrpg.rules.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#leech]{leech} critical hit effect (AR pg. 31) to any melee weapon you wield, but the saving throw DC is 10 + your character level + your Strength modifier, and the duration of the effect is 1d4 rounds. In addition, when a creature fails its save against this leech critical hit effect, you regain a number of Hit Points equal to half its CR or level. If the weapon already has a critical hit effect, you must choose which to apply on a critical hit.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 10,
     "modifiers": [],
     "price": 17000,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
@@ -95,15 +89,20 @@
       "dc": "10 + @details.level.value + @abilities.str.mod",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AA4 pg. 144",
     "system": "allHands",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

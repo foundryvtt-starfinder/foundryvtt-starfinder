@@ -4,11 +4,7 @@
   "type": "equipment",
   "img": "systems/sfrpg/icons/default/kevlar-vest.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -51,7 +47,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "16",
     "capacity": {
       "max": 20,
@@ -115,7 +110,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -132,7 +129,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -148,7 +147,6 @@
       "unidentified": "",
       "value": "<p>This suit of powered armor is made of metal scrap welded together into a crude frame. One arm has been shaped into a vise-like claw. Once per day, the wearer of a salvage chassis can take a move action and spend 5 charges from the armor’s battery to overcharge the armor, increasing the damage dealt by the claw to 1d10 bludgeoning and increasing the armor’s speed to 40 feet. Both effects last until the end of the wearer’s next turn, and for 1 hour afterward, the armor’s Strength is reduced to 12 (+1) and its speed is reduced to 10 feet. A character who is proficient in heavy armor is considered proficient with a salvage chassis. A character with proficiency in powered armor from some other source— such as a feat or class feature—gains an additional benefit while wearing a salvage chassis; when they hit a target character with an attack using the armor’s claw, that target gains the @UUID[Compendium.sfrpg.conditions.Item.yUtkoIshf4dPruNd]{Off-Target} condition until the end of its next turn.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -158,7 +156,8 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 2,
     "modifiers": [],
     "price": 850,
@@ -262,10 +261,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "reach": "",
     "rollNotes": "",
@@ -274,11 +270,12 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "medium",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "SA:JD pg. 57",
     "specialMaterials": {
       "abysium": false,
@@ -299,7 +296,6 @@
     "speed": "25 ft.",
     "strength": 16,
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -307,8 +303,8 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/technological%20items/lazer-drill.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "2",
     "capacity": {
       "max": 20,
@@ -90,8 +85,10 @@
       "effect": "Bleed",
       "parts": [
         {
+          "name": "",
           "formula": "1d6",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -99,7 +96,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -112,6 +111,7 @@
           "name": "",
           "formula": "3d6",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -119,12 +119,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -134,7 +137,6 @@
       "unidentified": "",
       "value": "<p>Excavation drills are a core hand tool for miners across the galaxy. Some claim that @UUID[Compendium.sfrpg.races.Item.SaWDXnfaX24Iuuuz]{Dwarf} mining engineers poached from Ulrikka Clanholdings initially designed these drills, as Ulrikka has previously produced similar designs. @UUID[Compendium.sfrpg.races.Item.SaWDXnfaX24Iuuuz]{Dwarf} knights have long used these drills in combat, as have gladiators, who often use them to put on bizarre and grisly shows. Utility and industrial models see extensive use in demolition and mining, while helical and volute drills are essential for some star-metal mining, where hard ore requires a tougher tool. Gyroidal drills are restricted, special-operations tools predominantly used to breach starship hulls during rescue or military boarding operations.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -144,7 +146,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 6,
     "modifiers": [],
@@ -248,10 +250,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
@@ -261,8 +260,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AP #34 pg. 44",
     "special": "",
     "specialMaterials": {
@@ -282,7 +283,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -290,7 +290,7 @@
       "value": 1
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

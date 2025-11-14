@@ -10,21 +10,10 @@
       "type": "starshipFrame",
       "img": "systems/sfrpg/icons/default/hexagonal-nut.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
-        "costMultipliedBySize": false,
         "crew": {
           "maximum": 0,
           "minimum": 0
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "damageThreshold": {
           "base": 0
@@ -46,6 +35,7 @@
         "modifiers": [],
         "pcu": null,
         "size": "small",
+        "slug": "",
         "source": "",
         "weaponMounts": {
           "aft": {
@@ -87,18 +77,8 @@
       "type": "starshipPowerCore",
       "img": "systems/sfrpg/icons/default/power-generator.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -106,9 +86,9 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
         "pcu": 120,
+        "slug": "",
         "source": "",
         "specialMaterials": {
           "abysium": false,
@@ -136,19 +116,9 @@
       "type": "starshipArmor",
       "img": "systems/sfrpg/icons/default/metal-scales.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 4,
         "cost": 5,
         "costMultipliedBySize": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -156,9 +126,8 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
-        "pcu": null,
+        "slug": "",
         "source": "CRB pg. 297",
         "specialMaterials": {
           "abysium": false,
@@ -185,18 +154,8 @@
       "type": "starshipDefensiveCountermeasure",
       "img": "systems/sfrpg/icons/default/bubble-field.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 6,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -207,6 +166,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": 3,
+        "slug": "",
         "source": "CRB pg. 297",
         "specialMaterials": {},
         "targetLockBonus": 4
@@ -218,18 +178,8 @@
       "type": "starshipOtherSystem",
       "img": "systems/sfrpg/icons/default/gears.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -240,6 +190,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": null,
+        "slug": "",
         "source": "AA1 pg. 158"
       }
     },
@@ -249,18 +200,8 @@
       "type": "starshipOtherSystem",
       "img": "systems/sfrpg/icons/default/gears.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -271,6 +212,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": null,
+        "slug": "",
         "source": ""
       }
     },
@@ -280,18 +222,8 @@
       "type": "starshipOtherSystem",
       "img": "systems/sfrpg/icons/default/gears.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -302,6 +234,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": null,
+        "slug": "",
         "source": ""
       }
     },
@@ -311,13 +244,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "allowadd": "true",
-        "attackBonus": "",
+        "attackBonus": null,
         "capacity": {
           "max": null,
           "value": null
@@ -325,24 +253,36 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "6d4",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>A telelith can use its slam only against a target in an adjacent hex. This attack has the ripper special property.</p>\n<h2 style=\"border-bottom: 1px solid var(--color-underline-header);\">Ripper</h2>\n<p>Source&nbsp;Starfinder Core Rulebook pg. 304</p>\n<p>Firing a blast of metal shards, a weapon with this special property deals terrific damage to a ship’s hull but is almost entirely negated by functioning shields. Halve all damage dealt by ripper weapons to shields. Ripper weapons are always short range.</p>"
+          "value": "<p>A telelith can use its slam only against a target in an adjacent hex. This attack has the ripper special property.</p>\n<h2 style=\"border-bottom:1px solid var(--color-underline-header)\">Ripper</h2>\n<p>Source&nbsp;Starfinder Core Rulebook pg. 304</p>\n<p>Firing a blast of metal shards, a weapon with this special property deals terrific damage to a ship’s hull but is almost entirely negated by functioning shields. Halve all damage dealt by ripper weapons to shields. Ripper weapons are always short range.</p>"
         },
         "isPowered": true,
         "modifiers": [],
@@ -352,6 +292,7 @@
         },
         "pcu": null,
         "range": "none",
+        "slug": "",
         "source": "AA3",
         "special": {
           "anchoring": false,
@@ -431,18 +372,8 @@
       "type": "starshipThruster",
       "img": "systems/sfrpg/icons/default/rocket-thruster.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -456,6 +387,7 @@
         "modifiers": [],
         "pcu": null,
         "pilotingModifier": 0,
+        "slug": "",
         "source": "",
         "specialMaterials": {
           "abysium": false,
@@ -482,19 +414,9 @@
       "type": "starshipShield",
       "img": "systems/sfrpg/icons/default/forward-field.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 0,
         "cost": 6,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "defenseValue": 0,
         "description": {
           "chat": "",
@@ -509,6 +431,7 @@
         "pcu": 20,
         "regeneration": 2,
         "shieldPoints": 50,
+        "slug": "",
         "source": "CRB pg. 302",
         "targetLockBonus": 0
       }
@@ -519,13 +442,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "allowadd": "true",
-        "attackBonus": "8",
+        "attackBonus": 8,
         "capacity": {
           "max": null,
           "value": null
@@ -533,17 +451,29 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "4d4",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -560,6 +490,7 @@
         },
         "pcu": null,
         "range": "none",
+        "slug": "",
         "source": "AA3",
         "special": {
           "anchoring": false,
@@ -729,88 +660,22 @@
   },
   "system": {
     "attributes": {
-      "ac": {
-        "misc": 0,
-        "value": 10
-      },
-      "complement": {
-        "max": 1,
-        "min": 0,
-        "value": 0
-      },
-      "computer": {
-        "value": 0
-      },
-      "criticalThreshold": {
-        "value": 10
-      },
-      "damageThreshold": {
-        "value": 0
-      },
-      "drift": {
-        "value": 0
-      },
-      "expansionBays": {
-        "value": 0
-      },
       "hp": {
-        "increment": 10,
-        "max": 0,
         "value": 35
-      },
-      "maneuverability": "",
-      "mounts": {
-        "aft": [],
-        "forward": [],
-        "port": [],
-        "starboard": [],
-        "turret": []
-      },
-      "pilotingBonus": {
-        "value": 0
-      },
-      "power": {
-        "max": 0,
-        "value": 0
-      },
-      "shields": {
-        "aft": {
-          "max": 0,
-          "value": 0
-        },
-        "forward": {
-          "max": 0,
-          "value": 0
-        },
-        "max": 0,
-        "port": {
-          "max": 0,
-          "value": 0
-        },
-        "starboard": {
-          "max": 0,
-          "value": 0
-        },
-        "value": 0
-      },
-      "speed": {
-        "value": 5
       },
       "systems": {
         "engines": {
           "affectedRoles": {
             "pilot": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "lifeSupport": {
           "affectedRoles": {
             "captain": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "powerCore": {
@@ -825,57 +690,84 @@
             "pilot": true,
             "scienceOfficer": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "sensors": {
           "affectedRoles": {
             "scienceOfficer": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "weaponsArrayAft": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "weaponsArrayForward": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "weaponsArrayPort": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "weaponsArrayStarboard": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         }
-      },
-      "targetLock": {
-        "misc": 0,
-        "value": 10
       }
     },
-    "conditions": {},
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "crew": {
       "captain": {
         "actorIds": [],
@@ -899,73 +791,45 @@
       },
       "npcData": {
         "captain": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "chiefMate": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "engineer": {
-          "abilities": {},
           "numberOfUses": 1,
           "skills": {
             "eng": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 12,
-              "ranks": 2,
-              "subname": "",
-              "value": 0
+              "ranks": 2
             }
           }
         },
         "gunner": {
-          "abilities": {},
           "numberOfUses": 1,
           "skills": {
             "gun": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 6,
-              "ranks": 2,
-              "subname": "",
-              "value": 0
+              "ranks": 2
             }
           }
         },
         "magicOfficer": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "pilot": {
-          "abilities": {},
           "numberOfUses": 1,
           "skills": {
             "pil": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 13,
-              "ranks": 2,
-              "subname": "",
-              "value": 0
+              "ranks": 2
             }
           }
         },
         "scienceOfficer": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         }
@@ -991,11 +855,7 @@
     "details": {
       "frame": "",
       "model": "N starship magical beast",
-      "modifiers": {
-        "custom": "",
-        "value": []
-      },
-      "notes": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Teleliths, often called &ldquo;living asteroids,&rdquo; look like irregular rock chunks dozens to hundreds of feet across. Difficult to distinguish from ordinary asteroids tumbling through space, teleliths are silicon-based entities with a rudimentary intelligence and a predilection for disguise. Teleliths feed on metal and are particularly drawn to dense or highly refined materials, such as those found in space stations and starships. Although some teleliths are scavengers, drifting lazily through asteroid fields to feed on metal-rich finds, others are ambush predators. Such teleliths lurk amid asteroids, wreckage, or other debris, waiting to launch themselves at passing vessels.<br /><br />Teleliths fight by slamming into their foes or hurling halfdigested chunks of rock or metal through their pores. These creatures continue to grow throughout their millennia-long life spans, and older teleliths develop strange abilities, including a strong electromagnetic field that works like a starship&rsquo;s shields. In addition, these larger, fiercer teleliths can launch mineral shards from their pores at railgun speeds. These teleliths also develop peculiar organs that contract in a metaphysical fashion to create a bizarre temporary wormhole that connects nearby points in space. The telelith uses this ability to &ldquo;blink&rdquo; across space, ambushing its prey or evading danger, although a pilot with quick enough reflexes can follow the telelith through this spatial distortion.<br /><br />When feeding, a telelith unfolds its stony carapace to reveal serrated mandibles and fourteen grasping appendages. Although vaguely resembling terrestrial isopods such as pill bugs, which roll into a ball for defense, an unfolded configuration is not the telelith&rsquo;s natural or preferred shape. A telelith unfolds only to eat, clinging to surfaces with its graspers while it grinds metal with its mandibles and absorbs the resultant powder through feeding vents. Once its meal is done (or sooner if the telelith senses danger) the telelith snaps back into its meteor-shaped configuration. Xenobiologists have observed that teleliths don&rsquo;t otherwise unfold, not even to breed.<br /><br />When it does decide to breed, a telelith releases gametes onto a solid surface through the same pores the creature uses to hurl debris. Once a second telelith does the same, infant teleliths gestate in egg-like nodules attached to the fertilized area, sometimes referred to as &ldquo;void barnacles.&rdquo; The nodules never hatch, but instead form the initial shell for a juvenile telelith, which breaks off when it&rsquo;s ready to feed.<br /><br />Although they lack a language or culture, teleliths are social creatures. They are most often encountered in large groups. Stories of asteroid fields composed mostly of teleliths that gather around and feed on massive planetoids seem fanciful. However, such fields might be mating gatherings or regions where countless telelith hatchlings have emerged from hibernation.<br /><br />A telelith can suspend its life functions indefinitely to survive tumbling through space without nourishing materials. Elder teleliths also work together to launch nursery asteroids into interstellar space after breeding. Teleliths have no way to enter the Drift on their own, but they have hitched rides on or been pulled into the Drift by starships. For all these reasons, the creatures can not only be found within the Drift, but they can also be encountered throughout the galaxy.</span></p>\n<h3>ECOLOGY</h3>\n<p>Environment any vacuum or the Drift</p>\n<p>Organization solitary, pair, or knot (3&ndash;12)</p>",
+      "notes": "<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl00_LabelName\">Teleliths, often called “living asteroids,” look like irregular rock chunks dozens to hundreds of feet across. Difficult to distinguish from ordinary asteroids tumbling through space, teleliths are silicon-based entities with a rudimentary intelligence and a predilection for disguise. Teleliths feed on metal and are particularly drawn to dense or highly refined materials, such as those found in space stations and starships. Although some teleliths are scavengers, drifting lazily through asteroid fields to feed on metal-rich finds, others are ambush predators. Such teleliths lurk amid asteroids, wreckage, or other debris, waiting to launch themselves at passing vessels.<br /><br />Teleliths fight by slamming into their foes or hurling halfdigested chunks of rock or metal through their pores. These creatures continue to grow throughout their millennia-long life spans, and older teleliths develop strange abilities, including a strong electromagnetic field that works like a starship’s shields. In addition, these larger, fiercer teleliths can launch mineral shards from their pores at railgun speeds. These teleliths also develop peculiar organs that contract in a metaphysical fashion to create a bizarre temporary wormhole that connects nearby points in space. The telelith uses this ability to “blink” across space, ambushing its prey or evading danger, although a pilot with quick enough reflexes can follow the telelith through this spatial distortion.<br /><br />When feeding, a telelith unfolds its stony carapace to reveal serrated mandibles and fourteen grasping appendages. Although vaguely resembling terrestrial isopods such as pill bugs, which roll into a ball for defense, an unfolded configuration is not the telelith’s natural or preferred shape. A telelith unfolds only to eat, clinging to surfaces with its graspers while it grinds metal with its mandibles and absorbs the resultant powder through feeding vents. Once its meal is done (or sooner if the telelith senses danger) the telelith snaps back into its meteor-shaped configuration. Xenobiologists have observed that teleliths don’t otherwise unfold, not even to breed.<br /><br />When it does decide to breed, a telelith releases gametes onto a solid surface through the same pores the creature uses to hurl debris. Once a second telelith does the same, infant teleliths gestate in egg-like nodules attached to the fertilized area, sometimes referred to as “void barnacles.” The nodules never hatch, but instead form the initial shell for a juvenile telelith, which breaks off when it’s ready to feed.<br /><br />Although they lack a language or culture, teleliths are social creatures. They are most often encountered in large groups. Stories of asteroid fields composed mostly of teleliths that gather around and feed on massive planetoids seem fanciful. However, such fields might be mating gatherings or regions where countless telelith hatchlings have emerged from hibernation.<br /><br />A telelith can suspend its life functions indefinitely to survive tumbling through space without nourishing materials. Elder teleliths also work together to launch nursery asteroids into interstellar space after breeding. Teleliths have no way to enter the Drift on their own, but they have hitched rides on or been pulled into the Drift by starships. For all these reasons, the creatures can not only be found within the Drift, but they can also be encountered throughout the galaxy.</span></p>\n<h3>ECOLOGY</h3>\n<p>Environment any vacuum or the Drift</p>\n<p>Organization solitary, pair, or knot (3–12)</p>",
       "size": "",
       "tier": 2
     },
@@ -1069,6 +929,7 @@
           "value": 10
         }
       }
-    }
+    },
+    "slug": ""
   }
 }

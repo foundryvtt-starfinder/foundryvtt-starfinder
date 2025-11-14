@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/magic/earth/projectile-stone-boulder-brown.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "0",
     "capacity": {
       "max": 0,
@@ -77,6 +72,7 @@
           "name": "9 bulk",
           "formula": "lookupRange(@details.level.value, 1, 5, 2, 7, 3, 9, 4, 11, 5, 13, 6, 15, 7, 17, 8, 19, 9)d6 + @abilities.str.mod",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -84,7 +80,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -93,6 +91,7 @@
           "name": "8 bulk",
           "formula": "lookupRange(@details.level.value, 1, 5, 2, 7, 3, 9, 4, 11, 5, 13, 6, 15, 7, 17, 8)d6 + @abilities.str.mod",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -100,7 +99,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -109,6 +110,7 @@
           "name": "7 bulk",
           "formula": "lookupRange(@details.level.value, 1, 5, 2, 7, 3, 9, 4, 11, 5, 13, 6, 15, 7)d6 + @abilities.str.mod",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -116,7 +118,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -125,6 +129,7 @@
           "name": "6 bulk",
           "formula": "lookupRange(@details.level.value, 1, 5, 2, 7, 3, 9, 4, 11, 5, 13, 6)d6 + @abilities.str.mod",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -132,7 +137,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -141,6 +148,7 @@
           "name": "5 bulk",
           "formula": "lookupRange(@details.level.value, 1, 5, 2, 7, 3, 9, 4, 11, 5)d6 + @abilities.str.mod",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -148,7 +156,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -157,6 +167,7 @@
           "name": "4 bulk",
           "formula": "lookupRange(@details.level.value, 1, 5, 2, 7, 3, 9, 4)d6 + @abilities.str.mod",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -164,7 +175,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -173,6 +186,7 @@
           "name": "3 Bulk",
           "formula": "lookupRange(@details.level.value, 1, 5, 2, 7, 3)d6 + @abilities.str.mod",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -180,12 +194,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -195,7 +212,6 @@
       "unidentified": "",
       "value": "<p>As a ranged attack using two hands, a giant can hurl an object or piece of debris with a minimum bulk of 3 and a maximum bulk equal to your Strength modifier +2. The debris is a basic melee weapon with the thrown property, the knockdown critical hit effect, and a range increment of 5 feet × their Strength modifier. It deals 1d6 bludgeoning damage. Picking up debris is a move action, but if a giant can draw a weapon without spending an action (such as via the Quick Draw feat), they can pick up debris as part of the action used to throw it once per round. They can’t use this ability while encumbered or overburdened. A giant increases the range increment of other thrown weapons they wield by 10 feet. At 5th level and every two levels thereafter, the damage dealt increases by 1d6, though the number of damage dice can’t exceed the bulk of the debris.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -205,7 +221,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 1,
     "modifiers": [],
@@ -310,8 +326,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "5 x Strength modifier in"
     },
@@ -323,8 +337,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "PoC pg. 20",
     "special": "",
     "specialMaterials": {
@@ -344,7 +360,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

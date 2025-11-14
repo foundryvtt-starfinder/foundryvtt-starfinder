@@ -10,20 +10,25 @@
       "type": "vehicleAttack",
       "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2*(2d4)",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -37,12 +42,12 @@
         },
         "ignoresHardness": 0,
         "modifiers": [],
-        "quantity": null,
         "save": {
           "type": "reflex",
           "dc": "8",
           "descriptor": "negate"
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -52,20 +57,25 @@
       "type": "vehicleAttack",
       "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d4",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -79,12 +89,12 @@
         },
         "ignoresHardness": 0,
         "modifiers": [],
-        "quantity": null,
         "save": {
           "type": "reflex",
           "dc": "8",
           "descriptor": "half"
         },
+        "slug": "",
         "source": ""
       }
     }
@@ -188,12 +198,12 @@
       "controlSkill": "pil",
       "cover": "none",
       "dimensions": {
-        "height": "3",
-        "length": "10",
-        "width": "5"
+        "height": 3,
+        "length": 10,
+        "width": 5
       },
       "eac": {
-        "value": null
+        "value": 10
       },
       "expansionBays": {
         "value": 0
@@ -209,23 +219,57 @@
       },
       "modifiers": {
         "athletics": 0,
-        "attackFullSpeed": "-3",
-        "attackMoving": "-1",
-        "attackStopped": "0",
-        "piloting": "+2",
+        "attackFullSpeed": 0,
+        "attackMoving": 0,
+        "attackStopped": 0,
+        "piloting": 2,
         "survival": 0
       },
       "size": "large",
-      "special": [],
       "speed": {
-        "type": "",
         "drive": "20 ft",
         "full": "200 ft",
         "mph": "22 mph"
-      },
-      "systems": []
+      }
     },
-    "conditions": {},
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "crew": {
       "complement": {
         "actorIds": [],
@@ -254,6 +298,8 @@
     "hangarBay": {
       "actorIds": [],
       "limit": 0
-    }
+    },
+    "modifiers": [],
+    "slug": ""
   }
 }

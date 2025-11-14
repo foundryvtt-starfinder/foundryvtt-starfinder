@@ -59,7 +59,7 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
                     nullable: true,
                     required: true
                 })
-            }),
+            }, {required: false}),
             descriptors: new fields.TypedObjectField(
                 new fields.BooleanField({initial: false}),
                 {validateKey: (key) => key in CONFIG.SFRPG.descriptors}

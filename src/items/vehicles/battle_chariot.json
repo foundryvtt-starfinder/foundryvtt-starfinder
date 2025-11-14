@@ -10,20 +10,25 @@
       "type": "vehicleAttack",
       "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2*(4d4)",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -42,6 +47,7 @@
           "dc": "10",
           "descriptor": "negate"
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -51,20 +57,25 @@
       "type": "vehicleAttack",
       "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d4",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -83,6 +94,7 @@
           "dc": "10",
           "descriptor": "half"
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -92,17 +104,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -111,6 +113,7 @@
           "value": "<p>Some vehicles have autocontrol, which enables you to spend your actions on tasks other than piloting, but is far less capable than an autopilot. You can engage autocontrol as a swift action after taking a drive or race action, and it lasts until it is disengaged (also a swift action) or until the vehicle is no longer capable of moving. When you’re using autocontrol, the vehicle becomes uncontrolled, but each round it moves in a straight line for the same distance and at the same heading and speed as the last pilot action (moving as if taking two drive actions if drive was the last action the pilot took, or as a race action if that was the last action the pilot took). The autocontrol uses the result of the pilot’s most recent Piloting check as the result of its Piloting checks.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
           "piloting": 0,
           "usedAsPilot": false
@@ -119,6 +122,7 @@
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": "CRB pg. 280"
       }
     },
@@ -128,17 +132,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -147,6 +141,7 @@
           "value": "<p>This vehicle relies on a creature or another machine to set its speed.</p>\n<h3>Drawn Vehicles</h3>\n<p>While most vehicles have their own means of propulsion, a handful of archaic designs harken to a time when the weight of civilization rested upon the backs of beasts. Such vehicles have no speed, and instead rely on creatures to pull them along by a specially designed harness. A drawn vehicle can be harnessed either to one creature of the same size category, or to two or more creatures one size category smaller than the vehicle. When a drawn vehicle is harnessed to creatures trained for the task, it gains a drive speed equal to the creatures’ walk speed, and a full speed equal to 3 ×the creatures’ walk speed. A pilot uses their Survival skill instead of their Piloting skill for checks to control a vehicle drawn by a creature, and drawn vehicles are always considered to have autocontrol.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
           "piloting": 0,
           "usedAsPilot": false
@@ -155,6 +150,7 @@
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": ""
       }
     }
@@ -258,9 +254,9 @@
       "controlSkill": "sur",
       "cover": "partial",
       "dimensions": {
-        "height": "4",
-        "length": "10",
-        "width": "5"
+        "height": 4,
+        "length": 10,
+        "width": 5
       },
       "eac": {
         "value": 10
@@ -279,23 +275,57 @@
       },
       "modifiers": {
         "athletics": 0,
-        "attackFullSpeed": "-2",
-        "attackMoving": "-1",
-        "attackStopped": "0",
-        "piloting": "0",
-        "survival": "-1"
+        "attackFullSpeed": 0,
+        "attackMoving": 0,
+        "attackStopped": 0,
+        "piloting": 0,
+        "survival": 0
       },
       "size": "large",
-      "special": [],
       "speed": {
-        "type": "",
         "drive": "-",
         "full": "-",
         "mph": "-"
-      },
-      "systems": []
+      }
     },
-    "conditions": {},
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "crew": {
       "complement": {
         "actorIds": [],
@@ -324,6 +354,8 @@
     "hangarBay": {
       "actorIds": [],
       "limit": 0
-    }
+    },
+    "modifiers": [],
+    "slug": ""
   }
 }
