@@ -71,7 +71,7 @@
                         {{localize "SFRPG.Items.Consumable.UseAction"}}
                     </button>
                 {{else if item.system.usage.per}}
-                    {{#if (and isOwner (not (eq item.type "weapon")))}}
+                    {{#if (and isOwner (and (not (eq item.system.usage.per "shot")) (not (eq item.system.usage.per "action"))))}}
                         <button type="button" class="tag use" data-tooltip="{{localize "SFRPG.ActorSheet.Inventory.Item.UseItemTooltip"}}">
                             {{item.system.usage.value}} / {{item.system.usage.per}}
                         </button>
