@@ -4,6 +4,10 @@ This update is a big one, with some big backend changes that will keep the syste
 
 Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG, @ian612, @Iankid, @ilya-vasiuk, @LebombJames, @levirak, and @Theleruby (apologies if I missed anyone!).
 
+## Breaking Changes
+
+- `@mod` can no longer be referenced in damage rolls. Instead, reference the ability modifier with its full path
+
 ## Core System Improvements
 
 ### General Improvements
