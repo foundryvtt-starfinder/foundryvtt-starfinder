@@ -133,12 +133,12 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
         // Attempt to retrieve current capacity. If it is null, exit early.
         const currentCapacity = this.getCurrentCapacity();
-        if (!currentCapacity) {
+        if (currentCapacity === null || currentCapacity === undefined) {
             return;
         }
 
         // Get max capacity
-        const maxCapacity = this.getMaxCapacity();
+        const maxCapacity = this.getMaxCapacity() ?? this.parentItem.getMaxCapacity();
         const updatedCapacity = currentCapacity + increaseAmount;
 
         if (this.type === "ammunition" && !this.system.useCapacity) {
