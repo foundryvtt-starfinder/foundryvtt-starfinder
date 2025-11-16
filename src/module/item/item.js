@@ -1665,10 +1665,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
             // Roll damage/attack or place template if needed. Do this here for the case where the item is consumed on use.
             if (this.hasAttack) {
-                const rolled = await this.rollAttack({}, options);
+                options.skipUI = overrideChatCard;
+                const rolled = await this.rollAttack(options);
                 if (!rolled) return; // Roll was cancelled, don't consume.
             }
             if (this.hasDamage) {
+                options.skipUI = overrideChatCard;
                 const rolled = await this.rollDamage({}, options);
                 if (!rolled) return; // Roll was cancelled, don't consume.
             }
