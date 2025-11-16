@@ -4,11 +4,7 @@
   "type": "shield",
   "img": "systems/sfrpg/icons/equipment/armor/tactical-shield-field.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "acp": 0,
     "actionTarget": "kac",
     "actionType": "mwak",
@@ -23,7 +19,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -44,7 +40,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bonus": {
       "aligned": 1,
       "wielded": 1
@@ -91,6 +86,8 @@
         {
           "name": "",
           "formula": "1d3 + @abilities.str.mod",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -98,12 +95,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -113,7 +113,6 @@
       "unidentified": "",
       "value": "<p>A tactical shield is a small, mobile defensive plate you carry on one limb and can maneuver to intercept attacks against you. A hand wielding a tactical shield can still hold another object and be used to reload weapons, but it cannot wield weapons or other shields. You can use a tactical shield to make a special unarmed strike that does not count as archaic.</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\"></span></p>"
     },
-    "descriptors": [],
     "dex": null,
     "duration": {
       "units": "instantaneous",
@@ -124,7 +123,8 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 5,
     "modifiers": [],
     "price": 2500,
@@ -225,10 +225,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
@@ -236,6 +233,12 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Character Operation Manual",
     "specialMaterials": {
       "abysium": false,
@@ -254,7 +257,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -262,8 +264,8 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

@@ -103,7 +103,7 @@ export function rollItemMacro(itemUuid, macroType) {
         case "cast":
             return item.useSpell();
         case "use":
-            return item.rollConsumable({ event });
+            return item.useItem({ event });
         default:
             return item.roll();
     }

@@ -10,20 +10,25 @@
       "type": "vehicleAttack",
       "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2*(13d10)",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -42,6 +47,7 @@
           "dc": "15",
           "descriptor": "negate"
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -51,20 +57,25 @@
       "type": "vehicleAttack",
       "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "13d10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -83,6 +94,7 @@
           "dc": "15",
           "descriptor": "half"
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -92,17 +104,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -111,14 +113,16 @@
           "value": "<p>Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn’t locked by a passcode or otherwise programmed not to obey).</p>\n<p>A vehicle is considered controlled when the autopilot is engaged. An autopilot’s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).</p>\n<p>The Systems entry in a vehicle’s statistics (see page 228) lists the autopilot’s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle’s modifier (listed in the vehicle’s Modifiers entry) to the Piloting checks.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
-          "piloting": "22",
+          "piloting": 22,
           "usedAsPilot": true
         },
         "senses": {
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": "CRB pg. 280"
       }
     },
@@ -128,17 +132,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -147,14 +141,16 @@
           "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
-          "piloting": "0",
+          "piloting": 0,
           "usedAsPilot": false
         },
         "senses": {
           "senses": "darkvision 5 miles",
           "usedForSenses": true
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -164,17 +160,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -183,14 +169,16 @@
           "value": "<p>A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device’s price.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
-          "piloting": "0",
+          "piloting": 0,
           "usedAsPilot": false
         },
         "senses": {
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": "CRB pg. 218"
       }
     },
@@ -200,11 +188,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/imds_missile_launcher.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rwak",
         "activation": {
@@ -218,7 +202,7 @@
           "shapable": false,
           "shape": "",
           "units": "ft",
-          "value": 2000
+          "value": "2000"
         },
         "attackBonus": 0,
         "attributes": {
@@ -239,7 +223,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": 1,
@@ -248,7 +231,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -281,14 +264,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d6 * 10",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
                 "bludgeoning": true,
-                "fire": true
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -298,7 +293,6 @@
           "unidentified": "",
           "value": "<p>This heavy weapon launches a guided missile that has a range increment of 2,000 feet. The weapon can target only airborne vehicles or starships. On a successful attack, the pilot of the defending vehicle can attempt a Piloting check (DC = the attack roll’s result) to halve the damage. An airspace defender has a capacity of five missiles.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -308,7 +302,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 12,
         "modifiers": [],
@@ -405,10 +399,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 80
+          "value": "80"
         },
         "rollNotes": "",
         "save": {
@@ -416,11 +408,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -428,7 +425,7 @@
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -536,9 +533,9 @@
       "controlSkill": "pil",
       "cover": "improved",
       "dimensions": {
-        "height": "15",
-        "length": "30",
-        "width": "20"
+        "height": 15,
+        "length": 30,
+        "width": 20
       },
       "eac": {
         "value": 26
@@ -557,23 +554,57 @@
       },
       "modifiers": {
         "athletics": 0,
-        "attackFullSpeed": "-6",
-        "attackMoving": "-3",
-        "attackStopped": "0",
-        "piloting": "-2",
+        "attackFullSpeed": 0,
+        "attackMoving": 0,
+        "attackStopped": 0,
+        "piloting": 0,
         "survival": 0
       },
       "size": "gargantuan",
-      "special": [],
       "speed": {
-        "type": "",
         "drive": "30 ft  (hover)",
         "full": "500 ft  (hover)",
         "mph": "55 mph (hover)"
-      },
-      "systems": []
+      }
     },
-    "conditions": {},
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "crew": {
       "complement": {
         "actorIds": [],
@@ -602,6 +633,8 @@
     "hangarBay": {
       "actorIds": [],
       "limit": 0
-    }
+    },
+    "modifiers": [],
+    "slug": ""
   }
 }

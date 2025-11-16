@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -28,7 +24,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -37,7 +33,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -47,7 +44,7 @@
           "unidentified": "",
           "value": "<p>As a reaction when hit by an attack that targets its KAC, a vasporan can molt its flesh to attempt to avoid the attack. The vasporan gains hardness 20 against the attack’s damage and can take a guarded step. The vasporan can’t use flash molt again for 1d4 rounds.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -58,33 +55,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -96,11 +95,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -114,7 +109,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 21,
         "attributes": {
@@ -135,7 +130,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -144,7 +138,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -155,13 +149,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d10+13",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -171,7 +178,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -181,7 +187,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -277,10 +283,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -288,11 +291,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -300,8 +308,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -314,11 +322,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -332,7 +336,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 18,
         "attributes": {
@@ -353,7 +357,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -362,7 +365,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -384,13 +387,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "5d4+9",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -400,7 +416,6 @@
           "unidentified": "",
           "value": "<p>As a standard action, a vasporan can eject thin spines as a ranged attack that targets KAC and has a range increment of 30 feet.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -410,7 +425,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -506,10 +521,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "rollNotes": "",
         "save": {
@@ -517,11 +530,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -529,7 +547,7 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -543,11 +561,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -560,7 +574,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -569,7 +583,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -579,7 +594,7 @@
           "unidentified": "",
           "value": "<p>A vasporan deals 2d8 additional damage against any creature unaware of it.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -590,15 +605,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "e75e244c-433c-4969-a32e-99a63b7aae88",
             "name": "Ambush Strike",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "all-damage",
             "enabled": false,
+            "limitTo": null,
             "max": 16,
             "modifier": "2d8",
             "modifierType": "formula",
@@ -610,30 +627,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -644,10 +663,9 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -658,7 +676,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -667,7 +685,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -677,7 +696,7 @@
           "unidentified": "",
           "value": "<p>A vasporan can molt specific parts of its skin to create sacs that catch wind currents or become filled with gases. In winds higher than a light wind (Starfinder Core Rulebook 399), a vasporan’s fly speed increases by 15 feet.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -688,34 +707,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -726,11 +747,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -743,7 +760,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 5
+          "value": "5"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -754,13 +771,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -770,7 +800,7 @@
           "unidentified": "",
           "value": "<p>A vasporan’s flesh contains pockets of volatile gases trapped just beneath the surface. These pockets ignite and explode when a vasporan is hit by a melee attack that deals fire damage. This deals 2d6 fire damage to creatures adjacent to the vasporan. A creature can avoid this damage with a successful DC 16 Reflex save.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -781,18 +811,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -801,13 +828,18 @@
           "dc": "16",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -910,108 +942,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "con": {
-        "base": 6,
-        "min": 3,
-        "misc": 0,
-        "mod": 6,
-        "value": 22
+        "base": 6
       },
       "dex": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 16
+        "base": 3
       },
       "int": {
-        "base": -4,
-        "min": 3,
-        "misc": 0,
-        "mod": -4,
-        "value": 2
+        "base": -4
       },
       "str": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 18
+        "base": 4
       },
       "wis": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 12
+        "base": 1
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 22,
-        "min": 0,
-        "tooltip": [],
-        "value": 22
+        "base": 22
       },
       "fort": {
-        "base": 13,
-        "bonus": 13,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 13
       },
       "hp": {
         "max": 145,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 145
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 3,
         "value": 3
       },
       "kac": {
-        "base": 24,
-        "min": 0,
-        "tooltip": [],
-        "value": 24
+        "base": 24
       },
-      "keyability": "",
       "reach": "10 ft.",
       "reflex": {
-        "base": 13,
-        "bonus": 13,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 13
       },
       "space": "10 ft.",
       "speed": {
@@ -1032,19 +1008,12 @@
         "special": "original base: 20 ft.; original special: climb 20 ft., fly 40 ft. (Ex, average)",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 8,
-        "bonus": 8,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 8
       }
     },
-    "classes": {},
     "conditions": {
       "asleep": false,
       "bleeding": false,
@@ -1067,6 +1036,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1082,9 +1052,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1092,9 +1059,8 @@
     "details": {
       "type": "Animal",
       "alignment": "N",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1103,10 +1069,10 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Vasporans are ambush predators capable of molting at highly accelerated rates. They use this molting ability for both offense&nbsp;and defense. A vasporan can molt select parts of its body to create large, balloon-like sacs it can use to catch air currents to fly. In environments where wind is minimal or unreliable, a vasporan can also produce internal gases to fill these sacs and thus create independent lift. The vasporan uses its flight to ambush creatures from a great height. In cases when its ambush fails or the vasporan itself is the subject of an attack, it molts as a means to escape injury. A vasporan can produce a reactive agent that causes its molted skin to instantly harden when exposed to air. This tough, molted shell serves as a distraction and can even intercept an attack in dire situations.</p>\n<p>A vasporan’s highly sensitive sense of smell warns it of approaching predators, and it’s also useful in detecting prey from great distances between various layers of thick gases. In addition using their molting capabilities to escape, vasporans molt their shells as a distraction. In most cases, vasporans molt after a failed ambush to make it difficult for the would-be prey to know where the vasporans have gone. The creatures also mark their territories with dozens of brittle moltings, both as a warning to other creatures and as an early detection system—a&nbsp;vasporan shell makes a&nbsp;distinct crackling and&nbsp;popping sound when&nbsp;it’s stepped on or&nbsp;destroyed that&nbsp;can alert the&nbsp;former owner&nbsp;when danger is&nbsp;approaching.</p>\n<p>In recent years,&nbsp;xenobiologists have&nbsp;posited that some&nbsp;particularly hardy&nbsp;specimens are able to&nbsp;produce a unique mix&nbsp;of gases that can both&nbsp;accelerate them to the&nbsp;high speeds needed to reach&nbsp;nearby planets and provide them&nbsp;with breathable air on the journey.&nbsp;Such exceptional vasporans are&nbsp;thought to be rare, but vasporan&nbsp;broods on other planets are&nbsp;nonetheless becoming more common,&nbsp;and many species are now having&nbsp;to learn to contend with these&nbsp;dangerous creatures.&nbsp;A typical vasporan is 11 feet long and weighs 750 pounds.</p>\n<h2>MOLTING COAT MODULES</h2>\n<p>These armor upgrades replicate the defensive flash molting&nbsp;of a vasporan by secreting a thin coat of enzymes and other&nbsp;materials that completely cover a piece of armor. The module&nbsp;is capable of shunting the coat, which instantaneously&nbsp;hardens when exposed to most atmospheres.</p>\n<h3>Molting Coat Module</h3>\n<p>A molting coat module replicates the quick-molting skin of a vasporan. You can activate the module as a reaction when you are hit by an attack targeting your KAC while in an atmosphere. You reduce the attack’s damage by an amount equal to 5 × the upgrade’s mark number. This reduction applies only to the triggering attack and stacks with one other source of damage reduction or resistance. The module requires 1 hour to secrete a new coat before it can be used again.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td>UPGRADE</td>\n<td style=\"text-align: center; vertical-align: middle;\">LEVEL</td>\n<td style=\"text-align: center; vertical-align: middle;\">PRICE</td>\n</tr>\n<tr>\n<td>Molting coat module, mk 1</td>\n<td style=\"text-align: center; vertical-align: middle;\">5</td>\n<td style=\"text-align: center; vertical-align: middle;\">2,700</td>\n</tr>\n<tr>\n<td>Molting coat module, mk 2</td>\n<td style=\"text-align: center; vertical-align: middle;\">11</td>\n<td style=\"text-align: center; vertical-align: middle;\">23,000</td>\n</tr>\n<tr>\n<td>Molting coat module, mk 3</td>\n<td style=\"text-align: center; vertical-align: middle;\">17</td>\n<td style=\"text-align: center; vertical-align: middle;\">225,000</td>\n</tr>\n</tbody>\n</table>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any sky (Old Ustavia)</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>",
+        "value": "<h2>Description</h2>\n<p>Vasporans are ambush predators capable of molting at highly accelerated rates. They use this molting ability for both offense&nbsp;and defense. A vasporan can molt select parts of its body to create large, balloon-like sacs it can use to catch air currents to fly. In environments where wind is minimal or unreliable, a vasporan can also produce internal gases to fill these sacs and thus create independent lift. The vasporan uses its flight to ambush creatures from a great height. In cases when its ambush fails or the vasporan itself is the subject of an attack, it molts as a means to escape injury. A vasporan can produce a reactive agent that causes its molted skin to instantly harden when exposed to air. This tough, molted shell serves as a distraction and can even intercept an attack in dire situations.</p>\n<p>A vasporan’s highly sensitive sense of smell warns it of approaching predators, and it’s also useful in detecting prey from great distances between various layers of thick gases. In addition using their molting capabilities to escape, vasporans molt their shells as a distraction. In most cases, vasporans molt after a failed ambush to make it difficult for the would-be prey to know where the vasporans have gone. The creatures also mark their territories with dozens of brittle moltings, both as a warning to other creatures and as an early detection system—a&nbsp;vasporan shell makes a&nbsp;distinct crackling and&nbsp;popping sound when&nbsp;it’s stepped on or&nbsp;destroyed that&nbsp;can alert the&nbsp;former owner&nbsp;when danger is&nbsp;approaching.</p>\n<p>In recent years,&nbsp;xenobiologists have&nbsp;posited that some&nbsp;particularly hardy&nbsp;specimens are able to&nbsp;produce a unique mix&nbsp;of gases that can both&nbsp;accelerate them to the&nbsp;high speeds needed to reach&nbsp;nearby planets and provide them&nbsp;with breathable air on the journey.&nbsp;Such exceptional vasporans are&nbsp;thought to be rare, but vasporan&nbsp;broods on other planets are&nbsp;nonetheless becoming more common,&nbsp;and many species are now having&nbsp;to learn to contend with these&nbsp;dangerous creatures.&nbsp;A typical vasporan is 11 feet long and weighs 750 pounds.</p>\n<h2>MOLTING COAT MODULES</h2>\n<p>These armor upgrades replicate the defensive flash molting&nbsp;of a vasporan by secreting a thin coat of enzymes and other&nbsp;materials that completely cover a piece of armor. The module&nbsp;is capable of shunting the coat, which instantaneously&nbsp;hardens when exposed to most atmospheres.</p>\n<h3>Molting Coat Module</h3>\n<p>A molting coat module replicates the quick-molting skin of a vasporan. You can activate the module as a reaction when you are hit by an attack targeting your KAC while in an atmosphere. You reduce the attack’s damage by an amount equal to 5 × the upgrade’s mark number. This reduction applies only to the triggering attack and stacks with one other source of damage reduction or resistance. The module requires 1 hour to secrete a new coat before it can be used again.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td>UPGRADE</td>\n<td style=\"text-align:center;vertical-align:middle\">LEVEL</td>\n<td style=\"text-align:center;vertical-align:middle\">PRICE</td>\n</tr>\n<tr>\n<td>Molting coat module, mk 1</td>\n<td style=\"text-align:center;vertical-align:middle\">5</td>\n<td style=\"text-align:center;vertical-align:middle\">2,700</td>\n</tr>\n<tr>\n<td>Molting coat module, mk 2</td>\n<td style=\"text-align:center;vertical-align:middle\">11</td>\n<td style=\"text-align:center;vertical-align:middle\">23,000</td>\n</tr>\n<tr>\n<td>Molting coat module, mk 3</td>\n<td style=\"text-align:center;vertical-align:middle\">17</td>\n<td style=\"text-align:center;vertical-align:middle\">225,000</td>\n</tr>\n</tbody>\n</table>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any sky (Old Ustavia)</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 9,
       "environment": "",
       "organization": "",
@@ -1114,29 +1080,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 132",
-      "xp": {
-        "value": 6400
-      }
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1144,10 +1101,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1155,10 +1111,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1166,10 +1121,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1177,10 +1131,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1188,10 +1141,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1199,10 +1151,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1210,10 +1161,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1221,10 +1171,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1232,10 +1181,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1243,10 +1191,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1254,10 +1201,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1265,10 +1211,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1276,10 +1221,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1287,10 +1231,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1298,9 +1241,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1311,7 +1252,6 @@
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "misc": 0,
-        "mod": 25,
         "ranks": 25,
         "subname": "to climb",
         "value": 0
@@ -1321,10 +1261,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1332,10 +1271,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1343,10 +1281,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 22,
         "ranks": 22,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1354,47 +1291,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1403,15 +1333,7 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
-        "custom": "",
-        "value": []
-      },
-      "dr": {
         "custom": "",
         "value": []
       },
@@ -1425,9 +1347,6 @@
       },
       "senses": "blindsense (scent) 90 ft., low-light vision;",
       "size": "large",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

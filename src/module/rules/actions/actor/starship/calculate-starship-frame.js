@@ -1,32 +1,66 @@
 
-import { SFRPGEffectType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
+import { SFRPGEffectType } from "../../../../modifiers/types.js";
 
 export default function(engine) {
-    const processModifier = (bonus, data) => {
+    const processModifier = (bonus, data, tooltip) => {
         let computedBonus = 0;
         try {
             const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
             computedBonus = roll.total;
+            tooltip.push(`${bonus.name}: ${bonus.effectType === SFRPGEffectType.STARSHIP_MULTIPLY_BUILD_POINTS ? 'x' : (computedBonus >= 0 ? '+' : '')}${String(computedBonus)}`);
         } catch (e) {
             console.error(e);
         }
         return computedBonus;
     };
 
-    const applyStackedModifiers = (stackedModifiers, data) => {
+    const applyStackedModifiers = (stackedModifiers, data, tooltip) => {
         return Object.entries(stackedModifiers).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += processModifier(bonus, data);
-                }
-            } else {
-                sum += processModifier(mod[1], data);
+            for (const bonus of mod[1]) {
+                sum += processModifier(bonus, data, tooltip);
             }
-
             return sum;
         }, 0);
+    };
+
+    const applyStackedMultipliers = (stackedModifiers, data, tooltip) => {
+        return Object.entries(stackedModifiers).reduce((product, mod) => {
+            if (mod[1].length === 0) return product;
+            for (const bonus of mod[1]) {
+                product *= processModifier(bonus, data, tooltip);
+            }
+            return product;
+        }, 1);
+    };
+
+    const applyBuildPointModifiers = (fact, context, data) => {
+        const buildPointModifiers = fact.modifiers.filter(mod => {
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.STARSHIP_BUILD_POINTS;
+        });
+        const multiplyBuildPointModifiers = fact.modifiers.filter(mod => {
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.STARSHIP_MULTIPLY_BUILD_POINTS;
+        });
+
+        if (buildPointModifiers.length > 0) {
+            const stackedModifiers = context.parameters.stackModifiers.process(
+                buildPointModifiers,
+                context,
+                {actor: fact.actor}
+            );
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data, data.attributes.bp.maxTooltip);
+            data.attributes.bp.max += modifierBonus;
+        }
+
+        if (multiplyBuildPointModifiers.length > 0) {
+            const stackedModifiers = context.parameters.stackModifiers.process(
+                multiplyBuildPointModifiers,
+                context,
+                {actor: fact.actor}
+            );
+            const modifierBonus = applyStackedMultipliers(stackedModifiers, data, data.attributes.bp.maxTooltip);
+            data.attributes.bp.max *= modifierBonus;
+        }
+        data.attributes.bp.max = Math.floor(data.attributes.bp.max);
     };
 
     const applyHullPointModifiers = (fact, context, data) => {
@@ -39,7 +73,7 @@ export default function(engine) {
                 context,
                 {actor: fact.actor}
             );
-            const modifierBonus = applyStackedModifiers(stackedModifiers, data);
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data, data.attributes.hp.tooltip);
             data.attributes.hp.max += modifierBonus;
         }
     };
@@ -54,7 +88,7 @@ export default function(engine) {
                 context,
                 {actor: fact.actor}
             );
-            const modifierBonus = applyStackedModifiers(stackedModifiers, data);
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data, data.attributes.hp.tooltip);
             data.attributes.hp.increment += modifierBonus;
         }
     };
@@ -68,7 +102,7 @@ export default function(engine) {
                 context,
                 {actor: fact.actor}
             );
-            const modifierBonus = applyStackedModifiers(stackedModifiers, data);
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data, data.attributes.turn.tooltip);
             data.attributes.turn.value = Math.max(0, data.attributes.turn.value + modifierBonus);
 
             if (modifierBonus !== 0) {
@@ -81,26 +115,6 @@ export default function(engine) {
     engine.closures.add( "calculateStarshipFrame", (fact, context) => {
         const data = fact.data;
         const frames = fact.frames;
-
-        const maneuverabilityMap = {
-            "clumsy" : { pilotingBonus: -2, turn: 4 },
-            "poor"   : { pilotingBonus: -1, turn: 3 },
-            "average": { pilotingBonus: 0, turn: 2 },
-            "good"   : { pilotingBonus: 1, turn: 1 },
-            "perfect": { pilotingBonus: 2, turn: 0 }
-        };
-
-        const sizeModifierMap = {
-            "n/a": 0,
-            "tiny": 1,
-            "small": 2,
-            "medium": 3,
-            "large": 4,
-            "huge": 5,
-            "gargantuan": 6,
-            "colossal": 7,
-            "superColossal": 8
-        };
 
         if (!data.crew) {
             data.crew = {
@@ -156,7 +170,8 @@ export default function(engine) {
         data.attributes.bp = {
             value: 0,
             max: CONFIG.SFRPG.starshipTierToBuildpoints[data.details.tier],
-            tooltip: []
+            tooltip: [],
+            maxTooltip: []
         };
 
         /** If galactic trade is enabled, max spent BP per tier is 5% higher. */
@@ -200,9 +215,11 @@ export default function(engine) {
                 min: 0,
                 max: 0
             };
-
-            data.attributes.hp.increment = 0;
-            data.attributes.hp.max = 0;
+            data.attributes.hp = {
+                increment: 0,
+                max: 0,
+                tooltip: []
+            };
             data.crew.gunner.limit = 0;
         } else {
             const frame = frames[0];
@@ -226,11 +243,12 @@ export default function(engine) {
                 max: frame.system.crew.maximum
             };
 
+            data.attributes.hp.tooltip = [];
             data.attributes.hp.increment = frame.system.hitpoints.increment;
             applyHullPointIncrementModifiers(fact, context, data);
             data.attributes.hp.max = frame.system.hitpoints.base + Math.floor(data.details.tier / 4) * data.attributes.hp.increment;
-
             applyHullPointModifiers(fact, context, data);
+
             data.crew.gunner.limit = frame.system.weaponMounts.forward.lightSlots + frame.system.weaponMounts.forward.heavySlots + frame.system.weaponMounts.forward.capitalSlots
                 + frame.system.weaponMounts.aft.lightSlots + frame.system.weaponMounts.aft.heavySlots + frame.system.weaponMounts.aft.capitalSlots
                 + frame.system.weaponMounts.port.lightSlots + frame.system.weaponMounts.port.heavySlots + frame.system.weaponMounts.port.capitalSlots
@@ -242,7 +260,7 @@ export default function(engine) {
             const armorItems = fact.items.filter(x => x.type === "starshipArmor");
             const armorTurnPenalty = armorItems[0]?.system?.turnDistancePenalty ?? 0;
             const ablativeArmorTurnPenalty = ablativeArmorItems[0]?.system?.turnDistancePenalty ?? 0;
-            const turnManeuverability = maneuverabilityMap[maneuverability].turn;
+            const turnManeuverability = CONFIG.SFRPG.starshipManeuverabilityMap[maneuverability].turn;
             data.attributes.turn.tooltip.push(`${maneuverability} maneuverability: ${turnManeuverability.signedString()}`);
 
             if (armorTurnPenalty !== 0) {
@@ -258,7 +276,7 @@ export default function(engine) {
 
         /** Ensure pilotingBonus exists. */
         data.attributes.pilotingBonus = {
-            value: maneuverabilityMap[data.attributes.maneuverability].pilotingBonus,
+            value: CONFIG.SFRPG.starshipManeuverabilityMap[data.attributes.maneuverability].pilotingBonus,
             tooltip: [game.i18n.format("SFRPG.StarshipSheet.Header.Movement.ManeuverabilityTooltip", {maneuverability: data.attributes.maneuverability})]
         };
 
@@ -333,11 +351,15 @@ export default function(engine) {
         }
 
         /** Compute BP */
-        const sizeModifier = sizeModifierMap[data.details.size] || 0;
+
+        // Apply build point maximum modifiers
+        applyBuildPointModifiers(fact, context, data);
+
+        const sizeMultiplier = CONFIG.SFRPG.starshipSizeMultiplierMap[data.details.size] || 0;
         const starshipComponents = fact.items.filter(x => x.type.startsWith("starship"));
         for (const component of starshipComponents) {
             const componentData = component.system;
-            const bpCost = componentData.costMultipliedBySize ? sizeModifier * componentData.cost : componentData.cost;
+            const bpCost = componentData.costMultipliedBySize ? sizeMultiplier * componentData.cost : componentData.cost;
             data.attributes.bp.value += bpCost;
             data.attributes.bp.tooltip.push(`${component.name}: ${bpCost}`);
         }

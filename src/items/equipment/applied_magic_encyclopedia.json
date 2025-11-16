@@ -4,11 +4,7 @@
   "type": "hybrid",
   "img": "systems/sfrpg/icons/equipment/magic%20items/obfuscated-journal.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 0,
@@ -61,7 +56,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -71,18 +67,17 @@
       "unidentified": "",
       "value": "<p>This tome is an electronic reader styled to look like a traditional magic grimoire that contains extensive descriptions and information on magical creatures, items, and spells. As a standard action, you can access the index of the encyclopedia to locate a page that describes a common or uncommon (at the GM’s discretion) magical spell, creature, or item, granting you a +4 circumstance modifier to your next Mysticism check to identify that magical creature, item, or spell within 1 minute.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "minute",
       "value": "1"
     },
     "equippable": false,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 1,
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 3,
     "limitedWear": false,
     "modifiers": [
@@ -91,8 +86,10 @@
         "name": "Applied Magic Encyclopedia",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "4",
         "modifierType": "formula",
@@ -103,24 +100,28 @@
       }
     ],
     "price": 1300,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 160",
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

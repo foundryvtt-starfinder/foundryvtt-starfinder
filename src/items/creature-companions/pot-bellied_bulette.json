@@ -10,11 +10,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -28,7 +24,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": null,
         "attributes": {
@@ -49,7 +45,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "0",
         "capacity": {
           "max": 0,
@@ -83,6 +78,7 @@
               "name": "",
               "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -90,12 +86,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": true,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -105,7 +104,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -115,7 +113,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 0,
         "modifiers": [],
@@ -218,12 +216,9 @@
           "wideLine": false
         },
         "quantity": 0,
-        "quantityPerPack": 0,
+        "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -233,8 +228,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {
@@ -254,7 +251,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -262,8 +258,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -276,11 +272,7 @@
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-shadow-black.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -293,7 +285,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -302,7 +294,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -360,19 +353,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "5558ee6e-5fc3-457b-b891-b64092833fbe",
             "name": "Creature Companion - EAC",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "VMrQIWvfcnxaU4fT",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "ac",
             "enabled": true,
+            "limitTo": null,
             "max": 11,
             "modifier": "lookupRange(@details.cr, 0, 1, 11, 2, 12, 3, 13, 4, 15, 5, 16, 6, 17, 7, 19, 8, 20, 9, 21, 10, 23, 12, 24, 13, 26, 14, 27, 15, 28, 16, 30, 17, 31, 18, 32, 19, 34, 20, 35)",
             "modifierType": "constant",
@@ -386,12 +377,10 @@
             "name": "Creature Companion - KAC",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "VMrQIWvfcnxaU4fT",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "ac",
             "enabled": true,
+            "limitTo": null,
             "max": 14,
             "modifier": "lookupRange(@details.cr, 0, 1, 14, 2, 15, 3, 16, 4, 18, 5, 19, 6, 20, 7, 22, 8, 23, 9, 24, 10, 26, 12, 27, 13, 29, 14, 30, 15, 31, 16, 33, 17, 34, 18, 35, 19, 37, 20, 38)",
             "modifierType": "constant",
@@ -405,12 +394,10 @@
             "name": "Creature Companion - Good Save",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "VMrQIWvfcnxaU4fT",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "save",
             "enabled": true,
+            "limitTo": null,
             "max": 4,
             "modifier": "lookupRange(@details.cr, 0, 1, 4, 2, 5, 5, 7, 7, 8, 10, 10, 13, 11, 5, 12, 18, 13, 20, 14)",
             "modifierType": "constant",
@@ -424,12 +411,10 @@
             "name": "Creature Companion - Poor Save 1",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "VMrQIWvfcnxaU4fT",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "save",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "lookupRange(@details.cr, 0, 1, 1, 3, 2, 5, 3, 7, 4, 10, 5, 11, 6, 15, 8, 19, 9)",
             "modifierType": "constant",
@@ -443,12 +428,10 @@
             "name": "Creature Companion - Poor Save 2",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "VMrQIWvfcnxaU4fT",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "save",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "lookupRange(@details.cr, 0, 1, 1, 3, 2, 5, 3, 7, 4, 10, 5, 11, 6, 15, 8, 19, 9)",
             "modifierType": "constant",
@@ -462,12 +445,10 @@
             "name": "Creature Companion - Int Modifier",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "VMrQIWvfcnxaU4fT",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "ability-score",
             "enabled": true,
+            "limitTo": null,
             "max": -8,
             "modifier": "-8",
             "modifierType": "constant",
@@ -481,12 +462,10 @@
             "name": "Creature Companion - Ability Modifier 1",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "VMrQIWvfcnxaU4fT",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "ability-score",
             "enabled": true,
+            "limitTo": null,
             "max": 4,
             "modifier": "lookupRange(@details.cr, 0, 1, 4, 7, 6, 13, 8, 19, 10)",
             "modifierType": "constant",
@@ -500,12 +479,10 @@
             "name": "Creature Companion - Ability Modifier 2",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "VMrQIWvfcnxaU4fT",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "ability-score",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "lookupRange(@details.cr, 0, 1, 2, 7, 4, 13, 6, 19, 8)",
             "modifierType": "constant",
@@ -519,12 +496,10 @@
             "name": "Creature Companion - Skills",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "VMrQIWvfcnxaU4fT",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "all-skills",
             "enabled": true,
+            "limitTo": null,
             "max": 5,
             "modifier": "lookupRange(@details.cr, 0, 1, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 12, 8, 13, 9, 14, 10, 15, 11, 16, 12, 17, 13, 19, 14, 20, 15, 21, 16, 22, 17, 23, 18, 24, 19, 26, 20, 27)",
             "modifierType": "constant",
@@ -538,12 +513,10 @@
             "name": "Creature Companion - Attack Bonus",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "VMrQIWvfcnxaU4fT",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "all-attacks",
             "enabled": true,
+            "limitTo": null,
             "max": 0,
             "modifier": "lookupRange(@details.cr, 0, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 9, 8, 10, 9, 11, 10, 13, 11, 14, 13, 16, 14, 17, 15, 18, 16, 19, 17, 20, 18, 21, 19, 23)",
             "modifierType": "constant",
@@ -555,30 +528,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "PoC pg. 73",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -589,11 +564,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "",
         "activation": {
@@ -615,7 +586,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -677,14 +649,12 @@
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
           "value": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -695,11 +665,12 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
@@ -806,119 +777,55 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "con": {
-        "base": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "dex": {
-        "base": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "int": {
-        "base": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "str": {
-        "base": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "wis": {
-        "base": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       }
     },
     "attributes": {
       "abilityDC": {
-        "base": "0"
+        "base": 0
       },
-      "arms": "",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 0,
       "baseSpellDC": {
-        "base": "0"
-      },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 0
       },
       "eac": {
-        "base": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 0
       },
       "fort": {
-        "base": 0,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 0
       },
       "hp": {
         "max": 10,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 10
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 0,
         "value": 0
       },
       "kac": {
-        "base": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 0
       },
-      "keyability": "",
       "reach": "0 ft.",
       "reflex": {
-        "base": 0,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 0
       },
       "rp": {
         "max": 10,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 10,
-        "min": 0,
-        "tooltip": [],
         "value": 0
       },
       "space": "2-1/2 ft.",
@@ -931,7 +838,7 @@
         },
         "flying": {
           "base": null,
-          "baseManeuverability": "-1"
+          "baseManeuverability": 0
         },
         "land": {
           "base": 30
@@ -940,38 +847,10 @@
         "special": "",
         "swimming": {
           "base": null
-        },
-        "value": null
-      },
-      "spellcasting": "",
-      "will": {
-        "base": 0,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
-      }
-    },
-    "common": {
-      "abilities": {
-        "cha": {
-          "base": 0
-        },
-        "con": {
-          "base": 0
-        },
-        "dex": {
-          "base": 0
-        },
-        "int": {
-          "base": 0
-        },
-        "str": {
-          "base": 0
-        },
-        "wis": {
-          "base": 0
         }
+      },
+      "will": {
+        "base": 0
       }
     },
     "conditions": {
@@ -1012,9 +891,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1022,9 +898,8 @@
     "details": {
       "type": "Magical Beast",
       "alignment": "",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1036,7 +911,6 @@
         "value": "<p>New Horizons Luxury Retreats’ genetic engineers have reached back into the mists of lost Golarion’s past to recreate one of that planet’s most feared predators... in miniature form! By shrinking the original creature’s size and dampening its voracious appetite, these scientists have essentially domesticated the bulette. The tiny, pot-bellied versions of these landsharks retain their iconic dorsal fin and ability to burrow through the earth.</p><h2>Pot-bellied Bulette</h2><p>Levels 2-8</p>\n<p>Tiny magical beast</p>\n<p><strong>Senses</strong> blindsense (vibration) 30 ft., darkvision 60 ft., low-light vision</p>\n<p><strong>Good Save</strong> Fort; <strong>Poor Saves</strong> Ref, Will</p>\n<p><strong>Speed</strong> 30 ft., burrow 20 ft.</p>\n<p><strong>Melee Attack</strong> jaws (P)</p>\n<p><strong>Space</strong> 2-1/2 ft. <strong>Reach</strong> 0 ft.</p>\n<p><strong>Ability Modifiers</strong> Str, Con</p>",
         "weight": ""
       },
-      "class": "",
       "combatRole": "",
       "cr": 2,
       "environment": "",
@@ -1045,30 +919,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "Bulette",
       "source": "PoC pg. 73",
-      "subtype": "",
-      "xp": {
-        "value": 10
-      }
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1076,10 +940,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1087,10 +950,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1098,10 +960,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1109,10 +970,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1120,10 +980,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1131,10 +990,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1142,10 +1000,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1153,10 +1010,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1164,10 +1020,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1175,10 +1030,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1186,10 +1040,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1197,10 +1050,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1208,10 +1060,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1219,10 +1070,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1230,9 +1080,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1242,10 +1090,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1253,10 +1100,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1264,10 +1110,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1275,47 +1120,40 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1324,15 +1162,7 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
-        "custom": "",
-        "value": []
-      },
-      "dr": {
         "custom": "",
         "value": []
       },
@@ -1346,9 +1176,6 @@
       },
       "senses": "blindsense (vibration) 30 ft., darkvision 60 ft., low-light vision",
       "size": "tiny",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

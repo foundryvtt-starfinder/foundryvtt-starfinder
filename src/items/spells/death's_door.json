@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "icons/magic/death/grave-tombstone-glow-teal.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -41,6 +37,8 @@
         {
           "name": "Damage",
           "formula": "lookupRange(@item.level, 1, 2, 2, 3, 4, 4, 6, 5, 8, 6, 10)d10",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -48,7 +46,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -56,6 +56,8 @@
         {
           "name": "Strength damage",
           "formula": "lookupRange(@item.level, 2, 2, 2, 3, 4, 4, 4, 5, 6, 6, 6)",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -63,7 +65,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -71,6 +75,8 @@
         {
           "name": "Dexterity damage",
           "formula": "lookupRange(@item.level, 0, 2, 2, 3, 2, 4, 4, 5, 4, 6, 6)",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -78,12 +84,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -93,14 +102,14 @@
       "unidentified": "",
       "value": "<p>You accelerate a living opponent’s personal timeline to the end of their natural life cycle, unleashing the ravages of time in a devastating surge. The target can attempt a Fortitude saving throw to halve the damage and ignore the ability damage dealt by this spell. Ability damage dealt by this spell wears off after 1 minute. A creature can take ability damage from this spell only once every 24 hours.</p>\n<p><strong>1st</strong>: When you cast death’s door as a 1st-level spell, it deals 1d10 damage plus 2 Strength damage to the target.</p>\n<p><strong>2nd</strong>: When you cast death’s door as a 2nd-level spell, it deals 2d10 damage plus 2 Strength and 2 Dexterity damage to the target.</p>\n<p><strong>3rd</strong>: When you cast death’s door as a 3rd-level spell, it deals 4d10 damage plus 4 Strength and 2 Dexterity damage to the target.</p>\n<p><strong>4th</strong>: When you cast death’s door as a 4th-level spell, it deals 6d10 damage plus 4 Strength and 4 Dexterity damage to the target.</p>\n<p><strong>5th</strong>: When you cast death’s door as a 5th-level spell, it deals 8d10 damage plus 6 Strength and 4 Dexterity damage to the target.</p>\n<p><strong>6th</strong>: When you cast death’s door as a 6th-level spell, it deals 10d10 damage plus 6 Strength and 6 Dexterity damage to the target.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": true,
     "level": 1,
     "materials": {
@@ -116,10 +125,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "close",
-      "value": null
+      "units": "close"
     },
     "rollNotes": "",
     "save": {
@@ -128,14 +134,19 @@
       "descriptor": "half"
     },
     "school": "trs",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GM pg. 72",
     "sr": true,
     "target": {
-      "type": "",
       "value": "one living creature"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

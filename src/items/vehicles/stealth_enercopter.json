@@ -10,20 +10,25 @@
       "type": "vehicleAttack",
       "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2*(18d10)",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -42,6 +47,7 @@
           "dc": "20",
           "descriptor": "negate"
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -51,20 +57,25 @@
       "type": "vehicleAttack",
       "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "18d10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -83,6 +94,7 @@
           "dc": "20",
           "descriptor": "half"
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -92,17 +104,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -111,14 +113,16 @@
           "value": "<p>Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn’t locked by a passcode or otherwise programmed not to obey).</p>\n<p>A vehicle is considered controlled when the autopilot is engaged. An autopilot’s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).</p>\n<p>The Systems entry in a vehicle’s statistics (see page 228) lists the autopilot’s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle’s modifier (listed in the vehicle’s Modifiers entry) to the Piloting checks.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
-          "piloting": "28",
+          "piloting": 28,
           "usedAsPilot": true
         },
         "senses": {
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": "CRB pg. 280"
       }
     },
@@ -128,17 +132,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -147,14 +141,16 @@
           "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
-          "piloting": "0",
+          "piloting": 0,
           "usedAsPilot": false
         },
         "senses": {
           "senses": "darkvision 5 miles",
           "usedForSenses": true
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -164,11 +160,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/white_star_plasma_cannon.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rwak",
         "activation": {
@@ -182,7 +174,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 5
+          "value": "5"
         },
         "attackBonus": 0,
         "attributes": {
@@ -203,7 +195,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": 100,
@@ -212,7 +203,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -244,14 +235,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "6d10",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
                 "electricity": true,
-                "fire": true
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -261,7 +264,6 @@
           "unidentified": "",
           "value": "<p>Plasma cannons shoot large, explosive blasts of ionized plasma. They are difficult to use and have a relatively short range for a heavy weapon, but their impact has devastating effect.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -271,7 +273,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 16,
         "modifiers": [],
@@ -368,10 +370,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 100
+          "value": "100"
         },
         "rollNotes": "",
         "save": {
@@ -379,11 +379,16 @@
           "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
           "descriptor": "half"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 177",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -391,7 +396,7 @@
           "value": 5
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -405,17 +410,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -424,14 +419,16 @@
           "value": "<p>A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device’s price.</p>\n<p>Comm units that function at system-wide and unlimited ranges aren’t as portable; they include built-in generators that provide the necessary amount of power.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
-          "piloting": "0",
+          "piloting": 0,
           "usedAsPilot": false
         },
         "senses": {
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": "CRB pg. 218"
       }
     },
@@ -441,17 +438,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -460,6 +447,7 @@
           "value": "<p>The coloration of the vehicle’s exterior automatically changes to match its surroundings. Its pilot can always attempt Stealth checks for the vehicle as long as it is stationary, but with the listed modifier. This check is opposed by the Computers or Perception check of anyone scanning the area with sensors.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
           "piloting": 0,
           "usedAsPilot": false
@@ -468,6 +456,7 @@
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -477,17 +466,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -496,6 +475,7 @@
           "value": "<p>You can activate or deactivate your armor’s force field as a standard action. Once active, the device generates an invisible force field around you, including all your worn and carried items. The force field blocks solids and liquids but not gases or light (including laser beams). You can breathe while the field is active, but you can’t eat or drink.</p>\n<p>While a force field is active, you gain a number of temporary Hit Points depending on the force field’s power. All damage dealt to you is subtracted from the force field’s temporary Hit Points first. A force field has fast healing, meaning that it regains temporary Hit Points at a fixed rate each round at the end of your turn, up to its normal maximum. If the force field’s temporary Hit Points are reduced to 0, it is inactive until the end of your next turn, when its fast healing restores some of its Hit Points. The charge capacity, amount of temporary Hit Points granted, and rate of fast healing vary according to the force field’s color code. A force field has a usage of 1 charge per round.</p>\n<p>More powerful force fields also have a fortification ability, which gives a percentage chance that a critical hit is treated as a normal attack, dealing normal damage and not applying any critical effect. You roll your fortification percentage chance before the critical hit’s damage is rolled. If a force field is inactive, its fortification ability does not function. A suit of armor cannot support more than one force field upgrade.</p>\n<table>\n<tbody>\n<tr>\n<th>COLOR</th>\n<th>CAPACITY</th>\n<th>TEMP HP</th>\n<th>FAST HEALING</th>\n<th>FORTIFICATION</th>\n</tr>\n<tr>\n<td>Brown</td>\n<td>10</td>\n<td>1</td>\n<td>1</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Purple</td>\n<td>10</td>\n<td>5</td>\n<td>2</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Black</td>\n<td>10</td>\n<td>10</td>\n<td>3</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>White</td>\n<td>20</td>\n<td>15</td>\n<td>4</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Gray</td>\n<td>20</td>\n<td>20</td>\n<td>5</td>\n<td>0%</td>\n</tr>\n<tr>\n<td>Green</td>\n<td>20</td>\n<td>25</td>\n<td>6</td>\n<td>20%</td>\n</tr>\n<tr>\n<td>Red</td>\n<td>40</td>\n<td>30</td>\n<td>7</td>\n<td>40%</td>\n</tr>\n<tr>\n<td>Blue</td>\n<td>40</td>\n<td>35</td>\n<td>8</td>\n<td>60%</td>\n</tr>\n<tr>\n<td>Orange</td>\n<td>40</td>\n<td>40</td>\n<td>9</td>\n<td>80%</td>\n</tr>\n<tr>\n<td>Prismatic</td>\n<td>100</td>\n<td>50</td>\n<td>10</td>\n<td>100%</td>\n</tr>\n</tbody>\n</table>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
           "piloting": 0,
           "usedAsPilot": false
@@ -504,6 +484,7 @@
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": ""
       }
     }
@@ -607,9 +588,9 @@
       "controlSkill": "pil",
       "cover": "total",
       "dimensions": {
-        "height": "7",
-        "length": "20",
-        "width": "10"
+        "height": 7,
+        "length": 20,
+        "width": 10
       },
       "eac": {
         "value": 30
@@ -628,23 +609,57 @@
       },
       "modifiers": {
         "athletics": 0,
-        "attackFullSpeed": "-4",
-        "attackMoving": "-2",
-        "attackStopped": "0",
-        "piloting": "0",
+        "attackFullSpeed": 0,
+        "attackMoving": 0,
+        "attackStopped": 0,
+        "piloting": 0,
         "survival": 0
       },
       "size": "huge",
-      "special": [],
       "speed": {
-        "type": "",
         "drive": "70 ft",
         "full": "850 ft",
         "mph": "95 mph (fly)"
-      },
-      "systems": []
+      }
     },
-    "conditions": {},
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "crew": {
       "complement": {
         "actorIds": [],
@@ -673,6 +688,8 @@
     "hangarBay": {
       "actorIds": [],
       "limit": 0
-    }
+    },
+    "modifiers": [],
+    "slug": ""
   }
 }

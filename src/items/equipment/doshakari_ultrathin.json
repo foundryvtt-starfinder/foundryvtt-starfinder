@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 0,
@@ -88,6 +83,7 @@
           "name": "",
           "formula": "5d4 + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -95,12 +91,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -110,7 +109,6 @@
       "unidentified": "",
       "value": "<p>This punch dagger resembles a miniature doshko extending from the knuckles, with one to four diamond‑shaped blades. Doshakaris come in most of the same varieties as traditional steel doshkos, including the translucent molecular rift version.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -120,7 +118,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "Wound",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 13,
     "modifiers": [],
@@ -225,10 +223,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
@@ -238,9 +233,11 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
-    "source": "NS pg. 148 ",
+    "slug": "",
+    "source": "NS pg. 148",
     "special": "",
     "specialMaterials": {
       "abysium": false,
@@ -259,7 +256,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

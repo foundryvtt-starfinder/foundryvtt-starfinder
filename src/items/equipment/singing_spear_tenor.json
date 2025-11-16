@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/weapons/staves/staff-ornate-purple.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 0,
@@ -77,6 +72,7 @@
           "name": "",
           "formula": "11d8 + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -84,12 +80,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": true
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -99,7 +98,6 @@
       "unidentified": "",
       "value": "<p>As a singing spear moves through the air, grooves and channels along its length catch the wind, amplifying the noise into a strong sonic vibration. Lashunta shotalashu hunters of @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel} originally used the weapons as the sound helped members of hunting parties keep track of one another and identify where targets might be in thick undergrowth. Singing spears sound pleasant, and can be found in sopranino, soprano, alto, and tenor models. Each has increasingly precise grooves for improved sonic damage that can disturb the inner ear and cause brief disorientation.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -109,7 +107,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 17,
     "modifiers": [],
@@ -214,8 +212,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "20"
     },
@@ -227,8 +223,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 13",
     "special": "",
     "specialMaterials": {
@@ -248,7 +246,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

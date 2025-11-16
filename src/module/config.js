@@ -47,6 +47,19 @@ SFRPG.abilities = {
     "cha": "SFRPG.AbilityCha"
 };
 
+/**
+ * The order in which ability scores should appear on character sheets
+ * @type {Array}
+ */
+SFRPG.abilityDisplayOrder = [
+    "str",
+    "dex",
+    "con",
+    "int",
+    "wis",
+    "cha"
+];
+
 SFRPG.acpEffectingArmorType = {
     "acp-all": "SFRPG.ModifierACPEffectingArmorTypeAll",
     "acp-light": "SFRPG.ModifierACPEffectingArmorTypeLight",
@@ -934,7 +947,7 @@ SFRPG.starshipSizes = {
     "huge": "SFRPG.SizeHuge",
     "gargantuan": "SFRPG.SizeGargantuan",
     "colossal": "SFRPG.SizeColossal",
-    "superColossal": "SFRPG.ShipSystems.Size.Supercolossal"
+    "supercolossal": "SFRPG.SizeSupercolossal"
 };
 
 SFRPG.itemSizes = {
@@ -963,7 +976,8 @@ SFRPG.tokenSizes = {
     "large": 2,
     "huge": 3,
     "gargantuan": 4,
-    "colossal": 6
+    "colossal": 6,
+    "supercolossal": 6
 };
 
 SFRPG.spellcastingClasses = {
@@ -1409,7 +1423,28 @@ SFRPG.starshipSizeMod = {
     "large": -1,
     "huge": -2,
     "gargantuan": -4,
-    "colossal": -8
+    "colossal": -8,
+    "supercolossal": -8
+};
+
+SFRPG.starshipSizeMultiplierMap = {
+    "n/a": 0,
+    "tiny": 1,
+    "small": 2,
+    "medium": 3,
+    "large": 4,
+    "huge": 5,
+    "gargantuan": 6,
+    "colossal": 7,
+    "supercolossal": 8
+};
+
+SFRPG.starshipManeuverabilityMap = {
+    "clumsy" : { pilotingBonus: -2, turn: 4 },
+    "poor"   : { pilotingBonus: -1, turn: 3 },
+    "average": { pilotingBonus: 0, turn: 2 },
+    "good"   : { pilotingBonus: 1, turn: 1 },
+    "perfect": { pilotingBonus: 2, turn: 0 }
 };
 
 SFRPG.starshipTierToBuildpoints = {
@@ -1517,52 +1552,86 @@ SFRPG.modifierTypes = {
     "weapon-specialization": "SFRPG.ModifierTypeWeaponSpecialization"
 };
 
-// See modules/modifiers/types.js, SFRPGEffectType
-SFRPG.modifierEffectTypes = {
-    "ac": "SFRPG.ModifierEffectTypeAC",
-    "hit-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Hitpoints",
-    "stamina-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Stamina",
-    "resolve-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Resolve",
+SFRPG.modifierEffectTypesAttack = {
     "base-attack-bonus": "SFRPG.ActorSheet.Modifiers.EffectTypes.BaseAttackBonus",
-    "cmd": "SFRPG.ModifierEffectTypeCMD",
-    "acp": "SFRPG.ModifierEffectTypeACP",
-    "initiative": "SFRPG.ModifierEffectTypeInit",
-    "ability-skills": "SFRPG.ModifierEffectTypeAbilitySkills",
-    "ability-score": "SFRPG.ModifierEffectTypeAbilityScore",
-    "ability-check": "SFRPG.ModifierEffectTypeAbilityCheck",
-    "ability-checks": "SFRPG.ModifierEffectTypeAbilityChecks",
-    "skill": "SFRPG.ModifierEffectTypeSkill",
-    "all-skills": "SFRPG.ModifierEffectTypeAllSkills",
-    "skill-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Skillpoints",
-    "skill-ranks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SkillRanks",
-    "saves": "SFRPG.ModifierEffectTypeSaves",
-    "save": "SFRPG.ModifierEffectTypeSave",
-    "spell-save-dc": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellSaveDC",
     "ranged-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackRolls",
     "melee-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.MeleeAttackRolls",
     "spell-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackRolls",
     "weapon-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAttackRolls",
-    "all-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackRolls",
     "weapon-property-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyAttackRolls",
     "weapon-category-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponCategoryAttackRolls",
+    "all-attacks": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackRolls"
+};
+
+SFRPG.modifierEffectTypesDamage = {
     "ranged-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.RangedAttackDamage",
     "melee-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.MeleeAttackDamage",
     "spell-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellAttackDamage",
     "weapon-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAttackDamage",
-    "all-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackDamage",
     "weapon-property-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyDamage",
     "weapon-category-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponCategoryDamage",
+    "all-damage": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAttackDamage"
+};
+
+SFRPG.modifierEffectTypesAmmunition = {
     "weapon-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificWeaponAmmoUsageMultiplier",
-    "all-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAmmoUsageMultiplier",
     "weapon-property-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponPropertyAmmoUsageMultiplier",
     "weapon-category-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.WeaponCategoryAmmoUsageMultiplier",
-    "bulk": "SFRPG.ActorSheet.Modifiers.EffectTypes.Encumbrance",
-    "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
-    "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
-    "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds",
-    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource",
+    "all-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAmmoUsageMultiplier"
+};
+
+SFRPG.modifierEffectTypesDefence = {
+    "ac": "SFRPG.ModifierEffectTypeAC",
+    "cmd": "SFRPG.ModifierEffectTypeCMD",
     "damage-reduction": "SFRPG.ActorSheet.Modifiers.EffectTypes.DamageReduction",
-    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance",
+    "energy-resistance": "SFRPG.ActorSheet.Modifiers.EffectTypes.EnergyResistance"
+};
+
+SFRPG.modifierEffectTypesResource = {
+    "hit-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Hitpoints",
+    "stamina-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Stamina",
+    "resolve-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Resolve",
+    "actor-resource": "SFRPG.ActorSheet.Modifiers.EffectTypes.ActorResource"
+};
+
+SFRPG.modifierEffectTypesAbility = {
+    "ability-check": "SFRPG.ModifierEffectTypeAbilityCheck",
+    "ability-checks": "SFRPG.ModifierEffectTypeAbilityChecks",
+    "ability-score": "SFRPG.ModifierEffectTypeAbilityScore"
+};
+
+SFRPG.modifierEffectTypesSkill = {
+    "skill": "SFRPG.ModifierEffectTypeSkill",
+    "ability-skills": "SFRPG.ModifierEffectTypeAbilitySkills",
+    "all-skills": "SFRPG.ModifierEffectTypeAllSkills",
+    "skill-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.Skillpoints",
+    "skill-ranks": "SFRPG.ActorSheet.Modifiers.EffectTypes.SkillRanks"
+};
+
+SFRPG.modifierEffectTypesSave = {
+    "save": "SFRPG.ModifierEffectTypeSave",
+    "saves": "SFRPG.ModifierEffectTypeSaves"
+};
+
+SFRPG.modifierEffectTypesDC = {
+    "spell-save-dc": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpellSaveDC"
+};
+
+SFRPG.modifierEffectTypesSpeed = {
+    "specific-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.SpecificSpeed",
+    "all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllSpeeds",
+    "multiply-all-speeds": "SFRPG.ActorSheet.Modifiers.EffectTypes.MultiplyAllSpeeds"
+};
+
+SFRPG.modifierEffectTypesMisc = {
+    "acp": "SFRPG.ModifierEffectTypeACP",
+    "bulk": "SFRPG.ActorSheet.Modifiers.EffectTypes.Encumbrance",
+    "initiative": "SFRPG.ModifierEffectTypeInit"
+};
+
+SFRPG.modifierEffectTypesStarship = {
+    "starship-build-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipBuildPoints",
+    "starship-multiply-build-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipMultiplyBuildPoints",
     "starship-hull-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipHullPoints",
     "starship-hull-points-increment": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipHullPointsIncrement",
     "starship-forward-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipForwardAC",
@@ -1573,6 +1642,22 @@ SFRPG.modifierEffectTypes = {
     "starship-speed": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipSpeed",
     "starship-turn-distance": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipTurnDistance",
     "starship-piloting-skill": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipPilotingSkill"
+};
+
+// See modules/modifiers/types.js, SFRPGEffectType
+SFRPG.modifierEffectTypes = {
+    ...SFRPG.modifierEffectTypesAttack,
+    ...SFRPG.modifierEffectTypesDamage,
+    ...SFRPG.modifierEffectTypesAmmunition,
+    ...SFRPG.modifierEffectTypesDefence,
+    ...SFRPG.modifierEffectTypesResource,
+    ...SFRPG.modifierEffectTypesAbility,
+    ...SFRPG.modifierEffectTypesSkill,
+    ...SFRPG.modifierEffectTypesSave,
+    ...SFRPG.modifierEffectTypesDC,
+    ...SFRPG.modifierEffectTypesSpeed,
+    ...SFRPG.modifierEffectTypesMisc,
+    ...SFRPG.modifierEffectTypesStarship
 };
 
 SFRPG.effectTypes = {

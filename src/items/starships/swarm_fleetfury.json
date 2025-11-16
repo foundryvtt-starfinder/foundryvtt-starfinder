@@ -10,18 +10,8 @@
       "type": "starshipPowerCore",
       "img": "systems/sfrpg/icons/default/power-generator.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 4,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -29,9 +19,9 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
         "pcu": 50,
+        "slug": "",
         "source": "CRB pg. 296",
         "specialMaterials": {
           "abysium": false,
@@ -59,18 +49,8 @@
       "type": "starshipSensor",
       "img": "systems/sfrpg/icons/default/radar-dish.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 3,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -78,11 +58,10 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifier": 2,
         "modifiers": [],
-        "pcu": null,
         "range": "short",
+        "slug": "",
         "source": "CRB pg. 301",
         "specialMaterials": {
           "abysium": false,
@@ -107,18 +86,8 @@
       "type": "starshipComputer",
       "img": "systems/sfrpg/icons/default/server-rack.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -131,6 +100,7 @@
         "modifiers": [],
         "nodes": 0,
         "pcu": null,
+        "slug": "",
         "source": "CRB pg. 297"
       }
     },
@@ -140,19 +110,9 @@
       "type": "starshipArmor",
       "img": "systems/sfrpg/icons/default/metal-scales.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 2,
         "cost": 2,
         "costMultipliedBySize": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -160,9 +120,8 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
-        "pcu": null,
+        "slug": "",
         "source": "CRB pg. 297",
         "specialMaterials": {
           "abysium": false,
@@ -189,18 +148,8 @@
       "type": "starshipDefensiveCountermeasure",
       "img": "systems/sfrpg/icons/default/bubble-field.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 3,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -211,6 +160,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": 1,
+        "slug": "",
         "source": "CRB pg. 297",
         "specialMaterials": {
           "abysium": false,
@@ -236,21 +186,10 @@
       "type": "starshipFrame",
       "img": "systems/sfrpg/icons/default/hexagonal-nut.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 8,
-        "costMultipliedBySize": false,
         "crew": {
           "maximum": 2,
           "minimum": 1
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "damageThreshold": {
           "base": 0
@@ -272,6 +211,7 @@
         "modifiers": [],
         "pcu": null,
         "size": "tiny",
+        "slug": "",
         "source": "CRB pg. 295",
         "weaponMounts": {
           "aft": {
@@ -313,18 +253,8 @@
       "type": "starshipThruster",
       "img": "systems/sfrpg/icons/default/rocket-thruster.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 6,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -338,6 +268,7 @@
         "modifiers": [],
         "pcu": 35,
         "pilotingModifier": -1,
+        "slug": "",
         "source": "CRB pg. 296",
         "specialMaterials": {
           "abysium": false,
@@ -364,12 +295,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "tl",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -377,17 +304,29 @@
         "class": "light",
         "cost": 7,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
               "name": "",
               "formula": "2d8",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -399,12 +338,12 @@
         "isPowered": true,
         "modifiers": [],
         "mount": {
-          "activated": false,
           "arc": "forward",
           "mounted": true
         },
         "pcu": 5,
         "range": "long",
+        "slug": "",
         "source": "CRB pg. 302",
         "special": {
           "anchoring": false,
@@ -574,88 +513,22 @@
   },
   "system": {
     "attributes": {
-      "ac": {
-        "misc": 0,
-        "value": 10
-      },
-      "complement": {
-        "max": 1,
-        "min": 0,
-        "value": 0
-      },
-      "computer": {
-        "value": 0
-      },
-      "criticalThreshold": {
-        "value": 10
-      },
-      "damageThreshold": {
-        "value": 0
-      },
-      "drift": {
-        "value": 0
-      },
-      "expansionBays": {
-        "value": 0
-      },
       "hp": {
-        "increment": 10,
-        "max": 0,
         "value": 35
-      },
-      "maneuverability": "",
-      "mounts": {
-        "aft": [],
-        "forward": [],
-        "port": [],
-        "starboard": [],
-        "turret": []
-      },
-      "pilotingBonus": {
-        "value": 0
-      },
-      "power": {
-        "max": 0,
-        "value": 0
-      },
-      "shields": {
-        "aft": {
-          "max": 0,
-          "value": 0
-        },
-        "forward": {
-          "max": 0,
-          "value": 0
-        },
-        "max": 0,
-        "port": {
-          "max": 0,
-          "value": 0
-        },
-        "starboard": {
-          "max": 0,
-          "value": 0
-        },
-        "value": 0
-      },
-      "speed": {
-        "value": 5
       },
       "systems": {
         "engines": {
           "affectedRoles": {
             "pilot": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "lifeSupport": {
           "affectedRoles": {
             "captain": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "powerCore": {
@@ -670,57 +543,84 @@
             "pilot": true,
             "scienceOfficer": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "sensors": {
           "affectedRoles": {
             "scienceOfficer": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "weaponsArrayAft": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "weaponsArrayForward": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "weaponsArrayPort": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "weaponsArrayStarboard": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         }
-      },
-      "targetLock": {
-        "misc": 0,
-        "value": 10
       }
     },
-    "conditions": {},
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "crew": {
       "captain": {
         "actorIds": [],
@@ -744,72 +644,44 @@
       },
       "npcData": {
         "captain": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "chiefMate": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "engineer": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "gunner": {
-          "abilities": {},
           "numberOfUses": 1,
           "skills": {
             "gun": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 5,
-              "ranks": 1,
-              "subname": "",
-              "value": 0
+              "ranks": 1
             }
           }
         },
         "magicOfficer": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "pilot": {
-          "abilities": {},
           "numberOfUses": 1,
           "skills": {
             "com": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 7,
-              "ranks": 1,
-              "subname": "",
-              "value": 0
+              "ranks": 1
             },
             "pil": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 8,
-              "ranks": 1,
-              "subname": "",
-              "value": 0
+              "ranks": 1
             }
           }
         },
         "scienceOfficer": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         }
@@ -835,11 +707,7 @@
     "details": {
       "frame": "",
       "model": "",
-      "modifiers": {
-        "custom": "",
-        "value": []
-      },
-      "notes": "<p><span class=\"fontstyle0\"><strong>Fleet Mind (Ex)</strong> </span><span class=\"fontstyle2\">Like the individual Swarm components, Swarm starships are bound together into a singular hive mind through a blend of radio, quantum, and telepathic communication. All Swarm starships within 10 hexes of each other are in constant communication; if one is aware of a threat, all are. (Such awareness can spread along a &ldquo;chain&rdquo; of Swarm starships under appropriate circumstances, potentially alerting distant Swarm vessels.) Swarm vessels can also communicate telepathically with all Swarm creatures within 10 hexes.</span></p>\n<p><span class=\"fontstyle0\"><strong>Living Starship (Ex)</strong> </span><span class=\"fontstyle2\">A fleetfury is a collection of symbiotic creatures so large that it functions as a starship (and thus engages in only starship combat). A network of connected brains commands these bioengineered Swarm components that act as a unified organism. This network allows the fleetfury to take crew actions using the skill bonuses, ranks, and level listed in Crew Actions above. Modifiers for the fleetfury&rsquo;s size, speed, and maneuverability are already factored into its statistics. Critical damage to life support instead damages this network of brains, with the critical effect applying to gunnery checks, in addition to any penalties from weapons array critical damage. Critical damage to crew has no effect on a fleetfury, due to the adaptability of its components.</span></p>\n<p><span class=\"fontstyle2\"><span class=\"fontstyle0\">Swarm fleetfuries are composed of several living bioengineered components crafted into the shape of a small, maneuverable starship. Like the members of the Swarm, fleetfuries have the ability to telepathically communicate with all other Swarm starships, acting with a single purpose without the need for a central command ship. Fleetfuries are often used as weapons of terror, deployed in massive numbers separated into individual wings to overwhelm and demoralize enemies.</span></span></p>\n<p><span class=\"fontstyle2\"><span class=\"fontstyle0\">An individual fleetfury isn&rsquo;t particularly well equipped or well armored for an extended battle. Its only weapon is an organic torpedo launcher, which a fleetfury can fire only five times before it loses its offensive capabilities. At that point, a fleetfury usually abandons combat, as another group of vessels closes in. A Swarm armada usually launches wave after wave of fleetfuries at the start of massive space battles, knowing that most of them will be destroyed in the fracas, though at great cost to their foes.</span> <br style=\"font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; orphans: 2; text-align: -webkit-auto; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-size-adjust: auto; -webkit-text-stroke-width: 0px;\" /></span></p>",
+      "notes": "<p><span class=\"fontstyle0\"><strong>Fleet Mind (Ex)</strong> </span><span class=\"fontstyle2\">Like the individual Swarm components, Swarm starships are bound together into a singular hive mind through a blend of radio, quantum, and telepathic communication. All Swarm starships within 10 hexes of each other are in constant communication; if one is aware of a threat, all are. (Such awareness can spread along a “chain” of Swarm starships under appropriate circumstances, potentially alerting distant Swarm vessels.) Swarm vessels can also communicate telepathically with all Swarm creatures within 10 hexes.</span></p>\n<p><span class=\"fontstyle0\"><strong>Living Starship (Ex)</strong> </span><span class=\"fontstyle2\">A fleetfury is a collection of symbiotic creatures so large that it functions as a starship (and thus engages in only starship combat). A network of connected brains commands these bioengineered Swarm components that act as a unified organism. This network allows the fleetfury to take crew actions using the skill bonuses, ranks, and level listed in Crew Actions above. Modifiers for the fleetfury’s size, speed, and maneuverability are already factored into its statistics. Critical damage to life support instead damages this network of brains, with the critical effect applying to gunnery checks, in addition to any penalties from weapons array critical damage. Critical damage to crew has no effect on a fleetfury, due to the adaptability of its components.</span></p>\n<p><span class=\"fontstyle2\"><span class=\"fontstyle0\">Swarm fleetfuries are composed of several living bioengineered components crafted into the shape of a small, maneuverable starship. Like the members of the Swarm, fleetfuries have the ability to telepathically communicate with all other Swarm starships, acting with a single purpose without the need for a central command ship. Fleetfuries are often used as weapons of terror, deployed in massive numbers separated into individual wings to overwhelm and demoralize enemies.</span></span></p>\n<p><span class=\"fontstyle2\"><span class=\"fontstyle0\">An individual fleetfury isn’t particularly well equipped or well armored for an extended battle. Its only weapon is an organic torpedo launcher, which a fleetfury can fire only five times before it loses its offensive capabilities. At that point, a fleetfury usually abandons combat, as another group of vessels closes in. A Swarm armada usually launches wave after wave of fleetfuries at the start of massive space battles, knowing that most of them will be destroyed in the fracas, though at great cost to their foes.</span> <br style=\"font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:normal;orphans:2;text-align:-webkit-auto;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;-webkit-text-size-adjust:auto;-webkit-text-stroke-width:0px\" /></span></p>",
       "size": "",
       "tier": 0.3333333333333333
     },
@@ -913,6 +781,7 @@
           "value": 10
         }
       }
-    }
+    },
+    "slug": ""
   }
 }

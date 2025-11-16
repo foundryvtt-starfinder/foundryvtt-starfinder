@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 80,
@@ -52,7 +47,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -70,6 +65,7 @@
           "acceptsType": [
             "ammunition"
           ],
+          "affectsEncumbrance": true,
           "amount": 1,
           "subtype": "",
           "weightMultiplier": 1,
@@ -84,8 +80,10 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "5d4",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -93,12 +91,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": true
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -108,7 +109,6 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.rules.Item.AoGIedPXZpPJUbzz]{Tech Relics}</p>\n<p>These usually gaudy weapons likely manifested within some virtual reality or were created by cultures locked in digital simulations. Digitizer weapons use standard batteries and insistently announce (sometimes in long-forgotten languages) that they require more ammunition whenever the battery is reduced below 20% its total capacity.</p>\n<p><strong>Additional Special Details</strong></p>\n<p>professional (vidgamer)</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -118,7 +118,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 13,
     "modifiers": [],
@@ -216,10 +216,8 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 40
+      "value": "40"
     },
     "rollNotes": "",
     "save": {
@@ -227,11 +225,16 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "TR pg. 65",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -239,11 +242,11 @@
       "value": 4
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     },
-    "weaponCategory": "",
+    "weaponCategory": "uncategorized",
     "weaponType": "smallA"
   }
 }

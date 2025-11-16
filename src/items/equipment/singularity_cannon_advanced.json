@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/autobeam_rifle_advanced.webp",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "3",
     "capacity": {
       "max": 80,
@@ -97,6 +92,8 @@
         {
           "name": "",
           "formula": "3d10",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -104,12 +101,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -119,7 +119,6 @@
       "unidentified": "",
       "value": "<p>By capturing, studying, and dissecting deadfall stalkers—all at considerable cost in blood and credits—the @UUID[Compendium.sfrpg.races.Item.3kLK4WKPqNvFTwIB]{Drow} manufacturer Arabani Arms Ltd. has created powerful cannons able to create gravitational singularities at a distant point. These instantaneous black holes tear apart nearby matter and, in the process, hurl away any victims who can’t clear the area. The singularity typically lasts for a split-second, yet slivers of the microscopic black hole can adhere to unlucky targets, painfully anchoring their bodies in place.</p>\n<p><strong>Gravitation</strong>: 15 ft.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -129,7 +128,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 14,
     "modifiers": [],
@@ -231,10 +230,8 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 50
+      "value": "50"
     },
     "rollNotes": "",
     "save": {
@@ -242,6 +239,12 @@
       "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
       "descriptor": "half"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AA4 pg. 30",
     "special": "",
     "specialMaterials": {
@@ -261,7 +264,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -269,7 +271,7 @@
       "value": 6
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

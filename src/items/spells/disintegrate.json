@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/disintegrate.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rsak",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -41,6 +37,8 @@
         {
           "name": "",
           "formula": "14d20",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -48,7 +46,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -56,6 +56,8 @@
         {
           "name": "",
           "formula": "4d20",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -63,12 +65,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -78,14 +83,14 @@
       "unidentified": "",
       "value": "<p>Immense power shoots from your finger, with the potential to disintegrate a target where it stands.</p>\n<p>When you cast this spell, a thin, green ray springs from your pointing finger. You must make a ranged attack against your target’s EAC, but you can add your key ability score bonus to this attack instead of your Dexterity modifier if it is higher. If you hit, the target takes 14d20 damage. Any creature reduced to 0 Hit Points by this spell is entirely disintegrated, leaving behind only a trace of fine dust. A disintegrated creature’s equipment is unaffected. Only one target is affected per casting of this spell.</p>\n<p>When used against an object, the ray simply disintegrates as much as a 10-foot cube of nonliving matter. Thus, the spell disintegrates only part of any very large object or structure targeted. The ray affects even objects constructed entirely of force, but it does not affect other magical effects that are not an object, creature, or force effect.</p>\n<p>A creature or object that succeeds at a Fortitude saving throw is partially affected, taking only 4d20 damage. If this damage reduces the creature or object to 0 Hit Points, the target is entirely disintegrated.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 6,
     "materials": {
@@ -101,10 +106,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "medium",
-      "value": null
+      "units": "medium"
     },
     "rollNotes": "",
     "save": {
@@ -113,14 +115,19 @@
       "descriptor": "partial"
     },
     "school": "trs",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "CRB pg. 350",
     "sr": true,
     "target": {
-      "type": "",
       "value": "one creature or object, or up to a 10-ft. cube of nonliving matter"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

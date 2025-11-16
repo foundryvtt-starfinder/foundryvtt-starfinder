@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/hazard.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 5
+      "value": "5"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -42,6 +38,7 @@
           "name": "Acid",
           "formula": "1d3",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": true,
             "bludgeoning": false,
@@ -49,7 +46,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -58,6 +57,7 @@
           "name": "Cold",
           "formula": "1d3",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -65,7 +65,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -74,6 +76,7 @@
           "name": "Electricity",
           "formula": "1d3",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -81,7 +84,9 @@
             "electricity": true,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -90,6 +95,7 @@
           "name": "Fire",
           "formula": "1d3",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -97,7 +103,9 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -106,6 +114,7 @@
           "name": "Sonic",
           "formula": "1d3",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -113,12 +122,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": true
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -172,7 +184,7 @@
       "value": "1"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 0,
     "materials": {
@@ -188,10 +200,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "close",
-      "value": null
+      "units": "close"
     },
     "rollNotes": "",
     "save": {
@@ -199,19 +208,20 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "scaling": {
-      "d3": true,
-      "d6": false
-    },
     "school": "evo",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "COM pg. 136",
     "sr": true,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

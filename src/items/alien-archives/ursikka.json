@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -28,7 +24,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -37,7 +33,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -47,7 +44,7 @@
           "unidentified": "",
           "value": "<p>(EX)</p>\n<p>When the creature is brought to 0 Hit Points, it can fight on for 1 more round. It can act normally until the end of its next turn; if it has 0 HP at that point, it dies. If it would lose further Hit Points before this, it ceases to be able to act and dies.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -58,34 +55,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -96,11 +95,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -114,7 +109,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 23,
         "attributes": {
@@ -135,7 +130,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -144,7 +138,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -166,13 +160,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d10+18",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -182,7 +189,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -192,7 +198,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -288,10 +294,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -299,11 +302,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -311,8 +319,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -325,7 +333,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -340,7 +347,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 23,
         "attributes": {
@@ -361,7 +368,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -370,7 +376,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -392,13 +398,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d10+18",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -408,7 +427,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -418,7 +436,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -428,22 +446,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -451,8 +471,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -465,11 +485,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -482,7 +498,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -493,13 +509,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "cold": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": true,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -509,7 +538,7 @@
           "unidentified": "",
           "value": "<p>As a standard action, an ursikka can coat its pincerlike claws with freezing, viscous saliva. This coating lasts for 1 minute. Any creature hit by an ursikka’s coated claws takes an additional 2d10 cold damage (Reflex DC 17 half).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -520,18 +549,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -540,13 +566,18 @@
           "dc": "17",
           "descriptor": "half"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -558,11 +589,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "other",
         "activation": {
@@ -575,7 +602,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "entangled [[/r 1d4]] rounds",
@@ -586,13 +613,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "cold": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": true,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -602,7 +642,7 @@
           "unidentified": "",
           "value": "<p>The saliva that drips from an ursikka’s mouth is sticky as well as cold, and any creature hit by its bite or spit attack becomes entangled for 1d4 rounds (Reflex DC 17 negates). At the end of each turn they’re entangled, a creature takes 2d10 cold damage. An entangled creature can end the entangled condition early with a successful DC 17 Acrobatics or Strength check as a standard action, or by dealing 15 points of fire or slashing damage to the saliva.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -613,18 +653,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -633,13 +670,18 @@
           "dc": "17",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -651,11 +693,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -668,7 +706,7 @@
           "shapable": false,
           "shape": "line",
           "units": "ft",
-          "value": 60
+          "value": "60"
         },
         "attackBonus": 0,
         "chatFlavor": "entangled",
@@ -679,13 +717,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "6d10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "cold": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": true,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -695,7 +746,7 @@
           "unidentified": "",
           "value": "<p>As a standard action, an ursikka can spit a 60-foot line of its saliva. Creatures in the area take 6d10 cold damage and become entangled. A successful DC 17 Reflex save halves the damage and negates the entangled condition.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -706,18 +757,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -726,13 +774,18 @@
           "dc": "17",
           "descriptor": "partial"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -744,93 +797,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": 0
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>An ursikka can enter a prolonged state of hibernation by weaving a cocoon from its spittle. It takes 1 uninterrupted hour of work for an ursikka to create this cocoon and an additional 24 hours for the cocoon to fully harden, after which it has hardness 10 and 100 Hit Points. While hibernating, an ursikka doesn’t need to drink or eat. As long as the cocoon remains intact, the ursikka remains unharmed in its hibernation. An ursikka must use its attacks to break free from its cocoon.</p>"
-        },
-        "descriptors": [],
-        "details": {
-          "category": "feat",
-          "combat": false,
-          "specialAbilityType": ""
-        },
-        "duration": {
-          "units": "instantaneous",
-          "value": ""
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "properties": {},
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "2cQL86rZkgEgoH71",
-      "name": "Ice Burrow (Ex)",
-      "type": "feat",
-      "img": "systems/sfrpg/icons/default/achievement.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -843,7 +810,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -852,7 +819,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -860,9 +828,9 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>Ursikkas have evolved to thrive in icy climes that are inhospitable to most other creatures. In addition to dirt, ursikkas can burrow through solid ice and through packed snow of any density.</p>"
+          "value": "<p>An ursikka can enter a prolonged state of hibernation by weaving a cocoon from its spittle. It takes 1 uninterrupted hour of work for an ursikka to create this cocoon and an additional 24 hours for the cocoon to fully harden, after which it has hardness 10 and 100 Hit Points. While hibernating, an ursikka doesn’t need to drink or eat. As long as the cocoon remains intact, the ursikka remains unharmed in its hibernation. An ursikka must use its attacks to break free from its cocoon.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -873,34 +841,120 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "2cQL86rZkgEgoH71",
+      "name": "Ice Burrow (Ex)",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
+      "system": {
+        "ability": "",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": "0"
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Ursikkas have evolved to thrive in icy climes that are inhospitable to most other creatures. In addition to dirt, ursikkas can burrow through solid ice and through packed snow of any density.</p>"
+        },
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": false,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "units": ""
+        },
+        "recharge": {
+          "charged": false,
+          "value": ""
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": ""
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "",
+        "target": {
+          "value": null
+        },
+        "uses": {
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1002,108 +1056,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": -3,
-        "min": 3,
-        "misc": 0,
-        "mod": -3,
-        "value": 4
+        "base": -3
       },
       "con": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 5,
-        "value": 20
+        "base": 5
       },
       "dex": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 16
+        "base": 3
       },
       "int": {
-        "base": -3,
-        "min": 3,
-        "misc": 0,
-        "mod": -3,
-        "value": 4
+        "base": -3
       },
       "str": {
-        "base": 8,
-        "min": 3,
-        "misc": 0,
-        "mod": 8,
-        "value": 26
+        "base": 8
       },
       "wis": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 12
+        "base": 1
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 23,
-        "min": 0,
-        "tooltip": [],
-        "value": 23
+        "base": 23
       },
       "fort": {
-        "base": 14,
-        "bonus": 14,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 14
       },
       "hp": {
         "max": 165,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 165
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 3,
         "value": 3
       },
       "kac": {
-        "base": 25,
-        "min": 0,
-        "tooltip": [],
-        "value": 25
+        "base": 25
       },
-      "keyability": "",
       "reach": "15 ft.",
       "reflex": {
-        "base": 14,
-        "bonus": 14,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 14
       },
       "space": "15 ft.",
       "speed": {
@@ -1124,19 +1122,12 @@
         "special": "original base: 40 ft.; original special: burrow 20 ft.; ice burrow",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 9,
-        "bonus": 9,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 9
       }
     },
-    "classes": {},
     "conditions": {
       "asleep": false,
       "bleeding": false,
@@ -1159,6 +1150,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1174,9 +1166,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1184,9 +1173,8 @@
     "details": {
       "type": "Magical Beast",
       "alignment": "N",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1195,10 +1183,10 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Populating Triaxian children’s horror tales, ursikkas roam the Triaxian wilderness during the wandering planet’s winter years. These enormous, nightmarish praying mantises stretch 20 feet in length and stand as tall as 25 feet—mostly due to the long, slender walking legs on which they skitter with an eerie speed. Ursikkas’ grasping forelimbs each end in sharp pincers capable of shearing flesh from bone, and their three-part maws can open wide enough to swallow humans whole. Freezing saliva drips from their gnashing mandibles, which can injure and trap prey.</p>\n<p>Ursikkas are endlessly hungry creatures that act primarily on instinct. As such, they view all smaller creatures as food. During their planet’s long winters, ursikkas terrorize @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}’s extensive rural lands to secure the several tons of meat they need each week&nbsp;to survive. They prefer to consume large, cold-blooded creatures, but hungry ursikkas pursue any viable prey, particularly victims that seem sluggish and easy to catch.</p>\n<p>As winter draws to a close, ursikkas become especially ravenous as they prepare for a long hibernation in their summer abodes: cocoons constructed from their own freezing saliva. The cocoons’ temperature resistance makes it an exceptional insulation material for delicate machinery, and Triaxian factories long ago devised chemical baths that make the cocoons more pliable. Freelance hunters can collect considerable bounties for these cocoons.</p>\n<p>Summerborn ryphorians actively seek and destroy slumbering ursikkas—not only to profit off their cocoons and hides, but also to cull the predators before they awaken the next winter and pose an active threat to communities. These local crews and hunting teams periodically join forces, each benefiting from the others’ aid. Their joint hunting ventures are limited to the summer seasons. This is in part because ursikkas almost always consume their cocoons to recoup the expended nutrients when they emerge in winter, and also because hunting hibernating ursikkas is safer than tracking active ones. The creatures are still ferocious even in summer, but their saliva production slows considerably during hibernation, and unless an awoken ursikka can eat enough to build a new cocoon, it often dies from exposure. Disturbed ursikkas sometimes rampage in the verdant summer wildernesses, desperate to eat and then return to sleep.</p>\n<p>Thanks to their tempestuous tempers and voracious appetites, ursikkas typically live solitary existences. However, where prey is abundant, ursikkas sometimes live in pairs or, rarely, in small hives. Even then, they typically hunt alone and fiercely guard their kills from their kin.</p>\n<h2>URSIKKA HIDE ARMOR</h2>\n<p>Some of the most intrepid hunters seek out ursikkas—and wily scavengers often search the tundra for fallen ursikka bodies—to harvest their hides. Ursikka hides are light, supple, and have an insulating quality that traps body heat, making them an ideal material for cold weather gear and clothes. Talented armorsmiths can create flexible light armor from this leather, which grants cold resistance in addition to the benefits listed on the table below. Basic ursikka hide armor provides cold resistance 10, and the resistance increases to 15 and 20 for advanced and elite suits respectively.</p>\n<p>Ursikka hide armor is uncommon in shops on @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}, rare across the Pact Worlds at large, and nearly impossible to find elsewhere in the galaxy. In some places on @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}— especially in the rural Allied Territories and Ning—wearing a suit of ursikka hide armor is a point of pride, a symbol of one’s courage and hunting prowess. For this reason, and to reap the rewards from selling this valuable resource, mercenary bands sometimes fan out across the planet’s rural locales specifically to gamble their lives on hunting these violent creatures.</p>\n<table style=\"width: 99.1279%; height: 153px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 54px;\">\n<td style=\"width: 15.5243%; height: 54px;\">ARMOR MODEL</td>\n<td style=\"width: 6.3102%; text-align: center; vertical-align: middle; height: 54px;\">LEVEL</td>\n<td style=\"width: 8.66404%; text-align: center; vertical-align: middle; height: 54px;\">PRICE</td>\n<td style=\"width: 9.38416%; text-align: center; vertical-align: middle; height: 54px;\">EAC BONUS</td>\n<td style=\"width: 9.38416%; text-align: center; vertical-align: middle; height: 54px;\">KAC BONUS</td>\n<td style=\"width: 9.10653%; text-align: center; vertical-align: middle; height: 54px;\">\n<p>MAX DEX</p>\n<p>BONUS</p>\n</td>\n<td style=\"width: 13.3561%; text-align: center; vertical-align: middle; height: 54px;\">\n<p>ARMOR CHECK</p>\n<p>PENALTY</p>\n</td>\n<td style=\"width: 12.4647%; text-align: center; vertical-align: middle; height: 54px;\">\n<p>SPEED</p>\n<p>ADJUSTMENT</p>\n</td>\n<td style=\"width: 9.94979%; text-align: center; vertical-align: middle; height: 54px;\">UPGRADE SLOTS</td>\n<td style=\"width: 3.94984%; text-align: center; vertical-align: middle; height: 54px;\">BULK</td>\n</tr>\n<tr style=\"height: 33px;\">\n<td style=\"width: 15.5243%; height: 33px;\">Ursikka hide, basic</td>\n<td style=\"width: 6.3102%; text-align: center; vertical-align: middle; height: 33px;\">9</td>\n<td style=\"width: 8.66404%; text-align: center; vertical-align: middle; height: 33px;\">12,500</td>\n<td style=\"width: 9.38416%; text-align: center; vertical-align: middle; height: 33px;\">+9</td>\n<td style=\"width: 9.38416%; text-align: center; vertical-align: middle; height: 33px;\">+9</td>\n<td style=\"width: 9.10653%; text-align: center; vertical-align: middle; height: 33px;\">7</td>\n<td style=\"width: 13.3561%; text-align: center; vertical-align: middle; height: 33px;\">-</td>\n<td style=\"width: 12.4647%; text-align: center; vertical-align: middle; height: 33px;\">-</td>\n<td style=\"width: 9.94979%; text-align: center; vertical-align: middle; height: 33px;\">1</td>\n<td style=\"width: 3.94984%; text-align: center; vertical-align: middle; height: 33px;\">L</td>\n</tr>\n<tr style=\"height: 33px;\">\n<td style=\"width: 15.5243%; height: 33px;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Ursikka hide, advanced</span></td>\n<td style=\"width: 6.3102%; text-align: center; vertical-align: middle; height: 33px;\">13</td>\n<td style=\"width: 8.66404%; text-align: center; vertical-align: middle; height: 33px;\">46,000</td>\n<td style=\"width: 9.38416%; text-align: center; vertical-align: middle; height: 33px;\">15</td>\n<td style=\"width: 9.38416%; text-align: center; vertical-align: middle; height: 33px;\">16</td>\n<td style=\"width: 9.10653%; text-align: center; vertical-align: middle; height: 33px;\">7</td>\n<td style=\"width: 13.3561%; text-align: center; vertical-align: middle; height: 33px;\">-</td>\n<td style=\"width: 12.4647%; text-align: center; vertical-align: middle; height: 33px;\">-</td>\n<td style=\"width: 9.94979%; text-align: center; vertical-align: middle; height: 33px;\">2</td>\n<td style=\"width: 3.94984%; text-align: center; vertical-align: middle; height: 33px;\">L</td>\n</tr>\n<tr style=\"height: 33px;\">\n<td style=\"width: 15.5243%; height: 33px;\">Ursikka hide, elite</td>\n<td style=\"width: 6.3102%; text-align: center; vertical-align: middle; height: 33px;\">17</td>\n<td style=\"width: 8.66404%; text-align: center; vertical-align: middle; height: 33px;\">240,000</td>\n<td style=\"width: 9.38416%; text-align: center; vertical-align: middle; height: 33px;\">20</td>\n<td style=\"width: 9.38416%; text-align: center; vertical-align: middle; height: 33px;\">20</td>\n<td style=\"width: 9.10653%; text-align: center; vertical-align: middle; height: 33px;\">8</td>\n<td style=\"width: 13.3561%; text-align: center; vertical-align: middle; height: 33px;\">-</td>\n<td style=\"width: 12.4647%; text-align: center; vertical-align: middle; height: 33px;\">-</td>\n<td style=\"width: 9.94979%; text-align: center; vertical-align: middle; height: 33px;\">3</td>\n<td style=\"width: 3.94984%; text-align: center; vertical-align: middle; height: 33px;\">L</td>\n</tr>\n</tbody>\n</table>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any arctic (@UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus})</p>\n<h3>Organization</h3>\n<p>solitary, pair, or hive (3–10)</p>\n</section>",
+        "value": "<h2>Description</h2>\n<p>Populating Triaxian children’s horror tales, ursikkas roam the Triaxian wilderness during the wandering planet’s winter years. These enormous, nightmarish praying mantises stretch 20 feet in length and stand as tall as 25 feet—mostly due to the long, slender walking legs on which they skitter with an eerie speed. Ursikkas’ grasping forelimbs each end in sharp pincers capable of shearing flesh from bone, and their three-part maws can open wide enough to swallow humans whole. Freezing saliva drips from their gnashing mandibles, which can injure and trap prey.</p>\n<p>Ursikkas are endlessly hungry creatures that act primarily on instinct. As such, they view all smaller creatures as food. During their planet’s long winters, ursikkas terrorize @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}’s extensive rural lands to secure the several tons of meat they need each week&nbsp;to survive. They prefer to consume large, cold-blooded creatures, but hungry ursikkas pursue any viable prey, particularly victims that seem sluggish and easy to catch.</p>\n<p>As winter draws to a close, ursikkas become especially ravenous as they prepare for a long hibernation in their summer abodes: cocoons constructed from their own freezing saliva. The cocoons’ temperature resistance makes it an exceptional insulation material for delicate machinery, and Triaxian factories long ago devised chemical baths that make the cocoons more pliable. Freelance hunters can collect considerable bounties for these cocoons.</p>\n<p>Summerborn ryphorians actively seek and destroy slumbering ursikkas—not only to profit off their cocoons and hides, but also to cull the predators before they awaken the next winter and pose an active threat to communities. These local crews and hunting teams periodically join forces, each benefiting from the others’ aid. Their joint hunting ventures are limited to the summer seasons. This is in part because ursikkas almost always consume their cocoons to recoup the expended nutrients when they emerge in winter, and also because hunting hibernating ursikkas is safer than tracking active ones. The creatures are still ferocious even in summer, but their saliva production slows considerably during hibernation, and unless an awoken ursikka can eat enough to build a new cocoon, it often dies from exposure. Disturbed ursikkas sometimes rampage in the verdant summer wildernesses, desperate to eat and then return to sleep.</p>\n<p>Thanks to their tempestuous tempers and voracious appetites, ursikkas typically live solitary existences. However, where prey is abundant, ursikkas sometimes live in pairs or, rarely, in small hives. Even then, they typically hunt alone and fiercely guard their kills from their kin.</p>\n<h2>URSIKKA HIDE ARMOR</h2>\n<p>Some of the most intrepid hunters seek out ursikkas—and wily scavengers often search the tundra for fallen ursikka bodies—to harvest their hides. Ursikka hides are light, supple, and have an insulating quality that traps body heat, making them an ideal material for cold weather gear and clothes. Talented armorsmiths can create flexible light armor from this leather, which grants cold resistance in addition to the benefits listed on the table below. Basic ursikka hide armor provides cold resistance 10, and the resistance increases to 15 and 20 for advanced and elite suits respectively.</p>\n<p>Ursikka hide armor is uncommon in shops on @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}, rare across the Pact Worlds at large, and nearly impossible to find elsewhere in the galaxy. In some places on @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}— especially in the rural Allied Territories and Ning—wearing a suit of ursikka hide armor is a point of pride, a symbol of one’s courage and hunting prowess. For this reason, and to reap the rewards from selling this valuable resource, mercenary bands sometimes fan out across the planet’s rural locales specifically to gamble their lives on hunting these violent creatures.</p>\n<table style=\"width:99.1279%;height:153px\" border=\"1\">\n<tbody>\n<tr style=\"height:54px\">\n<td style=\"width:15.5243%;height:54px\">ARMOR MODEL</td>\n<td style=\"width:6.3102%;text-align:center;vertical-align:middle;height:54px\">LEVEL</td>\n<td style=\"width:8.66404%;text-align:center;vertical-align:middle;height:54px\">PRICE</td>\n<td style=\"width:9.38416%;text-align:center;vertical-align:middle;height:54px\">EAC BONUS</td>\n<td style=\"width:9.38416%;text-align:center;vertical-align:middle;height:54px\">KAC BONUS</td>\n<td style=\"width:9.10653%;text-align:center;vertical-align:middle;height:54px\">\n<p>MAX DEX</p>\n<p>BONUS</p>\n</td>\n<td style=\"width:13.3561%;text-align:center;vertical-align:middle;height:54px\">\n<p>ARMOR CHECK</p>\n<p>PENALTY</p>\n</td>\n<td style=\"width:12.4647%;text-align:center;vertical-align:middle;height:54px\">\n<p>SPEED</p>\n<p>ADJUSTMENT</p>\n</td>\n<td style=\"width:9.94979%;text-align:center;vertical-align:middle;height:54px\">UPGRADE SLOTS</td>\n<td style=\"width:3.94984%;text-align:center;vertical-align:middle;height:54px\">BULK</td>\n</tr>\n<tr style=\"height:33px\">\n<td style=\"width:15.5243%;height:33px\">Ursikka hide, basic</td>\n<td style=\"width:6.3102%;text-align:center;vertical-align:middle;height:33px\">9</td>\n<td style=\"width:8.66404%;text-align:center;vertical-align:middle;height:33px\">12,500</td>\n<td style=\"width:9.38416%;text-align:center;vertical-align:middle;height:33px\">+9</td>\n<td style=\"width:9.38416%;text-align:center;vertical-align:middle;height:33px\">+9</td>\n<td style=\"width:9.10653%;text-align:center;vertical-align:middle;height:33px\">7</td>\n<td style=\"width:13.3561%;text-align:center;vertical-align:middle;height:33px\">-</td>\n<td style=\"width:12.4647%;text-align:center;vertical-align:middle;height:33px\">-</td>\n<td style=\"width:9.94979%;text-align:center;vertical-align:middle;height:33px\">1</td>\n<td style=\"width:3.94984%;text-align:center;vertical-align:middle;height:33px\">L</td>\n</tr>\n<tr style=\"height:33px\">\n<td style=\"width:15.5243%;height:33px\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">Ursikka hide, advanced</span></td>\n<td style=\"width:6.3102%;text-align:center;vertical-align:middle;height:33px\">13</td>\n<td style=\"width:8.66404%;text-align:center;vertical-align:middle;height:33px\">46,000</td>\n<td style=\"width:9.38416%;text-align:center;vertical-align:middle;height:33px\">15</td>\n<td style=\"width:9.38416%;text-align:center;vertical-align:middle;height:33px\">16</td>\n<td style=\"width:9.10653%;text-align:center;vertical-align:middle;height:33px\">7</td>\n<td style=\"width:13.3561%;text-align:center;vertical-align:middle;height:33px\">-</td>\n<td style=\"width:12.4647%;text-align:center;vertical-align:middle;height:33px\">-</td>\n<td style=\"width:9.94979%;text-align:center;vertical-align:middle;height:33px\">2</td>\n<td style=\"width:3.94984%;text-align:center;vertical-align:middle;height:33px\">L</td>\n</tr>\n<tr style=\"height:33px\">\n<td style=\"width:15.5243%;height:33px\">Ursikka hide, elite</td>\n<td style=\"width:6.3102%;text-align:center;vertical-align:middle;height:33px\">17</td>\n<td style=\"width:8.66404%;text-align:center;vertical-align:middle;height:33px\">240,000</td>\n<td style=\"width:9.38416%;text-align:center;vertical-align:middle;height:33px\">20</td>\n<td style=\"width:9.38416%;text-align:center;vertical-align:middle;height:33px\">20</td>\n<td style=\"width:9.10653%;text-align:center;vertical-align:middle;height:33px\">8</td>\n<td style=\"width:13.3561%;text-align:center;vertical-align:middle;height:33px\">-</td>\n<td style=\"width:12.4647%;text-align:center;vertical-align:middle;height:33px\">-</td>\n<td style=\"width:9.94979%;text-align:center;vertical-align:middle;height:33px\">3</td>\n<td style=\"width:3.94984%;text-align:center;vertical-align:middle;height:33px\">L</td>\n</tr>\n</tbody>\n</table>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any arctic (@UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus})</p>\n<h3>Organization</h3>\n<p>solitary, pair, or hive (3–10)</p>\n</section>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 10,
       "environment": "",
       "organization": "",
@@ -1206,29 +1194,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 128",
-      "xp": {
-        "value": 9600
-      }
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 19,
         "ranks": 19,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1236,10 +1215,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 24,
         "ranks": 24,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1247,10 +1225,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1258,10 +1235,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1269,10 +1245,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1280,10 +1255,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1291,10 +1265,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1302,10 +1275,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1313,10 +1285,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1324,10 +1295,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1335,10 +1305,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1346,10 +1315,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1357,10 +1325,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 19,
         "ranks": 19,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1368,10 +1335,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1379,10 +1345,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1390,9 +1355,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1402,10 +1365,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1413,10 +1375,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1424,10 +1385,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1435,47 +1395,40 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 19,
         "ranks": 19,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1484,21 +1437,9 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "",
         "value": []
-      },
-      "dr": {
-        "custom": "",
-        "value": [
-          {
-            "cold": "20"
-          }
-        ]
       },
       "dv": {
         "custom": "",
@@ -1510,9 +1451,6 @@
       },
       "senses": "darkvision 60 ft., low-light vision, blindsense (vibration) 30 ft.",
       "size": "huge",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

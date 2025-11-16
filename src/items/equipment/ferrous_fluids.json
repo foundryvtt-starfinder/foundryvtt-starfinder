@@ -5,10 +5,7 @@
   "img": "systems/sfrpg/icons/feats/climbing_master.webp",
   "system": {
     "type": "biotech",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -42,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -56,7 +52,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -66,17 +63,16 @@
       "unidentified": "",
       "value": "<p>By introducing carefully calibrated ferrous metals into your circulatory system, this augmentation enables you to control minor magnetic fields near you. You can use @UUID[Compendium.sfrpg.spells.Item.byAI5MUa3DgiiXc9]{psychokinetic hand} as a spell-like ability at will, targeting magnetic objects and with a range of up to 30 feet. In addition, you can activate your ferrous fluids as a move action, providing you a +5 circumstance bonus to Athletics checks to @UUID[Compendium.sfrpg.rules.JournalEntry.2mmspP39EOiog9zD.JournalEntryPage.ZeFfWgziHuzefMHL#climbing]{climb} metal surfaces as well as +2 circumstance bonus to KAC against @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#bull-rush]{bull rush} and @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#trip]{trip} combat maneuvers when you’re standing on a metal surface. In areas of @UUID[Compendium.sfrpg.rules.JournalEntry.SfkuzH5kxSAmG4nv.JournalEntryPage.n461i9lDXw303SiY#zero-gravity]{zero gravity}, you can move your land speed across metal surfaces without having to attempt skill checks, and as long as you’re adjacent to an Augmentation installers all across the galaxy offer a dazzling array of body enhancements, provided you have the credits—and the stomach (or relevant organ)—required to go undergo the installation appropriate surface, you don’t automatically move at the beginning of your turn each round.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
     },
     "equippable": false,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 6,
     "modifiers": [
       {
@@ -84,8 +80,10 @@
         "name": "Ferrous Fluids - Climb",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "5",
         "modifierType": "formula",
@@ -99,8 +97,10 @@
         "name": "Ferrous Fluids - Cbt Maneuvers",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "formula",
@@ -111,25 +111,29 @@
       }
     ],
     "price": 4100,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 148",
     "system": "endocrine",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "skill",
     "activation": {
@@ -89,15 +85,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "3da04461-94ac-4892-b965-5743891566ae",
         "name": "Nanite Disguise Bonus",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "formula",
@@ -109,14 +107,12 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "2nd Level (Nanocyte)",
     "rollNotes": "",
@@ -127,11 +123,12 @@
     },
     "skillCheck": {
       "type": "per",
-      "dc": "15 + (floor(@classes.nanocyte.levels * 1.5))"
+      "dc": "15 + (floor(@classes.nanocyte.levels * 1.5))",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 55",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/explosion_blast.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "rsak",
     "activation": {
@@ -50,14 +46,16 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         },
         {
           "name": "Explosion Damage",
-          "formula": "(lookupRange(@item.level, 1, 2, 2, 3, 2, 4, 3, 5, 4, 6, 5))d(lookupRange(@item.level, 4, 3, 6))6",
+          "formula": "(lookupRange(@item.level, 1, 2, 2, 3, 2, 4, 3, 5, 4, 6, 5))d(ternary(gte(@item.level, 3), 6, 4))6",
           "group": null,
           "isPrimarySection": false,
           "types": {
@@ -67,7 +65,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -127,7 +127,7 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": true,
     "level": 1,
     "materials": {
@@ -143,8 +143,6 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "close",
       "value": ""
     },
@@ -157,12 +155,13 @@
     "school": "con",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 126",
     "sr": false,
     "target": {
-      "type": "",
       "value": "one creature"
     },
     "uses": {

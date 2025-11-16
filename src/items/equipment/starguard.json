@@ -4,11 +4,7 @@
   "type": "equipment",
   "img": "systems/sfrpg/icons/default/kevlar-vest.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "armor": {
       "type": "power",
@@ -51,7 +47,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "10",
     "capacity": {
       "max": 40,
@@ -107,6 +102,7 @@
           "name": "",
           "formula": "4d8 +(@abilities.str.mod)",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -114,12 +110,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -129,7 +128,6 @@
       "unidentified": "",
       "value": "<p>This shimmering golden armor is made primarily of reinforced esaris, a extremely light and durable proprietary material developed by the kasathan doyenate. One of the most expensive and well-designed armors produced by kasathans, starguard deflects energy attacks nearly as effectively as its reinforced frame absorbs physical blows. The interior of the helmet provides continuous status updates about your surroundings, providing you @UUID[Compendium.sfrpg.rules.rX5rK6UWAIOeeipl.JournalEntryPage.p0o9tmWtKZ0qy8DI#blindsight]{Blindsight} (vibration) with a range of 120 feet.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -139,7 +137,8 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 20,
     "modifiers": [],
     "price": 904500,
@@ -148,10 +147,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "reach": "10 ft.",
     "rollNotes": "",
@@ -160,11 +156,12 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "medium",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 79",
     "specialMaterials": {
       "abysium": false,
@@ -185,7 +182,6 @@
     "speed": "",
     "strength": 30,
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -193,8 +189,8 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

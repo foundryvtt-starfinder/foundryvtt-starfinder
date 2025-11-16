@@ -4,13 +4,9 @@
   "type": "technological",
   "img": "systems/sfrpg/icons/default/processor.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 0,
@@ -52,7 +47,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": []
     },
@@ -61,7 +56,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -71,18 +67,17 @@
       "unidentified": "",
       "value": "<p>This oblong box the length of a @UUID[Compendium.sfrpg.races.Item.AMBcyDZDtJ1OOzh3]{Human} hand contains several hypoallergenic staples and a mass of sticky antiseptic gel. You use the dermal stapler by pressing it onto a willing or @UUID[Compendium.sfrpg.conditions.Item.lf8pbezocjYIvR9y]{Unconscious} living creature’s wound; the dermal stapler launches one of its staples into the wound to close it and slathers the staple with the antiseptic gel. You can use a dermal stapler on a willing or @UUID[Compendium.sfrpg.conditions.Item.lf8pbezocjYIvR9y]{Unconscious} creature to automatically end the @UUID[Compendium.sfrpg.conditions.Item.v9RNVTqyTyaPchvd]{Bleeding} condition without a Medicine check. Alternatively, you can use it in conjunction with a medkit to treat deadly wounds and gain a +1 insight bonus to your Medicine check. In addition to consuming a charge with each use, a dermal stapler must synthesize new staples and gel after 20 uses, at a cost in UPBs equal to one-quarter the stapler’s price.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "equippable": false,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 1,
     "identified": false,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 3,
     "modifiers": [
       {
@@ -90,8 +85,10 @@
         "name": "Dermal Stapler",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "+1",
         "modifierType": "formula",
@@ -102,24 +99,27 @@
       }
     ],
     "price": 1200,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AR pg. 100",
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -127,8 +127,8 @@
       "value": 0
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }

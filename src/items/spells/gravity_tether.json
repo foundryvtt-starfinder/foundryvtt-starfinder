@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/interplanetary_teleport.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "msak",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -41,6 +37,8 @@
         {
           "name": "",
           "formula": "5d8",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -48,12 +46,15 @@
             "electricity": true,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -63,14 +64,14 @@
       "unidentified": "",
       "value": "<p>By manipulating electromagnetic forces acting on your target, you change its movements. Attempt a melee attack against EAC. If you attempt a full attack, you can target two creatures. On a hit, your target takes 5d8 electricity damage and must attempt a Reflex save. On a failure, the target treats any square it moves farther from you as difficult terrain for the duration. A successful save ends the spell on the target.</p>\n<p>As a standard action, you can attempt an attack against an affected target within 60 feet, adding your key ability modifier to the attack roll. You can attack two affected targets if you take a full action to do so. If you hit the target’s KAC + 8, you pull it 5 feet closer to you plus 5 feet for every 5 by which the result exceeds a target’s KAC + 8. If you attack and hit two targets, you can instead move them closer to each other. Moving the target into a barrier, creature, dangerous space, or obstacle causes the target to stop before entering that space.</p>\n<p>Casting this spell doesn’t provoke attacks of opportunity.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "round",
       "value": "@details.cl.value"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 3,
     "materials": {
@@ -86,10 +87,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
@@ -98,14 +96,19 @@
       "descriptor": "partial"
     },
     "school": "trs",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GM pg. 75",
     "sr": true,
     "target": {
-      "type": "",
       "value": "one or two creatures"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

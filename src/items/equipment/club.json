@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/club.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 0,
@@ -52,7 +47,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": []
     },
@@ -63,13 +58,26 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d6 + @abilities.str.mod",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
-            "bludgeoning": true
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -79,7 +87,6 @@
       "unidentified": "",
       "value": "<p>A club is any sort of blunt, oblong instrument with a haft suitable for gripping. Clubs can be made of stone, wood, or similar materials. Metal clubs exist as well, and they are usually hollow to keep them from being too heavy. Some Free Captains refer to clubs as belaying pins, though those archaic items are not required on starships.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -89,7 +96,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 0,
     "modifiers": [],
@@ -185,10 +192,8 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
     "rollNotes": "",
     "save": {
@@ -196,11 +201,16 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "CRB pg. 171",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -208,7 +218,7 @@
       "value": 0
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

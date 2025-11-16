@@ -4,11 +4,7 @@
   "type": "technological",
   "img": "systems/sfrpg/icons/default/processor.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "capacity": {
       "max": 0,
@@ -74,7 +69,9 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -90,27 +87,25 @@
       "unidentified": "",
       "value": "<p>An oil slick module can be installed in the utility slot of any model of a @UUID[Compendium.sfrpg.equipment.Item.OJKhsKV1DSBZcdvr]{hoverchair} (Starfinder Tech Revolution 50). As part of taking a move action in the hoverchair, you can choose a 10-foot square that is adjacent to you before, during, or after your movement to be covered in slippery oil, as per the @UUID[Compendium.sfrpg.spells.Item.xPgI0T3aaPQnHE2Y]{grease} spell (DC = DC = 10 + half your level or your ranks in Piloting, whichever is greater + your Dexterity modifier). You can additionally take a standard action after the move action to cause the oil to catch fire, dealing [[/r 2d6]] fire damage to those in the area with a Reflex save for half damage (same DC as above). At the end of your next turn, all the oil is consumed and disappears along with the fire. Once you use this module, you must pay <strong>1,200 credits</strong> to refuel it.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
     },
     "equippable": false,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 0,
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 5,
     "modifiers": [],
     "price": 3000,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
@@ -122,11 +117,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 158 + Errata",
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -37,7 +33,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -96,29 +93,32 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
           "value": "30"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
@@ -134,12 +134,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/break_enchantment.webp",
       "system": {
-        "name": "Break Enchantment",
-        "type": "",
         "ability": "wis",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -158,7 +153,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -168,7 +163,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -178,14 +174,14 @@
           "unidentified": "",
           "value": "<p>This spell frees victims from curses, enchantments, and transmutations.<em>Break enchantment</em> can reverse even an instantaneous effect. For each such effect, you attempt a caster level check (1d20 + your caster level, maximum +15) against a DC equal to 11 + the caster level of the effect. Success means that the creature is free of the spell, curse, or effect. For a cursed magic item, the DC of the caster level check is equal to the DC of the curse.</p>\n<p>If the spell is one that can’t be dispelled by @UUID[Compendium.sfrpg.spells.KQ4vSfG9tq8EJxir]{Dispel Magic},<em>break enchantment</em> works only if that spell is 5th level or lower. If the effect comes from a permanent magic item,<em>break enchantment</em> doesn’t remove the curse from the item but it does free the victim from the item’s effects.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -199,29 +195,30 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 341",
         "sr": false,
         "target": {
-          "type": "",
           "value": "up to one creature per level, no two of which can be more than 30 ft. apart"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -233,12 +230,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/contact_other_plane.webp",
       "system": {
-        "name": "Contact Other Plane",
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -256,8 +248,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -267,7 +259,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -277,14 +270,14 @@
           "unidentified": "",
           "value": "<p>You send your mind to another plane of existence (an Elemental Plane or some plane further removed) in order to receive advice and information from powers there. The powers reply in a language you understand, but they resent such contact and give only brief answers to your questions. All questions are answered with “Yes,” “No,” “Maybe,” “Never,” “Irrelevant,” or some other one-word answer.</p>\n<p>You must concentrate on maintaining the spell in order to ask questions at the rate of one per round. A question is answered by the power during the same round. You can ask one question for every 2 caster levels. On rare occasions, this divination may be blocked by an act of certain deities or forces.</p>\n<p>Contacting a minor planar power is relatively safe but may not result in useful answers. For each question you ask, the GM secretly rolls [[/r 1d20]].</p>\n<p><strong>1–2</strong>: The power gives you no answer, the spell ends, and you must attempt a DC 7 Intelligence check. On a failed check, your Intelligence and Charisma scores each fall to 8 for a week and you are unable to cast spells for that period.</p>\n<p><strong>3–5</strong>: You receive a random answer to the question.</p>\n<p><strong>6–10</strong>: You receive an incorrect answer to the question. Based on the nature and needs of the creature contacted, this may be a lie designed to harm you.</p>\n<p><strong>11–15</strong>: You receive no answer to the question.</p>\n<p><strong>16 or More</strong>: You receive a truthful and useful one-word answer. If the question can’t be truthfully answered in this way, no answer is received.</p>\n<p>Contact with minds further removed from your home plane increases the probability that you will incur a decrease in Intelligence and Charisma due to your brain being overwhelmed by the power’s sheer strangeness and force, but it also increases the chance of the power knowing the answer and answering correctly. You can add any value from +1 to +5 to the d20 roll to represent contacting increasingly powerful planar beings. However, on a roll of 1 or 2, the result is still no answer, the spell ends, and you must attempt an Intelligence check to avoid losing Intelligence and Charisma. The DC of this Intelligence check is increased by the same amount added to the d20 check to contact a planar creature.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "concentration"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -298,29 +291,30 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 344",
         "sr": true,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -332,12 +326,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/reincarnate.webp",
       "system": {
-        "name": "Reincarnate",
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -356,7 +345,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -366,7 +355,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -374,16 +364,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>When you cast this spell, you bring back a @UUID[Compendium.sfrpg.conditions.nEJIWMKbPjqKuelo]{Dead} creature in another body, provided that its death occurred no more than 1 week before the casting of the spell and the target’s soul is free and willing to return. If the target’s soul is not willing to return, the spell fails; therefore, a target that wants to return receives no saving throw. Casting this spell requires a special monument worth at least 1,000 credits to serve as a beacon for the departed creature’s soul. This object is consumed when you cast the spell.</p>\n<p>Since the @UUID[Compendium.sfrpg.conditions.nEJIWMKbPjqKuelo]{Dead} creature is returning in a new body, all physical ills and @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P]{Afflictions} are removed. The condition of the creature’s remains is not a factor. So long as some small portion of the creature’s body still exists, it can be reincarnated, but the portion receiving the spell must have been part of the creature’s body at the time of death. The magic of the spell creates an entirely new young adult body for the soul to inhabit from the natural elements at hand. This process takes 1 hour to complete. When the body is ready, the target is reincarnated.</p>\n<p>A reincarnated creature recalls the majority of its former life and form. It retains any class features, feats, and skill ranks it formerly had. Its class, base attack bonus, base save bonuses, and Hit Points are unchanged. The creature should recalculate its ability scores from scratch as a member of its new race (remembering to include any ability score increases from leveling up). The target of the spell gains 2 permanent negative levels when it is reincarnated. If the target is 1st level, it takes 2 Constitution drain instead (if the Constitution drain would reduce its Constitution to 0 or less, the creature cannot be reincarnated). The target creature can decide whether its new body retains any of the implants it had in its former body. A spellcasting creature has a 50% chance of losing any given unused spell slot as if it had been used to cast a spell.</p>\n<p>For a humanoid creature, the new incarnation is determined using the table on the facing page. For nonhumanoid creatures, a similar table of creatures of the same type should be created.</p>\n<p>Elementals, outsiders, and undead creatures can’t be reincarnated. Any creature that can’t benefit from the mystic cure spell cannot be reincarnated. The spell can bring back a creature that has died of old age.</p>\n<p>The reincarnated creature gains all abilities associated with its new form, including any forms of movement and speeds, natural attacks, extraordinary abilities, and the like, but it does not automatically speak the language of the new form it takes.</p>\n<table>\n<tbody>\n<tr>\n<td style=\"text-align: center;\"><strong>D%</strong></td>\n<td style=\"text-align: center;\"><strong>Incarnation</strong></td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">1–6</td>\n<td style=\"text-align: center;\">@UUID[Compendium.sfrpg.races.GHIntVN70xTt2Tlo]{Android}</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">7–14</td>\n<td style=\"text-align: center;\">@UUID[Compendium.sfrpg.races.SaWDXnfaX24Iuuuz]{Dwarf}</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">15–22</td>\n<td style=\"text-align: center;\">@UUID[Compendium.sfrpg.races.K7OFZY7hnnKZQ8YY]{Elf}</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">23–30</td>\n<td style=\"text-align: center;\">@UUID[Compendium.sfrpg.races.5uBvbTEiUu1ckQwk]{Gnome}</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">31–34</td>\n<td style=\"text-align: center;\">@UUID[Compendium.sfrpg.races.5WhPSrWQWwWNLvtj]{Half-elf}</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">35–38</td>\n<td style=\"text-align: center;\">@UUID[Compendium.sfrpg.races.hRuWhbQgSFVA12NS]{Half-orc}</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">39–46</td>\n<td style=\"text-align: center;\">@UUID[Compendium.sfrpg.races.XVyIJzuDyZ4FkmCf]{Halfling}</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">47–55</td>\n<td style=\"text-align: center;\">@UUID[Compendium.sfrpg.races.AMBcyDZDtJ1OOzh3]{Human}</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">56–64</td>\n<td style=\"text-align: center;\">@UUID[Compendium.sfrpg.races.ShWYksP7IwWcqEVa]{Lashunta}</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">65–73</td>\n<td style=\"text-align: center;\">@UUID[Compendium.sfrpg.races.dGlSCMtFZ2ZIKUpl]{Kasatha}</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">74–81</td>\n<td style=\"text-align: center;\">@UUID[Compendium.sfrpg.races.VIJ6pdOVTJle3vJx]{Shirren}</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">82–90</td>\n<td style=\"text-align: center;\">@UUID[Compendium.sfrpg.races.7VtfabTXl7NEXC6u]{Vesk}</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">91–99</td>\n<td style=\"text-align: center;\">@UUID[Compendium.sfrpg.races.PWjnNkCCW5diAQU4]{Ysoki}</td>\n</tr>\n<tr>\n<td style=\"text-align: center;\">100</td>\n<td style=\"text-align: center;\">Other (GM’s choice)</td>\n</tr>\n</tbody>\n</table>\n<p>A miracle or wish spell can restore a reincarnated creature to its original form.</p>"
+          "value": "<p>When you cast this spell, you bring back a @UUID[Compendium.sfrpg.conditions.nEJIWMKbPjqKuelo]{Dead} creature in another body, provided that its death occurred no more than 1 week before the casting of the spell and the target’s soul is free and willing to return. If the target’s soul is not willing to return, the spell fails; therefore, a target that wants to return receives no saving throw. Casting this spell requires a special monument worth at least 1,000 credits to serve as a beacon for the departed creature’s soul. This object is consumed when you cast the spell.</p>\n<p>Since the @UUID[Compendium.sfrpg.conditions.nEJIWMKbPjqKuelo]{Dead} creature is returning in a new body, all physical ills and @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P]{Afflictions} are removed. The condition of the creature’s remains is not a factor. So long as some small portion of the creature’s body still exists, it can be reincarnated, but the portion receiving the spell must have been part of the creature’s body at the time of death. The magic of the spell creates an entirely new young adult body for the soul to inhabit from the natural elements at hand. This process takes 1 hour to complete. When the body is ready, the target is reincarnated.</p>\n<p>A reincarnated creature recalls the majority of its former life and form. It retains any class features, feats, and skill ranks it formerly had. Its class, base attack bonus, base save bonuses, and Hit Points are unchanged. The creature should recalculate its ability scores from scratch as a member of its new race (remembering to include any ability score increases from leveling up). The target of the spell gains 2 permanent negative levels when it is reincarnated. If the target is 1st level, it takes 2 Constitution drain instead (if the Constitution drain would reduce its Constitution to 0 or less, the creature cannot be reincarnated). The target creature can decide whether its new body retains any of the implants it had in its former body. A spellcasting creature has a 50% chance of losing any given unused spell slot as if it had been used to cast a spell.</p>\n<p>For a humanoid creature, the new incarnation is determined using the table on the facing page. For nonhumanoid creatures, a similar table of creatures of the same type should be created.</p>\n<p>Elementals, outsiders, and undead creatures can’t be reincarnated. Any creature that can’t benefit from the mystic cure spell cannot be reincarnated. The spell can bring back a creature that has died of old age.</p>\n<p>The reincarnated creature gains all abilities associated with its new form, including any forms of movement and speeds, natural attacks, extraordinary abilities, and the like, but it does not automatically speak the language of the new form it takes.</p>\n<table>\n<tbody>\n<tr>\n<td style=\"text-align:center\"><strong>D%</strong></td>\n<td style=\"text-align:center\"><strong>Incarnation</strong></td>\n</tr>\n<tr>\n<td style=\"text-align:center\">1–6</td>\n<td style=\"text-align:center\">@UUID[Compendium.sfrpg.races.GHIntVN70xTt2Tlo]{Android}</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">7–14</td>\n<td style=\"text-align:center\">@UUID[Compendium.sfrpg.races.SaWDXnfaX24Iuuuz]{Dwarf}</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">15–22</td>\n<td style=\"text-align:center\">@UUID[Compendium.sfrpg.races.K7OFZY7hnnKZQ8YY]{Elf}</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">23–30</td>\n<td style=\"text-align:center\">@UUID[Compendium.sfrpg.races.5uBvbTEiUu1ckQwk]{Gnome}</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">31–34</td>\n<td style=\"text-align:center\">@UUID[Compendium.sfrpg.races.5WhPSrWQWwWNLvtj]{Half-elf}</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">35–38</td>\n<td style=\"text-align:center\">@UUID[Compendium.sfrpg.races.hRuWhbQgSFVA12NS]{Half-orc}</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">39–46</td>\n<td style=\"text-align:center\">@UUID[Compendium.sfrpg.races.XVyIJzuDyZ4FkmCf]{Halfling}</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">47–55</td>\n<td style=\"text-align:center\">@UUID[Compendium.sfrpg.races.AMBcyDZDtJ1OOzh3]{Human}</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">56–64</td>\n<td style=\"text-align:center\">@UUID[Compendium.sfrpg.races.ShWYksP7IwWcqEVa]{Lashunta}</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">65–73</td>\n<td style=\"text-align:center\">@UUID[Compendium.sfrpg.races.dGlSCMtFZ2ZIKUpl]{Kasatha}</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">74–81</td>\n<td style=\"text-align:center\">@UUID[Compendium.sfrpg.races.VIJ6pdOVTJle3vJx]{Shirren}</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">82–90</td>\n<td style=\"text-align:center\">@UUID[Compendium.sfrpg.races.7VtfabTXl7NEXC6u]{Vesk}</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">91–99</td>\n<td style=\"text-align:center\">@UUID[Compendium.sfrpg.races.PWjnNkCCW5diAQU4]{Ysoki}</td>\n</tr>\n<tr>\n<td style=\"text-align:center\">100</td>\n<td style=\"text-align:center\">Other (GM’s choice)</td>\n</tr>\n</tbody>\n</table>\n<p>A miracle or wish spell can restore a reincarnated creature to its original form.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "instantaneous; see text"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -397,29 +387,30 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 372",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one dead creature"
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -431,12 +422,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/retrocognition.webp",
       "system": {
-        "name": "Retrocognition",
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -455,7 +441,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -465,7 +451,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -473,16 +460,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This spell allows you to gain psychic impressions from past events that occurred in your current location.&nbsp;Retrocognition&nbsp;reveals psychic impressions from events that occurred over the course of the last hour throughout the first minute of the spell’s duration, followed by impressions from the next hour back throughout the next minute you concentrate, and so on. If a psychically traumatic or turbulent event happened during that period, you must succeed at a Will saving throw (DC = 15, 20, or 25, depending on the severity of the traumatic or turbulent event) or lose your concentration on the spell. If you fail this saving throw, the spell ends.</p>\n<p>At caster level 16th and higher, you can choose to collect impressions from over the course of a longer interval of time than an hour, beginning at 1 week per minute of concentration (as listed on the table below). The amount of detail you receive diminishes, so this eventually makes it harder to distinguish impressions left by anything but the most major events. In most circumstances, you can’t glean information about what occurred during the Gap with this spell.</p>\n<table style=\"height: 68px;\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 149.867px; text-align: center;\"><strong>Caster Level</strong></td>\n<td style=\"height: 17px; width: 245.133px; text-align: center;\"><strong>Period</strong></td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 149.867px; text-align: center;\">16th–17th</td>\n<td style=\"height: 17px; width: 245.133px; text-align: center;\">1 week per minute</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 149.867px; text-align: center;\">18th–19th</td>\n<td style=\"height: 17px; width: 245.133px; text-align: center;\">1 year per minute</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 149.867px; text-align: center;\">20th</td>\n<td style=\"height: 17px; width: 245.133px; text-align: center;\">1 decade per minute</td>\n</tr>\n</tbody>\n</table>"
+          "value": "<p>This spell allows you to gain psychic impressions from past events that occurred in your current location.&nbsp;Retrocognition&nbsp;reveals psychic impressions from events that occurred over the course of the last hour throughout the first minute of the spell’s duration, followed by impressions from the next hour back throughout the next minute you concentrate, and so on. If a psychically traumatic or turbulent event happened during that period, you must succeed at a Will saving throw (DC = 15, 20, or 25, depending on the severity of the traumatic or turbulent event) or lose your concentration on the spell. If you fail this saving throw, the spell ends.</p>\n<p>At caster level 16th and higher, you can choose to collect impressions from over the course of a longer interval of time than an hour, beginning at 1 week per minute of concentration (as listed on the table below). The amount of detail you receive diminishes, so this eventually makes it harder to distinguish impressions left by anything but the most major events. In most circumstances, you can’t glean information about what occurred during the Gap with this spell.</p>\n<table style=\"height:68px\">\n<tbody>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:149.867px;text-align:center\"><strong>Caster Level</strong></td>\n<td style=\"height:17px;width:245.133px;text-align:center\"><strong>Period</strong></td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:149.867px;text-align:center\">16th–17th</td>\n<td style=\"height:17px;width:245.133px;text-align:center\">1 week per minute</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:149.867px;text-align:center\">18th–19th</td>\n<td style=\"height:17px;width:245.133px;text-align:center\">1 year per minute</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:149.867px;text-align:center\">20th</td>\n<td style=\"height:17px;width:245.133px;text-align:center\">1 decade per minute</td>\n</tr>\n</tbody>\n</table>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "concentration, up to 1 minute/level"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -496,29 +483,30 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 375",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -530,12 +518,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/telepathy.webp",
       "system": {
-        "name": "Telepathy",
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -553,8 +536,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -564,7 +547,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -574,14 +558,14 @@
           "unidentified": "",
           "value": "<p>You can mentally communicate with any other creature within 100 feet that has a language. It is possible to address multiple creatures at once telepathically, although maintaining a telepathic conversation with more than one creature at a time is just as difficult as speaking and listening to multiple people simultaneously. You can’t use telepathy to locate creatures to communicate with them, but once you’ve established telepathic communication, you don’t require line of effect to maintain it.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value*10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 5,
         "materials": {
@@ -595,29 +579,30 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 381",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -629,12 +614,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/divination.webp",
       "system": {
-        "name": "Divination",
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -652,8 +632,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -663,7 +643,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -673,14 +654,14 @@
           "unidentified": "",
           "value": "<p>Similar to <em>augury</em> but more powerful, a <em>divination</em> spell can provide you with a useful piece of advice in reply to a question concerning a specific goal, event, or activity that is to occur within 1 week. Casting this spell requires you to expend 1 Resolve Point. The advice granted by the spell can be as simple as a short phrase, or it might take the form of a cryptic rhyme or omen. If you don’t act on the information, the conditions may change so that the information is no longer useful. The chance for a correct divination is 75%. If the die roll fails, you know the spell failed, unless specific magic yielding false information is at work.</p>\n<p>As with <em>augury</em>, multiple castings of <em>divination</em> about the same topic by the same caster use the same die result as the first <em>divination</em> spell and yield the same answer each time.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 4,
         "materials": {
@@ -694,29 +675,30 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
           "type": "fort",
-          "dc": null,
+          "dc": "",
           "descriptor": "partial"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 352",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -728,12 +710,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mystic_cure.webp",
       "system": {
-        "name": "Mystic Cure (4th Level)",
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "heal",
         "activation": {
@@ -767,6 +744,7 @@
               "name": "Healing",
               "formula": "lookupRange(@item.level, 1, 2, 3, 3, 5, 4, 7, 5, 9, 6, 11)d8 + @abilities.wis.mod",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -774,7 +752,9 @@
                 "electricity": false,
                 "fire": false,
                 "healing": true,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -783,6 +763,7 @@
               "name": "4th level Extra Healing",
               "formula": "4d8",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -790,7 +771,9 @@
                 "electricity": false,
                 "fire": false,
                 "healing": true,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -799,6 +782,7 @@
               "name": "5th Level Extra Healing",
               "formula": "7d8",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -806,7 +790,9 @@
                 "electricity": false,
                 "fire": false,
                 "healing": true,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -815,6 +801,7 @@
               "name": "6th Level Extra Healing",
               "formula": "9d8",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -822,12 +809,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": true,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "If the target regains all of its Hit Points as a result of this healing, you can apply the remaining healing to yourself, as long as you are a living creature. On the other hand, if this isn’t enough to restore all the target’s Hit Points, you can transfer any number of your own Hit Points to the target, healing the target that amount.",
         "description": {
@@ -882,7 +872,7 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": true,
         "level": 4,
         "materials": {
@@ -896,13 +886,9 @@
           "mode": "innate",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -913,12 +899,13 @@
         "school": "con",
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 367",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
@@ -934,12 +921,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/clairaudience_clairvoyance.webp",
       "system": {
-        "name": "Clairaudience/Clairvoyance",
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -957,8 +939,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -968,7 +950,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -978,14 +961,14 @@
           "unidentified": "",
           "value": "<p>You create an invisible magical sensor at a specific location that enables you to hear or see (your choice) almost as if you were there. You don’t need line of sight or line of effect to create this sensor in a specific spot within range, but the locale must be either a place that’s familiar to you or an obvious location, such as inside a cave whose entrance you can see.</p>\n<p>The sensor doesn’t move, but you can rotate it in all directions to view the area as desired. This spell functions only on the plane of existence you are currently occupying.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -999,29 +982,30 @@
           "mode": "always",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "long",
-          "value": null
+          "units": "long"
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 342",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1033,12 +1017,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/tongues.webp",
       "system": {
-        "name": "Tongues",
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1056,8 +1035,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1067,7 +1046,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1077,14 +1057,14 @@
           "unidentified": "",
           "value": "<p>This spell grants the creature touched the ability to speak and understand the spoken or signed language of any intelligent creature, whether it is a racial tongue or a regional dialect. The target can speak only one language at a time, although it may be able to understand several languages.&nbsp;Tongues&nbsp;does not enable the target to speak with creatures who don’t speak. The target can make itself understood as far as its voice carries.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value*10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -1098,13 +1078,9 @@
           "mode": "always",
           "prepared": true
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1113,14 +1089,19 @@
           "descriptor": "harmless"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 383",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1132,7 +1113,6 @@
       "type": "container",
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -1151,7 +1131,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [
@@ -1168,7 +1147,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1192,7 +1171,7 @@
               "affectsEncumbrance": true,
               "amount": 1000,
               "subtype": "",
-              "weightProperty": "bulk"
+              "weightProperty": ""
             }
           ]
         },
@@ -1205,17 +1184,16 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
-        "img": "icons/svg/item-bag.svg",
-        "isOpen": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
-        "source": "",
-        "totalWeight": "L"
+        "slug": "",
+        "source": ""
       }
     },
     {
@@ -1224,11 +1202,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -1263,7 +1237,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "0",
         "capacity": {
           "max": 0,
@@ -1286,6 +1259,7 @@
               "name": "",
               "formula": "1d10 + 9",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": true,
                 "bludgeoning": true,
@@ -1293,12 +1267,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1308,7 +1285,6 @@
           "unidentified": "",
           "value": "<p>As a swift action, a scyphozoan can make one of her prehensile tentacles secrete acid; her unarmed strikes with that tentacle count as having the @UUID[Compendium.sfrpg.equipment.tXg2Qct6wWKXvzFW]{Corrosive} weapon fusion, except the ability is not magical. While the effect is activated, the scyphozoan is considered armed, and the attack doesn’t count as archaic, but the scyphozoan cannot hold an item in that tentacle.</p>\n<p>Starting at 3rd level, a scyphozoan adds 1-1/2 × her character level to the damage while the effect is activated. A scyphozoan can deactivate the effect as a swift action.</p>\n<p><em>Damage calculation is already set to account the additional damage of 1/2&nbsp;<span>× their character level, beyond the damage provided by their normal Weapon Specialization damage.</span></em></p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -1318,7 +1294,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -1423,10 +1399,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -1436,8 +1409,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "Scyphozoan",
         "special": "",
         "specialMaterials": {
@@ -1457,7 +1432,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1479,11 +1453,7 @@
       "type": "weapon",
       "img": "icons/weapons/wands/wand-carved-stone-shard.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "mwak",
         "activation": {
@@ -1518,7 +1488,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": null,
@@ -1562,6 +1531,7 @@
               "name": "",
               "formula": "1d10 + 9",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -1569,12 +1539,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1584,7 +1557,6 @@
           "unidentified": "",
           "value": "<p>Quite common on @UUID[Compendium.sfrpg.setting.0VTtBYDJC5vUC434]{Eox}, void staves are designed using extensive necromancy-derived technologies, resulting in nonreflective black coloration and a range of morbid effects. A target struck&nbsp;by a void staff suffers effects similar to frostbite, as the weapon&nbsp;drains the life energy out of the target on a cellular level and, in some cases, causes complications with breathing and other essential functions. Grave-class, crypt-class, tomb-class, and ossuary-class void staves are relatively common throughout the Pact Worlds, while barrow-class void staves are almost never&nbsp;seen anywhere except @UUID[Compendium.sfrpg.setting.0VTtBYDJC5vUC434]{Eox}.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -1594,10 +1566,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "img": "icons/weapons/wands/wand-carved-stone-shard.webp",
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
-        "isOpen": true,
         "level": 6,
         "modifiers": [],
         "price": 4600,
@@ -1701,10 +1671,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1714,8 +1681,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "AR pg. 36",
         "special": "",
         "specialMaterials": {
@@ -1735,10 +1704,8 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
-        "totalWeight": 1,
         "usage": {
           "per": "",
           "value": null
@@ -1746,7 +1713,6 @@
         "uses": {
           "max": "",
           "per": "",
-          "total": 0,
           "value": null
         },
         "weaponCategory": "cryo",
@@ -1759,11 +1725,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/default/kevlar-vest.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1777,7 +1739,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -1806,7 +1768,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -1815,7 +1776,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1846,7 +1807,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1856,7 +1818,6 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1866,7 +1827,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 6,
         "modifiers": [],
         "price": 4250,
@@ -1875,25 +1837,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AR pg. 70",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -1901,8 +1864,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1913,11 +1876,7 @@
       "type": "weapon",
       "img": "icons/weapons/wands/wand-carved-stone-shard.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "mwak",
         "activation": {
@@ -1952,7 +1911,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": null,
@@ -1996,6 +1954,7 @@
               "name": "",
               "formula": "1d10 + @abilities.str.mod",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -2003,12 +1962,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2018,7 +1980,6 @@
           "unidentified": "",
           "value": "<p>Quite common on @UUID[Compendium.sfrpg.setting.0VTtBYDJC5vUC434]{Eox}, void staves are designed using extensive necromancy-derived technologies, resulting in nonreflective black coloration and a range of morbid effects. A target struck&nbsp;by a void staff suffers effects similar to frostbite, as the weapon&nbsp;drains the life energy out of the target on a cellular level and, in some cases, causes complications with breathing and other essential functions. Grave-class, crypt-class, tomb-class, and ossuary-class void staves are relatively common throughout the Pact Worlds, while barrow-class void staves are almost never&nbsp;seen anywhere except @UUID[Compendium.sfrpg.setting.0VTtBYDJC5vUC434]{Eox}.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -2028,10 +1989,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "img": "icons/weapons/wands/wand-carved-stone-shard.webp",
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
-        "isOpen": true,
         "level": 6,
         "modifiers": [],
         "price": 4600,
@@ -2135,10 +2094,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -2148,8 +2104,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "AR pg. 36",
         "special": "",
         "specialMaterials": {
@@ -2169,10 +2127,8 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
-        "totalWeight": 1,
         "usage": {
           "per": "",
           "value": null
@@ -2180,7 +2136,6 @@
         "uses": {
           "max": "",
           "per": "",
-          "total": 0,
           "value": null
         },
         "weaponCategory": "cryo",
@@ -2193,11 +2148,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2210,7 +2161,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2219,7 +2170,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2275,33 +2227,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Racial Feature",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -2313,10 +2267,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/equipment/goods/religious-symbol.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "attributes": {
           "ac": {
             "value": ""
@@ -2335,14 +2285,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -2352,13 +2295,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 2,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "AR pg. 131"
       }
     }
@@ -2459,108 +2404,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 4
       },
       "con": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 1
       },
       "dex": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "int": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 2
       },
       "str": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 1
       },
       "wis": {
-        "base": 6,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 6
       }
     },
     "attributes": {
       "abilityDC": {
-        "base": "0"
+        "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
-        "base": "17"
-      },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 17
       },
       "eac": {
-        "base": 19,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 19
       },
       "fort": {
-        "base": 7,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 7
       },
       "hp": {
         "max": 105,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 105
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 0,
         "value": 0
       },
       "kac": {
-        "base": 20,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 20
       },
-      "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 7,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 7
       },
       "space": "5",
       "speed": {
@@ -2581,38 +2470,10 @@
         "special": "",
         "swimming": {
           "base": 30
-        },
-        "value": null
-      },
-      "spellcasting": "",
-      "will": {
-        "base": 11,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
-      }
-    },
-    "common": {
-      "abilities": {
-        "cha": {
-          "base": 0
-        },
-        "con": {
-          "base": 0
-        },
-        "dex": {
-          "base": 0
-        },
-        "int": {
-          "base": 0
-        },
-        "str": {
-          "base": 0
-        },
-        "wis": {
-          "base": 0
         }
+      },
+      "will": {
+        "base": 11
       }
     },
     "conditions": {
@@ -2653,9 +2514,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -2663,9 +2521,8 @@
     "details": {
       "type": "Aberration",
       "alignment": "NG",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -2677,7 +2534,6 @@
         "value": "<h2>RELIGIOUS FIGURES</h2><p>Religious figures are typically individuals who rise in their faith’s ranks due to their unrivaled devotion and skill—or even due to the blessings bestowed upon them by their deity. Religious figures don’t just lead the devout; they often also steer nonreligious discourse. Depending on their congregation and ambitions, the leader might even overshadow the government of a city or planet. Although this arrangement might bring peace, it could as easily realize a terrible regime of divine tyranny or terror.</p><h3>PROPHET</h3><p>Prophets are chosen by the gods to foretell the future, though they rarely have a choice in the matter. Their prophecies manifest as waking visions, astrological readings, cosmic energy pulses, or even direct conversations with their deities. While some prophets embrace their gift and serve as impartial messengers, others become overwhelmed by their prophecies, either in the hope of bringing their visions to fruition or in an attempt to stop some unfavorable future. These prophets often fall victim to exploitative opportunists who try to use them as a tool to foresee and manipulate the future.</p>",
         "weight": ""
       },
-      "class": "",
       "combatRole": "",
       "cr": 8,
       "environment": "",
@@ -2686,30 +2542,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "Scyphozoan",
       "source": "IS pg. 174",
-      "subtype": "",
-      "xp": {
-        "value": 10
-      }
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -2717,10 +2563,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -2728,10 +2573,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -2739,10 +2583,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -2750,10 +2593,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -2761,10 +2603,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 21,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -2772,10 +2613,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -2783,10 +2623,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -2794,10 +2633,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -2805,10 +2643,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -2816,10 +2653,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -2827,10 +2663,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 21,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -2838,10 +2673,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 16,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -2849,10 +2683,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -2860,10 +2693,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -2871,9 +2703,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -2883,10 +2713,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -2894,10 +2723,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -2905,10 +2733,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 16,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -2916,47 +2743,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -2965,15 +2785,7 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
-        "custom": "",
-        "value": []
-      },
-      "dr": {
         "custom": "",
         "value": []
       },
@@ -2991,9 +2803,6 @@
       },
       "senses": "blindsense (vibration) 30 ft.",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

@@ -4,11 +4,7 @@
   "type": "equipment",
   "img": "systems/sfrpg/icons/default/kevlar-vest.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "armor": {
       "type": "power",
@@ -51,7 +47,6 @@
       "size": "large",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "34",
     "capacity": {
       "max": 40,
@@ -107,6 +102,7 @@
           "name": "",
           "formula": "1d10 +(@abilities.str.mod)",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -114,12 +110,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -129,7 +128,6 @@
       "unidentified": "",
       "value": "<p>A cargo lifter consists of a simple metal frame atop slow-moving legs or treads. Rather than having articulated hands, its arms end in specialized gripping tools meant to lift bulky containers. A cargo lifter can’t use weapons and takes a –4 penalty to all attack rolls. It can carry 10 bulk more than normal for its Strength score without becoming @UUID[Compendium.sfrpg.conditions.Item.OwZA6flUQPH0jPA0]{Encumbered} or @UUID[Compendium.sfrpg.conditions.Item.11k3ObUIXEYFGrg9]{Overburdened}.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -139,7 +137,8 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 4,
     "modifiers": [
       {
@@ -147,8 +146,10 @@
         "name": "Cargo Lifter",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": true,
+        "limitTo": null,
         "max": -4,
         "modifier": "-4",
         "modifierType": "constant",
@@ -164,10 +165,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "reach": "5 ft.",
     "rollNotes": "",
@@ -176,11 +174,12 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "large",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "CRB pg. 204",
     "specialMaterials": {
       "abysium": false,
@@ -201,7 +200,6 @@
     "speed": "15 ft.",
     "strength": 20,
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -209,8 +207,8 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

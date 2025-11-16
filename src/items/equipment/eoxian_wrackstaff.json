@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 0,
@@ -76,6 +71,8 @@
         {
           "name": "",
           "formula": "6d4 + @abilities.str.mod",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -83,12 +80,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -98,7 +98,6 @@
       "unidentified": "",
       "value": "<p>Consisting of a long metallic shaft capped with a two-pronged head, an Eoxian wrackstaff is a two-handed basic melee weapon that deals 6d4 bludgeoning damage and has the block weapon special property. On a critical hit, the target is affected by @UUID[Compendium.sfrpg.spells.Item.2AYPwSy7I0Ar8yAH]{Inflict Pain} (CL 13th). Undead creatures are immune to this critical hit effect.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -108,7 +107,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 13,
     "modifiers": [],
@@ -210,10 +209,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
@@ -221,6 +217,12 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AA1 pg. 81",
     "special": "",
     "specialMaterials": {
@@ -240,7 +242,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -248,8 +249,8 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     },
     "weaponCategory": "uncategorized",

@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/weapons/wands/wand-carved-stone-shard.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "mwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 0,
@@ -88,6 +83,7 @@
           "name": "",
           "formula": "3d10 + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -95,12 +91,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -110,7 +109,6 @@
       "unidentified": "",
       "value": "<p>Quite common on @UUID[Compendium.sfrpg.setting.Item.0VTtBYDJC5vUC434]{Eox}, void staves are designed using extensive necromancy-derived technologies, resulting in nonreflective black coloration and a range of morbid effects. A target struck&nbsp;by a void staff suffers effects similar to frostbite, as the weapon&nbsp;drains the life energy out of the target on a cellular level and, in some cases, causes complications with breathing and other essential functions. Grave-class, crypt-class, tomb-class, and ossuary-class void staves are relatively common throughout the Pact Worlds, while barrow-class void staves are almost never&nbsp;seen anywhere except @UUID[Compendium.sfrpg.setting.Item.0VTtBYDJC5vUC434]{Eox}.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -120,7 +118,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 11,
     "modifiers": [],
@@ -225,10 +223,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
@@ -238,8 +233,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 36",
     "special": "",
     "specialMaterials": {
@@ -259,7 +256,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

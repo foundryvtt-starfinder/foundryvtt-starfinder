@@ -21,6 +21,7 @@ export function initializeRemoteInventory() {
  * @returns {ItemSFRPG} Returns the (possibly newly created) item on the target actor.
  */
 export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targetItem = null, targetItemStorageIndex = null) {
+    // TODO: It seems impossible to reach the addItemToActorAsync method, it might be removable (unless used by modules)
     if (!ActorItemHelper.IsValidHelper(targetActor)) return null;
 
     if (targetItem && targetItem === itemToAdd) {
@@ -57,7 +58,7 @@ export async function addItemToActorAsync(targetActor, itemToAdd, quantity, targ
     if (desiredParent) {
         const newContents = foundry.utils.deepClone(desiredParent.system.container.contents || []);
         newContents.push({id: addedItem._id, index: targetItemStorageIndex || 0});
-        await targetActor.updateItem(desiredParent._id, {"data.container.contents": newContents});
+        await targetActor.updateItem(desiredParent._id, {"container.contents": newContents});
     }
 
     return addedItem;
@@ -106,6 +107,7 @@ export async function moveItemBetweenActorsAsync(sourceActor, itemToMove, target
     }
 
     if (!ActorItemHelper.IsValidHelper(sourceActor)) {
+        // Temp: Only reachable via item.reload() via item.setItemContainer()
         console.log("Inventory::moveItemBetweenActorsAsync: sourceActor is not a valid ActorItemHelper, switching to addItemToActorAsync.");
         return addItemToActorAsync(targetActor, itemToMove, itemToMove.system.quantity, targetItem, targetItemStorageIndex);
     }
@@ -805,7 +807,7 @@ async function onItemCollectionItemDraggedToPlayer(message) {
 
         if (acceptableItemIds.length > 0) {
             const combinedContents = targetContainer.system.container.contents.concat(acceptableItemIds);
-            await target.updateItem(targetContainer.id, {"system.container.contents": combinedContents});
+            await target.updateItem(targetContainer.id, {"container.contents": combinedContents});
         }
     }
 }

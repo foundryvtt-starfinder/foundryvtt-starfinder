@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/versatile_specialization.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +85,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "6b305f26-6127-43c3-9f53-8eca4e52723e",
         "name": "Weapon Specialization Longarms",
         "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "constant",
@@ -110,8 +109,10 @@
         "name": "Weapon Specialization Adv Melee",
         "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
@@ -125,8 +126,10 @@
         "name": "Weapon Specialization Heavy",
         "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "constant",
@@ -140,8 +143,10 @@
         "name": "Weapon Specialization Sniper",
         "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "constant",
@@ -153,30 +158,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Core Rulebook",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

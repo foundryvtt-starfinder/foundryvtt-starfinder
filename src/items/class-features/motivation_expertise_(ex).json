@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "heal",
     "activation": {
@@ -33,8 +29,9 @@
       "parts": [
         {
           "name": "",
-          "formula": "1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
+          "formula": "1d(ternary(gte(@classes.envoy.levels, 13), 8, 6))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -42,12 +39,15 @@
             "electricity": false,
             "fire": false,
             "healing": true,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -55,7 +55,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.fqYiP2f9oSfcmrwC]{Envoy}</p>\n<p>You’re an expert at making people happy and high-spirited, allowing them to press forward when they might otherwise quit. You gain an expertise die of the same value as that granted to an envoy of your level by the expertise class feature. At 1st level, whenever you take an action that restores a creature’s Stamina Points or Hit Points, you can restore additional Stamina Points equal to the result of the roll of your [[/r 1d(lookupRange(@classes.envoy.levels,6,13,8))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)]]{expertise die}. You can still use your expertise die on Sense Motive checks, but you always add the minimum possible result. This is also true for any skills you select with @UUID[Compendium.sfrpg.class-features.Item.0HPp0nK0L1VawPYN]{skill expertise}.</p>\n<p><strong>This replaces expertise.</strong></p>\n<p><em>Select skill expertise in the Modifiers tab.</em></p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.fqYiP2f9oSfcmrwC]{Envoy}</p>\n<p>You’re an expert at making people happy and high-spirited, allowing them to press forward when they might otherwise quit. You gain an expertise die of the same value as that granted to an envoy of your level by the expertise class feature. At 1st level, whenever you take an action that restores a creature’s Stamina Points or Hit Points, you can restore additional Stamina Points equal to the result of the roll of your [[/r 1d(ternary(gte(@classes.envoy.levels, 13), 8, 6))+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)]]{expertise die}. You can still use your expertise die on Sense Motive checks, but you always add the minimum possible result. This is also true for any skills you select with @UUID[Compendium.sfrpg.class-features.Item.0HPp0nK0L1VawPYN]{skill expertise}.</p>\n<p><strong>This replaces expertise.</strong></p>\n<p><em>Select skill expertise in the Modifiers tab.</em></p>"
     },
     "descriptors": {
       "acid": false,
@@ -105,15 +105,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "d07b67b1-2c1b-4cc2-95fd-732f4e18085d",
         "name": "Motivation Expertise (Ex) - Sense Motive",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
         "modifierType": "formula",
@@ -127,8 +129,10 @@
         "name": "Motivation Expertise (Ex) - 1st Level",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
         "modifierType": "formula",
@@ -142,8 +146,10 @@
         "name": "Motivation Expertise (Ex) - 5th Level",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
         "modifierType": "formula",
@@ -157,8 +163,10 @@
         "name": "Motivation Expertise (Ex) - 9th Level",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
         "modifierType": "formula",
@@ -172,8 +180,10 @@
         "name": "Motivation Expertise (Ex) - 13th Level",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
         "modifierType": "formula",
@@ -187,8 +197,10 @@
         "name": "Motivation Expertise (Ex) - 17th Level",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1+lookupRange(@classes.envoy.levels,0,5,1,9,2,17,3,20,4)",
         "modifierType": "formula",
@@ -200,14 +212,11 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level (Envoy)",
     "rollNotes": "",
@@ -218,11 +227,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "COM, pg. 68",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "icons/magic/sonic/projectile-sound-rings-wave.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "cone",
       "units": "ft",
-      "value": 15
+      "value": "15"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -40,8 +36,9 @@
       "parts": [
         {
           "name": "",
-          "formula": "(lookupRange(@item.level, 1, 2, 2, 3, 3, 4, 5, 6, 7))d(lookupRange(@item.level, 8, 5, 10))",
+          "formula": "(lookupRange(@item.level, 1, 2, 2, 3, 3, 4, 5, 6, 7))d(ternary(gte(@item.level, 5), 10, 8))",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -49,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": true
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -104,11 +104,11 @@
     },
     "dismissible": false,
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": "instantaneous, plus 1 round"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": true,
     "level": 1,
     "materials": {
@@ -124,10 +124,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
@@ -136,14 +133,19 @@
       "descriptor": "partial"
     },
     "school": "div",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "IS pg. 63",
     "sr": true,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }
