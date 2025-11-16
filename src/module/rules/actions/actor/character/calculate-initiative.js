@@ -1,7 +1,8 @@
 export default function(engine) {
-    engine.closures.add("calculateInitiative", (fact, context) => {
+    engine.closures.add("calculateInitiative", (fact) => {
         const data = fact.data;
         const init = data.attributes.init;
+        if (!init.tooltip) init.tooltip = [];
 
         init.mod = data.abilities.dex.mod;
         init.total = init.mod;

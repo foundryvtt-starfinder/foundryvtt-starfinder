@@ -4,7 +4,6 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/gamma-rifle-ionizing.webp",
   "system": {
-    "type": "",
     "ability": "dex",
     "actionTarget": "eac",
     "actionType": "rwak",
@@ -18,8 +17,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "",
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -40,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 40,
@@ -49,7 +47,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -81,13 +79,26 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "2d10",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
-            "fire": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -97,9 +108,8 @@
       "unidentified": "",
       "value": "<p>Flame weapons deal fire damage without using lasers or plasma. This flame damage usually comes via superheated metal coils or gas ignition, but weapon manufacturers may devise other methods as well. Flame weapons often have the ability to set targets on fire, dealing @UUID[Compendium.sfrpg.conditions.Item.8LdyXZl9PeXXFE8O]{Burn} damage in addition to their initial fire damage when they land especially effective hits.</p>\n<p>Most flame weapons rely on a reactive blend of hydrocarbons called petrol for ammunition, rather than batteries.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
@@ -107,7 +117,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 9,
     "modifiers": [],
@@ -146,22 +156,25 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 80
+      "value": "80"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Armory",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -169,7 +182,7 @@
       "value": 5
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     },

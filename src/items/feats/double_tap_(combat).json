@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/double_tap.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,19 +85,21 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "67ab40d7-015a-49ad-ba9c-065c2c099ccb",
         "name": "Double Tap",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-attacks",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "constant",
-        "notes": "When you make a double-tap attack with a small arm, this attack gains a bonus to the attack roll and damage.",
+        "notes": "When you make a double-tap attack with a small arm, this attack gains a bonus to the attack roll.",
         "source": "",
         "subtab": "misc",
         "valueAffected": "smallA"
@@ -110,12 +109,31 @@
         "name": "Double Tap",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "ceil(@details.level.value / 2)",
         "modifierType": "constant",
-        "notes": "When you make a double-tap attack with a small arm, this attack gains a bonus to the attack roll and damage.",
+        "notes": "When you make a double-tap attack with a small arm, this attack gains a bonus to the damage.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "smallA"
+      },
+      {
+        "_id": "a5142838-3c9c-4b66-ad8e-3019bffed8f7",
+        "name": "Double Tap",
+        "type": "untyped",
+        "condition": "",
+        "damage": null,
+        "effectType": "weapon-ammo-usage-multiplier",
+        "enabled": true,
+        "limitTo": null,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "When you make a double-tap attack with a small arm, this attack uses double the amount of ammunition.",
         "source": "",
         "subtab": "misc",
         "valueAffected": "smallA"
@@ -123,25 +141,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Weapon Focus (small arms), proficiency with small arms.",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "COM pg. 114",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

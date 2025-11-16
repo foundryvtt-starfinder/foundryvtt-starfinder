@@ -4,7 +4,6 @@
   "type": "starshipAction",
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": {
       "resolve": true,
       "value": "15 + floor(1.5 * @ship.details.tier)"
@@ -21,10 +20,14 @@
     "formula": [
       {
         "name": "Computers",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@scienceOfficer.skills.com.mod"
       }
     ],
     "isPush": false,
+    "modifiers": [],
     "order": 21,
     "phase": {
       "name": "Helm phase",
@@ -36,6 +39,7 @@
     "selectors": [
       "scienceOfficer"
     ],
+    "slug": "",
     "source": "SOM"
   }
 }

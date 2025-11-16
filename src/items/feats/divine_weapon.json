@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/weapon_focus.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -20,8 +16,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -84,19 +81,21 @@
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "309e09f2-b155-4a7c-ac20-bee89333af65",
         "name": "Divine Weapon - Small Arms",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "floor(@details.level.value / 2)",
         "modifierType": "formula",
@@ -110,8 +109,10 @@
         "name": "Divine Weapon - Longarms",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "formula",
@@ -125,8 +126,10 @@
         "name": "Divine Weapon - Basic Melee",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "formula",
@@ -140,8 +143,10 @@
         "name": "Divine Weapon - Adv Melee",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "formula",
@@ -155,8 +160,10 @@
         "name": "Divine Weapon - Heavy",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "formula",
@@ -170,8 +177,10 @@
         "name": "Divine Weapon - Sniper",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "formula",
@@ -185,8 +194,10 @@
         "name": "Divine Weapon - Operative",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-property-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "-ceil(@details.level.value/2)",
         "modifierType": "formula",
@@ -200,8 +211,10 @@
         "name": "Divine Weapon - Special",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "formula",
@@ -213,29 +226,31 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": null,
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Worship a deity of an alignment within one step of your own alignment.",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GM pg. 99",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

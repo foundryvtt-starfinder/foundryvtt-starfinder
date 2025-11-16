@@ -4,7 +4,6 @@
   "type": "starshipAction",
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": {
       "resolve": false,
       "value": "10 (Any skill) or 15 (Diplomacy)"
@@ -21,26 +20,42 @@
     "formula": [
       {
         "name": "Diplomacy",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@captain.skills.dip.mod"
       },
       {
         "name": "Computers",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@captain.skills.com.mod"
       },
       {
         "name": "Engineering",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@captain.skills.eng.mod"
       },
       {
         "name": "Gunnery",
-        "formula": "max(@captain.attributes.baseAttackBonus.value, @captain.skills.pil.ranks) + @captain.abilities.dex.mod"
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
+        "formula": "max(@captain.attributes.baseAttackBonus.value, @captain.skills.pil.ranks, @captain.skills.gun.mod) + @captain.abilities.dex.mod"
       },
       {
         "name": "Piloting",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@captain.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       }
     ],
     "isPush": false,
+    "modifiers": [],
     "order": 10,
     "phase": {
       "name": "Any phase",
@@ -50,6 +65,7 @@
     "role": "captain",
     "selectorKey": "captain",
     "selectors": [],
+    "slug": "",
     "source": "CRB"
   }
 }

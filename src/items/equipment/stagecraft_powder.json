@@ -4,11 +4,7 @@
   "type": "magic",
   "img": "systems/sfrpg/icons/default/magick-trick.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "capacity": {
       "max": 0,
@@ -61,7 +56,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -71,18 +67,17 @@
       "unidentified": "",
       "value": "<p>Stagecraft powder was first created in the Veskarium for use during elaborate ceremonies and thematic productions to memorialize great heroes and their conquests. This single-use powder enchants its target with an attention-grabbing aura. As a move action, you can dust yourself or an adjacent willing ally with stagecraft powder, granting the target a +4 circumstance bonus to Bluff checks to create a diversion, to Charisma-based Profession checks to earn a living, and to Sleight of Hand checks to entertain. The dust also imposes a –4 penalty to Stealth checks. Stagecraft powder’s effects wear off in 1 hour.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "hour",
       "value": "1"
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 1,
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 7,
     "limitedWear": false,
     "modifiers": [
@@ -91,8 +86,10 @@
         "name": "Stagecraft Powder",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "4",
         "modifierType": "formula",
@@ -106,8 +103,10 @@
         "name": "Stagecraft Powder",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "4",
         "modifierType": "formula",
@@ -121,8 +120,10 @@
         "name": "Stagecraft Powder",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "4",
         "modifierType": "constant",
@@ -136,8 +137,10 @@
         "name": "Stagecraft Powder",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "-4",
         "modifierType": "constant",
@@ -148,24 +151,28 @@
       }
     ],
     "price": 850,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 155",
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

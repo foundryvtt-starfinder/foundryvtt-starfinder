@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/weapons/polearms/trident-jeweled-purple.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": null,
@@ -76,6 +71,8 @@
         {
           "name": "",
           "formula": "1d4 + @abilities.str.mod",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -83,12 +80,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -98,9 +98,8 @@
       "unidentified": "",
       "value": "<h2>Hybrid item</h2>\n<p>Draeliks who have proven their worth wield a shadowstaff, a weapon that channels cold, dark energy from the Negative Energy Plane. Many sages believe that sceaduinars gifted the arcane technology necessary to create these items to the draeliks to protect them from the predations of the Azlanti Star Empire. Shadowstaves function as both two-handed basic melee weapons and as small arms. A wielder must be proficient in small arms to use one as a ranged weapon without penalties and to gain the benefits of the Weapon Specialization feat with a shadowstaff used as a ranged weapon. These weapons use a special ammunition that is manufactured only on the worlds of the Shadari Confederacy (Starfinder Core Rulebook 468) and costs 160 credits for a 40-charge clip. Presented below are the statistics for a standard shadowstaff, used by advanced practitioners of the weapon’s art, as well as the lesser shadowstaff used by those newly honored with the responsibility of bearing the symbolic weapon. While even more powerful versions of the weapon exist, these are usually restricted to draelik high priests and other highly respected operatives of the draelik government.</p>\n<h3>Lesser Shadowstaff</h3>\n<p>A lesser shadowstaff is covered with fell symbols and crackles with dark energy. As a basic two-handed melee weapon, a lesser shadowstaff deals 1d4 bludgeoning, slashing, or piercing damage (your choice) as it manifests blades or spikes at will, and it has the block weapon special property. When used as a small arm, a lesser shadowstaff has a range increment of 30 feet, and a single shot consumes 1 charge from its 40-charge capacity and deals 1d4 cold damage. Switching a lesser shadowstaff from melee functionality to ranged functionality (or vice versa) is a swift action.</p>\n<p><em>This is the Melee attack item for @UUID[Compendium.sfrpg.equipment.Item.98FOgPPDdLainh1A]{Lesser Shadowstaff (ranged)}.</em></p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
@@ -108,7 +107,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 2,
     "modifiers": [],
@@ -210,10 +209,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
@@ -221,6 +217,12 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AA1 pg. 37",
     "special": "",
     "specialMaterials": {
@@ -240,7 +242,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -248,7 +249,7 @@
       "value": null
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

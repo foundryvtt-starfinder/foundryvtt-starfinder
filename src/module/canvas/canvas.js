@@ -7,7 +7,7 @@ Hooks.on('canvasReady', onCanvasReady);
 Hooks.on('createToken', onTokenCreated);
 Hooks.on('updateToken', onTokenUpdated);
 
-function onCanvasReady(...args) {
+function onCanvasReady() {
     if (!canvas.initialized) return;
     for (const placeable of canvas.tokens.placeables) {
         if (placeable.document.getFlag("sfrpg", "itemCollection")) {
@@ -104,7 +104,7 @@ function setupLootCollectionTokenInteraction(lootCollectionToken, updateApps = f
     }
 }
 
-function openLootCollectionSheet(event) {
+function openLootCollectionSheet() {
     const relevantToken = this;
     if (relevantToken.document.flags.sfrpg.itemCollection.locked && !game.user.isGM) {
         ui.notifications.info(game.i18n.format("SFRPG.ItemCollectionSheet.ItemCollectionLocked"));
@@ -124,7 +124,7 @@ async function handleCanvasDropAsync(canvas, data, targetActor) {
     const document = await Item.fromDropData(data);
     let sourceActor = null;
     const sourceItem = document;
-    const sourceItemData = foundry.utils.deepClone(document.system);
+    const sourceItemData = document.system;
 
     if (document?.parent?.isToken ?? false) {
         sourceActor = new ActorItemHelper(document.parent._id, document.parent.parent._id, document.parent.parent.parent._id);
@@ -136,7 +136,7 @@ async function handleCanvasDropAsync(canvas, data, targetActor) {
     if (targetActor === null) {
         const transferringItems = [sourceItem];
         if (sourceActor !== null && sourceItemData.container?.contents && sourceItemData.container.contents.length > 0) {
-            const containersToTest = [sourceItemData.container];
+            const containersToTest = [foundry.utils.deepClone(sourceItemData.container)];
             while (containersToTest.length > 0) {
                 const container = containersToTest.shift();
                 const children = sourceActor.filterItems(x => container.contents?.find(y => y.id === x.id));
@@ -179,13 +179,11 @@ export function canvasHandler(canvas, data) {
         // console.log("Canvas::handleItemDrop()");
 
         // If dropping onto a token, add the item to that token's actor. Otherwise create a loot token.
-        const targetActor = [...canvas.tokens.placeables]
+        const targetActor = [...canvas.tokens.placeables] // this method copied from pf2e
             .sort((a, b) => b.document.sort - a.document.sort)
-            .find((token) => {
-                const maximumX = token.x + (token.hitArea?.right ?? 0);
-                const maximumY = token.y + (token.hitArea?.bottom ?? 0);
-                return data.x >= token.x && data.y >= token.y && data.x <= maximumX && data.y <= maximumY;
-            })?.actor || null;
+            .sort((a, b) => b.document.elevation - a.document.elevation)
+            .find((t) => t.visible && t.bounds.contains(data.x, data.y))
+            ?.actor ?? null;
 
         if (targetActor) {
             const tokenId = targetActor.isToken ? targetActor.token.id : null;
@@ -218,7 +216,7 @@ export function canvasHandler(canvas, data) {
             // If there isn't a target actor, we're creating a loot token. If item piles is enabled, defer to that
             if (game.modules.get("item-piles")?.active) return true;
             else {
-                handleCanvasDropAsync(canvas, data, targetActor).then(_ => {});
+                handleCanvasDropAsync(canvas, data, targetActor);
                 return false;
             }
         }

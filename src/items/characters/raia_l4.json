@@ -11,10 +11,7 @@
       "img": "icons/magic/unholy/projectile-helix-blood-red.webp",
       "system": {
         "type": "personal",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -22,13 +19,12 @@
           "condition": "",
           "cost": 0
         },
-        "ammunitionType": "",
         "area": {
           "effect": "",
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "attributes": {
@@ -49,12 +45,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
-        "capacity": {
-          "max": 0,
-          "value": 0
-        },
         "chatFlavor": "",
         "container": {
           "contents": [],
@@ -67,7 +58,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -77,18 +69,16 @@
           "unidentified": "",
           "value": "<p>These implants supercharge the synaptic connections in your brain, allowing you to process information faster and send impulses throughout your body more effectively. Synaptic accelerators grant you additional ability points. This counts as a personal upgrade of the appropriate model number. It takes an hour to install a synaptic accelerator, and once a character has benefited from its technology, it is forever spent.</p>\n<p><em>Change your selected Ability upgrade in the Modifiers tab.</em></p>\n<h3>Personal Upgrades</h3>\n<p>Personal upgrades are a special class of augmentation that do not follow the normal system-limitation rules. Instead, these are broad upgrades that make changes across your entire body, while still allowing for other augmentations. Put more simply, buying a personal upgrade is the easiest way to increase your ability scores.</p>\n<p>Personal upgrades may be cybernetics, biotech upgrades, mystical crystals, nanite enhancements, or various other forms of enhancement, and each permanently grants you additional ability score points. Using any of these sorts of items counts as a personal upgrade.</p>\n<p>You can gain a total of three personal upgrades, regardless of the source. Each personal upgrade item has a model number: mk 1, mk 2, or mk 3. A mk 1 personal upgrade grants you +2 points to a single ability score, a mk 2 personal upgrade grants +4 points to a single ability score, and a mk 3 personal upgrade grants you +6 points to a single ability score. Each of your personal upgrades must be a different model number (for example, you cannot have three mk 1 upgrades, but you can have a mk 1, a mk 2, and a mk 3) and each must be applied to a different ability score. You can boost an existing personal upgrade by paying the difference in price between the current model and the next higher model. For example, if you have a mk 1 synaptic accelerator granting you +2 points of Strength, you could increase that to a mk 2 synaptic accelerator granting you a total +4 points of Strength by paying 5,100 credits (the difference in price between the mk 1 and mk 2 models). Be sure to keep track of what upgrades you have applied to which ability scores.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": true,
         "equipped": true,
-        "equippedBulkMultiplier": 1,
         "formula": "",
-        "hands": 0,
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 3,
         "modifiers": [
           {
@@ -96,8 +86,10 @@
             "name": "Synaptic accelerators, Mk 1",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "ability-score",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -108,34 +100,33 @@
           }
         ],
         "price": 1400,
+        "proficient": false,
         "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 212",
         "system": "none",
         "target": {
-          "type": "",
           "value": null
         },
-        "usage": {
-          "per": "",
-          "value": 0
-        },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -146,10 +137,6 @@
       "type": "class",
       "img": "systems/sfrpg/images/cup/gameplay/technomancer.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "bab": "moderate",
         "bonusSpellsPerDay": {
           "0": {
@@ -241,9 +228,6 @@
             "6": 1
           }
         },
-        "critical": {
-          "parts": []
-        },
         "csk": {
           "acr": false,
           "ath": false,
@@ -266,9 +250,6 @@
           "ste": false,
           "sur": false
         },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -278,7 +259,6 @@
         },
         "fort": "slow",
         "hp": {
-          "min": 1,
           "value": 5
         },
         "isCaster": true,
@@ -305,13 +285,11 @@
         },
         "ref": "slow",
         "skillRanks": {
-          "min": 4,
           "value": 4
         },
         "slug": "technomancer",
         "source": "CRB, p. 118",
         "sp": {
-          "min": 1,
           "value": 5
         },
         "spellAbility": "int",
@@ -685,12 +663,6 @@
             ]
           ]
         },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -699,11 +671,11 @@
           "value": "<p>Idealized by many other humanoid races and gifted with innate psychic abilities, lashuntas are at once consummate scholars and enlightened warriors, naturally divided into two specialized subraces with different abilities and societal roles.</p>\n<h3>Physical Description</h3>\n<p>To survive on the predator-rich world of @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel}, the telepathic humanoids called lashuntas evolved adaptive genetics that allow children to develop into one of two subspecies, depending on the stresses they endure at puberty: either the tall, intellectual, and adaptable damaya—who make up most of their race’s political leaders and ambassadors—or the short, burly, headstrong korasha, who excel as warriors and explorers. Both feature short forehead antennae that focus their natural telepathy, as well as colorful swirls and raised markings on their faces unique to each individual. Due to natural pheromones and lashuntas’ almost perfect physical symmetry, most humanoid races find lashuntas of both subspecies subconsciously (and sometimes unnervingly) attractive.</p>\n<p>Both clades of the species bear the same genetics, allowing them to intermarry and have children. While all lashunta children inherit complexions and certain distinguishing features from their parents, their subspecies is not one of them. Through psychic ritual and force of will techniques applied at puberty, modern lashuntas have mastered the ability to determine what subspecies a child will grow into, activating certain epigenetics and shutting down others. While some lashunta city-states attempt to steer children in particular directions, such as via government-run aptitude tests, most lashuntas believe passionately in a child’s right to choose. In ancient lashunta history, their starkly divided gender roles led to subspecies almost universally correlated with gender, but as lashunta culture has grown more egalitarian, gender balance between the two subspecies has become roughly equal.</p>\n<h3>Home World</h3>\n<p>Lashuntas form the most prominent race on @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel}, and have long been organized into independent city-states for protection against the planet’s many apex predators. At the same time, thanks to their large number of magical portals, lashuntas regularly ventured to other worlds even before the advent of space travel, and they have developed particularly close bonds with societies on @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton}.</p>\n<h3>Society and Alignment</h3>\n<p>Though lashunta societies usually characterize themselves as meritocracies, their leaders have traditionally been women and are usually damaya except in times of war. Both damaya and korasha lashuntas see education as one of the highest callings, making lashunta scholars renowned across the solar system. Military service is also valued, since @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel}’s dangerous ecosystem and lack of overarching governments mean that settlements need warriors to protect them from jungle monsters. Of these soldiers, the most iconic are the traditional shotalashu cavalry, lightly armored riders who form telepathic bonds with and take their name from their saurian mounts.</p>\n<p>On the whole, lashuntas’ focus on self-improvement, honor, and communal defense leads them toward good alignments, with damaya tending to be more lawful and korasha more chaotic.</p>\n<h3>Relations</h3>\n<p>Lashuntas believe that every culture has something to teach, and thanks to the legendary prowess of lashunta diplomats, most other races respect them and consider them allies, or at least reasonable associates. Vesk admire their warriors, androids and kasathas value their logic and learning, and humans respect their scholarship but risk embarrassing themselves trying to deal with lashuntas’ disconcerting attractiveness. Shirrens are the main exception to this pattern of mutual respect—though lashuntas’ millennia of warfare with the insectile formians has finally ended, many lashuntas are still uncomfortable interacting with similar races and worry that “the bugs” may one day unite against them.</p>\n<h3>Adventurers</h3>\n<p>When a lashunta leaves home, it’s often to grow—in knowledge, prowess, or simple enlightenment. Experience is the best teacher, and the thrill of discovery means that a lashunta adventurer is as likely to be drawn to a new world by a rumor of lost lore as by the promise of wealth. Of course, this quest for wisdom sounds less noble once it’s understood that the prestige associated with bringing significant new knowledge home to @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel} all but assures a lashunta the finest creature comforts for the rest of his life as a corporate consultant or professor at a university. Lashunta adventurers are most frequently envoys, technomancers, and mechanics, but soldiers and operatives are also common, the latter being trained and employed by the numerous powerful lashunta-owned corporations that have surpassed many citystates as the primary political powers on @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel} and beyond.</p>\n<p><strong>Ability Adjustments</strong>+2 Cha, +2 Int, -2 Con</p>\n<p><strong>Hit Points&nbsp;</strong> 4</p>\n<h2>Vital Stats</h2>\n<p><strong>Average Height&nbsp;</strong> 5-7 ft.</p>\n<p><strong>Average Weight&nbsp;</strong> 140-180 lbs.</p>\n<p><strong>Age of Maturity</strong>&nbsp;20 years</p>\n<p><strong>Maximum Age</strong> 80+2d20 years</p>\n<h2>Size and Type</h2>\n<p>Lashuntas are Medium humanoids with the lashunta subtype.</p>\n<h2>@UUID[Compendium.sfrpg.racial-features.Item.x9g62xhhpV3IYnIY]{Dimorphic}</h2>\n<p>All lashuntas gain +2 Charisma at character creation. Korasha lashuntas are muscular (+2 Strength at character creation) but often brash and unobservant (–2 Wisdom at character creation). Damaya lashuntas are typically clever and well-spoken (+2 Intelligence at character creation) but somewhat delicate (–2 Constitution at character creation).</p>\n<h2>@UUID[Compendium.sfrpg.racial-features.Item.fFSfWBcNfM67sdcc]{Lashunta Magic}</h2>\n<p>Lashuntas gain the following spell-like abilities:</p>\n<ul>\n<li><strong>At will&nbsp;</strong><em>@UUID[Compendium.sfrpg.spells.Item.cmD9XPyg0Cud1xYO]{Daze}, @UUID[Compendium.sfrpg.spells.Item.byAI5MUa3DgiiXc9]{Psychokinetic Hand}</em></li>\n<li><strong>1/day</strong><em>&nbsp;@UUID[Compendium.sfrpg.spells.Item.moyeAHT4yzZVWmmg]{Detect Thoughts}.</em></li>\n</ul>\n<p>See Spell-like Abilities on page 262. The caster level for these effects is equal to the lashunta’s level.</p>\n<h2>@UUID[Compendium.sfrpg.racial-features.Item.QmSOsPFazgFH1kKu]{Limited Telepathy}</h2>\n<p>Lashuntas can mentally communicate with any creatures within 30 feet with whom they share a language. Conversing telepathically with multiple creatures simultaneously is just as difficult as listening to multiple people speaking.</p>\n<h2>@UUID[Compendium.sfrpg.racial-features.Item.n2zxZs1AGyXINGef]{Student}</h2>\n<p>Lashuntas love to learn, and they receive a +2 species bonus to any two skills of their choice.</p>\n<h1>Alternate Species Traits</h1>\n<p><strong>Source&nbsp;</strong><em>COM pg. 22</em></p>\n<p>Lashunta variants are less common than the two clades and can be found in both, as represented in the following traits.</p>\n<h2>@UUID[Compendium.sfrpg.racial-features.Item.mfFFGrpqBbPjPT73]{Psychically Resistant}</h2>\n<p><strong>Source&nbsp;</strong><em>COM pg. 22</em></p>\n<p>Pre-Gap records show lashuntas lacking telepathy lived in ancient times, and such lashuntas appeared anew at the height of the Formian Wars. These psychically resistant lashuntas emit a low-level psychic static that sometimes leads other members of their naturally telepathic society to exclude them, though such lashuntas are often more skilled in verbal expression. Some can use this static to interfere with nearby telepathy.</p>\n<p>Psychically resistant lashuntas gain a +2 species bonus to Will saving throws against mind-affecting effects. They can use @UUID[Compendium.sfrpg.spells.Item.BrRuThVTv1aNfUKH]{Mental Silence} once per day as a spell-like ability.</p>\n<p><strong>This replaces lashunta magic and limited telepathy.</strong></p>\n<h2>@UUID[Compendium.sfrpg.racial-features.Item.XIljJ7ba89pV5Wos]{Rugged}</h2>\n<p><strong>Source&nbsp;</strong><em>COM pg. 22</em></p>\n<p>Some lashuntas express their species’ love of learning by focusing on physical training rather than on academic pursuits. A lashunta who has this trait gains @UUID[Compendium.sfrpg.feats.Item.F9H8iEN8FUXIOUM2]{Toughness} as a bonus feat.</p>\n<p><strong>This replaces student.</strong></p>"
         },
         "hp": {
-          "min": 1,
           "value": 4
         },
         "modifiers": [],
         "size": "medium",
+        "slug": "",
         "source": "CRB pg. 48",
         "subtype": "lashunta"
       }
@@ -714,16 +686,9 @@
       "type": "theme",
       "img": "systems/sfrpg/icons/default/plane-pilot.svg",
       "system": {
-        "type": "",
         "abilityMod": {
           "ability": "cha",
           "mod": 1
-        },
-        "abilityMods": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -734,6 +699,7 @@
         },
         "modifiers": [],
         "skill": "lsc",
+        "slug": "",
         "source": "CRB page 37"
       }
     },
@@ -743,11 +709,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/spell_technomancer.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -760,7 +722,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -769,7 +731,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -777,7 +740,7 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>You cast spells drawn from the technomancer spell list (see page 338). To learn or cast a spell, you must have an Intelligence score equal to at least 10 + the spell’s level. The Difficulty Class for a saving throw against your spell is 10 + the spell’s level + your Intelligence modifier.</p>\n<p>You can cast only a certain number of spells of each spell level per day. Your number of spells per day is given on Table 4–10: Technomancer <em>(Below).</em> In addition, you receive bonus spells per day if you have an Intelligence modifier of +1 or higher, as shown on Table 4–11: Technomancer Bonus Spells <em>(Below)</em>—note that you only receive these bonus spells once you can cast spells of that level normally. You can also cast 0-level spells. These spells are cast like any other spell, but there is no limit to how many 0-level spells you can cast each day.</p>\n<p>Your selection of spells is limited. You begin play knowing four 0-level spells and two 1st-level spells of your choice. At each new technomancer level, you learn one or more new spells, as indicated on Table 4–12: Technomancer Spells Known <em>(Below).</em> Unlike spells per day, the number of spells you know isn’t affected by your Intelligence modifier.</p>\n<p>Every time you gain a level, you can swap out one spell you already know and learn a single new spell of the same level in its place. In effect, you lose the old spell in exchange for the new one. You must choose whether or not to swap the spell at the same time you gain new spells known for the level.</p>\n<p>You can cast any technomancer spell you know at any time, assuming you have not yet used up your allotment of spells per day for the spell’s level. You can also cast a spell using a higher-level spell slot. For instance, if you want to cast a 1st-level spell but have used up all your 1st-level spells for the day, you can use a spell from a 2nd-level slot instead if you have one.</p>\n<p>You can also decipher magical inscriptions that would otherwise be unintelligible or, as a full action, identify any spells encoded in a spell gem. This does not normally invoke the magic contained within, although it may do so in the case of a cursed or trapped spell gem.</p><h2>Spells Per Day</h2><table class=\"inner\" style=\"height: 336px; width: 205px;\"><tbody><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\"><strong>Level</strong></td><td style=\"width: 20.4px; height: 16px;\"><strong>1st</strong></td><td style=\"width: 22.8px; height: 16px;\"><strong>2nd</strong></td><td style=\"width: 21.2px; height: 16px;\"><strong>3rd</strong></td><td style=\"width: 21.2px; height: 16px;\"><strong>4th</strong></td><td style=\"width: 21.2px; height: 16px;\"><strong>5th</strong></td><td style=\"width: 20.4px; height: 16px;\"><strong>6th</strong></td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">1st</td><td style=\"width: 20.4px; height: 16px;\">2</td><td style=\"width: 22.8px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">2nd</td><td style=\"width: 20.4px; height: 16px;\">2</td><td style=\"width: 22.8px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">3rd</td><td style=\"width: 20.4px; height: 16px;\">3</td><td style=\"width: 22.8px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">4th</td><td style=\"width: 20.4px; height: 16px;\">3</td><td style=\"width: 22.8px; height: 16px;\">2</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">5th</td><td style=\"width: 20.4px; height: 16px;\">4</td><td style=\"width: 22.8px; height: 16px;\">2</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">6th</td><td style=\"width: 20.4px; height: 16px;\">4</td><td style=\"width: 22.8px; height: 16px;\">3</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">7th</td><td style=\"width: 20.4px; height: 16px;\">4</td><td style=\"width: 22.8px; height: 16px;\">3</td><td style=\"width: 21.2px; height: 16px;\">2</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">8th</td><td style=\"width: 20.4px; height: 16px;\">4</td><td style=\"width: 22.8px; height: 16px;\">4</td><td style=\"width: 21.2px; height: 16px;\">2</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">9th</td><td style=\"width: 20.4px; height: 16px;\">5</td><td style=\"width: 22.8px; height: 16px;\">4</td><td style=\"width: 21.2px; height: 16px;\">3</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">10th</td><td style=\"width: 20.4px; height: 16px;\">5</td><td style=\"width: 22.8px; height: 16px;\">4</td><td style=\"width: 21.2px; height: 16px;\">3</td><td style=\"width: 21.2px; height: 16px;\">2</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">11th</td><td style=\"width: 20.4px; height: 16px;\">5</td><td style=\"width: 22.8px; height: 16px;\">4</td><td style=\"width: 21.2px; height: 16px;\">4</td><td style=\"width: 21.2px; height: 16px;\">2</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">12th</td><td style=\"width: 20.4px; height: 16px;\">5</td><td style=\"width: 22.8px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">4</td><td style=\"width: 21.2px; height: 16px;\">3</td><td style=\"width: 21.2px; height: 16px;\">-</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">13th</td><td style=\"width: 20.4px; height: 16px;\">5</td><td style=\"width: 22.8px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">4</td><td style=\"width: 21.2px; height: 16px;\">3</td><td style=\"width: 21.2px; height: 16px;\">2</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">14th</td><td style=\"width: 20.4px; height: 16px;\">5</td><td style=\"width: 22.8px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">4</td><td style=\"width: 21.2px; height: 16px;\">4</td><td style=\"width: 21.2px; height: 16px;\">2</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">15th</td><td style=\"width: 20.4px; height: 16px;\">5</td><td style=\"width: 22.8px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">4</td><td style=\"width: 21.2px; height: 16px;\">3</td><td style=\"width: 20.4px; height: 16px;\">-</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">16th</td><td style=\"width: 20.4px; height: 16px;\">5</td><td style=\"width: 22.8px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">4</td><td style=\"width: 21.2px; height: 16px;\">3</td><td style=\"width: 20.4px; height: 16px;\">2</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">17th</td><td style=\"width: 20.4px; height: 16px;\">5</td><td style=\"width: 22.8px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">4</td><td style=\"width: 21.2px; height: 16px;\">4</td><td style=\"width: 20.4px; height: 16px;\">2</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">18th</td><td style=\"width: 20.4px; height: 16px;\">5</td><td style=\"width: 22.8px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">4</td><td style=\"width: 20.4px; height: 16px;\">3</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">19th</td><td style=\"width: 20.4px; height: 16px;\">5</td><td style=\"width: 22.8px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">5</td><td style=\"width: 20.4px; height: 16px;\">4</td></tr><tr style=\"height: 16px;\"><td style=\"width: 57.2px; height: 16px;\">20th</td><td style=\"width: 20.4px; height: 16px;\">5</td><td style=\"width: 22.8px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">5</td><td style=\"width: 21.2px; height: 16px;\">5</td><td style=\"width: 20.4px; height: 16px;\">5</td></tr></tbody></table><h2>Bonus Spells per Day</h2><table class=\"inner\"><tbody><tr><td>&nbsp;</td><td colspan=\"7\"><strong>Bonus Spells Per Day (By Spell Level)</strong></td><td>&nbsp;</td></tr><tr><td><strong>Int Score</strong></td><td><strong>0</strong></td><td><strong>1st</strong></td><td><strong>2nd</strong></td><td><strong>3rd</strong></td><td><strong>4th</strong></td><td><strong>5th</strong></td><td><strong>6th</strong></td></tr><tr><td>1-11</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>12-13</td><td>-</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>14-15</td><td>-</td><td>1</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>16-17</td><td>-</td><td>1</td><td>1</td><td>1</td><td>-</td><td>-</td><td>-</td></tr><tr><td>18-19</td><td>-</td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td><td>-</td></tr><tr><td>20-21</td><td>-</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr><tr><td>22-23</td><td>-</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>24-25</td><td>-</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td></tr><tr><td>26-27</td><td>-</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td></tr><tr><td>28-29</td><td>-</td><td>3</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td></tr><tr><td>30-31</td><td>-</td><td>3</td><td>3</td><td>2</td><td>2</td><td>2</td><td>2</td></tr></tbody></table><h2>Spells Known</h2><table class=\"inner\"><tbody><tr><td><strong>Level</strong></td><td><strong>0</strong></td><td><strong>1st</strong></td><td><strong>2nd</strong></td><td><strong>3rd</strong></td><td><strong>4th</strong></td><td><strong>5th</strong></td><td><strong>6th</strong></td></tr><tr><td>1st</td><td>4</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>2nd</td><td>5</td><td>3</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>3rd</td><td>6</td><td>4</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>4th</td><td>6</td><td>4</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>5th</td><td>6</td><td>4</td><td>3</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>6th</td><td>6</td><td>4</td><td>4</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>7th</td><td>6</td><td>5</td><td>4</td><td>2</td><td>-</td><td>-</td><td>-</td></tr><tr><td>8th</td><td>6</td><td>5</td><td>4</td><td>3</td><td>-</td><td>-</td><td>-</td></tr><tr><td>9th</td><td>6</td><td>5</td><td>4</td><td>4</td><td>-</td><td>-</td><td>-</td></tr><tr><td>10th</td><td>6</td><td>5</td><td>5</td><td>4</td><td>2</td><td>-</td><td>-</td></tr><tr><td>11th</td><td>6</td><td>6</td><td>5</td><td>4</td><td>3</td><td>-</td><td>-</td></tr><tr><td>12th</td><td>6</td><td>6</td><td>5</td><td>4</td><td>4</td><td>-</td><td>-</td></tr><tr><td>13th</td><td>6</td><td>6</td><td>5</td><td>5</td><td>4</td><td>2</td><td>-</td></tr><tr><td>14th</td><td>6</td><td>6</td><td>6</td><td>5</td><td>4</td><td>3</td><td>-</td></tr><tr><td>15th</td><td>6</td><td>6</td><td>6</td><td>5</td><td>4</td><td>4</td><td>-</td></tr><tr><td>16th</td><td>6</td><td>6</td><td>6</td><td>5</td><td>5</td><td>4</td><td>2</td></tr><tr><td>17th</td><td>6</td><td>6</td><td>6</td><td>6</td><td>5</td><td>4</td><td>3</td></tr><tr><td>18th</td><td>6</td><td>6</td><td>6</td><td>6</td><td>5</td><td>4</td><td>4</td></tr><tr><td>19th</td><td>6</td><td>6</td><td>6</td><td>6</td><td>5</td><td>5</td><td>4</td></tr><tr><td>20th</td><td>6</td><td>6</td><td>6</td><td>6</td><td>6</td><td>5</td><td>5</td></tr></tbody></table>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>You cast spells drawn from the technomancer spell list (see page 338). To learn or cast a spell, you must have an Intelligence score equal to at least 10 + the spell’s level. The Difficulty Class for a saving throw against your spell is 10 + the spell’s level + your Intelligence modifier.</p>\n<p>You can cast only a certain number of spells of each spell level per day. Your number of spells per day is given on Table 4–10: Technomancer <em>(Below).</em> In addition, you receive bonus spells per day if you have an Intelligence modifier of +1 or higher, as shown on Table 4–11: Technomancer Bonus Spells <em>(Below)</em>—note that you only receive these bonus spells once you can cast spells of that level normally. You can also cast 0-level spells. These spells are cast like any other spell, but there is no limit to how many 0-level spells you can cast each day.</p>\n<p>Your selection of spells is limited. You begin play knowing four 0-level spells and two 1st-level spells of your choice. At each new technomancer level, you learn one or more new spells, as indicated on Table 4–12: Technomancer Spells Known <em>(Below).</em> Unlike spells per day, the number of spells you know isn’t affected by your Intelligence modifier.</p>\n<p>Every time you gain a level, you can swap out one spell you already know and learn a single new spell of the same level in its place. In effect, you lose the old spell in exchange for the new one. You must choose whether or not to swap the spell at the same time you gain new spells known for the level.</p>\n<p>You can cast any technomancer spell you know at any time, assuming you have not yet used up your allotment of spells per day for the spell’s level. You can also cast a spell using a higher-level spell slot. For instance, if you want to cast a 1st-level spell but have used up all your 1st-level spells for the day, you can use a spell from a 2nd-level slot instead if you have one.</p>\n<p>You can also decipher magical inscriptions that would otherwise be unintelligible or, as a full action, identify any spells encoded in a spell gem. This does not normally invoke the magic contained within, although it may do so in the case of a cursed or trapped spell gem.</p><h2>Spells Per Day</h2><table class=\"inner\" style=\"height:336px;width:205px\"><tbody><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\"><strong>Level</strong></td><td style=\"width:20.4px;height:16px\"><strong>1st</strong></td><td style=\"width:22.8px;height:16px\"><strong>2nd</strong></td><td style=\"width:21.2px;height:16px\"><strong>3rd</strong></td><td style=\"width:21.2px;height:16px\"><strong>4th</strong></td><td style=\"width:21.2px;height:16px\"><strong>5th</strong></td><td style=\"width:20.4px;height:16px\"><strong>6th</strong></td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">1st</td><td style=\"width:20.4px;height:16px\">2</td><td style=\"width:22.8px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">2nd</td><td style=\"width:20.4px;height:16px\">2</td><td style=\"width:22.8px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">3rd</td><td style=\"width:20.4px;height:16px\">3</td><td style=\"width:22.8px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">4th</td><td style=\"width:20.4px;height:16px\">3</td><td style=\"width:22.8px;height:16px\">2</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">5th</td><td style=\"width:20.4px;height:16px\">4</td><td style=\"width:22.8px;height:16px\">2</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">6th</td><td style=\"width:20.4px;height:16px\">4</td><td style=\"width:22.8px;height:16px\">3</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">7th</td><td style=\"width:20.4px;height:16px\">4</td><td style=\"width:22.8px;height:16px\">3</td><td style=\"width:21.2px;height:16px\">2</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">8th</td><td style=\"width:20.4px;height:16px\">4</td><td style=\"width:22.8px;height:16px\">4</td><td style=\"width:21.2px;height:16px\">2</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">9th</td><td style=\"width:20.4px;height:16px\">5</td><td style=\"width:22.8px;height:16px\">4</td><td style=\"width:21.2px;height:16px\">3</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">10th</td><td style=\"width:20.4px;height:16px\">5</td><td style=\"width:22.8px;height:16px\">4</td><td style=\"width:21.2px;height:16px\">3</td><td style=\"width:21.2px;height:16px\">2</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">11th</td><td style=\"width:20.4px;height:16px\">5</td><td style=\"width:22.8px;height:16px\">4</td><td style=\"width:21.2px;height:16px\">4</td><td style=\"width:21.2px;height:16px\">2</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">12th</td><td style=\"width:20.4px;height:16px\">5</td><td style=\"width:22.8px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">4</td><td style=\"width:21.2px;height:16px\">3</td><td style=\"width:21.2px;height:16px\">-</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">13th</td><td style=\"width:20.4px;height:16px\">5</td><td style=\"width:22.8px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">4</td><td style=\"width:21.2px;height:16px\">3</td><td style=\"width:21.2px;height:16px\">2</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">14th</td><td style=\"width:20.4px;height:16px\">5</td><td style=\"width:22.8px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">4</td><td style=\"width:21.2px;height:16px\">4</td><td style=\"width:21.2px;height:16px\">2</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">15th</td><td style=\"width:20.4px;height:16px\">5</td><td style=\"width:22.8px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">4</td><td style=\"width:21.2px;height:16px\">3</td><td style=\"width:20.4px;height:16px\">-</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">16th</td><td style=\"width:20.4px;height:16px\">5</td><td style=\"width:22.8px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">4</td><td style=\"width:21.2px;height:16px\">3</td><td style=\"width:20.4px;height:16px\">2</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">17th</td><td style=\"width:20.4px;height:16px\">5</td><td style=\"width:22.8px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">4</td><td style=\"width:21.2px;height:16px\">4</td><td style=\"width:20.4px;height:16px\">2</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">18th</td><td style=\"width:20.4px;height:16px\">5</td><td style=\"width:22.8px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">4</td><td style=\"width:20.4px;height:16px\">3</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">19th</td><td style=\"width:20.4px;height:16px\">5</td><td style=\"width:22.8px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">5</td><td style=\"width:20.4px;height:16px\">4</td></tr><tr style=\"height:16px\"><td style=\"width:57.2px;height:16px\">20th</td><td style=\"width:20.4px;height:16px\">5</td><td style=\"width:22.8px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">5</td><td style=\"width:21.2px;height:16px\">5</td><td style=\"width:20.4px;height:16px\">5</td></tr></tbody></table><h2>Bonus Spells per Day</h2><table class=\"inner\"><tbody><tr><td>&nbsp;</td><td colspan=\"7\"><strong>Bonus Spells Per Day (By Spell Level)</strong></td><td>&nbsp;</td></tr><tr><td><strong>Int Score</strong></td><td><strong>0</strong></td><td><strong>1st</strong></td><td><strong>2nd</strong></td><td><strong>3rd</strong></td><td><strong>4th</strong></td><td><strong>5th</strong></td><td><strong>6th</strong></td></tr><tr><td>1-11</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>12-13</td><td>-</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>14-15</td><td>-</td><td>1</td><td>1</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>16-17</td><td>-</td><td>1</td><td>1</td><td>1</td><td>-</td><td>-</td><td>-</td></tr><tr><td>18-19</td><td>-</td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td><td>-</td></tr><tr><td>20-21</td><td>-</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td><td>-</td></tr><tr><td>22-23</td><td>-</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td><td>1</td></tr><tr><td>24-25</td><td>-</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td><td>1</td></tr><tr><td>26-27</td><td>-</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td><td>1</td></tr><tr><td>28-29</td><td>-</td><td>3</td><td>2</td><td>2</td><td>2</td><td>2</td><td>1</td></tr><tr><td>30-31</td><td>-</td><td>3</td><td>3</td><td>2</td><td>2</td><td>2</td><td>2</td></tr></tbody></table><h2>Spells Known</h2><table class=\"inner\"><tbody><tr><td><strong>Level</strong></td><td><strong>0</strong></td><td><strong>1st</strong></td><td><strong>2nd</strong></td><td><strong>3rd</strong></td><td><strong>4th</strong></td><td><strong>5th</strong></td><td><strong>6th</strong></td></tr><tr><td>1st</td><td>4</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>2nd</td><td>5</td><td>3</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>3rd</td><td>6</td><td>4</td><td>-</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>4th</td><td>6</td><td>4</td><td>2</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>5th</td><td>6</td><td>4</td><td>3</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>6th</td><td>6</td><td>4</td><td>4</td><td>-</td><td>-</td><td>-</td><td>-</td></tr><tr><td>7th</td><td>6</td><td>5</td><td>4</td><td>2</td><td>-</td><td>-</td><td>-</td></tr><tr><td>8th</td><td>6</td><td>5</td><td>4</td><td>3</td><td>-</td><td>-</td><td>-</td></tr><tr><td>9th</td><td>6</td><td>5</td><td>4</td><td>4</td><td>-</td><td>-</td><td>-</td></tr><tr><td>10th</td><td>6</td><td>5</td><td>5</td><td>4</td><td>2</td><td>-</td><td>-</td></tr><tr><td>11th</td><td>6</td><td>6</td><td>5</td><td>4</td><td>3</td><td>-</td><td>-</td></tr><tr><td>12th</td><td>6</td><td>6</td><td>5</td><td>4</td><td>4</td><td>-</td><td>-</td></tr><tr><td>13th</td><td>6</td><td>6</td><td>5</td><td>5</td><td>4</td><td>2</td><td>-</td></tr><tr><td>14th</td><td>6</td><td>6</td><td>6</td><td>5</td><td>4</td><td>3</td><td>-</td></tr><tr><td>15th</td><td>6</td><td>6</td><td>6</td><td>5</td><td>4</td><td>4</td><td>-</td></tr><tr><td>16th</td><td>6</td><td>6</td><td>6</td><td>5</td><td>5</td><td>4</td><td>2</td></tr><tr><td>17th</td><td>6</td><td>6</td><td>6</td><td>6</td><td>5</td><td>4</td><td>3</td></tr><tr><td>18th</td><td>6</td><td>6</td><td>6</td><td>6</td><td>5</td><td>4</td><td>4</td></tr><tr><td>19th</td><td>6</td><td>6</td><td>6</td><td>6</td><td>5</td><td>5</td><td>4</td></tr><tr><td>20th</td><td>6</td><td>6</td><td>6</td><td>6</td><td>6</td><td>5</td><td>5</td></tr></tbody></table>"
         },
         "descriptors": {
           "acid": false,
@@ -823,38 +786,40 @@
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Technomancer",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -865,11 +830,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/spell_cache.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -882,7 +843,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -891,7 +852,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -901,45 +863,47 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>As the culmination of your early study of the fundamental forces of the galaxy, you have created a spell cache that allows you to store and access spells. Your spell cache could be a device such as a handheld computer or technological implant; an item such as a ring or staff; or a symbol such as a brand, tattoo, or other permanent modification to your body. While you don’t need your spell cache to cast your spells, once per day, you can activate your spell cache to cast any one spell you know and are capable of casting, even if you’ve expended all your spell slots for that spell’s level.</p>\n<p>If your spell cache is damaged, it is restored to full Hit Points the next time you regain your daily allotment of spell slots. If the spell cache is lost or destroyed, you can replace it after 1 week with a special ritual that takes 8 hours to complete.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "classFeature",
           "combat": false,
           "specialAbilityType": "su"
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Technomancer",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -950,11 +914,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/magic_hack.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -967,7 +927,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -976,7 +936,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -986,45 +947,47 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>You have carefully studied the forces that define magic and can manipulate them. You learn your first magic hack at 2nd level, and you learn an additional magic hack every 3 levels thereafter. When casting a spell, you can apply no more than one magic hack that affects the attributes of a spell (such as distant spell or extended spell). If a magic hack allows a saving throw to resist its effects, the DC is equal to 10 + half your technomancer level + your Intelligence modifier. The list of magic hacks appears starting on page 120.Magic hacks require you to be a certain level and are organized accordingly.</p>\n<h2>2nd Level</h2>\n<p>@UUID[Compendium.sfrpg.class-features.Item.ovPFzB9OLw5h8mUU]{Augment Vehicle (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.p7Y5OM04hvrMajCf]{Calculate Trajectory (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.lFR3rA9m6ltgVXZF]{Countertech (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.gCkrRgaHFL7VZPun]{Direct Denial of Shapechanging (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.Y1v8LR6kmelZOjRJ]{Empowered Weapon (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.6mV2OToxzRLgXwab]{Energize Spell (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.0Es2LqvRJdwuLwhR]{Extend Protections (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.ZKiHelN35R04UH8X]{Fabricate Tech (Sp)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.DkOzHY87bTjsdjMp]{Gremlin Companion (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.IyG50mhWfEdEyNaa]{Harmful Spells (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.bK9vtuy0v50jTM3t]{Magic Trajectories (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.L4BCfIhyNqvvO5fS]{Quick Scan (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.V7UpT4PWsXmFN5x9]{Robot Influence (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.VDTCYxAwUJzqLlfB]{Reroute Trap (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.fAwqXByzLKw120jR]{Selective Targeting (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.xgys0ZruHH2cVIq6]{Spell Countermeasures (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.TBIzd27ZlnFp6eyS]{Technomantic Proficiency (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.nSRK41cH6x6COCfK]{Technomantic Shield}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.kNLqYc4sgwFGSaVk]{Vital Conversion (Su)}</p>\n<h2>5th Level</h2>\n<p>@UUID[Compendium.sfrpg.class-features.Item.lAnZmQdEfR0DspQf]{Adaptable Spell Knowledge (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.nRmTp13PXbyD95Au]{Cache Concentration (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.ugzxYKdUIAsuuyIs]{Charging Jolt (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.fdcoRN7r7QXpa4zl]{Debug Spell (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.9xtiYkZJOdFyJtTo]{Distant Spell (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.lSGAIOOgI1TW0nUK]{Energy Alteration (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.UJx5Gk6p6SdlTcHl]{Extended Spell (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.6VgSouSQyQ7oYVrJ]{Fabricate Arms (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.peWQgdWXW3bKSCZY]{Glitch Step (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.5P2zjOJariOnymES]{Instant Upgrade (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.lCU7nIfqUnz6JGOG]{Magic Negation (Sp)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.pgDZ24xRLCzyAAkx]{Shadow Grenade (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.PXuedwnKWs6zkwyU]{Spell Grenade (Sp)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.fdV4zNtMMigKRp6L]{Toxic Spell (Ex)}</p>\n<h2>8th Level</h2>\n<p>@UUID[Compendium.sfrpg.class-features.Item.EJIrVeOaHL5Yep8X]{Brain Hacker (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.bREtI7lPsNOLzhQM]{Diviner's Tap (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.V8AwA3H6lU3FyO7S]{Drone Summoner (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.AOXGw4Xz0A8OLyZH]{Expanded Cache (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.OYd8WcvniXfBt0D3]{Extend Runtime (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.He1aSFpFlCH6pvP6]{Flash Teleport (Sp)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.gWcbl04nKAFwNq64]{Holographic Camouflage (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.cENLtAYi3JH6il2b]{Junk Arsenal (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.qvzQlvZGQHceu2Dm]{Mental Mark (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.uD5oeps79sKG205O]{Spellshot (Sp)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.eu0rZBqxaQJfst1U]{Tech Countermeasures (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.9cgYfRNMncyL0TNB]{Translocational Recall (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.vIsn1sJN8mQ8wnkP]{Usurp Code (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.1XeFlxWHAOvgrI1K]{Widened Spell (Ex)}</p>\n<h2>11th Level</h2>\n<p>@UUID[Compendium.sfrpg.class-features.Item.NKlwYJZmdbdkO5s0]{Adaptive Defenses (Sp)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.xBl8ejVWKP34EBsY]{Countertech Sentinel (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.lCv3CKmXiNT8Xf3z]{Critical Spells}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.LlrbKthJa9ApdCzg]{Diminish Spell Runtime (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.DGd0iTFGqwwoQQpt]{Eternal Spell (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.l1oJbmAVBJzpImXq]{Long-lasting Spell}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.rdDJlsRMErdSzLqc]{Proximity Alert (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.tmSdPgxBNoepRzrh]{Reactive Counter (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.hgKdip2zBuIURYW9]{Reboot Mind (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.fr3oZaGsdlBI3QHp]{Seeking Shot (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.CcebvlHzt4zM3HbD]{Spell Coupling (Ex)}</p>\n<h2>14th Level</h2>\n<p>@UUID[Compendium.sfrpg.class-features.Item.B9PM5DAbraAEMZnT]{Personal Firewall (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.rEZt5hlJTC9BJj5D]{Phase Shot (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.mx0FBkNGOR3oL0h1]{Quickened Spell (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.xhvVbc8XuXN7CAER]{Rain of Fire (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.e21qbz6sS95XPCR7]{Rebounding Spell (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.1jpkOJYV1ZgN55ZL]{Rewire Synapses (Sp)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.kadwsMWE3IvbveCS]{Soul Backup (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.73ppmcKyJqgR8jBp]{Spell Library (Ex)}</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "classFeature",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "2nd Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Technomancer",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1035,11 +998,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/spell_focus.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1052,7 +1011,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1061,7 +1020,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1071,45 +1031,47 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>You gain @UUID[Compendium.sfrpg.feats.Item.X0Vh8DqE3ZSpyXpC]{Spell Focus}&nbsp;as a bonus feat.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "classFeature",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "3rd Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Technomancer",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1120,11 +1082,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/tech_lore.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1137,7 +1095,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1146,7 +1104,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1156,26 +1115,28 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>You rewire your mind to give you greater insight into the nature of magic and technology. You gain a +1 insight bonus to Computers and Mysticism checks. This bonus increases by 1 at 6th level and every 3 levels thereafter.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "classFeature",
           "combat": false,
           "specialAbilityType": "ex"
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "f7cca474-1117-49f6-a645-425b858efe72",
             "name": "Techlore (Ex)",
             "type": "insight",
             "condition": "",
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 0,
             "modifier": "lookupRange(@classes.technomancer.levels, 0, 1, 1, 6, 2, 9, 3, 12, 4, 15, 5, 18, 6)",
             "modifierType": "constant",
@@ -1189,8 +1150,10 @@
             "name": "Techlore (Ex)",
             "type": "insight",
             "condition": "",
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 0,
             "modifier": "lookupRange(@classes.technomancer.levels, 0, 1, 1, 6, 2, 9, 3, 12, 4, 15, 5, 18, 6)",
             "modifierType": "constant",
@@ -1202,158 +1165,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "3rd Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Technomancer",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "0nRcIVTMR0jNAeUc",
-      "name": "Weapon Specialization (Ex) (Technomancer)",
-      "type": "feat",
-      "img": "systems/sfrpg/images/cup/gameplay/technomancer.webp",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "",
-          "value": null
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>You gain the @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}feat as a bonus feat for each weapon type this class grants you proficiency with.</p>"
-        },
-        "descriptors": [],
-        "details": {
-          "category": "classFeature",
-          "combat": false,
-          "specialAbilityType": "ex"
-        },
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [
-          {
-            "_id": "02ae5b7c-492f-4f98-94d9-ae15d6656084",
-            "name": "Weapon Specialization Technomancer",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-damage",
-            "enabled": true,
-            "modifier": "floor(@details.level.value / 2)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "smallA"
-          },
-          {
-            "_id": "4100ca86-eef1-4d66-a8f5-56a1deebd8ce",
-            "name": "Weapon Specialization Technomancer",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-damage",
-            "enabled": true,
-            "modifier": "@details.level.value",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "basicM"
-          },
-          {
-            "_id": "3ae5b0a0-a7ab-425a-b2f7-5f55740c069c",
-            "name": "Weapon Specialization Technomancer",
-            "type": "untyped",
-            "condition": "",
-            "effectType": "weapon-property-damage",
-            "enabled": true,
-            "modifier": "-ceil(@details.level.value / 2)",
-            "modifierType": "constant",
-            "notes": "",
-            "source": "",
-            "subtab": "misc",
-            "valueAffected": "operative"
-          }
-        ],
-        "properties": {},
-        "range": {
-          "additional": "",
+          "max": "0",
           "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "3rd Level",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "Technomancer",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
           "value": 0
         }
       }
@@ -1364,11 +1201,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/empowered_weapon.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1381,7 +1214,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1390,7 +1223,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1400,44 +1234,46 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.sobLlAGQkmWcFBFx]{Magic Hack}</p>\n<p>As a move action, you can expend an unused spell slot to reconfigure and enhance a weapon you’re wielding. Until the start of your next turn, your attacks with the enhanced weapon gain a bonus to attack rolls equal to the level of the spell slot you expended. In addition, your attacks with that weapon deal 1d6 additional damage per level of the expended spell slot. This damage is of the same type the weapon normally deals.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "classFeature",
           "combat": false,
           "specialAbilityType": "su"
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "2nd Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Technomancer",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1449,8 +1285,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/amplified_glitch.webp",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1463,7 +1298,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1472,7 +1307,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1482,7 +1318,7 @@
           "unidentified": "",
           "value": "<p>You can create sudden distractions with technological devices.</p>\n<p><strong>Prerequisites</strong>: Computers 3 ranks, Intimidate 3 ranks.</p>\n<hr />\n<p><strong>Benefit</strong>: As a standard action, you can wirelessly introduce a fast-acting virus into nearby technological devices to briefly cause them to malfunction in loud, surprising ways. You can use this ability on one target creature per character level, no two of which can be more than 30 feet apart. Each target must either be carrying technological devices or be within sight and hearing of such devices. While the locations of such devices are up to the GM, most public spaces (aside from technologically underdeveloped areas) contain enough technology for this feat to function. Your glitch causes alarms to go off, automated devices to spin and flail, readouts to flash brightly, and so on. With a successful Computers check (DC = 15 + 1 per target + 1-1/2 × the CR of the highest-CR target), all targets are @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken} for 1 round, plus 1 additional round for every 5 by which your result exceeds the DC.</p>\n<p>Once you have targeted a creature with this feat, that foe is immune to this ability for 24 hours.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": true,
@@ -1493,34 +1329,36 @@
           "value": "1 round + 1 round for every 5 by which your result exceeds the DC."
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1531,7 +1369,6 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/spell_focus.webp",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "",
         "actionType": "",
@@ -1544,8 +1381,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1554,7 +1391,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1564,26 +1402,28 @@
           "unidentified": "",
           "value": "<p>Through careful study, you have developed methods to make your spells harder to resist.</p>\n<p><strong>Prerequisites</strong>: Ability to cast spells, character level 3rd.</p>\n<hr />\n<p><strong>Benefit</strong>: The DC of spells you cast increases by 1. At 11th level, the DC of your spells instead increases by 2, and at 17th level, the DC of spells you cast instead increases by 3. This bonus does not apply to spell-like abilities.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "c5423034-adc7-4b05-a820-f1a1c4fcdb92",
             "name": "Spell Focus",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "spell-save-dc",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "1 + floor(@owner.details.level.value / 11) + floor(@owner.details.level.value / 17)",
             "modifierType": "constant",
@@ -1595,29 +1435,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1629,11 +1471,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/weapon_focus.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1645,8 +1483,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1655,7 +1493,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1709,19 +1548,21 @@
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "d647bc9f-f4a8-405b-b65d-9bd57647bfeb",
             "name": "Weapon Focus (Combat)",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "weapon-attacks",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "ternary(gte((@details.level.value - @attributes.baseAttackBonus.value),3),2,1)",
             "modifierType": "constant",
@@ -1733,29 +1574,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1767,7 +1610,6 @@
       "type": "consumable",
       "img": "systems/sfrpg/icons/equipment/magic%20items/serum-of-healing.webp",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "",
         "actionType": "heal",
@@ -1781,7 +1623,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1802,27 +1644,9 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "chatFlavor": "",
         "consumableType": "serum",
-        "container": {
-          "contents": [],
-          "includeContentsInWealthCalculation": 1,
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "spell"
-              ],
-              "affectsEncumbrance": false,
-              "amount": 0,
-              "subtype": "spellSlot",
-              "weightProperty": "bulk"
-            }
-          ]
-        },
         "critical": {
           "effect": "",
           "parts": []
@@ -1830,13 +1654,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "healing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": true,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1846,18 +1683,12 @@
           "unidentified": "",
           "value": "<p>This vial of medical serum quickly sets bones and repairs other physical damage. It restores Hit Points when administered to a living creature.</p>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum’s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
-        "id": "N2AwObRDMfXChaFR",
-        "identified": true,
-        "isActive": null,
+        "isActive": false,
         "level": 1,
         "modifiers": [],
         "price": 50,
@@ -1865,36 +1696,28 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
-        "source": "Core Rulebook",
-        "system": {
-          "container": {
-            "contents": [
-              {
-                "id": "zygoFzol5ahnytRj",
-                "index": 0
-              }
-            ]
-          }
-        },
-        "target": {
+        "skillCheck": {
           "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "Core Rulebook",
+        "target": {
           "value": ""
         },
         "uses": {
           "autoDestroy": true,
           "autoUse": true,
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "value": 1
         }
@@ -1906,7 +1729,6 @@
       "type": "consumable",
       "img": "systems/sfrpg/icons/equipment/magic%20items/serum-of-healing.webp",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "",
         "actionType": "heal",
@@ -1920,7 +1742,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1941,27 +1763,9 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "chatFlavor": "",
         "consumableType": "serum",
-        "container": {
-          "contents": [],
-          "includeContentsInWealthCalculation": 1,
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "spell"
-              ],
-              "affectsEncumbrance": false,
-              "amount": 0,
-              "subtype": "spellSlot",
-              "weightProperty": "bulk"
-            }
-          ]
-        },
         "critical": {
           "effect": "",
           "parts": []
@@ -1969,13 +1773,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "healing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": true,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1985,17 +1802,12 @@
           "unidentified": "",
           "value": "<p>This vial of medical serum quickly sets bones and repairs other physical damage. It restores Hit Points when administered to a living creature.</p>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum’s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
-        "identified": true,
-        "isActive": null,
+        "isActive": false,
         "level": 1,
         "modifiers": [],
         "price": 50,
@@ -2003,26 +1815,28 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
           "autoDestroy": true,
           "autoUse": true,
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "value": 1
         }
@@ -2034,7 +1848,6 @@
       "type": "consumable",
       "img": "systems/sfrpg/icons/equipment/magic%20items/serum-of-healing.webp",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "",
         "actionType": "heal",
@@ -2048,7 +1861,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -2069,27 +1882,9 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "chatFlavor": "",
         "consumableType": "serum",
-        "container": {
-          "contents": [],
-          "includeContentsInWealthCalculation": 1,
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "spell"
-              ],
-              "affectsEncumbrance": false,
-              "amount": 0,
-              "subtype": "spellSlot",
-              "weightProperty": "bulk"
-            }
-          ]
-        },
         "critical": {
           "effect": "",
           "parts": []
@@ -2097,13 +1892,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "healing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": true,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2113,17 +1921,12 @@
           "unidentified": "",
           "value": "<p>This vial of medical serum quickly sets bones and repairs other physical damage. It restores Hit Points when administered to a living creature.</p>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum’s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
-        "identified": true,
-        "isActive": null,
+        "isActive": false,
         "level": 1,
         "modifiers": [],
         "price": 50,
@@ -2131,26 +1934,28 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
           "autoDestroy": true,
           "autoUse": true,
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "value": 1
         }
@@ -2162,7 +1967,6 @@
       "type": "consumable",
       "img": "systems/sfrpg/icons/equipment/magic%20items/serum-of-healing.webp",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "",
         "actionType": "heal",
@@ -2176,7 +1980,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -2197,27 +2001,9 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "chatFlavor": "",
         "consumableType": "serum",
-        "container": {
-          "contents": [],
-          "includeContentsInWealthCalculation": 1,
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "spell"
-              ],
-              "affectsEncumbrance": false,
-              "amount": 0,
-              "subtype": "spellSlot",
-              "weightProperty": "bulk"
-            }
-          ]
-        },
         "critical": {
           "effect": "",
           "parts": []
@@ -2225,13 +2011,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "healing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": true,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2241,17 +2040,12 @@
           "unidentified": "",
           "value": "<p>This vial of medical serum quickly sets bones and repairs other physical damage. It restores Hit Points when administered to a living creature.</p>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum’s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
-        "identified": true,
-        "isActive": null,
+        "isActive": false,
         "level": 1,
         "modifiers": [],
         "price": 50,
@@ -2259,26 +2053,28 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
           "autoDestroy": true,
           "autoUse": true,
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "value": 1
         }
@@ -2290,11 +2086,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/lashunta-tempweave-basic.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2308,7 +2100,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -2337,7 +2129,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -2346,7 +2137,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -2367,7 +2158,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2377,17 +2169,17 @@
           "unidentified": "",
           "value": "<p>Lashuntas developed tempweave light armor by threading temperature-regulating wires through reinforced clothing. The result is a protective, flexible outfit that maintains a comfortable temperature for the wearer. Most tempweave outfits feature a fitted tunic over breeches, making them a popular choice for explorers venturing to hot or humid environments.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": true,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 4,
         "modifiers": [],
         "price": 1950,
@@ -2396,25 +2188,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 197",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -2422,8 +2215,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -2434,11 +2227,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/sonic-pistol-thunderstrike.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -2452,7 +2241,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -2473,7 +2262,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -2487,7 +2275,7 @@
               "index": 2
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -2529,13 +2317,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
                 "sonic": true
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2545,10 +2346,8 @@
           "unidentified": "",
           "value": "<p>Sonic pistols have a stocky barrel capped with a concave resonating chamber that amplifies and directs its sonic blast. They use high-intensity sound to shake molecules apart.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "total": 0,
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -2556,10 +2355,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "img": "systems/sfrpg/icons/equipment/weapons/sonic-pistol-thunderstrike.webp",
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
-        "isOpen": true,
         "level": 4,
         "modifiers": [],
         "price": 2300,
@@ -2654,11 +2451,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "total": 40,
           "units": "ft",
-          "value": 40
+          "value": "40"
         },
         "rollNotes": "",
         "save": {
@@ -2666,22 +2460,25 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 173",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
-        "totalWeight": "L",
         "usage": {
           "per": "shot",
           "value": 2
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
-          "total": 0,
           "value": null
         },
         "weaponCategory": "sonic",
@@ -2694,34 +2491,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -2730,14 +2512,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true
@@ -2749,34 +2530,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -2785,14 +2551,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true
@@ -2804,11 +2569,7 @@
       "type": "weapon",
       "img": "icons/weapons/staves/staff-simple.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -2822,7 +2583,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -2843,7 +2604,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -2852,7 +2612,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -2863,13 +2623,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4 + @abilities.str.mod",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2879,9 +2652,8 @@
           "unidentified": "",
           "value": "<p>A baton is a thin, solid metal shaft, usually with a textured rubber grip. A tactical baton can be used to inflict precise bludgeoning blows. An advanced baton, used by elite mercenary and security companies, often has an additional shaft, as well as a weighted end that can be powered to connect with substantially more force than a tactical baton.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -2889,7 +2661,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -2985,10 +2757,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -2996,11 +2766,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -3008,7 +2783,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -3022,13 +2797,9 @@
       "type": "technological",
       "img": "systems/sfrpg/icons/equipment/technological%20items/tool-kit.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -3040,7 +2811,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "attributes": {
@@ -3061,7 +2832,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -3079,7 +2849,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -3089,39 +2860,41 @@
           "unidentified": "",
           "value": "<p>A tool kit is a set of specialized tools and devices not worth purchasing individually, but which as a collection are required for a given task or provide a circumstance bonus to certain skill checks. The types of tool kits are: <strong>engineering kit</strong> (Engineering checks without one take a –2 penalty).</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
-        "hands": null,
+        "hands": 0,
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 20,
+        "proficient": false,
         "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -3129,8 +2902,8 @@
           "value": null
         },
         "uses": {
-          "max": null,
-          "per": null,
+          "max": "",
+          "per": "",
           "value": null
         }
       }
@@ -3141,10 +2914,6 @@
       "type": "goods",
       "img": "icons/equipment/chest/shirt-collared-brown.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "attributes": {
           "ac": {
             "value": ""
@@ -3163,14 +2932,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -3180,13 +2942,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 1,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "CRB pg. 230"
       }
     },
@@ -3196,7 +2960,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/equipment/goods/field-ration.webp",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -3215,11 +2978,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "1",
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -3229,13 +2988,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 1,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook"
       }
     },
@@ -3245,10 +3006,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/equipment/technological%20items/xenobiologists-field-kit.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "attributes": {
           "ac": {
             "value": ""
@@ -3267,14 +3024,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -3284,13 +3034,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 3,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "CRB pg. 231"
       }
     },
@@ -3300,10 +3052,9 @@
       "type": "technological",
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -3315,7 +3066,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "attributes": {
@@ -3336,7 +3087,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -3345,7 +3095,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -3354,7 +3104,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -3364,39 +3115,41 @@
           "unidentified": "",
           "value": "<p>A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device’s price.</p>\n<p>Comm units that function at system-wide and unlimited ranges aren’t as portable; they include built-in generators that provide the necessary amount of power. Short-term use of these units can be purchased in most major settlements (see page 234).</p>\n<p>See page 430 for more about Pact Worlds communications.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
         "hands": 1,
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 7,
+        "proficient": false,
         "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -3404,8 +3157,8 @@
           "value": 1
         },
         "uses": {
-          "max": null,
-          "per": null,
+          "max": "",
+          "per": "",
           "value": null
         }
       }
@@ -3416,11 +3169,7 @@
       "type": "weapon",
       "img": "icons/equipment/hand/gauntlet-simple-leather-brown-gold.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -3434,7 +3183,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -3455,7 +3204,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": null,
@@ -3464,7 +3212,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -3475,13 +3223,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d3 + @abilities.str.mod",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -3491,9 +3252,8 @@
           "unidentified": "",
           "value": "<p>An unarmed strike can be dealt with any limb or appendage. Unarmed strikes deal nonlethal damage, and the damage from an unarmed strike is considered weapon damage for the purposes of effects that give you a bonus to weapon damage rolls.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -3501,7 +3261,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 0,
         "modifiers": [],
@@ -3597,10 +3357,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -3608,11 +3365,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -3620,7 +3382,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -3634,11 +3396,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -3651,7 +3409,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -3660,7 +3418,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -3712,37 +3471,39 @@
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Lashunta",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 48",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -3754,11 +3515,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -3771,7 +3528,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -3780,7 +3537,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -3832,37 +3590,39 @@
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Lashunta",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 48",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -3874,11 +3634,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -3891,7 +3647,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -3900,7 +3656,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -3952,37 +3709,39 @@
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Racial Feature",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "day",
           "value": null
         }
@@ -3994,11 +3753,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -4011,7 +3766,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -4020,7 +3775,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -4074,23 +3830,21 @@
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "15def881-7143-411d-b4c0-94ca9269f580",
             "name": "Student",
             "type": "racial",
             "condition": "",
-            "container": {
-              "actorId": "u7wzeHDLO3R7y4Ci",
-              "itemId": "nfSvykOkNZB3sfHF"
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -4104,12 +3858,10 @@
             "name": "Student",
             "type": "racial",
             "condition": "",
-            "container": {
-              "actorId": "u7wzeHDLO3R7y4Ci",
-              "itemId": "nfSvykOkNZB3sfHF"
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -4121,29 +3873,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Lashunta",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 48",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -4155,11 +3909,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/detect_thoughts.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -4188,7 +3938,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -4242,7 +3993,7 @@
           "value": "concentration, up to 1 minute/level"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -4256,13 +4007,9 @@
           "mode": "innate",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -4273,12 +4020,13 @@
         "school": "div",
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 349",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
@@ -4294,11 +4042,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/daze.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -4327,7 +4071,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -4381,7 +4126,7 @@
           "value": "1"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -4395,13 +4140,9 @@
           "mode": "innate",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -4412,12 +4153,13 @@
         "school": "enc",
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 347",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one humanoid creature of CR 3 or lower"
         },
         "uses": {
@@ -4433,11 +4175,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/psychokenetic_hand.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -4466,7 +4204,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -4520,7 +4259,7 @@
           "value": "concentration"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -4534,25 +4273,26 @@
           "mode": "innate",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 370",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one unattended object of no more than 10 lbs. or 1 bulk"
         },
         "uses": {
@@ -4568,11 +4308,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/dancing_light.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -4590,8 +4326,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -4601,7 +4337,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -4611,14 +4348,14 @@
           "unidentified": "",
           "value": "<p>You create up to four lights that resemble small headlights or flashlights. The dancing lights must stay within a 10-foot-radius area in relation to each other but otherwise move as you desire: forward or back, up or down, straight or turning corners, or the like. The lights can move up to 100 feet per round. A light winks out if the distance between you and it exceeds the spell’s range.</p>\n<p>You can have only one <em>dancing lights</em> spell active at a time. If you cast this spell while another casting is still in effect, the previous casting is dispelled.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "minute",
           "value": "1"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -4632,29 +4369,30 @@
           "mode": "",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
           "type": "fort",
-          "dc": null,
+          "dc": "",
           "descriptor": "partial"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 347",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -4666,11 +4404,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/detect_magic.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -4689,7 +4423,7 @@
           "shapable": false,
           "shape": "cone",
           "units": "ft",
-          "value": 60
+          "value": "60"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -4699,7 +4433,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -4709,14 +4444,14 @@
           "unidentified": "",
           "value": "<p>You detect all magic spells, effects, items, and objects (including those on or affecting creatures you can see), as well as hybrid items, in the area. You can’t detect magical traps in this way, as they are created with additional magic that wards them from this common spell. Each round you concentrate on the same area, you can determine if one magic source you detect is from a spell, magic item, or other effect, and the caster level (or item level) of the effect. You can’t determine if there are magic sources in areas you can’t see, or if there was a magic source in an area at one time but that has since expired.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "concentration, up to 1 minute/level"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -4730,29 +4465,30 @@
           "mode": "",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 348",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -4764,11 +4500,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/energy_ray.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rsak",
         "activation": {
@@ -4787,7 +4519,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -4802,6 +4534,7 @@
               "name": "Acid",
               "formula": "1d3",
               "group": 0,
+              "isPrimarySection": false,
               "types": {
                 "acid": true,
                 "bludgeoning": false,
@@ -4809,7 +4542,9 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -4818,6 +4553,7 @@
               "name": "Cold",
               "formula": "1d3",
               "group": 0,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -4825,7 +4561,9 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -4834,6 +4572,7 @@
               "name": "Electricity",
               "formula": "1d3",
               "group": 0,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -4841,7 +4580,9 @@
                 "electricity": true,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -4850,6 +4591,7 @@
               "name": "Fire",
               "formula": "1d3",
               "group": 0,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -4857,12 +4599,15 @@
                 "electricity": false,
                 "fire": true,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -4916,7 +4661,7 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -4930,13 +4675,9 @@
           "mode": "",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -4944,19 +4685,20 @@
           "dc": "",
           "descriptor": "negate"
         },
-        "scaling": {
-          "d3": true,
-          "d6": false
-        },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 353",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature or object"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -4968,11 +4710,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/ghost_sound.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -4991,7 +4729,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -5001,7 +4739,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -5011,14 +4750,14 @@
           "unidentified": "",
           "value": "<p>You create a volume of sound that rises, falls, recedes, approaches, or remains fixed. You choose what type of sound this spell creates when casting it and cannot thereafter change the sound’s basic character.</p>\n<p>The volume of sound created can produce as much noise as 20 normal humans. Thus, you can create shouting, singing, talking, marching, running, or walking sounds, as well as sounds of battle or small explosions. You can make noises that sound like machines, the general chatter of distant conversation, or the roar of an alien predator, but you can’t make specific sounds such as intelligible speech or the exact hum of a particular starship’s engines.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -5032,13 +4771,9 @@
           "mode": "",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -5047,14 +4782,19 @@
           "descriptor": "disbelieve"
         },
         "school": "ill",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 356",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -5066,11 +4806,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mending.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "heal",
         "activation": {
@@ -5088,8 +4824,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -5101,13 +4837,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "healing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": true,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -5117,14 +4866,14 @@
           "unidentified": "",
           "value": "<p>This spell repairs damaged objects and constructs, restoring 1d4 Hit Points. If the object has the broken condition, this condition is removed if the object is restored to at least half its original Hit Points. All of the pieces of an object must be present for this spell to function. A construct can benefit from this spell only once per day. Magic items can be repaired by this spell, but magic items that are destroyed don’t have their magic abilities restored. This spell doesn’t reverse effects that warp or otherwise transmute items, but it can still repair damage dealt to such items.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -5138,13 +4887,10 @@
           "mode": "",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "rollNotes": "",
         "save": {
@@ -5153,14 +4899,19 @@
           "descriptor": "negate"
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 364",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one object of up to 1 bulk or one construct of up to Medium size"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -5172,11 +4923,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/transfert_charge.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -5195,7 +4942,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -5205,7 +4952,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -5215,14 +4963,14 @@
           "unidentified": "",
           "value": "<p>You can transfer any number of charges from one battery to another battery or from one power cell to another power cell. You can only transfer charges using two objects of the exact same type (two batteries of the same size, two identical power cells, or the like); you transfer charges from the source object to the receiving object.</p>\n<p>You must declare how many charges you are transferring before casting this spell. If you transfer more charges from the source than the receiving item can hold, the receiving item must succeed at a Fortitude saving throw or take 1d6 electricity damage. This spell provides no knowledge of how many charges a receiving item can safely hold, but you can choose to transfer fewer charges than the maximum allowed to reduce the risk.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -5236,13 +4984,9 @@
           "mode": "",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -5251,14 +4995,19 @@
           "descriptor": "object"
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 383",
         "sr": true,
         "target": {
-          "type": "",
           "value": "two objects of the same type; see text"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -5270,11 +5019,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/comprehend_languages.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -5292,8 +5037,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -5303,7 +5048,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -5313,14 +5059,14 @@
           "unidentified": "",
           "value": "<p>You can understand the spoken or signed words of creatures or read otherwise incomprehensible written or tactile messages. The ability to read does not necessarily impart insight into the material, merely its literal meaning. The spell enables you to understand or read an unknown language, not speak or write it. You can’t use this spell to read magic writing or encoded messages (though it does reveal if a message is magic or encoded), but you can use it to read raw computer code or foreign programming languages, allowing you to understand enough to attempt Computers checks on those materials without penalties.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value*10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -5334,29 +5080,30 @@
           "mode": "",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
           "type": "will",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 344",
         "sr": false,
         "target": {
-          "type": "",
           "value": "you"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -5368,11 +5115,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/grease.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -5391,7 +5134,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -5401,7 +5144,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -5455,7 +5199,7 @@
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -5469,13 +5213,10 @@
           "mode": "",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -5484,14 +5225,19 @@
           "descriptor": "partial"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 357",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one 10 ft. square or one object"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -5503,11 +5249,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/magic_missile.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "other",
         "activation": {
@@ -5526,7 +5268,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -5540,6 +5282,8 @@
             {
               "name": "",
               "formula": "1d4+1",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -5547,7 +5291,9 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -5555,6 +5301,8 @@
             {
               "name": "",
               "formula": "1d4+1",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -5562,7 +5310,9 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -5570,6 +5320,8 @@
             {
               "name": "",
               "formula": "1d4+1",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -5577,12 +5329,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -5592,14 +5347,14 @@
           "unidentified": "",
           "value": "<p>You fire two missiles of magical energy that strike targets unerringly (the creatures must still be valid targets) and deal 1d4+1 force damage each. You can’t target specific parts of a creature, and objects are not damaged by the spell.</p>\n<p>You can target a single creature or several creatures, but each missile can strike only one creature. You must designate targets before you attempt to overcome spell resistance or roll damage.</p>\n<p>You can cast this spell as a full action. If you do, you fire three missiles instead of two.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -5613,13 +5368,9 @@
           "mode": "",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -5628,14 +5379,19 @@
           "descriptor": "negate"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 364",
         "sr": true,
         "target": {
-          "type": "",
           "value": "up to three creatures, no two of which can be more than 15 ft. apart; see text"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -5647,11 +5403,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/overheat.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -5670,7 +5422,7 @@
           "shapable": false,
           "shape": "cone",
           "units": "ft",
-          "value": 15
+          "value": "15"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -5682,13 +5434,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -5698,14 +5463,14 @@
           "unidentified": "",
           "value": "<p>You collect the heat generated by nearby bodies and devices and vent it outward in a thermal wave, dealing 2d8 fire damage to creatures and objects in the area.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -5719,13 +5484,9 @@
           "mode": "",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -5734,14 +5495,19 @@
           "descriptor": "half"
         },
         "school": "evo",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 367",
         "sr": true,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -5753,11 +5519,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/flight.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -5786,7 +5548,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -5840,7 +5603,7 @@
           "value": "see text"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": true,
         "level": 2,
         "materials": {
@@ -5854,13 +5617,9 @@
           "mode": "",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -5871,12 +5630,13 @@
         "school": "trs",
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 355",
         "sr": true,
         "target": {
-          "type": "",
           "value": "see text"
         },
         "uses": {
@@ -5892,11 +5652,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/invilibility.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -5915,7 +5671,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -5925,7 +5681,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -5935,14 +5692,14 @@
           "unidentified": "",
           "value": "<p>The creature or object touched becomes invisible (see page 264). If the target is a creature, any gear it is carrying vanishes as well. If you cast the spell on someone else, neither you nor your allies can see the target unless you can normally see invisible things or you employ magic to do so.</p>\n<p>The spell ends if the target attacks any creature. For purposes of this spell, an attack includes any spell or harmful effect targeting a foe or whose area or effect includes a foe. Actions directed at unattended objects don’t break the spell. Spells that specifically affect allies but not foes are not attacks for this purpose, even when they include foes in their area. Causing harm indirectly is not an attack. Thus, an invisible being can open doors, talk, eat, climb stairs, summon security forces and have them attack, start a trash compactor with foes inside, remotely trigger traps, and so forth.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -5956,13 +5713,9 @@
           "mode": "",
           "prepared": false
         },
-        "prepared": true,
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -5971,14 +5724,19 @@
           "descriptor": "harmless"
         },
         "school": "ill",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 362",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature or object no more than 10 bulk/level"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -5990,11 +5748,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -6007,17 +5761,17 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
-        "category": "feat",
         "chatFlavor": "",
         "critical": {
           "effect": "",
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -6072,22 +5826,20 @@
         },
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "6555e446-c302-4311-a747-f9a5b67aba3a",
             "name": "Fix Diplomacy",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "u7wzeHDLO3R7y4Ci",
-              "itemId": "MShHhYCv1GwhsEnk"
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -6099,30 +5851,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -6133,11 +5887,7 @@
       "type": "weapon",
       "img": "icons/equipment/hand/gauntlet-simple-leather-brown-gold.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -6151,7 +5901,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -6172,7 +5922,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": null,
@@ -6181,7 +5930,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -6192,13 +5941,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d3 + @abilities.str.mod",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -6208,9 +5970,8 @@
           "unidentified": "",
           "value": "<p>An unarmed strike can be dealt with any limb or appendage. Unarmed strikes deal nonlethal damage, and the damage from an unarmed strike is considered weapon damage for the purposes of effects that give you a bonus to weapon damage rolls.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -6218,7 +5979,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 0,
         "modifiers": [],
@@ -6314,10 +6075,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -6325,11 +6083,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -6337,12 +6100,131 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
         "weaponCategory": "uncategorized",
         "weaponType": "basicM"
+      }
+    },
+    {
+      "_id": "QI2LDqDHzsxbWGs7",
+      "name": "Weapon Specialization (Ex) (Technomancer)",
+      "type": "feat",
+      "img": "systems/sfrpg/images/cup/gameplay/technomancer.webp",
+      "system": {
+        "ability": "",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": ""
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.IvLuq2pxKkHJJpae]{Technomancer}</p>\n<p>You gain the @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}feat as a bonus feat for each weapon type this class grants you proficiency with.</p>"
+        },
+        "descriptors": {},
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": false,
+        "modifiers": [
+          {
+            "_id": "02ae5b7c-492f-4f98-94d9-ae15d6656084",
+            "name": "Weapon Specialization Technomancer",
+            "type": "weapon-specialization",
+            "condition": "",
+            "damage": null,
+            "effectType": "weapon-damage",
+            "enabled": true,
+            "limitTo": null,
+            "max": 0,
+            "modifier": "floor(@details.level.value / 2)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "smallA"
+          },
+          {
+            "_id": "4100ca86-eef1-4d66-a8f5-56a1deebd8ce",
+            "name": "Weapon Specialization Technomancer",
+            "type": "weapon-specialization",
+            "condition": "",
+            "damage": null,
+            "effectType": "weapon-damage",
+            "enabled": true,
+            "limitTo": null,
+            "max": 0,
+            "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "basicM"
+          }
+        ],
+        "properties": {},
+        "range": {
+          "units": ""
+        },
+        "recharge": {
+          "charged": false,
+          "value": ""
+        },
+        "requirements": "3rd Level",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": ""
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "Technomancer",
+        "target": {
+          "value": null
+        },
+        "uses": {
+          "max": "0",
+          "per": "",
+          "value": 0
+        }
       }
     }
   ],
@@ -6445,124 +6327,62 @@
         "base": 10,
         "damage": null,
         "drain": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "userPenalty": null,
-        "value": 10
+        "userPenalty": null
       },
       "con": {
         "base": 12,
         "damage": null,
         "drain": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "userPenalty": null,
-        "value": 10
+        "userPenalty": null
       },
       "dex": {
         "base": 14,
         "damage": null,
         "drain": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "userPenalty": null,
-        "value": 10
+        "userPenalty": null
       },
       "int": {
         "base": 14,
         "damage": null,
         "drain": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "userPenalty": null,
-        "value": 10
+        "userPenalty": null
       },
       "str": {
         "base": 10,
         "damage": null,
         "drain": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "userPenalty": null,
-        "value": 10
+        "userPenalty": null
       },
       "wis": {
         "base": 10,
         "damage": null,
         "drain": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "userPenalty": null,
-        "value": 10
+        "userPenalty": null
       }
     },
     "attributes": {
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
-      "eac": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
+      "arms": 2,
       "fort": {
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "misc": 0
       },
       "hp": {
         "max": 24,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 24
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 0,
         "value": 0
       },
-      "kac": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
-      "keyability": "int",
       "reach": "",
       "reflex": {
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "misc": 0
       },
       "rp": {
         "max": 6,
-        "min": 0,
-        "tooltip": [],
         "value": 6
       },
       "sp": {
         "max": 20,
-        "min": 0,
-        "tooltip": [],
         "value": 20
       },
       "space": "",
@@ -6584,15 +6404,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "int",
       "will": {
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "misc": 0
       }
     },
     "conditions": {
@@ -6633,9 +6448,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 9,
       "upb": 0
@@ -6643,7 +6455,7 @@
     "details": {
       "alignment": "Lawful Good",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -6658,52 +6470,15 @@
       "cl": {
         "value": null
       },
-      "class": "",
-      "deity": "",
-      "environment": "",
-      "level": {
-        "max": 20,
-        "min": 1,
-        "value": 1
-      },
-      "organization": "",
-      "organizationSize": {
-        "max": null,
-        "min": null
-      },
       "race": "Lashunta (Damaya)",
       "theme": "Xenoseeker",
       "xp": {
-        "max": 1300,
-        "min": 0,
         "value": 0
       }
     },
     "modifiers": [],
-    "resources": {
-      "primary": {
-        "lr": 0,
-        "max": 0,
-        "sr": 0,
-        "value": 0
-      },
-      "secondary": {
-        "lr": 0,
-        "max": 0,
-        "sr": 0,
-        "value": 0
-      },
-      "tertiary": {
-        "lr": 0,
-        "max": 0,
-        "sr": 0,
-        "value": 0
-      }
-    },
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
+    "options": {
+      "hideUntrained": false
     },
     "skills": {
       "acr": {
@@ -6711,10 +6486,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -6722,10 +6496,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -6733,10 +6506,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -6744,10 +6516,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 4,
+        "subname": "",
         "value": 3
       },
       "cul": {
@@ -6755,10 +6526,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -6766,10 +6536,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 4,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -6777,10 +6546,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -6788,10 +6556,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 4,
+        "subname": "",
         "value": 3
       },
       "int": {
@@ -6799,10 +6566,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 4,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -6810,10 +6576,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 4,
+        "subname": "",
         "value": 3
       },
       "med": {
@@ -6821,10 +6586,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -6832,10 +6596,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 4,
+        "subname": "",
         "value": 3
       },
       "per": {
@@ -6843,10 +6606,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -6854,10 +6616,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 4,
+        "subname": "",
         "value": 3
       },
       "pil": {
@@ -6865,10 +6626,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 4,
+        "subname": "",
         "value": 3
       },
       "pro": {
@@ -6876,9 +6636,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -6888,10 +6646,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -6899,10 +6656,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 3
       },
       "ste": {
@@ -6910,10 +6666,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -6921,13 +6676,13 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
@@ -6935,22 +6690,22 @@
         "value": 0
       },
       "spell1": {
-        "max": "4",
+        "max": 4,
         "perClass": {
           "technomancer": {
-            "value": "4"
+            "value": 4
           }
         },
-        "value": "4"
+        "value": 4
       },
       "spell2": {
-        "max": "3",
+        "max": 3,
         "perClass": {
           "technomancer": {
-            "value": "3"
+            "value": 3
           }
         },
-        "value": "3"
+        "value": 3
       },
       "spell3": {
         "max": 0,
@@ -6982,15 +6737,7 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
-        "custom": "",
-        "value": []
-      },
-      "dr": {
         "custom": "",
         "value": []
       },
@@ -7011,9 +6758,6 @@
       },
       "senses": "",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0,
       "weaponProf": {
         "custom": "",

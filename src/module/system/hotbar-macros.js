@@ -8,12 +8,16 @@ const createMacroFnLookup = {
     AbilityCheck: createAbilityCheckMacro
 };
 
-Hooks.on("hotbarDrop", async (bar, data, slot) => {
+Hooks.on("hotbarDrop", (bar, data, slot) => {
     const createMacroFn = data && createMacroFnLookup[data.type];
-    if (createMacroFn) {
-        game.user.assignHotbarMacro(await createMacroFn(data), slot);
+    if (!bar.locked && createMacroFn) {
+        createMacroFn(data).then((macro) => {
+            game.user.assignHotbarMacro(macro, slot);
+        });
+        return false;
     } else {
         // silently ignore this hook, just in case someone else will pick it up.
+        return true;
     }
 });
 
@@ -22,7 +26,7 @@ Hooks.on("hotbarDrop", async (bar, data, slot) => {
  * doesn't already exist. If one does, return that one instead.
  *
  * @param {Object} data Macro creation description.
- * @returns {Promise<Macro>}
+ * @returns {Promise<?foundry.documents.Macro>}
  */
 async function findElseCreateMacro(data) {
     return game.macros.find(macro => (macro.name === data.name) && (macro.command === data.command))
@@ -34,7 +38,7 @@ async function findElseCreateMacro(data) {
  * Get an existing item macro if one exists, otherwise create a new one.
  *
  * @param {Object} data The item data
- * @returns {Promise<Macro|null>}
+ * @returns {Promise<?foundry.documents.Macro>}
  */
 async function createItemMacro(data) {
     let macro = null;
@@ -73,21 +77,19 @@ export function rollItemMacro(itemUuid, macroType) {
         /** @todo Remove this at some point */
 
         const speaker = ChatMessage.getSpeaker();
-        const actor = undefined
-            || (speaker.token && game.actors.tokens[speaker.token])
-            || (speaker.actor && game.actors.get(speaker.actor))
-        ;
+        const actor = (speaker.token && game.actors.tokens[speaker.token])
+            || (speaker.actor && game.actors.get(speaker.actor));
 
         if (actor) {
             item = actor.items.find(i => i.name === itemUuid);
             if (item) {
-                foundry.utils.logCompatibilityWarning("You are using an item macro which uses the item's name instead of its UUID. Support for these types of item macros will be removed in a future version of the SFRPG system. It is recommended to delete and re-create this item macro.", {since: "0.25"});
+                foundry.utils.logCompatibilityWarning("You are using an item macro which uses the item's name instead of its UUID. Support for these types of item macros will be removed in a future version of the SFRPG system. It is recommended to delete and re-create this item macro.", { since: "0.25" });
             }
         }
     }
 
     if (!item) {
-        return ui.notifications.error(`Cannot find the item associated with this item macro.`);
+        return ui.notifications.error(game.i18n.localize("SFRPG.Macro.ErrorMissingItem"));
     } else switch (macroType) {
         case "attack":
             return item.rollAttack({ event });
@@ -101,7 +103,7 @@ export function rollItemMacro(itemUuid, macroType) {
         case "cast":
             return item.useSpell();
         case "use":
-            return item.rollConsumable({ event });
+            return item.useItem({ event });
         default:
             return item.roll();
     }
@@ -159,9 +161,9 @@ async function createSkillCheckMacro(data) {
 const saveIconDefault = "icons/svg/d20.svg";
 const saveIconLookup = {
     // NOTE: If you're here because an icon is broken, try running `scripts/fa-svg-update/fa-svg-update.js`
-    fort:   `systems/sfrpg/icons/fa-svg/${checkIcons["fortitude"]}.svg`,
+    fort: `systems/sfrpg/icons/fa-svg/${checkIcons["fortitude"]}.svg`,
     reflex: `systems/sfrpg/icons/fa-svg/${checkIcons["reflex"]}.svg`,
-    will:   `systems/sfrpg/icons/fa-svg/${checkIcons["will"]}.svg`
+    will: `systems/sfrpg/icons/fa-svg/${checkIcons["will"]}.svg`
 };
 
 /**
@@ -230,13 +232,13 @@ export function connectToDocument(macro) {
     if (itemMacroDetails?.itemUuid) {
         const item = fromUuidSync(itemMacroDetails?.itemUuid);
         if (!item || !item.actor) return false;
-        item.apps[ui.hotbar.appId] = ui.hotbar;
+        item.apps[ui.hotbar.id] = ui.hotbar;
 
         // Attacking with a weapon with ammo triggers an update on the ammo, not the weapon, so listen to the ammo too.
         const childItems = _getChildItems(item);
         if (!childItems?.length) return;
         for (const child of childItems) {
-            child.apps[ui.hotbar.appId] = ui.hotbar;
+            child.apps[ui.hotbar.id] = ui.hotbar;
         }
 
         return true;
@@ -263,18 +265,18 @@ function _getChildItems(item) {
 
 // Before deleting an item, remove it from the hotbar's apps, so the delete method doesn't close the hotbar.
 Hooks.on("preDeleteItem", (item) => {
-    delete item.apps[ui.hotbar.appId];
+    delete item.apps[ui.hotbar.id];
 });
 
 // Add update listeners to all child items whenever an item is updated, in case any child items were swapped.
 Hooks.on("updateItem", (item) => {
-    if (item.apps[ui.hotbar.appId]) {
+    if (item.apps[ui.hotbar.id]) {
         const childItems = _getChildItems(item);
         if (!childItems?.length) return;
 
         for (const child of childItems) {
-            if (child.apps[ui.hotbar.appId]) continue;
-            child.apps[ui.hotbar.appId] = ui.hotbar;
+            if (child.apps[ui.hotbar.id]) continue;
+            child.apps[ui.hotbar.id] = ui.hotbar;
         }
     }
 });

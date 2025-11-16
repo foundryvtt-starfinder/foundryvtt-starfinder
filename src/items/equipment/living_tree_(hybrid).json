@@ -4,11 +4,7 @@
   "type": "equipment",
   "img": "systems/sfrpg/icons/default/kevlar-vest.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "armor": {
       "type": "power",
@@ -51,7 +47,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "57",
     "capacity": {
       "max": 20,
@@ -107,6 +102,7 @@
           "name": "",
           "formula": "2d10 +(@abilities.str.mod)",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -114,12 +110,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -129,17 +128,17 @@
       "unidentified": "",
       "value": "<p><strong>Speed&nbsp;</strong> 15 ft.</p>\n<p><strong>Strength&nbsp;</strong> 24 (+7);&nbsp;<strong>Damage</strong>&nbsp;2d10 B;&nbsp;<strong>Size&nbsp;</strong> Huge (15-ft. reach)</p>\n<p><strong>Capacity&nbsp;</strong> 20;&nbsp;<strong>Usage&nbsp;</strong> 1/hour</p>\n<p>On Ghorus Prime, arcane botanists grow trees implanted with mystic engines to create this armor. The first time each day a living tree is activated, it grants its wearer 2d6 temporary Hit Points that disappear once the wearer leaves or deactivates the armor. They regain these temporary Hit Points whenever they rest for 10 minutes to regain Stamina Points so long as they wear the armor while exposed to soil, water, and sunlight. If the wearer is a plant, they add their Constitution modifier to these temporary Hit Points. While deactivated for 8 hours with access to soil, water, and sunlight, a living tree regains 1d8 charges.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 8,
     "modifiers": [],
     "price": 11200,
@@ -148,10 +147,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "reach": "15 ft.",
     "rollNotes": "",
@@ -160,11 +156,12 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "huge",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "TR pg. 54",
     "specialMaterials": {
       "abysium": false,
@@ -185,7 +182,6 @@
     "speed": "15 ft.",
     "strength": 24,
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -193,8 +189,8 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

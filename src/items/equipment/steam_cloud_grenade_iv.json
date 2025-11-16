@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/weapons/thrown/bomb-pressure-black.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 1,
@@ -85,7 +80,9 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -101,7 +98,6 @@
       "unidentified": "",
       "value": "<p>This device releases highly pressurized steam that fills the area for [[/r 1d4]] rounds before dissipating. Creatures in the area can attempt a Reflex save for half damage upon detonation as normal, and any creature who enters or begins their turn in the cloud must attempt an additional Reflex save against the same damage. Further, the steam cloud provides @UUID[Compendium.sfrpg.rules.JournalEntry.Kjba2E3Ad5oMJ7hV.JournalEntryPage.nyB6pt2dd6iVQGmS]{concealment}.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "round",
       "value": "1d4"
@@ -111,7 +107,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 15,
     "modifiers": [],
@@ -216,8 +212,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "20"
     },
@@ -229,8 +223,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 164",
     "special": "",
     "specialMaterials": {
@@ -250,7 +246,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

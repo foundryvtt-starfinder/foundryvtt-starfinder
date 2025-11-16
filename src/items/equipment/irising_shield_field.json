@@ -4,11 +4,7 @@
   "type": "shield",
   "img": "systems/sfrpg/icons/default/energy-shield.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "acp": 0,
     "actionTarget": "kac",
     "actionType": "mwak",
@@ -23,7 +19,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -44,7 +40,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bonus": {
       "aligned": 1,
       "wielded": 1
@@ -91,6 +86,8 @@
         {
           "name": "",
           "formula": "1d3 + @abilities.str.mod",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -98,12 +95,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -113,18 +113,18 @@
       "unidentified": "",
       "value": "<p>Manufactured by Veskarium engineers for quick deployment, irising shields are cited by vesk soldiers to be life-saving implements of battle. An irising shield is made of flexible, lightweight material that can be compressed into a small, rectangular container worn on your forearm (usually attached to the outside of your armor). You wield an irising shield by deploying it from its container as a swift action, and it can be stored with another swift action. While you have an irising shield deployed, you can’t switch it to another hand. A hand wielding an irising shield can hold another object, but it can’t wield weapons or other shields. An irising shield is an object of light bulk when not deployed but increases to 1 bulk when deployed. You can use an irising shield to make a special unarmed attack that does not count as archaic.</p>"
     },
-    "descriptors": [],
     "dex": null,
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 6,
     "modifiers": [],
     "price": 4350,
@@ -225,10 +225,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
@@ -236,6 +233,12 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "NS pg. 151",
     "specialMaterials": {
       "abysium": false,
@@ -254,7 +257,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -262,8 +264,8 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

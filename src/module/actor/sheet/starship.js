@@ -469,19 +469,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             starshipWeapon:                     game.i18n.localize("SFRPG.StarshipSheet.Features.Prefixes.StarshipWeapons")
         };
 
-        if (!this.actor.system.crew.useNPCCrew) {
-            data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
-        } else {
-            data.actions = {
-                captain: ActorSheetSFRPGStarship.StarshipActionsCache.captain,
-                pilot: ActorSheetSFRPGStarship.StarshipActionsCache.pilot,
-                gunner: ActorSheetSFRPGStarship.StarshipActionsCache.gunner,
-                engineer: ActorSheetSFRPGStarship.StarshipActionsCache.engineer,
-                scienceOfficer: ActorSheetSFRPGStarship.StarshipActionsCache.scienceOfficer,
-                chiefMate: ActorSheetSFRPGStarship.StarshipActionsCache.chiefMate,
-                magicOfficer: ActorSheetSFRPGStarship.StarshipActionsCache.magicOfficer
-            };
-        }
+        data.actions = ActorSheetSFRPGStarship.StarshipActionsCache;
     }
 
     _prepareAttackString(item)  {
@@ -1020,7 +1008,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         for (const entry of docs) {
             const role = entry.system.role;
 
-            if (!tempCache[role]) tempCache[role] = {label: CONFIG.SFRPG.starshipRoleNames[role], actions: []};
+            if (!tempCache[role]) tempCache[role] = {label: CONFIG.SFRPG.starshipRoles[role], actions: []};
 
             tempCache[role].actions.push(entry);
         }
@@ -1030,7 +1018,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             roleData.actions.sort((a, b) => a.order - b.order);
         }
 
-        const desiredOrder = ["captain", "pilot", "gunner", "engineer", "scienceOfficer", "chiefMate", "magicOfficer", "openCrew", "minorCrew"];
+        const desiredOrder = CONFIG.SFRPG.starshipRoleDisplayOrder;
         /** Automatically append any missing elements to the list at the end, in case new roles are added in the future. */
         for (const key of Object.keys(tempCache)) {
             if (!desiredOrder.includes(key)) desiredOrder.push(key);

@@ -10,21 +10,10 @@
       "type": "starshipFrame",
       "img": "systems/sfrpg/icons/default/hexagonal-nut.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
-        "costMultipliedBySize": false,
         "crew": {
           "maximum": 4,
           "minimum": 4
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "damageThreshold": {
           "base": 0
@@ -46,6 +35,7 @@
         "modifiers": [],
         "pcu": null,
         "size": "small",
+        "slug": "",
         "source": "SOM, p. 130",
         "weaponMounts": {
           "aft": {
@@ -87,19 +77,9 @@
       "type": "starshipShield",
       "img": "systems/sfrpg/icons/default/forward-field.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 0,
         "cost": 5,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "defenseValue": 0,
         "description": {
           "chat": "",
@@ -114,6 +94,7 @@
         "pcu": 15,
         "regeneration": 1,
         "shieldPoints": 60,
+        "slug": "",
         "source": "CRB pg. 302",
         "targetLockBonus": 0
       }
@@ -124,7 +105,6 @@
       "type": "starshipPowerCore",
       "img": "systems/sfrpg/icons/default/power-generator.svg",
       "system": {
-        "type": "",
         "cost": null,
         "costMultipliedBySize": false,
         "description": {
@@ -134,9 +114,9 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
         "pcu": null,
+        "slug": "",
         "source": "",
         "specialMaterials": {},
         "supportedSizes": []
@@ -148,18 +128,8 @@
       "type": "starshipThruster",
       "img": "systems/sfrpg/icons/default/rocket-thruster.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -173,6 +143,7 @@
         "modifiers": [],
         "pcu": null,
         "pilotingModifier": 0,
+        "slug": "",
         "source": "",
         "specialMaterials": {},
         "speed": 8,
@@ -185,12 +156,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -198,17 +165,29 @@
         "class": "light",
         "cost": 0,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d4",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -220,12 +199,12 @@
         "isPowered": true,
         "modifiers": [],
         "mount": {
-          "activated": false,
           "arc": "forward",
           "mounted": true
         },
         "pcu": 0,
         "range": "medium",
+        "slug": "",
         "source": "CRB pg. 302",
         "special": {
           "anchoring": false,
@@ -291,12 +270,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -304,17 +279,29 @@
         "class": "light",
         "cost": 0,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d4",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -326,12 +313,12 @@
         "isPowered": true,
         "modifiers": [],
         "mount": {
-          "activated": false,
           "arc": "aft",
           "mounted": true
         },
         "pcu": 0,
         "range": "medium",
+        "slug": "",
         "source": "CRB pg. 302",
         "special": {
           "anchoring": false,
@@ -397,12 +384,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -410,17 +393,29 @@
         "class": "light",
         "cost": 0,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d4",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -432,12 +427,12 @@
         "isPowered": true,
         "modifiers": [],
         "mount": {
-          "activated": false,
           "arc": "turret",
           "mounted": true
         },
         "pcu": 0,
         "range": "medium",
+        "slug": "",
         "source": "CRB pg. 302",
         "special": {
           "anchoring": false,
@@ -593,87 +588,23 @@
   },
   "system": {
     "attributes": {
-      "ac": {
-        "misc": 0,
-        "value": 10
-      },
-      "complement": {
-        "max": 1,
-        "min": 0,
-        "value": 0
-      },
-      "computer": {
-        "value": 0
-      },
-      "criticalThreshold": {
-        "value": 10
-      },
-      "damageThreshold": {
-        "value": 0
-      },
-      "drift": {
-        "value": 0
-      },
-      "expansionBays": {
-        "value": 0
-      },
       "hp": {
-        "increment": 10,
-        "max": 0,
         "value": 90
-      },
-      "maneuverability": "",
-      "mounts": {
-        "aft": [],
-        "forward": [],
-        "port": [],
-        "starboard": [],
-        "turret": []
-      },
-      "pilotingBonus": {
-        "value": 0
-      },
-      "power": {
-        "max": 0,
-        "value": 0
-      },
-      "shields": {
-        "aft": {
-          "max": 0,
-          "value": 0
-        },
-        "forward": {
-          "max": 0,
-          "value": 0
-        },
-        "max": 0,
-        "port": {
-          "max": 0,
-          "value": 0
-        },
-        "starboard": {
-          "max": 0,
-          "value": 0
-        },
-        "value": 0
-      },
-      "speed": {
-        "value": 5
       },
       "systems": {
         "engines": {
           "affectedRoles": {
             "pilot": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "lifeSupport": {
           "affectedRoles": {
             "captain": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "powerCore": {
           "affectedRoles": {
@@ -687,51 +618,84 @@
             "pilot": true,
             "scienceOfficer": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "sensors": {
           "affectedRoles": {
             "scienceOfficer": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "weaponsArrayAft": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "weaponsArrayForward": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "weaponsArrayPort": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "weaponsArrayStarboard": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         }
-      },
-      "targetLock": {
-        "misc": 0,
-        "value": 10
       }
     },
-    "conditions": {},
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "crew": {
       "captain": {
         "actorIds": [],
@@ -755,37 +719,30 @@
       },
       "npcData": {
         "captain": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "chiefMate": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "engineer": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "gunner": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "magicOfficer": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "pilot": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "scienceOfficer": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         }
@@ -811,11 +768,7 @@
     "details": {
       "frame": "",
       "model": "",
-      "modifiers": {
-        "custom": "",
-        "value": []
-      },
-      "notes": "<p><strong>&nbsp;Fearsome: </strong>Once every 1d4 rounds, the creature can attempt the taunt captain crew action using its good skill bonus.</p>\n<hr />\n<p><strong>Teleportation: </strong>On its turn during the helm phase, in lieu of its standard movement, the creature can select an empty space within 5 hexes and teleport to that space with a facing of its choice. Once it uses this ability, it can&rsquo;t use it again for 1d4 rounds.</p>\n<hr />\n<p><strong>Living Starship (Ex) </strong>A derelict shade is an undead creature so immense that it functions as a starship (and thus engages only in starship combat). The ghostly remnants of the crew members, functioning as a unified whole, can take engineer, gunner, magic officerCOM, and pilot actions using the bonuses, level, and ranks listed above. Modifiers for its size, speed, and maneuverability have already been factored into its statistics. Use the following table to determine the effects when a derelict shade takes critical damage.</p>\n<table style=\"width: 69.6288%;\" border=\"1\">\n<tbody>\n<tr>\n<td style=\"width: 5.57295%;\"><strong>D%</strong></td>\n<td style=\"width: 10.3439%;\">&nbsp;<strong>SYSTEM</strong></td>\n<td style=\"width: 83.6533%;\">&nbsp;<strong>EFFECT</strong></td>\n</tr>\n<tr>\n<td style=\"width: 5.57295%;\">1&ndash;30</td>\n<td style=\"width: 10.3439%;\">&nbsp;Weapons array</td>\n<td style=\"width: 83.6533%;\">Randomly determine one arc containing weapons; condition applies to all gunner actions using weapons in that arc.&nbsp;</td>\n</tr>\n<tr>\n<td style=\"width: 5.57295%;\">31&ndash;60</td>\n<td style=\"width: 10.3439%;\">Propulsion&nbsp;</td>\n<td style=\"width: 83.6533%;\">&nbsp;Condition applies to all pilot actions.</td>\n</tr>\n<tr>\n<td style=\"width: 5.57295%;\">61&ndash;90</td>\n<td style=\"width: 10.3439%;\">Marrow</td>\n<td style=\"width: 83.6533%;\">Condition applies to all engineer and magic officer actions, except when patching or repairing the marrow.</td>\n</tr>\n<tr>\n<td style=\"width: 5.57295%;\">91&ndash;100</td>\n<td style=\"width: 10.3439%;\">Core&dagger;</td>\n<td style=\"width: 83.6533%;\">During the next round, each of the derelict shade&rsquo;s attempted actions has a 25% chance of failure.</td>\n</tr>\n</tbody>\n</table>\n<p>&nbsp; &dagger; A derelict shade&rsquo;s core doesn&rsquo;t gain critical damage conditions.</p>\n<hr />\n<p><strong>Shadeswarm (Ex)</strong> When using its teleportation ability to appear adjacent to a starship that has no shields remaining in one or more quadrants, a derelict shade can attempt a check using its gunnery bonus as part of using its teleportation. If the result is equal to or greater than the adjacent ship&rsquo;s AC, any living crew members aboard the starship are swarmed by spirits from the derelict shade. Each affected creature must succeed at a DC 11 Will save or be unable to act until after the next round&rsquo;s helm phase.</p>\n<hr />\n<p><strong>Ghosts in the Machine (Ex)&nbsp;</strong>A derelict shade&rsquo;s weaponry carries fragments of its crew&rsquo;s souls. If the derelict shade deals Hull Point damage to an enemy ship, these fragments infect the ship&rsquo;s systems and cause one randomly determined system to gain the glitching condition until the end of the next round, regardless of the amount of damage dealt. If the damage dealt would already give the system the glitching condition, it instead gains the malfunctioning condition until the end of the next round. A system that is already malfunctioning or wrecked is not affected.</p>\n<hr />\n<p><strong>Void Adaptation (Su) </strong></p>\n<p><strong>Source</strong><em> Alien Archive</em> 2 pg. 154</p>\n<p>A creature with void adaptation is inured to the void of outer space and has the following abilities:</p>\n<ul>\n<li>Immunity to cosmic rays.</li>\n<li>Immunity to the environmental effects of vacuum.</li>\n<li>No breath.</li>\n</ul>",
+      "notes": "<p><strong> Fearsome: </strong>Once every 1d4 rounds, the creature can attempt the taunt captain crew action using its good skill bonus.</p>\n<hr />\n<p><strong>Teleportation: </strong>On its turn during the helm phase, in lieu of its standard movement, the creature can select an empty space within 5 hexes and teleport to that space with a facing of its choice. Once it uses this ability, it can’t use it again for 1d4 rounds.</p>\n<hr />\n<p><strong>Living Starship (Ex) </strong>A derelict shade is an undead creature so immense that it functions as a starship (and thus engages only in starship combat). The ghostly remnants of the crew members, functioning as a unified whole, can take engineer, gunner, magic officerCOM, and pilot actions using the bonuses, level, and ranks listed above. Modifiers for its size, speed, and maneuverability have already been factored into its statistics. Use the following table to determine the effects when a derelict shade takes critical damage.</p>\n<table style=\"width:69.6288%\" border=\"1\">\n<tbody>\n<tr>\n<td style=\"width:5.57295%\"><strong>D%</strong></td>\n<td style=\"width:10.3439%\"> <strong>SYSTEM</strong></td>\n<td style=\"width:83.6533%\"> <strong>EFFECT</strong></td>\n</tr>\n<tr>\n<td style=\"width:5.57295%\">1–30</td>\n<td style=\"width:10.3439%\"> Weapons array</td>\n<td style=\"width:83.6533%\">Randomly determine one arc containing weapons; condition applies to all gunner actions using weapons in that arc. </td>\n</tr>\n<tr>\n<td style=\"width:5.57295%\">31–60</td>\n<td style=\"width:10.3439%\">Propulsion </td>\n<td style=\"width:83.6533%\"> Condition applies to all pilot actions.</td>\n</tr>\n<tr>\n<td style=\"width:5.57295%\">61–90</td>\n<td style=\"width:10.3439%\">Marrow</td>\n<td style=\"width:83.6533%\">Condition applies to all engineer and magic officer actions, except when patching or repairing the marrow.</td>\n</tr>\n<tr>\n<td style=\"width:5.57295%\">91–100</td>\n<td style=\"width:10.3439%\">Core†</td>\n<td style=\"width:83.6533%\">During the next round, each of the derelict shade’s attempted actions has a 25% chance of failure.</td>\n</tr>\n</tbody>\n</table>\n<p>  † A derelict shade’s core doesn’t gain critical damage conditions.</p>\n<hr />\n<p><strong>Shadeswarm (Ex)</strong> When using its teleportation ability to appear adjacent to a starship that has no shields remaining in one or more quadrants, a derelict shade can attempt a check using its gunnery bonus as part of using its teleportation. If the result is equal to or greater than the adjacent ship’s AC, any living crew members aboard the starship are swarmed by spirits from the derelict shade. Each affected creature must succeed at a DC 11 Will save or be unable to act until after the next round’s helm phase.</p>\n<hr />\n<p><strong>Ghosts in the Machine (Ex) </strong>A derelict shade’s weaponry carries fragments of its crew’s souls. If the derelict shade deals Hull Point damage to an enemy ship, these fragments infect the ship’s systems and cause one randomly determined system to gain the glitching condition until the end of the next round, regardless of the amount of damage dealt. If the damage dealt would already give the system the glitching condition, it instead gains the malfunctioning condition until the end of the next round. A system that is already malfunctioning or wrecked is not affected.</p>\n<hr />\n<p><strong>Void Adaptation (Su) </strong></p>\n<p><strong>Source</strong><em> Alien Archive</em> 2 pg. 154</p>\n<p>A creature with void adaptation is inured to the void of outer space and has the following abilities:</p>\n<ul>\n<li>Immunity to cosmic rays.</li>\n<li>Immunity to the environmental effects of vacuum.</li>\n<li>No breath.</li>\n</ul>",
       "size": "",
       "tier": 4
     },
@@ -889,6 +842,7 @@
           "value": 10
         }
       }
-    }
+    },
+    "slug": ""
   }
 }

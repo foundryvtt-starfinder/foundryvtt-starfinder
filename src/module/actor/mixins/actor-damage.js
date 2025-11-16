@@ -337,7 +337,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         const actorUpdate = {};
-        const actorData = foundry.utils.deepClone(this.system);
+        const actorData = this.system;
 
         const damagesPerType = [];
         if (damage.damageTypes.length > 0) {

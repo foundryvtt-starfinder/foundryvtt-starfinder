@@ -4,11 +4,7 @@
   "type": "shield",
   "img": "systems/sfrpg/icons/equipment/armor/riot-shield-paragon.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "acp": -2,
     "actionTarget": "",
     "actionType": "mwak",
@@ -23,7 +19,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -44,7 +40,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bonus": {
       "aligned": 4,
       "wielded": 1
@@ -87,7 +82,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -97,18 +93,18 @@
       "unidentified": "",
       "value": "<p>A riot shield is a large slab of advanced material, normally thin layers of nanocarbon over plastics and resins, and often including a transparent aluminum view port. A hand wielding a riot shield cannot be used for anything else, and changing your grip from carrying a riot shield to wielding it, or vice versa, requires a move action. Pulling out a riot shield from storage or putting one away also requires a move action. If you are wielding a riot shield, you gain a +2 bonus to any bull rush combat maneuver you attempt.</p>\n<p><span id=\"ctl00_MainContent_DetailedOutput\"></span></p>"
     },
-    "descriptors": [],
     "dex": 6,
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 20,
     "modifiers": [
       {
@@ -116,8 +112,10 @@
         "name": "Riot Shield - Combat maneuver",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "formula",
@@ -225,10 +223,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
@@ -236,6 +231,12 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Character Operation Manual",
     "specialMaterials": {
       "abysium": false,
@@ -254,7 +255,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -262,8 +262,8 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

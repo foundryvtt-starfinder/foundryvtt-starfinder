@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/desperation_canon_doom-caller.webp",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 40,
@@ -81,6 +76,7 @@
           "acceptsType": [
             "weaponAccessory"
           ],
+          "affectsEncumbrance": true,
           "amount": 4,
           "subtype": "",
           "weightMultiplier": 1,
@@ -98,6 +94,7 @@
           "name": "",
           "formula": "3d8",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": true,
             "bludgeoning": false,
@@ -105,12 +102,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -120,7 +120,6 @@
       "unidentified": "",
       "value": "<p>Despite having established planetwide peace, scyphozoan manufacturers like Meduza Industries continue to develop weapons for ceremonial, recreational, and security purposes.</p><hr /><p>A meduza rifle fires acidic filaments that cut and burn the target. The filaments quickly become inert but retain some adhesive properties. The rifles are grown from genetically engineered material taken from both scyphozoans and other Primorian species.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -130,7 +129,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 10,
     "modifiers": [],
@@ -235,8 +234,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "70"
     },
@@ -248,8 +245,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "IS, pg. 119",
     "special": "",
     "specialMaterials": {
@@ -269,7 +268,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

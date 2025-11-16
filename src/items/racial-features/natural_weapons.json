@@ -4,17 +4,13 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/feats/grappler_pull.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
-      "type": "none",
+      "type": "action",
       "condition": "",
-      "cost": 0
+      "cost": null
     },
     "ammunitionType": "",
     "area": {
@@ -24,7 +20,7 @@
       "units": "ft",
       "value": ""
     },
-    "attackBonus": 0,
+    "attackBonus": null,
     "attributes": {
       "ac": {
         "value": ""
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "0",
     "capacity": {
       "max": 0,
@@ -74,12 +69,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -89,9 +87,8 @@
       "unidentified": "",
       "value": "<p>Natural weapons (and natural attacks) such as acid spit, bite, claw, or slam don’t require ammunition and can’t be disarmed or sundered.</p>\n<p>In addition, a player character with this ability can attack with a special unarmed strike that deals lethal damage, doesn’t count as archaic, and threatens squares. They also gain a special version of the Weapon Specialization feat with this unarmed strike at 3rd level, allowing them to add 1–1/2 × their character level to their damage rolls for this unarmed strike (instead of just adding their character level as usual).</p>\n<p><em>Look to your species Natural Weapon/Attack feature to know how this item's damage type should be set. If no damage type is referenced, it is Bludgeoning, as the Unarmed strike.</em></p>\n<p><em>Damage calculation is already set to account the additional damage of 1/2</em><span><em>× their character level, beyond the damage provided by their normal Weapon Specialization damage.</em></span></p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
     "equippable": false,
@@ -99,7 +96,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 1,
     "modifiers": [],
@@ -204,10 +201,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
@@ -217,8 +211,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "Species Feature",
     "special": "",
     "specialMaterials": {
@@ -238,7 +234,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -246,7 +241,7 @@
       "value": 0
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
       "value": 0
     },

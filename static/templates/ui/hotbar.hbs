@@ -1,44 +1,43 @@
-<div id="hotbar" class="flexrow sfrpg {{#if locked}}locked{{/if}}" data-tooltip-direction="UP">
-    <div id="hotbar-directory-controls" class="bar-controls flexcol">
-        <a id="bar-toggle" data-tooltip="MACRO.CollapseHotbar">
-            <i class="fas fa-caret-down"></i>
-        </a>
-        <a id="macro-directory" data-tooltip="MACRO.Directory">
-            <i class="fas fa-folder"></i>
-        </a>
+<aside id="hotbar">
+    <div id="hotbar-controls-left" class="hotbar-controls flexcol" data-tooltip-direction="LEFT">
+        <button type="button" class="ui-control fa-solid fa-volume icon" data-action="mute" data-tooltip
+                aria-label="{{localize 'HOTBAR.MUTE'}}"></button>
+        <button type="button" class="ui-control fa-solid fa-bars icon" data-action="menu" data-tooltip
+                aria-label="{{localize 'HOTBAR.MENU'}}"></button>
     </div>
-    <nav id="action-bar" class="flexrow {{barClass}}"  aria-label="{{localize 'MACRO.NavLabel'}}">
-        <ol id="macro-list" class="flexrow" data-page="{{page}}">
-            {{#each macros}}
-            <li class="macro {{this.cssClass}}" data-slot="{{this.slot}}"
-                {{#if this.macro}}data-macro-id="{{this.macro.id}}" data-tooltip="{{this.tooltip}}"{{/if}}>
-                <span class="macro-key">{{this.key}}</span>
-                {{#if this.icon}}
-                <img class="macro-icon {{#if this.greyscale}}greyscale{{/if}} {{#if this.activeGlow}}active{{/if}}" src="{{this.icon}}" alt="{{this.tooltip}}" />
-                {{/if}}
-                {{#if this.macro.macroConfig.item}}
-                    <i class="fas {{this.iconClass}} icon"></i>
-                    {{#if this.macro.macroConfig.hasCapacity}}
-                    <footer class="macro-footer">{{this.macro.macroConfig.capacityCurrent}}/{{this.macro.macroConfig.capacityMaximum}}</footer>
-                    {{else if this.macro.macroConfig.hasUses}}
-                    <footer class="macro-footer">{{this.macro.macroConfig.item.system.uses.value}}/{{this.macro.macroConfig.item.system.uses.total}}</footer>
+    <menu id="action-bar" class="flexrow sfrpg" data-tooltip-direction="UP">
+        {{#each slots as |slot|}}
+            <li class="slot {{slot.cssClass}}" role="button" data-action="execute" data-slot="{{slot.slot}}"
+                style="{{slot.style}}" aria-label="{{slot.ariaLabel}}"
+                {{#if slot.tooltip}}data-tooltip-html="{{slot.tooltip}}"{{/if}}>
+                {{#if slot.img}}<img class="slot-icon {{#if slot.greyscale}}greyscale{{/if}} {{#if slot.activeGlow}}active{{/if}}" src="{{slot.img}}" alt="{{slot.ariaLabel}}">{{/if}}
+                <span class="key">{{slot.key}}</span>
+                {{#if slot.macro.macroConfig.item}}
+                    <i class="fas {{slot.iconClass}} icon"></i>
+                    {{#if slot.macro.macroConfig.hasCapacity}}
+                        <footer class="footer">{{slot.macro.macroConfig.capacityCurrent}}/{{slot.macro.macroConfig.capacityMaximum}}</footer>
+                    {{else if slot.macro.macroConfig.hasUses}}
+                        <footer class="footer">{{slot.macro.macroConfig.item.system.uses.value}}/{{slot.macro.macroConfig.item.system.uses.total}}</footer>
                     {{/if}}
                 {{/if}}
             </li>
-            {{/each}}
-        </ol>
-        <div id="hotbar-lock" class="bar-controls flexcol" data-tooltip-direction="UP">
-            <a class="page-control" data-action="lock" data-tooltip="MACRO.{{ifThen locked "Unlock" "Lock"}}Bar">
-                <i class="fas fa-lock{{#unless locked}}-open{{/unless}}"></i>
-            </a>
+        {{/each}}
+    </menu>
+    <div id="hotbar-controls-right" class="hotbar-controls flexrow" data-tooltip-direction="RIGHT">
+        <nav id="hotbar-page-controls" class="flexcol">
+            <button type="button" class="plain hotbar-page-control page-next fa-solid fa-triangle icon"
+                    data-action="page" data-direction="1" data-tooltip aria-label="{{localize 'HOTBAR.PAGE_NEXT'}}">
+            </button>
+            <span class="hotbar-page-number">{{page}}</span>
+            <button type="button" class="plain hotbar-page-control page-prev fa-solid fa-triangle icon"
+                    data-action="page" data-direction="-1" data-tooltip aria-label="{{localize 'HOTBAR.PAGE_PREV'}}">
+            </button>
+        </nav>
+        <div class="flexcol">
+            <button type="button" class="ui-control fa-solid fa-unlock icon" data-action="lock" data-tooltip
+                    aria-label="{{localize 'HOTBAR.LOCK'}}"></button>
+            <button type="button" class="ui-control fa-solid fa-trash icon" data-action="clear" data-tooltip
+                    aria-label="{{localize 'HOTBAR.CLEAR'}}"></button>
         </div>
-        <div id="hotbar-page-controls" class="bar-controls flexcol" data-tooltip-direction="UP">
-            <a class="page-control" data-action="page-up" data-tooltip="MACRO.PageUp" alt="{{localize 'MACRO.PageUp'}}" >
-                <i class="fas fa-angle-up"></i></a>
-            <span class="page-number">{{page}}</span>
-            <a class="page-control" data-action="page-down" data-tooltip="MACRO.PageDown" alt="{{localize 'MACRO.PageDown'}}">
-                <i class="fas fa-angle-down"></i>
-            </a>
-        </div>
-    </nav>
-</div>
+    </div>
+</aside>

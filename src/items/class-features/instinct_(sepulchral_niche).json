@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -82,23 +79,21 @@
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "2414774c-b760-4013-bc89-653852a87b3d",
         "name": "Instinct (Sepulchral Niche)",
         "type": "untyped",
         "condition": "",
-        "container": {
-          "actorId": "Ae7WsuaQwavXerQ0",
-          "itemId": "Acg1GER3zVeU7Enz"
-        },
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 6,
         "modifier": "(lookupRange(@resources.evolutionist.evolutionTrack.value, 0, 1, ceil(@resources.evolutionist.evolutionTrack.value * (lookupRange(@classes.evolutionist.levels, 0.5, 7, 1.5, 13, 2)))))",
         "modifierType": "formula",
@@ -112,12 +107,10 @@
         "name": "Instinct (Sepulchral Niche)",
         "type": "untyped",
         "condition": "",
-        "container": {
-          "actorId": "Ae7WsuaQwavXerQ0",
-          "itemId": "Acg1GER3zVeU7Enz"
-        },
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 6,
         "modifier": "(lookupRange(@resources.evolutionist.evolutionTrack.value, 0, 1, ceil(@resources.evolutionist.evolutionTrack.value * (lookupRange(@classes.evolutionist.levels, 0.5, 7, 1.5, 13, 2)))))",
         "modifierType": "formula",
@@ -129,30 +122,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level (Evolutionist)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "IS, pg. 15",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

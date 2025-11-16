@@ -5,9 +5,6 @@
   "img": "systems/sfrpg/icons/default/stopwatch.svg",
   "system": {
     "type": "effect",
-    "abilityMods": {
-      "parts": []
-    },
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
@@ -21,15 +18,9 @@
     },
     "context": {
       "origin": {
-        "actorUuid": "",
-        "itemUuid": ""
+        "actorUuid": null,
+        "itemUuid": null
       }
-    },
-    "critical": {
-      "parts": []
-    },
-    "damage": {
-      "parts": []
     },
     "description": {
       "chat": "",
@@ -42,43 +33,15 @@
     "modifiers": [
       {
         "_id": "9192a41b-4eff-46ad-875c-5ea415a69203",
-        "name": "Effect: Enhance Defense (Su) - 2nd Level",
+        "name": "Effect: Enhance Defense (Su)",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
-        "enabled": false,
-        "max": 1,
-        "modifier": "+1",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "eac"
-      },
-      {
-        "_id": "9910aa99-e639-413a-b236-170e6414abd0",
-        "name": "Effect: Enhance Defense (Su) - 8th Level",
-        "type": "circumstance",
-        "condition": "",
-        "effectType": "ac",
-        "enabled": false,
-        "max": 2,
-        "modifier": "+2",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "eac"
-      },
-      {
-        "_id": "ffdd3501-3afc-41bc-85f1-43f6ad8ca990",
-        "name": "Effect: Enhance Defense (Su) - 14th Level",
-        "type": "circumstance",
-        "condition": "",
-        "effectType": "ac",
-        "enabled": false,
-        "max": 3,
-        "modifier": "+3",
+        "enabled": true,
+        "limitTo": null,
+        "max": 0,
+        "modifier": "lookupRange(@origin.actor.details.level.value, 0, 2, 1, 8, 2, 14, 3)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -88,6 +51,7 @@
     ],
     "requirements": "2nd Level (Technomancer)",
     "showOnToken": true,
+    "slug": "",
     "source": "EN pg. 78",
     "turnEvents": []
   }

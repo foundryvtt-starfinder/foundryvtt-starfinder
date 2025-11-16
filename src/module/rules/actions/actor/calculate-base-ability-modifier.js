@@ -1,4 +1,4 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateBaseAbilityModifier", (fact, context) => {
@@ -20,7 +20,9 @@ export default function(engine) {
             try {
                 const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -38,6 +40,7 @@ export default function(engine) {
         });
 
         for (const [abl, ability] of Object.entries(data.abilities)) {
+            if (!ability.modifierTooltip) ability.modifierTooltip = [];
 
             const abilityMods = context.parameters.stackModifiers.process(
                 filteredMods.filter(mod => mod.valueAffected === abl || mod.effectType === SFRPGEffectType.ABILITY_MODIFIERS),
@@ -54,16 +57,9 @@ export default function(engine) {
             ability.modifierTooltip.push(game.i18n.format("SFRPG.AbilityModifierBase", { mod: base.signedString() }));
 
             const mod = Object.entries(abilityMods).reduce((sum, mod) => {
-                if (mod[1] === null || mod[1].length < 1) return sum;
-
-                if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                    for (const bonus of mod[1]) {
-                        sum += addModifier(bonus, data, ability, "SFRPG.AbilityModifiersTooltip");
-                    }
-                } else {
-                    sum += addModifier(mod[1], data, ability, "SFRPG.AbilityModifiersTooltip");
+                for (const bonus of mod[1]) {
+                    sum += addModifier(bonus, data, ability, "SFRPG.AbilityModifiersTooltip");
                 }
-
                 return sum;
             }, 0);
 
@@ -80,7 +76,7 @@ export default function(engine) {
 
         // Finally, update classes, if applicable
         if (data.classes) {
-            for (const [classId, classEntry] of Object.entries(data.classes)) {
+            for (const classEntry of Object.values(data.classes)) {
                 classEntry.keyAbilityMod = data.abilities[classEntry.keyAbilityScore]?.mod || 0;
             }
         }

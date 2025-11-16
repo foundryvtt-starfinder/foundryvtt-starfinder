@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "icons/magic/perception/eye-ringed-green.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,30 +37,28 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.rpaon3jF3nCe5eP9]{Theorem (Ex)}</p>\n<p>Following a regimen of experimental treatments, you have altered your senses to notice even the faintest traces of sounds or movement. You gain @UUID[Compendium.sfrpg.rules.rX5rK6UWAIOeeipl.JournalEntryPage.p0o9tmWtKZ0qy8DI#blindsense]{Blindsense} (vibration) with a range of 5 feet as well as a +2 enhancement bonus to Will saving throws against illusions.</p>\n<p>As a move action, you can spend 1 Resolve Point to enter a state of heightened awareness. This state allows you see invisible creatures as per @UUID[Compendium.sfrpg.spells.Item.5aW793TGgd3Kd4Fe]{See Invisibility}, your enhancement bonus to Will saving throws against illusions increases to +4, and you take a –2 penalty to Fortitude saving throws due to the enhanced strain on your body. This state lasts for a number of minutes equal to 10 × your biohacker level, and you can end the state before then as a swift action.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "2f260e51-235d-4b52-bb1a-8073fe8131d7",
         "name": "Enhanced Senses - illusions",
         "type": "enhancement",
         "condition": "",
-        "container": {
-          "actorId": "x0bGWfloAFlk2eFe",
-          "itemId": "ijG6aS1F3NDjmY3o"
-        },
+        "damage": null,
         "effectType": "save",
         "enabled": true,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "formula",
@@ -77,12 +72,10 @@
         "name": "Enhanced Sensations - illusions (heightened awareness)",
         "type": "untyped",
         "condition": "",
-        "container": {
-          "actorId": "x0bGWfloAFlk2eFe",
-          "itemId": "ijG6aS1F3NDjmY3o"
-        },
+        "damage": null,
         "effectType": "save",
         "enabled": false,
+        "limitTo": null,
         "max": 4,
         "modifier": "4",
         "modifierType": "formula",
@@ -96,12 +89,10 @@
         "name": "Enhanced Senses (heightened awareness)",
         "type": "untyped",
         "condition": "",
-        "container": {
-          "actorId": "x0bGWfloAFlk2eFe",
-          "itemId": "ijG6aS1F3NDjmY3o"
-        },
+        "damage": null,
         "effectType": "save",
         "enabled": false,
+        "limitTo": null,
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
@@ -113,30 +104,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "8th Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GEM pg. 14",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

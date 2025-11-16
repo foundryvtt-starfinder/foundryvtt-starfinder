@@ -10,11 +10,7 @@
       "type": "weapon",
       "img": "icons/equipment/hand/gauntlet-simple-leather-brown-gold.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -28,7 +24,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -49,7 +45,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": null,
@@ -58,7 +53,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -69,13 +64,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d3 + @abilities.str.mod",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -85,9 +93,8 @@
           "unidentified": "",
           "value": "<p>An unarmed strike can be dealt with any limb or appendage. Unarmed strikes deal nonlethal damage, and the damage from an unarmed strike is considered weapon damage for the purposes of effects that give you a bonus to weapon damage rolls.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -95,7 +102,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 0,
         "modifiers": [],
@@ -191,10 +198,7 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -202,11 +206,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -214,7 +223,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -245,12 +254,6 @@
             ]
           ]
         },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -259,11 +262,11 @@
           "value": "<p>Originally from a planet orbiting a @UUID[Compendium.sfrpg.conditions.Item.4MxAK5uS0zMNWhUK]{Dying} star far beyond the Pact Worlds, the four-armed kasathas maintain a reputation as a noble and mysterious people. They are famous for their anachronistic warriors, ancient wisdom, and strange traditions.</p>\n<h3>Physical Description</h3>\n<p>Kasathas are gray-skinned humanoids with four arms and pure black eyes. Lacking a protruding nose, a kasatha’s head is smooth and elongated, with skin stretched tight to a skull extending backward far beyond the edge of the neck. While lean compared to @UUID[Compendium.sfrpg.races.Item.AMBcyDZDtJ1OOzh3]{Human}, kasathas have more advanced muscle fibers that grant them surprising strength. Physical differences between kasatha genders are slight and easily overlooked by other races.</p>\n<h3>Home World</h3>\n<p>Kasathas evolved on Kasath, a massive desert planet orbiting a red giant. While they knew that, on a stellar scale, their sun was near death, tradition kept them from entertaining the idea of colonizing another world until shortly after the Gap. Then, their progenitor race—the plane-hopping witchwyrds—returned and told them of the perfect world: a place called @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton}.</p>\n<p>Determined to settle this promised land, the kasathas began construction of a great, slower-than-light colony ship. Hundreds of years later, the worldship&nbsp;@UUID[Compendium.sfrpg.setting.Item.nZHqkDndoLfqukCs]{Idari}&nbsp;arrived in the Pact Worlds system. To the crew’s surprise, however, local technology had advanced, and the kasathan juggernaut found itself too vulnerable to risk invading @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton}. Instead, while many kasathas emigrated peacefully to that planet and the surrounding worlds, the majority elected to remain aboard the&nbsp;@UUID[Compendium.sfrpg.setting.Item.nZHqkDndoLfqukCs]{Idari}&nbsp;in an orbit between @UUID[Compendium.sfrpg.setting.Item.f24qKgU5Wh5LLJyh]{Verces} and @UUID[Compendium.sfrpg.setting.Item.Yt2xT4Iy6lHjCzso]{The Diaspora}, tending its rotating-drum farms and manufacturing bays while trading with other races.</p>\n<h3>Society and Alignment</h3>\n<p>Kasathas were technologically advanced when humanity was still huddling in caves, yet they long ago plateaued socially and technologically, learning the importance of stability and balance after a series of near-apocalyptic disasters. In kasathan culture, the answer to any question lies somewhere in the past. The fact that their home world’s records extend further back into the Gap than any Pact World only encourages their veneration of history. This leads to a culture steeped in customs that can seem bizarre to outsiders, from the common requirement to hide one’s mouth around all but one’s most intimate companions to an ironclad belief in the superior dignity of wielding melee weapons over projectile or energy weapons.</p>\n<p>Kasathan society is generally matriarchal and nomadic, organized into myriad “great families,” clans, and subclans, with individuals and family units roaming as the whim takes them. Their conviction that most other races don’t truly understand the importance of personal dignity means kasathas rarely bother to teach their customs to outside races, which leads to their reputation as being mysterious, standoffish, wise, or all three. Each kasatha follows a unique set of traditions, combining common rituals with new ones she creates. She gains more and more traditions over a lifetime, so that the oldest kasathas spend much of their time honoring the past. This accumulation of personal customs begins during the Tempering, a yearlong walkabout all kasathas undergo at the end of adolescence. During this time, young kasathas are encouraged to test their limits, learn from other cultures, and engage in normally improper behavior in hopes of coming to appreciate the value of tradition.</p>\n<p>Many kasathas are lawful neutral, as befits their focus on custom, though younger ones can often be more chaotic, idealistic, or self-centered.</p>\n<h3>Relations</h3>\n<p>Kasathas strive to maintain open trade with all races, yet they find some more amicable than others. They see @UUID[Compendium.sfrpg.races.Item.7VtfabTXl7NEXC6u]{Vesk} as brutish and shameful in their focus on conquest by any means, and ysoki as loud and undignified. They get along well with lashuntas, who properly respect the knowledge of the past, and they are intrigued by both androids and shirrens—races they see as young enough to be led down proper paths. @UUID[Compendium.sfrpg.races.Item.AMBcyDZDtJ1OOzh3]{Humans} often confuse them; just when they’re ready to write all @UUID[Compendium.sfrpg.races.Item.AMBcyDZDtJ1OOzh3]{Humans} off as capricious, they meet one whose sense of honor almost matches their own.</p>\n<h3>Adventurers</h3>\n<p>Kasathas originally brought the philosophy of star cycles and cosmic balance to the Pact Worlds, and to this day most solarians are kasathas, though their physiques and love of dueling also make them excellent soldiers, and the study of ancient traditions turns many into mystics. Kasathas undergoing the Tempering make perfect explorers and adventurers, and in recent generations these walkabouts sometimes turn permanent.</p>\n<p><strong>Ability&nbsp;</strong><strong>Adjustments</strong>+2 Str, +2 Wis, -2 Int</p>\n<p><strong>Hit Points</strong>&nbsp;4</p>\n<h2>Vital Stats</h2>\n<p><strong>Average Height&nbsp;</strong> 6-7 ft.</p>\n<p><strong>Average Weight&nbsp;</strong> 120-200 lbs.</p>\n<p><strong>Age of Maturity&nbsp;</strong> 25 years</p>\n<p><strong>Maximum Age&nbsp;</strong> 100+2d20 years</p>\n<h2>Size and Type</h2>\n<p>Kasathas are Medium humanoids with the kasatha subtype.</p>\n<h2>@UUID[Compendium.sfrpg.racial-features.Item.dwD6Qn49xAYzTktl]{Desert Stride}</h2>\n<p>Kasathas can move through nonmagical difficult terrain in deserts, hills, and mountains at their normal speed.</p>\n<h2>@UUID[Compendium.sfrpg.racial-features.Item.DLNa7XnGG09k7OsT]{Four-Armed}</h2>\n<p>Kasathas have four arms, which allows them to wield and hold up to four hands’ worth of weapons and equipment. While their multiple arms increase the number of items they can have at the ready, it doesn’t increase the number of attacks they can make during combat.</p>\n<h2>@UUID[Compendium.sfrpg.racial-features.Item.SV0dXqHc7MJHrevN]{Historian}</h2>\n<p>Due to their in-depth historical training and the wide-ranging academic background knowledge they possess, kasathas receive a +2 species bonus to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.LeZmnFwnlB89ovBB]{Culture} checks.</p>\n<h2>@UUID[Compendium.sfrpg.racial-features.Item.eqDPcAecGzpNTLd1]{Natural Grace}</h2>\n<p>Kasathas receive a +2 species bonus to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.3QdtsfnVJsHEdrt0]{Acrobatics} and @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.iLlBAZBfHJMZQRQx]{Athletics} checks.</p>\n<h1>Alternate Species Traits</h1>\n<p><strong>Source&nbsp;</strong><em>COM pg. 20</em></p>\n<p>Kasathas have spread among the stars for generations. Some groups have developed adaptations to these diverse conditions, represented by the following alternate species traits.</p>\n<h2>@UUID[Compendium.sfrpg.racial-features.Item.0rMoi4u2dkN0UvOT]{Crew Member}</h2>\n<p><strong>Source&nbsp;</strong><em>COM pg. 20</em></p>\n<p>Some kasatha families have a long tradition of training kin to serve on the @UUID[Compendium.sfrpg.setting.Item.nZHqkDndoLfqukCs]{Idari}’s crew. These kasathas have a +2 species bonus to one skill among @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.IqOCYDKd9NgBwowp]{Computers}, @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4]{Engineering}, or @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.2xZnjhTSiLu0uoXB]{Piloting}.</p>\n<p><strong>This replaces historian.</strong></p>\n<h2>@UUID[Compendium.sfrpg.racial-features.Item.OlYxSp5lKVXjiuMP]{Personal Traditions}</h2>\n<p><strong>Source&nbsp;</strong><em>COM pg. 20</em></p>\n<p>Kasathas who lack strong bonds sometimes find strength in personal traditions. Once per day as a reaction, such a kasatha can reroll a failed saving throw.</p>\n<p><strong>This replaces natural grace.</strong></p>"
         },
         "hp": {
-          "min": 1,
           "value": 4
         },
         "modifiers": [],
         "size": "medium",
+        "slug": "",
         "source": "CRB pg. 46",
         "subtype": "kasatha"
       }
@@ -274,10 +277,6 @@
       "type": "class",
       "img": "systems/sfrpg/icons/default/id-card.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "bab": "moderate",
         "bonusSpellsPerDay": {
           "0": {
@@ -369,9 +368,6 @@
             "6": 1
           }
         },
-        "critical": {
-          "parts": []
-        },
         "csk": {
           "acr": false,
           "ath": false,
@@ -394,9 +390,6 @@
           "ste": false,
           "sur": false
         },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -406,7 +399,6 @@
         },
         "fort": "fast",
         "hp": {
-          "min": 1,
           "value": 6
         },
         "isCaster": false,
@@ -433,13 +425,11 @@
         },
         "ref": "slow",
         "skillRanks": {
-          "min": 4,
           "value": 4
         },
         "slug": "biohacker",
         "source": "COM, p. 40",
         "sp": {
-          "min": 1,
           "value": 6
         },
         "spellAbility": "",
@@ -796,19 +786,9 @@
       "type": "theme",
       "img": "systems/sfrpg/icons/default/plane-pilot.svg",
       "system": {
-        "type": "",
         "abilityMod": {
           "ability": "cha",
           "mod": 1
-        },
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -823,12 +803,10 @@
             "name": "Icon Bonus",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "1Z6IKujG4PKAxTWg",
-              "itemId": "svFQyxjmA7YWUCbq"
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "1",
             "modifierType": "constant",
@@ -839,6 +817,7 @@
           }
         ],
         "skill": "cul",
+        "slug": "",
         "source": "CRB page 31"
       }
     },
@@ -848,11 +827,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/equipment/technological%20items/medkit-advanced.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -865,7 +840,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -874,7 +849,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -884,136 +860,14 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>You have created a small, customized kit consisting of medical supplies, testing materials, and pharmaceutical compounds, which you can use to evaluate medical conditions and perform several additional tasks described below. You can configure your custom microlab to take the shape of anything that can fit in your hand or similar appendage. Alternatively, you can add it to an armor upgrade slot or to an augmentation system in your brain or an arm; it never takes up an armor upgrade slot or occupies a system in your body, so you can still use that slot or system for an armor upgrade or augmentation as normal. You must have your custom microlab on your person to use it, but you can configure it so it doesn’t need to be in your hand to function.</p>\n<p>Your custom microlab counts as a @UUID[Compendium.sfrpg.equipment.Item.4ANV2gtgo6zRffs3]{Basic Medkit} and a @UUID[Compendium.sfrpg.equipment.Item.NvrgoJ53pmEkacLl]{Chemalyzer} and can be used for any purposes applicable to those items. As long as you are in possession of your custom microlab, you can use Physical Science or Life Science instead of Mysticism to make serums, though these serums are not magic items, can be identified using Life Science or Physical Science rather than Mysticism, and do not require a detect magic spell to attempt such a check to identify.</p>\n<p>As long as you have your custom microlab, as a move action you can target a creature within your line of sight and within the microlab’s range (60 feet at 1st level) and attempt a special skill check to identify it. If the creature is living, this is a Life Science check. If it is unliving, it’s a Physical Science check. The DC of this check is determined by the creature’s rarity, as presented on the Creature Rarity table on page 133 of the Core Rulebook. You can attempt this check untrained regardless of the DC, and you always treat your die roll result as a 20.</p>\n<p>You can also attune your custom microlab to a number of individual creatures equal to 3 + your key ability modifier. This takes 10 minutes, which you can combine with the time needed to prepare your biohacks for the day, and the creatures must be present, willing, and able to cooperate with the scan. If you attune your microlab to creatures in excess of this number, the oldest attunements beyond your maximum number end. Otherwise, attunement lasts 24 hours, after which changes in environment and the target’s condition require the microlab be re-attuned. Under some circumstances, you can deliver biohacks to attuned creatures using ranged injection weapons without making an attack roll.</p>\n<p>At 5th level, your custom microlab can function as an @UUID[Compendium.sfrpg.equipment.Item.z95qI1bzrlZHhHQE]{Advanced Medkit}. At 9th level, it functions as a @UUID[Compendium.sfrpg.equipment.Item.brlpPXSQgBdcW27m]{Medical Lab} (with no increase to its bulk), and its range increases to 90 feet. At 17th level, its range increases to 120 feet.</p>\n<p>If your custom microlab is damaged, destroyed, lost, or stolen, you can kitbash a new one from any medkit or chemalyzer with 1 hour of work. You can have only one custom microlab at a time. If you create a new custom microlab, your old one functions as a normal item of whatever type you made it from.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "classFeature",
           "combat": false,
           "specialAbilityType": "ex"
         },
         "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "properties": {},
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "1st Level",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "Biohacker",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "pwSY1vuL6oZjh63P",
-      "name": "Biohacks (Ex)",
-      "type": "feat",
-      "img": "systems/sfrpg/icons/equipment/technological%20items/sprayflesh.webp",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
-        "actionTarget": "",
-        "actionType": "",
-        "activation": {
-          "type": "none",
-          "condition": "",
-          "cost": 1
-        },
-        "area": {
-          "effect": "",
-          "shapable": false,
-          "shape": "",
-          "units": "ft",
-          "value": ""
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "<h2>Basic Booster</h2><p>A basic booster biohack aids a creature in one manner or another. The effect lasts for a number of rounds equal to your key ability score modifier (minimum 1 round) unless it states otherwise. You begin play knowing this basic booster biohack; when you use it, select an effect:</p><ul><li>The target gains a +1 enhancement bonus to AC.</li><li>The target gains a +2 enhancement bonus to skill checks.</li><li>The target gains a +10-foot enhancement bonus to their speed. If the creature has more than one movement type, choose one to receive this bonus.</li></ul><h2>Basic Inhibitor</h2><p>A basic inhibitor biohack hinders a creature’s physiology or material function. The effect of an inhibitor lasts for a number of rounds equal to 3 + your key ability score modifier (minimum 1 round) unless it states otherwise. You begin play knowing this basic inhibitor biohack; when you use it, select an effect:</p><ul><li>The target takes a –2 penalty to AC.</li><li>You reduce the target’s DR by 5. At 9th level, you instead reduce it by 10. At 17th level, you instead reduce it by 15.</li><li>You reduce the target’s resistance to one type of energy (your choice) by 5. At 9th level, you instead reduce it by 10. At 17th level, you instead reduce it by 15.</li></ul><p>A creature can be affected by only one of your basic inhibitors at a time, though it could be under the effects of multiple basic inhibitors originating from multiple biohackers. If you affect a creature with a different basic inhibitor while a previous inhibitor is still in effect, the effects of the previous inhibitor end.</p>",
-          "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>As part of your custom microlab, you keep a specialized micropharmacy of catalysts, nanites, and specialized chemicals, plus a small mixing apparatus and syringes. You can use these components to quickly fashion biohacks: specialized solutions that produce different effects. In living targets, your biohacks alter normal biological processes; in nonliving creatures, they emulate biochemistry via complex chemical compounds. You can use biohacks to boost your allies or inhibit your foes. Your biohacks produce their effects only when you inject a creature with them (see below), and only you know how to make and administer them properly—a biohack that leaves your possession becomes inert until you pick it up again.</p>\n<p>You can deliver any biohack you create with any attack from an injection weapon. You must declare prior to the attack roll that you are using a biohack and specify which effect you are using, but you select and apply the biohack as part of the action used to make the attack. You do not need to preload your weapon with biohacks. If you are making a ranged attack and miss your target, the biohack is expended along with the attack’s ammunition. A biohack delivered via a melee injection weapon is not normally expended on a missed attack. If you must attempt an attack roll with a biohack and your attack hits but deals no damage (normally as a result of damage reduction or an ability such as the vanguard’s @UUID[Compendium.sfrpg.class-features.Item.5bNbood0KKzBbKyv]{Mitigate (Ex)}), the biohack is expended but the target is not affected by it. After a missed attack that does not expend the biohack, you can remove it or change which biohack you are using as part of your next attack without taking any additional action.</p>\n<p>You can also deliver a biohack using a physical syringe (from your custom microlab) that you can wield in one hand. This is considered a consumable basic melee weapon with negligible bulk, 1 Hit Point, and an item level and hardness equal to your biohacker level. To inject an unwilling creature with a biohack in this manner, you must hit them with a melee attack. This attack deals no damage, but if the creature would be damaged by 1 point of piercing damage, that creature is instead affected by the biohack within the syringe.</p>\n<p>A biohack can be injected into a willing or unconscious creature (or yourself) as a standard action without requiring an attack roll, as long as the target is within your reach. You can also use a ranged injection weapon to deliver a biohack to a willing ally you have attuned your @UUID[Compendium.sfrpg.class-features.Item.lgdDuAM2I3s8PQsD]{Custom Microlab (Ex)} to as a standard action without making an attack roll, as long as they’re within your custom microlab’s range. Under any other circumstance, injecting a biohack into an ally at range requires a successful ranged attack roll.</p>\n<p>The materials you use to create biohacks are inert until you activate them. Once activated, they can be used to create any biohacks you know. Each day after you have rested for 8 hours, you can spend 10 minutes to activate the ingredients to create a number of biohacks equal to 1 + your key ability score modifier. This is the maximum number of biohacks you can have ready at one time. This preparation activates only the ingredients; you don’t need to decide which specific biohacks you’re creating until the actual actions or attacks used to deliver them. Activated biohack materials that aren’t used that day become inert, even if they’re still in your possession. You can readily replenish these inert reagents on a regular basis at no cost, unless the GM states otherwise. Whenever you take a 10-minute rest to recover Stamina Points, you can also prepare additional activated biohack ingredients to replace those you have used, up to your maximum.</p>\n<p>Biohacks come in two varieties: boosters and inhibitors. At 1st level, you know the basic boosters and inhibitors listed below, the minor boosters and inhibitors that follow, and the unique booster and inhibitor granted by your primary field of study. As you increase in level, you can also devise @UUID[Compendium.sfrpg.class-features.Item.rpaon3jF3nCe5eP9]{theorems} to learn special biohacks, in addition to gaining biohacks from a @UUID[Compendium.sfrpg.class-features.Item.kqK4E3QfsnbIqHtB]{secondary} and a @UUID[Compendium.sfrpg.class-features.Item.fBSG6tVqpRJ6ssTe]{tertiary} field of study. Additionally, most fields of study eventually provide you with breakthroughs: special biohacks described in their entries.</p><h2>Basic Booster</h2><p>A basic booster biohack aids a creature in one manner or another. The effect lasts for a number of rounds equal to your key ability score modifier (minimum 1 round) unless it states otherwise. You begin play knowing this basic booster biohack; when you use it, select an effect:</p><ul><li>The target gains a +1 enhancement bonus to AC.</li><li>The target gains a +2 enhancement bonus to skill checks.</li><li>The target gains a +10-foot enhancement bonus to their speed. If the creature has more than one movement type, choose one to receive this bonus.</li></ul><h2>Basic Inhibitor</h2><p>A basic inhibitor biohack hinders a creature’s physiology or material function. The effect of an inhibitor lasts for a number of rounds equal to 3 + your key ability score modifier (minimum 1 round) unless it states otherwise. You begin play knowing this basic inhibitor biohack; when you use it, select an effect:</p><ul><li>The target takes a –2 penalty to AC.</li><li>You reduce the target’s DR by 5. At 9th level, you instead reduce it by 10. At 17th level, you instead reduce it by 15.</li><li>You reduce the target’s resistance to one type of energy (your choice) by 5. At 9th level, you instead reduce it by 10. At 17th level, you instead reduce it by 15.</li></ul><p>A creature can be affected by only one of your basic inhibitors at a time, though it could be under the effects of multiple basic inhibitors originating from multiple biohackers. If you affect a creature with a different basic inhibitor while a previous inhibitor is still in effect, the effects of the previous inhibitor end.</p><h2>Minor Biohacks</h2><p>You can create minor biohacks from less powerful (and more stable) pharmaceuticals, nanites, and catalysts, and you can add them to any attack you make with an injection weapon that does not already have another biohack added to it. You don’t need to activate the materials for minor biohacks in advance, and using them does not count against the maximum number of biohacks you can have ready at one time. Minor biohacks are otherwise used as and function as basic booster and basic inhibitor biohacks, and they count as such biohacks for the purposes of interactions with other abilities (such as spark of ingenuity).</p><h3>Minor Booster</h3><p>Using a minor booster biohack allows you to attempt some Medicine checks on targets you affect so long as the target is within range of your custom microlab. This doesn’t require any additional time or action beyond making the attack. The tasks you can attempt with such a Medicine check depend on your level, and they don’t have the duration of normal booster biohacks.</p>\n<p>At 1st level, you can attempt a Medicine check to administer first aid. At 3rd level, you can attempt a Medicine check to treat @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drugs} or poison, though on a successful check, the target gains a +4 bonus only on the next saving throw it attempts against the @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drug} or poison, and that saving throw must occur within the next hour. At 6th level you can attempt a Medicine check to treat @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease}, though on a successful check, the target gains a +4 bonus only to the next saving throw it attempts against the @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease}, and that saving throw must occur within the next hour.</p><h3>Minor Inhibitor</h3><p>A minor inhibitor biohack imposes a slight hindrance on a target: the target takes a –1 penalty to attack rolls for a number of rounds equal to 3 + your key ability score.</p>"
-        },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
-        "details": {
-          "category": "classFeature",
-          "combat": false,
-          "specialAbilityType": "ex"
-        },
-        "duration": {
-          "units": "text",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
@@ -1021,31 +875,33 @@
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": ""
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Biohacker",
         "target": {
-          "type": "",
-          "value": ""
+          "value": null
         },
         "uses": {
-          "max": "4",
-          "per": "charges",
-          "value": 4
+          "max": "0",
+          "per": "",
+          "value": 0
         }
       }
     },
@@ -1055,11 +911,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/equipment/weapons/acid_dart_rifle_complexe.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1072,7 +924,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1081,7 +933,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1091,26 +944,28 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>You are proficient with weapons with the injection weapon special property, as long as the weapon has not gained that weapon special property through a weapon fusion, spell, class feature, or similar ability or effect. At 2nd level, you gain a +1 bonus to attack rolls with these weapons. At 9th level, that bonus increases to +2, and at 18th level it increases to +3.</p>\n<p>When you hit an ally with such a weapon, you can avoid dealing damage to that ally, while still affecting the ally with the biohack booster or inhibitor, @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drug}, medicinal compound, poison, serum, or other substance that was loaded into the injection weapon. When you fire a weapon with the injection special property and you have multiple types of ammunition loaded into the weapon, you choose which type of ammunition you fire when you attempt the attack.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "classFeature",
           "combat": false,
           "specialAbilityType": "ex"
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "90c712c0-02db-4676-a2d0-7e3ec1b9c861",
             "name": "Injection Expert",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "weapon-property-attacks",
             "enabled": true,
+            "limitTo": null,
             "max": 0,
             "modifier": "lookupRange(@classes.biohacker.levels,0,2,1,9,2,18,3)",
             "modifierType": "constant",
@@ -1122,30 +977,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Biohacker",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1156,11 +1013,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1173,7 +1026,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1182,7 +1035,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1192,45 +1046,47 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>Your primary field of study represents your scientific specialty. Choose your primary field of study upon taking your first level in biohacker—once made, this choice cannot be changed. A field of study grants you a unique booster and inhibitor, many of which work only on living creatures (not objects or creatures with the @UUID[Compendium.sfrpg.universal-creature-rules.Item.xYzrzhvu0MIYbwFs]{Unliving (Ex)} universal creature rule) and have special properties and descriptors explained in their entries. At 5th level, you gain the breakthrough for your field of study.</p>\n<h2>Fields of Study</h2>\n<p>@UUID[Compendium.sfrpg.class-features.Item.fVBgYuL9f7oXpQdX]{Efficiency}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.8otrqaNJyyhRtDvW]{Genetics}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.ZjYCdb8f2Zmshjko]{Immunology}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.dCrhN6EheR1G5XN1]{Neurochemistry}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.kHeZbTmU7JXi8dbX]{Pharmacology}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.XCPOgrdkUgD0SypM]{Thaumapathy}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.hLx0K47DzIDQzbjV]{Thermoregulation}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.p98vVWLYBsMgDkXU]{Toxicology}</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "classFeature",
           "combat": false,
           "specialAbilityType": "ex"
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Biohacker",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1241,11 +1097,7 @@
       "type": "feat",
       "img": "icons/tools/laboratory/vials-blue-pink.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1258,7 +1110,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1267,7 +1119,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1277,45 +1130,47 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>You have an innate mental gift, and a special way of approaching problems that lets you surpass normal researchers and scholars. If your key ability score is Intelligence, you have a studious mind. If your key ability score is Wisdom, you have an instinctive mind. Your scientific method affects your @UUID[Compendium.sfrpg.class-features.Item.Sg8hjAB2QYWFrT0X]{Spark Of Ingenuity (Ex)} class feature (see below), and may impact how some other class features function, as noted in those abilities.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.VWqioBb7Bxs1j0cM]{Studious}</h2>\n<p>Your mind is a fortress of information that can rarely be breached. You gain a +1 bonus to Will saving throws. This bonus increases to +2 at 3rd level, +3 at 8th level, and +4 at 16th level. You also gain a +1 insight bonus to Life Science, Medicine, and Physical Science checks. This bonus increases by 1 at 3rd level, and every 4 levels thereafter. Additionally, you can add your Intelligence modifier instead of your Wisdom modifier to Perception and Sense Motive checks.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.bmscIuTpCFw5uvyG]{Instinctive}</h2>\n<p>You can quickly intuit the connections between things and often act instinctively on those connections, gaining knowledge and aptitude without always being able to say how you picked it up. Select two skills—once made, this choice cannot be changed. You gain a bonus rank in each of these two skills at every level, as well as a +1 insight bonus to checks using these skills. This bonus increases by 1 at 3rd level and every 4 levels thereafter. Additionally, you can add your Wisdom modifier instead of your Intelligence modifier to Life Science, Medicine, and Physical Science checks.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "classFeature",
           "combat": false,
           "specialAbilityType": "ex"
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Biohacker",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1326,11 +1181,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1343,7 +1194,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1352,7 +1203,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1362,45 +1214,47 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.aWxj3kjbSduZkm9j]{Primary Field Of Study (Ex)}</p>\n<p>Genetics is the study of living creatures’ inherited characteristics.</p>\n<p><strong>Booster</strong>: You temporarily boost a living creature (one that does not have the unliving universal creature rule) to improve the acuity of its hearing, granting the subject the benefits of blindsense (sound) with a range of 60 feet. If the creature already has blindsense, it instead gains the benefit of the Blind‑Fight feat. This benefit lasts for 60 minutes.</p>\n<p><strong>Inhibitor</strong>: You deliver a DNA-twisting or material-altering chemical nanite compound into a creature's body, increasing the damage it takes from one energy type (your choice). If the creature takes the chosen type of energy damage, it takes additional damage of the same type equal to half your level (minimum 1). This biohack doesn't increase the damage a creature takes from natural hazards or environments, only damage from energy attacks, spells, and other abilities.</p>\n<h2>Breakthrough</h2>\n<p>You can use the following ability when you achieve the breakthrough for this field of study.</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.ZzbME9Y2AykZ4fNo]{Gene Therapy (Ex)}: As a standard action, you can create and deliver a medicinal formula to a living creature that suspends the effects of damage to their mind and body. When injected, the formula allows the target to ignore the effects of all ability score damage and drain for 10 minutes. If you are at least 7th level, this effect lasts for 1 hour. If you are at least 13th level, it lasts for 24 hours.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "classFeature",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Field of Study",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1411,11 +1265,7 @@
       "type": "feat",
       "img": "icons/magic/perception/third-eye-blue-red.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1428,7 +1278,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1437,7 +1287,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1491,23 +1342,21 @@
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "16b7e368-4397-473a-9645-ee3d7d41b8ab",
             "name": "Instinctive Biohacker - Bonus Ranks",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "1Z6IKujG4PKAxTWg",
-              "itemId": "PGBmUZNm3JJQl5E1"
-            },
+            "damage": null,
             "effectType": "skill-ranks",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "@details.level.value",
             "modifierType": "constant",
@@ -1521,12 +1370,10 @@
             "name": "Instinctive Biohacker - Bonus Ranks",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "1Z6IKujG4PKAxTWg",
-              "itemId": "PGBmUZNm3JJQl5E1"
-            },
+            "damage": null,
             "effectType": "skill-ranks",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "@details.level.value",
             "modifierType": "constant",
@@ -1540,12 +1387,10 @@
             "name": "Instinctive Biohacker - Insight Bonus",
             "type": "insight",
             "condition": "",
-            "container": {
-              "actorId": "1Z6IKujG4PKAxTWg",
-              "itemId": "PGBmUZNm3JJQl5E1"
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "lookupRange(@classes.biohacker.levels,0,1,1,3,2,7,3,11,4,15,5,19,6)",
             "modifierType": "constant",
@@ -1559,12 +1404,10 @@
             "name": "Instinctive Biohacker - Insight Bonus",
             "type": "insight",
             "condition": "",
-            "container": {
-              "actorId": "1Z6IKujG4PKAxTWg",
-              "itemId": "PGBmUZNm3JJQl5E1"
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "lookupRange(@classes.biohacker.levels,0,1,1,3,2,7,3,11,4,15,5,19,6)",
             "modifierType": "constant",
@@ -1576,30 +1419,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "COM pg. 43",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1610,11 +1455,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1627,7 +1468,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1636,7 +1477,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1688,37 +1530,39 @@
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Kasatha",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 46",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1730,11 +1574,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1747,7 +1587,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1756,7 +1596,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1808,37 +1649,39 @@
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Racial Feature",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1850,11 +1693,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1867,7 +1706,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1876,7 +1715,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1928,19 +1768,21 @@
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "b61a7e5d-3d76-4ac3-a2f8-85a0c2fd926a",
             "name": "Historian",
             "type": "racial",
             "condition": "",
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -1952,29 +1794,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Kasatha",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 46",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1986,11 +1830,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2003,7 +1843,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2012,7 +1852,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2064,19 +1905,21 @@
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "b61a7e5d-3d76-4ac3-a2f8-85a0c2fd926a",
             "name": "Natural Grace",
             "type": "racial",
             "condition": "",
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -2090,8 +1933,10 @@
             "name": "Natural Grace",
             "type": "racial",
             "condition": "",
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -2103,29 +1948,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Kasatha",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 46",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -2137,7 +1984,6 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/mobility.webp",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "",
         "actionType": "",
@@ -2150,8 +1996,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2160,7 +2006,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2170,44 +2017,46 @@
           "unidentified": "",
           "value": "<p>You can easily move past dangerous foes.</p>\n<p><strong>Prerequisites</strong>: Dex 13.</p>\n<hr />\n<p><strong>Benefit</strong>: You gain a +4 bonus to your Armor Class against attacks of opportunity that you provoke by leaving a threatened square.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": true,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -2220,10 +2069,7 @@
       "img": "systems/sfrpg/icons/default/vr-headset.svg",
       "system": {
         "type": "cybernetic",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2236,7 +2082,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "attributes": {
@@ -2257,7 +2103,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "chatFlavor": "",
         "container": {
@@ -2295,7 +2140,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2305,47 +2151,46 @@
           "unidentified": "",
           "value": "<p>This prosthesis replaces a missing limb. It restores functionality, but it is no more durable than and doesn’t otherwise function differently than a normal limb for your species. A prosthetic limb can replace one you’ve lost, or you can have a limb removed in order to replace it with a prosthetic.</p>\n<p>A storage prosthetic limb has a built-in concealed storage compartment, which functions as a @UUID[Compendium.sfrpg.equipment.Item.Vfntv88z20LR2fIl]{hideaway limb} (see above).</p>\n<p><em>Change system in the details tab to use Arm and hand, or leg and foot</em></p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": true,
         "equipped": true,
-        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "img": "icons/svg/mystery-man.svg",
-        "isActive": null,
-        "isOpen": true,
+        "isActive": false,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 100,
+        "proficient": false,
         "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 209",
         "system": "hand",
         "target": {
-          "type": "",
           "value": null
         },
-        "totalWeight": "-",
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -2356,13 +2201,9 @@
       "type": "technological",
       "img": "systems/sfrpg/icons/equipment/technological%20items/medkit-basic.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -2374,7 +2215,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "attributes": {
@@ -2395,7 +2236,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": 0,
@@ -2413,7 +2253,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2423,39 +2264,41 @@
           "unidentified": "",
           "value": "<p>The basic medkit has spray antiseptic, bandages, and handheld instruments designed to examine, explore, and treat common ailments. The basic medkit allows you to attempt DC 25 Medicine checks to treat deadly wounds.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
         "hands": 2,
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -2463,8 +2306,8 @@
           "value": 0
         },
         "uses": {
-          "max": null,
-          "per": null,
+          "max": "",
+          "per": "",
           "value": null
         }
       }
@@ -2475,13 +2318,9 @@
       "type": "technological",
       "img": "systems/sfrpg/icons/equipment/technological%20items/chemalyzer.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -2493,7 +2332,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "attributes": {
@@ -2514,7 +2353,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -2532,7 +2370,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2542,18 +2381,17 @@
           "unidentified": "",
           "value": "<p>This handheld unit includes an extendable wand tipped with a sampling nozzle, and can be easily operated with a single hand. It grants a +4 circumstance bonus to Engineering, Mysticism, and Physical Science checks to identify an unknown @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drug}, medicinal, poison, or other chemical substance.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
         "hands": 1,
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [
           {
@@ -2561,12 +2399,10 @@
             "name": "Chemalyzer Bonus - Engineering",
             "type": "circumstance",
             "condition": "",
-            "container": {
-              "actorId": "1Z6IKujG4PKAxTWg",
-              "itemId": "vqb3Ai3QNpyhnbLM"
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 4,
             "modifier": "4",
             "modifierType": "formula",
@@ -2580,12 +2416,10 @@
             "name": "Chemalyzer Bonus - Mysticism",
             "type": "circumstance",
             "condition": "",
-            "container": {
-              "actorId": "1Z6IKujG4PKAxTWg",
-              "itemId": "vqb3Ai3QNpyhnbLM"
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 4,
             "modifier": "4",
             "modifierType": "formula",
@@ -2599,14 +2433,10 @@
             "name": "Chemalyzer Bonus - Physical Science",
             "type": "circumstance",
             "condition": "",
-            "container": {
-              "actorId": "1Z6IKujG4PKAxTWg",
-              "itemId": "vqb3Ai3QNpyhnbLM"
-            },
-            "dices": [],
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
-            "isDeterministic": true,
+            "limitTo": null,
             "max": 4,
             "modifier": "4",
             "modifierType": "formula",
@@ -2617,24 +2447,27 @@
           }
         ],
         "price": 0,
+        "proficient": false,
         "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Armory",
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -2642,8 +2475,8 @@
           "value": 2
         },
         "uses": {
-          "max": null,
-          "per": null,
+          "max": "",
+          "per": "",
           "value": null
         }
       }
@@ -2654,11 +2487,7 @@
       "type": "weapon",
       "img": "icons/weapons/staves/staff-simple.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -2693,7 +2522,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -2716,6 +2544,7 @@
               "name": "",
               "formula": "1d4 + @abilities.str.mod",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": true,
@@ -2723,12 +2552,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2738,7 +2570,6 @@
           "unidentified": "",
           "value": "<p>A baton is a thin, solid metal shaft, usually with a textured rubber grip. A tactical baton can be used to inflict precise bludgeoning blows. An advanced baton, used by elite mercenary and security companies, often has an additional shaft, as well as a weighted end that can be powered to connect with substantially more force than a tactical baton.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -2748,7 +2579,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -2853,8 +2684,6 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
           "value": "20"
         },
@@ -2866,8 +2695,10 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {
@@ -2887,7 +2718,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -2909,11 +2739,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/needler-pistol-tactical.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -2927,7 +2753,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -2948,7 +2774,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 8,
@@ -2996,6 +2821,8 @@
             {
               "name": "",
               "formula": "1d4",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -3003,12 +2830,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": true,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -3018,9 +2848,8 @@
           "unidentified": "",
           "value": "<p>A favorite of assassins and battlefield medics alike, the needler pistol uses magnetic fields or pressurized gas to launch darts that inject a substance into the target. This injection gun can be fitted with cartridges containing medicine or @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -3028,7 +2857,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -3130,10 +2959,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 40
+          "value": "40"
         },
         "rollNotes": "",
         "save": {
@@ -3141,6 +2968,12 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Character Operations Manual",
         "special": "",
         "specialMaterials": {
@@ -3160,7 +2993,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -3168,7 +3000,7 @@
           "value": 1
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -3182,11 +3014,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/shock-grenade.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rwak",
         "activation": {
@@ -3200,7 +3028,7 @@
           "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 15
+          "value": "15"
         },
         "attackBonus": 0,
         "attributes": {
@@ -3221,7 +3049,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 1,
@@ -3230,7 +3057,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -3262,13 +3089,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "electricity": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": true,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -3278,9 +3118,8 @@
           "unidentified": "",
           "value": "<p>A shock grenade releases a pulse of electrical energy on impact.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -3288,7 +3127,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -3384,10 +3223,8 @@
         "quantity": 2,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -3395,11 +3232,16 @@
           "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
           "descriptor": "half"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 177",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -3407,7 +3249,7 @@
           "value": 1
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "charges",
           "value": 1
         },
@@ -3421,11 +3263,7 @@
       "type": "consumable",
       "img": "systems/sfrpg/icons/equipment/magic%20items/serum-of-healing.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "heal",
         "activation": {
@@ -3459,27 +3297,9 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "chatFlavor": "",
         "consumableType": "serum",
-        "container": {
-          "contents": [],
-          "includeContentsInWealthCalculation": 1,
-          "isOpen": true,
-          "storage": [
-            {
-              "type": "slot",
-              "acceptsType": [
-                "spell"
-              ],
-              "affectsEncumbrance": false,
-              "amount": 0,
-              "subtype": "spellSlot",
-              "weightProperty": "bulk"
-            }
-          ]
-        },
         "critical": {
           "effect": "",
           "parts": []
@@ -3490,6 +3310,7 @@
               "name": "",
               "formula": "1d8",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -3497,12 +3318,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": true,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -3512,17 +3336,12 @@
           "unidentified": "",
           "value": "<p>This vial of medical serum quickly sets bones and repairs other physical damage. It restores Hit Points when administered to a living creature.</p>\n<p>Serums are vials of magic liquid that you can imbibe as a standard action or carefully trickle down the throat of a helpless or unconscious creature as a full action. Serums are normally 1 ounce of liquid (though it is possible to make serums with larger volumes, these are no more effective than standard serums), and lose potency if they are mixed with any other material. A serum can be used only once. Regardless of a serum’s actual item level, all serum vials have their hardness and Hit Points calculated as if they were 1st-level items.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
-        "identified": true,
-        "isActive": null,
+        "isActive": false,
         "level": 1,
         "modifiers": [],
         "price": 50,
@@ -3530,10 +3349,7 @@
         "quantity": 2,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -3543,11 +3359,12 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
@@ -3565,11 +3382,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/second-skin.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -3583,7 +3396,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -3612,7 +3425,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -3621,7 +3433,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -3642,7 +3454,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -3652,17 +3465,17 @@
           "unidentified": "",
           "value": "<p>This flexible body stocking fits tightly against its wearer and can be worn under ordinary clothes. If a second skin matches the wearer’s skin tone, this type of light armor can be difficult to detect. A second skin can also accept upgrades, making it popular for celebrities, diplomats, and other individuals who want protection without appearing to wear armor.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": true,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 250,
@@ -3671,25 +3484,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 197",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -3697,8 +3511,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -3709,40 +3523,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/darts.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "dart",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
           "value": 0
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -3751,14 +3544,13 @@
           "unidentified": "",
           "value": "<p>These light metal shafts each have a pointed tip and a reservoir to hold toxins or other appropriate substances that are typically liquid or viscous. While most combatants rely on darts to deliver toxins to enemies, particularly desperate or overworked field medics sometimes employ darts to conveniently deliver antitoxins, healing serums, and other beneficial @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drugs} across a crowded battlefield. In these cases, medics often practice to improve their aim to ensure that this strategy is effective when employed.</p>\n<p><strong>Capacity:</strong> 25</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 20,
         "quantity": 25,
         "quantityPerPack": 25,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {
           "abysium": false,
@@ -3785,40 +3577,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/darts.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "ammunitionType": "dart",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
           "value": 0
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -3827,14 +3598,13 @@
           "unidentified": "",
           "value": "<p>These light metal shafts each have a pointed tip and a reservoir to hold toxins or other appropriate substances that are typically liquid or viscous. While most combatants rely on darts to deliver toxins to enemies, particularly desperate or overworked field medics sometimes employ darts to conveniently deliver antitoxins, healing serums, and other beneficial @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drugs} across a crowded battlefield. In these cases, medics often practice to improve their aim to ensure that this strategy is effective when employed.</p>\n<p><strong>Capacity:</strong> 25</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 20,
         "quantity": 8,
         "quantityPerPack": 25,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {
           "abysium": false,
@@ -3861,10 +3631,6 @@
       "type": "goods",
       "img": "icons/equipment/chest/shirt-collared-brown.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "attributes": {
           "ac": {
             "value": ""
@@ -3883,14 +3649,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -3900,13 +3659,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 1,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "CRB pg. 230"
       }
     },
@@ -3916,10 +3677,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/equipment/technological%20items/xenobiologists-field-kit.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "attributes": {
           "ac": {
             "value": ""
@@ -3938,14 +3695,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -3955,13 +3705,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 3,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "CRB pg. 231"
       }
     },
@@ -3971,10 +3723,9 @@
       "type": "technological",
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -3986,7 +3737,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "attributes": {
@@ -4007,7 +3758,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -4016,7 +3766,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -4025,7 +3775,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -4035,39 +3786,41 @@
           "unidentified": "",
           "value": "<p>A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device’s price.</p>\n<p>Comm units that function at system-wide and unlimited ranges aren’t as portable; they include built-in generators that provide the necessary amount of power. Short-term use of these units can be purchased in most major settlements (see page 234).</p>\n<p>See page 430 for more about Pact Worlds communications.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "formula": "",
         "hands": 1,
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 7,
+        "proficient": false,
         "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -4075,8 +3828,8 @@
           "value": 1
         },
         "uses": {
-          "max": null,
-          "per": null,
+          "max": "",
+          "per": "",
           "value": null
         }
       }
@@ -4087,11 +3840,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -4104,17 +3853,17 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
-        "category": "feat",
         "chatFlavor": "",
         "critical": {
           "effect": "",
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -4169,22 +3918,20 @@
         },
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "8c6cf540-024c-46f6-9715-97f1f9c3b570",
             "name": "Fix Resolve",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "1Z6IKujG4PKAxTWg",
-              "itemId": "tsgtTidCoHa66FFQ"
-            },
+            "damage": null,
             "effectType": "resolve-points",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "1",
             "modifierType": "constant",
@@ -4198,12 +3945,10 @@
             "name": "Fix Life Science",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "1Z6IKujG4PKAxTWg",
-              "itemId": "tsgtTidCoHa66FFQ"
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "1",
             "modifierType": "constant",
@@ -4217,12 +3962,10 @@
             "name": "Fix Physical Science",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "1Z6IKujG4PKAxTWg",
-              "itemId": "tsgtTidCoHa66FFQ"
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "1",
             "modifierType": "constant",
@@ -4236,12 +3979,10 @@
             "name": "Fix Will Save",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "1Z6IKujG4PKAxTWg",
-              "itemId": "tsgtTidCoHa66FFQ"
-            },
+            "damage": null,
             "effectType": "save",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "1",
             "modifierType": "constant",
@@ -4253,31 +3994,157 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
+        }
+      }
+    },
+    {
+      "_id": "PpwoMkcmIDjFgRO8",
+      "name": "Biohacks (Ex)",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/equipment/technological%20items/sprayflesh.webp",
+      "system": {
+        "ability": "",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "none",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "ft",
+          "value": ""
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>As part of your custom microlab, you keep a specialized micropharmacy of catalysts, nanites, and specialized chemicals, plus a small mixing apparatus and syringes. You can use these components to quickly fashion biohacks: specialized solutions that produce different effects. In living targets, your biohacks alter normal biological processes; in nonliving creatures, they emulate biochemistry via complex chemical compounds. You can use biohacks to boost your allies or inhibit your foes. Your biohacks produce their effects only when you inject a creature with them (see below), and only you know how to make and administer them properly—a biohack that leaves your possession becomes inert until you pick it up again.</p>\n<p>You can deliver any biohack you create with any attack from an injection weapon. You must declare prior to the attack roll that you are using a biohack and specify which effect you are using, but you select and apply the biohack as part of the action used to make the attack. You do not need to preload your weapon with biohacks. If you are making a ranged attack and miss your target, the biohack is expended along with the attack’s ammunition. A biohack delivered via a melee injection weapon is not normally expended on a missed attack. If you must attempt an attack roll with a biohack and your attack hits but deals no damage (normally as a result of damage reduction or an ability such as the vanguard’s @UUID[Compendium.sfrpg.class-features.Item.5bNbood0KKzBbKyv]{Mitigate (Ex)}), the biohack is expended but the target is not affected by it. After a missed attack that does not expend the biohack, you can remove it or change which biohack you are using as part of your next attack without taking any additional action.</p>\n<p>You can also deliver a biohack using a physical syringe (from your custom microlab) that you can wield in one hand. This is considered a consumable basic melee weapon with negligible bulk, 1 Hit Point, and an item level and hardness equal to your biohacker level. To inject an unwilling creature with a biohack in this manner, you must hit them with a melee attack. This attack deals no damage, but if the creature would be damaged by 1 point of piercing damage, that creature is instead affected by the biohack within the syringe.</p>\n<p>A biohack can be injected into a willing or unconscious creature (or yourself) as a standard action without requiring an attack roll, as long as the target is within your reach. You can also use a ranged injection weapon to deliver a biohack to a willing ally you have attuned your @UUID[Compendium.sfrpg.class-features.Item.lgdDuAM2I3s8PQsD]{Custom Microlab (Ex)} to as a standard action without making an attack roll, as long as they’re within your custom microlab’s range. Under any other circumstance, injecting a biohack into an ally at range requires a successful ranged attack roll.</p>\n<p>The materials you use to create biohacks are inert until you activate them. Once activated, they can be used to create any biohacks you know. Each day after you have rested for 8 hours, you can spend 10 minutes to activate the ingredients to create a number of biohacks equal to 1 + your key ability score modifier. This is the maximum number of biohacks you can have ready at one time. This preparation activates only the ingredients; you don’t need to decide which specific biohacks you’re creating until the actual actions or attacks used to deliver them. Activated biohack materials that aren’t used that day become inert, even if they’re still in your possession. You can readily replenish these inert reagents on a regular basis at no cost, unless the GM states otherwise. Whenever you take a 10-minute rest to recover Stamina Points, you can also prepare additional activated biohack ingredients to replace those you have used, up to your maximum.</p>\n<p>Biohacks come in two varieties: boosters and inhibitors. At 1st level, you know the basic boosters and inhibitors listed below, the minor boosters and inhibitors that follow, and the unique booster and inhibitor granted by your primary field of study. As you increase in level, you can also devise @UUID[Compendium.sfrpg.class-features.Item.rpaon3jF3nCe5eP9]{theorems} to learn special biohacks, in addition to gaining biohacks from a @UUID[Compendium.sfrpg.class-features.Item.kqK4E3QfsnbIqHtB]{secondary} and a @UUID[Compendium.sfrpg.class-features.Item.fBSG6tVqpRJ6ssTe]{tertiary} field of study. Additionally, most fields of study eventually provide you with breakthroughs: special biohacks described in their entries.</p><h2>Basic Booster</h2><p>A basic booster biohack aids a creature in one manner or another. The effect lasts for a number of rounds equal to your key ability score modifier (minimum 1 round) unless it states otherwise. You begin play knowing this basic booster biohack; when you use it, select an effect:</p><ul><li>The target gains a +1 enhancement bonus to AC.</li><li>The target gains a +2 enhancement bonus to skill checks.</li><li>The target gains a +10-foot enhancement bonus to their speed. If the creature has more than one movement type, choose one to receive this bonus.</li></ul><p>@UUID[Compendium.sfrpg.effects.Item.VbgKwEzQoTXGQS4G]{Effect: Basic Booster +1 AC}</p>\n<p>@UUID[Compendium.sfrpg.effects.Item.kgfgyMbISSB7SWWx]{Effect: Basic Booster +2 Skill Checks}</p>\n<p>@UUID[Compendium.sfrpg.effects.Item.voLFsMAZu7COY6qZ]{Effect: Basic Booster +10-ft speed}</p><h2>Basic Inhibitor</h2><p>A basic inhibitor biohack hinders a creature’s physiology or material function. The effect of an inhibitor lasts for a number of rounds equal to 3 + your key ability score modifier (minimum 1 round) unless it states otherwise. You begin play knowing this basic inhibitor biohack; when you use it, select an effect:</p><ul><li>The target takes a –2 penalty to AC.</li><li>You reduce the target’s DR by 5. At 9th level, you instead reduce it by 10. At 17th level, you instead reduce it by 15.</li><li>You reduce the target’s resistance to one type of energy (your choice) by 5. At 9th level, you instead reduce it by 10. At 17th level, you instead reduce it by 15.</li></ul><p>@UUID[Compendium.sfrpg.effects.Item.YAQumXbZgPpLjV5R]{Effect: Basic Inhibitor -2 AC}</p>\n<p>@UUID[Compendium.sfrpg.effects.Item.1DFCBdMMuN5TL9im]{Marker: Basic Inhibitor DR Reduction}</p>\n<p>@UUID[Compendium.sfrpg.effects.Item.sFuDVfbUzUToX5XJ]{Marker: Basic Inhibitor ER Reduction}</p>\n<p>A creature can be affected by only one of your basic inhibitors at a time, though it could be under the effects of multiple basic inhibitors originating from multiple biohackers. If you affect a creature with a different basic inhibitor while a previous inhibitor is still in effect, the effects of the previous inhibitor end.</p><h2>Minor Biohacks</h2><p>You can create minor biohacks from less powerful (and more stable) pharmaceuticals, nanites, and catalysts, and you can add them to any attack you make with an injection weapon that does not already have another biohack added to it. You don’t need to activate the materials for minor biohacks in advance, and using them does not count against the maximum number of biohacks you can have ready at one time. Minor biohacks are otherwise used as and function as basic booster and basic inhibitor biohacks, and they count as such biohacks for the purposes of interactions with other abilities (such as spark of ingenuity).</p><h3>Minor Booster</h3><p>Using a minor booster biohack allows you to attempt some Medicine checks on targets you affect so long as the target is within range of your custom microlab. This doesn’t require any additional time or action beyond making the attack. The tasks you can attempt with such a Medicine check depend on your level, and they don’t have the duration of normal booster biohacks.</p>\n<p>At 1st level, you can attempt a Medicine check to administer first aid. At 3rd level, you can attempt a Medicine check to treat @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drugs} or poison, though on a successful check, the target gains a +4 bonus only on the next saving throw it attempts against the @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drug} or poison, and that saving throw must occur within the next hour. At 6th level you can attempt a Medicine check to treat @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease}, though on a successful check, the target gains a +4 bonus only to the next saving throw it attempts against the @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease}, and that saving throw must occur within the next hour.</p>\n<p>@UUID[Compendium.sfrpg.effects.Item.CB83RmXswXwxfrxN]{Effect: Minor Booster}</p><h3>Minor Inhibitor</h3><p>A minor inhibitor biohack imposes a slight hindrance on a target: the target takes a –1 penalty to attack rolls for a number of rounds equal to 3 + your key ability score.</p>\n<p>@UUID[Compendium.sfrpg.effects.Item.2yhQgD5o54WUgLtG]{Effect: Minor Inhibitor}</p>"
+        },
+        "descriptors": {
+          "acid": false,
+          "air": false,
+          "auditory": false,
+          "calling": false,
+          "chaotic": false,
+          "charm": false,
+          "cold": false,
+          "compulsion": false,
+          "creation": false,
+          "curse": false,
+          "darkness": false,
+          "death": false,
+          "disease": false,
+          "earth": false,
+          "electricity": false,
+          "emotion": false,
+          "evil": false,
+          "fear": false,
+          "fire": false,
+          "force": false,
+          "good": false,
+          "healing": false,
+          "illusion": false,
+          "language-dependent": false,
+          "lawful": false,
+          "light": false,
+          "mind-affecting": false,
+          "pain": false,
+          "poison": false,
+          "polymorph": false,
+          "radiation": false,
+          "scrying": false,
+          "sense-dependent": false,
+          "shadow": false,
+          "sonic": false,
+          "summoning": false,
+          "teleportation": false,
+          "water": false
+        },
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": false,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "units": "none",
+          "value": ""
+        },
+        "recharge": {
+          "charged": false,
+          "value": ""
+        },
+        "requirements": "1st Level Biohacker",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": ""
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "COM pg. 41",
+        "target": {
+          "value": ""
+        },
+        "uses": {
+          "max": "1 + @classes.biohacker.keyAbilityMod",
+          "per": "sr",
+          "value": 4
         }
       }
     }
@@ -4381,124 +4248,62 @@
         "base": 12,
         "damage": null,
         "drain": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "userPenalty": null,
-        "value": 10
+        "userPenalty": null
       },
       "con": {
         "base": 10,
         "damage": null,
         "drain": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "userPenalty": null,
-        "value": 10
+        "userPenalty": null
       },
       "dex": {
         "base": 14,
         "damage": null,
         "drain": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "userPenalty": null,
-        "value": 10
+        "userPenalty": null
       },
       "int": {
         "base": 10,
         "damage": null,
         "drain": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "userPenalty": null,
-        "value": 10
+        "userPenalty": null
       },
       "str": {
         "base": 10,
         "damage": null,
         "drain": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "userPenalty": null,
-        "value": 10
+        "userPenalty": null
       },
       "wis": {
         "base": 14,
         "damage": null,
         "drain": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "userPenalty": null,
-        "value": 10
+        "userPenalty": null
       }
     },
     "attributes": {
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
-      "eac": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
+      "arms": 2,
       "fort": {
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "misc": 0
       },
       "hp": {
         "max": 10,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 10
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 0,
         "value": 0
       },
-      "kac": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
-      "keyability": "wis",
       "reach": "5",
       "reflex": {
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "misc": 0
       },
       "rp": {
         "max": 5,
-        "min": 0,
-        "tooltip": [],
         "value": 5
       },
       "sp": {
         "max": 6,
-        "min": 0,
-        "tooltip": [],
         "value": 6
       },
       "space": "5",
@@ -4517,18 +4322,13 @@
           "base": 30
         },
         "mainMovement": "land",
-        "special": null,
+        "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "misc": 0
       }
     },
     "conditions": {
@@ -4569,9 +4369,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 2,
       "upb": 0
@@ -4579,7 +4376,7 @@
     "details": {
       "alignment": "CG",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -4588,58 +4385,21 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>When not on a Starfinder Society mission, Barsala researches biotech augmentations and teaches science on her popular children’s show, Dr. B’s Science Jubilee.</p><h2>SPECIAL ABILITIES</h2><p><strong>Custom Microlab (Ex)</strong> Barsala has integrated a customized kit consisting of medical supplies, testing materials, and pharmaceutical compounds into her prosthetic hand. She can use it to evaluate medical conditions and perform several additional tasks, described below.</p>\n<p>Her custom microlab counts as a basic medkit and a chemalyzer (granting a +4 bonus on Engineering, Mysticism, and Physical Science checks to identify unknown drugs, medicinals, poisons, and other chemical substances). As long as she has her custom microlab, as a move action she can target a creature within 60 feet in her line of sight and attempt a special skill check to identify it as though her die roll were a 20, using Life Science for a living creature or Physical Science for an unliving one, with the check’s DC determined by the creature’s rarity (page 133 of the Starfinder Core Rulebook).</p>\n<p>Barsala can also attune her custom microlab to 6 individual creatures. This takes 10 minutes, which she can combine with the time needed to prepare her biohacks for the day, and the creatures must be present, willing, and able to cooperate with the scan. If she attunes her microlab to creatures in excess of this number, the oldest attunements beyond her maximum number end. Otherwise, attunement lasts 24 hours, after which changes in environment and the target’s condition require the microlab be reattuned. Under some circumstances, Barsala can deliver biohacks to attuned creatures using ranged injection weapons without making an attack roll.</p>\n<p>If her custom microlab is damaged, destroyed, lost, or stolen, Barsala can kitbash a new one from any medkit or chemalyzer with 1 hour of work. She can have only one custom microlab at a time. If she creates a new one, her old microlab functions as a normal item of whatever type she made it from.</p><hr /><p><strong>Biohacks (Ex)</strong> Barsala can use biohacks to boost her allies or inhibit her foes. Her biohacks produce their effects only when she injects a creature with them (see below), and only she knows how to make and administer them properly—a biohack that leaves Barsala’s possession becomes inert until she picks it up again.</p>\n<p>Barsala can deliver any biohack she creates with any attack from an injection weapon. She must decide to use a biohack prior to the attack roll and specify which effect she’s using. She applies the biohack as part of the action used to make the attack. She does not need to preload her weapon with biohacks. If she makes a ranged attack and misses, the biohack is expended along with the attack’s ammunition. A biohack delivered via a melee injection weapon is not normally expended on a missed attack. If Barsala’s attack with a biohack hits but deals no damage, the biohack is expended but the target is not affected by it. After a missed attack that does not expend the biohack, Barsala can remove or change which biohack she’s using as part of her next attack without spending any additional action.</p>\n<p>She can also deliver a biohack using a physical syringe (a level 1 consumable basic melee weapon from her custom microlab) that she can wield in one hand. To inject an unwilling creature with a biohack in this manner, Barsala must hit the creature with a melee attack. This attack deals no damage, but if the creature would be damaged by 1 point of piercing damage, that creature is instead affected by the biohack within the syringe.</p>\n<p>Barsala can inject a biohack into a willing or unconscious creature (or herself) as a standard action without requiring an attack roll, as long as the target is within her reach. She can also use a ranged injection weapon to deliver a biohack to a willing ally she has attuned her custom microlab to as a standard action without making an attack roll, as long as they’re within 60 feet. Under any other circumstance, injecting a biohack into an ally at range requires a successful ranged attack roll.</p>\n<p>The materials Barsala uses to create biohacks are inert until she activates them. Once activated, they can be used to create any biohacks she knows. Each day after she has rested for 8 hours, Barsala can spend 10 minutes to activate the ingredients to create 4 biohacks, and this is the maximum number of biohacks she can have ready at one time. This preparation activates only the ingredients; Barsala doesn’t need to decide which specific biohacks she’s creating until performing the actual actions or attacks used to deliver them. Activated biohack materials that aren’t used that day become inert, even if they’re still in her possession. Barsala can readily replenish these inert reagents on a regular basis at no cost. Whenever she takes a 10-minute rest to recover Stamina Points, Barsala can also prepare additional activated biohack ingredients to replace those she has used, up to her maximum.</p>\n<p>Biohacks come in two varieties: boosters and inhibitors. Barsala knows the basic boosters and inhibitors listed below, the minor boosters and inhibitors that follow, and the unique booster and inhibitor granted by her primary field of study (see below).</p>\n<p><span style=\"text-decoration: underline;\"><em><span style=\"text-decoration: underline;\">Basic Booster </span></em></span>- A basic booster biohack aids a creature in one manner or another. The effect lasts for 3 rounds unless it states otherwise. When Barsala uses it, select an effect:</p><ul><li>The target gains a +1 enhancement bonus to AC.</li><li>The target gains a +2 enhancement bonus to skill checks.</li><li>The target gains a +10-foot enhancement bonus to their speed. If the creature has more than one movement type, choose one to receive this bonus.</li></ul><p><span style=\"text-decoration: underline;\"><em><span style=\"text-decoration: underline;\">Basic Inhibitor </span></em></span>- A basic inhibitor biohack hinders a creature’s physiology or material function. The effect of an inhibitor lasts for 6 rounds unless it states otherwise.&nbsp;</p>\n<p>When Barsala uses it, select an effect:</p><ul><li>The target takes a –2 penalty to AC.</li><li>Barsala reduces the target’s DR by 5.</li><li>Barsala reduces the target’s resistance to one type of energy (her choice) by 5.</li></ul><p>A creature can be affected by only one of Barsala’s basic inhibitors at a time, though it can be affected by multiple basic inhibitors originating from multiple biohackers. If Barsala affects a creature with a different basic inhibitor while a previous inhibitor is still affecting it, the effects of the previous inhibitor immediately end.</p>\n<p><span style=\"text-decoration: underline;\"><em><span style=\"text-decoration: underline;\">Minor Biohacks - </span></em></span>Barsala can create minor biohacks from less powerful (and more stable) pharmaceuticals, nanites, and catalysts, and she can add them to any attack she makes with an injection weapon that does not already have another biohack added to it. She doesn’t need to activate the materials for minor biohacks in advance, and using them does not count against the maximum number of biohacks she can have ready at one time. Minor biohacks are otherwise used as and function as basic booster and basic inhibitor biohacks, and they count as such biohacks for the purposes of interactions with other abilities.</p><ul><li><strong>Minor Booster:</strong> Using a minor booster biohack allows Barsala to attempt to administer first aid with a Medicine check on targets within 60 feet of her microlab. This doesn’t require any additional time or action beyond making the attack, and it doesn’t have the duration of normal biohacks.&nbsp;</li><li><p><strong>Minor Inhibitor:</strong> A minor inhibitor biohack imposes a slight hindrance; the target takes a –1 penalty to attack rolls for 6 rounds.</p><hr /></li></ul><p>Field of Study, Genetics (Ex) Barsala has selected the genetics field of study, granting her access to a unique booster and inhibitor.</p><ul><li><span style=\"text-decoration: underline;\"><em><span style=\"text-decoration: underline;\">Booster </span></em></span>- Barsala temporarily boosts a living creature to improve the acuity of its hearing, granting the subject the benefits of blindsense (sound) with a range of 60 feet. If the creature already has blindsense, it instead gains the benefit of the Blind-Fight feat. This benefit lasts for 1 hour.</li><li><span style=\"text-decoration: underline;\"><em><span style=\"text-decoration: underline;\">Inhibitor </span></em></span>- Barsala delivers a DNA-twisting or material-altering chemical nanite compound into a creature’s body, imparting vulnerability to one type of energy (her choice). If the creature is immune to that energy type, this inhibitor temporarily removes that immunity and gives the creature resistance 20 to that type of energy. If the creature has resistance to that energy type, this effect instead reduces its resistance by 10 (minimum 0). This biohack does not remove a creature’s resistance or immunity to natural hazards or environments, only to damage from energy attacks, spells, and other abilities.</li></ul><hr /><p>Injection Expert (Ex) Barsala is proficient with weapons with the injection weapon special property, as long as the weapon has not gained that weapon special property from a weapon fusion, spell, class feature, or similar ability or effect.&nbsp;</p>\n<p>When Barsala hits an ally with an injection weapon, she can avoid dealing damage to that ally, while still affecting the ally with the biohack booster or inhibitor, drug, medicinal compound, poison, serum, or other substance that was loaded into the injection weapon. When she fires a weapon with the injection special property and has multiple types of ammunition loaded into the weapon, she chooses which type of ammunition she fires when she makes the attack.</p><hr /><p><strong>Mobility</strong> Barsala gains a +4 bonus to her Armor Class against attacks of opportunity that she provokes by leaving a threatened square.</p><h2>GEAR DESCRIPTIONS</h2><p><strong>Mk 1 Serum of Healing</strong> Drinking a vial of this serum restores 1d8 HP.</p><hr /><p><strong>Second Skin</strong> While wearing this armor, Barsala can close its environmental seals and survive in a vacuum (or other harsh environment) for up to 24 hours.</p><hr /><p><strong>Tactical Needler Pistol This weapon can be fired 8 times before it needs to be reloaded. Its range</strong> increment is 40 feet.</p>",
+        "value": "<p>When not on a Starfinder Society mission, Barsala researches biotech augmentations and teaches science on her popular children’s show, Dr. B’s Science Jubilee.</p><h2>SPECIAL ABILITIES</h2><p><strong>Custom Microlab (Ex)</strong> Barsala has integrated a customized kit consisting of medical supplies, testing materials, and pharmaceutical compounds into her prosthetic hand. She can use it to evaluate medical conditions and perform several additional tasks, described below.</p>\n<p>Her custom microlab counts as a basic medkit and a chemalyzer (granting a +4 bonus on Engineering, Mysticism, and Physical Science checks to identify unknown drugs, medicinals, poisons, and other chemical substances). As long as she has her custom microlab, as a move action she can target a creature within 60 feet in her line of sight and attempt a special skill check to identify it as though her die roll were a 20, using Life Science for a living creature or Physical Science for an unliving one, with the check’s DC determined by the creature’s rarity (page 133 of the Starfinder Core Rulebook).</p>\n<p>Barsala can also attune her custom microlab to 6 individual creatures. This takes 10 minutes, which she can combine with the time needed to prepare her biohacks for the day, and the creatures must be present, willing, and able to cooperate with the scan. If she attunes her microlab to creatures in excess of this number, the oldest attunements beyond her maximum number end. Otherwise, attunement lasts 24 hours, after which changes in environment and the target’s condition require the microlab be reattuned. Under some circumstances, Barsala can deliver biohacks to attuned creatures using ranged injection weapons without making an attack roll.</p>\n<p>If her custom microlab is damaged, destroyed, lost, or stolen, Barsala can kitbash a new one from any medkit or chemalyzer with 1 hour of work. She can have only one custom microlab at a time. If she creates a new one, her old microlab functions as a normal item of whatever type she made it from.</p><hr /><p><strong>Biohacks (Ex)</strong> Barsala can use biohacks to boost her allies or inhibit her foes. Her biohacks produce their effects only when she injects a creature with them (see below), and only she knows how to make and administer them properly—a biohack that leaves Barsala’s possession becomes inert until she picks it up again.</p>\n<p>Barsala can deliver any biohack she creates with any attack from an injection weapon. She must decide to use a biohack prior to the attack roll and specify which effect she’s using. She applies the biohack as part of the action used to make the attack. She does not need to preload her weapon with biohacks. If she makes a ranged attack and misses, the biohack is expended along with the attack’s ammunition. A biohack delivered via a melee injection weapon is not normally expended on a missed attack. If Barsala’s attack with a biohack hits but deals no damage, the biohack is expended but the target is not affected by it. After a missed attack that does not expend the biohack, Barsala can remove or change which biohack she’s using as part of her next attack without spending any additional action.</p>\n<p>She can also deliver a biohack using a physical syringe (a level 1 consumable basic melee weapon from her custom microlab) that she can wield in one hand. To inject an unwilling creature with a biohack in this manner, Barsala must hit the creature with a melee attack. This attack deals no damage, but if the creature would be damaged by 1 point of piercing damage, that creature is instead affected by the biohack within the syringe.</p>\n<p>Barsala can inject a biohack into a willing or unconscious creature (or herself) as a standard action without requiring an attack roll, as long as the target is within her reach. She can also use a ranged injection weapon to deliver a biohack to a willing ally she has attuned her custom microlab to as a standard action without making an attack roll, as long as they’re within 60 feet. Under any other circumstance, injecting a biohack into an ally at range requires a successful ranged attack roll.</p>\n<p>The materials Barsala uses to create biohacks are inert until she activates them. Once activated, they can be used to create any biohacks she knows. Each day after she has rested for 8 hours, Barsala can spend 10 minutes to activate the ingredients to create 4 biohacks, and this is the maximum number of biohacks she can have ready at one time. This preparation activates only the ingredients; Barsala doesn’t need to decide which specific biohacks she’s creating until performing the actual actions or attacks used to deliver them. Activated biohack materials that aren’t used that day become inert, even if they’re still in her possession. Barsala can readily replenish these inert reagents on a regular basis at no cost. Whenever she takes a 10-minute rest to recover Stamina Points, Barsala can also prepare additional activated biohack ingredients to replace those she has used, up to her maximum.</p>\n<p>Biohacks come in two varieties: boosters and inhibitors. Barsala knows the basic boosters and inhibitors listed below, the minor boosters and inhibitors that follow, and the unique booster and inhibitor granted by her primary field of study (see below).</p>\n<p><span style=\"text-decoration:underline\"><em><span style=\"text-decoration:underline\">Basic Booster </span></em></span>- A basic booster biohack aids a creature in one manner or another. The effect lasts for 3 rounds unless it states otherwise. When Barsala uses it, select an effect:</p><ul><li>The target gains a +1 enhancement bonus to AC.</li><li>The target gains a +2 enhancement bonus to skill checks.</li><li>The target gains a +10-foot enhancement bonus to their speed. If the creature has more than one movement type, choose one to receive this bonus.</li></ul><p><span style=\"text-decoration:underline\"><em><span style=\"text-decoration:underline\">Basic Inhibitor </span></em></span>- A basic inhibitor biohack hinders a creature’s physiology or material function. The effect of an inhibitor lasts for 6 rounds unless it states otherwise.&nbsp;</p>\n<p>When Barsala uses it, select an effect:</p><ul><li>The target takes a –2 penalty to AC.</li><li>Barsala reduces the target’s DR by 5.</li><li>Barsala reduces the target’s resistance to one type of energy (her choice) by 5.</li></ul><p>A creature can be affected by only one of Barsala’s basic inhibitors at a time, though it can be affected by multiple basic inhibitors originating from multiple biohackers. If Barsala affects a creature with a different basic inhibitor while a previous inhibitor is still affecting it, the effects of the previous inhibitor immediately end.</p>\n<p><span style=\"text-decoration:underline\"><em><span style=\"text-decoration:underline\">Minor Biohacks - </span></em></span>Barsala can create minor biohacks from less powerful (and more stable) pharmaceuticals, nanites, and catalysts, and she can add them to any attack she makes with an injection weapon that does not already have another biohack added to it. She doesn’t need to activate the materials for minor biohacks in advance, and using them does not count against the maximum number of biohacks she can have ready at one time. Minor biohacks are otherwise used as and function as basic booster and basic inhibitor biohacks, and they count as such biohacks for the purposes of interactions with other abilities.</p><ul><li><strong>Minor Booster:</strong> Using a minor booster biohack allows Barsala to attempt to administer first aid with a Medicine check on targets within 60 feet of her microlab. This doesn’t require any additional time or action beyond making the attack, and it doesn’t have the duration of normal biohacks.&nbsp;</li><li><p><strong>Minor Inhibitor:</strong> A minor inhibitor biohack imposes a slight hindrance; the target takes a –1 penalty to attack rolls for 6 rounds.</p><hr /></li></ul><p>Field of Study, Genetics (Ex) Barsala has selected the genetics field of study, granting her access to a unique booster and inhibitor.</p><ul><li><span style=\"text-decoration:underline\"><em><span style=\"text-decoration:underline\">Booster </span></em></span>- Barsala temporarily boosts a living creature to improve the acuity of its hearing, granting the subject the benefits of blindsense (sound) with a range of 60 feet. If the creature already has blindsense, it instead gains the benefit of the Blind-Fight feat. This benefit lasts for 1 hour.</li><li><span style=\"text-decoration:underline\"><em><span style=\"text-decoration:underline\">Inhibitor </span></em></span>- Barsala delivers a DNA-twisting or material-altering chemical nanite compound into a creature’s body, imparting vulnerability to one type of energy (her choice). If the creature is immune to that energy type, this inhibitor temporarily removes that immunity and gives the creature resistance 20 to that type of energy. If the creature has resistance to that energy type, this effect instead reduces its resistance by 10 (minimum 0). This biohack does not remove a creature’s resistance or immunity to natural hazards or environments, only to damage from energy attacks, spells, and other abilities.</li></ul><hr /><p>Injection Expert (Ex) Barsala is proficient with weapons with the injection weapon special property, as long as the weapon has not gained that weapon special property from a weapon fusion, spell, class feature, or similar ability or effect.&nbsp;</p>\n<p>When Barsala hits an ally with an injection weapon, she can avoid dealing damage to that ally, while still affecting the ally with the biohack booster or inhibitor, drug, medicinal compound, poison, serum, or other substance that was loaded into the injection weapon. When she fires a weapon with the injection special property and has multiple types of ammunition loaded into the weapon, she chooses which type of ammunition she fires when she makes the attack.</p><hr /><p><strong>Mobility</strong> Barsala gains a +4 bonus to her Armor Class against attacks of opportunity that she provokes by leaving a threatened square.</p><h2>GEAR DESCRIPTIONS</h2><p><strong>Mk 1 Serum of Healing</strong> Drinking a vial of this serum restores 1d8 HP.</p><hr /><p><strong>Second Skin</strong> While wearing this armor, Barsala can close its environmental seals and survive in a vacuum (or other harsh environment) for up to 24 hours.</p><hr /><p><strong>Tactical Needler Pistol This weapon can be fired 8 times before it needs to be reloaded. Its range</strong> increment is 40 feet.</p>",
         "weight": ""
       },
       "cl": {
         "value": null
       },
-      "class": "",
-      "deity": "",
-      "environment": "",
-      "level": {
-        "max": 20,
-        "min": 1,
-        "value": 1
-      },
-      "organization": "",
-      "organizationSize": {
-        "max": null,
-        "min": null
-      },
       "race": "Kasatha",
       "theme": "Icon",
       "xp": {
-        "max": 1300,
-        "min": 0,
         "value": 0
       }
     },
     "modifiers": [],
-    "resources": {
-      "primary": {
-        "lr": 0,
-        "max": 0,
-        "sr": 0,
-        "value": 0
-      },
-      "secondary": {
-        "lr": 0,
-        "max": 0,
-        "sr": 0,
-        "value": 0
-      },
-      "tertiary": {
-        "lr": 0,
-        "max": 0,
-        "sr": 0,
-        "value": 0
-      }
-    },
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
+    "options": {
+      "hideUntrained": false
     },
     "skills": {
       "acr": {
@@ -4647,10 +4407,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -4658,10 +4417,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -4669,10 +4427,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 3
       },
       "com": {
@@ -4680,10 +4437,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 3
       },
       "cul": {
@@ -4691,10 +4447,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 1,
+        "subname": "",
         "value": 3
       },
       "dip": {
@@ -4702,10 +4457,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 3
       },
       "dis": {
@@ -4713,10 +4467,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -4724,10 +4477,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 3
       },
       "int": {
@@ -4735,10 +4487,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -4746,11 +4497,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
-        "notes": "",
         "ranks": 1,
+        "subname": "",
         "value": 3
       },
       "med": {
@@ -4758,11 +4507,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
-        "notes": "",
         "ranks": 1,
+        "subname": "",
         "value": 3
       },
       "mys": {
@@ -4770,10 +4517,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -4781,10 +4527,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 3
       },
       "phs": {
@@ -4792,11 +4537,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
-        "notes": "",
         "ranks": 1,
+        "subname": "",
         "value": 3
       },
       "pil": {
@@ -4804,10 +4547,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -4815,10 +4557,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
-        "notes": "",
         "ranks": 1,
         "subname": "video personality",
         "value": 3
@@ -4828,10 +4567,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 3
       },
       "sle": {
@@ -4839,10 +4577,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 3
       },
       "ste": {
@@ -4850,10 +4587,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -4861,13 +4597,13 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
@@ -4914,15 +4650,7 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
-        "custom": "",
-        "value": []
-      },
-      "dr": {
         "custom": "",
         "value": []
       },
@@ -4941,9 +4669,6 @@
       },
       "senses": "",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0,
       "weaponProf": {
         "custom": "",

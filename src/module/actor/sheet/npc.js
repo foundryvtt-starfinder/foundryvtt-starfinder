@@ -133,7 +133,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                     && !!item.system.recharge.value
                     && item.system.recharge.charged === false,
                 hasAttack:
-                    ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType)
+                    SFRPG.attackActions.includes(item.system.actionType)
                     && (!["weapon", "shield"].includes(item.type)
                     || item.system.equipped),
                 hasDamage:
@@ -256,7 +256,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         };
 
         if (this.actor.type === "npc2") {
-            const [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
+            const [permanent, temporary] = actorData.modifiers.reduce((arr, modifier) => {
                 if (modifier.subtab === "permanent") arr[0].push(modifier);
                 else if (modifier.subtab === "conditions") arr[3].push(modifier);
                 else arr[1].push(modifier); // Any unspecific categories go into temporary.
@@ -293,7 +293,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         return super._updateObject(event, formData);
     }
 
-    static async _selectActorData({yes, no, cancel, render, defaultYes = true, rejectClose = false, options = {width: 600}} = {}) {
+    static async _selectActorData({yes, no, render, defaultYes = true, rejectClose = false, options = {width: 600}} = {}) {
         return new Promise((resolve, reject) => {
             const dialog = new Dialog({
                 title: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogTitle"),
@@ -318,7 +318,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                     cancel: {
                         icon: '<i class="fas fa-times"></i>',
                         label: game.i18n.localize("SFRPG.NPCSheet.Interface.DuplicateNewStyle.DialogCancelButton"),
-                        callback: html => {
+                        callback: () => {
                             resolve(null);
                         }
                     }
@@ -334,7 +334,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         });
     }
 
-    async _duplicateAsNewStyleNPC(event) {
+    async _duplicateAsNewStyleNPC() {
         let actorData = this.actor.toObject();
 
         if (this.token && !this.token.actorLink) {
@@ -363,19 +363,25 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
         }
 
         // Convert the old user input into the new architecture
-        for (const [abl, ability] of Object.entries(actorData.system.abilities)) {
+        for (const ability of Object.values(actorData.system.abilities)) {
             ability.base = ability.mod;
         }
 
-        for (const [skl, skill] of Object.entries(actorData.system.skills)) {
+        for (const skill of Object.values(actorData.system.skills)) {
             if (skill.enabled) {
                 skill.ranks = skill.mod;
             }
         }
+        if (!actorData.system.attributes.eac) actorData.system.attributes.eac = {};
+        if (!actorData.system.attributes.kac) actorData.system.attributes.kac = {};
+        if (!actorData.system.attributes.init) actorData.system.attributes.init = {};
         actorData.system.attributes.eac.base = actorData.system.attributes.eac.value;
         actorData.system.attributes.kac.base = actorData.system.attributes.kac.value;
         actorData.system.attributes.init.value = actorData.system.attributes.init.total;
 
+        if (!actorData.system.attributes.fort) actorData.system.attributes.fort = {};
+        if (!actorData.system.attributes.reflex) actorData.system.attributes.reflex = {};
+        if (!actorData.system.attributes.will) actorData.system.attributes.will = {};
         actorData.system.attributes.fort.base = actorData.system.attributes.fort.bonus;
         actorData.system.attributes.reflex.base = actorData.system.attributes.reflex.bonus;
         actorData.system.attributes.will.base = actorData.system.attributes.will.bonus;

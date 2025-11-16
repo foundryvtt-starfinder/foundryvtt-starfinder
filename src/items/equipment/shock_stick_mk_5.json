@@ -4,11 +4,7 @@
   "type": "technological",
   "img": "systems/sfrpg/icons/equipment/goods/credstick.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 0,
@@ -74,7 +69,9 @@
             "electricity": true,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -90,27 +87,25 @@
       "unidentified": "",
       "value": "<p>This item appears to be a simple credstick but is actually a charged capacitor ready to shock whoever picks it up. Though it was originally created as a prank item, engineers have devised much more dangerous models whose shocks can even be lethal. A character must be actively searching to be able to distinguish a shock stick from a real credstick and must succeed at a Perception check with a DC of 20 + the shock stick’s item level. Once a shock stick is activated as a standard action, it is safe to handle or deactivate (another standard action) for 1 minute, until it reaches full charge. After that, the first creature or metal object to touch it takes electricity damage based on the model (Reflex save for half). Rolling a natural 20 on the Reflex save negates all damage. The shock stick is destroyed upon discharge.</p>\n<p><strong>Mk 1 (Level 1)</strong>: 2 electricity damage; DC 12</p>\n<p><strong>Mk 2 (Level 3)</strong>: 1d6 electricity damage; DC 14</p>\n<p><strong>Mk 3 (Level 6)</strong>: 2d6 electricity damage; DC 16</p>\n<p><strong>Mk 4 (Level 9)</strong>: 3d6 electricity damage; DC 20</p>\n<p><strong>Mk 5 (Level 12)</strong>: 6d6 electricity damage; DC 22</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
     },
     "equippable": false,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 1,
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 12,
     "modifiers": [],
     "price": 5500,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
@@ -122,11 +117,12 @@
     },
     "skillCheck": {
       "type": "per",
-      "dc": "32"
+      "dc": "32",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 158",
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

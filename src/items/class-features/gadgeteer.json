@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "icons/svg/clockwork.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,26 +37,28 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.PU3uwrAcmGXMGo2n]{Specialization}</p>\n<p>You can move from place to place without being noticed.</p>\n<p><strong>Associated Skills</strong>: @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4]{Engineering} and @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.qVEW9HjXQN0ok879]{Sleight of Hand}. You can attempt an Engineering check with a +4 bonus to make a trick attack by using a customized device to momentarily distract your enemy.</p>\n<p><strong>Specialization Exploit</strong>: @UUID[Compendium.sfrpg.class-features.Item.583I8ujhHputWnep]{Utility Belt (Ex)}</p>\n<p><strong>@UUID[Compendium.sfrpg.class-features.Item.hKAKWZvBIzZLXKQe]{Quick Deployment (Ex)}:</strong> At 11th level, once per round you can retrieve or put away a stored item (including from your utility belt) or pick up an item as part of another move action, standard action, or full action.</p>\n<p><em>Free Skill Ranks from Specialization's associated skills are auto applied in the modifiers tab</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "2085727b-8787-47e2-ab0b-2df80f70d6d6",
         "name": "Specialization",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill-ranks",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "@classes.operative.levels",
         "modifierType": "constant",
@@ -73,8 +72,10 @@
         "name": "Specialization",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill-ranks",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "@classes.operative.levels",
         "modifierType": "constant",
@@ -86,30 +87,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Specialization",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

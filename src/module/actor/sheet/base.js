@@ -63,7 +63,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const isOwner = this.document.isOwner;
         const data = {
             actor: this.actor,
-            system: foundry.utils.deepClone(this.actor.system),
+            system: this.actor.system,
             isOwner: isOwner,
             isGM: game.user.isGM,
             limited: this.document.limited,
@@ -128,7 +128,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         if (data.system.skills) {
             // Update skill labels
             for (const [s, skl] of Object.entries(data.system.skills)) {
-                skl.ability = data.system.abilities[skl.ability].label.substring(0, 3);
+                skl.abilityLabel = data.system.abilities[skl.ability]?.label.substring(0, 3) ?? "Err";
                 skl.icon = this._getClassSkillIcon(skl.value);
 
                 let skillLabel = CONFIG.SFRPG.skills[s.substring(0, 3)];
@@ -139,13 +139,6 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                 skl.label = skillLabel;
                 skl.hover = CONFIG.SFRPG.skillProficiencyLevels[skl.value];
             }
-
-            data.system.skills = Object.keys(data.system.skills).sort()
-                .reduce((skills, key) => {
-                    skills[key] = data.system.skills[key];
-
-                    return skills;
-                }, {});
 
             data.system.hasSkills = Object.values(data.system.skills).filter(x => x.enabled).length > 0;
         }
@@ -189,7 +182,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                 const oldValue = this.actor?.system?.currency[name];
                 let newValue = oldValue;
                 const isDelta = input.startsWith("+") || input.startsWith("-");
-                const sanitizedInput = input.replace(/[^0-9|+|-]/g, '');
+                const sanitizedInput = input.replace(/[^0-9|+|\-|.]/g, '');
                 if (sanitizedInput) {
                     newValue = isDelta ? Number(oldValue) + Number(sanitizedInput) : Number(sanitizedInput);
                 }
@@ -257,7 +250,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         /* -------------------------------------------- */
         /*  Spellbook
         /* -------------------------------------------- */
-        html.find('.spell-browse').click(ev => getSpellBrowser().render(true)); // Inventory Browser
+        html.find('.spell-browse').click(() => getSpellBrowser().render(true)); // Inventory Browser
 
         /* -------------------------------------------- */
         /*  Inventory
@@ -458,13 +451,32 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         try {
             const itemData = item.system;
             const actor = item.actor;
+            const actorData = actor.system;
             const isWeapon = ["weapon", "shield"].includes(item.type);
 
+            // TODO: This chunk is the same code as in item.js's rollAttack(), probably good practice to combine these into one method somewhere
             let abl = itemData.ability;
-            if (!abl && (actor.type === "npc" || actor.type === "npc2")) abl = "";
-            else if (!abl && (item.type === "spell")) abl = actor.system.attributes.spellcasting || "int";
-            else if (itemData.properties?.operative && actor.system.abilities.dex.value > actor.system.abilities.str.value) abl = "dex";
-            else if (!abl) abl = "str";
+            if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) {
+                abl = "";
+            } else if (!abl && (this.type === "spell")) {
+                if (itemData.actionType === "rsak") {
+                    abl = "dex";
+                } else if (itemData.actionType === "msak") {
+                    abl = "str";
+                } else {
+                    abl = actorData.attributes.spellcasting || "int";
+                }
+            } else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) {
+                abl = "dex";
+            } else if (!abl) {
+                if (itemData.actionType === "rwak" || itemData.actionType === "rsak") {
+                    abl = "dex";
+                } else if (itemData.actionType === "mwak" || itemData.actionType === "msak") {
+                    abl = "str";
+                } else {
+                    abl = "str";
+                }
+            }
 
             // Define Roll parts
             const parts = [];
@@ -500,7 +512,9 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             const roll = Roll.create(preparedFormula, rollData).simplifiedFormula;
             item.config.attackString = Number(roll) >= 0 ? `+${roll}` : roll;
 
-        } catch {
+        } catch (err) {
+            console.debug("Issue with calculating an attack string");
+            console.debug(err);
             item.config.attackString = game.i18n.localize("SFRPG.Attack");
         }
     }
@@ -709,7 +723,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     }
 
-    async _onShowImage(event) {
+    async _onShowImage() {
         const actor = this.actor;
         const title = actor.token?.name ?? actor.prototypeToken?.name ?? actor.name;
         new foundry.applications.apps.ImagePopout({src: actor.img, window: { title }, uuid: actor.uuid }).render(true);
@@ -797,8 +811,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
-
-        return item.rollConsumable({event: event});
+        return item.useItem({event:event});
     }
 
     _onItemRollAttack(event) {
@@ -1265,7 +1278,10 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         if (event) {
             const targetId = $(event.target).parents('.item')
                 .attr('data-item-id');
-            targetContainer = targetActor.getItem(targetId);
+            targetContainer = targetActor.getItem(targetId) ?? null;
+            if (targetContainer && !targetContainer.system.container?.storage) {
+                targetContainer = null;
+            }
         }
 
         // Handle ItemCollections
@@ -1290,10 +1306,10 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         // Handle trading between actors
         } else if (parsedDragData.uuid.includes("Actor")) {
             const actor = fromUuidSync(parsedDragData.uuid)?.actor || await fromUuid(parsedDragData.uuid)?.actor;
-
             const tokenId = actor.isToken ? actor.token.id : null;
             const sceneId = actor.isToken ? actor.token.parent.id : null;
             const sourceActor = new ActorItemHelper(actor.id, tokenId, sceneId);
+
             if (!ActorItemHelper.IsValidHelper(sourceActor)) {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.DragFromExternalTokenError"));
                 return;
@@ -1385,7 +1401,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                     const preferredStorageIndex = getFirstAcceptableStorageIndex(targetContainer, addedItem) || 0;
                     newContents.push({ id: addedItem.id, index: preferredStorageIndex });
 
-                    const update = { id: targetContainer.id, "system.container.contents": newContents };
+                    const update = { id: targetContainer.id, "container.contents": newContents };
                     await targetActor.updateItem(targetContainer.id, update);
                 }
 

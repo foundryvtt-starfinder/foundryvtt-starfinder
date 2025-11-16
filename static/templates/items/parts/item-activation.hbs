@@ -11,9 +11,10 @@
         <div class="form-group input-select">
             <label>{{ localize "SFRPG.Items.Activation.ActivationCost" }}</label>
             <div class="form-fields">
+                {{#if this.activation.hasInput}}
                 <input type="text" name="system.activation.cost" value="{{itemData.activation.cost}}" data-dtype="Number" placeholder="-"/>
+                {{/if}}
                 <select name="system.activation.type">
-                    {{selectOption "" "" selected=itemData.activation.type}}
                     {{selectOptions (sfrpg "abilityActivationTypes") selected=itemData.activation.type}}
                 </select>
             </div>
@@ -46,11 +47,21 @@
                 <input type="text" class="wide-form-field" name="system.duration.value" value="{{itemData.duration.value}}" data-dtype="String" placeholder="-"/>
                 {{/if}}
                 <select name="system.duration.units">
-                    {{selectOption "text" "SFRPG.Text" selected=itemData.duration.units localize=true}}
                     {{selectOptions (sfrpg "durationTypes") selected=itemData.duration.units}}
                 </select>
             </div>
         </div>
+
+        {{#if this.duration.needsEndOn}}
+        <div class="form-group">
+            <label>{{localize "SFRPG.Effect.EndTypesLabel"}}</label>
+            <div class="form-fields">
+                <select name="system.duration.endsOn">
+                    {{selectOptions (sfrpg "effectEndTypes") selected=itemData.duration.endsOn}}
+                </select>
+            </div>
+        </div>
+        {{/if}}
 
         {{!-- Limited Uses --}}
         <div class="form-group uses-per" data-tooltip="<strong>{{ localize "SFRPG.Items.Activation.LimitedUses" }}</strong><br/>@itemData.uses.value<br/>@itemData.uses.max</br/>@itemData.uses.per">
@@ -75,7 +86,7 @@
                 <div class="form-group input-select">
                     <label>{{#if (eq this.data.type "weapon")}}{{ localize "SFRPG.Items.Activation.RangeIncrement" }}{{else}}{{ localize "SFRPG.Items.Activation.Range" }}{{/if}}</label>
                     <div class="form-fields">
-                        {{#if this.range.showTotal}}<p class="calculated-total"><strong>{{itemData.range.total}}</strong></p>{{/if}}
+                        {{#if this.range.showTotal}}<p class="calculated-total"><strong>{{this.range.total}} {{localize "SFRPG.Units.Speed"}}</strong></p>{{/if}}
                         {{#if this.range.hasInput}}
                         <input class="wide-form-field" type="text" name="system.range.value" value="{{itemData.range.value}}" data-dtype="String" placeholder="Range"/>
                         {{/if}}

@@ -4,7 +4,6 @@
   "type": "starshipAction",
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": {
       "resolve": true,
       "value": "15 + floor(1.5 * @ship.details.tier)"
@@ -21,22 +20,35 @@
     "formula": [
       {
         "name": "Computers",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@captain.skills.com.mod"
       },
       {
         "name": "Engineering",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@captain.skills.eng.mod"
       },
       {
         "name": "Gunnery",
-        "formula": "max(@captain.attributes.baseAttackBonus.value, @captain.skills.pil.ranks) + @captain.abilities.dex.mod"
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
+        "formula": "max(@captain.attributes.baseAttackBonus.value, @captain.skills.pil.ranks, @captain.skills.gun.mod) + @captain.abilities.dex.mod"
       },
       {
         "name": "Piloting",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@captain.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       }
     ],
     "isPush": true,
+    "modifiers": [],
     "order": 30,
     "phase": {
       "name": "Any phase",
@@ -46,6 +58,7 @@
     "role": "captain",
     "selectorKey": "captain",
     "selectors": [],
+    "slug": "",
     "source": "CRB"
   }
 }

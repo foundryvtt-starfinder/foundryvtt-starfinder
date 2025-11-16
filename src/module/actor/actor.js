@@ -29,7 +29,7 @@ import { } from "./crew-update.js";
  * @property {string}                     operator An operator that determines how damage is split between multiple types.
  */
 
-/** @import { RollResult } from '../dice.js' */
+/** @import RollResult from '../dice.js' */
 
 /** @extends {foundry.documents.Actor} */
 export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
@@ -81,10 +81,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     prepareData() {
         super.prepareData();
 
-        this._ensureHasModifiers(this.system);
-        const modifiers = this.getAllModifiers(false, false, true);
-
         // Store all modifiers, from the actor and from items, on the actor in an instantiated state.
+        const modifiers = this.getAllModifiers(false, false, true);
         this.system.allModifiers = modifiers;
 
         // const timedEffects = SFRPGTimedEffect.getAllTimedEffects(this);
@@ -192,12 +190,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Extend preCreate to apply some defaults to newly created characters
-     * See the base Actor class for API documentation of this method
-     *
-     * @param {object} data               The initial data object provided to the document creation request
-     * @param {object} options            Additional options which modify the creation request
-     * @param {documents.BaseUser} user   The User requesting the document creation
-     * @returns {boolean|void}         Explicitly return false to prevent creation of this Document
+     * @inheritdoc
      */
     async _preCreate(data, options, user) {
         const autoLinkedTypes = ['character', 'drone'];
@@ -245,13 +238,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Extend preUpdate to clamp certain PC changes
-     * See the base Actor class for API documentation of this method
-     *
-     * Pre-update operations only occur for the client which requested the operation.
-     *
-     * @param {object} changed            The differential data that is changed relative to the documents prior values
-     * @param {object} options            Additional options which modify the update request
-     * @param {documents.BaseUser} user   The User requesting the document update
+     * @inheritdoc
      */
     async _preUpdate(changed, options, user) {
 
@@ -297,17 +284,13 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Delete any of corresponding timedEffect objects of the actor's items.
+     * Also remove linked hotbar instances from item apps before deleting so the hotbar isn't closed.
+     * @inheritdoc
      */
     async _onDelete(options, userId) {
         for (const item of this.items) {
-            if (item.type === "effect") {
-                const effect = game.sfrpg.timedEffects.get(item.uuid);
-                if (!effect) continue;
-
-                // Need to pass the item since the item has already been deleted from the server
-                effect.delete(item);
-            }
-
+            game.sfrpg.timedEffects.get(item.uuid)?.delete();
+            delete item.apps[ui.hotbar.id];
         }
 
         return super._onDelete(options, userId);
@@ -315,6 +298,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Toggle scrolling text for created effects
+     * @inheritdoc
      */
     _onCreateDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {
@@ -330,15 +314,11 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Delete item's corresponding timedEffect objects
+     * @inheritdoc
      */
     _onDeleteDescendantDocuments(parent, collection, documents, data, options, userId) {
         for (const item of documents) {
-            if (item.type === 'effect') {
-                const effect = game.sfrpg.timedEffects.get(item.uuid);
-                if (!effect) continue;
-
-                effect.delete();
-            }
+            game.sfrpg.timedEffects.get(item.uuid)?.delete();
         }
 
         return super._onDeleteDescendantDocuments(parent, collection, documents, data, options, userId);
@@ -406,37 +386,21 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         if (consumeSpellSlot && spellLevel > 0 && selectedSlot) {
             const actor = this;
             if (selectedSlot.source === "general") {
-                if (processContext) {
-                    processContext.then(function(result) {
-                        return actor.update({
-                            [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
-                        });
-                    });
-                } else {
-                    processContext = actor.update({
-                        [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
-                    });
-                }
+                processContext = actor.update({
+                    [`system.spells.spell${spellLevel}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].value) - 1, 0)
+                });
             } else {
                 const selectedLevel = selectedSlot.level;
                 const selectedClass = selectedSlot.source;
 
-                if (processContext) {
-                    processContext.then(function(result) {
-                        return actor.update({
-                            [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
-                        });
-                    });
-                } else {
-                    processContext = actor.update({
-                        [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
-                    });
-                }
+                processContext = actor.update({
+                    [`system.spells.spell${selectedLevel}.perClass.${selectedClass}.value`]: Math.max(parseInt(actor.system.spells[`spell${spellLevel}`].perClass[selectedClass].value) - 1, 0)
+                });
             }
         }
 
         if (processContext) {
-            processContext.then(function(result) {
+            processContext.then(function() {
                 return item.roll();
             });
 
@@ -449,12 +413,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     /**
      * Edit a skill's fields
      * @param {string} skillId The skill id (e.g. "ins")
-     * @param {Object} options Options which configure how the skill is edited
      */
-    async editSkill(skillId, options = {}) {
-        // Keeping this here for later
-        // this.update({"data.skills.-=skillId": null});
-        // use this to delete any unwanted skills.
+    async editSkill(skillId) {
 
         const skill = foundry.utils.deepClone(this.system.skills[skillId]);
         const isNpc = this.type === "npc" || this.type === "npc2";
@@ -512,9 +472,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Add a new skill
-     * @param {Object} options Options which configure how the skill is added
      */
-    async addSkill(options = {}) {
+    async addSkill() {
         const skill = {
             ability: "int",
             ranks: 0,
@@ -915,7 +874,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         }
 
         let speakerActor = this;
-        const roleKey = CONFIG.SFRPG.starshipRoleNames[actionEntry.system.role];
+        const roleKey = CONFIG.SFRPG.starshipRoles[actionEntry.system.role];
         let roleName = game.i18n.format(roleKey);
 
         const desiredKey = actionEntry.system.selectorKey;
@@ -930,7 +889,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
             const actorRole = this.getCrewRoleForActor(speakerActor.id);
             if (actorRole) {
-                const actorRoleKey = CONFIG.SFRPG.starshipRoleNames[actorRole];
+                const actorRoleKey = CONFIG.SFRPG.starshipRoles[actorRole];
                 roleName = game.i18n.format(actorRoleKey);
             }
         }
@@ -1070,8 +1029,12 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 }
 
                 /** Add remaining roles if available. */
-                const crewMates = ["gunner", "engineer", "chiefMate", "magicOfficer", "passenger", "scienceOfficer", "minorCrew", "openCrew"];
-                const allCrewMates = ["minorCrew", "openCrew"];
+                const crewMates = [
+                    ...Object.keys(CONFIG.SFRPG.starshipNormalCrewRoles),
+                    "passenger",
+                    ...Object.keys(CONFIG.SFRPG.starshipOtherRoles)
+                ];
+                const allCrewMates = Object.keys(CONFIG.SFRPG.starshipOtherRoles);
                 for (const crewType of crewMates) {
                     let crewCount = 1;
                     const crew = [];
@@ -1119,13 +1082,24 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 }
             } else {
                 /** Create 'fake' actors. */
-                rollContext.addContext("captain", this, actorData.system.crew.npcData.captain);
-                rollContext.addContext("pilot", this, actorData.system.crew.npcData.pilot);
-                rollContext.addContext("gunner", this, actorData.system.crew.npcData.gunner);
-                rollContext.addContext("engineer", this, actorData.system.crew.npcData.engineer);
-                rollContext.addContext("chiefMate", this, actorData.system.crew.npcData.chiefMate);
-                rollContext.addContext("magicOfficer", this, actorData.system.crew.npcData.magicOfficer);
-                rollContext.addContext("scienceOfficer", this, actorData.system.crew.npcData.scienceOfficer);
+                const crewRoles = Object.keys(CONFIG.SFRPG.starshipCrewRoles);
+                const populatedRoles = [];
+                crewRoles.forEach((role) => {
+                    if (crewData.npcData[role]?.numberOfUses) {
+                        rollContext.addContext(
+                            role,
+                            { name: game.i18n.localize(SFRPG.starshipRoles[role]) },
+                            actorData.system.crew.npcData[role]
+                        );
+                        populatedRoles.push(role);
+                    }
+                });
+                const otherRoles = Object.keys(CONFIG.SFRPG.starshipOtherRoles);
+                otherRoles.forEach((role) => {
+                    if (desiredSelectors.includes(role)) {
+                        rollContext.addSelector(role, populatedRoles);
+                    }
+                });
             }
         }
     }
@@ -1139,9 +1113,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * @param {ActorSFRPG} doc The updated actor, containing the old values
      * @param {Object} diff An update object containing the new values
      * @param {Object} options An object, to which the delta is appended to
-     * @param {String} _userId The ID of the current user
      */
-    floatingHpOnPreUpdate(doc, diff, options, _userId) {
+    floatingHpOnPreUpdate(doc, diff, options) {
         if (!game.settings.get("sfrpg", "floatingHP")) return;
 
         const dhp = this.diffHealth(diff.system, doc.system, doc.type);
@@ -1152,9 +1125,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * @param {ActorSFRPG} doc
      * @param {Object} diff
      * @param {Object} options
-     * @param {String} _userId
      */
-    floatingHpOnUpdate(actor, _data, options, _userId) {
+    floatingHpOnUpdate(actor, _data, options) {
         const dhp = options._hpDiffs;
         if (!dhp) return;
         const tokens = actor.getActiveTokens();
@@ -1167,10 +1139,9 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * Build HP diffs.
      * @param {Object} actorData The data of the updated actor, post-update
      * @param {Object} old The data of the updated actor, pre-update
-     * @param {String} type The actor's type
      * @return {Object} An object containing the key of the updated value, and the diff
      */
-    diffHealth(actorData, old, type) {
+    diffHealth(actorData, old) {
         if (!actorData) return;
 
         const diff = {};

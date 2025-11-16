@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/commodities/cloth/ribbon-green.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 0,
@@ -88,6 +83,7 @@
           "name": "",
           "formula": "1d8 + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -95,12 +91,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -110,7 +109,6 @@
       "unidentified": "",
       "value": "<p>The battleflowers of Ning have been using battle ribbons in ritualized combat for millennia, their use dating back to long before the Gap. The weapon is a 10-foot-long ribbon and about 3 inches wide with sharpened edges, and is employed in rippling and flowing motions around the user. Battle ribbons are difficult to use without training, so most who take up the battle ribbon seek apprenticeship with the famous battleflowers of Ning to learn the elaborate performance art—though acquiring such a mentor is difficult, as they take students only rarely. Battle ribbon varieties start with modern materials used in a traditional blade, then proceed to the innovations of the microedge and zero-edge battle ribbons.</p>\n<p><strong>Special Property:</strong> Professional (Dancer)</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -120,7 +118,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 3,
     "modifiers": [],
@@ -225,10 +223,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
@@ -238,8 +233,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 13",
     "special": "",
     "specialMaterials": {
@@ -259,7 +256,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

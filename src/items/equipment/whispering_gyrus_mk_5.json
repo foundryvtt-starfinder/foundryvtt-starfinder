@@ -5,10 +5,7 @@
   "img": "icons/magic/control/silhouette-aura-energy.webp",
   "system": {
     "type": "necrograft",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -42,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -56,7 +52,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -66,17 +63,16 @@
       "unidentified": "",
       "value": "<p>A whispering gyrus is a wisp of errant thought from an allip grafted directly into your brain or comparable organ. The frenetic whispers of the gyrus permeate your thoughts, giving you a –2 penalty to Wisdom-based skills and ability checks. A number of times per day equal to the necrograft’s mark, you can instead heed the whispers as a reaction when attempting an Intelligence-, Wisdom-, or Charisma-based skill check to negate the penalty from the gyrus and gain a +5 insight bonus to the check. In addition, the gyrus provides an enhancement bonus equal to its mark on saves against fear effects, languagedependent effects, and effects that cause confusion or sleep.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 20,
     "modifiers": [
       {
@@ -84,8 +80,10 @@
         "name": "Whispering gyrus - Wisdom penalty",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ability-skills",
         "enabled": true,
+        "limitTo": null,
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
@@ -99,8 +97,10 @@
         "name": "Whispering gyrus - Wisdom penalty",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ability-check",
         "enabled": true,
+        "limitTo": null,
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
@@ -114,8 +114,10 @@
         "name": "Whispering gyrus",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "ability-skills",
         "enabled": false,
+        "limitTo": null,
         "max": 5,
         "modifier": "+5",
         "modifierType": "formula",
@@ -129,8 +131,10 @@
         "name": "Whispering gyrus",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "ability-skills",
         "enabled": false,
+        "limitTo": null,
         "max": 5,
         "modifier": "+5",
         "modifierType": "formula",
@@ -144,8 +148,10 @@
         "name": "Whispering gyrus",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "ability-skills",
         "enabled": false,
+        "limitTo": null,
         "max": 5,
         "modifier": "+5",
         "modifierType": "formula",
@@ -159,8 +165,10 @@
         "name": "Whispering gyrus, Mk 5",
         "type": "enhancement",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": false,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "formula",
@@ -171,29 +179,32 @@
       }
     ],
     "price": 775000,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AR pg. 97",
     "system": "brain",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 5,
+      "max": "5",
       "per": "day",
       "value": 5
     }

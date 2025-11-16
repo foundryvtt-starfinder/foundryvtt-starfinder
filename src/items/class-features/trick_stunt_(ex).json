@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/classes/jumps_jets.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "other",
     "actionType": "skill",
     "activation": {
@@ -43,7 +39,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -107,18 +105,15 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "10th Level",
     "rollNotes": "",
@@ -129,11 +124,12 @@
     },
     "skillCheck": {
       "type": "pil",
-      "dc": "20 + your target’s CR (or the first target’s CR for the run over action)"
+      "dc": "20 + your target’s CR (or the first target’s CR for the run over action)",
+      "variable": false
     },
+    "slug": "",
     "source": "TR pg. 29",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

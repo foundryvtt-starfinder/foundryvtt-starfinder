@@ -4,11 +4,7 @@
   "type": "hybrid",
   "img": "systems/sfrpg/icons/default/energise.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 0,
@@ -61,7 +56,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -71,18 +67,17 @@
       "unidentified": "",
       "value": "<p>You can attach this small eyepiece to a set of googles or to the helmet of a suit of armor, and you can take a swift action to flip it down into position over one eye. You can use it for 1 hour a day, in 1-minute increments. While in use, the trap scanner allows you to detect magical and technological traps within 30 feet of you that are of a CR equal to 5 or lower, as long as you have clear line of sight to the trap. The trap scanner grants you a +4 circumstance modifier to Perception checks for detecting magical and technological traps.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "minute",
       "value": "1"
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 0,
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 3,
     "limitedWear": false,
     "modifiers": [
@@ -91,8 +86,10 @@
         "name": "Trap Scanner",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "4",
         "modifierType": "formula",
@@ -103,24 +100,28 @@
       }
     ],
     "price": 1500,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "30"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 163",
     "target": {
-      "type": "",
       "value": "Traps CR equal to 5 or lower"
     },
     "usage": {

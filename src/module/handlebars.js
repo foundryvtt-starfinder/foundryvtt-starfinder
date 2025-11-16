@@ -79,22 +79,22 @@ export function setupHandlebars() {
         return !value;
     });
 
-    Handlebars.registerHelper("add", function(v1, v2, options) {
+    Handlebars.registerHelper("add", function(v1, v2) {
         'use strict';
         return v1 + v2;
     });
 
-    Handlebars.registerHelper("sub", function(v1, v2, options) {
+    Handlebars.registerHelper("sub", function(v1, v2) {
         'use strict';
         return v1 - v2;
     });
 
-    Handlebars.registerHelper("mult", function(v1, v2, options) {
+    Handlebars.registerHelper("mult", function(v1, v2) {
         'use strict';
         return v1 * v2;
     });
 
-    Handlebars.registerHelper("div", function(v1, v2, options) {
+    Handlebars.registerHelper("div", function(v1, v2) {
         'use strict';
         return v1 / v2;
     });
@@ -104,7 +104,7 @@ export function setupHandlebars() {
         return !value;
     });
 
-    Handlebars.registerHelper('greaterThan', function(v1, v2, options) {
+    Handlebars.registerHelper('greaterThan', function(v1, v2) {
         'use strict';
         if (v1 > v2) {
             return true;
@@ -166,8 +166,9 @@ export function setupHandlebars() {
         return false;
     });
 
+    // TODO: this might be unnecessary, as {{log args}} seems to do the same thing and is built in
     Handlebars.registerHelper('console', function(...args) {
-        const options = args.pop();
+        args.pop();
         console.log(...args);
     });
 

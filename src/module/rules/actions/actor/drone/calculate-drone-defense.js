@@ -1,15 +1,15 @@
 import { SFRPG } from "../../../../config.js";
 
 export default function(engine) {
-    engine.closures.add("calculateDroneDefense", (fact, context) => {
+    engine.closures.add("calculateDroneDefense", (fact) => {
         const data = fact.data;
 
+        if (!data.attributes.cmd) data.attributes.cmd = {value: 0};
+        if (!data.attributes.eac) data.attributes.eac = {value: 0};
+        if (!data.attributes.kac) data.attributes.kac = {value: 0};
+
         // We only care about the first chassis
-        let activeChassis = null;
-        for (const chassis of fact.chassis) {
-            activeChassis = chassis;
-            break;
-        }
+        const activeChassis = fact.chassis && fact.chassis.length > 0 ? fact.chassis[0] : null;
 
         if (activeChassis) {
             const chassisData = activeChassis.system;

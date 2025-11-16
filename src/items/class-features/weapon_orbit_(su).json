@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/images/cup/gameplay/graviton.webp",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "rwak",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,26 +37,28 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:graviton] Graviton Revelation</p>\n<p>As a standard action, make a ranged attack with a melee weapon you’re wielding against a target within 30 feet. If you hit, you add your Charisma modifier to the weapon’s damage instead of adding your Strength modifier. At the end of your turn, the weapon returns to your hand unless you don’t have a free hand, in which case the weapon lands in your square. If attuned or fully attuned, you can use this ability to perform a full attack with the melee weapon at range, but each attack must be made against a different target within range. These attacks can benefit from the flashing strikes class feature as though they were melee attacks.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "819f0cc5-f802-4deb-a1ef-38fa758d715d",
         "name": "Weapon Orbit (Su)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "melee-damage",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "-@abilities.str.mod",
         "modifierType": "constant",
@@ -73,8 +72,10 @@
         "name": "Weapon Orbit (Su)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "melee-damage",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "@abilities.cha.mod",
         "modifierType": "constant",
@@ -88,8 +89,10 @@
         "name": "Weapon Orbit (Su) with Flashing Strikes (Ex)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ranged-attacks",
         "enabled": true,
+        "limitTo": null,
         "max": -3,
         "modifier": "-3",
         "modifierType": "formula",
@@ -101,14 +104,12 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "6th Level",
     "rollNotes": "",
@@ -117,13 +118,18 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "TR pg. 31",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

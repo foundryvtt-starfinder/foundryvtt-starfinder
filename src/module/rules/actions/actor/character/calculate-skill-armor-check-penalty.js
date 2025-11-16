@@ -1,4 +1,4 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateSkillArmorCheckPenalty", (fact, context) => {
@@ -27,7 +27,9 @@ export default function(engine) {
             try {
                 const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             let mod = 0;
             if (bonus.valueAffected === "acp-light" && hasLightArmor) {
@@ -62,16 +64,9 @@ export default function(engine) {
 
         const mods = context.parameters.stackModifiers.process(acpMods, context, {actor: fact.actor});
         const mod = Object.entries(mods).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, fact.data, skillModifier, "SFRPG.ACPTooltip");
-                }
-            } else {
-                sum += addModifier(mod[1], fact.data, skillModifier, "SFRPG.ACPTooltip");
+            for (const bonus of mod[1]) {
+                sum += addModifier(bonus, fact.data, skillModifier, "SFRPG.ACPTooltip");
             }
-
             return sum;
         }, 0);
 

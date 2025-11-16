@@ -4,11 +4,7 @@
   "type": "magic",
   "img": "icons/equipment/chest/vest-leather-brown.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 0,
@@ -61,7 +56,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -71,18 +67,17 @@
       "unidentified": "",
       "value": "<p>Designed to aid workers in the construction of massive temples and other large structures, this sturdy leather harness is imbued with mystical energies that enable you to work longer and faster. Wearing this harness grants you a +2 circumstance bonus against effects that would cause you to become @UUID[Compendium.sfrpg.conditions.Item.JGFn4MrDZ6X5vrzU]{fatigued} or @UUID[Compendium.sfrpg.conditions.Item.33ynSbmexuxC3cAQ]{exhausted}. Additionally, you can take a move action to gain a +2 circumstance bonus to Strength checks (but not attacks) for 1 hour.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "hour",
       "value": "1"
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 0,
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 2,
     "limitedWear": true,
     "modifiers": [
@@ -91,8 +86,10 @@
         "name": "Harness of Strength",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "formula",
@@ -106,8 +103,10 @@
         "name": "Harness of Strength",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "ability-check",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "constant",
@@ -118,24 +117,28 @@
       }
     ],
     "price": 700,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 154",
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
