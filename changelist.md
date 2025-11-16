@@ -6,6 +6,7 @@ Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG,
 
 ## Breaking Changes
 
+- Old-Style NPCs (actor type `npc`) are no longer supported; these will need to be converted to the modern NPC (actor type `npc2`) BEFORE updating to this version
 - `@mod` can no longer be referenced in damage rolls. Instead, reference the ability modifier with its full path
 
 ## Core System Improvements
