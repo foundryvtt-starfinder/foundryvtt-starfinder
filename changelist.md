@@ -27,6 +27,7 @@ Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG,
 - Ammunition usage multiplier modifiers added
 - Same-type Spell Save DC bonuses now stack correctly
 - Charges can now be consumed from items with ammunition via a Use Item button in the item's inventory listing
+- Items with per-minute ammo usage now include a manual "Use Item" button instead of using the previous unreliable algorithm to track ammo
 
 ### Starship Improvements
 
