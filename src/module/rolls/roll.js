@@ -196,4 +196,34 @@ export default class SFRPGRoll extends Roll {
             return super.parse(wrappedFormula, data);
         }
     }
+
+    static replaceFormulaData(formula, data, {missing, warn = false} = {}) {
+        formula = SFRPGRoll._insertValueProperty(formula, data);
+        return super.replaceFormulaData(formula, data, {missing, warn = false} = {});
+    }
+
+    /**
+    * A helper function to add the `.value` string to the end of referenced objects with the `value` subproperty.
+    * This allows a property at the address `object.property.value` to be referenced in formulas as just `object.property`
+    * @param {String} formula  A roll formula string
+    * @param {object} rollData The roll context
+    * @returns {String}        A modified roll formula string
+    */
+    static _insertValueProperty(formula, rollData) {
+        const formulaVariables = [...formula.matchAll(/@[A-z0-9.]*/g)];
+        if (!formulaVariables.length) return formula;
+        const checkedProps = [];
+        for (const formulaVariable of formulaVariables.reverse()) {
+            const propLabel = formulaVariable[0];
+            const prop = propLabel.slice(1);
+            const target = foundry.utils.getProperty(rollData, prop);
+            if (typeof target === 'object' && !checkedProps.includes(prop)) {
+                if (target.value) {
+                    formula = formula.replaceAll(prop, `${prop}.value`);
+                }
+            }
+            checkedProps.push(prop);
+        }
+        return formula;
+    }
 }
