@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/holo-grenade.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "ac5",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 10
+      "value": "10"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 1,
@@ -70,6 +65,7 @@
           "acceptsType": [
             "ammunition"
           ],
+          "affectsEncumbrance": true,
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightMultiplier": 1,
@@ -82,7 +78,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -90,9 +87,8 @@
       "gmnotes": "",
       "short": "<p>Nicknamed the “hole-maker,” this raw thasteron-packed&nbsp;explosive is a favored room-clearing device for special&nbsp;forces.</p>",
       "unidentified": "",
-      "value": "<p>Nicknamed the “hole-maker,” this raw thasteron-packed explosive is a favored room-clearing device for special forces.</p>\n<p>Explode (staggered, 10 ft.)</p>\n<p>Propel (5 feet)</p><hr style=\"border-top: 1px solid var(--color-border-light-primary); border-bottom: 1px solid var(--color-border-light-highlight);\"><p><strong>Thasteron Weapons:</strong>&nbsp;While Sanjaval Spaceflight mostly&nbsp;abandoned its thasteron mines and related manufacturing&nbsp;when Drift travel superseded its industry, it continued to&nbsp;produce sublight starship&nbsp;engines using the dirty fuel.&nbsp;It now enjoys a resurgence&nbsp;in popularity as more people&nbsp;steer away from a reliance on the Drift for&nbsp;intersystem travel. Some of the technological&nbsp;cottage industries that sprung up around thasteron&nbsp;during the collapse of its market have likewise gained&nbsp;popularity.</p>\n<p>Beyond the propulsive properties of thasteron, tactical uses for its nuisance emission, thasteronic asphalt (or thasphalt), have been developed by ysoki engineers. Thasphalt produces force energy and steam when bombarded with strong electromagnetic fields. These fields are too much for internal electronics, so most thasteron weapons are bulky copper, brass, and even leather-and-wood contraptions utilizing clockwork.</p>"
+      "value": "<p>Nicknamed the “hole-maker,” this raw thasteron-packed explosive is a favored room-clearing device for special forces.</p>\n<p>Explode (staggered, 10 ft.)</p>\n<p>Propel (5 feet)</p><hr style=\"border-top:1px solid var(--color-border-light-primary);border-bottom:1px solid var(--color-border-light-highlight)\"><p><strong>Thasteron Weapons:</strong>&nbsp;While Sanjaval Spaceflight mostly&nbsp;abandoned its thasteron mines and related manufacturing&nbsp;when Drift travel superseded its industry, it continued to&nbsp;produce sublight starship&nbsp;engines using the dirty fuel.&nbsp;It now enjoys a resurgence&nbsp;in popularity as more people&nbsp;steer away from a reliance on the Drift for&nbsp;intersystem travel. Some of the technological&nbsp;cottage industries that sprung up around thasteron&nbsp;during the collapse of its market have likewise gained&nbsp;popularity.</p>\n<p>Beyond the propulsive properties of thasteron, tactical uses for its nuisance emission, thasteronic asphalt (or thasphalt), have been developed by ysoki engineers. Thasphalt produces force energy and steam when bombarded with strong electromagnetic fields. These fields are too much for internal electronics, so most thasteron weapons are bulky copper, brass, and even leather-and-wood contraptions utilizing clockwork.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -102,7 +98,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 3,
     "modifiers": [],
@@ -206,10 +202,8 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "rollNotes": "",
     "save": {
@@ -217,6 +211,12 @@
       "dc": "(10 + floor(@item.level / 2) + @abilities.dex.mod)",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "DC pg. 51",
     "special": "",
     "specialMaterials": {
@@ -236,7 +236,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": "Staggered"
     },
     "usage": {
@@ -244,7 +243,7 @@
       "value": 1
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "charges",
       "value": 1
     },

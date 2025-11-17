@@ -166,6 +166,7 @@ export function setupHandlebars() {
         return false;
     });
 
+    // TODO: this might be unnecessary, as {{log args}} seems to do the same thing and is built in
     Handlebars.registerHelper('console', function(...args) {
         args.pop();
         console.log(...args);

@@ -5,10 +5,7 @@
   "img": "systems/sfrpg/icons/equipment/augmentations/respiration-compounder.webp",
   "system": {
     "type": "cybernetic",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -42,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -56,7 +52,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -66,17 +63,16 @@
       "unidentified": "",
       "value": "<p>A respiration compounder consists of a series of modules that attach to your lungs, letting you survive longer without having to breathe. Treat your Constitution score as though it were doubled for the purpose of how long you can hold your breath. You also gain a +4 bonus to Constitution checks to continue holding your breath. This doesn’t protect you from other dangers of an airless environment.</p>\n<p>The compounder also filters your air, granting a +2 bonus to saving throws against inhaled @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poisons} or other airborne toxins.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 1,
     "modifiers": [
       {
@@ -84,8 +80,10 @@
         "name": "Respiration Compounder",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": false,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "formula",
@@ -99,8 +97,10 @@
         "name": "Respiration Compounder",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ability-check",
         "enabled": false,
+        "limitTo": null,
         "max": 4,
         "modifier": "4",
         "modifierType": "formula",
@@ -111,30 +111,33 @@
       }
     ],
     "price": 250,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "CRB pg. 210",
     "system": "lungs",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

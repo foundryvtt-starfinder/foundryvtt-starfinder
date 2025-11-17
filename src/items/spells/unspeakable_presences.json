@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/unspeakable_presence.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 60
+      "value": "60"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -41,6 +37,8 @@
         {
           "name": "",
           "formula": "4d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -48,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -63,14 +64,14 @@
       "unidentified": "",
       "value": "<p>You swap the space beneath your enemies with the gnashing maws, tentacles, and claws of hideous beasts from another reality. A foe in the area takes 4d6 damage per round and cannot move until it succeeds at a Reflex saving throw, which it can attempt at the end of each of its turns. At that point, the opponent can be affected again only if it leaves the spell’s area and then returns.</p>\n<p>A creature that takes damage from this spell 3 rounds in a row must succeed at a Fortitude save or be consumed by the unspeakable presences. That creature dies, and when the spell ends, its body and gear disappear into the realities from whence the presences came. This is a death effect. Only&nbsp;miracle,&nbsp;warp reality, and&nbsp;wish&nbsp;can bring back a creature slain this way.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": true,
     "duration": {
       "units": "round",
       "value": "@details.cl.value"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 6,
     "materials": {
@@ -86,10 +87,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "long",
-      "value": null
+      "units": "long"
     },
     "rollNotes": "",
     "save": {
@@ -98,14 +96,19 @@
       "descriptor": "partial"
     },
     "school": "trs",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "COM pg. 142",
     "sr": false,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/tools/fasteners/washer-round-brass-yellow.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "mwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 0,
@@ -88,6 +83,7 @@
           "name": "",
           "formula": "7d6 + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -95,12 +91,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": true
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -110,7 +109,6 @@
       "unidentified": "",
       "value": "<p>A singing disk, also known as a shotalashu singer, is a 7-inchdiameter metal disk that is perforated with intricate abstract patterns and has a circular hole in the middle. When the weapon is swung or thrown, the perforations cause the air flowing through them to vibrate with a range of sonic frequencies like hundreds of voices singing simultaneously. The disks can sound quite lovely, but the sonic frequencies they create are unforgiving to the body and inner ear, and can muddle the mind. Singing disks have a series of models ranging from the sopranino to the soprano, alto, tenor, and bass versions.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -120,7 +118,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 16,
     "modifiers": [],
@@ -225,8 +223,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "60"
     },
@@ -238,8 +234,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 11",
     "special": "",
     "specialMaterials": {
@@ -259,7 +257,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "icons/magic/fire/explosion-fireball-medium-purple-orange.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "ac5",
     "actionType": "rsak",
     "activation": {
@@ -42,6 +38,7 @@
           "name": "",
           "formula": "1d4",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -49,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -108,7 +108,7 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 0,
     "materials": {
@@ -124,8 +124,6 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "20"
     },
@@ -138,12 +136,13 @@
     "school": "con",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "PoC pg. 83",
     "sr": false,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

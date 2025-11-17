@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/weapons/thrown/ball-spiked.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 1,
@@ -85,7 +80,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -101,7 +98,6 @@
       "unidentified": "",
       "value": "<p>This grenade is usually covered with vicious spikes. Any creatures who fail the Reflex save against the grenade’s initial damage must attempt a second Reflex save with a DC 5 lower than the normal DC of the grenade. For a maiming grenade I, a creature that fails on the second save is affected by the @UUID[Compendium.sfrpg.rules.JournalEntry.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#wound]{wound} critical hit effect. For a maiming grenade II, a creature that fails on the second save is affected by the @UUID[Compendium.sfrpg.rules.JournalEntry.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#severe-wound]{severe wound} critical hit effect.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -111,7 +107,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 11,
     "modifiers": [],
@@ -216,8 +212,6 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "20"
     },
@@ -229,8 +223,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 164",
     "special": "",
     "specialMaterials": {
@@ -250,7 +246,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

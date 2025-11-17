@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 0,
@@ -74,8 +69,10 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d6 + @abilities.str.mod",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -83,12 +80,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -98,7 +98,6 @@
       "unidentified": "",
       "value": "<p>This short staff ends in reconfigurable wrench-like prongs suited for operating on heavy machinery, sawing through debris, and incapacitating robots gone haywire. Each crisis wrench has specially fitted compartments along its length that stores an @UUID[Compendium.sfrpg.equipment.Item.T9nRPwJibhTuMjkp]{engineering kit} (Core Rulebook 221), and all crisis wrenches other than the tinker-class model also house an engineering specialty tool kit selected when purchasing the weapon. These kits are included in the weapon’s price and bulk.</p>\n<p><strong>Additional Special Details</strong></p>\n<p>professional (maintenance worker)</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -108,7 +107,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 1,
     "modifiers": [],
@@ -208,10 +207,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
@@ -219,11 +215,16 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "TR pg. 60",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -231,8 +232,8 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     },
     "weaponCategory": "uncategorized",

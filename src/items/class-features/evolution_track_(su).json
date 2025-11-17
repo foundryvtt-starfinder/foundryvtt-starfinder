@@ -5,21 +5,12 @@
   "img": "systems/sfrpg/icons/default/pie-chart.svg",
   "system": {
     "type": "evolutionist",
-    "abilityMods": {
-      "parts": []
-    },
     "base": 0,
     "combatTracker": {
       "displayAbsoluteValue": false,
       "show": true,
       "showOwnerAndGMOnly": true,
       "visualization": []
-    },
-    "critical": {
-      "parts": []
-    },
-    "damage": {
-      "parts": []
     },
     "description": {
       "chat": "",
@@ -35,8 +26,10 @@
         "name": "Evolution Track (Su) - Speed bonus",
         "type": "enhancement",
         "condition": "",
+        "damage": null,
         "effectType": "specific-speed",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "lookupRange(@resources.evolutionist.evolutionTrack.value, 0, 1, 5, 3, 10, 7, 15)",
         "modifierType": "constant",
@@ -50,8 +43,10 @@
         "name": "Evolution Track (Su) - Armor bonus",
         "type": "enhancement",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "lookupRange(@resources.evolutionist.evolutionTrack.value, 0, 4, 1, 8, 2)",
         "modifierType": "constant",
@@ -65,8 +60,10 @@
         "name": "Evolution Track (Su) - Attack bonus",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "ternary(gte(@resources.evolutionist.evolutionTrack.value, 5), max(1, floor(@classes.evolutionist.levels / 2)), 0)",
         "modifierType": "formula",
@@ -80,8 +77,10 @@
         "name": "Evolution Track (Su) - Save bonus",
         "type": "enhancement",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "ternary(gte(@resources.evolutionist.evolutionTrack.value, 6), 1, 0)",
         "modifierType": "constant",
@@ -92,10 +91,11 @@
       }
     ],
     "range": {
-      "max": 5,
-      "min": 0,
+      "max": "5",
+      "min": "0",
       "mode": "post"
     },
+    "slug": "",
     "source": "IS, pg. 11",
     "stage": "early",
     "subType": "evolutionTrack"

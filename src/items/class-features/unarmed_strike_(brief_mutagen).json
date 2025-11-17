@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/skills/melee/blood-slash-foam-red.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "-",
     "capacity": {
       "max": null,
@@ -74,7 +69,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -90,7 +87,6 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.2LjlJwvdgzejPYV5]{Brief Mutagen}</p>\n<p>You have developed a special metamorphosis injection that can physically transform a limb into an oversized pincer claw. Once per day per 4 biohacker levels, as a standard action, you can use your custom microlab to target a willing ally with a special biohack that endows them with an unarmed strike for 1 round per biohacker level. This unarmed strike deals lethal damage, doesn’t count as archaic, threatens squares, and has the grapple special property (Starfinder Armory 28). The target also adds 1-1/2 × their level to the damage it deals.</p>\n<p><em>Damage calculation is already set to account the additional damage of 1/2 × their character level, beyond the damage provided by their normal Weapon Specialization damage.</em></p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "round",
       "value": "@origin.actor.classes.biohacker.levels"
@@ -100,7 +96,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 0,
     "modifiers": [],
@@ -205,10 +201,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
@@ -218,8 +211,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 33",
     "special": "",
     "specialMaterials": {
@@ -239,7 +234,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

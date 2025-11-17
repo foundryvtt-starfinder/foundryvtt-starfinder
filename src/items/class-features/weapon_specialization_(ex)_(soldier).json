@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/images/cup/gameplay/soldier.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,7 +37,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.cCZQpV0NmYE9qZoL]{Soldier}</p>\n<p>You gain @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}as a bonus feat for each weapon type this class grants you proficiency with.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -51,15 +48,18 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "2cad179e-76e8-4f3f-90ae-88461e031ccc",
         "name": "Weapon Specialization Soldier",
         "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
+        "limitTo": null,
+        "max": 0,
         "modifier": "floor(@details.level.value / 2)",
         "modifierType": "constant",
         "notes": "",
@@ -72,8 +72,11 @@
         "name": "Weapon Specialization Soldier",
         "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
+        "limitTo": null,
+        "max": 0,
         "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
@@ -86,8 +89,10 @@
         "name": "Weapon Specialization Soldier",
         "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
@@ -101,8 +106,10 @@
         "name": "Weapon Specialization Soldier",
         "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "constant",
@@ -116,8 +123,10 @@
         "name": "Weapon Specialization Soldier",
         "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "constant",
@@ -131,8 +140,10 @@
         "name": "Weapon Specialization Soldier",
         "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "constant",
@@ -144,30 +155,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "3rd Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Soldier",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

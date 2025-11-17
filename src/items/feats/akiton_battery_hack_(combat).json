@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "icons/magic/lightning/bolt-strike-sparks-blue.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "mwak",
     "activation": {
@@ -43,7 +39,9 @@
             "electricity": true,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -107,13 +105,14 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "a16fb56b-6151-433b-854e-caf62e993164",
         "name": "Akiton Battery Hack (Combat) - Vs electrical devide",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "melee-attacks",
         "enabled": false,
         "limitTo": "parent",
@@ -128,14 +127,12 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Int 11",
     "rollNotes": "",
@@ -146,11 +143,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 104",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

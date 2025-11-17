@@ -6,9 +6,6 @@
   "system": {
     "type": "biotech",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -21,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -42,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -61,6 +57,7 @@
           "name": "",
           "formula": "5d6",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": true,
             "bludgeoning": false,
@@ -68,12 +65,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -83,17 +83,16 @@
       "unidentified": "",
       "value": "<p>These small tubes implanted into the sublingual salivary glands recreate a zernivian’s natural herbicide, mixing it with saliva to coat the inside of the mouth and esophagus with antifungal properties. You have a +2 circumstance bonus to saving throws against plant-related effects that are inhaled or ingested, such as corpseflower pollen (Armory 132), hyperleaf, id moss, or a ksarik’s carrion spores (Alien Archive 70). In addition, once per day as a standard action, you can make a ranged spit attack that deals 5d6 acid damage against a creature within 15 feet.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 10,
     "modifiers": [
       {
@@ -101,8 +100,10 @@
         "name": "Herbicidal glands",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "save",
         "enabled": false,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "formula",
@@ -113,14 +114,13 @@
       }
     ],
     "price": 19000,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 15
+      "value": "15"
     },
     "rollNotes": "",
     "save": {
@@ -128,14 +128,19 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #28 pg. 53",
     "system": "throat",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "day",
       "value": 1
     }

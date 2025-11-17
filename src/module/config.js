@@ -47,6 +47,19 @@ SFRPG.abilities = {
     "cha": "SFRPG.AbilityCha"
 };
 
+/**
+ * The order in which ability scores should appear on character sheets
+ * @type {Array}
+ */
+SFRPG.abilityDisplayOrder = [
+    "str",
+    "dex",
+    "con",
+    "int",
+    "wis",
+    "cha"
+];
+
 SFRPG.acpEffectingArmorType = {
     "acp-all": "SFRPG.ModifierACPEffectingArmorTypeAll",
     "acp-light": "SFRPG.ModifierACPEffectingArmorTypeLight",
@@ -934,7 +947,7 @@ SFRPG.starshipSizes = {
     "huge": "SFRPG.SizeHuge",
     "gargantuan": "SFRPG.SizeGargantuan",
     "colossal": "SFRPG.SizeColossal",
-    "superColossal": "SFRPG.ShipSystems.Size.Supercolossal"
+    "supercolossal": "SFRPG.SizeSupercolossal"
 };
 
 SFRPG.itemSizes = {
@@ -963,7 +976,8 @@ SFRPG.tokenSizes = {
     "large": 2,
     "huge": 3,
     "gargantuan": 4,
-    "colossal": 6
+    "colossal": 6,
+    "supercolossal": 6
 };
 
 SFRPG.spellcastingClasses = {
@@ -1409,7 +1423,28 @@ SFRPG.starshipSizeMod = {
     "large": -1,
     "huge": -2,
     "gargantuan": -4,
-    "colossal": -8
+    "colossal": -8,
+    "supercolossal": -8
+};
+
+SFRPG.starshipSizeMultiplierMap = {
+    "n/a": 0,
+    "tiny": 1,
+    "small": 2,
+    "medium": 3,
+    "large": 4,
+    "huge": 5,
+    "gargantuan": 6,
+    "colossal": 7,
+    "supercolossal": 8
+};
+
+SFRPG.starshipManeuverabilityMap = {
+    "clumsy" : { pilotingBonus: -2, turn: 4 },
+    "poor"   : { pilotingBonus: -1, turn: 3 },
+    "average": { pilotingBonus: 0, turn: 2 },
+    "good"   : { pilotingBonus: 1, turn: 1 },
+    "perfect": { pilotingBonus: 2, turn: 0 }
 };
 
 SFRPG.starshipTierToBuildpoints = {
@@ -1595,6 +1630,8 @@ SFRPG.modifierEffectTypesMisc = {
 };
 
 SFRPG.modifierEffectTypesStarship = {
+    "starship-build-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipBuildPoints",
+    "starship-multiply-build-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipMultiplyBuildPoints",
     "starship-hull-points": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipHullPoints",
     "starship-hull-points-increment": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipHullPointsIncrement",
     "starship-forward-ac": "SFRPG.ActorSheet.Modifiers.EffectTypes.StarshipForwardAC",

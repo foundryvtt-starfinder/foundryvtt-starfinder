@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/feats/enchanced_resistance.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "mwak",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -39,8 +35,10 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "@abilities.str.mod + (@details.level.value*1.5)",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -48,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -63,14 +64,14 @@
       "unidentified": "",
       "value": "<p>You transform your outer layer into solid rock, amplifying your offense and defense. You gain a special unarmed strike that deals lethal damage, doesn’t count as archaic, and threatens squares. You also add 1-1/2 × your character level to damage dealt with this attack (instead of the normal Weapon Specialization damage). You also gain DR 2/—. Finally, you gain a +2 circumstance bonus to your AC against bull rush, reposition, and trip combat maneuvers.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "round",
       "value": "@details.cl.value"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 2,
     "materials": {
@@ -86,10 +87,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "personal",
-      "value": null
+      "units": "personal"
     },
     "rollNotes": "",
     "save": {
@@ -98,14 +96,19 @@
       "descriptor": "negate"
     },
     "school": "trs",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GEM pg. 75",
     "sr": false,
     "target": {
-      "type": "",
       "value": "one living creature"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

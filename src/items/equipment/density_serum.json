@@ -4,11 +4,7 @@
   "type": "consumable",
   "img": "systems/sfrpg/icons/equipment/magic%20items/serum-x-ray.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -42,33 +38,16 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "chatFlavor": "",
     "consumableType": "serum",
-    "container": {
-      "contents": [],
-      "includeContentsInWealthCalculation": 1,
-      "isOpen": true,
-      "storage": [
-        {
-          "type": "slot",
-          "acceptsType": [
-            "spell"
-          ],
-          "affectsEncumbrance": false,
-          "amount": 0,
-          "subtype": "spellSlot",
-          "weightProperty": "bulk"
-        }
-      ]
-    },
     "critical": {
       "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -78,17 +57,12 @@
       "unidentified": "",
       "value": "<p>This opaque silver fluid is surprisingly heavy. When you drink this potion, your body becomes denser and heavier, but your size and appearance remain the same. For 1 minute after you drink a density serum, you gain a +4 circumstance bonus to KAC against bull rush, reposition, and trip combat maneuvers. In addition, you gain a +2 circumstance bonus to saving throws against other effects that would move you or knock you @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{prone}. When you successfully perform a combat maneuver to bull rush or reposition, increase the result of your melee attack roll by 5 when determining how far you move your target. Finally, your dense skin makes you resistant to physical damage; you gain damage reduction 2/—.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "minute",
       "value": "1"
     },
-    "equippable": false,
-    "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
-    "identified": true,
-    "isActive": null,
+    "isActive": false,
     "level": 7,
     "modifiers": [
       {
@@ -96,8 +70,10 @@
         "name": "Density Serum",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "constant",
@@ -111,8 +87,10 @@
         "name": "Density Serum",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "cmd",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "4",
         "modifierType": "formula",
@@ -126,8 +104,10 @@
         "name": "Density Serum",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "formula",
@@ -142,20 +122,23 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 168",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

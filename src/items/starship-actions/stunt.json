@@ -4,7 +4,6 @@
   "type": "starshipAction",
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": null,
     "description": {
       "chat": "",
@@ -78,6 +77,8 @@
       },
       {
         "name": "Turn in Place",
+        "dc": null,
+        "effectCritical": "",
         "effectNormal": "The ship does not move but instead can turn to face any direction. If the ship has a maneuverability of clumsy, it takes a –4 penalty to its AC and TL until the start of the next round. If it has a maneuverability of poor, it instead takes a –2 penalty to its AC and TL until the start of the next round. Ships with a maneuverability of average or better do not take a penalty. This stunt doesn’t require a skill check.",
         "formula": "@pilot.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       },
@@ -87,6 +88,7 @@
           "resolve": false,
           "value": "10 + 1-1/2 * Target Ship Tier"
         },
+        "effectCritical": "",
         "effectNormal": "Choose an allied starship. Your starship moves up to its speed and can turn as normal. If your starship occupies a hex that is adjacent to the chosen starship at the end of the helm phase, that allied starship gains a +2 circumstance bonus to its AC and TL until the start of the next round. To perform this stunt, you must succeed at a Piloting check (DC = 10 + 1-1/2 × the chosen starship’s tier). On a failed check, your starship moves as normal. If you fail the check by 5 or more, your starship moves as normal but interferes with the chosen starship’s movement; that starship takes a –2 penalty to its AC and TL until the start of the next round.",
         "formula": "@pilot.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       },
@@ -96,6 +98,7 @@
           "resolve": false,
           "value": "10 + 1-1/2 * Target Ship Tier"
         },
+        "effectCritical": "",
         "effectNormal": "Choose an enemy starship. Your starship moves up to its speed and can turn as normal. If your starship ends the helm phase within 5 hexes of the chosen starship, the next attack against the chosen starship, made during that round and originating from an arc not occupied by your ship, gains a +2 bonus to its gunnery check. To perform this stunt, you must succeed at a Piloting check (DC = 10 + 1-1/2 × the enemy starship’s tier). If you fail this check, your starship moves as normal but does not grant the bonus to the gunnery check.",
         "formula": "@pilot.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       },
@@ -105,6 +108,7 @@
           "resolve": false,
           "value": "5 + The Tracking Weapon's Speed + 1-1/2 * Target Ship Tier"
         },
+        "effectCritical": "",
         "effectNormal": "Choose one active tracking projectile that is moving toward (but has not yet reached) its target. Your starship moves up to its speed and can turn as normal. If it moves through a hex occupied by the projectile, the starship attempts to interfere with the projectile’s tracking system, causing it to veer off course and take a –4 penalty to its next gunnery check to continue moving toward its target. To perform this stunt, you must succeed at a Piloting check (DC = 5 + the tracking weapon’s speed + 1-1/2 × the attacking starship’s tier) with a circumstance bonus to your check equal to the bonus to TL granted by your starship’s defensive countermeasures. If you succeed by 5 or more, you cause the projectile to detonate harmlessly, destroying it. If you fail, your starship moves as normal but does not penalize the tracking weapon’s gunnery check. If you fail the check by 5 or more, the tracking projectile immediately attacks you instead; it makes a new gunnery check against your starship’s TL, dealing damage if it succeeds and veering off course to explode harmlessly if it fails.",
         "formula": "@pilot.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       },
@@ -120,6 +124,7 @@
       }
     ],
     "isPush": true,
+    "modifiers": [],
     "order": 20,
     "phase": {
       "name": "Helm phase",
@@ -129,6 +134,7 @@
     "role": "pilot",
     "selectorKey": "pilot",
     "selectors": [],
+    "slug": "",
     "source": "CRB"
   }
 }

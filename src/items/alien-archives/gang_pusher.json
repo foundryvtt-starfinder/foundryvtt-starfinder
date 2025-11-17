@@ -11,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/evasion.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -28,7 +24,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -37,7 +33,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -47,7 +44,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p>If you succeed at a Reflex save against an effect that normally has a partial effect on a successful save, you instead suffer no effect. You gain this benefit only when unencumbered and wearing light armor or no armor, and you lose the benefit when you are helpless or otherwise unable to move.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -58,34 +55,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "2nd Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Operative",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -96,11 +95,7 @@
       "type": "weapon",
       "img": "icons/weapons/staves/staff-simple.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -114,7 +109,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 8,
         "attributes": {
@@ -135,7 +130,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -144,7 +138,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -155,13 +149,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -171,7 +178,6 @@
           "unidentified": "",
           "value": "<p>A baton is a thin, solid metal shaft, usually with a textured rubber grip. A tactical baton can be used to inflict precise bludgeoning blows. An advanced baton, used by elite mercenary and security companies, often has an additional shaft, as well as a weighted end that can be powered to connect with substantially more force than a tactical baton.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -181,7 +187,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -277,10 +283,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -288,11 +292,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -300,7 +309,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -314,11 +323,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -332,7 +337,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 8,
         "attributes": {
@@ -353,7 +358,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -406,6 +410,8 @@
             {
               "name": "",
               "formula": "1d6",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -413,12 +419,15 @@
                 "electricity": true,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -428,7 +437,6 @@
           "unidentified": "",
           "value": "<p>Arc pistols fire deadly, stunning blasts of electricity at ranged targets. They have a two-pronged emitter that directs the electrical blast and a bulky chamber that holds the capacitor.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -438,7 +446,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 2,
         "modifiers": [],
@@ -540,10 +548,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 50
+          "value": "50"
         },
         "rollNotes": "",
         "save": {
@@ -551,6 +557,12 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 173",
         "special": "",
         "specialMaterials": {
@@ -570,7 +582,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -578,7 +589,7 @@
           "value": 2
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -592,7 +603,6 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/veiled_threat.webp",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "",
         "actionType": "",
@@ -605,8 +615,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -615,7 +625,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -625,7 +636,7 @@
           "unidentified": "",
           "value": "<p>You can be so subtle not even the people you threaten are entirely sure you threatened them.</p>\n<p><strong>Prerequisites</strong>: Cha 15, Intimidate 1 rank.</p>\n<hr />\n<p><strong>Benefit</strong>: When you successfully use the Intimidate skill to bully a creature, after the duration of its helpful attitude ends, its attitude toward you becomes indifferent rather than hostile.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -636,33 +647,35 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -674,11 +687,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/operative_exploit.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -691,7 +700,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -700,7 +709,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -710,7 +720,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p>As you gain experience, you learn special tricks called operative exploits. You learn your first operative exploit at 2nd level, and you learn an additional exploit every 2 levels thereafter. If an operative exploit allows a saving throw to resist its effects, the DC is equal to 10 + half your operative level + your Dexterity modifier. If it requires an enemy to attempt a skill check, the DC is equal to 10 + 1-1/2 × your operative level + your Dexterity modifier. The list of operative exploits appears on page 95. You cannot learn the same exploit more than once unless it specially says otherwise.</p>\n<h2>2nd Level</h2>\n<p>@UUID[Compendium.sfrpg.class-features.Item.c84usvQez3sMyhmj]{Alien Archive (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.QJjE9tvp0YFNhjfg]{Armor Optimizer (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.qS85C1OHxqO6KGqP]{Beguiling Outsider (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.uZa83E9JvgkMLtzW]{Combat Trick (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.N8E9qYb7SgeXN9XO]{Death Strike (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.QlYxKJXNoo8wKdKC]{Dramatic Dive (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.22QbA8wbeWcxRIWe]{Efficient Forager (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.WzzJsheUbpb7lgaC]{Expeditious Amp (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.UrjjbL5MKr0HQFsJ]{Feign Death (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.wlrYsn05dMaEpe5K]{Field Treatment (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.ejMFotFoC7gbTqvh]{Holographic Clone (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.EtlZvghK30Hlw27n]{Invigorating Strike (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.FdhfWip1bVpjOHOp]{Inoculation (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.eseniVOUmdIC9kAe]{Jack of All Trades (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.39NjCmzw2Tq62sVc]{Kick It Up (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.P6aQ6Wpt5KOZEjIF]{Nightvision (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.Z3MPGoaXFFLHxv35]{Quick Disguise (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.ZcoYv915Grhz7Gmy]{Secure Mind (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.zuTU6TUbZNEZj0zD]{Sense Magic (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.HtyPUSKEX9s6GSYs]{Shuriken Assassin (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.Suznr1WSCjd8lRMo]{Uncanny Mobility (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.NaGCVIyrwQsH8bV5]{Uncanny Pilot (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.AOHkbIjjeez1xyd8]{Without a Trace (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.gKTokERoqJMw3Tjc]{Xenolinguist (Ex)}</p>\n<h2>6th Level</h2>\n<p>@UUID[Compendium.sfrpg.class-features.Item.wlQ4ZyieOW259H8E]{All-Terrain Pilot (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.OAVc1W07QUCBNS94]{Bleeding Shot (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.rKRXkuuYb1KXP8wG]{Certainty (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.sAig01x59dY78r7C]{Daring Leap (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.KHg9HjJVua1BA6ti]{Debilitating Sniper (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.pQyvikDN4ygzK3XW]{Disrupting Shot (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.zHvk8K9j9J16Pq7d]{Enhanced Senses (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.5hFENxRv1EN8G8ZX]{Explorer's Lash (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.s7Ky6ciGqZo76ufI]{Hampering Shot (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.sbRjZRSYJMe5VdlM]{High-Ground Sniper (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.8D3x742G1EpW8yi5]{Improved Quick Movement (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.iXNufpth6OcQ3cxp]{Interfering Shot (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.76pPNAgYq34lJGJz]{Mentalist's Bane}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.r5siuht4D5PF9F9h]{Professional Trick (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.7jMP5sAgsJWIDV9F]{Soft Movement (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.GQ1CfD6EuVcaj5vW]{Speed Hacker (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.mXCFi3kv3Tkcia68]{Spell Sniper (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.o2GDNS1g87yquIMS]{Staggering Shot (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.COMSo09Fc4dT1oy7]{Stalwart (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.53vvS3ogfOHTmtEz]{Sure-Footed (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.rKdRBoMFfRWWPU4B]{Uncanny Shooter (Ex)}</p>\n<h2>10th Level</h2>\n<p>@UUID[Compendium.sfrpg.class-features.Item.WkZqCJUS19WvgeHA]{Cloaking Field (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.6EbKkF2yop2fK8yT]{Daring Explorer (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.RWsWmKuo1dvfF3X5]{Deactivating Shot}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.6bGa9hDPQzix8Grr]{Disarming Command (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.ROKksmxjvBSC1bEH]{Elusive Hacker (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.tJrt3OsZ3UVPvFEi]{Ever Vigilant (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.rh7MRpEqpfYuS7Xz]{Experiential Learning (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.qfr1FqWcslyvzzBP]{False Friend (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.cFPuRtplseICwmdg]{Ghost Step (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.ISaVcxApeHWdY767]{Glimpse the Truth (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.YjDe1a16TvdF232b]{Holographic Distraction (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.2N2OH6u4oZnYL6rs]{Improved Evasion (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.a7OzSFRznAqvqyNC]{Improved Uncanny Mobility (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.ZxQ5PHUhMXg7tzzc]{Intelligence Network (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.GthTqHHzNdVki94y]{Lash Snare (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.92c1eOFEI5CQy2y4]{Master of Disguise (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.uxOdzER7HJu4GEZz]{Psychokinetic Skills (Sp)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.dki2mlbyj3F8Rkm3]{Signature Stunt (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.WIPXaqsgvZt9cLU9]{Spider Climber (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.baRuU23mPo6lkVbn]{Stunning Shot (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.7CKYzT7GLWx8YLs2]{Terrain Concealment (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.h5y6rN0c26FsCvQ9]{Trick Stunt (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.583I8ujhHputWnep]{Utility Belt (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.qfdLaLl6DqIG0oyC]{Versatile Movement (Ex)}</p>\n<h2>14th Level</h2>\n<p>@UUID[Compendium.sfrpg.class-features.Item.ItE5wzk3HJFz9xaF]{Audacity (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.IbnGI8G3EtQ0FMtH]{Dual Specialization (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.FFhU2gNfYWtPm7oq]{Efficient Cloaking Field (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.mOdCEGMxvjzyrmVZ]{Extreme Movement (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.DBLjsVe5tkMG7Qoo]{Knockout Shot (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.C82WDji3fMQmvWH0]{Multiattack Mastery (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.UPpUSE3BLhDOzr8Z]{Shadow Slide (Sp)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.aCgo9Eh1tzkCkmQ7]{Teleport Trace (Su)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.AHFqNCWYiq0xUjNM]{Uncanny Senses (Ex)}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.4VXi6DHQpn8wIUAO]{Virulent Shot (Ex)}</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -721,34 +731,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "2nd Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Operative",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -759,11 +771,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/specialization.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -776,7 +784,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -785,7 +793,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -795,7 +804,7 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.uf8ADOAeBrtUkPVl]{Operative}</p>\n<p>Your specialization represents your primary area of expertise. Pick one specialization upon taking your 1st level of the operative class. Once made, this choice cannot be changed. Descriptions of the specializations appear on page 94 <em>(Below).</em> Your specialization grants you the @UUID[Compendium.sfrpg.feats.Item.dkDzFtHOTXLnJivf]{Skill Focus} feat (see page 161) in your specialization’s associated skills, and you gain a free skill rank in each of those skills at each operative level (this does not allow you to exceed the maximum number of skill ranks in a single skill).</p>\n<h2>Specialization Exploit - 5th Level</h2>\n<p>You gain your specialization’s listed exploit as a bonus operative exploit, even if you don’t meet the prerequisites.</p>\n<h2>Specialization Skill Mastery - 7th Level</h2>\n<p>You become so confident in certain skills that you can use them reliably even under adverse conditions. When attempting a skill check with a skill in which you have the Skill Focus feat, you can take 10 even if stress or distractions would normally prevent you from doing so.</p>\n<h2>Specialization Power - 11th Level</h2>\n<p>&nbsp;You gain a special power depending on your specialization.</p>\n<h2>Specializations</h2>\n<p>@UUID[Compendium.sfrpg.class-features.Item.bFbhkgja4X25QsoH]{Bandit}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.3zkJILkaP6Ua3YWe]{Daredevil}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.zKnRX8ZuVhyvC29H]{Detective}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.9xQJSKg493OndA58]{Disciple}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.oAgSuAUz2pzLQqh5]{Driver}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.M8fM2cZz8pTEN6wP]{Explorer}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.csatQ1lLr5J8lcpq]{Gadgeteer}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.nJxXUlTGdZ7Lc5ms]{Ghost}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.SWNQ1uqSQbAJlVng]{Hacker}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.wgKDO6rfjLMzhjnr]{Memory Weaver}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.RmU5en0JokeQXJyP]{Spy}</p>\n<p>@UUID[Compendium.sfrpg.class-features.Item.7jvvARPoLgBv3xBA]{Thief}</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -806,34 +815,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Operative",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -844,11 +855,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/freebooter-armor-1.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -862,7 +869,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -891,7 +898,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -900,7 +906,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -921,7 +927,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -931,7 +938,6 @@
           "unidentified": "",
           "value": "<p>Popularized by the Free Captains of @UUID[Compendium.sfrpg.setting.Item.Yt2xT4Iy6lHjCzso]{The Diaspora}, freebooter armor features an armored jacket or breastplate, heavy boots and gloves, numerous straps and hidden weapons, and a helmet. Novice explorers and mercenaries beginning their career sometimes choose freebooter armor for the air of rakish experience this light armor lends its wearer.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -941,7 +947,8 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 2,
         "modifiers": [],
         "price": 750,
@@ -950,25 +957,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 197",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -976,8 +984,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -988,11 +996,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/arc-pistol.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -1006,7 +1010,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1027,7 +1031,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -1075,8 +1078,10 @@
           "effect": "Arc 2",
           "parts": [
             {
+              "name": "",
               "formula": "2",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -1084,7 +1089,9 @@
                 "electricity": true,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -1096,6 +1103,8 @@
             {
               "name": "",
               "formula": "1d6",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -1103,12 +1112,15 @@
                 "electricity": true,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1118,7 +1130,6 @@
           "unidentified": "",
           "value": "<p>Arc pistols fire deadly, stunning blasts of electricity at ranged targets. They have a two-pronged emitter that directs the electrical blast and a bulky chamber that holds the capacitor.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1128,7 +1139,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 2,
         "modifiers": [],
@@ -1230,10 +1241,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 50
+          "value": "50"
         },
         "rollNotes": "",
         "save": {
@@ -1241,6 +1250,12 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 173",
         "special": "",
         "specialMaterials": {
@@ -1260,7 +1275,6 @@
           "voidglass": false
         },
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1268,7 +1282,7 @@
           "value": 2
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -1282,34 +1296,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1318,14 +1317,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
-        "quantity": "1",
+        "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true
@@ -1337,11 +1335,7 @@
       "type": "weapon",
       "img": "icons/weapons/staves/staff-simple.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -1355,7 +1349,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1376,7 +1370,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -1385,7 +1378,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -1396,13 +1389,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4 + @abilities.str.mod",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1412,7 +1418,6 @@
           "unidentified": "",
           "value": "<p>A baton is a thin, solid metal shaft, usually with a textured rubber grip. A tactical baton can be used to inflict precise bludgeoning blows. An advanced baton, used by elite mercenary and security companies, often has an additional shaft, as well as a weighted end that can be powered to connect with substantially more force than a tactical baton.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "instantaneous",
           "value": ""
@@ -1422,7 +1427,7 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -1518,10 +1523,8 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -1529,11 +1532,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1541,7 +1549,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -1555,7 +1563,6 @@
       "type": "container",
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -1574,7 +1581,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [
@@ -1595,7 +1601,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1619,7 +1625,7 @@
               "affectsEncumbrance": true,
               "amount": 1000,
               "subtype": "",
-              "weightProperty": "bulk"
+              "weightProperty": ""
             }
           ]
         },
@@ -1632,13 +1638,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1648,11 +1656,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1665,7 +1669,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1674,7 +1678,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1730,34 +1735,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1768,11 +1775,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1785,7 +1788,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1794,7 +1797,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1850,34 +1854,36 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1888,11 +1894,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/trick_attack.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1905,7 +1907,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1914,7 +1916,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1970,15 +1973,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "81c0dc16-b076-48be-b097-14a63a88cfe4",
             "name": "Trick Attack damage",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "weapon-property-damage",
             "enabled": true,
+            "limitTo": null,
             "max": 8,
             "modifier": "1d8",
             "modifierType": "formula",
@@ -1992,8 +1997,10 @@
             "name": "Trick Attack damage",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "weapon-damage",
             "enabled": true,
+            "limitTo": null,
             "max": 8,
             "modifier": "1d8",
             "modifierType": "formula",
@@ -2005,29 +2012,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Operative",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -2039,11 +2048,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/thief.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2056,7 +2061,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2065,7 +2070,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2121,15 +2127,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "2085727b-8787-47e2-ab0b-2df80f70d6d6",
             "name": "Specialization",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "skill-ranks",
             "enabled": true,
+            "limitTo": null,
             "max": 0,
             "modifier": "@classes.operative.levels",
             "modifierType": "constant",
@@ -2143,8 +2151,10 @@
             "name": "Specialization",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "skill-ranks",
             "enabled": true,
+            "limitTo": null,
             "max": 0,
             "modifier": "@classes.operative.levels",
             "modifierType": "constant",
@@ -2156,30 +2166,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Specialization",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -2281,108 +2293,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 2
       },
       "con": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "dex": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 4
       },
       "int": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 1
       },
       "str": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "wis": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 1
       }
     },
     "attributes": {
       "abilityDC": {
-        "base": "0"
+        "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
-        "base": "0"
-      },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 0
       },
       "eac": {
-        "base": 13,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 13
       },
       "fort": {
-        "base": 1,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 1
       },
       "hp": {
         "max": 23,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 23
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 0,
         "value": 9
       },
       "kac": {
-        "base": 14,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 14
       },
-      "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 4,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 4
       },
       "space": "5",
       "speed": {
@@ -2403,38 +2359,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
-      },
-      "spellcasting": "",
-      "will": {
-        "base": 5,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
-      }
-    },
-    "common": {
-      "abilities": {
-        "cha": {
-          "base": 0
-        },
-        "con": {
-          "base": 0
-        },
-        "dex": {
-          "base": 0
-        },
-        "int": {
-          "base": 0
-        },
-        "str": {
-          "base": 0
-        },
-        "wis": {
-          "base": 0
         }
+      },
+      "will": {
+        "base": 5
       }
     },
     "conditions": {
@@ -2475,9 +2403,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -2485,9 +2410,8 @@
     "details": {
       "type": "Humanoid",
       "alignment": "NE",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -2499,7 +2423,7 @@
         "value": "<p>Street gangs look for opportunities to score credits and protect their turfs. Most claim territories in run-down neighborhoods of big settlements, particularly @UUID[Compendium.sfrpg.setting.Item.hepqXl6gFvs5sDQu]{Absalom Station}, Nightarch on @UUID[Compendium.sfrpg.setting.Item.psZBx1kcx9pHsLrz]{Apostae}, and the fringes of @UUID[Compendium.sfrpg.setting.Item.f24qKgU5Wh5LLJyh]{Verces’s} Ring of Nations. @UUID[Compendium.sfrpg.setting.Item.gzXT0xwsj8kQAoj0]{Akiton} faces a particular proliferation of these gangs; there are few ways to make an honest living on this planet, so many of its small mining towns are overrun by criminals. The most successful street gangs often work for far-reaching employers such as the Golden League.</p>\n<p>Street gangs usually get involved in all manner of illegal activities: engaging in petty theft, making and selling drugs, fencing stolen goods, and running protection rackets, to name a few. A respectable-looking member of the gang or an individual connected to the gang might operate a front for these criminal enterprises, giving the gang a veneer of legitimacy within the community.</p>\n<p>Though they operate on opposite sides of the law, street gangs and security forces are usually found in close proximity. The presence of a street gang in a neighborhood is sometimes answered by an increase in security, but if the street gang is too tough, officers of the law looking after their own safety will refuse to tread on the gang’s turf. Alternatively, members of a crooked security force might be working hand-in-hand with a street gang to cover up evidence of crimes in exchange for a handful of credits or other favors. Sometimes an officer of the law works with a criminal organization out of a fear for his life or the lives of his family. In either case, when a street gang is able to set down roots, it can rot the morality of a community from within.</p>\n<p><strong>Adaptation:</strong> Street gangs can represent wasteland marauders on Akiton, aspiring space pirates in ports among the asteroids of the @UUID[Compendium.sfrpg.setting.Item.Yt2xT4Iy6lHjCzso]{Diaspora}, or smugglers flying between any parts of the Pact Worlds or beyond. However, by changing their alignment or circumstances, members of a street gang can also be used as a force fighting for freedom on an oppressed world</p><h3>Gang Pusher</h3><p>Gang pushers sell the illegal wares their gang collects, most notoriously dangerous and addictive drugs and cheap, shoddy implants. These augmentations might be simple pleasure stimulators or more practical devices of questionable workmanship. Some collect debts owed to the gang or trick marks out of money when subtlety is of more importance than force. Pushers can also be gang bosses who handle all the money their underlings collect by various unsavory means. These pushers might have machinists (see page 179) as elite toughs or personal guards.</p>\n<p>Pushers often single out potential threats as soon as they enter the gang’s turf, gathering information as thoroughly as reasonably possible before moving to intimidate and drive out the intruders. They spread rumors against any perceived threats, especially nosy adventurers. Most pushers seek to scare residents of their turf into silence regarding any real or potential crimes and thereby stall most investigations in the area.</p>\n<p><strong>Adaptation:</strong> Pushers can serve as street-savvy scouts and spies for most organizations. A pusher on her own could be a daring thief, stealing for the thrill of it.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 2,
       "environment": "",
       "organization": "",
@@ -2507,30 +2431,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "PW pg. 178",
-      "subtype": "Ysoki",
-      "xp": {
-        "value": 10
-      }
+      "subtype": "Ysoki"
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 8,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -2538,10 +2452,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -2549,10 +2462,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 13,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -2560,10 +2472,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -2571,10 +2482,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 8,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -2582,10 +2492,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -2593,10 +2502,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -2604,10 +2512,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 13,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -2615,10 +2522,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 13,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -2626,10 +2532,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -2637,10 +2542,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -2648,10 +2552,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -2659,10 +2562,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 13,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -2670,10 +2572,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -2681,10 +2582,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -2692,9 +2592,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -2704,10 +2602,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -2715,10 +2612,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 13,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -2726,10 +2622,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 13,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -2737,47 +2632,40 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 8,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -2786,15 +2674,7 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
-        "custom": "",
-        "value": []
-      },
-      "dr": {
         "custom": "",
         "value": []
       },
@@ -2811,9 +2691,6 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "small",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

@@ -4,7 +4,6 @@
   "type": "starshipAction",
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": {
       "resolve": true,
       "value": "15 + floor(1.5 * @ship.details.tier)"
@@ -21,10 +20,14 @@
     "formula": [
       {
         "name": "Intimidate",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@captain.skills.int.mod"
       }
     ],
     "isPush": false,
+    "modifiers": [],
     "order": 0,
     "phase": {
       "name": "Any phase",
@@ -34,6 +37,7 @@
     "role": "captain",
     "selectorKey": "captain",
     "selectors": [],
+    "slug": "",
     "source": "CRB"
   }
 }

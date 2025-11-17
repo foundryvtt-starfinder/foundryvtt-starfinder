@@ -4,11 +4,7 @@
   "type": "technological",
   "img": "systems/sfrpg/icons/default/processor.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 20,
@@ -61,7 +56,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -71,18 +67,17 @@
       "unidentified": "",
       "value": "<p>This large square of intricately patterned fabric is woven-through with wires, each connected to a microchip at one of the four tassel-covered corners. A smart scarf always functions as dust storm @UUID[Compendium.sfrpg.equipment.Item.BUKPrUKmcnckTJEW]{environmental clothing} (Core Rulebook 230) without consuming any charges. As a swift action, you can issue a voice command to reconfigure the garment into one of two configurations: it can cover your face except for your eyes, giving you a +1 circumstance bonus to Disguise or Stealth checks, or it can shift itself to shade its wearer’s eyes from bright light, giving you a +1 circumstance bonus to Perception or Survival checks in bright light and to saves against effects that would @UUID[Compendium.sfrpg.conditions.Item.YjE6UGzwOTfO9p4g]{dazzle} or @UUID[Compendium.sfrpg.conditions.Item.tOpF6qjnlnKc10t7]{blind} with light.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
     },
     "equippable": false,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 0,
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 2,
     "modifiers": [
       {
@@ -90,8 +85,10 @@
         "name": "Smart Scarf Config 1 - Disguise",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "formula",
@@ -105,8 +102,10 @@
         "name": "Smart Scarf Config 1 - Stealth",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "formula",
@@ -120,8 +119,10 @@
         "name": "Smart Scarf Config 2 - Perc",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "formula",
@@ -135,8 +136,10 @@
         "name": "Smart Scarf Config 2 - Survival",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "formula",
@@ -150,8 +153,10 @@
         "name": "Smart Scarf Config2 - Save",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "formula",
@@ -162,24 +167,28 @@
       }
     ],
     "price": 740,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 158",
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

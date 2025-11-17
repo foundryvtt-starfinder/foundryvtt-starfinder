@@ -4,11 +4,7 @@
   "type": "consumable",
   "img": "icons/consumables/potions/bottle-round-flask-fumes-purple.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -42,33 +38,16 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "consumableType": "serum",
-    "container": {
-      "contents": [],
-      "includeContentsInWealthCalculation": 1,
-      "isOpen": true,
-      "storage": [
-        {
-          "type": "slot",
-          "acceptsType": [
-            "spell"
-          ],
-          "affectsEncumbrance": false,
-          "amount": 0,
-          "subtype": "spellSlot",
-          "weightProperty": "bulk"
-        }
-      ]
-    },
     "critical": {
       "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -78,17 +57,12 @@
       "unidentified": "",
       "value": "<p>This fizzy purple serum tastes acidic and smells like soap. Favored by scientists, doctors, and others who work on very small scales, an ocu-amp serum greatly improves your close-range vision at the expense of your long-range vision. For 1 minute after you drink this serum, you gain a +2 circumstance on sight-based Perception checks within 30 feet and a +2 circumstance bonus to any skill use that benefits from exceedingly close vision, such as detecting complicated forgeries, performing surgery, or picking a lock. However, you take a –4 circumstance penalty on all sight-based Perception checks at a distance of 30 feet and greater. Additionally, anything further than 60 feet away has @UUID[Compendium.sfrpg.rules.JournalEntry.Kjba2E3Ad5oMJ7hV.JournalEntryPage.nyB6pt2dd6iVQGmS]{concealment} from you.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "minute",
       "value": "1"
     },
-    "equippable": false,
-    "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
-    "identified": true,
-    "isActive": null,
+    "isActive": false,
     "level": 2,
     "modifiers": [
       {
@@ -96,8 +70,10 @@
         "name": "Ocu-Amp Serum (<=30')",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "formula",
@@ -111,8 +87,10 @@
         "name": "Ocu-Amp Serum",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "all-skills",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "formula",
@@ -126,8 +104,10 @@
         "name": "Ocu-Amp Serum (>30')",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "-4",
         "modifierType": "formula",
@@ -142,20 +122,23 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 168",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
