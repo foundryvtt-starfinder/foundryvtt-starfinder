@@ -1,3 +1,6 @@
+# 0.29.0.1
+This is a small hotfix to prevent some errors in tooltip calculations. See Version 0.29.0 for the most recent set of major changes.
+
 # 0.29.0
 
 This update is a big one, with some big backend changes that will keep the system functioning on future Foundry release versions. It also includes a big update to feature activations that allows more accurate tracking of which effects are currently active, and restores the hotbar automation and features that were broken in the transition to Foundry v13. In addition, a lot of bugs have been fixed related to timed effects, starship combat, and various other features, and the last remaining Starfinder Enhanced data has been added.

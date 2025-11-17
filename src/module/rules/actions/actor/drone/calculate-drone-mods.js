@@ -81,7 +81,7 @@ export default function(engine) {
 
                 tooltip = game.i18n.format("SFRPG.SkillModifierTooltip", {
                     type: "Mechanic Level",
-                    mod: skill.ranks.signedString(),
+                    mod: skill.ranks?.signedString(),
                     source: mod.name
                 });
 
