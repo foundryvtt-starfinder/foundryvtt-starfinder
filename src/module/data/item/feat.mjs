@@ -104,6 +104,20 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
             })
         });
 
+        // Add fields needed to existing base item fields
+        foundry.utils.mergeObject(schema.activation.fields, {
+            macroAfterActivate: new fields.DocumentUUIDField({
+                initial: null,
+                nullable: true,
+                label: "SFRPG.Items.Feat.FeatureMacroAfterActivate"
+            }),
+            macroAfterDeactivate: new fields.DocumentUUIDField({
+                initial: null,
+                nullable: true,
+                label: "SFRPG.Items.Feat.FeatureMacroAfterDeactivate"
+            })
+        });
+
         // No initial value changes to templated fields
 
         return schema;
