@@ -212,17 +212,12 @@ export default class SFRPGRoll extends Roll {
     static _insertValueProperty(formula, rollData) {
         const formulaVariables = [...formula.matchAll(/@[A-z0-9.]*/g)];
         if (!formulaVariables.length) return formula;
-        const checkedProps = [];
-        for (const formulaVariable of formulaVariables.reverse()) {
-            const propLabel = formulaVariable[0];
-            const prop = propLabel.slice(1);
-            const target = foundry.utils.getProperty(rollData, prop);
-            if (typeof target === 'object' && !checkedProps.includes(prop)) {
-                if (target.value) {
-                    formula = formula.replaceAll(prop, `${prop}.value`);
-                }
+        for (const formulaVariable of formulaVariables) {
+            const prop = formulaVariable[0].slice(1);
+            const target = `${prop}.value`;
+            if (foundry.utils.hasProperty(rollData, target)) {
+                formula = formula.replace(prop, target);
             }
-            checkedProps.push(prop);
         }
         return formula;
     }
