@@ -90,8 +90,10 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     get hasArea() {
         const areaData = this.system?.area;
         if (!areaData) return false;
-
-        return !!Number(areaData?.value);
+        const hasAreaValue = areaData.total > 0
+            ? true
+            : (Number(areaData.value) > 0 ? true : false);
+        return hasAreaValue;
     }
 
     /**
@@ -1685,7 +1687,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 const rolled = await this.rollDamage({}, options);
                 if (!rolled) return; // Roll was cancelled, don't consume.
             }
-            if (this.hasArea) {
+            if (this.hasArea && ["ft", "meter"].includes(this.system.area.units) && !["", "other"].includes(this.system.area.shape)) {
                 const placed = await this.placeAbilityTemplate();
                 if (!placed) return; // Roll was cancelled, don't consume.
             }
