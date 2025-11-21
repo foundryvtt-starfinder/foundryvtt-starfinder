@@ -220,9 +220,9 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                             icon: "<i class='fas fa-check'></i>",
                             label: game.i18n.localize("SFRPG.ChatCard.ContextMenu.Accept"),
                             callback: (html) => {
-                                modifier = parseInt(html.querySelector("#modifier").value) || 0;
-                                healingTarget = html.querySelector("#apply-healing")?.value || "hp";
-                                bypassStamina = html.querySelector("#bypass-stamina")?.checked;
+                                modifier = parseInt(html[0].querySelector("#modifier").value) || 0;
+                                healingTarget = html[0].querySelector("#apply-healing")?.value || "hp";
+                                bypassStamina = html[0].querySelector("#bypass-stamina")?.checked;
                                 if (!modifier && (healingTarget === "hp" || bypassStamina === false)) ui.notifications.warn(game.i18n.localize("SFRPG.ChatCard.ContextMenu.NoDamageModifier"));
                             }
                         }
