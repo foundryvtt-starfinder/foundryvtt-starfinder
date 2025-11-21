@@ -1,16 +1,18 @@
 {
-  "_id": "cZxFlrWP8UFwNXVi",
-  "name": "Acidic Strike (Su)",
+  "_id": "1sc04NoiZXzFmGaV",
+  "name": "Power Drain - Vanguard (Su)",
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
     "ability": "",
     "actionTarget": "",
-    "actionType": "",
+    "actionType": "heal",
     "activation": {
-      "type": "",
-      "condition": "Critical Hit with a weapon or Entropic Strike",
-      "cost": null
+      "type": "none",
+      "condition": "",
+      "cost": null,
+      "macroAfterActivate": null,
+      "macroAfterDeactivate": null
     },
     "area": {
       "effect": "",
@@ -19,14 +21,34 @@
       "units": "ft",
       "value": ""
     },
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "critical": {
       "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": [],
+      "parts": [
+        {
+          "name": "Stamina Regeneration",
+          "formula": "lookupRange(1, 5,2, 8,3, 11,4, 14,5, 17,6, 20,7)d4 + @classes.vanguard.keyAbilityMod",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": true,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ],
       "primaryGroup": null
     },
     "damageNotes": "",
@@ -35,7 +57,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.Dysu4F8licjEb2FY]{Vanguard Discipline}</p>\n<p>You can enhance your @UUID[Compendium.sfrpg.class-features.Item.6Fuz5JTbJCBPynZd]{Entropic Strike (Su)} when you land a heavy blow on your target. When you score a critical hit using a weapon or your entropic strike, you ignore any acid resistance or immunity, and your attack deals additional damage equal to your level (this is not further doubled by the critical hit).</p>"
+      "value": "<p>You gain energy as entropy is released by defeated foes. Once per round when one of your attacks reduces a significant enemy to 0 Hit Points, you regain Stamina points equal to 1d4 + your key ability score modifier. The number of Stamina Points you regain increases by 1d4 at 5th level and every 3 levels thereafter.</p>"
     },
     "descriptors": {
       "acid": false,
@@ -88,42 +110,7 @@
     },
     "formula": "",
     "isActive": false,
-    "modifiers": [
-      {
-        "_id": "17027992-20a0-4bbb-94f4-a24826bdac8e",
-        "name": "Acidic Strike Critical Damage",
-        "type": "untyped",
-        "condition": "",
-        "damage": null,
-        "effectType": "ranged-damage",
-        "enabled": false,
-        "limitTo": null,
-        "max": 0,
-        "modifier": "@details.level.value",
-        "modifierType": "formula",
-        "notes": "",
-        "source": "Acidic Strike",
-        "subtab": "misc",
-        "valueAffected": ""
-      },
-      {
-        "_id": "d138dbed-962f-4405-82cf-569e4842eb52",
-        "name": "Acidic Strike Critical Damage",
-        "type": "untyped",
-        "condition": "",
-        "damage": null,
-        "effectType": "melee-damage",
-        "enabled": false,
-        "limitTo": null,
-        "max": 0,
-        "modifier": "@details.level.value",
-        "modifierType": "formula",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": ""
-      }
-    ],
+    "modifiers": [],
     "properties": {},
     "range": {
       "units": "none",
@@ -146,7 +133,7 @@
       "variable": false
     },
     "slug": "",
-    "source": "EN pg. 82",
+    "source": "EN pg. 83",
     "target": {
       "value": ""
     },
