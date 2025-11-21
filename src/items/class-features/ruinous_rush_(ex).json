@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "icons/skills/movement/feet-bladed-boots-fire.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "other",
     "activation": {
@@ -43,7 +39,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -107,15 +105,17 @@
       "value": "Until the end of your next turn"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "6cf554a9-2984-4947-8a82-dfcc7d5e6396",
         "name": "Runious Rush - Speed",
         "type": "enhancement",
         "condition": "",
+        "damage": null,
         "effectType": "all-speeds",
         "enabled": true,
+        "limitTo": null,
         "max": 20,
         "modifier": "20",
         "modifierType": "constant",
@@ -127,14 +127,11 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "2nd Level",
     "rollNotes": "",
@@ -145,11 +142,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "GEM pg. 30",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

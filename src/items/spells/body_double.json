@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/mirror_image.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -37,7 +33,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -47,14 +44,14 @@
       "unidentified": "",
       "value": "<div>\n<p>Upon casting this spell, choose a primary target and a secondary target, both within range. If the primary target fails or forfeits its saving throw, its appearance, scent, sounds, and mannerisms change to match those of the secondary target.</p>\n<p>As long as the two targets are of the same size category, they are indistinguishable. As a consequence, if the targets are adjacent and a creature takes an action that would affect one of the targets (such as an attack, a targeted spell, or an area effect), that action has a 50% chance of affecting the other target instead. Any action that would affect both creatures affects them both normally.</p>\n<p>This spell doesn’t deceive creatures under the effects of true seeing. Likewise, a creature that can’t perceive one of the targets isn’t fooled by this spell (even if the spell fooled that creature earlier), and its attacks, targeted spells, and other actions affect targets as normal.</p>\n</div>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "round",
       "value": "@details.cl.value"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 2,
     "materials": {
@@ -70,10 +67,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "+5 ft.",
-      "per": "2 levels",
-      "units": "close",
-      "value": null
+      "units": "close"
     },
     "rollNotes": "",
     "save": {
@@ -82,14 +76,19 @@
       "descriptor": "negate"
     },
     "school": "ill",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #35 pg. 54",
     "sr": true,
     "target": {
-      "type": "",
       "value": "Two creatures; see text"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

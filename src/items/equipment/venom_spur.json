@@ -6,9 +6,6 @@
   "system": {
     "type": "biotech",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -21,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -42,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -61,6 +57,7 @@
           "name": "Base damage",
           "formula": "1d6 + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -68,7 +65,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -77,6 +76,7 @@
           "name": "Venom damage",
           "formula": "2d6",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -84,12 +84,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -99,28 +102,25 @@
       "unidentified": "",
       "value": "<p>You implant a retractable stinger and venom sac into your hand. You can extend this stinger as a swift action but only while you aren’t holding anything in that hand. While extended, the venom spur is a one-handed basic melee weapon that deals 1d6 piercing damage and automatically injects venom into a struck target. An affected creature can attempt a Fortitude saving throw (DC = 10 + half your level + your Constitution modifier) to resist the effects of your venom. On a failed save, the creature takes 2d6 damage immediately and must attempt a new Fortitude saving throw at the start of its turn each round to end the effect. Each time it fails this save, it takes an additional 2d6 damage. Effects such as @UUID[Compendium.sfrpg.spells.Item.YGkyMwEE6SLfZc4r]{Remove Affliction} and antitoxin affect this venom as though it were a poison.</p>\n<p>Once used, the venom sac doesn’t refill until the next time you rest to regain Stamina Points. While it’s empty, you can still attack with the stinger but can’t envenomate your target.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 2,
     "modifiers": [],
     "price": 625,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
@@ -128,14 +128,19 @@
       "dc": "10 + floor(@details.level.value / 2) + @abilities.con.mod",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "CRB pg. 211",
     "system": "hand",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "sr",
       "value": 1
     }

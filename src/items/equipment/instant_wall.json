@@ -4,11 +4,7 @@
   "type": "hybrid",
   "img": "systems/sfrpg/icons/default/energise.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "skill",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 0,
@@ -72,18 +67,17 @@
       "unidentified": "",
       "value": "<p>An instant wall is composed of magically color- and texture-changing fabric that becomes rigid when deployed, allowing it to appear solid and match its surrounding environment. This can be used to hide the presence of a squad in an exposed corridor, cover up the presence of a door, or even hide the fact that a door has been opened. As a standard action, you can deploy (or stow) an instant wall in a corridor up to 10 feet across. The wall blocks line of sight and grants a +20 circumstance bonus to Stealth checks for creatures hiding behind the wall against creatures on the other side. An observer must succeed at a DC 14 Perception check to detect that an apparent wall is in fact an instant wall. Any damage or significant force applied to the wall causes it to collapse into crumpled fabric.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
     },
     "equippable": false,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 0,
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 6,
     "limitedWear": false,
     "modifiers": [
@@ -92,8 +86,10 @@
         "name": "Instant Wall",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "20",
         "modifierType": "formula",
@@ -104,12 +100,11 @@
       }
     ],
     "price": 4250,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
@@ -121,11 +116,12 @@
     },
     "skillCheck": {
       "type": "per",
-      "dc": "14"
+      "dc": "14",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 162",
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

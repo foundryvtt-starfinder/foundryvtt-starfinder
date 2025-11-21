@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 40,
@@ -52,7 +47,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -95,13 +90,26 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d6",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
             "sonic": true
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -111,7 +119,6 @@
       "unidentified": "",
       "value": "<p>The crystalline structure inside a resonant pistol comes from the same synthetic material used in the resonant gauntlet. An electrical current can be directed through a long, conical barrel fitted with layers of the crystal, causing the material to reverberate with a devastating ultrasonic frequency. These weapons are noted for their ease of use, since they create no recoil. The only indication that these weapons have fired is a faint, high-pitched beep. Resonant pistols using a crystal lattice are more common and less expensive than those that contain a crystal matrix.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -121,7 +128,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 7,
     "modifiers": [],
@@ -217,10 +224,8 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 40
+      "value": "40"
     },
     "rollNotes": "",
     "save": {
@@ -228,11 +233,16 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AR pg. 16",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -240,7 +250,7 @@
       "value": 2
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

@@ -4,7 +4,6 @@
   "type": "starshipAction",
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": {
       "resolve": false,
       "value": "Target ship's Target Lock score + 2 if shields are up."
@@ -21,10 +20,14 @@
     "formula": [
       {
         "name": "Computers",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@scienceOfficer.skills.com.ranks + @scienceOfficer.abilities.int.mod"
       }
     ],
     "isPush": false,
+    "modifiers": [],
     "order": 22,
     "phase": {
       "name": "Gunnery phase",
@@ -36,6 +39,7 @@
     "selectors": [
       "scienceOfficer"
     ],
+    "slug": "",
     "source": "SOM"
   }
 }

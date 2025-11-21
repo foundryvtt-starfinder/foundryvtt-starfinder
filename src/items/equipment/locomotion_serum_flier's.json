@@ -4,11 +4,7 @@
   "type": "consumable",
   "img": "icons/consumables/potions/bottle-conical-bubbling-blue.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -42,33 +38,16 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "chatFlavor": "",
     "consumableType": "serum",
-    "container": {
-      "contents": [],
-      "includeContentsInWealthCalculation": 1,
-      "isOpen": true,
-      "storage": [
-        {
-          "type": "slot",
-          "acceptsType": [
-            "spell"
-          ],
-          "affectsEncumbrance": false,
-          "amount": 0,
-          "subtype": "spellSlot",
-          "weightProperty": "bulk"
-        }
-      ]
-    },
     "critical": {
       "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -78,17 +57,12 @@
       "unidentified": "",
       "value": "<p>A locomotion serum is an invigorating serum with a gritty aftertaste. Drinking a locomotion serum grants you an additional mode of movement, or a benefit while using a certain type of movement, for a short time. The effects of a locomotion serum last for 10 minutes.</p>\n<p><strong>Flier’s (Level 9; 2,100 credits)</strong>: You gain a fly speed of 40 feet with maneuverability of average. If you are flying when this serum’s duration ends, you fall, taking damage from the fall as normal.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "minute",
       "value": "10"
     },
-    "equippable": false,
-    "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
-    "identified": true,
-    "isActive": null,
+    "isActive": false,
     "level": 9,
     "modifiers": [
       {
@@ -96,8 +70,10 @@
         "name": "Locomotion Serum",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "specific-speed",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "40",
         "modifierType": "constant",
@@ -112,20 +88,23 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN p. 168",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

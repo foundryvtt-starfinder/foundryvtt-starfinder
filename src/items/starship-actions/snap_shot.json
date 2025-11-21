@@ -4,7 +4,6 @@
   "type": "starshipAction",
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": null,
     "description": {
       "chat": "",
@@ -18,10 +17,14 @@
     "formula": [
       {
         "name": "Gunnery",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "max(@minorCrew.attributes.baseAttackBonus.value, @minorCrew.skills.pil.ranks, @minorCrew.skills.gun.mod) + @minorCrew.abilities.dex.mod - 2"
       }
     ],
     "isPush": false,
+    "modifiers": [],
     "order": 30,
     "phase": {
       "name": "Gunnery phase",
@@ -33,6 +36,7 @@
     "selectors": [
       "minorCrew"
     ],
+    "slug": "",
     "source": "CRB"
   }
 }

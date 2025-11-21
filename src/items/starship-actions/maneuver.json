@@ -4,7 +4,6 @@
   "type": "starshipAction",
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": {
       "resolve": true,
       "value": "15 + floor(1.5 * @ship.details.tier)"
@@ -21,10 +20,14 @@
     "formula": [
       {
         "name": "Piloting",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@pilot.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       }
     ],
     "isPush": false,
+    "modifiers": [],
     "order": 10,
     "phase": {
       "name": "Helm phase",
@@ -34,6 +37,7 @@
     "role": "pilot",
     "selectorKey": "pilot",
     "selectors": [],
+    "slug": "",
     "source": "CRB"
   }
 }

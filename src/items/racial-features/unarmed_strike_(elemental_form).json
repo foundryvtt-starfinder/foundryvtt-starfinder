@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "icons/skills/melee/blood-slash-foam-red.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "mwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "-",
     "capacity": {
       "max": null,
@@ -74,7 +69,9 @@
             "electricity": true,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -91,7 +88,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -108,7 +107,9 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -125,7 +126,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -141,7 +144,6 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.racial-features.Item.GFbyfuzv25088jYt]{Elemental Form}</p>\n<p><span>Once per day as a standard action, an elanaya can manifest their bonded elemental in their own body, gaining the following powers. Elemental form lasts for a number of minutes per day equal to the elanaya’s level.</span></p><ul><li><p>The elanaya gains a special unarmed strike that deals lethal damage of their associated energy type, doesn’t count as archaic, threatens squares, and targets EAC. They gain a special version of the Weapon Specialization feat with this unarmed strike at 3rd level, allowing them to add 1–1/2 × their character level to their damage rolls for this unarmed strike (instead of just adding their character level, as usual).</p></li></ul>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -151,7 +153,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 0,
     "modifiers": [],
@@ -256,10 +258,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
@@ -269,8 +268,10 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 20",
     "special": "",
     "specialMaterials": {
@@ -290,7 +291,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

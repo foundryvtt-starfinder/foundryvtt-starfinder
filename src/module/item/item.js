@@ -861,6 +861,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * @returns {Promise<RollResult?>}
      */
     async rollAttack(options = {}) {
+        options.disableDeductAmmo = options.disableDeductAmmo || options.event.ctrlKey || false;
         const itemData = this.system;
         const actorData = this.actor.system;
         const isWeapon = ["weapon", "shield"].includes(this.type);
@@ -946,16 +947,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             rollOptions.actionTargetSource = SFRPG.actionTargets;
         }
 
-        // Define Roll Data
-        const rollData = foundry.utils.deepClone(actorData);
-        // Add hasSave to roll
+        // Add has__ properties to itemData
         itemData.hasSave = this.hasSave;
         itemData.hasSkill = this.hasSkill;
         itemData.hasArea = this.hasArea;
         itemData.hasDamage = this.hasDamage;
         itemData.hasCapacity = this.hasCapacity();
 
-        rollData.item = itemData;
         const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
         // Warn the user if there is no ammo left
@@ -1135,17 +1133,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (itemData.hasOwnProperty("usage") && !options.disableDeductAmmo) {
             const usage = itemData.usage;
 
-            if (usage.per && ["round", "shot"].includes(usage.per)) {
+            if (usage.per && ["action", "shot"].includes(usage.per)) {
                 this.consumeCapacity(this._calculateAmmoUsageWithModifiers(usage.value));
-            } else if (usage.per && ['minute'].includes(usage.per)) {
-                if (game.combat) {
-                    const round = game.combat.current.round || 0;
-                    if (round % 10 === 1) {
-                        this.consumeCapacity(this._calculateAmmoUsageWithModifiers(usage.value));
-                    }
-                } else {
-                    ui.notifications.info("You currently cannot deduct ammunition from weapons with a usage per minute outside of combat.");
-                }
             }
         }
 
@@ -1384,12 +1373,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             return 0;
         }, 0);
 
-        // Define Roll Data
-        const rollData = foundry.utils.mergeObject(foundry.utils.deepClone(actorData), {
-            item: itemData,
-            mod: actorData.abilities[abl].mod
-        });
-
         let title = '';
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
             if (isHealing) {
@@ -1405,7 +1388,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             }
         }
 
-        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData, ownerData: rollData});
+        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
 
         /** Create additional modifiers. */
         const additionalModifiers = [];
@@ -1656,34 +1639,31 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     async useItem(options = {}) {
         const itemData = this.system;
-        const overrideUsage = !!options?.event?.shiftKey;
-        const overrideAddCapacity = options?.event?.altKey;
+        const addCapacity = options?.event?.altKey;
+        const overrideUsage = !!options?.event?.ctrlKey;
+        const overrideChatCard = !!options?.event?.shiftKey;
 
-        // Instead of activating the item, add charges to it
-        if (overrideAddCapacity) {
-            this.increaseCapacity(this.type === "consumable" ? 1 : itemData.usage.value);
-            return;
-        }
-
-        let currentCapacity = 0;
+        let sufficientCapacity = overrideUsage;
         if (this.hasCapacity()) {
-            currentCapacity = this.getCurrentCapacity();
+            sufficientCapacity = this.getCurrentCapacity() >= (itemData.usage?.value ?? itemData.uses?.value);
         }
 
-        if (!currentCapacity && !overrideUsage) {
+        if (!sufficientCapacity && !addCapacity) {
             ui.notifications.error(game.i18n.format("SFRPG.Items.Consumable.ErrorNoUses", {name: this.name}));
             return;
         }
 
-        if (this.type === "consumable" && itemData.actionType) {
+        if (!addCapacity && this.type === "consumable" && itemData.actionType) {
             options.flavorOverride = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
 
             // Roll damage/attack or place template if needed. Do this here for the case where the item is consumed on use.
             if (this.hasAttack) {
-                const rolled = await this.rollAttack({}, options);
+                options.skipUI = overrideChatCard;
+                const rolled = await this.rollAttack(options);
                 if (!rolled) return; // Roll was cancelled, don't consume.
             }
             if (this.hasDamage) {
+                options.skipUI = overrideChatCard;
                 const rolled = await this.rollDamage({}, options);
                 if (!rolled) return; // Roll was cancelled, don't consume.
             }
@@ -1691,7 +1671,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 const placed = await this.placeAbilityTemplate();
                 if (!placed) return; // Roll was cancelled, don't consume.
             }
-        } else {
+        } else if (!overrideChatCard) {
             const htmlOptions = { secrets: this.actor?.isOwner || true, rollData: this };
             htmlOptions.rollData.owner = this.actor?.system;
 
@@ -1701,39 +1681,35 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 actor: this.actor,
                 tokenId: token ? `${token.parent.id}.${token.id}` : null,
                 item: this,
-                system: itemData,
-                data: await this.getChatData(htmlOptions),
                 labels: this.labels,
-                hasAttack: this.hasAttack,
-                hasDamage: this.hasDamage,
-                hasSave: this.hasSave,
-                hasArea: this.hasArea,
-                hasOtherFormula: this.hasOtherFormula
+                hasSave: !addCapacity && this.hasSave,
+                hasArea: !addCapacity && this.hasArea,
+                hasOtherFormula: !addCapacity && this.hasOtherFormula,
+                action: addCapacity ? "SFRPG.ChatCard.ItemActivation.AddCapacity" : "SFRPG.ChatCard.ItemActivation.UseCapacity",
+                cost: overrideUsage ? "None" : itemData.usage?.value ?? itemData.uses?.value
             };
 
-            const template = `systems/sfrpg/templates/chat/item-card.hbs`;
-            const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
-            const flavor = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
+            const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
+            const renderPromise = foundry.applications.handlebars.renderTemplate(template, templateData);
+            renderPromise.then((html) => {
+                // Create the chat message
+                const chatData = {
+                    type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+                    speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor}),
+                    content: html
+                };
 
-            // Basic chat message data
-            const chatData = {
-                author: game.user.id,
-                flavor: flavor,
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-                content: html,
-                flags: { level: this.system.level },
-                speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
-            };
-
-            const rollMode = game.settings.get("core", "rollMode");
-            ChatMessage.applyRollMode(chatData, rollMode);
-
-            // Create the chat message
-            ChatMessage.create(chatData, { displaySheet: false });
+                const rollMode = game.settings.get("core", "rollMode");
+                ChatMessage.applyRollMode(chatData, rollMode);
+                ChatMessage.create(chatData, { displaySheet: false });
+            });
         }
 
-        // Deduct consumed charges from the item
-        if (!overrideUsage) {
+        if (addCapacity) {
+            // Instead of activating the item, add charges to it
+            this.increaseCapacity(this.type === "consumable" ? 1 : itemData.usage.value);
+        } else if (!overrideUsage) {
+            // Deduct consumed charges from the item
             this.consumeCapacity(this.type === "consumable" ? 1 : itemData.usage.value);
         }
     }

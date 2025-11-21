@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -88,15 +85,17 @@
       "value": "3"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "4e185bcc-55a2-492b-b1aa-1f30db7153c5",
         "name": "Bolstering Aura (Divine Niche)  - Attack Rolls",
         "type": "divine",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "lookupRange(@details.level.value, 1, 1, 10, 2)",
         "modifierType": "formula",
@@ -110,8 +109,10 @@
         "name": "Bolstering Aura (Divine Niche) - Will",
         "type": "divine",
         "condition": "",
+        "damage": null,
         "effectType": "save",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "lookupRange(@details.level.value, 1, 1, 10, 2)",
         "modifierType": "constant",
@@ -123,25 +124,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level (Evolutionist)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 42",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

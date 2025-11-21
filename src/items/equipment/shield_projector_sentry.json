@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/nil-grenade-launcher-merc.webp",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "2",
     "capacity": {
       "max": 40,
@@ -97,6 +92,8 @@
         {
           "name": "",
           "formula": "-",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -104,12 +101,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -119,7 +119,6 @@
       "unidentified": "",
       "value": "<p>A shield projector is a heavy weapon that encases its target in a short-duration force field, akin to that produced by an armor upgrade. Such force fields are of limited strength, but higher power shield projectors can create a stronger protective barrier around the target. Shield projectors see the most use among security forces assigned to protect diplomats and high-profile celebrities. Available models—from the least to most powerful—&nbsp;include sentry, defender, guardian, and warden shield projectors.</p>\n<p><strong>Shield</strong>: 1d4</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -129,7 +128,7 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 4,
     "modifiers": [],
@@ -231,10 +230,8 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 40
+      "value": "40"
     },
     "rollNotes": "",
     "save": {
@@ -242,6 +239,12 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AR pg. 16",
     "special": "",
     "specialMaterials": {
@@ -261,7 +264,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -269,7 +271,7 @@
       "value": 4
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

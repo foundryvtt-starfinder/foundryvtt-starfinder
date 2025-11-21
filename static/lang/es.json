@@ -231,7 +231,8 @@
                     "Install": "Install Augmentation",
                     "LevelUp": "Level Up",
                     "Unequip": "Unequip Item",
-                    "Uninstall": "Uninstall Augmentation"
+                    "Uninstall": "Uninstall Augmentation",
+                    "UseItemTooltip": "<strong>Use Item</strong></br>Use the item, consuming the listed capacity. Shift+Click to not post to chat, Ctrl+Click to not consume capacity, Alt+Click to add capacity."
                 },
                 "ItemValue": {
                     "Label": "Wealth:",
@@ -284,9 +285,11 @@
                     "Stamina": "Resistencia",
                     "StarshipAftAC": "Starship Aft AC",
                     "StarshipAllAC": "Starship All AC",
+                    "StarshipBuildPoints": "Starship Build Points",
                     "StarshipForwardAC": "Starship Forward AC",
                     "StarshipHullPoints": "Starship Hull Points",
                     "StarshipHullPointsIncrement": "Starship Hull Points Increment",
+                    "StarshipMultiplyBuildPoints": "Starship Build Point Multiplier",
                     "StarshipPilotingSkill": "Starship Piloting Skill",
                     "StarshipPortAC": "Starship Port AC",
                     "StarshipSpeed": "Starship Speed",
@@ -512,12 +515,14 @@
             },
             "ItemActivation": {
                 "Activates": "Activa",
+                "AddCapacity": "Added Capacity",
                 "Cost": "Costo: {cost}",
                 "Deactivates": "Desactiva",
                 "Duration": "Duración: {duration}",
                 "NoCharges": "Sin cargas",
                 "Reloads": "Recarga",
-                "Use": "Usar"
+                "Use": "Usar",
+                "UseCapacity": "Used Capacity"
             },
             "PlaceAbilityTemplate": "Colocar {label}"
         },
@@ -1738,6 +1743,10 @@
                 "FeatureAttack": "Ataque de la característica",
                 "FeatureCategory": "Categoría de característica",
                 "FeatureDetails": "Detalles de la característica",
+                "FeatureMacro": "Feature Macro Triggers",
+                "FeatureMacroAfterActivate": "On Activate",
+                "FeatureMacroAfterDeactivate": "On Deactivate",
+                "FeatureMacroHint": "Script macros can use <code>scope.item</code> to access this item or <code>scope.item.parent</code> to access its parent actor.",
                 "FeatureUsage": "Uso de la característica",
                 "RechargeOn": "Recargar en",
                 "Requirements": "Requisitos",
@@ -2840,6 +2849,7 @@
             },
             "Attributes": {
                 "BuildPoints": "Puntos de Construcción",
+                "BuildPointsMax": "Max",
                 "BuildPointsUsage": "Uso",
                 "Complement": "Tripulación",
                 "ComplementMax": "Número máximo de tripulantes que pueden asignarse a un rol en la nave (no es el máximo de criaturas a bordo).",

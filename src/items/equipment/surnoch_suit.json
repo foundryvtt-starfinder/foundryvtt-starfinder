@@ -4,11 +4,7 @@
   "type": "equipment",
   "img": "systems/sfrpg/icons/default/kevlar-vest.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "armor": {
       "type": "power",
@@ -51,7 +47,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "35",
     "capacity": {
       "max": 20,
@@ -107,6 +102,7 @@
           "name": "",
           "formula": "3d10 +(@abilities.str.mod)",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -114,12 +110,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -129,7 +128,6 @@
       "unidentified": "",
       "value": "<p>This sturdy gray suit of powered armor has rows of fine blades running along the body and limbs, which serve as digging claws; it is often used by elite sapper teams to reach entrenched enemies. A surnoch suit grants you a burrow speed. You can tunnel through rock while wearing a surnoch suit, but your speed is reduced to 5 feet.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -139,7 +137,8 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 18,
     "modifiers": [],
     "price": 405000,
@@ -148,10 +147,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "reach": "10 ft.",
     "rollNotes": "",
@@ -160,11 +156,12 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "large",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 79",
     "specialMaterials": {
       "abysium": false,
@@ -185,7 +182,6 @@
     "speed": "30 ft., burrow 20 ft.",
     "strength": 29,
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -193,8 +189,8 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

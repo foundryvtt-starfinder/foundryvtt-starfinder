@@ -4,13 +4,9 @@
   "type": "hybrid",
   "img": "systems/sfrpg/icons/default/energise.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 0,
@@ -61,7 +56,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -71,18 +67,17 @@
       "unidentified": "",
       "value": "<p>An&nbsp;adaptive Swarm mask&nbsp;is made from the exoskeleton plates from the head of a Swarm component. The mask counts as a worn magic item unless you install it in armor, taking up one upgrade slot. When you take damage of any type while wearing the mask, it reduces the damage by 5. It then ceases to provide that benefit, instead providing damage reduction or energy resistance 5 against the same damage type for 1 minute. The mask remains adapted to the same damage type even if you take a different type of damage. After the duration elapses, the mask becomes unadapted and can adjust to a new damage type. This mask attracts the attention of Swarm components in the same way weapons with the Swarm weapon special property do.</p>\n<p><em>For energy resistance, Enable/Disable in the Modifiers tab. Damage reduction must be manually accounted for currently.</em></p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 0,
     "identified": false,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 11,
     "limitedWear": true,
     "modifiers": [
@@ -91,8 +86,10 @@
         "name": "Adaptive Swarm Mask - Acid",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": false,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "constant",
@@ -106,8 +103,10 @@
         "name": "Adaptive Swarm Mask - Cold",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": false,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "constant",
@@ -121,8 +120,10 @@
         "name": "Adaptive Swarm Mask - Electricity",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": false,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "constant",
@@ -136,8 +137,10 @@
         "name": "Adaptive Swarm Mask - Fire",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": false,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "constant",
@@ -151,8 +154,10 @@
         "name": "Adaptive Swarm Mask - Sonic",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": false,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "constant",
@@ -163,24 +168,27 @@
       }
     ],
     "price": 24500,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #19 pg. 52",
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -188,8 +196,8 @@
       "value": 0
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }

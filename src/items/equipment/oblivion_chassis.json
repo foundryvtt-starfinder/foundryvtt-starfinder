@@ -4,11 +4,7 @@
   "type": "equipment",
   "img": "systems/sfrpg/icons/default/kevlar-vest.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "armor": {
       "type": "power",
@@ -51,7 +47,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "36",
     "capacity": {
       "max": 100,
@@ -107,6 +102,7 @@
           "name": "",
           "formula": "2d6 +(@abilities.str.mod)",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -114,12 +110,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -129,7 +128,6 @@
       "unidentified": "",
       "value": "<p>This powered, magical armor was originally constructed in the forges of Abaddon. While primarily battery-powered, it also converts soul energy into auxiliary power. Whenever a significant enemy dies within 30 feet of an operating oblivion chassis, the armor gains a number of soul charges equal to the dead creature’s CR. As a standard action, you can spend 10 soul charges to cast the spell @UUID[Compendium.sfrpg.spells.Item.VfGkPlxHZoxJDjX7]{Supercharge Weapon} on the armor’s unarmed strikes or a weapon in one of the armor’s weapon slots.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "instantaneous",
       "value": ""
@@ -139,7 +137,8 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 13,
     "modifiers": [],
     "price": 57150,
@@ -148,10 +147,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "reach": "",
     "rollNotes": "",
@@ -160,11 +156,12 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "large",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "DC pg. 52",
     "specialMaterials": {
       "abysium": false,
@@ -185,7 +182,6 @@
     "speed": "30 ft.",
     "strength": 25,
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -193,8 +189,8 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

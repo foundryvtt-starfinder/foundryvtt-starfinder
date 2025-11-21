@@ -10,21 +10,10 @@
       "type": "starshipFrame",
       "img": "systems/sfrpg/icons/default/hexagonal-nut.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
-        "costMultipliedBySize": false,
         "crew": {
           "maximum": 100,
           "minimum": 20
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "damageThreshold": {
           "base": 14
@@ -46,6 +35,7 @@
         "modifiers": [],
         "pcu": null,
         "size": "huge",
+        "slug": "",
         "source": "SOM, p. 108",
         "weaponMounts": {
           "aft": {
@@ -87,18 +77,8 @@
       "type": "starshipThruster",
       "img": "systems/sfrpg/icons/default/rocket-thruster.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 8,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -112,6 +92,7 @@
         "modifiers": [],
         "pcu": 140,
         "pilotingModifier": 0,
+        "slug": "",
         "source": "CRB pg. 297",
         "specialMaterials": {},
         "speed": 8,
@@ -124,19 +105,9 @@
       "type": "starshipShield",
       "img": "systems/sfrpg/icons/default/forward-field.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 0,
         "cost": 30,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "defenseValue": 0,
         "description": {
           "chat": "",
@@ -151,6 +122,7 @@
         "pcu": 90,
         "regeneration": 32,
         "shieldPoints": 420,
+        "slug": "",
         "source": "CRB pg. 302",
         "targetLockBonus": 0
       }
@@ -161,12 +133,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -174,17 +142,29 @@
         "class": "capital",
         "cost": 30,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "(3d4)*10",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -196,12 +176,12 @@
         "isPowered": true,
         "modifiers": [],
         "mount": {
-          "activated": false,
           "arc": "forward",
           "mounted": true
         },
         "pcu": 30,
         "range": "long",
+        "slug": "",
         "source": "CRB pg. 303",
         "special": {
           "anchoring": false,
@@ -267,12 +247,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "tl",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": 5,
           "value": 5
@@ -280,17 +256,29 @@
         "class": "light",
         "cost": 11,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d8",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -302,12 +290,12 @@
         "isPowered": true,
         "modifiers": [],
         "mount": {
-          "activated": false,
           "arc": "port",
           "mounted": true
         },
         "pcu": 5,
         "range": "long",
+        "slug": "",
         "source": "CRB pg. 302",
         "special": {
           "anchoring": false,
@@ -373,12 +361,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "tl",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": 5,
           "value": 5
@@ -386,17 +370,29 @@
         "class": "light",
         "cost": 11,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d8",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -408,12 +404,12 @@
         "isPowered": true,
         "modifiers": [],
         "mount": {
-          "activated": false,
           "arc": "starboard",
           "mounted": true
         },
         "pcu": 5,
         "range": "long",
+        "slug": "",
         "source": "CRB pg. 302",
         "special": {
           "anchoring": false,
@@ -479,12 +475,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "ac",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -492,17 +484,29 @@
         "class": "heavy",
         "cost": 25,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "10d6",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -514,12 +518,12 @@
         "isPowered": true,
         "modifiers": [],
         "mount": {
-          "activated": false,
           "arc": "turret",
           "mounted": true
         },
         "pcu": 40,
         "range": "long",
+        "slug": "",
         "source": "CRB pg. 302",
         "special": {
           "anchoring": false,
@@ -585,18 +589,8 @@
       "type": "starshipPowerCore",
       "img": "systems/sfrpg/icons/default/power-generator.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 40,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -604,9 +598,9 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
         "pcu": 400,
+        "slug": "",
         "source": "CRB pg. 296",
         "specialMaterials": {},
         "supportedSizes": [
@@ -622,18 +616,8 @@
       "type": "starshipDriftEngine",
       "img": "systems/sfrpg/icons/default/star-gate.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 2,
         "costMultipliedBySize": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -643,9 +627,10 @@
         },
         "engineRating": 1,
         "isPowered": true,
-        "maxSize": "superColossal",
+        "maxSize": "supercolossal",
         "modifiers": [],
         "pcu": 75,
+        "slug": "",
         "source": "CRB pg. 298"
       }
     },
@@ -655,19 +640,9 @@
       "type": "starshipFortifiedHull",
       "img": "systems/sfrpg/icons/default/steel-door.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 4,
         "costMultipliedBySize": true,
-        "critical": {
-          "parts": []
-        },
         "criticalThresholdBonus": 2,
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -675,9 +650,8 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": false,
         "modifiers": [],
-        "pcu": null,
+        "slug": "",
         "source": "SOM pg. 21"
       }
     },
@@ -687,18 +661,8 @@
       "type": "starshipSensor",
       "img": "systems/sfrpg/icons/default/radar-dish.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 14,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -706,11 +670,10 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifier": 4,
         "modifiers": [],
-        "pcu": null,
         "range": "long",
+        "slug": "",
         "source": "CRB pg. 301",
         "specialMaterials": {}
       }
@@ -721,18 +684,8 @@
       "type": "starshipCrewQuarter",
       "img": "systems/sfrpg/icons/default/bunk-beds.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 2,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -740,9 +693,8 @@
           "unidentified": "",
           "value": "<p>Good crew quarters are a bit more upscale than common crew quarters. They consist of dormitory-style rooms that can hold one or two small beds (larger starships usually require lower-ranking crew members to share these quarters) and sometimes a personal closet or drawer space for each occupant. Good crew quarters also include one or two shared bathrooms with multiple sinks and shower stalls, and a dining space with an attached galley. Crews of larger starships eat in this dining space in shifts.</p>"
         },
-        "isPowered": true,
         "modifiers": [],
-        "pcu": null,
+        "slug": "",
         "source": "CRB pg. 298"
       }
     },
@@ -752,19 +704,9 @@
       "type": "starshipArmor",
       "img": "systems/sfrpg/icons/default/metal-scales.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 9,
         "cost": 18,
         "costMultipliedBySize": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -772,12 +714,11 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
-        "pcu": null,
+        "slug": "",
         "source": "CRB pg. 297",
         "specialMaterials": {},
-        "targetLockPenalty": -2,
+        "targetLockPenalty": 0,
         "turnDistancePenalty": 1
       }
     },
@@ -787,18 +728,8 @@
       "type": "starshipDefensiveCountermeasure",
       "img": "systems/sfrpg/icons/default/bubble-field.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 22,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -809,6 +740,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": 11,
+        "slug": "",
         "source": "CRB pg. 297",
         "specialMaterials": {},
         "targetLockBonus": 9
@@ -820,18 +752,8 @@
       "type": "starshipComputer",
       "img": "systems/sfrpg/icons/default/server-rack.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 16,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -844,6 +766,7 @@
         "modifiers": [],
         "nodes": 4,
         "pcu": 15,
+        "slug": "",
         "source": "CRB pg. 297"
       }
     },
@@ -853,18 +776,8 @@
       "type": "starshipExpansionBay",
       "img": "systems/sfrpg/icons/default/cardboard-box-closed.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 0,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -875,6 +788,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": 0,
+        "slug": "",
         "source": "CRB pg. 300"
       }
     },
@@ -884,18 +798,8 @@
       "type": "starshipExpansionBay",
       "img": "systems/sfrpg/icons/default/cardboard-box-closed.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 0,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -906,6 +810,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": 0,
+        "slug": "",
         "source": "CRB pg. 300"
       }
     },
@@ -915,18 +820,8 @@
       "type": "starshipExpansionBay",
       "img": "systems/sfrpg/icons/default/cardboard-box-closed.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 8,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -937,6 +832,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": 4,
+        "slug": "",
         "source": "CRB pg. 300"
       }
     },
@@ -946,18 +842,8 @@
       "type": "starshipExpansionBay",
       "img": "systems/sfrpg/icons/default/cardboard-box-closed.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 4,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -968,6 +854,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": 10,
+        "slug": "",
         "source": "CRB pg. 300"
       }
     },
@@ -977,18 +864,8 @@
       "type": "starshipExpansionBay",
       "img": "systems/sfrpg/icons/default/cardboard-box-closed.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 4,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -999,6 +876,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": 10,
+        "slug": "",
         "source": "CRB pg. 300"
       }
     },
@@ -1008,18 +886,8 @@
       "type": "starshipExpansionBay",
       "img": "systems/sfrpg/icons/default/cardboard-box-closed.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": 1,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -1030,6 +898,7 @@
         "isPowered": true,
         "modifiers": [],
         "pcu": 3,
+        "slug": "",
         "source": "CRB pg. 300"
       }
     }
@@ -1129,87 +998,23 @@
   },
   "system": {
     "attributes": {
-      "ac": {
-        "misc": 0,
-        "value": 10
-      },
-      "complement": {
-        "max": 1,
-        "min": 0,
-        "value": 0
-      },
-      "computer": {
-        "value": 0
-      },
-      "criticalThreshold": {
-        "value": 10
-      },
-      "damageThreshold": {
-        "value": 0
-      },
-      "drift": {
-        "value": 0
-      },
-      "expansionBays": {
-        "value": 0
-      },
       "hp": {
-        "increment": 10,
-        "max": 0,
         "value": 255
-      },
-      "maneuverability": "",
-      "mounts": {
-        "aft": [],
-        "forward": [],
-        "port": [],
-        "starboard": [],
-        "turret": []
-      },
-      "pilotingBonus": {
-        "value": 0
-      },
-      "power": {
-        "max": 0,
-        "value": 0
-      },
-      "shields": {
-        "aft": {
-          "max": 0,
-          "value": 0
-        },
-        "forward": {
-          "max": 0,
-          "value": 0
-        },
-        "max": 0,
-        "port": {
-          "max": 0,
-          "value": 0
-        },
-        "starboard": {
-          "max": 0,
-          "value": 0
-        },
-        "value": 0
-      },
-      "speed": {
-        "value": 5
       },
       "systems": {
         "engines": {
           "affectedRoles": {
             "pilot": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "lifeSupport": {
           "affectedRoles": {
             "captain": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "powerCore": {
           "affectedRoles": {
@@ -1223,231 +1028,186 @@
             "pilot": true,
             "scienceOfficer": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "sensors": {
           "affectedRoles": {
             "scienceOfficer": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "weaponsArrayAft": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "weaponsArrayForward": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "weaponsArrayPort": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         },
         "weaponsArrayStarboard": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal"
+          "patch": "unpatched",
+          "value": "nominal"
         }
-      },
-      "targetLock": {
-        "misc": 0,
-        "value": 10
       }
     },
-    "conditions": {},
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "crew": {
       "captain": {
         "actorIds": [],
-        "actors": [],
         "limit": 1
       },
       "chiefMate": {
         "actorIds": [],
-        "actors": [],
         "limit": -1
       },
       "engineer": {
         "actorIds": [],
-        "actors": [],
         "limit": -1
       },
       "gunner": {
         "actorIds": [],
-        "actors": [],
         "limit": 4
       },
       "magicOfficer": {
         "actorIds": [],
-        "actors": [],
         "limit": -1
       },
       "npcData": {
         "captain": {
-          "abilities": {},
           "numberOfUses": 1,
           "skills": {
             "blu": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 23,
-              "ranks": 13,
-              "subname": "",
-              "value": 0
+              "ranks": 13
             },
             "com": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 23,
-              "ranks": 13,
-              "subname": "",
-              "value": 0
+              "ranks": 13
             },
             "dip": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 23,
-              "ranks": 13,
-              "subname": "",
-              "value": 0
+              "ranks": 13
             },
             "eng": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 23,
-              "ranks": 13,
-              "subname": "",
-              "value": 0
+              "ranks": 13
             },
             "pil": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 23,
-              "ranks": 13,
-              "subname": "",
-              "value": 0
+              "ranks": 13
             }
           }
         },
         "chiefMate": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "engineer": {
-          "abilities": {},
           "numberOfUses": 1,
           "skills": {
             "eng": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 23,
-              "ranks": 13,
-              "subname": "",
-              "value": 0
+              "ranks": 13
             }
           }
         },
         "gunner": {
-          "abilities": {},
           "numberOfUses": 4,
           "skills": {
             "gun": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 19,
-              "ranks": 13,
-              "subname": "",
-              "value": 0
+              "ranks": 13
             }
           }
         },
         "magicOfficer": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "pilot": {
-          "abilities": {},
           "numberOfUses": 1,
           "skills": {
             "pil": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 23,
-              "ranks": 13,
-              "subname": "",
-              "value": 0
+              "ranks": 13
             }
           }
         },
         "scienceOfficer": {
-          "abilities": {},
           "numberOfUses": 1,
           "skills": {
             "com": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 28,
-              "ranks": 13,
-              "subname": "",
-              "value": 0
+              "ranks": 13
             }
           }
         }
       },
       "passenger": {
         "actorIds": [],
-        "actors": [],
         "limit": -1
       },
       "pilot": {
         "actorIds": [],
-        "actors": [],
         "limit": 1
       },
       "scienceOfficer": {
         "actorIds": [],
-        "actors": [],
         "limit": -1
       },
       "useNPCCrew": true
@@ -1459,10 +1219,6 @@
     "details": {
       "frame": "",
       "model": "",
-      "modifiers": {
-        "custom": "",
-        "value": []
-      },
       "notes": "<p><strong>NOTE:</strong> The Stat Block values for <strong>AC</strong> 29; <strong>TL</strong> 31 are in error and do not ptoperly account for all crew bonuses and ship values. The amounts reflected in the Foundry stat block of <strong>AC</strong>:30; <strong>TL</strong>:28 are correct.</p>",
       "size": "",
       "tier": 13
@@ -1537,6 +1293,7 @@
           "value": 10
         }
       }
-    }
+    },
+    "slug": ""
   }
 }

@@ -4,7 +4,6 @@
   "type": "starshipAction",
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": {
       "resolve": true,
       "value": "10 + floor(1.5 * @ship.details.tier)"
@@ -21,14 +20,21 @@
     "formula": [
       {
         "name": "Acrobatics",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@chiefMate.skills.acr.mod"
       },
       {
         "name": "Athletics",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@chiefMate.skills.ath.mod"
       }
     ],
     "isPush": true,
+    "modifiers": [],
     "order": 0,
     "phase": {
       "name": "Helm phase",
@@ -40,6 +46,7 @@
     "selectors": [
       "chiefMate"
     ],
+    "slug": "",
     "source": "COM"
   }
 }

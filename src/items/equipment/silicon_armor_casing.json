@@ -4,13 +4,9 @@
   "type": "upgrade",
   "img": "icons/commodities/materials/liquid-blue.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
@@ -23,7 +19,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -44,7 +40,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 10,
@@ -53,7 +48,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": []
     },
@@ -62,7 +57,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -72,17 +68,12 @@
       "unidentified": "",
       "value": "<p>Some techniques from silicon mummification have been adapted to aid the living. The mummies’ same specialized silicon exterior can be applied to most armor as an upgrade.</p>\n<p>A thick silicon coating infused with magitech photocells coats your armor. A silicon armor casing can store up to 10 charges, but it can’t be charged via conventional recharging methods; instead, for every 8 hours spent in an area of normal or bright light illuminated by a star, the silicon armor casing gains 1 charge. As a move action, you can expend 1 charge either to recharge 1 day of the armor’s @UUID[Compendium.sfrpg.rules.Item.WP7hddXW4mLXXXOg]{Environmental protections}, or to restore 1 charge to one of the armor’s other armor upgrades. As a swift action, you can expend 2 of the armor casing’s charges to empower a melee or ranged attack, causing that attack to deal 2d6 additional fire damage if it hits (or 1d6 fire damage if the attack affects multiple creatures). As a swift action, you can expend 4 charges to increase the DC of one spell you cast before the end of your turn by 1.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
-    "equippable": false,
-    "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
-    "identified": true,
-    "isActive": null,
+    "isActive": false,
     "level": 8,
     "modifiers": [
       {
@@ -90,8 +81,10 @@
         "name": "Silicon Armor Casing - single",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 12,
         "modifier": "2d6",
         "modifierType": "formula",
@@ -105,8 +98,10 @@
         "name": "Silicon Armor Casing - multi",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 6,
         "modifier": "1d6",
         "modifierType": "formula",
@@ -121,21 +116,23 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
     "slots": 1,
+    "slug": "",
     "source": "AA4 pg. 75",
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -143,8 +140,8 @@
       "value": 1
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }

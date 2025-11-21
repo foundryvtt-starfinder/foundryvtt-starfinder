@@ -46,6 +46,9 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
             classes: ["sfrpg", "sheet", "item"],
             resizable: true,
             scrollY: [".tab.details"],
+            dragDrop: [
+                { dropSelector: '.dropUuid' }
+            ],
             tabs: [
                 {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"},
                 {navSelector: ".subtabs", contentSelector: ".sheet-details", initial: "properties"},
@@ -698,7 +701,21 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         // toggle timedEffect
         html.find('.effect-details-toggle').on('click', this._onToggleDetailsEffect.bind(this));
-        html.find("div[data-origin-uuid]").on("click", this._onClickOrigin.bind(this));
+        html.find('[data-origin-uuid]').on("click", this._onClickOrigin.bind(this));
+    }
+
+    async _canDragDrop() {
+        return this.item.canUserModify(game.user, 'update');
+    }
+
+    async _onDrop(event) {
+        const data = foundry.applications.ux.TextEditor.getDragEventData(event);
+        if (event.currentTarget.classList.contains('dropUuid')) {
+            const target = event.currentTarget.querySelector('input[name]')?.name;
+            if (target && Object.hasOwn(data, 'uuid')) {
+                await this.item.update({ [target]: data.uuid ?? ''});
+            }
+        }
     }
 
     /* -------------------------------------------- */

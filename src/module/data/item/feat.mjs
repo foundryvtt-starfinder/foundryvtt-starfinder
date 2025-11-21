@@ -59,7 +59,7 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
                     nullable: true,
                     required: true
                 })
-            }),
+            }, {required: false}),
             descriptors: new fields.TypedObjectField(
                 new fields.BooleanField({initial: false}),
                 {validateKey: (key) => key in CONFIG.SFRPG.descriptors}
@@ -101,6 +101,20 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
                 blank: true,
                 required: true,
                 label: "SFRPG.Items.Feat.Requirements"
+            })
+        });
+
+        // Add fields needed to existing base item fields
+        foundry.utils.mergeObject(schema.activation.fields, {
+            macroAfterActivate: new fields.DocumentUUIDField({
+                initial: null,
+                nullable: true,
+                label: "SFRPG.Items.Feat.FeatureMacroAfterActivate"
+            }),
+            macroAfterDeactivate: new fields.DocumentUUIDField({
+                initial: null,
+                nullable: true,
+                label: "SFRPG.Items.Feat.FeatureMacroAfterDeactivate"
             })
         });
 

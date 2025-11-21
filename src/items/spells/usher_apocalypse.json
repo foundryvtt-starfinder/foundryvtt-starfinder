@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/usher_apocalypse.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 60
+      "value": "60"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -41,6 +37,8 @@
         {
           "name": "",
           "formula": "6d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -48,12 +46,15 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -63,14 +64,14 @@
       "unidentified": "",
       "value": "<p>You create a quasi-real apocalypse to tear through the area, causing several effects. When the spell first takes effect, illusory hellfire crashes to the ground, dealing 6d6 fire damage to your enemies in the area. Creatures can attempt a Will saving throw to disbelieve the fiery vision and take only half damage.</p>\n<p>Then, for the duration, two more effects continue. An illusion makes the ground appear to be unstable crust over lava, which your foes treat as difficult terrain. Grasping hands appear to reach out from the ground to grab at enemies. Each time an enemy starts its turn in the area, it must succeed at a Reflex saving throw or be unable to leave its space for the turn.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": true,
     "duration": {
       "units": "round",
       "value": "@details.cl.value"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 6,
     "materials": {
@@ -86,10 +87,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "long",
-      "value": null
+      "units": "long"
     },
     "rollNotes": "",
     "save": {
@@ -98,14 +96,19 @@
       "descriptor": "half"
     },
     "school": "ill",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "COM pg. 142",
     "sr": true,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }
