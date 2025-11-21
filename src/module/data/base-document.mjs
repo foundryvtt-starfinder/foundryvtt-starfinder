@@ -51,7 +51,6 @@ export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
         };
     }
 
-    // TODO: Update all speeds to use this version of the template once migrations are implemented
     static _speedFieldData() {
         return {
             land: new fields.SchemaField({
@@ -59,7 +58,7 @@ export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
             }),
             flying: new fields.SchemaField({
                 base: new fields.NumberField({initial: 0, min: 0, required: true}),
-                baseManeuverability: new fields.NumberField({initial: 0, min: 0, required: true})
+                baseManeuverability: new fields.NumberField({initial: 0, min: -1, max: 1, required: true})
             }),
             swimming: new fields.SchemaField({
                 base: new fields.NumberField({initial: 0, min: 0, required: true})

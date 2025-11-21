@@ -285,7 +285,7 @@ export function setupHandlebars() {
     function configHelper(root, hbsOpts, ...props) {
         let result = root;
         for (const prop of props) {
-            result = foundry.utils.getProperty(result, prop);
+            result = foundry.utils.getProperty(result, prop) ?? foundry.utils.getProperty(result, prop.toString());
         }
         return result;
     }

@@ -18,38 +18,51 @@ export default function(engine) {
             const worstDexArmor = armors?.reduce((armor, worstArmor) => (armor.system?.armor?.dex || 0) < (worstArmor.system?.armor?.dex || 0) ? armor : worstArmor);
             const worstDexArmorData = worstDexArmor?.system;
 
-            // Max dex
+            // Max shield dex
             const shieldMinDex = shields?.sort((a, b) => a.system.dex <= b.system.dex ? -1 : 1)[0];
             const maxShieldDex = shieldMinDex?.system.dex ?? Number.MAX_SAFE_INTEGER;
-            const maxArmorDex = worstDexArmorData?.armor.dex ?? Number.MAX_SAFE_INTEGER;
+            const shieldMaxString = shieldMinDex?.system.dex?.signedString() ?? game.i18n.localize("SFRPG.Items.Unlimited");
 
+            // Max armor dex
+            let maxArmorDex = worstDexArmorData?.armor.dex ?? Number.MAX_SAFE_INTEGER;
+            let armorMaxString = worstDexArmorData?.armor.dex?.signedString() ?? game.i18n.localize("SFRPG.Items.Unlimited");
+
+            // Modifications due to power armor
+            const powerArmor = armors?.find(x => x?.system?.armor?.type === 'power');
+            if (powerArmor) {
+                if (powerArmor.getCurrentCapacity()) {
+                    const powerArmorData = powerArmor.system;
+                    data.abilities.str.value = powerArmorData.strength;
+                    data.abilities.str.mod = Math.floor((data.abilities.str.value - 10) / 2);
+                    data.abilities.str.tooltip = [
+                        game.i18n.format("SFRPG.AbilityScoreGenericTooltip", {
+                            score: game.i18n.localize("SFRPG.AbilityStr"),
+                            value: data.abilities.str.value.signedString(),
+                            source: powerArmor.name
+                        })
+                    ];
+                    data.abilities.str.modifierTooltip = [
+                        game.i18n.format("SFRPG.AbilityScoreGenericTooltip", {
+                            score: game.i18n.localize("SFRPG.AbilityStr"),
+                            value: data.abilities.str.mod.signedString(),
+                            source: powerArmor.name
+                        })
+                    ];
+                } else {
+                    if (maxArmorDex > 0) {
+                        maxArmorDex = 0;
+                        armorMaxString = "0";
+                    }
+                }
+            }
+
+            // Final maximum dexterity calculation
             const maxDex = Math.min(data.abilities.dex.mod, maxArmorDex, maxShieldDex);
             const maxDexTooltip = game.i18n.format("SFRPG.ACTooltipMaxDex", {
                 maxDex: maxDex.signedString(),
-                armorMax: worstDexArmorData?.armor.dex?.signedString() ?? game.i18n.localize("SFRPG.Items.Unlimited"),
-                shieldMax: shieldMinDex?.system.dex?.signedString() ?? game.i18n.localize("SFRPG.Items.Unlimited")
+                armorMax: armorMaxString,
+                shieldMax: shieldMaxString
             });
-
-            const powerArmor = armors?.find(x => x?.system?.armor?.type === 'power');
-            if (powerArmor) {
-                const powerArmorData = powerArmor.system;
-                data.abilities.str.value = powerArmorData.strength;
-                data.abilities.str.mod = Math.floor((data.abilities.str.value - 10) / 2);
-                data.abilities.str.tooltip = [
-                    game.i18n.format("SFRPG.AbilityScoreGenericTooltip", {
-                        score: game.i18n.localize("SFRPG.AbilityStr"),
-                        value: data.abilities.str.value.signedString(),
-                        source: powerArmor.name
-                    })
-                ];
-                data.abilities.str.modifierTooltip = [
-                    game.i18n.format("SFRPG.AbilityScoreGenericTooltip", {
-                        score: game.i18n.localize("SFRPG.AbilityStr"),
-                        value: data.abilities.str.mod.signedString(),
-                        source: powerArmor.name
-                    })
-                ];
-            }
 
             // AC bonuses
             const profMap = {

@@ -1,4 +1,5 @@
 import SFRPGItemBase from './base-item.mjs';
+import SFRPGDocumentBase from '../base-document.mjs';
 
 const { fields } = foundry.data;
 
@@ -8,6 +9,15 @@ export default class SFRPGItemEquipment extends SFRPGItemBase {
         'SFRPG.Item.Base',
         'SFRPG.Item.Equipment'
     ];
+
+    static migrateData(data) {
+        // v0.29.1 power armor full speed override
+        if (typeof data.speed === "string") {
+            data.speed = {special: data.speed};
+        }
+
+        return super.migrateData(data);
+    };
 
     static defineSchema() {
         const schema = super.defineSchema();
@@ -71,12 +81,7 @@ export default class SFRPGItemEquipment extends SFRPGItemBase {
             strength: new fields.NumberField({
                 integer: true
             }),
-            // TODO: replace speed with modern speed template (below) once migrations work
-            speed: new fields.StringField({
-                initial: "",
-                required: true
-            }),
-            /* speed: new fields.SchemaField(SFRPGDocumentBase._speedFieldData()), */
+            speed: new fields.SchemaField(SFRPGDocumentBase._speedFieldData()),
             reach: new fields.StringField({
                 initial: "",
                 required: true
