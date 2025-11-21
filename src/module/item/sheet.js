@@ -1,5 +1,6 @@
 import { SFRPG } from "../config.js";
 import RollContext from "../rolls/rollcontext.js";
+import { WeaponPropertySelectorSFRPG } from "../apps/trait-selectors/weapon-property-selector.js";
 
 const itemSizeArmorClassModifier = {
     "fine": 8,
@@ -363,7 +364,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         if (item.type === "weapon") {
             props.push(...Object.entries(itemData.properties)
-                .filter(e => e[1] === true)
+                .filter(e => e[1].value === true)
                 .map(e => ({
                     name: CONFIG.SFRPG.weaponProperties[e[0]],
                     tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]
@@ -695,6 +696,8 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         html.find('select[name="resource-mode"]').change(this._onChangeResourceVisualizationMode.bind(this));
         html.find('input[name="resource-value"]').change(this._onChangeResourceVisualizationValue.bind(this));
         html.find('input[name="resource-title"]').change(this._onChangeResourceVisualizationTitle.bind(this));
+
+        html.find('.trait-selector').click(this._onTraitSelector.bind(this));
 
         // toggle timedEffect
         html.find('.effect-details-toggle').on('click', this._onToggleDetailsEffect.bind(this));
@@ -1170,6 +1173,29 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         return this.item.update({
             "system.combatTracker.visualization": visualization
         });
+    }
+
+    /**
+     * Creates a TraitSelector dialog
+     *
+     * @param {Event} event HTML Event
+     * @private
+     */
+    _onTraitSelector(event) {
+        event.preventDefault();
+        const options = {
+            location: event.currentTarget.dataset.location,
+            title: event.currentTarget.dataset.title,
+            format: event.currentTarget.dataset.format,
+            choices: CONFIG.SFRPG[event.currentTarget.dataset.choices],
+            tooltips: CONFIG.SFRPG[event.currentTarget.dataset.tooltips]
+        };
+
+        // Pick the appropriate trait selector subclass
+        const cls = {
+            "itemProperties": WeaponPropertySelectorSFRPG
+        }[options.format];
+        new cls(this.item, options).render(true);
     }
 
     /**

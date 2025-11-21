@@ -90,8 +90,10 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     get hasArea() {
         const areaData = this.system?.area;
         if (!areaData) return false;
-
-        return !!Number(areaData?.value);
+        const hasAreaValue = areaData.total > 0
+            ? true
+            : (Number(areaData.value) > 0 ? true : false);
+        return hasAreaValue;
     }
 
     /**
@@ -558,7 +560,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         // Filter properties and return
-        data.properties = props.filter(p => !!p && !!p.name);
+        data.properties = props.filter(p => !!p?.name);
         return data;
     }
 
@@ -611,7 +613,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     _weaponChatData(data, labels, props) {
         props.push(
             {name: CONFIG.SFRPG.weaponTypes[data.weaponType], tooltip: null},
-            ...Object.entries(data.properties).filter(e => e[1] === true)
+            ...Object.entries(data.properties).filter(e => e[1].value === true)
                 .map(e => ({name: CONFIG.SFRPG.weaponProperties[e[0]], tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]})
                 )
         );
@@ -885,7 +887,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             } else {
                 abl = actorData.attributes.spellcasting || "int";
             }
-        } else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) {
+        } else if (itemData.properties?.operative?.value && actorData.abilities.dex.value > actorData.abilities.str.value) {
             abl = "dex";
         } else if (!abl) {
             if (itemData.actionType === "rwak" || itemData.actionType === "rsak") {
@@ -1036,7 +1038,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_ATTACKS) {
-                if (!this.system?.properties?.[mod.valueAffected]) {
+                if (!this.system?.properties?.[mod.valueAffected]?.value) {
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_ATTACKS) {
@@ -1391,7 +1393,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         /** Create additional modifiers. */
         const additionalModifiers = [];
 
-        if (itemData.properties?.archaic && isWeapon) {
+        if (itemData.properties?.archaic?.value && isWeapon) {
             additionalModifiers.push({bonus: { name: game.i18n.format("SFRPG.WeaponPropertiesArchaic"), modifier: "-5", enabled: true, notes: game.i18n.format("SFRPG.WeaponPropertiesArchaicTooltip") } });
         }
 
@@ -1469,7 +1471,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
-                if (!this.system.properties[mod.valueAffected]) {
+                if (!this.system.properties[mod.valueAffected]?.value) {
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_DAMAGE) {
@@ -1665,7 +1667,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 const rolled = await this.rollDamage({}, options);
                 if (!rolled) return; // Roll was cancelled, don't consume.
             }
-            if (this.hasArea) {
+            if (this.hasArea && ["ft", "meter"].includes(this.system.area.units) && !["", "other"].includes(this.system.area.shape)) {
                 const placed = await this.placeAbilityTemplate();
                 if (!placed) return; // Roll was cancelled, don't consume.
             }

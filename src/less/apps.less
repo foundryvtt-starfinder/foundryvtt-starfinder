@@ -271,14 +271,54 @@ img.icon-enricher {
     }
 
     &.app {
-        .trait-list {
-            li input[type="text"] {
-                flex: 0 0 65%;
+        .trait-selector {
+            overflow-y: hidden;
+            overflow-x: hidden;
+
+            h3 {
                 text-align: center;
             }
-            .energy-resistance .checkbox {
-                flex: 0 0 33%;
-                text-align: left;
+
+            .trait-header {
+                overflow-y: hidden;
+                overflow-x: hidden;
+
+                .sortcontainer {
+                    flex-basis: 0 0 95%;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .special-trait {
+                    flex-basis: 0 0 95%;
+                    align-items: center;
+                    justify-content: center;
+                    text-align: center;
+
+                    input{
+                        text-align: left;
+                    }
+                }
+            }
+
+            .trait-list {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+
+                li {
+                    flex: 0 0 150px;
+
+                    input[type="text"] {
+                        width: 2.5em;
+                    }
+                }
+
+                &#unselected {
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+                    max-height: 320px;
+                }
             }
         }
     }
