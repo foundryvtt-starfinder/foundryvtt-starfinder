@@ -439,6 +439,13 @@ export function sanitizeJSON(jsonInput) {
                 }
             }
         }
+
+        const hasDescriptors = !!item.system?.descriptors;
+        if (hasDescriptors) {
+            for (const [name, hasDescriptor] of Object.entries(item.system.descriptors)) {
+                if (!hasDescriptor) delete item.system.descriptors[name];
+            }
+        }
     };
 
     delete jsonInput?.flags?.core?.sourceId;
