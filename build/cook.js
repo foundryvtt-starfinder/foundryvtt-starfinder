@@ -419,17 +419,41 @@ export function sanitizeJSON(jsonInput) {
         }
     };
 
+    const cleanTypedObjectFields = (item) => {
+        const hasMaterials = !!item.system?.specialMaterials;
+        if (hasMaterials) {
+            for (const [name, hasMaterial] of Object.entries(item.system.specialMaterials)) {
+                if (!hasMaterial) delete item.system.specialMaterials[name];
+            }
+        }
+
+        const hasProperties = !!item.system?.properties;
+        if (hasProperties) {
+            for (const [name, hasProperty] of Object.entries(item.system.properties)) {
+                if (typeof hasProperty === "object") {
+                    if (!hasProperty.value) {
+                        delete item.system.properties[name];
+                    }
+                } else if (!hasProperty) {
+                    delete item.system.properties[name];
+                }
+            }
+        }
+    };
+
     delete jsonInput?.flags?.core?.sourceId;
 
     treeShake(jsonInput);
     cleanFlags(jsonInput);
     sanitizeDescription(jsonInput);
+    cleanTypedObjectFields(jsonInput);
 
     if (jsonInput.items) {
         for (const item of jsonInput.items) {
             treeShake(item);
             cleanFlags(item);
             sanitizeDescription(item);
+            cleanTypedObjectFields(item);
         }
     }
 
