@@ -430,13 +430,7 @@ export function sanitizeJSON(jsonInput) {
         const hasProperties = !!item.system?.properties;
         if (hasProperties) {
             for (const [name, hasProperty] of Object.entries(item.system.properties)) {
-                if (typeof hasProperty === "object") {
-                    if (!hasProperty.value) {
-                        delete item.system.properties[name];
-                    }
-                } else if (!hasProperty) {
-                    delete item.system.properties[name];
-                }
+                if (!hasProperty.value) delete item.system.properties[name];
             }
         }
 
