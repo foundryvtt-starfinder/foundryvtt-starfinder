@@ -1077,7 +1077,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER) {
-                if (!this.system?.properties?.[mod.valueAffected]) {
+                if (!this.system?.properties?.[mod.valueAffected]?.value) {
                     return false;
                 }
             } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER) {
