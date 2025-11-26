@@ -1,6 +1,10 @@
 # 0.29.1
 This release cleans up some more things on the backend and adds a couple of new features and bugfixes that were enabled by the implementation of the system data model in 0.29.0. Thanks to @levirak, @danimrath, and @ian612 for their contributions to this release, and to the community for filing bug reports and feature requests!
 
+## Deprecation Notice
+
+- In an upcoming version, we will be removing Starfinder's implementation of compendium art mapping since Foundry now handles this natively in a more robust manner.
+
 ## Core System Improvements
 
 - Features (class features, feats, etc.) can now be set up to execute a macro on activation and/or deactivation by @levirak
