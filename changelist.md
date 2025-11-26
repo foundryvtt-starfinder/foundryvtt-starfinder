@@ -1,3 +1,26 @@
+# 0.29.1
+This release cleans up some more things on the backend and adds a couple of new features and bugfixes that were enabled by the implementation of the system data model in 0.29.0. Thanks to @levirak, @danimrath, and @ian612 for their contributions to this release, and to the community for filing bug reports and feature requests!
+
+## Core System Improvements
+
+- Features (class features, feats, etc.) can now be set up to execute a macro on activation and/or deactivation by @levirak
+- The trait selector has been rewritten from the ground up to be more user friendly when selecting languages, proficiencies, and weapon properties by @ian612
+- Weapon properties can now be assigned a value, such as for the Boost/Blast properties by @ian612
+- Power Armor now correctly affects bulk, speed, and attributes based on whether it's equipped and powered by @ian612
+
+## Bugfixes
+
+- Errors caused by null data values fixed in a couple places by @danimrath
+- Inline intelligence and intimidate checks are now handled correctly by @ian612
+- Fix the damage modifier dialog being broken by @ian612
+
+## Data Entry and Localization
+
+- Power Drain Vanguard Discipline added by @ian612
+- The Gear Clamp item is now a container item type, allowing it to hold an item as per its description by @ian612
+- Extra Unarmed Attack removed from Raia Iconic by @ian612
+- Empty/false properties & descriptors & materials have been stripped from compendium files, reducing their size by @ian612
+
 # 0.29.0.1
 This is a small hotfix to prevent some errors in tooltip calculations. See Version 0.29.0 for the most recent set of major changes.
 
