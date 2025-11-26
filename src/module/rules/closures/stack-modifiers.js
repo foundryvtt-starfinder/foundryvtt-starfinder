@@ -29,6 +29,7 @@ export default class StackModifiers extends Closure {
                     const data = {};
                     if (actor?.system) {
                         Object.assign(data, actor.system);
+                        Object.assign(data, {"owner": actor.system});
                     }
                     if (item?.system) {
                         Object.assign(data, {"item": item.system});
