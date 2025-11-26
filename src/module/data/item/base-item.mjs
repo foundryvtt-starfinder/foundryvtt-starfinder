@@ -19,6 +19,15 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             data.system = "none";
         }
 
+        // Trait Selector Update (v0.29.1)
+        if (!foundry.utils.isEmpty(data.properties)) {
+            for (const [key, val] of Object.entries(data.properties)) {
+                if (typeof val === "boolean") {
+                    data.properties[key] = {value: val, extension: ""};
+                }
+            }
+        }
+
         return super.migrateData(data);
     }
 
@@ -141,7 +150,17 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 })
             }),
             properties: new fields.TypedObjectField(
-                new fields.BooleanField({initial: false}),
+                new fields.SchemaField({
+                    extension: new fields.StringField({
+                        initial: "",
+                        blank: true,
+                        required: true
+                    }),
+                    value: new fields.BooleanField({
+                        initial: false,
+                        required: true
+                    })
+                }),
                 {validateKey: (key) => key in CONFIG.SFRPG.weaponProperties}
             ),
             save: new fields.SchemaField(

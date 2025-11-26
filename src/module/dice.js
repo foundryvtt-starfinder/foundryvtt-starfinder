@@ -2,6 +2,7 @@ import SFRPGCustomChatMessage from "./chat/chatbox.js";
 import { SFRPG } from "./config.js";
 import RollTree from "./rolls/rolltree.js";
 import StackModifiers from "./rules/closures/stack-modifiers.js";
+import SFRPGRoll from "./rolls/roll.js";
 
 /**
  * @import SFRPGRoll from "./rolls/roll.js";
@@ -561,7 +562,7 @@ export class DiceSFRPG {
                     try {
                         const props = [];
                         for (const [key, isEnabled] of Object.entries(itemContext.entity.system.properties)) {
-                            if (isEnabled) {
+                            if (isEnabled.value) {
                                 tags.push({tag: `weapon-properties ${key}`, text: SFRPG.weaponProperties[key]});
                                 props.push(key);
                             }
@@ -922,7 +923,7 @@ export class DiceSFRPG {
         const rollInfo = RollTree.buildRollSync(sourceFormula, rollContext);
         const finalFormula = rollInfo.rolls[0].formula;
         try {
-            const formula = Roll.replaceFormulaData(finalFormula.finalRoll, null);
+            const formula = SFRPGRoll.replaceFormulaData(finalFormula.finalRoll, null);
             resultValue = Roll.safeEval(formula);
             resolveResult.evaluatedFormula = formula;
         } catch (error) {

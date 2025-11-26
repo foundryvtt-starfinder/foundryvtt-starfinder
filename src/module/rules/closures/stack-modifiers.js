@@ -1,5 +1,6 @@
 import { Closure } from "../../engine/closure/closure.js";
 import { SFRPGModifierType, SFRPGModifierTypes } from "../../modifiers/types.js";
+import SFRPGRoll from "../../rolls/roll.js";
 
 /**
  * Takes an array of modifiers and "stacks" them.
@@ -28,6 +29,7 @@ export default class StackModifiers extends Closure {
                     const data = {};
                     if (actor?.system) {
                         Object.assign(data, actor.system);
+                        Object.assign(data, {"owner": actor.system});
                     }
                     if (item?.system) {
                         Object.assign(data, {"item": item.system});
@@ -35,7 +37,7 @@ export default class StackModifiers extends Closure {
                     const roll = Roll.create(formula, data);
                     if (roll.isDeterministic) {
                         const warn = game.settings.get("sfrpg", "warnInvalidRollData") || false;
-                        const simplerFormula = Roll.replaceFormulaData(formula, data, {missing: 0, warn});
+                        const simplerFormula = SFRPGRoll.replaceFormulaData(formula, data, {missing: 0, warn});
                         modifier.max = Roll.safeEval(simplerFormula);
                     } else {
                         ui.notifications.error(`Error with modifier: ${modifier.name}. Dice are not available in constant formulas. Please use a situational modifier instead.`);

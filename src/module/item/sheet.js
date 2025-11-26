@@ -1,5 +1,6 @@
 import { SFRPG } from "../config.js";
 import RollContext from "../rolls/rollcontext.js";
+import { WeaponPropertySelectorSFRPG } from "../apps/trait-selectors/weapon-property-selector.js";
 
 const itemSizeArmorClassModifier = {
     "fine": 8,
@@ -45,6 +46,9 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
             classes: ["sfrpg", "sheet", "item"],
             resizable: true,
             scrollY: [".tab.details"],
+            dragDrop: [
+                { dropSelector: '.dropUuid' }
+            ],
             tabs: [
                 {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"},
                 {navSelector: ".subtabs", contentSelector: ".sheet-details", initial: "properties"},
@@ -360,7 +364,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         if (item.type === "weapon") {
             props.push(...Object.entries(itemData.properties)
-                .filter(e => e[1] === true)
+                .filter(e => e[1].value === true)
                 .map(e => ({
                     name: CONFIG.SFRPG.weaponProperties[e[0]],
                     tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]
@@ -693,9 +697,25 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         html.find('input[name="resource-value"]').change(this._onChangeResourceVisualizationValue.bind(this));
         html.find('input[name="resource-title"]').change(this._onChangeResourceVisualizationTitle.bind(this));
 
+        html.find('.trait-selector').click(this._onTraitSelector.bind(this));
+
         // toggle timedEffect
         html.find('.effect-details-toggle').on('click', this._onToggleDetailsEffect.bind(this));
-        html.find("div[data-origin-uuid]").on("click", this._onClickOrigin.bind(this));
+        html.find('[data-origin-uuid]').on("click", this._onClickOrigin.bind(this));
+    }
+
+    async _canDragDrop() {
+        return this.item.canUserModify(game.user, 'update');
+    }
+
+    async _onDrop(event) {
+        const data = foundry.applications.ux.TextEditor.getDragEventData(event);
+        if (event.currentTarget.classList.contains('dropUuid')) {
+            const target = event.currentTarget.querySelector('input[name]')?.name;
+            if (target && Object.hasOwn(data, 'uuid')) {
+                await this.item.update({ [target]: data.uuid ?? ''});
+            }
+        }
     }
 
     /* -------------------------------------------- */
@@ -1153,6 +1173,29 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         return this.item.update({
             "system.combatTracker.visualization": visualization
         });
+    }
+
+    /**
+     * Creates a TraitSelector dialog
+     *
+     * @param {Event} event HTML Event
+     * @private
+     */
+    _onTraitSelector(event) {
+        event.preventDefault();
+        const options = {
+            location: event.currentTarget.dataset.location,
+            title: event.currentTarget.dataset.title,
+            format: event.currentTarget.dataset.format,
+            choices: CONFIG.SFRPG[event.currentTarget.dataset.choices],
+            tooltips: CONFIG.SFRPG[event.currentTarget.dataset.tooltips]
+        };
+
+        // Pick the appropriate trait selector subclass
+        const cls = {
+            "itemProperties": WeaponPropertySelectorSFRPG
+        }[options.format];
+        new cls(this.item, options).render(true);
     }
 
     /**

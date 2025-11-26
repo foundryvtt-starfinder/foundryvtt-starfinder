@@ -1,6 +1,5 @@
 import { ActorSheetFlags } from "../../apps/actor-flags.js";
 import { ActorMovementConfig } from "../../apps/movement-config.js";
-import { TraitSelectorSFRPG } from "../../apps/trait-selector.js";
 import { SFRPGModifierType } from "../../modifiers/types.js";
 import StackModifiers from "../../rules/closures/stack-modifiers.js";
 
@@ -16,6 +15,9 @@ import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
 import { getStarshipBrowser } from "../../packs/starship-browser.js";
 import RollContext from "../../rolls/rollcontext.js";
+
+import { ActorTraitSelectorSFRPG } from "../../apps/trait-selectors/actor-trait-selector.js";
+
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
  * This sheet is an Abstract layer which is not used.
@@ -466,7 +468,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                 } else {
                     abl = actorData.attributes.spellcasting || "int";
                 }
-            } else if (itemData.properties?.operative && actorData.abilities.dex.value > actorData.abilities.str.value) {
+            } else if (itemData.properties?.operative?.value && actorData.abilities.dex.value > actorData.abilities.str.value) {
                 abl = "dex";
             } else if (!abl) {
                 if (itemData.actionType === "rwak" || itemData.actionType === "rsak") {
@@ -1148,22 +1150,26 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     }
 
     /**
-     * Creates an TraitSelectorSFRPG dialog
+     * Creates a TraitSelector dialog
      *
      * @param {Event} event HTML Event
      * @private
      */
     _onTraitSelector(event) {
         event.preventDefault();
-        const a = event.currentTarget;
-        const label = a.parentElement.querySelector('label');
         const options = {
-            name: label.getAttribute("for"),
-            title: label.innerText,
-            choices: CONFIG.SFRPG[a.dataset.options]
+            location: event.currentTarget.dataset.location,
+            title: event.currentTarget.dataset.title,
+            dataType: event.currentTarget.dataset.choices,
+            choices: CONFIG.SFRPG[event.currentTarget.dataset.choices],
+            format: event.currentTarget.dataset.format
         };
 
-        new TraitSelectorSFRPG(this.actor, options).render(true);
+        // Pick the appropriate trait selector subclass
+        const cls = {
+            "actorTraits": ActorTraitSelectorSFRPG
+        }[options.format];
+        new cls(this.actor, options).render(true);
     }
 
     /**
