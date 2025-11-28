@@ -10,20 +10,25 @@
       "type": "vehicleAttack",
       "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2*(17d10)",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -42,6 +47,7 @@
           "dc": "17",
           "descriptor": "negate"
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -51,20 +57,25 @@
       "type": "vehicleAttack",
       "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "17d10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -83,6 +94,7 @@
           "dc": "17",
           "descriptor": "half"
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -92,11 +104,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/advanced_reaction_cannon.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rwak",
         "activation": {
@@ -110,7 +118,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -131,7 +139,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "3",
         "capacity": {
           "max": 6,
@@ -140,7 +147,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -173,13 +180,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "6d10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -189,9 +209,8 @@
           "unidentified": "",
           "value": "<p>An ancient yet still popular vesk weapon, the reaction cannon uses advanced materials and technology to redirect the recoil of a projectile back into the projectile itself, making it an extremely damaging heavy weapon.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": true,
@@ -199,107 +218,27 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 14,
         "modifiers": [],
         "price": 73000,
         "proficient": true,
         "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": true,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shatter": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": true,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
+          "penetrating": {
+            "extension": "",
+            "value": true
+          },
+          "two": {
+            "extension": "",
+            "value": true
+          }
         },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 100
+          "value": "100"
         },
         "rollNotes": "",
         "save": {
@@ -307,11 +246,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 177",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -319,7 +263,7 @@
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -333,17 +277,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -352,14 +286,16 @@
           "value": "<p>Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn’t locked by a passcode or otherwise programmed not to obey).</p>\n<p>A vehicle is considered controlled when the autopilot is engaged. An autopilot’s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).</p>\n<p>The Systems entry in a vehicle’s statistics (see page 228) lists the autopilot’s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle’s modifier (listed in the vehicle’s Modifiers entry) to the Piloting checks.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
-          "piloting": "26",
+          "piloting": 26,
           "usedAsPilot": true
         },
         "senses": {
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": "CRB pg. 280"
       }
     },
@@ -369,17 +305,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -388,14 +314,16 @@
           "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
-          "piloting": "0",
+          "piloting": 0,
           "usedAsPilot": false
         },
         "senses": {
           "senses": "darkvision 1 mile",
           "usedForSenses": true
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -405,17 +333,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -424,6 +342,7 @@
           "value": "<p>This vehicle is fitted with the listed number of manipulators.</p>\n<h4>&nbsp;</h4>\n<p>Some vehicles are fitted with appendages ending in manipulating mechanisms such as digits and pincers. Such a vehicle is treated as a tall creature of the same size category for the purpose of determining the reach of its manipulators, and each manipulator can hold up to 10 × the vehicle’s item level in bulk. Manipulators are generally too large and clumsy for delicate tasks such as operating equipment designed for Medium and smaller creatures.</p>\n<p>A manipulator’s EAC is equal to 4 + the vehicle’s EAC and its KAC is equal to the 4 + the vehicle’s KAC. It has Hit Points equal to 3 × the item level of the vehicle and hardness equal to half the vehicle’s hardness. A manipulator that has lost at least half of its total Hit Points gains the broken condition, imposing a –2 penalty to Piloting checks to control the manipulator and to the DC of checks to escape the manipulator. Damage done to a vehicle’s manipulator doesn’t affect the vehicle’s Hit Point total.</p>\n<p>A vehicle’s pilot (or one of its complement) can control a manipulator in the following ways, though only one person can control a manipulator in a round.</p>\n<h5>Crush</h5>\n<p>As a standard action, you direct the manipulator to clamp tighter around a held creature or object (see Grab below), dealing half the vehicle’s collision damage. The creature or object can halve this damage by succeeding at a Fortitude saving throw (DC = 10 + the vehicle item level).</p>\n<h5>Grab</h5>\n<p>As a standard action, you direct the manipulator to grab at a target within its reach by attempting a Piloting check (DC = 10 + the target’s KAC). On a success, the target is @UUID[Compendium.sfrpg.conditions.Item.4AkWDHGM6gHDepHN]{Grappled} by the manipulator. If the target is a creature, it gains soft cover and the @UUID[Compendium.sfrpg.conditions.Item.4AkWDHGM6gHDepHN]{Grappled} condition while held by the manipulator. If the result of your Piloting check exceeded the DC by 5 or more, the creature is instead @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pinned}. A creature held by a manipulator can use the escape action to free itself by succeeding at an Acrobatics check (DC = 10 + the vehicle’s KAC), but it can’t grapple the vehicle in return.</p>\n<p>If the target of a successful grab is another vehicle, both vehicles are considered to be connected by a rigid tether (see Tethered Vehicles below).</p>\n<h5>Slam</h5>\n<p>As a standard action, you direct the manipulator to strike a target within its reach by attempting a Piloting check (DC = 5 + the target’s KAC). On a success, the manipulator deals half the vehicle’s collision damage to the target.</p>\n<p>If the target of the slam action is a creature, it can attempt a Reflex saving throw against the vehicle’s collision DC to halve the damage. If the target of the slam action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to halve the damage, with a DC equal to the result of your Piloting check.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
           "piloting": 0,
           "usedAsPilot": false
@@ -432,6 +351,7 @@
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": ""
       }
     }
@@ -535,9 +455,9 @@
       "controlSkill": "pil",
       "cover": "total",
       "dimensions": {
-        "height": "30",
-        "length": "40",
-        "width": "20"
+        "height": 30,
+        "length": 40,
+        "width": 20
       },
       "eac": {
         "value": 29
@@ -555,24 +475,58 @@
         "value": 31
       },
       "modifiers": {
-        "athletics": "",
-        "attackFullSpeed": "-5",
-        "attackMoving": "-3",
-        "attackStopped": "0",
-        "piloting": "-5",
+        "athletics": null,
+        "attackFullSpeed": 0,
+        "attackMoving": 0,
+        "attackStopped": 0,
+        "piloting": 0,
         "survival": 0
       },
       "size": "gargantuan",
-      "special": [],
       "speed": {
-        "type": "",
         "drive": "30 ft (land), 20 ft (climb)",
         "full": "550 ft (land), 350 ft (climb)",
         "mph": "65 mph (land), 40 mph (climb)"
-      },
-      "systems": []
+      }
     },
-    "conditions": {},
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "crew": {
       "complement": {
         "actorIds": [],
@@ -601,6 +555,8 @@
     "hangarBay": {
       "actorIds": [],
       "limit": 0
-    }
+    },
+    "modifiers": [],
+    "slug": ""
   }
 }

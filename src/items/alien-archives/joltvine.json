@@ -2,6 +2,7 @@
   "_id": "daiCXwK6RFeBwbo7",
   "name": "Joltvine",
   "type": "npc2",
+  "folder": "lseP1NMlLWuNTJ0v",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
@@ -10,7 +11,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "",
         "actionType": "mwak",
@@ -25,7 +25,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 5,
         "attributes": {
@@ -46,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -55,7 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -77,13 +76,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6 +3",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -93,17 +105,16 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "equippable": true,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -113,22 +124,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -136,8 +149,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -150,11 +163,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rwak",
         "activation": {
@@ -189,7 +198,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -223,6 +231,7 @@
               "name": "",
               "formula": "1d4 +1",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -230,12 +239,15 @@
                 "electricity": true,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -245,7 +257,6 @@
           "unidentified": "",
           "value": "<p>As a ranged attack, a joltvine can discharge a ray of electricity that has a range increment of 20 feet.</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -255,113 +266,16 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "buttressing": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "gearArray": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "healing": false,
-          "holyWater": false,
-          "hybrid": false,
-          "hydrodynamic": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "instrumental": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "propel": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "scramble": false,
-          "shape": false,
-          "shatter": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "thruster": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
           "value": "20"
         },
@@ -373,28 +287,14 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "special": "",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
+        "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -416,11 +316,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -442,7 +338,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -452,44 +349,7 @@
           "unidentified": "",
           "value": "<p>The joltvine closes its flowers as a standard action, during which it blends in with other leafy plant life and appears to be a patch of ordinary vegetation. This camouflage provides the joltvine a +10 bonus to Stealth checks while in dense vegetation, and it allows a joltvine to attempt a Stealth check even when lacking cover or concealment. Once a creature succeeds at a Perception check to realize a joltvine is more than it appears, the joltvine loses the benefit of vine camouflage against that creature until the creature can no longer see it.</p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -500,28 +360,17 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "e48412b6-5904-4fa3-9606-8e09310e4b3e",
             "name": "Vine Camouflage (Ex)",
             "type": "untyped",
             "condition": "",
-            "damageGroup": null,
-            "damageTypes": {
-              "acid": false,
-              "bludgeoning": false,
-              "cold": false,
-              "electricity": false,
-              "fire": false,
-              "healing": false,
-              "piercing": false,
-              "slashing": false,
-              "sonic": false
-            },
+            "damage": null,
             "effectType": "skill",
             "enabled": false,
-            "limitTo": "",
+            "limitTo": null,
             "max": 10,
             "modifier": "10",
             "modifierType": "formula",
@@ -533,25 +382,28 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "none",
           "value": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
@@ -567,11 +419,7 @@
       "type": "feat",
       "img": "icons/magic/nature/tree-animated-smile.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -584,7 +432,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -593,7 +441,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -603,82 +452,47 @@
           "unidentified": "",
           "value": "<p>Plants are immune to the following effects, unless the effect specifies it works against plants.</p>\n<ul>\n<li>@UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Mind-affecting effects}, @UUID[Compendium.sfrpg.conditions.NV4qXRDgb7zTNkW2]{Paralysis}, @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}, polymorph, @UUID[Compendium.sfrpg.conditions.3iTdt2NRgIyrychR]{Sleep}, and @UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunning}.</li>\n</ul>\n<p><em>Format</em>:<strong>Immunities</strong> plant immunities.</p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "universalCreatureRule",
           "combat": false,
           "specialAbilityType": "ex"
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA1 pg. 155",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -780,102 +594,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "con": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 1
       },
       "dex": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 4
       },
       "int": {
-        "base": -4,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": -4
       },
       "str": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 2
       },
       "wis": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 1
       }
     },
     "attributes": {
       "abilityDC": {
-        "base": "0"
+        "base": 0
       },
-      "arms": "2",
+      "arms": 2,
       "baseSpellDC": {
-        "base": "0"
-      },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 0
       },
       "eac": {
-        "base": 11,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 11
       },
       "fort": {
-        "base": 3,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 3
       },
       "hp": {
         "max": 20,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 20
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 0,
         "value": 4
       },
       "kac": {
-        "base": 13,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 13
       },
-      "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 5,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 5
       },
       "space": "5",
       "speed": {
@@ -898,18 +662,47 @@
           "base": 0
         }
       },
-      "spellcasting": "",
       "will": {
-        "base": 1,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 1
       }
     },
-    "conditions": {},
-    "counterClasses": {
-      "values": {}
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
     },
     "currency": {
       "credit": 0,
@@ -918,9 +711,8 @@
     "details": {
       "type": "Plant",
       "alignment": "N",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -932,7 +724,6 @@
         "value": "<p>Across Weydana-4, white trumpet vines are fast-growing creeping vines that have overrun several temperate regions. Brought in as decorative plants by settlers from the Marixah Republic who didn’t realize how seriously they would impact the local ecosystem, white trumpet vines have outlived their humanoid tenders and spread rampantly for over a century. They smother native plants. Their distinctive white trumpet-shaped flowers draw pollinators, and their broad leaves shade other plants from vital sunlight.</p>\n<p>However, powerful lightning storms can funnel an overwhelming amount of electricity into a white trumpet vine (such as from a bolt of lightning), and the plant’s cells become infused with the energy, transforming the mundane vines into the much more dangerous joltvines. Joltvines gain a modicum of sentience from the transformation.</p>\n<p>Joltvines uproot themselves from the white trumpet vines clustered around them and, by means of electrical transmission in their cells, writhe slowly but determinedly along surfaces, following a rudimentary instinct to seek out other sources of electricity. When a joltvine detects faint electric signals in living beings-or powerful electric signals in technological equipment-it attacks the source with its own darts of electricity. If it suspects prey might happen by, it prepares and ambush by hiding among mundane vegetation by closing up its distinctive white flowers.</p>\n<p>New joltvines seek to spread their genetic material; fortunately, joltvines produce only more white trumpet vines, not more joltvines. Joltvines thus tend to be solitary creatures once they’ve left the patch where they were created.</p>",
         "weight": ""
       },
-      "class": "",
       "combatRole": "combatant",
       "cr": 1,
       "environment": "any land (Weydana-4)",
@@ -941,13 +732,9 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AP #40 pg. 58",
-      "subtype": "",
-      "xp": {
-        "value": 10
-      }
+      "subtype": ""
     },
     "modifiers": [
       {
@@ -955,14 +742,12 @@
         "name": "Energy Resistance",
         "type": "untyped",
         "condition": "",
-        "container": {
-          "actorId": null,
-          "itemId": null
-        },
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": true,
+        "limitTo": null,
         "max": 10,
-        "modifier": 10,
+        "modifier": "10",
         "modifierType": "constant",
         "notes": "",
         "source": "Migration",
@@ -976,10 +761,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -987,10 +771,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 5,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -998,10 +781,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1009,10 +791,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1020,10 +801,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1031,10 +811,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1042,10 +821,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1053,10 +831,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1064,10 +841,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1075,10 +851,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1086,10 +861,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1097,10 +871,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1108,10 +881,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 5,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1119,10 +891,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1130,10 +901,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1141,9 +911,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1153,10 +921,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1164,10 +931,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1175,10 +941,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 10,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1186,47 +951,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1235,16 +993,8 @@
         "custom": "Plant Immunities",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "Plant Immunities",
-        "value": []
-      },
-      "dr": {
-        "custom": "",
         "value": []
       },
       "dv": {
@@ -1259,9 +1009,6 @@
       },
       "senses": "low-light vision",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

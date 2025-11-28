@@ -2,6 +2,7 @@
   "_id": "tbVVjX4mO4YrjkOC",
   "name": "Vorthuul",
   "type": "npc2",
+  "folder": "gTJQVURiWQz4rGgw",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
@@ -10,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -27,7 +24,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -36,7 +33,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -46,45 +44,47 @@
           "unidentified": "",
           "value": "<p>Vorthuuls are constantly shifting between the forms of two spirits that are forever intertwined through quantum entanglement: one an apparition that continually suffers in agony as its physical form is stretched by the black hole’s tidal forces, the other a tranquil, compressed mass created by a singularity’s crushing abyss. The vorthuul decides which of its two forms is dominant at the start of combat and can switch between the forms as a move action.</p>\n<p>Form of Crushing Tranquility: The vorthuul gains immunity to bludgeoning damage and force effects, as well as a +4 circumstance bonus to Will saves.</p>\n<p>Form of Everburning Essence: The vorthuul gains elemental immunities and ferocity.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -95,11 +95,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -112,8 +108,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 22,
         "attributes": {
@@ -134,7 +130,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": null,
@@ -143,7 +138,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -165,13 +160,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d10+18",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -181,9 +189,8 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -191,115 +198,34 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -307,7 +233,7 @@
           "value": null
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -321,11 +247,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -338,8 +260,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 19,
         "attributes": {
@@ -360,7 +282,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -369,7 +290,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -388,10 +309,22 @@
           "effect": "stunned",
           "parts": [
             {
+              "name": "",
               "formula": "",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -399,13 +332,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d6+10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -415,9 +361,8 @@
           "unidentified": "",
           "value": "<p>A vorthuul’s gravity blast has a range increment of 60 feet.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -425,115 +370,35 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 60
+          "value": "60"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -541,7 +406,7 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -555,11 +420,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rwak",
         "activation": {
@@ -571,8 +432,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 22,
         "chatFlavor": "",
@@ -581,7 +442,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -591,29 +453,26 @@
           "unidentified": "",
           "value": "<p>Three times per day as a full action, a vorthuul can take on the crushing gravitational properties of a black hole for 1d4+1 rounds, during which time the vorthuul’s speed is reduced by half. At the end of the vorthuul’s turn, creatures the same size or smaller and unattended objects of no more than light bulk within 30 feet of the vorthuul are drawn toward it. The vorthuul makes a single special combat maneuver with an attack bonus of +22, comparing the result to each creature’s KAC + 4. If successful, the creature is pulled 5 feet closer to the vorthuul plus 5 additional feet for every 5 by which the result exceeds the target’s KAC + 4. Unattended objects are automatically moved 10 feet closer to the vorthuul each round. While this ability is active, any creature that begins its turn adjacent to the vorthuul takes 2d10+10 bludgeoning damage (Fortitude DC 17 half); unattended objects automatically take this damage when they are moved adjacent to the vorthuul. In addition, any creature within 30 feet of the vorthuul while this ability is active has its speed reduced by half when it moves away from the vorthuul or doubled when it moves toward the vorthuul. A creature that moves neither toward nor away from the vorthuul during this time moves at its normal speed.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "/roll 1d4 + 1 rounds"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -622,13 +481,18 @@
           "dc": "17",
           "descriptor": "half"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 3,
+          "max": "3",
           "per": "day",
           "value": 3
         }
@@ -640,11 +504,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "mwak",
         "activation": {
@@ -656,8 +516,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 22,
         "chatFlavor": "On fail, target is pinned and staggered for 1 minute",
@@ -666,7 +526,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -676,29 +537,26 @@
           "unidentified": "",
           "value": "<p>As a standard action, a vorthuul can attempt to touch an adjacent creature with an attack bonus of +22 against the target’s EAC to channel the torment of being consumed by a singularity onto them. If the target fails a DC 19 Fortitude save, it is immediately @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pinned} and @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} by the crushing agony for 1 minute. As a standard action during its turn, the creature can attempt a DC 35 Acrobatics check to escape or a DC 25 Strength check to break through the invisible bonds of gravity, removing the @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pinned} and @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} conditions.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -707,13 +565,18 @@
           "dc": "19",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -725,11 +588,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -742,7 +601,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -751,7 +610,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -761,45 +621,47 @@
           "unidentified": "",
           "value": "<h3>(EX)</h3>\n<h3>The creature has no Constitution score or modifier. Any DCs or other statistics that rely on a Constitution score treat the creature as having a score of 10 (+0). The creature is immediately destroyed when it reaches 0 Hit Points. An unliving creature doesn’t heal damage naturally, but a construct can be repaired with the right tools. Spells such as make whole can heal constructs, and magic effects can heal undead. An unliving creature with fast healing (see page 154) still benefits from that ability. Unliving creatures don’t breathe, eat, or sleep. They can’t be raised or resurrected, except through the use of miracle, wish, or a similar effect that specifically works on unliving creatures.</h3>\n<hr />\n<h3>&nbsp;</h3>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -810,11 +672,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -827,7 +685,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -836,7 +694,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -846,45 +705,47 @@
           "unidentified": "",
           "value": "<p>Vorthuuls bend light toward themselves, including that produced by laser weapons. Attacks made with laser weapons against a vorthuul gain a +4 circumstance bonus to the attack roll and ignore the miss chance from concealment.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -986,103 +847,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "con": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "dex": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 5,
-        "value": 20
+        "base": 5
       },
       "int": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "str": {
-        "base": 8,
-        "min": 3,
-        "misc": 0,
-        "mod": 8,
-        "value": 26
+        "base": 8
       },
       "wis": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 16
+        "base": 3
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 23,
-        "min": 0,
-        "tooltip": [],
-        "value": 23
+        "base": 23
       },
       "fort": {
-        "base": 12,
-        "bonus": 12,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 12
       },
       "hp": {
         "max": 165,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 165
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 5,
         "value": 5
       },
       "kac": {
-        "base": 25,
-        "min": 0,
-        "tooltip": [],
-        "value": 25
+        "base": 25
       },
-      "keyability": "",
       "reach": "",
       "reflex": {
-        "base": 12,
-        "bonus": 12,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 12
       },
       "space": "",
       "speed": {
@@ -1103,21 +913,49 @@
         "special": "original base: fly 60 ft.; original special: (Su, perfect)",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 11,
-        "bonus": 11,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 11
       }
     },
-    "conditions": {},
-    "counterClasses": {
-      "values": {}
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
     },
     "currency": {
       "credit": 0,
@@ -1126,9 +964,8 @@
     "details": {
       "type": "Undead",
       "alignment": "NE",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1140,7 +977,7 @@
         "value": "<h2>Description</h2>\n<h3>Description</h3>\n<p>While it is unknown exactly what happens to any starfarer unfortunate enough to be pulled into a black hole, most scientists are certain that nothing can survive the multitude of gravitational forces that batter anything that passes the event horizon. However, reports of strange undead creatures appearing on starships and space stations near these deadly cosmic phenomena have led @UUID[Compendium.sfrpg.races.Item.dGlSCMtFZ2ZIKUpl]{Kasatha} mystics aboard the @UUID[Compendium.sfrpg.setting.Item.nZHqkDndoLfqukCs]{Idari} to conjecture that the terrible agony undergone by those consumed by a black hole sometimes allows their spirits to escape the phenomenon and continue on to wreak havoc among the living. The kasathas call such entities vorthuuls, though they are sometimes referred to as singularity wraiths by others. A vorthuul is a strange apparition that appears to be composed of two intertwined forms: one a squat, obsidian skeleton that emanates calm, the other the phantom visage of a creature eternally screaming in unbearable pain as it is stretched to impossible lengths. Neither of these forms ever separates from the other, though one spirit always seems to have dominance at any given moment, pulling along the other with its whims.</p>\n<p>@UUID[Compendium.sfrpg.races.Item.dGlSCMtFZ2ZIKUpl]{Kasatha} sages suggest that these two entangled spirits were once a single living creature that suffered the extreme misfortune of being pulled inexorably into the mouth of a black hole. In this moment, where time and reality get twisted, the black hole creates two versions of the same creature: one that is tortuously extended vertically while being compressed horizontally, and the other that is crushed into infinite density as it is drawn into the singularity. Both versions of the original creature are horribly killed, of course, and their spirits are linked to one another through quantum entanglement.</p>\n<p>While no one knows precisely how these two versions of the same creature’s spirit combine to form an undead vorthuul, those who travel the void know the true dangers these creatures present. Seemingly able to harness the gravitational forces of a black hole, a vorthuul is a horrifying sight for a party of adventurers hoping to loot an abandoned starship or mine precious metals from the surface of an asteroid.</p>\n<p>A vorthuul can appear on a starship, research station, or other celestial object when it passes close to a black hole (though not close enough to be caught by the singularity’s gravitational pull), seemingly manifesting as an avatar of the black hole itself. A singularity that has swallowed countless souls might be “home” to a large group of vorthuuls, making the region of space near that black hole particularly dangerous to living creatures. Such collections of vorthuuls often go unreported if no one makes it out of the area alive, leading to rumors of “haunted” stretches of space.</p>\n<p>Solarians-especially those of the @UUID[Compendium.sfrpg.races.Item.dGlSCMtFZ2ZIKUpl]{Kasatha} species-are especially aware of and concerned with the threat vorthuuls pose. Some solarians believe that many vorthuuls were once members of the same tradition who became disproportionately attuned with graviton forces. Their connection with the cosmic forces of gravity and light became imbalanced, contributing to their rebirth as vorthuuls, and they now seek out living solarians to completely destroy them.</p>\n<p>Other groups, such as the Cult of @UUID[Compendium.sfrpg.setting.Item.JpQpQbdXNOX6aTVG]{The Devourer}, respect the vorthuuls’ uncanny power, viewing them as avatars of their god of infinite destruction, and may even attempt to capture a vorthuul in an attempt to unleash its wrath upon their foes.</p>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>vacuum</p>\n<h3>Organization</h3>\n<p>solitary, pair, or supermass (3-6)</p>\n</section>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 10,
       "environment": "",
       "organization": "",
@@ -1148,12 +985,9 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA3 pg. 128",
-      "xp": {
-        "value": 9600
-      }
+      "subtype": ""
     },
     "modifiers": [],
     "skills": {
@@ -1162,10 +996,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 24,
         "ranks": 24,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1173,10 +1006,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 19,
         "ranks": 19,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1184,10 +1016,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1195,10 +1026,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1206,10 +1036,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1217,10 +1046,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1228,10 +1056,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1239,10 +1066,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1250,10 +1076,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1261,10 +1086,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1272,10 +1096,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1283,10 +1106,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1294,10 +1116,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 19,
         "ranks": 19,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1305,10 +1126,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1316,10 +1136,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1327,9 +1146,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1340,7 +1157,6 @@
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "misc": 23,
-        "mod": 32,
         "ranks": 32,
         "subname": "Fly",
         "value": 0
@@ -1350,10 +1166,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1361,10 +1176,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1372,10 +1186,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 19,
         "ranks": 19,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1383,47 +1196,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1432,16 +1238,8 @@
         "custom": "Undead Immunities",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "Undead Immunities",
-        "value": []
-      },
-      "dr": {
-        "custom": "",
         "value": []
       },
       "dv": {
@@ -1456,9 +1254,6 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

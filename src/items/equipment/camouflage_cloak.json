@@ -4,11 +4,7 @@
   "type": "magic",
   "img": "systems/sfrpg/icons/equipment/magic%20items/charge-cloak.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": 0,
@@ -61,7 +56,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -71,18 +67,17 @@
       "unidentified": "",
       "value": "<p>This lightweight cloak allows you to bend light around yourself and muffle any minor sounds you make. When standing still, you nearly vanish, and even when you move, you appear only as an outline with blurry features. The camouflage cloak doesn’t make you invisible, but it does make it easier to sneak around. You can activate or deactivate the cloak as a move action; this activation lasts up to 10 rounds per day, which need not be consecutive. You can attempt Stealth checks to hide while the camouflage cloak is active, even when you are being directly observed and lack a place to hide. Attacking doesn’t end that particular use of the camouflage cloak, but it does end that particular attempt to hide. If you remain perfectly still for at least 1 turn and take no actions, you gain a +10 circumstance bonus to Stealth checks until you move; this doesn’t stack with other bonuses to Stealth checks.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "round",
       "value": "1"
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "hands": 0,
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 11,
     "limitedWear": true,
     "modifiers": [
@@ -91,8 +86,10 @@
         "name": "Camouflage Cloak",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "10",
         "modifierType": "formula",
@@ -103,24 +100,28 @@
       }
     ],
     "price": 23500,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 152",
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

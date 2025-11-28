@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,44 +37,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.themes.Item.5asY5v0woPeqEvu7]{Cult Hunter}</p>\n<p>You can spend 10 minutes to lay out the evidence you’ve gathered about a specific cult, as long as, at the GM’s discretion, that evidence is enough to specifically identify that organization. This helps you prepare against that cult’s tactics and methods, but doesn’t count as a resting to regain Stamina Points. You gain a +2 circumstance bonus to @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.gZlg2ZKze0erNLmP]{Perception} and @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.nBrYkGfNBJAHe0xJ]{Sense Motive} checks against members of that cult and a +1 circumstance bonus to saving throws against its members’ spells and effects. This bonus lasts until you create a new conspiracy web. You can benefit from only one conspiracy web at a time.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "themeFeature",
       "combat": false,
@@ -88,15 +48,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "cb1f3b90-01cd-4356-8307-c3b6376246c8",
         "name": "Conspiracy Web",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "formula",
@@ -110,8 +72,10 @@
         "name": "Conspiracy Web",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "formula",
@@ -125,8 +89,10 @@
         "name": "Conspiracy Web",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "formula",
@@ -138,25 +104,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "6th Level - Cult Hunter",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #16 pg. 45",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

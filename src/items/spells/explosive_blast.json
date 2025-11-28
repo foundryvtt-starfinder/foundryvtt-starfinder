@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/explosion_blast.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "rsak",
     "activation": {
@@ -42,6 +38,7 @@
           "name": "",
           "formula": "9d6",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -49,12 +46,15 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -64,52 +64,14 @@
       "unidentified": "",
       "value": "<p>You magically transform a used battery into a powerful explosive device, propelling it in a straight line to a grid intersection within range, at which point it detonates, dealing 9d6 fire damage to all creatures and objects in the area. If you send the battery through a narrow opening, you must make a ranged attack (usually against an Armor Class of 10 for a narrow opening or an Armor Class of 15 for an extremely narrow opening) to avoid hitting the side and detonating it prematurely.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "auditory": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 3,
     "materials": {
@@ -125,10 +87,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "medium",
-      "value": null
+      "units": "medium"
     },
     "rollNotes": "",
     "save": {
@@ -139,12 +98,13 @@
     "school": "evo",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "CRB pg. 354",
     "sr": true,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

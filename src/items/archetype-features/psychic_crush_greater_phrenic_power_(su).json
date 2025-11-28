@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "other",
     "activation": {
@@ -35,6 +31,7 @@
           "name": "",
           "formula": "15d8",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -42,12 +39,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -58,42 +58,7 @@
       "value": "<p>&gt;@UUID[Compendium.sfrpg.archetype-features.Item.6QyE5hwfW7FKbJWE]{Greater Phrenic Power (Su)}</p>\n<p>As a standard action, you can invade the mind of a single creature within 60 feet of you. You deal 15d8 nonlethal damage and cause the target to be @UUID[Compendium.sfrpg.conditions.Item.ZacF0l6IwqBwToTJ]{sickened} for 1 round per class level you have. If the target succeeds at a Fortitude save, it takes half damage and is not sickened. This is a pain effect.</p>\n<p><em>This ability's usage is tracked by it's parent Greater Phrenic Power (Su) ability.</em></p>"
     },
     "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": true,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
+      "pain": true
     },
     "details": {
       "category": "archetypeFeature",
@@ -105,18 +70,16 @@
       "value": "@details.level.value"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "60"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "6th Level - Phrenic Adept",
     "rollNotes": "",
@@ -127,11 +90,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "CRB pg. 128",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

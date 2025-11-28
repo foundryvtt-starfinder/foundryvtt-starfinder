@@ -1,21 +1,11 @@
-import eslintPluginJsonc from "eslint-plugin-jsonc";
 import eslint from "@eslint/js";
 
 export default [
     {
-        ignores: ["dist/*"]
+        ignores: ["dist/*", "foundry/*"]
     },
 
     eslint.configs.recommended,
-
-    {
-        plugins: {
-            jsonc: eslintPluginJsonc
-        },
-        rules: {
-            ...eslintPluginJsonc.configs["recommended-with-json"].rules
-        }
-    },
 
     {
         rules: {
@@ -34,8 +24,7 @@ export default [
             ],
             "object-property-newline": ["error", {
                 "allowAllPropertiesOnSameLine": true
-            }
-            ],
+            }],
             "implicit-arrow-linebreak": ["error", "beside"],
             "comma-dangle": ["error", "never"],
             "no-duplicate-imports": "error",

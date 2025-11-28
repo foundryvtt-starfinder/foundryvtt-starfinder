@@ -4,11 +4,7 @@
   "type": "equipment",
   "img": "systems/sfrpg/icons/default/kevlar-vest.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "armor": {
       "type": "power",
@@ -51,7 +47,6 @@
       "size": "large",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "28",
     "capacity": {
       "max": 40,
@@ -107,6 +102,7 @@
           "name": "",
           "formula": "1d10 +(@abilities.str.mod)",
           "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -114,12 +110,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -129,17 +128,17 @@
       "unidentified": "",
       "value": "<p>This suspension harness has six arachnid legs. Each leg has a gravitic attraction device at the tip, allowing the armor to climb up walls and even walk across ceilings. The armor grants the wearer a climb speed of 25 feet. A spider harness also has powered arm braces that attach to the wearer’s arms, allowing the wearer to use weapons.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 10,
     "modifiers": [],
     "price": 19500,
@@ -148,10 +147,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "reach": "10 ft.",
     "rollNotes": "",
@@ -160,32 +156,25 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "large",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "CRB pg. 204",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
+    "specialMaterials": {},
+    "speed": {
+      "climbing": {
+        "base": 25
+      },
+      "land": {
+        "base": 25
+      },
+      "special": ""
     },
-    "speed": "25 ft., climb 25 ft.",
     "strength": 18,
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -193,8 +182,8 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

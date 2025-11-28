@@ -2,6 +2,7 @@ import SFRPGChatMessage from "./chat/chatbox.js";
 import { SFRPG } from "./config.js";
 import RollTree from "./rolls/rolltree.js";
 import StackModifiers from "./rules/closures/stack-modifiers.js";
+import SFRPGRoll from "./rolls/roll.js";
 
 /**
  * @import SFRPGRoll from "./rolls/roll.js";
@@ -347,9 +348,9 @@ export class DiceSFRPG {
         if (mainDie) {
             let dieRoll = "1" + mainDie;
             if (mainDie === "d20") {
-                if (rollInfo.button === "Disadvantage") {
+                if (rollInfo.button === "disadvantage") {
                     dieRoll = "2d20kl";
-                } else if (rollInfo.button === "Advantage") {
+                } else if (rollInfo.button === "advantage") {
                     dieRoll = "2d20kh";
                 }
             }
@@ -550,8 +551,8 @@ export class DiceSFRPG {
         // Most item types with damage
         if (SFRPG.itemsWithActionTypes.includes(itemContext.entity.type)) {
             const weaponProperties = [];
-            for (const [property, isEnabled] of Object.entries(itemContext.entity.system.properties)) {
-                if (isEnabled) {
+            for (const [property, propertyData] of Object.entries(itemContext.entity.system.properties)) {
+                if (propertyData.value) {
                     tags.push({tag: `weapon-properties ${property}`, text: SFRPG.weaponProperties[property]});
                     weaponProperties.push(property);
                 }
@@ -709,7 +710,7 @@ export class DiceSFRPG {
     /**
     * A helper function for determining if a roll was a critical success or not
     *
-    * @param {Object|null}  roll        The roll object
+    * @param {?Object}  roll        The roll object
     * @param {Number}       dieSize     The size of the die to look for to  trigger the critical
     * @param {Number}       critValue   The number needed to roll at or above to trigger the critical
     * @returns {Boolean}                `true` if a critical success, `false` otherwise
@@ -733,7 +734,7 @@ export class DiceSFRPG {
     /**
     * A helper function for determining if a roll was a fumble or not
     *
-    * @param {Object|null}  roll        The roll object
+    * @param {Object}  roll        The roll object
     * @param {Number}       dieSize     The size of the die to look for to  trigger the fumble
     * @param {Number}       fumbleValue The number needed to roll at or below to trigger the fumble
     * @returns {Boolean}                `true` if a fumble, `false` otherwise
@@ -822,7 +823,7 @@ export class DiceSFRPG {
         const rollInfo = RollTree.buildRollSync(sourceFormula, rollContext);
         const finalFormula = rollInfo.rolls[0].formula;
         try {
-            const formula = Roll.replaceFormulaData(finalFormula.finalRoll, null);
+            const formula = SFRPGRoll.replaceFormulaData(finalFormula.finalRoll, null);
             resultValue = Roll.safeEval(formula);
             resolveResult.evaluatedFormula = formula;
         } catch (error) {

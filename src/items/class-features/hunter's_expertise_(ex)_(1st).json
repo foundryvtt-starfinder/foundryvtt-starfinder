@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -20,8 +16,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,63 +37,28 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.GvubHqBOlV1CsWvz]{Hunter}</p>\n<p>You add @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.gZlg2ZKze0erNLmP]{Perception} to your list of class skills, and you gain a free skill rank at each soldier level you can use only for Perception or @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.UDTsEIldhXTn0VJA]{Survival} (this does not allow you to exceed the maximum number of skill ranks in a single skill). If you take the hunter fighting style as your secondary fighting style, you gain a free skill rank for these skills only at 9th level and at each soldier level gained thereafter.</p>\n<p><em>Enable modifier for when Hunter fighting style was selected in the Modifiers tab.</em></p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "b45074c0-94f7-472e-8104-098e279262d0",
         "name": "Hunter’s Expertise (Ex) - Primary fighting style",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill-points",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@classes.soldier.levels",
         "modifierType": "constant",
@@ -110,8 +72,10 @@
         "name": "Hunter’s Expertise (Ex) - Secondary fighting style",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill-points",
         "enabled": false,
+        "limitTo": null,
         "max": -8,
         "modifier": "(@classes.soldier.levels - 8)",
         "modifierType": "constant",
@@ -123,29 +87,31 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": null,
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Technique",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Hunter",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

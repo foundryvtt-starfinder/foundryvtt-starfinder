@@ -63,6 +63,7 @@ export default class SFRPGTimedEffect {
             value: "",
             activationTime: 0,
             activationEnd: 0,
+            activationTurn: "parent",
             expiryMode: {
                 /** @type {"turn"|"init"} Expire on a combatant's turn, or a specific init count. */
                 type: "turn",
@@ -157,9 +158,13 @@ export default class SFRPGTimedEffect {
 
             if (game.combat) {
                 this.activeDuration.expiryInit = game.combat.initiative;
+                this.activeDuration.activationTurn = game.combat.combatant?.actor?.uuid || "parent";
+            } else {
+                this.activeDuration.activationTurn = "parent";
             }
         } else if (resetActivationTime) {
             this.activeDuration.activationTime = -1;
+            this.activeDuration.activationTurn = "parent";
 
             if (game.combat) {
                 this.activeDuration.expiryInit = -1;
@@ -278,6 +283,7 @@ class SFRPGTimedEnable extends SFRPGTimedEffect {
 
         if (resetActivationTime) {
             delta['system.activeDuration.activationTime'] = this.activeDuration.activationTime;
+            delta['system.activeDuration.activationTurn'] = this.activeDuration.activationTurn;
             delta['system.activeDuration.expiryInit'] = this.activeDuration.expiryInit;
         }
 
@@ -348,7 +354,7 @@ class SFRPGTimedEnable extends SFRPGTimedEffect {
 
 class SFRPGTimedActivation extends SFRPGTimedEffect {
     /** Update the managed Item with data from this TimedEffect */
-    _updateAfterToggle(resetActivationTime) {
+    async _updateAfterToggle(resetActivationTime) {
         const item = this.item;
         const delta = {
             _id: item._id,
@@ -360,7 +366,8 @@ class SFRPGTimedActivation extends SFRPGTimedEffect {
             delta['system.activationEvent.startTime'] = this.activeDuration.activationTime;
         }
 
-        this.actor?.updateEmbeddedDocuments('Item', [delta]);
+        await this.actor?.updateEmbeddedDocuments('Item', [delta]);
+        await item._afterSetActive?.(this.enabled);
     }
 
     /** Update the managed Item after a {@linkcode poke} */
@@ -398,33 +405,35 @@ class SFRPGTimedActivation extends SFRPGTimedEffect {
                 value: duration.value,
                 activationTime: activationEvent.startTime,
                 activationEnd: endTime,
+                activationTurn: activationEvent.activationTurn,
                 expiryMode: {
                     type: "turn",
-                    turn: "parent"
+                    turn: activationEvent.expiryTurn ?? "parent"
                 },
                 expiryInit: 0,
                 remaining: mkRemaining(endTime - game.time.worldTime, duration.units, isActive),
-                endsOn: duration.endsOn
+                endsOn: activationEvent.endsOn
             }
         });
     }
 }
 
-Hooks.on("updateWorldTime", (worldTime, dt) => {
+Hooks.on("updateWorldTime", (worldTime) => {
+    // Only active GM should be modifying the timed effects
+    if (!game.users.activeGM?.isSelf) return;
+
     const timedEffects = game.sfrpg.timedEffects;
     for (const effect of timedEffects.values()) {
-        if (effect.actor.inCombat) continue;
+        if (game.combat?.started) continue;
         // handling effects while in combat is handled in combat.js
 
         const effectStart = effect.activeDuration.activationTime ?? -Infinity;
         const effectFinish = effect.activeDuration.activationEnd ?? Infinity;
-        if ((effectFinish <= worldTime && effect.enabled)
-            || (dt < 0 && effectFinish >= worldTime && !effect.enabled)
-        ) {
+        const shouldBeEnabled = effectStart <= worldTime && worldTime <= effectFinish;
+        if (shouldBeEnabled !== effect.enabled) {
             effect.toggle(false);
-        } else if (effectStart <= worldTime && worldTime <= effectFinish) {
+        } else if (shouldBeEnabled) {
             effect.poke();
         }
-
     }
 });

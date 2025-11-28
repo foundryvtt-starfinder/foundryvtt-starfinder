@@ -2,6 +2,7 @@
   "_id": "NzixuJm7J00jITS5",
   "name": "Rageshkor, Rock",
   "type": "npc2",
+  "folder": "oDeSIpQmKhLBZHHW",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
@@ -10,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -27,7 +24,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -36,7 +33,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -46,44 +44,46 @@
           "unidentified": "",
           "value": "<p>As a move action, a rageshkor can align portions of the flexible frills on its back armor to block attacks from one enemy the rageshkor is observing. Doing so grants the rageshkor two benefits against that enemy’s attacks until the start of the rageshkor’s next turn: the rageshkor’s AC increases by 2 and its fire and cold resistances each increase to 10.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -95,7 +95,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -110,7 +109,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 25,
         "attributes": {
@@ -131,7 +130,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -140,7 +138,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -159,10 +157,22 @@
           "effect": "",
           "parts": [
             {
-              "formula": null,
-              "operator": "",
+              "name": "",
+              "formula": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -170,13 +180,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "6d4+20",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -186,17 +209,16 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -206,22 +228,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -229,8 +253,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -243,11 +267,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -261,7 +281,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 22,
         "attributes": {
@@ -282,7 +302,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -291,7 +310,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -302,13 +321,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d8+20",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -318,9 +350,8 @@
           "unidentified": "",
           "value": "<p>By whipping its tail, a green rageshkor can hurl a detachable spike from just below its spiked tail club as a ranged attack with a range increment of 20 feet and a maximum range of 100 feet. The creature can hurl only six such spikes in a 24-hour period.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -328,106 +359,18 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -435,11 +378,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -447,7 +395,7 @@
           "value": 0
         },
         "uses": {
-          "max": 6,
+          "max": "6",
           "per": "day",
           "value": 6
         },
@@ -461,11 +409,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -478,7 +422,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -487,7 +431,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -497,45 +442,47 @@
           "unidentified": "",
           "value": "<p>Each target for Cleave and Great Cleave must be within 15 feet of the previous target, rather than adjacent to the previous target, but it must still be within the rock rageshkor’s reach.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -546,8 +493,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/cleave.webp",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -560,7 +506,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -569,7 +515,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -579,45 +526,47 @@
           "unidentified": "",
           "value": "<p>You can strike two adjacent foes with a single swing.</p>\n<p><strong>Prerequisites</strong>: Str 13, base attack bonus +1.</p>\n<hr />\n<p><strong>Benefit</strong>: As a standard action, you can make a single melee attack against a foe within reach. If you hit, you deal damage normally and can make an additional melee attack (using your full base attack bonus) against a foe that is adjacent to the first and also within reach. You can make only one additional attack per round with this feat. When you use this feat, you take a –2 penalty to your Armor Class until your next turn.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": "Until next turn."
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": "Foe within reach and adjacent to last target."
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -628,11 +577,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/great_cleave.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -645,7 +590,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -654,7 +599,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -664,44 +610,46 @@
           "unidentified": "",
           "value": "<p>You can strike many adjacent foes with a single blow.</p>\n<p><strong>Prerequisites</strong>: Str 13, Cleave, base attack bonus +4.</p>\n<hr />\n<p><strong>Benefit</strong>: If you strike a second target with the Cleave feat, you can spend 1 Resolve Point to make a melee attack against each subsequent foe that is both adjacent to the last target and within your reach, as long as you hit the previous foe. You can’t attack an individual foe more than once during this attack action.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": "1 target within reach and adjacent to last target hit."
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -713,11 +661,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -730,7 +674,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -739,7 +683,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -749,45 +694,47 @@
           "unidentified": "",
           "value": "<p>A rock rageshkor is unaffected by thin atmosphere and treats severely thin atmosphere as thin atmosphere (Core Rulebook 396). In addition, a rock rageshkor can hold its breath for 1 hour. Taking actions does not reduce this duration.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -889,113 +836,55 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "con": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 5,
-        "value": 20
+        "base": 5
       },
       "dex": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "int": {
-        "base": -4,
-        "min": 3,
-        "misc": 0,
-        "mod": -4,
-        "value": 2
+        "base": -4
       },
       "str": {
-        "base": 8,
-        "min": 3,
-        "misc": 0,
-        "mod": 8,
-        "value": 26
+        "base": 8
       },
       "wis": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 14
+        "base": 2
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 26,
-        "min": 0,
-        "tooltip": [],
-        "value": 26
+        "base": 26
       },
       "fort": {
-        "base": 17,
-        "bonus": 17,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 17
       },
       "hp": {
         "max": 200,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 200
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 4,
         "value": 4
       },
       "kac": {
-        "base": 28,
-        "min": 0,
-        "tooltip": [],
-        "value": 28
+        "base": 28
       },
-      "keyability": "",
       "reach": "15 ft.",
       "reflex": {
-        "base": 14,
-        "bonus": 14,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 14
       },
       "rp": {
         "max": 5,
-        "min": 0,
-        "tooltip": [],
         "value": 5
       },
       "space": "15 ft.",
@@ -1017,19 +906,12 @@
         "special": "original base: 30 ft.",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 11,
-        "bonus": 11,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 11
       }
     },
-    "classes": {},
     "conditions": {
       "asleep": false,
       "bleeding": false,
@@ -1052,6 +934,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1067,9 +950,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1077,9 +957,8 @@
     "details": {
       "type": "Animal",
       "alignment": "N",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1088,10 +967,10 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Fierce, armored saurians, rageshkors are among Vesk Prime’s most famous fauna. These beasts evolved alongside the planet’s other aggressive wildlife, leading to deadly evolutions unknown to other thyreophorans, most notably movable armor plates, and tail spikes rageshkors can hurl at distant threats.</p>\n<p>Vesk have long seen rageshkors as worthy foes. Records from before the Gap show that hunting rageshkors is an age‑old tradition, with accomplished hunters regularly wearing the hard-won hide, plates, and spikes. These cultural values have survived into modern times, and vesk and non-vesk alike regularly travel to Vesk Prime specifically for the chance to hunt a rageshkor. The most dedicated hunters equip themselves with archaic weaponry in the spirit of tradition, but even modern armaments are no guarantee of an easy fight.</p>\n<p>The smaller green rageshkors are the most prolific species, still prevalent in Vesk Prime’s forests and plains. Adolescents typically break from their birth herd, roaming either alone or in small cohorts. These roving rageshkors are especially aggressive, and they often pick fights with passersby, land transports, and even small buildings.</p>\n<p>The might and ferocity of green rageshkors pale in comparison to those of their larger kin, rock rageshkors. These rare animals are typically solitary, and during less prosperous times, rock rageshkors hunker down into a form of hibernation. Combined with their camouflaged bodies and the accumulation of windblown debris, these animals often fade into the landscape, snapping to vicious alertness only to ambush prey that mistakes it for a boulder.</p>\n<h3>RAGESHKOR SHIELDS</h3>\n<p>Vesk have used rageshkor frill plates for shields since ancient times. In the post-Gap era, vesk have developed high-tech versions of these shields that incorporate synthetic padding, alloyed fittings, and more to augment the natural materials while maintaining the shields’ cultural value. Although these shields can be purchased, a carrier in vesk territory should expect to be asked whether the shield was truly won (harvested from a rageshkor the wielder defeated), where the clash occurred, and how the battle fared. An earned rageshkor shield is a prestige piece that can win a warrior much respect.</p>\n<p><strong>Green Rageshkor Shield</strong>: This round shield, made of overlapping green rageshkor frill plates and modern composites, allows you to make unarmed attacks that don’t count as archaic.</p>\n<p><strong>Rock Rageshkor Shield</strong>: This roughly ovular shield is made of big rock rageshkor frill plates. The shield can be used to make unarmed attacks that don’t count as archaic. It also functions as if it had a mk 1 thermal capacitor installed, and this “upgrade” can be enhanced to higher model numbers without occupying the shield’s other upgrade slot.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td>SHIELD MODEL</td>\n<td style=\"text-align: center; vertical-align: middle;\">LEVEL</td>\n<td style=\"text-align: center; vertical-align: middle;\">PRICE</td>\n<td style=\"text-align: center; vertical-align: middle;\">SHIELD BONUS</td>\n<td style=\"text-align: center; vertical-align: middle;\">MAX DEX BONUS</td>\n<td style=\"text-align: center; vertical-align: middle;\">ACP</td>\n<td style=\"text-align: center; vertical-align: middle;\">BULK</td>\n<td style=\"text-align: center; vertical-align: middle;\">UPGRADES</td>\n</tr>\n<tr>\n<td>Rageshkor shield, green</td>\n<td style=\"text-align: center; vertical-align: middle;\">6</td>\n<td style=\"text-align: center; vertical-align: middle;\">4,250</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(0, 0, 0, 0.05);\">+1/+2</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">+3</td>\n<td style=\"text-align: center; vertical-align: middle;\">-1</td>\n<td style=\"text-align: center; vertical-align: middle;\">2</td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n</tr>\n<tr>\n<td><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Rageshkor shield, rock</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">12</td>\n<td style=\"text-align: center; vertical-align: middle;\">37,500</td>\n<td style=\"text-align: center; vertical-align: middle;\">+1/+2</td>\n<td style=\"text-align: center; vertical-align: middle;\">+4</td>\n<td style=\"text-align: center; vertical-align: middle;\">-1</td>\n<td style=\"text-align: center; vertical-align: middle;\">2</td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n</tr>\n</tbody>\n</table>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any deserts or mountains</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>",
+        "value": "<h2>Description</h2>\n<p>Fierce, armored saurians, rageshkors are among Vesk Prime’s most famous fauna. These beasts evolved alongside the planet’s other aggressive wildlife, leading to deadly evolutions unknown to other thyreophorans, most notably movable armor plates, and tail spikes rageshkors can hurl at distant threats.</p>\n<p>Vesk have long seen rageshkors as worthy foes. Records from before the Gap show that hunting rageshkors is an age‑old tradition, with accomplished hunters regularly wearing the hard-won hide, plates, and spikes. These cultural values have survived into modern times, and vesk and non-vesk alike regularly travel to Vesk Prime specifically for the chance to hunt a rageshkor. The most dedicated hunters equip themselves with archaic weaponry in the spirit of tradition, but even modern armaments are no guarantee of an easy fight.</p>\n<p>The smaller green rageshkors are the most prolific species, still prevalent in Vesk Prime’s forests and plains. Adolescents typically break from their birth herd, roaming either alone or in small cohorts. These roving rageshkors are especially aggressive, and they often pick fights with passersby, land transports, and even small buildings.</p>\n<p>The might and ferocity of green rageshkors pale in comparison to those of their larger kin, rock rageshkors. These rare animals are typically solitary, and during less prosperous times, rock rageshkors hunker down into a form of hibernation. Combined with their camouflaged bodies and the accumulation of windblown debris, these animals often fade into the landscape, snapping to vicious alertness only to ambush prey that mistakes it for a boulder.</p>\n<h3>RAGESHKOR SHIELDS</h3>\n<p>Vesk have used rageshkor frill plates for shields since ancient times. In the post-Gap era, vesk have developed high-tech versions of these shields that incorporate synthetic padding, alloyed fittings, and more to augment the natural materials while maintaining the shields’ cultural value. Although these shields can be purchased, a carrier in vesk territory should expect to be asked whether the shield was truly won (harvested from a rageshkor the wielder defeated), where the clash occurred, and how the battle fared. An earned rageshkor shield is a prestige piece that can win a warrior much respect.</p>\n<p><strong>Green Rageshkor Shield</strong>: This round shield, made of overlapping green rageshkor frill plates and modern composites, allows you to make unarmed attacks that don’t count as archaic.</p>\n<p><strong>Rock Rageshkor Shield</strong>: This roughly ovular shield is made of big rock rageshkor frill plates. The shield can be used to make unarmed attacks that don’t count as archaic. It also functions as if it had a mk 1 thermal capacitor installed, and this “upgrade” can be enhanced to higher model numbers without occupying the shield’s other upgrade slot.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td>SHIELD MODEL</td>\n<td style=\"text-align:center;vertical-align:middle\">LEVEL</td>\n<td style=\"text-align:center;vertical-align:middle\">PRICE</td>\n<td style=\"text-align:center;vertical-align:middle\">SHIELD BONUS</td>\n<td style=\"text-align:center;vertical-align:middle\">MAX DEX BONUS</td>\n<td style=\"text-align:center;vertical-align:middle\">ACP</td>\n<td style=\"text-align:center;vertical-align:middle\">BULK</td>\n<td style=\"text-align:center;vertical-align:middle\">UPGRADES</td>\n</tr>\n<tr>\n<td>Rageshkor shield, green</td>\n<td style=\"text-align:center;vertical-align:middle\">6</td>\n<td style=\"text-align:center;vertical-align:middle\">4,250</td>\n<td style=\"text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(0, 0, 0, 0.05)\">+1/+2</span></td>\n<td style=\"text-align:center;vertical-align:middle\">+3</td>\n<td style=\"text-align:center;vertical-align:middle\">-1</td>\n<td style=\"text-align:center;vertical-align:middle\">2</td>\n<td style=\"text-align:center;vertical-align:middle\">1</td>\n</tr>\n<tr>\n<td><span style=\"background-color:rgba(255, 255, 255, 0.2)\">Rageshkor shield, rock</span></td>\n<td style=\"text-align:center;vertical-align:middle\">12</td>\n<td style=\"text-align:center;vertical-align:middle\">37,500</td>\n<td style=\"text-align:center;vertical-align:middle\">+1/+2</td>\n<td style=\"text-align:center;vertical-align:middle\">+4</td>\n<td style=\"text-align:center;vertical-align:middle\">-1</td>\n<td style=\"text-align:center;vertical-align:middle\">2</td>\n<td style=\"text-align:center;vertical-align:middle\">1</td>\n</tr>\n</tbody>\n</table>\n<section class=\"secret\">\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any deserts or mountains</p>\n<h3>Organization</h3>\n<p>solitary or pair</p>\n</section>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 12,
       "environment": "",
       "organization": "",
@@ -1099,29 +978,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 96",
-      "xp": {
-        "value": 19200
-      }
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1129,10 +999,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 27,
         "ranks": 27,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1140,10 +1009,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1151,10 +1019,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1162,10 +1029,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1173,10 +1039,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1184,10 +1049,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1195,10 +1059,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1206,10 +1069,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 22,
         "ranks": 22,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1217,10 +1079,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1228,10 +1089,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1239,10 +1099,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1250,10 +1109,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 22,
         "ranks": 22,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1261,10 +1119,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1272,10 +1129,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1283,9 +1139,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1295,10 +1149,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1306,10 +1159,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1317,10 +1169,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1328,47 +1179,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1377,24 +1221,9 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "",
         "value": []
-      },
-      "dr": {
-        "custom": "",
-        "value": [
-          {
-            "cold": "5"
-          },
-          {
-            "fire": "5"
-          }
-        ]
       },
       "dv": {
         "custom": "",
@@ -1406,9 +1235,6 @@
       },
       "senses": "blindsense (scent) 60 ft., low-light vision;",
       "size": "huge",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

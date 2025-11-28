@@ -5,10 +5,7 @@
   "img": "icons/commodities/biological/hand-clawed-blue.webp",
   "system": {
     "type": "necrograft",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -42,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -56,7 +52,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -66,17 +63,16 @@
       "unidentified": "",
       "value": "<p>Perhaps as much a fashion statement as an augmentation, corpseskin replaces living skin with mummified flesh. Corpseskin insulates against cold, though it lacks the sensitivity of living flesh. You gain an amount of cold resistance equal to the necrograft’s mark. If you have cold resistance from your species traits that is equal to or greater than that from your corpseskin (and doesn’t explicitly stack with other sources of energy resistance), adding corpseskin increases the value of that cold resistance by 1. If you have cold resistance from your species traits of a value less than that of your corpseskin, the value of the cold resistance from your corpseskin increases by 1.</p>\n<p>Regardless of your corpseskin’s model, you take a –2 penalty to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.gZlg2ZKze0erNLmP]{Perception} checks based primarily on touch and gain a +2 enhancement bonus to saving throws against pain effects. The necrograft grants a +5 competence bonus to Disguise checks to impersonate corporeal, non-skeletal undead, but it increases the DC of disguising yourself as a living creature by 5 (in addition to any other modifiers). In addition, corpseskin protects against @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg.JournalEntryPage.8bxhPYw9heXqKHYD#radiation]{radiation} as armor of its item level (Core Rulebook 198).</p>\n<p><em>Adjust cold resistance modifier in the Modifiers tab, if racial traits provide cold resistance</em></p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": false,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 20,
     "modifiers": [
       {
@@ -84,8 +80,10 @@
         "name": "Corpseskin, Mk 5",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": true,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "constant",
@@ -99,8 +97,10 @@
         "name": "Corpseskin, Mk 5",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
@@ -114,8 +114,10 @@
         "name": "Corpseskin, Mk 5",
         "type": "enhancement",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": false,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "formula",
@@ -129,8 +131,10 @@
         "name": "Corpseskin, Mk 5",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "formula",
@@ -141,30 +145,33 @@
       }
     ],
     "price": 775000,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AR pg. 95",
     "system": "skin",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

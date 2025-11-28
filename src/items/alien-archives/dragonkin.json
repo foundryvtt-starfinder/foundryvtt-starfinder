@@ -2,6 +2,7 @@
   "_id": "EWYDjeqj2wKrSlRf",
   "name": "Dragonkin",
   "type": "npc2",
+  "folder": "eQ1s3ipd6I4FFpkE",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
@@ -10,11 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -27,8 +24,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 22,
         "attributes": {
@@ -49,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": 20,
@@ -58,7 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -100,14 +96,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d8 +15",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
                 "electricity": true,
-                "slashing": true
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -117,9 +125,8 @@
           "unidentified": "",
           "value": "<p>A modern take on the traditional weapon of the dragonkin,&nbsp;the dragonglaive is a polearm in which the large slashing&nbsp;blade is electrified via embedded circuitry. These weapons&nbsp;are generally so heavy that they can be used only by Large&nbsp;creatures or creatures with Strength modifiers of at least +4.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": true,
@@ -127,106 +134,31 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 8,
         "modifiers": [],
         "price": 9000,
         "proficient": true,
         "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": true,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": true,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": true,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
+          "powered": {
+            "extension": "",
+            "value": true
+          },
+          "reach": {
+            "extension": "",
+            "value": true
+          },
+          "two": {
+            "extension": "",
+            "value": true
+          }
         },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "rollNotes": "",
         "save": {
@@ -234,11 +166,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA1 pg. 41",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -246,7 +183,7 @@
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -260,7 +197,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -275,7 +211,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 22,
         "attributes": {
@@ -296,7 +232,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -305,7 +240,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -327,13 +262,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d6 +15",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -343,17 +291,16 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": true,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -363,22 +310,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -386,8 +335,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -400,11 +349,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/pulsecaster-rifle.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -417,8 +362,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 18,
         "attributes": {
@@ -439,7 +384,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": 18,
@@ -448,7 +392,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -490,13 +434,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d8 +9",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -506,9 +463,8 @@
           "unidentified": "",
           "value": "<p>The magnetar rifle uses magnetic fields to accelerate metallic rounds to high speeds. With few moving parts that can break down, it’s a workhorse automatic rifle popular among planetary explorers.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": true,
@@ -516,106 +472,31 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 9,
         "modifiers": [],
         "price": 11800,
         "proficient": true,
         "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": true,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": true,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": true,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
+          "analog": {
+            "extension": "",
+            "value": true
+          },
+          "automatic": {
+            "extension": "",
+            "value": true
+          },
+          "two": {
+            "extension": "",
+            "value": true
+          }
         },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 60
+          "value": "60"
         },
         "rollNotes": "",
         "save": {
@@ -623,11 +504,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 176",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -635,7 +521,7 @@
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -649,11 +535,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -666,7 +548,7 @@
           "shapable": false,
           "shape": "cone",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -677,8 +559,10 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "9d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -686,12 +570,15 @@
                 "electricity": false,
                 "fire": true,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -701,29 +588,26 @@
           "unidentified": "",
           "value": "<p>(SU)</p>\n<p>Some creatures can exhale a cone or line of energy or another magical effect. A breath weapon attack usually deals damage, and it is often energy-based. A breath weapon usually allows a target to attempt a Reflex saving throw for half damage, though some breath weapons require a successful Fortitude or Will save instead. A creature is immune to its own breath weapon and the breath weapons of others of its kind unless otherwise noted. Each breath weapon also indicates how often it can be used.</p>\n<p>Guidelines: 1d6 damage + 1d6 per CR, usable once every 1d4<span>&nbsp;</span>rounds. A cone is usually 30 feet long, increasing by 10 feet for every size category above Medium or decreasing by 5 feet for every size category below Medium. A line is twice as long as a cone would be.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -732,13 +616,18 @@
           "dc": "16",
           "descriptor": "half"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -750,11 +639,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/charge_attack.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -767,7 +652,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -776,7 +661,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -786,44 +672,46 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.AKI0TQ3pSwmU5twg]{Blitz}</p>\n<p>As a standard action, you can make a charge without the charge penalties (see page 248), and you can substitute a bull rush for the melee attack at the end of the charge. When you gain the soldier’s onslaught class feature, you can make two attacks instead of one at the end of your charge, both with a –4 penalty.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "2nd Technique",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Blitz",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": 1
         }
@@ -835,11 +723,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/armor_training.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -851,8 +735,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -861,7 +745,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -871,44 +756,46 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.oHKHSbFfmBgFfvW8]{Guard}</p>\n<p>You reduce the armor check penalty of armor you wear by 1 (to a minimum of 0) and increase the maximum Dexterity bonus allowed by your armor by 1.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Technique",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Guard",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": 1
         }
@@ -920,11 +807,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/keep_fighting.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -937,7 +820,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -946,7 +829,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -956,44 +840,46 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.AKI0TQ3pSwmU5twg]{Blitz}</p>\n<p>As a move action, you can spend 1 Resolve Point to regain Stamina Points equal to 2d6 + your soldier level. You can’t use this ability again until after you regain Stamina Points from a 10-minute rest. The number of Stamina Points you regain increases by 1d6 at 10th level, 15th level, and 20th level.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "3rd Technique",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Blitz",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": 1
         }
@@ -1005,10 +891,9 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -1019,7 +904,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1028,7 +913,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1038,45 +924,47 @@
           "unidentified": "",
           "value": "<p>A dragonkin can form a permanent bond with one willing non-dragonkin creature. Once this bond is made, a dragonkin cannot form another partner bond unless its current partner dies. A dragonkin and its partner can communicate with each other as if they both had telepathy with a range of 100 feet. In combat, when a dragonkin is within 30 feet of its partner, both creatures roll initiative checks separately and treat the higher result as the result for both of them.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1087,11 +975,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/iridishell-advanced.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1105,7 +989,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "heavy",
@@ -1134,7 +1018,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": 0,
@@ -1143,7 +1026,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1164,7 +1047,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1174,17 +1058,17 @@
           "unidentified": "",
           "value": "<p>These gleaming metal plates lock together to form a suit of heavy armor reminiscent of an insect’s shell. Although the iridishell was initially designed for shirrens, its beauty combined and functionality makes it a popular choice for many. More expensive suits of iridishell not only offer more protection but feature elaborate designs with gold or silver trim and embedded jewels.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": false,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 9,
         "modifiers": [],
         "price": 13100,
@@ -1193,25 +1077,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 198",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -1219,8 +1104,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1231,11 +1116,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/pulsecaster-rifle.webp",
       "system": {
-        "type": "",
         "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -1248,8 +1129,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1270,7 +1151,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": 18,
@@ -1279,7 +1159,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1321,13 +1201,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d8",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1337,9 +1230,8 @@
           "unidentified": "",
           "value": "<p>The magnetar rifle uses magnetic fields to accelerate metallic rounds to high speeds. With few moving parts that can break down, it’s a workhorse automatic rifle popular among planetary explorers.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -1347,106 +1239,31 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 9,
         "modifiers": [],
         "price": 11800,
         "proficient": true,
         "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": true,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": true,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": true,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
+          "analog": {
+            "extension": "",
+            "value": true
+          },
+          "automatic": {
+            "extension": "",
+            "value": true
+          },
+          "two": {
+            "extension": "",
+            "value": true
+          }
         },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 60
+          "value": "60"
         },
         "rollNotes": "",
         "save": {
@@ -1454,11 +1271,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 176",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1466,7 +1288,7 @@
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -1480,11 +1302,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -1497,8 +1315,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -1519,7 +1337,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "2",
         "capacity": {
           "max": 20,
@@ -1528,7 +1345,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1570,14 +1387,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d8 + @mod",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
                 "electricity": true,
-                "slashing": true
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1587,9 +1416,8 @@
           "unidentified": "",
           "value": "<p>A modern take on the traditional weapon of the dragonkin,&nbsp;the dragonglaive is a polearm in which the large slashing&nbsp;blade is electrified via embedded circuitry. These weapons&nbsp;are generally so heavy that they can be used only by Large&nbsp;creatures or creatures with Strength modifiers of at least +4.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -1597,106 +1425,31 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 8,
         "modifiers": [],
         "price": 9000,
         "proficient": true,
         "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": true,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": true,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": true,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
+          "powered": {
+            "extension": "",
+            "value": true
+          },
+          "reach": {
+            "extension": "",
+            "value": true
+          },
+          "two": {
+            "extension": "",
+            "value": true
+          }
         },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "rollNotes": "",
         "save": {
@@ -1704,11 +1457,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA1 pg. 41",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1716,7 +1474,7 @@
           "value": 1
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -1730,34 +1488,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
         "ammunitionType": "charge",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": 20,
           "value": 20
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1766,14 +1509,13 @@
           "unidentified": "",
           "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 60,
-        "quantity": "1",
+        "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": true
@@ -1785,7 +1527,6 @@
       "type": "container",
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -1804,7 +1545,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [
@@ -1829,7 +1569,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1853,7 +1593,7 @@
               "affectsEncumbrance": true,
               "amount": 1000,
               "subtype": "",
-              "weightProperty": "bulk"
+              "weightProperty": ""
             }
           ]
         },
@@ -1866,13 +1606,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1882,34 +1624,19 @@
       "type": "ammunition",
       "img": "systems/sfrpg/icons/equipment/weapons/rounds-longarm-and-sniper.webp",
       "system": {
-        "type": "",
         "ammunitionType": "roundL",
         "attributes": {
-          "ac": {
-            "value": ""
-          },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
           "value": 0
-        },
-        "damage": {
-          "parts": []
         },
         "description": {
           "chat": "",
@@ -1918,14 +1645,13 @@
           "unidentified": "",
           "value": "<p>Cased rounds are housed in magazines, which can be fitted into the appropriate weapon.</p>\n<p><strong>Capacity:</strong> 25</p>"
         },
-        "equippable": false,
-        "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
         "level": 1,
+        "modifiers": [],
         "price": 75,
         "quantity": 50,
         "quantityPerPack": 25,
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "useCapacity": false
@@ -1937,11 +1663,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/blitz.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1954,7 +1676,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1963,7 +1685,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1973,45 +1696,47 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.oKlwvc1HcIsg7Q7a]{Fighting Style}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl01_LabelName\"></span>The blitz fighting style is all about using speed and aggression to get into the thick of melee. You increase your speed and responsiveness, gain abilities that make you better at melee combat than your enemies, and keep on fighting even when surrounded by foes.</p>\n <h2>@UUID[Compendium.sfrpg.class-features.Item.bLPXnEXunSrwnIGT]{Rapid Response (Ex) (1st)}</h2>\n <p>You gain a +4 bonus to initiative checks and increase your land speed by 10 feet.</p>\n <h2>@UUID[Compendium.sfrpg.class-features.Item.yolCeVEzPKF4p6q1]{Charge Attack (Ex) (2nd)}</h2>\n <p>As a standard action, you can make a charge without the charge penalties (see page 248), and you can substitute a bull rush for the melee attack at the end of the charge. When you gain the soldier’s onslaught class feature, you can make two attacks instead of one at the end of your charge, both with a –4 penalty.</p>\n <h2>@UUID[Compendium.sfrpg.class-features.Item.m8OEzHyK2fs79LAP]{Keep Fighting (Ex) (3rd)}</h2>\n <p>As a move action, you can spend 1 Resolve Point to regain Stamina Points equal to 2d6 + your soldier level. You can’t use this ability again until after you regain Stamina Points from a 10-minute rest. The number of Stamina Points you regain increases by 1d6 at 10th level, 15th level, and 20th level.</p>\n <h2>@UUID[Compendium.sfrpg.class-features.Item.IlyzRIm03pslJJh6]{Perfect Opportunity (Ex) (4th)}</h2>\n <p>When you hit a creature with an attack of opportunity, that creature can’t move out of the squares you threaten until the start of its next turn. In addition, when an enemy takes a guarded step (see page 247) out of a square you threaten, you can make an attack of opportunity against it with a –2 penalty to the attack roll. If the target provoked an attack of opportunity by moving, hitting with your attack of opportunity ends the target’s movement immediately, preventing it from carrying out the rest of its movement.</p>\n <h2>@UUID[Compendium.sfrpg.class-features.Item.0uRrPeGV84fu4cQ7]{Against the Odds (Ex) (5th)}</h2>\n <p>You gain a bonus to melee damage rolls equal to double the number of enemies within 10 feet of you. Enemies who don’t constitute a significant threat (those with a CR equal to your level – 4 or less, or as determined by the GM) don’t count when calculating this bonus.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Fighting Style",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -2022,11 +1747,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/guard.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -2039,7 +1760,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -2048,7 +1769,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -2058,45 +1780,47 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.oKlwvc1HcIsg7Q7a]{Fighting Style}</p>\n<p><span id=\"ctl00_MainContent_DataListTalentsAll_ctl01_LabelName\"></span>The guard fighting style focuses on defense. You become adept at wearing armor, protecting against attacks, and enduring damage and other setbacks from attacks that get through your defenses.</p>\n <h2>@UUID[Compendium.sfrpg.class-features.Item.uAGN9sfUbx66jeqt]{Armor Training (Ex) (1st)}</h2>\n <p>You reduce the armor check penalty of armor you wear by 1 (to a minimum of 0) and increase the maximum Dexterity bonus allowed by your armor by 1.</p>\n <h2>@UUID[Compendium.sfrpg.class-features.Item.ISYvFdFkCBIeq5od]{Guard's Protection (Ex) (2nd)}</h2>\n <p>When an ally adjacent to you is damaged by an attack, you can use your reaction to intercede. You take half the damage, and your ally takes the other half. This has no effect on spells, and any conditions delivered by the attack apply to both of you. In addition, you are now proficient with powered armor.</p>\n <h2>@UUID[Compendium.sfrpg.class-features.Item.WLaJMhMcVxUPbr0C]{Rapid Recovery (Ex) (3rd)}</h2>\n <p>You can spend Resolve Points to ignore detrimental conditions. As a move action, you can spend 1 Resolve Point to suppress one of the following conditions for 10 minutes: exhausted, fatigued, frightened, nauseated, shaken, @UUID[Compendium.sfrpg.conditions.Item.ZacF0l6IwqBwToTJ]{Sickened}, or @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} (see pages 276–277). After 10 minutes, if the condition’s duration hasn’t ended, the condition’s effects return. You can suppress only one condition at a time; if you are both fatigued and shaken, you can avoid the effects of only one of them, and if you are affected by two different instances of the same condition, you’re still affected by the second one.</p>\n <h2>@UUID[Compendium.sfrpg.class-features.Item.bCvtws4aTTuKgfwm]{Kinetic Resistance (Ex) (4th)}</h2>\n <p>You gain DR 3/—. At 17th level, this DR increases to 5/—.</p>\n <h2>@UUID[Compendium.sfrpg.class-features.Item.wKKEJBJGT2S82JFO]{Impenetrable Defense (Ex) (5th)}</h2>\n <p>As a standard action, you can set up a strong defense for yourself and an adjacent ally. Until the start of your next turn, you gain three benefits: your damage reduction increases to DR 10/—; you and the chosen ally each gain a +4 bonus to AC; and if you use guard’s protection, you direct all the damage to yourself such that your ally takes none.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Fighting Style",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -2198,113 +1922,55 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       },
       "con": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 5,
-        "value": 10
+        "base": 5
       },
       "dex": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 10
+        "base": 2
       },
       "int": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "str": {
-        "base": 6,
-        "min": 3,
-        "misc": 0,
-        "mod": 6,
-        "value": 10
+        "base": 6
       },
       "wis": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 10
+        "base": 1
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 25,
-        "min": 0,
-        "tooltip": [],
-        "value": 25
+        "base": 25
       },
       "fort": {
-        "base": 14,
-        "bonus": 14,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 14
       },
       "hp": {
         "max": 142,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 142
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 6,
         "value": 6
       },
       "kac": {
-        "base": 27,
-        "min": 0,
-        "tooltip": [],
-        "value": 27
+        "base": 27
       },
-      "keyability": "",
       "reach": "10 ft. (15 ft. with dragonglaive)",
       "reflex": {
-        "base": 12,
-        "bonus": 12,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 12
       },
       "rp": {
         "max": 4,
-        "min": 0,
-        "tooltip": [],
         "value": 4
       },
       "space": "10 ft.",
@@ -2326,16 +1992,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 10,
-        "bonus": 10,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 10
       }
     },
     "conditions": {
@@ -2360,6 +2020,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -2375,9 +2036,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -2385,9 +2043,8 @@
     "details": {
       "type": "Dragon",
       "alignment": "LN",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -2399,7 +2056,7 @@
         "value": "<h2>Description</h2>\n<p>Native to @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}, dragonkin are smaller and more humanoid than their true dragon cousins, yet more intelligent than brutish drakes and wyverns. Even before the advent of the Gap, dragonkin had a long history of alliance with humanoids, specifically in a region on @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus} called the Skyfire Mandate, where many dragonkin carried ryphorian riders into battle against the armies of the evil dragons in the Drakelands. With the formation of the Pact, however, the Drakelands’ masters ramped back their cruelty to ostensibly legal levels; these dragons eschewed their expansionist wars in favor of biased laws, secret police forces, and corporate oligarchies. In the wake of this peace and the dawn of easily accessible space travel, the Skyfire Mandate’s famed Dragon Legion was renamed the Skyfire Legion and found a new purpose as a spacefaring mercenary league that protects innocent colony worlds that are beyond the reach of the Pact’s laws. Yet not all dragonkin and their bonded partners signed up to join the legendary militia’s new crusade, and some instead took to the stars independently to find their own fortunes.</p>\n<p>Probably the greatest distinguishing feature of the dragonkin is their near-magical ability to bond with a non-dragonkin partner, traditionally a ryphorian. Living and working together- and often training to complement each other in combat-a dragonkin and his partner can develop such a deep bond that they begin to literally read each other’s thoughts, allowing them to act with perfect synchronization. On @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}, this historically resulted in bonded pairs known as dragonrider pairs: a humanoid partner riding into combat on the dragonkin’s back and providing ranged and magical support. While there are still plenty of planet-dwelling pairs who practice this ancient form of combat, today, a dragonkin and his partner more often use their link to make an exceptional starship crew or ground assault squad. The bond between dragonkin and partner goes far beyond simple combat, however. While generally not romantically involved with each other, dragonkin and their partners act in sync in nearly every aspect of their lives and form an inseparable partnership that outside relationships must accommodate.</p>\n<p>Life among the stars has led to variation within the dragonkin race, both culturally and genetically. While dragonkin adopted the use of armor, weapons, and other tools millennia ago, this reliance has accelerated dramatically in recent centuries. Dragonkin who remain on @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus} and live according to tradition retain their abilities, yet those who make their homes in the cramped quarters of ships and space stations have a diminished ability to fly-a fact that drives a wedge between traditionalists and the newer breed, the latter of which claim that a good starship provides the only wings they need.</p>\n<p>Dragonkin tend to be intimidatingly stoic to strangers but loyal and fun with their friends. While the Skyfire Legion has an unusually heroic code of ethics for a mercenary unit, dragonkin in general are no more good or evil than humans, finding their own religious or moral codes or simply doing whatever it takes to protect their friends and families. While legionaries don’t like to admit it, many dragonkin (and even their humanoid partners) are perfectly happy working for the chromatic-run corporations on @UUID[Compendium.sfrpg.setting.Item.sRunEYMfbrHeHcl7]{Triaxus}, conducting shady operations and making sure humanoids in the Drakelands remain properly cowed. Dragonkin have a particularly complicated relationship with the vesk, as the normally aggressive reptilian race have ancient religious scriptures claiming that the spirits of the Veskarium’s greatest warriors would be reincarnated elsewhere in a form suspiciously similar to the dragonkin, and thus vesk have always treated dragonkin with respect and deference, even when their two systems were at war.</p>\n<p>The average terrestrial dragonkin is 15 to 20 feet long and weighs roughly 2,000 pounds, while the spacefaring variety can be as small as half that size.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 9,
       "environment": "any (Triaxus)",
       "organization": "solitary, bonded pair (1 and 1 partner), patrol (3-6 bonded pairs), wing (7-14 bonded pairs)",
@@ -2407,30 +2064,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA1 pg. 40",
-      "subtype": "",
-      "xp": {
-        "value": 10
-      }
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -2438,10 +2085,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -2449,10 +2095,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -2460,10 +2105,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -2471,10 +2115,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -2482,10 +2125,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -2493,10 +2135,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -2504,10 +2145,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -2515,10 +2155,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -2526,10 +2165,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -2537,10 +2175,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -2548,10 +2185,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -2559,10 +2195,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -2570,10 +2205,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -2581,10 +2215,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 22,
         "ranks": 22,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -2592,9 +2225,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -2604,10 +2235,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -2615,10 +2245,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -2626,10 +2255,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -2637,47 +2265,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -2688,19 +2309,11 @@
           "asleep"
         ]
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "Paralysis",
         "value": [
           "fire"
         ]
-      },
-      "dr": {
-        "custom": "",
-        "value": []
       },
       "dv": {
         "custom": "",
@@ -2715,9 +2328,6 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "large",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/classes/dark_matter.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,51 +37,14 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:graviton]&nbsp;Graviton Revelation</p>\n<p>As a move action, you can draw on the properties of dark matter to increase your density, allowing you to resist physical damage. You gain damage reduction 1/—. This increases to DR 2/— at 6th level and increases by 1 again every 3 solarian levels thereafter. This benefit lasts for 1 round or until you leave graviton mode. When you are attuned or fully attuned, your DR from dark matter is equal to half your solarian level.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
@@ -95,12 +55,10 @@
         "name": "Dark Matter (Su)",
         "type": "untyped",
         "condition": "",
-        "container": {
-          "actorId": "Qs2gOWidvlhDWFVK",
-          "itemId": "fOJj3YoFinXgPBYV"
-        },
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "(lookupRange(@resources.solarian.stellarMode.value, floor(@classes.solarian.levels / 2), 0, (lookupRange(@classes.solarian.levels, 0, 2, 1, 6, 2, 9, 3, 12, 4, 15, 5, 18, 6))))",
         "modifierType": "constant",
@@ -112,29 +70,31 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "2nd Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Solarian",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

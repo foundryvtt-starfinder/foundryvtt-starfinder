@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "other",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,6 +30,8 @@
         {
           "name": "",
           "formula": "(lookupRange(@classes.soldier.levels, 0, 1, 1, 7, 2, 11, 3, 15, 5, 19, 8))d(lookupRange(@classes.soldier.levels, 0, 1, 4, 3, 8))",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -41,12 +39,15 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -56,66 +57,26 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.DtbNSlkOtxaaplbr]{Mine Menace}</p>\n<p>Once per round when a mine you deployed is triggered you can increase its area of effect to also affect all squares within 10 feet of the mine. All creatures in that area take damage (Reflex half), but only the triggering creature gains the speed penalty. As a reaction when one of your mines explodes, you can choose a number of squares equal to your key ability score that aren’t affected.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "5th Technique (Soldier)",
     "rollNotes": "",
@@ -124,14 +85,19 @@
       "dc": "10+floor(@classes.soldier.levels/2) + (@classes.soldier.keyAbilityMod)",
       "descriptor": "half"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "IS, pg. 33",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

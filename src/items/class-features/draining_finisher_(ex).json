@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,63 +37,28 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.wFTC0sGqdpnZUib4]{Gear Boost}</p>\n<p>With a practiced swing, you expend all your weapon’s power into one strike. When you successfully use a melee weapon with the powered weapon special property to strike a target, you can expend all the weapon’s remaining charges to deal additional damage, after which the weapon deactivates. The amount of additional damage is equal to 1d4 for every 3 item levels the weapon has. If the weapon has at least one-fourth, one half, or three quarters of its charges remaining, the additional damage die size increases to d6s, d8s, or d10s respectively.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "a93de425-2e64-4eb0-b54c-910e05317d48",
         "name": "Draining Finisher (Ex)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-property-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "(floor(@item.level / 3))d4",
         "modifierType": "formula",
@@ -110,8 +72,10 @@
         "name": "Draining Finisher (Ex) 1/4 charges",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-property-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "(floor(@item.level / 3))d6",
         "modifierType": "formula",
@@ -125,8 +89,10 @@
         "name": "Draining Finisher (Ex) 1/2 charges",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-property-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "(floor(@item.level / 3))d8",
         "modifierType": "formula",
@@ -140,8 +106,10 @@
         "name": "Draining Finisher (Ex) 3/4 charges",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-property-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "(floor(@item.level / 3))d10",
         "modifierType": "formula",
@@ -153,30 +121,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "3rd Level (Soldier)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "IS, pg. 33",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

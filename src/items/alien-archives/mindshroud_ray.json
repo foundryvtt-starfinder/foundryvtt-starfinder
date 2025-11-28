@@ -2,6 +2,7 @@
   "_id": "mFjGCyw54B7JkyTg",
   "name": "Mindshroud Ray",
   "type": "npc2",
+  "folder": "WeG0R9FvPOiwv1Ve",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
@@ -10,11 +11,7 @@
       "type": "feat",
       "img": "icons/skills/wounds/injury-stapled-flesh-tan.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -27,7 +24,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -36,7 +33,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -46,82 +44,47 @@
           "unidentified": "",
           "value": "<p>When a mindshroud ray attached to another creature takes damage, it can use its reaction to force the attached creature to attempt a @Check[type:will|dc:13]. If the target fails, the ray reduces the damage it takes by up to 2, transferring that damage to the attached creature. This is a mind-affecting pain effect.</p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "speciesFeature",
           "combat": false,
           "specialAbilityType": "su"
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -132,11 +95,7 @@
       "type": "weapon",
       "img": "icons/creatures/claws/claw-hooked-curved.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "mwak",
         "activation": {
@@ -150,7 +109,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 10,
         "attributes": {
@@ -171,7 +130,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -205,6 +163,7 @@
               "name": "",
               "formula": "1d6 +4",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -212,12 +171,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": true,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -227,125 +189,26 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": true,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "buttressing": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "gearArray": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "healing": false,
-          "holyWater": false,
-          "hybrid": false,
-          "hydrodynamic": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "instrumental": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "propel": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "scramble": false,
-          "shape": false,
-          "shatter": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "thruster": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -355,28 +218,14 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "special": "",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
+        "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -384,8 +233,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -398,11 +247,7 @@
       "type": "feat",
       "img": "icons/magic/control/fear-fright-shadow-monster-red.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "other",
         "activation": {
@@ -415,7 +260,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -429,6 +274,7 @@
               "name": "",
               "formula": "2d6",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -436,12 +282,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "Nonlethal damage",
         "description": {
@@ -451,66 +300,26 @@
           "unidentified": "",
           "value": "<p>As a standard action, a ray deals 2d6 nonlethal damage to a visible target within 30 feet. The target also takes a -1 penalty to Intelligence-, Wisdom-, and Charisma-based checks; spell save DCs; and Will saving throws for 1 round (DC 13 Will negates). Targets the ray touches have a -2 penalty to this saving throw; the ray can touch an unwilling target by succeeding at a melee attack against the target’s EAC. A target that fails this saving throw by 5 or more is also @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{staggered} for 1 round.</p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "speciesFeature",
           "combat": false,
           "specialAbilityType": "su"
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -521,16 +330,17 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -541,11 +351,7 @@
       "type": "feat",
       "img": "icons/magic/control/fear-fright-monster-red.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "other",
         "activation": {
@@ -558,7 +364,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -572,6 +378,7 @@
               "name": "",
               "formula": "5",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -579,12 +386,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": true,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -594,66 +404,26 @@
           "unidentified": "",
           "value": "<p>As a full action when a mindshroud ray starts its turn attached to an unconscious but living aberration, animal, dragon, humanoid, magical beast, monstrous humanoid, or outsider with the native subtype, a mindshroud ray can attach to a part of the body where the target’s brain is located (usually the head). This process takes 1 minute and deals 5 piercing damage. The target and the mindshroud ray become one creature who gains the shrouded template graft and recovers from all nonlethal damage. A melded mindshroud ray can’t willingly leave the target and dies if the target does. Another creature can remove the melded mindshroud ray with 4 hours of surgery, which requires a medical lab and a successful @Check[type:medicine|dc:35].</p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "speciesFeature",
           "combat": false,
           "specialAbilityType": "su"
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -664,16 +434,17 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -684,11 +455,7 @@
       "type": "feat",
       "img": "icons/creatures/slimes/slime-giant-face-eyes.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -701,7 +468,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -710,7 +477,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -720,82 +488,47 @@
           "unidentified": "",
           "value": "<p>The creature can move through an area as small as one-quarter of its space without squeezing or one-eighth its space when squeezing.</p>\n<p><em>Format</em>:<strong>Other Abilities</strong> compression.</p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "universalCreatureRule",
           "combat": false,
           "specialAbilityType": "ex"
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA1 pg. 153",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -806,11 +539,7 @@
       "type": "feat",
       "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -823,7 +552,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -832,7 +561,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -842,82 +572,47 @@
           "unidentified": "",
           "value": "<p>A mindshroud ray’s blindsight automatically detects shrouded creatures.</p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "speciesFeature",
           "combat": false,
           "specialAbilityType": "su"
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1024,108 +719,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 1
       },
       "con": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 1
       },
       "dex": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 3
       },
       "int": {
-        "base": -3,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": -3
       },
       "str": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 2
       },
       "wis": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       }
     },
     "attributes": {
       "abilityDC": {
-        "base": "0"
+        "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
-        "base": "0"
-      },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 0
       },
       "eac": {
-        "base": 13,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 13
       },
       "fort": {
-        "base": 4,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 4
       },
       "hp": {
         "max": 25,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 25
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 0,
         "value": 3
       },
       "kac": {
-        "base": 15,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 15
       },
-      "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 4,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 4
       },
       "space": "5",
       "speed": {
@@ -1146,38 +785,10 @@
         "special": "spider climb",
         "swimming": {
           "base": 0
-        },
-        "value": null
-      },
-      "spellcasting": "",
-      "will": {
-        "base": 3,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
-      }
-    },
-    "common": {
-      "abilities": {
-        "cha": {
-          "base": 0
-        },
-        "con": {
-          "base": 0
-        },
-        "dex": {
-          "base": 0
-        },
-        "int": {
-          "base": 0
-        },
-        "str": {
-          "base": 0
-        },
-        "wis": {
-          "base": 0
         }
+      },
+      "will": {
+        "base": 3
       }
     },
     "conditions": {
@@ -1218,9 +829,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1228,9 +836,8 @@
     "details": {
       "type": "Aberration",
       "alignment": "NE",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1242,7 +849,7 @@
         "value": "<p>Mindshroud rays are cruel predators in search of hosts.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 2,
       "environment": "Any (Locus system)",
       "organization": "Solitary, pair, or clutch (3-18)",
@@ -1250,30 +857,20 @@
         "max": 18,
         "min": 3
       },
-      "race": "",
       "raceAndGrafts": "",
-      "source": "SA:LoC pg. 61",
-      "subtype": "",
-      "xp": {
-        "value": 10
-      }
+      "source": "SA:LL pg. 61",
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 7,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1281,10 +878,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1292,10 +888,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1303,10 +898,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1314,10 +908,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1325,10 +918,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1336,10 +928,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1347,10 +938,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1358,10 +948,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1369,10 +958,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1380,10 +968,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1391,10 +978,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1402,10 +988,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 7,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1413,10 +998,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1424,10 +1008,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1435,9 +1018,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1447,10 +1028,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1458,10 +1038,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1469,10 +1048,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 12,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1480,47 +1058,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1529,15 +1100,7 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
-        "custom": "",
-        "value": []
-      },
-      "dr": {
         "custom": "",
         "value": []
       },
@@ -1551,9 +1114,6 @@
       },
       "senses": "blindsight (thought) 60 ft., darkvision 60 ft.,  shroud sense",
       "size": "small",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

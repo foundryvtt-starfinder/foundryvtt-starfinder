@@ -4,11 +4,7 @@
   "type": "shield",
   "img": "systems/sfrpg/icons/default/energy-shield.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "acp": null,
     "actionTarget": "eac",
     "actionType": "mwak",
@@ -23,7 +19,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -44,7 +40,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bonus": {
       "aligned": 1,
       "wielded": 0
@@ -91,6 +86,8 @@
         {
           "name": "",
           "formula": "1d3 + @abilities.str.mod",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -98,7 +95,9 @@
             "electricity": true,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -106,6 +105,8 @@
         {
           "name": "Reaction Damage",
           "formula": "@item.level",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -113,12 +114,15 @@
             "electricity": true,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -128,122 +132,32 @@
       "unidentified": "",
       "value": "<p>A deterrence scale is a small, light shell of chitin carried with one limb and maneuvered to intercept attacks against you. A limb wielding a deterrence scale can still hold another object and be used to reload weapons, but it cannot wield weapons or other shields.</p>\n<p>A deterrence scale also can be used to make melee attacks; it is an advanced melee weapon when used in this way, dealing 1d3 electricity damage. In addition, when you have the shield aligned against a specific foe within your reach and that foe attacks you with a melee attack, you can use your reaction to shock that foe, dealing electricity damage equal to the shield’s item level; the attacker can attempt a Reflex save (DC = 10 + half the shield’s item level + your Dexterity modifier) to reduce this damage by half.</p>\n<p>A deterrence scale has the powered and stun weapon special properties. An electroplax or amperometric deterrence shield has capacity 20 and usage 1, while a galvanic or voltaic deterrence shield has capacity 40 and usage 1. A deterrence scale expends 1 charge each time you attack with it or you use a reaction to shock an attacker.</p>"
     },
-    "descriptors": [],
     "dex": null,
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 4,
     "modifiers": [],
     "price": 2200,
     "proficient": false,
     "properties": {
-      "aeon": false,
-      "amm": false,
-      "analog": false,
-      "antibiological": false,
-      "archaic": false,
-      "aurora": false,
-      "automatic": false,
-      "blast": false,
-      "block": false,
-      "boost": false,
-      "breach": false,
-      "breakdown": false,
-      "bright": false,
-      "buttressing": false,
-      "cluster": false,
-      "conceal": false,
-      "deconstruct": false,
-      "deflect": false,
-      "disarm": false,
-      "double": false,
-      "drainCharge": false,
-      "echo": false,
-      "entangle": false,
-      "explode": false,
-      "extinguish": false,
-      "feint": false,
-      "fiery": false,
-      "firstArc": false,
-      "flexibleLine": false,
-      "force": false,
-      "freeHands": false,
-      "fueled": false,
-      "gearArray": false,
-      "grapple": false,
-      "gravitation": false,
-      "guided": false,
-      "harrying": false,
-      "holyWater": false,
-      "hybrid": false,
-      "ignite": false,
-      "indirect": false,
-      "injection": false,
-      "integrated": false,
-      "line": false,
-      "living": false,
-      "lockdown": false,
-      "mind-affecting": false,
-      "mine": false,
-      "mire": false,
-      "modal": false,
-      "necrotic": false,
-      "nonlethal": true,
-      "one": false,
-      "operative": false,
-      "penetrating": false,
-      "polarize": false,
-      "polymorphic": false,
-      "powered": false,
-      "professional": false,
-      "propel": false,
-      "punchGun": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "recall": false,
-      "regrowth": false,
-      "relic": false,
-      "reposition": false,
-      "scramble": false,
-      "shape": false,
-      "shatter": false,
-      "shells": false,
-      "shield": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "sunder": false,
-      "swarm": false,
-      "tail": false,
-      "teleportive": false,
-      "thought": false,
-      "throttle": false,
-      "thrown": false,
-      "thruster": false,
-      "trip": false,
-      "two": false,
-      "unbalancing": false,
-      "underwater": false,
-      "unwieldy": false,
-      "variantBoost": false,
-      "wideLine": false
+      "nonlethal": {
+        "extension": "",
+        "value": true
+      }
     },
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
@@ -251,25 +165,15 @@
       "dc": "10 + floor(@item.level / 2) + @abilities.dex.mod",
       "descriptor": "half"
     },
-    "source": "AP #29 pg. 50",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
-    "target": {
+    "skillCheck": {
       "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
+    "source": "AP #29 pg. 50",
+    "specialMaterials": {},
+    "target": {
       "value": null
     },
     "usage": {
@@ -277,8 +181,8 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

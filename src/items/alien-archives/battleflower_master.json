@@ -2,6 +2,7 @@
   "_id": "Vd9YNOlluo9NmG2n",
   "name": "Battleflower Master",
   "type": "npc2",
+  "folder": "6rftrA1XMoEcWYk9",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
@@ -10,11 +11,7 @@
       "type": "weapon",
       "img": "icons/commodities/cloth/ribbon-green.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -49,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": null,
@@ -94,6 +90,7 @@
               "name": "",
               "formula": "5d8 +23",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -101,12 +98,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": true,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -116,7 +116,6 @@
           "unidentified": "",
           "value": "<p>The battleflowers of Ning have been using battle ribbons in ritualized combat for millennia, their use dating back to long before the Gap. The weapon is a 10-foot-long ribbon and about 3 inches wide with sharpened edges, and is employed in rippling and flowing motions around the user. Battle ribbons are difficult to use without training, so most who take up the battle ribbon seek apprenticeship with the famous battleflowers of Ning to learn the elaborate performance art—though acquiring such a mentor is difficult, as they take students only rarely. Battle ribbon varieties start with modern materials used in a traditional blade, then proceed to the innovations of the microedge and zero-edge battle ribbons.</p>\n<p><strong>Special Property:</strong> professional (dancer)</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -126,115 +125,34 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 12,
         "modifiers": [],
         "price": 35200,
         "proficient": true,
         "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": true,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "buttressing": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "gearArray": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "healing": false,
-          "holyWater": false,
-          "hybrid": false,
-          "hydrodynamic": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "instrumental": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": true,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": true,
-          "propel": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "scramble": false,
-          "shape": false,
-          "shatter": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "thruster": false,
-          "trip": false,
-          "two": true,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
+          "analog": {
+            "extension": "",
+            "value": true
+          },
+          "operative": {
+            "extension": "",
+            "value": true
+          },
+          "professional": {
+            "extension": "",
+            "value": true
+          },
+          "two": {
+            "extension": "",
+            "value": true
+          }
         },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -244,28 +162,14 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "AR pg. 13",
         "special": "",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
+        "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -287,11 +191,7 @@
       "type": "weapon",
       "img": "icons/equipment/hand/gauntlet-simple-leather-brown-gold.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -305,7 +205,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 30,
         "attributes": {
@@ -326,7 +226,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "-",
         "capacity": {
           "max": null,
@@ -335,7 +234,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": []
         },
@@ -346,13 +245,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "6d10 +23",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -362,9 +274,8 @@
           "unidentified": "",
           "value": "<p>An unarmed strike can be dealt with any limb or appendage. Unarmed strikes deal nonlethal damage, and the damage from an unarmed strike is considered weapon damage for the purposes of effects that give you a bonus to weapon damage rolls.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": true,
@@ -372,106 +283,30 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 0,
         "modifiers": [],
         "price": 0,
         "proficient": true,
         "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": true,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": true,
-          "one": true,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
+          "archaic": {
+            "extension": "",
+            "value": true
+          },
+          "nonlethal": {
+            "extension": "",
+            "value": true
+          },
+          "one": {
+            "extension": "",
+            "value": true
+          }
         },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -479,11 +314,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -491,7 +331,7 @@
           "value": null
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         },
@@ -505,11 +345,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -522,7 +358,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -531,7 +367,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -542,43 +379,8 @@
           "value": "<p>While a battleflower master is fighting in front of two or more noncombatants, whenever they successfully grapple an opponent or hit an opponent with a weapon with the Profession (dancer) weapon special property, they can attempt a Profession (dancer) check with the same DC as a check to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.6fqgiVqlA7u9jS4i#demoralize]{demoralize} that enemy (as the @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.6fqgiVqlA7u9jS4i]{Intimidate} skill) as a swift action. If the grapple attempt or attack roll is a natural 20, the battleflower master can roll twice on the demoralize attempt and take the higher roll. This is an emotion and fear effect.</p>"
         },
         "descriptors": {
-          "acid": false,
-          "air": false,
-          "auditory": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
           "emotion": true,
-          "evil": false,
-          "fear": true,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
+          "fear": true
         },
         "details": {
           "category": "feat",
@@ -587,37 +389,39 @@
         },
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -628,11 +432,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/feats/improved_combat_maneuver.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -644,8 +444,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -654,7 +454,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -664,68 +465,28 @@
           "unidentified": "",
           "value": "<p>You are particularly skilled with a specific combat maneuver.</p>\n<p><strong>Prerequisites</strong>: Base attack bonus +1.</p>\n<hr />\n<p><strong>Benefit</strong>: Choose one combat maneuver (bull rush, dirty trick, disarm, grapple, reposition, sunder, or trip). You gain a +4 bonus to your attack roll to resolve that combat maneuver.</p>\n<p><strong>Special</strong>: You can take Improved Combat Maneuver multiple times. The effects don’t stack. Each time you take the feat, it applies to a new combat maneuver.</p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "auditory": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": true,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "0b1ed051-9f1b-4c37-9ece-7c59ef4abf8b",
             "name": "Improved Combat Maneuver",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "R8aq5LrJgS9dXlid",
-              "itemId": "zefFV2dqssQbB2eI"
-            },
+            "damage": null,
             "effectType": "all-attacks",
             "enabled": false,
+            "limitTo": null,
             "max": 4,
             "modifier": "4",
             "modifierType": "formula",
@@ -737,29 +498,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -771,11 +534,7 @@
       "type": "equipment",
       "img": "icons/equipment/chest/breastplate-rivited-red.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -789,7 +548,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -818,7 +577,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -858,7 +616,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -868,17 +627,17 @@
           "unidentified": "",
           "value": "<p>Even juvenile defrex hide has layers of cartilaginous fibers that resist tearing, allowing for basic defrex hide. Adult defrex hide contains osteoderms that can deflect high-speed projectiles. Chemical treatments and modern materials can reinforce the hide to an even stronger degree.</p>\n<p><strong>Dermal Plating:</strong> A dermal plating augmentation can be installed in defrex hide armor, taking up one upgrade slot. The augmentation’s level must be equal to or lower than the armor’s item level.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": true,
         "equipped": false,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 16,
         "modifiers": [],
         "price": 142000,
@@ -887,40 +646,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
-        "source": "AA3 pg. 13",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
+        "source": "AA3 pg. 13",
+        "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -928,8 +673,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -940,11 +685,7 @@
       "type": "shield",
       "img": "systems/sfrpg/icons/default/energy-shield.svg",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "acp": 0,
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -959,7 +700,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "attributes": {
@@ -980,7 +721,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bonus": {
           "aligned": 3,
           "wielded": 1
@@ -1027,6 +767,8 @@
             {
               "name": "",
               "formula": "1d3 + @abilities.str.mod",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": true,
@@ -1034,12 +776,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1049,122 +794,32 @@
           "unidentified": "",
           "value": "<p>Manufactured by Veskarium engineers for quick deployment, irising shields are cited by vesk soldiers to be life-saving implements of battle. An irising shield is made of flexible, lightweight material that can be compressed into a small, rectangular container worn on your forearm (usually attached to the outside of your armor). You wield an irising shield by deploying it from its container as a swift action, and it can be stored with another swift action. While you have an irising shield deployed, you can’t switch it to another hand. A hand wielding an irising shield can hold another object, but it can’t wield weapons or other shields. An irising shield is an object of light bulk when not deployed but increases to 1 bulk when deployed. You can use an irising shield to make a special unarmed attack that does not count as archaic.</p>"
         },
-        "descriptors": [],
         "dex": null,
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": true,
         "equipped": false,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 16,
         "modifiers": [],
         "price": 175000,
         "proficient": false,
         "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "buttressing": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "gearArray": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": true,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "propel": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "scramble": false,
-          "shape": false,
-          "shatter": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "thruster": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
+          "nonlethal": {
+            "extension": "",
+            "value": true
+          }
         },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -1172,25 +827,15 @@
           "dc": "",
           "descriptor": "negate"
         },
-        "source": "NS pg. 151",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
-        "target": {
+        "skillCheck": {
           "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "NS pg. 151",
+        "specialMaterials": {},
+        "target": {
           "value": null
         },
         "usage": {
@@ -1198,8 +843,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1210,11 +855,7 @@
       "type": "weapon",
       "img": "icons/commodities/cloth/ribbon-green.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -1249,7 +890,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": null,
@@ -1294,6 +934,7 @@
               "name": "",
               "formula": "5d8 + @abilities.str.mod",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -1301,12 +942,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": true,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1316,7 +960,6 @@
           "unidentified": "",
           "value": "<p>The battleflowers of Ning have been using battle ribbons in ritualized combat for millennia, their use dating back to long before the Gap. The weapon is a 10-foot-long ribbon and about 3 inches wide with sharpened edges, and is employed in rippling and flowing motions around the user. Battle ribbons are difficult to use without training, so most who take up the battle ribbon seek apprenticeship with the famous battleflowers of Ning to learn the elaborate performance art—though acquiring such a mentor is difficult, as they take students only rarely. Battle ribbon varieties start with modern materials used in a traditional blade, then proceed to the innovations of the microedge and zero-edge battle ribbons.</p>\n<p><strong>Special Property:</strong> professional (dancer)</p>"
         },
-        "descriptors": [],
         "duration": {
           "units": "text",
           "value": ""
@@ -1326,115 +969,34 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 12,
         "modifiers": [],
         "price": 35200,
         "proficient": true,
         "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": true,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "buttressing": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "gearArray": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "healing": false,
-          "holyWater": false,
-          "hybrid": false,
-          "hydrodynamic": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "instrumental": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": true,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": true,
-          "propel": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "scramble": false,
-          "shape": false,
-          "shatter": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "thruster": false,
-          "trip": false,
-          "two": true,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
+          "analog": {
+            "extension": "",
+            "value": true
+          },
+          "operative": {
+            "extension": "",
+            "value": true
+          },
+          "professional": {
+            "extension": "",
+            "value": true
+          },
+          "two": {
+            "extension": "",
+            "value": true
+          }
         },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1444,28 +1006,14 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "AR pg. 13",
         "special": "",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
+        "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1487,7 +1035,6 @@
       "type": "container",
       "img": "systems/sfrpg/icons/default/briefcase.svg",
       "system": {
-        "type": "",
         "attributes": {
           "ac": {
             "value": ""
@@ -1506,7 +1053,6 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "L",
         "container": {
           "contents": [
@@ -1523,7 +1069,7 @@
               "index": 0
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1547,7 +1093,7 @@
               "affectsEncumbrance": true,
               "amount": 1000,
               "subtype": "",
-              "weightProperty": "bulk"
+              "weightProperty": ""
             }
           ]
         },
@@ -1560,13 +1106,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
+        "proficient": false,
         "quantity": 1,
         "quantityPerPack": 1,
+        "slug": "",
         "source": ""
       }
     },
@@ -1576,11 +1124,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1593,7 +1137,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1602,7 +1146,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1612,68 +1157,28 @@
           "unidentified": "",
           "value": "<p>Summerborn ryphorians gain fire resistance 5. Winterborn ryphorians gain cold resistance 5. Transitional ryphorians gain cold and fire resistance 2, and when in conditions of severe cold or heat, they have to attempt Fortitude saves only once per hour instead of once every 10 minutes. A ryphorian can stack this natural resistance with one other form of resistance.</p>\n<p><em></em></p><em><p>Enable and edit chosen resistance in the Modifiers tab.</p></em><p><em>The system does not currently allow stacking energy resistances. Adjust ER in the Modifiers tab to account for this.</em></p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "auditory": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "speciesFeature",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "15def881-7143-411d-b4c0-94ca9269f580",
             "name": "Trimorphic - Summerborn",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "Vd9YNOlluo9NmG2n",
-              "itemId": "TMQKPHkuVbSadS96"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": false,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -1687,12 +1192,10 @@
             "name": "Trimorphic - Winterborn",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "Vd9YNOlluo9NmG2n",
-              "itemId": "TMQKPHkuVbSadS96"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": false,
+            "limitTo": null,
             "max": 5,
             "modifier": "5",
             "modifierType": "constant",
@@ -1706,12 +1209,10 @@
             "name": "Trimorphic - Transitional",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "Vd9YNOlluo9NmG2n",
-              "itemId": "TMQKPHkuVbSadS96"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -1725,12 +1226,10 @@
             "name": "Trimorphic - Transitional",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "Vd9YNOlluo9NmG2n",
-              "itemId": "TMQKPHkuVbSadS96"
-            },
+            "damage": null,
             "effectType": "energy-resistance",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "constant",
@@ -1742,29 +1241,31 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "Ryphorian",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA1 pg. 96",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -1867,108 +1368,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 5
       },
       "con": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "dex": {
-        "base": 10,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 10
       },
       "int": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "str": {
-        "base": 7,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 7
       },
       "wis": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       }
     },
     "attributes": {
       "abilityDC": {
-        "base": "0"
+        "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
-        "base": "0"
-      },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 0
       },
       "eac": {
-        "base": 30,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 30
       },
       "fort": {
-        "base": 18,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 18
       },
       "hp": {
         "max": 300,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 300
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 0,
         "value": 10
       },
       "kac": {
-        "base": 32,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 32
       },
-      "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 20,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 20
       },
       "space": "5",
       "speed": {
@@ -1989,38 +1434,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
-      },
-      "spellcasting": "",
-      "will": {
-        "base": 14,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
-      }
-    },
-    "common": {
-      "abilities": {
-        "cha": {
-          "base": 0
-        },
-        "con": {
-          "base": 0
-        },
-        "dex": {
-          "base": 0
-        },
-        "int": {
-          "base": 0
-        },
-        "str": {
-          "base": 0
-        },
-        "wis": {
-          "base": 0
         }
+      },
+      "will": {
+        "base": 14
       }
     },
     "conditions": {
@@ -2061,9 +1478,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -2071,9 +1485,8 @@
     "details": {
       "type": "Humanoid",
       "alignment": "LN",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -2085,7 +1498,6 @@
         "value": "<h2>SPORTS FIGURES</h2><p>Across the universe, sapient species have independently discovered the societal benefits of friendly (and not-so-friendly) competition—as well as the fame and fortune that can be made by widely broadcasting such competitions to die-hard fans. While some cultures thrive on intellectual games of skill and strategy, others revel in fast-paced displays of martial might, brute strength, or deadly struggle. No matter the culture, those who succeed in these displays of wit and brawn can amass quite a bit of wealth, cultural clout, and even interplanetary notoriety. Sports figures are direct and to-the-point combatants with a focus on physicality, dexterity, or brute force, and they can easily serve in any role where violence is a means to an end.</p>\n<p>Re-skinned sports figures might serve as flashy mercenaries, daring pirates, specially trained guards, or hired muscle.</p><h3>BATTLEFLOWER MASTER</h3><p>The battleflowers of Ning are among the most famed martial artists within the Pact Worlds. Their rigorous training regimen incorporates multiple styles from across</p>\n<p>the galaxy and celebrates innovation, as long as it contributes to the greater culture of elaborate ritual combats for the entertainment of massive, dedicated crowds.</p>",
         "weight": ""
       },
-      "class": "",
       "combatRole": "",
       "cr": 16,
       "environment": "",
@@ -2094,30 +1506,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "Transitional ryphorian",
       "source": "IS pg. 179",
-      "subtype": "Ryphorian",
-      "xp": {
-        "value": 10
-      }
+      "subtype": "Ryphorian"
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 28,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -2125,10 +1527,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 28,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -2136,10 +1537,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -2147,10 +1547,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -2158,10 +1557,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -2169,10 +1567,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -2180,10 +1577,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -2191,10 +1587,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -2202,10 +1597,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -2213,10 +1607,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -2224,10 +1617,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -2235,10 +1627,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -2246,10 +1637,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 33,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -2257,10 +1647,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -2268,10 +1657,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -2279,10 +1667,7 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
-        "notes": "",
         "ranks": 33,
         "subname": "Dancer",
         "value": 3
@@ -2292,10 +1677,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -2303,10 +1687,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -2314,10 +1697,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -2325,47 +1707,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -2374,15 +1749,7 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
-        "custom": "",
-        "value": []
-      },
-      "dr": {
         "custom": "",
         "value": []
       },
@@ -2399,9 +1766,6 @@
       },
       "senses": "low-light vision",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

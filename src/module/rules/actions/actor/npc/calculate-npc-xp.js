@@ -14,6 +14,7 @@ export default function(engine) {
     };
 
     engine.closures.add("calculateNpcXp", (fact) => {
+        if (!fact.data.details.xp) fact.data.details.xp = {};
         fact.data.details.xp.value = getCRExp(fact.data.details.cr.value || fact.data.details.cr);
 
         return fact;

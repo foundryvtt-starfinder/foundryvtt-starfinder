@@ -12,7 +12,6 @@ import { getManifest, measureTime } from "./util.js";
 let cookErrorCount = 0;
 let cookAborted = false;
 const packErrors = {};
-let limitToPack = null;
 const runFormattingCheck = true;
 
 const sizeLookup = {
@@ -31,24 +30,18 @@ const sizeLookup = {
 const modulePath = url.fileURLToPath(import.meta.url);
 if (path.resolve(modulePath) === path.resolve(process.argv[1])) {
     await measureTime(async () => {
-        await cook();
+        await cook({limitToPack: process.env.npm_config_pack ?? null});
         console.log(`---`);
 
-        await unpackPacks(true);
+        await unpackPacks(true, {limitToPack: process.env.npm_config_pack ?? null});
     });
 
     process.exit(0);
 }
 
-export async function cook() {
+export async function cook(options = {}) {
     console.log(chalk.blueBright(`Cooking db files`));
-
-    for (let i = 3; i < process.argv.length; i++) {
-        if (process.argv[i] === '--pack') {
-            limitToPack = process.argv[i + 1];
-            i++;
-        }
-    }
+    const limitToPack = options.limitToPack ?? null;
 
     const compendiumMap = {};
     const allItems = [];
@@ -88,10 +81,10 @@ export async function cook() {
         return compendiumMap[a].length - compendiumMap[b].length;
     });
 
+    const idList = [];
     for (const directory of directories) {
         const itemSourceDir = `${sourceDir}/${directory}`;
         const outputDir = `dist/packs/${directory}`;
-
         const parsedFiles = [];
 
         const loadFile = async (file) => {
@@ -111,6 +104,12 @@ export async function cook() {
                         jsonInput.img = "icons/svg/mystery-man.svg";
                     }
 
+                    // Check for duplicate _id's on items
+                    if (idList.indexOf(jsonInput._id) !== -1) {
+                        throw new Error(`duplicate _id ${jsonInput._id}`);
+                    } else {
+                        idList.push(jsonInput._id);
+                    }
                 }
 
                 compendiumMap[directory][jsonInput._id] = jsonInput;
@@ -124,7 +123,12 @@ export async function cook() {
                 if (!(directory in packErrors)) {
                     packErrors[directory] = [];
                 }
-                packErrors[directory].push(`${chalk.bold(filePath)}: Error parsing file: ${err}`);
+                packErrors[directory].push(
+                    `Error parsing file '${filePath.substring(
+                        filePath.indexOf("items/") + 6,
+                        filePath.lastIndexOf(".json") + 5
+                    )}' | ${err}`
+                );
                 cookErrorCount++;
                 return;
             }
@@ -134,9 +138,7 @@ export async function cook() {
         const readPromises = [];
         for (const file of compendiumMap[directory].values()) {
             if (file === "_folders.json") continue;
-
             readPromises.push(loadFile(file));
-
         }
 
         const parsedFolders = await (async () => {
@@ -146,7 +148,7 @@ export async function cook() {
                 const foldersSource = (() => {
                     try {
                         return JSON.parse(jsonString);
-                    } catch (error) {
+                    } catch (err) {
                         if (!(directory in packErrors)) {
                             packErrors[directory] = [];
                         }
@@ -417,17 +419,42 @@ export function sanitizeJSON(jsonInput) {
         }
     };
 
+    const cleanTypedObjectFields = (item) => {
+        const hasMaterials = !!item.system?.specialMaterials;
+        if (hasMaterials) {
+            for (const [name, hasMaterial] of Object.entries(item.system.specialMaterials)) {
+                if (!hasMaterial) delete item.system.specialMaterials[name];
+            }
+        }
+
+        const hasProperties = !!item.system?.properties;
+        if (hasProperties) {
+            for (const [name, hasProperty] of Object.entries(item.system.properties)) {
+                if (!hasProperty.value) delete item.system.properties[name];
+            }
+        }
+
+        const hasDescriptors = !!item.system?.descriptors;
+        if (hasDescriptors) {
+            for (const [name, hasDescriptor] of Object.entries(item.system.descriptors)) {
+                if (!hasDescriptor) delete item.system.descriptors[name];
+            }
+        }
+    };
+
     delete jsonInput?.flags?.core?.sourceId;
 
     treeShake(jsonInput);
     cleanFlags(jsonInput);
     sanitizeDescription(jsonInput);
+    cleanTypedObjectFields(jsonInput);
 
     if (jsonInput.items) {
         for (const item of jsonInput.items) {
             treeShake(item);
             cleanFlags(item);
             sanitizeDescription(item);
+            cleanTypedObjectFields(item);
         }
     }
 

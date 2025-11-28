@@ -1,5 +1,62 @@
+import { SFRPGEffectType } from "../../../../modifiers/types.js";
+
 export default function(engine) {
-    engine.closures.add("calculateStarshipArmorClass", (fact) => {
+    const processModifier = (bonus, data) => {
+        let computedBonus = 0;
+        try {
+            const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
+            computedBonus = roll.total;
+        } catch (e) {
+            console.error(e);
+        }
+        return computedBonus;
+    };
+
+    const applyStackedModifiers = (stackedModifiers, data) => {
+        return Object.entries(stackedModifiers).reduce((sum, mod) => {
+            for (const bonus of mod[1]) {
+                sum += processModifier(bonus, data);
+            }
+            return sum;
+        }, 0);
+    };
+
+    const applyQuadrantACModifiers = (fact, context, data, addScore, quadrant, effectType) => {
+        const modifiers = fact.modifiers.filter(mod => mod.enabled && mod.effectType === effectType);
+
+        if (modifiers.length > 0) {
+            const stackedModifiers = context.parameters.stackModifiers.process(
+                modifiers,
+                context,
+                {actor: fact.actor}
+            );
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data);
+            if (modifierBonus !== 0) {
+                addScore(data.quadrants[quadrant].ac, "SFRPG.StarshipSheet.Modifiers.MiscModifier", modifierBonus);
+            }
+        }
+    };
+
+    const applyAllACModifiers = (fact, context, data, addScore) => {
+        const allACModifiers = fact.modifiers.filter(mod => mod.enabled && mod.effectType === SFRPGEffectType.STARSHIP_ALL_AC);
+
+        if (allACModifiers.length > 0) {
+            const stackedModifiers = context.parameters.stackModifiers.process(
+                allACModifiers,
+                context,
+                {actor: fact.actor}
+            );
+            const modifierBonus = applyStackedModifiers(stackedModifiers, data);
+            if (modifierBonus !== 0) {
+                addScore(data.quadrants.forward.ac, "SFRPG.StarshipSheet.Modifiers.MiscModifier", modifierBonus);
+                addScore(data.quadrants.port.ac, "SFRPG.StarshipSheet.Modifiers.MiscModifier", modifierBonus);
+                addScore(data.quadrants.starboard.ac, "SFRPG.StarshipSheet.Modifiers.MiscModifier", modifierBonus);
+                addScore(data.quadrants.aft.ac, "SFRPG.StarshipSheet.Modifiers.MiscModifier", modifierBonus);
+            }
+        }
+    };
+
+    engine.closures.add("calculateStarshipArmorClass", (fact, context) => {
         const data = fact.data;
         const actor = fact.actor;
 
@@ -102,6 +159,15 @@ export default function(engine) {
 
         }
 
+        // Apply quadrant-specific AC modifiers
+        applyQuadrantACModifiers(fact, context, data, addScore, 'forward', SFRPGEffectType.STARSHIP_FORWARD_AC);
+        applyQuadrantACModifiers(fact, context, data, addScore, 'port', SFRPGEffectType.STARSHIP_PORT_AC);
+        applyQuadrantACModifiers(fact, context, data, addScore, 'starboard', SFRPGEffectType.STARSHIP_STARBOARD_AC);
+        applyQuadrantACModifiers(fact, context, data, addScore, 'aft', SFRPGEffectType.STARSHIP_AFT_AC);
+
+        // Apply all AC modifiers (affects all quadrants)
+        applyAllACModifiers(fact, context, data, addScore);
+
         return fact;
-    });
+    }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] });
 }

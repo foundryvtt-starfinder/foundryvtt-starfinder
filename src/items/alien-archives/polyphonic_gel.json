@@ -2,6 +2,7 @@
   "_id": "UhTAEaez78nPCvXy",
   "name": "Polyphonic Gel",
   "type": "npc2",
+  "folder": "oDeSIpQmKhLBZHHW",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
@@ -10,7 +11,6 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "eac",
         "actionType": "mwak",
@@ -25,7 +25,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 6,
         "attributes": {
@@ -46,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -55,7 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -77,13 +76,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6+2",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
                 "sonic": true
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -93,17 +105,16 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -113,22 +124,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -136,8 +149,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -150,11 +163,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "mwak",
         "activation": {
@@ -167,7 +176,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 6,
         "chatFlavor": "",
@@ -176,7 +185,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -186,29 +196,26 @@
           "unidentified": "",
           "value": "<p>(EX)</p>\n<p>The creature can attempt a special attack against KAC as a standard action. If it succeeds, it deals no damage, but it adheres to its target. Once attached, the creature gains a +4 bonus to its AC (from cover) and a +2 circumstance bonus to melee attacks, but it can attack only the creature to which it is attached. An attached creature can’t move (though it moves with its target), take actions that require two hands, or make attacks of opportunity. An attached creature can be removed with a successful Strength check (DC = 10 + 1-1/2 × the creature’s CR) made as a move action, or it can remove itself from its target as a move action.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -217,14 +224,19 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -235,11 +247,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -252,19 +260,17 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
-        "container": {
-          "contents": []
-        },
         "critical": {
           "effect": "",
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -274,45 +280,47 @@
           "unidentified": "",
           "value": "<p>When the polyphonic gel deals sonic damage to a creature it’s attached to, it deals an equal amount of sonic damage to the target’s armor as well. This damage ignores half of the armor’s hardness, rounded up.&nbsp;</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -323,11 +331,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -340,7 +344,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -349,7 +353,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -359,26 +364,28 @@
           "unidentified": "",
           "value": "<p>Whenever a polyphonic plasm would take sonic damage, it absorbs that energy instead. The stored vibrations amplify the creature’s sonic waves, increasing damage dealt by the ooze’s next pseudopod attack before the end of its next turn by 2d6.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "e0b1b8a7-e95c-40f8-b874-7c93cf6da322",
             "name": "Amplify Frequency",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "all-damage",
             "enabled": true,
+            "limitTo": null,
             "max": 6,
             "modifier": "1d6",
             "modifierType": "formula",
@@ -390,30 +397,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -515,108 +524,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "con": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 16
+        "base": 3
       },
       "dex": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 12
+        "base": 1
       },
       "int": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "str": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 14
+        "base": 2
       },
       "wis": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 10,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 10
       },
       "fort": {
-        "base": 4,
-        "bonus": 4,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 4
       },
       "hp": {
         "max": 17,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 17
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 1,
         "value": 1
       },
       "kac": {
-        "base": 11,
-        "min": 0,
-        "tooltip": [],
-        "value": 11
+        "base": 11
       },
-      "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 0,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 0
       },
       "space": "",
       "speed": {
@@ -637,19 +590,12 @@
         "special": "original base: 15 ft.; original special: climb 15 ft.",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": -2,
-        "bonus": -2,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 0
       }
     },
-    "classes": {},
     "conditions": {
       "asleep": false,
       "bleeding": false,
@@ -672,6 +618,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -687,9 +634,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -697,9 +641,8 @@
     "details": {
       "type": "Ooze",
       "alignment": "N",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -711,37 +654,28 @@
         "value": "<h2>Description</h2>\n<p>A polyphonic gel resembles smoked glass that pulses with multicolored lights in time to an unpredictable rhythm. This ooze is actually an organic, semi-fluid mass of millions of flexible fibers that constantly vibrate to produce audible frequencies, ranging from hauntingly beautiful to shrill and discordant. These captivating displays often lure observers who mistake their performances and languidly extended pseudopods for friendly gestures. Such observers soon discover that the gels’ bodies course with sonic vibrations that can devastate flesh, bone, and steel as well as break prey into edible chunks.</p>\n<p>Although polyphonic gels seem to draw some nutrition out of physical material, they primarily feed on sound. When feeding, a gel sends out countless pulses that resonate off their prey’s body, the echoes fueling their metabolism. Each absorbed sound also helps the gel form new fibers, like a brain forging fresh neurons while learning, as the sounds create each fiber and shape its texture. In this way, polyphonic gels gradually grow—physically and in their sound vocabulary—when exposed to new sounds.</p>\n<p>Polyphonic gels can survive indefinitely if exposed to periodic sound, like a noisy fan or the rush of a waterfall. However, they grow only when supplied a range of sounds and materials to absorb. In practice, the mindless oozes manifest cravings for different sounds that drive them to search for novel prey or specific material types. Polyphonic gels sometimes slither frantically past other food sources in search of a specific type of crystal or pitch of dwarven scream. Previously docile specimens kept in captivity for study often develop these cravings, too. Despite their keepers’ best attempts to provide a balanced diet, the oozes’ desires can lead to catastrophic breakouts when they disintegrate their holding cells. When fed a varied diet, polyphonic gels can grow with extraordinary speed, doubling in size in a matter of days. Conversely, those oozes deprived of sound altogether (including any trapped in the vacuum of space) starve and gradually wither.</p>\n<p>Polyphonic gels can serve as a repository of sounds. In practice, they might repeat their prey’s garbled last words, crooning nonsense phrases with the haunting voices of the departed. Theoretically, though, it should be possible to elicit specific sounds from these oozes by isolating the key fibers, agitating them, and recording the output. Engineering tests have managed only small successes to date, however, and most consider anything more as impractical.</p>\n<p>Early in life, a polyphonic gel spans about 2–3 feet in diameter and weighs a mere 20 pounds. It grows in proportion to its sound absorption and reaches polyphonic plasm status when it spans almost 10 feet across and weighs 400 pounds. Beyond this size, the oozes rarely dedicate nutrients to additional growth, instead focusing on reproduction by budding a new gel that carries away a fraction of its parent’s sonic repertoire. Even when independent, gels tend to shadow their parent plasms until lured away by tempting new stimuli. Gels of all sizes periodically seek each other out, forming concerts of a dozen or more gels that sing to each other for days on end. The purpose of these gatherings remains unknown. They rarely result in growth, and since the oozes lack any true nervous tissue (much less minds), it seems unclear if these gatherings hold social value for the creatures, though they appear visibly calmed afterward. However, the gels often turn on anyone who interrupts their songs.</p>\n<p>Despite the dangers associated with polyphonic gels, they’re easy to detect and slow-moving, allowing careful xenobiologists and other researchers to study them with relative ease. Some Shelynites consider the oozes sacred, believing the creatures’ songs encode messages from the Eternal Rose herself. Worshippers have compiled years-long recordings and distributed them across Pact Worlds infospheres for free, and while the acolytes try to decode these soundscapes to understand their goddess, digital music artists have shamelessly sampled the files in hundreds of songs. These musical byproducts as well as the alien tones that only the gels can create only reinforce the Shelynites’ belief that polyphonic gels sing with divine will. Some priests happily shepherd these oozes across alien landscapes to help their charges learn new music. Though the priests might have good intentions, the wild and willful gels regularly escape to pursue some distant tune or tone. With so many incidents, several Pact Worlds have condemned and criminalized this expression of Shelyn’s faith.</p>\n<h3>Polyphonic Buffer Augmentation</h3>\n<p>Bioengineers studying polyphonic gels have synthesized an inorganic compound that can stymie echolocation and disperse destructive sound waves.</p>\n<p>Designed from a synthetic protoplasm that deadens and bends&nbsp;sonic vibrations, this skin graft gives you sonic resistance&nbsp;5. In addition, you can activate the graft to emit constant,&nbsp;erratic vibrations that interfere with blindsense (sound) and&nbsp;blindsight (sound). While activated, creatures can detect you&nbsp;with blindsense (sound) at only one-third the normal range,&nbsp;whereas creatures with blindsight (sound) gain only the&nbsp;benefits of blindsense when detecting you. The graft remains&nbsp;activated for 5 minutes or until deactivated, after which it&nbsp;can’t be activated again until you rest for 10 minutes to regain&nbsp;Stamina Points, though you can spend 1 Resolve Point to&nbsp;recharge it immediately.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any land</p>\n<h3>Organization</h3>\n<p>solitary, pair, or concert (3-12)</p>",
         "weight": ""
       },
-      "class": "",
-      "cr": 0.5,
+      "combatRole": "",
+      "cr": 1,
       "environment": "",
       "organization": "",
       "organizationSize": {
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 84",
-      "xp": {
-        "value": 200
-      }
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -749,10 +683,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 9,
         "ranks": 9,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -760,10 +693,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -771,10 +703,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -782,10 +713,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -793,10 +723,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -804,10 +733,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -815,10 +743,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -826,10 +753,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -837,10 +763,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -848,10 +773,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -859,10 +783,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -870,10 +793,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 4,
         "ranks": 4,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -881,10 +803,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -892,10 +813,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -903,9 +823,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -915,10 +833,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -926,10 +843,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -937,10 +853,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -948,47 +863,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -997,19 +905,11 @@
         "custom": "Ooze Immunities",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "Ooze Immunities",
         "value": [
           "sonic"
         ]
-      },
-      "dr": {
-        "custom": "",
-        "value": []
       },
       "dv": {
         "custom": "",
@@ -1021,9 +921,6 @@
       },
       "senses": "blindsight (sound) 120 ft.",
       "size": "small",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

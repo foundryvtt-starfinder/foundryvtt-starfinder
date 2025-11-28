@@ -35,7 +35,6 @@ import calculateMovementSpeeds from './rules/actions/actor/calculate-movement-sp
 import calculateSaveModifiers from './rules/actions/actor/calculate-save-modifiers.js';
 import calculateSkillModifiers from './rules/actions/actor/calculate-skill-modifiers.js';
 import calculateTimedEffects from "./rules/actions/actor/calculate-timed-effects.js";
-import clearTooltips from './rules/actions/actor/clear-tooltips.js';
 import logToConsole from './rules/actions/log.js';
 import stackModifiers from './rules/actions/modifiers/stack-modifiers.js';
 import isActorType from './rules/conditions/is-actor-type.js';
@@ -109,7 +108,6 @@ export default function(engine) {
     setResult(engine);
     undefinedClosure(engine);
     // Actor actions
-    clearTooltips(engine);
     calculateBaseAbilityScore(engine);
     calculateBulkAndWealth(engine);
     calculateActorResources(engine);
@@ -213,7 +211,6 @@ export default function(engine) {
             {
                 when: { closure: "isActorType", type: "character" },
                 then: [
-                    "clearTooltips",
                     "calculateCharacterLevel",
                     "calculateClasses",
                     "calculateTraits",
@@ -252,7 +249,6 @@ export default function(engine) {
             {
                 when: { closure: "isActorType", type: "drone" },
                 then: [
-                    "clearTooltips",
                     "calculateDroneChassis",
                     "calculateDroneMods",
                     "calculateDroneEquipment",
@@ -285,7 +281,6 @@ export default function(engine) {
             {
                 when: { closure: "isActorType", type: "npc" },
                 then: [
-                    "clearTooltips",
                     "calculateNpcXp",
                     "calculateNpcLevel",
                     "calculateNpcDcs",
@@ -302,7 +297,6 @@ export default function(engine) {
             {
                 when: { closure: "isActorType", type: "npc2" },
                 then: [
-                    "clearTooltips",
                     "calculateNpcXp",
                     "calculateNpcLevel",
                     "calculateNpcDcs",
@@ -327,7 +321,7 @@ export default function(engine) {
             {
                 when: { closure: "isActorType", type: "starship" },
                 then: [
-                    "calculateStarshipFrame",
+                    { closure: "calculateStarshipFrame", stackModifiers: "stackModifiers" },
                     { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     "calculateStarshipCrew",
                     "calculateStarshipCritThreshold",
@@ -336,8 +330,8 @@ export default function(engine) {
                     "calculateStarshipAblative",
                     "calculateStarshipPower",
                     "calculateStarshipSensors",
-                    "calculateStarshipSpeed",
-                    "calculateStarshipArmorClass",
+                    { closure: "calculateStarshipSpeed", stackModifiers: "stackModifiers" },
+                    { closure: "calculateStarshipArmorClass", stackModifiers: "stackModifiers" },
                     "calculateStarshipTargetLock",
                     "calculateStarshipComputer",
                     "calculateStarshipCriticalStatus",
@@ -364,7 +358,7 @@ export default function(engine) {
         name: "process-items",
         description: "Take all of the item data and process it.",
         rules: [
-            "calculateSaveDC",
+            { closure: "calculateSaveDC", stackModifiers: "stackModifiers" },
             "calculateSkillDC",
             "calculateActivationDetails",
             {

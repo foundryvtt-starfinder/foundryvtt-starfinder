@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/dispel_magic.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -50,7 +46,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -67,7 +65,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -83,51 +83,14 @@
       "unidentified": "",
       "value": "<p>You project a wave of temporal disruption that batters and disorients all creatures in the area, dealing 3d6 bludgeoning damage and @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggering} affected creatures for 1 round. Creatures in the area can attempt a Fortitude saving throw, reducing the damage by half and negating the staggered condition on a success.</p>\n<p>You can cast this spell as a full action. If you do, the spell’s range increases to 40 feet, and the spell deals 3d8 bludgeoning damage instead of 3d6.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 2,
     "materials": {
@@ -143,8 +106,6 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "30"
     },
@@ -157,12 +118,13 @@
     "school": "evo",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 128",
     "sr": true,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

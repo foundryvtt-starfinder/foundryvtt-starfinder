@@ -2,6 +2,7 @@
   "_id": "68Zh2g0gInpBEmdh",
   "name": "Orocoran Ichor Lord",
   "type": "npc2",
+  "folder": "eQ1s3ipd6I4FFpkE",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
@@ -10,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -27,7 +24,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -36,7 +33,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -46,45 +44,47 @@
           "unidentified": "",
           "value": "<p>(EX)</p>\n<p>Flanking the creature does not grant any bonuses, and abilities that function only against a creature that is flanked do not function against it.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -95,11 +95,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -113,7 +109,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 15,
         "attributes": {
@@ -134,7 +130,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -143,7 +138,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -162,10 +157,22 @@
           "effect": "Bleed 1d6",
           "parts": [
             {
+              "name": "",
               "formula": "1d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -173,13 +180,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d4+9",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -189,116 +209,26 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -306,11 +236,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -318,8 +253,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -332,11 +267,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -350,7 +281,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 17,
         "attributes": {
@@ -371,7 +302,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -380,7 +310,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -402,13 +332,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d6+9",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "acid": true
+                "acid": true,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -418,116 +361,26 @@
           "unidentified": "",
           "value": "<p>As a standard action, an orocoran can spew a thin stream of vomit at a target within 30 feet. In addition to taking damage, a creature hit with this spray is subject to the orocoran’s hallucinate ability.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -535,11 +388,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -547,8 +405,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -561,11 +419,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/augure.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -584,7 +438,7 @@
           "shapable": false,
           "shape": "line",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -594,7 +448,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -604,14 +459,14 @@
           "unidentified": "",
           "value": "<p>Casting <em>augury</em> can tell you whether a particular action will bring good or bad results for you in the immediate future. Casting this spell takes intense personal focus and requires you to spend 1 Resolve Point.</p>\n<p>The chance for successfully receiving a meaningful reply is 75%; this roll is made secretly by the GM. A question may be so straightforward that a successful result is automatic, or it may be so vague as to have no chance of success. If the augury succeeds, you get one of four results.</p>\n<ul>\n<li>Weal (if the action will probably bring good results).</li>\n<li>Woe (for bad results).</li>\n<li>Weal and woe (for both).</li>\n<li>Nothing (for actions that have neither especially good nor especially bad results).</li>\n</ul>\n<p>&nbsp; If the augury isn’t successful, you get the “nothing” result. A spellcaster who gets the “nothing” result has no way to tell whether it was the consequence of a failed or successful augury.</p>\n<p>The augury can see only about 30 minutes into the future, so anything that might happen beyond that time frame does not affect the result. Thus, the result might not take into account the long-term consequences of a contemplated action. Multiple castings of <em>augury</em> by the same creature about the same topic use the same die result as the first casting.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "10d6",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -627,26 +482,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
           "type": "reflex",
-          "dc": null,
+          "dc": "",
           "descriptor": "half"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 340",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 1,
+          "max": "1",
           "per": "day",
           "value": 1
         }
@@ -658,11 +515,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/charm_monster.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -681,7 +534,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -691,7 +544,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -701,14 +555,14 @@
           "unidentified": "",
           "value": "<p>This spell functions like <em>@UUID[Compendium.sfrpg.spells.Item.3nFCrisRp2GIjbR3]{Charm Person}</em>, except the effect is not restricted by creature type.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "day",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -724,10 +578,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -736,14 +588,19 @@
           "descriptor": "half"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 342",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -755,11 +612,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mind_thrust.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -778,7 +631,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -790,11 +643,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "7d10",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -804,14 +672,14 @@
           "unidentified": "",
           "value": "<p>You divine the most vulnerable portion of your opponent’s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.</p>\n<ul>\n<li><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n<li><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n<li><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n<li><strong>th:</strong> When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is @UUID[Compendium.sfrpg.conditions.Item.JGFn4MrDZ6X5vrzU]{Fatigued} for 1 round if it fails its saving throw.</li>\n<li><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is exhausted for 1 round if it fails its save and it is @UUID[Compendium.sfrpg.conditions.Item.JGFn4MrDZ6X5vrzU]{Fatigued} for 1 round if it succeeds at its saving throw.</li>\n<li><strong>6th:</strong> When you cast&nbsp;mind thrust&nbsp;as a 6th-level spell, it deals 17d10 damage to the target. The target is exhausted and @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is @UUID[Compendium.sfrpg.conditions.Item.JGFn4MrDZ6X5vrzU]{Fatigued} for 1 round if it succeeds at its saving throw.</li>\n</ul>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 3,
         "materials": {
@@ -827,10 +695,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -839,14 +705,19 @@
           "descriptor": "half"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 365",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -858,11 +729,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/fear.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -881,7 +748,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -891,7 +758,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -901,14 +769,14 @@
           "unidentified": "",
           "value": "<p>With a single mental nudge, you can unlock one or more targets’ deepest nightmares. A target that succeeds at its Will saving throw against this spell is @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken} for 1 round.</p>\n<ul>\n<li><strong>1st:</strong> When you cast @UUID[Compendium.sfrpg.spells.Item.zZGvuXQErBrHqyS6]{Fear} as a 1st-level spell, it affects one living creature of CR 4 or lower at close range (25 feet + 5 feet/2 levels). The target must succeed at a Will saving throw or be @UUID[Compendium.sfrpg.conditions.Item.DtwiUWi8dpzkq4tM]{Frightened} for 1d4 rounds.</li>\n<li><strong>2nd:</strong> When you cast @UUID[Compendium.sfrpg.spells.Item.zZGvuXQErBrHqyS6]{Fear} as a 2nd-level spell, it affects one living creature of CR 4 or lower per 3 caster levels at medium range (100 feet + 10 feet/level), no two of which can be more than 30 feet apart. Each target must succeed at a Will saving throw or be @UUID[Compendium.sfrpg.conditions.Item.DtwiUWi8dpzkq4tM]{Frightened} for 1 minute.</li>\n<li><strong>3rd:</strong> When you cast @UUID[Compendium.sfrpg.spells.Item.zZGvuXQErBrHqyS6]{Fear} as 3rd-level spell, it affects all living creatures of CR 8 or lower in 30-foot cone-shaped burst. Each target must succeed at a Will save or become panicked for 1 minute. If cornered, a panicked creature begins cowering.</li>\n<li><strong>4th:</strong> When you cast&nbsp;@UUID[Compendium.sfrpg.spells.Item.zZGvuXQErBrHqyS6]{Fear}&nbsp;as 4th-level spell, it affects all living creatures in 30-foot cone-shaped burst regardless of CR. Each target must succeed at a Will save or become panicked for 1 minute. If cornered, a panicked creature begins cowering.</li>\n</ul>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -924,10 +792,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -936,14 +801,19 @@
           "descriptor": "partial"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 354",
         "sr": true,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -955,11 +825,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/hold_person.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -978,7 +844,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -988,7 +854,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -998,14 +865,14 @@
           "unidentified": "",
           "value": "<p>The target becomes @UUID[Compendium.sfrpg.conditions.Item.NV4qXRDgb7zTNkW2]{Paralyzed} and freezes in place. It is aware and breathes normally but can’t take any physical actions, even speech. A held creature can’t cast spells. Each round on its turn, the target can spend a full action to attempt a new saving throw to end the effect. This does not provoke attacks of opportunity. A winged creature that is @UUID[Compendium.sfrpg.conditions.Item.NV4qXRDgb7zTNkW2]{Paralyzed} can’t flap its wings and falls. A swimmer can’t swim and may drown.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1021,10 +888,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "10",
-          "per": "level",
           "units": "ft",
-          "value": 100
+          "value": "100"
         },
         "rollNotes": "",
         "save": {
@@ -1033,14 +898,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 359",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1052,11 +922,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mystic_cure.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "heal",
         "activation": {
@@ -1075,7 +941,7 @@
           "shapable": false,
           "shape": "",
           "units": "touch",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1087,11 +953,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d8 + @abilities.wis.mod",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1101,14 +982,14 @@
           "unidentified": "",
           "value": "<p>With a touch, you heal and invigorate your target, restoring a number of Hit Points. If the target regains all of its Hit Points as a result of this healing, you can apply the remaining healing to yourself, as long as you are a living creature. On the other hand, if this isn’t enough to restore all the target’s Hit Points, you can transfer any number of your own Hit Points to the target, healing the target that amount. You can’t transfer more Hit Points than you have or more Hit Points than the target is missing.</p>\n<p>Mystic cure&nbsp;restores a number of Hit Points to your target depending on the spell’s level.</p>\n<p><strong>1st:</strong> 1d8 + your Wisdom modifier</p>\n<p><strong>2nd:</strong> 3d8 + your Wisdom modifier</p>\n<p><strong>3rd:</strong> 5d8 + your Wisdom modifier</p>\n<p><strong>4th:</strong> 7d8 + your Wisdom modifier</p>\n<p><strong>5th:</strong> 9d8 + your Wisdom modifier</p>\n<p><strong>6th:</strong> 11d8 + your Wisdom modifier</p>\n<p>In addition, unlike most healing, when you cast&nbsp;mystic cure&nbsp;as a spell of 4th-level or higher, you have two options to enhance its effects. The first option is to restore an extra 5d8 Hit Points with a 4th-level mystic cure spell, an extra 7d8 Hit Points with a 5th-level mystic cure spell, or an extra 9d8 Hit Points with a 6th-level mystic cure spell. The second option is to bring a target that died within 2 rounds back to life. In addition to healing such a creature, the spell returns the target to life, and the target takes a temporary negative level for 24 hours. This spell can’t resuscitate creatures slain by death effects, creatures turned into undead, or creatures whose bodies were destroyed, significantly mutilated, disintegrated, and so on.</p>\n<p>Casting this spell doesn’t provoke attacks of opportunity.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1124,10 +1005,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -1136,14 +1014,19 @@
           "descriptor": "harmless"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1155,11 +1038,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/remove_condition_lesser.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "rsak",
         "activation": {
@@ -1178,7 +1057,7 @@
           "shapable": false,
           "shape": "",
           "units": "touch",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1188,7 +1067,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1198,14 +1078,14 @@
           "unidentified": "",
           "value": "<p>You remove any one of the following conditions affecting the target: @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken}, @UUID[Compendium.sfrpg.conditions.Item.ZacF0l6IwqBwToTJ]{Sickened}, or @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered}. If the condition is the result of a @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease} or another ongoing effect, this spell removes the condition but does not cure the @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Disease} or ongoing effect, and the target can regain the condition from that effect as normal, potentially immediately.&nbsp;Lesser remove condition&nbsp;also doesn’t cure or remove other damage or conditions the target is suffering from any source, even the same source that caused the removed condition. Since this spell’s duration is instantaneous, it does not prevent the target from gaining the condition again.</p>\n<p>Casting this spell doesn’t provoke attacks of opportunity.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -1221,10 +1101,7 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "rollNotes": "",
         "save": {
@@ -1233,14 +1110,19 @@
           "descriptor": "harmless"
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1252,11 +1134,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1269,7 +1147,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1278,7 +1156,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1286,47 +1165,49 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>An orocoran’s stomach fluids are laced with the narcotic black ichor of @UUID[Compendium.sfrpg.setting.Item.Ave5caJSxVvKFVAB]{Aucturn}. A creature hit with the orocoran’s projectile vomit must succeed at a DC 16 Will save or be confused (as per @UUID[Compendium.sfrpg.spells.Item.wSeE9HyAmM7lTdpo]{Confusion}) for [[/r 1d4 rounds]].</p>\n<table class=\"simple\" cellpadding=\"5\">\n<thead style=\"box-sizing: border-box;\">\n<tr style=\"box-sizing: border-box;\">\n<th style=\"box-sizing: border-box; padding: 15px; text-align: center; background-color: #293d8e; border: 1px solid gray; color: #ffffff;\">d%</th>\n<th style=\"box-sizing: border-box; padding: 15px; text-align: center; background-color: #293d8e; border: 1px solid gray; color: #ffffff;\">Behavior</th>\n</tr>\n</thead>\n<tbody style=\"box-sizing: border-box;\">\n<tr style=\"box-sizing: border-box;\">\n<td style=\"box-sizing: border-box; padding: 10px; border: 1px solid gray; vertical-align: top;\">1–25</td>\n<td style=\"box-sizing: border-box; padding: 10px; border: 1px solid gray; vertical-align: top;\">Act normally.</td>\n</tr>\n<tr style=\"box-sizing: border-box; background-color: #b8d7e8;\">\n<td style=\"box-sizing: border-box; padding: 10px; border: 1px solid gray; vertical-align: top;\">26–50</td>\n<td style=\"box-sizing: border-box; padding: 10px; border: 1px solid gray; vertical-align: top;\">Do nothing but babble incoherently.</td>\n</tr>\n<tr style=\"box-sizing: border-box;\">\n<td style=\"box-sizing: border-box; padding: 10px; border: 1px solid gray; vertical-align: top;\">51–75</td>\n<td style=\"box-sizing: border-box; padding: 10px; border: 1px solid gray; vertical-align: top;\">Deal 1d8 +&nbsp;<a style=\"box-sizing: border-box; background-color: transparent; color: #0742da; text-decoration-line: none;\" href=\"http://www.starjammersrd.com/the-basics/ability-scores/#Strength_Str\">Str</a>&nbsp;modifier damage to self with item in hand.</td>\n</tr>\n<tr style=\"box-sizing: border-box; background-color: #b8d7e8;\">\n<td style=\"box-sizing: border-box; padding: 10px; border: 1px solid gray; vertical-align: top;\">76–100</td>\n<td style=\"box-sizing: border-box; padding: 10px; border: 1px solid gray; vertical-align: top;\"><a style=\"box-sizing: border-box; background-color: transparent; color: #0742da; text-decoration-line: none;\" href=\"http://www.starjammersrd.com/game-mastering/combat/#Attack\">Attack</a> nearest creature.</td>\n</tr>\n</tbody>\n</table>"
+          "value": "<p>An orocoran’s stomach fluids are laced with the narcotic black ichor of @UUID[Compendium.sfrpg.setting.Item.Ave5caJSxVvKFVAB]{Aucturn}. A creature hit with the orocoran’s projectile vomit must succeed at a DC 16 Will save or be confused (as per @UUID[Compendium.sfrpg.spells.Item.wSeE9HyAmM7lTdpo]{Confusion}) for [[/r 1d4 rounds]].</p>\n<table class=\"simple\">\n<thead style=\"box-sizing:border-box\">\n<tr style=\"box-sizing:border-box\">\n<th style=\"box-sizing:border-box;padding:15px;text-align:center;background-color:#293d8e;border:1px solid gray;color:#ffffff\">d%</th>\n<th style=\"box-sizing:border-box;padding:15px;text-align:center;background-color:#293d8e;border:1px solid gray;color:#ffffff\">Behavior</th>\n</tr>\n</thead>\n<tbody style=\"box-sizing:border-box\">\n<tr style=\"box-sizing:border-box\">\n<td style=\"box-sizing:border-box;padding:10px;border:1px solid gray;vertical-align:top\">1–25</td>\n<td style=\"box-sizing:border-box;padding:10px;border:1px solid gray;vertical-align:top\">Act normally.</td>\n</tr>\n<tr style=\"box-sizing:border-box;background-color:#b8d7e8\">\n<td style=\"box-sizing:border-box;padding:10px;border:1px solid gray;vertical-align:top\">26–50</td>\n<td style=\"box-sizing:border-box;padding:10px;border:1px solid gray;vertical-align:top\">Do nothing but babble incoherently.</td>\n</tr>\n<tr style=\"box-sizing:border-box\">\n<td style=\"box-sizing:border-box;padding:10px;border:1px solid gray;vertical-align:top\">51–75</td>\n<td style=\"box-sizing:border-box;padding:10px;border:1px solid gray;vertical-align:top\">Deal 1d8 +&nbsp;<a style=\"box-sizing:border-box;background-color:transparent;color:#0742da;text-decoration-line:none\" href=\"http://www.starjammersrd.com/the-basics/ability-scores/#Strength_Str\">Str</a>&nbsp;modifier damage to self with item in hand.</td>\n</tr>\n<tr style=\"box-sizing:border-box;background-color:#b8d7e8\">\n<td style=\"box-sizing:border-box;padding:10px;border:1px solid gray;vertical-align:top\">76–100</td>\n<td style=\"box-sizing:border-box;padding:10px;border:1px solid gray;vertical-align:top\"><a style=\"box-sizing:border-box;background-color:transparent;color:#0742da;text-decoration-line:none\" href=\"http://www.starjammersrd.com/game-mastering/combat/#Attack\">Attack</a> nearest creature.</td>\n</tr>\n</tbody>\n</table>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1337,11 +1218,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/see_invisibility.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1360,7 +1237,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1370,7 +1247,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1380,14 +1258,14 @@
           "unidentified": "",
           "value": "<p>You can see any invisible or ethereal objects or beings within your range of vision, as if they were normally visible. Such creatures are visible to you as translucent shapes, allowing you easily to discern the difference between visible and invisible or ethereal creatures.</p>\n<p>The spell doesn’t reveal the method used to obtain invisibility, doesn’t reveal illusions or enable you to see through opaque objects, and doesn’t reveal creatures that are simply concealed, hiding, or otherwise hard to see.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1403,27 +1281,29 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 376",
         "sr": false,
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1434,11 +1314,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/spider_climb.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -1457,7 +1333,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1467,7 +1343,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1477,14 +1354,14 @@
           "unidentified": "",
           "value": "<p>The target can climb and travel on vertical surfaces or even traverse ceilings as well as a spider does. An affected creature with four limbs must have three limbs free (not holding equipment or being used to perform skills and so on) to climb in this manner. A creature with six limbs needs only four available. In general, other creatures must have 75% of their limbs available to benefit from this spell. The target gains a climb speed of 20 feet (and the +8 species bonus to Athletics checks to climb granted by that climb speed); furthermore, it doesn’t need to attempt Athletics checks to climb to traverse a vertical or horizontal surface (even upside down). An affected creature climbing in this way is not @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-Footed} while climbing, and opponents get no special bonus to their attacks against it. The creature, however, can’t use the run action while climbing.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -1500,26 +1377,28 @@
         },
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "trs",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Starfinder Core Rulebook pg. 378",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1531,11 +1410,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/command.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -1554,7 +1429,7 @@
           "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1564,7 +1439,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1574,14 +1450,14 @@
           "unidentified": "",
           "value": "<p>You give the target one of the following commands, which it obeys to the best of its ability at its earliest opportunity. If the target can’t carry out your command on its next turn, the spell automatically fails.</p>\n<p><strong>Approach</strong>: The target moves toward you as quickly and directly as possible for 1 round, taking no other actions and triggering reactions (such as attacks of opportunity) for this movement as normal.</p>\n<p><strong>Drop</strong>: The target drops whatever it is holding. It can’t pick up any dropped item until its next turn.</p>\n<p><strong>Fall</strong>: The target falls to the ground and remains @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone} for 1 round. It can otherwise act normally.</p>\n<p><strong>Flee</strong>: The target moves away from you as quickly and directly as possible for 1 round, taking no other actions and provoking reactions (such as attacks of opportunity) for this movement as normal.</p>\n<p><strong>Halt</strong>: The target is @UUID[Compendium.sfrpg.conditions.Item.2XWEujYSyryB4oHm]{Dazed} for 1 round.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "1"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -1597,10 +1473,8 @@
         },
         "properties": {},
         "range": {
-          "additional": "5",
-          "per": "2 levels",
           "units": "ft",
-          "value": 25
+          "value": "25"
         },
         "rollNotes": "",
         "save": {
@@ -1609,14 +1483,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -1719,108 +1598,55 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       },
       "con": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       },
       "dex": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 10
+        "base": 4
       },
       "int": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 10
+        "base": 2
       },
       "str": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "wis": {
-        "base": 6,
-        "min": 3,
-        "misc": 0,
-        "mod": 6,
-        "value": 10
+        "base": 6
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 21,
-        "min": 0,
-        "tooltip": [],
-        "value": 21
+        "base": 21
       },
       "fort": {
-        "base": 8,
-        "bonus": 8,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 8
       },
       "hp": {
         "max": 120,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 120
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 4,
         "value": 4
       },
       "kac": {
-        "base": 22,
-        "min": 0,
-        "tooltip": [],
-        "value": 22
+        "base": 22
       },
-      "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 8,
-        "bonus": 8,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 8
       },
       "rp": {
         "max": 1,
-        "min": 0,
-        "tooltip": [],
         "value": 1
       },
       "space": "",
@@ -1842,16 +1668,10 @@
         "special": "original base: 30 ft.",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 14,
-        "bonus": 14,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 14
       }
     },
     "conditions": {
@@ -1872,13 +1692,14 @@
       "exhausted": false,
       "fascinated": false,
       "fatigued": false,
-      "flatfooted": false,
+      "flat-footed": false,
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
-      "offkilter": false,
-      "offtarget": false,
+      "off-kilter": false,
+      "off-target": false,
       "overburdened": false,
       "panicked": false,
       "paralyzed": false,
@@ -1891,9 +1712,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1901,9 +1719,8 @@
     "details": {
       "type": "Aberration",
       "alignment": "CE",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1915,7 +1732,7 @@
         "value": "<p>Native to @UUID[Compendium.sfrpg.setting.Item.Ave5caJSxVvKFVAB]{Aucturn}, orocorans maybe even predate the coming of the cults of the Elder Mythos and the Dominion of the Black, and they remain one of their world’s most populous intelligent races. Orocorans are parasites that prey on the living planet, seeking out the pulsing veins of black ichor that run beneath parts of @UUID[Compendium.sfrpg.setting.Item.Ave5caJSxVvKFVAB]{Aucturn}’s surface, drawing the liquid out with their mosquito-like proboscises. In addition to feeding the orocorans, these eldritch fluids also act as a powerful narcotic, filling the orocorans with euphoric hallucinations. Orocorans call this dream state “womb mind,” and they believe that it allows them to commune directly with the gestating consciousness of the planet itself. Indeed, there may be some truth to this idea, as even those orocorans not actively dreaming can use the ichor lingering in their systems to tap into this mystical consciousness and receive vague prophetic advice regarding their actions. Orocorans can usually be found wherever the veins of ichor flow thickest, either defending their hallucinogenic watering hole or simply lying sprawled in the grips of @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drug}-induced stupors. When not ichor dreaming, orocorans are irritable and unpredictable, in constant lowgrade pain from withdrawal symptoms. Slothful by nature, orocorans have little desire to create civilization, and they generally do so only when forced into it by more powerful races or rare orocoran individuals called ichor lords.</p>\n<p>While most orocorans have their higher faculties rotted out by the unending hunger of addiction, barely even using their telepathy to communicate, perhaps one in a thousand finds that the ichor supercharges its intellectual capacities, giving it not only a greater degree of cunning and intelligence but enhanced magical powers. These ichor lords believe themselves to be direct conduits to the mind of the sleeping planet, something between priests and avatars, and consider it their divine responsibility to organize their kin and rule over them in pursuit of the dreaming @UUID[Compendium.sfrpg.setting.Item.Ave5caJSxVvKFVAB]{Aucturn}’s goals. What exactly these goals might be varies wildly from lord to lord, but they somehow always seem to involve securing the ichor lord’s power and comfort, along with the crafting of elegant monasteries or massive fortresses to guard the local supply of ichor. These warlord-oracles control their fellows through both brute magical power and monopolization of the planet’s fluids, but the need for the ichor to be relatively fresh means that most of these makeshift kingdoms extend only as far as the local vein runs, their influence tapering as soon as the vein dives too far underground to be mined effectively. Regardless of the size of their holdings, all ichor lords and their subjects recognize the authority of the mysterious entity called Carsai the King. Though Carsai’s true nature has never been established, most orocorans believe him to be the greatest ichor lord and the ultimate prophet of their slumbering god, referring to him as the First Dreamer.</p>\n<p>Though capable of using other races’ technology—frequently armed for battle and used as shock troops by ichor lords or more organized races—threatened orocorans generally default to spewing their madness-inducing stomach fluids onto enemies, letting the fluids rot their targets’ minds, and then moving in to exsanguinate them with their proboscises. While orocorans are nearly 6 feet tall when standing upright, they prefer to run on all fours, and they usually weigh around 150 pounds. Orocorans have no gender or designated reproductive organs, and mating involves two participants piercing each other’s torsos with their proboscises to share genetic information and become pregnant. These individuals lay clutches of fertilized eggs in ichor-filled pockets gouged out of the planet’s skin, and then they abandon their young completely.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 9,
       "environment": "any (Aucturn)",
       "organization": "solitary or congregation (1 ichor lord plus 10-20 orocorans)",
@@ -1923,12 +1740,9 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA1 pg. 90",
-      "xp": {
-        "value": 10
-      }
+      "subtype": ""
     },
     "modifiers": [],
     "skills": {
@@ -1937,10 +1751,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1948,10 +1761,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1959,10 +1771,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1970,10 +1781,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1981,10 +1791,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1992,10 +1801,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -2003,10 +1811,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -2014,10 +1821,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -2025,10 +1831,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 22,
         "ranks": 22,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -2036,10 +1841,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -2047,10 +1851,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -2058,10 +1861,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 22,
         "ranks": 22,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -2069,10 +1871,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -2080,10 +1881,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -2091,10 +1891,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -2102,9 +1901,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -2114,10 +1911,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -2125,10 +1921,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -2136,10 +1931,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -2147,47 +1941,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
-        "max": "0",
-        "perClass": {},
-        "value": "0"
+        "max": 0,
+        "value": 0
       },
       "spell2": {
-        "max": "6",
-        "perClass": {},
-        "value": "6"
+        "max": 6,
+        "value": 6
       },
       "spell3": {
-        "max": "2",
-        "perClass": {},
-        "value": "2"
+        "max": 2,
+        "value": 2
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -2196,15 +1983,7 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
-        "custom": "",
-        "value": []
-      },
-      "dr": {
         "custom": "",
         "value": []
       },
@@ -2221,9 +2000,6 @@
       },
       "senses": "darkvision 60 ft., see invisibility",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

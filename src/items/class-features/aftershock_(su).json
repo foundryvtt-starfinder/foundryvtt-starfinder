@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,44 +37,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.q0sZTVGHE77Di2VU]{Solarian, Enhanced}</p>\n<p>Your most powerful revelations briefly warp reality around you, granting you a momentary advantage before the cosmos restores equilibrium.</p>\n<p>When you use a zenith revelation (including the black hole or supernova revelations), you gain a special benefit until the end of your next turn. This benefit changes based on the mode that is associated with that zenith revelation (see below). If you spend 1 Resolve Point after resolving the zenith revelation, increase the effect’s duration by [[/r 1d6]]{1d6 rounds}.</p>\n<p><strong>Graviton:</strong> You choose to either gain a +1 bonus to AC or calculate your AC using your Charisma modifier instead of your Dexterity modifier.</p>\n<p><strong>Photon:</strong> You can calculate your attack and damage modifiers using your Charisma modifier instead of your Strength or Dexterity modifier (this does not stack with the soulfire weapon fusion). Alternatively, the next successful attack you make before the end of your next turn gains a damage bonus equal to your Charisma modifier.</p>\n<p><em>Enable/Disable AC modifiers in the Modifiers tab.</em></p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -88,15 +48,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "2ada0f71-6b3c-494a-9dd1-7f6d7b090c65",
         "name": "Aftershock (Su) - AC +1",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "+1",
         "modifierType": "constant",
@@ -110,8 +72,10 @@
         "name": "Aftershock (Su) - Cha AC",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "- @abilities.dex.mod + @abilities.cha.mod",
         "modifierType": "constant",
@@ -125,8 +89,10 @@
         "name": "Aftershock (Su) - Str to Cha Attack",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "- @abilities.str.mod + @abilities.cha.mod",
         "modifierType": "formula",
@@ -140,8 +106,10 @@
         "name": "Aftershock (Su) - Dex to Cha Attack",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "- @abilities.dex.mod + @abilities.cha.mod",
         "modifierType": "formula",
@@ -155,8 +123,10 @@
         "name": "Aftershock (Su) - Str to Cha Damage",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "- @abilities.str.mod + @abilities.cha.mod",
         "modifierType": "formula",
@@ -170,8 +140,10 @@
         "name": "Aftershock (Su) - Dex to Cha Damage",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "- @abilities.dex.mod + @abilities.cha.mod",
         "modifierType": "formula",
@@ -185,8 +157,10 @@
         "name": "Aftershock (Su) - Cha Damage bonus",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "+ @abilities.cha.mod",
         "modifierType": "formula",
@@ -198,25 +172,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "8th Level Solarian Enhanced",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 67",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

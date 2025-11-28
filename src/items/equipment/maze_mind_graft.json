@@ -5,10 +5,7 @@
   "img": "icons/commodities/biological/organ-brain-pink.webp",
   "system": {
     "type": "speciesGraft",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -42,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -56,7 +52,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -66,17 +63,16 @@
       "unidentified": "",
       "value": "<p>Most @UUID[Compendium.sfrpg.races.Item.XbIjL8c0BwMi6Mo1]{nuars} have a naturally strong sense of direction Several microchips installed in your brain help you make similar connections, granting you a +2 enhancement bonus to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.2xZnjhTSiLu0uoXB]{Piloting} and @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.UDTsEIldhXTn0VJA]{Survival} checks (as long as you have 1 or more ranks in those skills). In addition, you can attempt a special level-based Wisdom check (1d20 + your level + your Wisdom modifier) instead of using your total bonus in the Piloting skill to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.2xZnjhTSiLu0uoXB#navigate]{navigate} or your total bonus in the Survival skill for @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.UDTsEIldhXTn0VJA#orienteering]{orienteering}.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 3,
     "modifiers": [
       {
@@ -84,8 +80,10 @@
         "name": "Maze Mind Graft",
         "type": "enhancement",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "ternary(gte(@skills.pil.ranks, 1), 2, 0)",
         "modifierType": "constant",
@@ -99,8 +97,10 @@
         "name": "Maze Mind Graft",
         "type": "enhancement",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "ternary(gte(@skills.pil.ranks, 1), 2, 0)",
         "modifierType": "constant",
@@ -111,30 +111,33 @@
       }
     ],
     "price": 1200,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AA4 pg. 145",
     "system": "brain",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

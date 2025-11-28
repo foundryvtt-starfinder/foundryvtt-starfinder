@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/equipment/weapons/acid_dart_rifle_complexe.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,26 +37,28 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>You are proficient with weapons with the injection weapon special property, as long as the weapon has not gained that weapon special property through a weapon fusion, spell, class feature, or similar ability or effect. At 2nd level, you gain a +1 bonus to attack rolls with these weapons. At 9th level, that bonus increases to +2, and at 18th level it increases to +3.</p>\n<p>When you hit an ally with such a weapon, you can avoid dealing damage to that ally, while still affecting the ally with the biohack booster or inhibitor, @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Drug}, medicinal compound, poison, serum, or other substance that was loaded into the injection weapon. When you fire a weapon with the injection special property and you have multiple types of ammunition loaded into the weapon, you choose which type of ammunition you fire when you attempt the attack.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "90c712c0-02db-4676-a2d0-7e3ec1b9c861",
         "name": "Injection Expert",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-property-attacks",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "lookupRange(@classes.biohacker.levels,0,2,1,9,2,18,3)",
         "modifierType": "constant",
@@ -71,30 +70,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Biohacker",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

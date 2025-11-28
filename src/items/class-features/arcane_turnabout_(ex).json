@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "other",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,26 +37,28 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.N5460NEe031AoP29]{Absorption}</p>\n<p>The circumstance bonus to saving throws provided by defensive dispersal increases to +2 against spells and spell-like abilities. When you use your defensive dispersal ability against a spell or spell-like ability and succeed the effect’s initial saving throw (or if the spell fails to overcome your spell resistance, if any), you can deflect some of the magical energy to damage a creature within 30 feet. That creature takes 1d6 force damage per level of the spell (Fortitude half), and if you target the spell’s caster with this effect, they take a –2 penalty to the saving throw.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "659a7083-559f-4ce5-9b93-aab0d5bdc268",
         "name": "Arcane Turnabout (Ex)",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": true,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "constant",
@@ -71,14 +70,11 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "13th Level",
     "rollNotes": "",
@@ -87,14 +83,19 @@
       "dc": "10+floor(@classes.nanocyte.levels/2) + @abilities.con.mod",
       "descriptor": "half"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GM pg. 26",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

@@ -4,7 +4,6 @@
   "type": "starshipAction",
   "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": {
       "resolve": true,
       "value": "15 + floor(1.5 * @ship.details.tier)"
@@ -21,10 +20,14 @@
     "formula": [
       {
         "name": "Engineering",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@engineer.skills.eng.mod"
       }
     ],
     "isPush": true,
+    "modifiers": [],
     "order": 30,
     "phase": {
       "name": "Engineering phase",
@@ -36,6 +39,7 @@
     "selectors": [
       "engineer"
     ],
+    "slug": "",
     "source": "CRB"
   }
 }

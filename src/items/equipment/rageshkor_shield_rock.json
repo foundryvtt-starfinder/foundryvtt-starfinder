@@ -4,11 +4,7 @@
   "type": "shield",
   "img": "icons/equipment/shield/heater-steel-worn.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "acp": -1,
     "actionTarget": "kac",
     "actionType": "mwak",
@@ -23,7 +19,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -44,7 +40,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bonus": {
       "aligned": 2,
       "wielded": 1
@@ -93,6 +88,8 @@
         {
           "name": "",
           "formula": "1d3 + @abilities.str.mod",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -100,12 +97,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -115,18 +115,18 @@
       "unidentified": "",
       "value": "<p>Vesk have used rageshkor frill plates for shields since ancient times. In the post-Gap era, vesk have developed high-tech versions of these shields that incorporate synthetic padding, alloyed fittings, and more to augment the natural materials while maintaining the shields’ cultural value. Although these shields can be purchased, a carrier in vesk territory should expect to be asked whether the shield was truly won (harvested from a rageshkor the wielder defeated), where the clash occurred, and how the battle fared. An earned rageshkor shield is a prestige piece that can win a warrior much respect.</p>\n<h3>Rock Rageshkor Shield</h3>\n<p>This roughly ovular shield is made of big rock rageshkor frill plates. The shield can be used to make unarmed attacks that don’t count as archaic. It also functions as if it had a @UUID[Compendium.sfrpg.equipment.Item.GlvKAoIQSImVLkFC]{Thermal capacitor, mk 1} installed, and this “upgrade” can be enhanced to higher model numbers without occupying the shield’s other upgrade slot.</p>\n<p><em>Edit modifiers in Modifier tab to enhance Thermal capacitor bonuses.</em></p>"
     },
-    "descriptors": [],
     "dex": 4,
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 12,
     "modifiers": [
       {
@@ -134,8 +134,10 @@
         "name": "Rageshkor shield",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": true,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "constant",
@@ -149,8 +151,10 @@
         "name": "Rageshkor shield",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": true,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "constant",
@@ -163,105 +167,15 @@
     "price": 37500,
     "proficient": false,
     "properties": {
-      "aeon": false,
-      "amm": false,
-      "analog": false,
-      "antibiological": false,
-      "archaic": false,
-      "aurora": false,
-      "automatic": false,
-      "blast": false,
-      "block": false,
-      "boost": false,
-      "breach": false,
-      "breakdown": false,
-      "bright": false,
-      "buttressing": false,
-      "cluster": false,
-      "conceal": false,
-      "deconstruct": false,
-      "deflect": false,
-      "disarm": false,
-      "double": false,
-      "drainCharge": false,
-      "echo": false,
-      "entangle": false,
-      "explode": false,
-      "extinguish": false,
-      "feint": false,
-      "fiery": false,
-      "firstArc": false,
-      "flexibleLine": false,
-      "force": false,
-      "freeHands": false,
-      "fueled": false,
-      "gearArray": false,
-      "grapple": false,
-      "gravitation": false,
-      "guided": false,
-      "harrying": false,
-      "holyWater": false,
-      "hybrid": false,
-      "ignite": false,
-      "indirect": false,
-      "injection": false,
-      "integrated": false,
-      "line": false,
-      "living": false,
-      "lockdown": false,
-      "mind-affecting": false,
-      "mine": false,
-      "mire": false,
-      "modal": false,
-      "necrotic": false,
-      "nonlethal": true,
-      "one": false,
-      "operative": false,
-      "penetrating": false,
-      "polarize": false,
-      "polymorphic": false,
-      "powered": false,
-      "professional": false,
-      "propel": false,
-      "punchGun": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "recall": false,
-      "regrowth": false,
-      "relic": false,
-      "reposition": false,
-      "scramble": false,
-      "shape": false,
-      "shatter": false,
-      "shells": false,
-      "shield": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "sunder": false,
-      "swarm": false,
-      "tail": false,
-      "teleportive": false,
-      "thought": false,
-      "throttle": false,
-      "thrown": false,
-      "thruster": false,
-      "trip": false,
-      "two": false,
-      "unbalancing": false,
-      "underwater": false,
-      "unwieldy": false,
-      "variantBoost": false,
-      "wideLine": false
+      "nonlethal": {
+        "extension": "",
+        "value": true
+      }
     },
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
@@ -269,25 +183,15 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "source": "AA4 pg. 97",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
-    "target": {
+    "skillCheck": {
       "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
+    "source": "AA4 pg. 97",
+    "specialMaterials": {},
+    "target": {
       "value": null
     },
     "usage": {
@@ -295,8 +199,8 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

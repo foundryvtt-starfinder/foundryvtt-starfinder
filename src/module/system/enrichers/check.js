@@ -73,6 +73,9 @@ export default class CheckEnricher extends BaseEnricher {
         const shortName = CheckNameHelper.shortFormName(this.args.type);
         const C = CONFIG.SFRPG;
 
+        // Disambiguate between "INTelligence and INTimidate"
+        if (shortName === "int") return this.args.type === "intimidate" ? "skill" : "ability";
+
         if (shortName in C.skills) return "skill";
         else if (shortName in C.saves) return "save";
         else if (shortName in C.abilities) return "ability";
@@ -81,12 +84,12 @@ export default class CheckEnricher extends BaseEnricher {
 
     get localizedType() {
         const C = CONFIG.SFRPG;
-        const type = CheckNameHelper.shortFormName(this.args.type);
+        const shortName = CheckNameHelper.shortFormName(this.args.type);
 
         switch (this.checkType) {
-            case "skill": return C.skills[type];
-            case "save": return C.saves[type];
-            case "ability": return C.abilities[type];
+            case "skill": return C.skills[shortName];
+            case "save": return C.saves[shortName];
+            case "ability": return C.abilities[shortName];
             default: return "";
         }
     }
@@ -141,7 +144,9 @@ export default class CheckEnricher extends BaseEnricher {
         };
         const id = CheckNameHelper.shortFormName(data.type);
 
-        if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, options);
+        // Disambiguate between "INTelligence and INTimidate", then select skill/save/ability
+        if (id === "int") data.type === "intimidate" ? actor.rollSkill(id, options) : actor.rollAbility(id, options);
+        else if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, options);
         else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, options);
         else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, options);
 

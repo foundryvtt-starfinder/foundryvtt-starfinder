@@ -4,11 +4,7 @@
   "type": "consumable",
   "img": "icons/consumables/potions/bottle-round-corked-blue.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -42,33 +38,16 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "chatFlavor": "",
     "consumableType": "serum",
-    "container": {
-      "contents": [],
-      "includeContentsInWealthCalculation": 1,
-      "isOpen": true,
-      "storage": [
-        {
-          "type": "slot",
-          "acceptsType": [
-            "spell"
-          ],
-          "affectsEncumbrance": false,
-          "amount": 0,
-          "subtype": "spellSlot",
-          "weightProperty": "bulk"
-        }
-      ]
-    },
     "critical": {
       "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -78,17 +57,12 @@
       "unidentified": "",
       "value": "<p>Aserum of water’s protectionlooks like a standard bottle of drinking water, but consuming it covers you with a thin layer of magically animated water. This has two effects, both of which last 1 hour. First, you gain resistance against acid and fire damage; amk 1 serum of water’s protectiongrants acid and fire resistance 5, a mk 2 serum grants acid and fire resistance 10, and a mk 3 serum grants acid and fire resistance 15. Second, you become vulnerable to cold damage, taking 50% more damage from cold effects.</p>\n<p><em>Toggle on/off the resistances in the Modifiers tab. Vulnerability to cold must be enabled in the Attributes tab of your Character Sheet.</em></p><em></em><p><em></em></p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
-    "equippable": false,
-    "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
-    "identified": true,
-    "isActive": null,
+    "isActive": false,
     "level": 4,
     "modifiers": [
       {
@@ -96,8 +70,10 @@
         "name": "Serum of water’s protection, mk 1",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": false,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "constant",
@@ -111,8 +87,10 @@
         "name": "Serum of water’s protection, mk 1",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": false,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "constant",
@@ -127,26 +105,28 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "DC pg. 113",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
       "autoDestroy": true,
       "autoUse": true,
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

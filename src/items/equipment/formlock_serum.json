@@ -4,11 +4,7 @@
   "type": "consumable",
   "img": "systems/sfrpg/icons/equipment/magic%20items/serum-x-ray.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -42,33 +38,16 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "consumableType": "serum",
-    "container": {
-      "contents": [],
-      "includeContentsInWealthCalculation": 1,
-      "isOpen": true,
-      "storage": [
-        {
-          "type": "slot",
-          "acceptsType": [
-            "spell"
-          ],
-          "affectsEncumbrance": false,
-          "amount": 0,
-          "subtype": "spellSlot",
-          "weightProperty": "bulk"
-        }
-      ]
-    },
     "critical": {
       "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -78,17 +57,12 @@
       "unidentified": "",
       "value": "<p>This flat, gray fluid has a sharp scent and bland flavor. For 1 hour after you drink this serum, you gain a +4 circumstance bonus to saving throws to resist polymorph effects and any affect that would give you a mutation, such as the mutation critical hit effect, a hesper’s mutating touch ability, or a pluprex demon’s invoke mutation ability. If you fail a saving throw against a polymorph effect or a mutation while this serum is in effect, you can spend 2 Resolve Points to reroll the failed saving throw. You must keep the results of the reroll and can’t reroll this saving throw a second time. After the results of this reroll are applied, the formlock serum’s duration immediately ends, as the last of the serum’s magic is burned from your system.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "hour",
       "value": "1"
     },
-    "equippable": false,
-    "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
-    "identified": true,
-    "isActive": null,
+    "isActive": false,
     "level": 6,
     "modifiers": [
       {
@@ -96,8 +70,10 @@
         "name": "Formlock Serum",
         "type": "circumstance",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "4",
         "modifierType": "formula",
@@ -112,20 +88,23 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 168",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

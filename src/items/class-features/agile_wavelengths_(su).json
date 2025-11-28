@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/images/cup/gameplay/graviton.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -20,8 +16,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,65 +37,30 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>@Icon[type:graviton] Graviton Revelation</p>\n<p>You have developed a technique to conduct maneuvers on the battlefield at range with your solar flare. You can attempt combat maneuvers as a ranged attack instead of a melee attack, with a range of 30 feet. Any weapon special properties your solar flare has that would affect certain combat maneuvers apply as normal. While attuned or fully attuned, you gain a +2 insight bonus to combat maneuvers attempted at range using this stellar revelation. You must have a solar flare to select this stellar revelation.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "ef003263-fd3a-46e2-a1b3-1c19c997b6f4",
         "name": "Agile Wavelengths (Su)",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "ranged-attacks",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
-        "modifier": "(lookupRange(@resources.solarian.stellarMode.value, 2, 0, 0))",
+        "modifier": "(ternary(lt(@resources.solarian.stellarMode.value, 0), 2, 0))",
         "modifierType": "formula",
         "notes": "While attuned or fully attuned, you gain a +2 insight bonus to combat maneuvers attempted at range using this stellar revelation.",
         "source": "",
@@ -108,29 +70,31 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": null,
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "2nd Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Solarian",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

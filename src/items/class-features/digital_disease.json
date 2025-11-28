@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,44 +37,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.rpaon3jF3nCe5eP9]{Theorem (Ex)}</p>\n<p>By combining your @UUID[Compendium.sfrpg.class-features.Item.lgdDuAM2I3s8PQsD]{Custom Microlab} and your @UUID[Compendium.sfrpg.class-features.Item.LlVZg2sfe3n2h2Dc]{Microlab Jack}, you have discovered a way to encode your biohacks into the stream of raw energy output from an energy weapon. You can treat one wielded weapon that deals energy damage as having the injection special property for the purposes of class abilities. This ability functions with the @UUID[Compendium.sfrpg.class-features.Item.IPDN3VDLTrrMFE2g]{Injection Expert} class feature, giving you proficiency, bonuses to attacks, and its other effects, despite the injection special property coming from a class feature.</p>\n<p>You must have the microlab jack theorem (Starfinder Tech Revolution 19) to choose this theorem.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -88,15 +48,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "bec59a70-e15e-42dc-aafc-992c9660f447",
         "name": "Digital Disease",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-property-attacks",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "lookupRange(@classes.biohacker.levels,0,2,1,9,2,18,3)",
         "modifierType": "formula",
@@ -108,25 +70,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "10th Level (Biohacker)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 34",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

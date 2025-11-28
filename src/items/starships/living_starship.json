@@ -10,21 +10,10 @@
       "type": "starshipFrame",
       "img": "systems/sfrpg/icons/default/hexagonal-nut.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
-        "costMultipliedBySize": false,
         "crew": {
           "maximum": 4,
           "minimum": 1
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
         },
         "damageThreshold": {
           "base": 0
@@ -46,6 +35,7 @@
         "modifiers": [],
         "pcu": null,
         "size": "medium",
+        "slug": "",
         "source": "EN pg. 53",
         "weaponMounts": {
           "aft": {
@@ -87,19 +77,9 @@
       "type": "starshipArmor",
       "img": "systems/sfrpg/icons/default/metal-scales.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 29,
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -107,26 +87,10 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
-        "pcu": null,
+        "slug": "",
         "source": "EN pg. 53",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
+        "specialMaterials": {},
         "targetLockPenalty": 28,
         "turnDistancePenalty": 0
       }
@@ -137,19 +101,9 @@
       "type": "starshipShield",
       "img": "systems/sfrpg/icons/default/forward-field.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "armorBonus": 0,
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "defenseValue": 0,
         "description": {
           "chat": "",
@@ -164,6 +118,7 @@
         "pcu": null,
         "regeneration": 0,
         "shieldPoints": 200,
+        "slug": "",
         "source": "EN pg. 53",
         "targetLockBonus": 0
       }
@@ -174,13 +129,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
-        "allowadd": "true",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -188,9 +138,6 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
@@ -198,9 +145,22 @@
               "formula": "5d8",
               "group": null,
               "isPrimarySection": false,
-              "types": {}
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -217,6 +177,7 @@
         },
         "pcu": null,
         "range": "medium",
+        "slug": "",
         "source": "EN pg. 53",
         "special": {
           "anchoring": false,
@@ -275,22 +236,7 @@
           "volatile": false,
           "vortex": false
         },
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
+        "specialMaterials": {},
         "speed": 0,
         "weaponType": "melee"
       }
@@ -301,13 +247,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
-        "allowadd": "true",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -315,9 +256,6 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
@@ -325,9 +263,22 @@
               "formula": "5d8",
               "group": null,
               "isPrimarySection": false,
-              "types": {}
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -344,6 +295,7 @@
         },
         "pcu": null,
         "range": "medium",
+        "slug": "",
         "source": "EN pg. 53",
         "special": {
           "anchoring": false,
@@ -402,22 +354,7 @@
           "volatile": false,
           "vortex": false
         },
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
+        "specialMaterials": {},
         "speed": 0,
         "weaponType": "melee"
       }
@@ -428,13 +365,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
-        "allowadd": "true",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -442,9 +374,6 @@
         "class": "light",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
@@ -452,9 +381,22 @@
               "formula": "5d8",
               "group": null,
               "isPrimarySection": false,
-              "types": {}
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -471,6 +413,7 @@
         },
         "pcu": null,
         "range": "medium",
+        "slug": "",
         "source": "EN pg. 53",
         "special": {
           "anchoring": false,
@@ -529,22 +472,7 @@
           "volatile": false,
           "vortex": false
         },
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
+        "specialMaterials": {},
         "speed": 0,
         "weaponType": "melee"
       }
@@ -555,13 +483,8 @@
       "type": "starshipWeapon",
       "img": "systems/sfrpg/icons/default/strafe.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
-        "allowadd": "true",
-        "attackBonus": "0",
+        "attackBonus": 0,
         "capacity": {
           "max": null,
           "value": null
@@ -569,9 +492,6 @@
         "class": "heavy",
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
@@ -579,9 +499,22 @@
               "formula": "2d6 * 10",
               "group": null,
               "isPrimarySection": false,
-              "types": {}
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "description": {
           "chat": "",
@@ -598,6 +531,7 @@
         },
         "pcu": null,
         "range": "medium",
+        "slug": "",
         "source": "EN pg. 53",
         "special": {
           "anchoring": false,
@@ -656,22 +590,7 @@
           "volatile": false,
           "vortex": false
         },
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
+        "specialMaterials": {},
         "speed": 0,
         "weaponType": "melee"
       }
@@ -682,18 +601,8 @@
       "type": "starshipPowerCore",
       "img": "systems/sfrpg/icons/default/power-generator.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -701,26 +610,11 @@
           "unidentified": "",
           "value": ""
         },
-        "isPowered": true,
         "modifiers": [],
         "pcu": 75,
+        "slug": "",
         "source": "EN pg. 53",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
+        "specialMaterials": {},
         "supportedSizes": []
       }
     },
@@ -730,18 +624,8 @@
       "type": "starshipThruster",
       "img": "systems/sfrpg/icons/default/rocket-thruster.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "cost": null,
         "costMultipliedBySize": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -755,23 +639,9 @@
         "modifiers": [],
         "pcu": null,
         "pilotingModifier": 0,
+        "slug": "",
         "source": "EN pg. 53",
-        "specialMaterials": {
-          "abysium": false,
-          "adamantine": false,
-          "coldiron": false,
-          "diatha": false,
-          "djezet": false,
-          "horacalcum": false,
-          "inubrix": false,
-          "khefak": false,
-          "noqual": false,
-          "nyblantine": false,
-          "purplecores": false,
-          "siccatite": false,
-          "silver": false,
-          "voidglass": false
-        },
+        "specialMaterials": {},
         "speed": 10,
         "supportedSize": "medium"
       }
@@ -782,16 +652,6 @@
       "type": "starshipSpecialAbility",
       "img": "systems/sfrpg/icons/default/cpu.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -799,6 +659,8 @@
           "unidentified": "",
           "value": "<p>This creature is so immense that it functions as a starship (and thus engages only in starship combat). It has no crew, but it can take engineer, gunner, magic officer (Character Operations Manual 148), and pilot actions (one of each, in the appropriate phases) using the appropriate skill bonuses and ranks. Because living creatures have unique anatomy, they require a special table for determining critical damage effects and conditions (Core&nbsp; Rulebook 321). This also serves as a list of systems an enemy science officer can target with the target system crew action. An example critical damage effect table is listed here, but you can tailor yours to reflect your specific creature’s anatomy.</p>\n<p><strong>Spacefaring Starship Creatures:</strong> Starship-scale creatures that live or travel in space have the void adaptation universal creature rule, which grants immunity to cosmic rays, immunity to the environmental effects of vacuum, and the no breath universal creature rule. In addition, they often have the spaceflight universal creature rule, granting them the ability to fly through space at standard navigation and astrogation speeds (Core Rulebook 290).</p><table><tbody><tr><td data-colwidth=\"115\"><p>D%</p></td><td data-colwidth=\"127\"><p>SYSTEM</p></td><td><p>EFFECT</p></td></tr><tr><td data-colwidth=\"115\"><p>1-30</p></td><td data-colwidth=\"127\"><p>Weapons array</p></td><td><p>Randomly determine one arc containing weapons; condition applies to all gunner actions using weapons in that arc.</p></td></tr><tr><td data-colwidth=\"115\"><p>31-60</p></td><td data-colwidth=\"127\"><p>Propulsion</p></td><td><p>Condition applies to all pilot actions.</p></td></tr><tr><td data-colwidth=\"115\"><p>61-90</p></td><td data-colwidth=\"127\"><p>Heart</p></td><td><p>Condition applies to all engineer actions, except when patching or repairing the heart.</p></td></tr><tr><td data-colwidth=\"115\"><p>91-100</p></td><td data-colwidth=\"127\"><p>Brain†</p></td><td><p>During the next round, each of the creature’s attempted actions has a 25% chance of failure.</p></td></tr></tbody></table><p>† The brain doesn’t gain critical damage conditions</p>"
         },
+        "modifiers": [],
+        "slug": "",
         "source": "SOM pg. 128"
       }
     },
@@ -808,16 +670,6 @@
       "type": "starshipSpecialAbility",
       "img": "systems/sfrpg/icons/default/cpu.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -825,6 +677,8 @@
           "unidentified": "",
           "value": "<p>Numerous creatures are inured to the void of outer space. A creature with void adaptation has the following abilities.</p><ul><li>Immunity to cosmic rays.</li><li>Immunity to the environmental effects of vacuum.</li><li>@UUID[Compendium.sfrpg.universal-creature-rules.BKv2DLiWN9G5XMyc]{No Breath (Ex)} (see page 152).</li></ul>"
         },
+        "modifiers": [],
+        "slug": "",
         "source": "SOM pg. 128"
       }
     }
@@ -924,88 +778,22 @@
   },
   "system": {
     "attributes": {
-      "ac": {
-        "misc": 0,
-        "value": 10
-      },
-      "complement": {
-        "max": 1,
-        "min": 0,
-        "value": 0
-      },
-      "computer": {
-        "value": 0
-      },
-      "criticalThreshold": {
-        "value": 10
-      },
-      "damageThreshold": {
-        "value": 0
-      },
-      "drift": {
-        "value": 0
-      },
-      "expansionBays": {
-        "value": 0
-      },
       "hp": {
-        "increment": 10,
-        "max": 0,
         "value": 400
-      },
-      "maneuverability": "",
-      "mounts": {
-        "aft": [],
-        "forward": [],
-        "port": [],
-        "starboard": [],
-        "turret": []
-      },
-      "pilotingBonus": {
-        "value": 0
-      },
-      "power": {
-        "max": 0,
-        "value": 0
-      },
-      "shields": {
-        "aft": {
-          "max": 0,
-          "value": 0
-        },
-        "forward": {
-          "max": 0,
-          "value": 0
-        },
-        "max": 0,
-        "port": {
-          "max": 0,
-          "value": 0
-        },
-        "starboard": {
-          "max": 0,
-          "value": 0
-        },
-        "value": 0
-      },
-      "speed": {
-        "value": 5
       },
       "systems": {
         "engines": {
           "affectedRoles": {
             "pilot": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "lifeSupport": {
           "affectedRoles": {
             "captain": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "powerCore": {
@@ -1020,57 +808,84 @@
             "pilot": true,
             "scienceOfficer": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "sensors": {
           "affectedRoles": {
             "scienceOfficer": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "weaponsArrayAft": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "weaponsArrayForward": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "weaponsArrayPort": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         },
         "weaponsArrayStarboard": {
           "affectedRoles": {
             "gunner": true
           },
-          "mod": 0,
-          "status": "nominal",
+          "patch": "unpatched",
           "value": "nominal"
         }
-      },
-      "targetLock": {
-        "misc": 0,
-        "value": 10
       }
     },
-    "conditions": {},
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "crew": {
       "captain": {
         "actorIds": [],
@@ -1094,85 +909,50 @@
       },
       "npcData": {
         "captain": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "chiefMate": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         },
         "engineer": {
-          "abilities": {},
           "numberOfUses": 1,
           "skills": {
             "eng": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 26,
-              "ranks": 1,
-              "subname": "",
-              "value": 0
+              "ranks": 1
             }
           }
         },
         "gunner": {
-          "abilities": {},
           "numberOfUses": 1,
           "skills": {
             "gun": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 22,
-              "ranks": 0,
-              "subname": "",
-              "value": 0
+              "ranks": 0
             }
           }
         },
         "magicOfficer": {
-          "abilities": {},
           "numberOfUses": 1,
           "skills": {
             "mys": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 26,
-              "ranks": 1,
-              "subname": "",
-              "value": 0
+              "ranks": 1
             }
           }
         },
         "pilot": {
-          "abilities": {},
           "numberOfUses": 1,
           "skills": {
             "pil": {
-              "ability": "int",
-              "enabled": true,
-              "hasArmorCheckPenalty": false,
-              "isTrainedOnly": false,
-              "misc": 0,
               "mod": 26,
-              "ranks": 1,
-              "subname": "",
-              "value": 0
+              "ranks": 1
             }
           }
         },
         "scienceOfficer": {
-          "abilities": {},
           "numberOfUses": null,
           "skills": {}
         }
@@ -1198,10 +978,6 @@
     "details": {
       "frame": "",
       "model": "Magical Beast",
-      "modifiers": {
-        "custom": "",
-        "value": []
-      },
       "notes": "",
       "size": "",
       "tier": 15
@@ -1276,6 +1052,7 @@
           "value": 10
         }
       }
-    }
+    },
+    "slug": ""
   }
 }

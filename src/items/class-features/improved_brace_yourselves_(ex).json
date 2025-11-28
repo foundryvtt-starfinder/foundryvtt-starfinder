@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -41,42 +38,9 @@
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.hIhgdXnqGHBm0A64]{Envoy Improvisation}</p>\n<p>&nbsp;@Icon[type:language-dependent] @Icon[type:mind-affecting] @Icon[type:sense-dependent]</p>\n<p>Your morale bonus from @UUID[Compendium.sfrpg.class-features.Item.U6eRbCZyw0ON3tjX]{Brace Yourselves} increases to +2. When you use this ability, each ally within 60 feet may also drop @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone} as a reaction. You must have the Brace Yourselves envoy improvisation to choose this improvisation.</p>\n<p>@UUID[Compendium.sfrpg.effects.Item.863w01D0qcfxHtYw]{Effect: Improved Brace Yourselves (Ex)}</p>"
     },
     "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
       "language-dependent": true,
-      "lawful": false,
-      "light": false,
       "mind-affecting": true,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": true,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
+      "sense-dependent": true
     },
     "details": {
       "category": "classFeature",
@@ -88,15 +52,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "83e34c7f-cade-4ec1-9612-54b3a425a91f",
         "name": "Improved Brace Yourselves (Ex)",
         "type": "morale",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": true,
+        "limitTo": null,
         "max": 2,
         "modifier": "2",
         "modifierType": "formula",
@@ -108,14 +74,12 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "60"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "8th Level (Envoy)",
     "rollNotes": "",
@@ -124,9 +88,14 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AR pg. 145",
     "target": {
-      "type": "",
       "value": "One Enemy"
     },
     "uses": {

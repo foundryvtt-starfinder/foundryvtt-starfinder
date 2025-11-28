@@ -5,9 +5,6 @@
   "img": "systems/sfrpg/icons/default/stopwatch.svg",
   "system": {
     "type": "effect",
-    "abilityMods": {
-      "parts": []
-    },
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
@@ -21,15 +18,9 @@
     },
     "context": {
       "origin": {
-        "actorUuid": "",
-        "itemUuid": ""
+        "actorUuid": null,
+        "itemUuid": null
       }
-    },
-    "critical": {
-      "parts": []
-    },
-    "damage": {
-      "parts": []
     },
     "description": {
       "chat": "",
@@ -45,8 +36,10 @@
         "name": "Effect: Mech Defensive Expert (Ex) - AC",
         "type": "base",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "lookupRange(@origin.actor.details.level.value, 0, 4, 1, 15, 2)",
         "modifierType": "constant",
@@ -60,8 +53,10 @@
         "name": "Effect: Mech Defensive Expert (Ex) - Saves",
         "type": "base",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "lookupRange(@origin.actor.details.level.value, 0, 4, 1, 15, 2)",
         "modifierType": "constant",
@@ -73,6 +68,7 @@
     ],
     "requirements": "4th Level (Mechanic)",
     "showOnToken": true,
+    "slug": "",
     "source": "EN pg. 47",
     "turnEvents": []
   }

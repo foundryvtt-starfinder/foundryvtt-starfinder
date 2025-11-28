@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/weapons/doshko.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 20,
@@ -109,6 +104,7 @@
           "name": "",
           "formula": "10d12 + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -116,12 +112,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -131,7 +130,6 @@
       "unidentified": "",
       "value": "<p>The traditional weapon of the vesk, the doshko is composed of one to four triangular blades arranged in a row and attached to a long haft. Ideal for devastating overhand blows and catching and parrying enemy weapons, its use is a highly respected art form in traditional vesk society, but it also sees use by creatures of other races as a variant axe. Traditionally, doshkos are made of steel, but in recent decades they have been crafted using advanced metallurgic techniques and even quantum technology to improve the stabbing edges.</p>\n<p>Ultrathin doshko blades look exceptionally delicate but hold a fine edge. Zero-edge doshkos appear to have a blurred edge, while molecular rift doshkos have translucent blades. Dimensional blade doshkos have a narrower visible blade, but the solid surrounding aura makes them vicious weapons.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -141,115 +139,30 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 17,
     "modifiers": [],
     "price": 248000,
     "proficient": false,
     "properties": {
-      "aeon": false,
-      "amm": false,
-      "analog": false,
-      "antibiological": false,
-      "archaic": false,
-      "aurora": false,
-      "automatic": false,
-      "blast": false,
-      "block": false,
-      "boost": false,
-      "breach": false,
-      "breakdown": false,
-      "bright": false,
-      "buttressing": false,
-      "cluster": false,
-      "conceal": false,
-      "deconstruct": false,
-      "deflect": false,
-      "disarm": false,
-      "double": false,
-      "drainCharge": false,
-      "echo": false,
-      "entangle": false,
-      "explode": false,
-      "extinguish": false,
-      "feint": false,
-      "fiery": false,
-      "firstArc": false,
-      "flexibleLine": false,
-      "force": false,
-      "freeHands": false,
-      "fueled": false,
-      "gearArray": false,
-      "grapple": false,
-      "gravitation": false,
-      "guided": false,
-      "harrying": false,
-      "healing": false,
-      "holyWater": false,
-      "hybrid": false,
-      "hydrodynamic": false,
-      "ignite": false,
-      "indirect": false,
-      "injection": false,
-      "instrumental": false,
-      "integrated": false,
-      "line": false,
-      "living": false,
-      "lockdown": false,
-      "mind-affecting": false,
-      "mine": false,
-      "mire": false,
-      "modal": false,
-      "necrotic": false,
-      "nonlethal": false,
-      "one": false,
-      "operative": false,
-      "penetrating": false,
-      "polarize": false,
-      "polymorphic": false,
-      "powered": true,
-      "professional": false,
-      "propel": false,
-      "punchGun": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "recall": false,
-      "regrowth": false,
-      "relic": false,
-      "reposition": false,
-      "scramble": false,
-      "shape": false,
-      "shatter": false,
-      "shells": false,
-      "shield": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "sunder": false,
-      "swarm": false,
-      "tail": false,
-      "teleportive": false,
-      "thought": false,
-      "throttle": false,
-      "thrown": false,
-      "thruster": false,
-      "trip": false,
-      "two": true,
-      "unbalancing": false,
-      "underwater": false,
-      "unwieldy": true,
-      "variantBoost": false,
-      "wideLine": false
+      "powered": {
+        "extension": "",
+        "value": true
+      },
+      "two": {
+        "extension": "",
+        "value": true
+      },
+      "unwieldy": {
+        "extension": "",
+        "value": true
+      }
     },
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
@@ -259,28 +172,14 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "CRB pg. 173",
     "special": "",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
+    "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

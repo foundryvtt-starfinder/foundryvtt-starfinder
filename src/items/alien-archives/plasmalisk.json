@@ -2,6 +2,7 @@
   "_id": "BE6ndUMhC35Ifwpf",
   "name": "Plasmalisk",
   "type": "npc2",
+  "folder": "oDeSIpQmKhLBZHHW",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
@@ -10,11 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -28,7 +25,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 28,
         "attributes": {
@@ -49,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -58,7 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -80,21 +76,45 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "6d6+22",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             },
             {
+              "name": "",
               "formula": "2d6",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
                 "electricity": true,
-                "fire": true
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -104,116 +124,26 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -221,11 +151,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -233,8 +168,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -247,11 +182,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -265,7 +196,7 @@
           "shapable": false,
           "shape": "",
           "units": "ft",
-          "value": 10
+          "value": "10"
         },
         "attackBonus": 25,
         "attributes": {
@@ -286,7 +217,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -295,7 +225,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -317,14 +247,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "8d6",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
                 "electricity": true,
-                "fire": true
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -334,9 +276,8 @@
           "unidentified": "",
           "value": "<p>A plasmalisk can spit a blob of swiftly ionizing material that explodes into plasma on contact. This functions as a ranged weapon with a range of 60 feet and the explode (10 ft.) weapon special property that deals 8d6 electricity and fire damage (Reflex DC 20 half). The plasmalisk can use this weapon once per 1d6 rounds.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -344,106 +285,23 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
         "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": true,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
+          "explode": {
+            "extension": "",
+            "value": true
+          }
         },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 60
+          "value": "60"
         },
         "rollNotes": "",
         "save": {
@@ -451,11 +309,16 @@
           "dc": "20",
           "descriptor": "half"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -463,7 +326,7 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -477,10 +340,9 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -491,7 +353,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -500,7 +362,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -510,45 +373,47 @@
           "unidentified": "",
           "value": "<p>A plasmalisk’s vibrantly glowing eyes can cause viewers’ bodily fluids to rapidly ionize and burn their bodies from the inside. A creature that fails a DC 20 Fortitude save is subject to the gaze’s effects, which mimic a Dexterity-track @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison} whose progression track is Healthy-Staggered-Immobile- Primed with a frequency of 1/round for 6 rounds and whose cure is 2 consecutive saves. A primed target is @UUID[Compendium.sfrpg.conditions.Item.lf8pbezocjYIvR9y]{Unconscious}, and 1d4 hours after becoming primed, the creature’s body explodes in a burst of plasma that deals 6d6 electricity and fire damage to anything in a 10-foot radius (Reflex DC 20 half). Each time a creature fails the Fortitude save against a plasmalisk’s gaze, they take 3d6 electricity and fire damage as their body ionizes. A creature that has succeeded at the gaze’s initial save or has been cured of the gaze’s ongoing effect is immune to that plasmalisk’s ionizing gaze for 24 hours. This isn’t a @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison} effect. Coating an affected creature completely with the plasmalisk’s blood ends the effect and immediately moves the creature two steps toward healthy. A plasmalisk has enough blood to coat 1d4+1 creatures in this way; a Large creature takes twice as much blood to coat.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -559,10 +424,9 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -573,7 +437,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -582,7 +446,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -592,45 +457,47 @@
           "unidentified": "",
           "value": "<p>Whenever a plasmalisk takes 15 or more electricity or fire damage in any combination from a single attack or effect (whether or not it resists any of the damage), reduce the number of rounds the plasmalisk must wait before it can use its plasma blast by 1, and increase the plasmalisk’s speed by 10 feet (maximum 50 feet) until the end of its next turn.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -641,10 +508,9 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -655,7 +521,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -664,7 +530,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -674,45 +541,47 @@
           "unidentified": "",
           "value": "<p>The glow of a plasmalisk’s scales increases the light level in a 10-foot radius by one step to a maximum of bright light. As a swift action, a plasmalisk can suppress this glow until the end of its next turn.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -814,108 +683,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": -3,
-        "min": 3,
-        "misc": 0,
-        "mod": -3,
-        "value": 4
+        "base": -3
       },
       "con": {
-        "base": 6,
-        "min": 3,
-        "misc": 0,
-        "mod": 6,
-        "value": 22
+        "base": 6
       },
       "dex": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 18
+        "base": 4
       },
       "int": {
-        "base": -2,
-        "min": 3,
-        "misc": 0,
-        "mod": -2,
-        "value": 6
+        "base": -2
       },
       "str": {
-        "base": 8,
-        "min": 3,
-        "misc": 0,
-        "mod": 8,
-        "value": 26
+        "base": 8
       },
       "wis": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 28,
-        "min": 0,
-        "tooltip": [],
-        "value": 28
+        "base": 28
       },
       "fort": {
-        "base": 18,
-        "bonus": 18,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 18
       },
       "hp": {
         "max": 250,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 250
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 4,
         "value": 4
       },
       "kac": {
-        "base": 30,
-        "min": 0,
-        "tooltip": [],
-        "value": 30
+        "base": 30
       },
-      "keyability": "",
       "reach": "5 ft.",
       "reflex": {
-        "base": 18,
-        "bonus": 18,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 18
       },
       "space": "10 ft.",
       "speed": {
@@ -936,19 +749,12 @@
         "special": "original base: 30 ft.",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 12,
-        "bonus": 12,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 12
       }
     },
-    "classes": {},
     "conditions": {
       "asleep": false,
       "bleeding": false,
@@ -971,6 +777,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -986,9 +793,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -996,9 +800,8 @@
     "details": {
       "type": "Magical Beast",
       "alignment": "N",
-      "aura": "Ionizing Gaze - Fort DC 20",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1010,7 +813,7 @@
         "value": "<h2>Description</h2>\n<p>Powerful reptilian predators, plasmalisks rely on blasts of plasma to hunt, scorching their prey and feasting on the remains. The key to their power stems from their ion cores— this specialized organ combines depressurization, chemical catalysts, and tiny nuclear reactions to ionize metals like lithium, sodium, and potassium. Plasmalisks use their constant plasma furnace as both a weapon and a power source. Not only do wisps of the plasma escape when plasmalisks bite, but they can also expel gouts of the ionized gases or channel the energy into creatures that meet their gazes. Their prey often boil alive, yet stronger victims smolder for hours, attracting scavengers before exploding and littering the area with ample food for canny plasmalisks to consume.</p>\n<p>Plasmalisks typically measure 12 feet from snout to tail and weigh about 4,500 pounds. These ponderous creatures rarely move at any pace faster than an amble even with their eight legs; this sluggishness stems from their alien metabolisms. Rather than draw power from mitochondria, plasmalisks’ cells are fueled almost entirely by a constant field of energy from their ion cores. When not actively hunting, their reaction rates slow. Plasmalisks often enter a torpor state in which they maintain just enough of their metabolism to restart the reactions once necessary. Their scales radiate a portion of their energy, both illuminating their surroundings and creating an electroreception field through which plasmalisks can sense nearby creatures and objects. Hibernating plasmalisks create almost no light, whereas fully active ones practically incandesce. Adults can modulate their light’s color and pattern to communicate, making nighttime mating displays visible for miles. In rare cases, whole mosaics gather together to glow in a reflection of the sky’s colors, attracting daring explorers and tourists who chase meteorological events in the hopes of spotting this behavior.</p>\n<p>Due to these resource-intensive actions, plasmalisks display ectothermic habits, sunning themselves or even basking on exposed cliffs during lightning storms or auroras to absorb ionized particles. These events generally calm plasmalisks, even to the point that they tolerate visitors and onlookers. Yet should plasmalisks absorb too much energy, they become moody and agitated, recklessly cavorting or hunting in an attempt to burn off the high. Reactors, power stations, and forges often draw the creatures from miles around, ultimately leading to the destruction of such locations once the plasmalisks overindulge and rampage.</p>\n<p>After a successful hunt, a plasmalisk primarily feeds on the ionized particles of its victims. However, the creature also requires conventional nutrients, albeit in smaller quantities than expected for sustaining its size; typically,&nbsp; a plasmalisk procures such nourishment by consuming its prey’s still-smoldering bodies. A plasmalisk’s greatest drive is its need for key minerals. Inexpertly dug furrows attest to a plasmalisk’s foraging, and it can migrate as much as 200 miles to reach mineral sources—no matter who or what lies in the way.</p>\n<p>Plasmalisks usually lay just a pair of eggs, depositing the second one roughly a week after the first, but well-fed females occasionally lay larger, even-numbered clutches. The translucent eggs glow with their parents’ ionizing energy, periodically fluctuating as the developing embryos shift and dream. Half of the eggs always hatch early, and these first hatchlings quickly cannibalize one of their less-developed clutch mates. Although macabre, this practice is essential to young plasmalisks’ survival, as hatchlings lack both the nutrients and activation energy to properly develop their ion cores. Genetic studies show that the slain sibling isn’t fully digested; the survivor’s body directly incorporates portions of the sibling’s organs and DNA, creating a chimeric whole. Collectors delight in capturing plasmalisk eggs—no easy feat given the parents’ tireless nest patrols. A little jury-rigged hardware can transform a healthy egg into a mobile (yet quite unethical) power station capable of restoring up to 100 charges or even&nbsp;jump-starting a damaged starship before killing the creature.</p>\n<h3>PLASMA PAINT</h3>\n<p>Plasmalisk scales and eggshells retain their energy-dissipating&nbsp;properties. Grinding down these parts and combining them with specially formulated chemicals creates a protective paint for coating armor or shock-sensitive electronics. Plasma paint doesn’t need to coat the entire surface of the armor it’s being applied to, and plasma paint enthusiasts, such as celebrity performers, often commission protective suits painted with stunningly decorative designs.</p>\n<p>Your armor’s painted patterns channel incoming energy, either dissipating it entirely or directing it into your weapons. You gain electricity resistance 5. When you take 5 or more electricity damage from a single attack or effect (before applying your resistance), you glow in a 10-foot radius (increasing the light level by one step, up to normal light) until the end of your next turn. During this time, any electricity damage you deal with non-analog weapons before the end of your next turn increases by 1d6.</p>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any warm or temperate land</p>\n<h3>Organization</h3>\n<p>solitary, pair, or mosaic (3–12)</p>\n</section>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 14,
       "environment": "",
       "organization": "",
@@ -1018,29 +821,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 82",
-      "xp": {
-        "value": 38400
-      }
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 25,
         "ranks": 25,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1048,10 +842,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 30,
         "ranks": 30,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1059,10 +852,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1070,10 +862,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1081,10 +872,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1092,10 +882,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1103,10 +892,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1114,10 +902,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1125,10 +912,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1136,10 +922,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1147,10 +932,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1158,10 +942,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1169,10 +952,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 25,
         "ranks": 25,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1180,10 +962,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1191,10 +972,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1202,9 +982,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1214,10 +992,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1225,10 +1002,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1236,10 +1012,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1247,47 +1022,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1296,25 +1064,10 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "",
         "value": [
           "radiation"
-        ]
-      },
-      "dr": {
-        "custom": "",
-        "value": [
-          {
-            "electricity": "15"
-          },
-          {
-            "fire": "15"
-          }
         ]
       },
       "dv": {
@@ -1327,9 +1080,6 @@
       },
       "senses": "blindsight (electricity) 60 ft., darkvision 60 ft.",
       "size": "large",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

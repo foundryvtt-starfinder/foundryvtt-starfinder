@@ -4,11 +4,7 @@
   "type": "equipment",
   "img": "systems/sfrpg/icons/default/kevlar-vest.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": ""
     },
     "armor": {
       "type": "power",
@@ -51,7 +47,6 @@
       "size": "large",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "36",
     "capacity": {
       "max": 20,
@@ -118,6 +113,7 @@
           "name": "",
           "formula": "1d10 +(@abilities.str.mod)",
           "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -125,12 +121,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -140,17 +139,17 @@
       "unidentified": "",
       "value": "<p>This clockwork exoskeleton was the first powered armor designed for the Azlanti Star Empire military. Like other Azlanti armor of the time, it has no breathing apparatus incorporated, though it does have a rudimentary temperature-control system. Instead, it has two upgrade slots in the helmet that can be used only to hold aeon stones. These slots usually house @UUID[Compendium.sfrpg.equipment.Item.QEqHUpTpgf1kW4qK]{Clear Spindle} and @UUID[Compendium.sfrpg.equipment.Item.q5TvgADqWSvzhxXt]{Iridescent Spindle} aeon stones, negating the wearer’s need to eat, drink, and breathe. 2 upgrade slots can be used only to hold aeon stones.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 5,
     "modifiers": [],
     "price": 3025,
@@ -159,10 +158,7 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "reach": "10 ft.",
     "rollNotes": "",
@@ -171,32 +167,17 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "large",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AP #42 pg. 51",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
+    "specialMaterials": {},
     "speed": "",
     "strength": 18,
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -204,8 +185,8 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

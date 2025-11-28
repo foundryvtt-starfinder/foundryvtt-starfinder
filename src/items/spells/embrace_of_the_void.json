@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "icons/magic/symbols/ring-circle-smoke-blue.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -41,6 +37,8 @@
         {
           "name": "",
           "formula": "lookupRange(@item.level, 2, 2, 4, 3, 7, 4, 10, 5, 15, 6, 17)d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -48,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -64,40 +65,7 @@
       "value": "<p>You wrap the target in the cold of the Negative Energy Plane, numbing its body. The target might lose feeling in its extremities or even be temporarily frozen in place. The target takes half damage on a successful save.</p>\n<p><strong>1st</strong>:&nbsp;When you cast embrace the void as a 1st-level spell, it deals 2d6 cold damage.</p>\n<p><strong>2nd</strong>:&nbsp;When you cast embrace the void as a 2nd-level spell, it deals 4d6 cold damage.</p>\n<p><strong>3rd</strong>:&nbsp;When you cast embrace the void as a 3rd-level spell, it deals 7d6 cold damage. On a failed save, the target is also off-target for 1 round.</p>\n<p><strong>4th</strong>:&nbsp;When you cast embrace the void as a 4th-level spell, it deals 10d6 cold damage. On a failed save, the target is also off-target for 1d4 rounds.</p>\n<p><strong>5th</strong>:&nbsp;When you cast embrace the void as a 5th-level spell, it deals 15d6 cold damage. On a failed save, the target is also staggered for 1 round and off-target for 1d6 rounds.</p>\n<p><strong>6th</strong>:&nbsp;When you cast embrace the void as a 6th-level spell, it deals 17d6 cold damage. On a failed save, the target is also paralyzed for 1 round and off-target for 1d6 rounds after that.</p>"
     },
     "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": true,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
+      "cold": true
     },
     "dismissible": false,
     "duration": {
@@ -105,7 +73,7 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": true,
     "level": 1,
     "materials": {
@@ -121,10 +89,8 @@
     },
     "properties": {},
     "range": {
-      "additional": "5 ft",
-      "per": "level",
       "units": "ft",
-      "value": 25
+      "value": "25"
     },
     "rollNotes": "",
     "save": {
@@ -133,14 +99,19 @@
       "descriptor": "half"
     },
     "school": "nec",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #45 pg. 51",
     "sr": true,
     "target": {
-      "type": "",
       "value": "1 creature"
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

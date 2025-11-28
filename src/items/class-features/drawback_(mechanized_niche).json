@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "other",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,6 +30,8 @@
         {
           "name": "",
           "formula": "(floor(@classes.evolutionist.levels / 2) + @resources.evolutionist.evolutionTrack.value)",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -41,12 +39,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -56,61 +57,28 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.NdImg3Bt0PzTvwgt]{Mechanized (Niche)}</p>\n<p>While you have at least 1 MP the first time per round you take either type of damage you chose for your instinct (above), you take additional damage equal to half your evolutionist level + your MP total.</p>\n<p>If you have 3 or more MP you become increasingly robotic. You’re treated as both a construct and your creature type— whichever type allows an ability to affect you for abilities that only affect one type, and whichever is worse for abilities that affect both types. Such effects continue to affect you even if you have fewer than 3 MP later in the effect’s duration. In addition, you can’t gain morale bonuses and you take a penalty equal to half your MP total, rounded up, to Charisma-based skill checks except Intimidate.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "e4873d0b-31a2-44c3-a43c-43d0bbd0ab52",
         "name": "Drawback (Mechanized Niche)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "-(lookupRange(@resources.evolutionist.evolutionTrack.value, 0, 3, ceil(@resources.evolutionist.evolutionTrack.value / 2)))",
         "modifierType": "constant",
@@ -124,8 +92,10 @@
         "name": "Drawback (Mechanized Niche)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "-(lookupRange(@resources.evolutionist.evolutionTrack.value, 0, 3, ceil(@resources.evolutionist.evolutionTrack.value / 2)))",
         "modifierType": "constant",
@@ -139,8 +109,10 @@
         "name": "Drawback (Mechanized Niche)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "-(lookupRange(@resources.evolutionist.evolutionTrack.value, 0, 3, ceil(@resources.evolutionist.evolutionTrack.value / 2)))",
         "modifierType": "constant",
@@ -152,14 +124,11 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level (Evolutionist)",
     "rollNotes": "",
@@ -168,14 +137,19 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "IS, pg. 14",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

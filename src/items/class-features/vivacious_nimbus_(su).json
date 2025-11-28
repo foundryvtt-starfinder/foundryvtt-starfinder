@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/images/cup/gameplay/photon.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "other",
     "activation": {
@@ -43,12 +39,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -58,44 +57,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.G7p2YIGFTAU6uGjL]{Stellar Revelation}</p>\n<p>&nbsp;@Icon[type:photon] Photon Revelation</p>\n<p>As a standard action while shedding normal or bright light with your @UUID[Compendium.sfrpg.class-features.Item.7VVFPck5IJhTmP7q]{Flare (Su)} revelation, you can infuse the light with the Positive Energy Plane’s life-giving influence, granting creatures in the illuminated area the effects of the <em>@UUID[Compendium.sfrpg.spells.Item.QtZHSuJf0hcryYtR]{Death Ward}</em> spell. This additional effect lasts for 1 round or until you leave photon mode, whichever happens first, though you can maintain this effect as a standard action each round (or as a move action if you’re fully attuned). When you @UUID[Compendium.sfrpg.conditions.Item.tOpF6qjnlnKc10t7]{Blind} an undead creature with your @UUID[Compendium.sfrpg.class-features.Item.7VVFPck5IJhTmP7q]{Flare (Su)} revelation flash of brilliant light, the target also takes force damage equal to your solarian level.</p>\n<p>You must have the @UUID[Compendium.sfrpg.class-features.Item.7VVFPck5IJhTmP7q]{Flare (Su)} revelation to select this revelation.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -106,18 +68,15 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "10th Level Solarian",
     "rollNotes": "",
@@ -128,11 +87,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "DC pg. 45",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

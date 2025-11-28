@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,6 +31,7 @@
           "name": "",
           "formula": "floor(@details.level.value / 2) + @abilities.str.mod",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -42,12 +39,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -57,44 +57,7 @@
       "unidentified": "",
       "value": "<p>You push foes into each other with disorienting, painful force.</p>\n<p><strong>Prerequisites:</strong> @UUID[Compendium.sfrpg.feats.Item.0Pq35gvSI2JlD682]{Improved Combat Maneuver} (bull rush).</p>\n<p><strong>Benefit:</strong> When you succeed at a @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#bull-rush]{bull rush} combat maneuver and push the target into another creature’s space, the target stops in the previous square as normal. However, both the target and the other creature take damage equal to half your character level plus your Strength modifier and gain the @UUID[Compendium.sfrpg.conditions.Item.yUtkoIshf4dPruNd]{Off-Target} condition until the beginning of your next turn. The second creature can reduce the damage by half and negate the off-target condition with a successful Reflex save (DC = 10 + 1/2 your level + your Strength modifier).</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "feat",
       "combat": true,
@@ -102,23 +65,20 @@
     },
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
-    "requirements": " Improved Combat Maneuver (bull rush).",
+    "requirements": "Improved Combat Maneuver (bull rush).",
     "rollNotes": "",
     "save": {
       "type": "reflex",
@@ -127,16 +87,17 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "PoC pg. 43",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

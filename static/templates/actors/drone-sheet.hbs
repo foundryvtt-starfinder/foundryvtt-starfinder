@@ -105,18 +105,20 @@
 
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexrow">
-                {{#each system.abilities as |ability id|}}
-                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
-                  <h4 class="ability-name box-title rollable" data-tooltip="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.value<br/><br/>{{#each ability.tooltip as |tip|}}{{tip}}<br/>{{/each}}">{{ability.label}}</h4>
-                  <div class="ability-modifiers flexrow">
-                    <span class="ability-mod" data-tooltip="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.mod<br/><br/>{{#each ability.modifierTooltip as |tip|}}{{tip}}<br/>{{/each}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                    {{#if (eq id "con")}}
-                    <div class="ability-center" data-tooltip="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.value<br/><br/>{{#each ability.tooltip as |tip|}}{{tip}}<br/>{{/each}}">-</div>
-                    {{else}}
-                    <div class="ability-center" data-tooltip="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.value<br/><br/>{{#each ability.tooltip as |tip|}}{{tip}}<br/>{{/each}}">{{ability.value}}</div>
-                    {{/if}}
-                  </div>
-                </li>
+                {{#each (sfrpg "abilityDisplayOrder") as |id|}}
+                    {{#with (lookup ../system.abilities id) as |ability|}}
+                    <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
+                        <h4 class="ability-name box-title rollable" data-tooltip="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.value<br/><br/>{{#each ability.tooltip as |tip|}}{{tip}}<br/>{{/each}}">{{ability.label}}</h4>
+                        <div class="ability-modifiers flexrow">
+                            <span class="ability-mod" data-tooltip="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.mod<br/><br/>{{#each ability.modifierTooltip as |tip|}}{{tip}}<br/>{{/each}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+                            {{#if (eq id "con")}}
+                            <div class="ability-center" data-tooltip="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.value<br/><br/>{{#each ability.tooltip as |tip|}}{{tip}}<br/>{{/each}}">-</div>
+                            {{else}}
+                            <div class="ability-center" data-tooltip="<strong>{{ability.label}}</strong><br/>@abilities.{{id}}.value<br/><br/>{{#each ability.tooltip as |tip|}}{{tip}}<br/>{{/each}}">{{ability.value}}</div>
+                            {{/if}}
+                        </div>
+                    </li>
+                    {{/with}}
                 {{/each}}
             </ul>
 
@@ -140,7 +142,7 @@
                         <a class="proficiency-toggle skill-proficiency" title="{{skill.hover}}">{{{skill.icon}}}</a>
                         <span class="skill-name rollable">{{skill.label}}</span>
                         <span class="skill-mod">{{numberFormat skill.ranks decimals=0}}</span>
-                        <span class="skill-ability">{{skill.ability}}</span>
+                        <span class="skill-ability">{{skill.abilityLabel}}</span>
                         <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
                     </li>
                     {{/if}}

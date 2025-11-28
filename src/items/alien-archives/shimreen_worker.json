@@ -2,6 +2,7 @@
   "_id": "hVCvzFEz8OT7gnKh",
   "name": "Shimreen Worker",
   "type": "npc2",
+  "folder": "gTJQVURiWQz4rGgw",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
@@ -10,19 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "acceptedItemTypes": {
-          "augmentation": false,
-          "consumable": false,
-          "container": false,
-          "equipment": false,
-          "fusion": true,
-          "goods": false,
-          "technological": false,
-          "upgrade": false,
-          "weapon": false
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -36,7 +25,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 4,
         "attributes": {
@@ -57,17 +46,15 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
           "value": 0
         },
         "chatFlavor": "",
-        "containedItemIds": [],
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -89,13 +76,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d3+2",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -105,17 +105,16 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": false,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
@@ -125,22 +124,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -148,8 +149,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -162,19 +163,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/equipment/weapons/laser-pistol-azimuth.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "acceptedItemTypes": {
-          "augmentation": false,
-          "consumable": false,
-          "container": false,
-          "equipment": false,
-          "fusion": true,
-          "goods": false,
-          "technological": false,
-          "upgrade": false,
-          "weapon": false
-        },
         "actionTarget": "kac",
         "actionType": "rwak",
         "activation": {
@@ -187,8 +176,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 6,
         "attributes": {
@@ -209,17 +198,15 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
           "value": 20
         },
         "chatFlavor": "",
-        "containedItemIds": [],
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -234,17 +221,32 @@
             }
           ]
         },
-        "critical": null,
+        "critical": {
+          "parts": []
+        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4+1",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -254,9 +256,8 @@
           "unidentified": "",
           "value": "<p>The laser pistol is possibly the most common small arm used by explorers, guards, mercenaries, and traders. Laser pistols are light and reliable, yet they still deal a respectable amount of damage.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
@@ -264,61 +265,40 @@
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 350,
         "proficient": true,
         "properties": {
-          "amm": false,
-          "analog": false,
-          "archaic": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "bright": false,
-          "disarm": false,
-          "entangle": false,
-          "explode": false,
-          "injection": false,
-          "line": false,
-          "nonlethal": false,
-          "one": true,
-          "operative": false,
-          "penetrating": false,
-          "powered": false,
-          "qreload": false,
-          "reach": false,
-          "sniper": false,
-          "stun": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unwieldy": false
+          "one": {
+            "extension": "",
+            "value": true
+          }
         },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "long": 0,
-          "per": "",
           "units": "ft",
-          "value": 80
+          "value": "80"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "SRRPG CRB, P. 173",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
-          "units": "",
           "value": ""
         },
         "usage": {
@@ -326,7 +306,7 @@
           "value": 1
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -340,10 +320,9 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -354,19 +333,17 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
-        "contents": [
-          "rId4b0e27NGfa7Ik"
-        ],
         "critical": {
           "effect": "",
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -376,45 +353,47 @@
           "unidentified": "",
           "value": "<p>Whenever a shimreen takes energy damage, they can voluntarily take an additional 1d4 damage of the same type by amplifying the energy within their crystalline form. The next time the shimreen hits with a melee attack, they release this energy, dealing an additional amount of damage equal to the extra damage the shimreen took (and of the same type). The shimreen can’t take additional damage in this way again until they release the energy they’re storing. If unused, this stored energy dissipates after 10 minutes. The amount of extra damage the shimreen takes (and deals) increases to 2d4 at 8th level (or CR 8) and 3d4 at 16th level (or CR 16).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -425,10 +404,9 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -439,7 +417,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -448,7 +426,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -458,45 +437,47 @@
           "unidentified": "",
           "value": "<p>A shimreen constantly emits dim, normal, or bright light in a 5-foot radius and is immune to the @UUID[Compendium.sfrpg.conditions.Item.YjE6UGzwOTfO9p4g]{Dazzled} condition. A shimreen can adjust their current level of light as a move action, but they can’t extinguish it.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -507,11 +488,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -523,8 +500,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -533,7 +510,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -543,44 +521,46 @@
           "unidentified": "",
           "value": "<p>As a swift action, a shimreen can transform one of their hands into a natural weapon that deals piercing damage. While transformed, this hand can’t be used to hold or use anything. The shimreen can reverse the transformation as a swift action.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -592,19 +572,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/stationwear-flight-suit.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "acceptedItemTypes": {
-          "augmentation": false,
-          "consumable": false,
-          "container": false,
-          "equipment": false,
-          "fusion": false,
-          "goods": false,
-          "technological": false,
-          "upgrade": true,
-          "weapon": false
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -618,7 +586,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -647,17 +615,15 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
           "value": 0
         },
         "chatFlavor": "",
-        "containedItemIds": [],
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -688,7 +654,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -698,17 +665,17 @@
           "unidentified": "",
           "value": "<p>Many types of reinforced clothing afford protection without sacrificing comfort or fashion. The prevalence of this kind of light armor on @UUID[Compendium.sfrpg.setting.Item.hepqXl6gFvs5sDQu]{Absalom Station} has led to the colloquial term “stationwear.” Stationwear ranges in style from casual wear to business suits and more formal garb. The usual @UUID[Compendium.sfrpg.rules.Item.WP7hddXW4mLXXXOg]{Environmental protections} of armor are concealed in the design of these outfits. The grades of armor—business, casual, elite, and flight suit—refer to the quality of the garments, not the style.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": false,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 95,
@@ -717,25 +684,26 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -743,8 +711,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -755,10 +723,6 @@
       "type": "goods",
       "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "attributes": {
           "ac": {
             "value": ""
@@ -777,14 +741,7 @@
           "size": "medium",
           "sturdy": false
         },
-        "attuned": false,
         "bulk": "-",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -794,13 +751,15 @@
         },
         "equippable": false,
         "equipped": false,
-        "equippedBulkMultiplier": 1,
         "identified": true,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 60,
+        "proficient": false,
         "quantity": 2,
         "quantityPerPack": 1,
+        "slug": "",
         "source": "Core Rulebook"
       }
     },
@@ -810,11 +769,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/combat_tracking.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -826,8 +781,8 @@
           "effect": "",
           "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -836,7 +791,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -846,44 +802,46 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.cM54UpNXExgDSbq4]{Exocortex}</p>\n<p>Your exocortex provides you with enhanced combat ability, granting you proficiency with heavy armor and longarms. At 3rd level, you gain weapon specialization in longarms just as if your class granted proficiency. As a move action during combat, you can designate a foe for your exocortex to track. As long as that target is in sight, the exocortex feeds you telemetry, vulnerabilities, and combat tactics, allowing you to make attacks against that target as if your base attack bonus from your mechanic levels were equal to your mechanic level. Designating another target causes you to immediately lose this bonus against the previous target.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": null,
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Exocortex",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -895,11 +853,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/exocortex.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -912,7 +866,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -921,7 +875,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -931,45 +886,47 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.i7zwEHz2RWkZVOAM]{Artificial Intelligence (Ex)}</p>\n<p>Your exocortex grants you all of the following abilities as you advance in level.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.epd9RUmCm20NBKBt]{Combat Tracking (Ex) - 1st Level}</h2>\n<p>Your exocortex provides you with enhanced combat ability, granting you proficiency with heavy armor and longarms. At 3rd level, you gain weapon specialization in longarms just as if your class granted proficiency. As a move action during combat, you can designate a foe for your exocortex to track. As long as that target is in sight, the exocortex feeds you telemetry, vulnerabilities, and combat tactics, allowing you to make attacks against that target as if your base attack bonus from your mechanic levels were equal to your mechanic level. Designating another target causes you to immediately lose this bonus against the previous target.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.yeAW67ho3SsxqJNR]{Memory Module (Ex) - 1st Level}</h2>\n<p>You can use your exocortex’s memory module to enhance your own knowledge. Once per day, as a reaction while not in combat, you can reroll a failed skill check (see page 243) to recall knowledge (see page 143). In addition, your exocortex grants you the Skill Focus feat as a bonus feat. You can’t use your exocortex’s memory module while combat tracking is activated. Every time you gain a mechanic level, you can rebuild your exocortex’s memory module, replacing the exocortex’s bonus Skill Focus feat with Skill Focus in a different skill.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.bczND131fy2XFpN0]{Wireless Hack (Ex) - 5th Level}</h2>\n<p>Instead of combat tracking, your exocortex can access another computer system within 20 feet, allowing it to attempt a Computers check against that computer each round, using your skill bonus. This counts as a standard action for the purpose of the Computers skill. You must remain within 20 feet of the computer system for the entire time your exocortex is interacting with the computer. If the task requires multiple actions (or even rounds) to accomplish, you can spend your actions to work in concert with your exocortex, counting both your action and the exocortex’s effective standard action toward the total time required. If you don’t have the remote hack class feature, you must be adjacent to the computer to attempt your checks.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.z8iOan4RJXYvVhit]{Exocortex Mods (Ex) - 7th Level}</h2>\n<p>Your exocortex allows you to apply any one of the following drone mods to yourself as if you were a drone with that mod installed: armor slot, cargo rack, climbing claws, enhanced senses, hydrojets, jump jets, resistance, smuggler’s compartment, speed, or weapon proficiency (gaining proficiency in advanced melee or heavy weapons). At 11th level, you can apply an additional mod, and your options expand to include echolocators, excavator, flight system, greater resistance, invisibility field, and reactive camouflage. At 14th and 17th levels, you can apply an additional mod. Each time you gain a level, you can switch any of your mods for different mods, but you must always choose at least one mod from the 7th-level list.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.4niFkgzfwyOAoOcd]{Twin Tracking (Ex) - 10th Level}</h2>\n<p>You can designate two targets for your exocortex to track, increasing your base attack bonus against each. You can designate both targets with a single move action, but you must be able to see them both at that time.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.R9W0ZkZezXLci357]{Multitasking (Ex) - 15th Level}</h2>\n<p>You can designate three targets for your exocortex to track (and designate them all as a single move action). In addition, the range of your exocortex’s wireless hack increases to 40 feet. Your exocortex can also engage in combat tracking and hack a nearby computer at the same time, but the computer counts as one of the exocortex’s designated targets (allowing you to track only two targets at the same time while wirelessly hacking the computer). Lastly, you can access your exocortex’s memory module in combat, even while it is engaged in combat tracking.</p>\n<h2>@UUID[Compendium.sfrpg.class-features.Item.scbcE4mjiHoNK7Wi]{Quad Attack (Ex) - 20th Level}</h2>\n<p>Your exocortex can track four targets simultaneously, and hacking a nearby computer doesn’t count against that limit.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Artificial Intelligence",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -980,11 +937,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/custom_rig.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -997,7 +950,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -1006,7 +959,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1016,45 +970,47 @@
           "unidentified": "",
           "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.HNCQFSPw4DVTATHv]{Mechanic}</p>\n<p>You have created a customized toolkit you can use to hack systems and items. Your custom rig can be configured to take up an upgrade slot on your armor or can be installed as a cybernetic augmentation system in your brain (though it can be combined with a datajack for the same price as installing a datajack normally), your eyes, or an arm. For more information on augmentations, see Chapter 7: Equipment. Alternatively, you can configure it to be a handheld device, meaning that you must retrieve it and hold it to use it effectively. While using this rig, you always count as having the appropriate tool or basic kit for any Computers or Engineering skill check you attempt. Some mechanic tricks (see page 71) and drone mods (see page 77) require the use of a custom rig. In addition, you can use your custom rig as a Mk I comm unit (see Chapter 7: Equipment). Finally, if you have a drone, you can use your custom rig to communicate over an encrypted channel with your drone to issue commands to its AI or directly control it at a range of 2,500 feet.</p>\n<p>If your custom rig is damaged, destroyed, lost, or stolen, you can kitbash a new one from any engineering kit, hacking kit, or other technological toolkit, reconfiguring the materials into a new custom rig with 1 hour of work. You can have only one custom rig at a time. If you create a new custom rig, your old one functions as a normal toolkit of whatever type you made it from and can no longer be used with your mechanic tricks.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "1st Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Mechanic",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -1156,103 +1112,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "con": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 12
+        "base": 1
       },
       "dex": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 14
+        "base": 2
       },
       "int": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 18
+        "base": 4
       },
       "str": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 12
+        "base": 1
       },
       "wis": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 11,
-        "min": 0,
-        "tooltip": [],
-        "value": 11
+        "base": 11
       },
       "fort": {
-        "base": 3,
-        "bonus": 3,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 3
       },
       "hp": {
         "max": 17,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 17
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 2,
         "value": 2
       },
       "kac": {
-        "base": 12,
-        "min": 0,
-        "tooltip": [],
-        "value": 12
+        "base": 12
       },
-      "keyability": "",
       "reach": "0",
       "reflex": {
-        "base": 3,
-        "bonus": 3,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 3
       },
       "space": "0",
       "speed": {
@@ -1267,27 +1172,55 @@
           "baseManeuverability": 0
         },
         "land": {
-          "base": "30"
+          "base": 30
         },
         "mainMovement": "land",
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 2,
-        "bonus": 2,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 2
       }
     },
-    "conditions": {},
-    "counterClasses": {
-      "values": {}
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
     },
     "currency": {
       "credit": 0,
@@ -1296,9 +1229,8 @@
     "details": {
       "type": "Humanoid",
       "alignment": "LN",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1310,7 +1242,7 @@
         "value": "<section class=\"secret\">\n<h2>Description</h2>\n<p>The world of Shimrinsara, deep in the Vast, is constantly plagued by violent storms, but seven glittering dome-cities protrude through the tempestuous clouds. These metropolises stand as a testament to the perseverance and resourcefulness of the planet’s most notable inhabitants: crystalline humanoids known as shimreens. Shimreens built their domes not only to protect their cities from the storms, but also to harness the abundant available energy that powers their civilization. According to surviving records, the crystalline people have been doing this since long before the Gap.</p>\n<p>Shimreens are composed of glimmering crystal, and the average shimreen is 7 feet tall and weighs 600 pounds. Though their tall, angular bodies can be any color (or even clear), most tend toward cool, bright jewel tones such as blue, purple, or teal. Much like their radiant metropolises, shimreens glow from within.</p>\n<p>The most popular legend about how shimreens came to be holds that the first shimreen was kissed by lightning, rising out of the earth and into sapience—and that their spark has passed down through the generations. Whatever their origins, modern shimreen are not so much born as they are made. @UUID[Compendium.sfrpg.setting.Item.VQrVznzrr85I90TI]{Pharasma}’s Forge, once merely a small volcanic hotspot, has developed over millennia into a sacred temple of making and unmaking. Narrow canals, carved into the mountain’s face in ray-like patterns, direct small rivers of lava into creation chambers. To form a new shimreen, fragments from one or more living parents are placed into a chamber, which is superheated by lava until either a soul is attracted to the seed crystals and a new shimreen is formed, or the contributed shards are consumed. It’s possible for a single shimreen to reproduce alone, or for each member of a large family unit to donate a piece of themselves. Since shimreens generally live for centuries, when one passes away, their body is taken in a solemn procession to be added to the lava that powers @UUID[Compendium.sfrpg.setting.Item.VQrVznzrr85I90TI]{Pharasma}’s Forge so that they may contribute to the making of new life. Shimreens are able to change their body slightly to fit their needs, including shifting an arm into a crystal lance or adjusting their constant internal glow. A significant number of shimreens shape the crystals atop their heads to form crowns, while others let the crystals around their faces grow wild to form clusters they call manes— and some do both.</p>\n<p>Thanks to Shimrinsara’s endless source of energy, its citizens are employed chiefly in the pursuit of culture and trade, rather than toiling to gather resources. Two castes make up the majority of shimreen inhabitants: workers and warriors. Workers can have a variety of skilled occupations and include artisans, engineers, entertainers, and scientists. Warriors are mainly tasked with fending off attempted incursions from outsiders who covet the shimreens’ plentiful resources, though they are also skilled in hunting the wild creatures that survive unprotected in the planet’s harsh atmosphere.</p>\n<p>The seven glowing cities of Shimrinsara are called the Jewels of Shimreen, and the largest of these is Kaniqlu, where elected representatives from each city form a council of seven that governs the planet. While most shimreens are fiercely protective of their home world, they do enjoy engaging in trade with other cultures so that they may learn and grow. During shimreen holidays, citizens gather to watch parades featuring several battalions of warriors, all performing intricate routines that are a mixture of elegant, flowing dance and ruthlessly lethal combat maneuvers.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any (Shimrinsara)</p>\n<h3>Organization</h3>\n<p>solitary, pair, or geode (3-8)</p>\n</section>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 1,
       "environment": "",
       "organization": "",
@@ -1318,13 +1250,9 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA3 pg. 96",
-      "subtype": "Shimreen",
-      "xp": {
-        "value": 400
-      }
+      "subtype": "Shimreen"
     },
     "modifiers": [],
     "skills": {
@@ -1333,10 +1261,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1344,10 +1271,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1355,10 +1281,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1366,10 +1291,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 10,
         "ranks": 10,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1377,10 +1301,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1388,10 +1311,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1399,10 +1321,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1410,10 +1331,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 10,
         "ranks": 10,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1421,10 +1341,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1432,10 +1351,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1443,10 +1361,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 5,
         "ranks": 5,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1454,10 +1371,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1465,10 +1381,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 5,
         "ranks": 5,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1476,10 +1391,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 10,
         "ranks": 10,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1487,10 +1401,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 5,
         "ranks": 5,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1498,9 +1411,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1510,10 +1421,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1521,10 +1431,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1532,10 +1441,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1543,47 +1451,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1594,21 +1495,9 @@
           "dazzled"
         ]
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "",
         "value": []
-      },
-      "dr": {
-        "custom": "",
-        "value": [
-          {
-            "electricity": "5"
-          }
-        ]
       },
       "dv": {
         "custom": "",
@@ -1622,9 +1511,6 @@
       },
       "senses": "",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

@@ -2,6 +2,7 @@
   "_id": "7RvBrqrxj0lU8HDn",
   "name": "Electrovore",
   "type": "npc2",
+  "folder": "eQ1s3ipd6I4FFpkE",
   "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
@@ -10,11 +11,7 @@
       "type": "weapon",
       "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -28,7 +25,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 9,
         "attributes": {
@@ -49,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -80,8 +76,10 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4 +3",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": true,
@@ -89,12 +87,15 @@
                 "electricity": false,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -104,120 +105,26 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": true,
         "equipped": true,
         "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
         "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "buttressing": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "gearArray": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shatter": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "thruster": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -225,11 +132,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -237,8 +149,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -251,11 +163,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -282,6 +190,7 @@
               "name": "",
               "formula": "1d6 + 2",
               "group": null,
+              "isPrimarySection": false,
               "types": {
                 "acid": false,
                 "bludgeoning": false,
@@ -289,12 +198,15 @@
                 "electricity": true,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -304,44 +216,7 @@
           "unidentified": "",
           "value": "<p>As a standard action, an electrovore can spend 1 Resolve Point to discharge some of its stored electrical energy as a powerful attack. All creatures within 10 feet of the electrovore take 1d6+2 electricity damage and are @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{staggered} for 1 round. A target can attempt a DC 13 Reflex save to take half this damage and negate the staggered effect.</p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
@@ -352,18 +227,15 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -374,11 +246,12 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
@@ -394,10 +267,9 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -408,7 +280,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -417,7 +289,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -427,45 +300,47 @@
           "unidentified": "",
           "value": "<p>Whenever an electrovore scores a critical hit against a living creature, a construct with the technological subtype, or a technological piece of gear, it siphons off a portion of the target’s electrical energy. This restores 1 Resolve Point (up to its maximum of 3).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -567,113 +442,55 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": -1,
-        "min": 3,
-        "misc": 0,
-        "mod": -1,
-        "value": 10
+        "base": -1
       },
       "con": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 10
+        "base": 1
       },
       "dex": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 10
+        "base": 4
       },
       "int": {
-        "base": -4,
-        "min": 3,
-        "misc": 0,
-        "mod": -4,
-        "value": 10
+        "base": -4
       },
       "str": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 10
+        "base": 1
       },
       "wis": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 10
+        "base": 2
       }
     },
     "attributes": {
       "abilityDC": {
-        "base": "13"
+        "base": 13
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
-        "base": "0"
-      },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 0
       },
       "eac": {
-        "base": 14,
-        "min": 0,
-        "tooltip": [],
-        "value": 14
+        "base": 14
       },
       "fort": {
-        "base": 3,
-        "bonus": 3,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 3
       },
       "hp": {
         "max": 23,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 23
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 4,
         "value": 4
       },
       "kac": {
-        "base": 14,
-        "min": 0,
-        "tooltip": [],
-        "value": 14
+        "base": 14
       },
-      "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 7,
-        "bonus": 7,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 7
       },
       "rp": {
         "max": 3,
-        "min": 0,
-        "tooltip": [],
         "value": 3
       },
       "space": "5",
@@ -695,16 +512,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 1,
-        "bonus": 1,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 1
       }
     },
     "conditions": {
@@ -729,6 +540,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -744,9 +556,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -754,9 +563,8 @@
     "details": {
       "type": "Magical Beast",
       "alignment": "N",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -765,10 +573,9 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Native to the wild planet of Verlorr, electrovores were on the verge of extinction as increased volcanic activity led to their swampy habitat’s disappearance, and along with it the three-headed electric eels that provided them sustenance. When explorers from the Pact Worlds first arrived on Verlorr 2 decades ago, however, electrovores were given a new lease on life, as the travelers came on massive metal vessels coursing with the very nourishment the beasts sought. A few crept on board the various ships, and since then, “conduit rats” (as some spacefarers refer to them) have quickly multiplied, forming colonies of varying sizes everywhere from @UUID[Compendium.sfrpg.setting.Item.hepqXl6gFvs5sDQu]{Absalom Station} to the farthest reaches of the Vast.</p>\n<p>An electrovore gains sustenance not from ingesting biological material but from the electrical currents that pulse through both mechanical devices and organic creatures. Xenobiologists have shown evidence that an electrovore’s internal organs are unlike those of a normal animal-it has no stomach, no intestines, and no liver. Instead, every cell of the creature acts as a tiny battery, providing the necessary impulses to move its muscles and power brain functions. In essence, an electrovore is composed almost entirely of nervous system. The creatures have quickly adapted to the artificial habitats of starships and space stations that course with their nourishment.</p>\n<p>With a serpentine body covered in sparking spines and sprouting a pair of leathery wings, a typical electrovore is 3 feet long and weighs 25 pounds. An electrovore has three bright-blue visual sensors: two flanking its head and one situated on the bridge of its snout. Its wide mouth is full of sharp teeth, but it rarely uses them in combat, instead employing them to chew through wire casings. An electrovore prefers to slap and sting with its barbed tail when on the hunt.</p>\n<p>A single electrovore poses little immediate threat to a starship or space station, but two or more reproduce at an alarming rate and can quickly overrun even the most experienced and best-equipped engineering team. The first signs of an electrovore infestation are usually power fluctuations in a remote, rarely traveled portion of a ship or decks already under repair or construction, but such deviations can be the result of anything from cosmic rays to a loose coupling or power being diverted to other systems. A gnawed cable or severed connector is generally the next indication of an electrovore’s presence, but by then there are likely dozens and dozens of the creatures throughout the ship’s crawlways, in its walls, and beneath its floors out of sight.</p>\n<p>In their new habitats, electrovores are incredibly fecund, doubling in number in 1d6+5 weeks (assuming there are two or more to begin with). If left unchecked, a handful of the creatures on a space station or large ship can eventually overwhelm the crew’s capacity to deal with them. As such, malicious space pirates and saboteurs sometimes release a pair of electrovores into a closed environment to disable their enemies’ vessels, distract from other threats or operations, or sink the economic or resale value of commercial operations or salvaged ships. However, the electrovores just as often disable the ships of these pirates and saboteurs, making this a risky and unreliable tactic.</p>\n<p>In addition to the direct damage an electrovore colony can deal to a ship’s infrastructure, it can also wreak havoc on the vessel’s systems when threatened. Full of siphoned electrical energy, a startled or cornered electrovore discharges this stored potential, often resulting in even more damage to computer systems and organic matter than the creature could normally manage in twice the time. Luckily, it takes some time for an electrovore to gather enough energy to perform this devastating attack.</p>\n<p>Larger starships generally have enough redundancies built into their construction that it takes much longer for electrovore infestations to disable their key systems, though a sizable enough colony of the creatures can unleash incredible destruction in a surprisingly short amount of time in the right conditions. Even a starship with one electrovore on it is in danger of eventually being incapacitated. For each period of time for each size of starship listed in the table below, one of the vessel’s systems (determined randomly) takes critical damage (Starfinder Core Rulebook 321). Of course, the more electrovores infesting a vessel, the faster they disable its systems, though it takes a minimum of 1 day for a starship to take a critical damage effect in this way.</p>\n<table style=\"width: 98.7097%; margin-left: auto; margin-right: auto;\" border=\"1\">\n<tbody>\n<tr>\n<td style=\"width: 31.9367%; text-align: center;\"><strong>Starship Size</strong></td>\n<td style=\"width: 66.974%; text-align: center;\"><strong>Time</strong></td>\n</tr>\n<tr>\n<td style=\"width: 31.9367%; text-align: center;\">Tiny</td>\n<td style=\"width: 66.974%; text-align: center;\">1d6 days - 1 day/2 electrovores</td>\n</tr>\n<tr>\n<td style=\"width: 31.9367%; text-align: center;\">Small</td>\n<td style=\"width: 66.974%; text-align: center;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">2d6 days - 1 day/3 electrovores</span></td>\n</tr>\n<tr>\n<td style=\"width: 31.9367%; text-align: center;\">Medium</td>\n<td style=\"width: 66.974%; text-align: center;\">2d10 days - 1 day/6 electrovores</td>\n</tr>\n<tr>\n<td style=\"width: 31.9367%; text-align: center;\">Large</td>\n<td style=\"width: 66.974%; text-align: center;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">4d8 days - 1 day/12 electrovores</span></td>\n</tr>\n<tr>\n<td style=\"width: 31.9367%; text-align: center;\">Huge</td>\n<td style=\"width: 66.974%; text-align: center;\">6d10 days - 1 day/30 electrovores</td>\n</tr>\n<tr>\n<td style=\"width: 31.9367%; text-align: center;\">Gargantuan</td>\n<td style=\"width: 66.974%; text-align: center;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">3d12 weeks - 1 week/50 electrovores</span></td>\n</tr>\n<tr>\n<td style=\"width: 31.9367%; text-align: center;\">Colossal</td>\n<td style=\"width: 66.974%; text-align: center;\">4d6 months - 1 month/100 electrovores</td>\n</tr>\n</tbody>\n</table>",
+        "value": "<h2>Description</h2>\n<p>Native to the wild planet of Verlorr, electrovores were on the verge of extinction as increased volcanic activity led to their swampy habitat’s disappearance, and along with it the three-headed electric eels that provided them sustenance. When explorers from the Pact Worlds first arrived on Verlorr 2 decades ago, however, electrovores were given a new lease on life, as the travelers came on massive metal vessels coursing with the very nourishment the beasts sought. A few crept on board the various ships, and since then, “conduit rats” (as some spacefarers refer to them) have quickly multiplied, forming colonies of varying sizes everywhere from @UUID[Compendium.sfrpg.setting.Item.hepqXl6gFvs5sDQu]{Absalom Station} to the farthest reaches of the Vast.</p>\n<p>An electrovore gains sustenance not from ingesting biological material but from the electrical currents that pulse through both mechanical devices and organic creatures. Xenobiologists have shown evidence that an electrovore’s internal organs are unlike those of a normal animal-it has no stomach, no intestines, and no liver. Instead, every cell of the creature acts as a tiny battery, providing the necessary impulses to move its muscles and power brain functions. In essence, an electrovore is composed almost entirely of nervous system. The creatures have quickly adapted to the artificial habitats of starships and space stations that course with their nourishment.</p>\n<p>With a serpentine body covered in sparking spines and sprouting a pair of leathery wings, a typical electrovore is 3 feet long and weighs 25 pounds. An electrovore has three bright-blue visual sensors: two flanking its head and one situated on the bridge of its snout. Its wide mouth is full of sharp teeth, but it rarely uses them in combat, instead employing them to chew through wire casings. An electrovore prefers to slap and sting with its barbed tail when on the hunt.</p>\n<p>A single electrovore poses little immediate threat to a starship or space station, but two or more reproduce at an alarming rate and can quickly overrun even the most experienced and best-equipped engineering team. The first signs of an electrovore infestation are usually power fluctuations in a remote, rarely traveled portion of a ship or decks already under repair or construction, but such deviations can be the result of anything from cosmic rays to a loose coupling or power being diverted to other systems. A gnawed cable or severed connector is generally the next indication of an electrovore’s presence, but by then there are likely dozens and dozens of the creatures throughout the ship’s crawlways, in its walls, and beneath its floors out of sight.</p>\n<p>In their new habitats, electrovores are incredibly fecund, doubling in number in 1d6+5 weeks (assuming there are two or more to begin with). If left unchecked, a handful of the creatures on a space station or large ship can eventually overwhelm the crew’s capacity to deal with them. As such, malicious space pirates and saboteurs sometimes release a pair of electrovores into a closed environment to disable their enemies’ vessels, distract from other threats or operations, or sink the economic or resale value of commercial operations or salvaged ships. However, the electrovores just as often disable the ships of these pirates and saboteurs, making this a risky and unreliable tactic.</p>\n<p>In addition to the direct damage an electrovore colony can deal to a ship’s infrastructure, it can also wreak havoc on the vessel’s systems when threatened. Full of siphoned electrical energy, a startled or cornered electrovore discharges this stored potential, often resulting in even more damage to computer systems and organic matter than the creature could normally manage in twice the time. Luckily, it takes some time for an electrovore to gather enough energy to perform this devastating attack.</p>\n<p>Larger starships generally have enough redundancies built into their construction that it takes much longer for electrovore infestations to disable their key systems, though a sizable enough colony of the creatures can unleash incredible destruction in a surprisingly short amount of time in the right conditions. Even a starship with one electrovore on it is in danger of eventually being incapacitated. For each period of time for each size of starship listed in the table below, one of the vessel’s systems (determined randomly) takes critical damage (Starfinder Core Rulebook 321). Of course, the more electrovores infesting a vessel, the faster they disable its systems, though it takes a minimum of 1 day for a starship to take a critical damage effect in this way.</p>\n<table style=\"width:98.7097%;margin-left:auto;margin-right:auto\" border=\"1\">\n<tbody>\n<tr>\n<td style=\"width:31.9367%;text-align:center\"><strong>Starship Size</strong></td>\n<td style=\"width:66.974%;text-align:center\"><strong>Time</strong></td>\n</tr>\n<tr>\n<td style=\"width:31.9367%;text-align:center\">Tiny</td>\n<td style=\"width:66.974%;text-align:center\">1d6 days - 1 day/2 electrovores</td>\n</tr>\n<tr>\n<td style=\"width:31.9367%;text-align:center\">Small</td>\n<td style=\"width:66.974%;text-align:center\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">2d6 days - 1 day/3 electrovores</span></td>\n</tr>\n<tr>\n<td style=\"width:31.9367%;text-align:center\">Medium</td>\n<td style=\"width:66.974%;text-align:center\">2d10 days - 1 day/6 electrovores</td>\n</tr>\n<tr>\n<td style=\"width:31.9367%;text-align:center\">Large</td>\n<td style=\"width:66.974%;text-align:center\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">4d8 days - 1 day/12 electrovores</span></td>\n</tr>\n<tr>\n<td style=\"width:31.9367%;text-align:center\">Huge</td>\n<td style=\"width:66.974%;text-align:center\">6d10 days - 1 day/30 electrovores</td>\n</tr>\n<tr>\n<td style=\"width:31.9367%;text-align:center\">Gargantuan</td>\n<td style=\"width:66.974%;text-align:center\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">3d12 weeks - 1 week/50 electrovores</span></td>\n</tr>\n<tr>\n<td style=\"width:31.9367%;text-align:center\">Colossal</td>\n<td style=\"width:66.974%;text-align:center\">4d6 months - 1 month/100 electrovores</td>\n</tr>\n</tbody>\n</table>",
         "weight": ""
       },
-      "class": "",
       "combatRole": "combatant",
       "cr": 2,
       "environment": "any",
@@ -777,30 +584,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA1 pg. 44",
-      "subtype": "",
-      "xp": {
-        "value": 10
-      }
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 7,
         "ranks": 7,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -808,10 +605,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 7,
         "ranks": 7,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -819,10 +615,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -830,10 +625,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -841,10 +635,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -852,10 +645,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -863,10 +655,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -874,10 +665,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -885,10 +675,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -896,10 +685,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -907,10 +695,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -918,10 +705,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -929,10 +715,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 12,
         "ranks": 12,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -940,10 +725,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -951,10 +735,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -962,9 +745,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -974,10 +755,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -985,10 +765,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -996,10 +775,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 12,
         "ranks": 12,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1007,47 +785,40 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 12,
         "ranks": 12,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1056,19 +827,11 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "",
         "value": [
           "electricity"
         ]
-      },
-      "dr": {
-        "custom": "",
-        "value": []
       },
       "dv": {
         "custom": "",
@@ -1080,9 +843,6 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "small",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

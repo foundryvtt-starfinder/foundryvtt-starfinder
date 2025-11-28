@@ -5,10 +5,7 @@
   "img": "systems/sfrpg/icons/default/vr-headset.svg",
   "system": {
     "type": "biotech",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -42,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -56,7 +52,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -66,17 +63,16 @@
       "unidentified": "",
       "value": "<p>A lobe grafted onto your throat processes toxins your body would normally struggle to remove. Whenever you attempt a saving throw against a drug or poison, your neutralizer lobe automatically attempts a @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.d4fcGwOcrsuYrwGH]{Medicine} check to @UUID[Compendium.sfrpg.rules.GMkLZsN3a7YPvA03.JournalEntryPage.d4fcGwOcrsuYrwGH#treat-drugs-or-poison]{treat drugs or poison}, using a modifier equal to your level + 2. If this Medicine check is successful, the neutralizer lobe grants you a +4 bonus to your subsequent saving throw.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 8,
     "modifiers": [
       {
@@ -84,8 +80,10 @@
         "name": "Neutralizer lobe",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": false,
+        "limitTo": null,
         "max": 4,
         "modifier": "4",
         "modifierType": "formula",
@@ -96,30 +94,33 @@
       }
     ],
     "price": 9900,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "TR pg. 56, AP #29 pg. 51",
     "system": "throat",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

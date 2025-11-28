@@ -10,11 +10,7 @@
       "type": "feat",
       "img": "icons/creatures/mammals/wolf-shadow-black.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -27,7 +23,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -36,7 +32,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -46,69 +43,28 @@
           "unidentified": "",
           "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>While anacites, androids, and SROs are fully sapient beings, nonsapient technological creatures have often attained status akin to an animal or family pet. Taking the form of an irregularly shaped polyhedron covered with a shiny touchsensitive coating; poypoiks were originally a pre-Gap series of “digital pets” created by the hobgoblins of the Marixah Republic for children to play with and learn how to care for a pet. Sometime after Triune sent the Signal into the Vast, poypoiks began to show self-awareness, but never sentience beyond animal intelligence. Following this, manufacture of the toys increased, with careful screening so they could be properly cared for and sold to those wishing to have a true “digital” pet.</p>\n<p>Poypoiks are creatures with their own uniquely shaped housing and screen tint that they pick themselves. One side is slightly magnetized, allowing them to be attached to a suit of armor, metallic jewelry, or even weapons. Though they are immobile, they love being able to see the universe around them, and gleefully beep and boop at sights that they enjoy, often echoing when their owner is visibly or audibly happy. The worst punishment one can inflict upon a poypoik is placement in a pocket or other container where it can’t see its surroundings.</p><h2>Poypoik</h2><p>Levels 1-20</p>\n<p>Tiny technological creature</p>\n<p><strong>Senses</strong> darkvision 60 ft., low-light vision</p>\n<p><strong>Good Save</strong> Fort;<strong>Poor Saves</strong> Ref, Will</p>\n<p><strong>Speed</strong> 0 ft.</p>\n<p><strong>Ranged Attack</strong> electric spark (E)</p>\n<p><strong>Space</strong> 1 ft.;<strong>Reach</strong> 0 ft.</p>\n<p><strong>Ability Modifiers</strong> Con, Dex</p><h3>Special Abilities</h3><p><strong>Electric Spark (Su)</strong></p>\n<p>Every 1d4 rounds, a poypoik can emit a directed spark of electricity as a ranged attack that targets EAC and has a range increment of 30 feet.</p>\n<p><strong>Quick Recharge (Su)</strong></p>\n<p>As a move action, you can attach your poypoik to a technological device or weapon that uses a battery in order to fully recharge it. This puts the poypoik into a harmless slumber, rendering it unconscious and unable to use any abilities until you take one hour to recharge it either by expending a standard (or greater) battery or connecting it to a recharging station or starship.</p>\n<p><strong>Sound the Alarm (Ex)</strong></p>\n<p>Poypoiks are always paying attention to what is going on around them. As long as your poypoik is attached to you or your worn or carried equipment and conscious, you gain a +1 insight bonus to initiative. This bonus increases by 1 at 5th level and every 5 levels thereafter.</p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "auditory": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "illusion": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "feat",
           "combat": false,
           "specialAbilityType": ""
         },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "5558ee6e-5fc3-457b-b891-b64092833fbe",
             "name": "Creature Companion - EAC",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "BQhGfcnKJ0eYf0Yy",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "ac",
             "enabled": true,
+            "limitTo": null,
             "max": 11,
             "modifier": "lookupRange(@details.cr, 0, 1, 11, 2, 12, 3, 13, 4, 15, 5, 16, 6, 17, 7, 19, 8, 20, 9, 21, 10, 23, 12, 24, 13, 26, 14, 27, 15, 28, 16, 30, 17, 31, 18, 32, 19, 34, 20, 35)",
             "modifierType": "constant",
@@ -122,12 +78,10 @@
             "name": "Creature Companion - KAC",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "BQhGfcnKJ0eYf0Yy",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "ac",
             "enabled": true,
+            "limitTo": null,
             "max": 14,
             "modifier": "lookupRange(@details.cr, 0, 1, 14, 2, 15, 3, 16, 4, 18, 5, 19, 6, 20, 7, 22, 8, 23, 9, 24, 10, 26, 12, 27, 13, 29, 14, 30, 15, 31, 16, 33, 17, 34, 18, 35, 19, 37, 20, 38)",
             "modifierType": "constant",
@@ -141,12 +95,10 @@
             "name": "Creature Companion - Good Save",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "BQhGfcnKJ0eYf0Yy",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "save",
             "enabled": true,
+            "limitTo": null,
             "max": 4,
             "modifier": "lookupRange(@details.cr, 0, 1, 4, 2, 5, 5, 7, 7, 8, 10, 10, 13, 11, 5, 12, 18, 13, 20, 14)",
             "modifierType": "constant",
@@ -160,12 +112,10 @@
             "name": "Creature Companion - Poor Save 1",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "BQhGfcnKJ0eYf0Yy",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "save",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "lookupRange(@details.cr, 0, 1, 1, 3, 2, 5, 3, 7, 4, 10, 5, 11, 6, 15, 8, 19, 9)",
             "modifierType": "constant",
@@ -179,12 +129,10 @@
             "name": "Creature Companion - Poor Save 2",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "BQhGfcnKJ0eYf0Yy",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "save",
             "enabled": true,
+            "limitTo": null,
             "max": 1,
             "modifier": "lookupRange(@details.cr, 0, 1, 1, 3, 2, 5, 3, 7, 4, 10, 5, 11, 6, 15, 8, 19, 9)",
             "modifierType": "constant",
@@ -198,12 +146,10 @@
             "name": "Creature Companion - Int Modifier",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "BQhGfcnKJ0eYf0Yy",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "ability-score",
             "enabled": true,
+            "limitTo": null,
             "max": -8,
             "modifier": "-8",
             "modifierType": "constant",
@@ -217,12 +163,10 @@
             "name": "Creature Companion - Ability Modifier 1",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "BQhGfcnKJ0eYf0Yy",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "ability-score",
             "enabled": true,
+            "limitTo": null,
             "max": 4,
             "modifier": "lookupRange(@details.cr, 0, 1, 4, 7, 6, 13, 8, 19, 10)",
             "modifierType": "constant",
@@ -236,12 +180,10 @@
             "name": "Creature Companion - Ability Modifier 2",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "BQhGfcnKJ0eYf0Yy",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "ability-score",
             "enabled": true,
+            "limitTo": null,
             "max": 2,
             "modifier": "lookupRange(@details.cr, 0, 1, 2, 7, 4, 13, 6, 19, 8)",
             "modifierType": "constant",
@@ -255,12 +197,10 @@
             "name": "Creature Companion - Skills",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "BQhGfcnKJ0eYf0Yy",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "all-skills",
             "enabled": true,
+            "limitTo": null,
             "max": 5,
             "modifier": "lookupRange(@details.cr, 0, 1, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 12, 8, 13, 9, 14, 10, 15, 11, 16, 12, 17, 13, 19, 14, 20, 15, 21, 16, 22, 17, 23, 18, 24, 19, 26, 20, 27)",
             "modifierType": "constant",
@@ -274,12 +214,10 @@
             "name": "Creature Companion - Attack Bonus",
             "type": "untyped",
             "condition": "",
-            "container": {
-              "actorId": "BQhGfcnKJ0eYf0Yy",
-              "itemId": "FTDQ7caOAQoT2E45"
-            },
+            "damage": null,
             "effectType": "all-attacks",
             "enabled": true,
+            "limitTo": null,
             "max": 0,
             "modifier": "lookupRange(@details.cr, 0, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 9, 8, 10, 9, 11, 10, 13, 11, 14, 13, 16, 14, 17, 15, 18, 16, 19, 17, 20, 18, 21, 19, 23)",
             "modifierType": "constant",
@@ -291,30 +229,32 @@
         ],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "EN pg. 135",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -325,11 +265,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -364,7 +300,9 @@
                 "electricity": true,
                 "fire": false,
                 "healing": false,
+                "nonlethal": false,
                 "piercing": false,
+                "radiation": false,
                 "slashing": false,
                 "sonic": false
               }
@@ -380,46 +318,7 @@
           "unidentified": "",
           "value": "<p>Every [[/r 1d4]] rounds, a poypoik can emit a directed spark of electricity as a ranged attack that targets EAC and has a range increment of 30 feet.</p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "auditory": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "illusion": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "universalCreatureRule",
           "combat": false,
@@ -430,113 +329,16 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "buttressing": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "gearArray": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "healing": false,
-          "holyWater": false,
-          "hybrid": false,
-          "hydrodynamic": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "instrumental": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "propel": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "scramble": false,
-          "shape": false,
-          "shatter": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "thruster": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
           "value": "30"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -547,11 +349,12 @@
         },
         "skillCheck": {
           "type": "",
-          "dc": ""
+          "dc": "",
+          "variable": false
         },
+        "slug": "",
         "source": "EN pg. 135",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
@@ -567,11 +370,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -593,7 +392,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -603,46 +403,7 @@
           "unidentified": "",
           "value": "<p>As a move action, you can attach your poypoik to a technological device or weapon that uses a battery in order to fully recharge it. This puts the poypoik into a harmless slumber, rendering it unconscious and unable to use any abilities until you take one hour to recharge it either by expending a standard (or greater) battery or connecting it to a recharging station or starship.</p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "auditory": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "illusion": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "universalCreatureRule",
           "combat": false,
@@ -653,29 +414,32 @@
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
           "units": "touch",
           "value": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "EN pg. 135",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
@@ -691,11 +455,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -708,7 +468,7 @@
           "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -717,7 +477,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -727,46 +488,7 @@
           "unidentified": "",
           "value": "<p>Poypoiks are always paying attention to what is going on around them. As long as your poypoik is attached to you or your worn or carried equipment and conscious, you gain a +1 insight bonus to initiative. This bonus increases by 1 at 5th level and every 5 levels thereafter.</p>\n<p><em>Add the @UUID[Compendium.sfrpg.effects.Item.3GlAPAKTkhC9W9Yc]{Effect: Sound the Alarm (Ex)} effect to your character sheet while the Poypoik is conscious. Disable it if detached or unconscious, such as after using Quick Recharge.</em></p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "auditory": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "illusion": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "universalCreatureRule",
           "combat": false,
@@ -774,37 +496,39 @@
         },
         "duration": {
           "units": "text",
-          "value": null
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
         "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "EN pg. 135",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": null,
-          "per": null,
+          "max": "",
+          "per": "",
           "value": null
         }
       }
@@ -906,114 +630,52 @@
   "system": {
     "abilities": {
       "cha": {
-        "base": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "con": {
-        "base": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "dex": {
-        "base": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "int": {
-        "base": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "str": {
-        "base": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "wis": {
-        "base": null,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       }
     },
     "attributes": {
       "abilityDC": {
-        "base": "0"
+        "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
-        "base": "0"
-      },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 0
       },
       "eac": {
-        "base": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 0
       },
       "fort": {
-        "base": 0,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 0
       },
       "hp": {
         "max": 10,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 10
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 0,
         "value": 0
       },
       "kac": {
-        "base": 0,
-        "min": 0,
-        "tooltip": [],
-        "value": 10
+        "base": 0
       },
-      "keyability": "",
       "reach": "5 ft.",
       "reflex": {
-        "base": 0,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
-      },
-      "sp": {
-        "max": 10,
-        "min": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 0
       },
       "space": "5 ft.",
       "speed": {
@@ -1025,7 +687,7 @@
         },
         "flying": {
           "base": 0,
-          "baseManeuverability": "0"
+          "baseManeuverability": 0
         },
         "land": {
           "base": 25
@@ -1034,38 +696,10 @@
         "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
-      },
-      "spellcasting": "",
-      "will": {
-        "base": 0,
-        "bonus": 0,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
-      }
-    },
-    "common": {
-      "abilities": {
-        "cha": {
-          "base": 0
-        },
-        "con": {
-          "base": 0
-        },
-        "dex": {
-          "base": 0
-        },
-        "int": {
-          "base": 0
-        },
-        "str": {
-          "base": 0
-        },
-        "wis": {
-          "base": 0
         }
+      },
+      "will": {
+        "base": 0
       }
     },
     "conditions": {
@@ -1106,9 +740,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1116,9 +747,8 @@
     "details": {
       "type": "Technological Creature",
       "alignment": "",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1130,7 +760,6 @@
         "value": "<p>While anacites, androids, and SROs are fully sapient beings, nonsapient technological creatures have often attained status akin to an animal or family pet. Taking the form of an irregularly shaped polyhedron covered with a shiny touchsensitive coating; poypoiks were originally a pre-Gap series of “digital pets” created by the hobgoblins of the Marixah Republic for children to play with and learn how to care for a pet. Sometime after Triune sent the Signal into the Vast, poypoiks began to show self-awareness, but never sentience beyond animal intelligence. Following this, manufacture of the toys increased, with careful screening so they could be properly cared for and sold to those wishing to have a true “digital” pet.</p>\n<p>Poypoiks are creatures with their own uniquely shaped housing and screen tint that they pick themselves. One side is slightly magnetized, allowing them to be attached to a suit of armor, metallic jewelry, or even weapons. Though they are immobile, they love being able to see the universe around them, and gleefully beep and boop at sights that they enjoy, often echoing when their owner is visibly or audibly happy. The worst punishment one can inflict upon a poypoik is placement in a pocket or other container where it can’t see its surroundings.</p><h2>Poypoik</h2><p>Levels 1-20</p>\n<p>Tiny technological creature</p>\n<p><strong>Senses</strong> darkvision 60 ft., low-light vision</p>\n<p><strong>Good Save</strong> Fort;<strong>Poor Saves</strong> Ref, Will</p>\n<p><strong>Speed</strong> 0 ft.</p>\n<p><strong>Ranged Attack</strong> electric spark (E)</p>\n<p><strong>Space</strong> 1 ft.;<strong>Reach</strong> 0 ft.</p>\n<p><strong>Ability Modifiers</strong> Con, Dex</p>",
         "weight": ""
       },
-      "class": "",
       "combatRole": "",
       "cr": 1,
       "environment": "",
@@ -1139,31 +768,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "EN pg. 135",
-      "subtype": "",
-      "xp": {
-        "value": 10
-      }
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
-        "notes": "",
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1171,10 +789,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1182,10 +799,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1193,10 +809,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1204,10 +819,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1215,10 +829,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1226,10 +839,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1237,10 +849,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1248,10 +859,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1259,10 +869,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1270,10 +879,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1281,10 +889,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1292,10 +899,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1303,10 +909,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1314,10 +919,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1325,9 +929,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1337,10 +939,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1348,10 +949,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1359,10 +959,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1370,47 +969,40 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1419,15 +1011,7 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
-        "custom": "",
-        "value": []
-      },
-      "dr": {
         "custom": "",
         "value": []
       },
@@ -1441,9 +1025,6 @@
       },
       "senses": "darkvision 60 ft., low-light vision",
       "size": "tiny",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,44 +37,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>When you perform a @UUID[Compendium.sfrpg.class-features.Item.MBNI94tbMoqizPUk]{Trick Attack (Ex)}, you make exceptional use of nearby @UUID[Compendium.sfrpg.rules.JournalEntry.Kjba2E3Ad5oMJ7hV.JournalEntryPage.1jkwbVTGQihSpCrL]{Cover} and @UUID[Compendium.sfrpg.rules.JournalEntry.Kjba2E3Ad5oMJ7hV.JournalEntryPage.nyB6pt2dd6iVQGmS]{Concealment} until the beginning of your next turn. If you have @UUID[Compendium.sfrpg.rules.JournalEntry.Kjba2E3Ad5oMJ7hV.JournalEntryPage.1jkwbVTGQihSpCrL#partial-cover]{Partial Cover} or cover and would be hit by an attack or fail a Reflex save, you can spend 1 Resolve Point as a @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.GtSmojwt4d6rdEkm]{Reaction} to increase the cover’s bonus to your AC and Reflex saves by 2 against that effect; this ability can cause the attack to miss or cause your saving throw to succeed. If an attack would hit you while you have concealment, but the miss chance for concealment hasn’t yet been rolled, you can spend 1 Resolve Point as a reaction to increase the miss chance for concealment by 10% (maximum 35% miss chance). If the triggering attack misses, you can immediately take a @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.SKgwxeMd2gB1g2W8#guarded-step]{Guarded Step}.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -88,15 +48,17 @@
       "value": "Until the beginning of your next turn"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "f6c694b5-5c3c-4eb7-9eb4-2d23c9c6fb9d",
         "name": "Terrain Concealment - AC Bonus",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "formula",
@@ -110,8 +72,10 @@
         "name": "Terrain Concealment - Reflex Saves",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "save",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "2",
         "modifierType": "formula",
@@ -123,25 +87,27 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "10th Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GEM pg. 23",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

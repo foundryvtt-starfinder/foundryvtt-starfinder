@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/verdant_code.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -42,6 +38,7 @@
           "name": "",
           "formula": "5d6",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -49,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -64,51 +64,14 @@
       "unidentified": "",
       "value": "<p>You turn data into plant matter that either instantly explodes outward or lurks within a device.</p>\n<p><strong>Instant Growth:&nbsp;</strong> You immediately incite growth from the targeted device. A creature can negate the effect on an object it holds with a successful Will save or with spell resistance. For both this and the dormant growth effect (see below), the plant matter explodes from the targeted device, filling all squares within a 20-foot-radius spread. Each creature in the area must attempt a Reflex save. On a failure, it takes 5d6 slashing damage and is @UUID[Compendium.sfrpg.conditions.Item.nFBcsp5FS1Wi46Fc]{Entangled}; on a successful save, it takes half damage, isn’t @UUID[Compendium.sfrpg.conditions.Item.nFBcsp5FS1Wi46Fc]{Entangled}, and is shunted to the nearest empty space available. A creature can escape the entangled effect with a successful Acrobatics or Athletics check as a standard action, using the spell save DC as the skill check DC. A square of plant matter has hardness 8 and 15 Hit Points. The growth also covers the device, preventing non-remote access until the plant matter is destroyed or disintegrates at the end of the spell’s duration.</p>\n<p><strong>Dormant Growth:&nbsp;</strong> You implant verdant code into an computer system or module you have root access to. The next time the device is accessed, plant matter explodes from the device (see above). A device can hold only one instance of verdant code at a time, and new instances erase the previous instance. If this spell’s duration ends before the implanted code is accessed, the code vanishes. This code can be made permanent, as&nbsp;implant data.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "dismissible": false,
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": "1 hour/level or until triggered, then 1 minute/level, see text"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 1,
     "materials": {
@@ -124,10 +87,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "close",
-      "value": null
+      "units": "close"
     },
     "rollNotes": "",
     "save": {
@@ -136,14 +96,19 @@
       "descriptor": "partial"
     },
     "school": "con",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "NS pg. 129",
     "sr": true,
     "target": {
-      "type": "",
       "value": "one computer system or module"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

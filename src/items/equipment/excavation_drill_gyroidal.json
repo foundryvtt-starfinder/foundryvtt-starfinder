@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/equipment/technological%20items/lazer-drill.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "2",
     "capacity": {
       "max": 100,
@@ -86,8 +81,10 @@
       "effect": "Bleed",
       "parts": [
         {
+          "name": "",
           "formula": "3d8",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -95,7 +92,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -108,6 +107,7 @@
           "name": "",
           "formula": "11d12",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -115,12 +115,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -130,9 +133,8 @@
       "unidentified": "",
       "value": "<p>Excavation drills are a core hand tool for miners across the galaxy. Some claim that @UUID[Compendium.sfrpg.races.Item.SaWDXnfaX24Iuuuz]{Dwarf} mining engineers poached from Ulrikka Clanholdings initially designed these drills, as Ulrikka has previously produced similar designs. @UUID[Compendium.sfrpg.races.Item.SaWDXnfaX24Iuuuz]{Dwarf} knights have long used these drills in combat, as have gladiators, who often use them to put on bizarre and grisly shows. Utility and industrial models see extensive use in demolition and mining, while helical and volute drills are essential for some star-metal mining, where hard ore requires a tougher tool. Gyroidal drills are restricted, special-operations tools predominantly used to breach starship hulls during rescue or military boarding operations.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
@@ -140,115 +142,38 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 18,
     "modifiers": [],
     "price": 387750,
     "proficient": false,
     "properties": {
-      "aeon": false,
-      "amm": true,
-      "analog": false,
-      "antibiological": false,
-      "archaic": false,
-      "aurora": false,
-      "automatic": false,
-      "blast": false,
-      "block": false,
-      "boost": false,
-      "breach": false,
-      "breakdown": false,
-      "bright": false,
-      "buttressing": false,
-      "cluster": false,
-      "conceal": false,
-      "deconstruct": false,
-      "deflect": false,
-      "disarm": false,
-      "double": false,
-      "drainCharge": false,
-      "echo": false,
-      "entangle": false,
-      "explode": false,
-      "extinguish": false,
-      "feint": false,
-      "fiery": false,
-      "firstArc": false,
-      "flexibleLine": false,
-      "force": false,
-      "freeHands": false,
-      "fueled": false,
-      "gearArray": false,
-      "grapple": false,
-      "gravitation": false,
-      "guided": false,
-      "harrying": false,
-      "healing": false,
-      "holyWater": false,
-      "hybrid": false,
-      "hydrodynamic": false,
-      "ignite": false,
-      "indirect": false,
-      "injection": false,
-      "instrumental": false,
-      "integrated": false,
-      "line": false,
-      "living": false,
-      "lockdown": false,
-      "mind-affecting": false,
-      "mine": false,
-      "mire": false,
-      "modal": false,
-      "necrotic": false,
-      "nonlethal": false,
-      "one": false,
-      "operative": false,
-      "penetrating": false,
-      "polarize": false,
-      "polymorphic": false,
-      "powered": false,
-      "professional": true,
-      "propel": false,
-      "punchGun": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "recall": false,
-      "regrowth": false,
-      "relic": false,
-      "reposition": false,
-      "scramble": false,
-      "shape": false,
-      "shatter": true,
-      "shells": false,
-      "shield": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "sunder": false,
-      "swarm": false,
-      "tail": false,
-      "teleportive": false,
-      "thought": false,
-      "throttle": false,
-      "thrown": false,
-      "thruster": false,
-      "trip": false,
-      "two": true,
-      "unbalancing": false,
-      "underwater": false,
-      "unwieldy": true,
-      "variantBoost": false,
-      "wideLine": false
+      "amm": {
+        "extension": "",
+        "value": true
+      },
+      "professional": {
+        "extension": "",
+        "value": true
+      },
+      "shatter": {
+        "extension": "",
+        "value": true
+      },
+      "two": {
+        "extension": "",
+        "value": true
+      },
+      "unwieldy": {
+        "extension": "",
+        "value": true
+      }
     },
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
@@ -258,28 +183,14 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AP #34 pg. 44",
     "special": "",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
+    "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -287,7 +198,7 @@
       "value": 4
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     },

@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/bilocation.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -50,7 +46,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
@@ -66,51 +64,14 @@
       "unidentified": "",
       "value": "<p>You rapidly rewind time for all creatures in the area to a moment before they were born, potentially erasing them from existence completely. Each creature in the area takes 12d8 slashing damage (Fortitude half). Any creature reduced to 0 Hit Points by this spell must succeed at a second Fortitude save or be erased from time, causing them to vanish, leaving behind their equipment. The spell eliminates all memories and records of an erased creature, though especially close friends and confidantes retain a vague notion of the creature’s identity. This erasure doesn’t undo the creature’s actions, so it might leave discrepancies and unexplained gaps in memories and recordings. An erased creature can only be restored to life by someone who knows their name or has deduced the creature’s identity (such as through painstaking investigation and deduction), and even then only with spells or rituals of 6th level or higher, such as @UUID[Compendium.sfrpg.spells.Item.i3lpfndXeLq85h12]{Miracle} or @UUID[Compendium.sfrpg.spells.Item.i4KITExV7vMeoM24]{Wish}.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 6,
     "materials": {
@@ -126,8 +87,6 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
@@ -140,12 +99,13 @@
     "school": "nec",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 122",
     "sr": true,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -41,44 +37,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.SRkvq0GXYm3Wi6ze]{Spellbrawler}</p>\n<p>After you deal damage to a creature within 30 feet with an attack, you can spend 2 Resolve Points (or 1 Resolve Point if the attack was a critical hit) as a reaction to drain a portion of that creature’s magical energy (Will negates) to empower your next attack. If the creature fails its saving throw, it loses one spell slot of the highest level it knows, as if it had expended it. If the creature has only spell-like abilities, it loses one daily use of the highest-level spell-like ability it can cast (determined randomly). If the creature can’t cast spells or spell-like abilities, this ability has no effect, and you regain the Resolve Points expended.</p>\n<p>If you successfully drain a spell or spell-like ability, you gain a +1 enhancement bonus to AC until the end of your next turn. When you deal damage with a weapon attack, you can dismiss this AC bonus to increase the damage dealt to one target by [[/r 1d6]] per level of the drained spell or spell-like ability.</p>\n<p>@UUID[Compendium.sfrpg.effects.Item.4IfCM4gVVrBNYO9D]{Effect: Spell Siphon (Su)}</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -89,15 +48,17 @@
       "value": "Until the end of your next turn"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "34eb1671-5143-46dd-adda-3426e82e9d18",
         "name": "Spell Siphon (Su)",
         "type": "enhancement",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "constant",
@@ -111,8 +72,10 @@
         "name": "Spell Siphon (Su)",
         "type": "enhancement",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "constant",
@@ -124,14 +87,12 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "30"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "5th Technique",
     "rollNotes": "",
@@ -142,11 +103,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "GM pg. 32",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

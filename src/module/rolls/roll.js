@@ -61,6 +61,17 @@ export default class SFRPGRoll extends Roll {
                 }
                 return new terms.NumericTerm({number: total});
             }
+            if (t instanceof terms.Die) {
+                if (t._number.isDeterministic) {
+                    let total = 0;
+                    try {
+                        total = t?.total || Roll.safeEval(t._number);
+                    } catch {
+                        total = Roll.safeEval(t._number);
+                    }
+                    return new terms.Die({faces: t.faces, number: total});
+                }
+            }
             return t;
         });
         return DiceSFRPG.simplifyRollFormula(Roll.fromTerms(newterms).formula) || "0";
@@ -184,5 +195,30 @@ export default class SFRPGRoll extends Roll {
 
             return super.parse(wrappedFormula, data);
         }
+    }
+
+    static replaceFormulaData(formula, data, {missing, warn = false} = {}) {
+        formula = SFRPGRoll._insertValueProperty(formula, data);
+        return super.replaceFormulaData(formula, data, {missing, warn = false} = {});
+    }
+
+    /**
+    * A helper function to add the `.value` string to the end of referenced objects with the `value` subproperty.
+    * This allows a property at the address `object.property.value` to be referenced in formulas as just `object.property`
+    * @param {String} formula  A roll formula string
+    * @param {object} rollData The roll context
+    * @returns {String}        A modified roll formula string
+    */
+    static _insertValueProperty(formula, rollData) {
+        const formulaVariables = [...formula.matchAll(/@[A-z0-9.]*/g)];
+        if (!formulaVariables.length) return formula;
+        for (const formulaVariable of formulaVariables) {
+            const prop = formulaVariable[0].slice(1);
+            const target = `${prop}.value`;
+            if (foundry.utils.hasProperty(rollData, target)) {
+                formula = formula.replace(prop, target);
+            }
+        }
+        return formula;
     }
 }

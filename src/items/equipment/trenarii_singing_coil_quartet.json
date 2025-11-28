@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "2",
     "capacity": {
       "max": 80,
@@ -76,6 +71,8 @@
         {
           "name": "",
           "formula": "4d4",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -83,12 +80,15 @@
             "electricity": true,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -98,9 +98,8 @@
       "unidentified": "",
       "value": "<p>The pahtras of Trenarez consider themselves the bleeding edge of pahtra musical innovation, and their latest hit is using carefully modulated electrical coils to emit lightning bolts that replicate musical tones. It wasn’t long before someone created a portable version, allowing the user to spread destruction to jaunty musical accompaniment.</p>\n<p><strong>Profession (Musician)<sup>AR</sup></strong></p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
@@ -108,112 +107,35 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 13,
     "modifiers": [],
     "price": 50000,
     "proficient": false,
     "properties": {
-      "aeon": false,
-      "amm": false,
-      "analog": false,
-      "antibiological": false,
-      "archaic": false,
-      "aurora": false,
-      "automatic": false,
-      "blast": false,
-      "block": false,
-      "boost": false,
-      "breach": false,
-      "breakdown": false,
-      "bright": false,
-      "buttressing": false,
-      "cluster": false,
-      "conceal": false,
-      "deconstruct": false,
-      "deflect": false,
-      "disarm": false,
-      "double": false,
-      "drainCharge": false,
-      "echo": false,
-      "entangle": false,
-      "explode": false,
-      "extinguish": false,
-      "feint": false,
-      "fiery": false,
-      "firstArc": false,
-      "flexibleLine": false,
-      "force": false,
-      "freeHands": false,
-      "fueled": false,
-      "gearArray": false,
-      "grapple": false,
-      "gravitation": false,
-      "guided": false,
-      "harrying": false,
-      "holyWater": false,
-      "hybrid": false,
-      "ignite": false,
-      "indirect": false,
-      "injection": false,
-      "integrated": false,
-      "line": true,
-      "living": false,
-      "lockdown": false,
-      "mind-affecting": false,
-      "mine": false,
-      "mire": false,
-      "modal": false,
-      "necrotic": false,
-      "nonlethal": false,
-      "one": false,
-      "operative": false,
-      "penetrating": false,
-      "polarize": false,
-      "polymorphic": false,
-      "powered": false,
-      "professional": true,
-      "propel": false,
-      "punchGun": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "recall": false,
-      "regrowth": false,
-      "relic": false,
-      "reposition": false,
-      "scramble": false,
-      "shape": false,
-      "shatter": false,
-      "shells": false,
-      "shield": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "sunder": false,
-      "swarm": false,
-      "tail": false,
-      "teleportive": false,
-      "thought": false,
-      "throttle": false,
-      "thrown": false,
-      "thruster": false,
-      "trip": false,
-      "two": true,
-      "unbalancing": false,
-      "underwater": false,
-      "unwieldy": true,
-      "variantBoost": false,
-      "wideLine": false
+      "line": {
+        "extension": "",
+        "value": true
+      },
+      "professional": {
+        "extension": "",
+        "value": true
+      },
+      "two": {
+        "extension": "",
+        "value": true
+      },
+      "unwieldy": {
+        "extension": "",
+        "value": true
+      }
     },
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 120
+      "value": "120"
     },
     "rollNotes": "",
     "save": {
@@ -221,26 +143,16 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "DC pg. 63",
     "special": "",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
+    "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -248,7 +160,7 @@
       "value": 10
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     },

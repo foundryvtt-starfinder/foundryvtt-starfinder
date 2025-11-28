@@ -5,10 +5,7 @@
   "img": "systems/sfrpg/icons/default/vr-headset.svg",
   "system": {
     "type": "cybernetic",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -42,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -56,7 +52,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -66,17 +63,16 @@
       "unidentified": "",
       "value": "<p>You line your skin with hardened composite plates that deflect physical attacks. You gain an amount of damage reduction that depends on the model of your dermal plating. If you have natural damage reduction equal to or greater than your dermal plating, adding dermal plating increases the value of your natural DR by 1. If you have natural DR of a value less than your dermal plating, the value of DR from your dermal plating increases by 1.</p>\n<p><em>Adjust damage reduction modifier in the Modifiers tab, if racial traits provide damage reduction.</em></p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 5,
     "modifiers": [
       {
@@ -84,8 +80,10 @@
         "name": "Dermal Plating, Mk 1",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "constant",
@@ -96,30 +94,33 @@
       }
     ],
     "price": 3025,
+    "proficient": false,
     "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "CRB pg. 209",
     "system": "skin",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,63 +37,28 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.PSHcGB4UFgMSiF4V]{Biohacker}</p>\n<p>Whereas most biohackers affect anatomy with injections, urogs’ crystalline physiology responds better to precise sonic resonances. An urog-trained biohacker can transform a living being’s composition with a word.</p>\n<p>Choose one of the following: advanced melee weapons, longarms, or sniper weapons. You’re proficient with weapons of the chosen type in the sonic category, and rather than the normal Weapon Specialization benefit for these weapons, you instead add half your character level to their damage. You can deliver injectable substances like poisons, serums, drugs, medicinals, and biohacks using sonic weapons as though they have the injection weapon special property and deal slashing damage. For any biohacker ability that functions with injection weapons, you can also apply that ability to a sonic weapon. At 2nd level, you gain a +1 bonus to attack rolls with these weapons. At 9th level the bonus increases to +2, and at 18th level it increases to +3. When you hit an ally with such a weapon, you can avoid dealing damage to that ally, while still affecting them with the biohack, drug, poison, serum, or other substance that was loaded into the injection weapon.</p>\n<p>Rather than using a syringe from your @UUID[Compendium.sfrpg.class-features.Item.lgdDuAM2I3s8PQsD]{custom microlab} to deliver biohacks, you instead use a handheld sonic pad that targets the EAC of an unwilling target but otherwise functions as a syringe. At 2nd level, you can use your custom microlab to direct a sonic burst at a creature within half your custom microlab’s range, affecting it with a biohack as if you had applied it with the sonic pad; this requires no attack roll, but an unwilling target can negate a biohack delivered this way with a successful Fortitude save (DC = 10 + half your biohacker level + your key ability score modifier). This is a sonic effect.</p>\n<p><strong>This replaces the injection expert class ability and the theorem gained at 2nd level.</strong></p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "5e669daf-829f-4062-b3fd-7d161cde287c",
         "name": "Resonating Biohack - Sonic Specialization",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-category-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "lookupRange(@classes.biohacker.levels, 0 , 3, floor(@classes.biohacker.levels / 2))",
         "modifierType": "formula",
@@ -110,8 +72,10 @@
         "name": "Resonating Biohack - Sonic attack roll bonus",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-category-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "lookupRange(@classes.biohacker.levels, 0 , 2, 1, 9, 2, 18, 3)",
         "modifierType": "formula",
@@ -123,14 +87,11 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level (Biohacker)",
     "rollNotes": "",
@@ -139,14 +100,19 @@
       "dc": "10+floor(@classes.biohacker.levels/2) + (@classes.biohacker.keyAbilityMod)",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "IS, pg. 20",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "icons/magic/lightning/orb-ball-spiral-blue.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "util",
     "activation": {
@@ -27,7 +23,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -42,6 +38,7 @@
           "name": "",
           "formula": "2d12",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -49,12 +46,15 @@
             "electricity": true,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -65,50 +65,15 @@
       "value": "<p>You surround yourself with an intangible crystalline sphere that grants you electricity resistance 10 for the spell’s duration. As a reaction when you resist electricity damage or cast another spell with the electricity descriptor, you can dismiss the spell to shatter the sphere, releasing its energy; creatures adjacent to you take 2d12 electricity damage.</p>"
     },
     "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": true,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
+      "electricity": true
     },
     "dismissible": true,
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": "10 minutes/level or until dismissed; see text"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 3,
     "materials": {
@@ -124,10 +89,7 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "personal",
-      "value": null
+      "units": "personal"
     },
     "rollNotes": "",
     "save": {
@@ -136,14 +98,19 @@
       "descriptor": "negate"
     },
     "school": "abj",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "IS pg. 123",
     "sr": false,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

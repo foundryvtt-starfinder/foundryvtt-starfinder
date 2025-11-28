@@ -1,3 +1,153 @@
+# 0.29.1
+This release cleans up some more things on the backend and adds a couple of new features and bugfixes that were enabled by the implementation of the system data model in 0.29.0. Thanks to @levirak, @danimrath, and @ian612 for their contributions to this release, and to the community for filing bug reports and feature requests!
+
+## Deprecation Notice
+
+- In an upcoming version, we will be removing Starfinder's implementation of compendium art mapping since Foundry now handles this natively in a more robust manner.
+
+## Core System Improvements
+
+- Features (class features, feats, etc.) can now be set up to execute a macro on activation and/or deactivation by @levirak
+- The trait selector has been rewritten from the ground up to be more user friendly when selecting languages, proficiencies, and weapon properties by @ian612
+- Weapon properties can now be assigned a value, such as for the Boost/Blast properties by @ian612
+- Power Armor now correctly affects bulk, speed, and attributes based on whether it's equipped and powered by @ian612
+
+## Bugfixes
+
+- Errors caused by null data values fixed in a couple places by @danimrath
+- Inline intelligence and intimidate checks are now handled correctly by @ian612
+- Fix the damage modifier dialog being broken by @ian612
+
+## Data Entry and Localization
+
+- Power Drain Vanguard Discipline added by @ian612
+- The Gear Clamp item is now a container item type, allowing it to hold an item as per its description by @ian612
+- Extra Unarmed Attack removed from Raia Iconic by @ian612
+- Empty/false properties & descriptors & materials have been stripped from compendium files, reducing their size by @ian612
+
+# 0.29.0.1
+This is a small hotfix to prevent some errors in tooltip calculations. See Version 0.29.0 for the most recent set of major changes.
+
+# 0.29.0
+
+This update is a big one, with some big backend changes that will keep the system functioning on future Foundry release versions. It also includes a big update to feature activations that allows more accurate tracking of which effects are currently active, and restores the hotbar automation and features that were broken in the transition to Foundry v13. In addition, a lot of bugs have been fixed related to timed effects, starship combat, and various other features, and the last remaining Starfinder Enhanced data has been added.
+
+Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG, @ian612, @Iankid, @ilya-vasiuk, @LebombJames, @levirak, and @Theleruby (apologies if I missed anyone!).
+
+## Breaking Changes
+
+- Old-Style NPCs (actor type `npc`) are no longer supported; these will need to be converted to the modern NPC (actor type `npc2`) BEFORE updating to this version
+- `@mod` can no longer be referenced in damage rolls. Instead, reference the ability modifier with its full path
+
+## Core System Improvements
+
+### General Improvements
+
+- Combat Type is now selected automatically when an actor is added to a not-in-progress combat by a GM
+- Modifier effect type dropdown selector now has options organized into logical groupings
+
+### Character/NPC/Drone Improvements
+
+- Overhaul of how feature activation works
+  - Default duration for features is now `instantaneous`
+  - `instantaneous` features no longer need to be toggled off (these now show up as yellow buttons on the character sheet)
+  - Activation time is now tracked for features, which automatically turn off upon expiry
+  - The `null` and `none` activation types are renamed to "Passive" and "Free" for clarity
+- Nonfunctional key ability score field removed from character sheets
+- NPC ability and spell DCs moved to the relevant tabs to highlight them
+- Ammunition usage multiplier modifiers added
+- Same-type Spell Save DC bonuses now stack correctly
+- Charges can now be consumed from items with ammunition via a Use Item button in the item's inventory listing
+- Items with per-minute ammo usage now include a manual "Use Item" button instead of using the previous unreliable algorithm to track ammo
+
+### Starship Improvements
+
+- Starship system patch state is now trackable on the starship sheet and automated correctly
+- Support added for a selection of modifiers affecting starship values
+- NPC Crew can now perform minor and open crew actions
+- New modifiers added to modify Build Point maximum
+- Starship size is now localized and AC & TL modifier is displayed next to it
+
+### Backend Improvements
+
+- Data Models have been added for all actor and item types in the game system, replacing template.json
+- Crew role names and definitions added to `config.js` in place of being hardcoded in code files
+- Bump libraries to latest revisions for security
+- Sanitization of codebase to remove linting errors and warnings
+- When cooking and unpacking compendium files, can now limit the operation to a single compendium if desired with the `--pack` option
+- Added an example `launch.json` file to enable debugging in Chrome & VS Code
+- Updated `CONTRIBUTING.md` with up-to-date documentation
+
+## Bug Fixes
+
+### General Fixes
+
+- Hotbar automations have been restored after being broken by the Foundry v13 upgrade
+- Condition application no longer depends on the name of the condition, allowing them to be localized if desired
+- Decimal values are now allowed in currency and build point fields without causing errors
+- Advantage and Disadvantage buttons now work correctly when rolling
+- Calculation of range on spell sheets fixed for Close/Medium/Long ranges
+
+### Character/NPC/Drone Fixes
+
+- Default attack roll bonuses are now correctly calculated based on the attack and weapon type, and actor stats
+- Skill checks that have the "variable DC" box checked no longer display the DC on chat cards
+- Timed Effects are now correctly handled individually for unlinked tokens using the same base actor
+- "Turn" duration added to effects to indicate something lasts until the end of the current turn
+- UPB weight is now correctly calculated (1 bulk per 1000 UPBs)
+
+### Starship Fixes
+
+- Typo fixed in the starship sheet that prevented an editor from opening
+- Starship combat phases where all combatants act simultaneously no longer highlight the top ship in the turn tracker
+- Turrets are now correctly impacted by critical weapon system damage
+
+### Backend Fixes
+
+- Fixed an error thrown for players by the `renderCombatTracker` hook
+- Fix an error being thrown when starship weapon attacks critically hit
+- Various improvements made to improve the quality and consistency of timed effects (Effect items and Features)
+
+## Data Entry & Localization
+
+This update adds the last of the Starfinder Enhanced content to the system, as well as individual items for theme and archetype features.
+
+### New Data
+
+- Remaining data from Starfinder Enhanced has been added
+  - Species have been added
+  - Rules journals for scaling equipment added
+  - Creature Companions added
+  - Summoned creatures for Singularity Servant, Solar Summoner, and Phase Swarm added
+  - Roll table added for Chaos Ammo
+  - Effects added for Enhance Defense and Enhance Energy Save
+  - GM Tools and Rituals have been added to the rules journals from Starfinder Enhanced (and Galactic Magic)
+- Added all archetype features as their own items
+- Theme features have been added as individual items with appropriate modifiers
+- Additional Spanish localizations
+
+### Corrections and Updates
+
+- Folders have been added to the Alien Archive compendium, sorting them by source (and type for adventures, NPC vs Alien)
+- Features have been updated to make the default duration `instantaneous` wherever a pre-existing duration was not found
+- Iconic characters updated to use modern version of Weapon Specialization feat
+- Binary `lookupRange` formulas replaced with `ternary` in compendiums
+- Typos and missing descriptions fixed for plasma guide items, "Baleful Polymorph", "Nanite Array (Ex)", Syringe Stick items, and Syringe Spear items
+- Description updated based on errata for the "Explosive Danger" class feature
+- Fix missing links in the "Field of Study" class feature
+- "Nanite Surge" typo preventing max uses calculating correctly fixed
+- "Nanite Surge" uses corrected to "per day" rather than "charges"
+- The "Biohacks" class feature now tracks uses and calculates max uses correctly, improving usability
+  - Iconic Barsala updated to use the updated "Biohacks" feature
+- "Expanded Cache (Su)" icon path is fixed
+- "Cultural Fascination" action type fixed
+- "Double Tap" now uses the ammo usage multiplier modifier to function correctly
+- Fix some starship action description and effect strings that were missing or had typos
+- Remove errant hash marks from some critical effect strings
+- Starship Actions "Encourage", "Harrying Shot", "Orders", and "Snap Shot" can now be rolled with the NPC gunnery skill
+- Drift engines in compendiums set to not powered by default
+- "Atech Immortal" updated to fix several incorrect fields
+
 # 0.28.3
 
 This update adds compatibility with some new Foundry v13 features, fixes to item-on-canvas dropping, a new Spanish Translation, and assorted other quality of life improvements.

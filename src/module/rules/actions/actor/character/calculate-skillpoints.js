@@ -1,28 +1,16 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateSkillpoints", (fact, context) => {
         const data = fact.data;
         const skills = fact.data.skills;
         const classes = fact.classes;
-
-        /** Fix the skillpoints field if not present. (Old data) */
-        if (!data.skillpoints) {
-            data.skillpoints = {
-                used: 0,
-                max: 0,
-                tooltip: []
-            };
-        }
+        if (!data.skillpoints) data.skillpoints = {};
 
         const addModifier = (bonus, data, item, localizationKey) => {
+            if (!item.rolledMods) item.rolledMods = [];
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
-                if (item.rolledMods) {
-                    item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
-                } else {
-                    item.rolledMods = [{mod: bonus.modifier, bonus: bonus}];
-                }
-
+                item.rolledMods.push({mod: bonus.modifier, bonus: bonus});
                 return 0;
             }
 
@@ -34,6 +22,7 @@ export default function(engine) {
                 console.error(e);
             }
 
+            if (!item.tooltip) item.tooltip = [];
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
@@ -55,16 +44,9 @@ export default function(engine) {
         skillPointModifiers = context.parameters.stackModifiers.process(skillPointModifiers, context, {actor: fact.actor});
 
         const skillPointModifierBonus = Object.entries(skillPointModifiers).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, data.skillpoints, "SFRPG.ActorSheet.Modifiers.Tooltips.BonusSkillpoints");
-                }
-            } else {
-                sum += addModifier(mod[1], data, data.skillpoints, "SFRPG.ActorSheet.Modifiers.Tooltips.BonusSkillpoints");
+            for (const bonus of mod[1]) {
+                sum += addModifier(bonus, data, data.skillpoints, "SFRPG.ActorSheet.Modifiers.Tooltips.BonusSkillpoints");
             }
-
             return sum;
         }, 0);
 
@@ -84,22 +66,16 @@ export default function(engine) {
             }), context, {actor: fact.actor});
 
             const accumulator = Object.entries(mods).reduce((sum, mod) => {
-                if (mod[1] === null || mod[1].length < 1) return sum;
-
-                if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                    for (const bonus of mod[1]) {
-                        sum += addModifier(bonus, fact.data, skill, "SFRPG.ActorSheet.Modifiers.Tooltips.SkillRank");
-                    }
-                } else {
-                    sum += addModifier(mod[1], fact.data, skill, "SFRPG.ActorSheet.Modifiers.Tooltips.SkillRank");
+                for (const bonus of mod[1]) {
+                    sum += addModifier(bonus, fact.data, skill, "SFRPG.ActorSheet.Modifiers.Tooltips.SkillRank");
                 }
-
                 return sum;
             }, 0);
 
             skill.min = accumulator;
         }
 
+        data.skillpoints.tooltip = [];
         let skillpointsMax = 0;
         let totalLevel = 0;
         for (const cls of classes) {

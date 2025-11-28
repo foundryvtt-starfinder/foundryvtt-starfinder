@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,44 +37,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.themes.Item.UMEVCZjRzhatEFnn]{Vaster}</p>\n<p>Former crewmates whisper of your strange, innate ability to get any ship to do exactly what you need, when you need it. You know starships and how to get the most out of them, so you can fill in for many crew roles whenever necessary. When taking chief mate (Character Operations Manual 146), pilot, and science officer actions, you can treat half your ranks in the @UUID[Compendium.sfrpg.rules.JournalEntry.GMkLZsN3a7YPvA03.JournalEntryPage.76u4HnGcAlySicb4]{Engineering} skill as ranks in the appropriate skills needed for actions in those crew roles. For gunnery checks, you can use your Engineering ranks in place of Piloting ranks, and you can use your Wisdom modifier in place of your Dexterity modifier. This feature gives you effective ranks in skills, so you’re considered to be trained in those skills for the purpose of fulfilling the crew role. If you’re trained in a skill required for a crew action, you instead receive a +1 insight bonus on the check for the action.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "themeFeature",
       "combat": false,
@@ -88,15 +48,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "b5b07001-2e32-4083-853d-62eaaf0f2e91",
         "name": "Starship Savant",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "all-skills",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "formula",
@@ -108,25 +70,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "12th Level - Vaster",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #34 pg. 49",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

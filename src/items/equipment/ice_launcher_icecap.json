@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "rwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "3",
     "capacity": {
       "max": 80,
@@ -52,7 +47,7 @@
     "chatFlavor": "Unwieldy",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": [
         {
@@ -81,23 +76,49 @@
       "effect": "Knockdown",
       "parts": [
         {
+          "name": "",
           "formula": "",
-          "operator": "",
-          "types": {}
+          "group": null,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
+          }
         }
       ]
     },
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "14d12",
-          "operator": "and",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
+            "acid": false,
             "bludgeoning": true,
-            "cryo": true
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -107,9 +128,8 @@
       "unidentified": "",
       "value": ""
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
@@ -117,115 +137,48 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 20,
     "modifiers": [],
     "price": 892000,
     "proficient": false,
     "properties": {
-      "aeon": false,
-      "amm": true,
-      "analog": false,
-      "antibiological": false,
-      "archaic": false,
-      "aurora": false,
-      "automatic": false,
-      "blast": false,
-      "block": false,
-      "boost": false,
-      "breach": false,
-      "breakdown": false,
-      "bright": false,
-      "cluster": false,
-      "conceal": false,
-      "deconstruct": false,
-      "deflect": false,
-      "disarm": false,
-      "double": false,
-      "drainCharge": false,
-      "echo": false,
-      "entangle": false,
-      "explode": false,
-      "extinguish": false,
-      "feint": false,
-      "fiery": false,
-      "firstArc": false,
-      "flexibleLine": false,
-      "force": false,
-      "freeHands": false,
-      "fueled": false,
-      "grapple": false,
-      "gravitation": false,
-      "guided": false,
-      "harrying": false,
-      "holyWater": false,
-      "ignite": false,
-      "indirect": false,
-      "injection": false,
-      "integrated": false,
-      "line": false,
-      "living": false,
-      "lockdown": false,
-      "mind-affecting": false,
-      "mine": false,
-      "mire": false,
-      "modal": false,
-      "necrotic": false,
-      "nonlethal": false,
-      "one": false,
-      "operative": false,
-      "penetrating": false,
-      "polarize": false,
-      "polymorphic": false,
-      "powered": false,
-      "professional": false,
-      "punchGun": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "recall": false,
-      "relic": false,
-      "reposition": false,
-      "shape": false,
-      "shells": false,
-      "shield": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "sunder": false,
-      "swarm": false,
-      "tail": false,
-      "teleportive": false,
-      "thought": false,
-      "throttle": false,
-      "thrown": false,
-      "trip": false,
-      "two": true,
-      "underwater": false,
-      "unwieldy": true,
-      "variantBoost": false,
-      "wideLine": false
+      "amm": {
+        "extension": "",
+        "value": true
+      },
+      "two": {
+        "extension": "",
+        "value": true
+      },
+      "unwieldy": {
+        "extension": "",
+        "value": true
+      }
     },
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
-      "value": 60
+      "value": "60"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AR",
     "special": "",
     "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {
@@ -233,7 +186,7 @@
       "value": 8
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 8
     },

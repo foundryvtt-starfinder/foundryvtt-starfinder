@@ -113,23 +113,25 @@
 
             {{!-- Ability Scores --}}
             <ul class="ability-scores flexrow">
-                {{#each system.abilities as |ability id|}}
-                <li class="ability {{#if ability.proficient}}proficient{{/if}}" data-ability="{{id}}">
-                  <div class="ability-header flexrow">
-                    <input class="ability-damage" name="system.abilities.{{id}}.damage" type="text" data-tooltip="{{localize "SFRPG.AbilityDamageTitle"}}"
-                    value="{{#if ability.damage}}{{ability.damage}}{{/if}}" data-dtype="Number" placeholder="{{localize "SFRPG.AbilityDamagePlaceholder"}}"/>
-                    <input class="ability-penalty" name="system.abilities.{{id}}.userPenalty" type="text" data-tooltip="{{localize "SFRPG.AbilityPenaltyTitle"}}"
-                    value="{{#if ability.userPenalty}}{{ability.userPenalty}}{{/if}}" data-dtype="Number" placeholder="{{localize "SFRPG.AbilityPenaltyPlaceholder"}}"/>
-                    <input class="ability-drain" name="system.abilities.{{id}}.drain" type="text" data-tooltip="{{localize "SFRPG.AbilityDrainTitle"}}"
-                    value="{{#if ability.drain}}{{ability.drain}}{{/if}}" data-dtype="Number" placeholder="{{localize "SFRPG.AbilityDrainPlaceholder"}}"/>
-                  </div>
-                  <h4 class="ability-name box-title rollable" data-tooltip="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.value<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{ability.label}}</h4>
-                  <div class="ability-modifiers flexrow">
-                    <span class="ability-mod" data-tooltip="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.modifierTooltip as |tip|}}{{tip}}<br>{{/each}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
-                    <div class="ability-center" data-tooltip="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.value<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{ability.value}}</div>
-                    <input class="ability-base" data-tooltip="<strong>{{localize "SFRPG.AbilityScoreBase"}}</strong><br>@abilities.{{id}}.base" name="system.abilities.{{id}}.base" type="text" value="{{ability.base}}" data-dtype="Number" placeholder="10"/>
-                  </div>
-                </li>
+                {{#each (sfrpg "abilityDisplayOrder") as |id|}}
+                    {{#with (lookup ../system.abilities id) as |ability|}}
+                    <li class="ability{{#if ability.proficient}} proficient{{/if}}" data-ability="{{id}}">
+                    <div class="ability-header flexrow">
+                        <input class="ability-damage" name="system.abilities.{{id}}.damage" type="text" data-tooltip="{{localize "SFRPG.AbilityDamageTitle"}}"
+                        value="{{#if ability.damage}}{{ability.damage}}{{/if}}" data-dtype="Number" placeholder="{{localize "SFRPG.AbilityDamagePlaceholder"}}"/>
+                        <input class="ability-penalty" name="system.abilities.{{id}}.userPenalty" type="text" data-tooltip="{{localize "SFRPG.AbilityPenaltyTitle"}}"
+                        value="{{#if ability.userPenalty}}{{ability.userPenalty}}{{/if}}" data-dtype="Number" placeholder="{{localize "SFRPG.AbilityPenaltyPlaceholder"}}"/>
+                        <input class="ability-drain" name="system.abilities.{{id}}.drain" type="text" data-tooltip="{{localize "SFRPG.AbilityDrainTitle"}}"
+                        value="{{#if ability.drain}}{{ability.drain}}{{/if}}" data-dtype="Number" placeholder="{{localize "SFRPG.AbilityDrainPlaceholder"}}"/>
+                    </div>
+                    <h4 class="ability-name box-title rollable" data-tooltip="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.value<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{ability.label}}</h4>
+                    <div class="ability-modifiers flexrow">
+                        <span class="ability-mod" data-tooltip="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.mod<br><br>{{#each ability.modifierTooltip as |tip|}}{{tip}}<br>{{/each}}">{{numberFormat ability.mod decimals=0 sign=true}}</span>
+                        <div class="ability-center" data-tooltip="<strong>{{ability.label}}</strong><br>@abilities.{{id}}.value<br><br>{{#each ability.tooltip as |tip|}}{{tip}}<br>{{/each}}">{{ability.value}}</div>
+                        <input class="ability-base" data-tooltip="<strong>{{localize "SFRPG.AbilityScoreBase"}}</strong><br>@abilities.{{id}}.base" name="system.abilities.{{id}}.base" type="text" value="{{ability.base}}" data-dtype="Number" placeholder="10"/>
+                    </div>
+                    </li>
+                    {{/with}}
                 {{/each}}
             </ul>
 
@@ -159,7 +161,7 @@
                         {{#if skill.hasArmorCheckPenalty}}<span>*</span>{{/if}}
                     </h4>
                     <input type="text" class="skill-ranks" title="Skill Ranks" name="system.skills.{{s}}.ranks" value="{{skill.ranks}}" data-dtype="Number" />
-                    <span class="skill-ability">{{skill.ability}}</span>
+                    <span class="skill-ability">{{skill.abilityLabel}}</span>
                     <span class="skill-mod">{{numberFormat skill.mod decimals=0 sign=true}}</span>
                 </li>
                 {{/each}}

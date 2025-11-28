@@ -4,10 +4,8 @@ export default function(engine) {
         const mods = fact.mods;
 
         data.attributes.arms = 0;
-        data.attributes.weaponMounts.melee.max = 0;
-        data.attributes.weaponMounts.ranged.max = 0;
-        data.attributes.armorSlots.current = 0;
-        data.attributes.armorSlots.max = 0;
+        data.attributes.weaponMounts = {melee: {max: 0}, ranged: {max: 0}};
+        data.attributes.armorSlots = {current: 0, max: 0};
         data.traits.senses = "";
         data.traits.spellResistance.value = data.traits.spellResistance.base;
         data.traits.spellResistance.tooltip = [];
@@ -83,7 +81,7 @@ export default function(engine) {
 
                 tooltip = game.i18n.format("SFRPG.SkillModifierTooltip", {
                     type: "Mechanic Level",
-                    mod: skill.ranks.signedString(),
+                    mod: skill.ranks?.signedString(),
                     source: mod.name
                 });
 

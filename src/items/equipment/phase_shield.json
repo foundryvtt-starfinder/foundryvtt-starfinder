@@ -4,13 +4,9 @@
   "type": "upgrade",
   "img": "systems/sfrpg/icons/default/armor-upgrade.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
@@ -23,7 +19,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -44,7 +40,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 40,
@@ -53,7 +48,7 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
-      "includeContentsInWealthCalculation": 1,
+      "includeContentsInWealthCalculation": true,
       "isOpen": true,
       "storage": []
     },
@@ -62,7 +57,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -72,17 +68,12 @@
       "unidentified": "",
       "value": "<p>You can activate this upgrade to generate a glowing, translucent blue shield on one of your arms that helps you block incoming attacks. Activating or deactivating the shield takes a move action. While the shield is active, you gain a +1 enhancement bonus to EAC. The phase shield interferes with your ability to use the arm it’s installed on, so while the phase shield is active, you can hold an item in that hand but not use it or make attacks with it.</p>\n<p>This can be installed only in heavy or powered armor.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
-    "equippable": false,
-    "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
-    "identified": true,
-    "isActive": null,
+    "isActive": false,
     "level": 6,
     "modifiers": [
       {
@@ -90,8 +81,10 @@
         "name": "Phase Shield",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "constant",
@@ -106,21 +99,23 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
     "slots": 1,
+    "slug": "",
     "source": "CRB pg. 205",
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -128,8 +123,8 @@
       "value": 2
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }

@@ -4,11 +4,7 @@
   "type": "weapon",
   "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -43,7 +39,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "1",
     "capacity": {
       "max": 40,
@@ -80,6 +75,7 @@
           "acceptsType": [
             "weaponAccessory"
           ],
+          "affectsEncumbrance": true,
           "amount": 4,
           "subtype": "",
           "weightMultiplier": 1,
@@ -91,8 +87,10 @@
       "effect": "Staggered",
       "parts": [
         {
+          "name": "",
           "formula": "",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -100,7 +98,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -113,6 +113,7 @@
           "name": "",
           "formula": "2d10",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -120,12 +121,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -135,7 +139,6 @@
       "unidentified": "",
       "value": "<p>A frost projector requires two armor upgrade slots to install: one for the short, wide barrel and another for the coolant canister and battery; cables and hoses connect the two components. These weapons are produced in frostbite-class, hailstorm-class, and blizzard-class models.</p><h3>Cryo Weapons</h3><p>Cryo weapons generate blasts of supercooled gas that can damage or incapacitate a target. The gas is kept within a charged cryochamber attached to the weapon. While primitive models simply sprayed these freezing chemicals like a flamethrower, modern models use a containment beam to deliver deadly frozen particles to targets at impressive ranges. Most cryo weapons automatically replenish their reservoirs of reactive chemicals by drawing and processing various gases from the atmosphere, needing only batteries to maintain their ammunition supply.</p>\n<p>One of the most popular lines of cryo weapons are zero weapons, including zero cannons, pistols, and rifles. In common parlance, avalanche-class cryo weapons are the coldest and most dangerous, followed in descending order by blizzard-class, hailstorm-class, and frostbite-class cryo weapons.</p>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
       "value": ""
@@ -145,113 +148,29 @@
     "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
     "isEquipment": true,
     "level": 12,
     "modifiers": [],
     "price": 42000,
     "proficient": false,
     "properties": {
-      "aeon": false,
-      "amm": true,
-      "analog": false,
-      "antibiological": false,
-      "archaic": false,
-      "aurora": false,
-      "automatic": false,
-      "blast": false,
-      "block": false,
-      "boost": false,
-      "breach": false,
-      "breakdown": false,
-      "bright": false,
-      "buttressing": false,
-      "cluster": false,
-      "conceal": false,
-      "deconstruct": false,
-      "deflect": false,
-      "disarm": false,
-      "double": false,
-      "drainCharge": false,
-      "echo": false,
-      "entangle": false,
-      "explode": false,
-      "extinguish": false,
-      "feint": false,
-      "fiery": false,
-      "firstArc": false,
-      "flexibleLine": false,
-      "force": false,
-      "freeHands": false,
-      "fueled": false,
-      "gearArray": false,
-      "grapple": false,
-      "gravitation": false,
-      "guided": false,
-      "harrying": false,
-      "healing": false,
-      "holyWater": false,
-      "hybrid": false,
-      "hydrodynamic": false,
-      "ignite": false,
-      "indirect": false,
-      "injection": false,
-      "instrumental": false,
-      "integrated": true,
-      "line": false,
-      "living": false,
-      "lockdown": false,
-      "mind-affecting": false,
-      "mine": false,
-      "mire": false,
-      "modal": false,
-      "necrotic": false,
-      "nonlethal": false,
-      "one": false,
-      "operative": false,
-      "penetrating": false,
-      "polarize": false,
-      "polymorphic": false,
-      "powered": false,
-      "professional": false,
-      "propel": false,
-      "punchGun": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "recall": false,
-      "regrowth": false,
-      "relic": false,
-      "reposition": false,
-      "scramble": false,
-      "shape": false,
-      "shatter": false,
-      "shells": false,
-      "shield": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "sunder": false,
-      "swarm": false,
-      "tail": false,
-      "teleportive": false,
-      "thought": false,
-      "throttle": false,
-      "thrown": false,
-      "thruster": false,
-      "trip": false,
-      "two": true,
-      "unbalancing": false,
-      "underwater": false,
-      "unwieldy": false,
-      "variantBoost": false,
-      "wideLine": false
+      "amm": {
+        "extension": "",
+        "value": true
+      },
+      "integrated": {
+        "extension": "",
+        "value": true
+      },
+      "two": {
+        "extension": "",
+        "value": true
+      }
     },
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "30"
     },
@@ -263,28 +182,14 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 34",
     "special": "",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
+    "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

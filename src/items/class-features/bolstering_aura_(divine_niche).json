@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,44 +37,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.d7srQIGDe42MfrDw]{Divine (Niche)}</p>\n<p>You release a fraction of the divine energy contained within your body, radiating it out from you to bolster your spiritual allies. As a move action, you can generate a 30-foot-radius aura of divine energy. Creatures in the area that are of your associated alignment gain a +1 divine bonus to attack rolls and Will saving throws. This aura lasts for 3 rounds. When this aura would end, you can spend MP to prolong its duration by 1 additional round; this costs 1 MP plus an additional MP for each previous round you have extended this effect. At 10th level, the bonus increases to +2. Once you use this ability, you can’t use it again until you spend a Resolve Point to regain Stamina Points after a 10-minute rest.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -88,15 +48,17 @@
       "value": "3"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "4e185bcc-55a2-492b-b1aa-1f30db7153c5",
         "name": "Bolstering Aura (Divine Niche)  - Attack Rolls",
         "type": "divine",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "lookupRange(@details.level.value, 1, 1, 10, 2)",
         "modifierType": "formula",
@@ -110,8 +72,10 @@
         "name": "Bolstering Aura (Divine Niche) - Will",
         "type": "divine",
         "condition": "",
+        "damage": null,
         "effectType": "save",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "lookupRange(@details.level.value, 1, 1, 10, 2)",
         "modifierType": "constant",
@@ -123,25 +87,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level (Evolutionist)",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 42",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

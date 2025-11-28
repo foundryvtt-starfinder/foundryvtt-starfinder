@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "icons/tools/navigation/map-chart-tan.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -21,7 +17,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,26 +37,28 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.B2i7KSug0gRIlgT0]{Trailblazer}</p>\n<p>When using Piloting to navigate or astrogate a course, you treat unfamiliar locations as seldom visited locations and seldom visited locations as frequently visited locations when calculating the DC. Additionally, double your channel skill ability’s insight bonus to Piloting checks when you perform stunts during starship combat.</p>\n<p><em>(Note: this bonus is untyped so it stacks correctly with Channel Skill, so double check your modifier correct)&nbsp;</em></p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "1769e445-a84d-44d0-a907-51c830a8c5b0",
         "name": "Piloting checks to perform stunts",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "lookupRange(@classes.mystic.levels, 0, 3, 1, 5, 2, 8, 3, 11, 4, 14, 5, 17, 6, 20, 7)*2",
         "modifierType": "formula",
@@ -71,30 +70,32 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "3rd Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GEM pg. 20",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

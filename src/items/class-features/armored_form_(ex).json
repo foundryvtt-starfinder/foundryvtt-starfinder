@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -41,44 +37,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.qIIoypmTFypnmRer]{Evolutionist Adaption}</p>\n<p>Your body grows a shell, protective scales, or a toughened hide, protecting you from harm. When you learn this adaptation, choose one of the following damage types: bludgeoning, piercing, or slashing. You can spend 1 MP as a move action to gain damage reduction that is bypassed by the types that you didn’t select. The value of this damage reduction equals 1 + half your evolutionist level and lasts for 3 rounds.</p>\n<p>You can learn this adaptation more than once, thereby allowing you to gain DR/— if you select the adaptation once for each damage type.</p>\n<p><em>In the modifiers tab, select and enable the damage type.</em></p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "classFeature",
       "combat": false,
@@ -89,15 +48,17 @@
       "value": "3"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "e9498bfa-83c1-40de-aac8-442dbed4fc39",
         "name": "Armored Form (Ex) - Bludgeoning",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1 + @classes.evolutionist.levels/2",
         "modifierType": "constant",
@@ -111,8 +72,10 @@
         "name": "Armored Form (Ex) - Piercing",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1 + @classes.evolutionist.levels/2",
         "modifierType": "constant",
@@ -126,8 +89,10 @@
         "name": "Armored Form (Ex) - Slashing",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "1 + @classes.evolutionist.levels/2",
         "modifierType": "constant",
@@ -139,14 +104,11 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "6th Level (Evolutionist)",
     "rollNotes": "",
@@ -157,11 +119,12 @@
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 43",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

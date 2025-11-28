@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,44 +37,7 @@
       "unidentified": "",
       "value": "<p>You are practiced in converting your momentum into deadly efficiency.</p>\n<p><strong>Prerequisites:</strong> Dex 17</p><hr /><p><strong>Benefit:</strong> Once per minute when you use a move action to move at least half your speed toward an enemy, you gain a +1 bonus to your next ranged attack against that enemy. If you move after using a standard action to make a ranged attack, your land speed increases by 5 feet until the end of your turn.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "feat",
       "combat": true,
@@ -88,15 +48,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "6e22f55d-ceec-4d3e-948c-34a7d0b6bded",
         "name": "Runner Gunner (Combat)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ranged-attacks",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "constant",
@@ -110,8 +72,10 @@
         "name": "Runner Gunner (Combat)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "specific-speed",
         "enabled": true,
+        "limitTo": null,
         "max": 5,
         "modifier": "5",
         "modifierType": "constant",
@@ -123,25 +87,28 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Dex 17",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "EN pg. 111",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

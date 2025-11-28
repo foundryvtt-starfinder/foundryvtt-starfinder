@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/akashic_revival.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -50,7 +46,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -66,51 +64,14 @@
       "unidentified": "",
       "value": "<p>You paralyze the target’s heart, causing intense pain and weakness. When you cast this spell, and each round thereafter that you concentrate to sustain the spell while in range, the target takes 5d6 damage and is @UUID[Compendium.sfrpg.conditions.Item.2XWEujYSyryB4oHm]{Dazed} for 1 round. The target can attempt a Fortitude save, and if successful, they take half damage and are @UUID[Compendium.sfrpg.conditions.Item.ZacF0l6IwqBwToTJ]{Sickened} rather than dazed for 1 round; a successful saving throw does not end the spell. If the target fails three consecutive saving throws against this spell, their Hit Points are immediately reduced to 0, and they begin dying.</p>\n<p>This spell has no effect against creatures that don’t have an anatomical heart.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "round",
       "value": "@details.cl.value"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 6,
     "materials": {
@@ -126,8 +87,6 @@
     },
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "close",
       "value": ""
     },
@@ -140,12 +99,13 @@
     "school": "trs",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "EN pg. 127",
     "sr": true,
     "target": {
-      "type": "",
       "value": "one living creature with a heart"
     },
     "uses": {

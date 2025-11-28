@@ -4,13 +4,9 @@
   "type": "upgrade",
   "img": "systems/sfrpg/icons/default/armor-upgrade.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
-    "actionType": null,
+    "actionType": "",
     "activation": {
       "type": "",
       "condition": "",
@@ -23,7 +19,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -44,7 +40,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "capacity": {
       "max": null,
@@ -62,7 +57,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -72,17 +68,12 @@
       "unidentified": "",
       "value": "<p>This upgrade regulates heat, protecting you from extreme temperatures. You can exist comfortably in conditions between –50° and 170° F without needing to attempt Fortitude saves. In addition, the armor grants cold resistance and fire resistance. The amount depends on the capacitor’s type, as listed below.</p>\n<ul>\n<li><strong>Mk 1:</strong>&nbsp;Resistance 5</li>\n<li><strong>Mk 2:</strong>&nbsp;Resistance 10</li>\n<li><strong>Mk 3:</strong>&nbsp;Resistance 15</li>\n</ul>"
     },
-    "descriptors": [],
     "duration": {
       "units": "text",
-      "value": null
+      "value": ""
     },
-    "equippable": false,
-    "equipped": false,
-    "equippedBulkMultiplier": 1,
     "formula": "",
-    "identified": true,
-    "isActive": null,
+    "isActive": false,
     "level": 12,
     "modifiers": [
       {
@@ -90,8 +81,10 @@
         "name": "Thermal Capacitor, Mk 2 (Fire)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": true,
+        "limitTo": null,
         "max": 10,
         "modifier": "10",
         "modifierType": "constant",
@@ -105,8 +98,10 @@
         "name": "Thermal Capacitor, Mk 2 (Cold)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": true,
+        "limitTo": null,
         "max": 10,
         "modifier": "10",
         "modifierType": "constant",
@@ -121,21 +116,23 @@
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
     "slots": 1,
+    "slug": "",
     "source": "CRB pg. 205",
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -143,8 +140,8 @@
       "value": null
     },
     "uses": {
-      "max": null,
-      "per": null,
+      "max": "",
+      "per": "",
       "value": null
     }
   }

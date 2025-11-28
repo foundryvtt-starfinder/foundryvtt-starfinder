@@ -10,20 +10,25 @@
       "type": "vehicleAttack",
       "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2*(5d6)",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -42,6 +47,7 @@
           "dc": "13",
           "descriptor": "negate"
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -51,20 +57,25 @@
       "type": "vehicleAttack",
       "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "5d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -83,6 +94,7 @@
           "dc": "13",
           "descriptor": "half"
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -92,17 +104,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -111,14 +113,16 @@
           "value": "<p>A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device’s price.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
-          "piloting": "0",
+          "piloting": 0,
           "usedAsPilot": false
         },
         "senses": {
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": "CRB pg. 218"
       }
     },
@@ -128,17 +132,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -147,6 +141,7 @@
           "value": "<p>Some vehicles have autocontrol, which enables you to spend your actions on tasks other than piloting, but is far less capable than an autopilot. You can engage autocontrol as a swift action after taking a drive or race action, and it lasts until it is disengaged (also a swift action) or until the vehicle is no longer capable of moving. When you’re using autocontrol, the vehicle becomes uncontrolled, but each round it moves in a straight line for the same distance and at the same heading and speed as the last pilot action (moving as if taking two drive actions if drive was the last action the pilot took, or as a race action if that was the last action the pilot took). The autocontrol uses the result of the pilot’s most recent Piloting check as the result of its Piloting checks.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
           "piloting": 0,
           "usedAsPilot": false
@@ -155,6 +150,7 @@
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": "CRB pg. 280"
       }
     },
@@ -164,17 +160,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -183,6 +169,7 @@
           "value": "<p>A CHERAV is considered a Large vehicle for the purpose of its collision damage and DC. When a CHERAV is targeted by a vehicle collision attack or is used to make a vehicle collision attack, the pilot can spend 1 Resolve Point before the damage is rolled to reduce the damage to the CHERAV by half.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
           "piloting": 0,
           "usedAsPilot": false
@@ -191,6 +178,7 @@
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": ""
       }
     }
@@ -294,9 +282,9 @@
       "controlSkill": "pil",
       "cover": "cover",
       "dimensions": {
-        "height": "5",
-        "length": "15",
-        "width": "10"
+        "height": 5,
+        "length": 15,
+        "width": 10
       },
       "eac": {
         "value": 17
@@ -315,37 +303,68 @@
       },
       "modifiers": {
         "athletics": 0,
-        "attackFullSpeed": "-4",
-        "attackMoving": "-2",
-        "attackStopped": "0",
-        "piloting": "2",
+        "attackFullSpeed": 0,
+        "attackMoving": 0,
+        "attackStopped": 0,
+        "piloting": 2,
         "survival": 0
       },
       "size": "huge",
-      "special": [],
       "speed": {
-        "type": "",
         "drive": "15 ft",
         "full": "450 ft (hover)",
         "mph": "50 mph (hover)"
-      },
-      "systems": []
+      }
     },
-    "conditions": {},
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "crew": {
       "complement": {
         "actorIds": [],
-        "actors": [],
         "limit": 0
       },
       "passenger": {
         "actorIds": [],
-        "actors": [],
         "limit": 7
       },
       "pilot": {
         "actorIds": [],
-        "actors": [],
         "limit": 1
       },
       "useNPCCrew": false
@@ -363,6 +382,8 @@
     "hangarBay": {
       "actorIds": [],
       "limit": 0
-    }
+    },
+    "modifiers": [],
+    "slug": ""
   }
 }

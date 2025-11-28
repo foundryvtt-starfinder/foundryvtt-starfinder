@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,44 +37,7 @@
       "unidentified": "",
       "value": "<p>&gt;@UUID[Compendium.sfrpg.archetypes.Item.H3ogllRvvxw3SOMu]{Espionage Specialist}</p>\n<p>One moment you might be schmoozing with a rival executive in a private office, and the next moment you’re assassinating them. You gain @UUID[Compendium.sfrpg.feats.Item.i5giuY838Czbb6Qa]{Fast-Talk}, @UUID[Compendium.sfrpg.feats.Item.YL1fs0mA5Gpb7sdV]{Greater Feint}, or @UUID[Compendium.sfrpg.feats.Item.11cfGGiQ9oTi4f9G]{Improved Feint} as a bonus feat. If you already have all these feats, you can select another feat for which you meet the prerequisites as a bonus feat. In addition, whenever you attack and hit someone who is @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{flat-footed}, such as during a surprise round, you deal that target an extra 1d8 damage of the same type your weapon normally deals.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "archetypeFeature",
       "combat": false,
@@ -88,28 +48,17 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "28dbbbfd-2250-4d58-86a7-c1acdaa80549",
         "name": "Backstabber (Ex)",
         "type": "untyped",
         "condition": "",
-        "damageGroup": null,
-        "damageTypes": {
-          "acid": false,
-          "bludgeoning": false,
-          "cold": false,
-          "electricity": false,
-          "fire": false,
-          "healing": false,
-          "piercing": false,
-          "slashing": false,
-          "sonic": false
-        },
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
-        "limitTo": "",
+        "limitTo": null,
         "max": 8,
         "modifier": "1d8",
         "modifierType": "formula",
@@ -121,25 +70,27 @@
     ],
     "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "12th Level - Espionage Specialist",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "COM pg. 101",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

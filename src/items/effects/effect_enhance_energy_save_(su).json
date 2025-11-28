@@ -5,9 +5,6 @@
   "img": "systems/sfrpg/icons/default/stopwatch.svg",
   "system": {
     "type": "effect",
-    "abilityMods": {
-      "parts": []
-    },
     "activeDuration": {
       "activationTime": 0,
       "endsOn": "onTurnStart",
@@ -21,15 +18,9 @@
     },
     "context": {
       "origin": {
-        "actorUuid": "",
-        "itemUuid": ""
+        "actorUuid": null,
+        "itemUuid": null
       }
-    },
-    "critical": {
-      "parts": []
-    },
-    "damage": {
-      "parts": []
     },
     "description": {
       "chat": "",
@@ -42,43 +33,15 @@
     "modifiers": [
       {
         "_id": "55512caf-0968-4c8a-9891-e392b86b10e2",
-        "name": "Effect: Enhance Energy Save (Su) - 2nd Level",
+        "name": "Effect: Enhance Energy Save (Su)",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": false,
-        "max": 2,
-        "modifier": "+2",
-        "modifierType": "formula",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": ""
-      },
-      {
-        "_id": "23e6f465-41ef-432d-9b12-14c061e77e4a",
-        "name": "Effect: Enhance Energy Save (Su) - 8th Level",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "saves",
-        "enabled": false,
-        "max": 3,
-        "modifier": "+3",
-        "modifierType": "formula",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": ""
-      },
-      {
-        "_id": "ffd02a30-c6e0-4712-9110-5c2464f33971",
-        "name": "Effect: Enhance Energy Save (Su) - 14th Level",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "saves",
-        "enabled": false,
-        "max": 4,
-        "modifier": "+4",
+        "limitTo": null,
+        "max": 0,
+        "modifier": "lookupRange(@origin.actor.details.level.value, 0, 2, 2, 8, 3, 14, 4)",
         "modifierType": "formula",
         "notes": "",
         "source": "",
@@ -88,6 +51,7 @@
     ],
     "requirements": "2nd Level (Technomancer)",
     "showOnToken": true,
+    "slug": "",
     "source": "EN pg. 78",
     "turnEvents": []
   }
