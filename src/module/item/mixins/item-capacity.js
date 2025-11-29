@@ -1,5 +1,7 @@
 import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory-utils.js";
 
+const ChatMessage = foundry.documents.ChatMessage;
+
 export const ItemCapacityMixin = (superclass) => class extends superclass {
     /**
      * Checks if this item has capacity.
@@ -303,10 +305,13 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             item: this,
             tokenId: this.actor.token?.id,
             action: "SFRPG.ChatCard.ItemActivation.Reloads",
-            cost: game.i18n.format("SFRPG.AbilityActivationTypesMove")
+            cost: game.i18n.format("SFRPG.AbilityActivationTypesMove"),
+            hasCapacity: this.hasCapacity(),
+            ammoLeft: this.getCurrentCapacity()
         };
+        // TODO-Ian: get the action name to appear in the title of the card (like rolls do)
 
-        const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
+        const template = `systems/sfrpg/templates/chat/reload-card.hbs`;
         const renderPromise = foundry.applications.handlebars.renderTemplate(template, templateData);
         renderPromise.then((html) => {
             // Create the chat message

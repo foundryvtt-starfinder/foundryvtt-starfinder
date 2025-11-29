@@ -105,7 +105,7 @@ export function rollItemMacro(itemUuid, macroType) {
         case "use":
             return item.useItem({ event });
         default:
-            return item.roll();
+            return item.toChat();
     }
 }
 
