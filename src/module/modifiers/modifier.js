@@ -154,7 +154,6 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
                         [
                             ...Object.keys(CONFIG.SFRPG.energyDamageTypes),
                             ...Object.keys(CONFIG.SFRPG.kineticDamageTypes),
-                            ...Object.keys(CONFIG.SFRPG.otherDamageTypes),
                             ...Object.keys(CONFIG.SFRPG.healingTypes)
 
                         ].reduce((obj, type) => {

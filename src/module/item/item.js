@@ -973,8 +973,6 @@ export class ItemSFRPG extends Mix(Item).with(ItemActivationMixin, ItemCapacityM
         itemData.hasDamage = this.hasDamage;
         itemData.hasCapacity = this.hasCapacity();
 
-        rollData.item = itemData;
-
         // Warn the user if there is no ammo left
         const usage = itemData.usage?.value || 0;
         const availableCapacity = this.getCurrentCapacity();

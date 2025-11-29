@@ -152,15 +152,6 @@
                 {{/each}}
             </div>
             <div class="form-group form-group-stacked">
-                <label>{{localize "SFRPG.Damage.OtherDamage"}}</label>
-                {{#each (sfrpg "otherDamageTypes") as |name type|}}
-                <label class="checkbox">
-                    <input type="checkbox" name="damage.damageTypes.{{type}}" {{checked (lookup ../modifier.damage.damageTypes
-                            type)}} />{{name}}
-                </label>
-                {{/each}}
-            </div>
-            <div class="form-group form-group-stacked">
                 <label>{{localize "SFRPG.Healing.Healing"}}</label>
                 {{#each (sfrpg "healingTypes") as |name type|}}
                 <label class="checkbox">
