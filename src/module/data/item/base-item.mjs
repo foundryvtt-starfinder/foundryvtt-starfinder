@@ -179,13 +179,13 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 initial: "uncategorized",
                 choices: Object.keys(CONFIG.SFRPG.weaponCategories),
                 blank: false,
-                required: true
+                required: false
             }),
             weaponType: new fields.StringField({
                 initial: "basicM",
                 choices: Object.keys(CONFIG.SFRPG.weaponTypes),
                 blank: false,
-                required: true
+                required: false
             })
         };
     }
