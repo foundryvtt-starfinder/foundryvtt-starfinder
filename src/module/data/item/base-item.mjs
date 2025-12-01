@@ -173,7 +173,20 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                     required: true,
                     nullable: true,
                     label: "SFRPG.Items.Action.SavingThrow"
-                })
+                }
+            ),
+            weaponCategory: new fields.StringField({
+                initial: "uncategorized",
+                choices: Object.keys(CONFIG.SFRPG.weaponCategories),
+                blank: false,
+                required: true
+            }),
+            weaponType: new fields.StringField({
+                initial: "basicM",
+                choices: Object.keys(CONFIG.SFRPG.weaponTypes),
+                blank: false,
+                required: true
+            })
         };
     }
 
