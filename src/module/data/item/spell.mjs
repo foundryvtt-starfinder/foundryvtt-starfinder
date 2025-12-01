@@ -42,10 +42,6 @@ export default class SFRPGItemSpell extends SFRPGItemBase {
                 initial: false,
                 label: "SFRPG.Items.Spell.Concentration"
             }),
-            descriptors: new fields.TypedObjectField(
-                new fields.BooleanField({initial: false}),
-                {validateKey: (key) => key in CONFIG.SFRPG.descriptors}
-            ),
             dismissible: new fields.BooleanField({
                 initial: false,
                 label: "SFRPG.Items.Spell.Dismissible"

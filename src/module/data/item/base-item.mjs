@@ -123,6 +123,10 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 label: "SFRPG.Items.Action.DamageNotes",
                 hint: "SFRPG.Items.Action.DamageNotesTooltip"
             }),
+            descriptors: new fields.TypedObjectField(
+                new fields.BooleanField({initial: false}),
+                {validateKey: (key) => key in CONFIG.SFRPG.descriptors}
+            ),
             formula: new fields.StringField({
                 initial: null,
                 nullable: true,
