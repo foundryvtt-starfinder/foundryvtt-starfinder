@@ -78,13 +78,7 @@ export class SFRPGDamage {
     }
 
     negatesDamageReduction(damageReductionNegation) {
-        if (this.properties.includes(damageReductionNegation)) {
-            return true;
-        }
-        if (this.damageTypes.includes(damageReductionNegation)) {
-            return true;
-        }
-        return false;
+        return (this.properties.includes(damageReductionNegation) || this.damageTypes.includes(damageReductionNegation)) ?? false;
     }
 
     /**

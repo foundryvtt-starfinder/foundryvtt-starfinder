@@ -21,7 +21,6 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
 
         // create the array of choices
         const choices = duplicate(this.options.choices);
-        // console.log(this, choices, traitData);
 
         for (const [key, displayName] of Object.entries(choices)) {
             choices[key] = {
