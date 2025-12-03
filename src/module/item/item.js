@@ -42,11 +42,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         return SFRPG.attackActions.includes(this.system.actionType);
     }
 
+    /**
+     * Does the item have an other formula implemented?
+     * @type {boolean}
+     */
     get hasOtherFormula() {
         return ("formula" in this.system) && this.system.formula?.trim().length > 0;
     }
-
-    /* -------------------------------------------- */
 
     /**
      * Does the Item implement a damage roll as part of its usage
@@ -55,8 +57,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     get hasDamage() {
         return !!(this.system.damage && this.system.damage.parts.length);
     }
-
-    /* -------------------------------------------- */
 
     /**
      * Does the Item implement a saving throw as part of its usage
@@ -94,6 +94,21 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             ? true
             : (Number(areaData.value) > 0 ? true : false);
         return hasAreaValue;
+    }
+
+    /**
+     * Does the Item's damage qualify as magic?
+     * @type {boolean}
+     */
+    get hasMagicDamage() {
+        if (!this.hasDamage) return false;
+        if (['magic', 'hybrid', 'spell'].includes(this.type)) return true;
+        if (['msak', 'rsak'].includes(this.system.actionType ?? null)) return true;
+        const containedItems = this.contents ?? [];
+        for (const item of containedItems) {
+            if (item.type === 'fusion') return true;
+        }
+        return false;
     }
 
     /**
