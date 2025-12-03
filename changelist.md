@@ -1,3 +1,11 @@
+# 0.29.1.2
+Another quick hotfix to resolve a data model error preventing NPC saves from being negative.
+
+## Bugfixes
+
+- The minimum value for NPC saves is now correctly set to -5, not 0 as it was previously
+  - NPC actors in the compendiums that had their saves increased to 0 by this error have been corrected back to old values
+
 # 0.29.1.1
 This is a hotfix release to resolve a couple of small bugs.
 
