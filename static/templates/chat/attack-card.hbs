@@ -1,0 +1,20 @@
+<div class="chat-card attack-card" data-actor-id="{{actorId}}" data-item-id="{{item.id}}" data-token-id="{{tokenId}}">
+    {{!-- Card Details --}}
+    {{> "systems/sfrpg/templates/chat/parts/card-item-details.hbs" isActorFocused=true}}
+
+    {{!-- Card Buttons --}}
+    {{> "systems/sfrpg/templates/chat/parts/card-buttons.hbs"}}
+</div>
+
+{{!-- Main Roll Content --}}
+{{{rollContent}}}
+
+<!--
+{{#if item.system.properties}}
+<footer class="card-footer">
+    {{#each item.system.properties}}
+    <span data-tooltip="{{#if this.tooltip}}{{this.tooltip}}{{else}}{{this.title}}{{/if}}">{{#if this.title}}<strong>{{this.title}}: </strong>{{/if}}{{this.name}}</span>
+    {{/each}}
+</footer>
+{{/if}}
+-->

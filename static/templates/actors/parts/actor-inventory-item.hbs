@@ -19,7 +19,8 @@
                             {{#if (eq item.system.actionType "heal")}}
                                 <button type="button" class="tag healing" data-tooltip="{{localize "SFRPG.ActionHeal"}}">{{item.config.damageString}}</button>
                             {{else}}
-                                <button type="button" class="tag damage" data-tooltip="{{localize "SFRPG.Damage.Title"}}">{{item.config.damageString}}</button>
+                                <button type="button" class="tag {{#if item.primaryDamageIsHealing}}healing{{else}}damage{{/if}}"
+                                    data-tooltip="{{localize "SFRPG.Damage.Title"}}">{{item.config.damageString}}</button>
                             {{/if}}
                         {{/if}}
                     {{/if}}
