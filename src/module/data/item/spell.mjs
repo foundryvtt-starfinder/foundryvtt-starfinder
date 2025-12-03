@@ -97,6 +97,16 @@ export default class SFRPGItemSpell extends SFRPGItemBase {
                     label: "SFRPG.Items.Spell.Prepared"
                 })
             }),
+            scaling: new fields.SchemaField({
+                d3: new fields.BooleanField({
+                    initial: false,
+                    required: true
+                }),
+                d6: new fields.BooleanField({
+                    initial: false,
+                    required: true
+                })
+            }),
             school: new fields.StringField({
                 initial: "abj",
                 required: true,
