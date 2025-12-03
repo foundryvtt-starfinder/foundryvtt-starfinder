@@ -602,6 +602,9 @@ export class DiceSFRPG {
                         }
                     }
                 }
+
+                const isMagic = itemContext.entity.hasMagicDamage;
+                if (isMagic) tags.push({tag: 'magic', text: game.i18n.localize("SFRPG.Magic.Magic")});
             }
 
             // Determine whether the roll should be a critical damage roll
