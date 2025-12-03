@@ -141,11 +141,17 @@ export default function(engine) {
             eac.maxDex = maxDex;
             kac.maxDex = maxDex;
 
-            if (armorEac.armor) eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorEac.value.signedString(), name: armorEac.name }));
+            if (armorEac.armor) {
+                eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorEac.value.signedString(), name: armorEac.name }));
+                eac.armorInfo = {bonus: armorEac.value, tooltip: game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorEac.value.signedString(), name: armorEac.name })}; // for checking if an armor modifier is higher than the armor bonus
+            }
             if (shields) shields.forEach(shield => eac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.system.bonus.wielded || 0).signedString(), name: shield.name })));
             eac.tooltip.push(maxDexTooltip);
 
-            if (armorKac.armor) kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorKac.value.signedString(), name: armorKac.name }));
+            if (armorKac.armor) {
+                kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorKac.value.signedString(), name: armorKac.name }));
+                kac.armorInfo = {bonus: armorKac.value, tooltip: game.i18n.format("SFRPG.ACTooltipArmorACMod", { armor: armorKac.value.signedString(), name: armorKac.name })};// for checking if an armor modifier is higher than the armor bonus
+            }
             if (shields) shields.forEach(shield => kac.tooltip.push(game.i18n.format("SFRPG.ACTooltipShieldACMod", { shield: (shield.system.bonus.wielded || 0).signedString(), name: shield.name })));
             kac.tooltip.push(maxDexTooltip);
         } else {
