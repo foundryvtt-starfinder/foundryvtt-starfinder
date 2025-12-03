@@ -83,7 +83,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
             fort: new fields.SchemaField({
                 base: new fields.NumberField({
                     initial: 0,
-                    min: 0,
+                    min: -5,
                     integer: true,
                     nullable: false,
                     required: true
@@ -92,7 +92,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
             reflex: new fields.SchemaField({
                 base: new fields.NumberField({
                     initial: 0,
-                    min: 0,
+                    min: -5,
                     integer: true,
                     nullable: false,
                     required: true
@@ -101,7 +101,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
             will: new fields.SchemaField({
                 base: new fields.NumberField({
                     initial: 0,
-                    min: 0,
+                    min: -5,
                     integer: true,
                     nullable: false,
                     required: true
