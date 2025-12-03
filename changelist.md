@@ -1,3 +1,14 @@
+# 0.29.1.1
+This is a hotfix release to resolve a couple of small bugs.
+
+## Bugfixes
+
+- The value `@item.properties.operative` and other properties, if not present in item data, should now resolve to `0` in formulas
+  - This fixes weapon specialization not calculating damage bonuses correctly
+- Scaling cantip data settings are restored to spells that use them
+  - If you have the spells Energy Ray, Hazard, Injury Echo, or Telekinetic Projectile, you'll need to delete them and re-add from the compendiums
+- AC bonuses from armor and armor-bonus-granting modifiers now stack correctly, with only the highest value used
+
 # 0.29.1
 This release cleans up some more things on the backend and adds a couple of new features and bugfixes that were enabled by the implementation of the system data model in 0.29.0. Thanks to @levirak, @danimrath, and @ian612 for their contributions to this release, and to the community for filing bug reports and feature requests!
 
