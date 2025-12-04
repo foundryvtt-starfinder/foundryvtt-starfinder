@@ -14,7 +14,6 @@
 
     <div class="form-group stacked weapon-properties">
         <ul class="traits-list">
-            {{log itemData.properties}}
             {{#each itemData.properties as |property name|}}
                 {{#if property.value}}
                     <li class="tag {{name}}" data-tooltip='<strong>{{sfrpg "weaponProperties" name}}</strong><br/>{{sfrpg "weaponPropertiesTooltips" name}}'>

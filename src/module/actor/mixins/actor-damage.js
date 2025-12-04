@@ -69,12 +69,7 @@ export class SFRPGDamage {
     }
 
     negatesDamageReduction(damageReductionNegation) {
-        if (this.properties.includes(damageReductionNegation)) {
-            return true;
-        }
-        if (this.damageTypes.includes(damageReductionNegation)) {
-            return true;
-        }
+        if (this.properties.includes(damageReductionNegation) || this.damageTypes.includes(damageReductionNegation)) return true;
         return false;
     }
 
@@ -260,6 +255,20 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                         properties.push(material);
                     }
                 }
+            }
+
+            const chatDescriptors = chatMessage.flags.descriptors;
+            if (chatDescriptors) {
+                for (const [descriptor, enabled] of Object.entries(chatDescriptors)) {
+                    if (enabled) {
+                        properties.push(descriptor);
+                    }
+                }
+            }
+
+            const chatHasMagicDamage = chatMessage.flags.hasMagicDamage;
+            if (chatHasMagicDamage) {
+                properties.push("magic");
             }
         }
 

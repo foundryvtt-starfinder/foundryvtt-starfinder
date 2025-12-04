@@ -762,6 +762,16 @@ SFRPG.specialMaterials = {
 // Damage Reductions
 SFRPG.damageReductionTypes = {
     "": "-",
+    "bludgeoning": "SFRPG.Damage.Types.Bludgeoning",
+    "piercing": "SFRPG.Damage.Types.Piercing",
+    "slashing": "SFRPG.Damage.Types.Slashing",
+    "force": "SFRPG.Descriptors.Force",
+    "magic": "SFRPG.Magic.Magic",
+    "radiation": "SFRPG.Descriptors.Radiation",
+    "chaotic": "SFRPG.Descriptors.Chaotic",
+    "lawful": "SFRPG.Descriptors.Lawful",
+    "good": "SFRPG.Descriptors.Good",
+    "evil": "SFRPG.Descriptors.Evil",
     ...SFRPG.specialMaterials,
     "custom": "SFRPG.Damage.Types.Custom"
 };

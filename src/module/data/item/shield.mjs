@@ -86,6 +86,9 @@ export default class SFRPGItemShield extends SFRPGItemBase {
         schema.proficient.initial = true;
         schema.ability.initial = "str";
 
+        schema.weaponCategory.required = true;
+        schema.weaponType.required = true;
+
         return schema;
     }
 }
