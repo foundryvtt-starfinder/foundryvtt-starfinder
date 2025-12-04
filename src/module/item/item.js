@@ -192,23 +192,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             if (tgt.value && tgt.value === "") tgt.value = null;
 
             labels.target = [tgt.value].filterJoin(" ");
-
-            /* let area = data.area || {};
-            if (typeof area.value === 'number' && area.value === 0) area.value = null;
-
-            if (area.units === "text") labels.area = String(area.value || "")?.trim();
-            else labels.area = [area.total || area.value, C.distanceUnits[area.units] || null, C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
-
-            // Range Label
-            /* let rng = data.range || {};
-            labels.range = [rng.value || "", C.distanceUnits[rng.units]].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
-
-            // Duration Label
-            /* let dur = data.duration || {};
-            labels.duration = [dur.value].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
         }
 
         // Item Actions
