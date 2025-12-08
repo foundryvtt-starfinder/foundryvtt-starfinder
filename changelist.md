@@ -1,3 +1,6 @@
+# 0.29.1.3
+This is another hotfix to resolve a data model issue preventing GM Notes on items from saving
+
 # 0.29.1.2
 Another quick hotfix to resolve a data model error preventing NPC saves from being negative.
 
