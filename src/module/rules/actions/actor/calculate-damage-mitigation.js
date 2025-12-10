@@ -30,7 +30,7 @@ export default function(engine) {
 
         const modifiers = fact.modifiers;
         const damageReductionModifiers = modifiers.filter(mod => { return mod.enabled && mod.modifierType === "constant" && [SFRPGEffectType.DAMAGE_REDUCTION].includes(mod.effectType); });
-        const energyRessistanceModifiers = modifiers.filter(mod => { return mod.enabled && mod.modifierType === "constant" && [SFRPGEffectType.ENERGY_RESISTANCE].includes(mod.effectType); });
+        const energyResistanceModifiers = modifiers.filter(mod => { return mod.enabled && mod.modifierType === "constant" && [SFRPGEffectType.ENERGY_RESISTANCE].includes(mod.effectType); });
 
         const rollContext = RollContext.createActorRollContext(actor);
 
@@ -44,7 +44,7 @@ export default function(engine) {
             };
 
             if (modifierInfo.negatedBy === "custom") {
-                modifierInfo.negatedBy = drModifier.notes;
+                modifierInfo.negatedBy = drModifier.customValue;
             }
 
             data.traits.damageMitigation.damageReduction.push(modifierInfo);
@@ -69,7 +69,7 @@ export default function(engine) {
             data.traits.damageMitigation.damageReductionTooltip.push(`${drModifier.source.name}: ${drModifier.value} / ${negatedBy}`);
         }
 
-        for (const erModifier of energyRessistanceModifiers) {
+        for (const erModifier of energyResistanceModifiers) {
             const resolvedModifierValue = tryResolveModifier(erModifier.modifier, rollContext);
             const modifierInfo = {
                 value: resolvedModifierValue,
@@ -78,7 +78,7 @@ export default function(engine) {
             };
 
             if (modifierInfo.negatedBy === "custom") {
-                modifierInfo.damageType = erModifier.notes;
+                modifierInfo.damageType = erModifier.customValue;
             }
 
             if (!data.traits.damageMitigation.energyResistance[modifierInfo.damageType] || data.traits.damageMitigation.energyResistance[modifierInfo.damageType].value < modifierInfo.value) {
