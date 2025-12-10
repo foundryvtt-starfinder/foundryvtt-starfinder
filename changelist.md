@@ -1,5 +1,11 @@
 # 0.29.1.3
-This is another hotfix to resolve a data model issue preventing GM Notes on items from saving
+This is another hotfix to resolve a data model issue preventing GM Notes on items from saving correctly, and to fix some styling issues with inline checks
+
+## Bugfixes
+
+- GM Notes are now correctly defined in the data model for items and actors that have them
+- Inline Checks now respect the `displayDC` option, and correctly display the DC by default on inline checks if it is provided
+- When sent to chat, inline checks no longer display a redundant "send to chat" button
 
 # 0.29.1.2
 Another quick hotfix to resolve a data model error preventing NPC saves from being negative.
