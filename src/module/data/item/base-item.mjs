@@ -49,7 +49,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             chat: new fields.HTMLField(),
             short: new fields.HTMLField(),
             unidentified: new fields.HTMLField(),
-            gmnotes: new fields.HTMLField()
+            gmNotes: new fields.HTMLField()
         });
 
         return schema;
