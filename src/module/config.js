@@ -762,17 +762,21 @@ SFRPG.specialMaterials = {
 // Damage Reductions
 SFRPG.damageReductionTypes = {
     "": "-",
+    ...SFRPG.kineticDamageTypes,
+    "force": "SFRPG.Descriptors.Force",
+    "magic": "SFRPG.Magic.Magic",
+    "radiation": "SFRPG.Descriptors.Radiation",
+    "chaotic": "SFRPG.Descriptors.Chaotic",
+    "lawful": "SFRPG.Descriptors.Lawful",
+    "good": "SFRPG.Descriptors.Good",
+    "evil": "SFRPG.Descriptors.Evil",
     ...SFRPG.specialMaterials,
     "custom": "SFRPG.Damage.Types.Custom"
 };
 
 // Energy Resistances
 SFRPG.energyResistanceTypes = {
-    "acid": "SFRPG.Damage.Types.Acid",
-    "cold": "SFRPG.Damage.Types.Cold",
-    "electricity": "SFRPG.Damage.Types.Electricity",
-    "fire": "SFRPG.Damage.Types.Fire",
-    "sonic": "SFRPG.Damage.Types.Sonic",
+    ...SFRPG.energyDamageTypes,
     "custom": "SFRPG.Damage.Types.Custom"
 };
 
