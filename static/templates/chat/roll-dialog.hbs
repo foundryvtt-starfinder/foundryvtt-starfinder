@@ -68,7 +68,20 @@
     {{/each}}
 </div>
 
-
+{{#if hasTarget}}
+<div class="target-section flexrow">
+    <label class="flex1">{{localize "SFRPG.RollTarget"}}:</label>
+    <div class="flex1">
+        <div class="target {{#if targetOwner}}owned{{else}}unowned{{/if}}" data-target-id="{{target.entity.id}}" {{#if targetOwner}}data-tooltip="{{targetTooltip}}"{{/if}}>
+            <img src="{{target.entity.document.texture.src}}" title="{{target.entity.name}}" width="48" height="48" />
+            <div class="target-info">
+                <h4>{{target.entity.name}}</h4>
+                <label class="target-level">{{localize "SFRPG.LevelLabelText"}}{{target.data.details.level.value}}</label>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}}
 
 {{#if hasModifiers}}
 <div>

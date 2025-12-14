@@ -69,6 +69,15 @@ export default class RollDialog extends Dialog {
             }
         }
 
+        /** Prepare Target */
+        if (contexts.allContexts.target) {
+            this.hasTarget = true;
+            this.target = contexts.allContexts.target;
+        } else {
+            this.hasTarget = false;
+            this.target = null;
+        }
+
         /** Returned values */
         this.additionalBonus = "";
         this.rollMode = game.settings.get("core", "rollMode");
@@ -99,6 +108,9 @@ export default class RollDialog extends Dialog {
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
         data.contexts = this.contexts;
+        data.hasTarget = this.hasTarget;
+        data.target = this.target;
+        data.targetOwner = this.target.entity.owner;
         data.damageGroups = this.damageGroups;
 
         for (const modifier of data.availableModifiers) {
@@ -152,6 +164,30 @@ export default class RollDialog extends Dialog {
             ].filter(Boolean).join(' + ') || '0';
         }
 
+        if (this.hasTarget) {
+            data.targetTooltip = "";
+            switch (this.target.entity.actor.type) {
+                case "character":
+                    data.targetTooltip = `<strong>EAC:</strong> ${this.target.data.attributes.eac.value}<br/><strong>KAC:</strong> ${this.target.data.attributes.kac.value}<br/><strong>KAC+8:</strong> ${this.target.data.attributes.cmd.value}`;
+                    break;
+                case "npc2":
+                    data.targetTooltip = `<strong>EAC:</strong> ${this.target.data.attributes.eac.value}<br/><strong>KAC:</strong> ${this.target.data.attributes.kac.value}`;
+                    break;
+                case "drone":
+                    data.targetTooltip = `<strong>EAC:</strong> ${this.target.data.attributes.eac.value}<br/><strong>KAC:</strong> ${this.target.data.attributes.kac.value}<br/><strong>KAC+8:</strong> ${this.target.data.attributes.cmd.value}`;
+                    break;
+                case "starship":
+                    data.targetTooltip = `<strong>Forward AC:</strong> ${this.target.data.quadrants.forward.ac.value}<br/><strong>Port AC:</strong> ${this.target.data.quadrants.port.ac.value}<br/><strong>Starboard AC:</strong> ${this.target.data.quadrants.starboard.ac.value}<br/><strong>Aft AC:</strong> ${this.target.data.quadrants.aft.ac.value}`;
+                    break;
+                case "vehicle":
+                    data.targetTooltip = `<strong>EAC:</strong> ${this.target.data.attributes.eac.value}<br/><strong>KAC:</strong> ${this.target.data.attributes.kac.value}`;
+                    break;
+                case "hazard":
+                    data.targetTooltip = `<strong>EAC:</strong> ${this.target.data.attributes.eac.value}<br/><strong>KAC:</strong> ${this.target.data.attributes.kac.value}`;
+                    break;
+            }
+        }
+
         return data;
     }
 
@@ -174,6 +210,8 @@ export default class RollDialog extends Dialog {
 
         const selectorCombobox = html.find('.selector');
         selectorCombobox.on('change', this._onSelectorChanged.bind(this));
+
+        html.find("div.target.owned").on("click", (event) => this._onTargetClick(event));
 
         html.find('input[class="damageSection"][type="radio"]').on('change', this._onDamageSectionRadio.bind(this)); // Handle radios turning each other off
         html.find('input[class="damageSection"][type="checkbox"]').on('change', this._onDamageSectionCheckbox.bind(this));
@@ -208,6 +246,14 @@ export default class RollDialog extends Dialog {
 
         this.position.height = "auto";
         this.render(false);
+    }
+
+    async _onTargetClick(event) {
+        event.preventDefault();
+        const id = event.currentTarget.dataset.targetId;
+        const actor = game.scenes.current.tokens.get(id).actor;
+
+        actor.sheet.render(true);
     }
 
     _onDamageSectionRadio(event) {
