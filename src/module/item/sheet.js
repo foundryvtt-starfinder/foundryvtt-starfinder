@@ -311,10 +311,10 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     _computeItemSaveBonus() {
         // TODO: Move this into the item's calculation rather than calculating on the sheet
         const parentItem = this.item;
-        const parentActorAbilities = parentItem.actor?.system?.abilities;
+        const parentActorAbilities = parentItem.actor?.system?.attributes;
         const itemLevel = parentItem.system.level;
         if (parentActorAbilities) {
-            return `[F: ${Math.max(itemLevel, parentActorAbilities.con.mod, 0)}, R: ${Math.max(itemLevel, parentActorAbilities.dex.mod, 0)}, W: ${Math.max(itemLevel, parentActorAbilities.dex.mod, 0)}]`;
+            return `[F: ${Math.max(itemLevel, parentActorAbilities.fort.bonus, 0)}, R: ${Math.max(itemLevel, parentActorAbilities.reflex.bonus, 0)}, W: ${Math.max(itemLevel, parentActorAbilities.will.bonus, 0)}]`;
         } else if (itemLevel < 1) {
             return 0;
         } else {
