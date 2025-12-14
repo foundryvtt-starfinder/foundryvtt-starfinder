@@ -87,6 +87,22 @@ SFRPG.saveDescriptors = {
 };
 
 /**
+ * All possible roll types in Starfinder
+ * @type {Object}
+ */
+SFRPG.rollTypes = {
+    "abilityCheck": "SFRPG.Rolls.AbilityCheck",
+    "attack": "SFRPG.Rolls.AttackRoll",
+    "damage": "SFRPG.Rolls.DamageRoll",
+    "gunnery": "SFRPG.Rolls.GunneryCheck",
+    "healing": "SFRPG.Rolls.HealingRoll",
+    "initiative": "SFRPG.Rolls.InitiativeRoll",
+    "roll": "SFRPG.Rolls.Roll",
+    "save": "SFRPG.Rolls.SavingThrow",
+    "skillCheck": "SFRPG.Rolls.SkillCheck"
+};
+
+/**
  * Character alignment options
  * @type {Object}
  */
