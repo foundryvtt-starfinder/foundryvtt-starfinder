@@ -69,6 +69,7 @@
 </div>
 
 {{#if hasTarget}}
+{{#if (or (eq rollType "attack") (eq rollType "gunnery"))}}
 <div class="target-section flexrow">
     <label class="flex1">{{localize "SFRPG.RollTarget"}}:</label>
     <div class="flex1">
@@ -81,6 +82,7 @@
         </div>
     </div>
 </div>
+{{/if}}
 {{/if}}
 
 {{#if hasModifiers}}

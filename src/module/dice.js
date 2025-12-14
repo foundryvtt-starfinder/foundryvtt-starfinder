@@ -153,26 +153,28 @@ export class DiceSFRPG {
     * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
     * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
     *
-    * @param {Object}               data               The parameters passed into the method
-    * @param {Event|JQuery.Event}   [data.event]       The triggering event which initiated the roll
-    * @param {string[]}             data.parts         The dice roll component parts, excluding the initial d20
-    * @param {RollContext}          data.rollContext   The contextual data for this roll
-    * @param {String}               data.title         The dice roll UI window title
-    * @param {SpeakerData}          data.speaker       The ChatMessage speaker to pass when creating the chat
-    * @param {string}               data.flavor        Any flavor text associated with this roll
-    * @param {Boolean}              [data.advantage]   Allow rolling with advantage (and therefore also with disadvantage)
-    * @param {Object}               data.rollOptions   Additional options to be stored with the roll
-    * @param {Number}               [data.critical]    The value of d20 result which represents a critical success
-    * @param {Number}               [data.fumble]      The value of d20 result which represents a critical failure
-    * @param {onD20DialogClosed}    data.onClose       Callback for actions to take when the dialog form is closed
-    * @param {DialogOptions}        data.dialogOptions Modal dialog options
-    * @param {difficulty}           data.difficulty    Optional parameter for checks
-    * @param {displayDifficulty}    data.displayDifficulty    Optional parameter to display check difficulty
+    * @param {Object}               data                The parameters passed into the method
+    * @param {Event|JQuery.Event}   [data.event]        The triggering event which initiated the roll
+    * @param {string[]}             data.parts          The dice roll component parts, excluding the initial d20
+    * @param {RollContext}          data.rollContext    The contextual data for this roll
+    * @param {String}               data.title          The dice roll UI window title
+    * @param {SpeakerData}          data.speaker        The ChatMessage speaker to pass when creating the chat
+    * @param {string}               data.flavor         Any flavor text associated with this roll
+    * @param {Boolean}              [data.advantage]    Allow rolling with advantage (and therefore also with disadvantage)
+    * @param {Object}               data.rollOptions    Additional options to be stored with the roll
+    * @param {Number}               [data.critical]     The value of d20 result which represents a critical success
+    * @param {Number}               [data.fumble]       The value of d20 result which represents a critical failure
+    * @param {onD20DialogClosed}    data.onClose        Callback for actions to take when the dialog form is closed
+    * @param {DialogOptions}        data.dialogOptions  Modal dialog options
+    * @param {String}               data.rollType       Type of roll (options: CONFIG.SFRPG.rollType)
+    * @param {Number}               data.difficulty     Optional parameter for checks
+    * @param {Boolean}              data.displayDifficulty    Optional parameter to display check difficulty
+    * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
     * @returns {Promise<RollResult?>}
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
         critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor",
-        difficulty = undefined, displayDifficulty = false, tags = []}) {
+        rollType = "roll", difficulty = undefined, displayDifficulty = false, tags = []}) {
 
         flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
 
@@ -202,13 +204,14 @@ export class DiceSFRPG {
         const formula = parts.map(partMapper).join(" + ");
 
         const rollInfo = await RollTree.buildRoll(formula, rollContext, {
-            debug: false,
             buttons: buttons,
+            debug: false,
             defaultButton: "normal",
-            title: title,
-            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
-            mainDie: "1d20",
             dialogOptions: dialogOptions,
+            mainDie: "1d20",
+            rollType: rollType,
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            title: title,
             useRawStrings: false
         });
         if (rollInfo.button === "cancel") {
@@ -273,7 +276,7 @@ export class DiceSFRPG {
                     rollMode: rollInfo.mode,
                     breakdown: preparedRollExplanation,
                     htmlData,
-                    rollType: "normal",
+                    rollType: rollType,
                     rollOptions,
                     rollDices: finalFormula.rollDices,
                     tags: tags
@@ -330,22 +333,27 @@ export class DiceSFRPG {
     *
     * Returns a promise that will return an object containing roll and formula.
     *
-    * @param {Object}             data               The parameters passed into the method.
-    * @param {Event|JQuery.Event} [data.event]       The triggering event which initiated the roll
-    * @param {String}             [data.rollFormula] The roll formula to use, excluding the initial die. If left empty, will look for parts.
-    * @param {string[]}           data.parts         The dice roll component parts, excluding the initial die
-    * @param {RollContext}        data.rollContext   The contextual data for this roll
-    * @param {String}             data.title         The dice roll UI window title
-    * @param {String}             [data.mainDie]     The main die to use for this roll, e.g. "d20".
-    * @param {Boolean}            [data.advantage]   Allow rolling with advantage (and therefore also with disadvantage)
-    * @param {Number}             [data.critical]    The value of d20 result which represents a critical success
-    * @param {Number}             [data.fumble]      The value of d20 result which represents a critical failure
-    * @param {string}             [data.breakdown]   An explanation of the roll modifiers and where they came from.
-    * @param {Tag[]}              [data.tags]        Any roll metadata that will be output on the bottom of the chat card.
-    * @param {DialogOptions}      data.dialogOptions Modal dialog options
-    * @returns {Promise<RollResult>|Promise<null>} Returns the roll's result or an empty promise.
+    * @param {Object}               data                The parameters passed into the method.
+    * @param {Event|JQuery.Event}   [data.event]        The triggering event which initiated the roll
+    * @param {String}               [data.rollFormula]  The roll formula to use, excluding the initial die. If left empty, will look for parts.
+    * @param {string[]}             data.parts          The dice roll component parts, excluding the initial die
+    * @param {RollContext}          data.rollContext    The contextual data for this roll
+    * @param {String}               data.title          The dice roll UI window title
+    * @param {String}               [data.mainDie]      The main die to use for this roll, e.g. "d20".
+    * @param {Boolean}              [data.advantage]    Allow rolling with advantage (and therefore also with disadvantage)
+    * @param {Number}               [data.critical]     The value of d20 result which represents a critical success
+    * @param {Number}               [data.fumble]       The value of d20 result which represents a critical failure
+    * @param {string}               [data.breakdown]    An explanation of the roll modifiers and where they came from.
+    * @param {DialogOptions}        data.dialogOptions  Modal dialog options
+    * @param {String}               data.rollType       Type of roll (options: CONFIG.SFRPG.rollType)
+    * @param {Number}               data.difficulty     Optional parameter for checks
+    * @param {Boolean}              data.displayDifficulty    Optional parameter to display check difficulty
+    * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
+    * @returns {Promise<RollResult>|Promise<null>}      Returns the roll's result or an empty promise.
     */
-    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true, critical = 20, fumble = 1, breakdown = "", tags = [], dialogOptions, useRawStrings = false, actorContextKey = "actor" }) {
+    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true,
+        critical = 20, fumble = 1, breakdown = "", dialogOptions, useRawStrings = false, actorContextKey = "actor",
+        rollType = "roll", difficulty = undefined, displayDifficulty = false, tags = []}) {
 
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -364,13 +372,14 @@ export class DiceSFRPG {
 
         const formula = rollFormula || parts.join(" + ");
         const rollInfo = await RollTree.buildRoll(formula, rollContext, {
-            debug: false,
             buttons: buttons,
+            debug: false,
             defaultButton: "normal",
-            title: title,
-            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
-            mainDie: mainDie ? "1" + mainDie : null,
             dialogOptions: dialogOptions,
+            mainDie: mainDie ? "1" + mainDie : null,
+            rollType: rollType,
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            title: title,
             useRawStrings: useRawStrings
         });
 
@@ -430,9 +439,12 @@ export class DiceSFRPG {
     * @param {string}               data.flavor        Any flavor text associated with this roll
     * @param {onDamageDialogClosed} data.onClose       Callback for actions to take when the dialog form is closed
     * @param {Object}               data.dialogOptions Modal dialog options
+    * @param {String}               data.rollType       Type of roll (options: CONFIG.SFRPG.rollType)
+    * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
     * @returns {Promise<bool>}                         `true` if roll was performed, `false` if it was canceled
     */
-    static async damageRoll({ event = new Event(''), parts, linkedAttackRoll, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions }) {
+    static async damageRoll({ event = new Event(''), parts, linkedAttackRoll, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions,
+        rollType = "damage", tags = []}) {
         flavor = `${title || ""}${(flavor ? " - " + flavor : "")}`;
 
         if (!rollContext?.isValid()) {
@@ -454,12 +466,11 @@ export class DiceSFRPG {
 
                 for (const type of filteredTypes) {
                     obj.types.push(type[0]);
+                    if (Object.keys(CONFIG.SFRPG.healingTypes).includes(type[0])) rollType = "healing";
                 }
 
                 if (cur.operator) obj.operator = cur.operator;
-
-                if (obj.types.length > 0)
-                    acc.push(obj);
+                if (obj.types.length > 0) acc.push(obj);
             }
 
             return acc;
@@ -475,6 +486,7 @@ export class DiceSFRPG {
                     const rollInfo = await RollTree.buildRoll(part.formula, rollContext, {
                         buttons: buttons,
                         defaultButton: "normal",
+                        rollType: rollType,
                         skipUI: true
                     });
                     part.formula = rollInfo.rolls[0].formula.finalRoll;
@@ -490,14 +502,15 @@ export class DiceSFRPG {
 
         const formula = finalParts.join(" + ");
         const rollInfo = await RollTree.buildRoll(formula, rollContext, {
-            debug: false,
             buttons: buttons,
+            debug: false,
             defaultButton: "normal",
-            title: title,
-            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
-            mainDie: "",
             dialogOptions: dialogOptions,
+            mainDie: "",
             parts: damageSections,
+            rollType: rollType,
+            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            title: title,
             useRawStrings: false
         });
         if (rollInfo.button === 'cancel') {
@@ -505,8 +518,6 @@ export class DiceSFRPG {
                 onClose(null, null, null, false);
             }
         } else for (const { formula: finalFormula, node: part } of rollInfo.rolls) {
-            /** @type {Tag[]} */
-            const tags = [];
             /** @type {HtmlData[]} */
             const htmlData = [{ name: "is-damage", value: "true" }];
 
@@ -545,15 +556,6 @@ export class DiceSFRPG {
                 arr.push(obj);
                 return arr;
             }, []);
-
-            // if (damageTypes) {
-            //     for (const damageType of damageTypes) {
-            //         const tag = "damage-type-" + damageType.types.join(`-${damageType.operator}-`);
-            //         const text = damageType.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[damageType.operator]} `);
-
-            //         tags.push({ tag: tag, text: text });
-            //     }
-            // }
 
             const itemContext = rollContext.allContexts['item'];
             if (itemContext) {
@@ -643,9 +645,6 @@ export class DiceSFRPG {
                 if (part.partIndex) {
                     finalFlavor += ` (${part.partIndex})`;
                 }
-                // const originalTypes = foundry.utils.deepClone(damageTypes);
-                // damageTypes = [getDamageTypeForPart(part)];
-                // console.log([originalTypes, damageTypes]);
             }
 
             finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
@@ -707,7 +706,7 @@ export class DiceSFRPG {
                     breakdown: preparedRollExplanation,
                     tags: tags,
                     htmlData: htmlData,
-                    rollType: "damage",
+                    rollType: rollType,
                     damageTypeString: damageTypeString
                 };
 
@@ -920,7 +919,7 @@ export class DiceSFRPG {
 
         let resultValue = 0;
 
-        const rollInfo = RollTree.buildRollSync(sourceFormula, rollContext);
+        const rollInfo = RollTree.buildRollSync(sourceFormula, rollContext, {rollType: "roll"});
         const finalFormula = rollInfo.rolls[0].formula;
         try {
             const formula = SFRPGRoll.replaceFormulaData(finalFormula.finalRoll, null);

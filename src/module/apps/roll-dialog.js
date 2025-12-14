@@ -25,9 +25,10 @@ export default class RollDialog extends Dialog {
      * @param {string} params.mainDie The primary die type used in this roll.
      * @param {DamagePart[]} [params.parts] An array of DamageParts.
      * @param {Object} [params.dialogData] Any additional data being passed to the dialog.
+     * @param {String} params.rollType The type of roll being made
      * @param {DialogOptions} [params.options] Any additional options being passed to the dialog.
      */
-    constructor({ rollTree, formula, contexts, availableModifiers, mainDie, parts = [], dialogData = {}, options = {} }) {
+    constructor({ rollTree, formula, contexts, availableModifiers, mainDie, parts = [], dialogData = {}, rollType = "roll", options = {} }) {
         super(dialogData, options);
 
         this.rollTree = rollTree;
@@ -78,6 +79,9 @@ export default class RollDialog extends Dialog {
             this.target = null;
         }
 
+        /** Set roll type */
+        this.rollType = rollType;
+
         /** Returned values */
         this.additionalBonus = "";
         this.rollMode = game.settings.get("core", "rollMode");
@@ -108,9 +112,10 @@ export default class RollDialog extends Dialog {
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
         data.contexts = this.contexts;
+        data.rollType = this.rollType;
         data.hasTarget = this.hasTarget;
         data.target = this.target;
-        data.targetOwner = this.target.entity.owner;
+        data.targetOwner = this.target?.entity?.isOwner ?? null;
         data.damageGroups = this.damageGroups;
 
         for (const modifier of data.availableModifiers) {
@@ -309,7 +314,8 @@ export default class RollDialog extends Dialog {
      * @param {RollContext} contexts
      * @param {Modifier[]} availableModifiers
      * @param {string} mainDie
-     * @param {DialogOptions} options
+     * @param {DialogOptions} options.dialogOptions
+     * @param {String} options.rollType             The type of roll
      * @returns {Promise<{button: string, rollMode: string, bonus: string, parts: DamagePart[]}>}
      */
     static showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
@@ -318,12 +324,8 @@ export default class RollDialog extends Dialog {
             const defaultButton = options.defaultButton || (Object.values(buttons)[0].id ?? Object.values(buttons)[0].label);
 
             const dlg = new RollDialog({
-                rollTree,
-                formula,
-                contexts,
                 availableModifiers,
-                mainDie,
-                parts: options.parts,
+                contexts,
                 dialogData: {
                     title: options.title || game.i18n.localize("SFRPG.Rolls.Dice.Roll"),
                     buttons: buttons,
@@ -332,6 +334,11 @@ export default class RollDialog extends Dialog {
                         resolve({button, rollMode, bonus: bonus?.trim(), parts});
                     }
                 },
+                formula,
+                mainDie,
+                parts: options.parts,
+                rollTree,
+                rollType: options.rollType,
                 options: options.dialogOptions || {}
             });
             dlg.render(true);

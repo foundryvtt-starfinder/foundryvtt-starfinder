@@ -141,7 +141,7 @@ export default class RollTree {
      * @param {boolean} [options.debug]
      * @returns {RollInfo}
      */
-    static buildRollSync(formula, contexts, options = {}) {
+    static buildRollSync(formula, contexts, options = {rollType: "roll"}) {
         return new RollTree(formula, contexts, options).#processRollRequest({
             button: options.defaultButton || (options.buttons ? (Object.values(options.buttons)[0].id ?? Object.values(options.buttons)[0].label) : "roll"),
             mode: game.settings.get("core", "rollMode"),
@@ -161,9 +161,10 @@ export default class RollTree {
      * @param {boolean} [options.skipUI] Do not show the UI. Default false.
      * @param {DamagePart[]} [options.parts]
      * @param {boolean} [options.debug]
+     * @param {String} [options.rollType] Type of roll
      * @returns {Promise<RollInfo>}
      */
-    static async buildRoll(formula, contexts, options = {}) {
+    static async buildRoll(formula, contexts, options = {rollType: "roll"}) {
         let result;
 
         if (options.skipUI) {
@@ -179,9 +180,10 @@ export default class RollTree {
             const uiResult = await RollDialog.showRollDialog(tree, formula, contexts, allRolledMods, options.mainDie, {
                 buttons: options.buttons,
                 defaultButton: options.defaultButton,
-                title: options.title,
                 dialogOptions: options.dialogOptions,
-                parts: options.parts
+                parts: options.parts,
+                rollType: options.rollType,
+                title: options.title
             });
 
             /* make sure anything toggled in the UI is correctly enabled */
