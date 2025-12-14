@@ -318,7 +318,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         } else if (itemLevel < 1) {
             return 0;
         } else {
-            return `Max(${itemLevel}, Mod)`;
+            return `${itemLevel}`;
         }
     }
 
