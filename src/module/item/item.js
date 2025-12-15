@@ -102,6 +102,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     get hasMagicDamage() {
         if (!this.hasDamage) return false;
+        if (this.system.magic) return true;
         if (['magic', 'hybrid', 'spell'].includes(this.type)) return true;
         if (['msak', 'rsak'].includes(this.system.actionType ?? null)) return true;
         if (this.system.properties?.hybrid?.value) return true;

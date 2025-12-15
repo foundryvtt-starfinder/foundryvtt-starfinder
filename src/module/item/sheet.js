@@ -133,6 +133,9 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         const itemData = this.item.system;
         data.placeholders = this.item.flags.placeholders || {};
 
+        // Item magic damage status
+        data.hasMagicDamage = data.item.hasMagicDamage;
+
         // Only physical items have hardness, hp, and their own saving throw when attacked.
         if (data.isPhysicalItem) {
             let itemLevel = this.parseNumber(itemData.level, 1);

@@ -358,6 +358,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             equipped: new fields.BooleanField({initial: false}),
             identified: new fields.BooleanField({initial: true}),
             isEquipment: new fields.BooleanField({initial: isEquipment}),
+            magic: new fields.BooleanField({initial: false}),
             proficient: new fields.BooleanField({initial: false})
         };
     }
