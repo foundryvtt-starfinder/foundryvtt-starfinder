@@ -104,6 +104,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (!this.hasDamage) return false;
         if (['magic', 'hybrid', 'spell'].includes(this.type)) return true;
         if (['msak', 'rsak'].includes(this.system.actionType ?? null)) return true;
+        if (this.system.properties?.hybrid?.value) return true;
         const containedItems = this.contents ?? [];
         for (const item of containedItems) {
             if (item.type === 'fusion') return true;
