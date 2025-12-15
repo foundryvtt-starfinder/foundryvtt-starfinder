@@ -600,7 +600,7 @@ export class DiceSFRPG {
                     }
                 }
 
-                const isMagic = itemContext.entity.hasMagicDamage;
+                const isMagic = itemContext.data.magic || itemContext.entity.hasMagicDamage;
                 if (isMagic) tags.push({tag: 'magic', text: game.i18n.localize("SFRPG.Magic.Magic")});
             }
 
