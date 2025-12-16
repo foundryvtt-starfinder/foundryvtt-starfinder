@@ -290,7 +290,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 }
             }
 
-            const chatHasMagicDamage = chatMessage.flags.hasMagicDamage;
+            const chatHasMagicDamage = chatMessage.flags.hasMagicDamage?.value;
             if (chatHasMagicDamage) {
                 properties.push("magic");
             }

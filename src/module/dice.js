@@ -708,8 +708,17 @@ export class DiceSFRPG {
                     damageTypeString: damageTypeString
                 };
 
-                if (itemContext && itemContext.entity.system.specialMaterials) {
-                    customData.specialMaterials = itemContext.entity.system.specialMaterials;
+                // Add special materials, descriptors, and magic status to chat message flags (to overcome DR)
+                if (itemContext) {
+                    if (itemContext.entity.system.specialMaterials) {
+                        customData.specialMaterials = itemContext.entity.system.specialMaterials;
+                    }
+
+                    if (itemContext.entity.system.descriptors) {
+                        customData.descriptors = itemContext.entity.system.descriptors;
+                    }
+
+                    customData.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
                 }
 
                 try {
@@ -750,9 +759,7 @@ export class DiceSFRPG {
                         messageData.flags.descriptors = itemContext.entity.system.descriptors;
                     }
 
-                    if (itemContext.entity.hasMagicDamage) {
-                        messageData.flags.hasMagicDamage = itemContext.entity.hasMagicDamage;
-                    }
+                    messageData.flags.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
                 }
 
                 ChatMessage.create(messageData, { rollMode: rollInfo.mode });
