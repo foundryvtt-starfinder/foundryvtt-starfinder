@@ -259,11 +259,11 @@ export default class SFRPGModifierApplication extends foundry.appv1.api.FormAppl
         html.find(".modifier-value-affected select").change(event => {
             const current = $(event.currentTarget);
             const valueAffectedElement = current.val();
-            const effectType = $(".modifier-effect-type select");
+            const effectType = $(".modifier-effect-type select").val();
 
             // Hide custom value field if the modifier effect type shouldn't have one
-            if (!(this.customValueTypes.includes(effectType)) && !(valueAffectedElement === "custom")) $("fieldset.modifier-custom-value").prop("disabled", true);
-            else $("fieldset.modifier-custom-value").prop("disabled", false);
+            if (this.customValueTypes.includes(effectType) && valueAffectedElement === "custom") $("fieldset.modifier-custom-value").prop("disabled", false);
+            else $("fieldset.modifier-custom-value").prop("disabled", true);
         });
     }
 
@@ -282,8 +282,8 @@ export default class SFRPGModifierApplication extends foundry.appv1.api.FormAppl
         else $("fieldset.modifier-limit-to").prop("disabled", false);
 
         // Hide custom value field if the modifier effect type shouldn't have one
-        if (!(this.customValueTypes.includes(effectType)) && !(valueAffectedElement === "custom")) $("fieldset.modifier-custom-value").prop("disabled", true);
-        else $("fieldset.modifier-custom-value").prop("disabled", false);
+        if (this.customValueTypes.includes(effectType) && valueAffectedElement.val() === "custom") $("fieldset.modifier-custom-value").prop("disabled", false);
+        else $("fieldset.modifier-custom-value").prop("disabled", true);
 
         switch (effectType) {
             case SFRPGEffectType.ABILITY_SKILLS:
