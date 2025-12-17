@@ -237,10 +237,6 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            if (rollOptions?.actionTarget) {
-                tags.push({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}) });
-            }
-
             const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
             rollObject.options.rollOptions = rollOptions;
             const roll = await rollObject.evaluate();
@@ -260,6 +256,13 @@ export class DiceSFRPG {
                         }
                     }
                 }
+            }
+
+            const success = DiceSFRPG.evaluateRollVsTarget(roll, rollContext, rollOptions.actionTarget, difficulty);
+            if (rollOptions?.actionTarget) {
+                tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `${rollOptions.actionTargetSource[rollOptions.actionTarget]} - ${success ? "HIT!" : "Miss :("}`} ) });
+            } else if (difficulty) {
+                tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `DC ${displayDifficulty ? difficulty : "??"}`}) });
             }
 
             const itemContext = rollContext.allContexts['item'];
@@ -952,6 +955,52 @@ export class DiceSFRPG {
         }
 
         return resolveResult;
+    }
+
+    /**
+     * Evaluates whether a d20 roll is a success or a failure
+     * @param   {SFRPGRoll}     roll            roll to evaluate
+     * @param   {RollContext}   rollContext     the context under which to evaluate to roll
+     * @param   {String}        actionTarget    the property on the target to evaluate against
+     * @param   {Number}        difficulty      hardcoded value to evaluate over actionTarget (optional)
+     * @returns {Boolean}                       returns false for failure, true for success, null if not evaluated
+     */
+    static evaluateRollVsTarget(roll, rollContext, actionTarget, difficulty = undefined) {
+        const validTargets = [...Object.keys(CONFIG.SFRPG.actionTargets), ...Object.keys(CONFIG.SFRPG.actionTargetsStarship)];
+        if (typeof roll.total === "number") {
+            if (difficulty) {
+                return roll.total >= difficulty;
+            } else if (rollContext.allContexts.target && validTargets.includes(actionTarget)) {
+                const targetData = rollContext.allContexts.target.data;
+                const evalValue = foundry.utils.getProperty(targetData, CONFIG.SFRPG.actionTargetPaths[actionTarget]);
+                switch (actionTarget) {
+                    case "":
+                        return null;
+                    case "other":
+                        return null;
+                    case "ac5":
+                        return roll.total >= 5;
+                    case "ac15":
+                        return roll.total >= 15;
+                    case "kac8":
+                        if (evalValue) {
+                            return roll.total >= evalValue;
+                        } else if (foundry.utils.getProperty(targetData, CONFIG.SFRPG.actionTargetPaths["kac"])) {
+                            return roll.total >= foundry.utils.getProperty(targetData, CONFIG.SFRPG.actionTargetPaths["kac"]) + 8;
+                        } else {
+                            return null;
+                        }
+                    case "ac":
+                        return null;
+                    case "tl":
+                        return null;
+                    default:
+                        return roll.total >= evalValue;
+                }
+            }
+        } else {
+            return null;
+        }
     }
 
     /**

@@ -2558,6 +2558,17 @@ SFRPG.actionTargetsStarship = {
     "tl": "SFRPG.Items.Action.ActionTarget.StarshipTL"
 };
 
+/**
+ * An object mapping action targets to the system data path their values are stored (for hit evaluation against targets).
+ */
+SFRPG.actionTargetPaths = {
+    "kac": "attributes.kac.value",
+    "kac8": "attributes.cmd.value",
+    "eac": "attributes.eac.value",
+    "ac5": "5",
+    "ac15": "15"
+};
+
 // Source: CRB, page 391
 SFRPG.characterWealthByLevel = {
     0: 0,

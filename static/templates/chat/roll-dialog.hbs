@@ -27,6 +27,7 @@
     </form>
 </div>
 
+{{#if (or (eq rollType "damage") (eq rollType "healing"))}}
 <div class="damage-type-selector-list">
     {{#if (gt (length damageGroups) 1) }}
         <h3 class="damage-type-list-title noborder" data-tooltip="{{localize "SFRPG.Damage.Types.Hint"}}">{{localize "SFRPG.Damage.Types.Title"}}</h3>
@@ -67,17 +68,17 @@
         </div>
     {{/each}}
 </div>
+{{/if}}
 
 {{#if hasTarget}}
 {{#if (or (eq rollType "attack") (eq rollType "gunnery"))}}
 <div class="target-section flexrow">
     <label class="flex1">{{localize "SFRPG.RollTarget"}}:</label>
-    <div class="flex1">
+    <div class="flex2">
         <div class="target {{#if targetOwner}}owned{{else}}unowned{{/if}}" data-target-id="{{target.entity.id}}" {{#if targetOwner}}data-tooltip="{{targetTooltip}}"{{/if}}>
             <img src="{{target.entity.document.texture.src}}" title="{{target.entity.name}}" width="48" height="48" />
-            <div class="target-info">
+            <div class="target-info flexrow">
                 <h4>{{target.entity.name}}</h4>
-                <label class="target-level">{{localize "SFRPG.LevelLabelText"}}{{target.data.details.level.value}}</label>
             </div>
         </div>
     </div>
