@@ -45,6 +45,8 @@ export const registerSystemSettings = function() {
         default: false,
         type: Boolean
     });
+
+    // TODO-Ian: Currently broken in new chat cards
     game.settings.register("sfrpg", "autoCollapseItemCards", {
         name: "SFRPG.Settings.AutoCollapseCard.Name",
         hint: "SFRPG.Settings.AutoCollapseCard.Hint",
@@ -64,15 +66,6 @@ export const registerSystemSettings = function() {
         config: false,
         default: 0,
         type: Number
-    });
-
-    game.settings.register("sfrpg", "useCustomChatCards", {
-        name: "SFRPG.Settings.UseCustomChatCard.Name",
-        hint: "SFRPG.Settings.UseCustomChatCard.Hint",
-        scope: "world",
-        config: true,
-        default: false,
-        type: Boolean
     });
 
     game.settings.register("sfrpg", "autoAddUnarmedStrike", {

@@ -157,7 +157,7 @@ SFRPG.weaponTypeProficiency = {
 };
 
 /**
- * This describes the ways that an ability can be cativated
+ * This describes the ways that an ability can be activated
  * @type {Object}
  */
 SFRPG.abilityActivationTypes = {
@@ -202,6 +202,18 @@ SFRPG.currencies = {
     "bp": "SFRPG.Currencies.BPs"
 };
 
+/* ---------------------------- Damage and Healing Types ---------------------------- */
+
+/**
+ * The valid kinetic damage types in SFRPG
+ * @type {Object}
+ */
+SFRPG.kineticDamageTypes = {
+    "bludgeoning": "SFRPG.Damage.Types.Bludgeoning",
+    "piercing": "SFRPG.Damage.Types.Piercing",
+    "slashing": "SFRPG.Damage.Types.Slashing"
+};
+
 /**
  * The valid energy damage types in SFRPG
  * @type {Object}
@@ -215,32 +227,12 @@ SFRPG.energyDamageTypes = {
 };
 
 /**
- * The valid kinetic damage types in SFRPG
- * @type {Object}
- */
-SFRPG.kineticDamageTypes = {
-    "bludgeoning": "SFRPG.Damage.Types.Bludgeoning",
-    "piercing": "SFRPG.Damage.Types.Piercing",
-    "slashing": "SFRPG.Damage.Types.Slashing"
-};
-
-/**
- * Valid damage types that are not kinetic or energy in SFRPG
- * @type {Object}
- */
-SFRPG.otherDamageTypes = {
-    "radiation": "SFRPG.Damage.Types.Radiation",
-    "nonlethal": "SFRPG.Damage.Types.Nonlethal"
-};
-
-/**
  * All valid damage types in SFRPG
  * @type {Object}
  */
 SFRPG.damageTypes = {
     ...SFRPG.energyDamageTypes,
-    ...SFRPG.kineticDamageTypes,
-    ...SFRPG.otherDamageTypes
+    ...SFRPG.kineticDamageTypes
 };
 
 /**
@@ -248,7 +240,9 @@ SFRPG.damageTypes = {
  * @type {Object}
  */
 SFRPG.healingTypes = {
-    "healing": "SFRPG.HealingTypesHealing"
+    "healing": "SFRPG.Healing.Types.HP",
+    "sp": "SFRPG.Healing.Types.SP",
+    "tempHP": "SFRPG.Healing.Types.TempHP"
 };
 
 /**
@@ -272,13 +266,80 @@ SFRPG.damageTypeToAcronym = {
     "sonic": "So",
     "bludgeoning": "B",
     "piercing": "P",
-    "slashing": "S"
+    "slashing": "S",
+    "healing": "HP",
+    "sp": "SP",
+    "tempHP": "Tmp"
+};
+
+SFRPG.weaponDamageTypes = {
+    "acid": "SFRPG.DamageTypesAcid",
+    "acid+bludgeoning": "SFRPG.DamageTypesAcidAndBludgeoning",
+    "acid+electricity": "SFRPG.DamageTypesAcidAndElectricity",
+    "acid+fire": "SFRPG.DamageTypesAcidAndFire",
+    "acid+piercing": "SFRPG.DamageTypesAcidAndPiercing",
+    "acid+slashing": "SFRPG.DamageTypesAcidAndSlashing",
+    "acid|fire": "SFRPG.DamageTypesAcidOrFire",
+    "acid|slashing": "SFRPG.DamageTypesAcidOrSlashing",
+    "cold": "SFRPG.DamageTypesCold",
+    "cold+piercing": "SFRPG.DamageTypesColdAndPiercing",
+    "cold+slashing": "SFRPG.DamageTypesColdAndSlashing",
+    "cold|fire": "SFRPG.DamageTypesColdOrFire",
+    "electricity": "SFRPG.DamageTypesElectricity",
+    "electricity+fire": "SFRPG.DamageTypesElectricityAndFire",
+    "electricity+piercing": "SFRPG.DamageTypesElectricityAndPiercing",
+    "electricity+slashing": "SFRPG.DamageTypesElectricityAndSlashing",
+    "force": "SFRPG.DamageTypesForce",
+    "fire": "SFRPG.DamageTypesFire",
+    "fire+force": "SFRPG.DamageTypesFireAndForce",
+    "fire+piercing": "SFRPG.DamageTypesFireAndPiercing",
+    "fire+slashing": "SFRPG.DamageTypesFireAndSlashing",
+    "fire|slashing": "SFRPG.DamageTypesFireOrSlashing",
+    "fire|sonic": "SFRPG.DamageTypesFireOrSonic",
+    "sonic": "SFRPG.DamageTypesSonic",
+    "bludgeoning": "SFRPG.DamageTypesBludgeoning",
+    "bludgeoning+cold": "SFRPG.DamageTypesBludgeoningAndCold",
+    "bludgeoning+electricity": "SFRPG.DamageTypesBludgeoningAndElectricity",
+    "bludgeoning+fire": "SFRPG.DamageTypesBludgeoningAndFire",
+    "bludgeoning+sonic": "SFRPG.DamageTypesBludgeoningAndSonic",
+    "piercing": "SFRPG.DamageTypesPiercing",
+    "piercing+sonic": "SFRPG.DamageTypesPiercingAndSonic",
+    "slashing": "SFRPG.DamageTypesSlashing",
+    "slashing+piercing": "SFRPG.DamageTypesSlashingAndPiercing",
+    "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic"
 };
 
 SFRPG.damageTypeOperators = {
     "and": "SFRPG.Damage.Types.Operators.And",
     "or": "SFRPG.Damage.Types.Operators.Or"
 };
+
+// Damage Reductions
+SFRPG.damageReductionTypes = {
+    "": "-",
+    "bludgeoning": "SFRPG.Damage.Types.Bludgeoning",
+    "piercing": "SFRPG.Damage.Types.Piercing",
+    "slashing": "SFRPG.Damage.Types.Slashing",
+    "magic": "SFRPG.Damage.Types.Magic",
+    "chaotic": "SFRPG.Descriptors.Chaotic",
+    "lawful": "SFRPG.Descriptors.Lawful",
+    "good": "SFRPG.Descriptors.Good",
+    "evil": "SFRPG.Descriptors.Evil",
+    ...SFRPG.specialMaterials,
+    "custom": "SFRPG.Damage.Types.Custom"
+};
+
+// Energy Resistances
+SFRPG.energyResistanceTypes = {
+    "acid": "SFRPG.Damage.Types.Acid",
+    "cold": "SFRPG.Damage.Types.Cold",
+    "electricity": "SFRPG.Damage.Types.Electricity",
+    "fire": "SFRPG.Damage.Types.Fire",
+    "sonic": "SFRPG.Damage.Types.Sonic",
+    "custom": "SFRPG.Damage.Types.Custom"
+};
+
+/* ---------------------------- Descriptors and Properties ---------------------------- */
 
 SFRPG.descriptors = {
     "acid": "SFRPG.Descriptors.Acid",
@@ -337,218 +398,6 @@ SFRPG.descriptorsTooltips = {
     "teleportation": "SFRPG.Descriptors.TeleportationDescription"
 };
 
-SFRPG.weaponDamageTypes = {
-    "acid": "SFRPG.DamageTypesAcid",
-    "acid+bludgeoning": "SFRPG.DamageTypesAcidAndBludgeoning",
-    "acid+electricity": "SFRPG.DamageTypesAcidAndElectricity",
-    "acid+fire": "SFRPG.DamageTypesAcidAndFire",
-    "acid+piercing": "SFRPG.DamageTypesAcidAndPiercing",
-    "acid+slashing": "SFRPG.DamageTypesAcidAndSlashing",
-    "acid|fire": "SFRPG.DamageTypesAcidOrFire",
-    "acid|slashing": "SFRPG.DamageTypesAcidOrSlashing",
-    "cold": "SFRPG.DamageTypesCold",
-    "cold+piercing": "SFRPG.DamageTypesColdAndPiercing",
-    "cold+slashing": "SFRPG.DamageTypesColdAndSlashing",
-    "cold|fire": "SFRPG.DamageTypesColdOrFire",
-    "electricity": "SFRPG.DamageTypesElectricity",
-    "electricity+fire": "SFRPG.DamageTypesElectricityAndFire",
-    "electricity+piercing": "SFRPG.DamageTypesElectricityAndPiercing",
-    "electricity+slashing": "SFRPG.DamageTypesElectricityAndSlashing",
-    "force": "SFRPG.DamageTypesForce",
-    "fire": "SFRPG.DamageTypesFire",
-    "fire+force": "SFRPG.DamageTypesFireAndForce",
-    "fire+piercing": "SFRPG.DamageTypesFireAndPiercing",
-    "fire+slashing": "SFRPG.DamageTypesFireAndSlashing",
-    "fire|slashing": "SFRPG.DamageTypesFireOrSlashing",
-    "fire|sonic": "SFRPG.DamageTypesFireOrSonic",
-    "sonic": "SFRPG.DamageTypesSonic",
-    "bludgeoning": "SFRPG.DamageTypesBludgeoning",
-    "bludgeoning+cold": "SFRPG.DamageTypesBludgeoningAndCold",
-    "bludgeoning+electricity": "SFRPG.DamageTypesBludgeoningAndElectricity",
-    "bludgeoning+fire": "SFRPG.DamageTypesBludgeoningAndFire",
-    "bludgeoning+sonic": "SFRPG.DamageTypesBludgeoningAndSonic",
-    "piercing": "SFRPG.DamageTypesPiercing",
-    "piercing+sonic": "SFRPG.DamageTypesPiercingAndSonic",
-    "slashing": "SFRPG.DamageTypesSlashing",
-    "slashing+piercing": "SFRPG.DamageTypesSlashingAndPiercing",
-    "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic"
-};
-
-SFRPG.ammunitionTypes = {
-    "charge": "SFRPG.Items.Ammunition.Type.Charges",
-    "roundS": "SFRPG.Items.Ammunition.Type.SmallArmRounds",
-    "roundL": "SFRPG.Items.Ammunition.Type.LongarmAndSniperRounds",
-    "roundH": "SFRPG.Items.Ammunition.Type.HeavyRounds",
-    "arrow": "SFRPG.Items.Ammunition.Type.Arrows",
-    "dart": "SFRPG.Items.Ammunition.Type.Darts",
-    "fuel": "SFRPG.Items.Ammunition.Type.Fuel",
-    "missile": "SFRPG.Items.Ammunition.Type.Missiles",
-    "rocket": "SFRPG.Items.Ammunition.Type.Rockets",
-    "shell": "SFRPG.Items.Ammunition.Type.Shells",
-    "flare": "SFRPG.Items.Ammunition.Type.Flares",
-    "flechettes": "SFRPG.Items.Ammunition.Type.Flechettes",
-    "nanite": "SFRPG.Items.Ammunition.Type.Nanites",
-    "junk": "SFRPG.Items.Ammunition.Type.Junk",
-    "caustrol": "SFRPG.Items.Ammunition.Type.Caustrol",
-    "sclerite": "SFRPG.Items.Ammunition.Type.Sclerites",
-    "moodGoo": "SFRPG.Items.Ammunition.Type.MoodGoo",
-    "thasphalt": "SFRPG.Items.Ammunition.Type.Thasphalt",
-    "thasteronPellets": "SFRPG.Items.Ammunition.Type.ThasteronPellets"
-};
-
-SFRPG.constantDistanceUnits = {
-    "none": "SFRPG.None",
-    "personal": "SFRPG.Personal",
-    "touch": "SFRPG.Touch",
-    "close": "SFRPG.Close",
-    "medium": "SFRPG.Medium",
-    "long": "SFRPG.Long",
-    "planetary": "SFRPG.Planetary",
-    "system": "SFRPG.SystemWide",
-    "plane": "SFRPG.Plane",
-    "unlimited": "SFRPG.Unlimited"
-};
-
-SFRPG.variableDistanceUnits = {
-    "ft": "SFRPG.Ft",
-    "meter": "SFRPG.Meter",
-    "mi": "SFRPG.Mi",
-    "spec": "SFRPG.Special",
-    "any": "SFRPG.DistAny"
-};
-
-SFRPG.distanceUnits = {
-    ...SFRPG.constantDistanceUnits,
-    ...SFRPG.variableDistanceUnits
-};
-
-/**
- * Durations for effects by definition must be non-zero.
- * @type {Object}
- */
-SFRPG.effectDurationTypes = {
-    "round": "SFRPG.Effect.DurationTypesRounds",
-    "minute": "SFRPG.Effect.DurationTypesMinutes",
-    "hour": "SFRPG.Effect.DurationTypesHours",
-    "day": "SFRPG.Effect.DurationTypesDays",
-    "permanent": "SFRPG.Effect.DurationTypesPermanent"
-};
-
-SFRPG.effectEndTypes = {
-    "onTurnStart": "SFRPG.Effect.EndTypesOnTurnStart",
-    "onTurnEnd": "SFRPG.Effect.EndTypesOnTurnEnd"
-};
-
-SFRPG.effectDurationFrom = {
-    "turn": 0,
-    "round": 6,
-    "minute": 60,
-    "hour": 3600,
-    "day": 86400
-};
-
-SFRPG.turnEventTypes = {
-    "note": "SFRPG.TurnEvent.Types.Note",
-    "roll": "SFRPG.TurnEvent.Types.Roll"
-};
-
-/**
- * Durations for features/spells however can be.
- * @type {Object}
- */
-SFRPG.durationTypes = {
-    "instantaneous": "SFRPG.DurationTypesInstantaneous",
-    "turn": "SFRPG.DurationTypesTurn",
-    ...SFRPG.effectDurationTypes,
-    "text": "SFRPG.Text"
-};
-
-SFRPG.uncountableDurations = Object.freeze([
-    "instantaneous",
-    "turn",
-    "permanent"
-]);
-
-SFRPG.targetTypes = {};
-
-SFRPG.timePeriods = {};
-
-SFRPG.spellPreparationModes = {
-    "always": "SFRPG.SpellPreparationModesAlways",
-    "innate": "SFRPG.SpellPreparationModesInnate"
-};
-
-SFRPG.limitedUsePeriods = {
-    "sr": "SFRPG.LimitedUsePeriodsShort",
-    "lr": "SFRPG.LimitedUsePeriodsLong",
-    "day": "SFRPG.LimitedUsePeriodsDay",
-    "charges": "SFRPG.LimitedUsePeriodsCharges"
-};
-
-SFRPG.senses = {
-    "bs": "SFRPG.SensesTypes.SensesBS",
-    "bl": "SFRPG.SensesTypes.SensesBL",
-    "dark": "SFRPG.SensesTypes.SensesDark",
-    "llv": "SFRPG.SensesTypes.SensesLLV",
-    "st": "SFRPG.SensesTypes.SensesST"
-};
-
-SFRPG.skills = {
-    "acr": "SFRPG.SkillAcr",
-    "ath": "SFRPG.SkillAth",
-    "blu": "SFRPG.SkillBlu",
-    "com": "SFRPG.SkillCom",
-    "cul": "SFRPG.SkillCul",
-    "dip": "SFRPG.SkillDip",
-    "dis": "SFRPG.SkillDis",
-    "eng": "SFRPG.SkillEng",
-    "int": "SFRPG.SkillInt",
-    "lsc": "SFRPG.SkillLsc",
-    "med": "SFRPG.SkillMed",
-    "mys": "SFRPG.SkillMys",
-    "per": "SFRPG.SkillPer",
-    "pro": "SFRPG.SkillPro",
-    "phs": "SFRPG.SkillPhs",
-    "pil": "SFRPG.SkillPil",
-    "sen": "SFRPG.SkillSen",
-    "sle": "SFRPG.SkillSle",
-    "ste": "SFRPG.SkillSte",
-    "sur": "SFRPG.SkillSur"
-};
-
-SFRPG.starshipSkills = {
-    ...SFRPG.skills,
-    "gun": "SFRPG.SkillGun"
-};
-
-// Weapon Types
-SFRPG.weaponTypes = {
-    "basicM": "SFRPG.WeaponTypesBasicMelee",
-    "advancedM": "SFRPG.WeaponTypesAdvMelee",
-    "smallA": "SFRPG.WeaponTypesSmallArms",
-    "longA": "SFRPG.WeaponTypesLongArms",
-    "heavy": "SFRPG.WeaponTypesHeavy",
-    "sniper": "SFRPG.WeaponTypesSniper",
-    "grenade": "SFRPG.WeaponTypesGrenades",
-    "special": "SFRPG.WeaponTypesSpecial",
-    "solarian": "SFRPG.WeaponTypesSolarian"
-};
-
-// Weapons sub categories
-SFRPG.weaponCategories = {
-    "cryo"         : "SFRPG.WeaponCategoriesCryo",
-    "disruption"   : "SFRPG.WeaponCategoriesDisruption",
-    "disintegrator": "SFRPG.WeaponCategoriesDisintegrator",
-    "flame"        : "SFRPG.WeaponCategoriesFlame",
-    "laser"        : "SFRPG.WeaponCategoriesLaser",
-    "plasma"       : "SFRPG.WeaponCategoriesPlasma",
-    "projectile"   : "SFRPG.WeaponCategoriesProjectile",
-    "shock"        : "SFRPG.WeaponCategoriesShock",
-    "sonic"        : "SFRPG.WeaponCategoriesSonic",
-    "uncategorized": "SFRPG.WeaponCategoriesUncategorized"
-};
-
-// Weapon Properties
 SFRPG.weaponProperties = {
     "one": "SFRPG.WeaponPropertiesOneHanded",
     "two": "SFRPG.WeaponPropertiesTwoHanded",
@@ -759,21 +608,178 @@ SFRPG.specialMaterials = {
     "voidglass": "SFRPG.SpecialMaterials.Voidglass"
 };
 
-// Damage Reductions
-SFRPG.damageReductionTypes = {
-    "": "-",
-    ...SFRPG.specialMaterials,
-    "custom": "SFRPG.Damage.Types.Custom"
+SFRPG.ammunitionTypes = {
+    "charge": "SFRPG.Items.Ammunition.Type.Charges",
+    "roundS": "SFRPG.Items.Ammunition.Type.SmallArmRounds",
+    "roundL": "SFRPG.Items.Ammunition.Type.LongarmAndSniperRounds",
+    "roundH": "SFRPG.Items.Ammunition.Type.HeavyRounds",
+    "arrow": "SFRPG.Items.Ammunition.Type.Arrows",
+    "dart": "SFRPG.Items.Ammunition.Type.Darts",
+    "fuel": "SFRPG.Items.Ammunition.Type.Fuel",
+    "missile": "SFRPG.Items.Ammunition.Type.Missiles",
+    "rocket": "SFRPG.Items.Ammunition.Type.Rockets",
+    "shell": "SFRPG.Items.Ammunition.Type.Shells",
+    "flare": "SFRPG.Items.Ammunition.Type.Flares",
+    "flechettes": "SFRPG.Items.Ammunition.Type.Flechettes",
+    "nanite": "SFRPG.Items.Ammunition.Type.Nanites",
+    "junk": "SFRPG.Items.Ammunition.Type.Junk",
+    "caustrol": "SFRPG.Items.Ammunition.Type.Caustrol",
+    "sclerite": "SFRPG.Items.Ammunition.Type.Sclerites",
+    "moodGoo": "SFRPG.Items.Ammunition.Type.MoodGoo",
+    "thasphalt": "SFRPG.Items.Ammunition.Type.Thasphalt",
+    "thasteronPellets": "SFRPG.Items.Ammunition.Type.ThasteronPellets"
 };
 
-// Energy Resistances
-SFRPG.energyResistanceTypes = {
-    "acid": "SFRPG.Damage.Types.Acid",
-    "cold": "SFRPG.Damage.Types.Cold",
-    "electricity": "SFRPG.Damage.Types.Electricity",
-    "fire": "SFRPG.Damage.Types.Fire",
-    "sonic": "SFRPG.Damage.Types.Sonic",
-    "custom": "SFRPG.Damage.Types.Custom"
+SFRPG.constantDistanceUnits = {
+    "none": "SFRPG.None",
+    "personal": "SFRPG.Personal",
+    "touch": "SFRPG.Touch",
+    "close": "SFRPG.Close",
+    "medium": "SFRPG.Medium",
+    "long": "SFRPG.Long",
+    "planetary": "SFRPG.Planetary",
+    "system": "SFRPG.SystemWide",
+    "plane": "SFRPG.Plane",
+    "unlimited": "SFRPG.Unlimited"
+};
+
+SFRPG.variableDistanceUnits = {
+    "ft": "SFRPG.Ft",
+    "meter": "SFRPG.Meter",
+    "mi": "SFRPG.Mi",
+    "spec": "SFRPG.Special",
+    "any": "SFRPG.DistAny"
+};
+
+SFRPG.distanceUnits = {
+    ...SFRPG.constantDistanceUnits,
+    ...SFRPG.variableDistanceUnits
+};
+
+/**
+ * Durations for effects by definition must be non-zero.
+ * @type {Object}
+ */
+SFRPG.effectDurationTypes = {
+    "round": "SFRPG.Effect.DurationTypesRounds",
+    "minute": "SFRPG.Effect.DurationTypesMinutes",
+    "hour": "SFRPG.Effect.DurationTypesHours",
+    "day": "SFRPG.Effect.DurationTypesDays",
+    "permanent": "SFRPG.Effect.DurationTypesPermanent"
+};
+
+SFRPG.effectEndTypes = {
+    "onTurnStart": "SFRPG.Effect.EndTypesOnTurnStart",
+    "onTurnEnd": "SFRPG.Effect.EndTypesOnTurnEnd"
+};
+
+SFRPG.effectDurationFrom = {
+    "turn": 0,
+    "round": 6,
+    "minute": 60,
+    "hour": 3600,
+    "day": 86400
+};
+
+SFRPG.turnEventTypes = {
+    "note": "SFRPG.TurnEvent.Types.Note",
+    "roll": "SFRPG.TurnEvent.Types.Roll"
+};
+
+/**
+ * Durations for features/spells however can be.
+ * @type {Object}
+ */
+SFRPG.durationTypes = {
+    "instantaneous": "SFRPG.DurationTypesInstantaneous",
+    "turn": "SFRPG.DurationTypesTurn",
+    ...SFRPG.effectDurationTypes,
+    "text": "SFRPG.Text"
+};
+
+SFRPG.uncountableDurations = Object.freeze([
+    "instantaneous",
+    "turn",
+    "permanent"
+]);
+
+SFRPG.targetTypes = {};
+
+SFRPG.timePeriods = {};
+
+SFRPG.spellPreparationModes = {
+    "always": "SFRPG.SpellPreparationModesAlways",
+    "innate": "SFRPG.SpellPreparationModesInnate"
+};
+
+SFRPG.limitedUsePeriods = {
+    "sr": "SFRPG.LimitedUsePeriodsShort",
+    "lr": "SFRPG.LimitedUsePeriodsLong",
+    "day": "SFRPG.LimitedUsePeriodsDay",
+    "charges": "SFRPG.LimitedUsePeriodsCharges"
+};
+
+SFRPG.senses = {
+    "bs": "SFRPG.SensesTypes.SensesBS",
+    "bl": "SFRPG.SensesTypes.SensesBL",
+    "dark": "SFRPG.SensesTypes.SensesDark",
+    "llv": "SFRPG.SensesTypes.SensesLLV",
+    "st": "SFRPG.SensesTypes.SensesST"
+};
+
+SFRPG.skills = {
+    "acr": "SFRPG.SkillAcr",
+    "ath": "SFRPG.SkillAth",
+    "blu": "SFRPG.SkillBlu",
+    "com": "SFRPG.SkillCom",
+    "cul": "SFRPG.SkillCul",
+    "dip": "SFRPG.SkillDip",
+    "dis": "SFRPG.SkillDis",
+    "eng": "SFRPG.SkillEng",
+    "int": "SFRPG.SkillInt",
+    "lsc": "SFRPG.SkillLsc",
+    "med": "SFRPG.SkillMed",
+    "mys": "SFRPG.SkillMys",
+    "per": "SFRPG.SkillPer",
+    "pro": "SFRPG.SkillPro",
+    "phs": "SFRPG.SkillPhs",
+    "pil": "SFRPG.SkillPil",
+    "sen": "SFRPG.SkillSen",
+    "sle": "SFRPG.SkillSle",
+    "ste": "SFRPG.SkillSte",
+    "sur": "SFRPG.SkillSur"
+};
+
+SFRPG.starshipSkills = {
+    ...SFRPG.skills,
+    "gun": "SFRPG.SkillGun"
+};
+
+// Weapon Types
+SFRPG.weaponTypes = {
+    "basicM": "SFRPG.WeaponTypesBasicMelee",
+    "advancedM": "SFRPG.WeaponTypesAdvMelee",
+    "smallA": "SFRPG.WeaponTypesSmallArms",
+    "longA": "SFRPG.WeaponTypesLongArms",
+    "heavy": "SFRPG.WeaponTypesHeavy",
+    "sniper": "SFRPG.WeaponTypesSniper",
+    "grenade": "SFRPG.WeaponTypesGrenades",
+    "special": "SFRPG.WeaponTypesSpecial",
+    "solarian": "SFRPG.WeaponTypesSolarian"
+};
+
+// Weapons sub categories
+SFRPG.weaponCategories = {
+    "cryo"         : "SFRPG.WeaponCategoriesCryo",
+    "disruption"   : "SFRPG.WeaponCategoriesDisruption",
+    "disintegrator": "SFRPG.WeaponCategoriesDisintegrator",
+    "flame"        : "SFRPG.WeaponCategoriesFlame",
+    "laser"        : "SFRPG.WeaponCategoriesLaser",
+    "plasma"       : "SFRPG.WeaponCategoriesPlasma",
+    "projectile"   : "SFRPG.WeaponCategoriesProjectile",
+    "shock"        : "SFRPG.WeaponCategoriesShock",
+    "sonic"        : "SFRPG.WeaponCategoriesSonic",
+    "uncategorized": "SFRPG.WeaponCategoriesUncategorized"
 };
 
 SFRPG.spellAreaShapes = {
@@ -2478,6 +2484,20 @@ SFRPG.storageWeightProperties = {
     "level": "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyLevel"
 };
 
+SFRPG.itemsWithActionTypes = [
+    "weapon",
+    "equipment",
+    "consumable",
+    "spell",
+    "feat",
+    "technological",
+    "hybrid",
+    "magic",
+    "upgrade",
+    "augmentation",
+    "mod"
+];
+
 SFRPG.combatTypes = [
     "normal",
     "starship",
@@ -2705,4 +2725,78 @@ SFRPG.defaultItemIcons = {
     "upgrade": "armor-upgrade.svg",
     "weapon": "bolter-gun.svg",
     "weaponAccessory": "gun-stock.svg"
+};
+
+SFRPG.checkIcons = {
+    "acrobatics":       "fa-person-walking",
+    "athletics":        "fa-dumbbell",
+    "bluff":            "fa-comment",
+    "computers":        "fa-computer",
+    "culture":          "fa-flag",
+    "diplomacy":        "fa-handshake",
+    "disguise":         "fa-mask",
+    "engineering":      "fa-gear",
+    "intimidate":       "fa-face-angry",
+    "life-science":     "fa-dna",
+    "medicine":         "fa-syringe",
+    "mysticism":        "fa-hand-sparkles",
+    "perception":       "fa-magnifying-glass",
+    "profession":       "fa-user-tie",
+    "physical-science": "fa-flask",
+    "piloting":         "fa-plane",
+    "sense-motive":     "fa-person-circle-question",
+    "sleight-of-hand":  "fa-hands",
+    "stealth":          "fa-moon",
+    "survival":         "fa-campground",
+
+    "fortitude":        "fa-shield-heart",
+    "reflex":           "fa-person-running",
+    "will":             "fa-brain",
+
+    "strength":         "fa-weight-hanging",
+    "dexterity":        "fa-feather-pointed",
+    "constitution":     "fa-heart-pulse",
+    "intelligence":     "fa-glasses",
+    "wisdom":           "fa-mountain-sun",
+    "charisma":         "fa-people-arrows",
+
+    "caster-level":     "fa-wand-magic-sparkles"
+};
+
+SFRPG.skillIconsShort = {
+    "acr": "fa-person-walking",
+    "ath": "fa-dumbbell",
+    "blu": "fa-comment",
+    "com": "fa-computer",
+    "cul": "fa-flag",
+    "dip": "fa-handshake",
+    "dis": "fa-mask",
+    "eng": "fa-gear",
+    "int": "fa-face-angry",
+    "lsc": "fa-dna",
+    "med": "fa-syringe",
+    "mys": "fa-hand-sparkles",
+    "per": "fa-magnifying-glass",
+    "pro": "fa-user-tie",
+    "phs": "fa-flask",
+    "pil": "fa-plane",
+    "sen": "fa-person-circle-question",
+    "sle": "fa-hands",
+    "ste": "fa-moon",
+    "sur": "fa-campground"
+},
+
+SFRPG.saveIconsShort = {
+    "fort":   "fa-shield-heart",
+    "reflex": "fa-person-running",
+    "will":   "fa-brain"
+},
+
+SFRPG.abilityIconsShort = {
+    "str": "fa-weight-hanging",
+    "dex": "fa-feather-pointed",
+    "con": "fa-heart-pulse",
+    "int": "fa-glasses",
+    "wis": "fa-mountain-sun",
+    "cha": "fa-people-arrows"
 };

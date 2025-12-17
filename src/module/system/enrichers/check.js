@@ -66,7 +66,7 @@ export default class CheckEnricher extends BaseEnricher {
 
     /** @inheritdoc */
     get icons() {
-        return checkIcons;
+        return CONFIG.SFRPG.checkIcons;
     }
 
     get checkType() {

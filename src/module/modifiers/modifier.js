@@ -153,7 +153,9 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
                     damageTypes: new fields.SchemaField(
                         [
                             ...Object.keys(CONFIG.SFRPG.energyDamageTypes),
-                            ...Object.keys(CONFIG.SFRPG.kineticDamageTypes)
+                            ...Object.keys(CONFIG.SFRPG.kineticDamageTypes),
+                            ...Object.keys(CONFIG.SFRPG.healingTypes)
+
                         ].reduce((obj, type) => {
                             obj[type] = new fields.BooleanField({ initial: false, required: false });
                             return obj;
