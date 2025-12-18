@@ -71,6 +71,14 @@ export default class SFRPGModifierApplication extends foundry.appv1.api.FormAppl
     ];
 
     /**
+     * Effect types which allow for a custom value field to be filled in in place of the dropdown selector
+     */
+    customValueTypes = [
+        SFRPGEffectType.DAMAGE_REDUCTION,
+        SFRPGEffectType.ENERGY_RESISTANCE
+    ];
+
+    /**
      * @override
      */
     getData() {
@@ -93,9 +101,9 @@ export default class SFRPGModifierApplication extends foundry.appv1.api.FormAppl
     activateListeners(html) {
         super.activateListeners(html);
 
+        // On Modifier Type Change
         html.find(".modifier-modifier-type select").change(event => {
             const modifierType = event.currentTarget.value;
-
             const damageSectionDetails = $("fieldset.damage-section-details");
 
             if (modifierType !== "damageSection") damageSectionDetails.prop("disabled", true);
@@ -104,12 +112,14 @@ export default class SFRPGModifierApplication extends foundry.appv1.api.FormAppl
             this.setPosition({ height: "auto" });
         });
 
+        // On Modifier Effected Attribute Change
         html.find(".modifier-effect-type select").change(event => {
             const current = $(event.currentTarget);
             const affectedValue = $(".modifier-value-affected select");
             const modifierType = $(".modifier-modifier-type select");
             const effectType = current.val();
             const oldValue = this.object.effectType;
+            const valueAffectedElement = this.element.find(".modifier-value-affected select");
 
             const damageSectionType = $("option[value='damageSection']");
 
@@ -123,6 +133,14 @@ export default class SFRPGModifierApplication extends foundry.appv1.api.FormAppl
             // Hide limit to setting if modifier doesn't affect an item
             if (!(this.limitToTypes.includes(effectType))) $("fieldset.modifier-limit-to").prop("disabled", true);
             else $("fieldset.modifier-limit-to").prop("disabled", false);
+
+            // Hide custom value field if the modifier effect type shouldn't have one
+            if (this.customValueTypes.includes(effectType) && valueAffectedElement.val() === "custom") $("fieldset.modifier-custom-value").prop("disabled", false);
+            else $("fieldset.modifier-custom-value").prop("disabled", true);
+
+            // Hide multiple DR/ER note
+            if (effectType === "damage-reduction") $("fieldset.multiple-dr-note").prop("disabled", false);
+            else $("fieldset.multiple-dr-note").prop("disabled", true);
 
             if (oldValue === SFRPGEffectType.ACTOR_RESOURCE || effectType === SFRPGEffectType.ACTOR_RESOURCE) {
                 const modifierDialog = this;
@@ -248,6 +266,17 @@ export default class SFRPGModifierApplication extends foundry.appv1.api.FormAppl
 
             this.setPosition({ height: "auto" });
         });
+
+        // On Modifier Specific Affected Value Change
+        html.find(".modifier-value-affected select").change(event => {
+            const current = $(event.currentTarget);
+            const valueAffectedElement = current;
+            const effectType = $(".modifier-effect-type select").val();
+
+            // Hide custom value field if the modifier effect type shouldn't have one
+            if (this.customValueTypes.includes(effectType) && valueAffectedElement.val() === "custom") $("fieldset.modifier-custom-value").prop("disabled", false);
+            else $("fieldset.modifier-custom-value").prop("disabled", true);
+        });
     }
 
     /** @override */
@@ -263,6 +292,14 @@ export default class SFRPGModifierApplication extends foundry.appv1.api.FormAppl
 
         if (!(this.limitToTypes.includes(effectType))) $("fieldset.modifier-limit-to").prop("disabled", true);
         else $("fieldset.modifier-limit-to").prop("disabled", false);
+
+        // Hide custom value field if the modifier effect type shouldn't have one
+        if (this.customValueTypes.includes(effectType) && valueAffectedElement.val() === "custom") $("fieldset.modifier-custom-value").prop("disabled", false);
+        else $("fieldset.modifier-custom-value").prop("disabled", true);
+
+        // Hide multiple DR note
+        if (effectType === "damage-reduction") $("fieldset.multiple-dr-note").prop("disabled", false);
+        else $("fieldset.multiple-dr-note").prop("disabled", true);
 
         switch (effectType) {
             case SFRPGEffectType.ABILITY_SKILLS:
