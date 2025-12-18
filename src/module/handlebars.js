@@ -166,12 +166,6 @@ export function setupHandlebars() {
         return false;
     });
 
-    // TODO: this might be unnecessary, as {{log args}} seems to do the same thing and is built in
-    Handlebars.registerHelper('console', function(...args) {
-        args.pop();
-        console.log(...args);
-    });
-
     Handlebars.registerHelper('indexOf', function(array, value, options) {
         const index = array.indexOf(value);
         if (index < 0) return index;

@@ -14,10 +14,12 @@
                 {{ localize "SFRPG.Items.Weapon.IsEquipment.Title" }}
             </label>
         {{/if}}
-        <label class="checkbox">
-            <input type="checkbox" {{#if hasMagicDamage}}name="" disabled=true {{checked true}}{{else}}name="system.magic" {{checked itemData.magic}}{{/if}} />
-            {{ localize "SFRPG.Magic.Magic" }}
-        </label>
+        {{#unless (or (eq item.type "magic") (eq item.type "hybrid"))}}
+            <label class="checkbox">
+                <input type="checkbox" {{#if hasMagicDamage}}name="" disabled=true {{checked true}}{{else}}name="system.magic" {{checked itemData.magic}}{{/if}} />
+                {{ localize "SFRPG.Magic.Magic" }}
+            </label>
+        {{/unless}}
         <label class="checkbox">
             <input type="checkbox" name="system.identified" {{checked itemData.identified}} />
             {{ localize "SFRPG.Items.Identified" }}
