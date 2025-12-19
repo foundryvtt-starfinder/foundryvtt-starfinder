@@ -149,7 +149,7 @@
                 </ul>
             </div>
             <div class="flexcol">
-                <h3 class="form-header noborder">{{localize "SFRPG.StarshipSheet.Quadrants.Header"}}</h3>
+                <h3 class="form-header noborder">{{localize "SFRPG.StarshipSheet.Quadrant.Header"}}</h3>
                 <ul class="attributes flexrow">
                     <li class="attribute defenses">
                         <h4 class="attribute-name box-title">{{localize "SFRPG.StarshipSheet.Sides.Forward"}}</h4>
@@ -166,7 +166,7 @@
                             <label class="quadrantFiller"></label>
                             {{/if}}
                             {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
+                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrant.NotAvailable"}}</label>
                             {{/if}}
                         </div>
                         <div class="attribute-value flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Details.Ablative.Forward"}}<br />@quadrants.forward.ablative.value">
@@ -177,7 +177,7 @@
                             <input type="text" class="quadrantDefense" name="system.quadrants.forward.ablative.max" value="{{system.quadrants.forward.ablative.max}}" data-dtype="Number" placeholder="0" />
                             <label></label>
                             {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
+                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrant.NotAvailable"}}</label>
                             {{/if}}
                         </div>
                         <ol class="attribute-multibox">
@@ -186,12 +186,12 @@
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Misc"}}</label>
                             </li>
-                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.forward.ac.value<br/>@quadrants.forward.ac.misc<br/><br/>{{#each system.quadrants.forward.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrant.ArmorClass"}}<br/>@quadrants.forward.ac.value<br/>@quadrants.forward.ac.misc<br/><br/>{{#each system.quadrants.forward.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>AC</label>
                                 <label>{{system.quadrants.forward.ac.value}}</label>
                                 <input type="text" name="system.quadrants.forward.ac.misc" value="{{numberFormat system.quadrants.forward.ac.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
                             </li>
-                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.forward.targetLock.value<br/>@quadrants.forward.targetLock.misc<br/><br/>{{#each system.quadrants.forward.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrant.TargetLock"}}<br/>@quadrants.forward.targetLock.value<br/>@quadrants.forward.targetLock.misc<br/><br/>{{#each system.quadrants.forward.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>TL</label>
                                 <label>{{system.quadrants.forward.targetLock.value}}</label>
                                 <input type="text" name="system.quadrants.forward.targetLock.misc" value="{{numberFormat system.quadrants.forward.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
@@ -213,7 +213,7 @@
                             <label class="quadrantFiller"></label>
                             {{/if}}
                             {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
+                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrant.NotAvailable"}}</label>
                             {{/if}}
                         </div>
                         <div class="attribute-value flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Details.Ablative.Port"}}<br />@quadrants.port.ablative.value">
@@ -224,7 +224,7 @@
                             <input type="text" class="quadrantDefense" name="system.quadrants.port.ablative.max" value="{{system.quadrants.port.ablative.max}}" data-dtype="Number" placeholder="0" />
                             <label></label>
                             {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
+                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrant.NotAvailable"}}</label>
                             {{/if}}
                         </div>
                         <ol class="attribute-multibox">
@@ -233,12 +233,12 @@
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Misc"}}</label>
                             </li>
-                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.port.ac.value<br/>@quadrants.port.ac.misc<br/><br/>{{#each system.quadrants.port.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrant.ArmorClass"}}<br/>@quadrants.port.ac.value<br/>@quadrants.port.ac.misc<br/><br/>{{#each system.quadrants.port.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>AC</label>
                                 <label>{{system.quadrants.port.ac.value}}</label>
                                 <input type="text" name="system.quadrants.port.ac.misc" value="{{numberFormat system.quadrants.port.ac.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
                             </li>
-                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.port.targetLock.value<br/>@quadrants.port.targetLock.misc<br/><br/>{{#each system.quadrants.port.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrant.TargetLock"}}<br/>@quadrants.port.targetLock.value<br/>@quadrants.port.targetLock.misc<br/><br/>{{#each system.quadrants.port.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>TL</label>
                                 <label>{{system.quadrants.port.targetLock.value}}</label>
                                 <input type="text" name="system.quadrants.port.targetLock.misc" value="{{numberFormat system.quadrants.port.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
@@ -260,7 +260,7 @@
                             <label class="quadrantFiller"></label>
                             {{/if}}
                             {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
+                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrant.NotAvailable"}}</label>
                             {{/if}}
                         </div>
                         <div class="attribute-value flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Details.Ablative.Starboard"}}<br />@quadrants.starboard.ablative.value">
@@ -271,7 +271,7 @@
                             <input type="text" class="quadrantDefense" name="system.quadrants.starboard.ablative.max" value="{{system.quadrants.starboard.ablative.max}}" data-dtype="Number" placeholder="0" />
                             <label></label>
                             {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
+                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrant.NotAvailable"}}</label>
                             {{/if}}
                         </div>
                         <ol class="attribute-multibox">
@@ -280,14 +280,14 @@
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Misc"}}</label>
                             </li>
-                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.starboard.ac.value<br/>@quadrants.starboard.ac.misc<br/><br/>{{#each system.quadrants.starboard.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrant.ArmorClass"}}<br/>@quadrants.starboard.ac.value<br/>@quadrants.starboard.ac.misc<br/><br/>{{#each system.quadrants.starboard.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>AC</label>
                                 <label>{{system.quadrants.starboard.ac.value}}</label>
                                 <input type="text" name="system.quadrants.starboard.ac.misc"
                                     value="{{numberFormat system.quadrants.starboard.ac.misc decimals=0 sign=true}}" data-dtype="Number"
                                     placeholder="+Misc" />
                             </li>
-                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.starboard.targetLock.value<br/>@quadrants.starboard.targetLock.misc<br/><br/>{{#each system.quadrants.starboard.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrant.TargetLock"}}<br/>@quadrants.starboard.targetLock.value<br/>@quadrants.starboard.targetLock.misc<br/><br/>{{#each system.quadrants.starboard.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>TL</label>
                                 <label>{{system.quadrants.starboard.targetLock.value}}</label>
                                 <input type="text" name="system.quadrants.starboard.targetLock.misc" value="{{numberFormat system.quadrants.starboard.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
@@ -309,7 +309,7 @@
                             <label class="quadrantFiller"></label>
                             {{/if}}
                             {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
+                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrant.NotAvailable"}}</label>
                             {{/if}}
                         </div>
                         <div class="attribute-value flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Details.Ablative.Aft"}}<br />@quadrants.aft.ablative.value">
@@ -320,7 +320,7 @@
                             <input type="text" class="quadrantDefense" name="system.quadrants.aft.ablative.max" value="{{system.quadrants.aft.ablative.max}}" data-dtype="Number" placeholder="0" />
                             <label></label>
                             {{else}}
-                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrants.NotAvailable"}}</label>
+                            <label class="notInstalled">{{localize "SFRPG.StarshipSheet.Quadrant.NotAvailable"}}</label>
                             {{/if}}
                         </div>
                         <ol class="attribute-multibox">
@@ -329,12 +329,12 @@
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Value"}}</label>
                                 <label>{{localize "SFRPG.StarshipSheet.Header.Misc"}}</label>
                             </li>
-                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrants.ArmorClass"}}<br/>@quadrants.aft.ac.value<br/>@quadrants.aft.ac.misc<br/><br/>{{#each system.quadrants.aft.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrant.ArmorClass"}}<br/>@quadrants.aft.ac.value<br/>@quadrants.aft.ac.misc<br/><br/>{{#each system.quadrants.aft.ac.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>AC</label>
                                 <label>{{system.quadrants.aft.ac.value}}</label>
                                 <input type="text" name="system.quadrants.aft.ac.misc" value="{{numberFormat system.quadrants.aft.ac.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
                             </li>
-                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrants.TargetLock"}}<br/>@quadrants.aft.targetLock.value<br/>@quadrants.aft.targetLock.misc<br/><br/>{{#each system.quadrants.aft.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
+                            <li class="flexrow" data-tooltip="{{localize "SFRPG.StarshipSheet.Quadrant.TargetLock"}}<br/>@quadrants.aft.targetLock.value<br/>@quadrants.aft.targetLock.misc<br/><br/>{{#each system.quadrants.aft.targetLock.tooltip as |tip|}}{{tip}}<br/>{{/each}}">
                                 <label>TL</label>
                                 <label>{{system.quadrants.aft.targetLock.value}}</label>
                                 <input type="text" name="system.quadrants.aft.targetLock.misc" value="{{numberFormat system.quadrants.aft.targetLock.misc decimals=0 sign=true}}" data-dtype="Number" placeholder="+Misc" />
@@ -350,11 +350,11 @@
                     <div class="flexcol">
                         {{#if (and system.hasShields (not system.hasDeflectorShields))}}
                         <div>
-                            <label>&nbsp;&nbsp;{{localize "SFRPG.StarshipSheet.Quadrants.ShieldHeader"}}</label>
+                            <label>&nbsp;&nbsp;{{localize "SFRPG.StarshipSheet.Quadrant.ShieldHeader"}}</label>
                             <span>({{system.attributes.shields.value}} / {{system.attributes.shields.max}})</span>
-                            <span>- {{localize "SFRPG.StarshipSheet.Quadrants.EvenDistribution"}}:</span>
+                            <span>- {{localize "SFRPG.StarshipSheet.Quadrant.EvenDistribution"}}:</span>
                             <span>{{system.attributes.shields.evenDistribution}}</span>
-                            <span>- {{localize "SFRPG.StarshipSheet.Quadrants.QuadrantLimit"}}:</span>
+                            <span>- {{localize "SFRPG.StarshipSheet.Quadrant.QuadrantLimit"}}:</span>
                             <span>{{system.attributes.shields.limit}}</span>
                             {{#if (greaterThan system.attributes.shields.value system.attributes.shields.max)}}
                             <span> - </span>
@@ -369,9 +369,9 @@
                         {{/if}}
                         {{#if system.hasAblativeArmor}}
                         <div>
-                            <label>&nbsp;&nbsp;{{localize "SFRPG.StarshipSheet.Quadrants.AblativeHeader"}}</label>
+                            <label>&nbsp;&nbsp;{{localize "SFRPG.StarshipSheet.Quadrant.AblativeHeader"}}</label>
                             <span>({{system.attributes.ablative.value}} / {{system.attributes.ablative.total}} / {{system.attributes.ablative.max}})</span>
-                            <span>- {{localize "SFRPG.StarshipSheet.Quadrants.EvenDistribution"}}:</span>
+                            <span>- {{localize "SFRPG.StarshipSheet.Quadrant.EvenDistribution"}}:</span>
                             <span>{{system.attributes.ablative.evenDistribution}}</span>
                             {{#if (greaterThan system.attributes.ablative.max (mult system.attributes.hp.max 2))}}
                             <span> - </span>

@@ -166,6 +166,7 @@ export default class RollTree {
      */
     static async buildRoll(formula, contexts, options = {rollType: "roll"}) {
         let result;
+        const rollType = options.rollType;
 
         if (options.skipUI) {
             result = RollTree.buildRollSync(formula, contexts, options);
@@ -182,7 +183,7 @@ export default class RollTree {
                 defaultButton: options.defaultButton,
                 dialogOptions: options.dialogOptions,
                 parts: options.parts,
-                rollType: options.rollType,
+                rollType: rollType,
                 title: options.title
             });
 
@@ -198,8 +199,15 @@ export default class RollTree {
                 mode: uiResult.rollMode,
                 bonus: uiResult.bonus,
                 enabledParts: uiResult.parts?.filter(part => part.enabled),
+                rollType: rollType,
                 debug: options.debug
             });
+
+            result.target = {actorType: contexts.allContexts?.target?.entity?.actor?.type ?? ""};
+            if (rollType === "gunnery" && result.target.actorType === "starship" && uiResult.targetQuadrant) {
+                result.target.quadrant = uiResult.targetQuadrant;
+                result.target.quadrantName = CONFIG.SFRPG.starshipQuadrants[uiResult.targetQuadrant];
+            }
         }
 
         return result;

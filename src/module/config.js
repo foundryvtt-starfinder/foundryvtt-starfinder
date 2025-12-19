@@ -1361,11 +1361,15 @@ SFRPG.starshipWeaponProperties = {
     "vortex"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex" // CRB
 };
 
-SFRPG.starshipArcs = {
+SFRPG.starshipQuadrants = {
     "forward"  : "SFRPG.ShipSystems.StarshipArcs.Forward",
-    "starboard": "SFRPG.ShipSystems.StarshipArcs.Starboard",
-    "aft"      : "SFRPG.ShipSystems.StarshipArcs.Aft",
     "port"     : "SFRPG.ShipSystems.StarshipArcs.Port",
+    "starboard": "SFRPG.ShipSystems.StarshipArcs.Starboard",
+    "aft"      : "SFRPG.ShipSystems.StarshipArcs.Aft"
+};
+
+SFRPG.starshipArcs = {
+    ...SFRPG.starshipQuadrants,
     "turret"   : "SFRPG.ShipSystems.StarshipArcs.Turret"
 };
 

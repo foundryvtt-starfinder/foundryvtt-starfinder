@@ -113,7 +113,7 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                     nullable: true,
                     required: true
                 })
-            }, {label: "SFRPG.StarshipSheet.Quadrants.AblativeHeader"}),
+            }, {label: "SFRPG.StarshipSheet.Quadrant.AblativeHeader"}),
             ac: new fields.SchemaField({
                 misc: new fields.NumberField({
                     initial: 0,
@@ -129,7 +129,7 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            }, {label: "SFRPG.StarshipSheet.Quadrants.ArmorClass"}),
+            }, {label: "SFRPG.StarshipSheet.Quadrant.ArmorClass"}),
             shields: new fields.SchemaField({
                 value: new fields.NumberField({
                     initial: null,
@@ -138,7 +138,7 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                     nullable: true,
                     required: true
                 })
-            }, {label: "SFRPG.StarshipSheet.Quadrants.ShieldHeader"}),
+            }, {label: "SFRPG.StarshipSheet.Quadrant.ShieldHeader"}),
             targetLock: new fields.SchemaField({
                 misc: new fields.NumberField({
                     initial: 0,
@@ -154,7 +154,7 @@ export default class SFRPGActorStarship extends SFRPGActorBase {
                     nullable: false,
                     required: true
                 })
-            }, {label: "SFRPG.StarshipSheet.Quadrants.TargetLock"})
+            }, {label: "SFRPG.StarshipSheet.Quadrant.TargetLock"})
         };
     }
 

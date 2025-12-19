@@ -201,8 +201,8 @@ export class DiceSFRPG {
             }
             return part;
         };
-        const formula = parts.map(partMapper).join(" + ");
 
+        const formula = parts.map(partMapper).join(" + ");
         const rollInfo = await RollTree.buildRoll(formula, rollContext, {
             buttons: buttons,
             debug: false,
@@ -214,6 +214,7 @@ export class DiceSFRPG {
             title: title,
             useRawStrings: false
         });
+
         if (rollInfo.button === "cancel") {
             if (onClose) {
                 onClose(null, null, null);
@@ -258,16 +259,28 @@ export class DiceSFRPG {
                 }
             }
 
-            const success = DiceSFRPG.evaluateRollVsTarget(roll, rollContext, rollOptions.actionTarget, difficulty);
+            // Roll Evaluation
+            const success = DiceSFRPG.evaluateRollVsTarget(roll, rollInfo, rollContext, rollOptions, difficulty);
+
+            let prependedQuadrantInfo = "";
+            if (rollInfo.target.actorType === "starship" && rollInfo.target.quadrant) {
+                prependedQuadrantInfo = `${rollInfo.target.quadrantName} `;
+            }
+
             if (rollOptions?.actionTarget) {
-                tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `${rollOptions.actionTargetSource[rollOptions.actionTarget]} - ${success ? "HIT!" : "Miss :("}`} ) });
+                const actionTargetSource = rollOptions.actionTargetSource[rollOptions.actionTarget];
+                if (success !== null) {
+                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `${prependedQuadrantInfo}${actionTargetSource} - ${success ? "HIT!" : "Miss :("}`} ) });
+                } else {
+                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `${prependedQuadrantInfo}${actionTargetSource}`} ) });
+                }
             } else if (difficulty) {
                 tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `DC ${displayDifficulty ? difficulty : "??"}`}) });
             }
 
+            // Chat Cards
             const itemContext = rollContext.allContexts['item'];
             const htmlData = [{ name: "rollNotes", value: itemContext?.system?.rollNotes }];
-
             let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
             let errorToThrow = null;
             if (useCustomCard && chatMessage) {
@@ -516,6 +529,8 @@ export class DiceSFRPG {
             title: title,
             useRawStrings: false
         });
+
+        // Evaluate the roll
         if (rollInfo.button === 'cancel') {
             if (onClose) {
                 onClose(null, null, null, false);
@@ -961,12 +976,17 @@ export class DiceSFRPG {
      * Evaluates whether a d20 roll is a success or a failure
      * @param   {SFRPGRoll}     roll            roll to evaluate
      * @param   {RollContext}   rollContext     the context under which to evaluate to roll
+     * @param   {RollInfo}      rollInfo        output from buildRoll, including dialog selections
      * @param   {String}        actionTarget    the property on the target to evaluate against
      * @param   {Number}        difficulty      hardcoded value to evaluate over actionTarget (optional)
      * @returns {Boolean}                       returns false for failure, true for success, null if not evaluated
      */
-    static evaluateRollVsTarget(roll, rollContext, actionTarget, difficulty = undefined) {
-        const validTargets = [...Object.keys(CONFIG.SFRPG.actionTargets), ...Object.keys(CONFIG.SFRPG.actionTargetsStarship)];
+    static evaluateRollVsTarget(roll, rollInfo, rollContext, rollOptions, difficulty = undefined) {
+        const actionTarget = rollOptions.actionTarget;
+        const targetActorType = rollInfo.target?.actorType;
+        const targetQuadrant = rollInfo.target?.quadrant ?? "";
+        const validTargets = targetActorType === "starship" ? Object.keys(CONFIG.SFRPG.actionTargetsStarship) : Object.keys(CONFIG.SFRPG.actionTargets);
+
         if (typeof roll.total === "number") {
             if (difficulty) {
                 return roll.total >= difficulty;
@@ -991,16 +1011,23 @@ export class DiceSFRPG {
                             return null;
                         }
                     case "ac":
-                        return null;
+                        if (targetQuadrant) {
+                            return roll.total >= foundry.utils.getProperty(targetData, `quadrants.${targetQuadrant}.ac.value`);
+                        } else {
+                            return null;
+                        }
                     case "tl":
-                        return null;
+                        if (targetQuadrant) {
+                            return roll.total >= foundry.utils.getProperty(targetData, `quadrants.${targetQuadrant}.targetLock.value`);
+                        } else {
+                            return null;
+                        }
                     default:
                         return roll.total >= evalValue;
                 }
             }
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**

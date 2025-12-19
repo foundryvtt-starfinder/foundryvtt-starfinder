@@ -71,6 +71,7 @@ export default class RollDialog extends Dialog {
         }
 
         /** Prepare Target */
+        this.targetQuadrant = "";
         if (contexts.allContexts.target) {
             this.hasTarget = true;
             this.target = contexts.allContexts.target;
@@ -115,6 +116,7 @@ export default class RollDialog extends Dialog {
         data.rollType = this.rollType;
         data.hasTarget = this.hasTarget;
         data.target = this.target;
+        data.targetQuadrant = this.targetQuadrant;
         data.targetOwner = this.target?.entity?.isOwner ?? null;
         data.damageGroups = this.damageGroups;
 
@@ -216,6 +218,9 @@ export default class RollDialog extends Dialog {
         const selectorCombobox = html.find('.selector');
         selectorCombobox.on('change', this._onSelectorChanged.bind(this));
 
+        const targetQuadrantSelector = html.find('.quadrant-select');
+        targetQuadrantSelector.on('change', this._onTargetQuadrantSelect.bind(this));
+
         html.find("div.target.owned").on("click", (event) => this._onTargetClick(event));
 
         html.find('input[class="damageSection"][type="radio"]').on('change', this._onDamageSectionRadio.bind(this)); // Handle radios turning each other off
@@ -261,6 +266,10 @@ export default class RollDialog extends Dialog {
         actor.sheet.render(true);
     }
 
+    async _onTargetQuadrantSelect(event) {
+        this.targetQuadrant = event.target.value;
+    }
+
     _onDamageSectionRadio(event) {
         const damageGroups = this.damageGroups;
 
@@ -299,7 +308,7 @@ export default class RollDialog extends Dialog {
     async close(options) {
         /** Fire callback, then delete, as it would get called again by Dialog#close. */
         if (this.data.close) {
-            this.data.close(this.rolledButton, this.rollMode, this.additionalBonus, this.parts);
+            this.data.close(this.rolledButton, this.rollMode, this.additionalBonus, this.parts, this.targetQuadrant);
             delete this.data.close;
         }
 
@@ -330,8 +339,8 @@ export default class RollDialog extends Dialog {
                     title: options.title || game.i18n.localize("SFRPG.Rolls.Dice.Roll"),
                     buttons: buttons,
                     default: defaultButton,
-                    close: (button, rollMode, bonus, parts) => {
-                        resolve({button, rollMode, bonus: bonus?.trim(), parts});
+                    close: (button, rollMode, bonus, parts, targetQuadrant) => {
+                        resolve({button, rollMode, bonus: bonus?.trim(), parts, targetQuadrant});
                     }
                 },
                 formula,
