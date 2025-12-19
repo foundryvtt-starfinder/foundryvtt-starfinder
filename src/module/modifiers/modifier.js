@@ -16,6 +16,7 @@ const { fields } = foundry.data;
  * @param {String}        data.modifierType  Determines if this modifier is a constant value (+2) or a roll formula (1d4).
  * @param {String}        data.effectType    The category of things that might be modified by this value.
  * @param {String}        data.valueAffected The specific statistic being affected.
+ * @param {String}        data.customValue   A string that can be parsed by the system into a custom value to be affected
  * @param {Boolean}       data.enabled       Is this modifier enabled or not.
  * @param {String}        data.source        Where does this modifier come from? An item, or an ability?
  * @param {String}        data.notes         Any notes that are useful for this modifier.
@@ -117,6 +118,13 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
                 blank: true,
                 label: "SFRPG.ModifierValueAffectedLabel",
                 hint: "SFRPG.ModifierValueAffectedTooltip"
+            }),
+            customValue: new fields.StringField({
+                initial: "",
+                required: false,
+                blank: true,
+                label: "SFRPG.ModifierCustomValueLabel",
+                hint: "SFRPG.ModifierCustomValueTooltip"
             }),
             enabled: new fields.BooleanField({
                 initial: false,

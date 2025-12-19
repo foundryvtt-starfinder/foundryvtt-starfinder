@@ -575,14 +575,15 @@ export class DiceSFRPG {
                 return arr;
             }, []);
 
+            // Add item properties, descriptors, and special materials to roll tags
             const itemContext = rollContext.allContexts['item'];
             if (itemContext) {
-                /** Regular Weapons use data.properties for their properties */
+                // Regular Weapons use data.properties for their properties
                 if (itemContext.entity.system.properties) {
                     try {
                         const props = [];
-                        for (const [key, isEnabled] of Object.entries(itemContext.entity.system.properties)) {
-                            if (isEnabled.value) {
+                        for (const [key, propValue] of Object.entries(itemContext.entity.system.properties)) {
+                            if (propValue.value) {
                                 tags.push({tag: `weapon-properties ${key}`, text: SFRPG.weaponProperties[key]});
                                 props.push(key);
                             }
@@ -593,7 +594,7 @@ export class DiceSFRPG {
                     }
                 }
 
-                /** Starship Weapons use data.special for their properties */
+                // Starship Weapons use data.special for their properties
                 if (itemContext.entity.type === "starshipWeapon") {
                     tags.push({tag: `starship-weapon-type ${itemContext.entity.system.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.system.weaponType]});
                     htmlData.push({ name: "starship-weapon-type", value: itemContext.entity.system.weaponType });
@@ -614,14 +615,22 @@ export class DiceSFRPG {
                     }
                 }
 
+                // Add descriptors
+                const descriptors = itemContext.entity.system.descriptors;
+                for (const [descriptor, isEnabled] of Object.entries(descriptors)) {
+                    if (isEnabled) tags.push({tag: descriptor, text: SFRPG.descriptors[descriptor]});
+                }
+
+                // Add special materials
                 const specialMaterials = itemContext.entity.system.specialMaterials;
                 if (specialMaterials) {
                     for (const [material, isEnabled] of Object.entries(specialMaterials)) {
-                        if (isEnabled) {
-                            tags.push({tag: material, text: SFRPG.specialMaterials[material]});
-                        }
+                        if (isEnabled) tags.push({tag: material, text: SFRPG.specialMaterials[material]});
                     }
                 }
+
+                const isMagic = itemContext.data.magic || itemContext.entity.hasMagicDamage;
+                if (isMagic) tags.push({tag: 'magic', text: game.i18n.localize("SFRPG.Magic.Magic")});
             }
 
             // Determine whether the roll should be a critical damage roll
@@ -728,8 +737,17 @@ export class DiceSFRPG {
                     damageTypeString: damageTypeString
                 };
 
-                if (itemContext && itemContext.entity.system.specialMaterials) {
-                    customData.specialMaterials = itemContext.entity.system.specialMaterials;
+                // Add special materials, descriptors, and magic status to chat message flags (to overcome DR)
+                if (itemContext) {
+                    if (itemContext.entity.system.specialMaterials) {
+                        customData.specialMaterials = itemContext.entity.system.specialMaterials;
+                    }
+
+                    if (itemContext.entity.system.descriptors) {
+                        customData.descriptors = itemContext.entity.system.descriptors;
+                    }
+
+                    customData.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
                 }
 
                 try {
@@ -742,28 +760,35 @@ export class DiceSFRPG {
 
             if (!useCustomCard && chatMessage) {
                 const rollContent = await roll.render({ htmlData: htmlData });
-
                 const messageData = {
-                    flavor: finalFlavor,
-                    speaker,
                     content: rollContent,
+                    flags: {},
+                    flavor: finalFlavor,
                     rolls: [roll],
-                    sound: CONFIG.sounds.dice
+                    sound: CONFIG.sounds.dice,
+                    speaker
                 };
 
                 // Insert the damage type string if possible.
                 if (damageTypeString?.length > 0) {
                     messageData.content = DiceSFRPG.appendTextToRoll(rollContent, damageTypeString);
-                    messageData.flags = {
-                        damage: {
-                            amount: roll.total,
-                            types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
-                        }
+                    messageData.flags.damage = {
+                        amount: roll.total,
+                        types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
                     };
+                }
 
-                    if (itemContext && itemContext.entity.system.specialMaterials) {
+                // Add special materials, descriptors, and magic status to chat message flags (to overcome DR)
+                if (itemContext) {
+                    if (itemContext.entity.system.specialMaterials) {
                         messageData.flags.specialMaterials = itemContext.entity.system.specialMaterials;
                     }
+
+                    if (itemContext.entity.system.descriptors) {
+                        messageData.flags.descriptors = itemContext.entity.system.descriptors;
+                    }
+
+                    messageData.flags.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
                 }
 
                 ChatMessage.create(messageData, { rollMode: rollInfo.mode });

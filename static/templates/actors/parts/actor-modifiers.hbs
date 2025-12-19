@@ -136,13 +136,13 @@
                             <h4>{{~modifier.valueAffected~}}</h4>
                         {{else if (eq modifier.effectType "damage-reduction")}}
                             {{#if (eq modifier.valueAffected "custom")}}
-                                {{modifier.notes}}
+                                {{modifier.customValue}}
                             {{else}}
                                 {{sfrpg "damageReductionTypes" modifier.valueAffected}}
                             {{/if}}
                         {{else if (eq modifier.effectType "energy-resistance")}}
                             {{#if (eq modifier.valueAffected "custom")}}
-                                {{modifier.notes}}
+                                {{modifier.customValue}}
                             {{else}}
                                 {{sfrpg "energyResistanceTypes" modifier.valueAffected}}
                             {{/if}}

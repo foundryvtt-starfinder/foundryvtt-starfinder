@@ -1,3 +1,39 @@
+# 0.29.2 - Damage Revisited
+This update overhauls the Damage Reduction/Energy Resistance system to support all types present in the game.
+
+## Breaking Changes
+
+- Custom DR/ER values should no longer be entered in the "Notes" section of their modifier; instead use the new Custom Value field
+
+## Core System Improvements
+DR/ER updates by @ian612
+
+- A new Custom Value field has been added to modifiers, which appears for relevant effect types (such as DR/ER)
+- Weapon Type data has been added for all items that support attack actions, such that weapon specialization can be applied to them
+- Items with actions now support descriptors, such that alignments and other descriptors can be applied to them
+- Damage from the following is automatically recognized as magic: Magic items, Hybrid items, Spells, spell attacks, items with equipped fusions
+- An item can also manually be set as magic so its damage is recognized as magic
+- Damage Reduction options for the 3 kinetic damage types, 4 alignments, and magic, force, and radiation have been added in addition to special materials
+- Multiple damage types/properties can now be set with and/or joining syntax so that one of a set or all are necessary to overcome the DR
+
+## Bugfixes
+
+- Item saving throw bonus calculations corrected by @danimrath
+- Items on starship actors no longer throw errors when opened due to bugs in the item saving throw calculation by @danimrath
+
+## Data Entry & Localization
+
+- All compendium actors and items using the previous DR format have been updated for compatibility with the new format
+
+# 0.29.1.3
+This is another hotfix to resolve a data model issue preventing GM Notes on items from saving correctly, and to fix some styling issues with inline checks
+
+## Bugfixes
+
+- GM Notes are now correctly defined in the data model for items and actors that have them
+- Inline Checks now respect the `displayDC` option, and correctly display the DC by default on inline checks if it is provided
+- When sent to chat, inline checks no longer display a redundant "send to chat" button
+
 # 0.29.1.2
 Another quick hotfix to resolve a data model error preventing NPC saves from being negative.
 

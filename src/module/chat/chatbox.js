@@ -71,6 +71,8 @@ export default class SFRPGCustomChatMessage {
             tags: data.tags,
             damageTypeString: data.damageTypeString,
             specialMaterials: data.specialMaterials,
+            descriptors: data.specialMaterials,
+            hasMagicDamage: data.hasMagicDamage,
             rollOptions: data.rollOptions,
             rollDices: data.rollDices
         };
@@ -135,8 +137,17 @@ export default class SFRPGCustomChatMessage {
             };
         }
 
+        // Options tags
         if (options?.specialMaterials) {
             messageData.flags.specialMaterials = options.specialMaterials;
+        }
+
+        if (options?.descriptors) {
+            messageData.flags.descriptors = options.descriptors;
+        }
+
+        if (options?.hasMagicDamage) {
+            messageData.flags.hasMagicDamage = options.hasMagicDamage;
         }
 
         if (options.rollOptions) {

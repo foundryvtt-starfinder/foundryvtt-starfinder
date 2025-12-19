@@ -42,11 +42,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         return SFRPG.attackActions.includes(this.system.actionType);
     }
 
+    /**
+     * Does the item have an other formula implemented?
+     * @type {boolean}
+     */
     get hasOtherFormula() {
         return ("formula" in this.system) && this.system.formula?.trim().length > 0;
     }
-
-    /* -------------------------------------------- */
 
     /**
      * Does the Item implement a damage roll as part of its usage
@@ -55,8 +57,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     get hasDamage() {
         return !!(this.system.damage && this.system.damage.parts.length);
     }
-
-    /* -------------------------------------------- */
 
     /**
      * Does the Item implement a saving throw as part of its usage
@@ -94,6 +94,22 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             ? true
             : (Number(areaData.value) > 0 ? true : false);
         return hasAreaValue;
+    }
+
+    /**
+     * Does the Item's damage qualify as magic?
+     * @type {boolean}
+     */
+    get hasMagicDamage() {
+        if (!this.hasDamage) return false;
+        if (['magic', 'hybrid', 'spell'].includes(this.type)) return true;
+        if (['msak', 'rsak'].includes(this.system.actionType ?? null)) return true;
+        if (this.system.properties?.hybrid?.value) return true;
+        const containedItems = this.contents ?? [];
+        for (const item of containedItems) {
+            if (item.type === 'fusion') return true;
+        }
+        return false;
     }
 
     /**
@@ -177,23 +193,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             if (tgt.value && tgt.value === "") tgt.value = null;
 
             labels.target = [tgt.value].filterJoin(" ");
-
-            /* let area = data.area || {};
-            if (typeof area.value === 'number' && area.value === 0) area.value = null;
-
-            if (area.units === "text") labels.area = String(area.value || "")?.trim();
-            else labels.area = [area.total || area.value, C.distanceUnits[area.units] || null, C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
-
-            // Range Label
-            /* let rng = data.range || {};
-            labels.range = [rng.value || "", C.distanceUnits[rng.units]].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
-
-            // Duration Label
-            /* let dur = data.duration || {};
-            labels.duration = [dur.value].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
         }
 
         // Item Actions
