@@ -269,13 +269,17 @@ export class DiceSFRPG {
 
             if (rollOptions?.actionTarget) {
                 const actionTargetSource = rollOptions.actionTargetSource[rollOptions.actionTarget];
+                const hitLocalized = game.i18n.format("SFRPG.Rolls.HitCaps");
+                const missLocalized = game.i18n.format("SFRPG.Rolls.Miss");
                 if (success !== null) {
-                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `${prependedQuadrantInfo}${actionTargetSource} - ${success ? "HIT!" : "Miss :("}`} ) });
+                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `${prependedQuadrantInfo}${actionTargetSource} - ${success ? `${hitLocalized}` : `${missLocalized}`}!`} ) });
                 } else {
                     tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `${prependedQuadrantInfo}${actionTargetSource}`} ) });
                 }
             } else if (difficulty) {
-                tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `DC ${displayDifficulty ? difficulty : "??"}`}) });
+                const successLocalized = game.i18n.format("SFRPG.Rolls.Success");
+                const failureLocalized = game.i18n.format("SFRPG.Rolls.Failure");
+                tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `DC ${displayDifficulty ? difficulty : "??"} - ${success ? `${successLocalized}` : `${failureLocalized}`}!`}) });
             }
 
             // Chat Cards
@@ -319,10 +323,6 @@ export class DiceSFRPG {
                 messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
                 if (rollOptions?.actionTarget) {
                     messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}));
-                }
-
-                if (difficulty) {
-                    messageData.flavor = `<span style="color:${roll.total >= difficulty ? 'green' : 'red'}"><h2>${roll.total >= difficulty ? 'Success' : 'Failure'}</h2></span>${messageData.flavor}${displayDifficulty ? ` (DC ${difficulty})` : ''}`;
                 }
 
                 // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
