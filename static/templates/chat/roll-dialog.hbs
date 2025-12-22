@@ -44,7 +44,7 @@
         {{log this}}
         {{#if (and (eq rollType "gunnery") (eq target.entity.actor.type "starship"))}}
         <div class="target-quadrant form-group">
-            <label>{{localize "SFRPG.StarshipSheet.Quadrant.TargetQuadrant"}}:</label>
+            <label>{{localize "SFRPG.StarshipSheet.Quadrants.TargetQuadrant"}}:</label>
             <select class="quadrant-select" name="targetQuadrant">
                 {{selectOption "" "-" selected=targetQuadrant}}
                 {{selectOptions (sfrpg "starshipQuadrants") selected=targetQuadrant}}

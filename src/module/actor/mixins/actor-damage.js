@@ -563,17 +563,17 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         /** Ask for quadrant */
         const options = [
-            game.i18n.format("SFRPG.StarshipSheet.Quadrant.Forward"),
-            game.i18n.format("SFRPG.StarshipSheet.Quadrant.Port"),
-            game.i18n.format("SFRPG.StarshipSheet.Quadrant.Starboard"),
-            game.i18n.format("SFRPG.StarshipSheet.Quadrant.Aft")
+            game.i18n.format("SFRPG.StarshipSheet.Quadrants.Forward"),
+            game.i18n.format("SFRPG.StarshipSheet.Quadrants.Port"),
+            game.i18n.format("SFRPG.StarshipSheet.Quadrants.Starboard"),
+            game.i18n.format("SFRPG.StarshipSheet.Quadrants.Aft")
         ];
         const results = await ChoiceDialog.show(
             game.i18n.format("SFRPG.StarshipSheet.Damage.Title", {name: this.name}),
             game.i18n.format("SFRPG.StarshipSheet.Damage.Message"),
             {
                 quadrant: {
-                    name: game.i18n.format("SFRPG.StarshipSheet.Quadrant.Quadrant"),
+                    name: game.i18n.format("SFRPG.StarshipSheet.Quadrants.Quadrant"),
                     options: options,
                     default: options[0]
                 }
