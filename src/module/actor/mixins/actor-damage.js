@@ -266,13 +266,13 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const chatMessageId = html.dataset?.messageId;
         const chatMessage = game.messages.get(chatMessageId);
         if (chatMessage) {
-            const chatDamageData = chatMessage.flags.damage;
+            const chatDamageData = chatMessage.flags.sfrpg?.damage;
             if (chatDamageData) {
                 rolledAmount = chatDamageData.amount;
                 damageTypes = chatDamageData.types;
             }
 
-            const chatSpecialMaterials = chatMessage.flags.specialMaterials;
+            const chatSpecialMaterials = chatMessage.flags.sfrpg?.specialMaterials;
             if (chatSpecialMaterials) {
                 for (const [material, enabled] of Object.entries(chatSpecialMaterials)) {
                     if (enabled) {
@@ -281,7 +281,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 }
             }
 
-            const chatDescriptors = chatMessage.flags.descriptors;
+            const chatDescriptors = chatMessage.flags.sfrpg?.descriptors;
             if (chatDescriptors) {
                 for (const [descriptor, enabled] of Object.entries(chatDescriptors)) {
                     if (enabled) {
@@ -290,7 +290,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 }
             }
 
-            const chatHasMagicDamage = chatMessage.flags.hasMagicDamage?.value;
+            const chatHasMagicDamage = chatMessage.flags.sfrpg?.hasMagicDamage?.value;
             if (chatHasMagicDamage) {
                 properties.push("magic");
             }
