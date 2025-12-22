@@ -118,14 +118,14 @@ export default class CheckEnricher extends BaseEnricher {
      * @returns {HTMLAnchorElement} */
     createElement() {
         const a = super.createElement();
-        const dcValue = this.args.dc ? parseInt(this.args.dc) : null;
-        const displayDC = this.args.displayDC !== undefined ? (this.args.displayDC === 'true' ? true : false) : (this.args.dc ? true : false);
+        if (this.args.displayDC === 'true' || this.args.displayDC === 'false') a.dataset.displayDC = this.args.displayDC;
 
+        const dcValue = this.args.dc ? parseInt(this.args.dc) : null;
         if (dcValue) a.dataset.dc = parseInt(this.args.dc);
-        if (displayDC) a.dataset.displayDC = 'true';
-        else a.dataset.displayDC = 'false';
+
         const iconSlug = (this.checkType === "ability") ? CheckNameHelper.longFormNameAbilities(this.args.type) : CheckNameHelper.longFormName(this.args.type);
 
+        const displayDC = this.args.displayDC !== undefined ? (this.args.displayDC === 'true' ? true : false) : (dcValue ? true : false);
         a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${displayDC ? `<span class="dc-value">DC ${a.dataset.dc} </span>` : ''}${a.innerHTML}`;
 
         return a;

@@ -266,13 +266,13 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const chatMessageId = html.dataset?.messageId;
         const chatMessage = game.messages.get(chatMessageId);
         if (chatMessage) {
-            const chatDamageData = chatMessage.flags.damage;
+            const chatDamageData = chatMessage.flags.sfrpg?.damage;
             if (chatDamageData) {
                 rolledAmount = chatDamageData.amount;
                 damageTypes = chatDamageData.types;
             }
 
-            const chatSpecialMaterials = chatMessage.flags.specialMaterials;
+            const chatSpecialMaterials = chatMessage.flags.sfrpg?.specialMaterials;
             if (chatSpecialMaterials) {
                 for (const [material, enabled] of Object.entries(chatSpecialMaterials)) {
                     if (enabled) {
@@ -281,7 +281,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 }
             }
 
-            const chatDescriptors = chatMessage.flags.descriptors;
+            const chatDescriptors = chatMessage.flags.sfrpg?.descriptors;
             if (chatDescriptors) {
                 for (const [descriptor, enabled] of Object.entries(chatDescriptors)) {
                     if (enabled) {
@@ -290,7 +290,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 }
             }
 
-            const chatHasMagicDamage = chatMessage.flags.hasMagicDamage?.value;
+            const chatHasMagicDamage = chatMessage.flags.sfrpg?.hasMagicDamage?.value;
             if (chatHasMagicDamage) {
                 properties.push("magic");
             }
@@ -563,17 +563,17 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         /** Ask for quadrant */
         const options = [
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Forward"),
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Port"),
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Starboard"),
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Aft")
+            game.i18n.format("SFRPG.StarshipSheet.Quadrants.Forward"),
+            game.i18n.format("SFRPG.StarshipSheet.Quadrants.Port"),
+            game.i18n.format("SFRPG.StarshipSheet.Quadrants.Starboard"),
+            game.i18n.format("SFRPG.StarshipSheet.Quadrants.Aft")
         ];
         const results = await ChoiceDialog.show(
             game.i18n.format("SFRPG.StarshipSheet.Damage.Title", {name: this.name}),
             game.i18n.format("SFRPG.StarshipSheet.Damage.Message"),
             {
                 quadrant: {
-                    name: game.i18n.format("SFRPG.StarshipSheet.Damage.Quadrant.Quadrant"),
+                    name: game.i18n.format("SFRPG.StarshipSheet.Quadrants.Quadrant"),
                     options: options,
                     default: options[0]
                 }

@@ -1,3 +1,11 @@
+# Development Version
+
+## Breaking Changes
+
+- Damage type, special materials, descriptors, and other chat message flags are now namespaced properly under `flags.sfrpg`
+- Due to flag formatting changes, right-click context menus on old chat messages will no longer function correctly and should be cleared when possible
+- Inline roll `displayDifficulty` property changed to `displayDC` for consistency across codebase
+
 # 0.29.2 - Damage Revisited
 This update overhauls the Damage Reduction/Energy Resistance system to support all types present in the game.
 

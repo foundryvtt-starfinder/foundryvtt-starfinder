@@ -1,7 +1,12 @@
 import { ActorSFRPG } from "../actor/actor.js";
 
 export const addChatMessageContextOptions = function(html, options) {
-    const canApply = li => canvas.tokens?.controlled?.length && li.querySelector(".dice-roll");
+    const canApply = li => {
+        const chatMessageId = li.dataset?.messageId;
+        const chatMessage = game.messages.get(chatMessageId);
+        const isRollWithDamage = chatMessage ? ["roll", "damage"].includes(chatMessage.flags.sfrpg?.rollType) : false;
+        return canvas.tokens?.controlled?.length && li.querySelector(".dice-roll") && isRollWithDamage;
+    };
     const noToken = li => !(canvas.tokens?.controlled?.length) && li.querySelector(".dice-roll");
     options.push(
         {

@@ -1001,6 +1001,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
+            rollType: "attack",
             onClose: this._onAttackRollClose.bind(this, options)
         });
     }
@@ -1185,6 +1186,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.addContext("ship", this.actor);
         rollContext.addContext("item", this, this.system);
         rollContext.addContext("weapon", this, this.system);
+        rollContext.addTargetContext();
         rollContext.setMainContext("");
 
         this.actor?.setupRollContexts(rollContext, ["gunner", "scienceOfficer"]);
@@ -1236,6 +1238,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             },
             rollOptions: rollOptions,
             actorContextKey: "gunner",
+            rollType: "gunnery",
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
@@ -1270,6 +1273,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.addContext("ship", this.actor);
         rollContext.addContext("item", this, this);
         rollContext.addContext("weapon", this, this);
+        rollContext.addTargetContext();
         rollContext.setMainContext("");
 
         return DiceSFRPG.d20Roll({
@@ -1285,6 +1289,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
+            rollType: "attack",
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
