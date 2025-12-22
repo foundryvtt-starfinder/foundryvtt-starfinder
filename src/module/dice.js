@@ -168,13 +168,13 @@ export class DiceSFRPG {
     * @param {DialogOptions}        data.dialogOptions  Modal dialog options
     * @param {String}               data.rollType       Type of roll (options: CONFIG.SFRPG.rollType)
     * @param {Number}               data.difficulty     Optional parameter for checks
-    * @param {Boolean}              data.displayDifficulty    Optional parameter to display check difficulty
+    * @param {Boolean}              data.displayDC      Optional parameter to display check difficulty
     * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
     * @returns {Promise<RollResult?>}
     */
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
         critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor",
-        rollType = "roll", difficulty = undefined, displayDifficulty = false, tags = []}) {
+        rollType = "roll", difficulty = undefined, displayDC = false, tags = []}) {
 
         flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
 
@@ -279,7 +279,7 @@ export class DiceSFRPG {
             } else if (difficulty) {
                 const successLocalized = game.i18n.format("SFRPG.Rolls.Success");
                 const failureLocalized = game.i18n.format("SFRPG.Rolls.Failure");
-                tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `DC ${displayDifficulty ? difficulty : "??"} - ${success ? `${successLocalized}` : `${failureLocalized}`}!`}) });
+                tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `DC ${displayDC ? difficulty : "??"} - ${success ? `${successLocalized}` : `${failureLocalized}`}!`}) });
             }
 
             // Chat Cards
@@ -326,8 +326,7 @@ export class DiceSFRPG {
                 }
 
                 // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
-                const msg = await ChatMessage.create(messageData, { rollMode: rollInfo.mode });
-                console.log(msg);
+                ChatMessage.create(messageData, { rollMode: rollInfo.mode });
             }
 
             if (onClose) {
@@ -364,13 +363,13 @@ export class DiceSFRPG {
     * @param {DialogOptions}        data.dialogOptions  Modal dialog options
     * @param {String}               data.rollType       Type of roll (options: CONFIG.SFRPG.rollType)
     * @param {Number}               data.difficulty     Optional parameter for checks
-    * @param {Boolean}              data.displayDifficulty    Optional parameter to display check difficulty
+    * @param {Boolean}              data.displayDC      Optional parameter to display check difficulty
     * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
     * @returns {Promise<RollResult>|Promise<null>}      Returns the roll's result or an empty promise.
     */
     static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true,
         critical = 20, fumble = 1, breakdown = "", dialogOptions, useRawStrings = false, actorContextKey = "actor",
-        rollType = "roll", difficulty = undefined, displayDifficulty = false, tags = []}) {
+        rollType = "roll", difficulty = undefined, displayDC = false, tags = []}) {
 
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);

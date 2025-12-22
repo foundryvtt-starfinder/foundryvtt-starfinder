@@ -583,7 +583,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             },
             rollType: "abilityCheck",
             difficulty: options.dc,
-            displayDifficulty: options.displayDC
+            displayDC: options.displayDC
         });
     }
 
@@ -617,7 +617,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             },
             rollType: "save",
             difficulty: options.dc,
-            displayDifficulty: options.displayDC
+            displayDC: options.displayDC
         });
     }
 
@@ -669,7 +669,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             },
             rollType: "skillCheck",
             difficulty: options.dc,
-            displayDifficulty: options.displayDC,
+            displayDC: options.displayDC,
             tags: tags
         });
     }

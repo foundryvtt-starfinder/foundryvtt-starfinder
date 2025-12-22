@@ -165,7 +165,6 @@ export default class SFRPGCustomChatMessage {
             messageData.flags.sfrpg.rollOptions = options.rollOptions;
         }
 
-        const msg = await ChatMessage.create(messageData, { rollMode: rollMode });
-        console.log(msg);
+        ChatMessage.create(messageData, { rollMode: rollMode });
     }
 }
