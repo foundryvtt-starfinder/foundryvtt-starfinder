@@ -140,4 +140,16 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
         await this.update(updateData);
         this._checkFlatFooted(conditionName, enabled);
     }
+
+    static async generateConditionCache() {
+        const pack = game.packs.get("sfrpg.conditions");
+        const documents = await pack.getDocuments({type: "effect"});
+
+        const cacheEntries = documents.reduce((obj, doc) => {
+            obj[doc.system.slug] = doc;
+            return obj;
+        }, {});
+
+        game.sfrpg.conditionCache = new Map(Object.entries(cacheEntries));
+    }
 };

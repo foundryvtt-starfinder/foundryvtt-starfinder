@@ -98,10 +98,10 @@ export async function unpackPacks(partOfCook = false, options = {}) {
         });
     }
 
-    const entries = fs.readdirSync(sourceDir, {withFileTypes: true});
-    const folders = entries.filter(f => !f.isFile());
+    const entries = await fs.opendir(sourceDir);
     const promises = [];
-    for (const folderEntry of folders) {
+    for await (const folderEntry of entries) {
+        if (folderEntry.isFile()) continue;
         const folder = folderEntry.name;
 
         if ((limitToPack

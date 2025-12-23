@@ -1,5 +1,5 @@
 import CheckNameHelper from "../../utils/skill-names.js";
-import BaseEnricher from "./base.js";
+import BaseEnricher, { getDatasetfromEvent } from "./base.js";
 
 export const checkIcons = Object.freeze({
     "acrobatics": "fa-person-walking",
@@ -100,7 +100,7 @@ export default class CheckEnricher extends BaseEnricher {
      */
     isValid() {
         if (!this.args.type || !this.validTypes.includes(CheckNameHelper.shortFormName(this.args.type))) {
-            return this._failValidation("Type");
+            return this._failValidation("Type", this.args.type || "");
         }
 
         return true;
@@ -130,10 +130,12 @@ export default class CheckEnricher extends BaseEnricher {
     }
 
     static hasRepost = true;
-    static hasListener = true;
+    static listeners = {
+        "click": this.#clickListener
+    };
 
-    static listener(event) {
-        const data = event.currentTarget.dataset;
+    static #clickListener(event) {
+        const data = getDatasetfromEvent(event);
 
         const actor = _token?.actor ?? game.user?.character;
         if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
@@ -146,7 +148,7 @@ export default class CheckEnricher extends BaseEnricher {
 
         // Disambiguate between "INTelligence and INTimidate", then select skill/save/ability
         if (id === "int") data.type === "intimidate" ? actor.rollSkill(id, options) : actor.rollAbility(id, options);
-        else if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, options);
+        else if (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, options);
         else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, options);
         else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, options);
 

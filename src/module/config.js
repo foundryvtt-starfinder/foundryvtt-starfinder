@@ -1,5 +1,6 @@
 import BrowserEnricher from "./system/enrichers/browser.js";
 import CheckEnricher from "./system/enrichers/check.js";
+import ConditionEnricher from "./system/enrichers/condition.js";
 import IconEnricher from "./system/enrichers/icon.js";
 import TemplateEnricher from "./system/enrichers/template.js";
 
@@ -2634,7 +2635,8 @@ SFRPG.enricherTypes = {
     "Browser": BrowserEnricher,
     "Icon": IconEnricher,
     "Check": CheckEnricher,
-    "Template": TemplateEnricher
+    "Template": TemplateEnricher,
+    "Condition": ConditionEnricher
 };
 
 SFRPG.foundryDefaultIcons = {
