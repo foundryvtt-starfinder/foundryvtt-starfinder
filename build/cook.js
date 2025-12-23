@@ -82,8 +82,8 @@ export async function cook(options = {}) {
     directories = await fs.opendir(sourceDir);
     const idList = [];
     for await (const {name: directory} of directories) {
-        console.log(`Processing ${directory} (${itemSourceDir})`);
         const itemSourceDir = `${sourceDir}/${directory}`;
+        console.log(`Processing ${directory} (${itemSourceDir})`);
         const outputDir = `dist/packs/${directory}`;
 
         const loadFile = async (file) => {
