@@ -47,12 +47,12 @@ export async function cook(options = {}) {
     const allItems = [];
 
     const sourceDir = "src/items";
-    let directories = await fs.opendir(sourceDir);
+    const directories = await fs.readdir(sourceDir);
     const promises = [];
 
     const dirPromises = [];
 
-    for await (const { name: directory } of directories) {
+    for (const directory of directories) {
         const itemSourceDir = `${sourceDir}/${directory}`;
         const outputDir = `dist/packs/${directory}`;
 
@@ -64,6 +64,7 @@ export async function cook(options = {}) {
                 }
             }
 
+            console.log(`Processing ${directory} (${itemSourceDir})`);
             compendiumMap[directory] = {};
 
             const files = await fs.readdir(itemSourceDir);
@@ -76,22 +77,22 @@ export async function cook(options = {}) {
     await Promise.all(dirPromises);
 
     // Do smallest first, so large packs don't block
-    /*     directories.sort((a, b) => {
+    directories.sort((a, b) => {
         return compendiumMap[a].length - compendiumMap[b].length;
-    }); */
-    directories = await fs.opendir(sourceDir);
+    });
+
     const idList = [];
-    for await (const {name: directory} of directories) {
+    for (const directory of directories) {
         const itemSourceDir = `${sourceDir}/${directory}`;
-        console.log(`Processing ${directory} (${itemSourceDir})`);
         const outputDir = `dist/packs/${directory}`;
+        const parsedFiles = [];
 
         const loadFile = async (file) => {
             const filePath = `${itemSourceDir}/${file}`;
             let jsonInput = await fs.readFile(filePath);
             try {
                 jsonInput = JSON.parse(jsonInput);
-                // parsedFiles.push(jsonInput);
+                parsedFiles.push(jsonInput);
 
                 if (!limitToPack || directory === limitToPack) {
                 // sanitize the incoming JSON
