@@ -860,7 +860,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * @returns {Promise<RollResult?>}
      */
     async rollAttack(options = {}) {
-        options.disableDeductAmmo = options.disableDeductAmmo || options.event.ctrlKey || false;
+        options.disableDeductAmmo = options.disableDeductAmmo || options.event?.ctrlKey || false;
         const itemData = this.system;
         const actorData = this.actor.system;
         const isWeapon = ["weapon", "shield"].includes(this.type);
