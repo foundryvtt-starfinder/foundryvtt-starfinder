@@ -617,8 +617,10 @@ export class DiceSFRPG {
 
                 // Add descriptors
                 const descriptors = itemContext.entity.system.descriptors;
-                for (const [descriptor, isEnabled] of Object.entries(descriptors)) {
-                    if (isEnabled) tags.push({tag: descriptor, text: SFRPG.descriptors[descriptor]});
+                if (descriptors) {
+                    for (const [descriptor, isEnabled] of Object.entries(descriptors)) {
+                        if (isEnabled) tags.push({tag: descriptor, text: SFRPG.descriptors[descriptor]});
+                    }
                 }
 
                 // Add special materials
