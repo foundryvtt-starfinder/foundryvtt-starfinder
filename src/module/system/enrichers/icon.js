@@ -55,6 +55,4 @@ export default class IconEnricher extends BaseEnricher {
 
         return img;
     }
-
-    static hasListener = false;
 }

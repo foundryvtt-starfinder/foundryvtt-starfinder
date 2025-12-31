@@ -2,7 +2,7 @@ import { getAlienArchiveBrowser } from "../../packs/alien-archive-browser.js";
 import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
 import { getStarshipBrowser } from "../../packs/starship-browser.js";
-import BaseEnricher from "./base.js";
+import BaseEnricher, { getDatasetfromEvent } from "./base.js";
 
 /**
  * Open a specified compendium browser, optionally with pre-defined filters.
@@ -59,10 +59,12 @@ export default class BrowserEnricher extends BaseEnricher {
 
     }
 
-    static hasListener = true;
+    static listeners = {
+        "click": this.#clickListener
+    };
 
-    static listener(event) {
-        const data = event.currentTarget.dataset;
+    static #clickListener(event) {
+        const data = getDatasetfromEvent(event);
         let browser, filters;
 
         // Gotta double parse this to get rid of escape characters from the HTML.
