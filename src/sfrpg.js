@@ -590,6 +590,7 @@ Hooks.once("i18nInit", () => {
         "spellLevels",
         "spellPreparationModes",
         "starshipArcs",
+        "starshipQuadrants",
         "starshipRoles",
         "starshipSizes",
         "starshipSystemPatch",

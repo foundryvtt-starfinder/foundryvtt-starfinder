@@ -157,6 +157,20 @@ export default class RollContext {
     }
 
     /**
+     * Adds a "target" context to the rollContext for the purpose of evaluating attack roll hits
+     */
+    addTargetContext() {
+        if (game.user.targets.size > 0) {
+            const target = game.user.targets.first();
+            const targetActor = target.actor ?? null;
+            if (targetActor) {
+                this.addContext("target", target, targetActor.system);
+                targetActor.setupRollContexts(this);
+            }
+        }
+    }
+
+    /**
      * Given a formula `@tag`, resolve the formula using the object as roll data.
      * @param {RollData} object An object to be used for lookup.
      * @param {FormulaKey} key The formula to be used as a key on the object.
@@ -190,6 +204,10 @@ export default class RollContext {
             rollContext.setMainContext(dataOptions?.actorKey ?? "actor");
             actor.setupRollContexts(rollContext);
         }
+
+        // Add a "target" context if a target is selected
+        rollContext.addTargetContext();
+
         return rollContext;
     }
 
@@ -216,6 +234,9 @@ export default class RollContext {
 
             itemOwningActor.setupRollContexts(rollContext);
         }
+
+        // Add a "target" context if a target is selected
+        rollContext.addTargetContext();
 
         return rollContext;
     }

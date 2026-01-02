@@ -701,6 +701,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             actorContextKey: "combatant",
             parts: parts,
             event,
+            rollType: "initiative",
             title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
         });
 
