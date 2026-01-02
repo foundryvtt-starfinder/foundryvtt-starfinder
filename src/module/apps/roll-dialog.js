@@ -75,6 +75,9 @@ export default class RollDialog extends Dialog {
         if (contexts.allContexts.target) {
             this.hasTarget = true;
             this.target = contexts.allContexts.target;
+            if (this.target.entity.actor.type === "starship") {
+                this.targetQuadrant = "forward";
+            }
         } else {
             this.hasTarget = false;
             this.target = null;
