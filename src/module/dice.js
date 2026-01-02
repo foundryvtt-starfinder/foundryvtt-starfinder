@@ -260,7 +260,8 @@ export class DiceSFRPG {
             }
 
             // Roll Evaluation
-            const success = DiceSFRPG.evaluateRollVsTarget(roll, rollInfo, rollContext, rollOptions, difficulty);
+            const evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions, difficulty);
+            const success = DiceSFRPG.evaluateRollVsValue(roll, evalValue);
 
             let prependedQuadrantInfo = "";
             if (rollInfo.target.actorType === "starship" && rollInfo.target.quadrant) {
@@ -272,9 +273,11 @@ export class DiceSFRPG {
                 const hitLocalized = game.i18n.format("SFRPG.Rolls.HitCaps");
                 const missLocalized = game.i18n.format("SFRPG.Rolls.Miss");
                 if (success !== null) {
-                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `${prependedQuadrantInfo}${actionTargetSource} - ${success ? `${hitLocalized}` : `${missLocalized}`}!`} ) });
+                    const actionTargetString = `${prependedQuadrantInfo}${actionTargetSource} - ${success ? `${hitLocalized}` : `${missLocalized}`}!`;
+                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: actionTargetString} ) });
                 } else {
-                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `${prependedQuadrantInfo}${actionTargetSource}`} ) });
+                    const actionTargetString = `${prependedQuadrantInfo}${actionTargetSource}`;
+                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: actionTargetString} ) });
                 }
             } else if (difficulty) {
                 const successLocalized = game.i18n.format("SFRPG.Rolls.Success");
@@ -1002,13 +1005,27 @@ export class DiceSFRPG {
     /**
      * Evaluates whether a d20 roll is a success or a failure
      * @param   {SFRPGRoll}     roll            roll to evaluate
+     * @param   {Number}        evalValue       value to evaluate against
+     * @returns {Boolean}                       returns false for failure, true for success, null if not evaluated
+     */
+    static evaluateRollVsValue(roll, evalValue = null) {
+        if ((evalValue !== null) && (typeof roll.total === "number")) {
+            return roll.total >= evalValue;
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Gets the value that the roll total should be evaluated against
+     * @param   {SFRPGRoll}     roll            roll to evaluate
      * @param   {RollContext}   rollContext     the context under which to evaluate to roll
      * @param   {RollInfo}      rollInfo        output from buildRoll, including dialog selections
      * @param   {String}        actionTarget    the property on the target to evaluate against
      * @param   {Number}        difficulty      hardcoded value to evaluate over actionTarget (optional)
-     * @returns {Boolean}                       returns false for failure, true for success, null if not evaluated
+     * @returns {Number}                        the value to evaluate the roll against
      */
-    static evaluateRollVsTarget(roll, rollInfo, rollContext, rollOptions, difficulty = undefined) {
+    static getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions, difficulty = undefined) {
         const actionTarget = rollOptions.actionTarget;
         const targetActorType = rollInfo.target?.actorType;
         const targetQuadrant = rollInfo.target?.quadrant ?? "";
@@ -1016,7 +1033,7 @@ export class DiceSFRPG {
 
         if (typeof roll.total === "number") {
             if (difficulty) {
-                return roll.total >= difficulty;
+                return difficulty;
             } else if (rollContext.allContexts.target && validTargets.includes(actionTarget)) {
                 const targetData = rollContext.allContexts.target.data;
                 const evalValue = foundry.utils.getProperty(targetData, CONFIG.SFRPG.actionTargetPaths[actionTarget]);
@@ -1026,31 +1043,31 @@ export class DiceSFRPG {
                     case "other":
                         return null;
                     case "ac5":
-                        return roll.total >= 5;
+                        return 5;
                     case "ac15":
-                        return roll.total >= 15;
+                        return 15;
                     case "kac8":
                         if (evalValue) {
-                            return roll.total >= evalValue;
+                            return evalValue;
                         } else if (foundry.utils.getProperty(targetData, CONFIG.SFRPG.actionTargetPaths["kac"])) {
-                            return roll.total >= foundry.utils.getProperty(targetData, CONFIG.SFRPG.actionTargetPaths["kac"]) + 8;
+                            return foundry.utils.getProperty(targetData, CONFIG.SFRPG.actionTargetPaths["kac"]) + 8;
                         } else {
                             return null;
                         }
                     case "ac":
                         if (targetQuadrant) {
-                            return roll.total >= foundry.utils.getProperty(targetData, `quadrants.${targetQuadrant}.ac.value`);
+                            return foundry.utils.getProperty(targetData, `quadrants.${targetQuadrant}.ac.value`);
                         } else {
                             return null;
                         }
                     case "tl":
                         if (targetQuadrant) {
-                            return roll.total >= foundry.utils.getProperty(targetData, `quadrants.${targetQuadrant}.targetLock.value`);
+                            return foundry.utils.getProperty(targetData, `quadrants.${targetQuadrant}.targetLock.value`);
                         } else {
                             return null;
                         }
                     default:
-                        return roll.total >= evalValue;
+                        return evalValue;
                 }
             }
         }

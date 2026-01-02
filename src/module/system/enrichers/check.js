@@ -126,7 +126,7 @@ export default class CheckEnricher extends BaseEnricher {
         const iconSlug = (this.checkType === "ability") ? CheckNameHelper.longFormNameAbilities(this.args.type) : CheckNameHelper.longFormName(this.args.type);
 
         const displayDC = this.args.displayDC !== undefined ? (this.args.displayDC === 'true' ? true : false) : (dcValue ? true : false);
-        a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${displayDC ? `<span class="dc-value">DC ${a.dataset.dc} </span>` : ''}${a.innerHTML}`;
+        a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${(displayDC || game.user.isGM) ? `<span class="dc-value">DC ${a.dataset.dc} </span>` : ''}${a.innerHTML}`;
 
         return a;
 
