@@ -1,3 +1,85 @@
+# 0.29.2 - Damage Revisited
+This update overhauls the Damage Reduction/Energy Resistance system to support all types present in the game.
+
+## Breaking Changes
+
+- Custom DR/ER values should no longer be entered in the "Notes" section of their modifier; instead use the new Custom Value field
+
+## Core System Improvements
+DR/ER updates by @ian612
+
+- A new Custom Value field has been added to modifiers, which appears for relevant effect types (such as DR/ER)
+- Weapon Type data has been added for all items that support attack actions, such that weapon specialization can be applied to them
+- Items with actions now support descriptors, such that alignments and other descriptors can be applied to them
+- Damage from the following is automatically recognized as magic: Magic items, Hybrid items, Spells, spell attacks, items with equipped fusions
+- An item can also manually be set as magic so its damage is recognized as magic
+- Damage Reduction options for the 3 kinetic damage types, 4 alignments, and magic, force, and radiation have been added in addition to special materials
+- Multiple damage types/properties can now be set with and/or joining syntax so that one of a set or all are necessary to overcome the DR
+
+## Bugfixes
+
+- Item saving throw bonus calculations corrected by @danimrath
+- Items on starship actors no longer throw errors when opened due to bugs in the item saving throw calculation by @danimrath
+
+## Data Entry & Localization
+
+- All compendium actors and items using the previous DR format have been updated for compatibility with the new format
+
+# 0.29.1.3
+This is another hotfix to resolve a data model issue preventing GM Notes on items from saving correctly, and to fix some styling issues with inline checks
+
+## Bugfixes
+
+- GM Notes are now correctly defined in the data model for items and actors that have them
+- Inline Checks now respect the `displayDC` option, and correctly display the DC by default on inline checks if it is provided
+- When sent to chat, inline checks no longer display a redundant "send to chat" button
+
+# 0.29.1.2
+Another quick hotfix to resolve a data model error preventing NPC saves from being negative.
+
+## Bugfixes
+
+- The minimum value for NPC saves is now correctly set to -5, not 0 as it was previously
+  - NPC actors in the compendiums that had their saves increased to 0 by this error have been corrected back to old values
+
+# 0.29.1.1
+This is a hotfix release to resolve a couple of small bugs.
+
+## Bugfixes
+
+- The value `@item.properties.operative` and other properties, if not present in item data, should now resolve to `0` in formulas
+  - This fixes weapon specialization not calculating damage bonuses correctly
+- Scaling cantip data settings are restored to spells that use them
+  - If you have the spells Energy Ray, Hazard, Injury Echo, or Telekinetic Projectile, you'll need to delete them and re-add from the compendiums
+- AC bonuses from armor and armor-bonus-granting modifiers now stack correctly, with only the highest value used
+
+# 0.29.1
+This release cleans up some more things on the backend and adds a couple of new features and bugfixes that were enabled by the implementation of the system data model in 0.29.0. Thanks to @levirak, @danimrath, and @ian612 for their contributions to this release, and to the community for filing bug reports and feature requests!
+
+## Deprecation Notice
+
+- In an upcoming version, we will be removing Starfinder's implementation of compendium art mapping since Foundry now handles this natively in a more robust manner.
+
+## Core System Improvements
+
+- Features (class features, feats, etc.) can now be set up to execute a macro on activation and/or deactivation by @levirak
+- The trait selector has been rewritten from the ground up to be more user friendly when selecting languages, proficiencies, and weapon properties by @ian612
+- Weapon properties can now be assigned a value, such as for the Boost/Blast properties by @ian612
+- Power Armor now correctly affects bulk, speed, and attributes based on whether it's equipped and powered by @ian612
+
+## Bugfixes
+
+- Errors caused by null data values fixed in a couple places by @danimrath
+- Inline intelligence and intimidate checks are now handled correctly by @ian612
+- Fix the damage modifier dialog being broken by @ian612
+
+## Data Entry and Localization
+
+- Power Drain Vanguard Discipline added by @ian612
+- The Gear Clamp item is now a container item type, allowing it to hold an item as per its description by @ian612
+- Extra Unarmed Attack removed from Raia Iconic by @ian612
+- Empty/false properties & descriptors & materials have been stripped from compendium files, reducing their size by @ian612
+
 # 0.29.0.1
 This is a small hotfix to prevent some errors in tooltip calculations. See Version 0.29.0 for the most recent set of major changes.
 

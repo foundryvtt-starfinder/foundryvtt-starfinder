@@ -196,8 +196,14 @@ export default class BaseEnricher {
      */
     static repostListener(event) {
         event.stopPropagation();
+        const element = event.currentTarget.parentElement.cloneNode(true);
+        for (const child of element.children) {
+            if (child.classList.contains("fa-comment-alt") || child.classList.contains("dc-value")) {
+                child.style.display = 'none';
+            }
+        }
 
-        return ChatMessage.create({content: event.currentTarget.parentElement.outerHTML});
+        return ChatMessage.create({content: element.outerHTML});
     }
 
     /** ---------

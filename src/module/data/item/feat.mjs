@@ -60,10 +60,6 @@ export default class SFRPGItemFeat extends SFRPGItemBase {
                     required: true
                 })
             }, {required: false}),
-            descriptors: new fields.TypedObjectField(
-                new fields.BooleanField({initial: false}),
-                {validateKey: (key) => key in CONFIG.SFRPG.descriptors}
-            ),
             details: new fields.SchemaField({
                 category: new fields.StringField({
                     initial: "feat",

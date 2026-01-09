@@ -42,10 +42,6 @@ export default class SFRPGItemSpell extends SFRPGItemBase {
                 initial: false,
                 label: "SFRPG.Items.Spell.Concentration"
             }),
-            descriptors: new fields.TypedObjectField(
-                new fields.BooleanField({initial: false}),
-                {validateKey: (key) => key in CONFIG.SFRPG.descriptors}
-            ),
             dismissible: new fields.BooleanField({
                 initial: false,
                 label: "SFRPG.Items.Spell.Dismissible"
@@ -99,6 +95,16 @@ export default class SFRPGItemSpell extends SFRPGItemBase {
                 prepared: new fields.BooleanField({
                     initial: false,
                     label: "SFRPG.Items.Spell.Prepared"
+                })
+            }),
+            scaling: new fields.SchemaField({
+                d3: new fields.BooleanField({
+                    initial: false,
+                    required: true
+                }),
+                d6: new fields.BooleanField({
+                    initial: false,
+                    required: true
                 })
             }),
             school: new fields.StringField({

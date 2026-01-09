@@ -133,6 +133,9 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         const itemData = this.item.system;
         data.placeholders = this.item.flags.placeholders || {};
 
+        // Item magic damage status
+        data.hasMagicDamage = data.item.hasMagicDamage;
+
         // Only physical items have hardness, hp, and their own saving throw when attacked.
         if (data.isPhysicalItem) {
             let itemLevel = this.parseNumber(itemData.level, 1);
@@ -311,15 +314,14 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     _computeItemSaveBonus() {
         // TODO: Move this into the item's calculation rather than calculating on the sheet
         const parentItem = this.item;
-        const parentActor = parentItem.actor;
+        const parentActorAbilities = parentItem.actor?.system?.attributes;
         const itemLevel = parentItem.system.level;
-        if (parentActor) {
-            const ActorAbilities = parentActor.system.abilities;
-            return `[F: ${Math.max(itemLevel, ActorAbilities.con.mod, 0)}, R: ${Math.max(itemLevel, ActorAbilities.dex.mod, 0)}, W: ${Math.max(itemLevel, ActorAbilities.dex.mod, 0)}]`;
+        if (parentActorAbilities) {
+            return `[F: ${Math.max(itemLevel, parentActorAbilities.fort.bonus, 0)}, R: ${Math.max(itemLevel, parentActorAbilities.reflex.bonus, 0)}, W: ${Math.max(itemLevel, parentActorAbilities.will.bonus, 0)}]`;
         } else if (itemLevel < 1) {
             return 0;
         } else {
-            return `Max(${itemLevel}, Mod)`;
+            return `${itemLevel}`;
         }
     }
 

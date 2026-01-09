@@ -68,14 +68,33 @@ export class SFRPGDamage {
         return this.healSettings !== null;
     }
 
-    negatesDamageReduction(damageReductionNegation) {
-        if (this.properties.includes(damageReductionNegation)) {
+    negatesDamageReduction(damageReductionNegation, damageType) {
+        // Change the damage match condition if multiple kinetic damage types are included in an && operator
+        const damageMatch = (drNegationArray, drNegation, damageType) => {
+            const b = drNegationArray.includes('bludgeoning') ? 1 : 0;
+            const p = drNegationArray.includes('piercing') ? 1 : 0;
+            const s = drNegationArray.includes('slashing') ? 1 : 0;
+            if (b + p + s >= 2) {
+                return this.damageTypes.includes(drNegation);
+            } else {
+                return damageType === drNegation;
+            }
+        };
+
+        // For && separator, return true if all values match; for || separator, return true if any values match
+        if (damageReductionNegation.includes('&&')) {
+            const drNegationArray = damageReductionNegation.split('&&').map(type => type.trim().toLowerCase());
+            for (const drNegation of drNegationArray) {
+                if (!(this.properties.includes(drNegation) || damageMatch(drNegationArray, drNegation, damageType))) return false;
+            }
             return true;
+        } else {
+            const drNegationArray = damageReductionNegation.split('||').map(type => type.trim().toLowerCase());
+            for (const drNegation of drNegationArray) {
+                if (this.properties.includes(drNegation) || damageType === drNegation) return true;
+            }
+            return false;
         }
-        if (this.damageTypes.includes(damageReductionNegation)) {
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -260,6 +279,20 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                         properties.push(material);
                     }
                 }
+            }
+
+            const chatDescriptors = chatMessage.flags.descriptors;
+            if (chatDescriptors) {
+                for (const [descriptor, enabled] of Object.entries(chatDescriptors)) {
+                    if (enabled) {
+                        properties.push(descriptor);
+                    }
+                }
+            }
+
+            const chatHasMagicDamage = chatMessage.flags.hasMagicDamage?.value;
+            if (chatHasMagicDamage) {
+                properties.push("magic");
             }
         }
 
@@ -479,7 +512,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const kineticDamageTypes = ['bludgeoning', 'piercing', 'slashing'];
         if (kineticDamageTypes.includes(damageType)) {
             for (const drEntry of damageMitigation.damageReduction) {
-                const isNegated = (!damage || damage.negatesDamageReduction(drEntry.negatedBy));
+                const isNegated = (!damage || damage.negatesDamageReduction(drEntry.negatedBy, damageType));
                 if (!isNegated) {
                     return drEntry.value;
                 }

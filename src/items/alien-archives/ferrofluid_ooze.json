@@ -448,44 +448,7 @@
           "unidentified": "",
           "value": "<p>The creature has no Intelligence score or modifier and is immune to @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Mind-affecting effects}. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10(+0).</p>\n<p><em>Format</em>: <strong>Other Abilities</strong> mindless.</p>\n<p><em>Guidelines</em>: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>"
         },
-        "descriptors": {
-          "acid": false,
-          "air": false,
-          "calling": false,
-          "chaotic": false,
-          "charm": false,
-          "cold": false,
-          "compulsion": false,
-          "creation": false,
-          "curse": false,
-          "darkness": false,
-          "death": false,
-          "disease": false,
-          "earth": false,
-          "electricity": false,
-          "emotion": false,
-          "evil": false,
-          "fear": false,
-          "fire": false,
-          "force": false,
-          "good": false,
-          "healing": false,
-          "language-dependent": false,
-          "lawful": false,
-          "light": false,
-          "mind-affecting": false,
-          "pain": false,
-          "poison": false,
-          "polymorph": false,
-          "radiation": false,
-          "scrying": false,
-          "sense-dependent": false,
-          "shadow": false,
-          "sonic": false,
-          "summoning": false,
-          "teleportation": false,
-          "water": false
-        },
+        "descriptors": {},
         "details": {
           "category": "universalCreatureRule",
           "combat": false,
@@ -696,7 +659,7 @@
         }
       },
       "will": {
-        "base": 0
+        "base": -1
       }
     },
     "conditions": {
@@ -775,6 +738,7 @@
         "name": "Damage Reduction",
         "type": "untyped",
         "condition": "",
+        "customValue": "piercing || slashing",
         "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
@@ -785,7 +749,7 @@
         "notes": "",
         "source": "",
         "subtab": "permanent",
-        "valueAffected": "piercing or slashing"
+        "valueAffected": "custom"
       },
       {
         "_id": "c6617ce5-4889-4482-9ef5-24784899f369",

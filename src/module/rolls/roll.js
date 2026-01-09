@@ -197,9 +197,9 @@ export default class SFRPGRoll extends Roll {
         }
     }
 
-    static replaceFormulaData(formula, data, {missing, warn = false} = {}) {
+    static replaceFormulaData(formula, data, options = {missing: 0, warn: true}) {
         formula = SFRPGRoll._insertValueProperty(formula, data);
-        return super.replaceFormulaData(formula, data, {missing, warn = false} = {});
+        return super.replaceFormulaData(formula, data, options);
     }
 
     /**

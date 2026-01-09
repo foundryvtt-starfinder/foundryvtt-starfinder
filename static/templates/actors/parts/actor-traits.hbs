@@ -124,27 +124,27 @@
     {{!-- Damage Reduction --}}
     <div class="form-group damage-reduction" {{createTippy title="SFRPG.Damage.Reduction" subtitle="@traits.damageMitigation.damageReductionFirst.value<br/>@traits.damageMitigation.damageReductionFirst.negatedBy" tooltips=system.traits.damageMitigation.damageReductionTooltip}}>
         <label>{{localize "SFRPG.Damage.Reduction"}}</label>
-        {{#if system.traits.damageMitigation.damageReductionFirst}}
-            {{#with system.traits.damageMitigation.damageReductionFirst}}
-            <span type="text" style="text-align: center;">{{value}}</span>
-            <span class="sep">/</span>
-            <span type="text" style="text-align: center;">
-                {{#if (eq negatedBy "")}}
-                    -
-                {{else}}
-                    {{#if (sfrpg "damageReductionTypes" negatedBy)}}
-                        {{sfrpg "damageReductionTypes" negatedBy}}
-                    {{else}}
-                        {{negatedBy}}
-                    {{/if}}
-                {{/if}}
-            </span>
-            {{/with}}
+        {{#if system.traits.damageMitigation.displayAsMultiple}}
+            <span type="text" style="text-align: center;">{{localize "SFRPG.Damage.MultipleDR"}}</span>
         {{else}}
-        <span type="text" style="text-align: center;">0</span>
-        <span class="sep">/</span>
-        <span type="text" style="text-align: center;">-</span>
-    {{/if}}
+            {{#if system.traits.damageMitigation.damageReductionFirst}}
+                {{#with system.traits.damageMitigation.damageReductionFirst}}
+                <span type="text" style="text-align: center;">{{value}}</span>
+                <span class="sep">/</span>
+                <span type="text" style="text-align: center;">
+                    {{#if (eq negatedBy "")}}
+                        -
+                    {{else}}
+                        {{negatedByDisplay}}
+                    {{/if}}
+                </span>
+                {{/with}}
+            {{else}}
+                <span type="text" style="text-align: center;">0</span>
+                <span class="sep">/</span>
+                <span type="text" style="text-align: center;">-</span>
+            {{/if}}
+        {{/if}}
     </div>
 
     {{!-- Energy Resistance --}}

@@ -88,6 +88,10 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         blank: true,
                         label: "SFRPG.ActorSheet.Biography.GenderPronouns"
                     }),
+                    gmNotes: new fields.HTMLField({
+                        initial: "",
+                        blank: true
+                    }),
                     height: new fields.StringField({
                         initial: "",
                         blank: true,
@@ -107,7 +111,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         initial: "",
                         blank: true
                     }),
-                    value: new fields.StringField({
+                    value: new fields.HTMLField({
                         initial: "",
                         blank: true
                     }),
@@ -462,6 +466,11 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     min: 0,
                     integer: true,
                     nullable: false,
+                    required: false
+                }),
+                notes: new fields.StringField({
+                    initial: "",
+                    blank: true,
                     required: false
                 }),
                 subname: new fields.StringField({
