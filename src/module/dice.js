@@ -273,11 +273,13 @@ export class DiceSFRPG {
                 const hitLocalized = game.i18n.format("SFRPG.Rolls.HitCaps");
                 const missLocalized = game.i18n.format("SFRPG.Rolls.Miss");
                 if (success !== null) {
-                    const actionTargetString = `${prependedQuadrantInfo}${actionTargetSource} - ${success ? `${hitLocalized}` : `${missLocalized}`}!`;
-                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: actionTargetString} ) });
+                    const actionTarget = `${prependedQuadrantInfo}${actionTargetSource}`;
+                    const targetValue = "tmp";
+                    const actionResult = success ? hitLocalized : missLocalized;
+                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue, actionResult}) });
                 } else {
-                    const actionTargetString = `${prependedQuadrantInfo}${actionTargetSource}`;
-                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: actionTargetString} ) });
+                    const actionTarget = `${prependedQuadrantInfo}${actionTargetSource}`;
+                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget} ) });
                 }
             } else if (difficulty) {
                 const successLocalized = game.i18n.format("SFRPG.Rolls.Success");
@@ -324,9 +326,6 @@ export class DiceSFRPG {
                 };
 
                 messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
-                if (rollOptions?.actionTarget) {
-                    messageData.content = DiceSFRPG.appendTextToRoll(messageData.content, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: rollOptions.actionTargetSource[rollOptions.actionTarget]}));
-                }
 
                 // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
                 ChatMessage.create(messageData, { rollMode: rollInfo.mode });
