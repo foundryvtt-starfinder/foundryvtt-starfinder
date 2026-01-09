@@ -268,23 +268,22 @@ export class DiceSFRPG {
                 prependedQuadrantInfo = `${rollInfo.target.quadrantName} `;
             }
 
+            const successLocalized = rollType === "attack" ? game.i18n.format("SFRPG.Rolls.HitCaps") : game.i18n.format("SFRPG.Rolls.SuccessCaps");
+            const failureLocalized = rollType === "attack" ? game.i18n.format("SFRPG.Rolls.MissCaps") : game.i18n.format("SFRPG.Rolls.FailureCaps");
             if (rollOptions?.actionTarget) {
                 const actionTargetSource = rollOptions.actionTargetSource[rollOptions.actionTarget];
-                const hitLocalized = game.i18n.format("SFRPG.Rolls.HitCaps");
-                const missLocalized = game.i18n.format("SFRPG.Rolls.Miss");
                 if (success !== null) {
                     const actionTarget = `${prependedQuadrantInfo}${actionTargetSource}`;
-                    const targetValue = "tmp";
-                    const actionResult = success ? hitLocalized : missLocalized;
-                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue, actionResult}) });
+                    const actionResult = `<span class="${success ? "success" : "fail"}">${success ? successLocalized : failureLocalized}</span>`;
+                    tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue: evalValue, actionResult}) });
                 } else {
                     const actionTarget = `${prependedQuadrantInfo}${actionTargetSource}`;
                     tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget} ) });
                 }
             } else if (difficulty) {
-                const successLocalized = game.i18n.format("SFRPG.Rolls.Success");
-                const failureLocalized = game.i18n.format("SFRPG.Rolls.Failure");
-                tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget: `DC ${displayDC ? difficulty : "??"} - ${success ? `${successLocalized}` : `${failureLocalized}`}!`}) });
+                const actionTarget = game.i18n.format("SFRPG.DC");
+                const actionResult = `<span class="${success ? "success" : "fail"}">${success ? successLocalized : failureLocalized}</span>`;
+                tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue: evalValue, actionResult}) });
             }
 
             // Chat Cards
