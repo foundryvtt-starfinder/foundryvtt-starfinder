@@ -468,6 +468,11 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     nullable: false,
                     required: false
                 }),
+                notes: new fields.StringField({
+                    initial: "",
+                    blank: true,
+                    required: false
+                }),
                 subname: new fields.StringField({
                     initial: "",
                     blank: true,
