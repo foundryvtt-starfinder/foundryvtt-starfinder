@@ -62,7 +62,8 @@ export default function(engine) {
 
                     const rollResult = DiceSFRPG.resolveFormulaWithoutDice(dcFormula, rollContext, {logErrors: false});
                     if (!rollResult.hadError) {
-                        item.labels.save = `DC ${rollResult.total >= 0 ? rollResult.total : ""} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+                        item.labels.dcValue = rollResult.total >= 0 ? rollResult.total : "";
+                        item.labels.save = `DC ${item.labels.dcValue} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
                         item.labels.saveFormula = dcFormula;
                         computedSave = true;
                     } else {
