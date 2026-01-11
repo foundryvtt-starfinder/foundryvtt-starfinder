@@ -79,7 +79,7 @@ export class ItemCollectionSheet extends DocumentSheet {
     /**
      * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
      */
-    getData() {
+    async getData() {
         const data = super.getData();
         data.isCharacter = true;
         data.isOwner = game.user.isGM;
@@ -111,6 +111,8 @@ export class ItemCollectionSheet extends DocumentSheet {
             item.totalWeight = item.totalWeight < 1 && item.totalWeight > 0
                 ? "L"
                 : item.totalWeight === 0 ? "-" : Math.floor(item.totalWeight);
+
+            item.expanded = item.expanded || false;
         }
 
         data.items = [];
@@ -130,12 +132,26 @@ export class ItemCollectionSheet extends DocumentSheet {
             }
         }
 
+        // Prepare summary HTML for expanded items
+        for (const itemData of data.items) {
+            const item = itemData.item;
+            if (item.expanded) {
+                const chatData = await this.getChatData(item, { secrets: true, rollData: item });
+                const div = $(`<div class="item-summary">${chatData.system.description.value}</div>`);
+                const props = $(`<div class="item-properties"></div>`);
+                chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tooltip='" + p.tooltip + "'") : ""}>${p.name}</span>`));
+                div.append(props);
+                item.summaryHTML = div[0].outerHTML;
+            }
+        }
+
         data.itemCollection = tokenData;
 
         if (data.itemCollection.locked && !game.user.isGM) {
             this.close();
         }
 
+        this.data = data;
         return data;
     }
 
@@ -191,22 +207,31 @@ export class ItemCollectionSheet extends DocumentSheet {
         const li = $(event.currentTarget).parents('.item');
         const itemId = li.attr("data-item-id");
         const item = this.itemCollection.flags.sfrpg.itemCollection.items.find(x => x._id === itemId);
-        const chatData = await this.getChatData(item, { secrets: true, rollData: item });
+        const isExpanded = item.expanded || false;
 
-        if (li.hasClass('expanded')) {
+        if (isExpanded) {
             const summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
+            li.removeClass('expanded');
+            item.expanded = false;
         } else {
+            const chatData = await this.getChatData(item, { secrets: true, rollData: item });
             const div = $(`<div class="item-summary">${chatData.system.description.value}</div>`);
             Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to newly added HTML.
             const props = $(`<div class="item-properties"></div>`);
             chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tooltip='" + p.tooltip + "'") : ""}>${p.name}</span>`));
-
             div.append(props);
             li.append(div.hide());
             div.slideDown(200, function() { /* noop */ });
+            li.addClass('expanded');
+            item.expanded = true;
         }
-        li.toggleClass('expanded');
+
+        // Update the item in the collection
+        const newItems = [...this.itemCollection.flags.sfrpg.itemCollection.items];
+        const index = newItems.findIndex(x => x._id === itemId);
+        newItems[index] = item;
+        await this.itemCollection.update({"flags.sfrpg.itemCollection.items": newItems});
     }
 
     _onItemEdit(event) {
