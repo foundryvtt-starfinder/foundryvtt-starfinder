@@ -1,4 +1,5 @@
 import AbilityTemplate from "../../canvas/ability-template.js";
+import {ItemSFRPG} from "../item.js";
 
 /**
  * @import { ActorSFRPG } from "../../actor/actor.js"
@@ -106,7 +107,7 @@ export const ItemChatMixin = (superclass) => class extends superclass {
             if (scene) {
                 const tokenData = scene.getEmbeddedDocument("Token", tokenId);
                 if (tokenData) {
-                    const token = new Token(tokenData);
+                    const token = new foundry.canvas.placeables.Token(tokenData);
                     chatCardActor = token.actor;
                 }
             }
