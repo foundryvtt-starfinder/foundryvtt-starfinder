@@ -170,6 +170,11 @@ export default class RollTree {
 
         if (options.skipUI) {
             result = RollTree.buildRollSync(formula, contexts, options);
+            result.target = {actorType: contexts.allContexts?.target?.entity?.actor?.type ?? ""};
+            if (rollType === "gunnery" && result.target.actorType === "starship") {
+                result.target.quadrant = 'forward';
+                result.target.quadrantName = CONFIG.SFRPG.starshipQuadrants['forward'];
+            }
         } else {
             const tree = new RollTree(formula, contexts, options);
             const allRolledMods = tree.getRolledModifiers();
