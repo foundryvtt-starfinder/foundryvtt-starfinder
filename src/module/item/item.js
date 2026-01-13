@@ -1599,8 +1599,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /* -------------------------------------------- */
 
     /**
-     * Place an attack roll using an item (weapon, feat, spell, or equipment)
-     * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
+     * Place an roll using an item based on an "Other Formula"
+     * Rely upon the DiceSFRPG.createRoll logic for the core implementation
      */
     async rollFormula(options = {}) {
         const itemData = this.system;
