@@ -590,6 +590,7 @@ Hooks.once("i18nInit", () => {
         "spellLevels",
         "spellPreparationModes",
         "starshipArcs",
+        "starshipQuadrants",
         "starshipRoles",
         "starshipSizes",
         "starshipSystemPatch",
@@ -752,6 +753,11 @@ async function migrateOldContainers() {
 Hooks.on("renderChatMessageHTML", (app, html, data) => {
     DiceSFRPG.highlightCriticalSuccessFailure(app, $(html), data);
     DiceSFRPG.addDamageTypes(app, $(html), data);
+
+    const gmOnlyText = html.querySelector('.gm-only');
+    if (!game.user.isGM) {
+        gmOnlyText.style.display = "none";
+    }
 
     if (game.settings.get("sfrpg", "autoCollapseItemCards")) {
         const cardContent = html.querySelector('.card-content');
