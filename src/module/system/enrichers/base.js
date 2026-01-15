@@ -198,8 +198,13 @@ export default class BaseEnricher {
         event.stopPropagation();
         const element = event.currentTarget.parentElement.cloneNode(true);
         for (const child of element.children) {
-            if (child.classList.contains("fa-comment-alt") || child.classList.contains("dc-value")) {
+            if (child.classList.contains("fa-comment-alt")) {
                 child.style.display = 'none';
+            }
+            if (child.classList.contains("dc-value")) {
+                if (element.dataset?.displayDC === undefined || element.dataset?.displayDC === 'false') {
+                    child.style.display = 'none';
+                }
             }
         }
 

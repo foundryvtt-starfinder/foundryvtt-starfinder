@@ -1,3 +1,28 @@
+# 0.30.0 - Targets Everywhere!
+This new system version adds new features to Starfinder 1e supporting Foundry's "targeting" system, including evaluation of rolls against targets and success/failure/hit/miss display for attack rolls, checks, and saves.
+
+## Breaking Changes
+
+- Damage type, special materials, descriptors, and other chat message flags are now namespaced properly under `flags.sfrpg`
+- Due to flag formatting changes, right-click context menus on old chat messages will no longer function correctly and should be cleared when possible
+- Inline roll `displayDifficulty` property changed to `displayDC` for consistency across codebase
+
+## Core System Improvements
+- Attack Roll/Check/Save evaluation added to the system, automatically determining whether a roll is a success or failure by @ian612
+    - Success/Failure is displayed on the resulting chat card, with GMs also seeing the value the roll is compared against
+    - Streamlining of previously implemented journal inline check buttons to use this same system
+    - See the [Wiki page](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/wiki/Common-Actions-In-Starfinder) for details on how to use this system
+- Formulas can now reference data on targets to set values (e.g. `@target.details.level.value` would return the current target's lavel/CR) by @ian612
+
+## Bugfixes
+- Errors caused by lack of an `event` being passed to the `item.rollAttack()` method (such as by modules) no longer cause errors by @danimrath
+- Custom chat cards now correctly get the generating token's image for display on the cards
+- Starship damage rolls work correctly again, by skipping descriptor checks if the `descriptor` object is missing from an item by @danimrath
+- Skill notes now save correctly again by @ian612
+
+## Data Entry & Localization
+- Acid Cannon Items have their descriptions added and HP corrected by @TheWaywardAldori
+
 # 0.29.2 - Damage Revisited
 This update overhauls the Damage Reduction/Energy Resistance system to support all types present in the game.
 

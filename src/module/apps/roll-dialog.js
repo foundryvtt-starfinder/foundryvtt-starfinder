@@ -25,9 +25,10 @@ export default class RollDialog extends Dialog {
      * @param {string} params.mainDie The primary die type used in this roll.
      * @param {DamagePart[]} [params.parts] An array of DamageParts.
      * @param {Object} [params.dialogData] Any additional data being passed to the dialog.
+     * @param {String} params.rollType The type of roll being made
      * @param {DialogOptions} [params.options] Any additional options being passed to the dialog.
      */
-    constructor({ rollTree, formula, contexts, availableModifiers, mainDie, parts = [], dialogData = {}, options = {} }) {
+    constructor({ rollTree, formula, contexts, availableModifiers, mainDie, parts = [], dialogData = {}, rollType = "roll", options = {} }) {
         super(dialogData, options);
 
         this.rollTree = rollTree;
@@ -69,6 +70,22 @@ export default class RollDialog extends Dialog {
             }
         }
 
+        /** Prepare Target */
+        this.targetQuadrant = "";
+        if (contexts.allContexts.target) {
+            this.hasTarget = true;
+            this.target = contexts.allContexts.target;
+            if (this.target.entity.actor.type === "starship") {
+                this.targetQuadrant = "forward";
+            }
+        } else {
+            this.hasTarget = false;
+            this.target = null;
+        }
+
+        /** Set roll type */
+        this.rollType = rollType;
+
         /** Returned values */
         this.additionalBonus = "";
         this.rollMode = game.settings.get("core", "rollMode");
@@ -99,6 +116,11 @@ export default class RollDialog extends Dialog {
         data.hasSelectors = this.contexts.selectors && this.contexts.selectors.length > 0;
         data.selectors = this.selectors;
         data.contexts = this.contexts;
+        data.rollType = this.rollType;
+        data.hasTarget = this.hasTarget;
+        data.target = this.target;
+        data.targetQuadrant = this.targetQuadrant;
+        data.targetOwner = this.target?.entity?.isOwner ?? null;
         data.damageGroups = this.damageGroups;
 
         for (const modifier of data.availableModifiers) {
@@ -152,6 +174,30 @@ export default class RollDialog extends Dialog {
             ].filter(Boolean).join(' + ') || '0';
         }
 
+        if (this.hasTarget) {
+            data.targetTooltip = "";
+            switch (this.target.entity.actor.type) {
+                case "character":
+                    data.targetTooltip = `<strong>EAC:</strong> ${this.target.data.attributes.eac.value}<br/><strong>KAC:</strong> ${this.target.data.attributes.kac.value}<br/><strong>KAC+8:</strong> ${this.target.data.attributes.cmd.value}`;
+                    break;
+                case "npc2":
+                    data.targetTooltip = `<strong>EAC:</strong> ${this.target.data.attributes.eac.value}<br/><strong>KAC:</strong> ${this.target.data.attributes.kac.value}`;
+                    break;
+                case "drone":
+                    data.targetTooltip = `<strong>EAC:</strong> ${this.target.data.attributes.eac.value}<br/><strong>KAC:</strong> ${this.target.data.attributes.kac.value}<br/><strong>KAC+8:</strong> ${this.target.data.attributes.cmd.value}`;
+                    break;
+                case "starship":
+                    data.targetTooltip = `<strong>Forward AC:</strong> ${this.target.data.quadrants.forward.ac.value}<br/><strong>Port AC:</strong> ${this.target.data.quadrants.port.ac.value}<br/><strong>Starboard AC:</strong> ${this.target.data.quadrants.starboard.ac.value}<br/><strong>Aft AC:</strong> ${this.target.data.quadrants.aft.ac.value}`;
+                    break;
+                case "vehicle":
+                    data.targetTooltip = `<strong>EAC:</strong> ${this.target.data.attributes.eac.value}<br/><strong>KAC:</strong> ${this.target.data.attributes.kac.value}`;
+                    break;
+                case "hazard":
+                    data.targetTooltip = `<strong>EAC:</strong> ${this.target.data.attributes.eac.value}<br/><strong>KAC:</strong> ${this.target.data.attributes.kac.value}`;
+                    break;
+            }
+        }
+
         return data;
     }
 
@@ -174,6 +220,11 @@ export default class RollDialog extends Dialog {
 
         const selectorCombobox = html.find('.selector');
         selectorCombobox.on('change', this._onSelectorChanged.bind(this));
+
+        const targetQuadrantSelector = html.find('.quadrant-select');
+        targetQuadrantSelector.on('change', this._onTargetQuadrantSelect.bind(this));
+
+        html.find("div.target.owned").on("click", (event) => this._onTargetClick(event));
 
         html.find('input[class="damageSection"][type="radio"]').on('change', this._onDamageSectionRadio.bind(this)); // Handle radios turning each other off
         html.find('input[class="damageSection"][type="checkbox"]').on('change', this._onDamageSectionCheckbox.bind(this));
@@ -208,6 +259,18 @@ export default class RollDialog extends Dialog {
 
         this.position.height = "auto";
         this.render(false);
+    }
+
+    async _onTargetClick(event) {
+        event.preventDefault();
+        const id = event.currentTarget.dataset.targetId;
+        const actor = game.scenes.current.tokens.get(id).actor;
+
+        actor.sheet.render(true);
+    }
+
+    async _onTargetQuadrantSelect(event) {
+        this.targetQuadrant = event.target.value;
     }
 
     _onDamageSectionRadio(event) {
@@ -248,7 +311,7 @@ export default class RollDialog extends Dialog {
     async close(options) {
         /** Fire callback, then delete, as it would get called again by Dialog#close. */
         if (this.data.close) {
-            this.data.close(this.rolledButton, this.rollMode, this.additionalBonus, this.parts);
+            this.data.close(this.rolledButton, this.rollMode, this.additionalBonus, this.parts, this.targetQuadrant);
             delete this.data.close;
         }
 
@@ -263,7 +326,8 @@ export default class RollDialog extends Dialog {
      * @param {RollContext} contexts
      * @param {Modifier[]} availableModifiers
      * @param {string} mainDie
-     * @param {DialogOptions} options
+     * @param {DialogOptions} options.dialogOptions
+     * @param {String} options.rollType             The type of roll
      * @returns {Promise<{button: string, rollMode: string, bonus: string, parts: DamagePart[]}>}
      */
     static showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
@@ -272,20 +336,21 @@ export default class RollDialog extends Dialog {
             const defaultButton = options.defaultButton || (Object.values(buttons)[0].id ?? Object.values(buttons)[0].label);
 
             const dlg = new RollDialog({
-                rollTree,
-                formula,
-                contexts,
                 availableModifiers,
-                mainDie,
-                parts: options.parts,
+                contexts,
                 dialogData: {
                     title: options.title || game.i18n.localize("SFRPG.Rolls.Dice.Roll"),
                     buttons: buttons,
                     default: defaultButton,
-                    close: (button, rollMode, bonus, parts) => {
-                        resolve({button, rollMode, bonus: bonus?.trim(), parts});
+                    close: (button, rollMode, bonus, parts, targetQuadrant) => {
+                        resolve({button, rollMode, bonus: bonus?.trim(), parts, targetQuadrant});
                     }
                 },
+                formula,
+                mainDie,
+                parts: options.parts,
+                rollTree,
+                rollType: options.rollType,
                 options: options.dialogOptions || {}
             });
             dlg.render(true);
