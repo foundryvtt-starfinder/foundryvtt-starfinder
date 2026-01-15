@@ -2,13 +2,10 @@
   "_id": "sWQk8CPprLucOSea",
   "name": "Inner gyros",
   "type": "augmentation",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/vr-headset.svg",
   "system": {
     "type": "cybernetic",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -18,9 +15,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "attributes": {
@@ -41,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -55,7 +52,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -63,18 +61,18 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Intricate instruments augment your inner ears, granting you an unshakable sense of balance and orientation. The augmentation grants you a +2 insight bonus to Acrobatics checks to balance and Piloting checks to perform stunts during starship combat. When an effect causes you to gain the @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{flat-footed} or @UUID[Compendium.sfrpg.conditions.QnGpBSHSTiszjPSb]{off-kilter} condition, you can spend 1 Resolve Point as a reaction to suppress that condition until the end of your next turn.</p>"
+      "value": "<p>Intricate instruments augment your inner ears, granting you an unshakable sense of balance and orientation. The augmentation grants you a +2 insight bonus to Acrobatics checks to balance and Piloting checks to perform stunts during starship combat. When an effect causes you to gain the @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{flat-footed} or @UUID[Compendium.sfrpg.conditions.Item.QnGpBSHSTiszjPSb]{off-kilter} condition, you can spend 1 Resolve Point as a reaction to suppress that condition until the end of your next turn.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 4,
     "modifiers": [
       {
@@ -82,8 +80,10 @@
         "name": "Inner gyros, balance",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 2,
         "modifier": "+2",
         "modifierType": "formula",
@@ -97,8 +97,10 @@
         "name": "Inner gyros, piloting stunt",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 2,
         "modifier": "+2",
         "modifierType": "formula",
@@ -109,29 +111,33 @@
       }
     ],
     "price": 2000,
+    "proficient": false,
+    "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "TR pg. 58",
     "system": "ears",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

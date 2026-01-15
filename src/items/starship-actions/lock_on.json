@@ -2,18 +2,8 @@
   "_id": "ML6Dh5dRr3XItvZx",
   "name": "Lock On",
   "type": "starshipAction",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
-    "abilityMods": {
-      "parts": []
-    },
-    "critical": {
-      "parts": []
-    },
-    "damage": {
-      "parts": []
-    },
     "dc": {
       "resolve": false,
       "value": "5 + 1-1/2 * Target Ship Tier + it's bonus from defensive countermeasures"
@@ -30,10 +20,14 @@
     "formula": [
       {
         "name": "Computers",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@scienceOfficer.skills.com.mod"
       }
     ],
     "isPush": true,
+    "modifiers": [],
     "order": 30,
     "phase": {
       "name": "Helm phase",
@@ -45,6 +39,7 @@
     "selectors": [
       "scienceOfficer"
     ],
+    "slug": "",
     "source": "CRB"
   }
 }

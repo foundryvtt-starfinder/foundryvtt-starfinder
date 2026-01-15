@@ -1,0 +1,1424 @@
+{
+  "_id": "T8Hbi32TelcdW5ID",
+  "name": "Rogatrich",
+  "type": "npc2",
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
+  "items": [
+    {
+      "_id": "FTDQ7caOAQoT2E45",
+      "name": "Creature Companion - Rogatrich",
+      "type": "feat",
+      "img": "icons/creatures/mammals/wolf-shadow-black.webp",
+      "system": {
+        "ability": "",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": "0"
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>@UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.gTHswZ0FBafS7ru0]{Creature Companion}</p>\n<p>Rogatriches are territorial, cantankerous elementals similar in appearance to a large bipedal bird. Native to frigid regions of the Plane of Water, rogatriches regularly find their way to the Material Plane, particularly to regions with constant cold temperatures.</p>\n<p>Rogatriches live on ice sheets and love to swim, though they also can be found on land in snowy regions when liquid water sources are scarce. They use their powerful beaks to peck through ice and shatter ice sheets, in addition to protecting themselves. While they don’t need to eat to survive, rogatriches enjoy catching and eating fish.</p>\n<p>In the wild, rogatriches often create nest mounds of ice or snow, which they burrow into and consider their territory. On the rare occasions rogatriches encounter manufactured structures, from vehicles and starships to homes and other buildings, they adopt these structures as their territory instead—often to the chagrin of the structure’s original inhabitants—hauling in ice chunks and snow to make the site more comfortable.</p>\n<p>Rogatriches are challenging to train and tame. They’re moody and stubborn even when trained and well-treated, and they tend to do what they want more often than they do what they’re told. It’s said that only the foolhardy bother trying to train a rogatrich—a claim made by rogatrich owners as often as it is by those who mock them. Once a rogatrich’s trust is earned, however, it can serve as a hardy, reliable mount.</p><h2>Rogatrich</h2><p><strong>Senses</strong> darkvision 60 ft.</p>\n<p><strong>Good Save</strong> Will;<strong>Poor Saves</strong> Fort, Ref</p>\n<p><strong>Immunities</strong> cold, elemental immunities</p>\n<p><strong>Weaknesses</strong> fire</p>\n<p><strong>Speed</strong> 40 ft., swim 20 ft.</p>\n<p><strong>Melee Attack</strong> beak (P) or kick (B)</p>\n<p><strong>Ranged Attack</strong> ice pinion (C &amp; P; critical staggered)</p>\n<p><strong>Space</strong> 10 ft.;<strong>Reach</strong> 5 ft.</p>\n<p><strong>Ability Modifiers</strong> Str, Wis</p><h3>Special Abilities</h3><p><strong>Chilling Aura (Ex)</strong></p>\n<p>Rogatriches release an aura of chilling cold. Creatures adjacent to or mounted on a rogatrich are immune to the effects of hot weather, treat severe heat as hot weather, and treat extreme heat as severe heat.</p>\n<p><strong>Ice Pinion (Ex)</strong></p>\n<p>Every 1d4 rounds, a rogatrich can launch a volley of ice feathers as a ranged attack that targets EAC. This attack has a range increment of 90 feet and the staggered critical hit effect.</p>\n<p><strong>Icewalking (Ex)</strong></p>\n<p>A rogatrich can move across icy surfaces without penalty and doesn’t need to attempt Acrobatics checks to run or charge on ice.</p>\n<p><em>HP Max must be manually adjusted. HP value can be found on the @UUID[Compendium.sfrpg.rules.MdBIBhycAbxoboqm.JournalEntryPage.FqsTa05DBVMfsvxy#creature-companion-statistics]{Creature Companion Statistics Table}</em></p>"
+        },
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": false,
+        "modifiers": [
+          {
+            "_id": "5558ee6e-5fc3-457b-b891-b64092833fbe",
+            "name": "Creature Companion - EAC",
+            "type": "untyped",
+            "condition": "",
+            "damage": null,
+            "effectType": "ac",
+            "enabled": true,
+            "limitTo": null,
+            "max": 11,
+            "modifier": "lookupRange(@details.cr, 0, 1, 11, 2, 12, 3, 13, 4, 15, 5, 16, 6, 17, 7, 19, 8, 20, 9, 21, 10, 23, 12, 24, 13, 26, 14, 27, 15, 28, 16, 30, 17, 31, 18, 32, 19, 34, 20, 35)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "eac"
+          },
+          {
+            "_id": "30cacf7f-ccf7-41a8-a639-161a5f90d1ab",
+            "name": "Creature Companion - KAC",
+            "type": "untyped",
+            "condition": "",
+            "damage": null,
+            "effectType": "ac",
+            "enabled": true,
+            "limitTo": null,
+            "max": 14,
+            "modifier": "lookupRange(@details.cr, 0, 1, 14, 2, 15, 3, 16, 4, 18, 5, 19, 6, 20, 7, 22, 8, 23, 9, 24, 10, 26, 12, 27, 13, 29, 14, 30, 15, 31, 16, 33, 17, 34, 18, 35, 19, 37, 20, 38)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "kac"
+          },
+          {
+            "_id": "31ba0bcf-606d-4e9b-8901-45a605ae8726",
+            "name": "Creature Companion - Good Save",
+            "type": "untyped",
+            "condition": "",
+            "damage": null,
+            "effectType": "save",
+            "enabled": true,
+            "limitTo": null,
+            "max": 4,
+            "modifier": "lookupRange(@details.cr, 0, 1, 4, 2, 5, 5, 7, 7, 8, 10, 10, 13, 11, 5, 12, 18, 13, 20, 14)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "will"
+          },
+          {
+            "_id": "4575bdce-7780-4637-9664-abb5a0c06ae0",
+            "name": "Creature Companion - Poor Save 1",
+            "type": "untyped",
+            "condition": "",
+            "damage": null,
+            "effectType": "save",
+            "enabled": true,
+            "limitTo": null,
+            "max": 1,
+            "modifier": "lookupRange(@details.cr, 0, 1, 1, 3, 2, 5, 3, 7, 4, 10, 5, 11, 6, 15, 8, 19, 9)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "reflex"
+          },
+          {
+            "_id": "af5d33a9-bda1-4ff9-bdd9-af8fd9074d7c",
+            "name": "Creature Companion - Poor Save 2",
+            "type": "untyped",
+            "condition": "",
+            "damage": null,
+            "effectType": "save",
+            "enabled": true,
+            "limitTo": null,
+            "max": 1,
+            "modifier": "lookupRange(@details.cr, 0, 1, 1, 3, 2, 5, 3, 7, 4, 10, 5, 11, 6, 15, 8, 19, 9)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "fort"
+          },
+          {
+            "_id": "390dc90f-53c5-489a-85f6-0beaeb3e28ee",
+            "name": "Creature Companion - Int Modifier",
+            "type": "untyped",
+            "condition": "",
+            "damage": null,
+            "effectType": "ability-score",
+            "enabled": true,
+            "limitTo": null,
+            "max": -8,
+            "modifier": "-8",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "int"
+          },
+          {
+            "_id": "0cacc53e-01e3-4f1c-8db2-eaca776cf2a3",
+            "name": "Creature Companion - Ability Modifier 1",
+            "type": "untyped",
+            "condition": "",
+            "damage": null,
+            "effectType": "ability-score",
+            "enabled": true,
+            "limitTo": null,
+            "max": 4,
+            "modifier": "lookupRange(@details.cr, 0, 1, 4, 7, 6, 13, 8, 19, 10)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "str"
+          },
+          {
+            "_id": "4ede1c33-c4bb-4a41-9959-510d9ee5945b",
+            "name": "Creature Companion - Ability Modifier 2",
+            "type": "untyped",
+            "condition": "",
+            "damage": null,
+            "effectType": "ability-score",
+            "enabled": true,
+            "limitTo": null,
+            "max": 2,
+            "modifier": "lookupRange(@details.cr, 0, 1, 2, 7, 4, 13, 6, 19, 8)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "wis"
+          },
+          {
+            "_id": "22f50713-43a7-4b87-a369-8a28268ced31",
+            "name": "Creature Companion - Skills",
+            "type": "untyped",
+            "condition": "",
+            "damage": null,
+            "effectType": "all-skills",
+            "enabled": true,
+            "limitTo": null,
+            "max": 5,
+            "modifier": "lookupRange(@details.cr, 0, 1, 5, 2, 6, 3, 7, 4, 8, 5, 9, 6, 10, 7, 12, 8, 13, 9, 14, 10, 15, 11, 16, 12, 17, 13, 19, 14, 20, 15, 21, 16, 22, 17, 23, 18, 24, 19, 26, 20, 27)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "acr"
+          },
+          {
+            "_id": "7b4fb66f-6342-4460-96cf-8599f6ddc87e",
+            "name": "Creature Companion - Attack Bonus",
+            "type": "untyped",
+            "condition": "",
+            "damage": null,
+            "effectType": "all-attacks",
+            "enabled": true,
+            "limitTo": null,
+            "max": 0,
+            "modifier": "lookupRange(@details.cr, 0, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 9, 8, 10, 9, 11, 10, 13, 11, 14, 13, 16, 14, 17, 15, 18, 16, 19, 17, 20, 18, 21, 19, 23)",
+            "modifierType": "constant",
+            "notes": "",
+            "source": "",
+            "subtab": "misc",
+            "valueAffected": "acr"
+          }
+        ],
+        "properties": {},
+        "range": {
+          "units": ""
+        },
+        "recharge": {
+          "charged": false,
+          "value": ""
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": ""
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "EN pg. 136",
+        "target": {
+          "value": null
+        },
+        "uses": {
+          "max": "0",
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "3mgZgul9j6JUZSpG",
+      "name": "Beak",
+      "type": "weapon",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
+      "system": {
+        "ability": "",
+        "actionTarget": "kac",
+        "actionType": "mwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": null
+        },
+        "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "ft",
+          "value": ""
+        },
+        "attackBonus": null,
+        "attributes": {
+          "ac": {
+            "value": "0"
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "0",
+            "value": 0
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "bulk": "0",
+        "capacity": {
+          "max": 0,
+          "value": 0
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": true,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 0,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "name": "",
+              "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
+              "group": null,
+              "isPrimarySection": true,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
+        },
+        "equippable": false,
+        "equipped": true,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
+        "identified": true,
+        "isActive": false,
+        "isEquipment": false,
+        "level": 0,
+        "modifiers": [],
+        "price": 0,
+        "proficient": true,
+        "properties": {},
+        "quantity": 0,
+        "quantityPerPack": 1,
+        "range": {
+          "units": "none",
+          "value": ""
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "",
+        "special": "",
+        "specialMaterials": {},
+        "target": {
+          "value": null
+        },
+        "usage": {
+          "per": "",
+          "value": 0
+        },
+        "uses": {
+          "max": "0",
+          "per": "",
+          "value": 0
+        },
+        "weaponCategory": "uncategorized",
+        "weaponType": "basicM"
+      }
+    },
+    {
+      "_id": "KFFPbZzSDI2ykesZ",
+      "name": "Elemental Immunities (Ex)",
+      "type": "feat",
+      "img": "icons/magic/earth/construct-stone.webp",
+      "system": {
+        "ability": "",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": ""
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Elementals are immune to the following effects, unless the effect specifies that it works against elemental creatures:</p>\n<ul>\n<li>\n<p>@UUID[Compendium.sfrpg.conditions.Item.v9RNVTqyTyaPchvd]{Bleed}, critical hits, @UUID[Compendium.sfrpg.conditions.Item.NV4qXRDgb7zTNkW2]{Paralysis}, @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poison}, @UUID[Compendium.sfrpg.conditions.Item.3iTdt2NRgIyrychR]{Sleep} effects, and @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunning}.</p>\n</li>\n<li>\n<p>Flanking—elementals are unflankable.</p>\n</li>\n</ul>\n<p><em>Format</em>:<strong>Immunities</strong> elemental immunities.</p>"
+        },
+        "descriptors": {},
+        "details": {
+          "category": "universalCreatureRule",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": false,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "units": ""
+        },
+        "recharge": {
+          "charged": false,
+          "value": ""
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": ""
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "AA1 pg. 154",
+        "target": {
+          "value": null
+        },
+        "uses": {
+          "max": "0",
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "lk5UQTFzFidRM1bF",
+      "name": "Kick",
+      "type": "weapon",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
+      "system": {
+        "ability": "",
+        "actionTarget": "kac",
+        "actionType": "mwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": null
+        },
+        "ammunitionType": "",
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "ft",
+          "value": ""
+        },
+        "attackBonus": null,
+        "attributes": {
+          "ac": {
+            "value": "0"
+          },
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "hardness": {
+            "value": ""
+          },
+          "hp": {
+            "max": "0",
+            "value": 0
+          },
+          "size": "medium",
+          "sturdy": true
+        },
+        "bulk": "0",
+        "capacity": {
+          "max": 0,
+          "value": 0
+        },
+        "chatFlavor": "",
+        "container": {
+          "contents": [],
+          "includeContentsInWealthCalculation": true,
+          "isOpen": true,
+          "storage": [
+            {
+              "type": "slot",
+              "acceptsType": [
+                "fusion"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 0,
+              "subtype": "fusion",
+              "weightProperty": "level"
+            }
+          ]
+        },
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "name": "",
+              "formula": "@abilities.str.mod + (lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
+              "group": null,
+              "isPrimarySection": true,
+              "types": {
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": ""
+        },
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
+        },
+        "equippable": false,
+        "equipped": true,
+        "equippedBulkMultiplier": 1,
+        "formula": "",
+        "identified": true,
+        "isActive": false,
+        "isEquipment": false,
+        "level": 0,
+        "modifiers": [],
+        "price": 0,
+        "proficient": true,
+        "properties": {},
+        "quantity": 0,
+        "quantityPerPack": 1,
+        "range": {
+          "units": "none",
+          "value": ""
+        },
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "",
+        "special": "",
+        "specialMaterials": {},
+        "target": {
+          "value": null
+        },
+        "usage": {
+          "per": "",
+          "value": 0
+        },
+        "uses": {
+          "max": "0",
+          "per": "",
+          "value": 0
+        },
+        "weaponCategory": "uncategorized",
+        "weaponType": "basicM"
+      }
+    },
+    {
+      "_id": "wA2GHT57GfZIdnxO",
+      "name": "Ice Pinion (Ex)",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
+      "system": {
+        "ability": "",
+        "actionTarget": "eac",
+        "actionType": "rwak",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "ft",
+          "value": ""
+        },
+        "attackBonus": null,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [
+            {
+              "name": "",
+              "formula": "(lookupRange(@details.cr, 0, 1, 1, 9, 3, 10, 2, 13, 6, 15, 5, 16, 6, 17, 8, 19, 9, 20, 13))d(lookupRange(@details.cr, 0, 1, 4, 6, 6, 7, 8, 8, 12, 9, 4, 10, 8, 11, 10, 12, 12, 13, 4, 14, 6, 15, 8, 17, 6, 18, 8, 20, 6)) + (@details.cr)",
+              "group": null,
+              "isPrimarySection": true,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": true,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
+            }
+          ],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Every [[/r 1d4]] rounds, a rogatrich can launch a volley of ice feathers as a ranged attack that targets EAC. This attack has a range increment of 90 feet and the @UUID[Compendium.sfrpg.rules.JournalEntry.O5GDQUKPCJ9Zbnfj.JournalEntryPage.zOJ86MDq6kNzAAbB#staggered]{staggered} critical hit effect.</p>"
+        },
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "text",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": false,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "units": "ft",
+          "value": "90"
+        },
+        "recharge": {
+          "charged": false,
+          "value": ""
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": "negate"
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "EN pg. 136",
+        "target": {
+          "value": ""
+        },
+        "uses": {
+          "max": "",
+          "per": "",
+          "value": null
+        }
+      }
+    },
+    {
+      "_id": "fjmtpyYLqTOiwjXC",
+      "name": "Chilling Aura (Ex)",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
+      "system": {
+        "ability": "",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": "0"
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Rogatriches release an aura of chilling cold. Creatures adjacent to or mounted on a rogatrich are immune to the effects of hot weather, treat severe heat as hot weather, and treat extreme heat as severe heat.</p>"
+        },
+        "descriptors": {},
+        "details": {
+          "category": "universalCreatureRule",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "text",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": false,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "units": ""
+        },
+        "recharge": {
+          "charged": false,
+          "value": ""
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": ""
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "EN pg. 136",
+        "target": {
+          "value": null
+        },
+        "uses": {
+          "max": "",
+          "per": "",
+          "value": null
+        }
+      }
+    },
+    {
+      "_id": "JoplabpfBUxUVmUm",
+      "name": "Icewalking (Ex)",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
+      "system": {
+        "ability": "",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": null
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": "0"
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
+          "parts": []
+        },
+        "damage": {
+          "parts": [],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>A rogatrich can move across icy surfaces without penalty and doesn’t need to attempt Acrobatics checks to run or charge on ice.</p>"
+        },
+        "descriptors": {},
+        "details": {
+          "category": "universalCreatureRule",
+          "combat": false,
+          "specialAbilityType": "ex"
+        },
+        "duration": {
+          "units": "text",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": false,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "units": ""
+        },
+        "recharge": {
+          "charged": false,
+          "value": ""
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": ""
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "EN pg. 136",
+        "target": {
+          "value": null
+        },
+        "uses": {
+          "max": "",
+          "per": "",
+          "value": null
+        }
+      }
+    }
+  ],
+  "prototypeToken": {
+    "name": "Rogatrich",
+    "actorLink": false,
+    "alpha": 1,
+    "appendNumber": false,
+    "bar1": {
+      "attribute": "attributes.hp"
+    },
+    "bar2": {
+      "attribute": ""
+    },
+    "detectionModes": [],
+    "displayBars": 20,
+    "displayName": 20,
+    "disposition": -1,
+    "height": 2,
+    "light": {
+      "alpha": 0.5,
+      "angle": 360,
+      "animation": {
+        "type": null,
+        "intensity": 5,
+        "reverse": false,
+        "speed": 5
+      },
+      "attenuation": 0.5,
+      "bright": 0,
+      "color": null,
+      "coloration": 1,
+      "contrast": 0,
+      "darkness": {
+        "max": 1,
+        "min": 0
+      },
+      "dim": 0,
+      "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
+      "saturation": 0,
+      "shadows": 0
+    },
+    "lockRotation": true,
+    "movementAction": "walk",
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
+    "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
+    "rotation": 0,
+    "sight": {
+      "angle": 360,
+      "attenuation": 0.1,
+      "brightness": 0,
+      "color": null,
+      "contrast": 0,
+      "enabled": false,
+      "range": null,
+      "saturation": 0,
+      "visionMode": "basic"
+    },
+    "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotation": 0,
+      "scaleX": 1,
+      "scaleY": 1,
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
+    },
+    "width": 2
+  },
+  "system": {
+    "abilities": {
+      "cha": {
+        "base": 0
+      },
+      "con": {
+        "base": 0
+      },
+      "dex": {
+        "base": 0
+      },
+      "int": {
+        "base": 0
+      },
+      "str": {
+        "base": 0
+      },
+      "wis": {
+        "base": 0
+      }
+    },
+    "attributes": {
+      "abilityDC": {
+        "base": 0
+      },
+      "arms": 2,
+      "baseSpellDC": {
+        "base": 0
+      },
+      "eac": {
+        "base": 0
+      },
+      "fort": {
+        "base": 0
+      },
+      "hp": {
+        "max": 10,
+        "temp": null,
+        "value": 10
+      },
+      "init": {
+        "value": 0
+      },
+      "kac": {
+        "base": 0
+      },
+      "reach": "5 ft.",
+      "reflex": {
+        "base": 0
+      },
+      "space": "10 ft.",
+      "speed": {
+        "burrowing": {
+          "base": 0
+        },
+        "climbing": {
+          "base": 0
+        },
+        "flying": {
+          "base": 0,
+          "baseManeuverability": 0
+        },
+        "land": {
+          "base": 40
+        },
+        "mainMovement": "land",
+        "special": "",
+        "swimming": {
+          "base": 20
+        }
+      },
+      "will": {
+        "base": 0
+      }
+    },
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
+    "currency": {
+      "credit": 0,
+      "upb": 0
+    },
+    "details": {
+      "type": "Outsider",
+      "alignment": "",
+      "biography": {
+        "age": "0",
+        "dateOfBirth": "",
+        "deity": "",
+        "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
+        "genderPronouns": "",
+        "height": "",
+        "homeWorld": "",
+        "otherVisuals": "",
+        "public": "",
+        "value": "<p>Rogatriches are territorial, cantankerous elementals similar in appearance to a large bipedal bird. Native to frigid regions of the Plane of Water, rogatriches regularly find their way to the Material Plane, particularly to regions with constant cold temperatures.</p>\n<p>Rogatriches live on ice sheets and love to swim, though they also can be found on land in snowy regions when liquid water sources are scarce. They use their powerful beaks to peck through ice and shatter ice sheets, in addition to protecting themselves. While they don’t need to eat to survive, rogatriches enjoy catching and eating fish.</p>\n<p>In the wild, rogatriches often create nest mounds of ice or snow, which they burrow into and consider their territory. On the rare occasions rogatriches encounter manufactured structures, from vehicles and starships to homes and other buildings, they adopt these structures as their territory instead—often to the chagrin of the structure’s original inhabitants—hauling in ice chunks and snow to make the site more comfortable.</p>\n<p>Rogatriches are challenging to train and tame. They’re moody and stubborn even when trained and well-treated, and they tend to do what they want more often than they do what they’re told. It’s said that only the foolhardy bother trying to train a rogatrich—a claim made by rogatrich owners as often as it is by those who mock them. Once a rogatrich’s trust is earned, however, it can serve as a hardy, reliable mount.</p><h2>Rogatrich</h2><p>Levels 6-20</p>\n<p>Large outsider (air, cold, elemental, extraplanar, water)</p>\n<p><strong>Senses</strong> darkvision 60 ft.</p>\n<p><strong>Good Save</strong> Will;<strong>Poor Saves</strong> Fort, Ref</p>\n<p><strong>Immunities</strong> cold, elemental immunities</p>\n<p><strong>Weaknesses</strong> fire</p>\n<p><strong>Speed</strong> 40 ft., swim 20 ft.</p>\n<p><strong>Melee Attack</strong> beak (P) or kick (B)</p>\n<p><strong>Ranged Attack</strong> ice pinion (C &amp; P; critical staggered)</p>\n<p><strong>Space</strong> 10 ft.;<strong>Reach</strong> 5 ft.</p>\n<p><strong>Ability Modifiers</strong> Str, Wis</p>",
+        "weight": ""
+      },
+      "combatRole": "",
+      "cr": 6,
+      "environment": "",
+      "organization": "",
+      "organizationSize": {
+        "max": null,
+        "min": 1
+      },
+      "raceAndGrafts": "",
+      "source": "EN pg. 136",
+      "subtype": "air, cold, elemental, extraplanar, water"
+    },
+    "modifiers": [],
+    "skills": {
+      "acr": {
+        "ability": "dex",
+        "enabled": true,
+        "hasArmorCheckPenalty": true,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "ath": {
+        "ability": "str",
+        "enabled": true,
+        "hasArmorCheckPenalty": true,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "blu": {
+        "ability": "cha",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "com": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "cul": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "dip": {
+        "ability": "cha",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "dis": {
+        "ability": "cha",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "eng": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "int": {
+        "ability": "cha",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "lsc": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "med": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "mys": {
+        "ability": "wis",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "per": {
+        "ability": "wis",
+        "enabled": true,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "phs": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "pil": {
+        "ability": "dex",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "pro": {
+        "ability": "int",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 3
+      },
+      "sen": {
+        "ability": "wis",
+        "enabled": false,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "sle": {
+        "ability": "dex",
+        "enabled": false,
+        "hasArmorCheckPenalty": true,
+        "isTrainedOnly": true,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "ste": {
+        "ability": "dex",
+        "enabled": true,
+        "hasArmorCheckPenalty": true,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      },
+      "sur": {
+        "ability": "wis",
+        "enabled": true,
+        "hasArmorCheckPenalty": false,
+        "isTrainedOnly": false,
+        "misc": 0,
+        "ranks": 0,
+        "subname": "",
+        "value": 0
+      }
+    },
+    "slug": "",
+    "spells": {
+      "spell0": {
+        "max": 0,
+        "value": 0
+      },
+      "spell1": {
+        "max": 0,
+        "value": 0
+      },
+      "spell2": {
+        "max": 0,
+        "value": 0
+      },
+      "spell3": {
+        "max": 0,
+        "value": 0
+      },
+      "spell4": {
+        "max": 0,
+        "value": 0
+      },
+      "spell5": {
+        "max": 0,
+        "value": 0
+      },
+      "spell6": {
+        "max": 0,
+        "value": 0
+      }
+    },
+    "traits": {
+      "ci": {
+        "custom": "",
+        "value": []
+      },
+      "di": {
+        "custom": "",
+        "value": [
+          "cold"
+        ]
+      },
+      "dv": {
+        "custom": "",
+        "value": [
+          "fire"
+        ]
+      },
+      "languages": {
+        "custom": "",
+        "value": []
+      },
+      "senses": "darkvision 60 ft.",
+      "size": "large",
+      "sr": 0
+    }
+  }
+}

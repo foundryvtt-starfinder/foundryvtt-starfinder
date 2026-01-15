@@ -1,0 +1,126 @@
+import SFRPGItemBase from './base-item.mjs';
+
+const { fields } = foundry.data;
+
+export default class SFRPGItemChassis extends SFRPGItemBase {
+
+    static LOCALIZATION_PREFIXES = [
+        'SFRPG.Item.Base',
+        'SFRPG.Item.Chassis'
+    ];
+
+    static defineSchema() {
+        const schema = super.defineSchema();
+
+        // Drone Chassis-specific properties
+        foundry.utils.mergeObject(schema, {
+            abilityIncreaseStats: new fields.SchemaField({
+                first: new fields.StringField({
+                    initial: "str",
+                    choices: ["", ...Object.keys(CONFIG.SFRPG.abilities)],
+                    blank: true,
+                    label: "SFRPG.Items.Chassis.AbilityIncreaseStats.First"
+                }),
+                second: new fields.StringField({
+                    initial: "dex",
+                    choices: ["", ...Object.keys(CONFIG.SFRPG.abilities)],
+                    blank: true,
+                    label: "SFRPG.Items.Chassis.AbilityIncreaseStats.Second"
+                })
+            }),
+            abilityScores: new fields.SchemaField({
+                cha: new fields.NumberField({
+                    initial: 6,
+                    min: 3,
+                    integer: true,
+                    required: true,
+                    label: "SFRPG.AbilityCha"
+                }),
+                con: new fields.StringField({
+                    initial: "-",
+                    required: true,
+                    label: "SFRPG.AbilityCon"
+                }),
+                dex: new fields.NumberField({
+                    initial: 10,
+                    min: 3,
+                    integer: true,
+                    required: true,
+                    label: "SFRPG.AbilityDex"
+                }),
+                int: new fields.NumberField({
+                    initial: 6,
+                    min: 3,
+                    integer: true,
+                    required: true,
+                    label: "SFRPG.AbilityInt"
+                }),
+                str: new fields.NumberField({
+                    initial: 10,
+                    min: 3,
+                    integer: true,
+                    required: true,
+                    label: "SFRPG.AbilityStr"
+                }),
+                wis: new fields.NumberField({
+                    initial: 10,
+                    min: 3,
+                    integer: true,
+                    required: true,
+                    label: "SFRPG.AbilityWis"
+                })
+            }),
+            eac: new fields.NumberField({
+                initial: 1,
+                min: 0,
+                integer: true,
+                required: true,
+                label: "SFRPG.DroneSheet.Chassis.Levels"
+            }),
+            fort: new fields.StringField({
+                initial: "slow",
+                choices: Object.keys(CONFIG.SFRPG.saveProgression),
+                blank: true,
+                label: "SFRPG.DroneSheet.Chassis.Details.Saves.Fortitude"
+            }),
+            levels: new fields.NumberField({
+                initial: 1,
+                min: 0,
+                integer: true,
+                required: true,
+                label: "SFRPG.DroneSheet.Chassis.Details.Defence.EAC"
+            }),
+            kac: new fields.NumberField({
+                initial: 1,
+                min: 0,
+                integer: true,
+                required: true,
+                label: "SFRPG.DroneSheet.Chassis.Details.Defence.KAC"
+            }),
+            ref: new fields.StringField({
+                initial: "fast",
+                choices: Object.keys(CONFIG.SFRPG.saveProgression),
+                blank: true,
+                label: "SFRPG.DroneSheet.Chassis.Details.Saves.Reflex"
+            }),
+            size: new fields.StringField({
+                initial: "medium",
+                choices: Object.keys(CONFIG.SFRPG.itemSizes),
+                blank: true,
+                required: true,
+                label: "SFRPG.Size"
+            }),
+            speed: new fields.SchemaField(SFRPGItemBase._speedFieldData()),
+            will: new fields.StringField({
+                initial: "slow",
+                choices: Object.keys(CONFIG.SFRPG.saveProgression),
+                blank: true,
+                label: "SFRPG.DroneSheet.Chassis.Details.Saves.Will"
+            })
+        });
+
+        // No changes to initial values needed
+
+        return schema;
+    }
+}

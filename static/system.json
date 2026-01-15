@@ -1,0 +1,911 @@
+{
+  "id": "sfrpg",
+  "title": "Starfinder",
+  "description": "A game system for running Starfinder in the Foundry VTT environment.",
+  "version": "0.29.2",
+  "authors": [
+    {
+      "name": "The Starfinder System Developers"
+    }
+  ],
+  "compatibility": {
+    "minimum": 13,
+    "verified": "13.351",
+    "maximum": 13
+  },
+  "url": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder",
+  "manifest": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/latest/download/system.json",
+  "download": "https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/releases/download/0.29.2/sfrpg-0.29.2.zip",
+  "flags": {
+    "sfrpg": {
+      "schema": 0.009
+    },
+    "hotReload": {
+      "extensions": [
+        "css",
+        "hbs",
+        "json"
+      ],
+      "paths": [
+        "templates",
+        "sfrpg.css",
+        "lang"
+      ]
+    }
+  },
+  "socket": true,
+  "initiative": "1d20 + @attributes.init.value",
+  "grid": {
+    "distance": 5,
+    "units": "ft",
+    "diagonals": 4
+  },
+  "primaryTokenAttribute": "attributes.hp",
+  "secondaryTokenAttribute": "attributes.sp",
+  "media": [
+    {
+      "type": "cover",
+      "url": "https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/static/images/starfinder_cover.webp",
+      "caption": "Starfinder"
+    },
+    {
+      "type": "icon",
+      "url": "https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/static/images/starfinder_icon.webp",
+      "caption": "Starfinder"
+    },
+    {
+      "type": "setup",
+      "url": "https://raw.githubusercontent.com/foundryvtt-starfinder/foundryvtt-starfinder/master/static/images/starfinder_icon.webp",
+      "name": "Starfinder"
+    }
+  ],
+  "esmodules": [
+    "sfrpg.js"
+  ],
+  "styles": [
+    "sfrpg.css"
+  ],
+  "packs": [
+    {
+      "name": "archetypes",
+      "label": "Archetypes",
+      "system": "sfrpg",
+      "path": "./packs/archetypes",
+      "type": "Item"
+    },
+    {
+      "label": "Archetype Features",
+      "type": "Item",
+      "name": "archetype-features",
+      "path": "./packs/archetype-features",
+      "system": "sfrpg"
+    },
+    {
+      "name": "characters",
+      "label": "Characters",
+      "system": "sfrpg",
+      "path": "./packs/characters",
+      "type": "Actor"
+    },
+    {
+      "name": "equipment",
+      "label": "Equipment",
+      "system": "sfrpg",
+      "path": "./packs/equipment",
+      "type": "Item"
+    },
+    {
+      "name": "effects",
+      "label": "Effects",
+      "system": "sfrpg",
+      "path": "./packs/effects",
+      "type": "Item"
+    },
+    {
+      "name": "feats",
+      "label": "Feats",
+      "system": "sfrpg",
+      "path": "./packs/feats",
+      "type": "Item"
+    },
+    {
+      "name": "spells",
+      "label": "Spells",
+      "system": "sfrpg",
+      "path": "./packs/spells",
+      "type": "Item"
+    },
+    {
+      "name": "races",
+      "label": "Species",
+      "system": "sfrpg",
+      "path": "./packs/races",
+      "type": "Item"
+    },
+    {
+      "label": "Classes",
+      "type": "Item",
+      "name": "classes",
+      "path": "./packs/classes",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Themes",
+      "type": "Item",
+      "name": "themes",
+      "path": "./packs/themes",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Theme Features",
+      "type": "Item",
+      "name": "theme-features",
+      "path": "./packs/theme-features",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Vehicles",
+      "type": "Actor",
+      "name": "vehicles",
+      "path": "./packs/vehicles",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Starship Components",
+      "type": "Item",
+      "name": "starship-components",
+      "path": "./packs/starship-components",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Starship Actions",
+      "type": "Item",
+      "name": "starship-actions",
+      "path": "./packs/starship-actions",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Setting",
+      "type": "JournalEntry",
+      "name": "setting",
+      "path": "./packs/setting",
+      "system": "sfrpg"
+    },
+    {
+      "label": "SFRPG Rules",
+      "type": "JournalEntry",
+      "name": "rules",
+      "path": "./packs/rules",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Tables",
+      "type": "RollTable",
+      "name": "tables",
+      "path": "./packs/tables",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Conditions",
+      "type": "Item",
+      "name": "conditions",
+      "path": "./packs/conditions",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Class Features",
+      "type": "Item",
+      "name": "class-features",
+      "path": "./packs/class-features",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Species Features",
+      "type": "Item",
+      "name": "racial-features",
+      "path": "./packs/racial-features",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Universal Creature Rules",
+      "type": "Item",
+      "name": "universal-creature-rules",
+      "path": "./packs/universal-creature-rules",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Alien Archives",
+      "type": "Actor",
+      "name": "alien-archives",
+      "path": "./packs/alien-archives",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Hazards",
+      "type": "Actor",
+      "name": "hazards",
+      "path": "./packs/hazards",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Starships",
+      "type": "Actor",
+      "name": "starships",
+      "path": "./packs/starships",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Creature Companions",
+      "type": "Actor",
+      "name": "creature-companions",
+      "path": "./packs/creature-companions",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Macros",
+      "type": "Macro",
+      "name": "macros",
+      "path": "./packs/macros",
+      "system": "sfrpg"
+    },
+    {
+      "label": "Summoned Creatures",
+      "type": "Actor",
+      "name": "summoned-creatures",
+      "path": "./packs/summoned-creatures",
+      "system": "sfrpg"
+    }
+  ],
+  "documentTypes": {
+    "Actor": {
+      "character": {
+        "htmlFields": [
+          "details.biography.value",
+          "details.biography.gmNotes",
+          "details.biography.value",
+          "details.notes"
+        ],
+        "filePathFields": {
+          "details.biography.fullBodyImage": [
+            "IMAGE"
+          ]
+        }
+      },
+      "drone": {
+        "htmlFields": [
+          "details.biography.value",
+          "details.biography.gmNotes",
+          "details.biography.value",
+          "details.notes"
+        ],
+        "filePathFields": {
+          "details.biography.fullBodyImage": [
+            "IMAGE"
+          ]
+        }
+      },
+      "hazard": {
+        "htmlFields": [
+          "details.description.value"
+        ]
+      },
+      "npc2": {
+        "htmlFields": [
+          "details.biography.value",
+          "details.biography.gmNotes",
+          "details.biography.value",
+          "details.notes"
+        ],
+        "filePathFields": {
+          "details.biography.fullBodyImage": [
+            "IMAGE"
+          ]
+        }
+      },
+      "starship": {
+        "htmlFields": [
+          "details.notes"
+        ]
+      },
+      "vehicle": {
+        "htmlFields": [
+          "details.description.chat",
+          "details.description.unidentified",
+          "details.description.value"
+        ]
+      }
+    },
+    "Item": {
+      "actorResource": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "ammunition": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "archetypes": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "asi": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "augmentation": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "chassis": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "class": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "consumable": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "container": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "effect": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "equipment": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "feat": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "fusion": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "goods": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "hybrid": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "magic": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "mod": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "race": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "shield": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "spell": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipAblativeArmor": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipAction": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipArmor": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipComputer": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipCrewQuarter": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipDefensiveCountermeasure": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipDriftEngine": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipExpansionBay": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipFortifiedHull": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipFrame": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipOtherSystem": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipPowerCore": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipReinforcedBulkhead": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipSecuritySystem": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipSensor": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipShield": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipSpecialAbility": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipThruster": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "starshipWeapon": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "technological": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "theme": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "upgrade": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "vehicleAttack": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "vehicleSystem": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "weapon": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      },
+      "weaponAccessory": {
+        "htmlFields": [
+          "description.value",
+          "description.gmNotes",
+          "description.chat",
+          "description.short",
+          "description.unidentified"
+        ],
+        "gmOnlyFields": [
+          "description.gmNotes"
+        ]
+      }
+    }
+  },
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    },
+    {
+      "lang": "ja",
+      "name": "日本語",
+      "path": "lang/ja.json"
+    },
+    {
+      "lang": "fr",
+      "name": "Français",
+      "path": "lang/fr.json"
+    },
+    {
+      "lang": "de",
+      "name": "Deutsch",
+      "path": "lang/de.json"
+    },
+    {
+      "lang": "it",
+      "name": "Italian",
+      "path": "lang/it.json"
+    },
+    {
+      "lang": "pt-BR",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-BR.json"
+    },
+    {
+      "lang": "es",
+      "name": "Español",
+      "path": "lang/es.json",
+      "flags": {}
+    }
+  ]
+}

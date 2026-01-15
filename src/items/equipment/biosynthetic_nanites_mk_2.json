@@ -2,13 +2,10 @@
   "_id": "izQQeFr3WDTYpmOZ",
   "name": "Biosynthetic Nanites, Mk 2",
   "type": "augmentation",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/vr-headset.svg",
   "system": {
     "type": "cybernetic",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "heal",
     "activation": {
@@ -18,9 +15,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -41,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -60,6 +57,7 @@
           "name": "Treat Wounds",
           "formula": "3d8",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -67,7 +65,9 @@
             "electricity": false,
             "fire": false,
             "healing": true,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -76,6 +76,7 @@
           "name": "Fast Healing",
           "formula": "3",
           "group": 0,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -83,12 +84,15 @@
             "electricity": false,
             "fire": false,
             "healing": true,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -106,17 +110,17 @@
     "equipped": false,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 9,
     "modifiers": [],
     "price": 13700,
+    "proficient": false,
+    "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
@@ -124,14 +128,19 @@
       "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #11 pg. 45",
     "system": "skin",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "day",
       "value": 1
     }

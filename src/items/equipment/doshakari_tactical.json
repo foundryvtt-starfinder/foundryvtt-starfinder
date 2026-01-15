@@ -2,13 +2,9 @@
   "_id": "Fe3oj0j5mVx9hGIx",
   "name": "Doshakari, tactical",
   "type": "weapon",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -16,14 +12,33 @@
       "condition": "",
       "cost": null
     },
+    "ammunitionType": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "ft",
+      "value": ""
     },
     "attackBonus": 0,
-    "attuned": false,
+    "attributes": {
+      "ac": {
+        "value": ""
+      },
+      "customBuilt": false,
+      "dex": {
+        "mod": ""
+      },
+      "hardness": {
+        "value": ""
+      },
+      "hp": {
+        "max": "",
+        "value": 33
+      },
+      "size": "medium",
+      "sturdy": true
+    },
     "bulk": "L",
     "capacity": {
       "max": 0,
@@ -32,6 +47,8 @@
     "chatFlavor": "",
     "container": {
       "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
       "storage": [
         {
           "type": "slot",
@@ -42,6 +59,17 @@
           "amount": 6,
           "subtype": "fusion",
           "weightProperty": "level"
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 1,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -52,78 +80,90 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "1d6 + @abilities.str.mod",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
-            "piercing": true
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": true,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>This punch dagger resembles a miniature doshko extending from the knuckles, with one to four diamond‑shaped blades. Doshakaris come in most of the same varieties as traditional steel doshkos, including the translucent molecular rift version.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "text",
       "value": ""
     },
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "Wound",
     "identified": true,
+    "isActive": false,
+    "isEquipment": true,
     "level": 6,
+    "modifiers": [],
     "price": 4300,
     "proficient": false,
     "properties": {
-      "amm": false,
-      "analog": true,
-      "archaic": false,
-      "automatic": false,
-      "blast": false,
-      "block": false,
-      "boost": false,
-      "bright": false,
-      "disarm": true,
-      "entangle": false,
-      "explode": false,
-      "injection": false,
-      "line": false,
-      "living": false,
-      "mind-affecting": false,
-      "nonlethal": false,
-      "one": true,
-      "operative": true,
-      "penetrating": false,
-      "powered": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "thrown": false,
-      "trip": false,
-      "two": false,
-      "unwieldy": false
+      "analog": {
+        "extension": "",
+        "value": true
+      },
+      "disarm": {
+        "extension": "",
+        "value": true
+      },
+      "one": {
+        "extension": "",
+        "value": true
+      },
+      "operative": {
+        "extension": "",
+        "value": true
+      }
     },
     "quantity": 1,
+    "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": null,
-      "value": null
+      "units": "none",
+      "value": ""
     },
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
-    "source": "NS pg. 148 ",
-    "special": "",
-    "target": {
+    "skillCheck": {
       "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
+    "source": "NS pg. 148",
+    "special": "",
+    "specialMaterials": {},
+    "target": {
       "value": ""
     },
     "usage": {
@@ -131,10 +171,11 @@
       "value": 0
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     },
+    "weaponCategory": "uncategorized",
     "weaponType": "advancedM"
   }
 }

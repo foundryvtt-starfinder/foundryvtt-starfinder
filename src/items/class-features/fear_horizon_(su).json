@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/images/cup/gameplay/graviton.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "other",
     "activation": {
@@ -18,9 +14,10 @@
     },
     "area": {
       "effect": "emanation",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -29,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,11 +35,12 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p>@Icon[type:graviton] Graviton Revelation</p>\n<p>When you’re fully graviton-attuned, you can leverage cosmic gravity as a standard action to drain enemies’ hope. All enemies in a 30-foot emanation with a CR equal to or less than your level become frightened for 1 minute (Will negates). At the end of each of its turns, an affected creature can attempt a new saving throw to end the effect prematurely. This is a mind-affecting fear effect.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.UVNOjH2ERlQjcGnU]{Zenith Revelation}</p>\n<p>@Icon[type:graviton] Graviton Revelation</p>\n<p>When you’re fully graviton-attuned, you can leverage cosmic gravity as a standard action to drain enemies’ hope. All enemies in a 30-foot emanation with a CR equal to or less than your level become frightened for 1 minute (Will negates). At the end of each of its turns, an affected creature can attempt a new saving throw to end the effect prematurely. This is a mind-affecting fear effect.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
@@ -49,32 +48,35 @@
       "value": "1"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
-    "requirements": "9th Level",
+    "requirements": "9th Level Solarian",
     "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "10+floor(@classes.solarian.levels/2) + @abilities.cha.mod",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "TR pg. 31",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

@@ -1,5 +1,5 @@
 export default function(engine) {
-    engine.closures.add('calculateBaseSkills', (fact, context) => {
+    engine.closures.add('calculateBaseSkills', (fact) => {
         const data = fact.data;
         const skills = data.skills;
         const theme = fact.theme;
@@ -31,12 +31,15 @@ export default function(engine) {
 
         // Skills
         for (const [skl, skill] of Object.entries(skills)) {
+            if (!skill.tooltip) skill.tooltip = [];
             skill.value = parseFloat(skill.value || 0);
             if (skill.value !== 3) skill.value = classSkills[skl] ?? 0;
+
             const classSkill = skill.value;
             const hasRanks = skill.ranks > 0;
             const abilityMod = data.abilities[skill.ability].mod;
             const modFromTheme = themeMod[skl] ?? 0;
+
             skill.mod = abilityMod + skill.ranks + (hasRanks ? classSkill : 0) + skill.misc + modFromTheme;
 
             if (hasRanks) {

@@ -1,0 +1,92 @@
+{
+  "_id": "l6FHmrdFDgImPf5n",
+  "name": "Effect: Chronosphere (6th Level)",
+  "type": "effect",
+  "img": "systems/sfrpg/icons/default/stopwatch.svg",
+  "system": {
+    "type": "effect",
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnEnd",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "origin"
+      },
+      "unit": "round",
+      "value": "1"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": null,
+        "itemUuid": null
+      }
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>When you cast chronosphere as a 6th-level spell and hit the target, the sphere deals 12d12 force damage <em>(handled by the spell)</em>, and the target takes a –10-foot penalty to speed, a –2 penalty to AC, and a –2 penalty to Reflex saving throws <em>(this effect)</em>.</p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "2064b25a-d1c4-47f7-a780-def1da9f697b",
+        "name": "Chronosphere: Movement",
+        "type": "untyped",
+        "condition": "",
+        "damage": null,
+        "effectType": "all-speeds",
+        "enabled": true,
+        "limitTo": null,
+        "max": 0,
+        "modifier": "-10",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Chronosphere",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "ed78562e-b44f-47f8-be6e-5318a347ec03",
+        "name": "Chronosphere: Reflex Saving Throws",
+        "type": "untyped",
+        "condition": "",
+        "damage": null,
+        "effectType": "save",
+        "enabled": true,
+        "limitTo": null,
+        "max": 0,
+        "modifier": "-2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Chronosphere",
+        "subtab": "misc",
+        "valueAffected": "reflex"
+      },
+      {
+        "_id": "7d96d39a-e48b-4965-b5d7-29731522dc19",
+        "name": "Chronosphere: AC",
+        "type": "untyped",
+        "condition": "",
+        "damage": null,
+        "effectType": "ac",
+        "enabled": true,
+        "limitTo": null,
+        "max": 0,
+        "modifier": "-2",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Chronosphere",
+        "subtab": "misc",
+        "valueAffected": "both"
+      }
+    ],
+    "requirements": "",
+    "showOnToken": true,
+    "slug": "",
+    "source": "",
+    "turnEvents": []
+  }
+}

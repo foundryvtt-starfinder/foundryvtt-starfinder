@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/shifting_surge.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -24,9 +20,10 @@
     },
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "line",
       "units": "ft",
-      "value": 120
+      "value": "120"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -40,6 +37,8 @@
         {
           "name": "",
           "formula": "12d8",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -47,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -62,14 +64,14 @@
       "unidentified": "",
       "value": "<p>You form a fist of divine energy and thrust it outward, damagingand potentially knocking down your enemies. You deal 12d8 damage with the force descriptor to each creature in the area. A creature that fails its Reflex save is additionally knocked prone.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": "Instantaneous"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 6,
     "materials": {
@@ -83,11 +85,9 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
@@ -96,14 +96,19 @@
       "descriptor": "half"
     },
     "school": "evo",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GM pg. 4",
     "sr": true,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

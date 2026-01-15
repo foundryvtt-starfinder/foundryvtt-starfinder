@@ -2,13 +2,9 @@
   "_id": "BhqOY4vd6cpDVrKI",
   "name": "Avenging Burst (Mechanized Niche)",
   "type": "feat",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "other",
     "activation": {
@@ -18,9 +14,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -32,7 +29,9 @@
       "parts": [
         {
           "name": "D4",
-          "formula": "(floor(@classes.evolutionist.levels / 2))d4",
+          "formula": "(max(1,floor(@classes.evolutionist.levels / 2)))d4",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -40,14 +39,18 @@
             "electricity": true,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         },
         {
           "name": "D6",
-          "formula": "(floor(@classes.evolutionist.levels / 2))d6",
+          "formula": "(max(1,floor(@classes.evolutionist.levels / 2)))d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -55,14 +58,18 @@
             "electricity": true,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         },
         {
           "name": "D8",
-          "formula": "(floor(@classes.evolutionist.levels / 2))d8",
+          "formula": "(max(1,floor(@classes.evolutionist.levels / 2)))d8",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -70,12 +77,15 @@
             "electricity": true,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -83,63 +93,28 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.NdImg3Bt0PzTvwgt]{Mechanized (Niche)}</p>\n<p>When a creature within 10 feet of you damages you, you can spend 1 MP as a reaction to vent lethal plasma through the wound to damage your attacker. This deals 1d4 electricity and fire damage for every 2 evolutionist levels you have; the creature takes half damage with a successful Reflex save. You can spend 1 additional MP when using this adaptation to roll d6s instead of d4s or you can spend 2 additional MP when using this adaptation to roll d8s instead of d4s. Once you use this adaptation, you can’t use it again until you rest for 10 minutes to regain Stamina Points.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.NdImg3Bt0PzTvwgt]{Mechanized (Niche)}</p>\n<p>When a creature within 10 feet of you damages you, you can spend 1 MP as a reaction to vent lethal plasma through the wound to damage your attacker. This deals 1d4 electricity and fire damage for every 2 evolutionist levels you have; the creature takes half damage with a successful Reflex save. You can spend 1 additional MP when using this adaptation to roll d6s instead of d4s or you can spend 2 additional MP when using this adaptation to roll d8s instead of d4s. Once you use this adaptation, you can’t use it again until you rest for 10 minutes to regain Stamina Points.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
-      "category": "classFeature"
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "1st Level (Evolutionist)",
     "rollNotes": "",
@@ -148,13 +123,18 @@
       "dc": "10+floor(@classes.evolutionist.levels/2) + (@classes.evolutionist.keyAbilityMod)",
       "descriptor": "half"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "IS, pg. 14",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "sr",
       "value": 1
     }

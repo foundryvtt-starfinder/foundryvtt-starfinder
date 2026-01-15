@@ -1,0 +1,60 @@
+import SFRPGItemBase from './base-item.mjs';
+
+const { fields } = foundry.data;
+
+export default class SFRPGItemWeapon extends SFRPGItemBase {
+
+    static LOCALIZATION_PREFIXES = [
+        'SFRPG.Item.Base',
+        'SFRPG.Item.Weapon'
+    ];
+
+    static defineSchema() {
+        const schema = super.defineSchema();
+
+        // merge schema with templates
+        foundry.utils.mergeObject(schema, {
+            ...SFRPGItemBase.actionTemplate(),
+            ...SFRPGItemBase.activatedEffectTemplate(),
+            ...SFRPGItemBase.containerTemplate(),
+            ...SFRPGItemBase.itemUsageTemplate(),
+            ...SFRPGItemBase.physicalItemTemplate({isEquippable: true, isEquipment: true}),
+            ...SFRPGItemBase.specialMaterialsTemplate()
+        });
+
+        // Weapon-specific properties
+        foundry.utils.mergeObject(schema, {
+            equippedBulkMultiplier: new fields.NumberField({
+                initial: 1,
+                min: 0,
+                required: true
+            }),
+            special: new fields.StringField({
+                initial: "",
+                blank: true,
+                required: false
+            })
+        });
+
+        // Change some initial values specific to weapons
+        schema.attributes.fields.sturdy.initial = true;
+        schema.container.fields.isOpen.initial = true;
+        schema.container.fields.storage.initial = [{
+            acceptsType: [
+                "fusion"
+            ],
+            affectsEncumbrance: true,
+            amount: 0,
+            subtype: "fusion",
+            type: "slot",
+            weightProperty: "level"
+        }];
+        schema.proficient.initial = true;
+        schema.ability.initial = "str";
+
+        schema.weaponCategory.required = true;
+        schema.weaponType.required = true;
+
+        return schema;
+    }
+}

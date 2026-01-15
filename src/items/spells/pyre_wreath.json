@@ -4,11 +4,8 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/pyre_wreath.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,14 +14,16 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,20 +33,26 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>This spell creates a circle of three fist-sized orbs of flame around the target creature. The orbs increase the light level by one step within a 10-foot-radius of the target. Anytime the target of the spell takes fire damage from an attack or spell, they can spend a reaction to have one of the orbs absorb the blow. That orb disappears and the amount of fire damage is reduced by 5. The orbs cannot be used to absorb fire damage that comes from a continuous or natural environmental effect, such as walking in lava or damage from the @UUID[Compendium.sfrpg.conditions.8LdyXZl9PeXXFE8O]{Burning} condition. The spell ends when all three orbs are expended in this manner.</p>"
+      "value": "<p>This spell creates a circle of three fist-sized orbs of flame around the target creature. The orbs increase the light level by one step within a 10-foot-radius of the target. Anytime the target of the spell takes fire damage from an attack or spell, they can spend a reaction to have one of the orbs absorb the blow. That orb disappears and the amount of fire damage is reduced by 5. The orbs cannot be used to absorb fire damage that comes from a continuous or natural environmental effect, such as walking in lava or damage from the @UUID[Compendium.sfrpg.conditions.Item.8LdyXZl9PeXXFE8O]{Burning} condition. The spell ends when all three orbs are expended in this manner.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": true,
     "duration": {
       "units": "hour",
       "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": false,
+    "isVariableLevel": false,
     "level": 1,
     "materials": {
       "consumed": false,
@@ -60,23 +65,30 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "units": "medium"
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",
       "descriptor": "harmless"
     },
     "school": "abj",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #18 pg. 53",
     "sr": true,
     "target": {
-      "type": "",
       "value": "one creature"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

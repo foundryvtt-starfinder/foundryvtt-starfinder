@@ -2,13 +2,9 @@
   "_id": "3pXUNhRIJq84h5na",
   "name": "Efreet Noble Regalia",
   "type": "equipment",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/kevlar-vest.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "armor": {
       "type": "power",
@@ -51,7 +47,6 @@
       "size": "huge",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "62",
     "capacity": {
       "max": 20,
@@ -107,6 +102,7 @@
           "name": "Slashing",
           "formula": "4d6 +(@abilities.str.mod)",
           "group": 0,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -114,7 +110,9 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
@@ -123,6 +121,7 @@
           "name": "Half Fire, Half Slashing",
           "formula": "4d6 +(@abilities.str.mod)",
           "group": 0,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -130,12 +129,15 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": true,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": 0
     },
     "damageNotes": "",
     "description": {
@@ -145,16 +147,17 @@
       "unidentified": "",
       "value": "<p>As its name implies, sets of efreet noble regalia were originally crafted for powerful efreet on the Plane of Fire. Traditionally, the armor is decorated in shining red and gold, and has elaborate horned helms. While wearing this armor and while it still has charges remaining, you have fire resistance 20 and are immune to environmental effects related to @UUID[Compendium.sfrpg.rules.SfkuzH5kxSAmG4nv.JournalEntryPage.n461i9lDXw303SiY#heat-dangers]{Heat}. Additionally, when attacking with the armor’s unarmed strikes or with any weapon slotted into the armor, you can make half the weapon’s damage fire damage.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 18,
     "modifiers": [
       {
@@ -162,8 +165,10 @@
         "name": "Energy Resistance Fire",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": true,
+        "limitTo": null,
         "max": 20,
         "modifier": "20",
         "modifierType": "constant",
@@ -175,13 +180,11 @@
     ],
     "price": 417000,
     "proficient": false,
+    "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "reach": "10 ft.",
     "rollNotes": "",
@@ -190,32 +193,22 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "huge",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "DC pg. 52",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
+    "specialMaterials": {},
+    "speed": {
+      "flying": {
+        "base": 30
+      },
+      "special": ""
     },
-    "speed": "30 ft., fly 30 ft. (average)",
     "strength": 30,
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -223,8 +216,8 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

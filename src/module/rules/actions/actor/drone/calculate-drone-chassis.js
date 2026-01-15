@@ -1,21 +1,26 @@
 import { SFRPG } from "../../../../config.js";
 
 export default function(engine) {
-    engine.closures.add("calculateDroneChassis", (fact, context) => {
+    engine.closures.add("calculateDroneChassis", (fact) => {
         const data = fact.data;
 
+        if (!data.abilities) data.abilities = {};
+        if (!data.abilities.cha) data.abilities.cha = {tooltip: []};
+        if (!data.abilities.con) data.abilities.con = {tooltip: []};
+        if (!data.abilities.dex) data.abilities.dex = {tooltip: []};
+        if (!data.abilities.int) data.abilities.int = {tooltip: []};
+        if (!data.abilities.str) data.abilities.str = {tooltip: []};
+        if (!data.abilities.wis) data.abilities.wis = {tooltip: []};
+        if (!data.details.level) data.details.level = {};
+
         // We only care about the first chassis
-        let activeChassis = null;
-        for (const chassis of fact.chassis) {
-            activeChassis = chassis;
-            break;
-        }
+        const activeChassis = fact.chassis && fact.chassis.length > 0 ? fact.chassis[0] : null;
 
         if (activeChassis) {
             const chassisData = activeChassis.system;
 
             data.traits.size = SFRPG.actorSizes[chassisData.size];
-            data.attributes.speed = mergeObject(data.attributes.speed, chassisData.speed, {overwrite: true});
+            data.attributes.speed = foundry.utils.mergeObject(data.attributes.speed, chassisData.speed, {overwrite: true});
             data.attributes.speed.special = "";
 
             let droneLevel = chassisData.levels;
@@ -33,21 +38,17 @@ export default function(engine) {
                 })]
             };
 
-            let abilityIncreaseStats = [chassisData.abilityIncreaseStats.first, chassisData.abilityIncreaseStats.second];
-            let abilityIncreases = SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
+            const abilityIncreaseStats = [chassisData.abilityIncreaseStats.first, chassisData.abilityIncreaseStats.second];
+            const abilityIncreases = SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
 
-            data.abilities.str.base = chassisData.abilityScores.str + (abilityIncreaseStats.includes("str") ? abilityIncreases : 0);
-
+            data.abilities.cha.base = chassisData.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
             data.abilities.dex.base = chassisData.abilityScores.dex + (abilityIncreaseStats.includes("dex") ? abilityIncreases : 0);
+            data.abilities.int.base = chassisData.abilityScores.int + (abilityIncreaseStats.includes("int") ? abilityIncreases : 0);
+            data.abilities.str.base = chassisData.abilityScores.str + (abilityIncreaseStats.includes("str") ? abilityIncreases : 0);
+            data.abilities.wis.base = chassisData.abilityScores.wis + (abilityIncreaseStats.includes("wis") ? abilityIncreases : 0);
 
             data.abilities.con.value = chassisData.abilityScores.con;
             data.abilities.con.mod = 0;
-
-            data.abilities.int.base = chassisData.abilityScores.int + (abilityIncreaseStats.includes("int") ? abilityIncreases : 0);
-
-            data.abilities.wis.base = chassisData.abilityScores.wis + (abilityIncreaseStats.includes("wis") ? abilityIncreases : 0);
-
-            data.abilities.cha.base = chassisData.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
         } else {
             data.abilities.str.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
             data.abilities.dex.tooltip.push(game.i18n.format("SFRPG.DroneSheet.Chassis.NotInstalled"));
@@ -64,8 +65,8 @@ export default function(engine) {
         }
 
         // Clear out skills, this and future closures will enable them again
-        let skillkeys = Object.keys(SFRPG.skills);
-        for (let skill of skillkeys) {
+        const skillkeys = Object.keys(SFRPG.skills);
+        for (const skill of skillkeys) {
             data.skills[skill].enabled = false;
             data.skills[skill].value = 0;
             data.skills[skill].ranks = 0;

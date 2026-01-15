@@ -2,18 +2,20 @@
   "_id": "Vp5QHZow2NHBoFYJ",
   "name": "Disintegration Chamber Trap",
   "type": "hazard",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/mantrap.svg",
   "items": [],
   "prototypeToken": {
     "name": "Disintegration Chamber Trap",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -38,15 +40,31 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -59,19 +77,30 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "systems/sfrpg/icons/default/mantrap.svg",
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },
   "system": {
     "attributes": {
       "baseAttackBonus": {
-        "value": ""
+        "value": 0
       },
       "bypass": {
         "value": ""
@@ -80,32 +109,32 @@
         "value": "14d12"
       },
       "duration": {
-        "value": ""
+        "value": null
       },
       "eac": {
-        "value": ""
+        "value": 0
       },
       "effect": {
         "value": "disintegration beam (14d12); Fortitude DC 22 reduces damage to 4d12; onset delay (1 round); multiple targets (all targets in room)"
       },
       "fort": {
-        "value": ""
+        "value": 0
       },
       "hardness": {
-        "value": ""
+        "value": 0
       },
       "hp": {
-        "max": null,
-        "value": null
+        "max": 10,
+        "value": 10
       },
       "init": {
         "value": ""
       },
       "kac": {
-        "value": ""
+        "value": 0
       },
       "reflex": {
-        "value": ""
+        "value": 0
       },
       "reset": {
         "value": "1 minute"
@@ -114,7 +143,7 @@
         "value": "location"
       },
       "will": {
-        "value": ""
+        "value": 0
       }
     },
     "dcs": {
@@ -133,10 +162,9 @@
       "description": {
         "value": "<p>When organic matter enters the trapped room, a disintegration beam permeates it 1 round later, atomizing everything within.</p>"
       },
-      "source": "Technological",
-      "xp": {
-        "value": 10
-      }
-    }
+      "source": "Technological"
+    },
+    "modifiers": [],
+    "slug": ""
   }
 }

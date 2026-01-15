@@ -1,4 +1,4 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateCMDModifiers", (fact, context) => {
@@ -18,9 +18,11 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -40,16 +42,9 @@ export default function(engine) {
         const mods = context.parameters.stackModifiers.process(filteredMods, context, {actor: fact.actor});
 
         const cmdMod = Object.entries(mods).reduce((prev, curr) => {
-            if (curr[1] === null || curr[1].length < 1) return prev;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
-                for (const bonus of curr[1]) {
-                    prev += addModifier(bonus, fact.data, cmd, "SFRPG.CMDModiferTooltip");
-                }
-            } else {
-                prev += addModifier(curr[1], fact.data, cmd, "SFRPG.CMDModiferTooltip");
+            for (const bonus of curr[1]) {
+                prev += addModifier(bonus, fact.data, cmd, "SFRPG.CMDModiferTooltip");
             }
-
             return prev;
         }, 0);
 

@@ -2,19 +2,16 @@
   "_id": "uQvAPpLUsw3T2PLH",
   "name": "Dawn Beetle, Core-Diver",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "folder": "oDeSIpQmKhLBZHHW",
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "kpEOYotPHZk8JFzH",
       "name": "Bite (plus 1d10 F)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -25,9 +22,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 20,
         "attributes": {
@@ -48,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -57,7 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -79,20 +76,45 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d10+15",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             },
             {
+              "name": "",
               "formula": "1d10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -102,114 +124,26 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -217,11 +151,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -229,8 +168,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -241,13 +180,9 @@
       "_id": "gLOBWXC9M8fMIKyb",
       "name": "Claw (plus 1d10 F)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -258,9 +193,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 22,
         "attributes": {
@@ -281,7 +217,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -290,7 +225,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -312,20 +247,45 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d6+15",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             },
             {
+              "name": "",
               "formula": "1d10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -335,114 +295,26 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
@@ -450,11 +322,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -462,8 +339,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -474,13 +351,9 @@
       "_id": "y3NztcyypQHBFCTQ",
       "name": "Breath Weapon",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -490,9 +363,10 @@
         },
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "cone",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -503,13 +377,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "11d6",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -519,23 +406,26 @@
           "unidentified": "",
           "value": "<p>30-ft. cone, 11d6 F, Reflex DC 17 half, usable every 1d6 rounds</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": true,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -544,13 +434,18 @@
           "dc": "17",
           "descriptor": "half"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -560,13 +455,9 @@
       "_id": "rGhwehyN4WR6hPCO",
       "name": "Solar Adaptation",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -576,9 +467,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -587,7 +479,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -597,39 +490,47 @@
           "unidentified": "",
           "value": "<p>(EX OR SU)</p>\n<p>The creature can survive within a star despite the luminance, pressure, radiation, and convection currents. In addition, while within a star, the creature can move as if it had a supernatural fly speed equal to its fastest speed.</p>\n<p>Guidelines: A creature with solar adaptation should also have the fire subtype or immunity to fire.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -638,88 +539,9 @@
       "_id": "Gz1CcKEhDB3bP0ry",
       "name": "Solar Slingshot (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "actionTarget": "",
-        "actionType": null,
-        "activation": {
-          "type": "",
-          "condition": "",
-          "cost": 0
-        },
-        "area": {
-          "effect": "",
-          "shape": "",
-          "units": "",
-          "value": 0
-        },
-        "attackBonus": 0,
-        "chatFlavor": "",
-        "critical": {
-          "effect": "",
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "damageNotes": "",
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>A dawn sun-scrapper can fly through space at standard navigation and astrogation speeds (Starfinder Core Rulebook 290) using Survival instead of Piloting to navigate. The beetle can initiate this travel only while within 10 miles of an ongoing solar flare or similar stellar phenomenon. The beetle can't fly, but while traveling and curled up, it can reliably survive crash landings, taking only 3d6 falling damage no matter the height or speed.</p>"
-        },
-        "descriptors": [],
-        "duration": {
-          "units": "",
-          "value": null
-        },
-        "formula": "",
-        "isActive": null,
-        "modifiers": [],
-        "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
-        },
-        "recharge": {
-          "charged": false,
-          "value": null
-        },
-        "requirements": "",
-        "rollNotes": "",
-        "save": {
-          "type": "",
-          "dc": null,
-          "descriptor": ""
-        },
-        "source": "",
-        "target": {
-          "type": "",
-          "value": null
-        },
-        "uses": {
-          "max": 0,
-          "per": null,
-          "value": 0
-        }
-      }
-    },
-    {
-      "_id": "IQh2cx3tevitxpQV",
-      "name": "Void Adaptation",
-      "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
-      "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -729,9 +551,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -740,7 +563,92 @@
           "parts": []
         },
         "damage": {
+          "parts": [],
+          "primaryGroup": null
+        },
+        "damageNotes": "",
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>A dawn sun-scrapper can fly through space at standard navigation and astrogation speeds (Starfinder Core Rulebook 290) using Survival instead of Piloting to navigate. The beetle can initiate this travel only while within 10 miles of an ongoing solar flare or similar stellar phenomenon. The beetle can't fly, but while traveling and curled up, it can reliably survive crash landings, taking only 3d6 falling damage no matter the height or speed.</p>"
+        },
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
+        "duration": {
+          "units": "instantaneous",
+          "value": ""
+        },
+        "formula": "",
+        "isActive": false,
+        "modifiers": [],
+        "properties": {},
+        "range": {
+          "units": ""
+        },
+        "recharge": {
+          "charged": false,
+          "value": ""
+        },
+        "requirements": "",
+        "rollNotes": "",
+        "save": {
+          "type": "",
+          "dc": "",
+          "descriptor": ""
+        },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "",
+        "target": {
+          "value": null
+        },
+        "uses": {
+          "max": "0",
+          "per": "",
+          "value": 0
+        }
+      }
+    },
+    {
+      "_id": "IQh2cx3tevitxpQV",
+      "name": "Void Adaptation",
+      "type": "feat",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
+      "system": {
+        "ability": "",
+        "actionTarget": "",
+        "actionType": "",
+        "activation": {
+          "type": "",
+          "condition": "",
+          "cost": 0
+        },
+        "area": {
+          "effect": "",
+          "shapable": false,
+          "shape": "",
+          "units": "",
+          "value": ""
+        },
+        "attackBonus": 0,
+        "chatFlavor": "",
+        "critical": {
+          "effect": "",
           "parts": []
+        },
+        "damage": {
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -750,39 +658,47 @@
           "unidentified": "",
           "value": "<p>(EX OR SU)</p>\n<p>Numerous creatures are inured to the void of outer space. A creature with void adaptation has the following abilities.</p>\n<ul>\n<li>Immunity to cosmic rays.</li>\n<li>Immunity to the environmental effects of vacuum.</li>\n<li>No breath (see page 152).</li>\n</ul>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -792,6 +708,7 @@
     "name": "Dawn Beetle, Core-Diver",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -823,11 +740,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -841,121 +777,75 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 2
   },
   "system": {
     "abilities": {
       "cha": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "con": {
-        "base": 8,
-        "min": 3,
-        "misc": 0,
-        "mod": 8,
-        "value": 26
+        "base": 8
       },
       "dex": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 14
+        "base": 2
       },
       "int": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "str": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 5,
-        "value": 20
+        "base": 5
       },
       "wis": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 16
+        "base": 3
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 23,
-        "min": 0,
-        "tooltip": [],
-        "value": 23
+        "base": 23
       },
       "fort": {
-        "base": 14,
-        "bonus": 14,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 14
       },
       "hp": {
         "max": 165,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 165
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 2,
         "value": 2
       },
       "kac": {
-        "base": 27,
-        "min": 0,
-        "tooltip": [],
-        "value": 27
+        "base": 27
       },
-      "keyability": "",
       "reach": "5 ft.",
       "reflex": {
-        "base": 9,
-        "bonus": 9,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 9
       },
       "space": "10 ft.",
       "speed": {
@@ -976,19 +866,12 @@
         "special": "original base: 20 ft.; original special: burrow 10 ft.",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 12,
-        "bonus": 12,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 12
       }
     },
-    "classes": {},
     "conditions": {
       "asleep": false,
       "bleeding": false,
@@ -1011,6 +894,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1026,9 +910,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1036,9 +917,8 @@
     "details": {
       "type": "Vermin",
       "alignment": "N",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1047,10 +927,10 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>Dawn beetles incubate deep within stars before hatching, burrowing up to their star’s middle layer, and seeking out debris to disassemble and recycle into brood chambers. The pressure deep within a star compresses and smooths the beetles’ silicon-based bodies to an iridescent sheen as they slowly tunnel through the plasma, giving each a uniquely beautiful carapace. With scissor-like mandibles that can punch through steel and spiky claws able to tear through stone, dawn beetles are notorious among mechanics, though @UUID[Compendium.sfrpg.setting.VJ0UTIsAggcCQJBu]{Sarenrae}’s followers revere these beetles for their tenacity.</p>\n<p>A dawn beetle’s life cycle consists of two principal stages: sun-scrapper early on, then core-diver near the end of its life. True to their name, sun-scrappers industriously scrabble about the middle layers of stars, chasing after any asteroids, derelict wrecks, and other debris that has survived the heat of entering the sun and dissecting and gathering the wreckage into large junk spheres. Sun-scrappers chew and mix the debris with special saliva that vastly raises the material’s melting point, allowing these spheres to remain mostly solid despite the heat.</p>\n<p>Once a beetle’s collection becomes too large to carry in its jaws, it instead pushes the mass backward with its hind legs as it searches for more material. These collectors periodically gather in crews for safety or, rarely, to push about a single massive scrap ball. When a sun-scrapper’s sphere grows so enormous that it sinks toward the star’s core, the beetle digs out a burrow in the sphere that repels heat so capably that terrestrial creatures and treasures can sometimes survive inside.</p>\n<p>Of course, proper debris rarely lasts long after colliding with the sun. When stymied in their search, dawn beetles seek out sunspots, angle themselves toward distant stars, and wait for a solar flare. The eventual explosion hurls the beetles through space at tremendous speeds. Some crash into other stars, where they begin their hunt anew. Others reach far-flung planets, where the beetles quickly scavenge the most promising scrap around. Though these intrepid colonists mean living creatures no harm, the beetles not only devastate buildings and vehicles, but they also periodically misidentify and capture live prey who they stubbornly try to incorporate into their junk balls. Core-divers on tectonically active planets can even burrow into their new homes’ molten cores and successfully hatch a new generation. Unfortunately, dawn beetles that miss their targets float haplessly and indefinitely, in rare cases colliding with unsuspecting starships and space stations that they adopt as their new homes.</p>\n<p>Thanks to their plodding compliance, dawn beetles are rather easy to domesticate. With the proper saddle to dissipate the heat, a rider can direct their mount like a living tractor, pushing objects and demolishing structures. Unscrupulous space pirates even hide within their mounts’ scrap spheres while sending out distress signals, waiting for unsuspecting starships to approach before emerging to have their beetles burrow into their prey. Other thrill seekers exploit the beetles’ navigation abilities, using planetary gravity to slingshot them toward a distant destination, or ride the beetles bareback through space as part of rodeo competitions.</p>\n<p>Some of @UUID[Compendium.sfrpg.setting.VJ0UTIsAggcCQJBu]{Sarenrae}’s faithful consider dawn beetles a sacred animal. Acolytes take them as mounts and follow them through the galaxy, trusting in their patron’s power to deliver them safely to other worlds to spread the Dawnflower’s healing. They believe those who can ride core-divers bareback without being burned are especially blessed. The Sarenites of the&nbsp;Burning&nbsp;Archipelago maintain small herds of the beetles on the surface, training them to recycle the settlement’s waste. However, these beetles periodically become too greedy, and the Archipelago’s security must fend off hundreds of the scavengers.</p>\n<h2>SUN-SCRAPPER BEETLE COMPANIONS</h2>\n<p>Dawn beetles make agreeable companions so long as their keepers periodically remind them not to disassemble nearby vehicles and architecture. A sun-scrapper becomes anxious unless regularly provided junk and a place to store it, but properly bribed, it remains content to live with others for years. Core-divers, on the other hand, rarely remain on the surface long enough to serve as long-term companions.</p>\n<h3><strong>SUN-SCRAPPER BEETLE&nbsp; &nbsp; Levels 2-16</strong></h3>\n<p>Large vermin</p>\n<p><strong>Senses</strong>&nbsp;darkvision 60 ft.</p>\n<p><strong>Good Save</strong>&nbsp;Fort;&nbsp;<strong>Poor Saves</strong>&nbsp;Ref, Will</p>\n<p><strong>Speed</strong>&nbsp;20 ft.,burrow 10 ft.</p>\n<p><strong>Melee Attack</strong>&nbsp;bite (P)</p>\n<p><strong>Space</strong>&nbsp;10 ft.;&nbsp;<strong>Reach&nbsp;</strong> 5 ft.</p>\n<p><strong>Ability Modifiers</strong>&nbsp;Con, Str</p>\n<p><strong>Other Abilities&nbsp;</strong> solar adaptation, void adaptation</p>\n<p><span style=\"text-decoration: underline;\"><strong>SPECIAL ABILITIES</strong></span></p>\n<p><strong>Junk Fortress</strong>&nbsp;<strong>(Ex)&nbsp;</strong> A sun-scrapper beetle gains the @UUID[Compendium.sfrpg.feats.8WoBQMwyWISDx6TI]{Barricade (Combat)} feat. When you're mounted on your sun-scrapper beetle companion, you and your companion benefit equally from the cover granted by Barricade.</p>\n<p><strong>Scrap (Ex)</strong>&nbsp;A sun-scrapper beetle gains +4 species bonus to sunder combat maneuvers</p>\n<p><strong>Solar Slingshot (Ex)&nbsp;</strong> A dawn sun-scrapper can fly through space at standard navigation and astrogation speeds (CRB pg. 290) using Survival instead of Piloting to navigate. The beetle can initiate this travel only while within 10 miles of an ongoing solar flare or similar stellar phenomenon. The beetle can’t fly, but while traveling and curled up, it can reliably survive crash landings, taking only 3d6 falling damage no matter the height or speed.</p>",
+        "value": "<p>Dawn beetles incubate deep within stars before hatching, burrowing up to their star’s middle layer, and seeking out debris to disassemble and recycle into brood chambers. The pressure deep within a star compresses and smooths the beetles’ silicon-based bodies to an iridescent sheen as they slowly tunnel through the plasma, giving each a uniquely beautiful carapace. With scissor-like mandibles that can punch through steel and spiky claws able to tear through stone, dawn beetles are notorious among mechanics, though @UUID[Compendium.sfrpg.setting.Item.VJ0UTIsAggcCQJBu]{Sarenrae}’s followers revere these beetles for their tenacity.</p>\n<p>A dawn beetle’s life cycle consists of two principal stages: sun-scrapper early on, then core-diver near the end of its life. True to their name, sun-scrappers industriously scrabble about the middle layers of stars, chasing after any asteroids, derelict wrecks, and other debris that has survived the heat of entering the sun and dissecting and gathering the wreckage into large junk spheres. Sun-scrappers chew and mix the debris with special saliva that vastly raises the material’s melting point, allowing these spheres to remain mostly solid despite the heat.</p>\n<p>Once a beetle’s collection becomes too large to carry in its jaws, it instead pushes the mass backward with its hind legs as it searches for more material. These collectors periodically gather in crews for safety or, rarely, to push about a single massive scrap ball. When a sun-scrapper’s sphere grows so enormous that it sinks toward the star’s core, the beetle digs out a burrow in the sphere that repels heat so capably that terrestrial creatures and treasures can sometimes survive inside.</p>\n<p>Of course, proper debris rarely lasts long after colliding with the sun. When stymied in their search, dawn beetles seek out sunspots, angle themselves toward distant stars, and wait for a solar flare. The eventual explosion hurls the beetles through space at tremendous speeds. Some crash into other stars, where they begin their hunt anew. Others reach far-flung planets, where the beetles quickly scavenge the most promising scrap around. Though these intrepid colonists mean living creatures no harm, the beetles not only devastate buildings and vehicles, but they also periodically misidentify and capture live prey who they stubbornly try to incorporate into their junk balls. Core-divers on tectonically active planets can even burrow into their new homes’ molten cores and successfully hatch a new generation. Unfortunately, dawn beetles that miss their targets float haplessly and indefinitely, in rare cases colliding with unsuspecting starships and space stations that they adopt as their new homes.</p>\n<p>Thanks to their plodding compliance, dawn beetles are rather easy to domesticate. With the proper saddle to dissipate the heat, a rider can direct their mount like a living tractor, pushing objects and demolishing structures. Unscrupulous space pirates even hide within their mounts’ scrap spheres while sending out distress signals, waiting for unsuspecting starships to approach before emerging to have their beetles burrow into their prey. Other thrill seekers exploit the beetles’ navigation abilities, using planetary gravity to slingshot them toward a distant destination, or ride the beetles bareback through space as part of rodeo competitions.</p>\n<p>Some of @UUID[Compendium.sfrpg.setting.Item.VJ0UTIsAggcCQJBu]{Sarenrae}’s faithful consider dawn beetles a sacred animal. Acolytes take them as mounts and follow them through the galaxy, trusting in their patron’s power to deliver them safely to other worlds to spread the Dawnflower’s healing. They believe those who can ride core-divers bareback without being burned are especially blessed. The Sarenites of the&nbsp;Burning&nbsp;Archipelago maintain small herds of the beetles on the surface, training them to recycle the settlement’s waste. However, these beetles periodically become too greedy, and the Archipelago’s security must fend off hundreds of the scavengers.</p>\n<h2>SUN-SCRAPPER BEETLE COMPANIONS</h2>\n<p>Dawn beetles make agreeable companions so long as their keepers periodically remind them not to disassemble nearby vehicles and architecture. A sun-scrapper becomes anxious unless regularly provided junk and a place to store it, but properly bribed, it remains content to live with others for years. Core-divers, on the other hand, rarely remain on the surface long enough to serve as long-term companions.</p>\n<h3><strong>SUN-SCRAPPER BEETLE&nbsp; &nbsp; Levels 2-16</strong></h3>\n<p>Large vermin</p>\n<p><strong>Senses</strong>&nbsp;darkvision 60 ft.</p>\n<p><strong>Good Save</strong>&nbsp;Fort;&nbsp;<strong>Poor Saves</strong>&nbsp;Ref, Will</p>\n<p><strong>Speed</strong>&nbsp;20 ft.,burrow 10 ft.</p>\n<p><strong>Melee Attack</strong>&nbsp;bite (P)</p>\n<p><strong>Space</strong>&nbsp;10 ft.;&nbsp;<strong>Reach&nbsp;</strong> 5 ft.</p>\n<p><strong>Ability Modifiers</strong>&nbsp;Con, Str</p>\n<p><strong>Other Abilities&nbsp;</strong> solar adaptation, void adaptation</p>\n<p><span style=\"text-decoration:underline\"><strong>SPECIAL ABILITIES</strong></span></p>\n<p><strong>Junk Fortress</strong>&nbsp;<strong>(Ex)&nbsp;</strong> A sun-scrapper beetle gains the @UUID[Compendium.sfrpg.feats.Item.8WoBQMwyWISDx6TI]{Barricade (Combat)} feat. When you're mounted on your sun-scrapper beetle companion, you and your companion benefit equally from the cover granted by Barricade.</p>\n<p><strong>Scrap (Ex)</strong>&nbsp;A sun-scrapper beetle gains +4 species bonus to sunder combat maneuvers</p>\n<p><strong>Solar Slingshot (Ex)&nbsp;</strong> A dawn sun-scrapper can fly through space at standard navigation and astrogation speeds (CRB pg. 290) using Survival instead of Piloting to navigate. The beetle can initiate this travel only while within 10 miles of an ongoing solar flare or similar stellar phenomenon. The beetle can’t fly, but while traveling and curled up, it can reliably survive crash landings, taking only 3d6 falling damage no matter the height or speed.</p>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 10,
       "environment": "any",
       "organization": "solitary, pair, or crew (3-6)",
@@ -1058,29 +938,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 26",
-      "xp": {
-        "value": 9600
-      }
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1088,10 +959,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 19,
         "ranks": 19,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1099,10 +969,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1110,10 +979,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1121,10 +989,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1132,10 +999,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1143,10 +1009,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1154,10 +1019,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1165,10 +1029,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1176,10 +1039,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1187,10 +1049,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1198,10 +1059,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1209,10 +1069,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 19,
         "ranks": 19,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1220,10 +1079,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1231,10 +1089,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1242,9 +1099,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1254,10 +1109,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1265,10 +1119,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1276,10 +1129,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1287,47 +1139,40 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 19,
         "ranks": 19,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1336,19 +1181,11 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "",
         "value": [
           "fire"
         ]
-      },
-      "dr": {
-        "custom": "",
-        "value": []
       },
       "dv": {
         "custom": "",
@@ -1360,9 +1197,6 @@
       },
       "senses": "darkvision 60 ft.",
       "size": "large",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "icons/magic/control/buff-strength-muscle-damage-orange.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -18,9 +14,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -29,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,27 +35,30 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Dysu4F8licjEb2FY]{Vanguard Discipline}</p>\n<p>You gain @UUID[Compendium.sfrpg.feats.7VAXjEhaqadFFCqT]{Climbing Master} as a bonus feat. You gain a bonus to Athletics checks to climb equal to any attack roll bonuses you have that apply specifically to resolving grapple combat maneuvers. You must have @UUID[Compendium.sfrpg.feats.0Pq35gvSI2JlD682]{Improved Combat Maneuver (Combat)} (grapple) to select this vanguard discipline.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.Dysu4F8licjEb2FY]{Vanguard Discipline}</p>\n<p>You gain @UUID[Compendium.sfrpg.feats.Item.7VAXjEhaqadFFCqT]{Climbing Master} as a bonus feat. You gain a bonus to Athletics checks to climb equal to any attack roll bonuses you have that apply specifically to resolving grapple combat maneuvers. You must have @UUID[Compendium.sfrpg.feats.Item.0Pq35gvSI2JlD682]{Improved Combat Maneuver (Combat)} (grapple) to select this vanguard discipline.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "d5cfa2eb-42de-4c10-8d3a-a3a95b3eb0c9",
         "name": "Hold on Tight - Climb",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "skill",
         "enabled": false,
+        "limitTo": null,
         "max": 4,
         "modifier": "4",
         "modifierType": "formula",
@@ -67,31 +68,34 @@
         "valueAffected": "ath"
       }
     ],
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "6th Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GEM pg. 30",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

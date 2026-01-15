@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/weapon_focus.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -20,8 +16,8 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,63 +37,28 @@
       "unidentified": "",
       "value": "<p>You gain bonuses to your deity's favorite weapon.</p>\n<p><strong>Prerequisites:</strong> Worship a deity of an alignment within one step of your own alignment.</p>\n<p><strong>Benefit:</strong> You gain proficiency with all models of your deity’s favored weapon, such as all longswords (standard, sintered, microserrated, and so forth). If you are 3rd level or higher, you also gain @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization} as a bonus feat for your deity’s favored weapon. If you are 10th level or higher, when you score a critical hit with your deity’s favored weapon, you increase the DC to resist that weapon’s critical hit effect by 2; this does not stack with the @UUID[Compendium.sfrpg.feats.Item.8BuU1VMQgMbMsz0i]{Improved Critical} feat.</p>\n<p><strong>Special:</strong> If you change which deity you worship, this feat gives you no benefit until you next gain a character level. You then receive the benefit appropriate for the deity you now worship if your alignment is within one step of that deity’s.</p>\n<p><em>Enable the appropriate Weapon Specialisation modifier in the Modifiers tab.</em></p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "feat",
       "combat": false,
       "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "309e09f2-b155-4a7c-ac20-bee89333af65",
         "name": "Divine Weapon - Small Arms",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "floor(@details.level.value / 2)",
         "modifierType": "formula",
@@ -110,8 +72,10 @@
         "name": "Divine Weapon - Longarms",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "formula",
@@ -125,8 +89,10 @@
         "name": "Divine Weapon - Basic Melee",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "formula",
@@ -140,8 +106,10 @@
         "name": "Divine Weapon - Adv Melee",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "formula",
@@ -155,8 +123,10 @@
         "name": "Divine Weapon - Heavy",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "formula",
@@ -170,8 +140,10 @@
         "name": "Divine Weapon - Sniper",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "formula",
@@ -185,8 +157,10 @@
         "name": "Divine Weapon - Operative",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-property-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "-ceil(@details.level.value/2)",
         "modifierType": "formula",
@@ -200,8 +174,10 @@
         "name": "Divine Weapon - Special",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "formula",
@@ -211,30 +187,33 @@
         "valueAffected": "special"
       }
     ],
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": null,
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Worship a deity of an alignment within one step of your own alignment.",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GM pg. 99",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

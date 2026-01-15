@@ -12,7 +12,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        mergeObject(options, {
+        foundry.utils.mergeObject(options, {
             classes: ['sfrpg', 'sheet', 'actor', 'character'],
             width: 715
             // height: 830
@@ -62,13 +62,12 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         };
 
         let physicalInventoryItems = [];
-        for (const [key, value] of Object.entries(inventory)) {
+        for (const value of Object.values(inventory)) {
             const datasetType = value.dataset.type;
             const types = datasetType.split(',');
             physicalInventoryItems = physicalInventoryItems.concat(types);
         }
 
-        //   0      1       2      3        4      5       6           7               8     9
         const [items,
             spells,
             feats,
@@ -84,7 +83,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 isStack: item.system.quantity ? item.system.quantity > 1 : false,
                 isOpen: item.type === "container" ? item.system.container.isOpen : true,
                 isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
-                hasAttack: ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
+                hasAttack: SFRPG.attackActions.includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                 hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                 hasUses: item.canBeUsed(),
                 isCharged: !item.hasUses || item.getRemainingUses() <= 0 || !item.isOnCooldown,
@@ -197,7 +196,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 hasActions: true,
                 dataset: { type: "feat", "activation.type": "action" }
             },
-            ...duplicate(CONFIG.SFRPG.featureCategories),
+            ...foundry.utils.deepClone(CONFIG.SFRPG.featureCategories),
             resources: {
                 category: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"),
                 items: [],
@@ -245,7 +244,8 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
             temporary: { label: "SFRPG.ModifiersTemporaryTabLabel", modifiers: [], dataset: { subtab: "temporary" } }
         };
 
-        const [permanent, temporary, itemModifiers, conditions, misc] = actorData.modifiers.reduce((arr, modifier) => {
+        // eslint-disable-next-line no-unused-vars
+        const [permanent, temporary, itemModifiers, conditions] = actorData.modifiers.reduce((arr, modifier) => {
             if (modifier.subtab === "permanent") arr[0].push(modifier);
             else if (modifier.subtab === "conditions") arr[3].push(modifier);
             else arr[1].push(modifier); // Any unspecific categories go into temporary.
@@ -270,7 +270,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
         if (!this.options.editable) return;
 
-        // html.find('.toggle-prepared').click(this._onPrepareItem.bind(this));
         html.find('.reload').on('click', this._onReloadWeapon.bind(this));
 
         html.find('.short-rest').on('click', this._onShortRest.bind(this));
@@ -280,30 +279,6 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         html.find('.modifier-delete').on('click', this._onModifierDelete.bind(this));
         html.find('.modifier-toggle').on('click', this._onToggleModifierEnabled.bind(this));
         html.find('.player-class-level-up').on('click', this._onLevelUp.bind(this));
-    }
-
-    onBeforeCreateNewItem(itemData) {
-        super.onBeforeCreateNewItem(itemData);
-
-        if (itemData["type"] === "asi") {
-            const numASI = this.actor.items.filter(x => x.type === "asi").length;
-            const level = 5 + numASI * 5;
-            itemData.name = game.i18n.format("SFRPG.ItemSheet.AbilityScoreIncrease.ItemName", {level: level});
-        }
-    }
-
-    /**
-     * Handle toggling the prepared status of an Owned Itme within the Actor
-     *
-     * @param {Event} event The triggering click event
-     */
-    _onPrepareItem(event) {
-        event.preventDefault();
-
-        const itemId = event.currentTarget.closest('.item').dataset.itemId;
-        const item = this.actor.items.get(itemId);
-
-        return item.update({'system.preparation.prepared': !item.system.preparation.prepared});
     }
 
     /**

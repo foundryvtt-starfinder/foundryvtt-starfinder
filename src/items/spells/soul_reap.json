@@ -4,11 +4,8 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/classes/menacing_gaze.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,14 +14,16 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "spread",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "attackBonus": 0,
     "chatFlavor": "staggered for 1 round",
@@ -36,24 +35,44 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "10d8",
-          "operator": "",
-          "types": {}
+          "group": null,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
+          }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>You engulf an area in a comet-like spiral of energy, untethering the souls or animating vital essence from undead in the area. Each undead creature in the area takes 10d8 damage and is @UUID[Compendium.sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} for 1 round. A creature that succeeds at a Will saving throw takes half damage and ignores the @UUID[Compendium.sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered} effect. Mindless undead receive no saving throw. This spell has no effect on creatures that are not undead.</p>"
+      "value": "<p>You engulf an area in a comet-like spiral of energy, untethering the souls or animating vital essence from undead in the area. Each undead creature in the area takes 10d8 damage and is @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} for 1 round. A creature that succeeds at a Will saving throw takes half damage and ignores the @UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered} effect. Mindless undead receive no saving throw. This spell has no effect on creatures that are not undead.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "formula": "",
+    "isActive": false,
+    "isVariableLevel": false,
     "level": 4,
     "materials": {
       "consumed": false,
@@ -66,23 +85,30 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "units": "medium"
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",
       "descriptor": "negate"
     },
     "school": "nec",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AA4 pg. 91",
     "sr": false,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

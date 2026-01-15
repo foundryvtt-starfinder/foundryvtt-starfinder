@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "icons/magic/defensive/illusion-evasion-echo-purple.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -18,9 +14,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -29,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,27 +35,30 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.kVzO7weftgwR0CQq]{Xenoambassador}</p>\n<p>You gain a +3 bonus to your AC and saving throws against any creature who can speak a language or communicate telepathically. Such creatures can sense this special defense before choosing you as the target of their attack. This protection ends at the end of your first turn in combat or once you perform a harmful action against another creature, whichever happens first. As a standard action before this ability ends, you can extend its duration by 1 round.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.kVzO7weftgwR0CQq]{Xenoambassador}</p>\n<p>You gain a +3 bonus to your AC and saving throws against any creature who can speak a language or communicate telepathically. Such creatures can sense this special defense before choosing you as the target of their attack. This protection ends at the end of your first turn in combat or once you perform a harmful action against another creature, whichever happens first. As a standard action before this ability ends, you can extend its duration by 1 round.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "su"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "ceeb17d9-0489-4341-a2fe-5c5411a9d561",
         "name": "Diplomatic Immunity - AC",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "ac",
         "enabled": false,
+        "limitTo": null,
         "max": 3,
         "modifier": "3",
         "modifierType": "constant",
@@ -71,8 +72,10 @@
         "name": "Diplomatic Immunity - Saves",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": true,
+        "limitTo": null,
         "max": 3,
         "modifier": "3",
         "modifierType": "formula",
@@ -82,31 +85,34 @@
         "valueAffected": ""
       }
     ],
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "3th Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GEM pg. 20",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

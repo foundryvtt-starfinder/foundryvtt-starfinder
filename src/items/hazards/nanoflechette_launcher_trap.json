@@ -2,18 +2,20 @@
   "_id": "CXWQ3cQTd4yjXM0S",
   "name": "Nanoflechette Launcher Trap",
   "type": "hazard",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/mantrap.svg",
   "items": [],
   "prototypeToken": {
     "name": "Nanoflechette Launcher Trap",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -38,15 +40,31 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -59,19 +77,30 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "systems/sfrpg/icons/default/mantrap.svg",
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },
   "system": {
     "attributes": {
       "baseAttackBonus": {
-        "value": "25"
+        "value": 25
       },
       "bypass": {
         "value": ""
@@ -80,19 +109,19 @@
         "value": "6d12"
       },
       "duration": {
-        "value": "10 rounds"
+        "value": null
       },
       "eac": {
-        "value": "23"
+        "value": 23
       },
       "effect": {
         "value": "nanoflechettes +25 ranged (6d12 P); multiple targets (all targets in room)"
       },
       "fort": {
-        "value": "14"
+        "value": 14
       },
       "hardness": {
-        "value": "10"
+        "value": 10
       },
       "hp": {
         "max": 40,
@@ -102,10 +131,10 @@
         "value": "17"
       },
       "kac": {
-        "value": "17"
+        "value": 17
       },
       "reflex": {
-        "value": "11"
+        "value": 11
       },
       "reset": {
         "value": "1 minute"
@@ -114,7 +143,7 @@
         "value": "location"
       },
       "will": {
-        "value": ""
+        "value": 0
       }
     },
     "dcs": {
@@ -133,10 +162,9 @@
       "description": {
         "value": "<p>When sensors detect movement in the trapped room, the doors seal and five wall apertures open on its initiative count to launch nanoflechettes at everyone in the room. The trap fires nanoflechettes for 10 rounds, unless all the apertures have been closed or destroyed. An aperture has EAC 23, KAC 27, Fort +14, Ref +11, hardness 10, and 40 Hit Points. Closing or destroying one aperture reduces the damage dealt by 1d12.</p>"
       },
-      "source": "Technological",
-      "xp": {
-        "value": 10
-      }
-    }
+      "source": "Technological"
+    },
+    "modifiers": [],
+    "slug": ""
   }
 }

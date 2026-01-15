@@ -1,21 +1,562 @@
+# 0.29.2 - Damage Revisited
+This update overhauls the Damage Reduction/Energy Resistance system to support all types present in the game.
+
+## Breaking Changes
+
+- Custom DR/ER values should no longer be entered in the "Notes" section of their modifier; instead use the new Custom Value field
+
+## Core System Improvements
+DR/ER updates by @ian612
+
+- A new Custom Value field has been added to modifiers, which appears for relevant effect types (such as DR/ER)
+- Weapon Type data has been added for all items that support attack actions, such that weapon specialization can be applied to them
+- Items with actions now support descriptors, such that alignments and other descriptors can be applied to them
+- Damage from the following is automatically recognized as magic: Magic items, Hybrid items, Spells, spell attacks, items with equipped fusions
+- An item can also manually be set as magic so its damage is recognized as magic
+- Damage Reduction options for the 3 kinetic damage types, 4 alignments, and magic, force, and radiation have been added in addition to special materials
+- Multiple damage types/properties can now be set with and/or joining syntax so that one of a set or all are necessary to overcome the DR
+
+## Bugfixes
+
+- Item saving throw bonus calculations corrected by @danimrath
+- Items on starship actors no longer throw errors when opened due to bugs in the item saving throw calculation by @danimrath
+
+## Data Entry & Localization
+
+- All compendium actors and items using the previous DR format have been updated for compatibility with the new format
+
+# 0.29.1.3
+This is another hotfix to resolve a data model issue preventing GM Notes on items from saving correctly, and to fix some styling issues with inline checks
+
+## Bugfixes
+
+- GM Notes are now correctly defined in the data model for items and actors that have them
+- Inline Checks now respect the `displayDC` option, and correctly display the DC by default on inline checks if it is provided
+- When sent to chat, inline checks no longer display a redundant "send to chat" button
+
+# 0.29.1.2
+Another quick hotfix to resolve a data model error preventing NPC saves from being negative.
+
+## Bugfixes
+
+- The minimum value for NPC saves is now correctly set to -5, not 0 as it was previously
+  - NPC actors in the compendiums that had their saves increased to 0 by this error have been corrected back to old values
+
+# 0.29.1.1
+This is a hotfix release to resolve a couple of small bugs.
+
+## Bugfixes
+
+- The value `@item.properties.operative` and other properties, if not present in item data, should now resolve to `0` in formulas
+  - This fixes weapon specialization not calculating damage bonuses correctly
+- Scaling cantip data settings are restored to spells that use them
+  - If you have the spells Energy Ray, Hazard, Injury Echo, or Telekinetic Projectile, you'll need to delete them and re-add from the compendiums
+- AC bonuses from armor and armor-bonus-granting modifiers now stack correctly, with only the highest value used
+
+# 0.29.1
+This release cleans up some more things on the backend and adds a couple of new features and bugfixes that were enabled by the implementation of the system data model in 0.29.0. Thanks to @levirak, @danimrath, and @ian612 for their contributions to this release, and to the community for filing bug reports and feature requests!
+
+## Deprecation Notice
+
+- In an upcoming version, we will be removing Starfinder's implementation of compendium art mapping since Foundry now handles this natively in a more robust manner.
+
+## Core System Improvements
+
+- Features (class features, feats, etc.) can now be set up to execute a macro on activation and/or deactivation by @levirak
+- The trait selector has been rewritten from the ground up to be more user friendly when selecting languages, proficiencies, and weapon properties by @ian612
+- Weapon properties can now be assigned a value, such as for the Boost/Blast properties by @ian612
+- Power Armor now correctly affects bulk, speed, and attributes based on whether it's equipped and powered by @ian612
+
+## Bugfixes
+
+- Errors caused by null data values fixed in a couple places by @danimrath
+- Inline intelligence and intimidate checks are now handled correctly by @ian612
+- Fix the damage modifier dialog being broken by @ian612
+
+## Data Entry and Localization
+
+- Power Drain Vanguard Discipline added by @ian612
+- The Gear Clamp item is now a container item type, allowing it to hold an item as per its description by @ian612
+- Extra Unarmed Attack removed from Raia Iconic by @ian612
+- Empty/false properties & descriptors & materials have been stripped from compendium files, reducing their size by @ian612
+
+# 0.29.0.1
+This is a small hotfix to prevent some errors in tooltip calculations. See Version 0.29.0 for the most recent set of major changes.
+
+# 0.29.0
+
+This update is a big one, with some big backend changes that will keep the system functioning on future Foundry release versions. It also includes a big update to feature activations that allows more accurate tracking of which effects are currently active, and restores the hotbar automation and features that were broken in the transition to Foundry v13. In addition, a lot of bugs have been fixed related to timed effects, starship combat, and various other features, and the last remaining Starfinder Enhanced data has been added.
+
+Contributions for this version were made by @CharlesHunter, @danimrath, @GusRPG, @ian612, @Iankid, @ilya-vasiuk, @LebombJames, @levirak, and @Theleruby (apologies if I missed anyone!).
+
+## Breaking Changes
+
+- Old-Style NPCs (actor type `npc`) are no longer supported; these will need to be converted to the modern NPC (actor type `npc2`) BEFORE updating to this version
+- `@mod` can no longer be referenced in damage rolls. Instead, reference the ability modifier with its full path
+
+## Core System Improvements
+
+### General Improvements
+
+- Combat Type is now selected automatically when an actor is added to a not-in-progress combat by a GM
+- Modifier effect type dropdown selector now has options organized into logical groupings
+
+### Character/NPC/Drone Improvements
+
+- Overhaul of how feature activation works
+  - Default duration for features is now `instantaneous`
+  - `instantaneous` features no longer need to be toggled off (these now show up as yellow buttons on the character sheet)
+  - Activation time is now tracked for features, which automatically turn off upon expiry
+  - The `null` and `none` activation types are renamed to "Passive" and "Free" for clarity
+- Nonfunctional key ability score field removed from character sheets
+- NPC ability and spell DCs moved to the relevant tabs to highlight them
+- Ammunition usage multiplier modifiers added
+- Same-type Spell Save DC bonuses now stack correctly
+- Charges can now be consumed from items with ammunition via a Use Item button in the item's inventory listing
+- Items with per-minute ammo usage now include a manual "Use Item" button instead of using the previous unreliable algorithm to track ammo
+
+### Starship Improvements
+
+- Starship system patch state is now trackable on the starship sheet and automated correctly
+- Support added for a selection of modifiers affecting starship values
+- NPC Crew can now perform minor and open crew actions
+- New modifiers added to modify Build Point maximum
+- Starship size is now localized and AC & TL modifier is displayed next to it
+
+### Backend Improvements
+
+- Data Models have been added for all actor and item types in the game system, replacing template.json
+- Crew role names and definitions added to `config.js` in place of being hardcoded in code files
+- Bump libraries to latest revisions for security
+- Sanitization of codebase to remove linting errors and warnings
+- When cooking and unpacking compendium files, can now limit the operation to a single compendium if desired with the `--pack` option
+- Added an example `launch.json` file to enable debugging in Chrome & VS Code
+- Updated `CONTRIBUTING.md` with up-to-date documentation
+
+## Bug Fixes
+
+### General Fixes
+
+- Hotbar automations have been restored after being broken by the Foundry v13 upgrade
+- Condition application no longer depends on the name of the condition, allowing them to be localized if desired
+- Decimal values are now allowed in currency and build point fields without causing errors
+- Advantage and Disadvantage buttons now work correctly when rolling
+- Calculation of range on spell sheets fixed for Close/Medium/Long ranges
+
+### Character/NPC/Drone Fixes
+
+- Default attack roll bonuses are now correctly calculated based on the attack and weapon type, and actor stats
+- Skill checks that have the "variable DC" box checked no longer display the DC on chat cards
+- Timed Effects are now correctly handled individually for unlinked tokens using the same base actor
+- "Turn" duration added to effects to indicate something lasts until the end of the current turn
+- UPB weight is now correctly calculated (1 bulk per 1000 UPBs)
+
+### Starship Fixes
+
+- Typo fixed in the starship sheet that prevented an editor from opening
+- Starship combat phases where all combatants act simultaneously no longer highlight the top ship in the turn tracker
+- Turrets are now correctly impacted by critical weapon system damage
+
+### Backend Fixes
+
+- Fixed an error thrown for players by the `renderCombatTracker` hook
+- Fix an error being thrown when starship weapon attacks critically hit
+- Various improvements made to improve the quality and consistency of timed effects (Effect items and Features)
+
+## Data Entry & Localization
+
+This update adds the last of the Starfinder Enhanced content to the system, as well as individual items for theme and archetype features.
+
+### New Data
+
+- Remaining data from Starfinder Enhanced has been added
+  - Species have been added
+  - Rules journals for scaling equipment added
+  - Creature Companions added
+  - Summoned creatures for Singularity Servant, Solar Summoner, and Phase Swarm added
+  - Roll table added for Chaos Ammo
+  - Effects added for Enhance Defense and Enhance Energy Save
+  - GM Tools and Rituals have been added to the rules journals from Starfinder Enhanced (and Galactic Magic)
+- Added all archetype features as their own items
+- Theme features have been added as individual items with appropriate modifiers
+- Additional Spanish localizations
+
+### Corrections and Updates
+
+- Folders have been added to the Alien Archive compendium, sorting them by source (and type for adventures, NPC vs Alien)
+- Features have been updated to make the default duration `instantaneous` wherever a pre-existing duration was not found
+- Iconic characters updated to use modern version of Weapon Specialization feat
+- Binary `lookupRange` formulas replaced with `ternary` in compendiums
+- Typos and missing descriptions fixed for plasma guide items, "Baleful Polymorph", "Nanite Array (Ex)", Syringe Stick items, and Syringe Spear items
+- Description updated based on errata for the "Explosive Danger" class feature
+- Fix missing links in the "Field of Study" class feature
+- "Nanite Surge" typo preventing max uses calculating correctly fixed
+- "Nanite Surge" uses corrected to "per day" rather than "charges"
+- The "Biohacks" class feature now tracks uses and calculates max uses correctly, improving usability
+  - Iconic Barsala updated to use the updated "Biohacks" feature
+- "Expanded Cache (Su)" icon path is fixed
+- "Cultural Fascination" action type fixed
+- "Double Tap" now uses the ammo usage multiplier modifier to function correctly
+- Fix some starship action description and effect strings that were missing or had typos
+- Remove errant hash marks from some critical effect strings
+- Starship Actions "Encourage", "Harrying Shot", "Orders", and "Snap Shot" can now be rolled with the NPC gunnery skill
+- Drift engines in compendiums set to not powered by default
+- "Atech Immortal" updated to fix several incorrect fields
+
+# 0.28.3
+
+This update adds compatibility with some new Foundry v13 features, fixes to item-on-canvas dropping, a new Spanish Translation, and assorted other quality of life improvements.
+
+## Core System Improvements
+
+- Delta (+/-) inputs are now supported on item quantity and actor currency fields by @ian612
+- Starfinder-specific movement types and drag ruler are implemented by @ian612
+- Critical Effects are now displayed on attack roll cards rather than damage by @ian612
+- Full speed details are now displayed in tooltips by @ian612
+- Remaining deprecated namespaces updated for v13 by @ian612
+- remove the `_stats` field from item jsons during `unpack` by @ian612
+- When damage is set to roll automatically, critical damage is now auto-rolled properly by @ian612
+- Spanish language translation added by @GusRPG
+- Setting added to lock artwork rotation by default for characters/NPCs/drones/hazards by @danimrath
+
+## Bug Fixes
+
+- `unpack` no longer throws out of memory errors by @ian612 and @LebombJames
+- Fix create dialog creating items in the sidebar instead of on actors by @LebombJames
+- Fix development intellisense setup bugs by @ian612
+- Fix issues with items being dropped on the canvas and associated item collections by @danimrath
+- In-line check buttons in journals are legible for dark and light mode themes by @ian612
+- RollResult objects returned again from roll methods by @levirak
+
+## Data Entry
+
+Enhanced feats and some Adventure Path data has been added.
+
+### New Data
+
+- Starfinder Enhanced feats by @Iankid
+- Adventure Path #19 NPCs by @Dyark-Mist
+
+# 0.28.2
+
+This release is primarily to address a bug in the item browsers causing them to not render any items. It also includes a couple of new features from contributors and the addition of some backlogged data from Interstellar Species and the Horizons of the Vast AP.
+
+## Core System Improvements
+
+- Added drag and drop macro creation for character stats by @levirak
+- Descriptive tags are now added to skill rolls by @Imper1um
+
+## Bug Fixes
+
+- Folders in compendiums are now parsed properly by @ian612
+- Document Browsers now show spell, equipment, and starship actions properly by @ian612
+
+## Data Entry
+
+Data entry for this update focused on getting in some backlogged data from older books.
+
+### New Data
+
+- NPCs from Interstellar Species have been added to the compendiums by @Iankid
+- Data from Horizons of the Vast Book 1 has been added by @Iankid
+
+### Corrections and Updates
+
+- Items used by the IS NPCs have been updated by @Iankid
+
+# 0.28.1
+
+Following closely on the heels of our final v12 release, Foundry v13 support is here! This version of sf1e is compatible with Foundry v13 and while we do not fully take advantage of all the v13 features yet, we will be rolling out new features as we complete them. As there are a number of breaking changes between foundry v12 and v13, this version is unfortunately not compatible with Foundry v12 installs. Please remember to back up your worlds before launching them with this new version, just in case.
+
+## Core System Improvements
+
+- Foundry v13 support has been added by @danimrath, @ian612, and @LebombJames
+
+# 0.28.0
+
+Beta version, not publicly released.
+
+# 0.27.3
+
+The final v12 release is here! This version contains a multitude of fixes and updates. The next version will be for v13 exclusively, so any future bugfixes or updates will require an update to the next system version, 0.28.0 or later.
+
+## Core System Improvements
+
+- Add optional DC parameters to checks by @ilya-vasiuk
+- HUGE update to the roll generation code to simplify it by @levirak
+- Move methods related to modifiers to the Modifier class, make updates and deletions easier by @LebombJames
+- The system build pipeline has been completely rewritten to use the modern Vite instead of the obsolete gulp package by @LebombJames
+- German localization updates by @pixelmonsta
+- Add spell school display to chat cards by @Theleruby
+- Improved roll simplification on chat cards by @Theleruby
+- A new automated release system has been implemented that will result in easier releases and fewer errors by @ian612
+
+## Bug Fixes
+
+- Fix item capacity calculation errors due to undefined return values by @danimrath
+- Fix incorrect usage deduction and destroy on use settings by @Theleruby
+- Fix unicode apostrophe and TM symbols changing to mangled characters on systems without utf-8 filename support by @Theleruby
+- Always mark Unarmed Strke as proficient when added to new characters by @Theleruby
+- Fix scaling cantrip formulas being broken by @Theleruby
+- Add weapon-category-attacks and weapon-category-damage to item modifiers template by @Theleruby
+- Fixes for how weapon specialization is calculated by @Theleruby
+- Fix starship roll options by @danimrath
+- Fix Vite config minification bugs by @danimrath
+- Fix item stacks (like ammo) not merging correctly by @ian612
+
+## Data Entry
+
+Along with a host of fixes to items and aliens in the compendiums, a big effort has been put forth to update all the system's weapons and grenades to use modern attributes. In addition, more Enhanced data (Themes, Archetypes, and Equipment) has been entered. Big thanks to @ilya-vasiuk, @joharr79, @rmorgens, and @Theleruby for these major contributions!
+
+### New Data
+
+- Starfinder Enhanced Equipment by @rmorgens
+- Starfinder Enhanced Archetypes by @ilya-vasiuk
+- Starfinder Enhanced Themes by @ilya-vasiuk
+- Starfinder Enhanced Spells by @joharr79
+
+### Corrections and Updates
+
+- Fixes to Cherav, Dampen Spell, Nanite Surge, Puncture Veil, Ferrofluid Ooze, and iconic character full body images by @ian612
+- Field ration item changed to consumable type by @Theleruby
+- Fix Junk Camouflage price by @Theleruby
+- Rubbish cannon fixes by @Theleruby
+- Junk Drone and Spy Drone battery fixes by @Theleruby
+- Fix laser pistol icons by @Theleruby
+- Fix Prismatic Nimbus DC formula by @Theleruby
+- Add hybrid property to Eoxian Wrackstaff by @Theleruby
+- Remove darkwater grenade and portable altar duplicate items by @Theleruby
+- Fix swift kick tooltip error by @Theleruby
+- Remove range increment from disposable blades by @Theleruby
+- Fix typos in descriptions for several items and English localization by @Theleruby
+- Change Shadow Pistol, Umbral to have a naming scheme consistent with other items by @Theleruby
+- Bulk fixes to almost ALL weapons for ammunition type, capacity, and usage by @Theleruby
+- Bulk fixes to grenade type weapons so they work correctly by @Theleruby
+- Fix all items with mangled apostrophes due to old build process errors by @Theleruby
+- Mark unarmed strike as not equipment by @Theleruby
+- Trick attack formula changed to a lookupRange by @Theleruby
+- Fix Versatile Specialization bonus type and operative damage by @Theleruby
+- Typos corrected on Psychopomps, Defrex Hardiness, and Apocalypse Insight by @ilya-vasiuk
+- Added damage to Days' Weariness spell by @ilya-vasiuk
+
+# 0.27.2
+
+Beta version, not publicly released.
+
+# 0.27.1
+This update primarily adds some new data (including more Starfinder Enhanced material) and addresses some bugs that popped up in 0.27.0 and before. Some small system improvements have also been made, primarily to the backend.
+
+## Core System Improvements
+- Update combats to start at round 1 instead of 0, and remove unneeded chat card clutter by @danimrath
+- Handelbars `config` variable was replaced with a static handlebars helper by @levirak
+- EquippedBulkModifier added to all physical item sheets by @ian612
+- Optional hot-reloading of `.css`, `.hbs`, and `.json` files by @LebombJames
+- System manifest url location changed to enable more flexible releases by @ian612
+- git settings updated to allow OS-native line endings by @levirak
+- Non-handled document types dropped on actors are now ignored, allowing modules to handle them by @levirak
+- Untrained skills can now be hidden on the actor sheet by @Imper1um
+- Package manifest URL and release process tweaked to make it more flexible by @ian612
+
+## Bug Fixes
+- Power Armor bulk now no longer counts toward inventory weight while worn and charged by @ian612
+- Feature items correctly list themselves as passive, active, or attack features based on activation settings by @danimrath
+- Compendium browsers correctly check user permissions on compendiums before showing their items to players by @ian612
+- Starship weapons targeting TL are no longer assumed to have the Limited Fire property by @ian612
+- New `.svg` icons are modified to work correctly in Firefox by @ian612
+
+## Data Entry
+The big addition this update is the Starfinder Enhanced class features. Thanks very much to @glitchexe for entering these. A large amount of missing class features from the Armory book have been added by @Iankid and @rmorgens. We have also begun an effort to clean up mis-formatted source fields on all items and actors.
+
+### New Data
+- Caustic Fissure spell and Eldritch Deception paradox added by @danimrath
+- Armory technomancer options added by @Iankid
+- Missing mechanic tricks from Armory added by @rmorgens
+- Missing soldier options from Armory added by @Iankid
+- Enhanced Class Features added by @glitchexe
+- Missing Operative Exploits from Armory by @rmorgens
+- Options from Redshift Rally added by @gustavognog
+- Missing Soldier Fighting Styles added by @rmorgens
+
+### Corrections and Updates
+- Several aliens missing KAC values have been updated to include them by @ian612
+- Assorted fixes to compendium source references by @danimrath
+- Around 250 items had their source fields reformatted to the correct syntax by @danimrath
+- Updates to Spell Gem items by @Iankid
+- Across-the-board updates to mechanic trick attributes and source formatting by @rmorgens
+- Updates to soldier class features from Armory by @Iankid
+- Operative Exploits updated to include in-text links and modern attributes by @rmorgens
+- Icons added to many items by @LucD20
+- Added Healing Touch usage by @LucD20
+- Updates to Envoy Improvisations and addition of effects by @rmorgens
+- Fix roll formula error in Megavitamin by @ian612
+
+
+# v0.27.0
+Apologies for the delay in getting this release out, but the team has added a few new maintainers and made some **big** updates and addressed a number of long-standing issues in this one! This includes the first of the Starfinder Enhanced data: enhanced classes and resolve point usage journals. The rest of the endhanced data will follow in the next few updates. Check out the full list of changes below, and remember to please report any bugs or issues you find.
+
+Thanks to all the contributors who helped get this update out the door!
+
+## Core System Improvements
+- Complete overhaul of item sheets, splitting the Details tab into subtabs and reorganizing all fields to improve usability by ian612
+- Tech, Magic, Hybrid, and Augmentation items now include the option to add actions
+- Refactor of Modifier toggling and method for propagation to parent objects by LebombJames
+- Update readme version table and to indicate the system is for Starfinder 1st Edition
+- Weapon items now have a toggle to indicate if they are equipment or natural weapons
+- Addition of a `globalThis` property to define the system structure and allow easier extension by modules
+- New system setting added to allow decimal values in actor speeds
+- Addition of missing French translation keys by aldarion-jdr
+- Turn events are implemented on effect items to allow automation for fast healing, burning, etc. by LebombJames
+- The build script was updated to support contributors running Linux or MacOS by levirak
+- Addition of starship combat QoL features automating rolling of critical damage by LebombJames and danimrath
+- Replacement of generic mystery man and item bag default icons for all item and actor types with bespoke ones from game-icons.net
+
+## Bug Fixes
+- Inline check buttons in journals and descriptions fixed
+- Journals have been updated to Foundry v12 formatting
+- Containers on item sheets with a lot of items in them now support scrolling
+- Various fixes to typos and missing localization strings
+- Starship combat initiative updated to include piloting bonus correctly and allow for rolls with no pilot by danimrath
+- Disable dragging of NPC starship crew skills to prevent errors by LebombJames
+- Convert `roll` (deprecated in v12) to `rolls` to trigger `isRoll()` by danimrath
+- Starship roll regex cleanup
+- Starship NPC crew no longer adds additional piloting bonus, since this is baked into statblock by LebombJames and danimrath
+- Migration of `{{#select}}` to `{{#selectOptions}}` handlebars helpers on all sheets by levirak
+- Roll privacy settings chosen in dialog boxes should now be properly applied to chat cards by danimrath and ian612
+- Spell DC modifiers correctly applied to spells regardless of if DC is specified or calculated automatically by danimrath
+- Combat tracker tracked resources (HP, SP, etc.) no longer bleed onto next line when an actor resource is displayed
+- Allow Themes to have blank skill and attribrute
+- Include armor turn modifier on starships
+- The bulk of items contained in weightless containers (like null-space chambers) is now displayed properly
+
+## Data Entry
+A HUGE number of fixes and new data additions have been made to the system compendiums.
+
+### New Data
+- Add Biohack effects by Iankid
+- Miracle Worker Ship Repair, Recalibrate Engine, and Vent Engines starship actions
+- Holographic Mantle and Consciousness Uplink Drive starship components
+- Alkanian species
+- Silent Slayer fighting style and associated features
+- Swarm Dreadlancer starship added
+- Data source codes in contributing.md updated to include recent book releases, full list of AP, One-Shot, and SFS titles added to `data-sources.md` by ian612
+- Crisis Refugee theme added along with theme features for Crisis Refugee, Drift Crashed, Opportunist, Planar Traveler, Spectra Scion, and Void Nomad themes by TerallianHub
+- Dreamer Mystic connection and features by rmorgens
+- Starfinder Enhanced Classes have arrived! New versions of the technomancer, solarian, witchwarper, and envoy have been added along with their class features by Iankid
+
+### Corrections and Updates
+Major heavy lifting on these fixes was done by Iankid and ilya-vasiuk!
+- Various fixes for typos and source string formatting
+- Small fix to how Get 'em works
+- Plasma Guide ammo type fixed
+- Analgesic prices and item levels corrected
+- Skipshot pistol descriptions and properties added
+- Starship combat rules journals updated to add Squadron Combat, Chases, and Narrative Starship Combat by rmorgens
+- Polymorphic weapons updated with new attributes
+- Updates to almost all solarian class features by Iankid
+- Transition all solarian weapon crystals from having damage to applying damage as a modifier by Iankid
+- Add species features and DR/ER to Planar Scion, Ifrit
+- Phentomite token is resized to 1x1 for a medium creature
+- Unleash Magic feature saving throw formula correction
+- Add descriptions for polyplate
+- Migrate DR to the new format for all compendium aliens/npcs by ilya-vasiuk
+- Correction to Fiery Curse ability for Pyric undead creatures
+- Spidersatchel set to have 0 bulk when equipped
+- Fix power armor ammo containers to use modern settings
+- Update mystic connection index to include all connections
+- Change scrap spikes into 4 separate items for different level versions
+- Swoop Hammer damage corrected
+- Heavy Weapon Edge Nanocyte knack adds included Heavy Weapon Specialization
+- Planar Scion, Tiefling features and ER/DR added
+- Snapshot Sphere storage added
+- Sonic Dampener and Filtered Rebreather energy resistance added
+- Shock Pad ammo types corrected
+- Links to Archives of Nethys on Cybernetic Golem and X-Ray Visor Scanner have been replaced with foundry links
+- Colour Out of Space *Susceptible to Force* ability added
+- Cybernetic Zombie self-destruct DC and electricity damage type added
+- Kalo Deepspeaker weapon and ammunition type corrected and bonuses corrected
+- Flechette updated from Goods to Ammunition type
+- Kalo Shredder weapons using Flechette updated to correct ammunition settings
+
+# v0.26.1
+This update addresses a few minor bugs in 0.26.0.
+
+## Core system improvements
+- Using spell item macros now prompts the spell cast dialog and correctly consumes a spell slot.
+- Add a helper method on the `Item` class to directly cast spells
+- `@Check`s now show "Save" or "Check" as appropriate.
+
+## Bug fixes
+- Fix migrations failing on new worlds
+- Fix server-side migrations warning about missing IDs
+- Fix the `Item` constructor signature creating errors for temporary items.
+
+## Data entry
+- Fix Avenging Burst's formula.
+
+# v0.26.0 - V12 Compatibility
+Luckily it's been less time between updates than last time! This update brings V12 compatibility to the system. None of these features are too flashy, but that's the point! Hopefully this update is as nondisruptive as possible.
+
+## Core system improvements
+- Reimplement grid measurement and templates to account for new core settings
+- Update lots of function and class paths to account for new namespaces
+- Migrate rolls to account for the split of synchronous roll evaluation
+- Speed up starship action cache generation
+- Update vision modes to account for vision changes in V12
+- Adjust cook process to account for new server side migrations
+- Implement a custom parser to account for stricter roll grammar
+- Reimplement Token condition HUD
+- Add `htmlField` and `filePathField` validation to `template.json`
+
+## Bug fixes
+- Fix token effect icons not appearing
+- Fix spell slots not being updatable on the sheet
+- Fix item create dialogs not working on sheets
+- Fix some errors with dropping items to sheets
+- Fix deflector shields not applying to TL
+
+
+# v0.25.3
+I don't have a funny intro for this update, I'm just frankly embarrassed it took so long, but regardless, this update fixes some minor but annoying bugs. Enhanced is on the way, I promise.
+
+## Core system improvements
+- New localisations and minor fixes to the German localisation.
+- Include SFRPG classes and methods in the `globalThis` for the convenience of modules
+
+## Bug fixes
+- Fix some cases where the combat difficulty display throws errors.
+- Fix tooltips incorrectly truncating Enhanced class names.
+- Many fixes to starship rolls
+- Fix spell casting using the incorrect spell levels.
+- Fix timed effects not toggling correctly
+- Fix text wrapping on properties/descriptors on item sheets
+- Fix penalties not applying to attack/damage totals on character sheets.
+- Fix modifiers to ability modifiers applying incorrectly, affecting conditions like Sickened
+- Ensure the idempotency of the damage type migration
+- Include `condition` as a valid modifier `subtab` value to solve failed data prep in some cases.
+- Fix locked tooltips getting stuck.
+- Fix new spells having 0/0 uses by default.
+
+## Data entry
+- Change Combat Tracker modifier to constant
+
 # v0.25.2
 This is another quick hotfix to address some issues raised by the new stricter modifier schema, as well as a few other changes picked up in the mean time.
 
-# Bug fixes
+## Bug fixes
 - Fully implement modifier type "Resistance" to stop DataModel errors
 - Re-implement right-click token HUD to overlay
 - Fix Sonic resistance not working
 - Remove redundant logic from encumbrance calculation
 
-# Data entry
+## Data entry
 - Add effect for Get 'Em
 
 # v0.25.1
 This hotfix addresses a few issues with unlinked actors, because of course they were the issue.
 
-# Core system improvements
+## Core system improvements
 - Added a toggle for invalid roll formula warnings, defaulted to off.
-# Bugfixes
+## Bugfixes
 - Fix modifiers on unlinked tokens causing a stack overflow
 - Fix importing NPCs failing
 - Fix hazards breaking the canvas
@@ -29,7 +570,7 @@ The very cool features currently sat on the development branch are here! Hopeful
 Biohackers and Envoys rejoice, for the new Effect item type allows you to apply temporary modifiers to yourself and others with the drop of an item. These Effects are smart, and will expire after their duration has expired -- on exactly the turn you want, and can even reference the origin actor's stats. This also comes with a refactor of conditions and the status effect token HUD. Major thanks to Dosendusche for doing the majority of the heavy lifting for this.
 
 ## Roll code fixes
-Dosendusche's other big contribution this update was a refactor of our roll code. The details are very technical, but this will result in far fewer modifier bugs, roll-time bugs, and miscalculations. 
+Dosendusche's other big contribution this update was a refactor of our roll code. The details are very technical, but this will result in far fewer modifier bugs, roll-time bugs, and miscalculations.
 
 ## Modifier improvements
 Modifiers also use Foundry's `DataModel` class, which basically means they will be more reliable and resistant to incorrect data. Additionally,
@@ -137,12 +678,12 @@ A custom `@Template` enricher has been added, allowing you to place templates fr
 - Fix missing condition description localisations
 - Use the correct starship frame in oliphaunt
 - Updated alternate outcome
-- Updated Reduction plating. 
-- Updated Bulkheads. 
-- Added Data Broker features. 
+- Updated Reduction plating.
+- Updated Bulkheads.
+- Added Data Broker features.
 - Set Nanite Patches as Consumables
-- Added Trap Spotter Exploit. 
-- Added Other to Consumable types. 
+- Added Trap Spotter Exploit.
+- Added Other to Consumable types.
 - Added Ace Pilot features.
 - Re-organised the Tactical Rules journals with the help of folders-in-compendiums, and added more sections from the Tactical Rules chapter of the CRB.
 - Added all remaining power armor, and fixes to existing power armor

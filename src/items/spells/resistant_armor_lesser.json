@@ -4,11 +4,8 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/resistant_armor_lesser.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,14 +14,16 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": true,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,20 +33,26 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Lesser resistant armor&nbsp;grants the target (and its gear) protection from your choice of either kinetic damage or energy damage. If you choose kinetic damage, the target and her gear gain DR 5/— that protects against <strong>bludgeoning, piercing, and slashing damage</strong>. If you choose energy damage, pick any two of acid, cold, electricity, fire, and sonic damage. The target and her gear gain energy resistance 5 that protects against the chosen types of energy. This damage reduction or energy resistance doesn’t stack with any damage reduction or energy resistance the target already has, and multiple castings of this spell don’t stack.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "minute",
       "value": "@details.cl.value*10"
     },
     "formula": "",
+    "isActive": false,
+    "isVariableLevel": false,
     "level": 3,
     "materials": {
       "consumed": false,
@@ -60,26 +65,30 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
+    "rollNotes": "",
     "save": {
       "type": "fort",
       "dc": "",
       "descriptor": "harmless"
     },
     "school": "abj",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "CRB pg. 374",
     "sr": true,
     "target": {
-      "type": "",
       "value": "one creature wearing armor"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

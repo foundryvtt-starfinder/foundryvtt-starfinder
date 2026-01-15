@@ -2,14 +2,10 @@
   "_id": "cR84AbjpUeJ8h5O0",
   "name": "Vandal rocket launcher (1d4)",
   "type": "starshipWeapon",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/strafe.svg",
   "system": {
-    "type": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "tl",
-    "attackBonus": "0",
+    "attackBonus": 0,
     "capacity": {
       "max": 3,
       "value": 3
@@ -17,20 +13,34 @@
     "class": "light",
     "cost": 5,
     "costMultipliedBySize": false,
-    "critical": {
-      "parts": []
-    },
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "4d8",
-          "operator": "",
-          "types": {}
+          "group": null,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
+          }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Jinsul assault ships are often outfitted with vandal rocket launchers. A vandal rocket that manages to breach a ship’s shields bursts into animated demolition drones that set to work taking the ship apart, piece by piece. Survivors of an encounter with jinsuls sold inactive vandal rocket drones to several Pact Worlds manufacturers who reverseâ€‘engineered the technology, making them available to the wider galaxy. These weapons have the vandal drones special property (see below).</p>\n<h3>Vandal Drones</h3>\n<p>When a weapon with this special property deals Hull Point damage to a ship, pieces of the projectile’s shrapnel animate into drones that continue to rend the target. Each successive gunnery phase, the struck starship loses the listed amount of Hull Points until the drones are either forcibly removed during the engineering phase with an Engineering check (DC 15 + 2 × the engineer’s starship’s tier) or shaken off by the pilot during the helm phase with a successful barrel roll, flip and burn, or flyby stunt. Multiple applications of this effect don’t stack; only the highest damage applies.</p>"
     },
@@ -42,6 +52,7 @@
     },
     "pcu": 12,
     "range": "long",
+    "slug": "",
     "source": "AA3 pg. 61",
     "special": {
       "anchoring": false,
@@ -96,6 +107,7 @@
       "volatile": false,
       "vortex": false
     },
+    "specialMaterials": {},
     "speed": 12,
     "weaponType": "tracking"
   }

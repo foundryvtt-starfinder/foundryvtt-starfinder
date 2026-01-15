@@ -2,13 +2,9 @@
   "_id": "uZjjzJnbzoM9G8aT",
   "name": "Disintegrator rifle, decimator",
   "type": "weapon",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -21,7 +17,7 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "ft",
+      "units": "none",
       "value": ""
     },
     "attackBonus": 0,
@@ -43,11 +39,10 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "2",
     "capacity": {
       "max": 40,
-      "value": 40
+      "value": 0
     },
     "chatFlavor": "",
     "container": {
@@ -89,13 +84,15 @@
       ]
     },
     "critical": {
-      "effect": "Corrode 2d6",
+      "effect": "Corrode",
       "parts": [
         {
-          "formula": "",
-          "operator": "",
+          "name": "",
+          "formula": "2d6",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
-            "acid": false,
+            "acid": true,
             "bludgeoning": false,
             "cold": false,
             "electricity": false,
@@ -138,121 +135,34 @@
       "unidentified": "",
       "value": "<p>Rather snub nosed compared to other longarms, a disintegrator rifle is heavier than it looks due to the row of round energy-generating compartments atop its frame. These compartments generate enough energy for the weapon to liquefy enemies’ bodies. Well-connected customers can purchase liquidator, decimator, executioner, and eradicator disintegrator rifles.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 11,
     "modifiers": [],
     "price": 29000,
     "proficient": false,
     "properties": {
-      "aeon": false,
-      "amm": true,
-      "analog": false,
-      "antibiological": false,
-      "archaic": false,
-      "aurora": false,
-      "automatic": false,
-      "blast": false,
-      "block": false,
-      "boost": false,
-      "breach": false,
-      "breakdown": false,
-      "bright": false,
-      "buttressing": false,
-      "cluster": false,
-      "conceal": false,
-      "deconstruct": false,
-      "deflect": false,
-      "disarm": false,
-      "double": false,
-      "drainCharge": false,
-      "echo": false,
-      "entangle": false,
-      "explode": false,
-      "extinguish": false,
-      "feint": false,
-      "fiery": false,
-      "firstArc": false,
-      "flexibleLine": false,
-      "force": false,
-      "freeHands": false,
-      "fueled": false,
-      "gearArray": false,
-      "grapple": false,
-      "gravitation": false,
-      "guided": false,
-      "harrying": false,
-      "healing": false,
-      "holyWater": false,
-      "hybrid": false,
-      "hydrodynamic": false,
-      "ignite": false,
-      "indirect": false,
-      "injection": false,
-      "instrumental": false,
-      "integrated": false,
-      "line": false,
-      "living": false,
-      "lockdown": false,
-      "mind-affecting": false,
-      "mine": false,
-      "mire": false,
-      "modal": false,
-      "necrotic": false,
-      "nonlethal": false,
-      "one": false,
-      "operative": false,
-      "penetrating": false,
-      "polarize": false,
-      "polymorphic": false,
-      "powered": false,
-      "professional": false,
-      "propel": false,
-      "punchGun": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "recall": false,
-      "regrowth": false,
-      "relic": false,
-      "reposition": false,
-      "scramble": false,
-      "shape": false,
-      "shatter": false,
-      "shells": false,
-      "shield": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "sunder": false,
-      "swarm": false,
-      "tail": false,
-      "teleportive": false,
-      "thought": false,
-      "throttle": false,
-      "thrown": false,
-      "thruster": false,
-      "trip": false,
-      "two": true,
-      "unbalancing": false,
-      "underwater": false,
-      "unwieldy": false,
-      "variantBoost": false,
-      "wideLine": false
+      "amm": {
+        "extension": "",
+        "value": true
+      },
+      "two": {
+        "extension": "",
+        "value": true
+      }
     },
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "30"
     },
@@ -260,12 +170,14 @@
     "save": {
       "type": "",
       "dc": "",
-      "descriptor": "negate"
+      "descriptor": ""
     },
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 36",
     "special": "",
     "specialMaterials": {
@@ -285,7 +197,6 @@
       "voidglass": false
     },
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

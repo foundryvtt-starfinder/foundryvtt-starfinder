@@ -1,4 +1,4 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateEncumbrance", (fact, context) => {
@@ -19,9 +19,11 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -56,16 +58,9 @@ export default function(engine) {
         };
 
         const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, encumbrance, "SFRPG.ActorSheet.Inventory.Encumbrance.EncumbranceModifierTooltip");
-                }
-            } else {
-                sum += addModifier(mod[1], data, encumbrance, "SFRPG.ActorSheet.Inventory.Encumbrance.EncumbranceModifierTooltip");
+            for (const bonus of mod[1]) {
+                sum += addModifier(bonus, data, encumbrance, "SFRPG.ActorSheet.Inventory.Encumbrance.EncumbranceModifierTooltip");
             }
-
             return sum;
         }, 0);
 

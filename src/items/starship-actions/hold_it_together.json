@@ -2,15 +2,16 @@
   "_id": "B9CsbXIcE9ZGlGv9",
   "name": "Hold It Together",
   "type": "starshipAction",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": {
       "resolve": true,
       "value": "15 + floor(1.5 * @ship.details.tier)"
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<h2>Normal effect</h2><p>You can hold one system together by constantly patching and modifying it. If you succeed at an Engineering check (DC = 15 + 1-1/2 × your starship’s tier), you can select one system; that system is treated as if its critical damage condition were two steps less severe for the rest of the round (wrecked becomes glitching, and a malfunctioning or glitching system functions as if it had taken no critical damage). This check isn’t modified by penalties from critical damage to the power core.</p><h2>Critical effect</h2><p>Thanks to your inspired repairs, the system you worked on is treated as if its critical damage condition were two steps less severe (wrecked becomes glitching, whereas malfunctioning or glitching become undamaged) for 1d4 rounds.</p>"
     },
@@ -19,10 +20,14 @@
     "formula": [
       {
         "name": "Engineering",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@engineer.skills.eng.mod"
       }
     ],
     "isPush": false,
+    "modifiers": [],
     "order": 10,
     "phase": {
       "name": "Engineering phase",
@@ -34,6 +39,7 @@
     "selectors": [
       "engineer"
     ],
+    "slug": "",
     "source": "CRB"
   }
 }

@@ -1,5 +1,6 @@
 import { SFRPG } from "../config.js";
 import RollContext from "../rolls/rollcontext.js";
+import { WeaponPropertySelectorSFRPG } from "../apps/trait-selectors/weapon-property-selector.js";
 
 const itemSizeArmorClassModifier = {
     "fine": 8,
@@ -15,9 +16,9 @@ const itemSizeArmorClassModifier = {
 
 /**
  * Override and extend the core ItemSheet implementation to handle SFRPG specific item types
- * @type {ItemSheet}
+ * @extends {foundry.appv1.sheets.ItemSheet}
  */
-export class ItemSheetSFRPG extends ItemSheet {
+export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     constructor(...args) {
         super(...args);
 
@@ -39,14 +40,18 @@ export class ItemSheetSFRPG extends ItemSheet {
     /* -------------------------------------------- */
 
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
-            width: 715,
+        return foundry.utils.mergeObject(super.defaultOptions, {
+            width: 770,
             height: 600,
             classes: ["sfrpg", "sheet", "item"],
             resizable: true,
             scrollY: [".tab.details"],
+            dragDrop: [
+                { dropSelector: '.dropUuid' }
+            ],
             tabs: [
                 {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "description"},
+                {navSelector: ".subtabs", contentSelector: ".sheet-details", initial: "properties"},
                 {navSelector: ".descTabs", contentSelector: ".desc-body", initial: "description"}
             ]
         });
@@ -87,15 +92,6 @@ export class ItemSheetSFRPG extends ItemSheet {
         return numericValue;
     }
 
-    async onPlaceholderUpdated(item, newSavingThrowScore) {
-        const placeholders = item.flags.placeholders;
-        if (placeholders.savingThrow.value !== newSavingThrowScore.total) {
-            placeholders.savingThrow.value = newSavingThrowScore.total;
-            await new Promise(resolve => setTimeout(resolve, 500));
-            this.render(false, {editable: this.options.editable});
-        }
-    }
-
     /**
      * Prepare item sheet data
      * Start with the base item data and extending with additional properties for rendering.
@@ -105,12 +101,13 @@ export class ItemSheetSFRPG extends ItemSheet {
         // Ensure derived data is included
         await this.item.processData();
 
-        data.itemData = this.document.system;
+        // Options for text enrichment, used later
+        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData() ?? {};
+        const secrets = this.item.isOwner;
+
+        data.itemData = data.data.system;
         data.actor = this.document.parent;
         data.labels = this.item.labels;
-
-        // Include CONFIG values
-        data.config = CONFIG.SFRPG;
 
         // Item Type, Status, and Details
         data.itemType = game.i18n.format(`TYPES.Item.${data.item.type}`);
@@ -122,6 +119,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasProficiency = data.itemData.proficient === true || data.itemData.proficient === false;
         data.isFeat = data.item.type === "feat";
         data.isActorResource = data.item.type === "actorResource";
+        data.isWeapon = data.item.type === "weapon";
         data.isVehicleAttack = data.item.type === "vehicleAttack";
         data.isVehicleSystem = data.item.type === "vehicleSystem";
         data.isGM = game.user.isGM;
@@ -135,47 +133,35 @@ export class ItemSheetSFRPG extends ItemSheet {
         const itemData = this.item.system;
         data.placeholders = this.item.flags.placeholders || {};
 
+        // Item magic damage status
+        data.hasMagicDamage = data.item.hasMagicDamage;
+
         // Only physical items have hardness, hp, and their own saving throw when attacked.
         if (data.isPhysicalItem) {
+            let itemLevel = this.parseNumber(itemData.level, 1);
+            let sizeModifier = 0;
+            let dexterityModifier = -5;
             if (itemData.attributes) {
-                const itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
-                const sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
-                const dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
+                itemLevel = this.parseNumber(itemData.level, 1) + (itemData.attributes.customBuilt ? 2 : 0);
+                sizeModifier = itemSizeArmorClassModifier[itemData.attributes.size];
+                dexterityModifier = this.parseNumber(itemData.attributes.dex?.mod, -5);
 
                 data.placeholders.hardness = this.parseNumber(itemData.attributes.hardness, itemData.attributes.sturdy ? 5 + (2 * itemLevel) : 5 + itemLevel);
                 data.placeholders.maxHitpoints = this.parseNumber(itemData.attributes.hp?.max, (itemData.attributes.sturdy ? 15 + 3 * itemLevel : 5 + itemLevel) + (itemLevel >= 15 ? 30 : 0));
                 data.placeholders.armorClass = this.parseNumber(itemData.attributes.ac, 10 + sizeModifier + dexterityModifier);
-                data.placeholders.dexterityModifier = dexterityModifier;
-                data.placeholders.sizeModifier = sizeModifier;
-
-                data.placeholders.savingThrow = data.placeholders.savingThrow || {};
-                data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
-                data.placeholders.savingThrow.value = data.placeholders.savingThrow.value ?? 10;
-
-                this.item.flags.placeholders = data.placeholders;
-                this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)
-                    .then((total) => this.onPlaceholderUpdated(this.item, total))
-                    .catch((reason) => console.log(reason));
             } else {
-                const itemLevel = this.parseNumber(itemData.level, 1);
-                const sizeModifier = 0;
-                const dexterityModifier = -5;
-
                 data.placeholders.hardness = 5 + itemLevel;
                 data.placeholders.maxHitpoints = (5 + itemLevel) + (itemLevel >= 15 ? 30 : 0);
                 data.placeholders.armorClass = 10 + sizeModifier + dexterityModifier;
-                data.placeholders.dexterityModifier = dexterityModifier;
-                data.placeholders.sizeModifier = sizeModifier;
-
-                data.placeholders.savingThrow = data.placeholders.savingThrow || {};
-                data.placeholders.savingThrow.formula = `@itemLevel + @owner.abilities.dex.mod`;
-                data.placeholders.savingThrow.value = data.placeholders.savingThrow.value ?? 10;
-
-                this.item.flags.placeholders = data.placeholders;
-                this._computeSavingThrowValue(itemLevel, data.placeholders.savingThrow.formula)
-                    .then((total) => this.onPlaceholderUpdated(this.item, total))
-                    .catch((reason) => console.log(reason));
             }
+
+            data.placeholders.savingThrow = {
+                formula: "max(@item.level, @owner.abilities.X.mod)",
+                value: this._computeItemSaveBonus()
+            };
+            data.placeholders.dexterityModifier = dexterityModifier;
+            data.placeholders.sizeModifier = sizeModifier;
+            this.item.flags.placeholders = data.placeholders;
         }
 
         data.selectedSize = (itemData.attributes && itemData.attributes.size) ? itemData.attributes.size : "medium";
@@ -191,9 +177,12 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.isHealing = data.item.actionType === "heal";
 
         // Determine whether to show calculated totals for fields with formulas
-        if (itemData?.activation?.type) {
-            data.range = {};
+        if (itemData?.activation?.type || data.item.type === "weapon") {
+            data.activation = {
+                hasInput: !SFRPG.uncountableActivations.includes(itemData?.activation?.type ?? "")
+            };
 
+            data.range = {};
             data.range.hasInput = (() => {
                 // C/M/L on spells requires no input
                 if (this.item.type === "spell") return !(["close", "medium", "long", "none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
@@ -201,13 +190,15 @@ export class ItemSheetSFRPG extends ItemSheet {
                 else return !(["none", "personal", "touch", "planetary", "system", "plane", "unlimited"].includes(itemData.range.units));
             })();
             data.range.showTotal = !!itemData.range?.total && (String(itemData.range?.total) !== String(itemData.range?.value));
+            data.range.total = itemData.range?.total;
 
             data.area = {};
             data.area.showTotal = !!itemData.area?.total && (String(itemData.area?.total) !== String(itemData.area?.value));
 
             data.duration = {};
             data.duration.showTotal = !!itemData.duration?.total && (String(itemData.duration?.total) !== String(itemData.duration?.value));
-            data.duration.hasInput = itemData.duration.units !== "instantaneous";
+            data.duration.hasInput = !SFRPG.uncountableDurations.includes(itemData.duration.units);
+            data.duration.needsEndOn = (itemData.duration?.units === "round");
 
             data.uses = {};
             data.uses.showTotal = !!itemData.uses?.total && (String(itemData.uses?.total) !== String(itemData.uses?.max));
@@ -223,8 +214,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         // Vehicle Attacks
         if (data.isVehicleAttack) {
-            data.placeholders.savingThrow = {};
-            data.placeholders.savingThrow.value = data.item.system.save.dc;
+            data.placeholders.savingThrow = {value: data.item.system.save.dc};
         }
 
         if (data.item.type === "effect") {
@@ -242,14 +232,23 @@ export class ItemSheetSFRPG extends ItemSheet {
             data.sourceActorChoices = {};
             if (game.combat?.started) {
                 for (const combatant of game.combat.combatants) {
-                    if (combatant.actorId === data.item?.actor?.id) continue;
-                    data.sourceActorChoices[combatant.actorId] = combatant.name;
+                    if (combatant.actor.uuid === data.item?.actor?.uuid) continue;
+                    data.sourceActorChoices[combatant.actor.uuid] = combatant.name;
                 }
             } else {
                 const PCs = game.actors.filter(i => i.type === "character");
                 for (const PC of PCs) {
-                    data.sourceActorChoices[PC.id] = PC.name;
+                    data.sourceActorChoices[PC.uuid] = PC.name;
                 }
+            }
+
+            // Turn Events
+            for (const [i, turnEvent] of (data.itemData.turnEvents || []).entries()) {
+                turnEvent.enrichedNote = await foundry.applications.ux.TextEditor.enrichHTML(turnEvent.content, {
+                    rollData,
+                    secrets
+                });
+                turnEvent.noteI = `system.turnEvents.${i}.content`;
             }
         }
 
@@ -259,46 +258,70 @@ export class ItemSheetSFRPG extends ItemSheet {
         data.hasCapacity = this.item.hasCapacity();
 
         // Enrich text editors
-        const async = true;
-        const rollData = RollContext.createItemRollContext(this.item, this.actor).getRollData() ?? {};
-        const secrets = this.item.isOwner;
 
-        data.enrichedDescription = await TextEditor.enrichHTML(this.item.system?.description?.value, {
-            async,
+        data.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.description?.value, {
             rollData,
             secrets
         });
-        data.enrichedShortDescription = await TextEditor.enrichHTML(this.item.system?.description?.short, {
-            async,
+        data.enrichedShortDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.description?.short, {
             rollData,
             secrets
         });
-        data.enrichedGMNotes = await TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
-            async,
+        data.enrichedGMNotes = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.description?.gmNotes, {
             rollData,
             secrets
         });
+
+        if (data?.item?.type === "starshipAction") {
+            data.enrichedEffectNormal = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.effectNormal, {
+                rollData,
+                secrets
+            });
+            data.enrichedEffectCritical = await foundry.applications.ux.TextEditor.enrichHTML(this.item.system?.effectCritical, {
+                rollData,
+                secrets
+            });
+
+            // Manage Subactions
+            if (data?.itemData?.formula?.length > 0) {
+                data.subactionEditorInfo = [];
+                let ct = 0;
+                for (const value of data.itemData.formula) {
+                    const effect = {};
+
+                    effect.enrichedEffectNormal = await foundry.applications.ux.TextEditor.enrichHTML(value.effectNormal, {
+                        rollData,
+                        secrets
+                    });
+                    effect.targetNormal = `system.formula.${ct}.effectNormal`;
+
+                    effect.enrichedEffectCritical = await foundry.applications.ux.TextEditor.enrichHTML(value.effectCritical, {
+                        rollData,
+                        secrets
+                    });
+                    effect.targetCritical = `system.formula.${ct}.effectCritical`;
+                    ct += 1;
+                    data.subactionEditorInfo.push(effect);
+                }
+            }
+        }
 
         return data;
     }
 
     /* -------------------------------------------- */
 
-    async _computeSavingThrowValue(itemLevel, formula) {
-        try {
-            const rollData = {
-                owner: this.item.actor ? duplicate(this.item.actor.system) : {abilities: {dex: {mod: 0}}},
-                item: duplicate(this.item.system),
-                itemLevel: itemLevel
-            };
-            if (!rollData.owner.abilities?.dex?.mod) {
-                rollData.owner.abilities = {dex: {mod: 0}};
-            }
-            const saveRoll = Roll.create(formula, rollData);
-            return saveRoll.evaluate({async: true});
-        } catch (err) {
-            console.log(err);
-            return null;
+    _computeItemSaveBonus() {
+        // TODO: Move this into the item's calculation rather than calculating on the sheet
+        const parentItem = this.item;
+        const parentActorAbilities = parentItem.actor?.system?.attributes;
+        const itemLevel = parentItem.system.level;
+        if (parentActorAbilities) {
+            return `[F: ${Math.max(itemLevel, parentActorAbilities.fort.bonus, 0)}, R: ${Math.max(itemLevel, parentActorAbilities.reflex.bonus, 0)}, W: ${Math.max(itemLevel, parentActorAbilities.will.bonus, 0)}]`;
+        } else if (itemLevel < 1) {
+            return 0;
+        } else {
+            return `${itemLevel}`;
         }
     }
 
@@ -313,7 +336,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         if (["weapon", "equipment", "shield"].includes(item.type)) return itemData.equipped ? game.i18n.localize("SFRPG.InventoryEquipped") : game.i18n.localize("SFRPG.InventoryNotEquipped");
         else if (item.type === "feat") return CONFIG.SFRPG.featureCategories[itemData.details.category]?.label || "";
-        else if (item.type === "starshipWeapon") return game.i18n.localize(`SFRPG.Items.ShipWeapon.${itemData.mount.mounted ? "Mounted" : "NotMounded"}`);
+        else if (item.type === "starshipWeapon") return game.i18n.localize(`SFRPG.Items.ShipWeapon.${itemData.mount.mounted ? "Mounted" : "NotMounted"}`);
         else if (item.type === "effect") return game.i18n.localize(`SFRPG.${itemData.enabled ? "Enabled" : "Disabled"}`);
         else if (item.type === "augmentation") {
             return `${CONFIG.SFRPG.augmentationTypes[itemData.type]} (${CONFIG.SFRPG.augmentationSystems[itemData.system] || ""})`;
@@ -343,7 +366,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         if (item.type === "weapon") {
             props.push(...Object.entries(itemData.properties)
-                .filter(e => e[1] === true)
+                .filter(e => e[1].value === true)
                 .map(e => ({
                     name: CONFIG.SFRPG.weaponProperties[e[0]],
                     tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]
@@ -515,7 +538,7 @@ export class ItemSheetSFRPG extends ItemSheet {
     _updateObject(event, formData) {
         // Handle Damage Array
         const damage = Object.entries(formData).filter(e => e[0].startsWith("system.damage.parts"));
-        formData["system.damage.parts"] = damage.reduce((arr, entry) => {
+        const damageParts = damage.reduce((arr, entry) => {
             const [i, key, type] = entry[0].split(".").slice(3);
             if (!arr[i]) arr[i] = { name: "", formula: "", types: {}, group: null, isPrimarySection: false };
 
@@ -539,10 +562,13 @@ export class ItemSheetSFRPG extends ItemSheet {
 
             return arr;
         }, []);
+        if (damageParts.length) {
+            formData["system.damage.parts"] = damageParts;
+        }
 
         // Handle Critical Damage Array
         const criticalDamage = Object.entries(formData).filter(e => e[0].startsWith("system.critical.parts"));
-        formData["system.critical.parts"] = criticalDamage.reduce((arr, entry) => {
+        const criticalDamageParts = criticalDamage.reduce((arr, entry) => {
             const [i, key, type] = entry[0].split(".").slice(3);
             if (!arr[i]) arr[i] = { formula: "", types: {}, operator: "" };
 
@@ -557,15 +583,76 @@ export class ItemSheetSFRPG extends ItemSheet {
 
             return arr;
         }, []);
+        if (criticalDamageParts.length) {
+            formData["system.critical.parts"] = criticalDamageParts;
+        }
 
         // Handle Ability Adjustments array
         const abilityMods = Object.entries(formData).filter(e => e[0].startsWith("system.abilityMods.parts"));
-        formData["system.abilityMods.parts"] = abilityMods.reduce((arr, entry) => {
+        const abilityModParts = abilityMods.reduce((arr, entry) => {
             const [i, j] = entry[0].split(".").slice(3);
             if (!arr[i]) arr[i] = [];
             arr[i][j] = entry[1];
             return arr;
         }, []);
+        if (abilityModParts.length) {
+            formData["system.abilityMods.parts"] = abilityModParts;
+        }
+
+        // Handle Starship Action/Subaction Formulas
+        if (this.object.type === "starshipAction") {
+            const currentFormula = {system: {formula: Object.assign({}, this.item.system.formula)}};
+            const formula = Object.entries(formData).filter(e => e[0].startsWith("system.formula"));
+            const newFormula = {};
+
+            for (const [k, v] of formula) {
+                newFormula[k] = v;
+                delete formData[k];
+            }
+
+            const expanded = foundry.utils.expandObject(newFormula);
+            const final = Object.values(foundry.utils.mergeObject(currentFormula, expanded, {overwrite:true}).system.formula);
+            formData["system.formula"] = final;
+        }
+
+        // Handle turn events
+        if (this.object.type === "effect") {
+            const currentEvents = {system: {turnEvents: Object.assign({}, this.item.system.turnEvents)}};
+            const formula = Object.entries(formData).filter(e => e[0].startsWith("system.turnEvents"));
+            const newEvents = {};
+
+            for (const [k, v] of formula) {
+                newEvents[k] = v;
+                delete formData[k];
+            }
+
+            const expanded = foundry.utils.expandObject(newEvents);
+            const final = Object.values(foundry.utils.mergeObject(currentEvents, expanded, {overwrite:true}).system.turnEvents);
+            formData["system.turnEvents"] = final;
+        }
+
+        // Handle prototype token movement changes on drone chassis mainMovement differing from previous value
+        if (this.item && this.actor && this.item?.type === "chassis") {
+            const oldMainMovement = this.item?.system?.speed?.mainMovement;
+            const newMainMovement = formData["system.speed.mainMovement"];
+            if (oldMainMovement !== newMainMovement) {
+                this.actor.update({'prototypeToken.movementAction': CONFIG.SFRPG.movementOptions[newMainMovement]});
+                console.log(`Starfinder | Updated prototype token movement action on ${this.actor.name} (${this.actor.id}) to '${CONFIG.SFRPG.movementOptions[newMainMovement]}'`);
+            }
+        }
+
+        // Allow basic +/- math in quantity field
+        const inputQuantity = formData["system.quantity"];
+        if (inputQuantity) {
+            const oldValue = this.item?.system?.quantity;
+            let newValue = oldValue;
+            const isDelta = inputQuantity.startsWith("+") || inputQuantity.startsWith("-");
+            const sanitizedInput = inputQuantity.replace(/[^0-9|+|-]/g, '');
+            if (sanitizedInput) {
+                newValue = isDelta ? Number(oldValue) + Number(sanitizedInput) : Number(sanitizedInput);
+            }
+            formData["system.quantity"] = newValue;
+        }
 
         // Update the Item
         return super._updateObject(event, formData);
@@ -588,6 +675,8 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find("input.primary-section-checkbox").click(this._onTogglePrimaryDamageSection.bind(this));
         html.find(".visualization-control").click(this._onActorResourceVisualizationControl.bind(this));
         html.find(".ability-adjustments-control").click(this._onAbilityAdjustmentsControl.bind(this));
+        html.find(".subaction-control").click(this._onSubactionControl.bind(this));
+        html.find(".turn-event-control").click(this._onTurnEventControl.bind(this));
 
         html.find('.modifier-create').click(this._onModifierCreate.bind(this));
         html.find('.modifier-edit').click(this._onModifierEdit.bind(this));
@@ -610,12 +699,68 @@ export class ItemSheetSFRPG extends ItemSheet {
         html.find('input[name="resource-value"]').change(this._onChangeResourceVisualizationValue.bind(this));
         html.find('input[name="resource-title"]').change(this._onChangeResourceVisualizationTitle.bind(this));
 
+        html.find('.trait-selector').click(this._onTraitSelector.bind(this));
+
         // toggle timedEffect
         html.find('.effect-details-toggle').on('click', this._onToggleDetailsEffect.bind(this));
-        html.find("div[data-origin-uuid]").on("click", this._onClickOrigin.bind(this));
+        html.find('[data-origin-uuid]').on("click", this._onClickOrigin.bind(this));
+    }
+
+    async _canDragDrop() {
+        return this.item.canUserModify(game.user, 'update');
+    }
+
+    async _onDrop(event) {
+        const data = foundry.applications.ux.TextEditor.getDragEventData(event);
+        if (event.currentTarget.classList.contains('dropUuid')) {
+            const target = event.currentTarget.querySelector('input[name]')?.name;
+            if (target && Object.hasOwn(data, 'uuid')) {
+                await this.item.update({ [target]: data.uuid ?? ''});
+            }
+        }
     }
 
     /* -------------------------------------------- */
+
+    /**
+     * Add or remove a subaction from a starship action
+     * @param {Event} event     The original click event
+     * @return {Promise}
+     * @private
+     */
+    async _onSubactionControl(event) {
+        event.preventDefault();
+        const a = event.currentTarget;
+        const formula = this.item.system.formula;
+        await this._onSubmit(event); // Submit any unsaved changes
+
+        // Add a new subaction
+        if (a.classList.contains("add-subaction")) {
+            if (formula.length > 0) {
+                return this.item.update({
+                    "system.formula": formula.concat([
+                        { dc: {resolve:false, value:""}, formula: "", name:"", effectNormal:"", effectCritical:"" }
+                    ])
+                });
+            }
+            else {
+                return this.item.update({
+                    "system.formula": [
+                        { dc: {resolve:false, value:""}, formula: "", name:"", effectNormal:"", effectCritical:"" }
+                    ]
+                });
+            }
+        }
+
+        // Remove a subaction
+        else if (a.classList.contains("delete-subaction")) {
+            const li = a.closest(".subaction-part");
+            formula.splice(Number(li.dataset.subactionPart), 1);
+            return this.item.update({
+                "system.formula": formula
+            });
+        }
+    }
 
     async _onAbilityAdjustmentsControl(event) {
         event.preventDefault();
@@ -625,7 +770,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-ability-adjustment")) {
             await this._onSubmit(event);
             const abilityMods = this.item.system.abilityMods;
-            return await this.item.update({
+            return this.item.update({
                 "system.abilityMods.parts": abilityMods.parts.concat([
                     [0, ""]
                 ])
@@ -636,9 +781,9 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("delete-ability-adjustment")) {
             await this._onSubmit(event);
             const li = a.closest(".ability-adjustment-part");
-            const abilityMods = duplicate(this.item.system.abilityMods);
+            const abilityMods = foundry.utils.deepClone(this.item.system.abilityMods);
             abilityMods.parts.splice(Number(li.dataset.abilityAdjustment), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.abilityMods.parts": abilityMods.parts
             });
         }
@@ -658,7 +803,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const damage = this.item.system.damage;
-            return await this.item.update({
+            return this.item.update({
                 "system.damage.parts": damage.parts.concat([
                     { name: "", formula: "", types: {}, group: null, isPrimarySection: false }
                 ])
@@ -669,9 +814,9 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("delete-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const li = a.closest(".damage-part");
-            const damage = duplicate(this.item.system.damage);
+            const damage = foundry.utils.deepClone(this.item.system.damage);
             damage.parts.splice(Number(li.dataset.damagePart), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.damage.parts": damage.parts
             });
         }
@@ -680,7 +825,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("add-critical-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const criticalDamage = this.item.system.critical;
-            return await this.item.update({
+            return this.item.update({
                 "system.critical.parts": criticalDamage.parts.concat([
                     ["", ""]
                 ])
@@ -691,9 +836,9 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("delete-critical-damage")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const li = a.closest(".damage-part");
-            const criticalDamage = duplicate(this.item.system.critical);
+            const criticalDamage = foundry.utils.deepClone(this.item.system.critical);
             criticalDamage.parts.splice(Number(li.dataset.criticalPart), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.critical.parts": criticalDamage.parts
             });
         }
@@ -727,7 +872,6 @@ export class ItemSheetSFRPG extends ItemSheet {
      */
     _onModifierCreate(event) {
         event.preventDefault();
-        const target = $(event.currentTarget);
 
         this.item.addModifier({
             name: "New Modifier"
@@ -735,30 +879,30 @@ export class ItemSheetSFRPG extends ItemSheet {
     }
 
     /**
-     * Delete a modifier from the item.
-     *
-     * @param {Event} event The originating click event
-     */
+    * Delete a modifier from the actor.
+    *
+    * @param {Event} event The originating click event
+    */
     async _onModifierDelete(event) {
         event.preventDefault();
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.item.system.modifiers.find(mod => mod._id === modifierId);
 
-        await this.item.deleteModifier(modifierId);
+        return modifier.parentDelete();
     }
-
     /**
-     * Edit a modifier for an item.
-     *
-     * @param {Event} event The orginating click event
-     */
-    _onModifierEdit(event) {
+    * Edit a modifier for an item.
+    * @param {Event} event The orginating click event
+    */
+    async _onModifierEdit(event) {
         event.preventDefault();
 
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
+        const modifier = this.item.system.modifiers.find(mod => mod._id === modifierId);
 
-        this.item.editModifier(modifierId);
+        return modifier.edit();
     }
 
     /**
@@ -771,29 +915,16 @@ export class ItemSheetSFRPG extends ItemSheet {
         const target = $(event.currentTarget);
         const modifierId = target.closest('.item.modifier').data('modifierId');
 
-        const modifiers = duplicate(this.item.system.modifiers);
+        const modifiers = this.item.system.modifiers;
         const modifier = modifiers.find(mod => mod._id === modifierId);
 
-        const formula = modifier.modifier;
-        if (formula) {
-            // TODO: test this this.item should be the actor if not try to get the actor here
-            const roll = Roll.create(formula, this.item.system);
-            modifier.max = await roll.evaluate({maximize: true}).total;
-        } else {
-            modifier.max = 0;
-        }
-
-        modifier.enabled = !modifier.enabled;
-
-        await this.item.update({
-            'system.modifiers': modifiers
-        });
+        return modifier.toggle();
     }
 
     async _onAddStorage(event) {
         event.preventDefault();
 
-        const storage = duplicate(this.item.system.container.storage);
+        const storage = foundry.utils.deepClone(this.item.system.container.storage);
         storage.push({
             type: "bulk",
             subtype: "",
@@ -813,7 +944,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        const storage = duplicate(this.item.system.container.storage);
+        const storage = foundry.utils.deepClone(this.item.system.container.storage);
         storage.splice(slotIndex, 1);
         await this.item.update({
             "system.container.storage": storage
@@ -827,7 +958,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        const storage = duplicate(this.item.system.container.storage);
+        const storage = foundry.utils.deepClone(this.item.system.container.storage);
         storage[slotIndex].type = event.currentTarget.value;
         if (storage[slotIndex].type === "bulk") {
             storage[slotIndex].subtype = "";
@@ -847,7 +978,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        const storage = duplicate(this.item.system.container.storage);
+        const storage = foundry.utils.deepClone(this.item.system.container.storage);
         storage[slotIndex].subtype = event.currentTarget.value;
         await this.item.update({
             "system.container.storage": storage
@@ -863,7 +994,7 @@ export class ItemSheetSFRPG extends ItemSheet {
 
         const inputNumber = Number(event.currentTarget.value);
         if (!Number.isNaN(inputNumber)) {
-            const storage = duplicate(this.item.system.container.storage);
+            const storage = foundry.utils.deepClone(this.item.system.container.storage);
             storage[slotIndex].amount = inputNumber;
             await this.item.update({
                 "system.container.storage": storage
@@ -878,7 +1009,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        const storage = duplicate(this.item.system.container.storage);
+        const storage = foundry.utils.deepClone(this.item.system.container.storage);
         storage[slotIndex].weightProperty = event.currentTarget.value;
         await this.item.update({
             "system.container.storage": storage
@@ -895,7 +1026,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const itemType = event.currentTarget.name;
         const enabled = event.currentTarget.checked;
 
-        const storage = duplicate(this.item.system.container.storage);
+        const storage = foundry.utils.deepClone(this.item.system.container.storage);
         if (enabled) {
             if (!storage[slotIndex].acceptsType.includes(itemType)) {
                 storage[slotIndex].acceptsType.push(itemType);
@@ -938,7 +1069,7 @@ export class ItemSheetSFRPG extends ItemSheet {
         const li = $(event.currentTarget).parents(".storage-slot");
         const slotIndex = li.attr("data-slot-index");
 
-        const storage = duplicate(this.item.system.container.storage);
+        const storage = foundry.utils.deepClone(this.item.system.container.storage);
         storage[slotIndex].affectsEncumbrance = event.currentTarget.checked;
         await this.item.update({
             "system.container.storage": storage
@@ -953,8 +1084,8 @@ export class ItemSheetSFRPG extends ItemSheet {
         // Add new visualization rule
         if (a.classList.contains("add-visualization")) {
             await this._onSubmit(event); // Submit any unsaved changes
-            const visualization = duplicate(this.item.system.combatTracker.visualization);
-            return await this.item.update({
+            const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
+            return this.item.update({
                 "system.combatTracker.visualization": visualization.concat([
                     { mode: "eq", value: 0, title: this.item.name, image: this.item.img }
                 ])
@@ -965,9 +1096,9 @@ export class ItemSheetSFRPG extends ItemSheet {
         if (a.classList.contains("delete-visualization")) {
             await this._onSubmit(event); // Submit any unsaved changes
             const li = a.closest(".visualization-part");
-            const visualization = duplicate(this.item.system.combatTracker.visualization);
+            const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
             visualization.splice(Number(li.dataset.index), 1);
-            return await this.item.update({
+            return this.item.update({
                 "system.combatTracker.visualization": visualization
             });
         }
@@ -980,10 +1111,9 @@ export class ItemSheetSFRPG extends ItemSheet {
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
 
-        const visualization = duplicate(this.item.system.combatTracker.visualization);
+        const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
         const currentImage = visualization[visualizationIndex].image || this.item.img;
 
-        const attr = event.currentTarget.dataset.edit;
         const fp = new FilePicker({
             type: "image",
             current: currentImage,
@@ -1006,10 +1136,10 @@ export class ItemSheetSFRPG extends ItemSheet {
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
 
-        const visualization = duplicate(this.item.system.combatTracker.visualization);
+        const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
         visualization[visualizationIndex].mode = event.currentTarget.value;
 
-        return await this.item.update({
+        return this.item.update({
             "system.combatTracker.visualization": visualization
         });
     }
@@ -1021,13 +1151,13 @@ export class ItemSheetSFRPG extends ItemSheet {
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
 
-        const visualization = duplicate(this.item.system.combatTracker.visualization);
+        const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
         visualization[visualizationIndex].value = Number(event.currentTarget.value);
         if (Number.isNaN(visualization[visualizationIndex].value)) {
             visualization[visualizationIndex].value = 0;
         }
 
-        return await this.item.update({
+        return this.item.update({
             "system.combatTracker.visualization": visualization
         });
     }
@@ -1039,17 +1169,39 @@ export class ItemSheetSFRPG extends ItemSheet {
         const parent = $(event.currentTarget).parents(".visualization-part");
         const visualizationIndex = $(parent).attr("data-index");
 
-        const visualization = duplicate(this.item.system.combatTracker.visualization);
+        const visualization = foundry.utils.deepClone(this.item.system.combatTracker.visualization);
         visualization[visualizationIndex].title = event.currentTarget.value;
 
-        return await this.item.update({
+        return this.item.update({
             "system.combatTracker.visualization": visualization
         });
     }
 
     /**
-     * Toggle an effect and their modifiers to be enabled or disabled.
+     * Creates a TraitSelector dialog
      *
+     * @param {Event} event HTML Event
+     * @private
+     */
+    _onTraitSelector(event) {
+        event.preventDefault();
+        const options = {
+            location: event.currentTarget.dataset.location,
+            title: event.currentTarget.dataset.title,
+            format: event.currentTarget.dataset.format,
+            choices: CONFIG.SFRPG[event.currentTarget.dataset.choices],
+            tooltips: CONFIG.SFRPG[event.currentTarget.dataset.tooltips]
+        };
+
+        // Pick the appropriate trait selector subclass
+        const cls = {
+            "itemProperties": WeaponPropertySelectorSFRPG
+        }[options.format];
+        new cls(this.item, options).render(true);
+    }
+
+    /**
+     * Toggle an effect and their modifiers to be enabled or disabled.
      * @param {Event} event The originating click event
      */
     async _onToggleDetailsEffect(event) {
@@ -1080,5 +1232,42 @@ export class ItemSheetSFRPG extends ItemSheet {
         const doc = await fromUuid(uuid);
 
         doc.sheet.render(true);
+    }
+
+    /**
+     * Add or remove a turn event from an effect
+     * @param {Event} event     The original click event
+     * @return {Promise}        The update promise
+     * @private
+     */
+    async _onTurnEventControl(event) {
+        event.preventDefault();
+        const a = event.currentTarget;
+        const turnEvents = this.item.system.turnEvents;
+        await this._onSubmit(event); // Submit any unsaved changes
+
+        // Add a new turn event
+        if (a.classList.contains("add-turn-event")) {
+            return this.item.update({
+                "system.turnEvents": turnEvents.concat([
+                    {
+                        trigger: "onTurnEnd",
+                        type: "roll",
+                        formula: "",
+                        damageTypes: {},
+                        name: ""
+                    }
+                ])
+            });
+        }
+
+        // Remove a turn event
+        else if (a.classList.contains("delete-turn-event")) {
+            const li = a.closest(".turn-event");
+            turnEvents.splice(Number(li.dataset.turnEventIdx), 1);
+            return this.item.update({
+                "system.turnEvents": turnEvents
+            });
+        }
     }
 }

@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/feats/barricade.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "other",
     "activation": {
@@ -18,14 +14,16 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -39,6 +37,8 @@
         {
           "name": "",
           "formula": "1d6*@cl",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -46,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -61,14 +64,14 @@
       "unidentified": "",
       "value": "<p>When you take damage from an effect, you can create a defensive conduit between yourself and one technological object, non-archaic armor, or non‑archaic weapon you’re carrying or wearing that’s 3 Bulk or less. The chosen object takes damage equal to 1d6 times your caster level, ignoring the object’s hardness. You reduce the damage you take from the triggering attack by half this result, though you can’t reduce the damage by more than 3 times the item’s level.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 2,
     "materials": {
@@ -82,11 +85,9 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "personal",
-      "value": null
+      "units": "personal"
     },
     "rollNotes": "",
     "save": {
@@ -95,14 +96,19 @@
       "descriptor": "negate"
     },
     "school": "abj",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AA4 pg. 37",
     "sr": false,
     "target": {
-      "type": "",
       "value": "one technological object, non-archaic armor, or non-archaic weapon you're carrying or wearing that's 3 Bulk or less"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

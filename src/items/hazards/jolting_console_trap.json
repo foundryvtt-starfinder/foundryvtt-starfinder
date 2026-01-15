@@ -2,18 +2,20 @@
   "_id": "yibkyfUlfOp4pzxa",
   "name": "Jolting Console Trap",
   "type": "hazard",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/mantrap.svg",
   "items": [],
   "prototypeToken": {
     "name": "Jolting Console Trap",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
     "bar2": {
       "attribute": ""
     },
+    "detectionModes": [],
     "displayBars": 20,
     "displayName": 20,
     "disposition": -1,
@@ -38,15 +40,31 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
-    "mirrorX": false,
-    "mirrorY": false,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
-    "scale": 1,
     "sight": {
       "angle": 360,
       "attenuation": 0.1,
@@ -59,19 +77,30 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "tint": null
+      "src": "systems/sfrpg/icons/default/mantrap.svg",
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },
   "system": {
     "attributes": {
       "baseAttackBonus": {
-        "value": "0"
+        "value": 0
       },
       "bypass": {
         "value": "wireless key card reader (Computers DC 19 to hack)"
@@ -80,32 +109,32 @@
         "value": "6d6"
       },
       "duration": {
-        "value": ""
+        "value": null
       },
       "eac": {
-        "value": ""
+        "value": 0
       },
       "effect": {
         "value": "arc of electricity (6d6 E); Reflex DC 14 half"
       },
       "fort": {
-        "value": ""
+        "value": 0
       },
       "hardness": {
-        "value": ""
+        "value": 0
       },
       "hp": {
-        "max": null,
-        "value": null
+        "max": 10,
+        "value": 10
       },
       "init": {
         "value": ""
       },
       "kac": {
-        "value": ""
+        "value": 0
       },
       "reflex": {
-        "value": ""
+        "value": 0
       },
       "reset": {
         "value": "immediate"
@@ -114,7 +143,7 @@
         "value": "touch"
       },
       "will": {
-        "value": ""
+        "value": 0
       }
     },
     "dcs": {
@@ -133,10 +162,9 @@
       "description": {
         "value": "<p>When an unsuspecting creature touches the trapped console, the console sparks with electricity, shocking the triggering creature.</p>"
       },
-      "source": "Technological",
-      "xp": {
-        "value": 10
-      }
-    }
+      "source": "Technological"
+    },
+    "modifiers": [],
+    "slug": ""
   }
 }

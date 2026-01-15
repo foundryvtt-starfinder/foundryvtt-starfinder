@@ -1,5 +1,10 @@
+import { ActorSFRPG } from "../actor/actor.js";
+import SFRPGModifierApplication from "../apps/modifier-app.js";
+import { ItemSFRPG } from "../item/item.js";
 import { generateUUID } from "../utils/utilities.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.js";
+
+const { fields } = foundry.data;
 
 /**
  * A data object that hold information about a specific modifier.
@@ -11,38 +16,39 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.
  * @param {String}        data.modifierType  Determines if this modifier is a constant value (+2) or a roll formula (1d4).
  * @param {String}        data.effectType    The category of things that might be modified by this value.
  * @param {String}        data.valueAffected The specific statistic being affected.
+ * @param {String}        data.customValue   A string that can be parsed by the system into a custom value to be affected
  * @param {Boolean}       data.enabled       Is this modifier enabled or not.
  * @param {String}        data.source        Where does this modifier come from? An item, or an ability?
  * @param {String}        data.notes         Any notes that are useful for this modifier.
  * @param {String}        data.subtab        What subtab should this appear on in the character sheet?
  * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
- * @param {String|null}   data.id            Override a random id with a specific one.
- * @param {Object|null}   data.container     The UUIDs of the actor and item, if applicable, the modifier is owned by.
- * @param {Object|null}   data.damage        If this modifier is a damage section modifier, the damage type and group
+ * @param {?String}       data.id            Override a random id with a specific one.
+ * @param {?Object}       data.damage        If this modifier is a damage section modifier, the damage type and group
  * @param {String}        data.limitTo       If this modifier is on an item, should the modifier affect only that item?
  */
 export default class SFRPGModifier extends foundry.abstract.DataModel {
     constructor(data, options = {}) {
         super(data, options);
+        this.globalModifier = options.globalModifier || false;
     }
 
     _initializeSource(source, options = {}) {
         // Create a random id, or set the specific one if provided.
-        source._id ||= source.id || generateUUID();
+        source._id ||= (source.id || generateUUID());
 
-        return super._initializeSource(source, (options = {}));
+        return super._initializeSource(source, options);
     }
 
     // Slight hack to keep modifiers on the database or exported to JSON minimal and clean.
     toObject(source = true) {
         if (source) {
-            const obj = deepClone(this._source);
+            const obj = foundry.utils.deepClone(this._source);
             delete obj.container;
-            if (!this.constructor._hasDamageSection(obj)) delete obj.damage;
+            if (!this.hasDamageSection) delete obj.damage;
             if (!obj.limitTo) delete obj.limitTo;
             return obj;
         }
-        return this.schema.toObject(this);
+        return this.constructor.schema.toObject(this);
     }
 
     // Remove empty optional data
@@ -61,17 +67,14 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
 
         // Calculate max, if not already
         try {
-            if (!this.max) {
-                const roll = Roll.create(this.modifier.toString());
-                this.max = roll.evaluate({maximize: true}).total;
-            }
+            const roll = Roll.create(this.modifier.toString(), this.owner.system);
+            this.max = roll.evaluateSync({strict: false}).total;
         } catch {
             this.max = 0;
         }
     }
 
     static defineSchema() {
-        const fields = foundry.data.fields;
         return {
             _id: new fields.StringField({ initial: "", required: true, readonly: false }),
             name: new fields.StringField({
@@ -116,9 +119,16 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
                 label: "SFRPG.ModifierValueAffectedLabel",
                 hint: "SFRPG.ModifierValueAffectedTooltip"
             }),
+            customValue: new fields.StringField({
+                initial: "",
+                required: false,
+                blank: true,
+                label: "SFRPG.ModifierCustomValueLabel",
+                hint: "SFRPG.ModifierCustomValueTooltip"
+            }),
             enabled: new fields.BooleanField({
                 initial: false,
-                required: false,
+                required: true,
                 label: "SFRPG.ModifierEnabledLabel",
                 hint: "SFRPG.ModifierEnabledTooltip"
             }),
@@ -137,17 +147,9 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
             subtab: new fields.StringField({
                 initial: "misc",
                 required: false,
-                choices: ["permanent", "temporary", "misc"]
+                choices: ["permanent", "temporary", "misc", "condition"]
             }),
             condition: new fields.StringField({ initial: "", required: false }),
-            container: new fields.SchemaField(
-                {
-                    actorUuid: new fields.StringField({ initial: null, required: true, nullable: true }),
-                    itemUuid: new fields.StringField({ initial: null, required: false, nullable: true }),
-                    tokenUuid: new fields.StringField({ initial: null, required: false, nullable: true })
-                },
-                { nullable: true, required: false }
-            ),
             damage: new fields.SchemaField(
                 {
                     damageGroup: new fields.NumberField({
@@ -181,27 +183,73 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         };
     }
 
+    /** @type {ActorSFRPG} */
     get actor() {
-        return fromUuidSync(this.container.actorUuid);
+        return this.parent.parent instanceof ActorSFRPG ? this.parent.parent : this.parent.parent.actor;
     }
 
+    /** @type {?ItemSFRPG} */
     get item() {
-        return fromUuidSync(this.container.itemUuid);
+        return this.parent.parent instanceof ItemSFRPG ? this.parent.parent : null;
+    }
+
+    /**
+     * A quick way to get the direct parent document of this modifier
+     * @type {ActorSFRPG|ItemSFRPG}
+     */
+    get owner() {
+        return this.item ?? this.actor;
     }
 
     get token() {
-        return fromUuidSync(this.container.tokenUuid);
+        return this.actor.isToken ? this.actor.token : this.actor.getActiveTokens(true, true);
     }
 
-    get primaryOwner() {
-        return this.item || this.actor;
-    }
-
+    /** @type {Boolean} */
     get hasDamageSection() {
         return this.constructor._hasDamageSection(this);
     }
 
     static _hasDamageSection(obj) {
         return (obj.damage && Object.values(obj.damage.damageTypes).some(type => !!type)) || false;
+    }
+
+    async toggle(active = null) {
+        return this.parentUpdate({enabled: active ?? !this.enabled});
+    }
+
+    /**
+     * A helper method to directly update this modifier within its owner, instead of having to find it in the modifiers array every time.
+     * @param {Object} data Update data to be applied to this modifier
+     * @param {Object} options Options to be passed to update. @see Document.update in foundry-esm.js 11580.
+     */
+    async parentUpdate(data, options = {}) {
+        if (!this.owner) throw new Error("SFRPG | This modifier has no parent, which is required to perform an update via the parent.");
+
+        const modifiers = this.owner.toObject().system.modifiers;
+        const modInParent = modifiers.find(mod => mod._id === this._id);
+
+        foundry.utils.mergeObject(modInParent, data);
+
+        return this.owner.update({ "system.modifiers": modifiers }, options);
+    }
+
+    /**
+     * A helper method to delete this modifier from its owner
+     * @param {Object} options Options to be passed to update. @see Document.update in foundry-esm.js 11580.
+     */
+    async parentDelete(options = {}) {
+        if (!this.owner) throw new Error("SFRPG | This modifier has no parent, which is required to delete via the parent.");
+
+        const modifiers = this.owner.toObject().system.modifiers.filter(mod => mod._id !== this._id);
+
+        return this.owner.update({"system.modifiers": modifiers}, options);
+    }
+
+    /**
+     * Open the Modifier editor App for this modifier
+     */
+    async edit() {
+        return new SFRPGModifierApplication(this, this.owner).render(true);
     }
 }

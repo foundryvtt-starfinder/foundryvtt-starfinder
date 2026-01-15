@@ -1,27 +1,8 @@
-import SFRPGModifierApplication from "../../apps/modifier-app.js";
-import SFRPGModifier from "../../modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../modifiers/types.js";
 import { getItemContainer } from "../actor-inventory-utils.js";
+/** @import SFRPGModifier from "../../modifiers/modifier.js" */
 
 export const ActorModifiersMixin = (superclass) => class extends superclass {
-
-    /**
-     * Check to ensure that this actor has a modifiers data object set, if not then set it.
-     * These will always be needed from hence forth, so we'll just make sure that they always exist.
-     *
-     * @param {Object}      data The actor data to check against.
-     * @param {String|Null} prop A specific property name to check.
-     *
-     * @returns {Object}         The modified data object with the modifiers data object added.
-     */
-    _ensureHasModifiers(data, prop = null) {
-        if (!hasProperty(data, "modifiers")) {
-            // console.log(`Starfinder | ${this.name} does not have the modifiers data object, attempting to create them...`);
-            data.modifiers = [];
-        }
-
-        return data;
-    }
 
     /**
      * Add a modifier to this actor.
@@ -38,7 +19,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @param {String}        data.source        Where did this modifier come from? An item, ability or something else?
      * @param {String}        data.notes         Any notes or comments about the modifier.
      * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
-     * @param {String|null}   data.id            Override the randomly generated id with this.
+     * @param {?String}   data.id            Override the randomly generated id with this.
      */
     async addModifier({
         name = "",
@@ -56,10 +37,9 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
         limitTo = "",
         damage = null
     } = {}) {
-        const data = this._ensureHasModifiers(duplicate(this.system));
-        const modifiers = data.modifiers;
 
-        modifiers.push(new SFRPGModifier({
+        const modifiers = this.system.modifiers;
+        modifiers.push({
             name,
             modifier,
             type,
@@ -74,32 +54,8 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
             id,
             limitTo,
             damage
-        }));
-
+        });
         await this.update({"system.modifiers": modifiers});
-    }
-
-    /**
-     * Delete a modifier for this Actor.
-     *
-     * @param {String} id The id for the modifier to delete
-     */
-    async deleteModifier(id) {
-        const modifiers = this.system.modifiers.filter(mod => mod._id !== id);
-
-        await this.update({"system.modifiers": modifiers});
-    }
-
-    /**
-     * Edit a modifier for an Actor.
-     *
-     * @param {String} id The id for the modifier to edit
-     */
-    editModifier(id) {
-        const modifiers = this.system.modifiers;
-        const modifier = modifiers.find(mod => mod._id === id);
-
-        new SFRPGModifierApplication(modifier, this).render(true);
     }
 
     /**
@@ -111,23 +67,13 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @returns {SFRPGModifier[]}
      */
     getAllModifiers(ignoreTemporary = false, ignoreEquipment = false, invalidate = false) {
-        if (!invalidate && this.system.modifiers) return this.system.allModifiers;
-
-        this.system.modifiers = this.system.modifiers.map(mod => {
-            const container = {actorUuid: this.uuid, itemUuid: null};
-            return new SFRPGModifier({...mod, container});
-        }, this);
+        if (!invalidate && this.system.allModifiers) return this.system.allModifiers;
 
         const allModifiers = this.system.modifiers.filter(mod => (!ignoreTemporary || mod.subtab === "permanent"));
 
         for (const item of this.items) {
             const itemData = item.system;
-
-            // Create each modifier as an SFRPGModifier instance first on the item data.
-            const itemModifiers = itemData.modifiers = itemData?.modifiers?.map(mod => {
-                const container = {actorUuid: this.uuid, itemUuid: item.uuid};
-                return new SFRPGModifier({...mod, container});
-            }, this) || [];
+            const itemModifiers = itemData.modifiers;
 
             if (!itemModifiers || itemModifiers.length === 0) continue;
 

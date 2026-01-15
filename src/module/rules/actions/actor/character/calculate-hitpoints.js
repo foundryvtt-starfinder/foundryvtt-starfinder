@@ -1,8 +1,9 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateHitpoints", (fact, context) => {
         const data = fact.data;
+        if (!data.attributes.hp.tooltip) data.attributes.hp.tooltip = [];
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -17,9 +18,11 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -53,7 +56,7 @@ export default function(engine) {
             for (const cls of fact.classes) {
                 const classData = cls.system;
 
-                let classBonus = Math.floor(classData.levels * classData.hp.value);
+                const classBonus = Math.floor(classData.levels * classData.hp.value);
                 hpMax += classBonus;
 
                 data.attributes.hp.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Header.Hitpoints.ClassTooltip", {
@@ -65,21 +68,14 @@ export default function(engine) {
 
         // Iterate through any modifiers that affect HP
         let filteredModifiers = fact.modifiers.filter(mod => {
-            return (mod.enabled || mod.modifierType === "roll") && mod.effectType == SFRPGEffectType.HIT_POINTS;
+            return (mod.enabled || mod.modifierType === "roll") && mod.effectType === SFRPGEffectType.HIT_POINTS;
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 
-        let bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, data.attributes.hp, "SFRPG.AbilityScoreBonusTooltip");
-                }
-            } else {
-                sum += addModifier(mod[1], data, data.attributes.hp, "SFRPG.AbilityScoreBonusTooltip");
+        const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
+            for (const bonus of mod[1]) {
+                sum += addModifier(bonus, data, data.attributes.hp, "SFRPG.AbilityScoreBonusTooltip");
             }
-
             return sum;
         }, 0);
 

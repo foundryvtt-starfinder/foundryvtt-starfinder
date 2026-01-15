@@ -2,19 +2,16 @@
   "_id": "RXMC0ouK8cmlVoE4",
   "name": "Atlapak",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "folder": "oDeSIpQmKhLBZHHW",
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "ofL4sL6VvGYeBiAe",
       "name": "Amphibious (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -24,9 +21,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -35,7 +33,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -45,39 +44,47 @@
           "unidentified": "",
           "value": "<p>The creature has the aquatic subtype, but it can breathe air and survive on land.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -86,9 +93,8 @@
       "_id": "KN9yxs1rYqyFE1aH",
       "name": "Claw",
       "type": "weapon",
-      "img": "icons/svg/item-bag.svg",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -100,9 +106,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 18,
         "attributes": {
@@ -123,7 +130,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -132,7 +138,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -154,13 +160,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d10+12",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -170,16 +189,17 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -188,22 +208,24 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -211,8 +233,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -223,13 +245,9 @@
       "_id": "uizoEAmE0FDTwhmV",
       "name": "Sonic Snap (Ex)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -240,9 +258,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 21,
         "attributes": {
@@ -263,7 +282,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -272,7 +290,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -294,13 +312,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "3d6+9",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
                 "sonic": true
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -310,114 +341,27 @@
           "unidentified": "",
           "value": "<p>By cocking and then snapping shut its specialized claw as a standard action, an atlapak can create a sonic burst as a ranged attack. This attack has a range increment of 80 feet, targets EAC, and has the penetrating special property, ignoring 9 points of its target's hardness. This ability doesn't function in environments with no atmosphere.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": null,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 80
+          "value": "80"
         },
         "rollNotes": "",
         "save": {
@@ -425,11 +369,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -437,7 +386,7 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -449,12 +398,11 @@
       "_id": "MIvT9OVPQ14wY4UE",
       "name": "Atmospheric Enhancement (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -462,9 +410,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -473,7 +422,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -483,39 +433,47 @@
           "unidentified": "",
           "value": "<p>An atlapak's sonic snap ability becomes increasingly effective the denser its surroundings. In normal and thicker atmospheric conditions, the range increment increases to 100 feet, and the DC to resist the atlapak's critical hit effect increases by 2. In thick atmosphere or underwater, the sonic snap gains the sniper (250 ft.) weapon property.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -524,12 +482,11 @@
       "_id": "Ua4UFBkIRfgg2ktK",
       "name": "Aerial Buoyancy (Ex)",
       "type": "feat",
-      "img": "icons/svg/item-bag.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
-        "actionType": null,
+        "actionType": "",
         "activation": {
           "type": "",
           "condition": "",
@@ -537,9 +494,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -548,7 +506,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -558,39 +517,47 @@
           "unidentified": "",
           "value": "<p>An atlapak can inflate its lightweight body and flap its gills to swim through the air. In normal atmosphere, the atlapak moves at half speed with clumsy maneuverability. In thick atmosphere, the atlapak flies at full speed with average maneuverability. It's unable to fly in environments with thin atmosphere or no atmosphere.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -599,13 +566,9 @@
       "_id": "Ux27BhlRpCQexhta",
       "name": "Mindless (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -615,9 +578,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -626,7 +590,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -636,39 +601,47 @@
           "unidentified": "",
           "value": "<p>The creature has no Intelligence score or modifier and is immune to mind-affecting effects. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -677,13 +650,9 @@
       "_id": "Q3bElZPv51jINs3j",
       "name": "Water Breathing (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -693,9 +662,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -704,7 +674,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -714,39 +685,47 @@
           "unidentified": "",
           "value": "<p>The creature can breathe water. It can’t breathe air unless it has the amphibious special ability (see page 152).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -756,6 +735,7 @@
     "name": "Atlapak",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -787,11 +767,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -805,121 +804,75 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 2
   },
   "system": {
     "abilities": {
       "cha": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "con": {
-        "base": 6,
-        "min": 3,
-        "misc": 0,
-        "mod": 6,
-        "value": 22
+        "base": 6
       },
       "dex": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 18
+        "base": 4
       },
       "int": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "str": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 16
+        "base": 3
       },
       "wis": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 22,
-        "min": 0,
-        "tooltip": [],
-        "value": 22
+        "base": 22
       },
       "fort": {
-        "base": 13,
-        "bonus": 13,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 13
       },
       "hp": {
         "max": 145,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 145
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 4,
         "value": 4
       },
       "kac": {
-        "base": 24,
-        "min": 0,
-        "tooltip": [],
-        "value": 24
+        "base": 24
       },
-      "keyability": "",
       "reach": "10 ft.",
       "reflex": {
-        "base": 11,
-        "bonus": 11,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 11
       },
       "space": "10 ft.",
       "speed": {
@@ -940,19 +893,12 @@
         "special": "original base: 20 ft.; original special: fly 30 ft. (Ex, clumsy or average)",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 8,
-        "bonus": 8,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 8
       }
     },
-    "classes": {},
     "conditions": {
       "asleep": false,
       "bleeding": false,
@@ -975,6 +921,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -990,9 +937,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1000,9 +944,8 @@
     "details": {
       "type": "Vermin (aquatic)",
       "alignment": "N",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1011,10 +954,10 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<p>Often compared to evolutionarily unrelated mantis shrimp, atlapaks have banded shells that offer considerable mobility. Their eight pairs of legs have evolved for walking and swimming; to perceive their surroundings, they have inquisitive antennae and three compound eyes mounted on movable stalks. These large, amphibious arthropods are also famous for their explosively devastating claws—one pincer designed for grasping and tearing and another capable of opening and snapping shut with incredible speed to generate cavitating sonic blasts.</p>\n<p>Rather than creating a localized explosion, an atlapak can fan its abdominal plates to focus and direct the sonic energy into a distant burst that can stun or outright kill prey hundreds of feet away. The denser the medium—whether liquid or gas—the more effective the blast. Atlapaks can grow as much as 10 feet long, while juveniles are around 5 feet long.</p>\n<p>Atlapaks prefer lurking in sheltered burrows that providecommanding views, such as coral reefs or low hills. From there, the creatures hunt by ambush, waiting for prey toapproach within easy striking range before unleashing several sonic bursts and closing in for the kill. Underwater,atlapaks often cohabitate with colonial tube worms like the pileated tsorkos, which gradually accumulate sandy mounds and tunnels. The atlapaks help watch for danger and often leave food scraps, while the worms provide good hiding spots and vantage points.</p>\n<p>Older atlapaks more often leave the water to seek terrestrial prey, using their natural buoyancy to hover several hundred feet above the surface while scouting for food. Drifting in this way also helps adults find mates, and although atlapaks most often reproduce in water, their eggs can survive in humid terrestrial environments. Some unlucky jungle explorers have fallen prey to the young arthropods when atlapak eggs adhered to the underside of tree branches hatch and drift into convoys.</p>\n<p>Although unintelligent, atlapaks exhibit utterly uncanny ballistics mastery. Their antennae are extremely sensitive to humidity and currents, for which the arthropods adjust their aim. Not only do their questing compound eyes provide exceptional depth perception, but their lenses also help them compensate for the refracting and obscuring qualities of&nbsp;water vapor and other gases, providing them with a clear view of their surroundings even in foggy conditions. Collectively, these features enable atlapaks to pinpoint and strike even fast-moving targets.</p>\n<p>Fresh atlapak meat has a clean taste that appeals to many species, though it acquires a repugnant sliminess within hours of the creature’s death. As a result, connoisseurs often commission live atlapak shipments to their restaurants, despite the danger the cargo presents for most starships. Kalos (Alien Archive 68) are especially partial to atlapak flesh, hunting the animals to near-extinction on their home world, Kalo-Mahoi.</p>\n<h3>SNAP WHIPS</h3>\n<p>Until recently, atlapaks’ exceptional pincers resisted engineers’ efforts to replicate the same mechanics in the form of a reliable weapon. In the past three decades, breakthroughs in materials science have enabled arms manufacturers to create handheld versions of an atlapak claw, which take the form of a semi-flexible, whip-like rod. An assemblage of reinforced metallic percussion plates and high-pressure levers near the rod’s tip creates a focused shock of sonic energy when activated, shattering nearby materials. Artificial ligaments strung throughout the rod translate the kinetic energy of a user’s backswing to rearm the device, priming it to release another sonic burst. Early prototypes of the snap whip directly incorporated atlapak components, though all but the most eccentric versions of such whips are now entirely synthetic and merely borrow the atlapak’s uniquely evolved design.</p>\n<p>The @UUID[Compendium.sfrpg.races.3kLK4WKPqNvFTwIB]{Drow} corporation Arabani Arms ultimately developed the breakthrough technology that created viable snap whips, and it continues to protect the design via patents and ongoing research despite the countless lethal imitations that have appeared on the market. The company’s R&amp;D department has yet to replicate atlapaks’ particular ability to channel sound waves over long distances—a breakthrough that would allow Arabani Arms to create a devastating new sniper weapon—but it has come close on several occasions.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td>WEAPON MODEL</td>\n<td style=\"text-align: center; vertical-align: middle;\">LEVEL</td>\n<td style=\"text-align: center; vertical-align: middle;\">PRICE</td>\n<td style=\"text-align: center; vertical-align: middle;\">DAMAGE</td>\n<td style=\"text-align: center; vertical-align: middle;\">CRITICAL</td>\n<td style=\"text-align: center; vertical-align: middle;\">BULK</td>\n<td style=\"text-align: center; vertical-align: middle;\">SPECIAL</td>\n</tr>\n<tr>\n<td>Snap whip, thunderstrike</td>\n<td style=\"text-align: center; vertical-align: middle;\">3</td>\n<td style=\"text-align: center; vertical-align: middle;\">1,600</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(0, 0, 0, 0.05);\">1d6 So</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">@UUID[Compendium.sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered}</td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n<td style=\"text-align: center; vertical-align: middle;\">Analog, penetrating, reach, sunder</td>\n</tr>\n<tr>\n<td><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Snap whip, LFD</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">8</td>\n<td style=\"text-align: center; vertical-align: middle;\">10,100</td>\n<td style=\"text-align: center; vertical-align: middle;\">2d6 So</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">@UUID[Compendium.sfrpg.conditions.aAQ6SW6iK0EVq8Ce]{Staggered}</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Analog, penetrating, reach, sunder</span></td>\n</tr>\n<tr>\n<td>Snap whip, HFD</td>\n<td style=\"text-align: center; vertical-align: middle;\">13</td>\n<td style=\"text-align: center; vertical-align: middle;\">54,000</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(0, 0, 0, 0.05);\">5d6 So</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">@UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned}</td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n<td style=\"text-align: center; vertical-align: middle;\">Analog, penetrating, reach, sunder</td>\n</tr>\n<tr>\n<td><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Snap whip, banshee</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">18</td>\n<td style=\"text-align: center; vertical-align: middle;\">445,000</td>\n<td style=\"text-align: center; vertical-align: middle;\">10d6 So</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">@UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned}</span></td>\n<td style=\"text-align: center; vertical-align: middle;\">1</td>\n<td style=\"text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Analog, penetrating, reach, sunder</span></td>\n</tr>\n</tbody>\n</table>",
+        "value": "<p>Often compared to evolutionarily unrelated mantis shrimp, atlapaks have banded shells that offer considerable mobility. Their eight pairs of legs have evolved for walking and swimming; to perceive their surroundings, they have inquisitive antennae and three compound eyes mounted on movable stalks. These large, amphibious arthropods are also famous for their explosively devastating claws—one pincer designed for grasping and tearing and another capable of opening and snapping shut with incredible speed to generate cavitating sonic blasts.</p>\n<p>Rather than creating a localized explosion, an atlapak can fan its abdominal plates to focus and direct the sonic energy into a distant burst that can stun or outright kill prey hundreds of feet away. The denser the medium—whether liquid or gas—the more effective the blast. Atlapaks can grow as much as 10 feet long, while juveniles are around 5 feet long.</p>\n<p>Atlapaks prefer lurking in sheltered burrows that providecommanding views, such as coral reefs or low hills. From there, the creatures hunt by ambush, waiting for prey toapproach within easy striking range before unleashing several sonic bursts and closing in for the kill. Underwater,atlapaks often cohabitate with colonial tube worms like the pileated tsorkos, which gradually accumulate sandy mounds and tunnels. The atlapaks help watch for danger and often leave food scraps, while the worms provide good hiding spots and vantage points.</p>\n<p>Older atlapaks more often leave the water to seek terrestrial prey, using their natural buoyancy to hover several hundred feet above the surface while scouting for food. Drifting in this way also helps adults find mates, and although atlapaks most often reproduce in water, their eggs can survive in humid terrestrial environments. Some unlucky jungle explorers have fallen prey to the young arthropods when atlapak eggs adhered to the underside of tree branches hatch and drift into convoys.</p>\n<p>Although unintelligent, atlapaks exhibit utterly uncanny ballistics mastery. Their antennae are extremely sensitive to humidity and currents, for which the arthropods adjust their aim. Not only do their questing compound eyes provide exceptional depth perception, but their lenses also help them compensate for the refracting and obscuring qualities of&nbsp;water vapor and other gases, providing them with a clear view of their surroundings even in foggy conditions. Collectively, these features enable atlapaks to pinpoint and strike even fast-moving targets.</p>\n<p>Fresh atlapak meat has a clean taste that appeals to many species, though it acquires a repugnant sliminess within hours of the creature’s death. As a result, connoisseurs often commission live atlapak shipments to their restaurants, despite the danger the cargo presents for most starships. Kalos (Alien Archive 68) are especially partial to atlapak flesh, hunting the animals to near-extinction on their home world, Kalo-Mahoi.</p>\n<h3>SNAP WHIPS</h3>\n<p>Until recently, atlapaks’ exceptional pincers resisted engineers’ efforts to replicate the same mechanics in the form of a reliable weapon. In the past three decades, breakthroughs in materials science have enabled arms manufacturers to create handheld versions of an atlapak claw, which take the form of a semi-flexible, whip-like rod. An assemblage of reinforced metallic percussion plates and high-pressure levers near the rod’s tip creates a focused shock of sonic energy when activated, shattering nearby materials. Artificial ligaments strung throughout the rod translate the kinetic energy of a user’s backswing to rearm the device, priming it to release another sonic burst. Early prototypes of the snap whip directly incorporated atlapak components, though all but the most eccentric versions of such whips are now entirely synthetic and merely borrow the atlapak’s uniquely evolved design.</p>\n<p>The @UUID[Compendium.sfrpg.races.Item.3kLK4WKPqNvFTwIB]{Drow} corporation Arabani Arms ultimately developed the breakthrough technology that created viable snap whips, and it continues to protect the design via patents and ongoing research despite the countless lethal imitations that have appeared on the market. The company’s R&amp;D department has yet to replicate atlapaks’ particular ability to channel sound waves over long distances—a breakthrough that would allow Arabani Arms to create a devastating new sniper weapon—but it has come close on several occasions.</p>\n<table border=\"1\">\n<tbody>\n<tr>\n<td>WEAPON MODEL</td>\n<td style=\"text-align:center;vertical-align:middle\">LEVEL</td>\n<td style=\"text-align:center;vertical-align:middle\">PRICE</td>\n<td style=\"text-align:center;vertical-align:middle\">DAMAGE</td>\n<td style=\"text-align:center;vertical-align:middle\">CRITICAL</td>\n<td style=\"text-align:center;vertical-align:middle\">BULK</td>\n<td style=\"text-align:center;vertical-align:middle\">SPECIAL</td>\n</tr>\n<tr>\n<td>Snap whip, thunderstrike</td>\n<td style=\"text-align:center;vertical-align:middle\">3</td>\n<td style=\"text-align:center;vertical-align:middle\">1,600</td>\n<td style=\"text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(0, 0, 0, 0.05)\">1d6 So</span></td>\n<td style=\"text-align:center;vertical-align:middle\">@UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered}</td>\n<td style=\"text-align:center;vertical-align:middle\">1</td>\n<td style=\"text-align:center;vertical-align:middle\">Analog, penetrating, reach, sunder</td>\n</tr>\n<tr>\n<td><span style=\"background-color:rgba(255, 255, 255, 0.2)\">Snap whip, LFD</span></td>\n<td style=\"text-align:center;vertical-align:middle\">8</td>\n<td style=\"text-align:center;vertical-align:middle\">10,100</td>\n<td style=\"text-align:center;vertical-align:middle\">2d6 So</td>\n<td style=\"text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">@UUID[Compendium.sfrpg.conditions.Item.aAQ6SW6iK0EVq8Ce]{Staggered}</span></td>\n<td style=\"text-align:center;vertical-align:middle\">1</td>\n<td style=\"text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">Analog, penetrating, reach, sunder</span></td>\n</tr>\n<tr>\n<td>Snap whip, HFD</td>\n<td style=\"text-align:center;vertical-align:middle\">13</td>\n<td style=\"text-align:center;vertical-align:middle\">54,000</td>\n<td style=\"text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(0, 0, 0, 0.05)\">5d6 So</span></td>\n<td style=\"text-align:center;vertical-align:middle\">@UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned}</td>\n<td style=\"text-align:center;vertical-align:middle\">1</td>\n<td style=\"text-align:center;vertical-align:middle\">Analog, penetrating, reach, sunder</td>\n</tr>\n<tr>\n<td><span style=\"background-color:rgba(255, 255, 255, 0.2)\">Snap whip, banshee</span></td>\n<td style=\"text-align:center;vertical-align:middle\">18</td>\n<td style=\"text-align:center;vertical-align:middle\">445,000</td>\n<td style=\"text-align:center;vertical-align:middle\">10d6 So</td>\n<td style=\"text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">@UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned}</span></td>\n<td style=\"text-align:center;vertical-align:middle\">1</td>\n<td style=\"text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">Analog, penetrating, reach, sunder</span></td>\n</tr>\n</tbody>\n</table>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 9,
       "environment": "warm or temperate hills or water",
       "organization": "solitary, pair, or cacophony (3&ndash;7)",
@@ -1022,30 +965,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 14",
-      "subtype": "Aquatic",
-      "xp": {
-        "value": 6400
-      }
+      "subtype": "Aquatic"
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 22,
         "ranks": 22,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1053,10 +986,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1064,10 +996,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1075,10 +1006,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1086,10 +1016,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1097,10 +1026,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1108,10 +1036,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1119,10 +1046,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1130,10 +1056,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1141,10 +1066,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1152,10 +1076,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1163,10 +1086,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1174,10 +1096,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 17,
         "ranks": 17,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1185,10 +1106,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1196,10 +1116,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1207,9 +1126,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1219,10 +1136,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1230,10 +1146,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1241,10 +1156,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1252,47 +1166,40 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1303,21 +1210,9 @@
           "deafened"
         ]
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "",
         "value": []
-      },
-      "dr": {
-        "custom": "",
-        "value": [
-          {
-            "sonic": "10"
-          }
-        ]
       },
       "dv": {
         "custom": "",
@@ -1329,9 +1224,6 @@
       },
       "senses": "darkvision 180 ft., sense through (vision [fog only]) 90 ft.",
       "size": "large",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

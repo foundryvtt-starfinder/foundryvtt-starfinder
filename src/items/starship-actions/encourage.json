@@ -2,15 +2,16 @@
   "_id": "gsPzG6Y9PW24YgUa",
   "name": "Encourage",
   "type": "starshipAction",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": {
       "resolve": false,
       "value": "10 (Any skill) or 15 (Diplomacy)"
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<h2>Normal effect</h2><p>You can encourage another member of the crew to give her a bonus to her action. This works like aid another (see page 133), granting a +2 bonus to the check required by a crew action if you succeed at a DC 10 check using the same skill. Alternatively, you can grant this same bonus by succeeding at a DC 15 Diplomacy check. You can’t encourage yourself.</p><h2>Critical effect</h2><p>You’re able to select just the right motivation for your crew, increasing the bonus you grant to your crew members’ actions to +4.</p>"
     },
@@ -19,26 +20,42 @@
     "formula": [
       {
         "name": "Diplomacy",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@captain.skills.dip.mod"
       },
       {
         "name": "Computers",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@captain.skills.com.mod"
       },
       {
         "name": "Engineering",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@captain.skills.eng.mod"
       },
       {
         "name": "Gunnery",
-        "formula": "max(@captain.attributes.baseAttackBonus.value, @captain.skills.pil.ranks) + @captain.abilities.dex.mod"
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
+        "formula": "max(@captain.attributes.baseAttackBonus.value, @captain.skills.pil.ranks, @captain.skills.gun.mod) + @captain.abilities.dex.mod"
       },
       {
         "name": "Piloting",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@captain.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       }
     ],
     "isPush": false,
+    "modifiers": [],
     "order": 10,
     "phase": {
       "name": "Any phase",
@@ -48,6 +65,7 @@
     "role": "captain",
     "selectorKey": "captain",
     "selectors": [],
+    "slug": "",
     "source": "CRB"
   }
 }

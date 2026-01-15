@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "icons/skills/melee/strike-chain-whip-blue.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -18,9 +14,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": "",
-      "value": 0
+      "units": "ft",
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -29,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,29 +35,28 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>When you perform a @UUID[Compendium.sfrpg.class-features.MBNI94tbMoqizPUk]{Trick Attack (Ex)} with a one-handed, whip-like melee weapon for your @UUID[Compendium.sfrpg.class-features.bhSrjkuWxz2DQHXC]{debilitating attack}, you can attempt to reposition the target. The target must succeed at a Reflex save or be moved 5 feet to a different location within your weapon’s reach and within 5 feet of its original placement. You can’t move the target past an obstacle. You must have the @UUID[Compendium.sfrpg.class-features.5hFENxRv1EN8G8ZX]{Explorer's Lash (Ex)} exploit to learn this exploit.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.On2ZrPJTe8FURsXY]{Operative Exploit}</p>\n<p>When you perform a @UUID[Compendium.sfrpg.class-features.Item.MBNI94tbMoqizPUk]{Trick Attack (Ex)} with a one-handed, whip-like melee weapon for your @UUID[Compendium.sfrpg.class-features.Item.bhSrjkuWxz2DQHXC]{debilitating attack}, you can attempt to @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#reposition]{reposition} the target. The target must succeed at a Reflex save or be moved 5 feet to a different location within your weapon’s reach and within 5 feet of its original placement. You can’t move the target past an obstacle. You must have the @UUID[Compendium.sfrpg.class-features.Item.5hFENxRv1EN8G8ZX]{Explorer's Lash (Ex)} exploit to learn this exploit.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [],
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": "none"
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "10th Level",
     "rollNotes": "",
@@ -68,14 +65,19 @@
       "dc": "10+floor(@classes.operative.levels/2)+@abilities.dex.mod",
       "descriptor": "negate"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GEM pg. 23",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

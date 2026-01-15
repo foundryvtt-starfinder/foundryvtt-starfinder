@@ -4,11 +4,8 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/umbral_tendrils.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,14 +14,16 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": false
     },
     "area": {
       "effect": "spread",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,20 +33,26 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>You summon a vision of a writhing mass of shadowy tendrils to assault creatures within 10 feet of the ground in the area. This area is difficult terrain. The first time a creature enters the area (including when the effect appears) on its turn, and each round the creature remains there, the creature takes 4d6 bludgeoning damage and becomes @UUID[Compendium.sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled}. If the tendrils are in dim light or darkness, the DC of the Will save increases by 2. A creature that succeeds at a Will saving throw halves the damage it takes and avoids becoming @UUID[Compendium.sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled}. The same casting of this spell can’t render such a creature @UUID[Compendium.sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled} again. By succeeding at subsequent saves, such a creature reduces damage it takes from the same casting of the spell to one-quarter normal.</p>"
+      "value": "<p>You summon a vision of a writhing mass of shadowy tendrils to assault creatures within 10 feet of the ground in the area. This area is difficult terrain. The first time a creature enters the area (including when the effect appears) on its turn, and each round the creature remains there, the creature takes 4d6 bludgeoning damage and becomes @UUID[Compendium.sfrpg.conditions.Item.nFBcsp5FS1Wi46Fc]{Entangled}. If the tendrils are in dim light or darkness, the DC of the Will save increases by 2. A creature that succeeds at a Will saving throw halves the damage it takes and avoids becoming @UUID[Compendium.sfrpg.conditions.Item.nFBcsp5FS1Wi46Fc]{Entangled}. The same casting of this spell can’t render such a creature @UUID[Compendium.sfrpg.conditions.Item.nFBcsp5FS1Wi46Fc]{Entangled} again. By succeeding at subsequent saves, such a creature reduces damage it takes from the same casting of the spell to one-quarter normal.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": true,
     "duration": {
       "units": "round",
       "value": "1+floor(@details.cl.value/3)"
     },
     "formula": "",
+    "isActive": false,
+    "isVariableLevel": false,
     "level": 3,
     "materials": {
       "consumed": false,
@@ -60,23 +65,30 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "units": "medium"
     },
+    "rollNotes": "",
     "save": {
       "type": "will",
       "dc": "",
       "descriptor": "half"
     },
     "school": "ill",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #12 pg. 53",
     "sr": true,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

@@ -1,0 +1,77 @@
+import eslint from "@eslint/js";
+
+export default [
+    {
+        ignores: ["dist/*", "foundry/*"]
+    },
+
+    eslint.configs.recommended,
+
+    {
+        rules: {
+            "indent": ["error", 4, { "SwitchCase": 1 }],
+            "keyword-spacing": ["error"],
+            "semi": ["error", "always"],
+            "no-unused-vars": "warn",
+            "camelcase": "warn",
+            "arrow-spacing": "error",
+            "eol-last": "error",
+            "array-element-newline": [
+                "error", {
+                    "ArrayExpression": "consistent",
+                    "ArrayPattern": { "minItems": 6 }
+                }
+            ],
+            "object-property-newline": ["error", {
+                "allowAllPropertiesOnSameLine": true
+            }],
+            "implicit-arrow-linebreak": ["error", "beside"],
+            "comma-dangle": ["error", "never"],
+            "no-duplicate-imports": "error",
+            "no-use-before-define": "off",
+            "no-unreachable-loop": "error",
+            "eqeqeq": ["error", "always"],
+            "no-eq-null": "error",
+            "init-declarations": "off",
+            "prefer-const": ["error", { "destructuring": "all" }],
+            "no-undef": "off",
+            "no-var": "error",
+            "spaced-comment": "error",
+            "array-bracket-newline": ["error", "consistent"],
+            "dot-location": ["error", "property"],
+            "comma-style": ["error", "last"],
+            "comma-spacing": "error",
+            "multiline-ternary": ["error", "always-multiline"],
+            "no-trailing-spaces": "error",
+            "no-irregular-whitespace": "error",
+            "func-call-spacing": "error",
+            "newline-per-chained-call": "error",
+            "no-whitespace-before-property": "error",
+            "rest-spread-spacing": ["error", "never"],
+            "space-before-blocks": ["error", "always"],
+            "space-before-function-paren": ["error", {
+                "anonymous": "never",
+                "named": "never",
+                "asyncArrow": "always"
+            }],
+            "operator-assignment": "warn",
+            "space-infix-ops": ["error"],
+            "operator-linebreak": ["error", "before"],
+            "no-multiple-empty-lines": [
+                "error",
+                {
+                    "max": 1,
+                    "maxEOF": 1
+                }
+            ],
+            "space-unary-ops": [
+                "error",
+                {
+                    "words": true,
+                    "nonwords": false
+                }
+            ],
+            "no-prototype-builtins": "off"
+        }
+    }
+];

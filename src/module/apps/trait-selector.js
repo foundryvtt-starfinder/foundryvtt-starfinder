@@ -9,21 +9,12 @@ export class TraitSelectorSFRPG extends FormApplication {
 
         options.id = "trait-selector";
         options.classes = ["sfrpg"];
-        options.title = "Actor Trait Selection";
+        options.title = "Trait Selection";
         options.template = "systems/sfrpg/templates/apps/trait-selector.hbs";
-        options.width = 320;
+        options.width = 480;
         options.height = "auto";
 
         return options;
-    }
-
-    /**
-     * Return a reference to the target attribute
-     *
-     * @type {String}
-     */
-    get attribute() {
-        return this.options.name;
     }
 
     /**
@@ -32,97 +23,122 @@ export class TraitSelectorSFRPG extends FormApplication {
      * @returns {Object}
      */
     getData() {
-        const attr = getProperty(this.object, this.attribute);
-        if (typeof attr.value === "string") attr.value = this.constructor._backCompat(attr.value, this.options.choices);
+        const dataLocation = this.options.location;
+        const traitData = getProperty(this.object, dataLocation);
+        return this._getTraitChoices(traitData);
+    }
 
-        const choices = duplicate(this.options.choices);
-        const isEnergyResistance = this.attribute === "system.traits.dr";
-        if (!isEnergyResistance) {
-            for (const [k, v] of Object.entries(choices)) {
-                choices[k] = {
-                    label: v,
-                    chosen: attr.value.includes(k)
-                };
-            }
-        } else {
-            for (const [k, v] of Object.entries(choices)) {
-                choices[k] = {
-                    label: v,
-                    chosen: false,
-                    resistanceValue: 0
-                };
-            }
+    /**
+     * Choose the appropriate update method for updating the data
+     *
+     * @param {Event} event The event that triggers the update
+     * @param {Object} formData The data from the form
+     */
+    async _updateObject(event, formData) {
+        await this.object.update(this._setTraitChoices(formData));
+    }
 
-            for (const value of attr.value) {
-                for (const [type, resistance] of Object.entries(value)) {
-                    choices[type].chosen = true;
-                    choices[type].resistanceValue = resistance;
+    /**
+     * Filter the displayed traits based on search input
+     *
+     * @param {Array} li An array of all the traits displayed on the form
+     * @private
+     */
+    async filterTraits(li) {
+        li.hide();
+
+        for (const trait of li) {
+            if (this.searchMatch(trait)) {
+                $(trait).show();
+            }
+        }
+    }
+
+    /**
+     * Check if a displayed item matches the search string
+     *
+     * @param {String} trait The localized trait name
+     * @private
+     */
+    searchMatch(trait) {
+        const searchTerm = this.searchTerm;
+
+        if (searchTerm !== '') {
+            const strings = this.searchTerm.split(',');
+
+            for (const string of strings) {
+                const textToSearch = $(trait).find('input')[0].nextSibling.data.toLowerCase().trim();
+                if (textToSearch.indexOf(string.toLowerCase().trim()) === -1) {
+                    return false;
                 }
             }
         }
 
-        return {
-            choices: choices,
-            custom: attr.custom,
-            isEnergyResistance
-        };
+        return true;
     }
 
     /**
-     * Support backwards compatability for old-style string separated traits
+     * Act on inputs to the html
      *
-     * @param {String} current The current value
-     * @param {Array} choices The choices
-     * @returns {Array}
-     * @private
+     * @param {Object} html
      */
-    static _backCompat(current, choices) {
-        if (!current || current.length === 0) return [];
-        current = current.split(/[\s,]/).filter(t => !!t);
-        return current.map(val => {
-            for (const [k, v] of Object.entries(choices)) {
-                if (val === v) return k;
-            }
-            return null;
-        }).filter(val => !!val);
-    }
+    activateListeners(html) {
 
-    /**
-     * Update the Actor object with new trait data processed from the form
-     *
-     * @param {Event} event The event that triggers the update
-     * @param {Object} formData The data from the form
-     * @private
-     */
-    _updateObject(event, formData) {
-        let choices = [];
+        // footer html (for searching)
+        const footer = html.find(".trait-footer");
 
-        if (this.attribute !== "system.traits.dr") {
-            for (const [k, v] of Object.entries(formData)) {
-                if ((k !== 'custom') && v) choices.push(k);
-            }
-        } else {
-            let resistances = Object.entries(formData).filter(e => e[0].startsWith("er"));
-            resistances = resistances.reduce((obj, entry) => {
-                const [type, i] = entry[0].split('.').slice(1);
-
-                if (!obj[type]) obj[type] = {};
-                obj[type][i] = entry[1];
-
-                return obj;
-            }, {});
-
-            choices = Object.entries(resistances).filter(e => e[1][0])
-                .reduce((arr, resistance) => {
-                    arr.push({[resistance[0]]: resistance[1][1]});
-
-                    return arr;
-                }, []);
-        }
-
-        this.object.update({
-            [`${this.attribute}.value`]: choices,
-            [`${this.attribute}.custom`]: formData.custom
+        // activating or deactivating filters
+        html.on('change keyup paste', 'input[name=textFilter]', ev => {
+            this.searchTerm = ev.target.value;
+            this.filterTraits(footer.find('li'));
         });
+
+        // Shuffle all checkboxes around based on whether or not they're checked
+        html.on('change', 'input[type=checkbox]', async ev => {
+
+            // Get relevant data
+            const formData = foundry.utils.expandObject(this._getSubmitData());
+            const propertyElement = ev.target.parentElement.parentElement;
+            const key = propertyElement.id;
+            const label = propertyElement.innerText.trim();
+            const selectedList = document.getElementById("selected");
+            const unselectedList = document.getElementById("unselected");
+
+            // The list which the changed list item is currently not in
+            const newList = propertyElement.parentElement === selectedList ? unselectedList : selectedList;
+
+            // Sort the list items by their text labels (localized names)
+            let targetListItem = null;
+            for (const listItem of newList.children) {
+                const itemLabel = listItem.innerText.trim();
+                if (label.localeCompare(itemLabel) <= 0) {
+                    targetListItem = listItem;
+                    break;
+                }
+            }
+
+            // Move the list item to the correct location in the new list
+            newList.insertBefore(propertyElement, targetListItem);
+
+            // If the box has been newly checked, append the text box and isObject data if needed
+            if (formData[key].needsTextExtension === 'true' && newList === selectedList) {
+                const extensionTextBox = document.createElement("input");
+                extensionTextBox.type = "text";
+                extensionTextBox.className = "extension";
+                extensionTextBox.name = `${key}.extension`;
+                extensionTextBox.value = "";
+                propertyElement.appendChild(extensionTextBox);
+            }
+
+            // Remove the extension text box if it's being unchecked and it's needed
+            if (formData[key].needsTextExtension && newList === unselectedList) {
+                for (const child of propertyElement.children) {
+                    if (child.className === 'extension') {
+                        child.remove();
+                    }
+                }
+            }
+        });
+
     }
 }

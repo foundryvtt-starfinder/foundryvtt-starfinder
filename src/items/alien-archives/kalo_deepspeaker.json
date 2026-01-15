@@ -2,7 +2,8 @@
   "_id": "o8ROezUgr2CPYuse",
   "name": "Kalo Deepspeaker",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "folder": "eQ1s3ipd6I4FFpkE",
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "qmffQmVDxyHfDslH",
@@ -10,11 +11,7 @@
       "type": "feat",
       "img": "systems/sfrpg/icons/classes/grasping_vines.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -24,9 +21,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -35,7 +33,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -43,40 +42,48 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.L8EnApYQIJp9EAtc]{Xenodruid}</p>\n<p>You can spend 1 Resolve Point as a standard action to cause an area within 100 feet to sprout writhing vines in a 20-foot-radius spread. The target surface must be solid but does not need to be capable of sustaining plants normally. The vines have a reach of 5 feet and attempt to wrap around creatures in the area of effect or those that enter the area; such a creature must succeed at a Reflex save or gain the entangled condition. Creatures that successfully save can move as normal, but those that remain in the area must attempt a new save at the end of your turn each round. Creatures moving into the area must attempt a save immediately; failure ends their movement and they become entangled. An entangled creature can break free as a move action with a successful Acrobatics check or DC 15 Strength check. The vines last for a number of rounds equal to your mystic level, and the entire area is difficult terrain while the effect lasts. At 11th level, the vines can reach 10 feet and sprout thorns that deal 1d6 piercing damage each round to creatures in the area.</p>"
+          "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.L8EnApYQIJp9EAtc]{Xenodruid}</p>\n<p>You can spend 1 Resolve Point as a standard action to cause an area within 100 feet to sprout writhing vines in a 20-foot-radius spread. The target surface must be solid but does not need to be capable of sustaining plants normally. The vines have a reach of 5 feet and attempt to wrap around creatures in the area of effect or those that enter the area; such a creature must succeed at a Reflex save or gain the entangled condition. Creatures that successfully save can move as normal, but those that remain in the area must attempt a new save at the end of your turn each round. Creatures moving into the area must attempt a save immediately; failure ends their movement and they become entangled. An entangled creature can break free as a move action with a successful Acrobatics check or DC 15 Strength check. The vines last for a number of rounds equal to your mystic level, and the entire area is difficult terrain while the effect lasts. At 11th level, the vines can reach 10 feet and sprout thorns that deal 1d6 piercing damage each round to creatures in the area.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
+        "details": {
+          "category": "classFeature",
+          "combat": false,
+          "specialAbilityType": "su"
+        },
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "3rd Level",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Xenodruid Connection",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         }
@@ -88,8 +95,7 @@
       "type": "equipment",
       "img": "systems/sfrpg/icons/equipment/armor/lashunta-tempweave-basic.webp",
       "system": {
-        "type": "",
-        "ability": null,
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -100,9 +106,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "armor": {
           "type": "light",
@@ -131,7 +138,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -140,7 +146,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -171,7 +177,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -181,42 +188,45 @@
           "unidentified": "",
           "value": "<p>Lashuntas developed tempweave light armor by threading temperature-regulating wires through reinforced clothing. The result is a protective, flexible outfit that maintains a comfortable temperature for the wearer. Most tempweave outfits feature a fitted tunic over breeches, making them a popular choice for explorers venturing to hot or humid environments.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 4,
         "modifiers": [],
         "price": 1950,
         "proficient": true,
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "reach": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
-        "size": "",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook",
         "specialMaterials": {},
         "speed": "",
         "strength": 0,
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -224,8 +234,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -236,11 +246,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mindlink.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -256,9 +262,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -268,7 +275,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -276,16 +284,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>You link your mind to that of a touched creature to swiftly communicate a large amount of complex information in an instant. You decide what the target learns, limited to any amount of information that otherwise could be communicated in 10 minutes. This information comes in a series of visual images and emotional sensations, and it isn’t @UUID[Compendium.sfrpg.rules.PqV3OCbUTyk2upPD]{Language-dependent}.</p>"
+          "value": "<p>You link your mind to that of a touched creature to swiftly communicate a large amount of complex information in an instant. You decide what the target learns, limited to any amount of information that otherwise could be communicated in 10 minutes. This information comes in a series of visual images and emotional sensations, and it isn’t @UUID[Compendium.sfrpg.rules.Item.PqV3OCbUTyk2upPD]{Language-dependent}.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -299,11 +307,9 @@
           "mode": "always",
           "prepared": true
         },
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "touch",
-          "value": null
+          "units": "touch"
         },
         "rollNotes": "",
         "save": {
@@ -312,14 +318,19 @@
           "descriptor": "harmless"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 365",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -331,11 +342,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/fog_cloud.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -351,9 +358,10 @@
         },
         "area": {
           "effect": "spread",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -363,7 +371,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -373,14 +382,14 @@
           "unidentified": "",
           "value": "<p>A bank of fog billows out from the point you designate. The fog obscures all sight, including darkvision, beyond 5 feet. A creature within 5 feet has concealment (attacks have a 20% miss chance) against its attacker. Creatures farther away have total concealment (50% miss chance, and the attacker can’t use sight to locate the target) against their attackers.</p>\n<p>A moderate wind (11+ mph) disperses the fog in 4 rounds; a strong wind (21+ mph) disperses the fog in 1 round.</p>\n<p>This spell doesn’t function underwater or in a vacuum.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value*10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -391,30 +400,33 @@
         },
         "modifiers": [],
         "preparation": {
-          "mode": null,
+          "mode": "",
           "prepared": true
         },
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 356",
         "sr": false,
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -426,11 +438,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/summon_creature.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -446,9 +454,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -458,7 +467,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -466,16 +476,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This spell summons an extraplanar creature (typically an elemental, magical beast native to another plane, or outsider, but also occasionally even extraplanar constructs). The summoned creature appears where you designate and acts immediately on your turn. It attacks your opponents to the best of its ability. If you can communicate with the creature, you can direct it to not attack, to attack particular enemies, or to perform other actions.</p>\n<p>When you gain this spell as a spell known, select four creatures from the appropriate list in Table 8: Summon Creature for each level at which you can cast this spell. For example, for the 1st-level&nbsp;summon creature&nbsp;spell, you could choose Tiny air, earth, fire, and water elementals. Note that a particular alignment or class is sometimes required to choose certain creatures, as listed in Table 8. In place of a single selection, you can choose a creature from a lower-level summoning list; doing so allows you the option of summoning multiple such creatures at a time. Each time you gain a character level, you can change these selections.</p>\n<p>You can gain&nbsp;summon creature&nbsp;a second time at the highest spell level you know, selecting four additional appropriate creatures at each level you can cast this spell.</p>\n<p>You choose which of the selected creatures you summon each time you cast the spell.</p>\n<p><strong>1st:</strong> When you cast&nbsp;summon creature&nbsp;as a 1st-level spell, you summon one creature from your selection of creatures from the 1st-level summoning list.</p>\n<p><strong>2nd:</strong> When you cast&nbsp;summon creature&nbsp;as a 2nd-level spell, you summon one creature from your selection of creatures from the 2nd-level summoning list. If the chosen creature is from a lower-level summoning list, you summon three such creatures instead.</p>\n<p><strong>3rd:</strong> When you cast&nbsp;summon creature&nbsp;as a 3rd-level spell, you summon one creature from your selection of creatures from the 3rd-level summoning list. If the chosen creature is from a lower-level summoning list, you summon three such creatures instead.</p>\n<p><strong>4th:</strong> When you cast&nbsp;summon creature&nbsp;as a 4th-level spell, you summon one creature from your selection of creatures from the 4th-level summoning list. If the chosen creature is from a lower-level summoning list, you summon three such creatures instead.</p>\n<p><strong>5th:</strong> When you cast&nbsp;summon creature&nbsp;as a 5th-level spell, you summon one creature from your selection of creatures from the 5th-level summoning list. If the chosen creature is from a lower-level summoning list, you summon three such creatures instead.</p>\n<p><strong>6th:</strong> When you cast&nbsp;summon creature&nbsp;as a 6th-level spell, you summon one creature from your selection of creatures from the 6th-level summoning list. If the chosen creature is from a lower-level summoning list, you summon three such creatures instead.</p>\n<p>A summoned creature can’t use teleportation or planar travel abilities or magical divination abilities. Creatures can’t be summoned into an environment that can’t support them (such as summoning a breathing creature into a vacuum). Creatures summoned using this spell can’t use spells or spell-like abilities that duplicate spells that require expending Resolve Points or expensive materials to cast (such as&nbsp;@UUID[Compendium.sfrpg.spells.IRUPIVT101SvIK6l]{Raise Dead}).</p>\n<p>To generate statistics for a summoned creature, first check the Stat Block column of the below tables. If the stat block is \"Alien\", use the creature’s stat block on that link, though it is altered slightly depending on your alignment. Otherwise, if the entry is Tiny, Small, Medium, Large, Huge, or elder, use the elemental stat block of the same name and apply the appropriate graft, listed in the Applied Graft column. Non-elemental creatures lose elemental immunities and do not gain an elemental graft. For example, to get the statistics of an angel from the 1st-level list, you use the tiny elemental stat block and apply the angel summoning graft.</p>\n<table style=\"height: 408px;\">\n<tbody>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 247.267px;\"><strong>1st Level</strong></td>\n<td style=\"height: 34px; width: 119.383px;\"><strong>Stat Block</strong></td>\n<td style=\"height: 34px; width: 169.633px;\"><strong>Applied Graft</strong></td>\n<td style=\"height: 34px; width: 288.717px;\"><strong>Summoner Requirements</strong></td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">Aeon</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Summoning</td>\n<td style=\"height: 17px; width: 288.717px;\">Neutral-aligned</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">Agathion</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Summoning</td>\n<td style=\"height: 17px; width: 288.717px;\">Nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">Angel</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Summoning</td>\n<td style=\"height: 17px; width: 288.717px;\">Nonevil</td>\n</tr>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 247.267px;\">Archon</td>\n<td style=\"height: 34px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 34px; width: 169.633px;\">Summoning</td>\n<td style=\"height: 34px; width: 288.717px;\">Nonchaotic and nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">Azata</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Summoning</td>\n<td style=\"height: 17px; width: 288.717px;\">Nonevil and nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">Daemon</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Summoning</td>\n<td style=\"height: 17px; width: 288.717px;\">Nongood</td>\n</tr>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 247.267px;\">Demon</td>\n<td style=\"height: 34px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 34px; width: 169.633px;\">Summoning</td>\n<td style=\"height: 34px; width: 288.717px;\">Nongood and nonlawful</td>\n</tr>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 247.267px;\">Devil</td>\n<td style=\"height: 34px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 34px; width: 169.633px;\">Summoning</td>\n<td style=\"height: 34px; width: 288.717px;\">Nonchaotic and nongood</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">Elemental, Air</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Elemental</td>\n<td style=\"height: 17px; width: 288.717px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">Elemental, Earth</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Elemental</td>\n<td style=\"height: 17px; width: 288.717px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">Elemental, Fire</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Elemental</td>\n<td style=\"height: 17px; width: 288.717px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">Elemental, Water</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Elemental</td>\n<td style=\"height: 17px; width: 288.717px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">First World Beast</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Summoning</td>\n<td style=\"height: 17px; width: 288.717px;\">Mystic</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">Inevitable</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Summoning</td>\n<td style=\"height: 17px; width: 288.717px;\">Nonchaotic</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">Protean</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Summoning</td>\n<td style=\"height: 17px; width: 288.717px;\">Nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">Robot</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Summoning</td>\n<td style=\"height: 17px; width: 288.717px;\">Technomancer</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 247.267px;\">Shadow Creature</td>\n<td style=\"height: 17px; width: 119.383px;\">Tiny</td>\n<td style=\"height: 17px; width: 169.633px;\">Summoning</td>\n<td style=\"height: 17px; width: 288.717px;\">None</td>\n</tr>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 247.267px;\">Skittermander Whelp</td>\n<td style=\"height: 34px; width: 119.383px;\">Alien</td>\n<td style=\"height: 34px; width: 169.633px;\">Simple</td>\n<td style=\"height: 34px; width: 288.717px;\">None</td>\n</tr>\n</tbody>\n</table>\n<table style=\"height: 323px;\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\"><strong>2nd Level</strong></td>\n<td style=\"height: 17px; width: 107.983px;\"><strong>Stat Block</strong></td>\n<td style=\"height: 17px; width: 141.067px;\"><strong>Applied Graft</strong></td>\n<td style=\"height: 17px; width: 261.033px;\"><strong>Summoner Requirements</strong></td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Aeon</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Summoning</td>\n<td style=\"height: 17px; width: 261.033px;\">Neutral-aligned</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Agathion</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Summoning</td>\n<td style=\"height: 17px; width: 261.033px;\">Nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Angel</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Summoning</td>\n<td style=\"height: 17px; width: 261.033px;\">Nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Archon</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Summoning</td>\n<td style=\"height: 17px; width: 261.033px;\">Nonchaotic and nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Azata</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Summoning</td>\n<td style=\"height: 17px; width: 261.033px;\">Nonevil and nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Daemon</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Summoning</td>\n<td style=\"height: 17px; width: 261.033px;\">Nongood</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Demon</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Summoning</td>\n<td style=\"height: 17px; width: 261.033px;\">Nongood and nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Devil</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Summoning</td>\n<td style=\"height: 17px; width: 261.033px;\">Nonchaotic and nongood</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Elemental, Air</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Elemental</td>\n<td style=\"height: 17px; width: 261.033px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Elemental, Earth</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Elemental</td>\n<td style=\"height: 17px; width: 261.033px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Elemental, Fire</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Elemental</td>\n<td style=\"height: 17px; width: 261.033px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Elemental, Water</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Elemental</td>\n<td style=\"height: 17px; width: 261.033px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">First World Beast</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Summoning</td>\n<td style=\"height: 17px; width: 261.033px;\">Mystic</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Inevitable</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Summoning</td>\n<td style=\"height: 17px; width: 261.033px;\">Nonchaotic</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Protean</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Summoning</td>\n<td style=\"height: 17px; width: 261.033px;\">Nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Robot</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Summoning</td>\n<td style=\"height: 17px; width: 261.033px;\">Technomancer</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Security Robot, Observer-Class</td>\n<td style=\"height: 17px; width: 107.983px;\">Alien</td>\n<td style=\"height: 17px; width: 141.067px;\">Simple</td>\n<td style=\"height: 17px; width: 261.033px;\">Technomancer</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 314.917px;\">Shadow Creature</td>\n<td style=\"height: 17px; width: 107.983px;\">Small</td>\n<td style=\"height: 17px; width: 141.067px;\">Summoning</td>\n<td style=\"height: 17px; width: 261.033px;\">None</td>\n</tr>\n</tbody>\n</table>\n<table style=\"height: 442px;\">\n<tbody>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 214.717px;\"><strong>3rd Level</strong></td>\n<td style=\"height: 34px; width: 129.6px;\"><strong>Stat Block</strong></td>\n<td style=\"height: 34px; width: 168.867px;\"><strong>Applied Graft</strong></td>\n<td style=\"height: 34px; width: 311.817px;\"><strong>Summoner Requirements</strong></td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Aeon</td>\n<td style=\"height: 17px; width: 129.6px;\">Medium</td>\n<td style=\"height: 17px; width: 168.867px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.817px;\">Neutral-aligned</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Agathion</td>\n<td style=\"height: 17px; width: 129.6px;\">Medium</td>\n<td style=\"height: 17px; width: 168.867px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.817px;\">Nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Angel</td>\n<td style=\"height: 17px; width: 129.6px;\">Medium</td>\n<td style=\"height: 17px; width: 168.867px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.817px;\">Nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Archon</td>\n<td style=\"height: 17px; width: 129.6px;\">Medium</td>\n<td style=\"height: 17px; width: 168.867px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.817px;\">Nonchaotic and nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Azata</td>\n<td style=\"height: 17px; width: 129.6px;\">Medium</td>\n<td style=\"height: 17px; width: 168.867px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.817px;\">Nonevil and nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Crest-Eater</td>\n<td style=\"height: 17px; width: 129.6px;\">Alien</td>\n<td style=\"height: 17px; width: 168.867px;\">Simple</td>\n<td style=\"height: 17px; width: 311.817px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Daemon</td>\n<td style=\"height: 17px; width: 129.6px;\">Medium</td>\n<td style=\"height: 17px; width: 168.867px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.817px;\">Nongood</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Demon</td>\n<td style=\"height: 17px; width: 129.6px;\">Medium</td>\n<td style=\"height: 17px; width: 168.867px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.817px;\">Nongood and nonlawful</td>\n</tr>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 214.717px;\">Devil</td>\n<td style=\"height: 34px; width: 129.6px;\">Medium</td>\n<td style=\"height: 34px; width: 168.867px;\">Summoning</td>\n<td style=\"height: 34px; width: 311.817px;\">Nonchaotic and nongood</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Elemental, Air</td>\n<td style=\"height: 17px; width: 129.6px;\">Medium</td>\n<td style=\"height: 17px; width: 168.867px;\">Elemental</td>\n<td style=\"height: 17px; width: 311.817px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Elemental, Earth</td>\n<td style=\"height: 17px; width: 129.6px;\">Medium</td>\n<td style=\"height: 17px; width: 168.867px;\">Elemental</td>\n<td style=\"height: 17px; width: 311.817px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Elemental, Fire</td>\n<td style=\"height: 17px; width: 129.6px;\">Medium</td>\n<td style=\"height: 17px; width: 168.867px;\">Elemental</td>\n<td style=\"height: 17px; width: 311.817px;\">None</td>\n</tr>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 214.717px;\">Elemental, Water</td>\n<td style=\"height: 34px; width: 129.6px;\">Medium</td>\n<td style=\"height: 34px; width: 168.867px;\">Elemental</td>\n<td style=\"height: 34px; width: 311.817px;\">None</td>\n</tr>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 214.717px;\">First World Beast</td>\n<td style=\"height: 34px; width: 129.6px;\">Medium</td>\n<td style=\"height: 34px; width: 168.867px;\">Summoning</td>\n<td style=\"height: 34px; width: 311.817px;\">Mystic</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Haan</td>\n<td style=\"height: 17px; width: 129.6px;\">Alien</td>\n<td style=\"height: 17px; width: 168.867px;\">Simple</td>\n<td style=\"height: 17px; width: 311.817px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Inevitable</td>\n<td style=\"height: 17px; width: 129.6px;\">Medium</td>\n<td style=\"height: 17px; width: 168.867px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.817px;\">Nonchaotic</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Ksarik</td>\n<td style=\"height: 17px; width: 129.6px;\">Alien</td>\n<td style=\"height: 17px; width: 168.867px;\">Simple</td>\n<td style=\"height: 17px; width: 311.817px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Protean</td>\n<td style=\"height: 17px; width: 129.6px;\">Medium</td>\n<td style=\"height: 17px; width: 168.867px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.817px;\">Nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 214.717px;\">Robot</td>\n<td style=\"height: 17px; width: 129.6px;\">Medium</td>\n<td style=\"height: 17px; width: 168.867px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.817px;\">Technomancer</td>\n</tr>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 214.717px;\">Shadow Creature</td>\n<td style=\"height: 34px; width: 129.6px;\">Medium</td>\n<td style=\"height: 34px; width: 168.867px;\">Summoning</td>\n<td style=\"height: 34px; width: 311.817px;\">None</td>\n</tr>\n</tbody>\n</table>\n<table style=\"height: 340px;\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\"><strong>4th Level</strong></td>\n<td style=\"height: 17px; width: 130.033px;\"><strong>Stat Block</strong></td>\n<td style=\"height: 17px; width: 169.683px;\"><strong>Applied Graft</strong></td>\n<td style=\"height: 17px; width: 313.483px;\"><strong>Summoner Requirements</strong></td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Aeon</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Neutral-aligned</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Agathion</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Angel</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Archon</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonchaotic and nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Azata</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonevil and nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Daemon</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nongood</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Demon</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nongood and nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Devil</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonchaotic and nongood</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Elemental, Air</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Elemental</td>\n<td style=\"height: 17px; width: 313.483px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Elemental, Earth</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Elemental</td>\n<td style=\"height: 17px; width: 313.483px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Elemental, Fire</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Elemental</td>\n<td style=\"height: 17px; width: 313.483px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Elemental, Water</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Elemental</td>\n<td style=\"height: 17px; width: 313.483px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">First World Beast</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Mystic</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Inevitable</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonchaotic</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Mountain Eel</td>\n<td style=\"height: 17px; width: 130.033px;\">Alien</td>\n<td style=\"height: 17px; width: 169.683px;\">Simple</td>\n<td style=\"height: 17px; width: 313.483px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Orocoran</td>\n<td style=\"height: 17px; width: 130.033px;\">Alien</td>\n<td style=\"height: 17px; width: 169.683px;\">Simple</td>\n<td style=\"height: 17px; width: 313.483px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Protean</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Robot</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Technomancer</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Shadow Creature</td>\n<td style=\"height: 17px; width: 130.033px;\">Large</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">None</td>\n</tr>\n</tbody>\n</table>\n<table style=\"height: 323px;\">\n<tbody>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\"><strong>5th Level</strong></td>\n<td style=\"height: 17px; width: 130.033px;\"><strong>Stat Block</strong></td>\n<td style=\"height: 17px; width: 169.683px;\"><strong>Applied Graft</strong></td>\n<td style=\"height: 17px; width: 313.483px;\"><strong>Summoner Requirements</strong></td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Aeon</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Neutral-aligned</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Agathion</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Angel</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Archon</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonchaotic and nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Azata</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonevil and nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Daemon</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nongood</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Demon</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nongood and nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Devil</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonchaotic and nongood</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Elemental, Air</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Elemental</td>\n<td style=\"height: 17px; width: 313.483px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Elemental, Earth</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Elemental</td>\n<td style=\"height: 17px; width: 313.483px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Elemental, Fire</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Elemental</td>\n<td style=\"height: 17px; width: 313.483px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Elemental, Water</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Elemental</td>\n<td style=\"height: 17px; width: 313.483px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">First World Beast</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Mystic</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Inevitable</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonchaotic</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Protean</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Robot</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">Technomancer</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Shadow Creature</td>\n<td style=\"height: 17px; width: 130.033px;\">Huge</td>\n<td style=\"height: 17px; width: 169.683px;\">Summoning</td>\n<td style=\"height: 17px; width: 313.483px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.8px;\">Surnoch</td>\n<td style=\"height: 17px; width: 130.033px;\">Alien</td>\n<td style=\"height: 17px; width: 169.683px;\">Simple</td>\n<td style=\"height: 17px; width: 313.483px;\">None</td>\n</tr>\n</tbody>\n</table>\n<table style=\"height: 393px;\">\n<tbody>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 211.583px;\"><strong>6th Level</strong></td>\n<td style=\"height: 34px; width: 129.267px;\"><strong>Stat Block</strong></td>\n<td style=\"height: 34px; width: 172.367px;\"><strong>Applied Graft</strong></td>\n<td style=\"height: 34px; width: 311.783px;\"><strong>Summoner Requirements</strong></td>\n</tr>\n<tr style=\"height: 19px;\">\n<td style=\"height: 19px; width: 211.583px;\">Aeon</td>\n<td style=\"height: 19px; width: 129.267px;\">Elder</td>\n<td style=\"height: 19px; width: 172.367px;\">Summoning</td>\n<td style=\"height: 19px; width: 311.783px;\">Neutral-aligned</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.583px;\">Agathion</td>\n<td style=\"height: 17px; width: 129.267px;\">Elder</td>\n<td style=\"height: 17px; width: 172.367px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.783px;\">Nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.583px;\">Angel</td>\n<td style=\"height: 17px; width: 129.267px;\">Elder</td>\n<td style=\"height: 17px; width: 172.367px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.783px;\">Nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.583px;\">Archon</td>\n<td style=\"height: 17px; width: 129.267px;\">Elder</td>\n<td style=\"height: 17px; width: 172.367px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.783px;\">Nonchaotic and nonevil</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.583px;\">Azata</td>\n<td style=\"height: 17px; width: 129.267px;\">Elder</td>\n<td style=\"height: 17px; width: 172.367px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.783px;\">Nonevil and nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.583px;\">Daemon</td>\n<td style=\"height: 17px; width: 129.267px;\">Elder</td>\n<td style=\"height: 17px; width: 172.367px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.783px;\">Nongood</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.583px;\">Demon</td>\n<td style=\"height: 17px; width: 129.267px;\">Elder</td>\n<td style=\"height: 17px; width: 172.367px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.783px;\">Nongood and nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.583px;\">Devil</td>\n<td style=\"height: 17px; width: 129.267px;\">Elder</td>\n<td style=\"height: 17px; width: 172.367px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.783px;\">Nonchaotic and nongood</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.583px;\">Elemental, Air</td>\n<td style=\"height: 17px; width: 129.267px;\">Elder</td>\n<td style=\"height: 17px; width: 172.367px;\">Elemental</td>\n<td style=\"height: 17px; width: 311.783px;\">None</td>\n</tr>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 211.583px;\">Elemental, Earth</td>\n<td style=\"height: 34px; width: 129.267px;\">Elder</td>\n<td style=\"height: 34px; width: 172.367px;\">Elemental</td>\n<td style=\"height: 34px; width: 311.783px;\">None</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.583px;\">Elemental, Fire</td>\n<td style=\"height: 17px; width: 129.267px;\">Elder</td>\n<td style=\"height: 17px; width: 172.367px;\">Elemental</td>\n<td style=\"height: 17px; width: 311.783px;\">None</td>\n</tr>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 211.583px;\">Elemental, Water</td>\n<td style=\"height: 34px; width: 129.267px;\">Elder</td>\n<td style=\"height: 34px; width: 172.367px;\">Elemental</td>\n<td style=\"height: 34px; width: 311.783px;\">None</td>\n</tr>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 211.583px;\">First World Beast</td>\n<td style=\"height: 34px; width: 129.267px;\">Elder</td>\n<td style=\"height: 34px; width: 172.367px;\">Summoning</td>\n<td style=\"height: 34px; width: 311.783px;\">Mystic</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.583px;\">Inevitable</td>\n<td style=\"height: 17px; width: 129.267px;\">Elder</td>\n<td style=\"height: 17px; width: 172.367px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.783px;\">Nonchaotic</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.583px;\">Protean</td>\n<td style=\"height: 17px; width: 129.267px;\">Elder</td>\n<td style=\"height: 17px; width: 172.367px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.783px;\">Nonlawful</td>\n</tr>\n<tr style=\"height: 17px;\">\n<td style=\"height: 17px; width: 211.583px;\">Robot</td>\n<td style=\"height: 17px; width: 129.267px;\">Elder</td>\n<td style=\"height: 17px; width: 172.367px;\">Summoning</td>\n<td style=\"height: 17px; width: 311.783px;\">Technomancer</td>\n</tr>\n<tr style=\"height: 34px;\">\n<td style=\"height: 34px; width: 211.583px;\">Shadow Creature</td>\n<td style=\"height: 34px; width: 129.267px;\">Elder</td>\n<td style=\"height: 34px; width: 172.367px;\">Summoning</td>\n<td style=\"height: 34px; width: 311.783px;\">None</td>\n</tr>\n</tbody>\n</table>"
+          "value": "<p>This spell summons an extraplanar creature (typically an elemental, magical beast native to another plane, or outsider, but also occasionally even extraplanar constructs). The summoned creature appears where you designate and acts immediately on your turn. It attacks your opponents to the best of its ability. If you can communicate with the creature, you can direct it to not attack, to attack particular enemies, or to perform other actions.</p>\n<p>When you gain this spell as a spell known, select four creatures from the appropriate list in Table 8: Summon Creature for each level at which you can cast this spell. For example, for the 1st-level&nbsp;summon creature&nbsp;spell, you could choose Tiny air, earth, fire, and water elementals. Note that a particular alignment or class is sometimes required to choose certain creatures, as listed in Table 8. In place of a single selection, you can choose a creature from a lower-level summoning list; doing so allows you the option of summoning multiple such creatures at a time. Each time you gain a character level, you can change these selections.</p>\n<p>You can gain&nbsp;summon creature&nbsp;a second time at the highest spell level you know, selecting four additional appropriate creatures at each level you can cast this spell.</p>\n<p>You choose which of the selected creatures you summon each time you cast the spell.</p>\n<p><strong>1st:</strong> When you cast&nbsp;summon creature&nbsp;as a 1st-level spell, you summon one creature from your selection of creatures from the 1st-level summoning list.</p>\n<p><strong>2nd:</strong> When you cast&nbsp;summon creature&nbsp;as a 2nd-level spell, you summon one creature from your selection of creatures from the 2nd-level summoning list. If the chosen creature is from a lower-level summoning list, you summon three such creatures instead.</p>\n<p><strong>3rd:</strong> When you cast&nbsp;summon creature&nbsp;as a 3rd-level spell, you summon one creature from your selection of creatures from the 3rd-level summoning list. If the chosen creature is from a lower-level summoning list, you summon three such creatures instead.</p>\n<p><strong>4th:</strong> When you cast&nbsp;summon creature&nbsp;as a 4th-level spell, you summon one creature from your selection of creatures from the 4th-level summoning list. If the chosen creature is from a lower-level summoning list, you summon three such creatures instead.</p>\n<p><strong>5th:</strong> When you cast&nbsp;summon creature&nbsp;as a 5th-level spell, you summon one creature from your selection of creatures from the 5th-level summoning list. If the chosen creature is from a lower-level summoning list, you summon three such creatures instead.</p>\n<p><strong>6th:</strong> When you cast&nbsp;summon creature&nbsp;as a 6th-level spell, you summon one creature from your selection of creatures from the 6th-level summoning list. If the chosen creature is from a lower-level summoning list, you summon three such creatures instead.</p>\n<p>A summoned creature can’t use teleportation or planar travel abilities or magical divination abilities. Creatures can’t be summoned into an environment that can’t support them (such as summoning a breathing creature into a vacuum). Creatures summoned using this spell can’t use spells or spell-like abilities that duplicate spells that require expending Resolve Points or expensive materials to cast (such as&nbsp;@UUID[Compendium.sfrpg.spells.Item.IRUPIVT101SvIK6l]{Raise Dead}).</p>\n<p>To generate statistics for a summoned creature, first check the Stat Block column of the below tables. If the stat block is \"Alien\", use the creature’s stat block on that link, though it is altered slightly depending on your alignment. Otherwise, if the entry is Tiny, Small, Medium, Large, Huge, or elder, use the elemental stat block of the same name and apply the appropriate graft, listed in the Applied Graft column. Non-elemental creatures lose elemental immunities and do not gain an elemental graft. For example, to get the statistics of an angel from the 1st-level list, you use the tiny elemental stat block and apply the angel summoning graft.</p>\n<table style=\"height:408px\">\n<tbody>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:247.267px\"><strong>1st Level</strong></td>\n<td style=\"height:34px;width:119.383px\"><strong>Stat Block</strong></td>\n<td style=\"height:34px;width:169.633px\"><strong>Applied Graft</strong></td>\n<td style=\"height:34px;width:288.717px\"><strong>Summoner Requirements</strong></td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">Aeon</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Summoning</td>\n<td style=\"height:17px;width:288.717px\">Neutral-aligned</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">Agathion</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Summoning</td>\n<td style=\"height:17px;width:288.717px\">Nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">Angel</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Summoning</td>\n<td style=\"height:17px;width:288.717px\">Nonevil</td>\n</tr>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:247.267px\">Archon</td>\n<td style=\"height:34px;width:119.383px\">Tiny</td>\n<td style=\"height:34px;width:169.633px\">Summoning</td>\n<td style=\"height:34px;width:288.717px\">Nonchaotic and nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">Azata</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Summoning</td>\n<td style=\"height:17px;width:288.717px\">Nonevil and nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">Daemon</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Summoning</td>\n<td style=\"height:17px;width:288.717px\">Nongood</td>\n</tr>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:247.267px\">Demon</td>\n<td style=\"height:34px;width:119.383px\">Tiny</td>\n<td style=\"height:34px;width:169.633px\">Summoning</td>\n<td style=\"height:34px;width:288.717px\">Nongood and nonlawful</td>\n</tr>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:247.267px\">Devil</td>\n<td style=\"height:34px;width:119.383px\">Tiny</td>\n<td style=\"height:34px;width:169.633px\">Summoning</td>\n<td style=\"height:34px;width:288.717px\">Nonchaotic and nongood</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">Elemental, Air</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Elemental</td>\n<td style=\"height:17px;width:288.717px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">Elemental, Earth</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Elemental</td>\n<td style=\"height:17px;width:288.717px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">Elemental, Fire</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Elemental</td>\n<td style=\"height:17px;width:288.717px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">Elemental, Water</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Elemental</td>\n<td style=\"height:17px;width:288.717px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">First World Beast</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Summoning</td>\n<td style=\"height:17px;width:288.717px\">Mystic</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">Inevitable</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Summoning</td>\n<td style=\"height:17px;width:288.717px\">Nonchaotic</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">Protean</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Summoning</td>\n<td style=\"height:17px;width:288.717px\">Nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">Robot</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Summoning</td>\n<td style=\"height:17px;width:288.717px\">Technomancer</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:247.267px\">Shadow Creature</td>\n<td style=\"height:17px;width:119.383px\">Tiny</td>\n<td style=\"height:17px;width:169.633px\">Summoning</td>\n<td style=\"height:17px;width:288.717px\">None</td>\n</tr>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:247.267px\">Skittermander Whelp</td>\n<td style=\"height:34px;width:119.383px\">Alien</td>\n<td style=\"height:34px;width:169.633px\">Simple</td>\n<td style=\"height:34px;width:288.717px\">None</td>\n</tr>\n</tbody>\n</table>\n<table style=\"height:323px\">\n<tbody>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\"><strong>2nd Level</strong></td>\n<td style=\"height:17px;width:107.983px\"><strong>Stat Block</strong></td>\n<td style=\"height:17px;width:141.067px\"><strong>Applied Graft</strong></td>\n<td style=\"height:17px;width:261.033px\"><strong>Summoner Requirements</strong></td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Aeon</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Summoning</td>\n<td style=\"height:17px;width:261.033px\">Neutral-aligned</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Agathion</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Summoning</td>\n<td style=\"height:17px;width:261.033px\">Nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Angel</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Summoning</td>\n<td style=\"height:17px;width:261.033px\">Nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Archon</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Summoning</td>\n<td style=\"height:17px;width:261.033px\">Nonchaotic and nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Azata</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Summoning</td>\n<td style=\"height:17px;width:261.033px\">Nonevil and nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Daemon</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Summoning</td>\n<td style=\"height:17px;width:261.033px\">Nongood</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Demon</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Summoning</td>\n<td style=\"height:17px;width:261.033px\">Nongood and nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Devil</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Summoning</td>\n<td style=\"height:17px;width:261.033px\">Nonchaotic and nongood</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Elemental, Air</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Elemental</td>\n<td style=\"height:17px;width:261.033px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Elemental, Earth</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Elemental</td>\n<td style=\"height:17px;width:261.033px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Elemental, Fire</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Elemental</td>\n<td style=\"height:17px;width:261.033px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Elemental, Water</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Elemental</td>\n<td style=\"height:17px;width:261.033px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">First World Beast</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Summoning</td>\n<td style=\"height:17px;width:261.033px\">Mystic</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Inevitable</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Summoning</td>\n<td style=\"height:17px;width:261.033px\">Nonchaotic</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Protean</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Summoning</td>\n<td style=\"height:17px;width:261.033px\">Nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Robot</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Summoning</td>\n<td style=\"height:17px;width:261.033px\">Technomancer</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Security Robot, Observer-Class</td>\n<td style=\"height:17px;width:107.983px\">Alien</td>\n<td style=\"height:17px;width:141.067px\">Simple</td>\n<td style=\"height:17px;width:261.033px\">Technomancer</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:314.917px\">Shadow Creature</td>\n<td style=\"height:17px;width:107.983px\">Small</td>\n<td style=\"height:17px;width:141.067px\">Summoning</td>\n<td style=\"height:17px;width:261.033px\">None</td>\n</tr>\n</tbody>\n</table>\n<table style=\"height:442px\">\n<tbody>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:214.717px\"><strong>3rd Level</strong></td>\n<td style=\"height:34px;width:129.6px\"><strong>Stat Block</strong></td>\n<td style=\"height:34px;width:168.867px\"><strong>Applied Graft</strong></td>\n<td style=\"height:34px;width:311.817px\"><strong>Summoner Requirements</strong></td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Aeon</td>\n<td style=\"height:17px;width:129.6px\">Medium</td>\n<td style=\"height:17px;width:168.867px\">Summoning</td>\n<td style=\"height:17px;width:311.817px\">Neutral-aligned</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Agathion</td>\n<td style=\"height:17px;width:129.6px\">Medium</td>\n<td style=\"height:17px;width:168.867px\">Summoning</td>\n<td style=\"height:17px;width:311.817px\">Nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Angel</td>\n<td style=\"height:17px;width:129.6px\">Medium</td>\n<td style=\"height:17px;width:168.867px\">Summoning</td>\n<td style=\"height:17px;width:311.817px\">Nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Archon</td>\n<td style=\"height:17px;width:129.6px\">Medium</td>\n<td style=\"height:17px;width:168.867px\">Summoning</td>\n<td style=\"height:17px;width:311.817px\">Nonchaotic and nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Azata</td>\n<td style=\"height:17px;width:129.6px\">Medium</td>\n<td style=\"height:17px;width:168.867px\">Summoning</td>\n<td style=\"height:17px;width:311.817px\">Nonevil and nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Crest-Eater</td>\n<td style=\"height:17px;width:129.6px\">Alien</td>\n<td style=\"height:17px;width:168.867px\">Simple</td>\n<td style=\"height:17px;width:311.817px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Daemon</td>\n<td style=\"height:17px;width:129.6px\">Medium</td>\n<td style=\"height:17px;width:168.867px\">Summoning</td>\n<td style=\"height:17px;width:311.817px\">Nongood</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Demon</td>\n<td style=\"height:17px;width:129.6px\">Medium</td>\n<td style=\"height:17px;width:168.867px\">Summoning</td>\n<td style=\"height:17px;width:311.817px\">Nongood and nonlawful</td>\n</tr>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:214.717px\">Devil</td>\n<td style=\"height:34px;width:129.6px\">Medium</td>\n<td style=\"height:34px;width:168.867px\">Summoning</td>\n<td style=\"height:34px;width:311.817px\">Nonchaotic and nongood</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Elemental, Air</td>\n<td style=\"height:17px;width:129.6px\">Medium</td>\n<td style=\"height:17px;width:168.867px\">Elemental</td>\n<td style=\"height:17px;width:311.817px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Elemental, Earth</td>\n<td style=\"height:17px;width:129.6px\">Medium</td>\n<td style=\"height:17px;width:168.867px\">Elemental</td>\n<td style=\"height:17px;width:311.817px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Elemental, Fire</td>\n<td style=\"height:17px;width:129.6px\">Medium</td>\n<td style=\"height:17px;width:168.867px\">Elemental</td>\n<td style=\"height:17px;width:311.817px\">None</td>\n</tr>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:214.717px\">Elemental, Water</td>\n<td style=\"height:34px;width:129.6px\">Medium</td>\n<td style=\"height:34px;width:168.867px\">Elemental</td>\n<td style=\"height:34px;width:311.817px\">None</td>\n</tr>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:214.717px\">First World Beast</td>\n<td style=\"height:34px;width:129.6px\">Medium</td>\n<td style=\"height:34px;width:168.867px\">Summoning</td>\n<td style=\"height:34px;width:311.817px\">Mystic</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Haan</td>\n<td style=\"height:17px;width:129.6px\">Alien</td>\n<td style=\"height:17px;width:168.867px\">Simple</td>\n<td style=\"height:17px;width:311.817px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Inevitable</td>\n<td style=\"height:17px;width:129.6px\">Medium</td>\n<td style=\"height:17px;width:168.867px\">Summoning</td>\n<td style=\"height:17px;width:311.817px\">Nonchaotic</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Ksarik</td>\n<td style=\"height:17px;width:129.6px\">Alien</td>\n<td style=\"height:17px;width:168.867px\">Simple</td>\n<td style=\"height:17px;width:311.817px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Protean</td>\n<td style=\"height:17px;width:129.6px\">Medium</td>\n<td style=\"height:17px;width:168.867px\">Summoning</td>\n<td style=\"height:17px;width:311.817px\">Nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:214.717px\">Robot</td>\n<td style=\"height:17px;width:129.6px\">Medium</td>\n<td style=\"height:17px;width:168.867px\">Summoning</td>\n<td style=\"height:17px;width:311.817px\">Technomancer</td>\n</tr>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:214.717px\">Shadow Creature</td>\n<td style=\"height:34px;width:129.6px\">Medium</td>\n<td style=\"height:34px;width:168.867px\">Summoning</td>\n<td style=\"height:34px;width:311.817px\">None</td>\n</tr>\n</tbody>\n</table>\n<table style=\"height:340px\">\n<tbody>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\"><strong>4th Level</strong></td>\n<td style=\"height:17px;width:130.033px\"><strong>Stat Block</strong></td>\n<td style=\"height:17px;width:169.683px\"><strong>Applied Graft</strong></td>\n<td style=\"height:17px;width:313.483px\"><strong>Summoner Requirements</strong></td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Aeon</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Neutral-aligned</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Agathion</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Angel</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Archon</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonchaotic and nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Azata</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonevil and nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Daemon</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nongood</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Demon</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nongood and nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Devil</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonchaotic and nongood</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Elemental, Air</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Elemental</td>\n<td style=\"height:17px;width:313.483px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Elemental, Earth</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Elemental</td>\n<td style=\"height:17px;width:313.483px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Elemental, Fire</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Elemental</td>\n<td style=\"height:17px;width:313.483px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Elemental, Water</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Elemental</td>\n<td style=\"height:17px;width:313.483px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">First World Beast</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Mystic</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Inevitable</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonchaotic</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Mountain Eel</td>\n<td style=\"height:17px;width:130.033px\">Alien</td>\n<td style=\"height:17px;width:169.683px\">Simple</td>\n<td style=\"height:17px;width:313.483px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Orocoran</td>\n<td style=\"height:17px;width:130.033px\">Alien</td>\n<td style=\"height:17px;width:169.683px\">Simple</td>\n<td style=\"height:17px;width:313.483px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Protean</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Robot</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Technomancer</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Shadow Creature</td>\n<td style=\"height:17px;width:130.033px\">Large</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">None</td>\n</tr>\n</tbody>\n</table>\n<table style=\"height:323px\">\n<tbody>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\"><strong>5th Level</strong></td>\n<td style=\"height:17px;width:130.033px\"><strong>Stat Block</strong></td>\n<td style=\"height:17px;width:169.683px\"><strong>Applied Graft</strong></td>\n<td style=\"height:17px;width:313.483px\"><strong>Summoner Requirements</strong></td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Aeon</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Neutral-aligned</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Agathion</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Angel</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Archon</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonchaotic and nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Azata</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonevil and nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Daemon</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nongood</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Demon</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nongood and nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Devil</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonchaotic and nongood</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Elemental, Air</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Elemental</td>\n<td style=\"height:17px;width:313.483px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Elemental, Earth</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Elemental</td>\n<td style=\"height:17px;width:313.483px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Elemental, Fire</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Elemental</td>\n<td style=\"height:17px;width:313.483px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Elemental, Water</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Elemental</td>\n<td style=\"height:17px;width:313.483px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">First World Beast</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Mystic</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Inevitable</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonchaotic</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Protean</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Robot</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">Technomancer</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Shadow Creature</td>\n<td style=\"height:17px;width:130.033px\">Huge</td>\n<td style=\"height:17px;width:169.683px\">Summoning</td>\n<td style=\"height:17px;width:313.483px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.8px\">Surnoch</td>\n<td style=\"height:17px;width:130.033px\">Alien</td>\n<td style=\"height:17px;width:169.683px\">Simple</td>\n<td style=\"height:17px;width:313.483px\">None</td>\n</tr>\n</tbody>\n</table>\n<table style=\"height:393px\">\n<tbody>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:211.583px\"><strong>6th Level</strong></td>\n<td style=\"height:34px;width:129.267px\"><strong>Stat Block</strong></td>\n<td style=\"height:34px;width:172.367px\"><strong>Applied Graft</strong></td>\n<td style=\"height:34px;width:311.783px\"><strong>Summoner Requirements</strong></td>\n</tr>\n<tr style=\"height:19px\">\n<td style=\"height:19px;width:211.583px\">Aeon</td>\n<td style=\"height:19px;width:129.267px\">Elder</td>\n<td style=\"height:19px;width:172.367px\">Summoning</td>\n<td style=\"height:19px;width:311.783px\">Neutral-aligned</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.583px\">Agathion</td>\n<td style=\"height:17px;width:129.267px\">Elder</td>\n<td style=\"height:17px;width:172.367px\">Summoning</td>\n<td style=\"height:17px;width:311.783px\">Nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.583px\">Angel</td>\n<td style=\"height:17px;width:129.267px\">Elder</td>\n<td style=\"height:17px;width:172.367px\">Summoning</td>\n<td style=\"height:17px;width:311.783px\">Nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.583px\">Archon</td>\n<td style=\"height:17px;width:129.267px\">Elder</td>\n<td style=\"height:17px;width:172.367px\">Summoning</td>\n<td style=\"height:17px;width:311.783px\">Nonchaotic and nonevil</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.583px\">Azata</td>\n<td style=\"height:17px;width:129.267px\">Elder</td>\n<td style=\"height:17px;width:172.367px\">Summoning</td>\n<td style=\"height:17px;width:311.783px\">Nonevil and nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.583px\">Daemon</td>\n<td style=\"height:17px;width:129.267px\">Elder</td>\n<td style=\"height:17px;width:172.367px\">Summoning</td>\n<td style=\"height:17px;width:311.783px\">Nongood</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.583px\">Demon</td>\n<td style=\"height:17px;width:129.267px\">Elder</td>\n<td style=\"height:17px;width:172.367px\">Summoning</td>\n<td style=\"height:17px;width:311.783px\">Nongood and nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.583px\">Devil</td>\n<td style=\"height:17px;width:129.267px\">Elder</td>\n<td style=\"height:17px;width:172.367px\">Summoning</td>\n<td style=\"height:17px;width:311.783px\">Nonchaotic and nongood</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.583px\">Elemental, Air</td>\n<td style=\"height:17px;width:129.267px\">Elder</td>\n<td style=\"height:17px;width:172.367px\">Elemental</td>\n<td style=\"height:17px;width:311.783px\">None</td>\n</tr>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:211.583px\">Elemental, Earth</td>\n<td style=\"height:34px;width:129.267px\">Elder</td>\n<td style=\"height:34px;width:172.367px\">Elemental</td>\n<td style=\"height:34px;width:311.783px\">None</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.583px\">Elemental, Fire</td>\n<td style=\"height:17px;width:129.267px\">Elder</td>\n<td style=\"height:17px;width:172.367px\">Elemental</td>\n<td style=\"height:17px;width:311.783px\">None</td>\n</tr>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:211.583px\">Elemental, Water</td>\n<td style=\"height:34px;width:129.267px\">Elder</td>\n<td style=\"height:34px;width:172.367px\">Elemental</td>\n<td style=\"height:34px;width:311.783px\">None</td>\n</tr>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:211.583px\">First World Beast</td>\n<td style=\"height:34px;width:129.267px\">Elder</td>\n<td style=\"height:34px;width:172.367px\">Summoning</td>\n<td style=\"height:34px;width:311.783px\">Mystic</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.583px\">Inevitable</td>\n<td style=\"height:17px;width:129.267px\">Elder</td>\n<td style=\"height:17px;width:172.367px\">Summoning</td>\n<td style=\"height:17px;width:311.783px\">Nonchaotic</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.583px\">Protean</td>\n<td style=\"height:17px;width:129.267px\">Elder</td>\n<td style=\"height:17px;width:172.367px\">Summoning</td>\n<td style=\"height:17px;width:311.783px\">Nonlawful</td>\n</tr>\n<tr style=\"height:17px\">\n<td style=\"height:17px;width:211.583px\">Robot</td>\n<td style=\"height:17px;width:129.267px\">Elder</td>\n<td style=\"height:17px;width:172.367px\">Summoning</td>\n<td style=\"height:17px;width:311.783px\">Technomancer</td>\n</tr>\n<tr style=\"height:34px\">\n<td style=\"height:34px;width:211.583px\">Shadow Creature</td>\n<td style=\"height:34px;width:129.267px\">Elder</td>\n<td style=\"height:34px;width:172.367px\">Summoning</td>\n<td style=\"height:34px;width:311.783px\">None</td>\n</tr>\n</tbody>\n</table>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": true,
         "duration": {
           "units": "round",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 2,
         "materials": {
@@ -489,27 +499,30 @@
           "mode": "",
           "prepared": true
         },
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "con",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "AA1 pg. 144",
         "sr": false,
         "target": {
-          "type": "",
           "value": "one or more summoned creatures"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -521,11 +534,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/command.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -541,9 +550,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -553,7 +563,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -561,16 +572,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>You give the target one of the following commands, which it obeys to the best of its ability at its earliest opportunity. If the target can’t carry out your command on its next turn, the spell automatically fails.</p>\n<p><strong>Approach</strong>: The target moves toward you as quickly and directly as possible for 1 round, taking no other actions and triggering reactions (such as attacks of opportunity) for this movement as normal.</p>\n<p><strong>Drop</strong>: The target drops whatever it is holding. It can’t pick up any dropped item until its next turn.</p>\n<p><strong>Fall</strong>: The target falls to the ground and remains @UUID[Compendium.sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone} for 1 round. It can otherwise act normally.</p>\n<p><strong>Flee</strong>: The target moves away from you as quickly and directly as possible for 1 round, taking no other actions and provoking reactions (such as attacks of opportunity) for this movement as normal.</p>\n<p><strong>Halt</strong>: The target is dazed for 1 round.</p>"
+          "value": "<p>You give the target one of the following commands, which it obeys to the best of its ability at its earliest opportunity. If the target can’t carry out your command on its next turn, the spell automatically fails.</p>\n<p><strong>Approach</strong>: The target moves toward you as quickly and directly as possible for 1 round, taking no other actions and triggering reactions (such as attacks of opportunity) for this movement as normal.</p>\n<p><strong>Drop</strong>: The target drops whatever it is holding. It can’t pick up any dropped item until its next turn.</p>\n<p><strong>Fall</strong>: The target falls to the ground and remains @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone} for 1 round. It can otherwise act normally.</p>\n<p><strong>Flee</strong>: The target moves away from you as quickly and directly as possible for 1 round, taking no other actions and provoking reactions (such as attacks of opportunity) for this movement as normal.</p>\n<p><strong>Halt</strong>: The target is dazed for 1 round.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "1"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -584,11 +595,9 @@
           "mode": "",
           "prepared": true
         },
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -597,14 +606,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 343",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one living creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -616,11 +630,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/life_bubble.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -636,9 +646,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -648,7 +659,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -658,14 +670,14 @@
           "unidentified": "",
           "value": "<p>You surround the target creatures with a constant and movable 1-inch shell of tolerable living conditions customized for each creature. This shell enables the targets to breathe freely in a variety of atmospheric conditions (including in corrosive, thick, thin, and toxic atmospheres), as well as underwater or in a vacuum. It also makes the targets immune to harmful gases and vapors, including inhaled @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.gBhZDjh30JEyh7DY]{Diseases} and @UUID[Compendium.sfrpg.rules.JaRMioj4isNp7r1P.JournalEntryPage.ZaS9H4rwaFIQTUBC]{Poisons} as well as spells with a harmful gaseous effect. In addition, the shell protects targets (and their equipment) from extreme temperatures (between –50° and 140° F) without having to attempt Fortitude saving throws, as well as extreme pressures.</p>\n<p>Life bubble&nbsp;doesn’t provide protection from energy damage, negative or positive energy (such as found on the Negative and Positive Energy Planes), or radiation; it also doesn’t provide the ability to see in conditions of poor visibility (such as in smoke or fog) or the ability to move or act normally in conditions that impede movement (such as underwater).</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "day",
           "value": "@details.cl.value"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -676,14 +688,12 @@
         },
         "modifiers": [],
         "preparation": {
-          "mode": null,
+          "mode": "",
           "prepared": true
         },
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
@@ -692,14 +702,19 @@
           "descriptor": "harmless"
         },
         "school": "abj",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 363",
         "sr": true,
         "target": {
-          "type": "",
           "value": "up to one creature/level, no two of which can be more than 30 ft. apart"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -711,11 +726,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/mind_thrust.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -731,9 +742,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -745,11 +757,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2d10",
-              "operator": "",
-              "types": {}
+              "group": null,
+              "isPrimarySection": false,
+              "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
+              }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -757,16 +784,16 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>You divine the most vulnerable portion of your opponent’s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.</p>\n<ul>\n<li><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n<li><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n<li><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n<li><strong>th:</strong> When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is fatigued for 1 round if it fails its saving throw.</li>\n<li><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is exhausted for 1 round if it fails its save and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n<li><strong>6th:</strong> When you cast&nbsp;mind thrust&nbsp;as a 6th-level spell, it deals 17d10 damage to the target. The target is exhausted and @UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n</ul>"
+          "value": "<p>You divine the most vulnerable portion of your opponent’s mind and overload it with a glut of psychic information. The target can attempt a Will saving throw to halve the damage dealt by this spell. This spell has no effect on creatures without an Intelligence score.</p>\n<ul>\n<li><strong>1st:</strong> When you cast mind thrust as a 1st-level spell, it deals 2d10 damage to the target.</li>\n<li><strong>2nd:</strong> When you cast mind thrust as a 2nd-level spell, it deals 4d10 damage to the target.</li>\n<li><strong>3rd:</strong> When you cast mind thrust as a 3rd-level spell, it deals 7d10 damage to the target.</li>\n<li><strong>th:</strong> When you cast mind thrust as a 4th-level spell, it deals 10d10 damage to the target and the target is fatigued for 1 round if it fails its saving throw.</li>\n<li><strong>5th:</strong> When you cast mind thrust as a 5th-level spell, it deals 15d10 damage to the target. The target is exhausted for 1 round if it fails its save and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n<li><strong>6th:</strong> When you cast&nbsp;mind thrust&nbsp;as a 6th-level spell, it deals 17d10 damage to the target. The target is exhausted and @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned} for 1 round if it fails its save, and it is fatigued for 1 round if it succeeds at its saving throw.</li>\n</ul>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "instantaneous",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 1,
         "materials": {
@@ -780,11 +807,9 @@
           "mode": "",
           "prepared": true
         },
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -793,14 +818,19 @@
           "descriptor": "half"
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 365",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one creature"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -812,11 +842,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/daze.webp",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -832,9 +858,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -844,7 +871,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -854,14 +882,14 @@
           "unidentified": "",
           "value": "<p>This spell short-circuits the mind of a humanoid creature with a CR of 3 or lower so that it is dazed (unable to take actions, but taking no penalty to AC). Humanoids of CR 4 or higher are not affected. After a creature has been dazed by this spell, it is immune to it for 1 minute.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "round",
           "value": "1"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -875,11 +903,9 @@
           "mode": "always",
           "prepared": true
         },
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "close",
-          "value": null
+          "units": "close"
         },
         "rollNotes": "",
         "save": {
@@ -888,14 +914,19 @@
           "descriptor": "negate"
         },
         "school": "enc",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 347",
         "sr": true,
         "target": {
-          "type": "",
           "value": "one humanoid creature of CR 3 or lower"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -907,11 +938,7 @@
       "type": "spell",
       "img": "systems/sfrpg/icons/spells/telepathic_message.webp",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -927,9 +954,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": null,
-          "value": null
+          "units": "",
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -939,7 +967,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -949,14 +978,14 @@
           "unidentified": "",
           "value": "<p>You can send a short telepathic message and hear simple telepathic replies. Any living creature within 10 feet of you or an intended recipient also receives your telepathic message if it succeeds at a DC 25 Perception check. You must be able to see or hear each recipient. The creatures that receive the message can reply telepathically, but no more than a single message can be sent each round, and each message cannot exceed 10 words. A technomancer casting this spell can also use it to send a message to a computer or a construct with the technological subtype if the receiving target is designed to receive messages.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
         "dismissible": false,
         "duration": {
           "units": "minute",
           "value": "@details.cl.value*10"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "isVariableLevel": false,
         "level": 0,
         "materials": {
@@ -970,158 +999,56 @@
           "mode": "always",
           "prepared": true
         },
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "medium",
-          "value": null
+          "units": "medium"
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
         "school": "div",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "CRB pg. 381",
         "sr": false,
         "target": {
-          "type": "",
           "value": "up to one creature/level"
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
       }
     },
     {
-      "_id": "CBiY4QJh9b5KKgqe",
-      "name": "Battery",
-      "type": "goods",
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
-      "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
-        },
-        "attuned": false,
-        "bulk": "-",
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
-        },
-        "equippable": false,
-        "equipped": false,
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 60,
-        "quantity": 2,
-        "quantityPerPack": 1,
-        "source": "Core Rulebook"
-      }
-    },
-    {
-      "_id": "zmZfbaZoANEVJjhp",
-      "name": "Battery",
-      "type": "goods",
-      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
-      "system": {
-        "type": "",
-        "attributes": {
-          "ac": {
-            "value": ""
-          },
-          "customBuilt": false,
-          "dex": {
-            "mod": ""
-          },
-          "hardness": {
-            "value": ""
-          },
-          "hp": {
-            "max": "",
-            "value": 6
-          },
-          "size": "medium",
-          "sturdy": false
-        },
-        "attuned": false,
-        "bulk": "-",
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
-        },
-        "equippable": false,
-        "equipped": false,
-        "identified": true,
-        "level": 1,
-        "modifiers": [],
-        "price": 60,
-        "quantity": 1,
-        "quantityPerPack": 1,
-        "source": "Core Rulebook"
-      }
-    },
-    {
       "_id": "pXDLQyP2ZITk5vt5",
-      "name": "Spear, tactical",
+      "name": "Underwater Spear, tactical",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "icons/weapons/polearms/spear-hooked-blue.webp",
       "system": {
-        "type": "",
         "ability": "str",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
-          "type": "none",
+          "type": "",
           "condition": "",
           "cost": null
         },
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 8,
         "attributes": {
@@ -1142,7 +1069,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "1",
         "capacity": {
           "max": null,
@@ -1151,7 +1077,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -1173,13 +1099,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6 + 5",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1189,114 +1128,44 @@
           "unidentified": "",
           "value": "<p>Spears come in many varieties. Buzzblade spears vibrate at high frequency. Zero-edge spears employ quantum manufacturing to hone an edge so fine that it seems indistinct. The gravity spear uses a tiny gravity field generator to accelerate the weapon at the moment of impact.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
-        "equippable": false,
+        "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 375,
         "proficient": true,
         "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": true,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": true,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": true,
-          "trip": false,
-          "two": true,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
+          "analog": {
+            "extension": "",
+            "value": true
+          },
+          "block": {
+            "extension": "",
+            "value": true
+          },
+          "thrown": {
+            "extension": "",
+            "value": true
+          },
+          "two": {
+            "extension": "",
+            "value": true
+          }
         },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "rollNotes": "",
         "save": {
@@ -1304,11 +1173,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "Core Rulebook, P. 171",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -1316,7 +1190,7 @@
           "value": null
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -1325,50 +1199,46 @@
       }
     },
     {
-      "_id": "FLYTGWjHFY2l00Nq",
-      "name": "Underwater Zero pistol, frostbite-class",
+      "_id": "u7dERM8YvCuEX4yO",
+      "name": "Underwater Zero Pistol, Frostbite-Class",
       "type": "weapon",
-      "img": "systems/sfrpg/icons/equipment/weapons/zero-pistol-frostbite-class.webp",
+      "img": "systems/sfrpg/icons/equipment/weapons/zero-pistol-blizzard-class.webp",
       "system": {
-        "type": "",
-        "ability": "dex",
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
-          "type": "none",
+          "type": "",
           "condition": "",
           "cost": null
         },
-        "ammunitionType": "",
+        "ammunitionType": "charge",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "none",
-          "value": null
+          "units": "ft",
+          "value": ""
         },
         "attackBonus": 10,
         "attributes": {
           "ac": {
-            "value": ""
+            "value": "5"
           },
           "customBuilt": false,
           "dex": {
             "mod": ""
           },
           "hardness": {
-            "value": ""
+            "value": "15"
           },
           "hp": {
-            "max": "",
-            "value": 6
+            "max": "30",
+            "value": 30
           },
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 20,
@@ -1378,40 +1248,62 @@
         "container": {
           "contents": [
             {
-              "id": "zmZfbaZoANEVJjhp",
-              "index": 0
+              "id": "9Swly2D6mSEVh9Cy",
+              "index": 1
             }
           ],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
               "type": "slot",
               "acceptsType": [
-                "fusion",
-                "goods"
+                "fusion"
               ],
               "affectsEncumbrance": true,
               "amount": 5,
               "subtype": "fusion",
               "weightProperty": "level"
+            },
+            {
+              "type": "slot",
+              "acceptsType": [
+                "ammunition"
+              ],
+              "affectsEncumbrance": true,
+              "amount": 1,
+              "subtype": "ammunitionSlot",
+              "weightProperty": ""
             }
           ]
         },
         "critical": {
-          "effect": "staggered [DC 15]",
+          "effect": "Staggered (DC 15)",
           "parts": []
         },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d6+5",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "cold": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": true,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -1421,114 +1313,32 @@
           "unidentified": "",
           "value": "<p>Zero pistols have a weighted grip to balance their unusually heavy barrels. A cylindrical canister over the barrel contains and directs the coolants.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
-        "equippable": false,
+        "equippable": true,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 5,
         "modifiers": [],
         "price": 3060,
         "proficient": true,
         "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": true,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
+          "one": {
+            "extension": "",
+            "value": true
+          }
         },
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 60
+          "value": "60"
         },
         "rollNotes": "",
         "save": {
@@ -1536,24 +1346,146 @@
           "dc": "",
           "descriptor": "negate"
         },
-        "source": "Core Rulebook, P. 173",
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
+        "source": "CRB pg. 173",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
-          "per": "round",
+          "per": "shot",
           "value": 1
         },
         "uses": {
-          "max": 0,
+          "max": "",
           "per": "",
-          "value": 0
+          "value": null
         },
         "weaponCategory": "cryo",
         "weaponType": "smallA"
+      }
+    },
+    {
+      "_id": "9Swly2D6mSEVh9Cy",
+      "name": "Battery",
+      "type": "ammunition",
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
+      "system": {
+        "ammunitionType": "charge",
+        "attributes": {
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "bulk": "-",
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
+        },
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 60,
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "slug": "",
+        "source": "Core Rulebook",
+        "specialMaterials": {},
+        "useCapacity": true
+      }
+    },
+    {
+      "_id": "pAClTdVbGkmiIL3y",
+      "name": "Battery",
+      "type": "ammunition",
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
+      "system": {
+        "ammunitionType": "charge",
+        "attributes": {
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "bulk": "-",
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
+        },
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 60,
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "slug": "",
+        "source": "Core Rulebook",
+        "specialMaterials": {},
+        "useCapacity": true
+      }
+    },
+    {
+      "_id": "iOOfZOzkTX28s6An",
+      "name": "Battery",
+      "type": "ammunition",
+      "img": "systems/sfrpg/icons/equipment/weapons/battery-standard.webp",
+      "system": {
+        "ammunitionType": "charge",
+        "attributes": {
+          "customBuilt": false,
+          "dex": {
+            "mod": ""
+          },
+          "size": "medium",
+          "sturdy": false
+        },
+        "bulk": "-",
+        "capacity": {
+          "max": 20,
+          "value": 20
+        },
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>Batteries charge powered weapons, but they can also be used to power an array of items, including powered armor and technological items. Batteries have a standardized size and weight, and items that take batteries all have a slot into which they fit, regardless of the item’s actual size. Weapons that use batteries list the highest-capacity battery they are capable of using as well as how many charges from the battery that each shot consumes.</p>\n<p><strong>Capacity:</strong> 20</p>"
+        },
+        "identified": true,
+        "level": 1,
+        "modifiers": [],
+        "price": 60,
+        "quantity": 1,
+        "quantityPerPack": 1,
+        "slug": "",
+        "source": "Core Rulebook",
+        "specialMaterials": {},
+        "useCapacity": true
       }
     }
   ],
@@ -1561,6 +1493,7 @@
     "name": "Kalo Deepspeaker",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -1592,11 +1525,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -1610,121 +1562,75 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },
   "system": {
     "abilities": {
       "cha": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 10
+        "base": 2
       },
       "con": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 10
+        "base": 1
       },
       "dex": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 10
+        "base": 3
       },
       "int": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "str": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "wis": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 5,
-        "value": 10
+        "base": 5
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 17,
-        "min": 0,
-        "tooltip": [],
-        "value": 17
+        "base": 17
       },
       "fort": {
-        "base": 3,
-        "bonus": 3,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 3
       },
       "hp": {
         "max": 57,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 57
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 3,
         "value": 3
       },
       "kac": {
-        "base": 17,
-        "min": 0,
-        "tooltip": [],
-        "value": 17
+        "base": 17
       },
-      "keyability": "",
       "reach": "",
       "reflex": {
-        "base": 4,
-        "bonus": 4,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 4
       },
       "space": "",
       "speed": {
@@ -1745,16 +1651,10 @@
         "special": "original base: 20 ft.; original special: swim 50 ft.",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "wis",
       "will": {
-        "base": 9,
-        "bonus": 9,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 9
       }
     },
     "conditions": {
@@ -1779,6 +1679,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1794,9 +1695,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1804,9 +1702,8 @@
     "details": {
       "type": "Monstrous Humanoid (aquatic)",
       "alignment": "NG",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1815,10 +1712,10 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<section>\n<h2>Kalo</h2>\n<p>@UUID[Compendium.sfrpg.races.AMBcyDZDtJ1OOzh3]{Humans} often compare kalos to bats due to the thin membranes between their arms and legs. In fact, these winglike structures are fins, allowing kalos to swoop with grace and speed through the icy waters of the Brethedan moon of Kalo-Mahoi. Kalo skin has a blue-green tinge and is translucent in places. Their bulging, glowing eyes can move and focus independently.</p>\n<p>Highly civilized and generally peaceful, kalos were the first residents of any moon to successfully win independent Pact Worlds recognition, and today, many of their coral-encrusted underwater vent cities feature air-filled spaces for terrestrial dignitaries and expatriates, with trading outposts studding the ocean world’s crusty shell of surface ice. While kalos primarily rely on sonar as they glide wraithlike through the dark oceans, their cities are riots of colored lights—testaments to the culture’s rich artistic tradition.</p>\n<p>Few kalos lack an artistic or scholarly hobby, and though not overly tied to tradition, most kalos take pride in their history, giving their children and organizations names harkening back to ancient tribal practices. Members of military units are often given evocative names like “sharkhunters” despite their modern responsibilities. Those in traditional roles such as that of the mystical deepspeaker, who converses with—and can even command—creatures of the depths, are less necessary in the age of executives and prime ministers, yet these sages are still often sought out as arbitrators and mediators for both community and governmental disputes.</p>\n<p>Although slower out of water, kalo warriors are renowned for their calm precision in battle, especially in zero-g and underwater, and known for using cryo weapons against enemies of other races, trusting their natural resistances to protect them from friendly fire. The average kalo is 5-1/2 feet tall and weighs 100 pounds.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any aquatic (Kalo-Mahoi)</p>\n<h3>Organization</h3>\n<p>solitary or delegation (1 deepspeaker and honor guard of 3-6 kalo sharkhunters)</p>\n<h2>Offense</h2>\n<h3>Connection</h3>\n<p>xenodruid</p>\n</section>",
+        "value": "<section>\n<h2>Kalo</h2>\n<p>@UUID[Compendium.sfrpg.races.Item.AMBcyDZDtJ1OOzh3]{Humans} often compare kalos to bats due to the thin membranes between their arms and legs. In fact, these winglike structures are fins, allowing kalos to swoop with grace and speed through the icy waters of the Brethedan moon of Kalo-Mahoi. Kalo skin has a blue-green tinge and is translucent in places. Their bulging, glowing eyes can move and focus independently.</p>\n<p>Highly civilized and generally peaceful, kalos were the first residents of any moon to successfully win independent Pact Worlds recognition, and today, many of their coral-encrusted underwater vent cities feature air-filled spaces for terrestrial dignitaries and expatriates, with trading outposts studding the ocean world’s crusty shell of surface ice. While kalos primarily rely on sonar as they glide wraithlike through the dark oceans, their cities are riots of colored lights—testaments to the culture’s rich artistic tradition.</p>\n<p>Few kalos lack an artistic or scholarly hobby, and though not overly tied to tradition, most kalos take pride in their history, giving their children and organizations names harkening back to ancient tribal practices. Members of military units are often given evocative names like “sharkhunters” despite their modern responsibilities. Those in traditional roles such as that of the mystical deepspeaker, who converses with—and can even command—creatures of the depths, are less necessary in the age of executives and prime ministers, yet these sages are still often sought out as arbitrators and mediators for both community and governmental disputes.</p>\n<p>Although slower out of water, kalo warriors are renowned for their calm precision in battle, especially in zero-g and underwater, and known for using cryo weapons against enemies of other races, trusting their natural resistances to protect them from friendly fire. The average kalo is 5-1/2 feet tall and weighs 100 pounds.</p>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>any aquatic (Kalo-Mahoi)</p>\n<h3>Organization</h3>\n<p>solitary or delegation (1 deepspeaker and honor guard of 3-6 kalo sharkhunters)</p>\n<h2>Offense</h2>\n<h3>Connection</h3>\n<p>xenodruid</p>\n</section>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "spellcaster",
       "cr": 5,
       "environment": "",
       "organization": "",
@@ -1826,30 +1723,38 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "Kalo mystic",
       "source": "AA1 pg. 68",
-      "subtype": "Aquatic",
-      "xp": {
-        "value": 10
+      "subtype": "Aquatic"
+    },
+    "modifiers": [
+      {
+        "_id": "a29cc995-fe43-4028-8646-eee10e9a9305",
+        "name": "Stealth while in water",
+        "type": "untyped",
+        "condition": "",
+        "damage": null,
+        "effectType": "skill",
+        "enabled": false,
+        "limitTo": null,
+        "max": 0,
+        "modifier": "4",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Species",
+        "subtab": "permanent",
+        "valueAffected": "ste"
       }
-    },
-    "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
+    ],
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1857,10 +1762,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1868,10 +1772,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1879,10 +1782,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1890,10 +1792,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1901,10 +1802,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 16,
         "ranks": 16,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1912,10 +1812,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1923,10 +1822,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1934,10 +1832,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1945,10 +1842,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1956,10 +1852,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1967,10 +1862,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 16,
         "ranks": 16,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1978,10 +1872,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 11,
         "ranks": 11,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1989,10 +1882,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -2000,20 +1892,17 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
         "ability": "int",
-        "enabled": true,
+        "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 11,
         "ranks": 11,
         "subname": "",
         "value": 3
@@ -2024,20 +1913,8 @@
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
         "misc": 0,
-        "mod": 11,
         "ranks": 11,
         "subname": "judge",
-        "value": 0
-      },
-      "pro2": {
-        "ability": "int",
-        "enabled": true,
-        "hasArmorCheckPenalty": false,
-        "isTrainedOnly": false,
-        "misc": 0,
-        "mod": 15,
-        "ranks": 15,
-        "subname": "stealth in water",
         "value": 0
       },
       "sen": {
@@ -2045,10 +1922,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -2056,10 +1932,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -2067,10 +1942,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 11,
         "ranks": 11,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -2078,47 +1952,40 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 11,
         "ranks": 11,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
-        "max": "6",
-        "perClass": {},
-        "value": "6"
+        "max": 6,
+        "value": 6
       },
       "spell2": {
-        "max": "3",
-        "perClass": {},
-        "value": "3"
+        "max": 3,
+        "value": 3
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -2127,21 +1994,9 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "",
         "value": []
-      },
-      "dr": {
-        "custom": "",
-        "value": [
-          {
-            "cold": "10"
-          }
-        ]
       },
       "dv": {
         "custom": "",
@@ -2156,9 +2011,6 @@
       },
       "senses": "blindsight (sound) 60 ft., low-light vision",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

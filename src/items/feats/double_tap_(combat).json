@@ -4,11 +4,7 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/double_tap.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -30,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -40,44 +37,7 @@
       "unidentified": "",
       "value": "<p>You can make rapid small arm attacks to increase the effectiveness of your attacks.</p>\n<p><strong>Prerequisites</strong>: Weapon Focus (small arms), proficiency with small arms.</p><hr /><p><strong>Benefit</strong>: As a standard action, you can take a single attack action to make a double-tap attack with a small arm. This attack gains a +1 bonus to the attack roll, and your bonus to damage from Weapon Specialization is equal to your character level (rather than half your character level). The small arm used cannot have the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#blast]{blast}, @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#explode]{explode}, @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#flexible-line]{flexible line}, @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#line]{line}, @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#unwieldy]{unwieldy}, or @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#wide-line]{wide line} weapon special properties, or any other property that allows it to attack multiple targets or an area in a single attack. This attack cannot benefit from the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#boost]{boost}, @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#guided]{guided}, or @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#variant-boost]{variant boost} weapon special properties, or any other ability or effect that is a move action and alters the effect of your attack or damage. This expends ammunition equal to two attack rolls, and if you cannot expend that ammunition, you cannot use this ability.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "details": {
       "category": "feat",
       "combat": true,
@@ -88,19 +48,21 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "67ab40d7-015a-49ad-ba9c-065c2c099ccb",
         "name": "Double Tap",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-attacks",
         "enabled": true,
+        "limitTo": null,
         "max": 1,
         "modifier": "1",
         "modifierType": "constant",
-        "notes": "When you make a double-tap attack with a small arm, this attack gains a bonus to the attack roll and damage.",
+        "notes": "When you make a double-tap attack with a small arm, this attack gains a bonus to the attack roll.",
         "source": "",
         "subtab": "misc",
         "valueAffected": "smallA"
@@ -110,37 +72,60 @@
         "name": "Double Tap",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "ceil(@details.level.value / 2)",
         "modifierType": "constant",
-        "notes": "When you make a double-tap attack with a small arm, this attack gains a bonus to the attack roll and damage.",
+        "notes": "When you make a double-tap attack with a small arm, this attack gains a bonus to the damage.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": "smallA"
+      },
+      {
+        "_id": "a5142838-3c9c-4b66-ad8e-3019bffed8f7",
+        "name": "Double Tap",
+        "type": "untyped",
+        "condition": "",
+        "damage": null,
+        "effectType": "weapon-ammo-usage-multiplier",
+        "enabled": true,
+        "limitTo": null,
+        "max": 0,
+        "modifier": "2",
+        "modifierType": "constant",
+        "notes": "When you make a double-tap attack with a small arm, this attack uses double the amount of ammunition.",
         "source": "",
         "subtab": "misc",
         "valueAffected": "smallA"
       }
     ],
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "none",
       "value": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "Weapon Focus (small arms), proficiency with small arms.",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "COM pg. 114",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

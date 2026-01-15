@@ -2,13 +2,9 @@
   "_id": "xjMEz2kddyyfe5Mw",
   "name": "Encounter Suit",
   "type": "equipment",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/kevlar-vest.svg",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "kac",
     "actionType": "mwak",
     "activation": {
@@ -22,7 +18,7 @@
       "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "armor": {
       "type": "power",
@@ -51,7 +47,6 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "10",
     "capacity": {
       "max": 20,
@@ -107,6 +102,7 @@
           "name": "",
           "formula": "1d6 +(@abilities.str.mod)",
           "group": null,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -114,12 +110,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -129,27 +128,26 @@
       "unidentified": "",
       "value": "<p>This armor is made of rubbery blue material grown by barathu conglomerates. It's most popular among early-stage barathus who are not yet as skilled at adapting to various environments.</p>\n<p>The armors was developed by and designed for barathus; as such, they are highly adjustable, easily accommodating barathus’ ever-changing physiology. Reduce the DC for Engineering checks to @UUID[Compendium.sfrpg.rules.WP7hddXW4mLXXXOg.JournalEntryPage.8bxhPYw9heXqKHYD#armor-size]{Adjusting Armor} by 5; if you pay a professional to adjust the armor instead of doing so yourself, the cost is 5% of the armor’s purchase price.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 4,
     "modifiers": [],
     "price": 2800,
     "proficient": false,
+    "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "reach": "5 ft.",
     "rollNotes": "",
@@ -158,32 +156,22 @@
       "dc": "",
       "descriptor": "negate"
     },
-    "size": "medium",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "AP #29 pg. 49",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
+    "specialMaterials": {},
+    "speed": {
+      "land": {
+        "base": 25
+      },
+      "special": ""
     },
-    "speed": "25 ft.",
     "strength": 16,
     "target": {
-      "type": "",
       "value": null
     },
     "usage": {
@@ -191,8 +179,8 @@
       "value": 1
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

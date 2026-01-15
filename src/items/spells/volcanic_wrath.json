@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "icons/magic/fire/explosion-embers-orange.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -24,9 +20,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -41,6 +38,7 @@
           "name": "",
           "formula": "(lookupRange(@item.level, 2, 2, 4, 3, 7, 4, 10, 5, 15, 6, 17))d6",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": true,
@@ -48,12 +46,15 @@
             "electricity": false,
             "fire": true,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -63,51 +64,14 @@
       "unidentified": "",
       "value": "<p>You summon an erupting volcano that unleashes molten rock over an area, dealing fire and bludgeoning damage. The eruption leaves molten rocks, thick ash, and smoke, making the entire area of effect difficult terrain for the duration of the spell.</p>\n<p><strong>1st:</strong> When you cast volcanic wrath as a 1st-level spell, it deals 2d6 damage in a 10-ft-radius, 20 ft. high burst.</p>\n<p><strong>2nd:</strong> When you cast volcanic wrath as a 2nd-level spell, it deals 4d6 damage in a 10-ft-radius, 20 ft. high cylinder.</p>\n<p><strong>3rd:</strong> When you cast volcanic wrath as a 3rd-level spell, it deals 7d6 damage in a 20-ft-radius, 40 ft. high cylinder.</p>\n<p><strong>4th:</strong> When you cast volcanic wrath as a 4th-level spell, it deals 10d6 damage in a 20-ft-radius, 40 ft. high cylinder.</p>\n<p><strong>5th:</strong> When you cast volcanic wrath as a 5th-level spell, it deals 15d6 damage in a 30-ft-radius, 60 ft. high cylinder.</p>\n<p><strong>6th:</strong> When you cast volcanic wrath as a 6th-level spell, it deals 17d6 damage in a 30-ft-radius, 60 ft. high cylinder.</p>"
     },
-    "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": false,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
-    },
+    "descriptors": {},
     "dismissible": false,
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": true,
     "level": 1,
     "materials": {
@@ -121,6 +85,7 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "units": "medium"
     },
@@ -131,14 +96,19 @@
       "descriptor": "half"
     },
     "school": "con",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "IS pg. 115",
     "sr": true,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

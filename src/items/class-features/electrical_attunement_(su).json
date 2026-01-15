@@ -2,12 +2,9 @@
   "_id": "CkndBsEO0IMsYZ4m",
   "name": "Electrical Attunement (Su)",
   "type": "actorResource",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/pie-chart.svg",
   "system": {
     "type": "solarian",
-    "abilityMods": {
-      "parts": []
-    },
     "base": 0,
     "combatTracker": {
       "displayAbsoluteValue": true,
@@ -46,12 +43,6 @@
         }
       ]
     },
-    "critical": {
-      "parts": []
-    },
-    "damage": {
-      "parts": []
-    },
     "description": {
       "chat": "",
       "gmnotes": "",
@@ -66,8 +57,10 @@
         "name": "Energy Mode",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "all-speeds",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "(max(0, sign(@resources.solarian.stellarMode.value)) * (5 + (floor(@classes.solarian.levels / 3) * 5)))",
         "modifierType": "constant",
@@ -81,8 +74,10 @@
         "name": "Resistance mode",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "damage-reduction",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "(max(0, 0 - sign(@resources.solarian.stellarMode.value)) * (1 + floor(@classes.solarian.levels / 6)))",
         "modifierType": "constant",
@@ -93,10 +88,11 @@
       }
     ],
     "range": {
-      "max": 3,
-      "min": -3,
+      "max": "3",
+      "min": "-3",
       "mode": "immediate"
     },
+    "slug": "",
     "source": "TR pg. 30",
     "stage": "early",
     "subType": "stellarMode"

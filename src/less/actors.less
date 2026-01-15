@@ -428,6 +428,20 @@
     /*  Skills                                   */
     /* ----------------------------------------- */
 
+	/* If hideUntrained is selected, only show skills that are allowed untrained,
+	 * or trained skills that have at least one rank in it. */
+	ul.skills-list.hide-untrained li.skill.trained-only:not(.trained) {
+		display: none;
+	}
+
+    a.option-toggle {
+        float: right;
+    }
+
+    a.selected {
+        color: @colorFaint;
+    }
+
     ul.skills-list {
         flex: 0 0 192px;
         list-style: none;
@@ -599,6 +613,10 @@
             line-height: 20px;
             font-weight: bold;
             margin: 0;
+
+            &.narrow {
+                flex: 0 0 100px;
+            }
         }
 
         input {
@@ -621,8 +639,36 @@
             color: @colorTan;
         }
 
+        &.crew-list-npc { //Disable mouse-over hover with npc skills as they aren't draggable.
+            cursor: default;
+        }
+
         .value {
             text-align: right;
+        }
+    }
+
+    /* NPC Ability DC field */
+    .npc-ability-field {
+        margin: 0 8px;
+        flex: 0 0 20px;
+        h3 {
+            .exo2();
+            font-size: var(--font-size-16);
+            margin: 0;
+            border: none;
+        }
+        hr {
+            margin: 2px 0px 2px 0px;
+        }
+        .form-group {
+            align-items: left;
+            label, input {
+                flex: 0 0 150px;
+            }
+            input {
+                flex: 0 0 50px;
+            }
         }
     }
 
@@ -837,6 +883,19 @@
                 }
             }
 
+            .item-utilisation {
+                .use {
+                    background: @sfrpgYellow;
+                    color: #000;
+                    cursor: pointer;
+
+                    &:hover,
+                    &:focus {
+                        box-shadow: 0 0 5px @sfrpgYellow;
+                    }
+                }
+            }
+
             // Item Dropdown Properties
             .item-properties,
             .crew-properties {
@@ -861,8 +920,6 @@
             border: @borderGroove;
             font-weight: bold;
             line-height: 24px;
-            cursor: pointer;
-            transition: color 200ms;
 
             &.disabled {
                 h3 {
@@ -876,10 +933,6 @@
                 font-size: var(--font-size-13);
                 font-weight: bold;
                 border: none;
-            }
-
-            &.collapsed {
-                color: darkgrey;
             }
 
             .item-controls a.item-create,
@@ -908,12 +961,14 @@
             }
             &.modifier-value-affected {
                 flex: 0 0 120px;
+                overflow: clip;
+                max-width: 120px;
             }
             &.modifier-type {
                 flex: 0 0 95px;
             }
 
-            flex: 0 0 82px;
+            flex: 0 0 92px;
             font-size: var(--font-size-12);
             color: @colorTan;
             text-align: center;
@@ -939,6 +994,15 @@
                 &:hover,
                 &:focus {
                     box-shadow: 0 0 5px @sfrpgGreen;
+                }
+            }
+
+            .featInstantaneous {
+                background: @sfrpgYellow;
+                color: #000;
+                &:hover,
+                &:focus {
+                    box-shadow: 0 0 5px @sfrpgYellow;
                 }
             }
 
@@ -972,7 +1036,7 @@
         .item-controls,
         .crew-controls {
             flex: 0 0 44px;
-            .flexrow();
+            .flexrow-sfrpg();
             justify-content: flex-end;
 
             a {

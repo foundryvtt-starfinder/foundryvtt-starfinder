@@ -2,12 +2,13 @@
   "_id": "zSdO7axt0084UMB3",
   "name": "Snap Shot",
   "type": "starshipAction",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": null,
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<h2>Normal effect</h2><p>You can fire one of your starship’s weapons with a –2 penalty to the gunnery check. You can take this action only if no other gunner actions have been taken during the gunnery phase (including snap shot).</p>"
     },
@@ -16,10 +17,14 @@
     "formula": [
       {
         "name": "Gunnery",
-        "formula": "max(@minorCrew.attributes.baseAttackBonus.value, @minorCrew.skills.pil.ranks) + @minorCrew.abilities.dex.mod - 2"
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
+        "formula": "max(@minorCrew.attributes.baseAttackBonus.value, @minorCrew.skills.pil.ranks, @minorCrew.skills.gun.mod) + @minorCrew.abilities.dex.mod - 2"
       }
     ],
     "isPush": false,
+    "modifiers": [],
     "order": 30,
     "phase": {
       "name": "Gunnery phase",
@@ -31,6 +36,7 @@
     "selectors": [
       "minorCrew"
     ],
+    "slug": "",
     "source": "CRB"
   }
 }

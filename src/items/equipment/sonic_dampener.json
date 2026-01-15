@@ -2,13 +2,26 @@
   "_id": "Q09y8CKzOmQgDGBr",
   "name": "Sonic dampener",
   "type": "upgrade",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
   "system": {
-    "type": "",
-    "abilityMods": {
-      "parts": []
+    "ability": "",
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "",
+      "condition": "",
+      "cost": 0
     },
     "allowedArmorType": "any",
+    "ammunitionType": "",
+    "area": {
+      "effect": "",
+      "shapable": false,
+      "shape": "",
+      "units": "",
+      "value": "0"
+    },
+    "attackBonus": 0,
     "attributes": {
       "ac": {
         "value": "5"
@@ -27,32 +40,107 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "L",
     "capacity": {
       "max": null,
       "value": null
     },
+    "chatFlavor": "",
+    "container": {
+      "contents": [],
+      "includeContentsInWealthCalculation": true,
+      "isOpen": true,
+      "storage": []
+    },
     "critical": {
+      "effect": "",
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>This device muffles the incidental sounds you make, and sonic attacks lose power in your vicinity. You gain sonic resistance 5 and reduce your armor check penalty by 1 when making Stealth checks.</p>"
     },
-    "equipped": false,
-    "identified": true,
+    "duration": {
+      "units": "text",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": false,
     "level": 7,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "5311eab3-c654-4444-9399-46215490a79a",
+        "name": "Sonic Dampener",
+        "type": "untyped",
+        "condition": "",
+        "damage": null,
+        "effectType": "energy-resistance",
+        "enabled": true,
+        "limitTo": null,
+        "max": 0,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "",
+        "source": "Armor Upgrade",
+        "subtab": "misc",
+        "valueAffected": "sonic"
+      },
+      {
+        "_id": "6d731a11-5c20-4551-bcd3-a865b2daa620",
+        "name": "Sonic Dampener (Stealth Checks)",
+        "type": "untyped",
+        "condition": "",
+        "damage": null,
+        "effectType": "acp",
+        "enabled": true,
+        "limitTo": null,
+        "max": 0,
+        "modifier": "-1",
+        "modifierType": "formula",
+        "notes": "",
+        "source": "Armor Upgrade",
+        "subtab": "misc",
+        "valueAffected": "acp-all"
+      }
+    ],
     "price": 7150,
+    "properties": {},
     "quantity": 1,
+    "quantityPerPack": 1,
+    "range": {
+      "units": ""
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "",
+      "dc": "",
+      "descriptor": ""
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
     "slots": 1,
+    "slug": "",
     "source": "CRB pg. 205",
+    "target": {
+      "value": null
+    },
     "usage": {
+      "per": "",
+      "value": null
+    },
+    "uses": {
+      "max": "",
       "per": "",
       "value": null
     }

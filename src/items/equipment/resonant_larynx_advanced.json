@@ -6,9 +6,6 @@
   "system": {
     "type": "magitech",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -18,9 +15,10 @@
     },
     "area": {
       "effect": "spread",
+      "shapable": false,
       "shape": "cone",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "attackBonus": 0,
     "attributes": {
@@ -41,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -60,6 +57,7 @@
           "name": "",
           "formula": "10d6",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -67,12 +65,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": true
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -80,28 +81,27 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>The resonant larynx augmentation is a small resonating crystal in your throat that can amplify your voice to deafening levels. As a standard action, you can activate the resonant larynx to unleash an ear-piercing shriek in a 30-foot cone-shaped spread that doesn’t harm you. Each creature in the area must attempt a Fortitude saving throw (DC = 10 + half your level + your Constitution modifier). On a failure, a creature takes 5d6 sonic damage (or 10d6 for the advanced model) and is @UUID[Compendium.sfrpg.conditions.D8JvCEmOiWKe2UDx]{deafened} for [[/r 2d4]]{2d4 rounds}. If a creature succeeds at the saving throw, it takes half the damage and is deafened for only 1 round. Once you have used your resonant larynx, you can’t use it again until you’ve taken a 10-minute rest that would allow you to regain Stamina Points. However, you can spend 1 Resolve Point at any time to recharge the augmentation immediately.</p>"
+      "value": "<p>The resonant larynx augmentation is a small resonating crystal in your throat that can amplify your voice to deafening levels. As a standard action, you can activate the resonant larynx to unleash an ear-piercing shriek in a 30-foot cone-shaped spread that doesn’t harm you. Each creature in the area must attempt a Fortitude saving throw (DC = 10 + half your level + your Constitution modifier). On a failure, a creature takes 5d6 sonic damage (or 10d6 for the advanced model) and is @UUID[Compendium.sfrpg.conditions.Item.D8JvCEmOiWKe2UDx]{deafened} for [[/r 2d4]]{2d4 rounds}. If a creature succeeds at the saving throw, it takes half the damage and is deafened for only 1 round. Once you have used your resonant larynx, you can’t use it again until you’ve taken a 10-minute rest that would allow you to regain Stamina Points. However, you can spend 1 Resolve Point at any time to recharge the augmentation immediately.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
     "equipped": false,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 11,
     "modifiers": [],
     "price": 25500,
+    "proficient": false,
+    "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
@@ -109,14 +109,19 @@
       "dc": "10 + floor(@details.level.value / 2) + @abilities.con.mod",
       "descriptor": "partial"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #8 pg. 45",
     "system": "throat",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "sr",
       "value": 1
     }

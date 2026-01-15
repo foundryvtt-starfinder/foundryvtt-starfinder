@@ -16,6 +16,9 @@ Steps to reproduce the behavior:
 **Expected behavior**
 A clear and concise description of what you expected to happen.
 
+**Module Interference**
+Does the issue still appear with all modules disabled? If not, which modules are you using when the error occurs?
+
 **Screenshots**
 If applicable, add screenshots to help explain your problem.
 

@@ -1,0 +1,119 @@
+{
+  "_id": "BkscrQIjLyVCxreZ",
+  "name": "Shed Skin (Ex)",
+  "type": "feat",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
+  "system": {
+    "ability": "",
+    "actionTarget": "",
+    "actionType": "",
+    "activation": {
+      "type": "reaction",
+      "condition": "Spend 3 MP and reroll",
+      "cost": 1
+    },
+    "area": {
+      "effect": "",
+      "shapable": false,
+      "shape": "",
+      "units": "ft",
+      "value": ""
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": [],
+      "primaryGroup": null
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.class-features.Item.qIIoypmTFypnmRer]{Evolutionist Adaption}</p>\n<p>In a pinch, you can rapidly shed the outermost layers of your skin. You gain a +2 circumstance bonus to all saves against the @UUID[Compendium.sfrpg.conditions.Item.8LdyXZl9PeXXFE8O]{Burning} and @UUID[Compendium.sfrpg.conditions.Item.nFBcsp5FS1Wi46Fc]{Entangled} conditions, and a +2 circumstance bonus to your KAC against @UUID[Compendium.sfrpg.rules.JournalEntry.U37n5tY5hn1ctzQL.JournalEntryPage.R33uiOMesYP0ISWl#grapple]{Grapple} combat maneuvers. If you would fail a saving throw and gain the burning or entangled condition, you can spend 3 MP and reroll that saving throw as a reaction. If you would become grappled by a creature, you can spend 3 MP as a reaction to force that creature to reroll their attack roll to resolve the grapple.</p>"
+    },
+    "descriptors": {},
+    "details": {
+      "category": "classFeature",
+      "combat": false,
+      "specialAbilityType": "ex"
+    },
+    "duration": {
+      "units": "text",
+      "value": ""
+    },
+    "formula": "",
+    "isActive": false,
+    "modifiers": [
+      {
+        "_id": "85a061c4-65bc-4e6a-86eb-151200daaa4c",
+        "name": "Shed Skin (Ex) - Burning or Entangled",
+        "type": "circumstance",
+        "condition": "",
+        "damage": null,
+        "effectType": "saves",
+        "enabled": true,
+        "limitTo": null,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "You gain a +2 circumstance bonus to all saves against \nthe burning and entangled conditions.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      },
+      {
+        "_id": "2926a0a0-f3dc-4d3b-a26c-8bb8a9a912cf",
+        "name": "Shed Skin (Ex) - Grapple Combat Maneuvers",
+        "type": "circumstance",
+        "condition": "",
+        "damage": null,
+        "effectType": "cmd",
+        "enabled": true,
+        "limitTo": null,
+        "max": 2,
+        "modifier": "2",
+        "modifierType": "formula",
+        "notes": "You gain a +2 circumstance \nbonus to your KAC against grapple combat maneuvers.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
+    "properties": {},
+    "range": {
+      "units": "none"
+    },
+    "recharge": {
+      "charged": false,
+      "value": ""
+    },
+    "requirements": "14th Level (Evolutionist)",
+    "rollNotes": "",
+    "save": {
+      "type": "will",
+      "dc": "10+floor(@classes.evolutionist.levels/2) + (@classes.evolutionist.keyAbilityMod)",
+      "descriptor": "negate"
+    },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
+    "source": "EN pg. 45",
+    "target": {
+      "value": ""
+    },
+    "uses": {
+      "max": "",
+      "per": "",
+      "value": null
+    }
+  }
+}

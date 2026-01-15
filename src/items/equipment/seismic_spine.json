@@ -6,9 +6,6 @@
   "system": {
     "type": "magitech",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -18,9 +15,10 @@
     },
     "area": {
       "effect": "spread",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "attackBonus": 0,
     "attributes": {
@@ -41,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -60,6 +57,7 @@
           "name": "",
           "formula": "10d6",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -67,12 +65,15 @@
             "electricity": true,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": true
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -80,18 +81,18 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Biotechnicians speculate that a rendalairn has an internal structure that stabilizes it and enables it to create its quake pulse. Bleeding-edge tech has been invented based on these theories, allowing augmentation of the central nervous system.</p>\n<p>A seismic spine gives you resistance 15 to electricity damage and sonic damage. Once per day as a standard action, you can stomp the ground or otherwise create percussion, such as by clapping your hands, to unleash a shockwave from your seismic spine. Creatures and objects within a 20-foot-radius spread of you take 10d6 electricity and sonic damage (Fortitude save for half damage; DC = 10 + half your character level + your Constitution modifier). A creature that fails the saving throw is knocked @UUID[Compendium.sfrpg.conditions.XeRGqHVtcZ7vsgJ0]{Prone}. If a technological construct fails the save, the construct is also @UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned} for 1 round even if it is normally immune to being @UUID[Compendium.sfrpg.conditions.CvsDp0GvojxiF2jz]{Stunned}. Unattended hybrid or technological objects in the area cease functioning for 1 round. Once you have used your seismic spine, you can do so again only after you have rested for 10 minutes to regain Stamina Points, and you must spend 1 Resolve Point to use your seismic spine each time after the first time per day.</p>"
+      "value": "<p>Biotechnicians speculate that a rendalairn has an internal structure that stabilizes it and enables it to create its quake pulse. Bleeding-edge tech has been invented based on these theories, allowing augmentation of the central nervous system.</p>\n<p>A seismic spine gives you resistance 15 to electricity damage and sonic damage. Once per day as a standard action, you can stomp the ground or otherwise create percussion, such as by clapping your hands, to unleash a shockwave from your seismic spine. Creatures and objects within a 20-foot-radius spread of you take 10d6 electricity and sonic damage (Fortitude save for half damage; DC = 10 + half your character level + your Constitution modifier). A creature that fails the saving throw is knocked @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{Prone}. If a technological construct fails the save, the construct is also @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned} for 1 round even if it is normally immune to being @UUID[Compendium.sfrpg.conditions.Item.CvsDp0GvojxiF2jz]{Stunned}. Unattended hybrid or technological objects in the area cease functioning for 1 round. Once you have used your seismic spine, you can do so again only after you have rested for 10 minutes to regain Stamina Points, and you must spend 1 Resolve Point to use your seismic spine each time after the first time per day.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
     "equipped": false,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 20,
     "modifiers": [
       {
@@ -99,8 +100,10 @@
         "name": "Seismic Spine",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": true,
+        "limitTo": null,
         "max": 15,
         "modifier": "15",
         "modifierType": "constant",
@@ -114,8 +117,10 @@
         "name": "Seismic Spine",
         "type": "untyped",
         "condition": "",
+        "damage": null,
         "effectType": "energy-resistance",
         "enabled": true,
+        "limitTo": null,
         "max": 15,
         "modifier": "15",
         "modifierType": "constant",
@@ -126,13 +131,12 @@
       }
     ],
     "price": 1075000,
+    "proficient": false,
+    "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
@@ -140,14 +144,19 @@
       "dc": "10 + floor(@details.level.value / 2) + @abilities.con.mod",
       "descriptor": "half"
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AA3 pg. 85",
     "system": "spinal",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "sr",
       "value": 1
     }

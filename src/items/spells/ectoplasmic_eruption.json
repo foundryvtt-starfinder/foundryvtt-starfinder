@@ -4,11 +4,8 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/ectoplastmic_eruption.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,14 +14,16 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "attackBonus": 0,
     "chatFlavor": "Entangled on failed Reflex Save",
@@ -36,26 +35,44 @@
     "damage": {
       "parts": [
         {
+          "name": "",
           "formula": "6d6",
-          "operator": "",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
-            "bludgeoning": true
+            "acid": false,
+            "bludgeoning": true,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
-      "value": "<p>Swirling psychic matter, known as ectoplasm, erupts from a point you choose. Those in the area take 6d6 bludgeoning damage. Those who fail the Reflex saving throw are @UUID[Compendium.sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled} for the spell’s duration. The ectoplasm extends to the Ethereal Plane, so it affects ethereal and incorporeal creatures and objects. Such a creature @UUID[Compendium.sfrpg.conditions.nFBcsp5FS1Wi46Fc]{Entangled} in the eruption is forced to partially materialize, so it cannot enter or pass through solid objects, takes half damage from nonmagical kinetic attacks, and takes full damage from magic and energy weapons, spells, spell-like effects, and supernatural effects. It reacts as a material creature to non-damaging spells.</p>"
+      "value": "<p>Swirling psychic matter, known as ectoplasm, erupts from a point you choose. Those in the area take 6d6 bludgeoning damage. Those who fail the Reflex saving throw are @UUID[Compendium.sfrpg.conditions.Item.nFBcsp5FS1Wi46Fc]{Entangled} for the spell’s duration. The ectoplasm extends to the Ethereal Plane, so it affects ethereal and incorporeal creatures and objects. Such a creature @UUID[Compendium.sfrpg.conditions.Item.nFBcsp5FS1Wi46Fc]{Entangled} in the eruption is forced to partially materialize, so it cannot enter or pass through solid objects, takes half damage from nonmagical kinetic attacks, and takes full damage from magic and energy weapons, spells, spell-like effects, and supernatural effects. It reacts as a material creature to non-damaging spells.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "round",
       "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": false,
+    "isVariableLevel": false,
     "level": 4,
     "materials": {
       "consumed": false,
@@ -68,23 +85,30 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "units": "medium"
     },
+    "rollNotes": "",
     "save": {
       "type": "reflex",
       "dc": "",
       "descriptor": "partial"
     },
     "school": "evo",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #23 pg. 52",
     "sr": true,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/mystic_cure_mass.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "heal",
     "activation": {
@@ -24,9 +20,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -40,6 +37,8 @@
         {
           "name": "Healing",
           "formula": "lookupRange(@item.level, 0, 5, 3, 6, 5)d8 + @abilities.wis.mod",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -47,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": true,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "Choose one of these targets within 10 feet of you; if that target regains all of its Hit Points as a result of this healing, you can apply the remaining healing to yourself, as long as you are a living creature. On the other hand, if this isn’t enough to restore all of that target’s Hit Points, you can transfer any number of your own Hit Points to that target, healing the target that amount.",
     "description": {
@@ -62,14 +64,14 @@
       "unidentified": "",
       "value": "<p>You restore a number of Hit Points to a number of targets. Choose one of these targets within 10 feet of you; if that target regains all of its Hit Points as a result of this healing, you can apply the remaining healing to yourself, as long as you are a living creature. On the other hand, if this isn’t enough to restore all of that target’s Hit Points, you can transfer any number of your own Hit Points to that target, healing the target that amount. You can’t transfer more Hit Points than you have or more Hit Points than the target is missing.</p>\n<p>The number of Hit Points mass mystic cure restores to each target depends on the spell’s level.</p>\n<p><strong>5th:</strong> 3d8 + your Wisdom modifier</p>\n<p><strong>6th:</strong> 5d8 + your Wisdom modifier</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": true,
     "level": 5,
     "materials": {
@@ -83,6 +85,7 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "units": "close"
     },
@@ -93,14 +96,19 @@
       "descriptor": "harmless"
     },
     "school": "con",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "CRB pg. 367",
     "sr": true,
     "target": {
-      "type": "",
       "value": "up to one creature/level, no two of which can be more than 30 ft. apart"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

@@ -4,11 +4,8 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/optimize_technology.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,14 +14,16 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
-      "units": null,
-      "value": null
+      "units": "",
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,20 +33,26 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>You tap into the multiverse and find a reality with a forgotten object similar to the target of this spell, swapping that item with the target item. For the duration of the spell, you can select one weapon fusion or armor upgrade on the target item to replace with a weapon fusion or armor upgrade from the Core Rulebook. A fusion selected this way must be the same level of the original or lower. An upgrade selected this way must be the same type (hybrid, magical, or technological) as the original, be of the same level or lower. and occupy the same number of slots or fewer. At the end of the spell’s duration, the original item returns as it was when swapped, including its number of remaining charges, if any.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": true,
     "duration": {
       "units": "round",
       "value": "@details.cl.value"
     },
     "formula": "",
+    "isActive": false,
+    "isVariableLevel": false,
     "level": 2,
     "materials": {
       "consumed": false,
@@ -60,23 +65,30 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "units": "close"
     },
+    "rollNotes": "",
     "save": {
       "type": "fort",
       "dc": "",
       "descriptor": "object"
     },
     "school": "trs",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "NS pg. 155",
     "sr": true,
     "target": {
-      "type": "",
       "value": "one weapon with at least one weapon fusion or one suit of armor with at least one armor upgrade"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

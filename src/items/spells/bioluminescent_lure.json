@@ -4,11 +4,8 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/classes/energize_spell.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,14 +14,16 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,7 +33,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -44,14 +44,14 @@
       "unidentified": "",
       "value": "<p>You cause a 30-foot-diameter sphere of water or other liquid to fill with bioluminescent plankton, increasing the light level from dark to dim or from dim to normal. For the spell’s duration, you can take a standard action to move this area up to 30 feet in any direction. You can also take a standard action to condense the plankton into a tight, brightly glowing ball at the center of the sphere. If you do so, each creature that starts its turn in or enters the spell’s area must attempt a Will save or become fascinated until the beginning of its next turn. A creature that saves against this effect is immune to it for 24 hours. This spell has no effect above water.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": true,
     "duration": {
       "units": "round",
       "value": "@details.cl.value"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 2,
     "materials": {
@@ -65,6 +65,7 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "units": "medium"
     },
@@ -75,14 +76,19 @@
       "descriptor": "negate"
     },
     "school": "abj",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #36 pg. 51",
     "sr": false,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

@@ -2,13 +2,9 @@
   "_id": "P8qPwzLOJEkiCnrI",
   "name": "Weapon Specialization (Ex) (Nanocyte)",
   "type": "feat",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/achievement.svg",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -18,9 +14,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
-      "value": 0
+      "value": "0"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -29,7 +26,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -37,27 +35,31 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.MMyeA7kL5Vhcio05]{Nanocyte}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with, including any weapons for which you gained proficiency through a nanocyte knack.</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.MMyeA7kL5Vhcio05]{Nanocyte}</p>\n<p>You gain the Weapon Specialization feat as a bonus feat for each weapon type this class grants you proficiency with, including any weapons for which you gained proficiency through a nanocyte knack.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "b2130b98-6111-4a1a-b993-f09c7c0473a6",
         "name": "Weapon Specialization Nanocyte",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
+        "limitTo": null,
+        "max": 0,
         "modifier": "floor(@details.level.value / 2)",
         "modifierType": "constant",
         "notes": "",
@@ -68,11 +70,14 @@
       {
         "_id": "3d4f25d8-a043-454c-b0f9-89a8d545acaa",
         "name": "Weapon Specialization Nanocyte",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "limitTo": null,
+        "max": 0,
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -80,28 +85,16 @@
         "valueAffected": "basicM"
       },
       {
-        "_id": "2aa3dc23-d6d8-45e8-8f59-77275df200c8",
-        "name": "Weapon Specialization Nanocyte",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
-      },
-      {
         "_id": "6dc57afa-9780-48d7-acca-2f82e7b92fee",
         "name": "Weapon Specialization Nanocyte",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -111,10 +104,12 @@
       {
         "_id": "30235d9b-b47e-4ddf-922e-426f15e09da2",
         "name": "Weapon Specialization Nanocyte",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
         "modifier": "@details.level.value",
         "modifierType": "constant",
@@ -124,31 +119,34 @@
         "valueAffected": "longA"
       }
     ],
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "3rd Level",
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "TR, p. 10",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

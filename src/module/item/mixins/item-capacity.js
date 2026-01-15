@@ -46,7 +46,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         // Find child item
         const childItems = getChildItems(itemHelper, this);
         const loadedAmmunition = childItems.find(x => x.type === "ammunition");
-        return loadedAmmunition;
+        return loadedAmmunition ?? null;
     }
 
     /**
@@ -62,7 +62,10 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         const itemData = this.system;
         if (this.type === "ammunition" && !this.system.useCapacity) {
             return itemData.quantity;
-        } else {
+        } else if (this.type === "consumable") {
+            return this.system.uses.value ? this.system.uses.value : (this.system.quantity > 0 ? 1 : 0);
+        }
+        else {
             return itemData.capacity?.value;
         }
     }
@@ -86,8 +89,74 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
         if (this.type === "ammunition" && !this.system.useCapacity) {
             return this.update({'system.quantity': updatedCapacity});
+        } else if (this.type === "consumable") {
+            // Consumables always reduce uses by one, but also can reduce item quantity
+            const itemData = this.system;
+            if (itemData.uses.autoUse) {
+                let quantity = itemData.quantity;
+                let remainingUses = Math.max(this.getRemainingUses() - 1, 0);
+
+                if (remainingUses < 1) {
+                    // Deduct an item quantity
+                    quantity = Math.max(quantity - 1, 0);
+                    if (quantity < 1 && itemData.uses.autoDestroy) {
+                        // Destroy the item
+                        this.actor.deleteEmbeddedDocuments("Item", [this.id]);
+                    } else {
+                        if (quantity > 0) {
+                            // Reset the remaining charges
+                            remainingUses = this.getMaxUses();
+                        }
+                        this.update({
+                            'system.quantity': quantity,
+                            'system.uses.value': remainingUses
+                        });
+                    }
+                } else {
+                    // Deduct the remaining charges
+                    this.update({'system.uses.value': remainingUses});
+                }
+            }
         } else {
             return this.update({'system.capacity.value': updatedCapacity});
+        }
+    }
+
+    /**
+     * Increases capacity by some amount.
+     */
+    increaseCapacity(increaseAmount) {
+        if (this.requiresCapacityItem()) {
+            const capacityItem = this.getCapacityItem();
+            return capacityItem?.increaseCapacity(increaseAmount);
+        }
+
+        // Attempt to retrieve current capacity. If it is null, exit early.
+        const currentCapacity = this.getCurrentCapacity();
+        if (currentCapacity === null || currentCapacity === undefined) {
+            return;
+        }
+
+        // Get max capacity
+        const maxCapacity = this.getMaxCapacity() ?? this.parentItem.getMaxCapacity();
+        const updatedCapacity = currentCapacity + increaseAmount;
+
+        if (this.type === "ammunition" && !this.system.useCapacity) {
+            return this.update({'system.quantity': Math.min(updatedCapacity, maxCapacity)});
+        } else if (this.type === "consumable") {
+            if (updatedCapacity > maxCapacity) {
+                const capacityOvershoot = (updatedCapacity - maxCapacity) % maxCapacity;
+                const quantityOvershoot = Math.ceil(updatedCapacity / maxCapacity) - 1;
+                this.update({
+                    'system.quantity': this.system.quantity + quantityOvershoot,
+                    'system.uses.value': capacityOvershoot
+                });
+            } else {
+                // Add charges
+                this.update({'system.uses.value': Math.min(updatedCapacity, maxCapacity)});
+            }
+        } else {
+            return this.update({'system.capacity.value': Math.min(updatedCapacity, maxCapacity)});
         }
     }
 
@@ -98,6 +167,14 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
     getMaxCapacity() {
         if (this.type === "ammunition" && !this.system.useCapacity) {
             return null;
+        } else if (this.type === "consumable") {
+            try {
+                const roll = Roll.create(this.system.uses.max, {...this.actor.system, item: this.system}).evaluateSync({strict: false});
+                return roll.total ? roll.total : (this.system.quantity > 0 ? 1 : 0);
+            } catch (e) {
+                console.error(e);
+                return 0;
+            }
         }
 
         const itemData = this.system;
@@ -142,7 +219,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
                 const originalContainer = getItemContainer(this.actor.items, newAmmunition);
 
-                if (newAmmunition.system.useCapacity || capacityItem == null) {
+                if (newAmmunition.system.useCapacity || capacityItem === null) {
                     if (capacityItem) {
                         updatePromise = setItemContainer(itemHelper, capacityItem, null, 1);
                     }
@@ -171,7 +248,11 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.NoAmmunitionAvailable", {name: this.name}));
             }
         } else {
-            updatePromise = this.update({'system.capacity.value': maxCapacity});
+            if (this.type === "consumable") {
+                updatePromise = this.update({'system.uses.value': maxCapacity});
+            } else {
+                updatePromise = this.update({'system.capacity.value': maxCapacity});
+            }
         }
 
         if (updatePromise) {
@@ -226,15 +307,17 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-        const renderPromise = renderTemplate(template, templateData);
+        const renderPromise = foundry.applications.handlebars.renderTemplate(template, templateData);
         renderPromise.then((html) => {
             // Create the chat message
             const chatData = {
-                type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                 content: html
             };
 
+            const rollMode = game.settings.get("core", "rollMode");
+            ChatMessage.applyRollMode(chatData, rollMode);
             ChatMessage.create(chatData, { displaySheet: false });
         });
 

@@ -1,16 +1,16 @@
-import { SFRPG } from "../../config.js";
+import { ActorSFRPG } from "../actor.js";
 import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     constructor(...args) {
         super(...args);
 
-        this.acceptedItemTypes.push(...SFRPG.vehicleDefinitionItemTypes);
-        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+        this.acceptedItemTypes.push(...CONFIG.SFRPG.vehicleDefinitionItemTypes);
+        this.acceptedItemTypes.push(...CONFIG.SFRPG.physicalItemTypes);
     }
 
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["sfrpg", "sheet", "actor", "vehicle"],
             width: 600
             // height: 685
@@ -33,7 +33,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         this._getHangarBayData(data);
 
         // Encrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.description.value, {
+        data.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.description.value, {
             async: true,
             rollData: this.actor.getRollData() ?? {},
             secrets: this.actor.isOwner
@@ -127,7 +127,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const [attacks, primarySystems, expansionBays, actorResources] = data.items.reduce((arr, item) => {
             item.img = item.img || DEFAULT_TOKEN;
             if (!item.config) item.config = {};
-            const hasAttack = ["mwak", "rwak", "msak", "rsak"].includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
+            const hasAttack = CONFIG.SFRPG.attackActions.includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
             const hasDamage = item.system.damage?.parts
                 && item.system.damage.parts.length > 0
                 && (!["weapon", "shield"].includes(item.type) || item.system.equipped);
@@ -178,7 +178,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Activate event listeners using the prepared sheet HTML
      *
-     * @param {HTML} html The prepared HTML object ready to be rendered into the DOM
+     * @param {JQuery} html The prepared HTML object ready to be rendered into the DOM
      */
     activateListeners(html) {
         super.activateListeners(html);
@@ -242,22 +242,11 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     async _onDrop(event) {
         event.preventDefault();
 
-        // let data;
-        // try {
-        //     data = JSON.parse(event.dataTransfer.getData('text/plain'));
-        //     if (!data) {
-        //         return false;
-        //     }
-        // } catch (err) {
-        //     return false;
-        // }
-
         const data = TextEditor.getDragEventData(event);
-        if (!data) return false;
-
-        // Case - Dropped Actor
-        if (data.type === "Actor") {
-            const actor = await Actor.fromDropData(data);
+        if (Hooks.call('dropActorSheetData', this.actor, this, data) === false) {
+            // Further processing halted
+        } else if (data.type === "Actor") {
+            const actor = await ActorSFRPG.fromDropData(data);
 
             // Other vehicles are only acceptable if this vehicle has 1 or more hangar bays
             if (actor.type === "vehicle") {
@@ -268,49 +257,16 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
                 return this._onCrewDrop(event, actor.id);
             }
         } else if (data.type === "Item") {
-            const rawItemData = await this._getItemDropData(event, data);
+            const rawItemData = (await Item.fromDropData(data)).toObject();
 
             if (rawItemData.type === "weapon" || rawItemData.type === "vehicleAttack") {
-                return this.processDroppedData(event, data);
+                return this.processDroppedItems(event, data);
             } else if (rawItemData.type === "starshipExpansionBay" || rawItemData.type === "vehicleSystem" || rawItemData.type === "actorResource") {
                 return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
             }
         }
 
         return false;
-    }
-
-    /**
-     * Get an items data.
-     *
-     * @param {Event} event The originating drag event
-     * @param {object} data The data transfer object
-     */
-    async _getItemDropData(event, data) {
-        let itemData = null;
-
-        const actor = this.actor;
-        const item = await Item.fromDropData(data);
-        itemData = item;
-
-        // if (data.pack) {
-        //     const pack = game.packs.get(data.pack);
-        //     if (pack.documentName !== "Item") return;
-        //     itemData = await pack.getEntity(data.id);
-        // } else if (data.data) {
-        //     let sameActor = data.actorId === actor.id;
-        //     if (sameActor && actor.isToken) sameActor = data.tokenId === actor.token.id;
-        //     if (sameActor) {
-        //         await this._onSortItem(event, data.data);
-        //     }
-        //     itemData = data.data;
-        // } else {
-        //     let item = game.items.get(data.id);
-        //     if (!item) return;
-        //     itemData = item.data;
-        // }
-
-        return duplicate(itemData);
     }
 
     /**
@@ -326,7 +282,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         if (!actorId) return false;
 
-        const hangarBay = duplicate(this.actor.system.hangarBay);
+        const hangarBay = foundry.utils.deepClone(this.actor.system.hangarBay);
 
         if (hangarBay.limit === -1 || hangarBay.actorIds.length < hangarBay.limit) {
             hangarBay.actorIds.push(actorId);
@@ -355,7 +311,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const targetRole = event.target.dataset.role;
         if (!targetRole || !actorId) return false;
 
-        const crew = duplicate(this.actor.system.crew);
+        const crew = foundry.utils.deepClone(this.actor.system.crew);
         const crewRole = crew[targetRole];
         const oldRole = this.actor.getCrewRoleForActor(actorId);
 
@@ -439,7 +395,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             return null;
         }
 
-        const hangarData = duplicate(this.actor.system.hangarBay);
+        const hangarData = foundry.utils.deepClone(this.actor.system.hangarBay);
         hangarData.actorIds = hangarData.actorIds.filter(x => x !== actorId);
         await this.actor.update({
             "system.hangarBay": hangarData
@@ -536,15 +492,17 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: html
         };
 
+        const rollMode = game.settings.get("core", "rollMode");
+        ChatMessage.applyRollMode(chatData, rollMode);
         await ChatMessage.create(chatData, { displaySheet: false });
     }
 
@@ -579,15 +537,17 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         };
 
         const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-        const html = await renderTemplate(template, templateData);
+        const html = await foundry.applications.handlebars.renderTemplate(template, templateData);
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: html
         };
 
+        const rollMode = game.settings.get("core", "rollMode");
+        ChatMessage.applyRollMode(chatData, rollMode);
         await ChatMessage.create(chatData, { displaySheet: false });
     }
 }

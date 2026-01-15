@@ -4,11 +4,8 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/classes/envoy_improvisation.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
+    "actionTarget": "",
     "actionType": "save",
     "activation": {
       "type": "action",
@@ -17,14 +14,16 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "spread",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,7 +33,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -42,16 +42,16 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>You release a howl of primal rage, echoing the pain of Dreamers awoken by injury. Creatures in the area that fail their saves are @UUID[Compendium.sfrpg.conditions.nywSVEeDvp1bk7L3]{Shaken} for [[/r 2d4]] rounds. Dreamers are immune to this spell.</p>\n<p>Barathus can cast this spell as a reaction when reduced to 0 Hit Points. In this case, the spell’s DC is increased by 2.</p>"
+      "value": "<p>You release a howl of primal rage, echoing the pain of Dreamers awoken by injury. Creatures in the area that fail their saves are @UUID[Compendium.sfrpg.conditions.Item.nywSVEeDvp1bk7L3]{Shaken} for [[/r 2d4]] rounds. Dreamers are immune to this spell.</p>\n<p>Barathus can cast this spell as a reaction when reduced to 0 Hit Points. In this case, the spell’s DC is increased by 2.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": "see text"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 2,
     "materials": {
@@ -65,11 +65,9 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "personal",
-      "value": null
+      "units": "personal"
     },
     "rollNotes": "",
     "save": {
@@ -78,14 +76,19 @@
       "descriptor": "partial"
     },
     "school": "enc",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #29 pg. 44",
     "sr": true,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

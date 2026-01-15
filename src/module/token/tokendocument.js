@@ -1,4 +1,27 @@
-export default class SFRPGTokenDocument extends TokenDocument {
+export default class SFRPGTokenDocument extends foundry.documents.TokenDocument {
+    async _preCreate(data, options, user) {
+        const updates = {};
+
+        if (this.actor) {
+            // Override the token's movement to "crawl" when placed if the actor has the prone condition
+            if (CONFIG.SFRPG.actorsCharacterScale.includes(this.actor.type) && this.hasStatusEffect("prone")) {
+                updates.movementAction = "crawl";
+            }
+
+        }
+
+        this.updateSource(updates);
+        return super._preCreate(data, options, user);
+    }
+
+    // When a linked token's base actor is updated, check if the movement action is correct
+    async _onRelatedUpdate(update = {}, operation = {}) {
+        if (this.actor) {
+            await this.updateMovement(this.actor);
+        }
+        return super._onRelatedUpdate(update, operation);
+    }
+
     /**
      * Hijack Token health bar rendering to include temporary and temp-max health in the bar display
      *
@@ -8,43 +31,75 @@ export default class SFRPGTokenDocument extends TokenDocument {
      * @returns
      */
     getBarAttribute(barName, {alternative} = {}) {
-        const attr = alternative || (barName ? this[barName].attribute : null);
-        if ( !attr || !this.actor ) return null;
-        const data = foundry.utils.getProperty(this.actor.system, attr);
+        const attribute = alternative || (barName ? this[barName].attribute : null);
+        if ( !attribute || !this.actor ) return null;
+        const system = this.actor.system;
+        const isSystemDataModel = system instanceof foundry.abstract.DataModel;
+        const templateModel = game.model.Actor[this.actor.type];
+
+        // Get the current attribute value
+        const data = foundry.utils.getProperty(system, attribute);
         if ( (data === null) || (data === undefined) ) return null;
-        const model = game.system.model.Actor[this.actor.type];
 
         // Single values
         if ( Number.isNumeric(data) ) {
+            let editable = foundry.utils.hasProperty(templateModel, attribute);
+            if ( isSystemDataModel ) {
+                const field = system.schema.getField(attribute);
+                if ( field ) editable = field instanceof foundry.data.fields.NumberField;
+            }
             return {
                 type: "value",
-                attribute: attr,
+                attribute: attribute,
                 value: Number(data),
-                editable: foundry.utils.hasProperty(model, attr)
+                editable: editable
             };
         }
 
         // Attribute objects
         else if ( ("value" in data) && ("max" in data) ) {
+            let editable = foundry.utils.hasProperty(templateModel, `${attribute}.value`);
+            if ( isSystemDataModel ) {
+                const field = system.schema.getField(`${attribute}.value`);
+                if ( field ) editable = field instanceof foundry.data.fields.NumberField;
+            }
             let value = parseInt(data.value || 0);
             let max = parseInt(data.max || 0);
 
-            if (attr === "attributes.hp") {
+            if (attribute === "attributes.hp") {
                 value += parseInt(data.temp || 0);
                 max += parseInt(data.tempmax || 0);
             }
 
             return {
                 type: "bar",
-                attribute: attr,
+                attribute: attribute,
                 value: value,
                 max: max,
-                editable: foundry.utils.hasProperty(model, `${attr}.value`)
+                editable: editable
             };
         }
 
         // Otherwise null
         return null;
+    }
+
+    /**
+     * Updates the default and available movement types based on the actor speed settings and
+     * whether or not the token has the "prone" condition.
+     */
+    async updateMovement(actor) {
+        const mainMovement = actor.system.attributes.speed.mainMovement;
+        let update = {};
+        if (this.hasStatusEffect("prone") && this.movementAction !== "crawl") {
+            update = {_id: this._id, movementAction: "crawl"};
+        } else if (!this.hasStatusEffect("prone") && this.movementAction === "crawl") {
+            update = {_id: this._id, movementAction: CONFIG.SFRPG.movementOptions[mainMovement]};
+        } else {
+            return null;
+        }
+        console.log('Token conditions changed, updating movement actions.');
+        await this.update(update);
     }
 
     /**

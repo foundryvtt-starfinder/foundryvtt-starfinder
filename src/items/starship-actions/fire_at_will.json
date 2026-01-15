@@ -2,12 +2,13 @@
   "_id": "gTnq68hXhcwfMhfO",
   "name": "Fire At Will",
   "type": "starshipAction",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": null,
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<h2>Normal effect</h2><p>You can fire any two starship weapons, regardless of their arc. Each attack is made at a –4 penalty.</p>"
     },
@@ -16,10 +17,14 @@
     "formula": [
       {
         "name": "Gunnery",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks, @gunner.skills.gun.mod) + @gunner.abilities.dex.mod - 4"
       }
     ],
     "isPush": true,
+    "modifiers": [],
     "order": 0,
     "phase": {
       "name": "Gunnery phase",
@@ -31,6 +36,7 @@
     "selectors": [
       "gunner"
     ],
+    "slug": "",
     "source": "CRB"
   }
 }

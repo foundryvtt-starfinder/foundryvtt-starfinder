@@ -2,13 +2,9 @@
   "_id": "b8WuxLOeMnlaR7hb",
   "name": "Coolant sprayer, isothermal",
   "type": "weapon",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/bolter-gun.svg",
   "system": {
-    "type": "",
     "ability": "dex",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rwak",
     "activation": {
@@ -21,7 +17,7 @@
       "effect": "",
       "shapable": false,
       "shape": "",
-      "units": "ft",
+      "units": "none",
       "value": ""
     },
     "attackBonus": 0,
@@ -43,11 +39,10 @@
       "size": "medium",
       "sturdy": true
     },
-    "attuned": false,
     "bulk": "3",
     "capacity": {
       "max": 40,
-      "value": 40
+      "value": 0
     },
     "chatFlavor": "",
     "container": {
@@ -90,23 +85,7 @@
     },
     "critical": {
       "effect": "Staggered",
-      "parts": [
-        {
-          "formula": "",
-          "operator": "",
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "piercing": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": []
     },
     "damage": {
       "parts": [
@@ -127,7 +106,8 @@
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -137,121 +117,46 @@
       "unidentified": "",
       "value": "<p>Coolant sprayers were designed following the principles of a flamethrower, but with an eye more toward hindrance than sheer damage. Experts can easily identify a coolant sprayer by the bulky insulation surrounding the sprayer’s coolant reservoir. The weapon expels a cone of activated coolant that stiffens and freezes living tissue. While not harmless, the effect is somewhat less deadly than most energy weapons. Hiemal, algid, glacial, and isothermal coolant sprayers all function in similar ways, though their destructive potential varies from one model to another.</p>\n<p><strong>@UUID[Compendium.sfrpg.conditions.Item.nFBcsp5FS1Wi46Fc]{Entangle} ([[/r 2d4]]{2d4 rounds})</strong></p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "text",
+      "units": "instantaneous",
       "value": ""
     },
-    "equippable": false,
+    "equippable": true,
     "equipped": false,
+    "equippedBulkMultiplier": 1,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": true,
     "level": 17,
     "modifiers": [],
     "price": 290000,
     "proficient": false,
     "properties": {
-      "aeon": false,
-      "amm": true,
-      "analog": false,
-      "antibiological": false,
-      "archaic": false,
-      "aurora": false,
-      "automatic": false,
-      "blast": true,
-      "block": false,
-      "boost": false,
-      "breach": false,
-      "breakdown": false,
-      "bright": false,
-      "buttressing": false,
-      "cluster": false,
-      "conceal": false,
-      "deconstruct": false,
-      "deflect": false,
-      "disarm": false,
-      "double": false,
-      "drainCharge": false,
-      "echo": false,
-      "entangle": true,
-      "explode": false,
-      "extinguish": false,
-      "feint": false,
-      "fiery": false,
-      "firstArc": false,
-      "flexibleLine": false,
-      "force": false,
-      "freeHands": false,
-      "fueled": false,
-      "gearArray": false,
-      "grapple": false,
-      "gravitation": false,
-      "guided": false,
-      "harrying": false,
-      "healing": false,
-      "holyWater": false,
-      "hybrid": false,
-      "hydrodynamic": false,
-      "ignite": false,
-      "indirect": false,
-      "injection": false,
-      "instrumental": false,
-      "integrated": false,
-      "line": false,
-      "living": false,
-      "lockdown": false,
-      "mind-affecting": false,
-      "mine": false,
-      "mire": false,
-      "modal": false,
-      "necrotic": false,
-      "nonlethal": false,
-      "one": false,
-      "operative": false,
-      "penetrating": false,
-      "polarize": false,
-      "polymorphic": false,
-      "powered": false,
-      "professional": false,
-      "propel": false,
-      "punchGun": false,
-      "qreload": false,
-      "radioactive": false,
-      "reach": false,
-      "recall": false,
-      "regrowth": false,
-      "relic": false,
-      "reposition": false,
-      "scramble": false,
-      "shape": false,
-      "shatter": false,
-      "shells": false,
-      "shield": false,
-      "sniper": false,
-      "stun": false,
-      "subtle": false,
-      "sunder": false,
-      "swarm": false,
-      "tail": false,
-      "teleportive": false,
-      "thought": false,
-      "throttle": false,
-      "thrown": false,
-      "thruster": false,
-      "trip": false,
-      "two": true,
-      "unbalancing": false,
-      "underwater": false,
-      "unwieldy": true,
-      "variantBoost": false,
-      "wideLine": false
+      "amm": {
+        "extension": "",
+        "value": true
+      },
+      "blast": {
+        "extension": "",
+        "value": true
+      },
+      "entangle": {
+        "extension": "2d4 rounds",
+        "value": true
+      },
+      "two": {
+        "extension": "",
+        "value": true
+      },
+      "unwieldy": {
+        "extension": "",
+        "value": true
+      }
     },
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "40"
     },
@@ -263,28 +168,14 @@
     },
     "skillCheck": {
       "type": "acr",
-      "dc": "10 + @item.level + @abilities.dex.mod"
+      "dc": "10 + @item.level + @abilities.dex.mod",
+      "variable": false
     },
+    "slug": "",
     "source": "AR pg. 34",
     "special": "",
-    "specialMaterials": {
-      "abysium": false,
-      "adamantine": false,
-      "coldiron": false,
-      "diatha": false,
-      "djezet": false,
-      "horacalcum": false,
-      "inubrix": false,
-      "khefak": false,
-      "noqual": false,
-      "nyblantine": false,
-      "purplecores": false,
-      "siccatite": false,
-      "silver": false,
-      "voidglass": false
-    },
+    "specialMaterials": {},
     "target": {
-      "type": "",
       "value": ""
     },
     "usage": {

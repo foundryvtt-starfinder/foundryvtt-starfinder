@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/implant_data.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -18,14 +14,16 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +33,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -45,14 +44,14 @@
       "unidentified": "",
       "value": "<p>You subtly rearrange the internal circuitry of a computer system or module, programming it to convey a certain dataset when accessed (either normally or if it is hacked). You can implant up to one piece of data per caster level. A piece of data consists of a simple fact, such as a creature or object’s location or physical description, a creature or object’s tangible or intangible value, or another simple statement. When an affected computer system or module is accessed, this implanted data is the first data the accessing individual gains, regardless of what data the individual is actually looking for, though the accessing individual can access the system or module’s actual information if it looks beyond the implanted data. The implanted data vanishes from the system or module once the accessing individual has reviewed it. If this spell’s duration ends before an individual accesses the implanted data, the implanted data vanishes.</p>\n<p>The implanted data can be made permanent with a special ritual, which takes 1 hour and requires materials worth 5,000 credits. Once it’s made permanent, the implanted data temporarily vanishes after it is accessed, but it returns 1 hour later.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": "1 hour/level or until triggered; see text"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 2,
     "materials": {
@@ -66,27 +65,30 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "touch",
-      "value": null
+      "units": "touch"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": "negate"
     },
     "school": "ill",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "CRB pg. 361",
     "sr": false,
     "target": {
-      "type": "",
       "value": "one computer system of module"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

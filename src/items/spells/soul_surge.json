@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/modify_memory.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "eac",
     "actionType": "rsak",
     "activation": {
@@ -24,9 +20,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -40,6 +37,8 @@
         {
           "name": "",
           "formula": "lookupRange(@item.level, 3d8, 2, 6d8, 3, 10d8, 4, 14d8, 5, 21d8, 6, 24d8)",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -47,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -62,14 +64,14 @@
       "unidentified": "",
       "value": "<p>Soul surge was innovated by Hanakan mystics concomitant with the attunement of their soulstones. With this spell, you draw forth a tiny bit of your essence to attack your opponent, losing a number of Hit Points equal to the number of damage dice you roll for your soul surge. Attempt a ranged attack against a single target’s EAC, adding your key ability score modifier to the attack roll instead of your Dexterity modifier if it’s higher. Your soul surge does piercing damage that has the force descriptor, and the amount of damage it does depends on the level at which it’s cast.</p>\n<p><strong>1st</strong>:When you castsoul surgeas a 1st-level spell, it deals 3d8 damage to the target.</p>\n<p><strong>2nd</strong>:When you castsoul surgeas a 2nd-level spell, it deals 6d8 damage to the target.</p>\n<p><strong>3rd</strong>:When you castsoul surgeas a 3rd-level spell, it deals 10d8 damage to the target.</p>\n<p><strong>4th</strong>:When you castsoul surgeas a 4th-level spell, it deals 14d8 damage to the target.</p>\n<p><strong>5th</strong>:When you castsoul surgeas a 5th-level spell, it deals 21d8 damage to the target.</p>\n<p><strong>6th</strong>:When you castsoul surgeas a 6th-level spell, it deals 24d8 damage to the target.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": true,
     "level": 1,
     "materials": {
@@ -83,6 +85,7 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "units": "close"
     },
@@ -93,14 +96,19 @@
       "descriptor": "negate"
     },
     "school": "evo",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "GM pg. 82",
     "sr": false,
     "target": {
-      "type": "",
       "value": "one creature"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

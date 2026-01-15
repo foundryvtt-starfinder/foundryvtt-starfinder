@@ -1,33 +1,22 @@
 export default function(engine) {
-    engine.closures.add("calculateCharacterLevel", (fact, context) => {
+    engine.closures.add("calculateCharacterLevel", (fact) => {
         const data = fact.data;
         const classes = fact.classes;
 
-        data.details.level.value = 0;
-
-        /** Ensure CL exists. */
-        if (!data.details.cl) {
-            data.details.cl = {
-                value: null,
-                tooltip: []
-            };
-        } else {
-            data.details.cl.value = null;
-        }
+        if (!data.details.level) data.details.level = {value: 0, tooltip: []};
+        if (!data.details.cl.tooltip) data.details.cl.tooltip = [];
 
         for (const cls of classes) {
-            const classData = cls.system;
-
-            const classLevel = classData.levels;
+            const classLevel = cls.system.levels;
             const tooltip = game.i18n.format("SFRPG.CharacterLevelsTooltip", {
-                class: cls.name,
-                levels: classLevel + ` (@classes.${cls.name.toLowerCase()}.levels)`
+                class: cls.name.split(',')[0].trim(),
+                levels: classLevel + ` (@classes.${cls.name.toLowerCase().split(',')[0].trim()}.levels)`
             });
 
             data.details.level.value += classLevel;
             data.details.level.tooltip.push(tooltip);
 
-            if (classData.isCaster) {
+            if (cls.system.isCaster) {
                 if (data.details.cl.value === null) {
                     data.details.cl.value = 0;
                 }
@@ -36,6 +25,7 @@ export default function(engine) {
             }
         }
 
+        if (data.details.level.value < 1) data.details.level.value = 1;
         return fact;
     });
 }

@@ -5,10 +5,7 @@
   "img": "icons/commodities/biological/organ-brain-red.webp",
   "system": {
     "type": "magitech",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
     "actionTarget": "",
     "actionType": "",
     "activation": {
@@ -18,9 +15,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "attributes": {
@@ -41,7 +39,6 @@
       "size": "medium",
       "sturdy": false
     },
-    "attuned": false,
     "bulk": "-",
     "chatFlavor": "",
     "container": {
@@ -55,7 +52,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -65,16 +63,16 @@
       "unidentified": "",
       "value": "<p>Neurons in your brain are wired into a predictive AI that uses algorithms and divinations to predict a single humanoid’s actions. As a standard action, you can target any creature of your type that you are observing to gain split-second predictions for as long as you continue to observe it or until you deactivate your augmentation as a swift action. During this time, you gain a +1 insight bonus to saving throws and skill checks against that creature and against effects that creature produces. In addition, if you concentrate as a move action, you gain a +1 insight bonus to attack rolls against that creature until the beginning of your next turn. You can target only one creature at a time.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "equippable": true,
     "equipped": false,
     "formula": "",
     "identified": true,
-    "isActive": null,
+    "isActive": false,
+    "isEquipment": false,
     "level": 12,
     "modifiers": [
       {
@@ -82,8 +80,10 @@
         "name": "Divining mirror neurons",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "saves",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "+1",
         "modifierType": "formula",
@@ -97,8 +97,10 @@
         "name": "Divining mirror neurons",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "all-skills",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "+1",
         "modifierType": "formula",
@@ -112,8 +114,10 @@
         "name": "Divining mirror neurons",
         "type": "insight",
         "condition": "",
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "+1",
         "modifierType": "formula",
@@ -124,28 +128,32 @@
       }
     ],
     "price": 36400,
+    "proficient": false,
+    "properties": {},
     "quantity": 1,
     "quantityPerPack": 1,
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AR pg. 91",
     "system": "brain",
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 0,
+      "max": "0",
       "per": "",
       "value": 0
     }

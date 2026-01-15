@@ -2,12 +2,13 @@
   "_id": "HzOXH8vFMCgBnMjg",
   "name": "Fly",
   "type": "starshipAction",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": null,
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<h2>Normal effect</h2><p>You move your starship up to its speed and can make any turns allowed by its maneuverability. This doesn’t require a skill check.</p>"
     },
@@ -16,10 +17,14 @@
     "formula": [
       {
         "name": "Piloting",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@pilot.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       }
     ],
     "isPush": false,
+    "modifiers": [],
     "order": 0,
     "phase": {
       "name": "Helm phase",
@@ -29,6 +34,7 @@
     "role": "pilot",
     "selectorKey": "pilot",
     "selectors": [],
+    "slug": "",
     "source": "CRB"
   }
 }

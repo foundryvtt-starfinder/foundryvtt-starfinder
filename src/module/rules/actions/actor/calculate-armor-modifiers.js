@@ -1,12 +1,12 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateArmorModifiers", (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
+
         const eac = data.attributes.eac;
         const kac = data.attributes.kac;
-
         eac.tooltip = eac.tooltip ?? [];
         kac.tooltip = kac.tooltip ?? [];
 
@@ -23,11 +23,27 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
+            let computedBonusAdjust = 0;
             if (computedBonus !== 0 && localizationKey) {
+                if (bonus.type === "armor" && !foundry.utils.isEmpty(item.armorInfo)) {
+                    // If an armor bonus from modifiers is higher than that provided by the wearer's armor, don't count the worn armor
+                    if (computedBonus > item.armorInfo.bonus) {
+                        const targetTooltipIndex = item.tooltip.findIndex(tip => tip === item.armorInfo.tooltip);
+                        if (targetTooltipIndex >= 0) {
+                            delete item.tooltip[targetTooltipIndex]; // Remove armor tooltip
+                            computedBonusAdjust = item.armorInfo.bonus; // Amount to adjust returned bonus by
+                        }
+                    } else {
+                        // Return 0 for the bonus, don't add to tooltip if armor is better
+                        return 0;
+                    }
+                }
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
@@ -35,41 +51,28 @@ export default function(engine) {
                 }));
             }
 
-            return computedBonus;
+            // Return the computed bonus, adjusting it downward by the armor's AC value if less than the armor bonus from modifiers
+            return computedBonus - computedBonusAdjust;
         };
 
-        let armorMods = modifiers.filter(mod => {
+        const armorMods = modifiers.filter(mod => {
             return (mod.enabled || mod.modifierType === "formula") && [SFRPGEffectType.AC].includes(mod.effectType);
         });
 
-        let eacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["eac", "both"].includes(mod.valueAffected)), context, {actor: fact.actor});
-        let kacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["kac", "both"].includes(mod.valueAffected)), context, {actor: fact.actor});
+        const eacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["eac", "both"].includes(mod.valueAffected)), context, {actor: fact.actor});
+        const kacMods = context.parameters.stackModifiers.process(armorMods.filter(mod => ["kac", "both"].includes(mod.valueAffected)), context, {actor: fact.actor});
 
-        let eacMod = Object.entries(eacMods).reduce((sum, curr) => {
-            if (curr[1] === null || curr[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
-                for (const bonus of curr[1]) {
-                    sum += addModifier(bonus, data, eac, "SFRPG.ACTooltipBonus");
-                }
-            } else {
-                sum += addModifier(curr[1], data, eac, "SFRPG.ACTooltipBonus");
+        const eacMod = Object.entries(eacMods).reduce((sum, curr) => {
+            for (const bonus of curr[1]) {
+                sum += addModifier(bonus, data, eac, "SFRPG.ACTooltipBonus");
             }
-
             return sum;
         }, 0);
 
-        let kacMod = Object.entries(kacMods).reduce((sum, curr) => {
-            if (curr[1] === null || curr[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(curr[0])) {
-                for (const bonus of curr[1]) {
-                    sum += addModifier(bonus, data, kac, "SFRPG.ACTooltipBonus");
-                }
-            } else {
-                sum += addModifier(curr[1], data, kac, "SFRPG.ACTooltipBonus");
+        const kacMod = Object.entries(kacMods).reduce((sum, curr) => {
+            for (const bonus of curr[1]) {
+                sum += addModifier(bonus, data, kac, "SFRPG.ACTooltipBonus");
             }
-
             return sum;
         }, 0);
 

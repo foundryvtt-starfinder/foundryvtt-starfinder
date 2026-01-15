@@ -2,13 +2,9 @@
   "_id": "NVVf8imPKtIRs2BK",
   "name": "Sonic Blast (Ex)",
   "type": "mod",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/auto-repair.svg",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "other",
     "activation": {
@@ -20,9 +16,10 @@
     "additionalSenses": "",
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "cone",
       "units": "ft",
-      "value": 30
+      "value": "30"
     },
     "arms": {
       "armType": "general",
@@ -40,6 +37,8 @@
         {
           "name": "",
           "formula": "floor(@details.level.value/2)d10",
+          "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -47,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": false,
+            "radiation": false,
             "slashing": false,
             "sonic": true
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -60,24 +62,21 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>@UUID[Compendium.sfrpg.class-features.cQtmz297P5g6g5xv]{Advanced Mods}</p>\n<p>Your drone houses a devastating sound cannon. Once per hour, the drone can activate the sonic blast as a standard action, dealing sonic damage to all creatures and objects in a 30-foot cone; affected targets can halve the damage with a successful Fortitude saving throw (DC = 10 + 1/2 your mechanic level + your Intelligence modifier). The blast deals 1d10 damage for every two mechanic levels you have.</p>"
+      "value": "<p>@UUID[Compendium.sfrpg.class-features.Item.cQtmz297P5g6g5xv]{Advanced Mods}</p>\n<p>Your drone houses a devastating sound cannon. Once per hour, the drone can activate the sonic blast as a standard action, dealing sonic damage to all creatures and objects in a 30-foot cone; affected targets can halve the damage with a successful Fortitude saving throw (DC = 10 + 1/2 your mechanic level + your Intelligence modifier). The blast deals 1d10 damage for every two mechanic levels you have.</p>"
     },
-    "descriptors": [],
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isArmorSlot": false,
     "isFree": false,
     "maxInstalls": 1,
     "modifiers": [],
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "none",
-      "value": null
+      "units": "none"
     },
     "rollNotes": "",
     "save": {
@@ -85,15 +84,19 @@
       "dc": "10 + floor(@details.level.value/2) + @abilities.int.mod",
       "descriptor": "half"
     },
-    "shieldProficiency": "",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "TR pg. 25",
     "spellResistance": 0,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": 1,
+      "max": "1",
       "per": "",
       "value": 1
     },

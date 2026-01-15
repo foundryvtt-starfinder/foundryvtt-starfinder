@@ -1,8 +1,9 @@
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add("calculateResolve", (fact, context) => {
         const data = fact.data;
+        if (!data.attributes.rp.tooltip) data.attributes.rp.tooltip = [];
 
         const addModifier = (bonus, data, item, localizationKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -17,9 +18,11 @@ export default function(engine) {
 
             let computedBonus = 0;
             try {
-                const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+                const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
                 computedBonus = roll.total;
-            } catch {}
+            } catch (e) {
+                console.error(e);
+            }
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
@@ -35,7 +38,7 @@ export default function(engine) {
         let rpMax = 0; // Max(1, Max(1, Floor(Character Level / 2)) + Key Ability Score Modifier)
 
         // Level bonus
-        let levelBonus = Math.max(1, Math.floor(data.details.level.value / 2));
+        const levelBonus = Math.max(1, Math.floor(data.details.level.value / 2));
         rpMax += levelBonus;
 
         data.attributes.rp.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Header.Resolve.LevelTooltip", {
@@ -60,7 +63,7 @@ export default function(engine) {
                 const classData = cls.system;
 
                 if (!classData.kas) continue;
-                let classScore = fact.data.abilities[classData.kas].mod;
+                const classScore = fact.data.abilities[classData.kas].mod;
                 if (classScore > highestKeyAbilityScoreModifier) {
                     keyAbilityScore = classData.kas;
                     highestKeyAbilityScoreModifier = classScore;
@@ -83,21 +86,14 @@ export default function(engine) {
 
         // Iterate through any modifiers that affect RP
         let filteredModifiers = fact.modifiers.filter(mod => {
-            return (mod.enabled || mod.modifierType === "formula") && mod.effectType == SFRPGEffectType.RESOLVE_POINTS;
+            return (mod.enabled || mod.modifierType === "formula") && mod.effectType === SFRPGEffectType.RESOLVE_POINTS;
         });
         filteredModifiers = context.parameters.stackModifiers.process(filteredModifiers, context, {actor: fact.actor});
 
-        let bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
-            if (mod[1] === null || mod[1].length < 1) return sum;
-
-            if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                for (const bonus of mod[1]) {
-                    sum += addModifier(bonus, data, data.attributes.rp, "SFRPG.AbilityScoreBonusTooltip");
-                }
-            } else {
-                sum += addModifier(mod[1], data, data.attributes.rp, "SFRPG.AbilityScoreBonusTooltip");
+        const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
+            for (const bonus of mod[1]) {
+                sum += addModifier(bonus, data, data.attributes.rp, "SFRPG.AbilityScoreBonusTooltip");
             }
-
             return sum;
         }, 0);
 

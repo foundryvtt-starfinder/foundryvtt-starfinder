@@ -2,28 +2,33 @@
   "_id": "NiTmrGOcbRTJ6wYN",
   "name": "Aquatic Crawler",
   "type": "vehicle",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/bus.svg",
   "items": [
     {
       "_id": "IFQG4V1jH9iw8fZK",
       "name": "Collision (Ram)",
       "type": "vehicleAttack",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "2*(8d10)",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -42,6 +47,7 @@
           "dc": "14",
           "descriptor": "negate"
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -49,22 +55,27 @@
       "_id": "ZNQw4yfixdMSttws",
       "name": "Collision (Run Over)",
       "type": "vehicleAttack",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/reticule.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "critical": {
-          "parts": []
-        },
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "8d10",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "bludgeoning": true
+                "acid": false,
+                "bludgeoning": true,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
           ]
@@ -83,6 +94,7 @@
           "dc": "18",
           "descriptor": "half"
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -90,19 +102,9 @@
       "_id": "nftdLik1SKP5TCSx",
       "name": "Autopilot",
       "type": "vehicleSystem",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -111,14 +113,16 @@
           "value": "<p>Some vehicles have an autopilot AI that can control the vehicle in place of an actual pilot. You can engage or disengage an autopilot as a swift action. You can input a destination into an autopilot as a move action, and the autopilot attempts to reach that location if doing so is possible (provided the autopilot isn’t locked by a passcode or otherwise programmed not to obey).</p>\n<p>A vehicle is considered controlled when the autopilot is engaged. An autopilot’s actions are dictated by the GM, and an autopilot can take any of the actions to pilot the vehicle that an actual pilot can. However, autopilots tend to be cautious, rarely risking the integrity of the vehicle and never attempting to ram or run over a target unless specifically programmed as a war machine (indicated in its stat block).</p>\n<p>The Systems entry in a vehicle’s statistics (see page 228) lists the autopilot’s modifier to the Piloting skill. For Piloting checks attempted for the Autopilot, apply this modifier first and then apply the vehicle’s modifier (listed in the vehicle’s Modifiers entry) to the Piloting checks.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
-          "piloting": "16",
+          "piloting": 16,
           "usedAsPilot": true
         },
         "senses": {
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": "CRB pg. 280"
       }
     },
@@ -126,19 +130,9 @@
       "_id": "n9E17kB2undqsb16",
       "name": "Clingers",
       "type": "vehicleSystem",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -147,6 +141,7 @@
           "value": "<p>A combination of electromagnets, graspers, grav emitters, high-friction grips, or other mechanisms allow this vehicle to climb as though affected by the spider climb spell. The vehicle must have a climb speed to have this ability.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
           "piloting": 0,
           "usedAsPilot": false
@@ -155,6 +150,7 @@
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -164,17 +160,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -183,14 +169,16 @@
           "value": "<p>Normally, a creature in a vehicle can attempt Perception checks using its normal senses while inside the vehicle to notice things outside of the vehicle. A vehicle with enhanced sensors allows a creature in that vehicle to attempt Perception checks using the listed sense at the listed range.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
-          "piloting": "0",
+          "piloting": 0,
           "usedAsPilot": false
         },
         "senses": {
           "senses": "darkvision 120 ft.",
           "usedForSenses": true
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -198,27 +186,18 @@
       "_id": "iT17SpxppYyfe3r9",
       "name": "Manipulators",
       "type": "vehicleSystem",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/gear-stick.svg",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>This vehicle is fitted with the listed number of manipulators.</p>\n<h4>&nbsp;</h4>\n<p>Some vehicles are fitted with appendages ending in manipulating mechanisms such as digits and pincers. Such a vehicle is treated as a tall creature of the same size category for the purpose of determining the reach of its manipulators, and each manipulator can hold up to 10 × the vehicle’s item level in bulk. Manipulators are generally too large and clumsy for delicate tasks such as operating equipment designed for Medium and smaller creatures.</p>\n<p>A manipulator’s EAC is equal to 4 + the vehicle’s EAC and its KAC is equal to the 4 + the vehicle’s KAC. It has Hit Points equal to 3 × the item level of the vehicle and hardness equal to half the vehicle’s hardness. A manipulator that has lost at least half of its total Hit Points gains the broken condition, imposing a –2 penalty to Piloting checks to control the manipulator and to the DC of checks to escape the manipulator. Damage done to a vehicle’s manipulator doesn’t affect the vehicle’s Hit Point total.</p>\n<p>A vehicle’s pilot (or one of its complement) can control a manipulator in the following ways, though only one person can control a manipulator in a round.</p>\n<h5>Crush</h5>\n<p>As a standard action, you direct the manipulator to clamp tighter around a held creature or object (see Grab below), dealing half the vehicle’s collision damage. The creature or object can halve this damage by succeeding at a Fortitude saving throw (DC = 10 + the vehicle item level).</p>\n<h5>Grab</h5>\n<p>As a standard action, you direct the manipulator to grab at a target within its reach by attempting a Piloting check (DC = 10 + the target’s KAC). On a success, the target is @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} by the manipulator. If the target is a creature, it gains soft cover and the @UUID[Compendium.sfrpg.conditions.4AkWDHGM6gHDepHN]{Grappled} condition while held by the manipulator. If the result of your Piloting check exceeded the DC by 5 or more, the creature is instead @UUID[Compendium.sfrpg.conditions.XgK4EdO5D3Fj3iWz]{Pinned}. A creature held by a manipulator can use the escape action to free itself by succeeding at an Acrobatics check (DC = 10 + the vehicle’s KAC), but it can’t grapple the vehicle in return.</p>\n<p>If the target of a successful grab is another vehicle, both vehicles are considered to be connected by a rigid tether (see Tethered Vehicles below).</p>\n<h5>Slam</h5>\n<p>As a standard action, you direct the manipulator to strike a target within its reach by attempting a Piloting check (DC = 5 + the target’s KAC). On a success, the manipulator deals half the vehicle’s collision damage to the target.</p>\n<p>If the target of the slam action is a creature, it can attempt a Reflex saving throw against the vehicle’s collision DC to halve the damage. If the target of the slam action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to halve the damage, with a DC equal to the result of your Piloting check.</p>"
+          "value": "<p>This vehicle is fitted with the listed number of manipulators.</p>\n<h4>&nbsp;</h4>\n<p>Some vehicles are fitted with appendages ending in manipulating mechanisms such as digits and pincers. Such a vehicle is treated as a tall creature of the same size category for the purpose of determining the reach of its manipulators, and each manipulator can hold up to 10 × the vehicle’s item level in bulk. Manipulators are generally too large and clumsy for delicate tasks such as operating equipment designed for Medium and smaller creatures.</p>\n<p>A manipulator’s EAC is equal to 4 + the vehicle’s EAC and its KAC is equal to the 4 + the vehicle’s KAC. It has Hit Points equal to 3 × the item level of the vehicle and hardness equal to half the vehicle’s hardness. A manipulator that has lost at least half of its total Hit Points gains the broken condition, imposing a –2 penalty to Piloting checks to control the manipulator and to the DC of checks to escape the manipulator. Damage done to a vehicle’s manipulator doesn’t affect the vehicle’s Hit Point total.</p>\n<p>A vehicle’s pilot (or one of its complement) can control a manipulator in the following ways, though only one person can control a manipulator in a round.</p>\n<h5>Crush</h5>\n<p>As a standard action, you direct the manipulator to clamp tighter around a held creature or object (see Grab below), dealing half the vehicle’s collision damage. The creature or object can halve this damage by succeeding at a Fortitude saving throw (DC = 10 + the vehicle item level).</p>\n<h5>Grab</h5>\n<p>As a standard action, you direct the manipulator to grab at a target within its reach by attempting a Piloting check (DC = 10 + the target’s KAC). On a success, the target is @UUID[Compendium.sfrpg.conditions.Item.4AkWDHGM6gHDepHN]{Grappled} by the manipulator. If the target is a creature, it gains soft cover and the @UUID[Compendium.sfrpg.conditions.Item.4AkWDHGM6gHDepHN]{Grappled} condition while held by the manipulator. If the result of your Piloting check exceeded the DC by 5 or more, the creature is instead @UUID[Compendium.sfrpg.conditions.Item.XgK4EdO5D3Fj3iWz]{Pinned}. A creature held by a manipulator can use the escape action to free itself by succeeding at an Acrobatics check (DC = 10 + the vehicle’s KAC), but it can’t grapple the vehicle in return.</p>\n<p>If the target of a successful grab is another vehicle, both vehicles are considered to be connected by a rigid tether (see Tethered Vehicles below).</p>\n<h5>Slam</h5>\n<p>As a standard action, you direct the manipulator to strike a target within its reach by attempting a Piloting check (DC = 5 + the target’s KAC). On a success, the manipulator deals half the vehicle’s collision damage to the target.</p>\n<p>If the target of the slam action is a creature, it can attempt a Reflex saving throw against the vehicle’s collision DC to halve the damage. If the target of the slam action is another vehicle, the pilot of the defending vehicle can attempt a Piloting check to halve the damage, with a DC equal to the result of your Piloting check.</p>"
         },
         "isActive": false,
+        "modifiers": [],
         "piloting": {
           "piloting": 0,
           "usedAsPilot": false
@@ -227,6 +206,7 @@
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
         "source": ""
       }
     },
@@ -236,17 +216,7 @@
       "type": "vehicleSystem",
       "img": "systems/sfrpg/icons/equipment/technological%20items/comm-unit-personal.webp",
       "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
         "canBeActivated": true,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
         "description": {
           "chat": "",
           "gmnotes": "",
@@ -255,42 +225,7 @@
           "value": "<p>A personal comm unit is pocket-sized device that combines a minor portable computer (treat as a tier-0 computer with no upgrades or modules) and a cellular communication device, allowing wireless communication with other comm units in both audio- and text-based formats at planetary range (see page 272). A personal comm unit also includes a calculator, a flashlight (increases the light level one step in a 15-foot cone), and several entertainment options (including games and access to any local infospheres). You can upgrade a personal comm unit to function as some other devices (such as full computers and scanners) by spending credits equal to 110% of the additional device’s price.</p>"
         },
         "isActive": false,
-        "piloting": {
-          "piloting": "0",
-          "usedAsPilot": false
-        },
-        "senses": {
-          "senses": "",
-          "usedForSenses": false
-        },
-        "source": "CRB pg. 218"
-      }
-    },
-    {
-      "_id": "ghulHcIJvAhMCTUc",
-      "name": "Enclosed (Ex)",
-      "type": "vehicleSystem",
-      "img": "icons/svg/mystery-man.svg",
-      "system": {
-        "type": "",
-        "abilityMods": {
-          "parts": []
-        },
-        "canBeActivated": false,
-        "critical": {
-          "parts": []
-        },
-        "damage": {
-          "parts": []
-        },
-        "description": {
-          "chat": "",
-          "gmnotes": "",
-          "short": "",
-          "unidentified": "",
-          "value": "<p>In addition to having total cover, the pilot and passengers in an enclosed vehicle can’t use their personal weapons to attack creatures and objects outside the vehicle, though they can use the vehicle’s weapons (if any).</p>"
-        },
-        "isActive": false,
+        "modifiers": [],
         "piloting": {
           "piloting": 0,
           "usedAsPilot": false
@@ -299,6 +234,35 @@
           "senses": "",
           "usedForSenses": false
         },
+        "slug": "",
+        "source": "CRB pg. 218"
+      }
+    },
+    {
+      "_id": "ghulHcIJvAhMCTUc",
+      "name": "Enclosed (Ex)",
+      "type": "vehicleSystem",
+      "img": "systems/sfrpg/icons/default/gear-stick.svg",
+      "system": {
+        "canBeActivated": false,
+        "description": {
+          "chat": "",
+          "gmnotes": "",
+          "short": "",
+          "unidentified": "",
+          "value": "<p>In addition to having total cover, the pilot and passengers in an enclosed vehicle can’t use their personal weapons to attack creatures and objects outside the vehicle, though they can use the vehicle’s weapons (if any).</p>"
+        },
+        "isActive": false,
+        "modifiers": [],
+        "piloting": {
+          "piloting": 0,
+          "usedAsPilot": false
+        },
+        "senses": {
+          "senses": "",
+          "usedForSenses": false
+        },
+        "slug": "",
         "source": ""
       }
     }
@@ -307,6 +271,7 @@
     "name": "Aquatic Crawler",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -338,11 +303,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -356,13 +340,23 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/bus.svg",
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 3
   },
@@ -372,9 +366,9 @@
       "controlSkill": "pil",
       "cover": "total",
       "dimensions": {
-        "height": "12",
-        "length": "20",
-        "width": "20"
+        "height": 12,
+        "length": 20,
+        "width": 20
       },
       "eac": {
         "value": 20
@@ -392,24 +386,58 @@
         "value": 22
       },
       "modifiers": {
-        "athletics": "",
-        "attackFullSpeed": "-5",
-        "attackMoving": "-3",
-        "attackStopped": "0",
-        "piloting": "-2",
-        "survival": ""
+        "athletics": null,
+        "attackFullSpeed": 0,
+        "attackMoving": 0,
+        "attackStopped": 0,
+        "piloting": 0,
+        "survival": null
       },
       "size": "huge",
-      "special": [],
       "speed": {
-        "type": "",
         "drive": "30 ft (climb and land) 20 ft (swim)",
         "full": "350 ft (climb and land) 260 ft (swim)",
         "mph": "40 mph (climb and land) 30 mph (swim)"
-      },
-      "systems": []
+      }
     },
-    "conditions": {},
+    "conditions": {
+      "asleep": false,
+      "bleeding": false,
+      "blinded": false,
+      "broken": false,
+      "burning": false,
+      "confused": false,
+      "cowering": false,
+      "dazed": false,
+      "dazzled": false,
+      "dead": false,
+      "deafened": false,
+      "dying": false,
+      "encumbered": false,
+      "entangled": false,
+      "exhausted": false,
+      "fascinated": false,
+      "fatigued": false,
+      "flat-footed": false,
+      "frightened": false,
+      "grappled": false,
+      "helpless": false,
+      "invisible": false,
+      "nauseated": false,
+      "off-kilter": false,
+      "off-target": false,
+      "overburdened": false,
+      "panicked": false,
+      "paralyzed": false,
+      "pinned": false,
+      "prone": false,
+      "shaken": false,
+      "sickened": false,
+      "stable": false,
+      "staggered": false,
+      "stunned": false,
+      "unconscious": false
+    },
     "crew": {
       "complement": {
         "actorIds": [],
@@ -438,6 +466,8 @@
     "hangarBay": {
       "actorIds": [],
       "limit": 0
-    }
+    },
+    "modifiers": [],
+    "slug": ""
   }
 }

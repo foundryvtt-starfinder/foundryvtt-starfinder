@@ -1,10 +1,11 @@
 import { SFRPG } from "../../../config.js";
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../../../modifiers/types.js";
+import { SFRPGEffectType, SFRPGModifierType } from "../../../modifiers/types.js";
 
 export default function(engine) {
     engine.closures.add( "calculateMovementSpeeds", (fact, context) => {
         const data = fact.data;
         const armors = fact.armors?.length > 0 ? fact.armors : null;
+        if (!data.attributes.speed.tooltip) data.attributes.speed.tooltip = [];
 
         const addModifier = (bonus, data, item, localizationKey, speedKey) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -17,7 +18,7 @@ export default function(engine) {
                 return 0;
             }
 
-            const roll = Roll.create(bonus.modifier.toString(), data).evaluate({maximize: true});
+            const roll = Roll.create(bonus.modifier.toString(), data).evaluateSync({strict: false});
             const computedBonus = roll.total;
 
             if (computedBonus !== 0 && localizationKey) {
@@ -31,6 +32,32 @@ export default function(engine) {
 
             return computedBonus;
         };
+
+        // If power Armor is equipped and has capacity remaining, use that speed as the actor's base speed
+        let armorIsPowered = false;
+        let hasEquippedPowerArmor = false;
+        let powerArmorSpeed = {};
+        let tooltipPowered = "Unpowered";
+        if (armors) {
+            for (const armorItem of armors) {
+                if (armorItem.system.armor.type === "power") {
+                    hasEquippedPowerArmor = true;
+                    powerArmorSpeed = armorItem.system.speed;
+                    if (armorItem.getCurrentCapacity()) {
+                        armorIsPowered = true;
+                        tooltipPowered = "Powered";
+                    }
+
+                    data.attributes.speed.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.Speed", {
+                        speed: `Power Armor Speed (${tooltipPowered})`,
+                        type: "",
+                        mod: "",
+                        source: armorItem.name
+                    }));
+                    continue;
+                }
+            }
+        }
 
         const slowestArmor = armors?.reduce((armor, worstArmor) => (armor.system?.armor?.speedAdjust || 0) < (worstArmor.system?.armor?.speedAdjust || 0) ? armor : worstArmor);
         const armorSpeed = slowestArmor?.system?.armor?.speedAdjust || 0;
@@ -48,7 +75,18 @@ export default function(engine) {
                 continue;
             }
 
-            const baseValue = Number(data.attributes.speed[speedKey].base);
+            let baseValue = Number(data.attributes.speed[speedKey].base);
+
+            // Replace base land speed value with power armor base speed
+            if (hasEquippedPowerArmor) {
+                baseValue = powerArmorSpeed[speedKey].base;
+                // If unpowered (value set to 0)
+                if (!armorIsPowered) {
+                    baseValue = 0;
+                    data.attributes.speed[speedKey].value = 0;
+                    continue;
+                }
+            }
 
             let filteredModifiers = fact.modifiers.filter(mod => {
                 return (mod.enabled || mod.modifierType === "formula") && (mod.effectType === SFRPGEffectType.ALL_SPEEDS || (mod.effectType === SFRPGEffectType.SPECIFIC_SPEED && mod.valueAffected === speedKey));
@@ -61,16 +99,9 @@ export default function(engine) {
             filteredMultiplyModifiers = context.parameters.stackModifiers.process(filteredMultiplyModifiers, context, {actor: fact.actor});
 
             const bonus = Object.entries(filteredModifiers).reduce((sum, mod) => {
-                if (mod[1] === null || mod[1].length < 1) return sum;
-
-                if ([SFRPGModifierTypes.CIRCUMSTANCE, SFRPGModifierTypes.UNTYPED].includes(mod[0])) {
-                    for (const bonus of mod[1]) {
-                        sum += addModifier(bonus, data, data.attributes.speed, "SFRPG.ActorSheet.Modifiers.Tooltips.Speed", speedKey);
-                    }
-                } else {
-                    sum += addModifier(mod[1], data, data.attributes.speed, "SFRPG.ActorSheet.Modifiers.Tooltips.Speed", speedKey);
+                for (const bonus of mod[1]) {
+                    sum += addModifier(bonus, data, data.attributes.speed, "SFRPG.ActorSheet.Modifiers.Tooltips.Speed", speedKey);
                 }
-
                 return sum;
             }, 0);
 
@@ -92,7 +123,7 @@ export default function(engine) {
                         return 0;
                     }
 
-                    const roll = Roll.create(modifierBonus.modifier.toString(), data).evaluate({maximize: true});
+                    const roll = Roll.create(modifierBonus.modifier.toString(), data).evaluateSync({strict: false});
                     const computedBonus = roll.total;
 
                     if (computedBonus !== 0) {
@@ -108,10 +139,14 @@ export default function(engine) {
                 }
             }
 
-            data.attributes.speed[speedKey].value = Math.floor(data.attributes.speed[speedKey].value);
+            if (!game.settings.get("sfrpg", "decimalSpeed")) {
+                data.attributes.speed[speedKey].value = Math.floor(data.attributes.speed[speedKey].value);
+            }
 
             if (speedKey === "flying") {
-                data.attributes.speed[speedKey].maneuverability = data.attributes.speed[speedKey].baseManeuverability;
+                data.attributes.speed[speedKey].maneuverability = (hasEquippedPowerArmor && armorIsPowered)
+                    ? powerArmorSpeed[speedKey].baseManeuverability
+                    : data.attributes.speed[speedKey].baseManeuverability;
             }
         }
 

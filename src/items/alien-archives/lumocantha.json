@@ -2,19 +2,16 @@
   "_id": "rk4lDYZVPdMmBMUR",
   "name": "Lumocantha",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "folder": "oDeSIpQmKhLBZHHW",
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "rOIa3laZxjgN5oic",
       "name": "Laser Spines (Ex)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "eac",
         "actionType": "rwak",
         "activation": {
@@ -25,9 +22,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "none",
-          "value": null
+          "value": ""
         },
         "attackBonus": 10,
         "attributes": {
@@ -48,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -57,7 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -79,13 +76,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4+2",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "fire": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -95,114 +105,27 @@
           "unidentified": "",
           "value": "<p>A lumocantha’s individual capsules are constantly lasing, and the creature makes attacks by squeezing a shutter-like fiber at the base of each spine to allow light through. This is a ranged attack that targets EAC, has a range increment of 60 feet, and does not provoke attacks of opportunity.</p>"
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
+          "units": "instantaneous",
           "value": ""
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": true,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
           "units": "ft",
-          "value": 60
+          "value": "60"
         },
         "rollNotes": "",
         "save": {
@@ -210,11 +133,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": ""
         },
         "usage": {
@@ -222,7 +150,7 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
+          "max": "0",
           "per": "",
           "value": 0
         },
@@ -234,13 +162,9 @@
       "_id": "dl6Lhy5B9vbBIdXx",
       "name": "Dye capsules (Ex)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -250,9 +174,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
-          "value": 0
+          "value": "0"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -263,13 +188,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "1d4",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": false,
               "types": {
-                "acid": true
+                "acid": true,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -279,21 +217,28 @@
           "unidentified": "",
           "value": "<p>A lumocantha’s center has many individual capsules filled with a corrosive dye that acts as a lasing medium. A creature adjacent to the lumocantha who hits it with a melee attack takes 1d4 acid damage and is stained by dye. An affected creature can attempt a DC 11 Reflex save to take half damage and avoid being stained. The lumocantha gains a +2 circumstance bonus on ranged attacks against creatures stained by this dye, even if the dye came from another lumocantha.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [
           {
             "_id": "7001b2f2-86bd-4215-92d3-41558d7f5fd6",
             "name": "Dye capsules",
             "type": "untyped",
             "condition": "",
+            "damage": null,
             "effectType": "ranged-attacks",
             "enabled": false,
+            "limitTo": null,
             "max": 2,
             "modifier": "2",
             "modifierType": "formula",
@@ -303,15 +248,13 @@
             "valueAffected": ""
           }
         ],
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -320,14 +263,19 @@
           "dc": "11",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -336,13 +284,9 @@
       "_id": "lpHVw6H7H2y0YRjC",
       "name": "Mindless",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
-        "ability": null,
-        "abilityMods": {
-          "parts": []
-        },
+        "ability": "",
         "actionTarget": "",
         "actionType": "",
         "activation": {
@@ -352,9 +296,10 @@
         },
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
           "units": "",
-          "value": null
+          "value": ""
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -363,7 +308,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -373,39 +319,47 @@
           "unidentified": "",
           "value": "<p>(EX)</p>\n<p>The creature has no Intelligence score or modifier and is immune to mind-affecting effects. Any DCs or other statistics that rely on an Intelligence score treat the creature as having a score of 10 (+0).</p>\n<p>Guidelines: Mindless creatures usually have fewer good skills and no master skills. Their skills should be based on inborn abilities, since they’re incapable of training.</p>\n<hr />"
         },
-        "descriptors": [],
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": ""
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
+          "dc": "",
           "descriptor": ""
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": null
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         }
       }
@@ -415,6 +369,7 @@
     "name": "Lumocantha",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -446,11 +401,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -464,121 +438,75 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 1
   },
   "system": {
     "abilities": {
       "cha": {
-        "base": 0,
-        "min": 3,
-        "misc": 0,
-        "mod": 0,
-        "value": 10
+        "base": 0
       },
       "con": {
-        "base": 2,
-        "min": 3,
-        "misc": 0,
-        "mod": 2,
-        "value": 14
+        "base": 2
       },
       "dex": {
-        "base": 4,
-        "min": 3,
-        "misc": 0,
-        "mod": 4,
-        "value": 18
+        "base": 4
       },
       "int": {
-        "base": -4,
-        "min": 3,
-        "misc": 0,
-        "mod": -4,
-        "value": 2
+        "base": -4
       },
       "str": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 12
+        "base": 1
       },
       "wis": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 12
+        "base": 1
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 13,
-        "min": 0,
-        "tooltip": [],
-        "value": 13
+        "base": 13
       },
       "fort": {
-        "base": 6,
-        "bonus": 6,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 6
       },
       "hp": {
         "max": 25,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 25
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 4,
         "value": 4
       },
       "kac": {
-        "base": 15,
-        "min": 0,
-        "tooltip": [],
-        "value": 15
+        "base": 15
       },
-      "keyability": "",
       "reach": "5",
       "reflex": {
-        "base": 4,
-        "bonus": 4,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 4
       },
       "space": "5",
       "speed": {
@@ -599,19 +527,12 @@
         "special": "original base: 10 ft.; original special: climb 10 ft.",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 1,
-        "bonus": 1,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 1
       }
     },
-    "classes": {},
     "conditions": {
       "asleep": false,
       "bleeding": false,
@@ -634,6 +555,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -649,9 +571,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -659,9 +578,8 @@
     "details": {
       "type": "Plant",
       "alignment": "N",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -670,10 +588,10 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Lumocanthas are a beautiful sight from a safe distance. Their enormous blossoms have a central stamen composed of numerous ruby-red capsules, pulsing with activity. Long translucent yellow spines extend in all directions, rising up with the sun’s light and drooping in the darkness. The fluid inside the capsules is a strong dye that acts as a natural lasing medium, and in response to a nearby threat, the flowers can activate natural shutters at the base of their spines, allowing light to propagate through the spines and strike their opponents. These organic lasers are surprisingly powerful, and unaware observers can easily find themselves running for their lives from the laser-shooting plants. Younger lumocanthas measure 2 to 3 feet across and 5 feet high, while flowers that are hundreds of years old grow to 10 or even 20 feet high.</p>\n<p>For all their firepower, lumocanthas aren’t intentionally aggressive. The plants are not sentient, and the laser reaction is an instinctive response. They do not fire on each other or other plants. Very small creatures can usually escape their notice, and squoxes or birds often perch atop them. The flowers are surprisingly mobile, though they move very slowly, padding forward on tangles of roots pulled from the ground.</p>\n<p>They don’t often chase threats, but they do sometimes migrate to a different grove that has better soil or more sunlight. When property owners want to deliberately displace a colony of lumocanthas, they typically do so by using shaded roofs or magical darkness to make the blossoms unhappy in their current location. A trail of nutrient-rich soil can then lead an entire colony to a new, well-lit home, where it promptly lays down roots. Many municipalities outlaw planting lumocanthas, citing their dangerous nature. Of course, there are always a few ambitious or eccentric gardeners who want lumocanthas as part of their landscaping, and they make their grounds as inviting as possible for the strange blossoms.</p>\n<p>Lumocanthas were first cataloged on Vesk-6, but they’re found in many places across the galaxy. Vesk often use them as both aesthetic and protective installations, and as such have brought the plants to the many new planets they’ve visited or conquered. Other species, particularly those with resistance to fire, such as ifrits and tieflings, have taken a liking to the unusual plants. Given that the flowers are mobile, they have moved from yards to forests and jungles on quite a few planets, making it possible to encounter wild‑grown lumocanthas in many natural settings.</p>\n<p>Lumocanthas’ dye is popular in a variety of applications, though harvesting the fluid is no easy feat. Textile manufacturers claim that the deep crimson color can’t be replicated with any other materials, though many knock-off dyes exist. Experts say that the way to tell whether purportedly dyed fabric is genuine is to rub it quickly until it gets warm. If it glows slightly, it’s real. Clothing certified to contain lumocantha dye sells for a high price, and some individuals with expensive taste order custom‑dyed furniture or linens to spice up their home decor. The dye is also used in lasers for weapons and industrial purposes, with many customers refusing to use anything else. The dye is a popular choice for use in nonlethal alarms and security systems, tagging thieves with the distinctive color and making it easier to track them. The dye is even used as a component of some medications, though in very dilute amounts. Due to its extensive commercial uses, much of the dye comes from lumocantha farms. One of the largest such farms in the Pact Worlds is on @UUID[Compendium.sfrpg.setting.mkJGLfpJkvAKLZz3]{Castrovel}, owned by two tieflings who risk only minor burns when harvesting their valuable crop. Given that the flowers can get up and walk away, these farms are generally far from heavily populated areas and well-fenced.</p>\n<p>Despite being capable of killing large creatures, lumocanthas are not carnivorous. They obtain nutrients from soil and sunlight like many other plants. While lumocanthas don’t require sleep, they do enter a state of diminished energy for a few hours in the middle of the night. During this period, their spines droop low and they’re slower to employ their lasers if they sense an approaching threat. Their laser spines are still functional even in the dead of night, however, as would-be dye thieves have found out when the plants spring back to life on being touched or damaged. Lumocanthas kept in darkness for more than a week temporarily lose their laser spine ability, and the flowers are often transported this way. This is dangerous&nbsp;for the plants though, as being kept in darkness for more&nbsp;than 2 weeks can starve the flowers to death.</p>\n<h3>DYE GRENADES</h3>\n<p>Lumocantha dye can be weaponized easily. A creature that&nbsp;fails its Reflex saving throw against a dye grenade takes&nbsp;additional damage from laser weapons equal to half the dye&nbsp;grenade’s item level (minimum 1). This lasts until the dye&nbsp;is removed, usually by changing armor or clothing or by&nbsp;spending 1d4 hours cleaning off the stain.</p>\n<table style=\"width: 99.1279%; height: 80px;\" border=\"1\">\n<tbody>\n<tr style=\"height: 16px;\">\n<td style=\"width: 16.1989%; height: 16px;\">GRENADES</td>\n<td style=\"width: 10.5559%; height: 16px; text-align: center; vertical-align: middle;\">LEVEL</td>\n<td style=\"width: 10.4118%; height: 16px; text-align: center; vertical-align: middle;\">PRICE</td>\n<td style=\"width: 8.47186%; height: 16px; text-align: center; vertical-align: middle;\">RANGE</td>\n<td style=\"width: 11.6871%; height: 16px; text-align: center; vertical-align: middle;\">CAPACITY</td>\n<td style=\"width: 9.9759%; height: 16px; text-align: center; vertical-align: middle;\">BULK</td>\n<td style=\"width: 31.2321%; height: 16px; text-align: center; vertical-align: middle;\">SPECIAL</td>\n</tr>\n<tr style=\"height: 16px;\">\n<td style=\"width: 16.1989%; height: 16px;\">Dye grenade I</td>\n<td style=\"width: 10.5559%; height: 16px; text-align: center; vertical-align: middle;\">1</td>\n<td style=\"width: 10.4118%; height: 16px; text-align: center; vertical-align: middle;\">50</td>\n<td style=\"width: 8.47186%; height: 16px; text-align: center; vertical-align: middle;\">20 ft</td>\n<td style=\"width: 11.6871%; height: 16px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(0, 0, 0, 0.05);\">Drawn</span></td>\n<td style=\"width: 9.9759%; height: 16px; text-align: center; vertical-align: middle;\">L</td>\n<td style=\"width: 31.2321%; height: 16px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(0, 0, 0, 0.05);\">Explode (1d4 A, dye-stained, 10 ft)</span></td>\n</tr>\n<tr style=\"height: 16px;\">\n<td style=\"width: 16.1989%; height: 16px;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Dye grenade II</span></td>\n<td style=\"width: 10.5559%; height: 16px; text-align: center; vertical-align: middle;\">4</td>\n<td style=\"width: 10.4118%; height: 16px; text-align: center; vertical-align: middle;\">320</td>\n<td style=\"width: 8.47186%; height: 16px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">20 ft</span></td>\n<td style=\"width: 11.6871%; height: 16px; text-align: center; vertical-align: middle;\">Drawn</td>\n<td style=\"width: 9.9759%; height: 16px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">L</span></td>\n<td style=\"width: 31.2321%; height: 16px; text-align: center; vertical-align: middle;\">Explode (2d4 A, dye-stained, 10 ft)</td>\n</tr>\n<tr style=\"height: 16px;\">\n<td style=\"width: 16.1989%; height: 16px;\">Dye grenade III</td>\n<td style=\"width: 10.5559%; height: 16px; text-align: center; vertical-align: middle;\">8</td>\n<td style=\"width: 10.4118%; height: 16px; text-align: center; vertical-align: middle;\">1,300</td>\n<td style=\"width: 8.47186%; height: 16px; text-align: center; vertical-align: middle;\">20 ft</td>\n<td style=\"width: 11.6871%; height: 16px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(0, 0, 0, 0.05);\">Drawn</span></td>\n<td style=\"width: 9.9759%; height: 16px; text-align: center; vertical-align: middle;\">L</td>\n<td style=\"width: 31.2321%; height: 16px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(0, 0, 0, 0.05);\">Explode (4d4 A, dye-stained, 10 ft)</span></td>\n</tr>\n<tr style=\"height: 16px;\">\n<td style=\"width: 16.1989%; height: 16px;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Dye grenade IV</span></td>\n<td style=\"width: 10.5559%; height: 16px; text-align: center; vertical-align: middle;\">12</td>\n<td style=\"width: 10.4118%; height: 16px; text-align: center; vertical-align: middle;\">5,100</td>\n<td style=\"width: 8.47186%; height: 16px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">20 ft</span></td>\n<td style=\"width: 11.6871%; height: 16px; text-align: center; vertical-align: middle;\">Drawn</td>\n<td style=\"width: 9.9759%; height: 16px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">L</span></td>\n<td style=\"width: 31.2321%; height: 16px; text-align: center; vertical-align: middle;\">Explode (6d4 A, dye-stained, 10 ft)</td>\n</tr>\n</tbody>\n</table>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>temperate and warm forests</p>\n<h3>Organization</h3>\n<p>solitary or colony (3–8)</p>\n</section>",
+        "value": "<h2>Description</h2>\n<p>Lumocanthas are a beautiful sight from a safe distance. Their enormous blossoms have a central stamen composed of numerous ruby-red capsules, pulsing with activity. Long translucent yellow spines extend in all directions, rising up with the sun’s light and drooping in the darkness. The fluid inside the capsules is a strong dye that acts as a natural lasing medium, and in response to a nearby threat, the flowers can activate natural shutters at the base of their spines, allowing light to propagate through the spines and strike their opponents. These organic lasers are surprisingly powerful, and unaware observers can easily find themselves running for their lives from the laser-shooting plants. Younger lumocanthas measure 2 to 3 feet across and 5 feet high, while flowers that are hundreds of years old grow to 10 or even 20 feet high.</p>\n<p>For all their firepower, lumocanthas aren’t intentionally aggressive. The plants are not sentient, and the laser reaction is an instinctive response. They do not fire on each other or other plants. Very small creatures can usually escape their notice, and squoxes or birds often perch atop them. The flowers are surprisingly mobile, though they move very slowly, padding forward on tangles of roots pulled from the ground.</p>\n<p>They don’t often chase threats, but they do sometimes migrate to a different grove that has better soil or more sunlight. When property owners want to deliberately displace a colony of lumocanthas, they typically do so by using shaded roofs or magical darkness to make the blossoms unhappy in their current location. A trail of nutrient-rich soil can then lead an entire colony to a new, well-lit home, where it promptly lays down roots. Many municipalities outlaw planting lumocanthas, citing their dangerous nature. Of course, there are always a few ambitious or eccentric gardeners who want lumocanthas as part of their landscaping, and they make their grounds as inviting as possible for the strange blossoms.</p>\n<p>Lumocanthas were first cataloged on Vesk-6, but they’re found in many places across the galaxy. Vesk often use them as both aesthetic and protective installations, and as such have brought the plants to the many new planets they’ve visited or conquered. Other species, particularly those with resistance to fire, such as ifrits and tieflings, have taken a liking to the unusual plants. Given that the flowers are mobile, they have moved from yards to forests and jungles on quite a few planets, making it possible to encounter wild‑grown lumocanthas in many natural settings.</p>\n<p>Lumocanthas’ dye is popular in a variety of applications, though harvesting the fluid is no easy feat. Textile manufacturers claim that the deep crimson color can’t be replicated with any other materials, though many knock-off dyes exist. Experts say that the way to tell whether purportedly dyed fabric is genuine is to rub it quickly until it gets warm. If it glows slightly, it’s real. Clothing certified to contain lumocantha dye sells for a high price, and some individuals with expensive taste order custom‑dyed furniture or linens to spice up their home decor. The dye is also used in lasers for weapons and industrial purposes, with many customers refusing to use anything else. The dye is a popular choice for use in nonlethal alarms and security systems, tagging thieves with the distinctive color and making it easier to track them. The dye is even used as a component of some medications, though in very dilute amounts. Due to its extensive commercial uses, much of the dye comes from lumocantha farms. One of the largest such farms in the Pact Worlds is on @UUID[Compendium.sfrpg.setting.Item.mkJGLfpJkvAKLZz3]{Castrovel}, owned by two tieflings who risk only minor burns when harvesting their valuable crop. Given that the flowers can get up and walk away, these farms are generally far from heavily populated areas and well-fenced.</p>\n<p>Despite being capable of killing large creatures, lumocanthas are not carnivorous. They obtain nutrients from soil and sunlight like many other plants. While lumocanthas don’t require sleep, they do enter a state of diminished energy for a few hours in the middle of the night. During this period, their spines droop low and they’re slower to employ their lasers if they sense an approaching threat. Their laser spines are still functional even in the dead of night, however, as would-be dye thieves have found out when the plants spring back to life on being touched or damaged. Lumocanthas kept in darkness for more than a week temporarily lose their laser spine ability, and the flowers are often transported this way. This is dangerous&nbsp;for the plants though, as being kept in darkness for more&nbsp;than 2 weeks can starve the flowers to death.</p>\n<h3>DYE GRENADES</h3>\n<p>Lumocantha dye can be weaponized easily. A creature that&nbsp;fails its Reflex saving throw against a dye grenade takes&nbsp;additional damage from laser weapons equal to half the dye&nbsp;grenade’s item level (minimum 1). This lasts until the dye&nbsp;is removed, usually by changing armor or clothing or by&nbsp;spending 1d4 hours cleaning off the stain.</p>\n<table style=\"width:99.1279%;height:80px\" border=\"1\">\n<tbody>\n<tr style=\"height:16px\">\n<td style=\"width:16.1989%;height:16px\">GRENADES</td>\n<td style=\"width:10.5559%;height:16px;text-align:center;vertical-align:middle\">LEVEL</td>\n<td style=\"width:10.4118%;height:16px;text-align:center;vertical-align:middle\">PRICE</td>\n<td style=\"width:8.47186%;height:16px;text-align:center;vertical-align:middle\">RANGE</td>\n<td style=\"width:11.6871%;height:16px;text-align:center;vertical-align:middle\">CAPACITY</td>\n<td style=\"width:9.9759%;height:16px;text-align:center;vertical-align:middle\">BULK</td>\n<td style=\"width:31.2321%;height:16px;text-align:center;vertical-align:middle\">SPECIAL</td>\n</tr>\n<tr style=\"height:16px\">\n<td style=\"width:16.1989%;height:16px\">Dye grenade I</td>\n<td style=\"width:10.5559%;height:16px;text-align:center;vertical-align:middle\">1</td>\n<td style=\"width:10.4118%;height:16px;text-align:center;vertical-align:middle\">50</td>\n<td style=\"width:8.47186%;height:16px;text-align:center;vertical-align:middle\">20 ft</td>\n<td style=\"width:11.6871%;height:16px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(0, 0, 0, 0.05)\">Drawn</span></td>\n<td style=\"width:9.9759%;height:16px;text-align:center;vertical-align:middle\">L</td>\n<td style=\"width:31.2321%;height:16px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(0, 0, 0, 0.05)\">Explode (1d4 A, dye-stained, 10 ft)</span></td>\n</tr>\n<tr style=\"height:16px\">\n<td style=\"width:16.1989%;height:16px\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">Dye grenade II</span></td>\n<td style=\"width:10.5559%;height:16px;text-align:center;vertical-align:middle\">4</td>\n<td style=\"width:10.4118%;height:16px;text-align:center;vertical-align:middle\">320</td>\n<td style=\"width:8.47186%;height:16px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">20 ft</span></td>\n<td style=\"width:11.6871%;height:16px;text-align:center;vertical-align:middle\">Drawn</td>\n<td style=\"width:9.9759%;height:16px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">L</span></td>\n<td style=\"width:31.2321%;height:16px;text-align:center;vertical-align:middle\">Explode (2d4 A, dye-stained, 10 ft)</td>\n</tr>\n<tr style=\"height:16px\">\n<td style=\"width:16.1989%;height:16px\">Dye grenade III</td>\n<td style=\"width:10.5559%;height:16px;text-align:center;vertical-align:middle\">8</td>\n<td style=\"width:10.4118%;height:16px;text-align:center;vertical-align:middle\">1,300</td>\n<td style=\"width:8.47186%;height:16px;text-align:center;vertical-align:middle\">20 ft</td>\n<td style=\"width:11.6871%;height:16px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(0, 0, 0, 0.05)\">Drawn</span></td>\n<td style=\"width:9.9759%;height:16px;text-align:center;vertical-align:middle\">L</td>\n<td style=\"width:31.2321%;height:16px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(0, 0, 0, 0.05)\">Explode (4d4 A, dye-stained, 10 ft)</span></td>\n</tr>\n<tr style=\"height:16px\">\n<td style=\"width:16.1989%;height:16px\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">Dye grenade IV</span></td>\n<td style=\"width:10.5559%;height:16px;text-align:center;vertical-align:middle\">12</td>\n<td style=\"width:10.4118%;height:16px;text-align:center;vertical-align:middle\">5,100</td>\n<td style=\"width:8.47186%;height:16px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">20 ft</span></td>\n<td style=\"width:11.6871%;height:16px;text-align:center;vertical-align:middle\">Drawn</td>\n<td style=\"width:9.9759%;height:16px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">L</span></td>\n<td style=\"width:31.2321%;height:16px;text-align:center;vertical-align:middle\">Explode (6d4 A, dye-stained, 10 ft)</td>\n</tr>\n</tbody>\n</table>\n<section>\n<h2>Ecology</h2>\n<h3>Environment</h3>\n<p>temperate and warm forests</p>\n<h3>Organization</h3>\n<p>solitary or colony (3–8)</p>\n</section>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "",
       "cr": 2,
       "environment": "",
       "organization": "",
@@ -681,29 +599,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 68",
-      "xp": {
-        "value": 600
-      }
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 7,
         "ranks": 7,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -711,10 +620,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 7,
         "ranks": 7,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -722,10 +630,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -733,10 +640,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -744,10 +650,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -755,10 +660,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -766,10 +670,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -777,10 +680,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -788,10 +690,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -799,10 +700,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -810,10 +710,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -821,10 +720,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -832,10 +730,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 7,
         "ranks": 7,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -843,10 +740,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -854,10 +750,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -865,9 +760,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -877,10 +770,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -888,10 +780,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -899,10 +790,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -910,47 +800,40 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 12,
         "ranks": 12,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -959,21 +842,9 @@
         "custom": "Plant Immunities",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "Plant Immunities",
         "value": []
-      },
-      "dr": {
-        "custom": "",
-        "value": [
-          {
-            "fire": "5"
-          }
-        ]
       },
       "dv": {
         "custom": "",
@@ -985,9 +856,6 @@
       },
       "senses": "low-light vision",
       "size": "medium",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

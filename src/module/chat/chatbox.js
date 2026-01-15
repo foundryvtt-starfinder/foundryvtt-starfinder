@@ -63,15 +63,16 @@ export default class SFRPGCustomChatMessage {
             dataRoll: roll,
             rollType: data.rollType,
             rollNotes: data.htmlData?.find(x => x.name === "rollNotes")?.value,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
-            config: CONFIG.SFRPG,
-            tokenImg: actor.token?.img || actor.img,
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            tokenImg: actor.token?.texture?.src || actor.img,
             actorId: actor.id,
             tokenId: this.getToken(actor),
             breakdown: data.breakdown,
             tags: data.tags,
             damageTypeString: data.damageTypeString,
             specialMaterials: data.specialMaterials,
+            descriptors: data.specialMaterials,
+            hasMagicDamage: data.hasMagicDamage,
             rollOptions: data.rollOptions,
             rollDices: data.rollDices
         };
@@ -82,7 +83,7 @@ export default class SFRPGCustomChatMessage {
             if (speaker.token) {
                 const token = game.scenes.get(speaker.scene)?.tokens?.get(speaker.token);
                 if (token) {
-                    options.tokenImg = token.img;
+                    options.tokenImg = token.texture?.src;
                     setImage = true;
                 }
             }
@@ -115,22 +116,15 @@ export default class SFRPGCustomChatMessage {
         }
 
         options = foundry.utils.mergeObject(options, { rollContent });
-        const cardContent = await renderTemplate(templateName, options);
-        const rollMode = data.rollMode ? data.rollMode : game.settings.get('core', 'rollMode');
-
-        // let explainedRollContent = rollContent;
-        // if (options.breakdown) {
-        //     const insertIndex = rollContent.indexOf(`<section class="tooltip-part">`);
-        //     explainedRollContent = rollContent.substring(0, insertIndex) + options.explanation + rollContent.substring(insertIndex);
-        // }
+        const cardContent = await foundry.applications.handlebars.renderTemplate(templateName, options);
+        const rollMode = data.rollMode ?? game.settings.get('core', 'rollMode');
 
         const messageData = {
             flavor: data.title,
             speaker: data.speaker,
-            content: cardContent, // + explainedRollContent + (options.additionalContent || ""),
-            rollMode: rollMode,
-            roll: roll,
-            type: CONST.CHAT_MESSAGE_TYPES.ROLL,
+            content: cardContent,
+            rolls: [roll],
+            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice,
             rollType: data.rollType,
             flags: {}
@@ -143,14 +137,23 @@ export default class SFRPGCustomChatMessage {
             };
         }
 
+        // Options tags
         if (options?.specialMaterials) {
             messageData.flags.specialMaterials = options.specialMaterials;
+        }
+
+        if (options?.descriptors) {
+            messageData.flags.descriptors = options.descriptors;
+        }
+
+        if (options?.hasMagicDamage) {
+            messageData.flags.hasMagicDamage = options.hasMagicDamage;
         }
 
         if (options.rollOptions) {
             messageData.flags.rollOptions = options.rollOptions;
         }
 
-        ChatMessage.create(messageData);
+        ChatMessage.create(messageData, { rollMode: rollMode });
     }
 }

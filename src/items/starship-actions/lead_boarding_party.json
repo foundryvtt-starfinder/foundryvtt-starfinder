@@ -2,15 +2,16 @@
   "_id": "9mCZxidXk8Txsdoz",
   "name": "Lead Boarding Party",
   "type": "starshipAction",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": {
       "resolve": false,
       "value": "Target starship's tier (rounded down) + Target starship's security modifier + Target starship's training modifier"
     },
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<h2>Normal effect</h2><p>You accompany a boarding party, granting it a major advantage. Add an insight bonus equal to your key ability score’s modifier to the boarding party’s boarding attack modifier. If the boarding attack succeeds, you can choose which system takes critical damage.</p><h2>Critical effect</h2><p>Your assault team inflicts devastating damage to a nearby system. You inflict critical damage to an additional starship system, determined randomly.</p>"
     },
@@ -19,10 +20,14 @@
     "formula": [
       {
         "name": "Boarding Attack",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@ship.boardingParty.tier + @ship.boardingParty.complement.mod + @ship.boardingParty.training.mod"
       }
     ],
     "isPush": false,
+    "modifiers": [],
     "order": 50,
     "phase": {
       "name": "Engineering phase, Open",
@@ -34,6 +39,7 @@
     "selectors": [
       "openCrew"
     ],
+    "slug": "",
     "source": "SOM"
   }
 }

@@ -4,11 +4,8 @@
   "type": "feat",
   "img": "systems/sfrpg/images/cup/gameplay/solarian.webp",
   "system": {
-    "type": "",
-    "ability": null,
-    "abilityMods": {
-      "parts": []
-    },
+    "ability": "",
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -17,9 +14,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -28,34 +26,40 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.kuEdVbzv5zXIO4wk]{Solarian}</p>\n<p>You gain the @UUID[Compendium.sfrpg.feats.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}feat as a bonus feat for each weapon type this class grants you proficiency with.If you selected solar weapon as your solar manifestation, it gains the benefit of Weapon Specialization as if it were an advanced melee weapon.&nbsp;</p>"
+      "value": "<p>&gt;@UUID[Compendium.sfrpg.classes.Item.kuEdVbzv5zXIO4wk]{Solarian}</p>\n<p>You gain the @UUID[Compendium.sfrpg.feats.Item.9Us7Eg9cAoq3BcS5]{Weapon Specialization (Combat)}feat as a bonus feat for each weapon type this class grants you proficiency with.If you selected solar weapon as your solar manifestation, it gains the benefit of Weapon Specialization as if it were an advanced melee weapon.&nbsp;</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "classFeature",
+      "combat": false,
       "specialAbilityType": "ex"
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "modifiers": [
       {
         "_id": "5ed4c491-efda-4716-ae6c-22544d419022",
         "name": "Weapon Specialization Solarian",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
+        "limitTo": null,
+        "max": 0,
         "modifier": "floor(@details.level.value / 2)",
         "modifierType": "constant",
         "notes": "",
@@ -66,11 +70,14 @@
       {
         "_id": "eddc907c-4b25-412d-a037-26c6f4ed8d1a",
         "name": "Weapon Specialization Solarian",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
-        "modifier": "@details.level.value",
+        "limitTo": null,
+        "max": 0,
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -78,28 +85,16 @@
         "valueAffected": "basicM"
       },
       {
-        "_id": "0c5a7a26-2bc7-4d20-a568-23f45ee1eee3",
-        "name": "Weapon Specialization Solarian",
-        "type": "untyped",
-        "condition": "",
-        "effectType": "weapon-property-damage",
-        "enabled": true,
-        "modifier": "-ceil(@details.level.value / 2)",
-        "modifierType": "constant",
-        "notes": "",
-        "source": "",
-        "subtab": "misc",
-        "valueAffected": "operative"
-      },
-      {
         "_id": "7c30373d-0b3b-4fe6-874d-68afaab64519",
         "name": "Weapon Specialization Solarian",
-        "type": "untyped",
+        "type": "weapon-specialization",
         "condition": "",
+        "damage": null,
         "effectType": "weapon-damage",
         "enabled": true,
+        "limitTo": null,
         "max": 0,
-        "modifier": "@details.level.value",
+        "modifier": "ternary(@item.properties.operative, floor(@details.level.value / 2), @details.level.value)",
         "modifierType": "constant",
         "notes": "",
         "source": "",
@@ -107,30 +102,34 @@
         "valueAffected": "advancedM"
       }
     ],
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "3rd Level",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Solarian",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

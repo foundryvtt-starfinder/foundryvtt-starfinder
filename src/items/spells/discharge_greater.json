@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/discharge_greater.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -18,14 +14,16 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "burst",
+      "shapable": false,
       "shape": "sphere",
       "units": "ft",
-      "value": 20
+      "value": "20"
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +33,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,16 +42,16 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This spell functions as @UUID[Compendium.sfrpg.spells.nuqOXX3XI47h0cBV]{Discharge}, except it can discharge multiple technological objects. You can use it in one of two ways: an area discharge or a targeted discharge.</p>\n<p><strong>Area Discharge</strong>: When used in this way, the spell affects everything within a 20-foot-radius burst. Each creature in the area is affected as though by <em>discharge</em>(affecting only one object in the creature’s possession), and each unattended object is similarly affected.</p>\n<p><strong>Targeted Discharge</strong>: If this spell targets a single creature, it can discharge one randomly determined object from the target’s charged or electrically powered possessions for every 4 caster levels you have.</p>\n<h2>@UUID[Compendium.sfrpg.spells.nuqOXX3XI47h0cBV]{Discharge}</h2>\n<p>You can dissipate the charges from one technological object, temporarily depower one electrically powered technological object that does not use charges, or severely hinder a construct with the technological subtype. If the spell targets an object with charges, the object loses all of its remaining charges. If the object is powered by electrical means other than charges, its functions are suppressed for 1d4 rounds. If the spell targets a creature not of the technological subtype, it affects a random charged or electrically powered item in that creature’s possession. If the target is a construct with the technological subtype, it is staggered and cannot use any energy-based attacks for 1d4 rounds. A construct with the technological subtype that is affected by this spell can attempt a Fortitude saving throw at the end of each round to shrug off the effect.&nbsp;</p>"
+      "value": "<p>This spell functions as @UUID[Compendium.sfrpg.spells.Item.nuqOXX3XI47h0cBV]{Discharge}, except it can discharge multiple technological objects. You can use it in one of two ways: an area discharge or a targeted discharge.</p>\n<p><strong>Area Discharge</strong>: When used in this way, the spell affects everything within a 20-foot-radius burst. Each creature in the area is affected as though by <em>discharge</em>(affecting only one object in the creature’s possession), and each unattended object is similarly affected.</p>\n<p><strong>Targeted Discharge</strong>: If this spell targets a single creature, it can discharge one randomly determined object from the target’s charged or electrically powered possessions for every 4 caster levels you have.</p>\n<h2>@UUID[Compendium.sfrpg.spells.Item.nuqOXX3XI47h0cBV]{Discharge}</h2>\n<p>You can dissipate the charges from one technological object, temporarily depower one electrically powered technological object that does not use charges, or severely hinder a construct with the technological subtype. If the spell targets an object with charges, the object loses all of its remaining charges. If the object is powered by electrical means other than charges, its functions are suppressed for 1d4 rounds. If the spell targets a creature not of the technological subtype, it affects a random charged or electrically powered item in that creature’s possession. If the target is a construct with the technological subtype, it is staggered and cannot use any energy-based attacks for 1d4 rounds. A construct with the technological subtype that is affected by this spell can attempt a Fortitude saving throw at the end of each round to shrug off the effect.&nbsp;</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": false,
     "duration": {
       "units": "instantaneous",
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 6,
     "materials": {
@@ -66,6 +65,7 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "units": "medium"
     },
@@ -76,14 +76,19 @@
       "descriptor": "negate"
     },
     "school": "abj",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "CRB pg. 350",
     "sr": false,
     "target": {
-      "type": "",
       "value": "one creature or technological object, or a 20-ft.-radius burst"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

@@ -4,8 +4,8 @@
   "type": "feat",
   "img": "systems/sfrpg/icons/feats/deadly_aim.webp",
   "system": {
-    "type": "",
-    "ability": null,
+    "ability": "",
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "",
@@ -14,9 +14,10 @@
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -25,35 +26,39 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
+    "damageNotes": "",
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<p>Your can strike your enemies’ weak points and deal more damage.</p>\n<p><strong>Prerequisites</strong>: Base attack bonus +1.</p>\n<hr />\n<p><strong>Benefit</strong>: When you take the attack or full attack action with weapons (including a solarian’s solar manifestation, but not spells or other special abilities of any kind), you can take a –2 penalty to your attack rolls. If you do, those attacks deal additional damage equal to half your base attack bonus (minimum 1).</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "details": {
       "category": "feat",
-      "combat": true
+      "combat": true,
+      "specialAbilityType": ""
     },
     "duration": {
-      "units": "",
-      "value": null
+      "units": "instantaneous",
+      "value": ""
     },
     "formula": "",
+    "isActive": false,
     "modifiers": [
       {
         "_id": "aa55be0b-608b-405b-8ec2-96088e5cbba2",
         "name": "Deadly Aim (Combat)",
         "type": "untyped",
         "condition": "",
-        "container": {
-          "actorId": "OBr55AMenkfdhVpb",
-          "itemId": "KKLlKYgjnWs4ijRE"
-        },
+        "damage": null,
         "effectType": "all-attacks",
         "enabled": false,
+        "limitTo": null,
         "max": -2,
         "modifier": "-2",
         "modifierType": "formula",
@@ -67,12 +72,10 @@
         "name": "Deadly Aim (Combat)",
         "type": "untyped",
         "condition": "",
-        "container": {
-          "actorId": "OBr55AMenkfdhVpb",
-          "itemId": "KKLlKYgjnWs4ijRE"
-        },
+        "damage": null,
         "effectType": "all-damage",
         "enabled": false,
+        "limitTo": null,
         "max": 1,
         "modifier": "max(1, floor(@attributes.baseAttackBonus.value/2))",
         "modifierType": "formula",
@@ -82,30 +85,34 @@
         "valueAffected": ""
       }
     ],
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "",
-      "value": null
+      "units": ""
     },
     "recharge": {
       "charged": false,
-      "value": null
+      "value": ""
     },
     "requirements": "",
+    "rollNotes": "",
     "save": {
       "type": "",
-      "dc": null,
+      "dc": "",
       "descriptor": ""
     },
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "Core Rulebook",
     "target": {
-      "type": "",
       "value": null
     },
     "uses": {
-      "max": 0,
-      "per": null,
+      "max": "0",
+      "per": "",
       "value": 0
     }
   }

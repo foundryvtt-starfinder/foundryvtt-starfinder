@@ -1,4 +1,5 @@
 import { DiceSFRPG } from "../../../dice.js";
+import { SFRPGEffectType } from "../../../modifiers/types.js";
 import RollContext from "../../../rolls/rollcontext.js";
 
 export default function(engine) {
@@ -19,33 +20,37 @@ export default function(engine) {
 
                 let dcFormula = save.dc?.toString();
                 if (!dcFormula) {
-                    const ownerKeyAbilityId = actorData?.attributes.keyability  || classes[0]?.system.kas;
+                    const ownerKeyAbilityId = classes[0]?.system.kas ?? null;
                     const itemKeyAbilityId = data.ability;
                     const spellbookSpellAbility = actorData?.attributes.spellcasting;
                     const classSpellAbility = classes[0]?.system.spellAbility;
 
                     const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
-                    if (abilityKey) {
-                        if (itemData.type === "spell") {
-                            dcFormula = `10 + @item.level + @owner.abilities.${abilityKey}.mod`;
 
-                            // Get owner spell save dc modifiers and append to roll
-                            const allModifiers = actor?.getAllModifiers();
-                            if (allModifiers) {
-                                for (const modifier of allModifiers.filter(x => x.enabled && x.effectType === "spell-save-dc")) {
-                                    dcFormula += ` + ${modifier.modifier}[${modifier.name}]`;
-                                }
-                            }
-                        } else if (itemData.type === "feat") {
-                            dcFormula = `10 + floor(@owner.details.level.value / 2) + @owner.abilities.${abilityKey}.mod`;
-                        } else {
-                            dcFormula = `10 + floor(@item.level / 2) + @owner.abilities.${abilityKey}.mod`;
-                        }
-                    } else if (actor.type === "npc" || actor.type === "npc2") {
+                    if (actor.type === "npc" || actor.type === "npc2") {
                         if (itemData.type === "spell") {
                             dcFormula = `@owner.attributes.baseSpellDC.value + @item.level`;
                         } else {
                             dcFormula = `@owner.attributes.abilityDC.value`;
+                        }
+                    } else {
+                        if (itemData.type === "spell") {
+                            dcFormula = "10 + @item.level" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
+                        } else if (itemData.type === "feat") {
+                            dcFormula = "10 + floor(@owner.details.level.value / 2)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
+                        } else {
+                            dcFormula = "10 + floor(@item.level / 2)" + (abilityKey ? ` + @owner.abilities.${abilityKey}.mod` : "");
+                        }
+                    }
+                }
+
+                if (itemData.type === "spell") {
+                    // Get owner spell save dc modifiers and append to roll
+                    const dcModifiers = actor.getAllModifiers().filter(x => x.enabled && x.effectType === SFRPGEffectType.SPELL_SAVE_DC);
+                    const stackedModifiers = context.parameters.stackModifiers.process(dcModifiers, context, {actor: fact.owner.actor});
+                    for (const modifiers of Object.values(stackedModifiers)) {
+                        for (const modifier of modifiers) {
+                            dcFormula += ` + ${modifier.modifier}[${modifier.name}]`;
                         }
                     }
                 }
@@ -82,5 +87,5 @@ export default function(engine) {
         }
 
         return fact;
-    });
+    }, { required: ["stackModifiers"], closureParameters: ["stackModifiers"] } );
 }

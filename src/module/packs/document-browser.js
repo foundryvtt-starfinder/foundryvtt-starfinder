@@ -1,5 +1,6 @@
 /**
  * DocumentBrowserSFRPG forked from ItemBrowserPF2e by Felix Miller aka syl3r86
+ * @import { Collection } from "@common/utils/_module.mjs"
  */
 import { packLoader } from './pack-loader.js';
 
@@ -26,7 +27,7 @@ export class DocumentBrowserSFRPG extends Application {
                     label: "Settings",
                     class: "configure-sheet",
                     icon: "fas fa-cog",
-                    onclick: ev => this.openSettings()
+                    onclick: () => this.openSettings()
                 }
             ].concat(buttons);
         }
@@ -35,7 +36,7 @@ export class DocumentBrowserSFRPG extends Application {
 
     activateListeners(html) {
         this.resetFilters(html, !!this.filters);
-        html.on('click', '.clear-filters', ev => {
+        html.on('click', '.clear-filters', () => {
             this.resetFilters(html);
             this.filterItems(html.find('li'));
         });
@@ -77,8 +78,8 @@ export class DocumentBrowserSFRPG extends Application {
         });
 
         // toggle hints
-        html.on('mousedown', 'input[name=textFilter]', ev => {
-            if (event.which == 3) {
+        html.on('mousedown', 'input[name=textFilter]', () => {
+            if (event.which === 3) {
                 $(html.find('.hint')).toggle(100);
             }
         });
@@ -174,7 +175,7 @@ export class DocumentBrowserSFRPG extends Application {
                 filter.content.value = filterValue;
             }
 
-            if (filterValue != originalValue) {
+            if (filterValue !== originalValue) {
                 html.find(`input[name=${filterType}-value]`).val(filterValue);
             }
 
@@ -184,7 +185,7 @@ export class DocumentBrowserSFRPG extends Application {
         });
     }
 
-    _onDragStart(event, li) {
+    _onDragStart(event) {
         const itemUuid = $(event.currentTarget).attr('data-entry-uuid');
 
         const rawData = {
@@ -198,7 +199,7 @@ export class DocumentBrowserSFRPG extends Application {
     }
 
     async getData() {
-        if (this.items == undefined || this.forceReload == true) {
+        if (this.items === undefined || this.forceReload === true) {
             // spells will be stored locally to not require full loading each time the browser is opened
             this.items = await this.loadItems();
             this.forceReload = false;
@@ -211,9 +212,9 @@ export class DocumentBrowserSFRPG extends Application {
         }
 
         const data = {};
-        data.defaultSortMethod = this.getDefaultSortMethod();
         data.tags = this.getTags();
         data.items = this.items;
+        data.sortingMethod = this.getDefaultSortMethod();
         data.sortingMethods = this.sortingMethods;
         data.filters = this.filters;
         return data;
@@ -227,7 +228,6 @@ export class DocumentBrowserSFRPG extends Application {
         const sortingMethods = {
             name: {
                 name: game.i18n.format("SFRPG.Browsers.ItemBrowser.BrowserSortMethodName"),
-                selected: true,
                 method: this._sortByName
             }
         };
@@ -251,28 +251,36 @@ export class DocumentBrowserSFRPG extends Application {
         return {};
     }
 
-    allowedItem(item) {
+    allowedItem() {
         return true;
     }
 
     async loadItems() {
         console.log('Starfinder | Compendium Browser | Started loading items');
+        /** @type {Collection<string, {uuid: string, img: string, name: string, system: object, type: string}>} */
         const items = new Map();
+        const user = game.user;
+        const userPermission = user.isGM ? "GAMEMASTER" : (user.isTrusted ? "TRUSTED" : "PLAYER");
 
         for await (const {pack, content} of packLoader.loadPacks(this.entityType, this._loadedPacks)) {
-            console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
+            const packPermission = pack.ownership;
+            if (!packPermission.TRUSTED) {
+                packPermission.TRUSTED = packPermission["PLAYER"];
+            }
+            if (["OWNER", "OBSERVER", "LIMITED"].includes(packPermission[userPermission]) || user.isGM) {
+                console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
 
-            for (const item of content) {
-                const itemData = {
-                    uuid: `Compendium.${pack.collection}.${item._id}`,
-                    img: item.img,
-                    name: item.name,
-                    system: item.system,
-                    type: item.type
-                };
+                for (const item of content) {
+                    const itemData = {
+                        uuid: `Compendium.${pack.collection}.${item._id}`,
+                        img: item.img,
+                        name: item.name,
+                        system: item.system,
+                        type: item.type
+                    };
 
-                if (this.allowedItem(item)) {
-                    items.set(itemData.uuid, itemData);
+                    if (this.allowedItem(item)) items.set(itemData.uuid, itemData);
+
                 }
             }
         }
@@ -303,12 +311,12 @@ export class DocumentBrowserSFRPG extends Application {
     }
 
     getFilterResult(element) {
-        if (this.sorters.text != '') {
+        if (this.sorters.text !== '') {
             const strings = this.sorters.text.split(',');
 
             for (const string of strings) {
-                if (string.indexOf(':') == -1) {
-                    if ($(element).find('.item-name a')[0].innerHTML.toLowerCase().indexOf(string.toLowerCase().trim()) == -1) {
+                if (string.indexOf(':') === -1) {
+                    if ($(element).find('.item-name a')[0].innerHTML.toLowerCase().indexOf(string.toLowerCase().trim()) === -1) {
                         return false;
                     }
                 } else {
@@ -318,19 +326,19 @@ export class DocumentBrowserSFRPG extends Application {
                     if ($(element).find(`input[name=${targetStat}]`)
                         .val()
                         .toLowerCase()
-                        .indexOf(targetValue) == -1) {
+                        .indexOf(targetValue) === -1) {
                         return false;
                     }
                 }
             }
         }
 
-        if (this.sorters.castingtime != 'null') {
+        if (this.sorters.castingtime !== 'null') {
             const castingtime = $(element).find('input[name=time]')
                 .val()
                 .toLowerCase();
 
-            if (castingtime != this.sorters.castingtime) {
+            if (castingtime !== this.sorters.castingtime) {
                 return false;
             }
         }
@@ -360,7 +368,7 @@ export class DocumentBrowserSFRPG extends Application {
         const newObj = {};
 
         for (const key in obj) {
-            if (obj[key] == true) {
+            if (obj[key] === true) {
                 newObj[key] = true;
             }
         }
@@ -458,7 +466,7 @@ export class DocumentBrowserSFRPG extends Application {
                 return resolve(document.querySelector(selector));
             }
 
-            const observer = new MutationObserver(mutations => {
+            const observer = new MutationObserver(() => {
                 if (document.querySelector(selector)) {
                     resolve(document.querySelector(selector));
                     observer.disconnect();
@@ -490,10 +498,11 @@ export class DocumentBrowserSFRPG extends Application {
 
     /* -------------------------------------------- */
     getConfigurationProperties() {
-        return {
+        /** @type {const} */
+        return ({
             label: "Compendium Browser",
             settings: "itemBrowser"
-        };
+        });
     }
 
     initializeSettings(defaultAllowedCompendiums = null) {
@@ -512,7 +521,7 @@ export class DocumentBrowserSFRPG extends Application {
         }); // load settings from container
 
         let settings = game.settings.get('sfrpg', configuration.settings);
-        if (settings == '') {
+        if (settings === '') {
             // if settings are empty create the settings data
             console.log(`Starfinder | [READY] ${configuration.label} | Creating settings`);
             settings = {};
@@ -537,7 +546,7 @@ export class DocumentBrowserSFRPG extends Application {
                 if (compendium.documentName === entityType) {
                     settings[compendium.collection] = {
                         // add entry for each item compendium, that is turned on if no settings for it exist already
-                        load: loadedSettings[compendium.collection] == undefined ? true : loadedSettings[compendium.collection].load,
+                        load: loadedSettings[compendium.collection] === undefined ? true : loadedSettings[compendium.collection].load,
                         name: compendium.metadata.label
                     };
                 }
@@ -567,7 +576,7 @@ export class DocumentBrowserSFRPG extends Application {
                 save: {
                     icon: '<i class="fas fa-check"></i>',
                     label: 'Save',
-                    callback: html => {
+                    callback: () => {
                     }
                 }
             },

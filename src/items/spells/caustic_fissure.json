@@ -1,0 +1,119 @@
+{
+  "_id": "qA6jttVoTCCnVTam",
+  "name": "Caustic Fissure",
+  "type": "spell",
+  "img": "systems/sfrpg/icons/spells/ectoplastmic_eruption.webp",
+  "system": {
+    "ability": "",
+    "actionTarget": "",
+    "actionType": "save",
+    "activation": {
+      "type": "action",
+      "condition": "",
+      "cost": 1
+    },
+    "allowedClasses": {
+      "myst": false,
+      "precog": false,
+      "tech": false,
+      "wysh": true
+    },
+    "area": {
+      "effect": "",
+      "shapable": false,
+      "shape": "line",
+      "units": "ft",
+      "value": "lookupRange(@item.level, 10, 2, 20, 3, 30, 4, 40, 5, 60, 6, 80)"
+    },
+    "attackBonus": 0,
+    "chatFlavor": "",
+    "concentration": false,
+    "critical": {
+      "effect": "",
+      "parts": []
+    },
+    "damage": {
+      "parts": [
+        {
+          "name": "Caustic Fissure",
+          "formula": "lookupRange(@item.level, 2, 2, 4, 3, 6, 4, 6, 5, 8, 6, 10)d(ternary(gte(@item.level, 6), 6, 4))",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": true,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": false,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ],
+      "primaryGroup": null
+    },
+    "damageNotes": "",
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>You tear a thin fissure in reality, releasing a blaze of caustic energy. The fissure must be oriented on a horizontal surface that can fit its length, which depends on the level of the spell; the fissure runs through the center of the affected squares. The height of the blaze of caustic energy released from the fissure and the damage it deals to creatures who pass through it or end their turn in one of the fissure’s squares (no save) also depend on the level of the spell.</p>\n<p>If you evoke the fissure so that it appears where creatures are, each creature takes damage as if passing through the blaze and must immediately attempt a Reflex saving throw. On a failure, the creature falls @UUID[Compendium.sfrpg.conditions.Item.XeRGqHVtcZ7vsgJ0]{prone}</p>\n<p><strong>1st</strong>:When you cast caustic fissure as a 1st-level spell, the fissure is 10 feet long. The blaze of caustic energy rises to a height of 10 feet above the fissure and deals 2d4 acid damage.</p>\n<p><strong>2nd</strong>:When you cast caustic fissure as a 2nd-level spell, the fissure is 20 feet long. The blaze of caustic energy rises to a height of 10 feet above the fissure and deals 4d4 acid damage.</p>\n<p><strong>3rd</strong>:When you cast caustic fissure as a 3rd-level spell, the fissure is 30 feet long. The blaze of caustic energy rises to a height of 20 feet above the fissure and deals 6d4 acid damage.</p>\n<p><strong>4th</strong>:When you cast caustic fissure as a 4th-level spell, the fissure is 40 feet long. The blaze of caustic energy rises to a height of 25 feet above the fissure and deals 6d6 acid damage.</p>\n<p><strong>5th</strong>:When you cast caustic fissure as a 5th-level spell, the fissure is 60 feet long. The blaze of caustic energy rises to a height of 30 feet above the fissure and deals 8d6 acid damage.</p>\n<p><strong>6th</strong>:When you cast caustic fissure as a 6th-level spell,the fissure is 80 feet long. The blaze of caustic energy rises to a height of 40 feet above the fissure and deals 10d6 acid damage.</p>"
+    },
+    "descriptors": {
+      "acid": true
+    },
+    "dismissible": false,
+    "duration": {
+      "units": "round",
+      "value": "@details.cl.value"
+    },
+    "formula": "",
+    "isActive": false,
+    "isVariableLevel": true,
+    "level": 1,
+    "materials": {
+      "consumed": false,
+      "cost": 0,
+      "supply": 0,
+      "value": ""
+    },
+    "modifiers": [],
+    "preparation": {
+      "mode": "",
+      "prepared": false
+    },
+    "properties": {},
+    "range": {
+      "units": "ft",
+      "value": "100 + @details.cl.value * 10"
+    },
+    "rollNotes": "",
+    "save": {
+      "type": "reflex",
+      "dc": "",
+      "descriptor": "partial"
+    },
+    "school": "evo",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
+    "source": "AP #48 pg. 51",
+    "sr": false,
+    "target": {
+      "value": ""
+    },
+    "uses": {
+      "max": "",
+      "per": "",
+      "value": null
+    }
+  }
+}

@@ -4,17 +4,13 @@
   "type": "spell",
   "img": "icons/magic/fire/explosion-fireball-medium-purple-orange.webp",
   "system": {
-    "type": "",
     "ability": "str",
-    "abilityMods": {
-      "parts": []
-    },
-    "actionTarget": "",
+    "actionTarget": "ac5",
     "actionType": "rsak",
     "activation": {
       "type": "action",
       "condition": "",
-      "cost": 0
+      "cost": 1
     },
     "allowedClasses": {
       "myst": false,
@@ -29,7 +25,7 @@
       "units": "ft",
       "value": "5"
     },
-    "attackBonus": 0,
+    "attackBonus": null,
     "chatFlavor": "",
     "concentration": false,
     "critical": {
@@ -42,6 +38,7 @@
           "name": "",
           "formula": "1d4",
           "group": null,
+          "isPrimarySection": false,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -49,12 +46,15 @@
             "electricity": false,
             "fire": false,
             "healing": false,
+            "nonlethal": false,
             "piercing": true,
+            "radiation": false,
             "slashing": false,
             "sonic": false
           }
         }
-      ]
+      ],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -65,42 +65,7 @@
       "value": "<p>You rapidly conjure and assemble the components to make a grenade, which you throw as part of the action used to cast this spell, requiring an attack roll to hit the intersection as normal. The grenade has a 20-foot range increment, deals 1d4 piercing damage, and has the @UUID[Compendium.sfrpg.rules.JournalEntry.Nrf6oy9pJwcEmryP.JournalEntryPage.nXkFsyxk7Vybdn7G#explode]{explode} (5 feet) property. Creatures in the affected area can attempt a Reflex save to halve the damage.</p>"
     },
     "descriptors": {
-      "acid": false,
-      "air": false,
-      "calling": false,
-      "chaotic": false,
-      "charm": false,
-      "cold": false,
-      "compulsion": false,
-      "creation": true,
-      "curse": false,
-      "darkness": false,
-      "death": false,
-      "disease": false,
-      "earth": false,
-      "electricity": false,
-      "emotion": false,
-      "evil": false,
-      "fear": false,
-      "fire": false,
-      "force": false,
-      "good": false,
-      "healing": false,
-      "language-dependent": false,
-      "lawful": false,
-      "light": false,
-      "mind-affecting": false,
-      "pain": false,
-      "poison": false,
-      "polymorph": false,
-      "radiation": false,
-      "scrying": false,
-      "sense-dependent": false,
-      "shadow": false,
-      "sonic": false,
-      "summoning": false,
-      "teleportation": false,
-      "water": false
+      "creation": true
     },
     "dismissible": false,
     "duration": {
@@ -108,7 +73,7 @@
       "value": ""
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 0,
     "materials": {
@@ -122,27 +87,27 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
       "units": "ft",
       "value": "20"
     },
     "rollNotes": "",
     "save": {
       "type": "reflex",
-      "dc": "",
+      "dc": "10+floor(@item.level/2)+@abilities.dex.mod",
       "descriptor": "half"
     },
     "school": "con",
     "skillCheck": {
       "type": "",
-      "dc": ""
+      "dc": "",
+      "variable": false
     },
+    "slug": "",
     "source": "PoC pg. 83",
     "sr": false,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {

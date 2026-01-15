@@ -1,8 +1,21 @@
+import { DiceSFRPG } from "../../dice.js";
+import RollContext from "../../rolls/rollcontext.js";
+
+/**
+ * The data necessary to track how long an activation has been ongoing.
+ * @typedef {object} ActivationEvent
+ * @property {?number} startTime - world time at activation, `null` for -Infinity
+ * @property {?number} endTime - world time at expected expiration, `null` for Infinity
+ * @property {string} endsOn - from {@linkcode CONFIG.SFRPG.effectEndTypes}
+ * @property {string} status - A status string for `SFRPGTimedEffect` to set
+ * @property {?number} deactivatedAt - world time at deactivation
+ */
+
 export const ItemActivationMixin = (superclass) => class extends superclass {
 
     hasUses() {
         const itemData = this.system;
-        return (itemData.uses?.max || itemData.uses?.total) && (itemData.uses?.value !== null && itemData.uses?.value !== undefined);
+        return (Number(itemData.uses?.max) || itemData.uses?.total) && (itemData.uses?.value !== null && itemData.uses?.value !== undefined);
     }
 
     getRemainingUses() {
@@ -29,10 +42,20 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
     }
 
     isActive() {
-        const itemData = this.system;
-        return !!(itemData.isActive);
+        return !!this.system.isActive;
     }
 
+    get timeRemainingStr() {
+        return this.system.activationEvent?.status
+            ?? this.timedEffect?.activeDuration?.remaining?.string
+            ?? game.i18n.localize("SFRPG.ActorSheet.Inventory.Item.Deactivate");
+    }
+
+    /**
+     * Activate or deactivate this item.
+     * @param {!boolean} active True to activate, false to deactivate.
+     * @returns {Promise<Document>} The promise for the async update.
+     */
     setActive(active) {
         // Only true and false are accepted.
         if (active !== true && active !== false) {
@@ -44,6 +67,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
             return;
         }
 
+        const duration = this.system.duration;
         const updateData = {};
 
         const remainingUses = this.getRemainingUses();
@@ -57,12 +81,59 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
             updateData['system.uses.value'] = Math.max(0, remainingUses - 1);
         }
 
-        updateData['system.isActive'] = active;
+        const isActive = active && (duration.units !== "instantaneous");
+        updateData['system.isActive'] = isActive;
 
-        const updatePromise = this.update(updateData);
-        const rollMode = game.settings.get("core", "rollMode");
+        if (isActive) {
+            const worldTime = game.time.worldTime;
+            const activationTurn = game.combat?.combatant?.actor?.uuid || "parent";
+            let expiryTurn = "parent";
+            let endsOn = duration.endsOn ?? "onTurnStart";
 
-        if (active || this.system.duration.value || this.system.uses.max > 0) {
+            let endTime;
+            if (Object.hasOwn(CONFIG.SFRPG.effectDurationFrom, duration.units)) {
+                const rollContext = RollContext.createItemRollContext(this, this.actor);
+                const totalUnits = DiceSFRPG.resolveFormulaWithoutDice(String(duration.value || 0), rollContext).total;
+                endTime = worldTime + (totalUnits * CONFIG.SFRPG.effectDurationFrom[duration.units]);
+                if (duration.units === "turn") {
+                    endsOn = "onTurnEnd";
+                    expiryTurn = game.combat?.combatant?.actor?.uuid || "parent";
+                } else if (game.combat?.combatant) {
+                    const actorIndex = game.combat.turns.findIndex(combatant => combatant.actor.uuid === this.actor.uuid);
+                    const currentIndex = game.combat.turns.findIndex(combatant => combatant.id === game.combat.combatant.id);
+                    if (actorIndex < currentIndex) {
+                        endTime += CONFIG.SFRPG.effectDurationFrom.round;
+                    }
+                }
+            } else {
+                endTime = Infinity;
+            }
+
+            updateData['system.activationEvent'] = {
+                startTime: worldTime,
+                endTime: endTime,
+                endsOn: endsOn,
+                status: null,
+                deactivatedAt: null,
+                activationTurn: activationTurn,
+                expiryTurn: expiryTurn
+            };
+        } else if (this.system.activationEvent) {
+            updateData['system.activationEvent'] = {
+                startTime: -1,
+                endTime: -1,
+                endsOn: duration.endsOn ?? "onTurnStart",
+                status: null,
+                deactivatedAt: game.time.worldTime,
+                activationTurn: "parent",
+                expiryTurn: "parent"
+            };
+        }
+
+        const updatePromise = this.update(updateData)
+            .then(() => this._afterSetActive(active));
+
+        if (active || duration.value || this.system.uses.max > 0) {
             updatePromise.then(() => {
                 // Render the chat card template
                 const templateData = active
@@ -90,14 +161,13 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 }
 
                 const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-                const htmlPromise = renderTemplate(template, templateData);
+                const htmlPromise = foundry.applications.handlebars.renderTemplate(template, templateData);
                 htmlPromise.then((html) => {
                     // Create the chat message
                     const chatData = {
-                        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+                        type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                         content: html,
-                        rollMode: rollMode,
                         flags: {
                             sfrpg: {
                                 item: this.uuid,
@@ -107,18 +177,8 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                     };
 
                     if (!active) chatData.action = "SFRPG.ChatCard.ItemActivation.Deactivates";
-
-                    // Toggle default roll mode
-                    if (["gmroll", "blindroll"].includes(rollMode)) {
-                        chatData["whisper"] = ChatMessage.getWhisperRecipients("GM");
-                    }
-                    if (rollMode === "blindroll") {
-                        chatData["blind"] = true;
-                    }
-                    if (rollMode === "selfroll") {
-                        chatData["whisper"] = ChatMessage.getWhisperRecipients(game.user.name);
-                    }
-
+                    const rollMode = game.settings.get("core", "rollMode");
+                    ChatMessage.applyRollMode(chatData, rollMode);
                     ChatMessage.create(chatData, { displaySheet: false });
                 });
 
@@ -127,5 +187,12 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
         }
 
         return updatePromise;
+    }
+
+    async _afterSetActive(active) {
+        const macro = await fromUuid(active ? this.system.activation.macroAfterActivate : this.system.activation.macroAfterDeactivate);
+        if (macro?.canExecute) {
+            await this.executeMacroWithContext(macro);
+        }
     }
 };

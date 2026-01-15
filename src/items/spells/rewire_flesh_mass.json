@@ -4,11 +4,7 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/rewire_flesh_mass.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
     "actionTarget": "",
     "actionType": "save",
     "activation": {
@@ -18,14 +14,16 @@
     },
     "allowedClasses": {
       "myst": false,
+      "precog": false,
       "tech": true,
       "wysh": false
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -35,7 +33,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -43,16 +42,16 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>This functions as rewire flesh, except as stated above.</p>\n<h2>@UUID[Compendium.sfrpg.spells.9xLt1qSUCcTHoN5f]{Rewire Flesh}</h2>\n<p>Like rewriting the code that makes up a computer program, you manipulate the target’s DNA to painfully rewire that target’s biological functions to mimic the cold and rigid processes of a robot. The target must succeed at a Will saving throw, or all of its movement speeds are halved and it takes 3d6 slashing damage per round on its turn as its internal organs shift and transform to become more like the inner components of a robot. Each round, the target can attempt a Fortitude saving throw to halve the damage this spell causes.</p>\n<p>While this spell is in effect, the target’s body becomes visibly more robotic; its voice is tinny and halting, its movements are jerky, and its face is unmoving and emotionless. The target has the @UUID[Compendium.sfrpg.conditions.MZ8OoH1GE9qDMyCD]{Flat-footed} condition, and it takes a –2 penalty to all Sense Motive checks as well as to all Charisma-based and Dexterity-based skill and ability checks.</p>"
+      "value": "<p>This functions as rewire flesh, except as stated above.</p>\n<h2>@UUID[Compendium.sfrpg.spells.Item.9xLt1qSUCcTHoN5f]{Rewire Flesh}</h2>\n<p>Like rewriting the code that makes up a computer program, you manipulate the target’s DNA to painfully rewire that target’s biological functions to mimic the cold and rigid processes of a robot. The target must succeed at a Will saving throw, or all of its movement speeds are halved and it takes 3d6 slashing damage per round on its turn as its internal organs shift and transform to become more like the inner components of a robot. Each round, the target can attempt a Fortitude saving throw to halve the damage this spell causes.</p>\n<p>While this spell is in effect, the target’s body becomes visibly more robotic; its voice is tinny and halting, its movements are jerky, and its face is unmoving and emotionless. The target has the @UUID[Compendium.sfrpg.conditions.Item.MZ8OoH1GE9qDMyCD]{Flat-footed} condition, and it takes a –2 penalty to all Sense Motive checks as well as to all Charisma-based and Dexterity-based skill and ability checks.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": true,
     "duration": {
-      "units": "",
+      "units": "instantaneous",
       "value": "1 round/level (D); see text"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 6,
     "materials": {
@@ -66,6 +65,7 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
       "units": "medium"
     },
@@ -76,14 +76,19 @@
       "descriptor": "negate"
     },
     "school": "trs",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "CRB pg. 376",
     "sr": false,
     "target": {
-      "type": "",
       "value": "up to one living creature/level, no two of which can be more than 30 ft. apart"
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

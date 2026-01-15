@@ -4,11 +4,8 @@
   "type": "spell",
   "img": "systems/sfrpg/icons/spells/enduring_worlds.webp",
   "system": {
-    "type": "",
     "ability": "",
-    "abilityMods": {
-      "parts": []
-    },
+    "actionTarget": "",
     "actionType": "",
     "activation": {
       "type": "special",
@@ -17,14 +14,16 @@
     },
     "allowedClasses": {
       "myst": true,
+      "precog": false,
       "tech": false,
       "wysh": true
     },
     "area": {
       "effect": "",
+      "shapable": false,
       "shape": "",
       "units": "none",
-      "value": null
+      "value": ""
     },
     "attackBonus": 0,
     "chatFlavor": "",
@@ -34,7 +33,8 @@
       "parts": []
     },
     "damage": {
-      "parts": []
+      "parts": [],
+      "primaryGroup": null
     },
     "damageNotes": "",
     "description": {
@@ -44,14 +44,14 @@
       "unidentified": "",
       "value": "<p>Your body briefly shifts into an amorphous form, enabling you to circumvent certain attacks and squeeze through tight spaces. You do not take double damage from critical hits, but critical hit effects apply against you normally. You gain a +4 circumstance bonus to your KAC against the grapple and reposition combat maneuvers. You can move through an area as small as one-quarter of your space without squeezing, or one-eighth your space when squeezing.</p>\n<p>To benefit from this spell, you must have the shapechanger subtype or be benefiting from a polymorph effect. You can cast this spell as a reaction when you are attacked by a grapple or reposition maneuver or hit by a critical hit, but when you do, you can’t take a standard action on your next turn.</p>"
     },
-    "descriptors": [],
+    "descriptors": {},
     "dismissible": true,
     "duration": {
       "units": "round",
       "value": "@details.cl.value"
     },
     "formula": "",
-    "isActive": null,
+    "isActive": false,
     "isVariableLevel": false,
     "level": 2,
     "materials": {
@@ -65,11 +65,9 @@
       "mode": "",
       "prepared": false
     },
+    "properties": {},
     "range": {
-      "additional": "",
-      "per": "",
-      "units": "personal",
-      "value": null
+      "units": "personal"
     },
     "rollNotes": "",
     "save": {
@@ -78,14 +76,19 @@
       "descriptor": "negate"
     },
     "school": "trs",
+    "skillCheck": {
+      "type": "",
+      "dc": "",
+      "variable": false
+    },
+    "slug": "",
     "source": "AP #27 pg. 45",
     "sr": false,
     "target": {
-      "type": "",
       "value": ""
     },
     "uses": {
-      "max": null,
+      "max": "",
       "per": "",
       "value": null
     }

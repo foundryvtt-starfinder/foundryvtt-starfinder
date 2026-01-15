@@ -10,7 +10,8 @@ export const SFRPGModifierTypes = Object.freeze({
     MORALE: "morale",
     RESISTANCE: "resistance",
     RACIAL: "racial",
-    UNTYPED: "untyped"
+    UNTYPED: "untyped",
+    WEAPON_SPECIALIZATION: "weapon-specialization"
 });
 
 export const SFRPGEffectType = Object.freeze({
@@ -28,6 +29,10 @@ export const SFRPGEffectType = Object.freeze({
     ALL_DAMAGE: "all-damage",
     WEAPON_PROPERTY_DAMAGE: "weapon-property-damage",
     WEAPON_CATEGORY_DAMAGE: "weapon-category-damage",
+    WEAPON_AMMO_USAGE_MULTIPLIER: "weapon-ammo-usage-multiplier",
+    ALL_AMMO_USAGE_MULTIPLIER: "all-ammo-usage-multiplier",
+    WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER: "weapon-property-ammo-usage-multiplier",
+    WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER: "weapon-category-ammo-usage-multiplier",
     BASE_ATTACK_BONUS: "base-attack-bonus",
     AC: "ac",
     CMD: "cmd",
@@ -59,7 +64,19 @@ export const SFRPGEffectType = Object.freeze({
     BULK: "bulk",
     BULK_CALCULATION: "bulk-calculation",
     ACTOR_RESOURCE: "actor-resource",
-    ENERGY_RESISTANCE: "energy-resistance"
+    ENERGY_RESISTANCE: "energy-resistance",
+    STARSHIP_BUILD_POINTS: "starship-build-points",
+    STARSHIP_MULTIPLY_BUILD_POINTS: "starship-multiply-build-points",
+    STARSHIP_HULL_POINTS: "starship-hull-points",
+    STARSHIP_HULL_POINTS_INCREMENT: "starship-hull-points-increment",
+    STARSHIP_FORWARD_AC: "starship-forward-ac",
+    STARSHIP_PORT_AC: "starship-port-ac",
+    STARSHIP_STARBOARD_AC: "starship-starboard-ac",
+    STARSHIP_AFT_AC: "starship-aft-ac",
+    STARSHIP_ALL_AC: "starship-all-ac",
+    STARSHIP_SPEED: "starship-speed",
+    STARSHIP_TURN_DISTANCE: "starship-turn-distance",
+    STARSHIP_PILOTING_SKILL: "starship-piloting-skill"
 });
 
 export const SFRPGModifierType = Object.freeze({

@@ -8,7 +8,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
     }
 
     static get defaultOptions() {
-        return mergeObject(super.defaultOptions, {
+        return foundry.utils.mergeObject(super.defaultOptions, {
             classes: ["sfrpg", "sheet", "actor", "hazard"],
             width: 600
             // height: 685
@@ -24,7 +24,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
         const data = await super.getData();
 
         // Enrich text editors
-        data.enrichedDescription = await TextEditor.enrichHTML(this.actor.system.details.description.value, {
+        data.enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.description.value, {
             async: true,
             rollData: this.actor.getRollData() ?? {},
             secrets: this.actor.isOwner
@@ -57,11 +57,9 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
     /**
      * Organize and classify items for hazard sheets.
      * Hazards don't need items, but this function is required because base.js calls it.
-     *
-     * @param {Object} data Data for the sheet
      */
-    _prepareItems(data) {
-
+    _prepareItems() {
+        // pass
     }
 
     async _onFortSaveClicked(event) {
@@ -99,7 +97,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
             const rollContext = RollContext.createActorRollContext(this.actor);
 
             const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Damage", {name: this.actor.name});
-            return DiceSFRPG.damageRoll({
+            await DiceSFRPG.damageRoll({
                 event: event,
                 rollContext: rollContext,
                 parts: [{ formula: this.actor.system.attributes.damage.value }],

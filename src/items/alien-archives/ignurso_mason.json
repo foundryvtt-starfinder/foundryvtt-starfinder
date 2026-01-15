@@ -2,15 +2,15 @@
   "_id": "2cU2k7Kz2Tjn6qap",
   "name": "Ignurso Mason",
   "type": "npc2",
-  "img": "icons/svg/mystery-man.svg",
+  "folder": "oDeSIpQmKhLBZHHW",
+  "img": "systems/sfrpg/icons/default/alien-stare.svg",
   "items": [
     {
       "_id": "KV0q55kql03uiSfz",
       "name": "Bite",
       "type": "weapon",
-      "img": "icons/svg/item-bag.svg",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -22,9 +22,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": "0"
         },
         "attackBonus": 24,
         "attributes": {
@@ -45,7 +46,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -54,7 +54,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -76,13 +76,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d6+19",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -92,16 +105,17 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -110,22 +124,25 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": "",
+          "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -133,8 +150,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -145,13 +162,9 @@
       "_id": "tm70taygg4y97SVQ",
       "name": "Claw (plus Grab)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -162,9 +175,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": "0"
         },
         "attackBonus": 24,
         "attributes": {
@@ -185,7 +199,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -194,7 +207,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -216,13 +229,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d6+19",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -232,114 +258,27 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "rollNotes": "",
         "save": {
@@ -347,11 +286,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -359,8 +303,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -371,9 +315,8 @@
       "_id": "wG6mo0TUliTuoxvA",
       "name": "[MultiATK] Bite",
       "type": "weapon",
-      "img": "icons/svg/item-bag.svg",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
         "actionTarget": "kac",
         "actionType": "mwak",
@@ -385,9 +328,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": "0"
         },
         "attackBonus": 15,
         "attributes": {
@@ -408,7 +352,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -417,7 +360,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -439,13 +382,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d6+19",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "piercing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": true,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -455,16 +411,17 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
@@ -473,22 +430,25 @@
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "rollNotes": "",
         "save": {
           "type": "",
-          "dc": null,
-          "descriptor": ""
+          "dc": "",
+          "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -496,8 +456,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -508,13 +468,9 @@
       "_id": "h0shRvlR2fJg4a5R",
       "name": "[MultiATK] 2 Claws (plus Grab)",
       "type": "weapon",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/bolter-gun.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "kac",
         "actionType": "mwak",
         "activation": {
@@ -525,9 +481,10 @@
         "ammunitionType": "",
         "area": {
           "effect": "",
+          "shapable": false,
           "shape": "",
-          "units": "",
-          "value": 0
+          "units": "ft",
+          "value": "0"
         },
         "attackBonus": 18,
         "attributes": {
@@ -548,7 +505,6 @@
           "size": "medium",
           "sturdy": true
         },
-        "attuned": false,
         "bulk": "L",
         "capacity": {
           "max": 0,
@@ -557,7 +513,7 @@
         "chatFlavor": "",
         "container": {
           "contents": [],
-          "includeContentsInWealthCalculation": 1,
+          "includeContentsInWealthCalculation": true,
           "isOpen": true,
           "storage": [
             {
@@ -579,13 +535,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "4d6+19",
-              "operator": "",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
-                "slashing": true
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
+                "electricity": false,
+                "fire": false,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": true,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -595,114 +564,27 @@
           "unidentified": "",
           "value": ""
         },
-        "descriptors": [],
         "duration": {
-          "units": "",
-          "value": null
+          "units": "instantaneous",
+          "value": ""
         },
         "equippable": false,
         "equipped": true,
+        "equippedBulkMultiplier": 1,
         "formula": "",
         "identified": true,
-        "isActive": null,
+        "isActive": false,
+        "isEquipment": false,
         "level": 1,
         "modifiers": [],
         "price": 0,
         "proficient": true,
-        "properties": {
-          "aeon": false,
-          "amm": false,
-          "analog": false,
-          "antibiological": false,
-          "archaic": false,
-          "aurora": false,
-          "automatic": false,
-          "blast": false,
-          "block": false,
-          "boost": false,
-          "breach": false,
-          "breakdown": false,
-          "bright": false,
-          "cluster": false,
-          "conceal": false,
-          "deconstruct": false,
-          "deflect": false,
-          "disarm": false,
-          "double": false,
-          "drainCharge": false,
-          "echo": false,
-          "entangle": false,
-          "explode": false,
-          "extinguish": false,
-          "feint": false,
-          "fiery": false,
-          "firstArc": false,
-          "flexibleLine": false,
-          "force": false,
-          "freeHands": false,
-          "fueled": false,
-          "grapple": false,
-          "gravitation": false,
-          "guided": false,
-          "harrying": false,
-          "holyWater": false,
-          "hybrid": false,
-          "ignite": false,
-          "indirect": false,
-          "injection": false,
-          "integrated": false,
-          "line": false,
-          "living": false,
-          "lockdown": false,
-          "mind-affecting": false,
-          "mine": false,
-          "mire": false,
-          "modal": false,
-          "necrotic": false,
-          "nonlethal": false,
-          "one": false,
-          "operative": false,
-          "penetrating": false,
-          "polarize": false,
-          "polymorphic": false,
-          "powered": false,
-          "professional": false,
-          "punchGun": false,
-          "qreload": false,
-          "radioactive": false,
-          "reach": false,
-          "recall": false,
-          "regrowth": false,
-          "relic": false,
-          "reposition": false,
-          "shape": false,
-          "shells": false,
-          "shield": false,
-          "sniper": false,
-          "stun": false,
-          "subtle": false,
-          "sunder": false,
-          "swarm": false,
-          "tail": false,
-          "teleportive": false,
-          "thought": false,
-          "throttle": false,
-          "thrown": false,
-          "trip": false,
-          "two": false,
-          "unbalancing": false,
-          "underwater": false,
-          "unwieldy": false,
-          "variantBoost": false,
-          "wideLine": false
-        },
+        "properties": {},
         "quantity": 1,
         "quantityPerPack": 1,
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "",
-          "value": null
+          "units": "none",
+          "value": ""
         },
         "rollNotes": "",
         "save": {
@@ -710,11 +592,16 @@
           "dc": "",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "special": "",
         "specialMaterials": {},
         "target": {
-          "type": "",
           "value": null
         },
         "usage": {
@@ -722,8 +609,8 @@
           "value": 0
         },
         "uses": {
-          "max": 0,
-          "per": null,
+          "max": "0",
+          "per": "",
           "value": 0
         },
         "weaponCategory": "uncategorized",
@@ -734,13 +621,9 @@
       "_id": "YpMAODrr5K08qzVw",
       "name": "Vent (Su)",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -749,10 +632,11 @@
           "cost": 1
         },
         "area": {
-          "effect": "",
+          "effect": "spread",
+          "shapable": false,
           "shape": "sphere",
           "units": "ft",
-          "value": 20
+          "value": "20"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -761,7 +645,8 @@
           "parts": []
         },
         "damage": {
-          "parts": []
+          "parts": [],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -769,25 +654,28 @@
           "gmnotes": "",
           "short": "",
           "unidentified": "",
-          "value": "<p>As a move action, or in place of making a bite attack when using multiattack, an ignurso can forcefully exhale a 20-foot-radius cloud of choking smoke centered on itself. Non-ignursos in or entering the area are sickened for 1 round (Fortitude DC 18 negates), and the cloud otherwise functions as fog cloud with a duration of 1d6 rounds.</p>"
+          "value": "<p>As a move action, or in place of making a bite attack when using multiattack, an ignurso can forcefully exhale a 20-foot-radius cloud of choking smoke centered on itself. Non-ignursos in or entering the area are @UUID[Compendium.sfrpg.conditions.Item.ZacF0l6IwqBwToTJ]{Sickened} for 1 round (Fortitude DC 18 negates), and the cloud otherwise functions as fog cloud with a duration of [[/r 1d6]] rounds.</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": "su"
+        },
         "duration": {
-          "units": "",
+          "units": "text",
           "value": "[[/r 1d6]] rounds"
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "personal",
-          "value": null
+          "units": "personal"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -796,13 +684,18 @@
           "dc": "18",
           "descriptor": "negate"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -812,13 +705,9 @@
       "_id": "JxBSobHz4LkSYaVf",
       "name": "Breath Weapon",
       "type": "feat",
-      "img": "icons/svg/mystery-man.svg",
+      "img": "systems/sfrpg/icons/default/achievement.svg",
       "system": {
-        "type": "",
         "ability": "",
-        "abilityMods": {
-          "parts": []
-        },
         "actionTarget": "",
         "actionType": "save",
         "activation": {
@@ -828,9 +717,10 @@
         },
         "area": {
           "effect": "burst",
+          "shapable": false,
           "shape": "cone",
           "units": "ft",
-          "value": 30
+          "value": "30"
         },
         "attackBonus": 0,
         "chatFlavor": "",
@@ -841,14 +731,26 @@
         "damage": {
           "parts": [
             {
+              "name": "",
               "formula": "12d6",
-              "operator": "and",
+              "group": null,
+              "isPrimarySection": true,
               "types": {
+                "acid": false,
+                "bludgeoning": false,
+                "cold": false,
                 "electricity": true,
-                "fire": true
+                "fire": true,
+                "healing": false,
+                "nonlethal": false,
+                "piercing": false,
+                "radiation": false,
+                "slashing": false,
+                "sonic": false
               }
             }
-          ]
+          ],
+          "primaryGroup": null
         },
         "damageNotes": "",
         "description": {
@@ -858,23 +760,26 @@
           "unidentified": "",
           "value": "<p>30-ft. cone, 12d6 E&amp;F, DC 13 Reflex, usable every 1d4 round</p>"
         },
-        "descriptors": [],
+        "descriptors": {},
+        "details": {
+          "category": "feat",
+          "combat": false,
+          "specialAbilityType": ""
+        },
         "duration": {
-          "units": "",
+          "units": "text",
           "value": ""
         },
         "formula": "",
-        "isActive": null,
+        "isActive": false,
         "modifiers": [],
+        "properties": {},
         "range": {
-          "additional": "",
-          "per": "",
-          "units": "none",
-          "value": null
+          "units": "none"
         },
         "recharge": {
           "charged": false,
-          "value": null
+          "value": ""
         },
         "requirements": "",
         "rollNotes": "",
@@ -883,13 +788,18 @@
           "dc": "13",
           "descriptor": "half"
         },
+        "skillCheck": {
+          "type": "",
+          "dc": "",
+          "variable": false
+        },
+        "slug": "",
         "source": "",
         "target": {
-          "type": "",
           "value": ""
         },
         "uses": {
-          "max": null,
+          "max": "",
           "per": "",
           "value": null
         }
@@ -900,6 +810,7 @@
     "name": "Ignurso Mason",
     "actorLink": false,
     "alpha": 1,
+    "appendNumber": false,
     "bar1": {
       "attribute": "attributes.hp"
     },
@@ -931,11 +842,30 @@
       },
       "dim": 0,
       "luminosity": 0.5,
+      "negative": false,
+      "priority": 0,
       "saturation": 0,
       "shadows": 0
     },
     "lockRotation": false,
+    "movementAction": null,
+    "occludable": {
+      "radius": 0
+    },
+    "prependAdjective": false,
     "randomImg": false,
+    "ring": {
+      "colors": {
+        "background": null,
+        "ring": null
+      },
+      "effects": 1,
+      "enabled": false,
+      "subject": {
+        "scale": 1,
+        "texture": null
+      }
+    },
     "rotation": 0,
     "sight": {
       "angle": 360,
@@ -949,129 +879,83 @@
       "visionMode": "basic"
     },
     "texture": {
+      "alphaThreshold": 0.75,
+      "anchorX": 0.5,
+      "anchorY": 0.5,
+      "fit": "contain",
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
       "scaleX": 1,
       "scaleY": 1,
-      "src": "icons/svg/mystery-man.svg",
-      "tint": null
+      "src": "systems/sfrpg/icons/default/alien-stare.svg",
+      "tint": "#ffffff"
+    },
+    "turnMarker": {
+      "animation": null,
+      "disposition": false,
+      "mode": 1,
+      "src": null
     },
     "width": 2
   },
   "system": {
     "abilities": {
       "cha": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 12
+        "base": 1
       },
       "con": {
-        "base": 3,
-        "min": 3,
-        "misc": 0,
-        "mod": 3,
-        "value": 16
+        "base": 3
       },
       "dex": {
-        "base": 5,
-        "min": 3,
-        "misc": 0,
-        "mod": 5,
-        "value": 20
+        "base": 5
       },
       "int": {
-        "base": -1,
-        "min": 3,
-        "misc": 0,
-        "mod": -1,
-        "value": 8
+        "base": -1
       },
       "str": {
-        "base": 8,
-        "min": 3,
-        "misc": 0,
-        "mod": 8,
-        "value": 26
+        "base": 8
       },
       "wis": {
-        "base": 1,
-        "min": 3,
-        "misc": 0,
-        "mod": 1,
-        "value": 12
+        "base": 1
       }
     },
     "attributes": {
       "abilityDC": {
         "base": 0
       },
-      "arms": "2",
-      "bab": 0,
-      "baseAttackBonus": {
-        "rolledMods": [],
-        "tooltip": [],
-        "value": 0
-      },
+      "arms": 2,
       "baseSpellDC": {
         "base": 0
       },
-      "cmd": {
-        "min": 0,
-        "tooltip": [],
-        "value": 10
-      },
       "eac": {
-        "base": 24,
-        "min": 0,
-        "tooltip": [],
-        "value": 24
+        "base": 24
       },
       "fort": {
-        "base": 15,
-        "bonus": 15,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 15
       },
       "hp": {
         "max": 180,
-        "min": 0,
         "temp": null,
-        "tempmax": null,
-        "tooltip": [],
         "value": 180
       },
       "init": {
-        "bonus": 0,
-        "tooltip": [],
-        "total": 5,
         "value": 5
       },
       "kac": {
-        "base": null,
-        "min": 0,
-        "tooltip": [],
-        "value": null
+        "base": 26
       },
-      "keyability": "",
       "reach": "5 ft.",
       "reflex": {
-        "base": 15,
-        "bonus": 15,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 15
       },
       "space": "10 ft.",
       "speed": {
         "burrowing": {
-          "base": 0
+          "base": 20
         },
         "climbing": {
-          "base": 0
+          "base": 20
         },
         "flying": {
           "base": 0,
@@ -1081,22 +965,15 @@
           "base": 30
         },
         "mainMovement": "land",
-        "special": "original base: 30 ft.; original special: burrow 20 ft., climb 20 ft.",
+        "special": "",
         "swimming": {
           "base": 0
-        },
-        "value": null
+        }
       },
-      "spellcasting": "",
       "will": {
-        "base": 10,
-        "bonus": 10,
-        "misc": 0,
-        "tooltip": [],
-        "value": 0
+        "base": 10
       }
     },
-    "classes": {},
     "conditions": {
       "asleep": false,
       "bleeding": false,
@@ -1119,6 +996,7 @@
       "frightened": false,
       "grappled": false,
       "helpless": false,
+      "invisible": false,
       "nauseated": false,
       "off-kilter": false,
       "off-target": false,
@@ -1134,9 +1012,6 @@
       "stunned": false,
       "unconscious": false
     },
-    "counterClasses": {
-      "values": {}
-    },
     "currency": {
       "credit": 0,
       "upb": 0
@@ -1144,9 +1019,8 @@
     "details": {
       "type": "Magical Beast",
       "alignment": "N",
-      "aura": "",
       "biography": {
-        "age": 0,
+        "age": "0",
         "dateOfBirth": "",
         "deity": "",
         "fullBodyImage": "systems/sfrpg/images/mystery-body.webp",
@@ -1155,10 +1029,10 @@
         "homeWorld": "",
         "otherVisuals": "",
         "public": "",
-        "value": "<h2>Description</h2>\n<p>Ignursos are ursine mammals typically found in geothermally active areas, from hot springs to calderas. Standing up to 10 feet tall when on their hind legs and weighing up to 800 pounds, ignursos are physically intimidating. Yet they rarely make use of their fearsome appearance, instead preferring to burrow underground or lounge wherever it’s warm. When they do act out of hunger or stress, ignursos become forces of destruction, their cyclopean eyes blazing with ferocity as the creatures exhale gouts of fire.</p>\n<p>An ignurso’s body is ideally suited for extremely warm environments. Wiry, flame-resistant fur covers its legs and belly, giving the creature crucial insulation in cooler areas. Its back and head are protected by thick scales able to shed incoming blows and fiery ash with equal ease, allowing an ignurso to remain active even during moderate volcanic events. Thick foreclaws allow the ignurso to dig swiftly through soil and softer igneous rock, climb with ease, and knock down prey. The only part of its body ill-suited to its fiery, subterranean terrain is its single eye—a liability around spraying soil or stray sparks. Having a single eye is evolutionarily common on the ignurso’s home planet, and they have developed a nictitating membrane to protect their eye, keen vision in darkness and smoke alike, and a plow-like horn above the eye that serves as a visor against the worst debris.</p>\n<p>Except in regions with consistently hot surface climates, ignursos tunnel deep underground during winter to avoid the chill, hibernating for months at a time. In their volcanically active homes, burrowing means not only avoiding cold air but also getting closer to deep magma veins. Closer to the surface, ignursos tear through the soil in search of insect larvae and burrowing creatures. During volcanic events, ignursos seek out carrion, feasting on creatures that have suffocated by toxic gases or crushed by debris. They even carve surface trenches well ahead of eruptions and use the trenches to funnel lava into long barriers in which they trap their prey.</p>\n<p>When other food is scarce, ignursos grudgingly leave their favored haunts—especially when trying to fatten up for hibernation. They’re opportunistic omnivores, enjoying berries and grasses as readily as they do fish, eggs, carrion, and urban refuse. Dozens of viral videos chronicle the rare cases when ignursos wander into settlements. Unaware of the flammability of objects around them, ignursos often accidentally cause fiery explosions, then scramble away while roaring in shock as their surroundings go up in flame.</p>\n<p>Ignursos remain usually solitary unless courting a mate or raising cubs. Females give birth to live young and raise them for about 18 months before urging them to fend for themselves. Younger ignursos, known as burrowers, aggressively dig out their own domains and live out fairly animalistic existences. Ignursos have a natural lifespan of about 25 years, and in the last decade of life, the creatures develop exceptional cunning and resilience. This seems to come from an intensifying attunement to their volcanic surroundings, as if communing with the fires deep below. In fact, not only do these elders apparently learn to understand Ignan and sense impending eruptions, but their fire breath changes to superheated plasma. Known as masons, these ignursos tunnel less and build more, using their breath to melt rock to a liquid consistency before shaping it into crude structures.</p>\n<p>Along with basic shelters, ignurso masons sculpt strange monuments and statues, the purpose of which continues to vex biologists. For all the danger they represent, ignursos serve two crucial roles in their ecosystems: volcanic mitigation and habitat creation. Periodically, an overzealous ignurso digs so close to a volcano’s magma chamber that lava breaks through the rock, wells up within the ignurso’s tunnels, and vents lazily to the surface. In such events, the destruction is minimal, and geologists have determined that these vents release some of the underground pressure, making true eruptions less frequent and devastating. As some of the few creatures able to tunnel through solid rock, ignursos are also a keystone species in volcanically active areas. Their heavy claws pulverize the hard surface, making way for small plants to colonize the new soil, and their broad tunnels create new habitats for a variety of animals. Ignurso mason construction has even shaped early cultures, with several planets’ earliest cities having relied on their structures as rudimentary shelters. As hot spots migrate over the millennia, so too do ignurso populations, consistently reshaping the land.</p>\n<h3>IGNURSO KNUCKLES</h3>\n<p>Ignursos wield enough strength to punch through rock, and even after death, their claws ignite with momentary heat when struck against another surface. Weaponsmiths can stabilize the claws’ supernatural ignition and incorporate them into bladed gauntlets known as ignurso knuckles. These gauntlets’ ignurso-hide coverings protect the wielder from the&nbsp;claws’ heat, and high-end models allow the claws to retract into wrist sheathes.</p>\n<table style=\"width: 676px;\" border=\"1\">\n<tbody>\n<tr>\n<td style=\"width: 154px;\">WEAPON MODEL</td>\n<td style=\"width: 62px; text-align: center; vertical-align: middle;\">LEVEL</td>\n<td style=\"width: 74px; text-align: center; vertical-align: middle;\">PRICE</td>\n<td style=\"width: 67px; text-align: center; vertical-align: middle;\">DAMAGE</td>\n<td style=\"width: 98px; text-align: center; vertical-align: middle;\">CRITICAL</td>\n<td style=\"width: 48px; text-align: center; vertical-align: middle;\">BULK</td>\n<td style=\"width: 163px; text-align: center; vertical-align: middle;\">SPECIAL</td>\n</tr>\n<tr>\n<td style=\"width: 154px;\">Ignurso knuckles, ember</td>\n<td style=\"width: 62px; text-align: center; vertical-align: middle;\">5</td>\n<td style=\"width: 74px; text-align: center; vertical-align: middle;\">3,100</td>\n<td style=\"width: 67px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(0, 0, 0, 0.05);\">1d6 F&amp;S</span></td>\n<td style=\"width: 98px; text-align: center; vertical-align: middle;\">Wound</td>\n<td style=\"width: 48px; text-align: center; vertical-align: middle;\">L</td>\n<td style=\"width: 163px; text-align: center; vertical-align: middle;\">Analog, penetrating</td>\n</tr>\n<tr>\n<td style=\"width: 154px;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Ignurso knuckles, blaze</span></td>\n<td style=\"width: 62px; text-align: center; vertical-align: middle;\">9</td>\n<td style=\"width: 74px; text-align: center; vertical-align: middle;\">13,500</td>\n<td style=\"width: 67px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">2</span>d6 F&amp;S<span style=\"background-color: rgba(255, 255, 255, 0.2);\">\n</span></td>\n<td style=\"width: 98px; text-align: center; vertical-align: middle;\">Wound</td>\n<td style=\"width: 48px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">L</span></td>\n<td style=\"width: 163px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Analog, penetrating</span></td>\n</tr>\n<tr>\n<td style=\"width: 154px;\">Ignurso knuckles, inferno</td>\n<td style=\"width: 62px; text-align: center; vertical-align: middle;\">13</td>\n<td style=\"width: 74px; text-align: center; vertical-align: middle;\">50,250</td>\n<td style=\"width: 67px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(0, 0, 0, 0.05);\">4d6 F&amp;S</span></td>\n<td style=\"width: 98px; text-align: center; vertical-align: middle;\">Wound</td>\n<td style=\"width: 48px; text-align: center; vertical-align: middle;\">L</td>\n<td style=\"width: 163px; text-align: center; vertical-align: middle;\">Analog, penetrating</td>\n</tr>\n<tr>\n<td style=\"width: 154px;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Ignurso knuckles, sola flare</span></td>\n<td style=\"width: 62px; text-align: center; vertical-align: middle;\">17</td>\n<td style=\"width: 74px; text-align: center; vertical-align: middle;\">262,000</td>\n<td style=\"width: 67px; text-align: center; vertical-align: middle;\">9d6 F&amp;S</td>\n<td style=\"width: 98px; text-align: center; vertical-align: middle;\">Severe wound</td>\n<td style=\"width: 48px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">L</span></td>\n<td style=\"width: 163px; text-align: center; vertical-align: middle;\"><span style=\"background-color: rgba(255, 255, 255, 0.2);\">Analog, penetrating</span></td>\n</tr>\n</tbody>\n</table>\n<section></section>",
+        "value": "<h2>Description</h2>\n<p>Ignursos are ursine mammals typically found in geothermally active areas, from hot springs to calderas. Standing up to 10 feet tall when on their hind legs and weighing up to 800 pounds, ignursos are physically intimidating. Yet they rarely make use of their fearsome appearance, instead preferring to burrow underground or lounge wherever it’s warm. When they do act out of hunger or stress, ignursos become forces of destruction, their cyclopean eyes blazing with ferocity as the creatures exhale gouts of fire.</p>\n<p>An ignurso’s body is ideally suited for extremely warm environments. Wiry, flame-resistant fur covers its legs and belly, giving the creature crucial insulation in cooler areas. Its back and head are protected by thick scales able to shed incoming blows and fiery ash with equal ease, allowing an ignurso to remain active even during moderate volcanic events. Thick foreclaws allow the ignurso to dig swiftly through soil and softer igneous rock, climb with ease, and knock down prey. The only part of its body ill-suited to its fiery, subterranean terrain is its single eye—a liability around spraying soil or stray sparks. Having a single eye is evolutionarily common on the ignurso’s home planet, and they have developed a nictitating membrane to protect their eye, keen vision in darkness and smoke alike, and a plow-like horn above the eye that serves as a visor against the worst debris.</p>\n<p>Except in regions with consistently hot surface climates, ignursos tunnel deep underground during winter to avoid the chill, hibernating for months at a time. In their volcanically active homes, burrowing means not only avoiding cold air but also getting closer to deep magma veins. Closer to the surface, ignursos tear through the soil in search of insect larvae and burrowing creatures. During volcanic events, ignursos seek out carrion, feasting on creatures that have suffocated by toxic gases or crushed by debris. They even carve surface trenches well ahead of eruptions and use the trenches to funnel lava into long barriers in which they trap their prey.</p>\n<p>When other food is scarce, ignursos grudgingly leave their favored haunts—especially when trying to fatten up for hibernation. They’re opportunistic omnivores, enjoying berries and grasses as readily as they do fish, eggs, carrion, and urban refuse. Dozens of viral videos chronicle the rare cases when ignursos wander into settlements. Unaware of the flammability of objects around them, ignursos often accidentally cause fiery explosions, then scramble away while roaring in shock as their surroundings go up in flame.</p>\n<p>Ignursos remain usually solitary unless courting a mate or raising cubs. Females give birth to live young and raise them for about 18 months before urging them to fend for themselves. Younger ignursos, known as burrowers, aggressively dig out their own domains and live out fairly animalistic existences. Ignursos have a natural lifespan of about 25 years, and in the last decade of life, the creatures develop exceptional cunning and resilience. This seems to come from an intensifying attunement to their volcanic surroundings, as if communing with the fires deep below. In fact, not only do these elders apparently learn to understand Ignan and sense impending eruptions, but their fire breath changes to superheated plasma. Known as masons, these ignursos tunnel less and build more, using their breath to melt rock to a liquid consistency before shaping it into crude structures.</p>\n<p>Along with basic shelters, ignurso masons sculpt strange monuments and statues, the purpose of which continues to vex biologists. For all the danger they represent, ignursos serve two crucial roles in their ecosystems: volcanic mitigation and habitat creation. Periodically, an overzealous ignurso digs so close to a volcano’s magma chamber that lava breaks through the rock, wells up within the ignurso’s tunnels, and vents lazily to the surface. In such events, the destruction is minimal, and geologists have determined that these vents release some of the underground pressure, making true eruptions less frequent and devastating. As some of the few creatures able to tunnel through solid rock, ignursos are also a keystone species in volcanically active areas. Their heavy claws pulverize the hard surface, making way for small plants to colonize the new soil, and their broad tunnels create new habitats for a variety of animals. Ignurso mason construction has even shaped early cultures, with several planets’ earliest cities having relied on their structures as rudimentary shelters. As hot spots migrate over the millennia, so too do ignurso populations, consistently reshaping the land.</p>\n<h3>IGNURSO KNUCKLES</h3>\n<p>Ignursos wield enough strength to punch through rock, and even after death, their claws ignite with momentary heat when struck against another surface. Weaponsmiths can stabilize the claws’ supernatural ignition and incorporate them into bladed gauntlets known as ignurso knuckles. These gauntlets’ ignurso-hide coverings protect the wielder from the&nbsp;claws’ heat, and high-end models allow the claws to retract into wrist sheathes.</p>\n<table style=\"width:676px\" border=\"1\">\n<tbody>\n<tr>\n<td style=\"width:154px\">WEAPON MODEL</td>\n<td style=\"width:62px;text-align:center;vertical-align:middle\">LEVEL</td>\n<td style=\"width:74px;text-align:center;vertical-align:middle\">PRICE</td>\n<td style=\"width:67px;text-align:center;vertical-align:middle\">DAMAGE</td>\n<td style=\"width:98px;text-align:center;vertical-align:middle\">CRITICAL</td>\n<td style=\"width:48px;text-align:center;vertical-align:middle\">BULK</td>\n<td style=\"width:163px;text-align:center;vertical-align:middle\">SPECIAL</td>\n</tr>\n<tr>\n<td style=\"width:154px\">Ignurso knuckles, ember</td>\n<td style=\"width:62px;text-align:center;vertical-align:middle\">5</td>\n<td style=\"width:74px;text-align:center;vertical-align:middle\">3,100</td>\n<td style=\"width:67px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(0, 0, 0, 0.05)\">1d6 F&amp;S</span></td>\n<td style=\"width:98px;text-align:center;vertical-align:middle\">Wound</td>\n<td style=\"width:48px;text-align:center;vertical-align:middle\">L</td>\n<td style=\"width:163px;text-align:center;vertical-align:middle\">Analog, penetrating</td>\n</tr>\n<tr>\n<td style=\"width:154px\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">Ignurso knuckles, blaze</span></td>\n<td style=\"width:62px;text-align:center;vertical-align:middle\">9</td>\n<td style=\"width:74px;text-align:center;vertical-align:middle\">13,500</td>\n<td style=\"width:67px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">2</span>d6 F&amp;S<span style=\"background-color:rgba(255, 255, 255, 0.2)\">\n</span></td>\n<td style=\"width:98px;text-align:center;vertical-align:middle\">Wound</td>\n<td style=\"width:48px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">L</span></td>\n<td style=\"width:163px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">Analog, penetrating</span></td>\n</tr>\n<tr>\n<td style=\"width:154px\">Ignurso knuckles, inferno</td>\n<td style=\"width:62px;text-align:center;vertical-align:middle\">13</td>\n<td style=\"width:74px;text-align:center;vertical-align:middle\">50,250</td>\n<td style=\"width:67px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(0, 0, 0, 0.05)\">4d6 F&amp;S</span></td>\n<td style=\"width:98px;text-align:center;vertical-align:middle\">Wound</td>\n<td style=\"width:48px;text-align:center;vertical-align:middle\">L</td>\n<td style=\"width:163px;text-align:center;vertical-align:middle\">Analog, penetrating</td>\n</tr>\n<tr>\n<td style=\"width:154px\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">Ignurso knuckles, sola flare</span></td>\n<td style=\"width:62px;text-align:center;vertical-align:middle\">17</td>\n<td style=\"width:74px;text-align:center;vertical-align:middle\">262,000</td>\n<td style=\"width:67px;text-align:center;vertical-align:middle\">9d6 F&amp;S</td>\n<td style=\"width:98px;text-align:center;vertical-align:middle\">Severe wound</td>\n<td style=\"width:48px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">L</span></td>\n<td style=\"width:163px;text-align:center;vertical-align:middle\"><span style=\"background-color:rgba(255, 255, 255, 0.2)\">Analog, penetrating</span></td>\n</tr>\n</tbody>\n</table>\n<section></section>",
         "weight": ""
       },
-      "class": "",
+      "combatRole": "combatant",
       "cr": 11,
       "environment": "warm mountains and underground",
       "organization": "solitary, pair, pack (3-8)",
@@ -1166,29 +1040,20 @@
         "max": null,
         "min": 1
       },
-      "race": "",
       "raceAndGrafts": "",
       "source": "AA4 pg. 50",
-      "xp": {
-        "value": 12800
-      }
+      "subtype": ""
     },
     "modifiers": [],
-    "skillpoints": {
-      "max": 0,
-      "tooltip": [],
-      "used": 0
-    },
     "skills": {
       "acr": {
         "ability": "dex",
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ath": {
@@ -1196,10 +1061,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 25,
         "ranks": 25,
+        "subname": "",
         "value": 0
       },
       "blu": {
@@ -1207,10 +1071,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "com": {
@@ -1218,10 +1081,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "cul": {
@@ -1229,10 +1091,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dip": {
@@ -1240,10 +1101,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "dis": {
@@ -1251,10 +1111,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "eng": {
@@ -1262,10 +1121,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "int": {
@@ -1273,10 +1131,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "lsc": {
@@ -1284,10 +1141,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "med": {
@@ -1295,10 +1151,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "mys": {
@@ -1306,10 +1161,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "per": {
@@ -1317,10 +1171,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 20,
         "ranks": 20,
+        "subname": "",
         "value": 0
       },
       "phs": {
@@ -1328,10 +1181,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pil": {
@@ -1339,10 +1191,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "pro": {
@@ -1350,9 +1201,7 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
         "subname": "",
         "value": 3
@@ -1362,10 +1211,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "sle": {
@@ -1373,10 +1221,9 @@
         "enabled": false,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": true,
-        "min": 0,
         "misc": 0,
-        "mod": 0,
         "ranks": 0,
+        "subname": "",
         "value": 0
       },
       "ste": {
@@ -1384,10 +1231,9 @@
         "enabled": true,
         "hasArmorCheckPenalty": true,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 20,
         "ranks": 20,
+        "subname": "",
         "value": 0
       },
       "sur": {
@@ -1395,47 +1241,40 @@
         "enabled": true,
         "hasArmorCheckPenalty": false,
         "isTrainedOnly": false,
-        "min": 0,
         "misc": 0,
-        "mod": 20,
         "ranks": 20,
+        "subname": "",
         "value": 0
       }
     },
+    "slug": "",
     "spells": {
       "spell0": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell1": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell2": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell3": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell4": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell5": {
         "max": 0,
-        "perClass": {},
         "value": 0
       },
       "spell6": {
         "max": 0,
-        "perClass": {},
         "value": 0
       }
     },
@@ -1444,19 +1283,11 @@
         "custom": "",
         "value": []
       },
-      "damageReduction": {
-        "negatedBy": "",
-        "value": 0
-      },
       "di": {
         "custom": "",
         "value": [
           "fire"
         ]
-      },
-      "dr": {
-        "custom": "",
-        "value": []
       },
       "dv": {
         "custom": "",
@@ -1472,9 +1303,6 @@
       },
       "senses": "darkvision 60 ft., low-light vision, sense through (vision [smoke only])",
       "size": "large",
-      "spellResistance": {
-        "base": 0
-      },
       "sr": 0
     }
   }

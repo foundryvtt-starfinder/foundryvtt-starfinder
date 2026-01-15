@@ -1,0 +1,58 @@
+{
+  "_id": "4Mxkfn4Y9j6Pxhjy",
+  "name": "Effect: Pilot Burrower (Ex)",
+  "type": "effect",
+  "img": "systems/sfrpg/icons/default/stopwatch.svg",
+  "system": {
+    "type": "effect",
+    "activeDuration": {
+      "activationTime": 0,
+      "endsOn": "onTurnStart",
+      "expiryInit": 0,
+      "expiryMode": {
+        "type": "turn",
+        "turn": "parent"
+      },
+      "unit": "permanent",
+      "value": "0"
+    },
+    "context": {
+      "origin": {
+        "actorUuid": null,
+        "itemUuid": null
+      }
+    },
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>Your varksi companion can act as a sort of pilot fish while you are both burrowing, increasing any burrow speed you have from another source by 5 feet.</p>\n<p><em>Enable the effect from the Modifiers tab if you have a burrow speed.</em></p>"
+    },
+    "enabled": true,
+    "modifiers": [
+      {
+        "_id": "7e4b9b4a-ab95-4498-9dc0-3558d78d146c",
+        "name": "Pilot Burrower",
+        "type": "untyped",
+        "condition": "",
+        "damage": null,
+        "effectType": "specific-speed",
+        "enabled": false,
+        "limitTo": null,
+        "max": 0,
+        "modifier": "5",
+        "modifierType": "constant",
+        "notes": "Applies if you have a burrow speed.",
+        "source": "Creature Companion Ability",
+        "subtab": "misc",
+        "valueAffected": "burrowing"
+      }
+    ],
+    "requirements": "",
+    "showOnToken": false,
+    "slug": "",
+    "source": "",
+    "turnEvents": []
+  }
+}

@@ -2,12 +2,13 @@
   "_id": "FDcymzZLqnp2K8eC",
   "name": "Full Power",
   "type": "starshipAction",
-  "img": "icons/svg/mystery-man.svg",
+  "img": "systems/sfrpg/icons/default/crosshair.svg",
   "system": {
-    "type": "",
     "dc": null,
     "description": {
       "chat": "",
+      "gmnotes": "",
+      "short": "",
       "unidentified": "",
       "value": "<h2>Normal effect</h2><p>If you have at least 6 ranks in Piloting, you can spend 1 Resolve Point to move your starship up to 1-1/2 times its speed. You can make turns during this movement, but you add 2 to your starship’s distance between turns.</p><h2>Critical effect</h2><p>You maintain steady control over your starship during its movement and add only 1 to your starship’s distance between turns.</p>"
     },
@@ -16,10 +17,14 @@
     "formula": [
       {
         "name": "Piloting",
+        "dc": null,
+        "effectCritical": "",
+        "effectNormal": "",
         "formula": "@pilot.skills.pil.mod + @ship.attributes.pilotingBonus.value"
       }
     ],
     "isPush": true,
+    "modifiers": [],
     "order": 30,
     "phase": {
       "name": "Helm phase",
@@ -29,6 +34,7 @@
     "role": "pilot",
     "selectorKey": "pilot",
     "selectors": [],
+    "slug": "",
     "source": "CRB"
   }
 }
