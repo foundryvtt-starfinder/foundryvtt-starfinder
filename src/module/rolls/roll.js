@@ -206,7 +206,7 @@ export default class SFRPGRoll extends Roll {
     * A helper function to add the `.value` string to the end of referenced objects with the `value` subproperty.
     * This allows a property at the address `object.property.value` to be referenced in formulas as just `object.property`
     * @param {String} formula  A roll formula string
-    * @param {object} rollData The roll context
+    * @param {Object} rollData The roll context data
     * @returns {String}        A modified roll formula string
     */
     static _insertValueProperty(formula, rollData) {

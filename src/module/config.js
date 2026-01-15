@@ -87,6 +87,22 @@ SFRPG.saveDescriptors = {
 };
 
 /**
+ * All possible roll types in Starfinder
+ * @type {Object}
+ */
+SFRPG.rollTypes = {
+    "abilityCheck": "SFRPG.Rolls.AbilityCheck",
+    "attack": "SFRPG.Rolls.AttackRoll",
+    "damage": "SFRPG.Rolls.DamageRoll",
+    "gunnery": "SFRPG.Rolls.GunneryCheck",
+    "healing": "SFRPG.Rolls.HealingRoll",
+    "initiative": "SFRPG.Rolls.InitiativeRoll",
+    "roll": "SFRPG.Rolls.Roll",
+    "save": "SFRPG.Rolls.SavingThrow",
+    "skillCheck": "SFRPG.Rolls.SkillCheck"
+};
+
+/**
  * Character alignment options
  * @type {Object}
  */
@@ -1349,11 +1365,15 @@ SFRPG.starshipWeaponProperties = {
     "vortex"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex" // CRB
 };
 
-SFRPG.starshipArcs = {
+SFRPG.starshipQuadrants = {
     "forward"  : "SFRPG.ShipSystems.StarshipArcs.Forward",
-    "starboard": "SFRPG.ShipSystems.StarshipArcs.Starboard",
-    "aft"      : "SFRPG.ShipSystems.StarshipArcs.Aft",
     "port"     : "SFRPG.ShipSystems.StarshipArcs.Port",
+    "starboard": "SFRPG.ShipSystems.StarshipArcs.Starboard",
+    "aft"      : "SFRPG.ShipSystems.StarshipArcs.Aft"
+};
+
+SFRPG.starshipArcs = {
+    ...SFRPG.starshipQuadrants,
     "turret"   : "SFRPG.ShipSystems.StarshipArcs.Turret"
 };
 
@@ -2544,6 +2564,17 @@ SFRPG.actionTargetsStarship = {
     "": "SFRPG.Items.Action.ActionTarget.None",
     "ac": "SFRPG.Items.Action.ActionTarget.StarshipAC",
     "tl": "SFRPG.Items.Action.ActionTarget.StarshipTL"
+};
+
+/**
+ * An object mapping action targets to the system data path their values are stored (for hit evaluation against targets).
+ */
+SFRPG.actionTargetPaths = {
+    "kac": "attributes.kac.value",
+    "kac8": "attributes.cmd.value",
+    "eac": "attributes.eac.value",
+    "ac5": "5",
+    "ac15": "15"
 };
 
 // Source: CRB, page 391

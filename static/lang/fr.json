@@ -781,6 +781,7 @@
             "UPBs": "BPUs"
         },
         "Cybernetic": "Cybernétique",
+        "DC": "DC",
         "Damage": {
             "DamageOperator": "Damage Operator",
             "EnergyDamage": "Energy Damage",
@@ -1557,6 +1558,7 @@
                     "StarshipAC": "CA",
                     "StarshipTL": "TL",
                     "Tag": "Cibles: {actionTarget}",
+                    "TagFull": "Targets: {actionTarget}<span class='gm-only'> {targetValue}</span> - {actionResult}",
                     "Title": "Action de ciblage",
                     "Tooltip": "Si cette action cible une propriété spécifique, vous pouvez la configurer ici."
                 },
@@ -2273,6 +2275,8 @@
             }
         },
         "Rolls": {
+            "AbilityCheck": "Ability Check",
+            "AbilityCheckFull": "Ability Check - {name}",
             "AttackRoll": "Jet d'attaque",
             "AttackRollFull": "Jet d'attaque - {name}",
             "Character": {
@@ -2330,9 +2334,24 @@
                 "SkillCheckTitle": "Test de compétence - {skill}",
                 "SkillCheckTitleWithProfession": "Test de Compétence - {skill} ({profession})"
             },
+            "Failure": "Failure",
+            "FailureCaps": "FAILURE",
+            "GunneryCheck": "Gunnery Check",
+            "GunneryCheckFull": "Gunnery Check - {name}",
             "HealingRoll": "Jet de soin",
             "HealingRollFull": "Jet de soin - {name}",
+            "Hit": "Hit",
+            "HitCaps": "HIT",
+            "InitiativeRoll": "Initiative Roll",
             "InitiativeRollFull": "Jet d'initiative - {name}",
+            "Miss": "Miss",
+            "MissCaps": "MISS",
+            "Roll": "Roll",
+            "RollTarget": "Roll Target",
+            "SavingThrow": "Saving Throw",
+            "SavingThrowFull": "Saving Throw - {name}",
+            "SkillCheck": "Skill Check",
+            "SkillCheckFull": "Ability Check - {name}",
             "Starship": {
                 "Broadside": "Bordée",
                 "CaptainDemand": "Instruction du capitaine",
@@ -2367,7 +2386,9 @@
                     "Starboard": "Tribord",
                     "Title": "{name} - Sélectionner le quadrant d'arme utilisé"
                 }
-            }
+            },
+            "Success": "Success",
+            "SuccessCaps": "SUCCESS"
         },
         "Save": "Sauvegarde",
         "SaveAbilityModTooltip": "Modificateur de caractéristique: {mod} ({ability})",
@@ -2928,13 +2949,6 @@
                 "Message": "Les dégâts à un vaisseau spatial proviennent toujours d'une direction spécifique, veuillez sélectionner le quadrant auquel les dégâts entrants doivent être appliqués.",
                 "Nat20": "Critical damage! {name} takes a critical damage effect.",
                 "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
-                "Quadrant": {
-                    "Aft": "Poupe",
-                    "Forward": "Proue",
-                    "Port": "Bâbord",
-                    "Quadrant": "Quadrant",
-                    "Starboard": "Tribord"
-                },
                 "Title": "{name} - Sélectionner le quadrant endommagé."
             },
             "Details": {
@@ -3031,13 +3045,19 @@
             },
             "Quadrants": {
                 "AblativeHeader": "Blindage ablatif",
+                "Aft": "Poupe",
                 "ArmorClass": "Classe d'Armure",
                 "EvenDistribution": "Distribution uniforme",
+                "Forward": "Proue",
                 "Header": "Défenses du quadrant",
                 "NotAvailable": "Indisponible",
+                "Port": "Bâbord",
+                "Quadrant": "Quadrant",
                 "QuadrantLimit": "Limite de Quadrant",
                 "ShieldHeader": "Boucliers",
-                "TargetLock": "Verrouillage de cible"
+                "Starboard": "Tribord",
+                "TargetLock": "Verrouillage de cible",
+                "TargetQuadrant": "Target Quadrant"
             },
             "RandomQuadrantMacro": {
                 "NoToken": "Select the recipient of the critical effect before proceeding.",
@@ -3083,6 +3103,7 @@
         },
         "SubmitButtonLabel": "Valider",
         "SystemWide": "À l'échelle du système",
+        "Target": "Target",
         "TempHPMaxPlaceHolderText": "+Max",
         "TempHPPlaceHolderText": "+Temp",
         "Text": "Text",

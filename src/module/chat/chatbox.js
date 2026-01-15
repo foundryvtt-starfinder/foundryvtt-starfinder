@@ -19,14 +19,19 @@ export default class SFRPGCustomChatMessage {
     /**
      * Render a custom standard roll to chat.
      *
-     * @param {Roll}        roll             The roll data
-     * @param {object}      data             The data for the roll
-     * @param {RollContext} data.rollContent The context for the roll
-     * @param {string}      [data.title]     The chat card title
-     * @param {SpeakerData} [data.speaker]   The speaker for the ChatMesage
-     * @param {string}      [data.rollMode]  The roll mode
-     * @param {string}      [data.breakdown] An explanation for the roll and it's modifiers
-     * @param {Tag[]}       [data.tags]      Any item metadata that will be output at the bottom of the chat card.
+     * @param {Roll}        roll                The roll data
+     * @param {object}      data                The data for the roll
+     * @param {RollContext} [data.rollContent]    The context for the roll
+     * @param {string}      [data.title]        The chat card title
+     * @param {SpeakerData} [data.speaker]      The speaker for the ChatMesage
+     * @param {string}      [data.rollMode]     The roll mode
+     * @param {string}      [data.breakdown]    An explanation for the roll and it's modifiers
+     * @param {object}      [data.htmlData]     Base HTML data for the roll chat card
+     * @param {string}      [data.rollType]     The type of roll
+     * @param {RollOptions} [data.rollOptions]  Options for the roll
+     * @param {Array}       [data.rollDices]    The dice used in the roll
+     * @param {Boolean}     [data.rollSuccess]  Whether the roll, evaluated against the action target, was a success
+     * @param {Tag[]}       [data.tags]         Any item metadata that will be output at the bottom of the chat card.
      */
     static renderStandardRoll(roll, data) {
         /** Get entities */
@@ -64,7 +69,7 @@ export default class SFRPGCustomChatMessage {
             rollType: data.rollType,
             rollNotes: data.htmlData?.find(x => x.name === "rollNotes")?.value,
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            tokenImg: actor.token?.img || actor.img,
+            tokenImg: actor.token?.texture?.src || actor.img,
             actorId: actor.id,
             tokenId: this.getToken(actor),
             breakdown: data.breakdown,
@@ -74,7 +79,8 @@ export default class SFRPGCustomChatMessage {
             descriptors: data.specialMaterials,
             hasMagicDamage: data.hasMagicDamage,
             rollOptions: data.rollOptions,
-            rollDices: data.rollDices
+            rollDices: data.rollDices,
+            rollSuccess: data.rollSuccess
         };
 
         const speaker = data.speaker;
@@ -83,7 +89,7 @@ export default class SFRPGCustomChatMessage {
             if (speaker.token) {
                 const token = game.scenes.get(speaker.scene)?.tokens?.get(speaker.token);
                 if (token) {
-                    options.tokenImg = token.img;
+                    options.tokenImg = token.texture?.src;
                     setImage = true;
                 }
             }
@@ -127,31 +133,36 @@ export default class SFRPGCustomChatMessage {
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice,
             rollType: data.rollType,
-            flags: {}
+            flags: {sfrpg: {rollType: data.rollType}}
         };
 
         if (damageTypeString?.length > 0) {
-            messageData.flags.damage = {
+            messageData.flags.sfrpg.damage = {
                 amount: roll.total,
                 types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
             };
         }
 
+        // Roll success flag
+        if (options?.rollSuccess === true || options?.rollSuccess === false) {
+            messageData.flags.sfrpg.rollSuccess = options.rollSuccess;
+        }
+
         // Options tags
         if (options?.specialMaterials) {
-            messageData.flags.specialMaterials = options.specialMaterials;
+            messageData.flags.sfrpg.specialMaterials = options.specialMaterials;
         }
 
         if (options?.descriptors) {
-            messageData.flags.descriptors = options.descriptors;
+            messageData.flags.sfrpg.descriptors = options.descriptors;
         }
 
         if (options?.hasMagicDamage) {
-            messageData.flags.hasMagicDamage = options.hasMagicDamage;
+            messageData.flags.sfrpg.hasMagicDamage = options.hasMagicDamage;
         }
 
         if (options.rollOptions) {
-            messageData.flags.rollOptions = options.rollOptions;
+            messageData.flags.sfrpg.rollOptions = options.rollOptions;
         }
 
         ChatMessage.create(messageData, { rollMode: rollMode });

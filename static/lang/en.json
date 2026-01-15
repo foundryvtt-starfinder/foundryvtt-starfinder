@@ -781,6 +781,7 @@
             "UPBs": "UPBs"
         },
         "Cybernetic": "Cybernetic",
+        "DC": "DC",
         "Damage": {
             "DamageOperator": "Damage Operator",
             "EnergyDamage": "Energy Damage",
@@ -1557,6 +1558,7 @@
                     "StarshipAC": "AC",
                     "StarshipTL": "TL",
                     "Tag": "Targets: {actionTarget}",
+                    "TagFull": "Targets: {actionTarget}<span class='gm-only'> {targetValue}</span> - {actionResult}",
                     "Title": "Action Target",
                     "Tooltip": "If this action targets a specific property, you can configure that here."
                 },
@@ -2273,6 +2275,8 @@
             }
         },
         "Rolls": {
+            "AbilityCheck": "Ability Check",
+            "AbilityCheckFull": "Ability Check - {name}",
             "AttackRoll": "Attack Roll",
             "AttackRollFull": "Attack Roll - {name}",
             "Character": {
@@ -2330,9 +2334,24 @@
                 "SkillCheckTitle": "Skill Check - {skill}",
                 "SkillCheckTitleWithProfession": "Skill Check - {skill} ({profession})"
             },
+            "Failure": "Failure",
+            "FailureCaps": "FAILURE",
+            "GunneryCheck": "Gunnery Check",
+            "GunneryCheckFull": "Gunnery Check - {name}",
             "HealingRoll": "Healing Roll",
             "HealingRollFull": "Healing Roll - {name}",
+            "Hit": "Hit",
+            "HitCaps": "HIT",
+            "InitiativeRoll": "Initiative Roll",
             "InitiativeRollFull": "Initiative Roll - {name}",
+            "Miss": "Miss",
+            "MissCaps": "MISS",
+            "Roll": "Roll",
+            "RollTarget": "Roll Target",
+            "SavingThrow": "Saving Throw",
+            "SavingThrowFull": "Saving Throw - {name}",
+            "SkillCheck": "Skill Check",
+            "SkillCheckFull": "Ability Check - {name}",
             "Starship": {
                 "Broadside": "Broadside",
                 "CaptainDemand": "Captain's Demand",
@@ -2367,7 +2386,9 @@
                     "Starboard": "Starboard",
                     "Title": "{name} - Select the weapon quadrant used."
                 }
-            }
+            },
+            "Success": "Success",
+            "SuccessCaps": "SUCCESS"
         },
         "Save": "Save",
         "SaveAbilityModTooltip": "Ability Modifier: {mod} ({ability})",
@@ -2928,13 +2949,6 @@
                 "Message": "Damage to a starship always originates from a specific direction, please select the quadrant the incoming damage should be applied to.",
                 "Nat20": "Critical damage! {name} takes a critical damage effect.",
                 "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
-                "Quadrant": {
-                    "Aft": "Aft",
-                    "Forward": "Forward",
-                    "Port": "Port",
-                    "Quadrant": "Quadrant",
-                    "Starboard": "Starboard"
-                },
                 "Title": "{name} - Select the damaged quadrant."
             },
             "Details": {
@@ -3031,13 +3045,19 @@
             },
             "Quadrants": {
                 "AblativeHeader": "Ablative Armor",
+                "Aft": "Aft",
                 "ArmorClass": "Armor Class",
                 "EvenDistribution": "Even distribution",
+                "Forward": "Forward",
                 "Header": "Quadrant Defenses",
                 "NotAvailable": "Not available",
+                "Port": "Port",
+                "Quadrant": "Quadrant",
                 "QuadrantLimit": "Quadrant limit",
                 "ShieldHeader": "Shields",
-                "TargetLock": "Target Lock"
+                "Starboard": "Starboard",
+                "TargetLock": "Target Lock",
+                "TargetQuadrant": "Target Quadrant"
             },
             "RandomQuadrantMacro": {
                 "NoToken": "Select the recipient of the critical effect before proceeding.",
@@ -3083,6 +3103,7 @@
         },
         "SubmitButtonLabel": "Submit",
         "SystemWide": "System-Wide",
+        "Target": "Target",
         "TempHPMaxPlaceHolderText": "+Max",
         "TempHPPlaceHolderText": "+Temp",
         "Text": "Text",
