@@ -117,4 +117,17 @@
                 <a class="item-control item-delete" title="Delete Item"><i class="fas fa-trash"></i></a>
             </div>
             {{/if}}
+
+            {{#if (or (ne item.enrichedDescription undefined) item.properties)}}
+            <div class="item-summary">
+                {{{item.enrichedDescription}}}
+                {{#if item.properties}}
+                <div class="item-properties">
+                    {{#each item.properties as |prop|}}
+                        <span class="tag" {{#if prop.tooltip}}data-tooltip="{{prop.tooltip}}"{{else if prop.title}}data-tooltip="{{prop.title}}"{{/if}}><strong>{{#if prop.title}}{{prop.title}}: {{/if}}</strong>{{prop.name}}</span>
+                    {{/each}}
+                </div>
+                {{/if}}
+            </div>
+            {{/if}}
         </li>

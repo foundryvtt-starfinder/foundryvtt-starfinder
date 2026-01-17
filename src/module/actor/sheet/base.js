@@ -161,23 +161,11 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         this._prepareItems(data);
 
-        // Prepare summary HTML for expanded items
+        // Prepare summary data for all items
         for (const item of data.items) {
-            if (item.expanded) {
-                const chatData = await item.getChatData();
-                const desiredDescription = chatData.description.short || chatData.description.value;
-                const div = $(`<div class="item-summary">${desiredDescription}</div>`);
-                const props = $(`<div class="item-properties"></div>`);
-                chatData.properties.forEach(p => {
-                    let tooltipValue = p.tooltip || p.title || "";
-                    if (tooltipValue) tooltipValue = `data-tooltip="${tooltipValue}"`;
-                    props.append(
-                        `<span class="tag" ${tooltipValue}><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
-                    );
-                });
-                div.append(props);
-                item.summaryHTML = div[0].outerHTML;
-            }
+            const chatData = await item.getChatData();
+            item.enrichedDescription = chatData.description.short || chatData.description.value;
+            item.properties = chatData.properties;
         }
 
         // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
@@ -227,14 +215,18 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     async activateListeners(html) {
         super.activateListeners(html);
 
-        // Add summary divs for initially expanded items
-        html.find('.item').each((i, el) => {
-            const li = $(el);
+        // Hide item summaries by default unless they should be expanded
+        html.find('.item-summary').each((i, el) => {
+            const summary = $(el);
+            const li = summary.parents('.item');
             const itemId = li.data('item-id');
             const item = this.data.items.find(x => x.id === itemId);
-            if (item && item.expanded) {
+            if (item && item.expanded && !li.hasClass('expanded')) {
                 li.addClass('expanded');
-                li.append(item.summaryHTML);
+            }
+            else if (!item || (!item.expanded && li.hasClass('expanded'))) {
+                summary.hide();
+                li.removeClass('expanded');
             }
         });
 
@@ -1068,34 +1060,19 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
         const li = $(event.currentTarget).parents('.item');
         const item = this.actor.items.get(li.data('item-id'));
-        const isExpanded = item.expanded || false;
+        const summary = li.find('.item-summary');
 
-        if (isExpanded) {
-            const summary = li.children('.item-summary');
-            summary.slideUp(200, () => summary.remove());
-            li.removeClass('expanded');
+        if (li.hasClass('expanded')) {
+            summary.slideUp(200, () => {
+                li.removeClass('expanded');
+                summary.hide();
+            });
             item.expanded = false;
         } else {
-            const chatData = await item.getChatData();
-            const desiredDescription = chatData.description.short || chatData.description.value;
-            const div = $(`<div class="item-summary">${desiredDescription}</div>`);
-            Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to this HTML.
-
-            const props = $(`<div class="item-properties"></div>`);
-            chatData.properties.forEach(p => {
-                let tooltipValue = p.tooltip || p.title || "";
-                if (tooltipValue) tooltipValue = `data-tooltip="${tooltipValue}"`;
-                props.append(
-                    `<span class="tag" ${tooltipValue}><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
-                );
-            });
-
-            div.append(props);
-            li.append(div.hide());
-
-            div.slideDown(200, function() { /* noop */ });
+            summary.slideDown(200);
             li.addClass('expanded');
             item.expanded = true;
+            Hooks.callAll("renderItemSummary", this, summary, {});
         }
 
         await item.setFlag('sfrpg', 'expanded', item.expanded);
