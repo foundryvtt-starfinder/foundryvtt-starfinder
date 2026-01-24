@@ -1044,7 +1044,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to this HTML.
 
             const props = $(`<div class="item-properties"></div>`);
-            chatData.properties.forEach(p => {
+            chatData.chatProperties.forEach(p => {
                 let tooltipValue = p.tooltip || p.title || "";
                 if (tooltipValue) tooltipValue = `data-tooltip="${tooltipValue}"`;
                 props.append(
