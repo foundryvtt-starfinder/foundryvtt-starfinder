@@ -60,8 +60,11 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /** @inheritdoc */
     async close(options) {
-        for (const item of this.actor.items) {
-            item.setFlag('sfrpg', 'expanded', false);
+        const closeAllSetting = game.settings.get("sfrpg", "closeAllItemSummaries");
+        if (closeAllSetting) {
+            for (const item of this.actor.items) {
+                item.setFlag('sfrpg', 'expanded', false);
+            }
         }
         return super.close(options);
     }
