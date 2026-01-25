@@ -347,7 +347,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         }
 
         // Filter properties and return
-        data.properties = props.filter(p => !!p.value && !!p.name);
+        data.chatProperties = props.filter(p => !!p.value && !!p.name);
         return data;
     }
 
