@@ -58,6 +58,14 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         });
     }
 
+    /** @inheritdoc */
+    async close(options) {
+        for (const item of this.actor.items) {
+            item.setFlag('sfrpg', 'expanded', false);
+        }
+        return super.close(options);
+    }
+
     /**
      * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
      */
@@ -1060,7 +1068,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     }
 
     /**
-     * Handle rolling of an item form the Actor sheet, obtaining the item instance an dispatching to it's roll method.
+     * Handle creation and display of a short summary for an item when it is clicked on in the character sheet
      *
      * @param {Event} event The html event
      */
