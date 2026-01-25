@@ -1,3 +1,15 @@
+# Development
+Changes made to the most recent dev version
+
+## Breaking Changes
+
+- `item.getChatData()` returns chat properties as `chatProperties` rather than `properties`, which is where they're now spaced in chat message card .hbs files
+
+## Bugfixes
+
+- Item cards display properties in the footer of the card correctly now
+- Item summaries displayed on actor sheets no longer break item properties by overriding them
+
 # 0.30.0 - Targets Everywhere!
 This new system version adds new features to Starfinder 1e supporting Foundry's "targeting" system, including evaluation of rolls against targets and success/failure/hit/miss display for attack rolls, checks, and saves.
 
@@ -22,6 +34,7 @@ This new system version adds new features to Starfinder 1e supporting Foundry's 
 
 ## Data Entry & Localization
 - Acid Cannon Items have their descriptions added and HP corrected by @TheWaywardAldori
+- A whole slew of weapons (Bone, Cold, Disintegrator, and ~1/2 of the Flame Weapons) from Armory have been updated to modernize their data by @iankid
 
 # 0.29.2 - Damage Revisited
 This update overhauls the Damage Reduction/Energy Resistance system to support all types present in the game.
