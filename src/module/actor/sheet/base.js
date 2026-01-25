@@ -1087,16 +1087,17 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         if (item.expanded || false) {
             const summary = li.children('.item-summary');
+            li.removeClass('expanded');
+            item.expanded = false;
             summary.slideUp(200, () => {
-                li.removeClass('expanded');
-                item.expanded = false;
                 item.setFlag('sfrpg', 'expanded', false);
             });
         } else {
             const summary = await this._prepareItemSummary(item);
+            li.append(summary.hide());
+            li.addClass('expanded');
+            item.expanded = true;
             summary.slideDown(200, () => {
-                li.addClass('expanded');
-                item.expanded = true;
                 item.setFlag('sfrpg', 'expanded', true);
             });
         }
