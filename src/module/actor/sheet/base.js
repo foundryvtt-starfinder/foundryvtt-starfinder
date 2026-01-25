@@ -165,7 +165,6 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         for (const item of data.items) {
             const chatData = await item.getChatData();
             item.enrichedDescription = chatData.description.short || chatData.description.value;
-            item.properties = chatData.properties;
         }
 
         // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
@@ -181,7 +180,6 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             secrets
         });
 
-        this.data = data;
         return data;
     }
 
@@ -220,7 +218,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             const summary = $(el);
             const li = summary.parents('.item');
             const itemId = li.data('item-id');
-            const item = this.data.items.find(x => x.id === itemId);
+            const item = this.actor.items.find(x => x.id === itemId);
             if (item && item.expanded && !li.hasClass('expanded')) {
                 li.addClass('expanded');
             }

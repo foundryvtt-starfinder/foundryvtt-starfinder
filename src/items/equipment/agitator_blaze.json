@@ -34,7 +34,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 33
       },
       "size": "medium",
       "sturdy": true
@@ -44,7 +44,7 @@
       "max": 40,
       "value": 0
     },
-    "chatFlavor": "Boost 1d6",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": true,
@@ -69,6 +69,17 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -87,9 +98,7 @@
             "electricity": false,
             "fire": true,
             "healing": false,
-            "nonlethal": false,
             "piercing": false,
-            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -102,7 +111,7 @@
           "name": "",
           "formula": "2d6",
           "group": null,
-          "isPrimarySection": false,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -126,7 +135,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>An agitator is a portable generator of microwave radiation that rapidly heats up targets to create internal bubbles of steam or makes targets burst into flames. The longer the weapon is focused, the more intense the agitation becomes, making it a favored by the defenders of bunkers, guard posts, and other emplacements. Ember agitators and blaze agitators rely on individual generators, taking the form of a bulky cylinder in the middle of the gun that hums ominously as the weapon fires, but miniaturization technology allows inferno agitators and solar flare agitators to include multiple smaller generators for increased effect.</p>"
     },
     "duration": {
       "units": "instantaneous",
@@ -140,7 +149,24 @@
     "isActive": false,
     "isEquipment": true,
     "level": 6,
-    "modifiers": [],
+    "modifiers": [
+      {
+        "_id": "f51ca2e0-a407-49fe-b8ca-6e873ccdb8f8",
+        "name": "Boost",
+        "type": "untyped",
+        "condition": "",
+        "effectType": "all-damage",
+        "enabled": false,
+        "limitTo": "parent",
+        "max": 6,
+        "modifier": "1d6",
+        "modifierType": "formula",
+        "notes": "You can charge up a weapon with this special property as a move action. When you do, you increase the weapon’s damage by the listed amount on the next attack you make with the weapon. Boosting expends charges from the weapon equal to its usage value. This increases the weapon’s damage and is multiplied on a critical hit. Boosting a weapon more than once before firing it doesn’t have any extra effect, and the extra charge dissipates if the weapon is not fired by the end of your next turn.",
+        "source": "",
+        "subtab": "misc",
+        "valueAffected": ""
+      }
+    ],
     "price": 4300,
     "proficient": false,
     "properties": {
@@ -149,7 +175,7 @@
         "value": true
       },
       "boost": {
-        "extension": "",
+        "extension": "1d6",
         "value": true
       },
       "two": {
@@ -175,7 +201,7 @@
       "variable": false
     },
     "slug": "",
-    "source": "AR",
+    "source": "AR pg. 37",
     "special": "",
     "specialMaterials": {},
     "target": {
@@ -186,9 +212,9 @@
       "value": 1
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 1
+      "value": null
     },
     "weaponCategory": "flame",
     "weaponType": "heavy"

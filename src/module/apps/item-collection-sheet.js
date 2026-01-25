@@ -148,7 +148,6 @@ export class ItemCollectionSheet extends DocumentSheet {
             const item = itemData.item;
             const chatData = await this.getChatData(item, { secrets: true, rollData: item });
             item.enrichedDescription = chatData.system.description.value;
-            item.properties = chatData.properties;
         }
 
         data.itemCollection = tokenData;
@@ -346,7 +345,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         }
 
         // Filter properties and return
-        data.properties = props.filter(p => !!p.value && !!p.name);
+        data.chatProperties = props.filter(p => !!p.value && !!p.name);
         return data;
     }
 
