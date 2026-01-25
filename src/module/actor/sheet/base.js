@@ -441,6 +441,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         });
         div.append(props);
         item.summaryHTML = div[0].outerHTML;
+        Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to this HTML.
         return div;
     }
 
