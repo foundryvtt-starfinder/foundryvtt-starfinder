@@ -168,7 +168,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                 const desiredDescription = chatData.description.short || chatData.description.value;
                 const div = $(`<div class="item-summary">${desiredDescription}</div>`);
                 const props = $(`<div class="item-properties"></div>`);
-                chatData.properties.forEach(p => {
+                chatData.chatProperties.forEach(p => {
                     let tooltipValue = p.tooltip || p.title || "";
                     if (tooltipValue) tooltipValue = `data-tooltip="${tooltipValue}"`;
                     props.append(

@@ -139,7 +139,7 @@ export class ItemCollectionSheet extends DocumentSheet {
                 const chatData = await this.getChatData(item, { secrets: true, rollData: item });
                 const div = $(`<div class="item-summary">${chatData.system.description.value}</div>`);
                 const props = $(`<div class="item-properties"></div>`);
-                chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tooltip='" + p.tooltip + "'") : ""}>${p.name}</span>`));
+                chatData.chatProperties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tooltip='" + p.tooltip + "'") : ""}>${p.name}</span>`));
                 div.append(props);
                 item.summaryHTML = div[0].outerHTML;
             }
