@@ -2,7 +2,7 @@
  * A list of the notifications to display, as well as the system version associated with them
  */
 const updateNotifications = {
-    0.1: {
+    0.001: {
         version: "0.30.1",
         message: "To facilitate better communication between the system developers and users, we have added this notification system, starting in Version 0.30.1, which will display upon installing a new system version with significant changes to be aware of. If an update is minor, you may not see one of these messages.<br>As they will only show up upon installing a new system version and we don't have the ability to wait for localization for all languages before releasing system updates, these messages will unfortunately only be in English (apologies to international users!)."
     }
