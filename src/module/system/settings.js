@@ -7,7 +7,7 @@ export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "chatNotificationDuration", {
         name: "SFRPG.Settings.ChatNotificationDuration.Name",
         hint: "SFRPG.Settings.ChatNotificationDuration.Hint",
-        scope: "client",
+        scope: "user",
         config: true,
         default: 5000,
         type: Number,
@@ -48,7 +48,7 @@ export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "autoCollapseItemCards", {
         name: "SFRPG.Settings.AutoCollapseCard.Name",
         hint: "SFRPG.Settings.AutoCollapseCard.Hint",
-        scope: "client",
+        scope: "user",
         config: true,
         default: false,
         type: Boolean,
@@ -194,7 +194,7 @@ export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "rollDamageWithAttack", {
         name: "SFRPG.Settings.DamageWithAttack.Name",
         hint: "SFRPG.Settings.DamageWithAttack.Hint",
-        scope: "client",
+        scope: "user",
         config: true,
         default: false,
         type: Boolean
@@ -216,7 +216,7 @@ export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "alwaysShowQuantity", {
         name: "SFRPG.Settings.AlwaysShowQuantity.Name",
         hint: "SFRPG.Settings.AlwaysShowQuantity.Hint",
-        scope: "client",
+        scope: "user",
         config: true,
         default: false,
         type: Boolean,
@@ -263,7 +263,7 @@ export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "rulerColor0", {
         name: "SFRPG.Settings.rulerColor0.Name",
         hint: "SFRPG.Settings.rulerColor0.Hint",
-        scope: "client",
+        scope: "user",
         config: true,
         default: "#0080FF",
         type: new foundry.data.fields.ColorField()
@@ -271,7 +271,7 @@ export const registerSystemSettings = function() {
 
     game.settings.register("sfrpg", "rulerColor1", {
         name: "SFRPG.Settings.rulerColor1.Name",
-        scope: "client",
+        scope: "user",
         config: true,
         default: "#F06400",
         type: new foundry.data.fields.ColorField()
@@ -279,7 +279,7 @@ export const registerSystemSettings = function() {
 
     game.settings.register("sfrpg", "rulerColor2", {
         name: "SFRPG.Settings.rulerColor2.Name",
-        scope: "client",
+        scope: "user",
         config: true,
         default: "#80004F",
         type: new foundry.data.fields.ColorField()
