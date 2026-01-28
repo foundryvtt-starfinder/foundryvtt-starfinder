@@ -46,6 +46,7 @@ import { preloadHandlebarsTemplates, setupHandlebars } from "./module/handlebars
 import { ItemSFRPG } from "./module/item/item.js";
 import { ItemSheetSFRPG } from "./module/item/sheet.js";
 import migrateWorld from './module/migration.js';
+import { updateNotification } from './module/apps/update-notification';
 import SFRPGModifier from "./module/modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module/modifiers/types.js";
 import { RPC } from "./module/rpc.js";
@@ -686,6 +687,7 @@ Hooks.once("ready", async () => {
         connectToDocument(macro);
     }
 
+    // Migration system
     if (game.users.activeGM?.isSelf) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.flags.sfrpg.schema);
@@ -714,6 +716,11 @@ Hooks.once("ready", async () => {
 
     }
 
+    // System Update Notifications
+    if (game.users.activeGM?.isSelf) {
+        updateNotification();
+    }
+
     Hooks.on("dropCanvasData", (canvas, data) => canvasHandler(canvas, data));
 
     const finishTime = (new Date()).getTime();
@@ -722,6 +729,13 @@ Hooks.once("ready", async () => {
     const startupDuration = finishTime - initTime;
     console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
+
+/**
+ * Migrates containers from an old format (not sure what version) to a modern version.
+ * This should probably be removed at some point, since Data Model migration is preferable.
+ *
+ * @returns {[Promise]} An array of promises to resolve
+ */
 async function migrateOldContainers() {
     const promises = [];
     for (const actor of game.actors.contents) {
