@@ -57,15 +57,6 @@ export const registerSystemSettings = function() {
         }
     });
 
-    game.settings.register("sfrpg", "worldSchemaVersion", {
-        name: "SFRPG.Settings.WorldSchemaVersion.Name",
-        hint: "SFRPG.Settings.WorldSchemaVersion.Hint",
-        scope: "world",
-        config: false,
-        default: 0,
-        type: Number
-    });
-
     game.settings.register("sfrpg", "useCustomChatCards", {
         name: "SFRPG.Settings.UseCustomChatCard.Name",
         hint: "SFRPG.Settings.UseCustomChatCard.Hint",
@@ -349,5 +340,23 @@ export const registerSystemSettings = function() {
                 }
             });
         }
+    });
+
+    game.settings.register("sfrpg", "notificationSchema", {
+        name: "SFRPG.Settings.NotificationSchema.Name",
+        hint: "SFRPG.Settings.NotificationSchema.Hint",
+        scope: "world",
+        config: true,
+        default: 0,
+        type: Number
+    });
+
+    game.settings.register("sfrpg", "worldSchemaVersion", {
+        name: "SFRPG.Settings.WorldSchemaVersion.Name",
+        hint: "SFRPG.Settings.WorldSchemaVersion.Hint",
+        scope: "world",
+        config: false,
+        default: 0,
+        type: Number
     });
 };
