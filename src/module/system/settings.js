@@ -345,7 +345,7 @@ export const registerSystemSettings = function() {
     game.settings.register("sfrpg", "notificationSchema", {
         name: "SFRPG.Settings.NotificationSchema.Name",
         hint: "SFRPG.Settings.NotificationSchema.Hint",
-        scope: "world",
+        scope: "user",
         config: true,
         default: 0,
         type: Number

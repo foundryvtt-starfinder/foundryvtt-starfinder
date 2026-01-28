@@ -19,10 +19,13 @@ export async function updateNotification() {
 
     if (systemNotificationSchema > worldSchema) {
         // Get list of update versions and list of messages to display
-        const toDisplay = [];
-        for (const [schema, entry] of Object.entries(updateNotifications)) {
-            if (Number(schema) > worldSchema && Number(schema) <= systemNotificationSchema) {
-                toDisplay.push(entry);
+        // Only display the latest message if the user is new (schema setting at default of 0)
+        const toDisplay = worldSchema === 0 ? [updateNotifications[systemNotificationSchema]] : [];
+        if (worldSchema !== 0) {
+            for (const [schema, entry] of Object.entries(updateNotifications)) {
+                if (Number(schema) > worldSchema && Number(schema) <= systemNotificationSchema) {
+                    toDisplay.push(entry);
+                }
             }
         }
 
