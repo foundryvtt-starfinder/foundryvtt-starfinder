@@ -35,25 +35,7 @@ import { } from "./crew-update.js";
 export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
 
     constructor(data, context) {
-        // Set module art if available. This applies art to actors viewed or created from compendiums.
-        if (context.pack && data._id) {
-            const art = game.sfrpg.compendiumArt.map.get(`Compendium.${context.pack}.${data._id}`);
-            if (art) {
-                data.img = art.actor;
-                const tokenArt = typeof art.token === "string"
-                    ? { texture: { src: art.token } }
-                    : {
-                        texture: {
-                            src: art.token.img,
-                            scaleX: art.token.scale,
-                            scaleY: art.token.scale
-                        }
-                    };
-                data.prototypeToken = foundry.utils.mergeObject(data.prototypeToken ?? {}, tokenArt);
-            }
-        }
         super(data, context);
-        // console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
     }
 
     // Temporary effects are displayed on the token, so hijack it and include effects

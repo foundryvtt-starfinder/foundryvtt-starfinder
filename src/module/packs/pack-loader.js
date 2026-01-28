@@ -59,7 +59,6 @@ export class PackLoader {
 
             if (!data) {
                 const content = await pack.getIndex({ fields });
-                this.setCompendiumArt(pack.collection, content);
                 data = this.loadedPacks[entityType][packId] = {
                     pack,
                     content
@@ -75,19 +74,6 @@ export class PackLoader {
         }
 
         ui.notifications.remove(progress);
-    }
-
-    /**
-     * @param {string} packName
-     * @param {Collection[]} index
-     */
-    setCompendiumArt(packName, index) {
-        if (!packName.startsWith("sfrpg.")) return;
-        for (const record of index) {
-            const entry = game.sfrpg.compendiumArt.map.get(`Compendium.${packName}.${record._id}`);
-            const art = entry?.actor ?? entry?.item;
-            record.img = art ?? record.img;
-        }
     }
 }
 

@@ -18,13 +18,6 @@ import { ItemChatMixin } from "./mixins/item-chat.js";
 export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin, ItemChatMixin) {
 
     constructor(data, context = {}) {
-        // Set module art if available. This applies art to items viewed or created from compendiums.
-        if (context.pack && data._id) {
-            const art = game.sfrpg.compendiumArt.map.get(`Compendium.${context.pack}.${data._id}`);
-            if (art) {
-                data.img = art.item;
-            }
-        }
         super(data, context);
     }
 
