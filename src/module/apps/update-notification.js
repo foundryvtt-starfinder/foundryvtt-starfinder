@@ -1,6 +1,9 @@
 /**
  * A list of the notifications to display, as well as the system version associated with them.
- * `userType` has options "gm" or "all" to show to either just GMs or all users, respectively
+ *
+ * `version` should be a string containing the version number.
+ * `userType` has options "gm" or "all" to show to either just GMs or all users, respectively.
+ * `message` is the message to display. Supports html tags for formatting.
  */
 const updateNotifications = {
     0.001: {
