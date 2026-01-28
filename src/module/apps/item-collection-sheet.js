@@ -79,7 +79,7 @@ export class ItemCollectionSheet extends DocumentSheet {
     /**
      * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
      */
-    async getData() {
+    getData() {
         const data = super.getData();
         data.isCharacter = true;
         data.isOwner = game.user.isGM;
