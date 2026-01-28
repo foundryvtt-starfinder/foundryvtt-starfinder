@@ -1,5 +1,5 @@
 import AbilityTemplate from "../../canvas/ability-template.js";
-import BaseEnricher from "./base.js";
+import BaseEnricher, { getDatasetfromEvent } from "./base.js";
 
 /**
  * Place a template
@@ -65,10 +65,13 @@ export default class TemplateEnricher extends BaseEnricher {
     }
 
     static hasRepost = true;
-    static hasListener = true;
+    static listeners = {
+        "click": this.#clickListener
+    };
 
-    static async listener(event) {
-        let { type, distance, color, texture } = event.currentTarget.dataset;
+    static async #clickListener(event) {
+        const data = getDatasetfromEvent(event);
+        let { type, distance, color, texture } = data;
 
         type = {
             "sphere": "circle",
@@ -82,7 +85,7 @@ export default class TemplateEnricher extends BaseEnricher {
 
         const template = AbilityTemplate.fromData({
             type: type || "circle",
-            distance: distance ||  0,
+            distance: distance ||  5,
             color: color || null,
             texture: texture || null,
             hidden: event.altKey

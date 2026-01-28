@@ -1,30 +1,26 @@
 /**
- * @typedef {Object} CustomEnricher
- * @property {RegExp} pattern
- * @property {EnricherFunction} enricher
+ * @import { TextEditorEnricherConfig, TextEditorEnricher } from "@client/config.mjs"
+ * @import HTMLEnrichedContentElement from "@client/applications/elements/enriched-content.mjs"
  */
 
 /**
  * Abstract base class for enrichers which carries validation and basic element creation.
  * @abstract
  * @class
+ * @type {TextEditorEnricherConfig}
  */
 export default class BaseEnricher {
-
-    /** @type {CustomEnricher} */
     constructor() {
         if (this.constructor === BaseEnricher) throw new Error(
             "The BaseEnricher class is an abstract class and may not be instantiated."
         );
         this.pattern = this.regex;
         this.enricher = this.enricherFunc.bind(this);
+        this.onRender = this.onRenderFunc.bind(this);
+        this.id = `sfrpg.${this.enricherType || "base"}`;
     }
 
-    /** --------
-    |           |
-    |  Getters  |
-    |           |
-    ----------*/
+    /** Getters */
 
     /**
      * The RegExp to capture the text.
@@ -52,25 +48,20 @@ export default class BaseEnricher {
 
     /**
      * An object of FA icons to be used in the element
-     * @returns {Object}
+     * @returns {Record<string, string>}
      */
     get icons() {
         throw new Error("This method must be implemented on subclasses of BaseEnricher.");
     }
 
-    /** -------------------
-    |                      |
-    |  Element Generation  |
-    |                      |
-    ----------------------*/
+    /** Element Generation */
 
     /**
      * Transform the Regex match array into an enriched element, performing validation.
-     * @callback EnricherFunction
-     * @param {RegExp} match A Regex match array from the inputted text
-     * @returns {HTMLElement} The enriched element
+     * @type {TextEditorEnricher}
+     * @returns {Promise<HTMLElement|null>}
      */
-    enricherFunc(match) {
+    async enricherFunc(match) {
         this.match = match;
 
         if (this.match[3]) this.name = this.match[3];
@@ -81,7 +72,7 @@ export default class BaseEnricher {
         // Early return an error element if invalid
         if (!this.isValid()) return this.element;
 
-        this.validateName();
+        await this.validateName();
 
         this.element = this.createElement();
 
@@ -113,7 +104,7 @@ export default class BaseEnricher {
      */
     isValid() {
         if (!this.args.type || !this.validTypes.includes(this.args.type)) {
-            return this._failValidation("Type");
+            return this._failValidation("Type", this.args.type || "");
         }
 
         return true;
@@ -124,17 +115,21 @@ export default class BaseEnricher {
      * @param {String} failedArg The argument that failed validation, to be used in the error element
      * @returns {false}
      */
-    _failValidation(failedArg) {
+    _failValidation(failedArg, invalidValue) {
+        const message = `@${this.enricherType} parsing failed! ${failedArg} ${invalidValue ? `"${invalidValue}" ` : ""}is invalid.`;
+
         const strong = document.createElement("strong");
-        strong.innerText = `${this.enricherType} parsing failed! ${failedArg} is invalid.`;
+        strong.innerText = message;
         this.element = strong;
+
+        console.error(message, this.constructor.name);
         return false;
     }
 
     /**
      * Sets a default name if none was given
      */
-    validateName() {
+    async validateName() {
         this.name ||= `${this.args.type.capitalize()} ${this.enricherType}`;
     }
 
@@ -154,16 +149,12 @@ export default class BaseEnricher {
 
         a.innerText = this.name;
 
-        if (this.#_hasRepost) a = this.addRepost(a);
+        if (this.#hasRepost) a = this.addRepost(a);
 
         return a;
     }
 
-    /** -------
-    |          |
-    |  Repost  |
-    |          |
-    -----------*/
+    /** Repost */
 
     /**
      * Should this enricher have a repost button appended to created elements?
@@ -172,7 +163,7 @@ export default class BaseEnricher {
      */
     static hasRepost = false;
     /** @type {Boolean} */
-    #_hasRepost = this.constructor.hasRepost;
+    #hasRepost = this.constructor.hasRepost;
 
     /**
      * Take an anchor element and append a repost button
@@ -189,12 +180,26 @@ export default class BaseEnricher {
         return a;
     }
 
+    /** Listeners */
+
+    /** @type {Record<string, (event: Event) => void>}*/
+    static listeners = {};
+
+    /** @param {HTMLEnrichedContentElement} enrichedElement */
+    onRenderFunc(enrichedElement) {
+        if (this.#hasRepost) enrichedElement.querySelector("i.repost")?.addEventListener("click", this.repostListener);
+
+        for (const [event, listener] of Object.entries(this.constructor.listeners)) {
+            enrichedElement.addEventListener(event, listener);
+        }
+    }
+
     /**
      * Handle repost button click, sending a chat message of the current target to chat.
      * @param {Event} event
      * @returns Create a chat message
      */
-    static repostListener(event) {
+    repostListener(event) {
         event.stopPropagation();
         const element = event.currentTarget.parentElement.cloneNode(true);
         for (const child of element.children) {
@@ -211,34 +216,9 @@ export default class BaseEnricher {
         return ChatMessage.create({content: element.outerHTML});
     }
 
-    /** ---------
-    |            |
-    |  Listener  |
-    |            |
-    ------------*/
+}
 
-    /**
-     * Whether the enricher has an event listener.
-     * @type {Boolean}
-     */
-    static hasListener = false;
-
-    /**
-     * A callback function to run when the element is clicked.
-     * @param {Event} event The DOM event that triggers the listener
-     * @returns {void}
-     */
-    // eslint-disable-next-line no-unused-vars
-    static listener(event) {}
-
-    /**
-     * Add Event listeners to the DOM body at startup.
-     */
-    static addListeners() {
-        const body = $("body");
-        body.on("click", `i.repost`, this.repostListener);
-        for (const [action, cls] of Object.entries(CONFIG.SFRPG.enricherTypes)) {
-            if (cls.hasListener) body.on("click", `a[data-action="${action}"]`, cls.listener);
-        }
-    }
+export function getDatasetfromEvent(event) {
+    const anchorEl = event.currentTarget.children[0];
+    return anchorEl?.dataset || null;
 }

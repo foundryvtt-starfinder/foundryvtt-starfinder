@@ -55,12 +55,6 @@ import { registerSystemSettings } from "./module/system/settings.js";
 import TooltipManagerSFRPG from "./module/tooltip.js";
 import { generateUUID, rerenderApps } from "./module/utils/utilities.js";
 
-import BaseEnricher from "./module/system/enrichers/base.js";
-import BrowserEnricher from "./module/system/enrichers/browser.js";
-import CheckEnricher from "./module/system/enrichers/check.js";
-import IconEnricher from "./module/system/enrichers/icon.js";
-import TemplateEnricher from "./module/system/enrichers/template.js";
-
 import RollDialog from "./module/apps/roll-dialog.js";
 import AbilityTemplate from "./module/canvas/ability-template.js";
 import setupVision from "./module/canvas/vision.js";
@@ -71,8 +65,8 @@ import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
 import registerCompendiumArt from "./module/system/compendium-art.js";
 import { connectToDocument, rollItemMacro } from "./module/system/hotbar-macros.js";
-import SFRPGTokenDocument from "./module/token/tokendocument.js";
 import SFRPGTokenRuler from "./module/token/token-ruler.js";
+import SFRPGTokenDocument from "./module/token/tokendocument.js";
 
 import { extendDragData } from "./module/item/drag-data.js";
 import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js";
@@ -123,6 +117,7 @@ const moduleStructure = {
         SFRPGModifierApplication,
         TraitSelectorSFRPG
     },
+    conditionCache: new Map(),
     compendiumArt: { map: new Map(), refresh: registerCompendiumArt },
     config: SFRPG,
     dice: DiceSFRPG,
@@ -395,7 +390,7 @@ Hooks.once('init', async function() {
     preloadHandlebarsTemplates();
 
     console.log("Starfinder | [INIT] Setting up inline buttons");
-    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher(), new TemplateEnricher());
+    CONFIG.TextEditor.enrichers.push(...Object.values(CONFIG.SFRPG.enricherTypes).map(cls => new cls()));
 
     console.log("Starfinder | [INIT] Applying inline icons");
     CONFIG.Actor.typeIcons = {
@@ -656,6 +651,7 @@ Hooks.once("setup", function() {
 
     console.log("Starfinder | [SETUP] Caching starship actions");
     ActorSheetSFRPGStarship.ensureStarshipActions();
+    ActorSFRPG.generateConditionCache();
 
     console.log("Starfinder | [SETUP] Registering custom handlebars");
     setupHandlebars();
@@ -678,7 +674,7 @@ Hooks.once("ready", async () => {
     registerCompendiumArt();
 
     console.log("Starfinder | [READY] Setting up event listeners");
-    BaseEnricher.addListeners();
+    // BaseEnricher.addListeners();
     ItemSFRPG.chatListeners($("body"));
     extendDragData();
 
