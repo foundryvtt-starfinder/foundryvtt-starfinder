@@ -573,4 +573,8 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             })
         };
     }
+
+    get item() {
+        return this.parent;
+    }
 }
