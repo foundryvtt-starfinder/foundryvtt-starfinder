@@ -58,6 +58,17 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         });
     }
 
+    /** @inheritdoc */
+    async close(options) {
+        const closeAllSetting = game.settings.get("sfrpg", "closeAllItemSummaries");
+        if (closeAllSetting) {
+            for (const item of this.actor.items) {
+                item.setFlag('sfrpg', 'expanded', false);
+            }
+        }
+        return super.close(options);
+    }
+
     /**
      * Add some extra data when rendering the sheet to reduce the amount of logic required within the template.
      */
@@ -157,6 +168,13 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         this._prepareItems(data);
 
+        for (const item of data.items) {
+            item.expanded = item.getFlag('sfrpg', 'expanded') || false;
+            if (item.expanded) {
+                await this._prepareItemSummary(item);
+            }
+        }
+
         // Enrich text editors. The below are used for character, drone and npc(2). Other types use editors defined in their class.
         const secrets = this.actor.isOwner;
         data.enrichedBiography = await foundry.applications.ux.TextEditor.enrichHTML(this.actor.system.details.biography.value, {
@@ -202,6 +220,17 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
      */
     async activateListeners(html) {
         super.activateListeners(html);
+
+        // Add summary divs for initially expanded items
+        html.find('.item').each((i, el) => {
+            const li = $(el);
+            const itemId = li.data('item-id');
+            const item = this.actor.items.find(x => x.id === itemId);
+            if (item && item.expanded) {
+                li.addClass('expanded');
+                li.append(item.summaryHTML);
+            }
+        });
 
         html.find('[data-wpad]').each((i, e) => {
             const text = e.tagName === "INPUT" ? e.value : e.innerText,
@@ -395,6 +424,28 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                 break;
         }
         app?.render(true);
+    }
+
+    /**
+     * Prepares drop-down summary HTML for expanded items on character sheets
+     * @param {ItemSFRPG} item      An item to prepare the summary for
+     */
+    async _prepareItemSummary(item) {
+        const chatData = await item.getChatData();
+        const desiredDescription = chatData.description.short || chatData.description.value;
+        const div = $(`<div class="item-summary">${desiredDescription}</div>`);
+        const props = $(`<div class="item-properties"></div>`);
+        chatData.chatProperties.forEach(p => {
+            let tooltipValue = p.tooltip || p.title || "";
+            if (tooltipValue) tooltipValue = `data-tooltip="${tooltipValue}"`;
+            props.append(
+                `<span class="tag" ${tooltipValue}><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
+            );
+        });
+        div.append(props);
+        item.summaryHTML = div[0].outerHTML;
+        Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to this HTML.
+        return div;
     }
 
     _prepareTraits(traits) {
@@ -1025,7 +1076,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     }
 
     /**
-     * Handle rolling of an item form the Actor sheet, obtaining the item instance an dispatching to it's roll method.
+     * Handle creation and display of a short summary for an item when it is clicked on in the character sheet
      *
      * @param {Event} event The html event
      */
@@ -1033,33 +1084,23 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
         const li = $(event.currentTarget).parents('.item');
         const item = this.actor.items.get(li.data('item-id'));
-        const chatData = await item.getChatData();
 
-        if (li.hasClass('expanded')) {
+        if (item.expanded || false) {
             const summary = li.children('.item-summary');
-            summary.slideUp(200, () => summary.remove());
+            li.removeClass('expanded');
+            item.expanded = false;
+            summary.slideUp(200, () => {
+                item.setFlag('sfrpg', 'expanded', false);
+            });
         } else {
-            const desiredDescription = chatData.description.short || chatData.description.value;
-            const div = $(`<div class="item-summary">${desiredDescription}</div>`);
-            Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to this HTML.
-
-            const props = $(`<div class="item-properties"></div>`);
-            chatData.chatProperties.forEach(p => {
-                let tooltipValue = p.tooltip || p.title || "";
-                if (tooltipValue) tooltipValue = `data-tooltip="${tooltipValue}"`;
-                props.append(
-                    `<span class="tag" ${tooltipValue}><strong>${p.title ? p.title + ":" : ""} </strong>${p.name}</span>`
-                );
-            }
-            );
-
-            div.append(props);
-            li.append(div.hide());
-
-            div.slideDown(200, function() { /* noop */ });
+            const summary = await this._prepareItemSummary(item);
+            li.append(summary.hide());
+            li.addClass('expanded');
+            item.expanded = true;
+            summary.slideDown(200, () => {
+                item.setFlag('sfrpg', 'expanded', true);
+            });
         }
-        li.toggleClass('expanded');
-
     }
 
     async _onItemSplit(event) {
