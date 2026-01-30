@@ -69,7 +69,6 @@ import SFRPGRoll from "./module/rolls/roll.js";
 import RollContext from "./module/rolls/rollcontext.js";
 import RollNode from "./module/rolls/rollnode.js";
 import RollTree from "./module/rolls/rolltree.js";
-import registerCompendiumArt from "./module/system/compendium-art.js";
 import { connectToDocument, rollItemMacro } from "./module/system/hotbar-macros.js";
 import SFRPGTokenDocument from "./module/token/tokendocument.js";
 import SFRPGTokenRuler from "./module/token/token-ruler.js";
@@ -123,7 +122,6 @@ const moduleStructure = {
         SFRPGModifierApplication,
         TraitSelectorSFRPG
     },
-    compendiumArt: { map: new Map(), refresh: registerCompendiumArt },
     config: SFRPG,
     dice: DiceSFRPG,
     documents: { ActorSFRPG, ItemSFRPG, CombatSFRPG },
@@ -673,9 +671,6 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Setting up Vision Modes");
     setupVision();
-
-    console.log("Starfinder | [READY] Applying artwork from modules to compendiums");
-    registerCompendiumArt();
 
     console.log("Starfinder | [READY] Setting up event listeners");
     BaseEnricher.addListeners();
