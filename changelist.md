@@ -7,6 +7,7 @@ This update contains a few small fixes that fix a couple of bugs with the new ta
 ## Core System Improvements
 - Select Client settings are changed to User settings where they make sense
 - A new update notification system has been added to facilitate communication between the developers and users for when important changes are made.
+- `system.json` `title` field updated to "Starfinder First Edition"; `description` likewise updated
 
 ## Bugfixes
 - Item cards display properties in the footer of the card correctly now
