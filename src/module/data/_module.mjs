@@ -55,3 +55,6 @@ export { default as SFRPGItemVehicleAttack } from './item/vehicleAttack.mjs';
 export { default as SFRPGItemVehicleSystem } from './item/vehicleSystem.mjs';
 export { default as SFRPGItemWeapon } from './item/weapon.mjs';
 export { default as SFRPGItemWeaponAccessory } from './item/weaponAccessory.mjs';
+
+// Export Chat Messages
+export { default as SFRPGChatMessageBase } from './message/base-message.mjs';

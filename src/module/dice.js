@@ -2,6 +2,7 @@ import { SFRPG } from "./config.js";
 import RollTree from "./rolls/rolltree.js";
 import StackModifiers from "./rules/closures/stack-modifiers.js";
 import SFRPGRoll from "./rolls/roll.js";
+import { ChatMessageSFRPG } from "./chat/message.js";
 
 /**
  * @import SFRPGRoll from "./rolls/roll.js";
@@ -282,7 +283,7 @@ export class DiceSFRPG {
                 messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
 
                 // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
-                ChatMessage.create(messageData, { rollMode: rollInfo.mode });
+                ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
             }
 
             if (onClose) {
@@ -706,7 +707,7 @@ export class DiceSFRPG {
                     messageData.flags.sfrpg.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
                 }
 
-                ChatMessage.create(messageData, { rollMode: rollInfo.mode });
+                ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
             }
 
             if (onClose) {
@@ -735,7 +736,7 @@ export class DiceSFRPG {
     /**
      * Hightlight rolls that are considered critical successes or failures.
      *
-     * @param {ChatMessage} message            The ChatMessage document being rendered
+     * @param {ChatMessageSFRPG} message       The ChatMessage document being rendered
      * @param {JQuery}      html               The pending HTML as a jQuery object
      * @param {Object}      data               The input data provided for template rendering
      * @param {Object}      data.data          The ChatMessage data
@@ -811,7 +812,7 @@ export class DiceSFRPG {
     /**
      * Add damage types for damage rolls to the chat card.
      *
-     * @param {ChatMessage} message            The ChatMessage document being rendered
+     * @param {ChatMessageSFRPG} message       The ChatMessage document being rendered
      * @param {JQuery}      html               The pending HTML as a jQuery object
      */
     static addDamageTypes(message, html) {

@@ -10,9 +10,15 @@
 // Required for Vite to build Less files
 import './less/sfrpg.less';
 
-import { ActorItemHelper, initializeRemoteInventory } from "./module/actor/actor-inventory-utils.js";
+// Import SFRPG config data
+import { SFRPG } from "./module/config.js";
+
+// Import Actor class, helpers, and mixins
 import { ActorSFRPG } from "./module/actor/actor.js";
+import { ActorItemHelper, initializeRemoteInventory } from "./module/actor/actor-inventory-utils.js";
 import { SFRPGDamage, SFRPGHealingSetting } from "./module/actor/mixins/actor-damage.js";
+
+// Import Actor Sheets
 import { ActorSheetSFRPG } from "./module/actor/sheet/base.js";
 import { ActorSheetSFRPGCharacter } from "./module/actor/sheet/character.js";
 import { ActorSheetSFRPGDrone } from "./module/actor/sheet/drone.js";
@@ -21,66 +27,95 @@ import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
 import { ActorSheetSFRPGVehicle } from "./module/actor/sheet/vehicle.js";
 import { ActorSheetFlags } from './module/apps/actor-flags.js';
+
+// Import Item class, helpers, and mixins
+import { ItemSFRPG } from "./module/item/item.js";
+import { extendDragData } from "./module/item/drag-data.js";
+import { ItemSheetSFRPG } from "./module/item/sheet.js";
+
+// Import Combat class
+import { CombatSFRPG } from "./module/combat/combat.js";
+
+// Import Dice class
+import { DiceSFRPG } from './module/dice.js';
+
+// Import Roll class and functions
+import SFRPGRoll from "./module/rolls/roll.js";
+import RollContext from "./module/rolls/rollcontext.js";
+import RollNode from "./module/rolls/rollnode.js";
+import RollTree from "./module/rolls/rolltree.js";
+
+// Import Tokens
+import SFRPGTokenDocument from "./module/token/tokendocument.js";
+import { SFRPGTokenHUD } from './module/token/token-hud.js';
+import SFRPGTokenRuler from "./module/token/token-ruler.js";
+
+// Import Canvas Tools
+import AbilityTemplate from "./module/canvas/ability-template.js";
+import { canvasHandler } from "./module/canvas/canvas.js";
+import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/canvas/template-overrides.js";
+import setupVision from "./module/canvas/vision.js";
+
+// Import Chat Message functions
+import { ChatMessageSFRPG } from "./module/chat/message.js";
+import { addChatMessageContextOptions } from "./module/chat/chat-message-options.js";
+
+// Import Modifiers
+import SFRPGModifier from "./module/modifiers/modifier.js";
+import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module/modifiers/types.js";
+
+// Import Rules Engine
+import Engine from "./module/engine/engine.js";
+import registerSystemRules from "./module/rules.js";
+
+// Import dialog apps
 import { ChoiceDialog } from './module/apps/choice-dialog.js';
 import { DroneRepairDialog } from './module/apps/drone-repair-dialog.js';
 import { AddEditSkillDialog } from './module/apps/edit-skill-dialog.js';
 import { InputDialog } from './module/apps/input-dialog.js';
-import { ItemCollectionSheet } from './module/apps/item-collection-sheet.js';
 import { ItemDeletionDialog } from './module/apps/item-deletion-dialog.js';
-import SFRPGModifierApplication from './module/apps/modifier-app.js';
 import { ActorMovementConfig } from './module/apps/movement-config.js';
 import { NpcSkillToggleDialog } from './module/apps/npc-skill-toggle-dialog.js';
+import RollDialog from "./module/apps/roll-dialog.js";
 import { ShortRestDialog } from './module/apps/short-rest.js';
 import { SpellCastDialog } from './module/apps/spell-cast-dialog.js';
-import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
+
+// Import other apps
 import { HotbarSFRPG } from "./module/apps/ui/hotbar.js";
-import { canvasHandler } from "./module/canvas/canvas.js";
-import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/canvas/template-overrides.js";
-import { addChatMessageContextOptions } from "./module/chat/chat-message-options.js";
-import CounterManagement from "./module/classes/counter-management.js";
-import { CombatSFRPG } from "./module/combat/combat.js";
-import { SFRPG } from "./module/config.js";
-import { DiceSFRPG } from './module/dice.js';
-import Engine from "./module/engine/engine.js";
-import { preloadHandlebarsTemplates, setupHandlebars } from "./module/handlebars.js";
-import { ItemSFRPG } from "./module/item/item.js";
-import { ItemSheetSFRPG } from "./module/item/sheet.js";
-import migrateWorld from './module/migration.js';
+import { ItemCollectionSheet } from './module/apps/item-collection-sheet.js';
+import SFRPGModifierApplication from './module/apps/modifier-app.js';
+import { TraitSelectorSFRPG } from './module/apps/trait-selector.js';
 import { updateNotification } from './module/apps/update-notification';
-import SFRPGModifier from "./module/modifiers/modifier.js";
-import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module/modifiers/types.js";
-import { RPC } from "./module/rpc.js";
-import registerSystemRules from "./module/rules.js";
+
+// Import settings and migration
+import migrateWorld from './module/migration.js';
 import { registerSystemSettings } from "./module/system/settings.js";
 import TooltipManagerSFRPG from "./module/tooltip.js";
-import { generateUUID, rerenderApps } from "./module/utils/utilities.js";
 
+// Import Handlebars
+import { preloadHandlebarsTemplates, setupHandlebars } from "./module/handlebars.js";
+
+// Import HTML enrichers
 import BaseEnricher from "./module/system/enrichers/base.js";
 import BrowserEnricher from "./module/system/enrichers/browser.js";
 import CheckEnricher from "./module/system/enrichers/check.js";
 import IconEnricher from "./module/system/enrichers/icon.js";
 import TemplateEnricher from "./module/system/enrichers/template.js";
 
-import RollDialog from "./module/apps/roll-dialog.js";
-import AbilityTemplate from "./module/canvas/ability-template.js";
-import setupVision from "./module/canvas/vision.js";
+// Import item browsers
 import { initializeBrowsers } from "./module/packs/browsers.js";
-import SFRPGRoll from "./module/rolls/roll.js";
-import RollContext from "./module/rolls/rollcontext.js";
-import RollNode from "./module/rolls/rollnode.js";
-import RollTree from "./module/rolls/rolltree.js";
-import registerCompendiumArt from "./module/system/compendium-art.js";
-import { connectToDocument, rollItemMacro } from "./module/system/hotbar-macros.js";
-import SFRPGTokenDocument from "./module/token/tokendocument.js";
-import SFRPGTokenRuler from "./module/token/token-ruler.js";
-
-import { extendDragData } from "./module/item/drag-data.js";
 import { getAlienArchiveBrowser } from "./module/packs/alien-archive-browser.js";
 import { getEquipmentBrowser } from "./module/packs/equipment-browser.js";
 import { getSpellBrowser } from "./module/packs/spell-browser.js";
 import { getStarshipBrowser } from "./module/packs/starship-browser.js";
-import { SFRPGTokenHUD } from './module/token/token-hud.js';
+
+// Import Utilities
+import CounterManagement from "./module/classes/counter-management.js";
+import { RPC } from "./module/rpc.js";
+import registerCompendiumArt from "./module/system/compendium-art.js";
+import { connectToDocument, rollItemMacro } from "./module/system/hotbar-macros.js";
 import isObject from './module/utils/is-object.js';
+import { generateUUID, rerenderApps } from "./module/utils/utilities.js";
 
 // Import DataModel classes
 import * as models from './module/data/_module.mjs';
@@ -193,8 +228,6 @@ Hooks.once('init', async function() {
 ==================================================`
     );
 
-    // CONFIG.compatibility.mode = CONST.COMPATIBILITY_MODES.SILENT;
-
     console.log("Starfinder | [INIT] Initializing the rules engine");
     const engine = new Engine();
 
@@ -207,6 +240,7 @@ Hooks.once('init', async function() {
     console.log("Starfinder | [INIT] Overriding document classes");
     CONFIG.Actor.documentClass = ActorSFRPG;
     CONFIG.Item.documentClass = ItemSFRPG;
+    CONFIG.ChatMessage.documentClass = ChatMessageSFRPG;
     CONFIG.Combat.documentClass = CombatSFRPG;
     CONFIG.Dice.rolls.unshift(SFRPGRoll);
 
@@ -278,6 +312,11 @@ Hooks.once('init', async function() {
         vehicleSystem: models.SFRPGItemVehicleSystem,
         weapon: models.SFRPGItemWeapon,
         weaponAccessory: models.SFRPGItemWeaponAccessory
+    };
+
+    CONFIG.ChatMessage.dataModels = {
+        base: models.SFRPGChatMessageBase,
+        standard: models.SFRPGChatMessageBase
     };
 
     CONFIG.ui.hotbar = HotbarSFRPG;
