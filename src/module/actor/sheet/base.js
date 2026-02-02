@@ -63,7 +63,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const closeAllSetting = game.settings.get("sfrpg", "closeAllItemSummaries");
         if (closeAllSetting) {
             for (const item of this.actor.items) {
-                item.setFlag('sfrpg', 'expanded', false);
+                item.setFlag('sfrpg', `expanded.${game.user.id}`, false);
             }
         }
         return super.close(options);
@@ -169,7 +169,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         this._prepareItems(data);
 
         for (const item of data.items) {
-            item.expanded = item.getFlag('sfrpg', 'expanded') || false;
+            item.expanded = item.getFlag('sfrpg', `expanded.${game.user.id}`) || false;
             if (item.expanded) {
                 await this._prepareItemSummary(item);
             }
@@ -1090,7 +1090,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             li.removeClass('expanded');
             item.expanded = false;
             summary.slideUp(200, () => {
-                item.setFlag('sfrpg', 'expanded', false);
+                item.setFlag('sfrpg', `expanded.${game.user.id}`, false);
             });
         } else {
             const summary = await this._prepareItemSummary(item);
@@ -1098,7 +1098,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             li.addClass('expanded');
             item.expanded = true;
             summary.slideDown(200, () => {
-                item.setFlag('sfrpg', 'expanded', true);
+                item.setFlag('sfrpg', `expanded.${game.user.id}`, true);
             });
         }
     }
