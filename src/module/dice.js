@@ -1,4 +1,3 @@
-import SFRPGCustomChatMessage from "./chat/chatbox.js";
 import { SFRPG } from "./config.js";
 import RollTree from "./rolls/rolltree.js";
 import StackModifiers from "./rules/closures/stack-modifiers.js";
@@ -269,32 +268,8 @@ export class DiceSFRPG {
             // Chat Cards
             const itemContext = rollContext.allContexts['item'];
             const htmlData = [{ name: "rollNotes", value: itemContext?.system?.rollNotes }];
-            let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
-            let errorToThrow = null;
 
-            if (useCustomCard && chatMessage) {
-                // Push the roll to the ChatBox
-                const customData = {
-                    title: flavor,
-                    rollContext,
-                    speaker,
-                    rollMode: rollInfo.mode,
-                    breakdown: preparedRollExplanation,
-                    htmlData,
-                    rollType: rollType,
-                    rollOptions,
-                    rollDices: finalFormula.rollDices,
-                    rollSuccess,
-                    tags: tags
-                };
-
-                try {
-                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
-                } catch (error) {
-                    useCustomCard = false;
-                    errorToThrow = error;
-                }
-            } else if (!useCustomCard && chatMessage) {
+            if (chatMessage) {
                 const messageData = {
                     flavor,
                     speaker,
@@ -312,10 +287,6 @@ export class DiceSFRPG {
 
             if (onClose) {
                 onClose(roll, formula, finalFormula);
-            }
-
-            if (errorToThrow) {
-                throw errorToThrow;
             }
 
             return { roll, finalFormula };
@@ -702,44 +673,7 @@ export class DiceSFRPG {
             htmlData.push({ name: "damage-parts", value: JSON.stringify(tempParts) });
             htmlData.push({ name: "rollNotes", value: itemContext?.data?.damageNotes });
 
-            let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
-            let errorToThrow = null;
-            if (useCustomCard && chatMessage) {
-                // Push the roll to the ChatBox
-                const customData = {
-                    title: finalFlavor,
-                    rollContext:  rollContext,
-                    speaker: speaker,
-                    rollMode: rollInfo.mode,
-                    breakdown: preparedRollExplanation,
-                    tags: tags,
-                    htmlData: htmlData,
-                    rollType: rollType,
-                    damageTypeString: damageTypeString
-                };
-
-                // Add special materials, descriptors, and magic status to chat message flags (to overcome DR)
-                if (itemContext) {
-                    if (itemContext.entity.system.specialMaterials) {
-                        customData.specialMaterials = itemContext.entity.system.specialMaterials;
-                    }
-
-                    if (itemContext.entity.system.descriptors) {
-                        customData.descriptors = itemContext.entity.system.descriptors;
-                    }
-
-                    customData.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
-                }
-
-                try {
-                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
-                } catch (error) {
-                    useCustomCard = false;
-                    errorToThrow = error;
-                }
-            }
-
-            if (!useCustomCard && chatMessage) {
+            if (chatMessage) {
                 const rollContent = await roll.render({ htmlData: htmlData });
                 const messageData = {
                     content: rollContent,
@@ -777,10 +711,6 @@ export class DiceSFRPG {
 
             if (onClose) {
                 onClose(roll, formula, finalFormula, isCritical);
-            }
-
-            if (errorToThrow) {
-                throw errorToThrow;
             }
         }
 

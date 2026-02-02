@@ -952,7 +952,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         itemData.hasDamage = this.hasDamage;
         itemData.hasCapacity = this.hasCapacity();
 
-        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
+        const title = game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
         // Warn the user if there is no ammo left
         const usage = itemData.usage?.value || 0;
@@ -1172,7 +1172,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         } else { // If not an ECM weapon and not an NPC, use BAB/Piloting + Dex
             parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
         }
-        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
+        const title = game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
         // If max capacity is 0, assume the item doesn't have limited fire property
         if (this.hasCapacity() && this.getCurrentCapacity() <= 0 && this.getMaxCapacity() > 0) {
@@ -1265,7 +1265,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // TODO: Take vehicle's negative attack modifiers
         const parts = [];
 
-        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
+        const title = game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
         /** Build the roll context */
         const rollContext = new RollContext();
@@ -1376,21 +1376,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             return 0;
         }, 0);
 
-        let title = '';
-        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
-            if (isHealing) {
-                title = game.i18n.localize("SFRPG.Rolls.HealingRoll");
-            } else {
-                title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
-            }
-        } else {
-            if (isHealing) {
-                title = game.i18n.format("SFRPG.Rolls.HealingRollFull", {name: this.name});
-            } else {
-                title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
-            }
-        }
-
+        const title = isHealing ? game.i18n.format("SFRPG.Rolls.HealingRollFull", {name: this.name}) : game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
 
         /** Create additional modifiers. */
@@ -1500,12 +1486,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             part.isDamageSection = true;
         }
 
-        let title = '';
-        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
-            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
-        } else {
-            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
-        }
+        const title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
 
         /** Build the roll context */
         const rollContext = new RollContext();
@@ -1547,12 +1528,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             part.isDamageSection = true;
         }
 
-        let title = '';
-        if (game.settings.get('sfrpg', 'useCustomChatCards')) {
-            title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
-        } else {
-            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
-        }
+        const title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
 
         /** Build the roll context */
         const rollContext = new RollContext();

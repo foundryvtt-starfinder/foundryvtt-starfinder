@@ -19,7 +19,7 @@ const { terms, Roll } = foundry.dice;
  */
 
 /**
- * A custom implementation for the foundry {@link Roll} class.
+ * A custom implementation for the foundry {@link foundry.dice.Roll} class.
  *
  * @inheritdoc
  */
@@ -40,6 +40,8 @@ export default class SFRPGRoll extends Roll {
         this.breakdown = rollData.data.breakdown;
         /** @type {HtmlData[]} */
         this.htmlData = rollData.data.htmlData;
+        /** @type {string} */
+        this.rollType = "roll";
     }
 
     /**
