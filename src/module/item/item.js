@@ -558,7 +558,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         // Filter properties and return
-        data.properties = props.filter(p => !!p?.name);
+        data.chatProperties = props.filter(p => !!p?.name);
         return data;
     }
 

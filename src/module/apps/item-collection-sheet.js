@@ -200,7 +200,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             const div = $(`<div class="item-summary">${chatData.system.description.value}</div>`);
             Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to newly added HTML.
             const props = $(`<div class="item-properties"></div>`);
-            chatData.properties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tooltip='" + p.tooltip + "'") : ""}>${p.name}</span>`));
+            chatData.chatProperties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tooltip='" + p.tooltip + "'") : ""}>${p.name}</span>`));
 
             div.append(props);
             li.append(div.hide());

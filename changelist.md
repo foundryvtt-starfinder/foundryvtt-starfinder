@@ -1,3 +1,19 @@
+# Version 0.30.1
+This update contains a few small fixes that fix a couple of bugs with the new targeting system and chat cards, as well as introduces a method for us (the developers) to make announcements about new features and fixes to users.
+
+## Breaking Changes
+- `item.getChatData()` returns chat properties as `chatProperties` rather than `properties`, which is where they're now spaced in chat message card .hbs files
+
+## Core System Improvements
+- Select Client settings are changed to User settings where they make sense
+- A new update notification system has been added to facilitate communication between the developers and users for when important changes are made.
+- `system.json` `title` field updated to "Starfinder First Edition"; `description` likewise updated
+
+## Bugfixes
+- Item cards display properties in the footer of the card correctly now
+- Item summaries displayed on actor sheets no longer break item properties by overriding them
+- Natural 1's and 20's now evaluate as Failure/Miss and Success/Hit on chat cards, regardless of the rolled value and target DC/AC
+
 # 0.30.0 - Targets Everywhere!
 This new system version adds new features to Starfinder 1e supporting Foundry's "targeting" system, including evaluation of rolls against targets and success/failure/hit/miss display for attack rolls, checks, and saves.
 
