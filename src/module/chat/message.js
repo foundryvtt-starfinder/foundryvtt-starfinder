@@ -1,3 +1,5 @@
+import { addChatMessageContextOptions } from "./chat-message-options.js";
+
 /** @extends {foundry.documents.ChatMessage} */
 export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
     constructor(data, options) {

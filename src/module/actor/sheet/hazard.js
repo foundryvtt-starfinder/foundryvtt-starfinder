@@ -1,3 +1,4 @@
+import { ChatMessageSFRPG } from "../../chat/message.js";
 import { DiceSFRPG } from "../../dice.js";
 import RollContext from "../../rolls/rollcontext.js";
 import { ActorSheetSFRPG } from "./base.js";
@@ -103,7 +104,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
                 parts: [{ formula: this.actor.system.attributes.damage.value }],
                 title: name,
                 flavor: null,
-                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
                 dialogOptions: {
                     left: event ? event.clientX - 80 : null,
                     top: event ? event.clientY - 80 : null
@@ -128,7 +129,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
             parts: [rollValue],
             title: rollName,
             flavor: null,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 left: event ? event.clientX - 80 : null,
                 top: event ? event.clientY - 80 : null

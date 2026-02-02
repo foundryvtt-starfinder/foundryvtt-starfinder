@@ -1,4 +1,5 @@
 import { CombatDifficulty } from "../apps/combat-difficulty.js";
+import { ChatMessageSFRPG } from "../chat/message.js";
 import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
@@ -473,11 +474,11 @@ export class CombatSFRPG extends foundry.documents.Combat {
         // Create the chat message
         const chatData = {
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
 
-        await ChatMessage.create(chatData, { displaySheet: false });
+        await ChatMessageSFRPG.create(chatData, { displaySheet: false });
     }
 
     async _printNewPhaseChatCard(eventData) {
@@ -512,11 +513,11 @@ export class CombatSFRPG extends foundry.documents.Combat {
         // Create the chat message
         const chatData = {
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
 
-        await ChatMessage.create(chatData, { displaySheet: false });
+        await ChatMessageSFRPG.create(chatData, { displaySheet: false });
     }
 
     async _printNewTurnChatCard(eventData) {
@@ -550,12 +551,12 @@ export class CombatSFRPG extends foundry.documents.Combat {
         // Create the chat message
         const chatData = {
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
-            whisper: eventData.newCombatant.hidden ? ChatMessage.getWhisperRecipients("GM") : [],
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
+            whisper: eventData.newCombatant.hidden ? ChatMessageSFRPG.getWhisperRecipients("GM") : [],
             content: html
         };
 
-        await ChatMessage.create(chatData, { displaySheet: false });
+        await ChatMessageSFRPG.create(chatData, { displaySheet: false });
     }
 
     getCombatType() {
@@ -798,7 +799,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create multiple chat messages
         await messages.forEach(message => {
-            ChatMessage.create(message, { rollMode: message.rollMode });
+            ChatMessageSFRPG.create(message, { rollMode: message.rollMode });
         });
 
         // Return the updated Combat

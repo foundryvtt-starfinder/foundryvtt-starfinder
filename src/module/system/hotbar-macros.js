@@ -1,4 +1,5 @@
 import { ActorItemHelper, getChildItems } from "../actor/actor-inventory-utils.js";
+import { ChatMessageSFRPG } from "../chat/message.js";
 import { checkIcons } from "./enrichers/check.js";
 
 const createMacroFnLookup = {
@@ -76,7 +77,7 @@ export function rollItemMacro(itemUuid, macroType) {
         // For backward compatibility's sake, fallback to the old method of searching by name.
         /** @todo Remove this at some point */
 
-        const speaker = ChatMessage.getSpeaker();
+        const speaker = ChatMessageSFRPG.getSpeaker();
         const actor = (speaker.token && game.actors.tokens[speaker.token])
             || (speaker.actor && game.actors.get(speaker.actor));
 

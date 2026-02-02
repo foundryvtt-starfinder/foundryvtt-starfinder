@@ -1,4 +1,5 @@
 import { ActorItemHelper, getChildItems, getItemContainer, setItemContainer } from "../../actor/actor-inventory-utils.js";
+import { ChatMessageSFRPG } from "../../chat/message.js";
 
 export const ItemCapacityMixin = (superclass) => class extends superclass {
     /**
@@ -312,13 +313,13 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             // Create the chat message
             const chatData = {
                 type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
                 content: html
             };
 
             const rollMode = game.settings.get("core", "rollMode");
-            ChatMessage.applyRollMode(chatData, rollMode);
-            ChatMessage.create(chatData, { displaySheet: false });
+            ChatMessageSFRPG.applyRollMode(chatData, rollMode);
+            ChatMessageSFRPG.create(chatData, { displaySheet: false });
         });
 
     }

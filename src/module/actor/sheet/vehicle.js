@@ -1,3 +1,4 @@
+import { ChatMessageSFRPG } from "../../chat/message.js";
 import { ActorSFRPG } from "../actor.js";
 import { ActorSheetSFRPG } from "./base.js";
 
@@ -497,13 +498,13 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         // Create the chat message
         const chatData = {
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             content: html
         };
 
         const rollMode = game.settings.get("core", "rollMode");
-        ChatMessage.applyRollMode(chatData, rollMode);
-        await ChatMessage.create(chatData, { displaySheet: false });
+        ChatMessageSFRPG.applyRollMode(chatData, rollMode);
+        await ChatMessageSFRPG.create(chatData, { displaySheet: false });
     }
 
     /**
@@ -542,12 +543,12 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         // Create the chat message
         const chatData = {
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             content: html
         };
 
         const rollMode = game.settings.get("core", "rollMode");
-        ChatMessage.applyRollMode(chatData, rollMode);
-        await ChatMessage.create(chatData, { displaySheet: false });
+        ChatMessageSFRPG.applyRollMode(chatData, rollMode);
+        await ChatMessageSFRPG.create(chatData, { displaySheet: false });
     }
 }

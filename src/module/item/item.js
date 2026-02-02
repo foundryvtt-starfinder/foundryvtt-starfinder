@@ -1,4 +1,5 @@
 import { getItemContainer } from "../actor/actor-inventory-utils.js";
+import { ChatMessageSFRPG } from "../chat/message.js";
 import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import SFRPGModifier from "../modifiers/modifier.js";
@@ -452,14 +453,14 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     level: this.system.level
                 }
             },
-            speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
+            speaker: token ? ChatMessageSFRPG.getSpeaker({token: token}) : ChatMessageSFRPG.getSpeaker({actor: this.actor})
         };
 
         const rollMode = game.settings.get("core", "rollMode");
-        ChatMessage.applyRollMode(chatData, rollMode);
+        ChatMessageSFRPG.applyRollMode(chatData, rollMode);
 
         // Create the chat message
-        return ChatMessage.create(chatData, { displaySheet: false });
+        return ChatMessageSFRPG.create(chatData, { displaySheet: false });
     }
 
     /* -------------------------------------------- */
@@ -991,7 +992,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 rollData: this.actor.getRollData() ?? {},
                 secrets: this.isOwner
             }),
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             critical: critThreshold,
             chatMessage: options.chatMessage,
             rollOptions: rollOptions,
@@ -1227,7 +1228,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             parts: parts,
             rollContext: rollContext,
             title: title,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             critical: 20,
             chatMessage: options.chatMessage,
             dialogOptions: {
@@ -1280,7 +1281,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             parts: parts,
             rollContext: rollContext,
             title: title,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             critical: 20,
             chatMessage: options.chatMessage,
             dialogOptions: {
@@ -1410,7 +1411,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 rollData: this.actor.getRollData() ?? {},
                 secrets: this.isOwner
             }) || null,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
                 skipUI: options.skipUI,
@@ -1500,7 +1501,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             parts,
             rollContext,
             title,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
                 skipUI: true,
@@ -1545,7 +1546,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             criticalData: {preventDoubling: true},
             rollContext: rollContext,
             title: title,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
                 skipUI: options.skipUI,
@@ -1600,9 +1601,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const preparedRollExplanation = DiceSFRPG.formatFormula(rollResult.formula.formula);
         const content = await rollResult.roll.render({ breakdown: preparedRollExplanation });
 
-        ChatMessage.create({
+        ChatMessageSFRPG.create({
             flavor: `${title}${(itemData.chatFlavor ? " - " + itemData.chatFlavor : "")}`,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             content: content,
             rolls: [rollResult.roll],
@@ -1674,13 +1675,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 // Create the chat message
                 const chatData = {
                     type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-                    speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor}),
+                    speaker: token ? ChatMessageSFRPG.getSpeaker({token: token}) : ChatMessageSFRPG.getSpeaker({actor: this.actor}),
                     content: html
                 };
 
                 const rollMode = game.settings.get("core", "rollMode");
-                ChatMessage.applyRollMode(chatData, rollMode);
-                ChatMessage.create(chatData, { displaySheet: false });
+                ChatMessageSFRPG.applyRollMode(chatData, rollMode);
+                ChatMessageSFRPG.create(chatData, { displaySheet: false });
             });
         }
 
@@ -1713,17 +1714,17 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             author: game.user.id,
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
-            whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
+            whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessageSFRPG.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",
             rolls: [roll],
-            speaker: ChatMessage.getSpeaker({
+            speaker: ChatMessageSFRPG.getSpeaker({
                 actor: this.actor,
                 alias: this.actor.name
             })
         };
 
         // Update the Item data
-        const promises = [ChatMessage.create(chatData)];
+        const promises = [ChatMessageSFRPG.create(chatData)];
         if (success) promises.push(this.update({ "system.recharge.charged": true }));
         return Promise.all(promises);
     }
@@ -1913,9 +1914,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     _handleEffectNoteEvent(turnEvent) {
-        ChatMessage.create({
+        ChatMessageSFRPG.create({
             content: turnEvent.content,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor })
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor })
         });
     }
 
@@ -1935,7 +1936,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         return DiceSFRPG.damageRoll({
             parts,
             rollContext,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 skipUI: true
             },

@@ -1,4 +1,5 @@
 import { ChoiceDialog } from "../../apps/choice-dialog.js";
+import { ChatMessageSFRPG } from "../../chat/message.js";
 
 export class SFRPGHealingSetting {
     constructor({stamina = false, hitpoints = true, temp = false} = {}) {
@@ -705,12 +706,12 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             ui.notifications.warn(warningMessage);
             const chatData = {
                 user: game.user.id,
-                speaker: ChatMessage.getSpeaker({actor: this}),
+                speaker: ChatMessageSFRPG.getSpeaker({actor: this}),
                 content: warningMessage,
                 type: CONST.CHAT_MESSAGE_STYLES.OTHER
             };
-            ChatMessage.applyRollMode(chatData, rollMode);
-            ChatMessage.create(chatData);
+            ChatMessageSFRPG.applyRollMode(chatData, rollMode);
+            ChatMessageSFRPG.create(chatData);
         }
 
         if (damage.isCritical && newHullPoints !== originalHullPoints) {
@@ -719,12 +720,12 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             ui.notifications.warn(warningMessage);
             const chatData = {
                 user: game.user.id,
-                speaker: ChatMessage.getSpeaker({actor: this}),
+                speaker: ChatMessageSFRPG.getSpeaker({actor: this}),
                 content: warningMessage,
                 type: CONST.CHAT_MESSAGE_STYLES.OTHER
             };
-            ChatMessage.applyRollMode(chatData, rollMode);
-            ChatMessage.create(chatData);
+            ChatMessageSFRPG.applyRollMode(chatData, rollMode);
+            ChatMessageSFRPG.create(chatData);
         }
 
         if (timesToRoll > 0) {

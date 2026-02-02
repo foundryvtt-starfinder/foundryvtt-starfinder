@@ -19,6 +19,7 @@ import { ItemSFRPG } from "../item/item.js";
 import { ItemSheetSFRPG } from "../item/sheet.js";
 import SFRPGTimedEffect from "../timedEffect/timedEffect.js";
 import { } from "./crew-update.js";
+import { ChatMessageSFRPG } from "../chat/message.js";
 
 /**
  * A data structure for storing damage statistics.
@@ -573,7 +574,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             parts: [ `@abilities.${abilityId}.abilityCheckBonus` ],
             title:  game.i18n.format("SFRPG.Rolls.Dice.AbilityCheckTitle", {label: CONFIG.SFRPG.abilities[abilityId]}),
             flavor: null,
-            speaker: ChatMessage.getSpeaker({ actor: this }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
             onClose: options.onClose,
             dialogOptions: {
@@ -606,7 +607,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             parts: parts,
             title: game.i18n.format("SFRPG.Rolls.Dice.SaveTitle", {label: label}),
             flavor: null,
-            speaker: ChatMessage.getSpeaker({ actor: this }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
             onClose: options.onClose,
             dialogOptions: {
@@ -657,7 +658,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 async: true,
                 rollData: this.getRollData() ?? {}
             }),
-            speaker: ChatMessage.getSpeaker({ actor: this }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
             onClose: options.onClose,
             dialogOptions: {
@@ -719,7 +720,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             parts: parts,
             title: game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", {skill: CONFIG.SFRPG.skills["pil"]}),
             flavor: null,
-            speaker: ChatMessage.getSpeaker({ actor: this }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
             dialogOptions: {
                 skipUI: options.skipUI,
@@ -950,9 +951,9 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         const preparedRollExplanation = DiceSFRPG.formatFormula(rollResult.formula.formula);
         const rollContent = await rollResult.roll.render({ breakdown: preparedRollExplanation });
 
-        ChatMessage.create({
+        ChatMessageSFRPG.create({
             flavor: flavor,
-            speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: speakerActor }),
             content: rollContent,
             rolls: [rollResult.roll],
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,

@@ -4,6 +4,8 @@
  * @property {EnricherFunction} enricher
  */
 
+import { ChatMessageSFRPG } from "../../chat/message";
+
 /**
  * Abstract base class for enrichers which carries validation and basic element creation.
  * @abstract
@@ -208,7 +210,7 @@ export default class BaseEnricher {
             }
         }
 
-        return ChatMessage.create({content: element.outerHTML});
+        return ChatMessageSFRPG.create({content: element.outerHTML});
     }
 
     /** ---------

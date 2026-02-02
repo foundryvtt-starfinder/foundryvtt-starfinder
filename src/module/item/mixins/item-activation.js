@@ -1,3 +1,4 @@
+import { ChatMessageSFRPG } from "../../chat/message.js";
 import { DiceSFRPG } from "../../dice.js";
 import RollContext from "../../rolls/rollcontext.js";
 
@@ -166,7 +167,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                     // Create the chat message
                     const chatData = {
                         type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-                        speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                        speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
                         content: html,
                         flags: {
                             sfrpg: {
@@ -178,8 +179,8 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
 
                     if (!active) chatData.action = "SFRPG.ChatCard.ItemActivation.Deactivates";
                     const rollMode = game.settings.get("core", "rollMode");
-                    ChatMessage.applyRollMode(chatData, rollMode);
-                    ChatMessage.create(chatData, { displaySheet: false });
+                    ChatMessageSFRPG.applyRollMode(chatData, rollMode);
+                    ChatMessageSFRPG.create(chatData, { displaySheet: false });
                 });
 
                 Hooks.callAll("itemActivationChanged", {actor: this.actor, item: this, isActive: active});
