@@ -58,7 +58,6 @@ import setupVision from "./module/canvas/vision.js";
 
 // Import Chat Message functions
 import { ChatMessageSFRPG } from "./module/chat/message.js";
-import { addChatMessageContextOptions } from "./module/chat/chat-message-options.js";
 
 // Import Modifiers
 import SFRPGModifier from "./module/modifiers/modifier.js";
@@ -819,7 +818,7 @@ Hooks.on("renderChatMessageHTML", (app, html, data) => {
     }
 });
 
-Hooks.on("getChatMessageContextOptions", addChatMessageContextOptions);
+Hooks.on("getChatMessageContextOptions", ChatMessageSFRPG.addContextOptions);
 
 Hooks.on("renderAbstractSidebarTab", async (app) => {
     if (app.options.id === "settings") {
