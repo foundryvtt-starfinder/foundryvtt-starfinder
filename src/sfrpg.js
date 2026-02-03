@@ -733,7 +733,7 @@ Hooks.once("ready", async () => {
 });
 
 export function registerKeybinds() {
-    const { SHIFT, CONTROL, ALT } = foundry.helpers.interaction.KeyboardManager.MODIFIER_KEYS;
+    const { SHIFT, CONTROL } = foundry.helpers.interaction.KeyboardManager.MODIFIER_KEYS;
 
     game.keybindings.register('sfrpg', 'summaries', {
         name: game.i18n.localize('SFRPG.Keybindings.CloseAllItemSummaries.Name'),
@@ -752,7 +752,7 @@ export function registerKeybinds() {
             return true;
         },
         restricted: false,
-        precedence: CONST.KEYBINDING_PRECEDENCE.PRIORITY,
+        precedence: CONST.KEYBINDING_PRECEDENCE.PRIORITY
     });
 }
 
