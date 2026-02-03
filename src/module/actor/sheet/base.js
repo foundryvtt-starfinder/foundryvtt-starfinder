@@ -62,11 +62,18 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     async close(options) {
         const closeAllSetting = game.settings.get("sfrpg", "closeAllItemSummaries");
         if (closeAllSetting) {
-            for (const item of this.actor.items) {
-                item.setFlag('sfrpg', `expanded.${game.user.id}`, false);
-            }
+            await this._closeAllItemSummaries();
         }
         return super.close(options);
+    }
+
+    /**
+     * Close all expanded item summaries for the current user.
+     */
+    async _closeAllItemSummaries() {
+        for (const item of this.actor.items) {
+            item.setFlag('sfrpg', `expanded.${game.user.id}`, false);
+        }
     }
 
     /**
