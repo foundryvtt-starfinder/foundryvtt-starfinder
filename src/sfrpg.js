@@ -718,10 +718,8 @@ Hooks.once("ready", async () => {
 
     }
 
-    // System Update Notifications
-    if (game.users.activeGM?.isSelf) {
-        updateNotification();
-    }
+    // System Update Information Notifications
+    updateNotification();
 
     Hooks.on("dropCanvasData", (canvas, data) => canvasHandler(canvas, data));
 

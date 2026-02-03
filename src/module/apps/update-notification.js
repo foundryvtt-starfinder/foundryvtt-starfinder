@@ -1,9 +1,14 @@
 /**
- * A list of the notifications to display, as well as the system version associated with them
+ * A list of the notifications to display, as well as the system version associated with them.
+ *
+ * `version` should be a string containing the version number.
+ * `userType` has options "gm" or "all" to show to either just GMs or all users, respectively.
+ * `message` is the message to display. Supports html tags for formatting.
  */
 const updateNotifications = {
     0.001: {
         version: "0.30.1",
+        userType: "all",
         message: "To facilitate better communication between the system developers and users, we have added this notification system, starting in Version 0.30.1, which will display upon installing a new system version with significant changes to be aware of. If an update is minor, you may not see one of these messages.<br>As they will only show up upon installing a new system version and we don't have the ability to wait for localization for all languages before releasing system updates, these messages will unfortunately only be in English (apologies to international users!)."
     }
 };
@@ -19,17 +24,22 @@ export async function updateNotification() {
 
     if (systemNotificationSchema > worldSchema) {
         // Get list of update versions and list of messages to display
-        const toDisplay = [];
-        for (const [schema, entry] of Object.entries(updateNotifications)) {
-            if (Number(schema) > worldSchema && Number(schema) <= systemNotificationSchema) {
-                toDisplay.push(entry);
+        // Only display the latest message if the user is new (schema setting at default of 0)
+        const toDisplay = worldSchema === 0 ? [updateNotifications[systemNotificationSchema]] : [];
+        if (worldSchema !== 0) {
+            for (const [schema, entry] of Object.entries(updateNotifications)) {
+                if (Number(schema) > worldSchema && Number(schema) <= systemNotificationSchema) {
+                    toDisplay.push(entry);
+                }
             }
         }
 
         // Construct message
         let dlgText = "";
         for (const notif of toDisplay) {
-            dlgText += `<h4>Version ${notif.version}</h4><p>${notif.message}</p>`;
+            if (notif.userType === "all" || (notif.userType === "gm" && game.user.isGM)) {
+                dlgText += `<h4>Version ${notif.version}</h4><p>${notif.message}</p>`;
+            }
         }
         dlgText += game.i18n.localize("SFRPG.Notification.Bugs");
 
