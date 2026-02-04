@@ -503,6 +503,8 @@ Hooks.once('init', async function() {
         });
     }
 
+    registerKeybinds();
+
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
@@ -727,6 +729,30 @@ Hooks.once("ready", async () => {
     const startupDuration = finishTime - initTime;
     console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
+
+export function registerKeybinds() {
+    const { SHIFT, CONTROL } = foundry.helpers.interaction.KeyboardManager.MODIFIER_KEYS;
+
+    game.keybindings.register('sfrpg', 'summaries', {
+        name: game.i18n.localize('SFRPG.Keybindings.CloseAllItemSummaries.Name'),
+        hint: game.i18n.localize('SFRPG.Keybindings.CloseAllItemSummaries.Hint'),
+        editable: [
+            {
+                key: 'KeyC',
+                modifiers: [CONTROL, SHIFT]
+            }
+        ],
+        onDown: () => {
+            const app = Object.values(ui.windows).find(app => app instanceof ActorSheetSFRPG && app.actor);
+            if (app) {
+                app._closeAllItemSummaries();
+            }
+            return true;
+        },
+        restricted: false,
+        precedence: CONST.KEYBINDING_PRECEDENCE.PRIORITY
+    });
+}
 
 /**
  * Migrates containers from an old format (not sure what version) to a modern version.
