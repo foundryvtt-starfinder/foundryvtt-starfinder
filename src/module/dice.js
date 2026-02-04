@@ -237,7 +237,7 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
+            const rollObject = SFRPGRoll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
             rollObject.options.rollOptions = rollOptions;
             const roll = await rollObject.evaluate();
 
@@ -374,7 +374,7 @@ export class DiceSFRPG {
             .trim();
         finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
 
-        const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
+        const rollObject = SFRPGRoll.create(finalFormula.finalRoll, { breakdown, tags });
         const roll = await rollObject.evaluate();
         roll.options.rollMode = rollInfo.mode;
 
@@ -631,7 +631,7 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
+            const rollObject = SFRPGRoll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
             const roll = await rollObject.evaluate();
 
             // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
@@ -692,7 +692,7 @@ export class DiceSFRPG {
                     };
                 }
 
-                // Add special materials, descriptors, and magic status to chat message flags (to overcome DR)
+                // Add special materials, descriptors, and magic status to chat message system data (to overcome DR)
                 if (itemContext) {
                     if (itemContext.entity.system.specialMaterials) {
                         messageData.system.specialMaterials = itemContext.entity.system.specialMaterials;
@@ -1146,7 +1146,7 @@ export class DiceSFRPG {
      */
     static _simplifyFormula(formula, rollContext) {
         try {
-            return Roll.create(formula, rollContext.getRollData()).simplifiedFormula;
+            return SFRPGRoll.create(formula, rollContext.getRollData()).simplifiedFormula;
         } catch {
             return formula;
         }
@@ -1169,7 +1169,7 @@ export class DiceSFRPG {
     static simplifyRollFormula(formula, { preserveFlavor = false } = {}) {
         // Create a new roll and verify that the formula is valid before attempting simplification.
         let roll;
-        try { roll = Roll.create(formula); } catch (err) { console.warn(`Unable to simplify formula '${formula}': ${err}`); }
+        try { roll = SFRPGRoll.create(formula); } catch (err) { console.warn(`Unable to simplify formula '${formula}': ${err}`); }
         Roll.validate(roll.formula);
 
         // Optionally strip flavor annotations.
