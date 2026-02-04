@@ -937,7 +937,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         // Define Critical threshold
         const critThreshold = 20;
-        // if ( this.type === "weapon" ) critThreshold = this.actor.getFlag("sfrpg", "weaponCriticalThreshold") || 20;
 
         const rollOptions = {};
 

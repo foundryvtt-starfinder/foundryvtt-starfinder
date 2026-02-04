@@ -51,6 +51,15 @@ export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
         };
     }
 
+    static specialMaterialsTemplate() {
+        return {
+            specialMaterials: new fields.TypedObjectField(
+                new fields.BooleanField({initial: false}),
+                {validateKey: (key) => Object.keys(CONFIG.SFRPG.specialMaterials).includes(key)}
+            )
+        };
+    }
+
     static _speedFieldData() {
         return {
             land: new fields.SchemaField({

@@ -2,11 +2,16 @@ import { ActorSFRPG } from "../actor/actor.js";
 
 /** @extends {foundry.documents.ChatMessage} */
 export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
-    constructor(data, options) {
+    constructor(data, options = {}) {
         super(data, options);
 
         /** @type {string} type of the chat message*/
         this.type = "base";
+    }
+
+    static async create(data, options = {}) {
+        const msg = await super.create(data, options);
+        return msg;
     }
 
     static addContextOptions(html, options) {

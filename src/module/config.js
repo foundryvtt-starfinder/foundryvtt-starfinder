@@ -97,6 +97,7 @@ SFRPG.rollTypes = {
     "gunnery": "SFRPG.Rolls.GunneryCheck",
     "healing": "SFRPG.Rolls.HealingRoll",
     "initiative": "SFRPG.Rolls.InitiativeRoll",
+    "none": "",
     "roll": "SFRPG.Rolls.Roll",
     "save": "SFRPG.Rolls.SavingThrow",
     "skillCheck": "SFRPG.Rolls.SkillCheck"
@@ -2740,4 +2741,14 @@ SFRPG.defaultItemIcons = {
     "upgrade": "armor-upgrade.svg",
     "weapon": "bolter-gun.svg",
     "weaponAccessory": "gun-stock.svg"
+};
+
+SFRPG.chatButtonTypes = {
+    "ability": "SFRPG.Ability",
+    "attack": "SFRPG.Attack",
+    "damage": "SFRPG.Damage",
+    "healing": "SFRPG.Healing",
+    "other": "SFRPG.Other",
+    "save": "SFRPG.Save",
+    "skill": "SFRPG.Skill"
 };

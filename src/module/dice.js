@@ -276,7 +276,7 @@ export class DiceSFRPG {
                     speaker,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    flags: {sfrpg: { rollOptions, rollSuccess, rollType }},
+                    system: {rollOptions, rollSuccess, rollType},
                     tags: tags
                 };
 
@@ -412,7 +412,6 @@ export class DiceSFRPG {
     */
     static async damageRoll({ event = new Event(''), parts, linkedAttackRoll, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions,
         rollType = "damage", tags = []}) {
-        flavor = `${title || ""}${(flavor ? " - " + flavor : "")}`;
 
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -651,8 +650,7 @@ export class DiceSFRPG {
                 }
             }
 
-            // Associate the damage types for this attack to the first DiceTerm
-            // for the roll.
+            // Associate the damage types for this attack to the first DiceTerm for the roll.
             const die = roll.dice && roll.dice.length > 0 ? roll.dice[0] : null;
 
             if (die) {
@@ -678,10 +676,10 @@ export class DiceSFRPG {
                 const rollContent = await roll.render({ htmlData: htmlData });
                 const messageData = {
                     content: rollContent,
-                    flags: {sfrpg: {rollType: rollType}},
                     flavor: finalFlavor,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
+                    system: {rollType},
                     speaker
                 };
 
@@ -697,14 +695,14 @@ export class DiceSFRPG {
                 // Add special materials, descriptors, and magic status to chat message flags (to overcome DR)
                 if (itemContext) {
                     if (itemContext.entity.system.specialMaterials) {
-                        messageData.flags.sfrpg.specialMaterials = itemContext.entity.system.specialMaterials;
+                        messageData.system.specialMaterials = itemContext.entity.system.specialMaterials;
                     }
 
                     if (itemContext.entity.system.descriptors) {
-                        messageData.flags.sfrpg.descriptors = itemContext.entity.system.descriptors;
+                        messageData.system.descriptors = itemContext.entity.system.descriptors;
                     }
 
-                    messageData.flags.sfrpg.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
+                    messageData.system.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
                 }
 
                 ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });

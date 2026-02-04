@@ -535,15 +535,6 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
         };
     }
 
-    static specialMaterialsTemplate() {
-        return {
-            specialMaterials: new fields.TypedObjectField(
-                new fields.BooleanField({initial: false}),
-                {validateKey: (key) => Object.keys(CONFIG.SFRPG.specialMaterials).includes(key)}
-            )
-        };
-    }
-
     static starshipBPTemplate() {
         return {
             cost: new fields.NumberField({
