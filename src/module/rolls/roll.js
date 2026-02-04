@@ -41,13 +41,13 @@ export default class SFRPGRoll extends Roll {
         /** @type {HtmlData[]} */
         this.htmlData = rollData.data.htmlData;
         /** @type {String} */
-        this.rollType = rollData.data.rollType ?? "roll";
+        this.rollType = rollData.options.rollType ?? "roll";
         /** @type {Boolean} */
-        this.d20Critical = rollData.data.d20Critical ?? false;
+        this.d20Critical = rollData.options.d20Critical ?? false;
         /** @type {Boolean} */
-        this.d20Fumble = rollData.data.d20Fumble ?? false;
+        this.d20Fumble = rollData.options.d20Fumble ?? false;
         /** @type {Number} */
-        this.evalValue = rollData.data.evalValue ?? null;
+        this.evalValue = rollData.options.evalValue ?? null;
     }
 
     /**

@@ -226,8 +226,9 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const rollObject = SFRPGRoll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags, rollType: rollOptions.rollType });
+            const rollObject = SFRPGRoll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags}, { rollType: rollOptions.rollType });
             roll = await rollObject.evaluate();
+            roll.options = {};
 
             // Flag critical thresholds and add Critical hit and effect information
             for (const d of roll.dice) {
@@ -238,19 +239,19 @@ export class DiceSFRPG {
                     // Critical Effect flavor and tags
                     const criticalData = rollContext.allContexts?.item?.data?.critical;
                     if (d.total === rollOptions.critical) {
-                        roll.d20Critical = true;
+                        roll.options.d20Critical = true;
                         flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
                         if (criticalData?.effect?.trim()) {
                             tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                         }
                     } else if (d.total === rollOptions.fumble) {
-                        roll.d20Fumble = true;
+                        roll.options.d20Fumble = true;
                     }
                 }
             }
 
             // Roll Evaluation
-            roll.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions);
+            roll.options.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions);
             DiceSFRPG.addRollSuccessTag(roll, rollInfo, rollOptions, tags);
 
             // Chat Cards
@@ -270,7 +271,8 @@ export class DiceSFRPG {
                 messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
 
                 // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
-                const msg = await ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode, rollData: {evalValue: roll.evalValue, d20Critical: roll.d20Critical, d20Fumble: roll.d20Fumble} });
+                const msg = await ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
+                console.log(msg);
             }
 
             if (onClose) {
