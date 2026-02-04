@@ -267,7 +267,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const chatMessageId = html.dataset?.messageId;
         const chatMessage = game.messages.get(chatMessageId);
         if (chatMessage) {
-            const chatDamageData = chatMessage.flags.sfrpg?.damage;
+            const chatDamageData = chatMessage.system.damage;
             if (chatDamageData) {
                 rolledAmount = chatDamageData.amount;
                 damageTypes = chatDamageData.types;

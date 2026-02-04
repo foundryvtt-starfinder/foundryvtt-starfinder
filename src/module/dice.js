@@ -686,7 +686,7 @@ export class DiceSFRPG {
                 // Insert the damage type string if possible.
                 if (damageTypeString?.length > 0) {
                     messageData.content = DiceSFRPG.appendTextToRoll(rollContent, damageTypeString);
-                    messageData.flags.sfrpg.damage = {
+                    messageData.system.damage = {
                         amount: roll.total,
                         types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
                     };

@@ -27,6 +27,9 @@ export default class SFRPGChatMessageBase extends SFRPGDocumentBase {
             })
         );
 
+        // TODO: Eventually, add more detail to this
+        schema.damage = new fields.ObjectField();
+
         schema.descriptors = new fields.TypedObjectField(
             new fields.BooleanField({initial: false}),
             {validateKey: (key) => key in CONFIG.SFRPG.descriptors}
