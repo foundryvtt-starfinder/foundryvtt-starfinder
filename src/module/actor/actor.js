@@ -582,7 +582,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollType: "abilityCheck",
+            rollOptions: {rollType: "abilityCheck"},
             difficulty: options.dc
         });
     }
@@ -615,7 +615,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollType: "save",
+            rollOptions: {rollType: "save"},
             difficulty: options.dc
         });
     }
@@ -666,7 +666,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollType: "skillCheck",
+            rollOptions: {rollType: "skillCheck"},
             difficulty: options.dc,
             tags: tags
         });
@@ -727,7 +727,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollType: "skillCheck",
+            rollOptions: {rollType: "skillCheck"},
             onClose: options.onClose
         });
     }

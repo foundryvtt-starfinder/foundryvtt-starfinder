@@ -167,12 +167,13 @@ export default class RollTree {
      * @param {boolean} [options.skipUI] Do not show the UI. Default false.
      * @param {DamagePart[]} [options.parts]
      * @param {boolean} [options.debug]
-     * @param {String} [options.rollType] Type of roll
+     * @param {String} [options.rollOptions.rollType] Type of roll
      * @returns {Promise<RollInfo>}
      */
-    static async buildRoll(formula, contexts, options = {rollType: "roll"}) {
+    static async buildRoll(formula, contexts, options = {}) {
         let result;
-        const rollType = options.rollType;
+        const rollOptions = options.rollOptions ?? {};
+        const rollType = rollOptions.rollType ?? "roll";
 
         if (options.skipUI) {
             result = RollTree.buildRollSync(formula, contexts, options);
@@ -194,7 +195,7 @@ export default class RollTree {
                 defaultButton: options.defaultButton,
                 dialogOptions: options.dialogOptions,
                 parts: options.parts,
-                rollType: rollType,
+                rollOptions,
                 title: options.title
             });
 

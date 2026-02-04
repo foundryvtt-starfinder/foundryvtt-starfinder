@@ -40,8 +40,14 @@ export default class SFRPGRoll extends Roll {
         this.breakdown = rollData.data.breakdown;
         /** @type {HtmlData[]} */
         this.htmlData = rollData.data.htmlData;
-        /** @type {string} */
-        this.rollType = "roll";
+        /** @type {String} */
+        this.rollType = rollData.data.rollType ?? "roll";
+        /** @type {Boolean} */
+        this.d20Critical = rollData.data.d20Critical ?? false;
+        /** @type {Boolean} */
+        this.d20Fumble = rollData.data.d20Fumble ?? false;
+        /** @type {Number} */
+        this.evalValue = rollData.data.evalValue ?? null;
     }
 
     /**
@@ -77,6 +83,24 @@ export default class SFRPGRoll extends Roll {
             return t;
         });
         return DiceSFRPG.simplifyRollFormula(Roll.fromTerms(newterms).formula) || "0";
+    }
+
+    /**
+     * Evaluates whether a roll is a success or a failure, if an evalValue is present (typically only for d20 rolls)
+     * @type {Boolean}  returns false for failure, true for success, null if not evaluated
+     */
+    get isSuccessful() {
+        const evalValue = this.evalValue;
+        if ((evalValue !== null) && (typeof this.total === "number")) {
+            if (this.d20Critical) {
+                return true;
+            } else if (this.d20Fumble) {
+                return false;
+            }
+            return this.total >= evalValue;
+        } else {
+            return null;
+        }
     }
 
     /** @inheritdoc */

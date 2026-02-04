@@ -938,7 +938,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // Define Critical threshold
         const critThreshold = 20;
 
-        const rollOptions = {};
+        const rollOptions = {rollType: "attack"};
 
         if (this.system.actionTarget) {
             rollOptions.actionTarget = this.system.actionTarget;
@@ -994,13 +994,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             critical: critThreshold,
             chatMessage: options.chatMessage,
-            rollOptions: rollOptions,
+            rollOptions,
             dialogOptions: {
                 skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollType: "attack",
             onClose: this._onAttackRollClose.bind(this, options)
         });
     }
@@ -1207,7 +1206,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
 
-        const rollOptions = {};
+        const rollOptions = {rollType: "attack"};
 
         if (this.system.actionTarget) {
             rollOptions.actionTarget = this.system.actionTarget;
@@ -1235,9 +1234,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollOptions: rollOptions,
+            rollOptions,
             actorContextKey: "gunner",
-            rollType: "gunnery",
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
@@ -1288,7 +1286,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollType: "attack",
+            rollOptions: {rollType: "attack"},
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");

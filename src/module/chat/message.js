@@ -10,8 +10,7 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
     }
 
     static async create(data, options = {}) {
-        const msg = await super.create(data, options);
-        return msg;
+        return super.create(data, options);
     }
 
     static addContextOptions(html, options) {

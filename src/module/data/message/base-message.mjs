@@ -45,16 +45,6 @@ export default class SFRPGChatMessageBase extends SFRPGDocumentBase {
         // TODO: Eventually, add more detail to this
         schema.rollOptions = new fields.ObjectField();
 
-        schema.rollSuccess = new fields.BooleanField({
-            initial: null,
-            nullable: true
-        });
-
-        schema.rollType = new fields.StringField({
-            initial: "none",
-            choices: Object.keys(CONFIG.SFRPG.rollTypes)
-        });
-
         schema.tags = new fields.TypedObjectField(
             new fields.SchemaField(SFRPGChatMessageBase._tagData())
         );

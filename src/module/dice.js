@@ -162,20 +162,13 @@ export class DiceSFRPG {
     * @param {string}               data.flavor         Any flavor text associated with this roll
     * @param {Boolean}              [data.advantage]    Allow rolling with advantage (and therefore also with disadvantage)
     * @param {Object}               data.rollOptions    Additional options to be stored with the roll
-    * @param {Number}               [data.critical]     The value of d20 result which represents a critical success
-    * @param {Number}               [data.fumble]       The value of d20 result which represents a critical failure
     * @param {onD20DialogClosed}    data.onClose        Callback for actions to take when the dialog form is closed
     * @param {DialogOptions}        data.dialogOptions  Modal dialog options
-    * @param {String}               data.rollType       Type of roll (options: CONFIG.SFRPG.rollType)
-    * @param {Number}               data.difficulty     Optional parameter for checks
     * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
     * @returns {Promise<RollResult?>}
     */
-    static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
-        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor",
-        rollType = "roll", difficulty = undefined, tags = []}) {
-
-        flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
+    static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {critical: 20, fumble: 1, rollType: "roll"},
+        chatMessage = true, onClose, dialogOptions, actorContextKey = "actor", tags = []}) {
 
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
@@ -208,18 +201,14 @@ export class DiceSFRPG {
             defaultButton: "normal",
             dialogOptions: dialogOptions,
             mainDie: "1d20",
-            rollType: rollType,
+            rollOptions,
             skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             title: title,
             useRawStrings: false
         });
 
-        if (rollInfo.button === "cancel") {
-            if (onClose) {
-                onClose(null, null, null);
-            }
-            return null;
-        } else {
+        let roll = {};
+        if (rollInfo.button !== "cancel") {
             let dieRoll = "1d20";
             if (rollInfo.button === "disadvantage") {
                 dieRoll = "2d20kl";
@@ -237,34 +226,32 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const rollObject = SFRPGRoll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
-            rollObject.options.rollOptions = rollOptions;
-            const roll = await rollObject.evaluate();
+            const rollObject = SFRPGRoll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags, rollType: rollOptions.rollType });
+            roll = await rollObject.evaluate();
 
             // Flag critical thresholds and add Critical hit and effect information
             for (const d of roll.dice) {
                 if (d.faces === 20) {
-                    d.options.critical = critical;
-                    d.options.fumble = fumble;
+                    d.options.critical = rollOptions.critical;
+                    d.options.fumble = rollOptions.fumble;
 
                     // Critical Effect flavor and tags
                     const criticalData = rollContext.allContexts?.item?.data?.critical;
-                    if (d.total === critical) {
+                    if (d.total === rollOptions.critical) {
                         roll.d20Critical = true;
                         flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
                         if (criticalData?.effect?.trim()) {
                             tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                         }
-                    } else if (d.total === fumble) {
+                    } else if (d.total === rollOptions.fumble) {
                         roll.d20Fumble = true;
                     }
                 }
             }
 
             // Roll Evaluation
-            const evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions, difficulty);
-            const rollSuccess = DiceSFRPG.evaluateRollVsValue(roll, evalValue);
-            DiceSFRPG.addRollSuccessTag(roll, rollInfo, rollOptions, rollType, difficulty, evalValue, rollSuccess, tags);
+            roll.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions);
+            DiceSFRPG.addRollSuccessTag(roll, rollInfo, rollOptions, tags);
 
             // Chat Cards
             const itemContext = rollContext.allContexts['item'];
@@ -276,14 +263,14 @@ export class DiceSFRPG {
                     speaker,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    system: {rollOptions, rollSuccess, rollType},
+                    system: {rollOptions},
                     tags: tags
                 };
 
                 messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
 
                 // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
-                ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
+                const msg = await ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode, rollData: {evalValue: roll.evalValue, d20Critical: roll.d20Critical, d20Fumble: roll.d20Fumble} });
             }
 
             if (onClose) {
@@ -291,6 +278,11 @@ export class DiceSFRPG {
             }
 
             return { roll, finalFormula };
+        } else {
+            if (onClose) {
+                onClose(null, null, null);
+            }
+            return null;
         }
     }
 
@@ -908,34 +900,15 @@ export class DiceSFRPG {
     }
 
     /**
-     * Evaluates whether a d20 roll is a success or a failure
-     * @param   {SFRPGRoll}     roll            roll to evaluate
-     * @param   {Number}        evalValue       value to evaluate against
-     * @returns {Boolean}                       returns false for failure, true for success, null if not evaluated
-     */
-    static evaluateRollVsValue(roll, evalValue = null) {
-        if ((evalValue !== null) && (typeof roll.total === "number")) {
-            if (roll.d20Critical) {
-                return true;
-            } else if (roll.d20Fumble) {
-                return false;
-            }
-            return roll.total >= evalValue;
-        } else {
-            return null;
-        }
-    }
-
-    /**
      * Gets the value that the roll total should be evaluated against
      * @param   {SFRPGRoll}     roll            roll to evaluate
      * @param   {RollInfo}      rollInfo        output from buildRoll, including dialog selections
      * @param   {RollContext}   rollContext     the context under which to evaluate to roll
      * @param   {Object}        rollOptions     additional options to be stored with the roll
-     * @param   {Number}        difficulty      hardcoded value to evaluate over actionTarget (optional)
      */
-    static getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions, difficulty = undefined) {
+    static getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions) {
         const actionTarget = rollOptions.actionTarget;
+        const difficulty = rollOptions.difficulty;
         const targetActorType = rollInfo.target?.actorType;
         const targetQuadrant = rollInfo.target?.quadrant ?? "";
         const validTargets = targetActorType === "starship" ? Object.keys(CONFIG.SFRPG.actionTargetsStarship) : Object.keys(CONFIG.SFRPG.actionTargets);
@@ -988,17 +961,18 @@ export class DiceSFRPG {
      * @param   {SFRPGRoll}     roll            the roll object
      * @param   {RollInfo}      rollInfo        output from buildRoll, including dialog selections
      * @param   {Object}        rollOptions     additional options to be stored with the roll
-     * @param   {String}        rollType        a string specifying the type of roll being made
-     * @param   {Number}        difficulty      DC value specified for skill checks, saving throws, and other rolls
-     * @param   {Number}        evalValue       the value against which the roll is to be evaluated
-     * @param   {Boolean}       rollSuccess     determines if the roll was successful
      * @param   {Tag[]}         tags            tags array of any roll tags to be added to the chat card
      */
-    static addRollSuccessTag(roll, rollInfo, rollOptions, rollType, difficulty, evalValue, rollSuccess, tags) {
+    static addRollSuccessTag(roll, rollInfo, rollOptions, tags) {
         let prependedQuadrantInfo = "";
         if (rollInfo.target.actorType === "starship" && rollInfo.target.quadrant) {
             prependedQuadrantInfo = `${rollInfo.target.quadrantName} `;
         }
+
+        const evalValue = roll.evalValue;
+        const rollSuccess = roll.isSuccessful;
+        const rollType = rollOptions.rollType;
+        const difficulty = rollOptions.difficulty;
 
         const rollIsAttack = rollType === "attack" || rollType === "gunnery";
         const criticalSuccessLocalized = rollIsAttack ? game.i18n.format("SFRPG.Rolls.CriticalHitCaps") : game.i18n.format("SFRPG.Rolls.CriticalSuccessCaps");
