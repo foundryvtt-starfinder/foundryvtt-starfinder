@@ -226,9 +226,8 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
             const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
 
-            const rollObject = SFRPGRoll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags}, { rollType: rollOptions.rollType });
+            const rollObject = SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, tags, rollType: rollOptions.rollType });
             roll = await rollObject.evaluate();
-            roll.options = {};
 
             // Flag critical thresholds and add Critical hit and effect information
             for (const d of roll.dice) {
@@ -242,7 +241,7 @@ export class DiceSFRPG {
                         roll.options.d20Critical = true;
                         flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
                         if (criticalData?.effect?.trim()) {
-                            tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
+                            roll.options.tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                         }
                     } else if (d.total === rollOptions.fumble) {
                         roll.options.d20Fumble = true;
@@ -252,7 +251,7 @@ export class DiceSFRPG {
 
             // Roll Evaluation
             roll.options.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions);
-            DiceSFRPG.addRollSuccessTag(roll, rollInfo, rollOptions, tags);
+            roll.options.tags.unshift(DiceSFRPG.createRollSuccessTag(roll, rollInfo, rollOptions));
 
             // Chat Cards
             const itemContext = rollContext.allContexts['item'];
@@ -264,15 +263,13 @@ export class DiceSFRPG {
                     speaker,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    system: {rollOptions},
-                    tags: tags
+                    system: {rollOptions}
                 };
 
                 messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
 
                 // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
-                const msg = await ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
-                console.log(msg);
+                ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
             }
 
             if (onClose) {
@@ -963,16 +960,16 @@ export class DiceSFRPG {
      * @param   {SFRPGRoll}     roll            the roll object
      * @param   {RollInfo}      rollInfo        output from buildRoll, including dialog selections
      * @param   {Object}        rollOptions     additional options to be stored with the roll
-     * @param   {Tag[]}         tags            tags array of any roll tags to be added to the chat card
+     * @returns {Tag}                           the generated tag that indicates success/failure
      */
-    static addRollSuccessTag(roll, rollInfo, rollOptions, tags) {
+    static createRollSuccessTag(roll, rollInfo, rollOptions) {
         let prependedQuadrantInfo = "";
         if (rollInfo.target.actorType === "starship" && rollInfo.target.quadrant) {
             prependedQuadrantInfo = `${rollInfo.target.quadrantName} `;
         }
 
         const evalValue = roll.evalValue;
-        const rollSuccess = roll.isSuccessful;
+        const rollSuccess = roll.product;
         const rollType = rollOptions.rollType;
         const difficulty = rollOptions.difficulty;
 
@@ -994,10 +991,10 @@ export class DiceSFRPG {
                 } else {
                     actionResult = `<span class="${rollSuccess ? "success" : "fail"}">${rollSuccess ? successLocalized : failureLocalized}</span>`;
                 }
-                tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue: evalValue, actionResult}) });
+                return { name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue: evalValue, actionResult}) };
             } else {
                 const actionTarget = `${prependedQuadrantInfo}${actionTargetSource}`;
-                tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget} ) });
+                return { name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget} ) };
             }
         } else if (difficulty) {
             const actionTarget = game.i18n.format("SFRPG.DC");
@@ -1009,7 +1006,7 @@ export class DiceSFRPG {
             } else {
                 actionResult = `<span class="${rollSuccess ? "success" : "fail"}">${rollSuccess ? successLocalized : failureLocalized}</span>`;
             }
-            tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue: evalValue, actionResult}) });
+            return { name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue: evalValue, actionResult}) };
         }
     }
 

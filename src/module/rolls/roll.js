@@ -25,29 +25,88 @@ const { terms, Roll } = foundry.dice;
  */
 export default class SFRPGRoll extends Roll {
     constructor(formula, data = {}, options = {}) {
-        const rollData = {
-            formula: formula,
-            data: data,
-            options: options
+        Hooks.callAll("onBeforeRoll", {formula, data, options});
+        super(formula, data, options);
+    }
+
+    /**
+     * Return the tags passed to a roll
+     *
+     * @type {Tag[]}
+     */
+    get tags() {
+        return this.options.tags ?? [];
+    }
+
+    /**
+     * Return the roll's breakdown
+     *
+     * @type {String}
+     */
+    get breakdown() {
+        return this.options.breakdown ?? "";
+    }
+
+    /**
+     * Return the roll's HTML Data
+     *
+     * @type {HtmlData[]}
+     */
+    get htmlData() {
+        return this.options.htmlData ?? "";
+    }
+
+    /**
+     * Return the roll's type
+     *
+     * @type {String}
+     */
+    get rollType() {
+        return this.options.rollType ?? "roll";
+    }
+
+    /**
+     * Return true if the roll is a d20 roll and a critical (i.e. 20)
+     *
+     * @type {Boolean}
+     */
+    get d20Critical() {
+        return this.options.d20Critical ?? false;
+    }
+
+    /**
+     * Return true if the roll is a d20 roll and a fumble (i.e. 1)
+     *
+     * @type {Boolean}
+     */
+    get d20Fumble() {
+        return this.options.d20Fumble ?? false;
+    }
+
+    /**
+     * Return the value the roll is being evaluated against, if any
+     *
+     * @type {Number}
+     */
+    get evalValue() {
+        return this.options.evalValue ?? null;
+    }
+
+    /**
+     * Return all the roll options data in an object
+     *
+     * @type {Object}
+     */
+    get allRollOptions() {
+        return {
+            tags: this.tags,
+            breakdown: this.breakdown,
+            htmlData: this.htmlData,
+            rollType: this.rollType,
+            d20Critical: this.d20Critical,
+            d20Fumble: this.d20Fumble,
+            evalValue: this.evalValue
         };
-        Hooks.callAll("onBeforeRoll", rollData);
-
-        super(rollData.formula, rollData.data, rollData.options);
-
-        /** @type {Tag[]} */
-        this.tags = rollData.data.tags;
-        /** @type {string} */
-        this.breakdown = rollData.data.breakdown;
-        /** @type {HtmlData[]} */
-        this.htmlData = rollData.data.htmlData;
-        /** @type {String} */
-        this.rollType = rollData.options.rollType ?? "roll";
-        /** @type {Boolean} */
-        this.d20Critical = rollData.options.d20Critical ?? false;
-        /** @type {Boolean} */
-        this.d20Fumble = rollData.options.d20Fumble ?? false;
-        /** @type {Number} */
-        this.evalValue = rollData.options.evalValue ?? null;
     }
 
     /**
@@ -86,21 +145,25 @@ export default class SFRPGRoll extends Roll {
     }
 
     /**
+     * @override
      * Evaluates whether a roll is a success or a failure, if an evalValue is present (typically only for d20 rolls)
      * @type {Boolean}  returns false for failure, true for success, null if not evaluated
      */
-    get isSuccessful() {
+    get product() {
+        const total = this.total;
         const evalValue = this.evalValue;
-        if ((evalValue !== null) && (typeof this.total === "number")) {
-            if (this.d20Critical) {
-                return true;
-            } else if (this.d20Fumble) {
-                return false;
-            }
-            return this.total >= evalValue;
+        if ((evalValue !== null) && (typeof total === "number")) {
+            if (this.d20Critical)       return true;
+            else if (this.d20Fumble)    return false;
+            else                        return total >= evalValue;
         } else {
             return null;
         }
+    }
+
+    /** @override */
+    static create(formula, data = {}, options = {}) {
+        return super.create(formula, data, options);
     }
 
     /** @inheritdoc */
@@ -155,13 +218,10 @@ export default class SFRPGRoll extends Roll {
             author: game.user.id,
             flavor: null,
             template: this.constructor.CHAT_TEMPLATE,
-            blind: false
+            blind: false,
+            ...this.allRollOptions
         }, chatOptions);
         const isPrivate = chatOptions.isPrivate;
-
-        if (chatOptions?.breakdown) this.breakdown = chatOptions.breakdown;
-        if (chatOptions?.tags) this.tags = chatOptions.tags;
-        if (chatOptions?.htmlData) this.htmlData = chatOptions.htmlData;
 
         // Execute the roll, if needed
         if (!this._evaluated) await this.evaluate();
@@ -174,10 +234,10 @@ export default class SFRPGRoll extends Roll {
             tooltip: isPrivate ? "" : await this.getTooltip(),
             customTooltip: chatOptions.customTooltip,
             total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
-            tags: this.tags,
-            breakdown: this.breakdown,
-            htmlData: this.htmlData,
-            rollNotes: this.htmlData?.find(x => x.name === "rollNotes")?.value
+            tags: chatOptions.tags,
+            breakdown: chatOptions.breakdown,
+            htmlData: chatOptions.htmlData,
+            rollNotes: chatOptions.htmlData?.find(x => x.name === "rollNotes")?.value
         };
 
         // Render the roll display template
