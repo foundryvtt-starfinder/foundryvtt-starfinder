@@ -519,7 +519,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
     /**
      * Roll a Skill Check
-     * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
+     * Prompt a player user if the character is rolling a trained-only skill while untrained
      * @param {string} skillId      The skill id (e.g. "ins")
      * @param {Object} options      Options which configure how the skill check is rolled
      * @returns {Promise<RollResult?>}
@@ -582,8 +582,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollOptions: {rollType: "abilityCheck"},
-            difficulty: options.dc
+            rollOptions: {rollType: "abilityCheck", difficulty: options.dc}
         });
     }
 
@@ -595,17 +594,11 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * @returns {Promise<RollResult?>}
      */
     async rollSave(saveId, options = {}) {
-        const label = CONFIG.SFRPG.saves[saveId];
-
-        const rollContext = RollContext.createActorRollContext(this);
-
-        const parts = [`@attributes.${saveId}.bonus`];
-
         return DiceSFRPG.d20Roll({
             event: options.event,
-            rollContext: rollContext,
-            parts: parts,
-            title: game.i18n.format("SFRPG.Rolls.Dice.SaveTitle", {label: label}),
+            rollContext: RollContext.createActorRollContext(this),
+            parts: [`@attributes.${saveId}.bonus`],
+            title: game.i18n.format("SFRPG.Rolls.Dice.SaveTitle", {label: CONFIG.SFRPG.saves[saveId]}),
             flavor: null,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
@@ -615,8 +608,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollOptions: {rollType: "save"},
-            difficulty: options.dc
+            rollOptions: {rollType: "save", difficulty: options.dc}
         });
     }
 
@@ -628,20 +620,11 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * @returns {Promise<RollResult?>}
      */
     async rollSkillCheck(skillId, options = {}) {
-        const rollContext = RollContext.createActorRollContext(this);
-        const parts = [`@skills.${skillId}.mod`];
         const skill = this.system.skills[skillId];
 
-        const title = skillId.includes('pro')
-            ? game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname })
-            : game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
-
+        // Add roll tags for class skills and trained vs. untrained
         const tags = [];
-
-        if (skill.value) {
-            tags.push({name: "classSkill", text: game.i18n.format("SFRPG.SkillProficiencyLevelClassSkill")});
-        }
-
+        if (skill.value) tags.push({name: "classSkill", text: game.i18n.format("SFRPG.SkillProficiencyLevelClassSkill")});
         if (skill.ranks) {
             tags.push({name: "hasSkillRanks", text: game.i18n.format("SFRPG.SkillTrained")});
         } else {
@@ -649,10 +632,15 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             tags.push({name: "hasSkillRanks", text: game.i18n.format("SFRPG.SkillUntrained")});
         }
 
+        // Profession skills have IDs `pro`, `pro1`, `pro2`, etc.
+        const title = skillId.includes('pro')
+            ? game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname })
+            : game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
+
         return DiceSFRPG.d20Roll({
             event: options.event,
-            rollContext: rollContext,
-            parts: parts,
+            rollContext: RollContext.createActorRollContext(this),
+            parts: [`@skills.${skillId}.mod`],
             title: title,
             flavor: await foundry.applications.ux.TextEditor.enrichHTML(skill.notes, {
                 async: true,
@@ -666,8 +654,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollOptions: {rollType: "skillCheck"},
-            difficulty: options.dc,
+            rollOptions: {rollType: "skillCheck", difficulty: options.dc},
             tags: tags
         });
     }
