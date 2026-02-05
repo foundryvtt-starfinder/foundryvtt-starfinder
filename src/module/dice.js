@@ -236,8 +236,7 @@ export class DiceSFRPG {
             mainDie: "1d20",
             rollOptions,
             skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
-            title: title,
-            useRawStrings: false
+            title: title
         });
 
         // Evaluate the roll unless cancelled
@@ -314,7 +313,7 @@ export class DiceSFRPG {
     * @returns {Promise<RollResult>|Promise<null>}      Returns the roll's result or an empty promise.
     */
     static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20",
-        critical = 20, fumble = 1, breakdown = "", dialogOptions, useRawStrings = false, actorContextKey = "actor",
+        critical = 20, fumble = 1, breakdown = "", dialogOptions, actorContextKey = "actor",
         rollType = "roll", tags = []}) {
 
         // Verify roll context is valid before continuing
@@ -329,8 +328,7 @@ export class DiceSFRPG {
             mainDie: mainDie ? "1" + mainDie : null,
             rollType: rollType,
             skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
-            title: title,
-            useRawStrings: useRawStrings
+            title: title
         });
 
         if (rollInfo.button === "cancel") {
@@ -450,8 +448,7 @@ export class DiceSFRPG {
             parts: damageSections,
             rollType: rollType,
             skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
-            title: title,
-            useRawStrings: false
+            title: title
         });
 
         // Evaluate the roll
