@@ -147,6 +147,31 @@ import { ChatMessageSFRPG } from "./chat/message.js";
  */
 
 export class DiceSFRPG {
+
+    /**
+     * Roll dialog buttons for normal rolls
+     */
+    static normalRollButtons = {
+        "Normal": { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Roll") }
+    };
+
+    /**
+     * Roll dialog buttons for rolls where advantage is enabled
+     */
+    static advantageRollButtons = {
+        "Disadvantage": { id: "disadvantage", label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") },
+        "Normal": { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") },
+        "Advantage": { id: "advantage", label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") }
+    };
+
+    /**
+     * Roll dialog buttons for normal rolls
+     */
+    static damageRollButtons = {
+        Normal: { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.NormalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalDamageTooltip") },
+        Critical: { id: "critical", label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
+    };
+
     /**
     * A standardized helper function for managing core Starfinder "d20 rolls"
     *
@@ -160,29 +185,18 @@ export class DiceSFRPG {
     * @param {String}               data.title          The dice roll UI window title
     * @param {SpeakerData}          data.speaker        The ChatMessage speaker to pass when creating the chat
     * @param {string}               data.flavor         Any flavor text associated with this roll
-    * @param {Boolean}              [data.advantage]    Allow rolling with advantage (and therefore also with disadvantage)
     * @param {Object}               data.rollOptions    Additional options to be stored with the roll
     * @param {onD20DialogClosed}    data.onClose        Callback for actions to take when the dialog form is closed
     * @param {DialogOptions}        data.dialogOptions  Modal dialog options
     * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
     * @returns {Promise<RollResult?>}
     */
-    static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {critical: 20, fumble: 1, rollType: "roll"},
+    static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, rollOptions = {critical: 20, fumble: 1, rollType: "roll"},
         chatMessage = true, onClose, dialogOptions, actorContextKey = "actor", tags = []}) {
 
         if (!rollContext?.isValid()) {
             console.log(['Invalid rollContext', rollContext]);
             return null;
-        }
-
-        /** New roll formula system */
-        const buttons = {};
-        if (game.settings.get("sfrpg", "useAdvantageDisadvantage") && advantage) {
-            buttons["Disadvantage"] = { id: "disadvantage", label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
-            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
-            buttons["Advantage"] = { id: "advantage", label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
-        } else {
-            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
         }
 
         const partMapper = (part) => {
@@ -196,7 +210,7 @@ export class DiceSFRPG {
 
         const formula = parts.map(partMapper).join(" + ");
         const rollInfo = await RollTree.buildRoll(formula, rollContext, {
-            buttons: buttons,
+            buttons: game.settings.get("sfrpg", "useAdvantageDisadvantage") ? DiceSFRPG.advantageRollButtons : DiceSFRPG.normalRollButtons,
             debug: false,
             defaultButton: "normal",
             dialogOptions: dialogOptions,
@@ -300,7 +314,6 @@ export class DiceSFRPG {
     * @param {RollContext}          data.rollContext    The contextual data for this roll
     * @param {String}               data.title          The dice roll UI window title
     * @param {String}               [data.mainDie]      The main die to use for this roll, e.g. "d20".
-    * @param {Boolean}              [data.advantage]    Allow rolling with advantage (and therefore also with disadvantage)
     * @param {Number}               [data.critical]     The value of d20 result which represents a critical success
     * @param {Number}               [data.fumble]       The value of d20 result which represents a critical failure
     * @param {string}               [data.breakdown]    An explanation of the roll modifiers and where they came from.
@@ -309,7 +322,7 @@ export class DiceSFRPG {
     * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
     * @returns {Promise<RollResult>|Promise<null>}      Returns the roll's result or an empty promise.
     */
-    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true,
+    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20",
         critical = 20, fumble = 1, breakdown = "", dialogOptions, useRawStrings = false, actorContextKey = "actor",
         rollType = "roll", tags = []}) {
 
@@ -318,19 +331,9 @@ export class DiceSFRPG {
             return null;
         }
 
-        /** New roll formula system */
-        const buttons = {};
-        if (game.settings.get("sfrpg", "useAdvantageDisadvantage") && advantage) {
-            buttons["Disadvantage"] = { id: "disadvantage", label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
-            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
-            buttons["Advantage"] = { id: "advantage", label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
-        } else {
-            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
-        }
-
         const formula = rollFormula || parts.join(" + ");
         const rollInfo = await RollTree.buildRoll(formula, rollContext, {
-            buttons: buttons,
+            buttons: game.settings.get("sfrpg", "useAdvantageDisadvantage") ? DiceSFRPG.advantageRollButtons : DiceSFRPG.normalRollButtons,
             debug: false,
             defaultButton: "normal",
             dialogOptions: dialogOptions,
@@ -409,12 +412,6 @@ export class DiceSFRPG {
             return false;
         }
 
-        /** New roll formula system */
-        const buttons = {
-            Normal: { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.NormalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalDamageTooltip") },
-            Critical: { id: "critical", label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
-        };
-
         /** @type {DamageType[]} */
         const damageTypes = parts.reduce((acc, cur) => {
             if (cur.types && !foundry.utils.isEmpty(cur.types)) {
@@ -441,7 +438,7 @@ export class DiceSFRPG {
                     damageSections.push(part);
 
                     const rollInfo = await RollTree.buildRoll(part.formula, rollContext, {
-                        buttons: buttons,
+                        buttons: DiceSFRPG.damageRollButtons,
                         defaultButton: "normal",
                         rollType: rollType,
                         skipUI: true
@@ -459,7 +456,7 @@ export class DiceSFRPG {
 
         const formula = finalParts.join(" + ");
         const rollInfo = await RollTree.buildRoll(formula, rollContext, {
-            buttons: buttons,
+            buttons: DiceSFRPG.damageRollButtons,
             debug: false,
             defaultButton: "normal",
             dialogOptions: dialogOptions,
@@ -581,7 +578,7 @@ export class DiceSFRPG {
             if ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) {
                 // if quick roll is selected, determine whether a roll is a critical hit based on the linked attack (if present)
                 // if the control key is pressed, roll critical damage regardless
-                isCritical = event?.ctrlKey ? true : (linkedAttackRoll ? DiceSFRPG.isCriticalSuccess(linkedAttackRoll) : false);
+                isCritical = event?.ctrlKey ? true : (linkedAttackRoll ? linkedAttackRoll.isCritical() : false);
             } else if (rollInfo.button === "critical") {
                 isCritical = true;
             }
@@ -727,75 +724,18 @@ export class DiceSFRPG {
      *
      * @param {ChatMessageSFRPG} message       The ChatMessage document being rendered
      * @param {JQuery}      html               The pending HTML as a jQuery object
-     * @param {Object}      data               The input data provided for template rendering
-     * @param {Object}      data.data          The ChatMessage data
-     * @param {User}        data.user          The User that initiated the ChatMessage
-     * @param {User}        data.author        The name of the Actor that created this ChatMessage
-     * @param {string}      data.alias         The alias of the Actor that created this ChatMessage
-     * @param {string[]}    data.cssClass      CSS classes that should be applied to this message
-     * @param {boolean}     data.isWhisper     Should this ChatMessage be sent in a private message
-     * @param {string[]}    data.whisperTo     A list of user names this message should be sent to
-     * @param {string}      [data.borderColor] A border color applied to the chat card
      */
     static highlightCriticalSuccessFailure(message, html) {
         if (!message.isRoll || !message.isContentVisible) return;
 
         const roll = message.rolls[0];
         if (!roll.dice.length) return;
-        if (DiceSFRPG.isCriticalSuccess(roll)) {
+        if (roll.isCritical()) {
             html.find('.dice-total').addClass('success');
         }
-        if (DiceSFRPG.isFumble(roll)) {
+        if (roll.isFumble()) {
             html.find('.dice-total').addClass('failure');
         }
-    }
-
-    /**
-    * A helper function for determining if a roll was a critical success or not
-    *
-    * @param {?Object}  roll        The roll object
-    * @param {Number}       dieSize     The size of the die to look for to  trigger the critical
-    * @param {Number}       critValue   The number needed to roll at or above to trigger the critical
-    * @returns {Boolean}                `true` if a critical success, `false` otherwise
-    */
-    static isCriticalSuccess(roll, dieSize = 20, critValue = null) {
-        if (!roll?.dice?.length) {
-            return false;
-        }
-
-        for (const d of roll.dice) {
-            if (d.faces === dieSize && d.results.length === 1 && (critValue || d.options.critical)) {
-                if (d.total >= (critValue ?? d.options.critical)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-    * A helper function for determining if a roll was a fumble or not
-    *
-    * @param {Object}  roll        The roll object
-    * @param {Number}       dieSize     The size of the die to look for to  trigger the fumble
-    * @param {Number}       fumbleValue The number needed to roll at or below to trigger the fumble
-    * @returns {Boolean}                `true` if a fumble, `false` otherwise
-    */
-    static isFumble(roll, dieSize = 20, fumbleValue = null) {
-        if (!roll?.dice?.length) {
-            return false;
-        }
-
-        for (const d of roll.dice) {
-            if (d.faces === dieSize && d.results.length === 1 && (fumbleValue || d.options.fumble)) {
-                if (d.total <= (fumbleValue ?? d.options.fumble)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 
     /**
