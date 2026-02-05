@@ -66,24 +66,6 @@ export default class SFRPGRoll extends Roll {
     }
 
     /**
-     * Return true if the roll is a d20 roll and a critical (i.e. 20)
-     *
-     * @type {Boolean}
-     */
-    get d20Critical() {
-        return this.options.d20Critical ?? false;
-    }
-
-    /**
-     * Return true if the roll is a d20 roll and a fumble (i.e. 1)
-     *
-     * @type {Boolean}
-     */
-    get d20Fumble() {
-        return this.options.d20Fumble ?? false;
-    }
-
-    /**
      * Return the value the roll is being evaluated against, if any
      *
      * @type {Number}
@@ -103,8 +85,6 @@ export default class SFRPGRoll extends Roll {
             breakdown: this.breakdown,
             htmlData: this.htmlData,
             rollType: this.rollType,
-            d20Critical: this.d20Critical,
-            d20Fumble: this.d20Fumble,
             evalValue: this.evalValue
         };
     }
@@ -153,17 +133,12 @@ export default class SFRPGRoll extends Roll {
         const total = this.total;
         const evalValue = this.evalValue;
         if ((evalValue !== null) && (typeof total === "number")) {
-            if (this.d20Critical)       return true;
-            else if (this.d20Fumble)    return false;
-            else                        return total >= evalValue;
+            if (this.isCritical())       return true;
+            else if (this.isFumble())    return false;
+            else                         return total >= evalValue;
         } else {
             return null;
         }
-    }
-
-    /** @override */
-    static create(formula, data = {}, options = {}) {
-        return super.create(formula, data, options);
     }
 
     /** @inheritdoc */
@@ -245,6 +220,44 @@ export default class SFRPGRoll extends Roll {
     }
 
     /**
+    * A helper function for determining if a roll was a critical success or not
+    *
+    * @param {Number}       dieSize     The size of the die to look for to trigger the critical
+    * @param {Number}       critValue   The number needed to roll at or above to trigger the critical
+    * @returns {Boolean}                `true` if a critical success, `false` otherwise
+    */
+    isCritical(dieSize = 20, critValue = 20) {
+        if (!this?.dice?.length) return false;
+
+        for (const d of this.dice) {
+            if (d.faces === dieSize && d.results.length === 1 && critValue) {
+                if (d.total >= critValue) return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+    * A helper function for determining if a roll was a fumble or not
+    *
+    * @param {Number}       dieSize     The size of the die to look for to trigger the fumble
+    * @param {Number}       fumbleValue The number needed to roll at or below to trigger the fumble
+    * @returns {Boolean}                `true` if a fumble, `false` otherwise
+    */
+    isFumble(dieSize = 20, fumbleValue = 1) {
+        if (!this?.dice?.length) return false;
+
+        for (const d of this.dice) {
+            if (d.faces === dieSize && d.results.length === 1 && fumbleValue) {
+                if (d.total <= fumbleValue) return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * @override
      * Wrapper around Roll.parse to try and wrap loose function terms (e.g `floor(...)d6`) in parentheses to appease the roll parser.
      * We try the core parser first (as to not create any unintended side effects), and if that fails, try again with our transformation.
@@ -307,4 +320,5 @@ export default class SFRPGRoll extends Roll {
         }
         return formula;
     }
+
 }

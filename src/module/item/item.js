@@ -1139,7 +1139,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
 
         const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
-        if (rollDamageWithAttack && !DiceSFRPG.isFumble(roll) && !options.disableDamageAfterAttack) {
+        if (rollDamageWithAttack && !roll.isFumble() && !options.disableDamageAfterAttack) {
             this.rollDamage({}, {linkedAttackRoll: roll});
         }
     }
