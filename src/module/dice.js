@@ -7,6 +7,8 @@ import { ChatMessageSFRPG } from "./chat/message.js";
 /**
  * @import SFRPGRoll from "./rolls/roll.js";
  * @import RollContext from "./rolls/rollcontext.js";
+ * @import ActorSFRPG from "./actor/actor.js";
+ * @import RollInfo from "./rolls/rolltree.js";
  */
 
 // Type definitions for documentation.
@@ -152,7 +154,7 @@ export class DiceSFRPG {
      * Roll dialog buttons for normal rolls
      * @type {Object}
      */
-    get normalRollButtons() {
+    static get normalRollButtons() {
         return {
             Normal: {
                 id: "normal",
@@ -165,7 +167,7 @@ export class DiceSFRPG {
      * Roll dialog buttons for rolls where advantage is enabled
      * @type {Object}
      */
-    get advantageRollButtons() {
+    static get advantageRollButtons() {
         return {
             "Disadvantage": { id: "disadvantage", label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") },
             "Normal": { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") },
@@ -177,7 +179,7 @@ export class DiceSFRPG {
      * Roll dialog buttons for normal rolls
      * @type {Object}
      */
-    get damageRollButtons() {
+    static get damageRollButtons() {
         return {
             Normal: { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.NormalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalDamageTooltip") },
             Critical: { id: "critical", label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
@@ -227,7 +229,7 @@ export class DiceSFRPG {
 
         // Get the roll information determined by selections in the roll dialog
         const rollInfo = await RollTree.buildRoll(formula, rollContext, {
-            buttons: game.settings.get("sfrpg", "useAdvantageDisadvantage") ? DiceSFRPG.advantageRollButtons : DiceSFRPG.normalRollButtons,
+            buttons: game.settings.get("sfrpg", "useAdvantageDisadvantage") ? this.advantageRollButtons : this.normalRollButtons,
             debug: false,
             defaultButton: "normal",
             dialogOptions: dialogOptions,
@@ -242,62 +244,39 @@ export class DiceSFRPG {
         if (rollInfo.button !== "cancel") {
 
             // Set the main die roll value
-            let dieRoll = "1d20";
-            if (rollInfo.button === "advantage") dieRoll = "2d20kh";
-            else if (rollInfo.button === "disadvantage") dieRoll = "2d20kl";
+            let baseDie = "1d20";
+            if (rollInfo.button === "advantage") baseDie = "2d20kh";
+            else if (rollInfo.button === "disadvantage") baseDie = "2d20kl";
 
-            const node = rollInfo.rolls[0].node;
-            const finalFormula = await this._calcStackingFormula(node, rollInfo.modifiers, rollInfo.bonus, rollContext.allContexts[actorContextKey]?.entity);
-
-            finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
-            finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
-            finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
-                .trim();
-            finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
-            const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
-
+            const finalFormula = await this._calcStackingFormula(baseDie, rollInfo, rollContext.allContexts[actorContextKey]?.entity);
+            const preparedRollExplanation = DiceSFRPG.formatExplanation(finalFormula.formula);
             const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, tags, rollType: rollOptions.rollType }).evaluate();
 
-            // Flag critical thresholds and add Critical hit and effect information
-            for (const d of roll.dice) {
-                if (d.faces === 20) {
-                    d.options.critical = rollOptions.critical;
-                    d.options.fumble = rollOptions.fumble;
-
-                    // Critical Effect flavor and tags
-                    const criticalData = rollContext.allContexts?.item?.data?.critical;
-                    if (d.total === rollOptions.critical) {
-                        roll.options.d20Critical = true;
-                        flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
-                        if (criticalData?.effect?.trim()) {
-                            roll.options.tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
-                        }
-                    } else if (d.total === rollOptions.fumble) {
-                        roll.options.d20Fumble = true;
-                    }
+            // Add Critical hit and effect information if required
+            if (roll.isCritical()) {
+                flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
+                if (criticalData?.effect?.trim()) {
+                    roll.options.tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                 }
             }
 
-            // Roll Evaluation
+            // Roll Evaluation vs Action Target (KAC, EAC, DC, etc.)
             roll.options.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions);
             roll.options.tags.unshift(DiceSFRPG.createRollSuccessTag(roll, rollInfo, rollOptions));
 
-            // Chat Cards
-            const itemContext = rollContext.allContexts['item'];
-            const htmlData = [{ name: "rollNotes", value: itemContext?.system?.rollNotes }];
+            // Add item roll notes
+            const htmlData = [{ name: "rollNotes", value: rollContext.allContexts['item']?.system?.rollNotes }];
 
+            // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
             if (chatMessage) {
                 const messageData = {
+                    content: await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices }),
                     flavor,
                     speaker,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
                     system: {rollOptions}
                 };
-
-                messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
-
-                // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
                 ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
             }
 
@@ -357,8 +336,7 @@ export class DiceSFRPG {
             return null;
         }
 
-        const node = rollInfo.rolls[0].node;
-        const finalFormula = await this._calcStackingFormula(node, rollInfo.modifiers, rollInfo.bonus, rollContext.allContexts[actorContextKey]?.entity);
+        const finalFormula = await this._calcStackingFormula(null, rollInfo, rollContext.allContexts[actorContextKey]?.entity);
 
         if (mainDie) {
             let dieRoll = "1" + mainDie;
@@ -624,7 +602,7 @@ export class DiceSFRPG {
             finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
                 .trim();
             finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
-            const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
+            const preparedRollExplanation = DiceSFRPG.formatExplanation(finalFormula.formula);
 
             const rollObject = SFRPGRoll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
             const roll = await rollObject.evaluate();
@@ -767,13 +745,13 @@ export class DiceSFRPG {
         }
     }
 
-    static formatFormula(formulaText) {
+    static formatExplanation(explanationText) {
         let index = 0;
         let consumedText = "";
         let isReading = false;
         const sections = [];
-        while (index < formulaText.length) {
-            const token = formulaText[index++];
+        while (index < explanationText.length) {
+            const token = explanationText[index++];
             if (token === "[") {
                 sections.push({text: consumedText, replace: true});
                 consumedText = "";
@@ -797,6 +775,7 @@ export class DiceSFRPG {
                 finalResult += section.text;
             }
         }
+        finalResult = (finalResult[0] === '-') ? finalResult : '+ ' + finalResult;
         return finalResult;
     }
 
@@ -978,82 +957,65 @@ export class DiceSFRPG {
 
     /**
      * Calculates the final formula used for rolls with applied stacking of the modifiers
-     * @param {RollNode} node - the Rootnode which is used for the roll
-     * @param {SFRPGModifier[]} rollMods - all modifiers applied to this roll (unstacked)
-     * @param {Number} bonus - the situational bonus for this roll
+     * @param {String}          baseDie     the base die used in the roll (string representation)
+     * @param {RollInfo}        rollInfo    output from buildRoll, including dialog selections
+     * @param {ActorSFRPG}      actor       the actor making the roll
      * @returns {ResolvedRoll}
      */
-    static async _calcStackingFormula(node, rollMods, bonus = null, actor = null) {
+    static async _calcStackingFormula(baseDie = null, rollInfo, actor = null) {
+        const node = rollInfo.rolls[0].node;
+        const rollMods = rollInfo.modifiers;
+        const bonus = rollInfo.bonus ?? '';
+        const enabledRollMods = rollMods.filter(mod => mod.enabled);
+
+        // Remove modifier nodes that already exist so they aren't double-counted
         let rootNode = node;
+        for (const mod of enabledRollMods) rootNode = this._removeModifierNodes(rootNode, mod);
 
-        const stackModifiers = new StackModifiers();
-        const stackedMods = await stackModifiers.processAsync(rollMods.filter(mod => {
-            if (mod.enabled && mod.type) {
-                rootNode = this._removeModifierNodes(rootNode, mod);
-                return true;
-            }
-        }), null, { actor: actor });
+        // Stack modifiers, removing multiples with the same type
+        const stackedRollMods = await new StackModifiers().processAsync(enabledRollMods, null, { actor: actor });
 
-        let rollString = '';
-        let formulaString = '';
-        const rollDices = [];
-        const stackedModsArray = Object.keys(stackedMods);
-        for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
-            const stackModifier = stackedMods[stackedModsArray[stackModsI]];
-            if (stackModifier === null || stackModifier === undefined) {
-                continue;
-            }
-            if (stackModifier instanceof Array) {
-                for (let stackModifierI = 0; stackModifierI < stackModifier.length; stackModifierI++) {
-                    const modifier = stackModifier[stackModifierI];
-                    rollString += `${modifier.max.toString()}+`;
-                    // TODO:
-                    /*
-                        add title to the span f.e.:
-                        title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
-                        but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
-                    */
-                    if (!modifier.isDeterministic) {
-                        rollDices.push(...modifier.dices);
-                        formulaString += `${modifier.max.toString()}(${modifier.modifier})[<span>${modifier.name}</span>] + `;
-                    } else {
-                        formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>] + `;
-                    }
-                }
-            } else {
-                rollString += `${stackModifier.max.toString()}+`;
-                // TODO:
-                /*
-                    add title to the span f.e.:
-                    title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
-                    but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
-                */
-                if (!stackModifier.isDeterministic) {
-                    rollDices.push(...stackModifier.dices);
-                    formulaString += `${stackModifier.max.toString()}(${stackModifier.modifier})[<span>${stackModifier.name}</span>] + `;
+        // Account for situational roll modifiers in the roll formula & explanation
+        const rollModFormulaParts = [];
+        const rollModExplanationParts = [];
+        const rollModDice = [];
+        for (const modifiers of Object.values(stackedRollMods)) {
+            for (const modifier of modifiers) {
+                rollModFormulaParts.push(modifier.max);
+
+                if (modifier.isDeterministic) {
+                    rollModExplanationParts.push(`${modifier.max} [<span>${modifier.name}</span>]`);
                 } else {
-                    formulaString += `${stackModifier.max.toString()}[<span>${stackModifier.name}</span>] + `;
+                    rollModExplanationParts.push(`${modifier.max}(${modifier.modifier}) [<span>${modifier.name}</span>]`);
+                    rollModDice.push(...modifier.dices);
                 }
+                /*
+                TODO: add title to the span, e.g.:
+                title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
+                but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
+                */
             }
         }
 
-        formulaString += bonus ? `${bonus.toString()}[<span>${game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus")}</span>]` : '';
+        // Add the situational bonus if present
+        if (bonus) {
+            rollModFormulaParts.push(bonus);
+            rollModExplanationParts.push(`${bonus} [<span>${game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus")}</span>]`);
+        }
 
-        rollString += bonus ? `${bonus}` : '';
-        rollString = rollString.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
-            .trim();
-        rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
-
+        // Generate the unmodified formula object to return
         const finalFormula = rootNode.resolveForRoll(rollMods);
 
-        finalFormula.finalRoll = rollString ? `${finalFormula.finalRoll} + ${rollString}` : finalFormula.finalRoll;
-        finalFormula.formula = formulaString ? `${finalFormula.formula} + ${formulaString}` : finalFormula.formula;
-
-        finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
-            .trim();
-        finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
-
-        finalFormula.rollDices = rollDices;
+        // Set the dice, formula string (finalRoll), and explanation string (formula) on the object to be returned
+        finalFormula.rollDices = rollModDice;
+        finalFormula.finalRoll = [baseDie ?? '', finalFormula.finalRoll, ...rollModFormulaParts]
+            .join(" + ")
+            .replace(/\+\s*-\s*/gi, "- ")
+            .replace(/\+\s*\+\s*/gi, "+ ");
+        finalFormula.formula = [finalFormula.formula, ...rollModExplanationParts]
+            .join(" + ")
+            .replace(/\+\s*-\s*/gi, "- ")
+            .replace(/\+\s*\+\s*/gi, "+ ");
 
         return finalFormula;
     }

@@ -13,9 +13,6 @@ data-action="expandRoll">
         <div class="dice-formula">{{formula}}</div>
         <div class="dice-tooltip">
             <div class="wrapper">
-                <div class="dice-formula-breakdown">
-                    {{{breakdown}}}
-                </div>
                 {{{tooltip}}}
                 {{#each customTooltip}}
                     <section class="tooltip-part">
@@ -30,6 +27,9 @@ data-action="expandRoll">
                         </div>
                     </section>
                 {{/each}}
+                <div class="dice-formula-breakdown">
+                    {{{breakdown}}}
+                </div>
             </div>
         </div>
         <h3 class="dice-total">{{total}}</h3>

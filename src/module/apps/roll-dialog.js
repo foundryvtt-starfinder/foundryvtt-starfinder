@@ -343,7 +343,11 @@ export default class RollDialog extends Dialog {
                     buttons: buttons,
                     default: defaultButton,
                     close: (button, rollMode, bonus, parts, targetQuadrant) => {
-                        resolve({button, rollMode, bonus: bonus?.trim(), parts, targetQuadrant});
+                        const cleanBonus = bonus?.replace(/\+\s*-\s*/gi, "- ")
+                            .replace(/\+\s*\+\s*/gi, "+ ")
+                            .replace(/\s\s+/g, ' ')
+                            .trim();
+                        resolve({button, rollMode, bonus: cleanBonus, parts, targetQuadrant});
                     }
                 },
                 formula,

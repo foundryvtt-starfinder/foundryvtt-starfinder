@@ -756,7 +756,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             }, messageOptions);
 
             // Prepare roll formula explanation
-            const preparedRollExplanation = DiceSFRPG.formatFormula(roll.flags.sfrpg.finalFormula.formula);
+            const preparedRollExplanation = DiceSFRPG.formatExplanation(roll.flags.sfrpg.finalFormula.formula);
             const preparedRollExplanationElement = document.createElement("div");
             preparedRollExplanationElement.innerHTML = preparedRollExplanation;
 
