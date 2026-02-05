@@ -319,7 +319,22 @@ export class DiceSFRPG {
         // Verify roll context is valid before continuing
         if (!rollContext?.isValid()) return null;
 
-        const formula = rollFormula || parts.join(" + ");
+        // Unpack and simplify any roll parts that are objects (these come from modifiers that affect rolls)
+        const formulaParts = [];
+        for (const part of parts) {
+            if (part instanceof Object) {
+                const simplifiedFormula = this._simplifyFormula(part.score || "0", rollContext);
+                const explanation = part.explanation ? `[${part.explanation}]` : "";
+                formulaParts.push(`${simplifiedFormula}${explanation}`);
+            } else {
+                formulaParts.push(part);
+            }
+        }
+
+        // Build the roll formula
+        const formula = rollFormula || formulaParts.join(" + ");
+
+        // Get the roll information determined by selections in the roll dialog
         const rollInfo = await RollTree.buildRoll(formula, rollContext, {
             buttons: game.settings.get("sfrpg", "useAdvantageDisadvantage") ? DiceSFRPG.advantageRollButtons : DiceSFRPG.normalRollButtons,
             debug: false,
@@ -331,6 +346,7 @@ export class DiceSFRPG {
             title: title
         });
 
+        // If cancelled, exit
         if (rollInfo.button === "cancel") {
             return null;
         }

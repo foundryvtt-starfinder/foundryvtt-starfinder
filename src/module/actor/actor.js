@@ -898,7 +898,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 const dcRoll = await DiceSFRPG.createRoll({
                     rollContext: rollContext,
                     rollFormula: dc.value,
-                    mainDie: 'd0',
+                    mainDie: '1d20',
                     title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
                     dialogOptions: { skipUI: true },
                     actorContextKey: actionEntry.system.role
