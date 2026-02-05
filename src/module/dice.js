@@ -194,10 +194,8 @@ export class DiceSFRPG {
     static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, rollOptions = {critical: 20, fumble: 1, rollType: "roll"},
         chatMessage = true, onClose, dialogOptions, actorContextKey = "actor", tags = []}) {
 
-        if (!rollContext?.isValid()) {
-            console.log(['Invalid rollContext', rollContext]);
-            return null;
-        }
+        // Verify roll context is valid before continuing
+        if (!rollContext?.isValid()) return null;
 
         const partMapper = (part) => {
             if (part instanceof Object) {
@@ -326,10 +324,8 @@ export class DiceSFRPG {
         critical = 20, fumble = 1, breakdown = "", dialogOptions, useRawStrings = false, actorContextKey = "actor",
         rollType = "roll", tags = []}) {
 
-        if (!rollContext?.isValid()) {
-            console.log(['Invalid rollContext', rollContext]);
-            return null;
-        }
+        // Verify roll context is valid before continuing
+        if (!rollContext?.isValid()) return null;
 
         const formula = rollFormula || parts.join(" + ");
         const rollInfo = await RollTree.buildRoll(formula, rollContext, {
@@ -407,10 +403,8 @@ export class DiceSFRPG {
     static async damageRoll({ event = new Event(''), parts, linkedAttackRoll, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions,
         rollType = "damage", tags = []}) {
 
-        if (!rollContext?.isValid()) {
-            console.log(['Invalid rollContext', rollContext]);
-            return false;
-        }
+        // Verify roll context is valid before continuing
+        if (!rollContext?.isValid()) return null;
 
         /** @type {DamageType[]} */
         const damageTypes = parts.reduce((acc, cur) => {
