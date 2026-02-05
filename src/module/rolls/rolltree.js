@@ -3,10 +3,10 @@ import RollNode from "./rollnode.js";
 
 /**
  * @typedef {Object} RollInfo
- * @property {string}          button
- * @property {string}          mode
- * @property {SFRPGModifier[]} modifiers
- * @property {string?}         bonus
+ * @property {string}          button       The button pressed on the roll dialog
+ * @property {string}          mode         The roll mode (public, gm, etc.) to use to make the roll
+ * @property {SFRPGModifier[]} modifiers    List of available modifiers on the dialog
+ * @property {string?}         bonus        The manually entered situational bonus
  * @property {EachRoll[]}      rolls
  */
 
