@@ -161,7 +161,7 @@ export class DiceSFRPG {
                 label: game.i18n.localize("SFRPG.Rolls.Dice.Roll")
             }
         };
-    };
+    }
 
     /**
      * Roll dialog buttons for rolls where advantage is enabled
@@ -173,7 +173,7 @@ export class DiceSFRPG {
             "Normal": { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") },
             "Advantage": { id: "advantage", label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") }
         };
-    };
+    }
 
     /**
      * Roll dialog buttons for normal rolls
@@ -184,7 +184,7 @@ export class DiceSFRPG {
             Normal: { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.NormalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalDamageTooltip") },
             Critical: { id: "critical", label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
         };
-    };
+    }
 
     /**
     * A standardized helper function for managing core Starfinder "d20 rolls"
@@ -255,6 +255,7 @@ export class DiceSFRPG {
             // Add Critical hit and effect information if required
             if (roll.isCritical()) {
                 flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
+                const criticalData = rollContext.allContexts?.item?.data?.critical;
                 if (criticalData?.effect?.trim()) {
                     roll.options.tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
                 }
@@ -262,7 +263,7 @@ export class DiceSFRPG {
 
             // Roll Evaluation vs Action Target (KAC, EAC, DC, etc.)
             roll.options.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions);
-            roll.options.tags.unshift(DiceSFRPG.createRollSuccessTag(roll, rollInfo, rollOptions));
+            roll.options.tags.unshift(DiceSFRPG.rollSuccessTag(roll, rollInfo, rollOptions));
 
             // Add item roll notes
             const htmlData = [{ name: "rollNotes", value: rollContext.allContexts['item']?.system?.rollNotes }];
@@ -888,7 +889,7 @@ export class DiceSFRPG {
      * @param   {Object}        rollOptions     additional options to be stored with the roll
      * @returns {Tag}                           the generated tag that indicates success/failure
      */
-    static createRollSuccessTag(roll, rollInfo, rollOptions) {
+    static rollSuccessTag(roll, rollInfo, rollOptions) {
         let prependedQuadrantInfo = "";
         if (rollInfo.target.actorType === "starship" && rollInfo.target.quadrant) {
             prependedQuadrantInfo = `${rollInfo.target.quadrantName} `;
