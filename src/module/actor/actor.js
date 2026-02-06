@@ -569,7 +569,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      */
     async rollAbility(abilityId, options = {}) {
         return DiceSFRPG.d20Roll({
-            event: options.event,
+            skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault') ? !options.event?.shiftKey : options.event?.shiftKey,
             rollContext: RollContext.createActorRollContext(this),
             parts: [ `@abilities.${abilityId}.abilityCheckBonus` ],
             title:  game.i18n.format("SFRPG.Rolls.Dice.AbilityCheckTitle", {label: CONFIG.SFRPG.abilities[abilityId]}),
@@ -578,7 +578,6 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             chatMessage: options.chatMessage,
             onClose: options.onClose,
             dialogOptions: {
-                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -595,7 +594,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      */
     async rollSave(saveId, options = {}) {
         return DiceSFRPG.d20Roll({
-            event: options.event,
+            skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault') ? !options.event?.shiftKey : options.event?.shiftKey,
             rollContext: RollContext.createActorRollContext(this),
             parts: [`@attributes.${saveId}.bonus`],
             title: game.i18n.format("SFRPG.Rolls.Dice.SaveTitle", {label: CONFIG.SFRPG.saves[saveId]}),
@@ -604,7 +603,6 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             chatMessage: options.chatMessage,
             onClose: options.onClose,
             dialogOptions: {
-                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -638,7 +636,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             : game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
 
         return DiceSFRPG.d20Roll({
-            event: options.event,
+            skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault') ? !options.event?.shiftKey : options.event?.shiftKey,
             rollContext: RollContext.createActorRollContext(this),
             parts: [`@skills.${skillId}.mod`],
             title: title,
@@ -650,7 +648,6 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             chatMessage: options.chatMessage,
             onClose: options.onClose,
             dialogOptions: {
-                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -702,7 +699,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         this.setupRollContexts(rollContext);
 
         return DiceSFRPG.d20Roll({
-            event: options.event,
+            skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault') ? !options.event?.shiftKey : options.event?.shiftKey,
             rollContext: rollContext,
             parts: parts,
             title: game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", {skill: CONFIG.SFRPG.skills["pil"]}),
@@ -710,7 +707,6 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
             dialogOptions: {
-                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -896,11 +892,11 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         if (dc) {
             if (dc.resolve) {
                 const dcRoll = await DiceSFRPG.createRoll({
+                    skipUI: true,
                     rollContext: rollContext,
                     rollFormula: dc.value,
                     mainDie: '1d20',
                     title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
-                    dialogOptions: { skipUI: true },
                     actorContextKey: actionEntry.system.role
                 });
 

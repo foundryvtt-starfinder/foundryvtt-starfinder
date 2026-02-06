@@ -695,7 +695,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }
 
         const rollResult = await DiceSFRPG.createRoll({
-            event,
+            skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault'),
             parts: parts,
             rollContext: RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"}),
             title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name}),

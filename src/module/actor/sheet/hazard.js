@@ -121,11 +121,9 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
     }
 
     _performRoll(event, rollName, rollValue, isAttack) {
-        const rollContext = RollContext.createActorRollContext(this.actor);
-
         return DiceSFRPG.d20Roll({
-            event: event,
-            rollContext: rollContext,
+            skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault') ? !event.shiftKey : event.shiftKey,
+            rollContext: RollContext.createActorRollContext(this.actor),
             parts: [rollValue],
             title: rollName,
             flavor: null,

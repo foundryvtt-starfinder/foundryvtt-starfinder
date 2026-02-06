@@ -193,20 +193,21 @@ export class DiceSFRPG {
     * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
     *
     * @param {Object}               data                    The parameters passed into the method
-    * @param {Event|JQuery.Event}   [data.event]            The triggering event which initiated the roll
+    * @param {boolean}              [data.skipUI]           The triggering event which initiated the roll
     * @param {string[]}             data.parts              The dice roll component parts, excluding the initial d20
     * @param {RollContext}          data.rollContext        The contextual data for this roll
-    * @param {String}               data.title              The dice roll UI window title
+    * @param {string}               [data.title]            The dice roll UI window title
     * @param {SpeakerData}          data.speaker            The ChatMessage speaker to pass when creating the chat
-    * @param {string}               data.flavor             Any flavor text associated with this roll
-    * @param {Object}               data.rollOptions        Additional options to be stored with the roll
-    * @param {onD20DialogClosed}    data.onClose            Callback for actions to take when the dialog form is closed
-    * @param {DialogOptions}        data.dialogOptions      Modal dialog options
-    * @param {String}               data.actorContextKey    Key for evaluating the correct rollContext entry when calculating formulas
+    * @param {string}               [data.flavor]           Any flavor text associated with this roll
+    * @param {Object}               [data.rollOptions]      Additional options to be stored with the roll
+    * @param {boolean}              [data.chatMessage]      Whether to create & show a chat message after making the roll
+    * @param {onD20DialogClosed}    [data.onClose]          Callback for actions to take when the dialog form is closed
+    * @param {DialogOptions}        [data.dialogOptions]    Modal dialog options
+    * @param {string}               [data.actorContextKey]  Key for evaluating the correct rollContext entry when calculating formulas
     * @param {Tag[]}                [data.tags]             Any roll metadata that will be output on the bottom of the chat card
     * @returns {Promise<RollResult?>}
     */
-    static async d20Roll({ event = new Event(''), parts = [], rollContext, title, speaker, flavor, rollOptions = {critical: 20, fumble: 1, rollType: "roll", mainDie: "1d20"},
+    static async d20Roll({ skipUI = false, parts = [], rollContext, title, speaker, flavor, rollOptions = {critical: 20, fumble: 1, rollType: "roll", mainDie: "1d20"},
         chatMessage = true, onClose, dialogOptions, actorContextKey = "actor", tags = []}) {
 
         // Verify roll context is valid before continuing
@@ -233,7 +234,7 @@ export class DiceSFRPG {
             debug: false,
             dialogOptions: dialogOptions,
             rollOptions,
-            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            skipUI: skipUI && !rollContext.hasMultipleSelectors(),
             title: title
         });
 
@@ -297,7 +298,7 @@ export class DiceSFRPG {
     * Returns a promise that will return an object containing roll and formula.
     *
     * @param {Object}               data                The parameters passed into the method.
-    * @param {Event|JQuery.Event}   [data.event]        The triggering event which initiated the roll
+    * @param {boolean}              [data.skipUI]       The triggering event which initiated the roll
     * @param {String}               [data.rollFormula]  The roll formula to use, excluding the initial die. If left empty, will look for parts.
     * @param {string[]}             data.parts          The dice roll component parts, excluding the initial die
     * @param {RollContext}          data.rollContext    The contextual data for this roll
@@ -308,7 +309,7 @@ export class DiceSFRPG {
     * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
     * @returns {Promise<RollResult>|Promise<null>}      Returns the roll's result or an empty promise.
     */
-    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, rollOptions = {critical: 20, fumble: 1, rollType: "roll", mainDie: "1d20"},
+    static async createRoll({ skipUI = false, rollFormula = null, parts, rollContext, title, rollOptions = {critical: 20, fumble: 1, rollType: "roll", mainDie: "1d20"},
         dialogOptions, actorContextKey = "actor", tags = []}) {
 
         // Verify roll context is valid before continuing
@@ -336,7 +337,7 @@ export class DiceSFRPG {
             debug: false,
             dialogOptions: dialogOptions,
             rollOptions,
-            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            skipUI: skipUI && !rollContext.hasMultipleSelectors(),
             title: title
         });
 

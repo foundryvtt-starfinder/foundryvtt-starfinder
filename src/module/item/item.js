@@ -981,7 +981,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         // Call the roll helper utility
         return DiceSFRPG.d20Roll({
-            event: options.event,
+            skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault') ? !options.event?.shiftKey : options.event?.shiftKey,
             parts: parts,
             actorContextKey: "owner",
             rollContext: rollContext,
@@ -1222,7 +1222,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         return DiceSFRPG.d20Roll({
-            event: options.event,
+            skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault') ? !options.event?.shiftKey : options.event?.shiftKey,
             parts: parts,
             rollContext: rollContext,
             title: title,
@@ -1274,7 +1274,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.setMainContext("");
 
         return DiceSFRPG.d20Roll({
-            event: options.event,
+            skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault') ? !options.event?.shiftKey : options.event?.shiftKey,
             parts: parts,
             rollContext: rollContext,
             title: title,
