@@ -60,5 +60,5 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
             }
         );
         return options;
-    };
+    }
 }

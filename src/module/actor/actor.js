@@ -20,6 +20,7 @@ import { ItemSheetSFRPG } from "../item/sheet.js";
 import SFRPGTimedEffect from "../timedEffect/timedEffect.js";
 import { } from "./crew-update.js";
 import { ChatMessageSFRPG } from "../chat/message.js";
+import SFRPGRoll from "../rolls/roll.js";
 
 /**
  * A data structure for storing damage statistics.
@@ -573,7 +574,6 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             rollContext: RollContext.createActorRollContext(this),
             parts: [ `@abilities.${abilityId}.abilityCheckBonus` ],
             title:  game.i18n.format("SFRPG.Rolls.Dice.AbilityCheckTitle", {label: CONFIG.SFRPG.abilities[abilityId]}),
-            flavor: null,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
             onClose: options.onClose,
@@ -581,7 +581,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollOptions: {rollType: "abilityCheck", difficulty: options.dc}
+            rollCriteria: SFRPGRoll.createRollCriteria("abilityCheck", {difficulty: options.dc})
         });
     }
 
@@ -598,7 +598,6 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             rollContext: RollContext.createActorRollContext(this),
             parts: [`@attributes.${saveId}.bonus`],
             title: game.i18n.format("SFRPG.Rolls.Dice.SaveTitle", {label: CONFIG.SFRPG.saves[saveId]}),
-            flavor: null,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
             onClose: options.onClose,
@@ -606,7 +605,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollOptions: {rollType: "save", difficulty: options.dc}
+            rollCriteria: SFRPGRoll.createRollCriteria("save", {difficulty: options.dc})
         });
     }
 
@@ -651,7 +650,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollOptions: {rollType: "skillCheck", difficulty: options.dc},
+            rollCriteria: SFRPGRoll.createRollCriteria("skillCheck", {difficulty: options.dc}),
             tags: tags
         });
     }
@@ -703,14 +702,13 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             rollContext: rollContext,
             parts: parts,
             title: game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", {skill: CONFIG.SFRPG.skills["pil"]}),
-            flavor: null,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this }),
             chatMessage: options.chatMessage,
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollOptions: {rollType: "skillCheck"},
+            rollCriteria: SFRPGRoll.createRollCriteria("skillCheck", {difficulty: options.dc}),
             onClose: options.onClose
         });
     }
@@ -847,14 +845,32 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             }
         }
 
-        const rollResult = await DiceSFRPG.createRoll({
+        const dc = selectedFormula.dc || actionEntry.system.dc;
+        let dcRoll = null;
+        if (dc) {
+            if (dc.resolve) {
+                dcRoll = await DiceSFRPG.createRoll({
+                    actorContextKey: actionEntry.system.role,
+                    chatMessage: false,
+                    rollContext: rollContext,
+                    rollCriteria: SFRPGRoll.createRollCriteria("none"),
+                    rollFormula: dc.value,
+                    skipUI: true,
+                    title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name})
+                });
+            }
+        }
+
+        const {roll, formula} = await DiceSFRPG.createRoll({
+            actorContextKey: actionEntry.system.role,
+            chatMessage: false,
             rollContext: rollContext,
+            rollCriteria: SFRPGRoll.createRollCriteria("skillCheck", dc?.resolve ? {difficulty: dcRoll.roll.total} : {} ),
             rollFormula: selectedFormula.formula + systemBonus + " + @additional.modifiers.bonus",
-            title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
-            actorContextKey: actionEntry.system.role
+            title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name})
         });
 
-        if (!rollResult) {
+        if (!roll) {
             return;
         }
 
@@ -888,18 +904,8 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             flavor += `<h2>${actionEntry.name} (${selectedFormula.name})</h2>`;
         }
 
-        const dc = selectedFormula.dc || actionEntry.system.dc;
         if (dc) {
             if (dc.resolve) {
-                const dcRoll = await DiceSFRPG.createRoll({
-                    skipUI: true,
-                    rollContext: rollContext,
-                    rollFormula: dc.value,
-                    mainDie: '1d20',
-                    title: game.i18n.format("SFRPG.Rolls.StarshipAction", {action: actionEntry.name}),
-                    actorContextKey: actionEntry.system.role
-                });
-
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${dcRoll.roll.total}</p>`;
             } else {
                 flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.DC")}: </strong>${await foundry.applications.ux.TextEditor.enrichHTML(dc.value, {
@@ -919,7 +925,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         if (actionEntry.system.effectCritical) {
             const critEffectDisplayState = game.settings.get("sfrpg", "starshipActionsCrit");
             if (critEffectDisplayState !== 'never') {
-                if (critEffectDisplayState === 'always' || rollResult.roll.dice[0].values[0] === 20) {
+                if (critEffectDisplayState === 'always' || roll.isCritical) {
                     flavor += `<p><strong>${game.i18n.format("SFRPG.Rolls.StarshipActions.Chat.CriticalEffect")}: </strong>`;
                     flavor += await foundry.applications.ux.TextEditor.enrichHTML(selectedFormula.effectCritical || actionEntry.system.effectCritical, {
                         async: true,
@@ -930,15 +936,15 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             }
         }
 
-        const rollMode = rollResult.roll?.options?.rollMode ?? game.settings.get("core", "rollMode");
-        const preparedRollExplanation = DiceSFRPG.formatExplanation(rollResult.formula.formula);
-        const rollContent = await rollResult.roll.render({ breakdown: preparedRollExplanation });
+        const rollMode = roll?.options?.rollMode ?? game.settings.get("core", "rollMode");
+        const preparedRollExplanation = DiceSFRPG.formatExplanation(formula.formula);
+        const rollContent = await roll.render({ breakdown: preparedRollExplanation, tags: roll.tags });
 
         ChatMessageSFRPG.create({
             flavor: flavor,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: speakerActor }),
             content: rollContent,
-            rolls: [rollResult.roll],
+            rolls: [roll],
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
         }, { rollMode: rollMode});

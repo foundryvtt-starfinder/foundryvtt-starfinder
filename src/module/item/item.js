@@ -4,6 +4,7 @@ import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import SFRPGModifier from "../modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../modifiers/types.js";
+import SFRPGRoll from "../rolls/roll.js";
 import RollContext from "../rolls/rollcontext.js";
 import StackModifiers from "../rules/closures/stack-modifiers.js";
 import { Mix } from "../utils/custom-mixer.js";
@@ -935,11 +936,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             return 0;
         }, 0);
 
-        // Define Critical threshold
-        const critThreshold = 20;
-
-        const rollOptions = {rollType: "attack"};
-
+        const rollOptions = {};
         if (this.system.actionTarget) {
             rollOptions.actionTarget = this.system.actionTarget;
             rollOptions.actionTargetSource = SFRPG.actionTargets;
@@ -992,11 +989,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 secrets: this.isOwner
             }),
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
-            critical: critThreshold,
             chatMessage: options.chatMessage,
-            rollOptions,
+            rollCriteria: SFRPGRoll.createRollCriteria("attack", rollOptions),
             dialogOptions: {
-                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
@@ -1206,7 +1201,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
 
-        const rollOptions = {rollType: "attack"};
+        const rollOptions = {};
 
         if (this.system.actionTarget) {
             rollOptions.actionTarget = this.system.actionTarget;
@@ -1227,14 +1222,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             rollContext: rollContext,
             title: title,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
-            critical: 20,
             chatMessage: options.chatMessage,
             dialogOptions: {
-                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollOptions,
+            rollCriteria: SFRPGRoll.createRollCriteria("gunnery", rollOptions),
             actorContextKey: "gunner",
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
@@ -1279,14 +1272,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             rollContext: rollContext,
             title: title,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
-            critical: 20,
             chatMessage: options.chatMessage,
             dialogOptions: {
-                skipUI: options.skipUI,
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollOptions: {rollType: "attack"},
+            rollCriteria: SFRPGRoll.createRollCriteria("attack"),
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
@@ -1583,27 +1574,26 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         // Define Roll Data
-        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
-
         const title = game.i18n.localize(`SFRPG.Items.Action.OtherFormula`);
-        const rollResult = await DiceSFRPG.createRoll({
-            rollContext: rollContext,
+        const {roll, formula} = await DiceSFRPG.createRoll({
+            chatMessage: false,
+            rollContext: RollContext.createItemRollContext(this, this.actor, {itemData: itemData}),
+            rollCriteria: SFRPGRoll.createRollCriteria("roll", { mainDie: "1d20" }),
             rollFormula: itemData.formula,
-            title: title,
-            mainDie: null
+            title: title
         });
 
-        if (!rollResult) return;
+        if (!roll) return;
 
-        const preparedRollExplanation = DiceSFRPG.formatExplanation(rollResult.formula.formula);
-        const content = await rollResult.roll.render({ breakdown: preparedRollExplanation });
+        const preparedRollExplanation = DiceSFRPG.formatExplanation(formula.formula);
+        const content = await roll.render({ breakdown: preparedRollExplanation });
 
         ChatMessageSFRPG.create({
             flavor: `${title}${(itemData.chatFlavor ? " - " + itemData.chatFlavor : "")}`,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             content: content,
-            rolls: [rollResult.roll],
+            rolls: [roll],
             type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
         });

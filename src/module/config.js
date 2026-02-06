@@ -93,6 +93,7 @@ SFRPG.saveDescriptors = {
 SFRPG.rollTypes = {
     "abilityCheck": "SFRPG.Rolls.AbilityCheck",
     "attack": "SFRPG.Rolls.AttackRoll",
+    "concealment": "SFRPG.Rolls.Concealment",
     "damage": "SFRPG.Rolls.DamageRoll",
     "gunnery": "SFRPG.Rolls.GunneryCheck",
     "healing": "SFRPG.Rolls.HealingRoll",

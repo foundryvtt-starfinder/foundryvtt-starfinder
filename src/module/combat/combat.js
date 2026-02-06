@@ -2,6 +2,7 @@ import { CombatDifficulty } from "../apps/combat-difficulty.js";
 import { ChatMessageSFRPG } from "../chat/message.js";
 import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
+import SFRPGRoll from "../rolls/roll.js";
 import RollContext from "../rolls/rollcontext.js";
 /**  @import Combatant from "@client/documents/combatant.mjs" */
 /*
@@ -695,12 +696,13 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }
 
         const rollResult = await DiceSFRPG.createRoll({
-            skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault'),
+            actorContextKey: "combatant",
+            chatMessage: false,
             parts: parts,
             rollContext: RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"}),
-            title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name}),
-            rollOptions: {rollType: "initiative"},
-            actorContextKey: "combatant"
+            rollCriteria: SFRPGRoll.createRollCriteria("initiative"),
+            skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault'),
+            title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
         });
 
         rollResult.roll.flags = { sfrpg: { finalFormula: rollResult.formula } };

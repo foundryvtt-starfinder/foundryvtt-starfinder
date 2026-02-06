@@ -126,7 +126,6 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
             rollContext: RollContext.createActorRollContext(this.actor),
             parts: [rollValue],
             title: rollName,
-            flavor: null,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             dialogOptions: {
                 left: event ? event.clientX - 80 : null,

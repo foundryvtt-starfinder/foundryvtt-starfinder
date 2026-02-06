@@ -9,6 +9,8 @@ import { ChatMessageSFRPG } from "./chat/message.js";
  * @import RollContext from "./rolls/rollcontext.js";
  * @import ActorSFRPG from "./actor/actor.js";
  * @import RollInfo from "./rolls/rolltree.js";
+ * @import {HtmlData, RollCriteria, Tag} from "./rolls/roll.js"
+ * @import SFRPGModifier from "./modifiers/modifier.js"
  */
 
 // Type definitions for documentation.
@@ -71,7 +73,6 @@ import { ChatMessageSFRPG } from "./chat/message.js";
  *                                        have their vertical scroll positions preserved during a re-render.
  * @property {TabsConfiguration[]} [tabs] An array of tabbed container configurations which should be enabled
  *                                        for the application.
- * @property {boolean}  [skipUI]          Should this dialog be skipped?
  */
 
 /**
@@ -88,33 +89,6 @@ import { ChatMessageSFRPG } from "./chat/message.js";
  * @typedef {Object} RollResult
  * @property {SFRPGRoll} roll The data for the roll
  * @property {FinalFormula} formula The finalized formula used in the roll
- */
-
-/**
- * A data structure for outputing any metadata that is rendered at the bottom
- * of a Roll chat card.
- *
- * @typedef {Object} Tag
- * @property {string} tag Text that will be addeded as a class on an HTMLElement
- * @property {string} text The text rendered on the card.
- */
-
-/**
- * A structure for passing data into an HTML for for use in data- attributes.
- *
- * @typedef {Object} HtmlData
- * @property {string} name The name of the data property sans data-
- * @property {string} value The value of the data property.
- */
-
-/**
- * An optional modifer that can be added to a roll.
- *
- * @typedef {Object} Modifier
- * @property {string}  name     The name of the modifer.
- * @property {boolean} enabled  Whether this modifier is enabled or not.
- * @property {string}  modifier The modifier being added.
- * @property {string}  notes    Any additional text about the modifier.
  */
 
 /**
@@ -193,22 +167,22 @@ export class DiceSFRPG {
     * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
     *
     * @param {Object}               data                    The parameters passed into the method
-    * @param {boolean}              [data.skipUI]           The triggering event which initiated the roll
     * @param {string[]}             data.parts              The dice roll component parts, excluding the initial d20
     * @param {RollContext}          data.rollContext        The contextual data for this roll
-    * @param {string}               [data.title]            The dice roll UI window title
-    * @param {SpeakerData}          data.speaker            The ChatMessage speaker to pass when creating the chat
-    * @param {string}               [data.flavor]           Any flavor text associated with this roll
-    * @param {Object}               [data.rollOptions]      Additional options to be stored with the roll
-    * @param {boolean}              [data.chatMessage]      Whether to create & show a chat message after making the roll
-    * @param {onD20DialogClosed}    [data.onClose]          Callback for actions to take when the dialog form is closed
-    * @param {DialogOptions}        [data.dialogOptions]    Modal dialog options
+    * @param {RollCriteria}         data.rollCriteria       Additional data to further define the roll and what it's doing
+    * @param {SpeakerData}          data.speaker            The ChatMessage speaker to pass when creating the chat (optional if chatMessage is false)
     * @param {string}               [data.actorContextKey]  Key for evaluating the correct rollContext entry when calculating formulas
+    * @param {boolean}              [data.chatMessage]      Whether to create & show a chat message after making the roll
+    * @param {DialogOptions}        [data.dialogOptions]    Modal dialog options
+    * @param {string}               [data.flavor]           Any flavor text associated with this roll
+    * @param {onD20DialogClosed}    [data.onClose]          Callback for actions to take when the dialog form is closed
+    * @param {boolean}              [data.skipUI]           The triggering event which initiated the roll
     * @param {Tag[]}                [data.tags]             Any roll metadata that will be output on the bottom of the chat card
+    * @param {string}               [data.title]            The dice roll UI window title
     * @returns {Promise<RollResult?>}
     */
-    static async d20Roll({ skipUI = false, parts = [], rollContext, title, speaker, flavor, rollOptions = {critical: 20, fumble: 1, rollType: "roll", mainDie: "1d20"},
-        chatMessage = true, onClose, dialogOptions, actorContextKey = "actor", tags = []}) {
+    static async d20Roll({ parts = [], rollContext, rollCriteria, speaker,
+        actorContextKey = "actor", chatMessage = true, dialogOptions, flavor, onClose, skipUI = false, tags = [], title}) {
 
         // Verify roll context is valid before continuing
         if (!rollContext?.isValid()) return null;
@@ -229,11 +203,10 @@ export class DiceSFRPG {
         const formula = formulaParts.join(" + ");
 
         // Get the roll information determined by selections in the roll dialog
-        const rollInfo = await RollTree.buildRoll(formula, rollContext, {
+        const rollInfo = await RollTree.buildRoll(formula, rollContext, rollCriteria, {
             buttons: game.settings.get("sfrpg", "useAdvantageDisadvantage") ? this.advantageRollButtons : this.normalRollButtons,
             debug: false,
             dialogOptions: dialogOptions,
-            rollOptions,
             skipUI: skipUI && !rollContext.hasMultipleSelectors(),
             title: title
         });
@@ -242,17 +215,17 @@ export class DiceSFRPG {
         if (rollInfo.button !== "cancel") {
 
             // Set the main die roll value
-            let baseDie = rollOptions.mainDie;
+            let baseDie = rollCriteria.mainDie;
             if (rollInfo.button === "advantage") baseDie = "2d20kh";
             else if (rollInfo.button === "disadvantage") baseDie = "2d20kl";
 
             // Create the roll formula, explanation, and roll
             const finalFormula = await this._calcStackingFormula(baseDie, rollInfo, rollContext.allContexts[actorContextKey]?.entity);
             const preparedRollExplanation = DiceSFRPG.formatExplanation(finalFormula.formula);
-            const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, tags, rollType: rollOptions.rollType }).evaluate();
+            const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, tags, rollCriteria }).evaluate();
 
             // Add Critical hit and effect information if required
-            if (roll.isCritical()) {
+            if (roll.isCritical) {
                 flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
                 const criticalData = rollContext.allContexts?.item?.data?.critical;
                 if (criticalData?.effect?.trim()) {
@@ -261,8 +234,8 @@ export class DiceSFRPG {
             }
 
             // Roll Evaluation vs Action Target (KAC, EAC, DC, etc.)
-            roll.options.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions);
-            roll.options.tags.unshift(DiceSFRPG.rollSuccessTag(roll, rollInfo, rollOptions));
+            roll.options.rollCriteria.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollCriteria);
+            roll.options.tags.unshift(DiceSFRPG.rollSuccessTag(roll, rollInfo, rollCriteria));
 
             // Add item roll notes
             const htmlData = [{ name: "rollNotes", value: rollContext.allContexts['item']?.system?.rollNotes }];
@@ -275,7 +248,7 @@ export class DiceSFRPG {
                     speaker,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    system: {rollOptions}
+                    system: {}
                 };
                 ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
             }
@@ -297,20 +270,23 @@ export class DiceSFRPG {
     *
     * Returns a promise that will return an object containing roll and formula.
     *
-    * @param {Object}               data                The parameters passed into the method.
-    * @param {boolean}              [data.skipUI]       The triggering event which initiated the roll
-    * @param {String}               [data.rollFormula]  The roll formula to use, excluding the initial die. If left empty, will look for parts.
-    * @param {string[]}             data.parts          The dice roll component parts, excluding the initial die
-    * @param {RollContext}          data.rollContext    The contextual data for this roll
-    * @param {String}               data.title          The dice roll UI window title
-    * @param {string}               [data.breakdown]    An explanation of the roll modifiers and where they came from.
-    * @param {DialogOptions}        data.dialogOptions  Modal dialog options
-    * @param {RollOptions}          data.rollOptions    options to be passed to the roll
-    * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
-    * @returns {Promise<RollResult>|Promise<null>}      Returns the roll's result or an empty promise.
+    * @param {Object}               data                    The parameters passed into the method.
+    * @param {RollContext}          data.rollContext        The contextual data for this roll
+    * @param {RollCriteria}         data.rollCriteria       Additional data to further define the roll and what it's doing
+    * @param {SpeakerData}          data.speaker            The ChatMessage speaker to pass when creating the chat (optional if chatMessage is false)
+    * @param {string}               [data.actorContextKey]  Key for evaluating the correct rollContext entry when calculating formulas
+    * @param {boolean}              [data.chatMessage]      Whether to create & show a chat message after making the roll
+    * @param {DialogOptions}        [data.dialogOptions]    Modal dialog options
+    * @param {string}               [data.flavor]           Any flavor text associated with this roll
+    * @param {string[]}             [data.parts]            The dice roll component parts, excluding the initial die
+    * @param {string}               [data.rollFormula]      The roll formula to use, excluding the initial die. If left empty, will look for parts.
+    * @param {boolean}              [data.skipUI]           The triggering event which initiated the roll
+    * @param {Tag[]}                [data.tags]             Any roll metadata that will be output on the bottom of the chat card
+    * @param {string}               [data.title]            The dice roll UI window title
+    * @returns {Promise<RollResult>|Promise<null>}          Returns the roll's result or an empty promise.
     */
-    static async createRoll({ skipUI = false, rollFormula = null, parts, rollContext, title, rollOptions = {critical: 20, fumble: 1, rollType: "roll", mainDie: "1d20"},
-        dialogOptions, actorContextKey = "actor", tags = []}) {
+    static async createRoll({ rollContext, rollCriteria, speaker,
+        actorContextKey = "actor", chatMessage = true, dialogOptions, flavor, parts = [], rollFormula = null, skipUI = false, tags = [], title}) {
 
         // Verify roll context is valid before continuing
         if (!rollContext?.isValid()) return null;
@@ -331,31 +307,29 @@ export class DiceSFRPG {
         const formula = rollFormula || formulaParts.join(" + ");
 
         // Get the roll information determined by selections in the roll dialog
-        const buttons = (game.settings.get("sfrpg", "useAdvantageDisadvantage") && mainDie === "1d20") ? this.advantageRollButtons : this.normalRollButtons;
-        const rollInfo = await RollTree.buildRoll(formula, rollContext, {
-            buttons,
+        const rollInfo = await RollTree.buildRoll(formula, rollContext, rollCriteria, {
+            buttons: game.settings.get("sfrpg", "useAdvantageDisadvantage") && mainDie === "1d20" ? this.advantageRollButtons : this.normalRollButtons,
             debug: false,
             dialogOptions: dialogOptions,
-            rollOptions,
             skipUI: skipUI && !rollContext.hasMultipleSelectors(),
             title: title
         });
 
         // If cancelled, exit
         if (rollInfo.button !== "cancel") {
-            let baseDie = null;
+            let baseDie = rollCriteria.mainDie;
             if (rollInfo.button === "disadvantage") baseDie = "2d20kl";
             else if (rollInfo.button === "advantage") baseDie = "2d20kh";
 
             const finalFormula = await this._calcStackingFormula(baseDie, rollInfo, rollContext.allContexts[actorContextKey]?.entity);
             const preparedRollExplanation = DiceSFRPG.formatExplanation(finalFormula.formula);
-            const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, tags, rollType: rollOptions.rollType }).evaluate();
+            const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, tags, rollCriteria }).evaluate();
 
             // Roll Evaluation vs Action Target (KAC, EAC, DC, etc.)
-            roll.options.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions);
-            roll.options.tags.unshift(DiceSFRPG.rollSuccessTag(roll, rollInfo, rollOptions));
+            roll.options.rollCriteria.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollCriteria);
+            roll.options.tags.unshift(DiceSFRPG.rollSuccessTag(roll, rollInfo, rollCriteria));
 
-            // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
+            // Create a chat message, applying the appropriate roll type (public, gmroll, etc.) and tags
             if (chatMessage) {
                 const messageData = {
                     content: await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices }),
@@ -363,7 +337,7 @@ export class DiceSFRPG {
                     speaker,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    system: {rollOptions}
+                    system: {}
                 };
                 ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
             }
@@ -426,7 +400,7 @@ export class DiceSFRPG {
                 if (part.isDamageSection) {
                     damageSections.push(part);
 
-                    const rollInfo = await RollTree.buildRoll(part.formula, rollContext, {
+                    const rollInfo = await RollTree.buildRoll(part.formula, rollContext, rollCriteria, {
                         buttons: DiceSFRPG.damageRollButtons,
                         defaultButton: "normal",
                         rollType: rollType,
@@ -718,10 +692,10 @@ export class DiceSFRPG {
 
         const roll = message.rolls[0];
         if (!roll.dice.length) return;
-        if (roll.isCritical()) {
+        if (roll.isCritical) {
             html.find('.dice-total').addClass('success');
         }
-        if (roll.isFumble()) {
+        if (roll.isFumble) {
             html.find('.dice-total').addClass('failure');
         }
     }
@@ -832,11 +806,11 @@ export class DiceSFRPG {
      * @param   {SFRPGRoll}     roll            roll to evaluate
      * @param   {RollInfo}      rollInfo        output from buildRoll, including dialog selections
      * @param   {RollContext}   rollContext     the context under which to evaluate to roll
-     * @param   {Object}        rollOptions     additional options to be stored with the roll
+     * @param   {RollCriteria}  rollCriteria    additional options to be stored with the roll
      */
-    static getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions) {
-        const actionTarget = rollOptions.actionTarget;
-        const difficulty = rollOptions.difficulty;
+    static getTargetRollEvalValue(roll, rollInfo, rollContext, rollCriteria) {
+        const actionTarget = rollCriteria.actionTarget;
+        const difficulty = rollCriteria.difficulty;
         const targetActorType = rollInfo.target?.actorType;
         const targetQuadrant = rollInfo.target?.quadrant ?? "";
         const validTargets = targetActorType === "starship" ? Object.keys(CONFIG.SFRPG.actionTargetsStarship) : Object.keys(CONFIG.SFRPG.actionTargets);
@@ -888,10 +862,10 @@ export class DiceSFRPG {
      * Generates the success/failure message based on the roll value, type, and target stats
      * @param   {SFRPGRoll}     roll            the roll object
      * @param   {RollInfo}      rollInfo        output from buildRoll, including dialog selections
-     * @param   {Object}        rollOptions     additional options to be stored with the roll
+     * @param   {RollCriteria}  rollCriteria     additional options to be stored with the roll
      * @returns {Tag}                           the generated tag that indicates success/failure
      */
-    static rollSuccessTag(roll, rollInfo, rollOptions) {
+    static rollSuccessTag(roll, rollInfo, rollCriteria) {
         let prependedQuadrantInfo = "";
         if (rollInfo.target.actorType === "starship" && rollInfo.target.quadrant) {
             prependedQuadrantInfo = `${rollInfo.target.quadrantName} `;
@@ -899,8 +873,8 @@ export class DiceSFRPG {
 
         const evalValue = roll.evalValue;
         const rollSuccess = roll.product;
-        const rollType = rollOptions.rollType;
-        const difficulty = rollOptions.difficulty;
+        const rollType = rollCriteria.rollType;
+        const difficulty = rollCriteria.difficulty;
 
         const rollIsAttack = rollType === "attack" || rollType === "gunnery";
         const criticalSuccessLocalized = rollIsAttack ? game.i18n.format("SFRPG.Rolls.CriticalHitCaps") : game.i18n.format("SFRPG.Rolls.CriticalSuccessCaps");
@@ -908,14 +882,14 @@ export class DiceSFRPG {
         const failureLocalized = rollIsAttack ? game.i18n.format("SFRPG.Rolls.MissCaps") : game.i18n.format("SFRPG.Rolls.FailureCaps");
         const fumbleLocalized = game.i18n.format("SFRPG.Rolls.FumbleCaps");
 
-        if (rollOptions?.actionTarget) {
-            const actionTargetSource = rollOptions.actionTargetSource[rollOptions.actionTarget];
+        if (rollCriteria?.actionTarget) {
+            const actionTargetSource = rollCriteria.actionTargetSource[rollCriteria.actionTarget];
             if (rollSuccess !== null) {
                 const actionTarget = `${prependedQuadrantInfo}${actionTargetSource}`;
                 let actionResult = "";
-                if (roll.d20Critical) {
+                if (roll.isCritical) {
                     actionResult = `<span class="success">${criticalSuccessLocalized}</span>`;
-                } else if (roll.d20Fumble) {
+                } else if (roll.isFumble) {
                     actionResult = `<span class="fail">${fumbleLocalized}</span>`;
                 } else {
                     actionResult = `<span class="${rollSuccess ? "success" : "fail"}">${rollSuccess ? successLocalized : failureLocalized}</span>`;
@@ -928,9 +902,9 @@ export class DiceSFRPG {
         } else if (difficulty) {
             const actionTarget = game.i18n.format("SFRPG.DC");
             let actionResult = "";
-            if (roll.d20Critical) {
+            if (roll.isCritical) {
                 actionResult = `<span class="success">${criticalSuccessLocalized}</span>`;
-            } else if (roll.d20Fumble) {
+            } else if (roll.isFumble) {
                 actionResult = `<span class="fail">${fumbleLocalized}</span>`;
             } else {
                 actionResult = `<span class="${rollSuccess ? "success" : "fail"}">${rollSuccess ? successLocalized : failureLocalized}</span>`;
@@ -941,8 +915,8 @@ export class DiceSFRPG {
 
     /**
      * returns the rootNode with removed childnodes that match the modifier.
-     * @param {RollNode} rootNode
-     * @param {Object} modifier
+     * @param {RollNode}        rootNode
+     * @param {SFRPGModifier}   modifier
      */
     static _removeModifierNodes(rootNode, modifier) {
         let node = rootNode;
