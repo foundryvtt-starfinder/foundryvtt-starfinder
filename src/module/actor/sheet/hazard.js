@@ -95,15 +95,10 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
         event.preventDefault();
 
         if (this.actor.system.attributes.damage.value) {
-            const rollContext = RollContext.createActorRollContext(this.actor);
-
-            const name = game.i18n.format("SFRPG.HazardSheet.Rolls.Damage", {name: this.actor.name});
             await DiceSFRPG.damageRoll({
-                event: event,
-                rollContext: rollContext,
                 parts: [{ formula: this.actor.system.attributes.damage.value }],
-                title: name,
-                flavor: null,
+                rollContext: RollContext.createActorRollContext(this.actor),
+                rollCriteria: SFRPGRoll.createRollCriteria("damage"),
                 speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
                 dialogOptions: {
                     left: event ? event.clientX - 80 : null,
@@ -113,7 +108,9 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
                     if (roll) {
                         Hooks.callAll("damageRolled", {actor: this.actor, item: null, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: null});
                     }
-                }
+                },
+                skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault') ? !event.shiftKey : event.shiftKey,
+                title: game.i18n.format("SFRPG.HazardSheet.Rolls.Damage", {name: this.actor.name})
             });
         } else {
             ui.notifications.warn(game.i18n.format("SFRPG.HazardSheet.Notifications.NoDamage", {name: this.actor.name}));

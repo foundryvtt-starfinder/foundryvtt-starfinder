@@ -1388,30 +1388,30 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         // Call the roll helper utility
         return DiceSFRPG.damageRoll({
-            event: event,
             parts: parts,
-            linkedAttackRoll: options.linkedAttackRoll ?? null,
-            criticalData: itemData.critical,
             rollContext: rollContext,
-            title: title,
+            rollCriteria: SFRPGRoll.createRollCriteria("damage"),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
+            chatMessage: options.chatMessage,
+            criticalDamageData: itemData.critical,
+            dialogOptions: {
+                width: 400,
+                top: event ? event.clientY - 80 : null,
+                left: window.innerWidth - 710
+            },
             flavor: await foundry.applications.ux.TextEditor.enrichHTML(options?.flavorOverride || itemData.chatFlavor, {
                 async: true,
                 rollData: this.actor.getRollData() ?? {},
                 secrets: this.isOwner
             }) || null,
-            speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
-            chatMessage: options.chatMessage,
-            dialogOptions: {
-                skipUI: options.skipUI,
-                width: 400,
-                top: event ? event.clientY - 80 : null,
-                left: window.innerWidth - 710
-            },
+            linkedAttackRoll: options.linkedAttackRoll ?? null,
             onClose: (roll, formula, finalFormula, isCritical) => {
                 if (roll) {
                     Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
-            }
+            },
+            skipUI: options.skipUI || game.settings.get('sfrpg', 'useQuickRollAsDefault') ? !event?.shiftKey : event?.shiftKey,
+            title: title
         });
     }
 
@@ -1485,14 +1485,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.setMainContext("");
 
         return DiceSFRPG.damageRoll({
-            event,
             parts,
             rollContext,
-            title,
+            rollCriteria: SFRPGRoll.createRollCriteria("damage"),
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             dialogOptions: {
-                skipUI: true,
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
@@ -1501,7 +1499,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 if (roll) {
                     Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
-            }
+            },
+            skipUI: true,
+            title
         });
     }
 
@@ -1529,15 +1529,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         this.actor?.setupRollContexts(rollContext, ["gunner"]);
 
         return DiceSFRPG.damageRoll({
-            event: event,
             parts: parts,
-            criticalData: {preventDoubling: true},
             rollContext: rollContext,
-            title: title,
+            rollCriteria: SFRPGRoll.createRollCriteria("damage"),
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
+            criticalDamageData: {preventDoubling: true},
             dialogOptions: {
-                skipUI: options.skipUI,
                 width: 400,
                 top: event ? event.clientY - 80 : null,
                 left: window.innerWidth - 710
@@ -1546,7 +1544,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 if (roll) {
                     Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
-            }
+            },
+            skipUI: options.skipUI || game.settings.get('sfrpg', 'useQuickRollAsDefault') ? !event?.shiftKey : event?.shiftKey,
+            title: title
         });
     }
 
@@ -1918,15 +1918,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             group: null
         }];
 
-        const rollContext = RollContext.createItemRollContext(this, this.actor);
-
         return DiceSFRPG.damageRoll({
             parts,
-            rollContext,
+            rollContext: RollContext.createItemRollContext(this, this.actor),
+            rollCriteria: SFRPGRoll.createRollCriteria("damage"),
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
-            dialogOptions: {
-                skipUI: true
-            },
+            skipUI: true,
             title: turnEvent.name || this.name
         });
     }

@@ -243,22 +243,12 @@ SFRPG.kineticDamageTypes = {
 };
 
 /**
- * Valid damage types that are not kinetic or energy in SFRPG
- * @type {Object}
- */
-SFRPG.otherDamageTypes = {
-    "radiation": "SFRPG.Damage.Types.Radiation",
-    "nonlethal": "SFRPG.Damage.Types.Nonlethal"
-};
-
-/**
  * All valid damage types in SFRPG
  * @type {Object}
  */
 SFRPG.damageTypes = {
     ...SFRPG.energyDamageTypes,
-    ...SFRPG.kineticDamageTypes,
-    ...SFRPG.otherDamageTypes
+    ...SFRPG.kineticDamageTypes
 };
 
 /**

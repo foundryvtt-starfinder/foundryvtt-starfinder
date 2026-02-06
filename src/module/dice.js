@@ -13,15 +13,6 @@ import { ChatMessageSFRPG } from "./chat/message.js";
  * @import SFRPGModifier from "./modifiers/modifier.js"
  */
 
-// Type definitions for documentation.
-/**
- * A data structure for storing data about damage types
- *
- * @typedef {Object} DamageType
- * @property {String[]} types    An array of damage types.
- * @property {string}   operator An operator that determines how damage is split between multiple types.
- */
-
 /**
  * A data structure for storing damage statistics.
  *
@@ -150,7 +141,7 @@ export class DiceSFRPG {
     }
 
     /**
-     * Roll dialog buttons for normal rolls
+     * Roll dialog buttons for damage rolls
      * @type {Object}
      */
     static get damageRollButtons() {
@@ -354,23 +345,23 @@ export class DiceSFRPG {
     * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
     * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
     *
-    * @param {Object}               data               Parameters passed into the method
-    * @param {Event}                [data.event]       The triggering event which initiated the roll
-    * @param {DamagePart[]}         data.parts         The dice roll component parts
-    * @param {SFRPGRoll}            linkedAttackRoll   A linked attack roll, passed if damage is automatically rolled with attacks
-    * @param {CriticalDamage}       data.criticalData  Critical damage information, in case of a critical hit
-    * @param {RollContext}          data.rollContext   The contextual data for this roll
-    * @param {String}               data.title         The dice roll UI window title
-    * @param {SpeakerData}          data.speaker       The ChatMessage speaker to pass when creating the chat
-    * @param {string}               data.flavor        Any flavor text associated with this roll
-    * @param {onDamageDialogClosed} data.onClose       Callback for actions to take when the dialog form is closed
-    * @param {Object}               data.dialogOptions Modal dialog options
-    * @param {String}               data.rollType       Type of roll (options: CONFIG.SFRPG.rollType)
-    * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
-    * @returns {Promise<bool>}                         `true` if roll was performed, `false` if it was canceled
+    * @param {Object}               data                    Parameters passed into the method
+    * @param {DamagePart[]}         data.parts              The dice roll component parts
+    * @param {RollContext}          data.rollContext        The contextual data for this roll
+    * @param {RollCriteria}         data.rollCriteria       Additional data to further define the roll and what it's doing
+    * @param {SpeakerData}          data.speaker            The ChatMessage speaker to pass when creating the chat (optional if chatMessage is false)
+    * @param {boolean}              [data.chatMessage]      Whether to create & show a chat message after making the roll
+    * @param {DialogOptions}        [data.dialogOptions]    Modal dialog options
+    * @param {string}               [data.flavor]           Any flavor text associated with this roll
+    * @param {SFRPGRoll}            [data.linkedAttackRoll] A linked attack roll, passed if damage is automatically rolled with attacks
+    * @param {onD20DialogClosed}    [data.onClose]          Callback for actions to take when the dialog form is closed
+    * @param {boolean}              [data.skipUI]           Whether or not the roll dialog should be skipped
+    * @param {Tag[]}                [data.tags]             Any roll metadata that will be output on the bottom of the chat card.
+    * @param {string}               [data.title]            The dice roll UI window title
+    * @returns {Promise<bool>}                              `true` if roll was performed, `false` if it was canceled
     */
-    static async damageRoll({ event = new Event(''), parts, linkedAttackRoll, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions,
-        rollType = "damage", tags = []}) {
+    static async damageRoll({ parts, rollContext, rollCriteria, speaker,
+        chatMessage = true, criticalDamageData = {}, dialogOptions, flavor, linkedAttackRoll, onClose, skipUI = false, tags = [], title}) {
 
         // Verify roll context is valid before continuing
         if (!rollContext?.isValid()) return null;
@@ -401,9 +392,7 @@ export class DiceSFRPG {
                     damageSections.push(part);
 
                     const rollInfo = await RollTree.buildRoll(part.formula, rollContext, rollCriteria, {
-                        buttons: DiceSFRPG.damageRollButtons,
-                        defaultButton: "normal",
-                        rollType: rollType,
+                        buttons: this.damageRollButtons,
                         skipUI: true
                     });
                     part.formula = rollInfo.rolls[0].formula.finalRoll;
@@ -418,15 +407,12 @@ export class DiceSFRPG {
         }
 
         const formula = finalParts.join(" + ");
-        const rollInfo = await RollTree.buildRoll(formula, rollContext, {
+        const rollInfo = await RollTree.buildRoll(formula, rollContext, rollCriteria, {
             buttons: DiceSFRPG.damageRollButtons,
             debug: false,
-            defaultButton: "normal",
             dialogOptions: dialogOptions,
-            mainDie: "",
             parts: damageSections,
-            rollType: rollType,
-            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
+            skipUI: skipUI && !rollContext.hasMultipleSelectors(),
             title: title
         });
 
@@ -550,20 +536,20 @@ export class DiceSFRPG {
                 htmlData.push({ name: "is-critical", value: "true" });
                 tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
 
-                if (!criticalData?.preventDoubling) {
+                if (!criticalDamageData?.preventDoubling) {
                     finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                     finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
                 }
 
-                if (criticalData !== undefined) {
-                    const critRoll = criticalData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula)
+                if (criticalDamageData !== undefined) {
+                    const critRoll = criticalDamageData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula)
                         .join("+") ?? "";
                     if (critRoll.length > 0) {
                         finalFormula.finalRoll = finalFormula.finalRoll + " + " + critRoll;
                         finalFormula.formula = finalFormula.formula + " + " + critRoll;
                     }
 
-                    htmlData.push({ name: "critical-data", value: JSON.stringify(criticalData) });
+                    htmlData.push({ name: "critical-data", value: JSON.stringify(criticalDamageData) });
                 }
 
                 finalFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": finalFlavor });
@@ -609,8 +595,8 @@ export class DiceSFRPG {
                 die.options.damageTypes = damageTypes;
                 die.options.damageParts = tempParts;
 
-                if (criticalData) {
-                    die.options.criticalData = criticalData;
+                if (criticalDamageData) {
+                    die.options.criticalData = criticalDamageData;
                 }
 
                 const properties = rollContext.allContexts["item"]?.data?.properties;
@@ -629,7 +615,7 @@ export class DiceSFRPG {
                     flavor: finalFlavor,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    system: {rollType},
+                    system: {},
                     speaker
                 };
 
