@@ -247,6 +247,7 @@ export class DiceSFRPG {
             if (rollInfo.button === "advantage") baseDie = "2d20kh";
             else if (rollInfo.button === "disadvantage") baseDie = "2d20kl";
 
+            // Create the roll formula, explanation, and roll
             const finalFormula = await this._calcStackingFormula(baseDie, rollInfo, rollContext.allContexts[actorContextKey]?.entity);
             const preparedRollExplanation = DiceSFRPG.formatExplanation(finalFormula.formula);
             const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, tags, rollType: rollOptions.rollType }).evaluate();
@@ -303,18 +304,14 @@ export class DiceSFRPG {
     * @param {string[]}             data.parts          The dice roll component parts, excluding the initial die
     * @param {RollContext}          data.rollContext    The contextual data for this roll
     * @param {String}               data.title          The dice roll UI window title
-    * @param {String}               [data.mainDie]      The main die to use for this roll, e.g. "d20".
-    * @param {Number}               [data.critical]     The value of d20 result which represents a critical success
-    * @param {Number}               [data.fumble]       The value of d20 result which represents a critical failure
     * @param {string}               [data.breakdown]    An explanation of the roll modifiers and where they came from.
     * @param {DialogOptions}        data.dialogOptions  Modal dialog options
-    * @param {String}               data.rollType       Type of roll (options: CONFIG.SFRPG.rollType)
+    * @param {RollOptions}          data.rollOptions    options to be passed to the roll
     * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
     * @returns {Promise<RollResult>|Promise<null>}      Returns the roll's result or an empty promise.
     */
-    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20",
-        critical = 20, fumble = 1, breakdown = "", dialogOptions, actorContextKey = "actor",
-        rollType = "roll", tags = []}) {
+    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, rollOptions = {critical: 20, fumble: 1, rollType: "roll", mainDie: "1d20"},
+        dialogOptions, actorContextKey = "actor", tags = []}) {
 
         // Verify roll context is valid before continuing
         if (!rollContext?.isValid()) return null;
@@ -335,54 +332,49 @@ export class DiceSFRPG {
         const formula = rollFormula || formulaParts.join(" + ");
 
         // Get the roll information determined by selections in the roll dialog
+        const buttons = (game.settings.get("sfrpg", "useAdvantageDisadvantage") && mainDie === "1d20") ? this.advantageRollButtons : this.normalRollButtons;
         const rollInfo = await RollTree.buildRoll(formula, rollContext, {
-            buttons: game.settings.get("sfrpg", "useAdvantageDisadvantage") ? DiceSFRPG.advantageRollButtons : DiceSFRPG.normalRollButtons,
+            buttons,
             debug: false,
             defaultButton: "normal",
             dialogOptions: dialogOptions,
-            mainDie: mainDie ? "1" + mainDie : null,
+            mainDie: mainDie,
             rollType: rollType,
             skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             title: title
         });
 
         // If cancelled, exit
-        if (rollInfo.button === "cancel") {
+        if (rollInfo.button !== "cancel") {
+            let baseDie = null;
+            if (rollInfo.button === "disadvantage") baseDie = "2d20kl";
+            else if (rollInfo.button === "advantage") baseDie = "2d20kh";
+
+            const finalFormula = await this._calcStackingFormula(baseDie, rollInfo, rollContext.allContexts[actorContextKey]?.entity);
+            const preparedRollExplanation = DiceSFRPG.formatExplanation(finalFormula.formula);
+            const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, tags, rollType: rollOptions.rollType }).evaluate();
+
+            // Roll Evaluation vs Action Target (KAC, EAC, DC, etc.)
+            roll.options.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions);
+            roll.options.tags.unshift(DiceSFRPG.rollSuccessTag(roll, rollInfo, rollOptions));
+
+            // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
+            if (chatMessage) {
+                const messageData = {
+                    content: await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices }),
+                    flavor,
+                    speaker,
+                    rolls: [roll],
+                    sound: CONFIG.sounds.dice,
+                    system: {rollOptions}
+                };
+                ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
+            }
+            return {roll: roll, formula: finalFormula};
+
+        } else {
             return null;
         }
-
-        const finalFormula = await this._calcStackingFormula(null, rollInfo, rollContext.allContexts[actorContextKey]?.entity);
-
-        if (mainDie) {
-            let dieRoll = "1" + mainDie;
-            if (mainDie === "d20") {
-                if (rollInfo.button === "disadvantage") {
-                    dieRoll = "2d20kl";
-                } else if (rollInfo.button === "advantage") {
-                    dieRoll = "2d20kh";
-                }
-            }
-            finalFormula.finalRoll = [dieRoll, finalFormula.finalRoll].filter(Boolean).join(' + ');
-            finalFormula.formula = [dieRoll, finalFormula.formula].filter(Boolean).join(' + ');
-        }
-
-        finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
-            .trim();
-        finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
-
-        const rollObject = SFRPGRoll.create(finalFormula.finalRoll, { breakdown, tags });
-        const roll = await rollObject.evaluate();
-        roll.options.rollMode = rollInfo.mode;
-
-        // Flag critical thresholds
-        for (const d of roll.dice) {
-            if (d.faces === 20) {
-                d.options.critical = critical;
-                d.options.fumble = fumble;
-            }
-        }
-
-        return {roll: roll, formula: finalFormula};
     }
 
     /**

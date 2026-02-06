@@ -679,10 +679,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
     }
 
     async _getInitiativeRoll(combatant) {
-        const rollContext = RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"});
-
         const parts = [];
-
         if (this.getCombatType() === "starship") {
             parts.push("@pilot.skills.pil.mod");
             if (!combatant.actor.system.crew.useNPCCrew) {
@@ -698,12 +695,12 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }
 
         const rollResult = await DiceSFRPG.createRoll({
-            rollContext: rollContext,
-            actorContextKey: "combatant",
-            parts: parts,
             event,
-            rollType: "initiative",
-            title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
+            parts: parts,
+            rollContext: RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"}),
+            title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name}),
+            rollOptions: {rollType: "initiative"},
+            actorContextKey: "combatant"
         });
 
         rollResult.roll.flags = { sfrpg: { finalFormula: rollResult.formula } };
