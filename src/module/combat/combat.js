@@ -704,9 +704,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault'),
             title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
         });
-
-        rollResult.roll.flags = { sfrpg: { finalFormula: rollResult.formula } };
-        return rollResult.roll;
+        return rollResult;
     }
 
     async rollInitiative(ids, {updateTurn = true, messageOptions = {}} = {}) {
@@ -736,7 +734,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             }
 
             // Roll initiative
-            const roll = await this._getInitiativeRoll(combatant, "");
+            const {roll, formula} = await this._getInitiativeRoll(combatant, "");
             if (!roll) {
                 continue;
             }
@@ -755,7 +753,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             }, messageOptions);
 
             // Prepare roll formula explanation
-            const preparedRollExplanation = DiceSFRPG.formatExplanation(roll.flags.sfrpg.finalFormula.formula);
+            const preparedRollExplanation = DiceSFRPG.formatExplanation(formula.formula);
             const preparedRollExplanationElement = document.createElement("div");
             preparedRollExplanationElement.innerHTML = preparedRollExplanation;
 
