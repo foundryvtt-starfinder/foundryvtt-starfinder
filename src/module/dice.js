@@ -206,7 +206,7 @@ export class DiceSFRPG {
     * @param {Tag[]}                [data.tags]             Any roll metadata that will be output on the bottom of the chat card
     * @returns {Promise<RollResult?>}
     */
-    static async d20Roll({ event = new Event(''), parts = [], rollContext, title, speaker, flavor, rollOptions = {critical: 20, fumble: 1, rollType: "roll"},
+    static async d20Roll({ event = new Event(''), parts = [], rollContext, title, speaker, flavor, rollOptions = {critical: 20, fumble: 1, rollType: "roll", mainDie: "1d20"},
         chatMessage = true, onClose, dialogOptions, actorContextKey = "actor", tags = []}) {
 
         // Verify roll context is valid before continuing
@@ -231,9 +231,7 @@ export class DiceSFRPG {
         const rollInfo = await RollTree.buildRoll(formula, rollContext, {
             buttons: game.settings.get("sfrpg", "useAdvantageDisadvantage") ? this.advantageRollButtons : this.normalRollButtons,
             debug: false,
-            defaultButton: "normal",
             dialogOptions: dialogOptions,
-            mainDie: "1d20",
             rollOptions,
             skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             title: title
@@ -243,7 +241,7 @@ export class DiceSFRPG {
         if (rollInfo.button !== "cancel") {
 
             // Set the main die roll value
-            let baseDie = "1d20";
+            let baseDie = rollOptions.mainDie;
             if (rollInfo.button === "advantage") baseDie = "2d20kh";
             else if (rollInfo.button === "disadvantage") baseDie = "2d20kl";
 
@@ -336,10 +334,8 @@ export class DiceSFRPG {
         const rollInfo = await RollTree.buildRoll(formula, rollContext, {
             buttons,
             debug: false,
-            defaultButton: "normal",
             dialogOptions: dialogOptions,
-            mainDie: mainDie,
-            rollType: rollType,
+            rollOptions,
             skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
             title: title
         });

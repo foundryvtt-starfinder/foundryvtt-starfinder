@@ -159,22 +159,25 @@ export default class RollTree {
     }
 
     /**
-     * Method used to build the roll data needed for a Roll.
+     * Method used to build the roll data needed for a SFRPGRoll.
      *
-     * @param {string} formula The formula for the Roll
-     * @param {RollContext} contexts The data context for this roll
-     * @param {Object} [options]
-     * @param {boolean} [options.skipUI] Do not show the UI. Default false.
-     * @param {DamagePart[]} [options.parts]
-     * @param {boolean} [options.debug]
-     * @param {String} [options.rollOptions.rollType] Type of roll
+     * @param {string}              formula             The formula for the Roll
+     * @param {RollContext}         contexts            The data context for this roll
+     * @param {Object}              [options]
+     * @param {Object}              [options.buttons]   Buttons to display on the roll dialog
+     * @param {boolean}             [options.debug]     Whether or not to send debug logs to the console
+     * @param {Object}              [options.dialogOptions] Options to pass to the roll dialog for its construction
+     * @param {DamagePart[]}        [options.parts]     If a damage roll, the damage sections that make it up
+     * @param {Object}              [options.rollOptions]   Options further defining the roll
+     * @param {boolean}             [options.skipUI]    Do not show the UI. Default false.
+     * @param {string}              [options.title]     The title for the roll dialog window
      * @returns {Promise<RollInfo>}
      */
     static async buildRoll(formula, contexts, options = {}) {
-        let result;
-        const rollOptions = options.rollOptions ?? {};
+        const rollOptions = options.rollOptions ?? {mainDie: "1d20"};
         const rollType = rollOptions.rollType ?? "roll";
 
+        let result;
         if (options.skipUI) {
             result = RollTree.buildRollSync(formula, contexts, options);
             result.target = {actorType: contexts.allContexts?.target?.entity?.actor?.type ?? ""};
@@ -192,7 +195,6 @@ export default class RollTree {
 
             const uiResult = await RollDialog.showRollDialog(tree, formula, contexts, allRolledMods, options.mainDie, {
                 buttons: options.buttons,
-                defaultButton: options.defaultButton,
                 dialogOptions: options.dialogOptions,
                 parts: options.parts,
                 rollOptions,

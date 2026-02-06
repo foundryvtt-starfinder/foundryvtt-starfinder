@@ -333,7 +333,6 @@ export default class RollDialog extends Dialog {
     static showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
         return new Promise(resolve => {
             const buttons = options.buttons || { roll: { id: "roll", label: game.i18n.localize("SFRPG.Rolls.Dice.Roll") } };
-            const defaultButton = options.defaultButton || (Object.values(buttons)[0].id ?? Object.values(buttons)[0].label);
 
             const dlg = new RollDialog({
                 availableModifiers,
@@ -341,7 +340,7 @@ export default class RollDialog extends Dialog {
                 dialogData: {
                     title: options.title || game.i18n.localize("SFRPG.Rolls.Dice.Roll"),
                     buttons: buttons,
-                    default: defaultButton,
+                    default: "normal",
                     close: (button, rollMode, bonus, parts, targetQuadrant) => {
                         const cleanBonus = bonus?.replace(/\+\s*-\s*/gi, "- ")
                             .replace(/\+\s*\+\s*/gi, "+ ")
