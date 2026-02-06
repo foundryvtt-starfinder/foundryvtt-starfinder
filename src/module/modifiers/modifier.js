@@ -7,24 +7,23 @@ import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.
 const { fields } = foundry.data;
 
 /**
- * A data object that hold information about a specific modifier.
+ * An object that defines a specific modifier.
  *
- * @param {Object}        data               The data for the modifier.
- * @param {String}        data.name          The name for the modifier. Only useful for identifying the modifier.
- * @param {Number|String} data.modifier      The value to modify with. This can be either a constant number or a Roll formula.
- * @param {String}        data.type          The modifier type. This is used to determine if a modifier stacks or not.
- * @param {String}        data.modifierType  Determines if this modifier is a constant value (+2) or a roll formula (1d4).
- * @param {String}        data.effectType    The category of things that might be modified by this value.
- * @param {String}        data.valueAffected The specific statistic being affected.
- * @param {String}        data.customValue   A string that can be parsed by the system into a custom value to be affected
- * @param {Boolean}       data.enabled       Is this modifier enabled or not.
- * @param {String}        data.source        Where does this modifier come from? An item, or an ability?
- * @param {String}        data.notes         Any notes that are useful for this modifier.
- * @param {String}        data.subtab        What subtab should this appear on in the character sheet?
- * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
- * @param {?String}       data.id            Override a random id with a specific one.
- * @param {?Object}       data.damage        If this modifier is a damage section modifier, the damage type and group
- * @param {String}        data.limitTo       If this modifier is on an item, should the modifier affect only that item?
+ * @param {string}  [condition]     The condition, if any, that this modifier is associated with.
+ * @param {string}  name            The name for the modifier. Only useful for identifying the modifier.
+ * @param {string}  modifier        The value to modify with. This can be either a constant number or a Roll formula.
+ * @param {string}  modifierType    Determines if this modifier is a constant value (+2) or a roll formula (1d4).
+ * @param {string}  type            The modifier type. This is used to determine if a modifier stacks or not.
+ * @param {string}  effectType      The category of things that might be modified by this value.
+ * @param {string}  valueAffected   The specific statistic being affected.
+ * @param {string}  customValue     A string that can be parsed by the system into a custom value to be affected
+ * @param {boolean} enabled         Is this modifier enabled or not.
+ * @param {string}  source          Where does this modifier come from? An item, or an ability?
+ * @param {string}  notes           Any notes that are useful for this modifier.
+ * @param {string}  subtab          What subtab should this appear on in the character sheet?
+ * @param {string}  [id]            Override a random id with a specific one.
+ * @param {Object}  [damage]        If this modifier is a damage section modifier, the damage type and group
+ * @param {string}  limitTo         If this modifier is on an item, should the modifier affect only that item?
  */
 export default class SFRPGModifier extends foundry.abstract.DataModel {
     constructor(data, options = {}) {
