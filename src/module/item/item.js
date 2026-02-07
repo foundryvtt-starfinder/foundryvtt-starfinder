@@ -322,44 +322,41 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         // Apply a tag if the item is a weapon that's not equipment (unarmed strike, natural attack, etc.)
-        if (this.type === "weapon") {
-            this.system.transferrable = this.system.isEquipment;
-        } else {
-            this.system.transferrable = true;
-        }
+        if (this.type === "weapon") this.system.transferrable = this.system.isEquipment;
+        else this.system.transferrable = true;
 
         // Activated Items
         if (this.system.hasOwnProperty("activation")) {
 
             // Ability Activation Label
-            const act = this.system.activation || {};
-            if (act) {
-                if (act.type === "none") {
+            const activation = this.system.activation || {};
+            if (activation) {
+                if (activation.type === "none") {
                     labels.activation = (this.system.duration?.units === "instantaneous")
                         ? game.i18n.localize("SFRPG.AbilityActivationButton.Use")
                         : game.i18n.localize("SFRPG.AbilityActivationButton.Activate");
-                } else if (SFRPG.uncountableActivations.includes(act.type)) {
-                    labels.activation = CONFIG.SFRPG.abilityActivationTypes[act.type];
+                } else if (SFRPG.uncountableActivations.includes(activation.type)) {
+                    labels.activation = CONFIG.SFRPG.abilityActivationTypes[activation.type];
                 } else {
                     labels.activation = [
-                        act.cost,
-                        CONFIG.SFRPG.abilityActivationTypes[act.type]
+                        activation.cost,
+                        CONFIG.SFRPG.abilityActivationTypes[activation.type]
                     ].filterJoin(" ");
                 }
             }
 
-            const tgt = this.system.target || {};
-            if (tgt.value && tgt.value === "") tgt.value = null;
-
-            labels.target = [tgt.value].filterJoin(" ");
+            const target = this.system.target || {};
+            if (target.value && tgt.value === "") target.value = null;
+            labels.target = [target.value].filterJoin(" ");
         }
 
         // Item Actions
+        // TODO-Ian: Why do all actions when we just seem to prepare damage?
         if (this.system.hasOwnProperty("actionType")) {
             // Damage
             const damage = this.system.damage || {};
-            const itemParts = damage.parts;
-            if (itemParts.length > 0) {
+            const damageParts = damage.parts;
+            if (damageParts.length > 0) {
                 labels.damage = damage.parts
                     .map(d => d[0])
                     .join(" + ")
@@ -367,7 +364,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
                 // There must always be one primary damage group or section.
                 // If the primary damage group is set, mark all of the members of that group as primary.
-                const allGroups = itemParts.reduce((arr, part) => {
+                const allGroups = damageParts.reduce((arr, part) => {
                     if (!!part.group || part.group === 0) arr.push(part.group);
                     return arr;
                 }, []);
@@ -376,18 +373,18 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     if (!(allGroups.includes(this.system.damage.primaryGroup)))
                         this.system.damage.primaryGroup = allGroups.sort()[0];
 
-                    for (const part of itemParts) {
+                    for (const part of damageParts) {
                         if (part.group === this.system.damage.primaryGroup) part.isPrimarySection = true;
                         else part.isPrimarySection = false;
                     }
 
                 // If the primary group is blank, set the 1st damage section, and any parts in the same group, as primary.
-                } else if (!(itemParts.some(part => part.isPrimarySection))) {
-                    itemParts[0].isPrimarySection = true;
-                    const primaryGroup = itemParts[0].group ?? null;
+                } else if (!(damageParts.some(part => part.isPrimarySection))) {
+                    damageParts[0].isPrimarySection = true;
+                    const primaryGroup = damageParts[0].group ?? null;
 
                     if (primaryGroup !== null) {
-                        for (const part of itemParts) {
+                        for (const part of damageParts) {
                             if (part.group === primaryGroup) part.isPrimarySection = true;
                             else part.isPrimarySection = false;
                         }
@@ -395,7 +392,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 }
 
             }
-
         }
 
         // Assign labels and return the Item
