@@ -44,6 +44,34 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /*  Item Properties                             */
     /* -------------------------------------------- */
 
+    get abilityKey() {
+        const itemData = this.system;
+        const actorData = this.actor;
+        let abl = itemData.ability;
+        if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) {
+            abl = "";
+        } else if (!abl && (this.type === "spell")) {
+            if (itemData.actionType === "rsak") {
+                abl = "dex";
+            } else if (itemData.actionType === "msak") {
+                abl = "str";
+            } else {
+                abl = actorData.attributes.spellcasting || "int";
+            }
+        } else if (itemData.properties?.operative?.value && actorData.abilities.dex.value > actorData.abilities.str.value) {
+            abl = "dex";
+        } else if (!abl) {
+            if (itemData.actionType === "rwak" || itemData.actionType === "rsak") {
+                abl = "dex";
+            } else if (itemData.actionType === "mwak" || itemData.actionType === "msak") {
+                abl = "str";
+            } else {
+                abl = "str";
+            }
+        }
+        return abl;
+    }
+
     /**
      * Does the Item implement an attack roll as part of its usage
      * @type {boolean}
@@ -1001,111 +1029,60 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             return;
         }
 
+        // If Ctrl key held, don't deduct ammo
         options.disableDeductAmmo = options.disableDeductAmmo || options.event?.ctrlKey;
 
+        // Divert to specific starship or vehicle attack methods if appropriate
         if (this.type === "starshipWeapon") return this._rollStarshipAttack(options);
         if (this.type === "vehicleAttack") return this._rollVehicleAttack(options);
 
-        const itemData = this.system;
-        const actorData = this.actor.system;
-
-        // Determine ability score modifier
-        // TODO: This chunk is the same code as in base.js's _prepareAttackString(), probably good practice to combine these into one method somewhere
-        let abl = itemData.ability;
-        if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) {
-            abl = "";
-        } else if (!abl && (this.type === "spell")) {
-            if (itemData.actionType === "rsak") {
-                abl = "dex";
-            } else if (itemData.actionType === "msak") {
-                abl = "str";
-            } else {
-                abl = actorData.attributes.spellcasting || "int";
-            }
-        } else if (itemData.properties?.operative?.value && actorData.abilities.dex.value > actorData.abilities.str.value) {
-            abl = "dex";
-        } else if (!abl) {
-            if (itemData.actionType === "rwak" || itemData.actionType === "rsak") {
-                abl = "dex";
-            } else if (itemData.actionType === "mwak" || itemData.actionType === "msak") {
-                abl = "str";
-            } else {
-                abl = "str";
-            }
+        // Check if the item's usage per attack is greater than the ammo remaining and warn the user if there is none left
+        if (this.getCurrentCapacity() < (this.system.usage?.value || 0)) {
+            ui.notifications.warn(game.i18n.format("SFRPG.ItemNoAmmo", {name: this.name}));
         }
 
         // Define Roll parts
         const parts = [];
-
-        if (Number.isNumeric(itemData.attackBonus) && itemData.attackBonus !== 0) parts.push("@item.attackBonus");
-        if (abl) parts.push(`@abilities.${abl}.mod`);
+        if (Number.isNumeric(this.system.attackBonus) && this.system.attackBonus !== 0) parts.push("@item.attackBonus");
+        if (this.abilityKey) parts.push(`@abilities.${this.abilityKey}.mod`);
         if (["character", "drone"].includes(this.actor.type)) parts.push("@attributes.baseAttackBonus.value");
         if (this.isWeapon) {
             const proficiencyKey = SFRPG.weaponTypeProficiency[this.system.weaponType];
-            const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(proficiencyKey);
+            const proficient = this.system.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(proficiencyKey);
             if (!proficient) {
                 parts.push(`-4[${game.i18n.localize("SFRPG.Items.NotProficient")}]`);
             }
         }
 
-        const modifiers = await new StackModifiers().processAsync(this.relevantModifiers.attack, null, {actor: this.actor});
-        const rolledMods = [];
-        const addModifier = (bonus, parts) => {
-            if (bonus.modifierType === SFRPGModifierType.FORMULA) {
-                rolledMods.push(bonus);
-                return;
-            }
-            const computedBonus = bonus.modifier;
-            parts.push({score: computedBonus, explanation: bonus.name});
-            return computedBonus;
-        };
-
-        Object.entries(modifiers).reduce((sum, mod) => {
-            for (const bonus of mod[1]) {
-                addModifier(bonus, parts);
-            }
-            return 0;
-        }, 0);
-
-        const rollOptions = {};
-        if (this.system.actionTarget) {
-            rollOptions.actionTarget = this.system.actionTarget;
-            rollOptions.actionTargetSource = SFRPG.actionTargets;
-        }
-
-        // Add has__ properties to itemData
-        itemData.hasSave = this.hasSave;
-        itemData.hasSkill = this.hasSkill;
-        itemData.hasArea = this.hasArea;
-        itemData.hasDamage = this.hasDamage;
-        itemData.hasCapacity = this.hasCapacity();
-
-        const title = game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
-
-        // Warn the user if there is no ammo left
-        const usage = itemData.usage?.value || 0;
-        const availableCapacity = this.getCurrentCapacity();
-        if (availableCapacity < usage) {
-            ui.notifications.warn(game.i18n.format("SFRPG.ItemNoAmmo", {name: this.name}));
-        }
-
-        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
-
-        /** Create global attack modifiers. */
+        // Create global attack modifiers, add them to the situational list to show in the roll dialog
         const additionalModifiers = foundry.utils.deepClone(SFRPG.globalAttackRollModifiers).map(mod => {
             const modInstance = {bonus: new SFRPGModifier(mod.bonus, {parent: this, globalModifier: true})};
             return modInstance;
         });
 
-        /** Apply bonus rolled mods from relevant attack roll formula modifiers. */
-        for (const rolledMod of rolledMods) {
-            additionalModifiers.push({
-                bonus: rolledMod
-            });
+        // Get applicable modifiers and parse these into situational (FORMULA, additionalModifiers),
+        // and constant (set directly as roll parts)
+        const modifiers = await new StackModifiers().processAsync(this.relevantModifiers.attack, null, {actor: this.actor});
+        for (const modType of Object.values(modifiers)) {
+            for (const mod of modType) {
+                if (mod.modifierType === SFRPGModifierType.FORMULA) additionalModifiers.push({bonus: mod});
+                else parts.push({score: mod.modifier, explanation: mod.name});
+            }
         }
 
-        rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
+        // Include bonus from additional modifiers at the end of the formula
         parts.push("@additional.modifiers.bonus");
+
+        // If the item has an action target, get some target info for adding in to the roll criteria later
+        const rollTargetInfo = {};
+        if (this.system.actionTarget) {
+            rollTargetInfo.actionTarget = this.system.actionTarget;
+            rollTargetInfo.actionTargetSource = SFRPG.actionTargets;
+        }
+
+        // Create roll context for this item and add additional contexts (for modifier evaluation)
+        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: this.system});
+        rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
 
         // Call the roll helper utility
         return DiceSFRPG.d20Roll({
@@ -1113,7 +1090,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             parts: parts,
             actorContextKey: "owner",
             rollContext: rollContext,
-            title: title,
+            title: game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name}),
             flavor: await foundry.applications.ux.TextEditor.enrichHTML(this.system?.chatFlavor, {
                 async: true,
                 rollData: this.actor.getRollData() ?? {},
@@ -1121,7 +1098,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             }),
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
-            rollCriteria: SFRPGRoll.createRollCriteria("attack", rollOptions),
+            rollCriteria: SFRPGRoll.createRollCriteria("attack", rollTargetInfo),
             dialogOptions: {
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
@@ -1131,7 +1108,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     _calculateAmmoUsageWithModifiers(value) {
-        modifiers = new StackModifiers().process(this.relevantModifiers.ammo, null, {actor: this.actor, item: this});
+        const modifiers = new StackModifiers().process(this.relevantModifiers.ammo, null, {actor: this.actor, item: this});
         let multiplier = 1.0;
         const modsToProcess = [];
         for (const modValue of Object.values(modifiers)) {
