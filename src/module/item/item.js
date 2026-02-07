@@ -301,68 +301,65 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     prepareData() {
         super.prepareData();
-        const C = CONFIG.SFRPG;
         const labels = {};
-        const itemData = this;
-        const data = this.system;
 
         // Spell Level,  School, and Components
-        if (itemData.type === "spell") {
-            labels.level = C.spellLevels[data.level];
-            labels.school = C.spellSchools[data.school];
+        if (this.type === "spell") {
+            labels.level = CONFIG.SFRPG.spellLevels[this.system.level];
+            labels.school = CONFIG.SFRPG.spellSchools[this.system.school];
         }
 
         // Feat Items
-        else if (itemData.type === "feat") {
-            const act = data.activation;
-            labels.featType = data?.damage?.parts?.length && SFRPG.attackActions.includes(data.actionType)
+        else if (this.type === "feat") {
+            const act = this.system.activation;
+            labels.featType = this.system?.damage?.parts?.length && SFRPG.attackActions.includes(this.system.actionType)
                 ? game.i18n.localize("SFRPG.Attack")
                 : act.type ? game.i18n.localize("SFRPG.Items.Action.TitleAction") : game.i18n.localize("SFRPG.Passive");
         }
 
         // Equipment Items
-        else if (itemData.type === "equipment") {
-            labels.eac = data.armor.eac ? `${data.armor.eac} ${game.i18n.localize("SFRPG.EnergyArmorClassShort")}` : "";
-            labels.kac = data.armor.kac ? `${data.armor.kac} ${game.i18n.localize("SFRPG.KineticArmorClassShort")}` : "";
+        else if (this.type === "equipment") {
+            labels.eac = this.system.armor.eac ? `${this.system.armor.eac} ${game.i18n.localize("SFRPG.EnergyArmorClassShort")}` : "";
+            labels.kac = this.system.armor.kac ? `${this.system.armor.kac} ${game.i18n.localize("SFRPG.KineticArmorClassShort")}` : "";
         }
 
         // Apply a tag if the item is a weapon that's not equipment (unarmed strike, natural attack, etc.)
-        if (itemData.type === "weapon") {
-            itemData.system.transferrable = itemData.system.isEquipment;
+        if (this.type === "weapon") {
+            this.system.transferrable = this.system.isEquipment;
         } else {
-            itemData.system.transferrable = true;
+            this.system.transferrable = true;
         }
 
         // Activated Items
-        if (data.hasOwnProperty("activation")) {
+        if (this.system.hasOwnProperty("activation")) {
 
             // Ability Activation Label
-            const act = data.activation || {};
+            const act = this.system.activation || {};
             if (act) {
                 if (act.type === "none") {
-                    labels.activation = (data.duration?.units === "instantaneous")
+                    labels.activation = (this.system.duration?.units === "instantaneous")
                         ? game.i18n.localize("SFRPG.AbilityActivationButton.Use")
                         : game.i18n.localize("SFRPG.AbilityActivationButton.Activate");
                 } else if (SFRPG.uncountableActivations.includes(act.type)) {
-                    labels.activation = C.abilityActivationTypes[act.type];
+                    labels.activation = CONFIG.SFRPG.abilityActivationTypes[act.type];
                 } else {
                     labels.activation = [
                         act.cost,
-                        C.abilityActivationTypes[act.type]
+                        CONFIG.SFRPG.abilityActivationTypes[act.type]
                     ].filterJoin(" ");
                 }
             }
 
-            const tgt = data.target || {};
+            const tgt = this.system.target || {};
             if (tgt.value && tgt.value === "") tgt.value = null;
 
             labels.target = [tgt.value].filterJoin(" ");
         }
 
         // Item Actions
-        if (data.hasOwnProperty("actionType")) {
+        if (this.system.hasOwnProperty("actionType")) {
             // Damage
-            const damage = data.damage || {};
+            const damage = this.system.damage || {};
             const itemParts = damage.parts;
             if (itemParts.length > 0) {
                 labels.damage = damage.parts
@@ -376,13 +373,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     if (!!part.group || part.group === 0) arr.push(part.group);
                     return arr;
                 }, []);
-                if (Number.isInteger(data.damage.primaryGroup) && allGroups.length > 0) {
+                if (Number.isInteger(this.system.damage.primaryGroup) && allGroups.length > 0) {
                     // Set primary group to first group if no parts on the item are in the group
-                    if (!(allGroups.includes(data.damage.primaryGroup)))
-                        data.damage.primaryGroup = allGroups.sort()[0];
+                    if (!(allGroups.includes(this.system.damage.primaryGroup)))
+                        this.system.damage.primaryGroup = allGroups.sort()[0];
 
                     for (const part of itemParts) {
-                        if (part.group === data.damage.primaryGroup) part.isPrimarySection = true;
+                        if (part.group === this.system.damage.primaryGroup) part.isPrimarySection = true;
                         else part.isPrimarySection = false;
                     }
 
