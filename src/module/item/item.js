@@ -1367,14 +1367,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (!abl && (this.type === "spell")) abl = actorData.attributes.spellcasting || "int";
         else if (!abl) abl = "str";
 
-        // Define Roll parts
-        // TODO-Ian: Why don't these already have `isDamageSection`
-        /** @type {DamageParts[]} */
-        const damageParts = foundry.utils.deepClone(itemData.damage.parts);
-        for (const part of damageParts) {
-            part.isDamageSection = true;
-        }
-
         // Create an array for additional modifiers (available for enabling/disabling in the roll dialog)
         const additionalModifiers = [];
 
@@ -1389,7 +1381,11 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             {actor: this.actor}
         );
 
-        // Parse the relevant modifiers into damage parts
+        // Get damage parts and indicate that they're formatted as damage sections
+        const damageParts = foundry.utils.deepClone(itemData.damage.parts);
+        for (const part of damageParts) part.isDamageSection = true;
+
+        // Parse the relevant modifiers into damage parts or additionalModifiers
         for (const modifierType of Object.values(stackedModifiers)) {
             for (const modifier of modifierType) {
                 if (modifier.modifierType === "damageSection") {

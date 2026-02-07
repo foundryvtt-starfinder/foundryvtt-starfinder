@@ -17,11 +17,18 @@ export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
 
     static damagePartTemplate() {
         return {
-            name: new fields.StringField({
+            formula: new fields.StringField({
                 initial: "",
                 blank: true
             }),
-            formula: new fields.StringField({
+            group: new fields.NumberField({
+                initial: null,
+                min: 0,
+                integer: true,
+                nullable: true
+            }),
+            isPrimarySection: new fields.BooleanField(),
+            name: new fields.StringField({
                 initial: "",
                 blank: true
             }),
@@ -31,14 +38,7 @@ export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
                     return obj;
                 }, {}),
                 {required: false}
-            ),
-            group: new fields.NumberField({
-                initial: null,
-                min: 0,
-                integer: true,
-                nullable: true
-            }),
-            isPrimarySection: new fields.BooleanField()
+            )
         };
     }
 
