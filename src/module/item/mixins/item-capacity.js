@@ -5,7 +5,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
     /**
      * Checks if this item has capacity.
      */
-    hasCapacity() {
+    get hasCapacity() {
         if (this.type === "starshipWeapon") {
             return (
                 this.system.weaponType === "tracking"

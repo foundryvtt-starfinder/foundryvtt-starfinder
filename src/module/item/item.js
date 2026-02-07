@@ -989,24 +989,25 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * Place an attack roll using an item (weapon, feat, spell, or equipment)
      * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
      *
-     * Supported options:
-     * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
-     * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
-     *
+     * @param   {Object}    [options]                           Options to be passed to the roll
+     * @param   {Event}     [options.event]                     The triggering event
+     * @param   {boolean}   [options.disableDamageAfterAttack]  If the "Roll damage with attack" system setting is enabled, this being true disables it
+     * @param   {boolean}   [options.disableDeductAmmo]         Prevent ammo being deducted
      * @returns {Promise<RollResult?>}
      */
     async rollAttack(options = {}) {
-        options.disableDeductAmmo = options.disableDeductAmmo || options.event?.ctrlKey || false;
-        const itemData = this.system;
-        const actorData = this.actor.system;
-
         if (!this.hasAttack) {
             ui.notifications.error("You may not make an Attack Roll with this Item.");
             return;
         }
 
+        options.disableDeductAmmo = options.disableDeductAmmo || options.event?.ctrlKey;
+
         if (this.type === "starshipWeapon") return this._rollStarshipAttack(options);
         if (this.type === "vehicleAttack") return this._rollVehicleAttack(options);
+
+        const itemData = this.system;
+        const actorData = this.actor.system;
 
         // Determine ability score modifier
         // TODO: This chunk is the same code as in base.js's _prepareAttackString(), probably good practice to combine these into one method somewhere
@@ -1077,7 +1078,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         itemData.hasSkill = this.hasSkill;
         itemData.hasArea = this.hasArea;
         itemData.hasDamage = this.hasDamage;
-        itemData.hasCapacity = this.hasCapacity();
+        itemData.hasCapacity = this.hasCapacity;
 
         const title = game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
@@ -1211,7 +1212,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const title = game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
 
         // If max capacity is 0, assume the item doesn't have limited fire property
-        if (this.hasCapacity() && this.getCurrentCapacity() <= 0 && this.getMaxCapacity() > 0) {
+        if (this.hasCapacity && this.getCurrentCapacity() <= 0 && this.getMaxCapacity() > 0) {
             ui.notifications.warn(game.i18n.format("SFRPG.StarshipSheet.Weapons.NoCapacity"));
             return false;
         }
@@ -1278,7 +1279,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                         this.rollDamage(options.event);
                     }
 
-                    if (this.hasCapacity() && !options.disableDeductAmmo && this.getMaxCapacity() > 0) {
+                    if (this.hasCapacity && !options.disableDeductAmmo && this.getMaxCapacity() > 0) {
                         this.consumeCapacity(1);
                     }
 
@@ -1327,7 +1328,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                         this.rollDamage(options.event);
                     }
 
-                    if (this.hasCapacity() && !options.disableDeductAmmo) {
+                    if (this.hasCapacity && !options.disableDeductAmmo) {
                         this.consumeCapacity(1);
                     }
 
@@ -1590,7 +1591,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const overrideChatCard = !!options?.event?.shiftKey;
 
         let sufficientCapacity = overrideUsage;
-        if (this.hasCapacity()) {
+        if (this.hasCapacity) {
             sufficientCapacity = this.getCurrentCapacity() >= (itemData.usage?.value ?? itemData.uses?.value);
         }
 
