@@ -1683,6 +1683,7 @@ SFRPG.effectTypes = {
 
 SFRPG.modifierType = {
     "constant": "SFRPG.ModifierTypeConstant",
+    "damageSection": "SFRPG.ModifierTypeDamageSection",
     "formula": "SFRPG.ModifierTypeFormula"
 };
 
