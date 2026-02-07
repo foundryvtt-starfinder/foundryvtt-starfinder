@@ -989,24 +989,25 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * Place an attack roll using an item (weapon, feat, spell, or equipment)
      * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
      *
-     * Supported options:
-     * disableDamageAfterAttack: If the system setting "Roll damage with attack" is enabled, setting this flag to true will disable this behavior.
-     * disableDeductAmmo: Setting this to true will prevent ammo being deducted if applicable.
-     *
+     * @param   {Object}    [options]                           Options to be passed to the roll
+     * @param   {Event}     [options.event]                     The triggering event
+     * @param   {boolean}   [options.disableDamageAfterAttack]  If the "Roll damage with attack" system setting is enabled, this being true disables it
+     * @param   {boolean}   [options.disableDeductAmmo]         Prevent ammo being deducted
      * @returns {Promise<RollResult?>}
      */
     async rollAttack(options = {}) {
-        options.disableDeductAmmo = options.disableDeductAmmo || options.event?.ctrlKey || false;
-        const itemData = this.system;
-        const actorData = this.actor.system;
-
         if (!this.hasAttack) {
             ui.notifications.error("You may not make an Attack Roll with this Item.");
             return;
         }
 
+        options.disableDeductAmmo = options.disableDeductAmmo || options.event?.ctrlKey;
+
         if (this.type === "starshipWeapon") return this._rollStarshipAttack(options);
         if (this.type === "vehicleAttack") return this._rollVehicleAttack(options);
+
+        const itemData = this.system;
+        const actorData = this.actor.system;
 
         // Determine ability score modifier
         // TODO: This chunk is the same code as in base.js's _prepareAttackString(), probably good practice to combine these into one method somewhere
