@@ -1552,7 +1552,7 @@ SFRPG.saveProgression = {
     "fast": "SFRPG.SaveProgressionFast"
 };
 
-SFRPG.modifierTypes = {
+SFRPG.modifierBonusTypes = {
     "ability": "SFRPG.ModifierTypeAbility",
     "armor": "SFRPG.ModifierTypeArmor",
     "base": "SFRPG.ModifierTypeBase",

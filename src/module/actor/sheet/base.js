@@ -496,9 +496,8 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
             const formula = parts.join("+");
 
-            let appropriateMods = item.getAppropriateAttackModifiers(isWeapon);
             // Remove situational modifiers
-            appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
+            const appropriateMods = item.relevantModifiers.attack.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
             let modifiers = stackModifiers.process(appropriateMods, null, {actor: actor, item: item});
 
@@ -527,15 +526,13 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
      */
     _prepareDamageString(item) {
         try {
-            const isWeapon = ["weapon", "shield"].includes(item.type);
             const formula = item.system.damage.parts[0].formula;
             if (!formula) throw ("No damage formula, deferring to default string");
 
-            let appropriateMods = item.getAppropriateDamageModifiers(isWeapon);
-            // Remove situational modifiers
-            appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
+            // Get non-situational damage modifiers
+            const constantMods = item.relevantModifiers.damage.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null, {actor: item.actor, item: item});
+            let modifiers = stackModifiers.process(constantMods, null, {actor: item.actor, item: item});
 
             modifiers = Object.values(modifiers)
                 .flat()
@@ -813,7 +810,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
-        return item.useItem({event:event});
+        return item.useItem({event});
     }
 
     _onItemRollAttack(event) {
@@ -829,7 +826,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        return item.rollDamage({event: event});
+        return item.rollDamage(event);
     }
 
     async _onActivateFeat(event) {

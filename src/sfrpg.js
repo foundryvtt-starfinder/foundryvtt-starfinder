@@ -612,7 +612,7 @@ Hooks.once("i18nInit", () => {
         "modifierEffectTypesStarship",
         "modifierEffectTypes",
         "modifierType",
-        "modifierTypes",
+        "modifierBonusTypes",
         "rangeModes",
         "saveDescriptors",
         "saveProgression",

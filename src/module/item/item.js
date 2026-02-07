@@ -16,6 +16,16 @@ import { ItemChatMixin } from "./mixins/item-chat.js";
  * @import { RollResult } from '../dice.js'
  */
 
+/**
+ * The relevant roll modifiers for this item or actor for each type of roll that it can make
+ *
+ * @typedef     {Object}            ItemRollModifiers
+ * @property    {SFRPGModifier[]}   ammo        Modifiers for ammunition usage
+ * @property    {SFRPGModifier[]}   attack      Modifiers for attack rolls made with this item
+ * @property    {SFRPGModifier[]}   damage      Modifiers for damage rolls made with this item
+ * @property    {SFRPGModifier[]}   healing     Modifiers for healing rolls made with this item
+ */
+
 /** @extends {foundry.documents.Item} */
 export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin, ItemChatMixin) {
 
@@ -114,11 +124,128 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     /**
-     * The timedEffect object of this item, if any.
-     * @returns {SFRPGTimedEffect|undefined}
+     * Is the item a weapon (or shield)?
+     * @type {boolean}
      */
-    get timedEffect() {
-        return game.sfrpg.timedEffects.get(this.uuid);
+    get isWeapon() {
+        return ["weapon", "shield"].includes(this.type);
+    }
+
+    /**
+     * Gets the types of modifiers that are relevant to this item, split into the types of rolls that can be made with it
+     * @type {ItemRollModifiers}
+     */
+    get relevantModifiers() {
+        const ammo = [];
+        const attack = [];
+        const damage = [];
+        // const healing = [];
+        const allModifiers = this.actor.getAllModifiers();
+
+        // Applies to all rolls
+        ammo.push(SFRPGEffectType.ALL_AMMO_USAGE_MULTIPLIER);
+        attack.push(SFRPGEffectType.ALL_ATTACKS);
+        damage.push(SFRPGEffectType.ALL_DAMAGE);
+
+        // Applies based on action type
+        if (SFRPG.spellAttackActions.includes(this.system.actionType)) {
+            attack.push(SFRPGEffectType.SPELL_ATTACKS);
+            damage.push(SFRPGEffectType.SPELL_DAMAGE);
+        } else if (this.type === "spell" && this.system.actionType === "save") {
+            damage.push(SFRPGEffectType.SPELL_DAMAGE);
+        } else if (this.system.actionType === "rwak") {
+            attack.push(SFRPGEffectType.RANGED_ATTACKS);
+            damage.push(SFRPGEffectType.RANGED_DAMAGE);
+        } else if (this.system.actionType === "mwak") {
+            attack.push(SFRPGEffectType.MELEE_ATTACKS);
+            damage.push(SFRPGEffectType.MELEE_DAMAGE);
+        }
+
+        // Applies based on whether its a weapon and if it has matching properties or categories
+        if (this.isWeapon) {
+            ammo.push(SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER, SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER, SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER);
+            attack.push(SFRPGEffectType.WEAPON_ATTACKS, SFRPGEffectType.WEAPON_PROPERTY_ATTACKS, SFRPGEffectType.WEAPON_CATEGORY_ATTACKS);
+            damage.push(SFRPGEffectType.WEAPON_DAMAGE, SFRPGEffectType.WEAPON_PROPERTY_DAMAGE, SFRPGEffectType.WEAPON_CATEGORY_DAMAGE);
+        }
+
+        // Collect all the modifiers for ammo usage
+        const ammoModifiers = allModifiers.filter(mod => {
+            // Remove inactive mods and mods that aren't constant (this is only supporting constant mods right now)
+            if (!mod.enabled || mod.modifierType !== SFRPGModifierType.CONSTANT) return false;
+
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
+            if (mod.limitTo === "container") {
+                const parentItem = getItemContainer(this.actor.items, mod.item);
+                if (parentItem?.id !== this.id) return false;
+            }
+
+            if (mod.effectType === SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER) {
+                if (mod.valueAffected !== this.system?.weaponType) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER) {
+                if (!this.system?.properties?.[mod.valueAffected]?.value) {
+                    return false;
+                }
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER) {
+                if (this.system?.weaponCategory !== mod.valueAffected) {
+                    return false;
+                }
+            }
+
+            return ammo.includes(mod.effectType);
+        });
+
+        // Collect all the modifiers for attack rolls
+        const attackModifiers = allModifiers.filter(mod => {
+            // Remove inactive constant and damage section mods. Keep all situational mods, regardless of status.
+            if (!mod.enabled && mod.modifierType !== SFRPGModifierType.FORMULA) return false;
+
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
+            if (mod.limitTo === "container") {
+                const parentItem = getItemContainer(this.actor.items, mod.item);
+                if (parentItem?.id !== this.id) return false;
+            }
+
+            if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
+                if (mod.valueAffected !== this.system?.weaponType) return false;
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_ATTACKS) {
+                if (!this.system?.properties?.[mod.valueAffected]?.value) return false;
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_ATTACKS) {
+                if (this.system?.weaponCategory !== mod.valueAffected) return false;
+            }
+
+            return attack.includes(mod.effectType);
+        });
+
+        // Collect all the modifiers for damage rolls
+        const damageModifiers = allModifiers.filter(mod => {
+            // If it's disabled or not one of the modifiers we've identified as relevant, ditch it
+            if (!damage.includes(mod.effectType) || !mod.enabled) {
+                return false;
+            }
+
+            // If a mod is limited to affecting its parent item or parent item's container
+            if (mod.limitTo === "parent" && mod.item !== this) return false;
+            if (mod.limitTo === "container") {
+                const parentItem = getItemContainer(this.actor.items, mod.item);
+                if (parentItem?.id !== this.id) return false;
+            }
+
+            // Downselect for weapons, weapon properties, and weapon categories
+            if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
+                if (mod.valueAffected !== this.system.weaponType) return false;
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
+                if (!this.system.properties[mod.valueAffected]?.value) return false;
+            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_DAMAGE) {
+                if (this.system.weaponCategory !== mod.valueAffected) return false;
+            }
+
+            // Return any remaining modifiers if they are enabled or situational (formula) or damage sections
+            return (mod.enabled || ["formula", "damageSection"].includes(mod.modifierType));
+        });
+
+        return {ammo: ammoModifiers, attack: attackModifiers, damage: damageModifiers, healing: []};
     }
 
     get origin() {
@@ -127,6 +254,14 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     get originItem() {
         return fromUuidSync(this.system?.context?.origin?.itemUuid) || null;
+    }
+
+    /**
+     * The timedEffect object of this item, if any.
+     * @returns {SFRPGTimedEffect|undefined}
+     */
+    get timedEffect() {
+        return game.sfrpg.timedEffects.get(this.uuid);
     }
 
     /* -------------------------------------------- */
@@ -864,7 +999,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         options.disableDeductAmmo = options.disableDeductAmmo || options.event?.ctrlKey || false;
         const itemData = this.system;
         const actorData = this.actor.system;
-        const isWeapon = ["weapon", "shield"].includes(this.type);
 
         if (!this.hasAttack) {
             ui.notifications.error("You may not make an Attack Roll with this Item.");
@@ -905,7 +1039,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (Number.isNumeric(itemData.attackBonus) && itemData.attackBonus !== 0) parts.push("@item.attackBonus");
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.type)) parts.push("@attributes.baseAttackBonus.value");
-        if (isWeapon) {
+        if (this.isWeapon) {
             const proficiencyKey = SFRPG.weaponTypeProficiency[this.system.weaponType];
             const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(proficiencyKey);
             if (!proficient) {
@@ -913,11 +1047,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             }
         }
 
-        let modifiers = this.getAppropriateAttackModifiers(isWeapon);
-
-        const stackModifiers = new StackModifiers();
-        modifiers = await stackModifiers.processAsync(modifiers, null, {actor: this.actor});
-
+        const modifiers = await new StackModifiers().processAsync(this.relevantModifiers.attack, null, {actor: this.actor});
         const rolledMods = [];
         const addModifier = (bonus, parts) => {
             if (bonus.modifierType === SFRPGModifierType.FORMULA) {
@@ -999,96 +1129,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         });
     }
 
-    getAppropriateAttackModifiers(isWeapon) {
-        const acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
-        if (SFRPG.spellAttackActions.includes(this.system.actionType)) {
-            acceptedModifiers.push(SFRPGEffectType.SPELL_ATTACKS);
-        } else if (this.system.actionType === "rwak") {
-            acceptedModifiers.push(SFRPGEffectType.RANGED_ATTACKS);
-        } else if (this.system.actionType === "mwak") {
-            acceptedModifiers.push(SFRPGEffectType.MELEE_ATTACKS);
-        }
-
-        if (isWeapon) {
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_ATTACKS);
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_ATTACKS);
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_ATTACKS);
-        }
-
-        let modifiers = this.actor.getAllModifiers();
-        modifiers = modifiers.filter(mod => {
-            // Remove inactive constant and damage section mods. Keep all situational mods, regardless of status.
-            if (!mod.enabled && mod.modifierType !== SFRPGModifierType.FORMULA) return false;
-
-            if (mod.limitTo === "parent" && mod.item !== this) return false;
-            if (mod.limitTo === "container") {
-                const parentItem = getItemContainer(this.actor.items, mod.item);
-                if (parentItem?.id !== this.id) return false;
-            }
-
-            if (mod.effectType === SFRPGEffectType.WEAPON_ATTACKS) {
-                if (mod.valueAffected !== this.system?.weaponType) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_ATTACKS) {
-                if (!this.system?.properties?.[mod.valueAffected]?.value) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_ATTACKS) {
-                if (this.system?.weaponCategory !== mod.valueAffected) {
-                    return false;
-                }
-            }
-
-            return acceptedModifiers.includes(mod.effectType);
-        });
-
-        return modifiers;
-    }
-
-    getAppropriateAmmoUsageModifiers() {
-        const acceptedModifiers = [
-            SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER,
-            SFRPGEffectType.ALL_AMMO_USAGE_MULTIPLIER,
-            SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER,
-            SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER
-        ];
-
-        let modifiers = this.actor.getAllModifiers();
-        modifiers = modifiers.filter(mod => {
-            // Remove inactive mods and mods that aren't constant (this is only supporting constant mods right now)
-            if (!mod.enabled || mod.modifierType !== SFRPGModifierType.CONSTANT) return false;
-
-            if (mod.limitTo === "parent" && mod.item !== this) return false;
-            if (mod.limitTo === "container") {
-                const parentItem = getItemContainer(this.actor.items, mod.item);
-                if (parentItem?.id !== this.id) return false;
-            }
-
-            if (mod.effectType === SFRPGEffectType.WEAPON_AMMO_USAGE_MULTIPLIER) {
-                if (mod.valueAffected !== this.system?.weaponType) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_AMMO_USAGE_MULTIPLIER) {
-                if (!this.system?.properties?.[mod.valueAffected]?.value) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_AMMO_USAGE_MULTIPLIER) {
-                if (this.system?.weaponCategory !== mod.valueAffected) {
-                    return false;
-                }
-            }
-
-            return acceptedModifiers.includes(mod.effectType);
-        });
-
-        return modifiers;
-    }
-
     _calculateAmmoUsageWithModifiers(value) {
-        let modifiers = this.getAppropriateAmmoUsageModifiers();
-        const stackModifiers = new StackModifiers();
-        modifiers = stackModifiers.process(modifiers, null, {actor: this.actor, item: this});
+        modifiers = new StackModifiers().process(this.relevantModifiers.ammo, null, {actor: this.actor, item: this});
         let multiplier = 1.0;
         const modsToProcess = [];
         for (const modValue of Object.values(modifiers)) {
@@ -1135,7 +1177,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
         if (rollDamageWithAttack && !roll.isFumble() && !options.disableDamageAfterAttack) {
-            this.rollDamage({}, {linkedAttackRoll: roll});
+            this.rollDamage(options.event, {linkedAttackRoll: roll});
         }
     }
 
@@ -1233,7 +1275,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
                     if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
-                        this.rollDamage({});
+                        this.rollDamage(options.event);
                     }
 
                     if (this.hasCapacity() && !options.disableDeductAmmo && this.getMaxCapacity() > 0) {
@@ -1282,7 +1324,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
                     if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
-                        this.rollDamage({});
+                        this.rollDamage(options.event);
                     }
 
                     if (this.hasCapacity() && !options.disableDeductAmmo) {
@@ -1300,14 +1342,14 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /**
      * Place a damage roll using an item (weapon, feat, spell, or equipment)
      * Rely upon the DiceSFRPG.damageRoll logic for the core implementation
-     * @returns {Promise<bool>}  `true` if roll was performed, `false` if it was canceled
+     *
+     * @param   {Event}         [event]     The triggering event
+     * @param   {Object}        [options]   Options for the damage roll
+     * @returns {Promise<bool>}             `true` if roll was performed, `false` if it was canceled
      */
-    async rollDamage({ event } = {}, options = {}) {
-        const itemData  = this.system;
-        const actorData = this.actor.getRollData(); // this.actor.system;
-        const isWeapon  = ["weapon", "shield"].includes(this.type);
-        const isHealing = this.system.actionType === "heal";
+    async rollDamage(event = new Event(""), options = {}) {
 
+        // Verify we can make a damage roll
         if (!this.hasDamage) {
             ui.notifications.error("You may not make a Damage Roll with this Item.");
             return;
@@ -1316,81 +1358,70 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (this.type === "starshipWeapon") return this._rollStarshipDamage({ event: event });
         if (this.type === "vehicleAttack") return this._rollVehicleDamage({ event: event});
 
+        const itemData  = this.system;
+        const actorData = this.actor?.system;
+        const isHealing = this.system.actionType === "heal";
+
         // Determine ability score modifier
         let abl = itemData.ability;
         if (!abl && (this.type === "spell")) abl = actorData.attributes.spellcasting || "int";
         else if (!abl) abl = "str";
 
         // Define Roll parts
+        // TODO-Ian: Why don't these already have `isDamageSection`
         /** @type {DamageParts[]} */
-        const parts = foundry.utils.deepClone(itemData.damage.parts);
-        for (const part of parts) {
+        const damageParts = foundry.utils.deepClone(itemData.damage.parts);
+        for (const part of damageParts) {
             part.isDamageSection = true;
         }
 
-        let modifiers = this.getAppropriateDamageModifiers(isWeapon);
-
-        const stackModifiers = new StackModifiers();
-        modifiers = await stackModifiers.processAsync(modifiers, null, {actor: this.actor});
-
-        const rolledMods = [];
-        const addModifier = (bonus, parts) => {
-            if (bonus.modifierType === "damageSection") {
-                parts.push({
-                    isDamageSection: true,
-                    enabled: bonus.enabled,
-                    name: bonus.name,
-                    explanation: bonus.name,
-                    formula: bonus.modifier,
-                    types: bonus?.damage?.damageTypes,
-                    group: bonus?.damage?.damageGroup
-                });
-                return;
-            }
-            else if (bonus.modifierType === "formula") {
-                rolledMods.push(bonus);
-                return;
-            }
-
-            // console.log(`Adding ${bonus.name} with ${bonus.modifier}`);
-            const computedBonus = bonus.modifier;
-            parts.push({ formula: computedBonus, explanation: bonus.name });
-            return computedBonus;
-        };
-
-        Object.entries(modifiers).reduce((sum, mod) => {
-            for (const bonus of mod[1]) {
-                addModifier(bonus, parts);
-            }
-            return 0;
-        }, 0);
-
-        const title = isHealing ? game.i18n.format("SFRPG.Rolls.HealingRollFull", {name: this.name}) : game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
-        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
-
-        /** Create additional modifiers. */
+        // Create an array for additional modifiers (available for enabling/disabling in the roll dialog)
         const additionalModifiers = [];
 
-        if (itemData.properties?.archaic?.value && isWeapon) {
+        // Damage penalty for archaic weapons
+        if (itemData.properties?.archaic?.value && this.isWeapon) {
             additionalModifiers.push({bonus: { name: game.i18n.format("SFRPG.WeaponPropertiesArchaic"), modifier: "-5", enabled: true, notes: game.i18n.format("SFRPG.WeaponPropertiesArchaicTooltip") } });
         }
 
-        for (const rolledMod of rolledMods) {
-            additionalModifiers.push({
-                bonus: rolledMod
-            });
+        const stackedModifiers = await new StackModifiers().processAsync(
+            this.relevantModifiers.damage,
+            null,
+            {actor: this.actor}
+        );
+
+        // Parse the relevant modifiers into damage parts
+        for (const modifierType of Object.values(stackedModifiers)) {
+            for (const modifier of modifierType) {
+                if (modifier.modifierType === "damageSection") {
+                    damageParts.push({
+                        isDamageSection: true,
+                        enabled: modifier.enabled,
+                        name: modifier.name,
+                        explanation: modifier.name,
+                        formula: modifier.modifier,
+                        types: modifier?.damage?.damageTypes,
+                        group: modifier?.damage?.damageGroup
+                    });
+                } else if (modifier.modifierType === "formula") {
+                    additionalModifiers.push({bonus: modifier});
+                } else {
+                    damageParts.push({ formula: modifier.modifier, explanation: modifier.name });
+                }
+            }
         }
 
+        // Set up rollContexts
+        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
         if (additionalModifiers.length > 0) {
             rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
-            parts.push({ formula: "@additional.modifiers.bonus" });
+            damageParts.push({ formula: "@additional.modifiers.bonus" });
         }
 
         // Call the roll helper utility
         return DiceSFRPG.damageRoll({
-            parts: parts,
+            parts: damageParts,
             rollContext: rollContext,
-            rollCriteria: SFRPGRoll.createRollCriteria("damage"),
+            rollCriteria: SFRPGRoll.createRollCriteria(isHealing ? "healing" : "damage"),
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
             criticalDamageData: itemData.critical,
@@ -1411,56 +1442,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 }
             },
             skipUI: options.skipUI || game.settings.get('sfrpg', 'useQuickRollAsDefault') ? !event?.shiftKey : event?.shiftKey,
-            title: title
+            title: isHealing ? game.i18n.format("SFRPG.Rolls.HealingRollFull", {name: this.name}) : game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name})
         });
-    }
-
-    getAppropriateDamageModifiers(isWeapon) {
-        const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
-
-        if (SFRPG.spellAttackActions.includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
-            acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
-        } else if (this.system.actionType === "rwak") {
-            acceptedModifiers.push(SFRPGEffectType.RANGED_DAMAGE);
-        } else if (this.system.actionType === "mwak") {
-            acceptedModifiers.push(SFRPGEffectType.MELEE_DAMAGE);
-        }
-
-        if (isWeapon) {
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_DAMAGE);
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_PROPERTY_DAMAGE);
-            acceptedModifiers.push(SFRPGEffectType.WEAPON_CATEGORY_DAMAGE);
-        }
-
-        let modifiers = this.actor.getAllModifiers();
-        modifiers = modifiers.filter(mod => {
-            if (!acceptedModifiers.includes(mod.effectType)) {
-                return false;
-            }
-
-            if (mod.limitTo === "parent" && mod.item !== this) return false;
-            if (mod.limitTo === "container") {
-                const parentItem = getItemContainer(this.actor.items, mod.item);
-                if (parentItem?.id !== this.id) return false;
-            }
-
-            if (mod.effectType === SFRPGEffectType.WEAPON_DAMAGE) {
-                if (mod.valueAffected !== this.system.weaponType) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_PROPERTY_DAMAGE) {
-                if (!this.system.properties[mod.valueAffected]?.value) {
-                    return false;
-                }
-            } else if (mod.effectType === SFRPGEffectType.WEAPON_CATEGORY_DAMAGE) {
-                if (this.system.weaponCategory !== mod.valueAffected) {
-                    return false;
-                }
-            }
-            return (mod.enabled || ["formula", "damageSection"].includes(mod.modifierType));
-        });
-
-        return modifiers;
     }
 
     async _rollVehicleDamage({ event } = {}, options = {}) {
@@ -1631,7 +1614,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             }
             if (this.hasDamage) {
                 options.skipUI = overrideChatCard;
-                const rolled = await this.rollDamage({}, options);
+                const rolled = await this.rollDamage(options.event, options);
                 if (!rolled) return; // Roll was cancelled, don't consume.
             }
             if (this.hasArea && ["ft", "meter"].includes(this.system.area.units) && !["", "other"].includes(this.system.area.shape)) {

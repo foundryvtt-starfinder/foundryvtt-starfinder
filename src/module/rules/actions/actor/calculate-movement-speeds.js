@@ -64,7 +64,7 @@ export default function(engine) {
         if (armorSpeed) {
             data.attributes.speed.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.Speed", {
                 speed: game.i18n.localize("SFRPG.ActorSheet.Attributes.Speed.Types.All"),
-                type: SFRPG.modifierTypes["armor"],
+                type: SFRPG.modifierBonusTypes["armor"],
                 mod: armorSpeed.signedString(),
                 source: slowestArmor.name
             }));

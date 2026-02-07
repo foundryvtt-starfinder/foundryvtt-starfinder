@@ -67,13 +67,6 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         return [...super.temporaryEffects, ...fromEffects];
     }
 
-    /** @override */
-    getRollData() {
-        const data = super.getRollData();
-
-        return data;
-    }
-
     /**
      * Augment the basic actor data with additional dynamic data.
      *

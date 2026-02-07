@@ -124,8 +124,8 @@ export default class RollDialog extends Dialog {
         data.damageGroups = this.damageGroups;
 
         for (const modifier of data.availableModifiers) {
-            if (Object.keys(CONFIG.SFRPG.modifierTypes).includes(modifier.type)) {
-                modifier.localizedType = game.i18n.localize(`${CONFIG.SFRPG.modifierTypes[modifier.type]}`);
+            if (Object.keys(CONFIG.SFRPG.modifierBonusTypes).includes(modifier.type)) {
+                modifier.localizedType = game.i18n.localize(`${CONFIG.SFRPG.modifierBonusTypes[modifier.type]}`);
             }
         }
 
