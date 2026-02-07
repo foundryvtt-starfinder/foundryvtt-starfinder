@@ -454,7 +454,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             const itemData = item.system;
             const actor = item.actor;
             const isWeapon = ["weapon", "shield"].includes(item.type);
-            const abl = item.abilityKey;
+            const abl = item.attackAbility;
 
             // Define Roll parts
             const parts = [];
