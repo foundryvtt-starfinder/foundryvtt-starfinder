@@ -96,7 +96,7 @@ export class ActorSheetSFRPGHazard extends ActorSheetSFRPG {
 
         if (this.actor.system.attributes.damage.value) {
             await DiceSFRPG.damageRoll({
-                parts: [{ formula: this.actor.system.attributes.damage.value }],
+                damageParts: [{ formula: this.actor.system.attributes.damage.value }],
                 rollContext: RollContext.createActorRollContext(this.actor),
                 rollCriteria: SFRPGRoll.createRollCriteria("damage"),
                 speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),

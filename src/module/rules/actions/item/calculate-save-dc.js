@@ -59,7 +59,6 @@ export default function(engine) {
 
                 if (dcFormula) {
                     const rollContext = RollContext.createItemRollContext(item, actor, {itemData: data});
-
                     const rollResult = DiceSFRPG.resolveFormulaWithoutDice(dcFormula, rollContext, {logErrors: false});
                     if (!rollResult.hadError) {
                         item.labels.dcValue = rollResult.total >= 0 ? rollResult.total : "";

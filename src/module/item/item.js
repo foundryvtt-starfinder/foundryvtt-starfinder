@@ -346,7 +346,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             }
 
             const target = this.system.target || {};
-            if (target.value && tgt.value === "") target.value = null;
+            if (target.value && target.value === "") target.value = null;
             labels.target = [target.value].filterJoin(" ");
         }
 
@@ -997,7 +997,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         // Call the roll helper utility
         return DiceSFRPG.damageRoll({
-            parts: damageParts,
+            damageParts,
             rollContext: rollContext,
             rollCriteria: SFRPGRoll.createRollCriteria(isHealing ? "healing" : "damage"),
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
@@ -1045,7 +1045,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.setMainContext("");
 
         return DiceSFRPG.damageRoll({
-            parts,
+            damageParts: parts,
             rollContext,
             rollCriteria: SFRPGRoll.createRollCriteria("damage"),
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
@@ -1088,7 +1088,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         this.actor?.setupRollContexts(rollContext, ["gunner"]);
 
         return DiceSFRPG.damageRoll({
-            parts: parts,
+            damageParts: parts,
             rollContext: rollContext,
             rollCriteria: SFRPGRoll.createRollCriteria("damage"),
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
@@ -1467,7 +1467,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     async _handleEffectRollEvent(turnEvent) {
         if (!turnEvent.formula) return;
 
-        const parts = [{
+        const damageParts = [{
             isDamageSection: true,
             enabled: true,
             formula: turnEvent.formula,
@@ -1476,7 +1476,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }];
 
         return DiceSFRPG.damageRoll({
-            parts,
+            damageParts,
             rollContext: RollContext.createItemRollContext(this, this.actor),
             rollCriteria: SFRPGRoll.createRollCriteria("damage"),
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
