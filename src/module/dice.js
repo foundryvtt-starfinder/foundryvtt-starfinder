@@ -346,7 +346,7 @@ export class DiceSFRPG {
     * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
     *
     * @param {Object}               data                    Parameters passed into the method
-    * @param {DamagePart[]}         data.parts              The dice roll component parts
+    * @param {DamagePart[]}         data.damageParts        The component damage parts of the roll
     * @param {RollContext}          data.rollContext        The contextual data for this roll
     * @param {RollCriteria}         data.rollCriteria       Additional data to further define the roll and what it's doing
     * @param {SpeakerData}          data.speaker            The ChatMessage speaker to pass when creating the chat (optional if chatMessage is false)
@@ -360,53 +360,31 @@ export class DiceSFRPG {
     * @param {string}               [data.title]            The dice roll UI window title
     * @returns {Promise<bool>}                              `true` if roll was performed, `false` if it was canceled
     */
-    static async damageRoll({ parts, rollContext, rollCriteria, speaker,
+    static async damageRoll({ damageParts, rollContext, rollCriteria, speaker,
         chatMessage = true, criticalDamageData = {}, dialogOptions, flavor, linkedAttackRoll, onClose, skipUI = false, tags = [], title}) {
 
         // Verify roll context is valid before continuing
         if (!rollContext?.isValid()) return null;
 
-        /** @type {DamageType[]} */
-        const damageTypes = parts.reduce((acc, cur) => {
-            if (cur.types && !foundry.utils.isEmpty(cur.types)) {
-                const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
-                const obj = { types: [], operator: "" };
-
-                for (const type of filteredTypes) {
-                    obj.types.push(type[0]);
-                    if (Object.keys(CONFIG.SFRPG.healingTypes).includes(type[0])) rollType = "healing";
-                }
-
-                if (cur.operator) obj.operator = cur.operator;
-                if (obj.types.length > 0) acc.push(obj);
-            }
-
-            return acc;
-        }, []);
-
-        const finalParts = [];
+        // Split the damage parts into damage sections and formula parts (modifiers, like bonuses/penalties)
         const damageSections = [];
-        for (const part of parts) {
-            if (part instanceof Object) {
-                if (part.isDamageSection) {
-                    damageSections.push(part);
-
-                    const rollInfo = await RollTree.buildRoll(part.formula, rollContext, rollCriteria, {
-                        buttons: this.damageRollButtons,
-                        skipUI: true
-                    });
-                    part.formula = rollInfo.rolls[0].formula.finalRoll;
-                } else {
-                    const simplifiedFormula = this._simplifyFormula(part.formula || "0", rollContext);
-                    const explanation = part.explanation ? `[${part.explanation}]` : "";
-                    finalParts.push(`${simplifiedFormula}${explanation}`);
-                }
+        const formulaParts = [];
+        for (const part of damageParts) {
+            if (part.isDamageSection) {
+                // Replace variables in the damage section's formula before continuing
+                // Don't fully simplify yet; we'll do that later so the tooltip can be generated first
+                const rollInfo = await RollTree.buildRoll(part.formula, rollContext, rollCriteria, {skipUI: true});
+                part.formula = rollInfo.rolls[0].formula.finalRoll;
+                damageSections.push(part);
             } else {
-                finalParts.push(formula);
+                // Simplify the formula for any formula parts, also replacing variables
+                const simplifiedFormula = this._simplifyFormula(part.formula || "0", rollContext);
+                const explanation = part.explanation ? `[${part.explanation}]` : "";
+                formulaParts.push(`${simplifiedFormula}${explanation}`);
             }
         }
 
-        const formula = finalParts.join(" + ");
+        const formula = formulaParts.join(" + ");
         const rollInfo = await RollTree.buildRoll(formula, rollContext, rollCriteria, {
             buttons: DiceSFRPG.damageRollButtons,
             debug: false,
@@ -417,56 +395,40 @@ export class DiceSFRPG {
         });
 
         // Evaluate the roll
-        if (rollInfo.button === 'cancel') {
-            if (onClose) {
-                onClose(null, null, null, false);
-            }
-        } else for (const { formula: finalFormula, node: part } of rollInfo.rolls) {
-            /** @type {HtmlData[]} */
-            const htmlData = [{ name: "is-damage", value: "true" }];
+        if (rollInfo.button !== 'cancel') {
+            for (const rollData of rollInfo.rolls) {
+                const finalFormula = rollData.formula;
+                const part = rollData.node;
+                const partRollCriteria = foundry.utils.deepClone(rollCriteria); // Duplicate so we can manipulate if needed
+                /** @type {HtmlData[]} */
+                const htmlData = [{ name: "is-damage", value: "true" }];
 
-            const usedParts = part ? [part] : parts;
-            if (part) {
-                part.operator = "and";
-            }
-
-            let damageTypeString = "";
-            const tempParts = usedParts.reduce((arr, curr) => {
-                const obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
-                if (curr.types && !foundry.utils.isEmpty(curr.types)) {
-                    for (const [key, isEnabled] of Object.entries(curr.types)) {
-                        if (isEnabled) {
-                            obj.types.push(key);
-                        }
+                // Get the damage types for this section; If any are healing, change the rollType
+                const damageTypes = [];
+                for (const damageType of Object.entries(part.types)) {
+                    if (damageType[1]) {
+                        if (!damageTypes.includes(damageType[0])) damageTypes.push(damageType[0]);
+                        if (Object.keys(CONFIG.SFRPG.healingTypes).includes(damageType[0])) partRollCriteria.rollType = "healing";
                     }
                 }
+                partRollCriteria.damageTypese = damageTypes;
 
-                if (obj.types && obj.types.length > 0) {
-                    const tag = `damage-type-${(obj.types.join(`-${obj.operator}-`))}`;
-                    const text = obj.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[obj.operator]} `);
-                    const shortText = obj.types.map(type => SFRPG.damageTypeToAcronym[type]).join(` & `);
-
-                    // In most use cases, damage rolls should never contain more parts. But because the system is complex and confusing, it is theoretically possible.
-                    // If that happens, we'll just concatenate the damage types to the roll string and pretend nothing is wrong.
-                    if (damageTypeString?.length > 0) {
-                        damageTypeString += ", ";
-                    }
-                    damageTypeString += shortText;
-
+                // Create the damage type tags
+                if (damageTypes.length) {
+                    const tag = `damage-type-${(damageTypes.join(`-and-`))}`;
+                    const text = damageTypes.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators["and"]} `);
                     if (!tags.some(t => t.tag === tag && t.text === text))
                         tags.push({ tag: tag, text: text });
                 }
 
-                arr.push(obj);
-                return arr;
-            }, []);
+                const damageTypeString = "";
 
-            // Add item properties, descriptors, and special materials to roll tags
-            const itemContext = rollContext.allContexts['item'];
-            if (itemContext) {
-                // Regular Weapons use data.properties for their properties
-                if (itemContext.entity.system.properties) {
-                    try {
+                // Add item properties, descriptors, and special materials to roll tags (and htmlData when necessary)
+                const itemContext = rollContext.allContexts['item'];
+                if (itemContext) {
+
+                    // Regular Weapons use data.properties for their properties
+                    if (itemContext.entity.system.properties) {
                         const props = [];
                         for (const [key, propValue] of Object.entries(itemContext.entity.system.properties)) {
                             if (propValue.value) {
@@ -475,18 +437,15 @@ export class DiceSFRPG {
                             }
                         }
                         htmlData.push({ name: "weapon-properties", value: JSON.stringify(props) });
-                    } catch {
-                        // pass
                     }
-                }
 
-                // Starship Weapons use data.special for their properties
-                if (itemContext.entity.type === "starshipWeapon") {
-                    tags.push({tag: `starship-weapon-type ${itemContext.entity.system.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.system.weaponType]});
-                    htmlData.push({ name: "starship-weapon-type", value: itemContext.entity.system.weaponType });
+                    // TODO: Move starship weapon properties & materials to the same location as normal properties & materials
+                    // Starship Weapons use data.special for their properties
+                    if (itemContext.entity.type === "starshipWeapon") {
+                        tags.push({tag: `starship-weapon-type ${itemContext.entity.system.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.system.weaponType]});
+                        htmlData.push({ name: "starship-weapon-type", value: itemContext.entity.system.weaponType });
 
-                    if (itemContext.entity.system.special) {
-                        try {
+                        if (itemContext.entity.system.special) {
                             const props = [];
                             for (const [key, isEnabled] of Object.entries(itemContext.entity.system.special)) {
                                 if (isEnabled) {
@@ -495,13 +454,11 @@ export class DiceSFRPG {
                                 }
                             }
                             htmlData.push({ name: "starship-weapon-properties", value: JSON.stringify(props) });
-                        } catch {
-                            // pass
                         }
                     }
                 }
 
-                // Add descriptors
+                // Add descriptors tags
                 const descriptors = itemContext.entity.system.descriptors;
                 if (descriptors) {
                     for (const [descriptor, isEnabled] of Object.entries(descriptors)) {
@@ -509,7 +466,7 @@ export class DiceSFRPG {
                     }
                 }
 
-                // Add special materials
+                // Add special materials tags
                 const specialMaterials = itemContext.entity.system.specialMaterials;
                 if (specialMaterials) {
                     for (const [material, isEnabled] of Object.entries(specialMaterials)) {
@@ -517,138 +474,108 @@ export class DiceSFRPG {
                     }
                 }
 
+                // Add a tag if the damage should be magic
                 const isMagic = itemContext.data.magic || itemContext.entity.hasMagicDamage;
                 if (isMagic) tags.push({tag: 'magic', text: game.i18n.localize("SFRPG.Magic.Magic")});
-            }
 
-            // Determine whether the roll should be a critical damage roll
-            let isCritical = false;
-            if ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) {
-                // if quick roll is selected, determine whether a roll is a critical hit based on the linked attack (if present)
-                // if the control key is pressed, roll critical damage regardless
-                isCritical = event?.ctrlKey ? true : (linkedAttackRoll ? linkedAttackRoll.isCritical() : false);
-            } else if (rollInfo.button === "critical") {
-                isCritical = true;
-            }
-
-            let finalFlavor = foundry.utils.deepClone(flavor);
-            if (isCritical) {
-                htmlData.push({ name: "is-critical", value: "true" });
-                tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
-
-                if (!criticalDamageData?.preventDoubling) {
-                    finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
-                    finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
-                }
-
-                if (criticalDamageData !== undefined) {
-                    const critRoll = criticalDamageData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula)
-                        .join("+") ?? "";
-                    if (critRoll.length > 0) {
-                        finalFormula.finalRoll = finalFormula.finalRoll + " + " + critRoll;
-                        finalFormula.formula = finalFormula.formula + " + " + critRoll;
+                // Determine whether the roll should be a critical, and handle those effects
+                const isCritical = (rollInfo.button === "critical" || (skipUI && linkedAttackRoll.isCritical)) ? true : false;
+                // TODO-Ian: I don't like this excessive finalFlavor string manipulation; ditch it
+                let finalFlavor = foundry.utils.deepClone(flavor);
+                if (isCritical) {
+                    if (!criticalDamageData?.preventDoubling) {
+                        finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
+                        finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
                     }
 
-                    htmlData.push({ name: "critical-data", value: JSON.stringify(criticalDamageData) });
+                    htmlData.push({ name: "is-critical", value: "true" });
+                    tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
+                    if (criticalDamageData.effect) htmlData.push({ name: "critical-effect", value: criticalDamageData.effect });
+
+                    finalFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": finalFlavor });
                 }
 
-                finalFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": finalFlavor });
-            }
-
-            if (part?.name) {
-                finalFlavor += `: ${part.name}`;
-                if (part.partIndex) {
-                    finalFlavor += ` (${part.partIndex})`;
+                // Tack on the names of the damage sections to the flavor text in the chat card
+                if (part?.name) {
+                    finalFlavor += `: ${part.name}`;
+                    if (part.partIndex) {
+                        finalFlavor += ` (${part.partIndex})`;
+                    }
                 }
-            }
 
-            finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
-                .trim();
-            finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
-            const preparedRollExplanation = DiceSFRPG.formatExplanation(finalFormula.formula);
+                // Format the roll explanation, create the roll, and evaluate it
+                const preparedRollExplanation = DiceSFRPG.formatExplanation(finalFormula.formula);
+                const roll = await SFRPGRoll.create(finalFormula.finalRoll, { tags, breakdown: preparedRollExplanation, rollCriteria: partRollCriteria }).evaluate();
 
-            const rollObject = SFRPGRoll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
-            const roll = await rollObject.evaluate();
+                // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
+                if (roll.total < 1) {
+                    roll._total = 1; // TODO-Ian: I don't really like overwriting this property, should get the minimum value some other way
 
-            // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
-            if (roll._total < 1) {
-                roll._total = 1;
-                const nonlethal = tags.find(e => e.tag === "weapon-properties nonlethal");
-
-                if (itemContext.type !== "starshipWeapon") {
-                    if (nonlethal) {
-                        nonlethal.text += ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`;
+                    // Add '(minimum damage)' text and nonlethal tags if needed
+                    const nonlethal = tags.find(e => e.tag === "weapon-properties nonlethal");
+                    if (itemContext.entity.type === "starshipWeapon") {
+                        tags.push({ tag: "minimum-damage", text: game.i18n.localize("SFRPG.Damage.MinimumDamage") });
                     } else {
-                        tags.push({ tag: "nonlethal", text: game.i18n.format("SFRPG.Damage.Types.Nonlethal") + ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`});
+                        if (nonlethal) nonlethal.text += ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`;
+                        else tags.push({ tag: "nonlethal", text: game.i18n.format("SFRPG.Damage.Types.Nonlethal") + ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`});
                     }
-                } else {
-                    tags.push({ tag: "minimum-damage", text: game.i18n.localize("SFRPG.Damage.MinimumDamage") });
-                }
-            }
-
-            // Associate the damage types for this attack to the first DiceTerm for the roll.
-            const die = roll.dice && roll.dice.length > 0 ? roll.dice[0] : null;
-
-            if (die) {
-                /** @type {boolean} */
-                die.options.isDamageRoll = true;
-                die.options.damageTypes = damageTypes;
-                die.options.damageParts = tempParts;
-
-                if (criticalDamageData) {
-                    die.options.criticalData = criticalDamageData;
                 }
 
-                const properties = rollContext.allContexts["item"]?.data?.properties;
-                if (properties) {
-                    die.options.isModal = properties.modal || properties.double;
+                // TODO-Ian: Continue from here... Also why do we attach the damage info to the die and not the roll?
+                // Associate the damage types for this attack to the first DiceTerm for the roll.
+                const die = roll.dice && roll.dice.length > 0 ? roll.dice[0] : null;
+                if (die) {
+                    die.options.damageParts = part;
+                    const properties = rollContext.allContexts["item"]?.data?.properties;
+                    if (properties) die.options.isModal = properties.modal || properties.double;
                 }
-            }
 
-            htmlData.push({ name: "damage-parts", value: JSON.stringify(tempParts) });
-            htmlData.push({ name: "rollNotes", value: itemContext?.data?.damageNotes });
+                htmlData.push({ name: "damage-parts", value: JSON.stringify(tempParts) });
+                htmlData.push({ name: "rollNotes", value: itemContext?.data?.damageNotes });
 
-            if (chatMessage) {
-                const rollContent = await roll.render({ htmlData: htmlData });
-                const messageData = {
-                    content: rollContent,
-                    flavor: finalFlavor,
-                    rolls: [roll],
-                    sound: CONFIG.sounds.dice,
-                    system: {},
-                    speaker
-                };
-
-                // Insert the damage type string if possible.
-                if (damageTypeString?.length > 0) {
-                    messageData.content = DiceSFRPG.appendTextToRoll(rollContent, damageTypeString);
-                    messageData.system.damage = {
-                        amount: roll.total,
-                        types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
+                if (chatMessage) {
+                    const rollContent = await roll.render({ htmlData: htmlData });
+                    const messageData = {
+                        content: rollContent,
+                        flavor: finalFlavor,
+                        rolls: [roll],
+                        sound: CONFIG.sounds.dice,
+                        system: {},
+                        speaker
                     };
-                }
 
-                // Add special materials, descriptors, and magic status to chat message system data (to overcome DR)
-                if (itemContext) {
-                    if (itemContext.entity.system.specialMaterials) {
-                        messageData.system.specialMaterials = itemContext.entity.system.specialMaterials;
+                    // Insert the damage type string if possible.
+                    if (damageTypeString?.length > 0) {
+                        messageData.content = DiceSFRPG.appendTextToRoll(rollContent, damageTypeString);
+                        messageData.system.damage = {
+                            amount: roll.total,
+                            types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
+                        };
                     }
 
-                    if (itemContext.entity.system.descriptors) {
-                        messageData.system.descriptors = itemContext.entity.system.descriptors;
+                    // Add special materials, descriptors, and magic status to chat message system data (to overcome DR)
+                    if (itemContext) {
+                        if (itemContext.entity.system.specialMaterials) {
+                            messageData.system.specialMaterials = itemContext.entity.system.specialMaterials;
+                        }
+
+                        if (itemContext.entity.system.descriptors) {
+                            messageData.system.descriptors = itemContext.entity.system.descriptors;
+                        }
+
+                        messageData.system.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
                     }
 
-                    messageData.system.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
+                    ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
                 }
 
-                ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
+                if (onClose) {
+                    onClose(roll, formula, finalFormula, isCritical);
+                }
             }
-
-            if (onClose) {
-                onClose(roll, formula, finalFormula, isCritical);
-            }
+        } else if (onClose) {
+            onClose(null, null, null, false);
         }
-
         return rollInfo.button !== 'cancel';
     }
 
