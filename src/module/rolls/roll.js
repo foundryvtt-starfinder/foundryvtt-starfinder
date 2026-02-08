@@ -113,6 +113,15 @@ export default class SFRPGRoll extends Roll {
     }
 
     /**
+     * Determine if a roll is a "damage roll" (i.e. is intended to be applied to HP or SP).
+     *
+     * @returns {Boolean}   `true` if rollType is "damage" or "healing"
+     */
+    get isDamageRoll() {
+        return ["damage", "healing"].includes(this.options.rollCriteria.rollType);
+    }
+
+    /**
     * Determine if a roll was a fumble or not
     *
     * @returns {Boolean}    `true` if a fumble, `false` otherwise
