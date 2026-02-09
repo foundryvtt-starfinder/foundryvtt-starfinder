@@ -46,26 +46,21 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     get attackAbility() {
         let abl = this.system.ability;
+        const actorAbilities = this.actor.system.abilities;
+        const actionType = this.system.actionType;
+
         if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) {
             abl = "";
         } else if (!abl && (this.type === "spell")) {
-            if (this.system.actionType === "rsak") {
-                abl = "dex";
-            } else if (this.system.actionType === "msak") {
-                abl = "str";
-            } else {
-                abl = this.actor.attributes.spellcasting || "int";
-            }
-        } else if (this.system.properties?.operative?.value && this.actor.abilities.dex.value > this.actor.abilities.str.value) {
+            if (actionType === "rsak")      abl = "dex";
+            else if (actionType === "msak") abl = "str";
+            else                            abl = this.actor.attributes.spellcasting || "int";
+        } else if (this.system.properties?.operative?.value && actorAbilities.dex.value > actorAbilities.str.value) {
             abl = "dex";
         } else if (!abl) {
-            if (this.system.actionType === "rwak" || this.system.actionType === "rsak") {
-                abl = "dex";
-            } else if (this.system.actionType === "mwak" || this.system.actionType === "msak") {
-                abl = "str";
-            } else {
-                abl = "str";
-            }
+            if (actionType === "rwak" || actionType === "rsak")         abl = "dex";
+            else if (actionType === "mwak" || actionType === "msak")    abl = "str";
+            else                                                        abl = "str";
         }
         return abl;
     }

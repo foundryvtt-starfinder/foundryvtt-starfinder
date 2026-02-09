@@ -17,6 +17,7 @@ import { getStarshipBrowser } from "../../packs/starship-browser.js";
 import RollContext from "../../rolls/rollcontext.js";
 
 import { ActorTraitSelectorSFRPG } from "../../apps/trait-selectors/actor-trait-selector.js";
+import SFRPGRoll from "../../rolls/roll.js";
 
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
@@ -486,7 +487,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
             const rollData = RollContext.createItemRollContext(item, item.actor).getRollData();
 
-            const roll = Roll.create(preparedFormula, rollData).simplifiedFormula;
+            const roll = SFRPGRoll.create(preparedFormula, rollData).simplifiedFormula;
             item.config.attackString = Number(roll) >= 0 ? `+${roll}` : roll;
 
         } catch (err) {

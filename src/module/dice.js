@@ -505,7 +505,7 @@ export class DiceSFRPG {
 
                 // Format the roll explanation, create the roll, and evaluate it
                 const preparedRollExplanation = DiceSFRPG.formatExplanation(finalFormula.formula);
-                const roll = await SFRPGRoll.create(finalFormula.finalRoll, { tags, breakdown: preparedRollExplanation, rollCriteria: partRollCriteria }).evaluate();
+                const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { tags, breakdown: preparedRollExplanation, rollCriteria: partRollCriteria }).evaluate();
 
                 // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
                 if (roll.total < 1) {
@@ -521,22 +521,12 @@ export class DiceSFRPG {
                     }
                 }
 
-                // TODO-Ian: Continue from here... Also why do we attach the damage info to the die and not the roll?
-                // Associate the damage types for this attack to the first DiceTerm for the roll.
-                const die = roll.dice && roll.dice.length > 0 ? roll.dice[0] : null;
-                if (die) {
-                    die.options.damageParts = part;
-                    const properties = rollContext.allContexts["item"]?.data?.properties;
-                    if (properties) die.options.isModal = properties.modal || properties.double;
-                }
-
-                htmlData.push({ name: "damage-parts", value: JSON.stringify(tempParts) });
+                htmlData.push({ name: "damage-parts", value: JSON.stringify(part) });
                 htmlData.push({ name: "rollNotes", value: itemContext?.data?.damageNotes });
 
                 if (chatMessage) {
-                    const rollContent = await roll.render({ htmlData: htmlData });
                     const messageData = {
-                        content: rollContent,
+                        content: await roll.render({ htmlData: htmlData }),
                         flavor: finalFlavor,
                         rolls: [roll],
                         sound: CONFIG.sounds.dice,
@@ -544,38 +534,18 @@ export class DiceSFRPG {
                         speaker
                     };
 
-                    // Insert the damage type string if possible.
-                    if (damageTypeString?.length > 0) {
-                        messageData.content = DiceSFRPG.appendTextToRoll(rollContent, damageTypeString);
-                        messageData.system.damage = {
-                            amount: roll.total,
-                            types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
-                        };
-                    }
-
                     // Add special materials, descriptors, and magic status to chat message system data (to overcome DR)
-                    if (itemContext) {
-                        if (itemContext.entity.system.specialMaterials) {
-                            messageData.system.specialMaterials = itemContext.entity.system.specialMaterials;
-                        }
+                    if (specialMaterials) messageData.system.specialMaterials = specialMaterials;
+                    if (descriptors) messageData.system.descriptors = descriptors;
+                    if (itemContext) messageData.system.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
 
-                        if (itemContext.entity.system.descriptors) {
-                            messageData.system.descriptors = itemContext.entity.system.descriptors;
-                        }
-
-                        messageData.system.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
-                    }
-
-                    ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
+                    // Create the chat message
+                    const msg = await ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
+                    console.log(msg);
                 }
-
-                if (onClose) {
-                    onClose(roll, formula, finalFormula, isCritical);
-                }
+                if (onClose) onClose(roll, formula, finalFormula, isCritical);
             }
-        } else if (onClose) {
-            onClose(null, null, null, false);
-        }
+        } else if (onClose) onClose(null, null, null, false);
         return rollInfo.button !== 'cancel';
     }
 
