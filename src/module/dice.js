@@ -421,9 +421,7 @@ export class DiceSFRPG {
                         tags.push({ tag: tag, text: text });
                 }
 
-                const damageTypeString = "";
-
-                // Add item properties, descriptors, and special materials to roll tags (and htmlData when necessary)
+                // Add item properties, descriptors, and special materials to roll tags
                 const itemContext = rollContext.allContexts['item'];
                 if (itemContext) {
 
@@ -526,7 +524,7 @@ export class DiceSFRPG {
 
                 if (chatMessage) {
                     const messageData = {
-                        content: await roll.render({ htmlData: htmlData }),
+                        content: await roll.render({ htmlData }),
                         flavor: finalFlavor,
                         rolls: [roll],
                         sound: CONFIG.sounds.dice,
@@ -547,21 +545,6 @@ export class DiceSFRPG {
             }
         } else if (onClose) onClose(null, null, null, false);
         return rollInfo.button !== 'cancel';
-    }
-
-    static appendTextToRoll(originalRollHTML, textToAppend) {
-        const diceRollHtml = '<h3 class="dice-total">';
-
-        const diceRollIndex = originalRollHTML.indexOf(diceRollHtml);
-        const firstHalf = originalRollHTML.substring(0, diceRollIndex + diceRollHtml.length);
-        const splitOffFirstHalf = originalRollHTML.substring(diceRollIndex + diceRollHtml.length);
-
-        const closeTagIndex = splitOffFirstHalf.indexOf('</h3>');
-        const rollResultHtml = splitOffFirstHalf.substring(0, closeTagIndex);
-        const secondHalf = splitOffFirstHalf.substring(closeTagIndex);
-
-        const combinedResult = firstHalf + rollResultHtml + ` ${textToAppend}` + secondHalf;
-        return combinedResult;
     }
 
     /**
