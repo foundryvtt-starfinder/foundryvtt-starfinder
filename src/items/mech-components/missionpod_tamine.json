@@ -1,0 +1,231 @@
+{
+  "_id": "mechMsnPod04Tamne",
+  "name": "Tamine Mission Pod",
+  "type": "mechMissionPod",
+  "img": "systems/sfrpg/icons/mech-frame.png",
+  "folder": "mechFldrMsnPods1",
+  "system": {
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>The tamine mission pod relies on the onslaught of a long-ranged weapons platform to deliver havoc from afar.</p>"
+    },
+    "source": "Tech Revolution",
+    "isActive": false,
+    "statMods": {
+      "hp": 0,
+      "sp": 1,
+      "eac": 1,
+      "kac": 1,
+      "fort": 0,
+      "ref": 0,
+      "strength": 0,
+      "speed": 0
+    },
+    "mpCost": 0,
+    "itemTemplates": [
+      {
+        "name": "Laser Rifle",
+        "type": "mechWeapon",
+        "img": "systems/sfrpg/icons/equipment/weapons/artillery-laser-azimuth.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>A standard laser weapon scaled up for mech combat.</p><p><strong>Critical:</strong> Burn 1d6</p>"
+          },
+          "source": "Tech Revolution",
+          "damage": {
+            "parts": [
+              {"formula": "", "types": {"fire": true}, "operator": ""}
+            ]
+          },
+          "weaponType": "ranged",
+          "slot": "frame",
+          "range": "250 ft.",
+          "area": "",
+          "capacity": 20,
+          "usage": 1,
+          "ppCost": 0,
+          "mpCost": 3.5,
+          "save": {"type": "", "dc": null, "descriptor": ""},
+          "special": "automatic, burn 1d6 critical"
+        }
+      },
+      {
+        "name": "Missile Battery",
+        "type": "mechWeapon",
+        "img": "systems/sfrpg/icons/equipment/weapons/imds_missile_launcher.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>A rack of guided missiles for engaging multiple targets.</p><p><strong>Special:</strong> Volley - Can fire multiple missiles at different targets.</p>"
+          },
+          "source": "Tech Revolution",
+          "damage": {
+            "parts": [
+              {"formula": "", "types": {"bludgeoning": true, "fire": true}, "operator": ""}
+            ]
+          },
+          "weaponType": "ranged",
+          "slot": "frame",
+          "range": "200 ft.",
+          "area": "",
+          "capacity": 12,
+          "usage": 1,
+          "ppCost": 0,
+          "mpCost": 2.5,
+          "save": {"type": "", "dc": null, "descriptor": ""},
+          "special": "volley"
+        }
+      },
+      {
+        "name": "Technosling",
+        "type": "mechWeapon",
+        "img": "systems/sfrpg/icons/equipment/weapons/gyrojet_rifle_tactical.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>An electromagnetic launcher that hurls massive projectiles at high velocity.</p><p><strong>Critical:</strong> Knockdown</p>"
+          },
+          "source": "Tech Revolution",
+          "damage": {
+            "parts": [
+              {"formula": "", "types": {"bludgeoning": true, "piercing": true}, "operator": ""}
+            ]
+          },
+          "weaponType": "ranged",
+          "slot": "upperLimb",
+          "range": "80 ft.",
+          "area": "",
+          "capacity": 10,
+          "usage": 1,
+          "ppCost": 0,
+          "mpCost": 2.5,
+          "save": {"type": "", "dc": null, "descriptor": ""},
+          "special": "knockdown critical"
+        }
+      },
+      {
+        "name": "Eternal Core, Mk 2 (Scrapper)",
+        "type": "mechPowerCore",
+        "img": "systems/sfrpg/icons/default/power-generator.svg",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>An advanced eternal power core for mechs. Eternal cores provide high capacity and strong initial power but slower regeneration. Scrapper configuration.</p>"
+          },
+          "mpCost": 0,
+          "ppInitial": 6,
+          "ppMax": 13,
+          "ppRegen": 1,
+          "source": "Tech Revolution"
+        }
+      },
+      {
+        "name": "Precision Arms",
+        "type": "mechUpperLimb",
+        "img": "systems/sfrpg/icons/mech-frame.png",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>A pair of finely calibrated arms with enhanced targeting systems for improved accuracy. (+1 ranged)</p>"
+          },
+          "source": "Tech Revolution",
+          "slots": 2,
+          "meleeAttack": 1,
+          "rangedAttack": 1,
+          "eac": 1,
+          "kac": 1,
+          "strength": 0,
+          "baseHp": 0,
+          "canBeActivated": false,
+          "ppCost": 0,
+          "mpCost": 1
+        }
+      },
+      {
+        "name": "Autotarget",
+        "type": "mechAuxiliary",
+        "img": "systems/sfrpg/icons/equipment/technological items/omnidirectional_camera.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>Energy rods and heat sinks boost attack accuracy.</p><p><strong>Accurate Strikes (1 PP):</strong> All operators are treated as having Piloting ranks equal to their levels for 1 round.</p>"
+          },
+          "source": "Tech Revolution",
+          "canBeActivated": true,
+          "isActive": false,
+          "ppCost": 1,
+          "mpCost": 1
+        }
+      },
+      {
+        "name": "Thrusters",
+        "type": "mechAuxiliary",
+        "img": "systems/sfrpg/icons/equipment/technological items/glider_foils.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>Powerful engines enable short-distance flight.</p><p><strong>Power Jump (2 PP):</strong> Gain a fly speed of 60 feet with average maneuverability. Maximum height is 30 feet. You must land or continue jumping each round or fall.</p>"
+          },
+          "source": "Tech Revolution",
+          "canBeActivated": true,
+          "isActive": false,
+          "ppCost": 2,
+          "mpCost": 1
+        }
+      },
+      {
+        "name": "Enhanced Shields",
+        "type": "mechUpgrade",
+        "img": "systems/sfrpg/icons/mech-frame.png",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>The mech's shield generators are enhanced with additional capacitors.</p><p><strong>Effect:</strong> Increase the mech's Shield Points by an amount equal to its tier.</p>"
+          },
+          "source": "Tech Revolution",
+          "mpCost": 3
+        }
+      }
+    ],
+    "createdItemIds": [],
+    "container": {
+      "isOpen": true,
+      "storage": [{
+        "acceptsType": ["mechWeapon", "mechPowerCore", "mechUpperLimb", "mechAuxiliary", "mechUpgrade"],
+        "affectsEncumbrance": false,
+        "amount": 0,
+        "subtype": "",
+        "type": "slot",
+        "weightProperty": ""
+      }]
+    }
+  }
+}

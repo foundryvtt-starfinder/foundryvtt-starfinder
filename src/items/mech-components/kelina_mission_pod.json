@@ -1,0 +1,222 @@
+{
+  "_id": "mechMsnPod02Kelna",
+  "name": "Kelina Mission Pod",
+  "type": "mechMissionPod",
+  "folder": "mechFldrMsnPods1",
+  "img": "systems/sfrpg/icons/mech-frame.png",
+  "system": {
+    "container": {
+      "isOpen": true,
+      "storage": [
+        {
+          "type": "slot",
+          "acceptsType": [
+            "mechWeapon",
+            "mechPowerCore",
+            "mechUpperLimb",
+            "mechAuxiliary",
+            "mechUpgrade"
+          ],
+          "affectsEncumbrance": false,
+          "amount": 0,
+          "subtype": "",
+          "weightProperty": ""
+        }
+      ]
+    },
+    "createdItemIds": [],
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>A mission pod configuration optimized for speed and defensive mobility with enhanced armor.</p>"
+    },
+    "isActive": false,
+    "itemTemplates": [
+      {
+        "name": "Rocket Launcher",
+        "type": "mechWeapon",
+        "img": "systems/sfrpg/icons/equipment/weapons/imds_missile_launcher.webp",
+        "system": {
+          "area": "explode (10 ft.)",
+          "capacity": 2,
+          "damage": {
+            "parts": [
+              {
+                "formula": "",
+                "operator": "",
+                "types": {
+                  "bludgeoning": true,
+                  "fire": true
+                }
+              }
+            ]
+          },
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>A heavy launcher that fires explosive rockets.</p><p><strong>Special:</strong> Siege Mode (3 PP) - Fire a devastating shot with increased damage and blast radius.</p>"
+          },
+          "mpCost": 4,
+          "ppCost": 3,
+          "range": "150 ft.",
+          "save": {
+            "type": "reflex",
+            "dc": null,
+            "descriptor": ""
+          },
+          "slot": "frame",
+          "source": "Tech Revolution",
+          "special": "explode (10 ft.), unwieldy, siege mode (3 PP)",
+          "usage": 1,
+          "weaponType": "ranged"
+        }
+      },
+      {
+        "name": "Eternal Core, Mk 2 (Aeon)",
+        "type": "mechPowerCore",
+        "img": "systems/sfrpg/icons/default/power-generator.svg",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>An advanced eternal power core for mechs. Eternal cores provide high capacity and strong initial power but slower regeneration. Aeon configuration.</p>"
+          },
+          "mpCost": 0,
+          "ppInitial": 6,
+          "ppMax": 13,
+          "ppRegen": 1,
+          "source": "Tech Revolution"
+        }
+      },
+      {
+        "name": "Tough Arms",
+        "type": "mechUpperLimb",
+        "img": "systems/sfrpg/icons/mech-frame.png",
+        "system": {
+          "baseHp": 1,
+          "canBeActivated": false,
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>A pair of heavily armored arms designed for durability and defense.</p>"
+          },
+          "eac": 2,
+          "kac": 2,
+          "meleeAttack": 0,
+          "mpCost": 1,
+          "ppCost": 0,
+          "rangedAttack": 0,
+          "slots": 2,
+          "source": "Tech Revolution",
+          "strength": 0
+        }
+      },
+      {
+        "name": "Thrusters",
+        "type": "mechAuxiliary",
+        "img": "systems/sfrpg/icons/equipment/technological items/glider_foils.webp",
+        "system": {
+          "canBeActivated": true,
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>Powerful engines enable short-distance flight.</p><p><strong>Power Jump (2 PP):</strong> Gain a fly speed of 60 feet with average maneuverability. Maximum height is 30 feet. You must land or continue jumping each round or fall.</p>"
+          },
+          "isActive": false,
+          "mpCost": 1,
+          "ppCost": 2,
+          "source": "Tech Revolution"
+        }
+      },
+      {
+        "name": "Weapon Core (Cold, Fire)",
+        "type": "mechAuxiliary",
+        "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
+        "system": {
+          "canBeActivated": true,
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>Energetic nodes connect to the mech's weapon mounts. Configured for cold and fire energy types.</p><p><strong>Energize Weapon (2 PP):</strong> Convert half of a weapon's damage to cold or fire for 1 turn.</p><p><strong>Boomerang Strike (2 PP):</strong> Grant the returning fusion to a thrown melee weapon for 1 minute.</p>"
+          },
+          "isActive": false,
+          "mpCost": 1,
+          "ppCost": 2,
+          "source": "Tech Revolution"
+        }
+      },
+      {
+        "name": "Fleet",
+        "type": "mechUpgrade",
+        "img": "systems/sfrpg/icons/mech-frame.png",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>The mech's movement systems are optimized for speed.</p><p><strong>Effect:</strong> Increase each of the mech's movement speeds by 10 feet.</p>"
+          },
+          "mpCost": 2,
+          "source": "Tech Revolution"
+        }
+      },
+      {
+        "name": "Rapid Reflexes",
+        "type": "mechUpgrade",
+        "img": "systems/sfrpg/icons/mech-frame.png",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>The mech's control systems are tuned for faster response times.</p><p><strong>Effect:</strong> The mech gains a +1 bonus to EAC and Reflex saving throws.</p>"
+          },
+          "mpCost": 2,
+          "source": "Tech Revolution"
+        }
+      },
+      {
+        "name": "Reinforced Frame",
+        "type": "mechUpgrade",
+        "img": "systems/sfrpg/icons/mech-frame.png",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>The mech's frame is reinforced with additional armor plating.</p><p><strong>Effect:</strong> Increase the mech's base HP by 5 and HP advancement by 1.</p>"
+          },
+          "mpCost": 1,
+          "source": "Tech Revolution"
+        }
+      }
+    ],
+    "mpCost": 0,
+    "source": "Tech Revolution",
+    "statMods": {
+      "eac": 3,
+      "fort": 0,
+      "hp": 11,
+      "kac": 2,
+      "ref": 1,
+      "sp": 0,
+      "speed": 10,
+      "strength": 0
+    }
+  }
+}

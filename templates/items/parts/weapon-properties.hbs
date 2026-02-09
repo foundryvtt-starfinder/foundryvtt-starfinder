@@ -1,0 +1,26 @@
+<div class="bubble">
+    <h3 class="bubble-header">
+        <label>
+            <a class="trait-selector"
+                data-tooltips="weaponPropertiesTooltips"
+                data-choices="weaponProperties"
+                data-format="itemProperties"
+                data-location="system.properties"
+                data-title="{{localize "SFRPG.Items.Weapon.Properties"}}">
+                {{ localize "SFRPG.Items.Weapon.Properties" }}&nbsp;&nbsp;<i class="fas fa-edit"></i>
+            </a>
+        </label>
+    </h3>
+
+    <div class="form-group stacked weapon-properties">
+        <ul class="traits-list">
+            {{#each itemData.properties as |property name|}}
+                {{#if property.value}}
+                    <li class="tag {{name}}" data-tooltip='<strong>{{sfrpg "weaponProperties" name}}</strong><br/>{{sfrpg "weaponPropertiesTooltips" name}}'>
+                        {{sfrpg "weaponProperties" name}}{{#if property.extension}}: {{property.extension}}{{/if}}
+                    </li>
+                {{/if}}
+            {{/each}}
+        </ul>
+    </div>
+</div>

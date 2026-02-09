@@ -1,0 +1,247 @@
+{
+  "_id": "mechMsnPod03Olheo",
+  "name": "Olheo Mission Pod",
+  "type": "mechMissionPod",
+  "img": "systems/sfrpg/icons/mech-frame.png",
+  "folder": "mechFldrMsnPods1",
+  "system": {
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>The olheo mission pod is designed to act as a command valko, responsive and able to change tactics in the field.</p>"
+    },
+    "source": "Tech Revolution",
+    "isActive": false,
+    "statMods": {
+      "hp": 0,
+      "sp": 0,
+      "eac": 3,
+      "kac": 2,
+      "fort": 0,
+      "ref": 1,
+      "strength": 0,
+      "speed": 10
+    },
+    "mpCost": 0,
+    "itemTemplates": [
+      {
+        "name": "Swordwhip",
+        "type": "mechWeapon",
+        "img": "systems/sfrpg/icons/equipment/weapons/curveblade.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>A segmented blade that can transform between sword and whip modes.</p><p><strong>Special:</strong> Whip Mode (1 PP) - Transform the weapon to gain reach for 1 round.</p>"
+          },
+          "source": "Tech Revolution",
+          "damage": {
+            "parts": [
+              {"formula": "", "types": {"slashing": true}, "operator": ""}
+            ]
+          },
+          "weaponType": "melee",
+          "slot": "upperLimb",
+          "range": "",
+          "area": "",
+          "capacity": null,
+          "usage": null,
+          "ppCost": 1,
+          "mpCost": 2.5,
+          "save": {"type": "", "dc": null, "descriptor": ""},
+          "special": "whip mode (1 PP)"
+        }
+      },
+      {
+        "name": "Flamethrower",
+        "type": "mechWeapon",
+        "img": "systems/sfrpg/icons/equipment/weapons/hellhound-class_flamethrower.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>A devastating weapon that projects streams of burning fuel.</p><p><strong>Critical:</strong> Burn 1d8</p>"
+          },
+          "source": "Tech Revolution",
+          "damage": {
+            "parts": [
+              {"formula": "", "types": {"fire": true}, "operator": ""}
+            ]
+          },
+          "weaponType": "ranged",
+          "slot": "upperLimb",
+          "range": "60 ft.",
+          "area": "blast or line",
+          "capacity": 5,
+          "usage": 1,
+          "ppCost": 0,
+          "mpCost": 4.5,
+          "save": {"type": "reflex", "dc": null, "descriptor": ""},
+          "special": "ignite, blast or line, burn 1d8 critical"
+        }
+      },
+      {
+        "name": "Missile Battery",
+        "type": "mechWeapon",
+        "img": "systems/sfrpg/icons/equipment/weapons/imds_missile_launcher.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>A rack of guided missiles for engaging multiple targets.</p><p><strong>Special:</strong> Volley - Can fire multiple missiles at different targets.</p>"
+          },
+          "source": "Tech Revolution",
+          "damage": {
+            "parts": [
+              {"formula": "", "types": {"bludgeoning": true, "fire": true}, "operator": ""}
+            ]
+          },
+          "weaponType": "ranged",
+          "slot": "frame",
+          "range": "200 ft.",
+          "area": "",
+          "capacity": 12,
+          "usage": 1,
+          "ppCost": 0,
+          "mpCost": 2.5,
+          "save": {"type": "", "dc": null, "descriptor": ""},
+          "special": "volley"
+        }
+      },
+      {
+        "name": "Eternal Core, Mk 2 (Aeon)",
+        "type": "mechPowerCore",
+        "img": "systems/sfrpg/icons/default/power-generator.svg",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>An advanced eternal power core for mechs. Eternal cores provide high capacity and strong initial power but slower regeneration. Aeon configuration.</p>"
+          },
+          "mpCost": 0,
+          "ppInitial": 6,
+          "ppMax": 13,
+          "ppRegen": 1,
+          "source": "Tech Revolution"
+        }
+      },
+      {
+        "name": "Precision Arms",
+        "type": "mechUpperLimb",
+        "img": "systems/sfrpg/icons/mech-frame.png",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>A pair of finely calibrated arms with enhanced targeting systems for improved accuracy.</p>"
+          },
+          "source": "Tech Revolution",
+          "slots": 2,
+          "meleeAttack": 1,
+          "rangedAttack": 1,
+          "eac": 1,
+          "kac": 1,
+          "strength": 0,
+          "baseHp": 0,
+          "canBeActivated": false,
+          "ppCost": 0,
+          "mpCost": 1
+        }
+      },
+      {
+        "name": "Haste Circuit",
+        "type": "mechAuxiliary",
+        "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>This system stabilizes maneuvers and enables bursts of speed.</p><p><strong>Speed Surge (2 PP):</strong> Gain an additional movement action. This ability can be used multiple times per turn.</p>"
+          },
+          "source": "Tech Revolution",
+          "canBeActivated": true,
+          "isActive": false,
+          "ppCost": 2,
+          "mpCost": 1
+        }
+      },
+      {
+        "name": "Thrusters",
+        "type": "mechAuxiliary",
+        "img": "systems/sfrpg/icons/equipment/technological items/glider_foils.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>Powerful engines enable short-distance flight.</p><p><strong>Power Jump (2 PP):</strong> Gain a fly speed of 60 feet with average maneuverability. Maximum height is 30 feet. You must land or continue jumping each round or fall.</p>"
+          },
+          "source": "Tech Revolution",
+          "canBeActivated": true,
+          "isActive": false,
+          "ppCost": 2,
+          "mpCost": 1
+        }
+      },
+      {
+        "name": "Fleet",
+        "type": "mechUpgrade",
+        "img": "systems/sfrpg/icons/mech-frame.png",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>The mech's movement systems are optimized for speed.</p><p><strong>Effect:</strong> Increase each of the mech's movement speeds by 10 feet.</p>"
+          },
+          "source": "Tech Revolution",
+          "mpCost": 2
+        }
+      },
+      {
+        "name": "Rapid Reflexes",
+        "type": "mechUpgrade",
+        "img": "systems/sfrpg/icons/mech-frame.png",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>The mech's control systems are tuned for faster response times.</p><p><strong>Effect:</strong> The mech gains a +1 bonus to EAC and Reflex saving throws.</p>"
+          },
+          "source": "Tech Revolution",
+          "mpCost": 2
+        }
+      }
+    ],
+    "createdItemIds": [],
+    "container": {
+      "isOpen": true,
+      "storage": [{
+        "acceptsType": ["mechWeapon", "mechPowerCore", "mechUpperLimb", "mechAuxiliary", "mechUpgrade"],
+        "affectsEncumbrance": false,
+        "amount": 0,
+        "subtype": "",
+        "type": "slot",
+        "weightProperty": ""
+      }]
+    }
+  }
+}

@@ -1,0 +1,533 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+    <header class="sheet-header flexrow">
+        <div class="image-container">
+            <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" height="140" width="140" />
+            <a class="hover-icon" data-action="show-image"><i class="fas fa-image fa-fw"></i></a>
+        </div>
+
+        <div class="header-details flexcol">
+            <div class="header-background flexrow" style="flex: 0 0 60px;">
+                <h1 class="charname">
+                    <input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize "SFRPG.MechSheet.Header.NamePlaceholder" }}" title="{{ localize "SFRPG.MechSheet.Header.NameTooltip" }}" />
+                </h1>
+
+                <div class="charlevel">
+                    <div class="level noxp">
+                        <label>{{ localize "SFRPG.MechSheet.Header.Tier" }}</label>
+                        <input name="system.details.tier" type="text" value="{{labels.tier}}" placeholder="{{ localize "SFRPG.MechSheet.Header.TierPlaceholder" }}" />
+                    </div>
+                </div>
+            </div>
+
+            <ul class="summary" style="flex: 0 0 80px;">
+                <li>
+                    {{#if labels.frame}}
+                    <span class="frame-name">{{labels.frame}}</span>
+                    {{else}}
+                    <span class="frame-name placeholder">{{ localize "SFRPG.MechSheet.Header.FramePlaceholder" }}</span>
+                    {{/if}}
+                </li>
+                <li>
+                    <input type="text" name="system.details.source" value="{{system.details.source}}" placeholder="{{localize "SFRPG.NPCSheet.Header.SourcePlaceHolderText"}}" />
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+        <a class="item" data-tab="components">{{ localize "SFRPG.MechSheet.Tabs.Components" }}</a>
+        {{#if hasLockerWeapons}}<a class="item" data-tab="weapons-locker">{{ localize "SFRPG.MechSheet.Tabs.WeaponsLocker" }}</a>{{/if}}
+        <a class="item" data-tab="operators">{{ localize "SFRPG.MechSheet.Tabs.Operators" }}</a>
+        <a class="item" data-tab="notes">{{ localize "SFRPG.Notes" }}</a>
+    </nav>
+
+    <section class="sheet-body">
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+            <div class="flexrow">
+                <ul class="attributes flexrow">
+                    <li data-tooltip="{{#each system.attributes.hp.tooltip as |tip|}}{{tip}}<br>{{/each}}" class="attribute health">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.MechSheet.Attributes.HPShort" }}</h4>
+                        <div class="attribute-value multiple">
+                            <input name="system.attributes.hp.value" type="text" value="{{system.attributes.hp.value}}" data-dtype="Number" placeholder="10" />
+                            <span class="sep"> / </span>
+                            <span class="calculated-value">{{system.attributes.hp.max}}</span>
+                        </div>
+                        <footer class="attribute-footer">
+                            <div class="flexrow">
+                                <span>{{ localize "SFRPG.MechSheet.Attributes.Hardness" }}</span>
+                                <span class="calculated-value">{{system.attributes.hardness}}</span>
+                            </div>
+                        </footer>
+                    </li>
+                    <li data-tooltip="{{#each system.attributes.sp.tooltip as |tip|}}{{tip}}<br>{{/each}}" class="attribute health">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.MechSheet.Attributes.SPShort" }}</h4>
+                        <div class="attribute-value multiple">
+                            <input name="system.attributes.sp.value" type="text" value="{{system.attributes.sp.value}}" data-dtype="Number" placeholder="0" />
+                            <span class="sep"> / </span>
+                            <span class="calculated-value">{{system.attributes.sp.max}}</span>
+                        </div>
+                    </li>
+                    <li class="attribute" data-tooltip="{{#each system.attributes.eac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.EnergyArmorClass" }}</h4>
+                        <div class="attribute-value">
+                            <span class="calculated-value">{{system.attributes.eac.value}}</span>
+                        </div>
+                    </li>
+                    <li class="attribute" data-tooltip="{{#each system.attributes.kac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.KineticArmorClass" }}</h4>
+                        <div class="attribute-value">
+                            <span class="calculated-value">{{system.attributes.kac.value}}</span>
+                        </div>
+                    </li>
+                    <li class="attribute" data-tooltip="{{#each system.attributes.fort.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.FortitudeSave" }}</h4>
+                        <div class="attribute-value">
+                            <span class="calculated-value">+{{system.attributes.fort.value}}</span>
+                        </div>
+                    </li>
+                    <li class="attribute" data-tooltip="{{#each system.attributes.ref.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.ReflexSave" }}</h4>
+                        <div class="attribute-value">
+                            <span class="calculated-value">+{{system.attributes.ref.value}}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="flexcol">
+                <h3 class="form-header noborder">{{ localize "SFRPG.MechSheet.Attributes.PowerPointsTitle" }}</h3>
+                <div class="flexrow">
+                    <div class="flexcol">
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.PPCurrent" }}</label>
+                            <div class="form-fields pp-controls">
+                                <a class="pp-control pp-decrease" data-action="decrease" data-tooltip="Decrease PP"><i class="fas fa-minus"></i></a>
+                                <input type="text" name="system.attributes.pp.value" value="{{system.attributes.pp.value}}" data-dtype="Number" />
+                                <a class="pp-control pp-increase" data-action="increase" data-tooltip="Increase PP"><i class="fas fa-plus"></i></a>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.PPMax" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{system.attributes.pp.max}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.PPInitial" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{system.attributes.pp.initial}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.PPRegen" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{system.attributes.pp.regen}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flexcol">
+                <h3 class="form-header noborder">{{ localize "SFRPG.MechSheet.Attributes.SpeedTitle" }}</h3>
+                <div class="flexrow">
+                    <div class="flexcol">
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.Speed.Land" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{system.attributes.speed.land}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.Speed.Fly" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{system.attributes.speed.fly}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.Speed.Swim" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{system.attributes.speed.swim}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.Speed.Burrow" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{system.attributes.speed.burrow}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flexcol">
+                <h3 class="form-header noborder">{{ localize "SFRPG.MechSheet.Attributes.CombatTitle" }}</h3>
+                <div class="flexrow">
+                    <div class="flexcol">
+                        <div class="form-group" data-tooltip="{{#each system.attributes.strength.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.EffectiveStrength" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">+{{system.attributes.strength.value}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group" data-tooltip="{{#each system.attributes.attackBonus.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.AttackBonus" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">+{{system.attributes.attackBonus.value}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.Reach" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{system.attributes.reach}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.Senses" }}</label>
+                            <div class="form-fields">
+                                <input type="text" name="system.attributes.senses" value="{{system.attributes.senses}}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flexcol">
+                <h3 class="form-header noborder">{{ localize "SFRPG.MechSheet.Attributes.OtherTitle" }}</h3>
+                <div class="flexrow">
+                    <div class="flexcol">
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.Size" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{localize (lookup (sfrpg "mechSizes") system.attributes.size)}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.Operators" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{system.attributes.operators.min}} - {{system.attributes.operators.max}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.MechPoints" }}</label>
+                            <div class="form-fields">
+                                <input type="text" name="system.currency.mp" value="{{system.currency.mp}}" data-dtype="Number" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flexcol">
+                <h3 class="form-header noborder">{{ localize "SFRPG.MechSheet.Attributes.SlotsTitle" }}</h3>
+                <div class="flexrow">
+                    <div class="flexcol">
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.Slots.Frame" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{system.attributes.slots.frame}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.Slots.UpperLimb" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{system.attributes.slots.upperLimb}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.Slots.LowerLimb" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{system.attributes.slots.lowerLimb}}</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Attributes.Slots.Auxiliary" }}</label>
+                            <div class="form-fields">
+                                <span class="calculated-value">{{system.attributes.slots.auxiliary}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flexcol">
+                <h3 class="form-header noborder">{{ localize "SFRPG.MechSheet.Systems.Title" }}</h3>
+                <div class="flexrow">
+                    <div class="flexcol">
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Systems.UpperLimbs" }}</label>
+                            <div class="form-fields">
+                                <select name="system.attributes.systems.upperLimbs.value">
+                                    {{selectOptions (sfrpg "mechSystemStatus") selected=system.attributes.systems.upperLimbs.value localize=true}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Systems.LowerLimbs" }}</label>
+                            <div class="form-fields">
+                                <select name="system.attributes.systems.lowerLimbs.value">
+                                    {{selectOptions (sfrpg "mechSystemStatus") selected=system.attributes.systems.lowerLimbs.value localize=true}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Systems.Frame" }}</label>
+                            <div class="form-fields">
+                                <select name="system.attributes.systems.frame.value">
+                                    {{selectOptions (sfrpg "mechSystemStatus") selected=system.attributes.systems.frame.value localize=true}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Systems.PowerCore" }}</label>
+                            <div class="form-fields">
+                                <select name="system.attributes.systems.powerCore.value">
+                                    {{selectOptions (sfrpg "mechSystemStatus") selected=system.attributes.systems.powerCore.value localize=true}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Systems.AuxSystem" }}</label>
+                            <div class="form-fields">
+                                <select name="system.attributes.systems.auxSystem.value">
+                                    {{selectOptions (sfrpg "mechSystemStatus") selected=system.attributes.systems.auxSystem.value localize=true}}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Components Tab --}}
+        <div class="tab features flexcol" data-group="primary" data-tab="components">
+            {{!-- Frame section --}}
+            {{#each featuresTop as |section sid|}}
+            <ol class="inventory-list">
+                <li class="inventory-header flexrow">
+                    <h3 class="item-name noborder flexrow">{{section.category}}</h3>
+                    {{#if ../isOwner}}
+                    {{#if section.allowAdd}}
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                        <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
+                        </a>
+                    </div>
+                    {{/if}}
+                    {{/if}}
+                </li>
+
+                <ol class="item-list">
+                    {{#each section.items as |item iid|}}
+                    {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=item children=item.contents }}
+                    {{/each}}
+                </ol>
+
+                {{!-- Weapons mounted to this component --}}
+                {{#if section.weaponSlots}}
+                <li class="inventory-header flexrow weapons-subheader">
+                    <h4 class="item-name noborder">
+                        {{ localize "SFRPG.MechSheet.WeaponsLocker.MountedWeapons" }}
+                        ({{section.weaponSlots.used}}/{{section.weaponSlots.max}})
+                    </h4>
+                    {{#if ../isOwner}}
+                    {{#if section.allowAddWeapon}}
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" data-type="mechWeapon" data-slot="{{section.slotType}}">
+                        <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
+                        </a>
+                    </div>
+                    {{/if}}
+                    {{/if}}
+                </li>
+                <ol class="item-list weapons-list">
+                    {{#each section.weapons as |weapon wid|}}
+                    {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=weapon children=weapon.contents }}
+                    {{/each}}
+                </ol>
+                {{/if}}
+            </ol>
+            {{/each}}
+
+            {{!-- Mission Pods Section --}}
+            <ol class="inventory-list mission-pods-section">
+                <li class="inventory-header flexrow">
+                    <h3 class="item-name noborder flexrow">{{missionPods.label}}</h3>
+                    {{#if isOwner}}
+                    {{#if missionPods.allowAdd}}
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" data-type="mechMissionPod">
+                        <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
+                        </a>
+                    </div>
+                    {{/if}}
+                    {{/if}}
+                </li>
+
+                <ol class="item-list">
+                    {{#each missionPods.items as |pod pid|}}
+                    <li class="item flexrow {{#if pod.system.isActive}}active-pod{{/if}}" data-item-id="{{pod._id}}">
+                        <div class="item-image" style="background-image: url('{{pod.img}}')"></div>
+                        <div class="item-name flexrow">
+                            <h4>{{pod.name}}</h4>
+                            {{#if pod.system.isActive}}
+                            <span class="pod-status active">{{ localize "SFRPG.MechSheet.MissionPod.IsActive" }}</span>
+                            {{/if}}
+                        </div>
+                        <div class="item-modifiers">
+                            {{#if pod.system.statMods.hp}}<span>HP +{{pod.system.statMods.hp}}</span>{{/if}}
+                            {{#if pod.system.statMods.eac}}<span>EAC +{{pod.system.statMods.eac}}</span>{{/if}}
+                            {{#if pod.system.statMods.kac}}<span>KAC +{{pod.system.statMods.kac}}</span>{{/if}}
+                        </div>
+                        {{#if ../isOwner}}
+                        <div class="item-controls">
+                            {{#if pod.system.isActive}}
+                            <a class="item-control pod-deactivate" title="{{localize "SFRPG.MechSheet.MissionPod.Deactivate"}}"><i class="fas fa-power-off"></i></a>
+                            {{else}}
+                            <a class="item-control pod-activate" title="{{localize "SFRPG.MechSheet.MissionPod.Activate"}}"><i class="fas fa-play"></i></a>
+                            {{/if}}
+                            <a class="item-control item-edit" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Edit"}}"><i class="fas fa-edit"></i></a>
+                            <a class="item-control item-delete" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Delete"}}"><i class="fas fa-trash"></i></a>
+                        </div>
+                        {{/if}}
+                    </li>
+                    {{/each}}
+                </ol>
+            </ol>
+
+            {{!-- Remaining component sections --}}
+            {{#each featuresBottom as |section sid|}}
+            <ol class="inventory-list">
+                <li class="inventory-header flexrow">
+                    <h3 class="item-name noborder flexrow">{{section.category}}</h3>
+                    {{#if ../isOwner}}
+                    {{#if section.allowAdd}}
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" {{#each section.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>
+                        <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
+                        </a>
+                    </div>
+                    {{/if}}
+                    {{/if}}
+                </li>
+
+                <ol class="item-list">
+                    {{#each section.items as |item iid|}}
+                    {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=item children=item.contents }}
+                    {{/each}}
+                </ol>
+
+                {{!-- Weapons mounted to this component --}}
+                {{#if section.weaponSlots}}
+                <li class="inventory-header flexrow weapons-subheader">
+                    <h4 class="item-name noborder">
+                        {{ localize "SFRPG.MechSheet.WeaponsLocker.MountedWeapons" }}
+                        ({{section.weaponSlots.used}}/{{section.weaponSlots.max}})
+                    </h4>
+                    {{#if ../isOwner}}
+                    {{#if section.allowAddWeapon}}
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" data-type="mechWeapon" data-slot="{{section.slotType}}">
+                        <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
+                        </a>
+                    </div>
+                    {{/if}}
+                    {{/if}}
+                </li>
+                <ol class="item-list weapons-list">
+                    {{#each section.weapons as |weapon wid|}}
+                    {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=weapon children=weapon.contents }}
+                    {{/each}}
+                </ol>
+                {{/if}}
+            </ol>
+            {{/each}}
+        </div>
+
+        {{!-- Weapons Locker Tab --}}
+        {{#if hasLockerWeapons}}
+        <div class="tab attacks" data-group="primary" data-tab="weapons-locker">
+            <div class="weapons-locker-info">
+                <p><i class="fas fa-info-circle"></i> {{ localize "SFRPG.MechSheet.WeaponsLocker.Description" }}</p>
+            </div>
+            <ol class="inventory-list">
+                <li class="inventory-header flexrow">
+                    <h3 class="item-name noborder flexrow">{{weaponsLocker.label}}</h3>
+                    {{#if isOwner}}
+                    <div class="item-controls">
+                        <a class="item-control item-create" title="{{localize "SFRPG.ActorSheet.Inventory.Item.Create"}}" data-type="mechWeapon" data-slot="locker">
+                        <i class="fas fa-plus"></i> {{localize "SFRPG.InventoryAdd"}}
+                        </a>
+                    </div>
+                    {{/if}}
+                </li>
+
+                <ol class="item-list">
+                    {{#each weaponsLocker.weapons as |weapon wid|}}
+                    {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../this bigItem=true item=weapon children=weapon.contents }}
+                    {{/each}}
+                </ol>
+            </ol>
+        </div>
+        {{/if}}
+
+        {{!-- Operators Tab --}}
+        <div class="tab attacks" data-group="primary" data-tab="operators">
+            <div class="crew-settings flexrow">
+                <ol class="settings flexrow">
+                    <h4 class="attribute-name box-title">
+                        {{localize "SFRPG.MechSheet.Crew.Header"}}
+                        <i class="fas fa-users"></i>
+                    </h4>
+                    {{#if isGM}}
+                    <label class="checkbox">
+                        <label><b>{{localize "SFRPG.MechSheet.Crew.OperatorsSetting"}}</b></label>
+                        <input type="checkbox" name="system.crew.useNPCCrew" {{checked system.crew.useNPCCrew}}/>{{localize "SFRPG.MechSheet.Crew.IsNPCOperators"}}
+                    </label>
+                    {{/if}}
+                </ol>
+            </div>
+
+            {{#unless system.crew.useNPCCrew}}
+            <ol class="crew-list">
+                {{#each crew as |role|}}
+                <li class="flexrow crew-header {{role.cssClass}}" {{#each role.dataset as |v k|}}data-{{k}}="{{v}}"{{/each}}>{{role.label}}</li>
+                <ol class="crew-item-list">
+                    {{#each role.actors as |actor a|}}
+                    <li class="crew flexrow draggable" data-actor-id="{{actor.id}}">
+                        <div class="crew-name flexrow">
+                            <div class="crew-image" style="background-image: url({{actor.img}})"></div>
+                            <a class="crew-view"><h4>{{actor.name}}</h4></a>
+                        </div>
+
+                        <div class="crew-controls">
+                            <a class="crew-control crew-delete" title="Remove Crew Member"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </li>
+                    {{/each}}
+                </ol>
+                {{/each}}
+            </ol>
+            {{else}}
+            <ol class="crew-list">
+                <p class="notification info">{{ localize "SFRPG.MechSheet.Crew.NPCOperatorsHint" }}</p>
+            </ol>
+            {{/unless}}
+        </div>
+
+        {{!-- Notes Tab --}}
+        <div class="tab biography flexcol" data-group="primary" data-tab="notes">
+            {{editor
+                enrichedDescription
+                target="system.details.notes"
+                button=true
+                editable=editable
+                engine="prosemirror"
+                collaborate="true"
+            }}
+        </div>
+    </section>
+</form>

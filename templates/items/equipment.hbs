@@ -1,0 +1,217 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    {{> "systems/sfrpg/templates/items/parts/item-header.hbs"}}
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+        <a class="item" data-tab="modifiers">{{ localize "SFRPG.Modifiers" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-description.hbs"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            {{!-- Details Tab Navigation --}}
+            <nav class="sheet-subnavigation subtabs" data-group="subdetails">
+                <a class="item active" data-tab="properties">{{ localize "SFRPG.ItemSheet.Details.Tab.Properties" }}</a>
+                <a class="item" data-tab="usage">{{ localize "SFRPG.ItemSheet.Details.Tab.UsageAction" }}</a>
+                <a class="item" data-tab="container">{{ localize "SFRPG.ItemSheet.Details.Tab.ContainerDetails" }}</a>
+            </nav>
+
+            {{!-- Details Section --}}
+            <section class="sheet-details">
+
+                {{!-- Properties Tab --}}
+                <div class="tab properties" data-group="subdetails" data-tab="properties">
+
+                    {{!-- Armor Details --}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{ localize "SFRPG.ItemSheet.Details.Section.ArmorDetails" }}</h3>
+
+                        <div class="bubble-info">
+
+                            {{!-- Armor Type --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Equipment.Category" }}</label>
+                                <select name="system.armor.type">
+                                    {{selectOptions (sfrpg "armorTypes") selected=itemData.armor.type}}
+                                </select>
+                            </div>
+
+                            {{!-- Armor Class --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Equipment.EAC" }}</label>
+                                <div class="form-fields">
+                                <input type="text" name="system.armor.eac" value="{{itemData.armor.eac}}" data-dtype="Number"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Equipment.KAC" }}</label>
+                                <div class="form-fields">
+                                <input type="text" name="system.armor.kac" value="{{itemData.armor.kac}}" data-dtype="Number"/>
+                                </div>
+                            </div>
+
+                            {{!-- Dexterity Modifier --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.MaxDex" }}</label>
+                                <div class="form-fields">
+                                <input type="text" name="system.armor.dex" value="{{itemData.armor.dex}}" data-dtype="Number" placeholder="{{ localize "SFRPG.Items.Unlimited" }}"/>
+                                </div>
+                            </div>
+
+                            {{!-- Armor Check Penalty --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.ACP" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.armor.acp" value="{{itemData.armor.acp}}" data-dtype="Number" placeholder="0" />
+                                </div>
+                            </div>
+
+                            {{!-- Speed Adjustment --}}
+                            {{#unless isPowerArmor}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Items.Equipment.SpeedAdjustment" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.armor.speedAdjust" value="{{itemData.armor.speedAdjust}}" data-dtype="Number" placeholder="0" />
+                                    <span>{{ localize "SFRPG.Units.Speed" }}</span>
+                                </div>
+                            </div>
+                            {{/unless}}
+
+                            {{!-- Equipment Status --}}
+                            {{> "systems/sfrpg/templates/items/parts/item-status.hbs"}}
+
+                        </div>
+                    </div>
+
+                    {{!-- Power Armor Specific --}}
+                    {{#if isPowerArmor}}
+                    <div class="bubble">
+                        <h3 class="bubble-header">{{ localize "SFRPG.Items.Equipment.PowerArmorDetails" }}</h3>
+
+                        <div class="bubble-info">
+                            {{!-- Required Strength --}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.AbilityStr" }}</label>
+                                <div class="form-fields">
+                                <input type="text" name="system.strength" value="{{itemData.strength}}" data-dtype="Number" placeholder="{{ localize "SFRPG.None" }}"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Size" }}</label>
+                                <div class="form-fields">
+                                    <select name="system.size">
+                                        {{selectOptions (sfrpg "actorSizes") selected=itemData.size}}
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.Reach" }}</label>
+                                <div class="form-fields">
+                                    <input type="text" name="system.reach" value="{{itemData.reach}}" placeholder="5 {{ localize "SFRPG.Units.Speed" }}" />
+                                </div>
+                            </div>
+
+                        <div class="bubble">
+                            <h3 class="bubble-header">{{ localize "SFRPG.Items.Equipment.PowerArmorSpeeds" }}</h3>
+
+                            <div class="bubble-info">
+
+                                <div class="form-group">
+                                    <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Land" }}</label>
+                                    <div class="form-fields">
+                                        <input type="text" name="system.speed.land.base" value="{{itemData.speed.land.base}}" data-dtype="Number"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Burrowing" }}</label>
+                                    <div class="form-fields">
+                                        <input type="text" name="system.speed.burrowing.base" value="{{itemData.speed.burrowing.base}}" data-dtype="Number"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Climbing" }}</label>
+                                    <div class="form-fields">
+                                        <input type="text" name="system.speed.climbing.base" value="{{itemData.speed.climbing.base}}" data-dtype="Number"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Flying" }}</label>
+                                    <div class="form-fields">
+                                        <input name="system.speed.flying.base" type="text" value="{{itemData.speed.flying.base}}" data-dtype="Number"/>
+                                        <select name="system.speed.flying.baseManeuverability">
+                                            {{selectOptions (sfrpg "flightManeuverability") selected=itemData.speed.flying.baseManeuverability}}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Swimming" }}</label>
+                                    <div class="form-fields">
+                                        <input type="text" name="system.speed.swimming.base" value="{{itemData.speed.swimming.base}}" data-dtype="Number"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>{{ localize "SFRPG.ActorSheet.Attributes.Speed.Types.Special" }}</label>
+                                    <div class="form-fields">
+                                        <input type="text" name="system.speed.special" value="{{itemData.speed.special}}" data-dtype="String" placeholder="{{ localize 'SFRPG.SpeedSpecial' }}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{!-- Armor Capacity --}}
+                        {{> "systems/sfrpg/templates/items/parts/item-capacity.hbs"}}
+
+                        </div>
+                    </div>
+
+                    {{/if}}
+
+                    {{!-- Physical Properties --}}
+                    {{> "systems/sfrpg/templates/items/parts/physical-item-details.hbs" includeMaterials=true}}
+
+                </div>
+
+                {{!-- Usage and Action Tab --}}
+                <div class="tab usage" data-group="subdetails" data-tab="usage">
+
+                    {{!-- Item Activation Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-activation.hbs" message="SFRPG.Items.EquipmentUsage"}}
+
+                    {{!-- Item Action Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/item-action.hbs" message="SFRPG.Items.Equipment.Action"}}
+
+                </div>
+
+                {{!-- Container Tab --}}
+                <div class="tab container" data-group="subdetails" data-tab="container">
+
+                    {{!-- Container Template --}}
+                    {{> "systems/sfrpg/templates/items/parts/container-details.hbs" message="SFRPG.Items.Equipment.ContainerTooltip"}}
+
+                </div>
+            </section>
+        </div>
+
+        {{!-- Modifiers Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-modifiers.hbs"}}
+
+    </section>
+</form>

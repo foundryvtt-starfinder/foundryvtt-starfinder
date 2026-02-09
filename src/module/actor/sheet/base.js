@@ -181,6 +181,9 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const currency = expandedData.system.currency;
         if (currency) {
             for (const [name, input] of Object.entries(currency)) {
+                // Skip non-string inputs (e.g., numbers from calculated fields)
+                if (typeof input !== 'string') continue;
+
                 const oldValue = this.actor?.system?.currency[name];
                 let newValue = oldValue;
                 const isDelta = input.startsWith("+") || input.startsWith("-");
@@ -454,6 +457,19 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             const itemData = item.system;
             const actor = item.actor;
             const actorData = actor.system;
+
+            // Mech weapons: base attack (tier + limbs) shown on sheet;
+            // operator's BAB/Piloting is added at roll time
+            if (item.type === "mechWeapon") {
+                const isMelee = itemData.weaponType === "melee";
+                const baseAttack = isMelee
+                    ? actorData.attributes?.meleeAttackBonus || 0
+                    : actorData.attributes?.rangedAttackBonus || 0;
+                const sign = baseAttack >= 0 ? "+" : "";
+                item.config.attackString = `${sign}${baseAttack} + ${game.i18n.localize("SFRPG.MechSheet.OperatorBonus")}`;
+                return;
+            }
+
             const isWeapon = ["weapon", "shield"].includes(item.type);
 
             // TODO: This chunk is the same code as in item.js's rollAttack(), probably good practice to combine these into one method somewhere
@@ -527,9 +543,31 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
      */
     _prepareDamageString(item) {
         try {
-            const isWeapon = ["weapon", "shield"].includes(item.type);
             const formula = item.system.damage.parts[0].formula;
             if (!formula) throw ("No damage formula, deferring to default string");
+
+            // Mech weapons add tier-based damage modifier
+            if (item.type === "mechWeapon") {
+                const isMelee = item.system.weaponType === "melee";
+                const damageModKey = isMelee ? "melee" : "ranged";
+                const damageModValue = item.actor.system.attributes?.damageModifier?.[damageModKey] || 0;
+
+                const preparedFormula = damageModValue ? `${formula} + ${damageModValue}` : formula;
+                const rollData = RollContext.createItemRollContext(item, item.actor).getRollData();
+                const roll = Roll.create(preparedFormula, rollData).simplifiedFormula;
+                if (!roll) throw ("Invalid roll, deferring to default string.");
+
+                const damageTypes = Object.entries(item.system.damage.parts[0].types)
+                    .map(([type, enabled]) => {
+                        if (enabled) return SFRPG.damageTypeToAcronym[type];
+                    })
+                    .filterJoin(" & ");
+
+                item.config.damageString = `${roll} ${damageTypes}`;
+                return;
+            }
+
+            const isWeapon = ["weapon", "shield"].includes(item.type);
 
             let appropriateMods = item.getAppropriateDamageModifiers(isWeapon);
             // Remove situational modifiers

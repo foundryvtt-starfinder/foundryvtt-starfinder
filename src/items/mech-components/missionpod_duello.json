@@ -1,0 +1,247 @@
+{
+  "_id": "mechMsnPod01Duelo",
+  "name": "Duello Mission Pod",
+  "type": "mechMissionPod",
+  "img": "systems/sfrpg/icons/mech-frame.png",
+  "folder": "mechFldrMsnPods1",
+  "system": {
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>A mission pod configuration designed for enhanced combat durability and close-quarters engagement.</p>"
+    },
+    "source": "Tech Revolution",
+    "isActive": false,
+    "statMods": {
+      "hp": 8,
+      "sp": 0,
+      "eac": 1,
+      "kac": 3,
+      "fort": 1,
+      "ref": 0,
+      "strength": 1,
+      "speed": 0
+    },
+    "mpCost": 0,
+    "itemTemplates": [
+      {
+        "name": "Adamantine Claws",
+        "type": "mechWeapon",
+        "img": "systems/sfrpg/icons/equipment/weapons/fangblade.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>Massive adamantine claws mounted on the mech's lower limbs for devastating melee attacks.</p><p><strong>Critical:</strong> Bleed 1d6</p>"
+          },
+          "source": "Tech Revolution",
+          "damage": {
+            "parts": [
+              {"formula": "", "types": {"slashing": true}, "operator": ""}
+            ]
+          },
+          "weaponType": "melee",
+          "slot": "lowerLimb",
+          "range": "",
+          "area": "",
+          "capacity": null,
+          "usage": null,
+          "ppCost": 0,
+          "mpCost": 3,
+          "save": {"type": "", "dc": null, "descriptor": ""},
+          "special": "penetrating, bleed 1d6 critical"
+        }
+      },
+      {
+        "name": "Spiked Shield",
+        "type": "mechWeapon",
+        "img": "systems/sfrpg/icons/equipment/armor/tactical-shield.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>A massive shield with integrated spikes for offensive and defensive combat.</p><p><strong>Critical:</strong> Bleed 1d6</p>"
+          },
+          "source": "Tech Revolution",
+          "damage": {
+            "parts": [
+              {"formula": "", "types": {"bludgeoning": true, "piercing": true}, "operator": ""}
+            ]
+          },
+          "weaponType": "melee",
+          "slot": "upperLimb",
+          "range": "",
+          "area": "",
+          "capacity": null,
+          "usage": null,
+          "ppCost": 0,
+          "mpCost": 2.5,
+          "save": {"type": "", "dc": null, "descriptor": ""},
+          "special": "analog, block, deflect, bleed 1d6 critical"
+        }
+      },
+      {
+        "name": "Sonic Shotgun",
+        "type": "mechWeapon",
+        "img": "systems/sfrpg/icons/equipment/weapons/sonic-pistol-thunderstrike.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>A devastating close-range weapon that fires concentrated sonic blasts.</p><p><strong>Critical:</strong> Knockdown</p>"
+          },
+          "source": "Tech Revolution",
+          "damage": {
+            "parts": [
+              {"formula": "", "types": {"sonic": true}, "operator": ""}
+            ]
+          },
+          "weaponType": "ranged",
+          "slot": "frame",
+          "range": "80 ft.",
+          "area": "blast",
+          "capacity": 5,
+          "usage": 1,
+          "ppCost": 0,
+          "mpCost": 4,
+          "save": {"type": "", "dc": null, "descriptor": ""},
+          "special": "blast, penetrating, knockdown critical"
+        }
+      },
+      {
+        "name": "Eternal Core, Mk 2 (Scrapper)",
+        "type": "mechPowerCore",
+        "img": "systems/sfrpg/icons/default/power-generator.svg",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>An advanced eternal power core for mechs. Eternal cores provide high capacity and strong initial power but slower regeneration. Scrapper configuration.</p>"
+          },
+          "mpCost": 0,
+          "ppInitial": 6,
+          "ppMax": 13,
+          "ppRegen": 1,
+          "source": "Tech Revolution"
+        }
+      },
+      {
+        "name": "Powerful Arms",
+        "type": "mechUpperLimb",
+        "img": "systems/sfrpg/icons/mech-frame.png",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>A pair of reinforced arms with enhanced hydraulics designed for powerful melee strikes. (+1 melee)</p>"
+          },
+          "source": "Tech Revolution",
+          "slots": 2,
+          "meleeAttack": 1,
+          "rangedAttack": 0,
+          "eac": 1,
+          "kac": 2,
+          "strength": 1,
+          "baseHp": 0,
+          "canBeActivated": false,
+          "ppCost": 0,
+          "mpCost": 1
+        }
+      },
+      {
+        "name": "Plasma-Shock Circuits",
+        "type": "mechAuxiliary",
+        "img": "systems/sfrpg/icons/equipment/technological%20items/emergency_defense_sphere.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>This system transforms dissipating shield energy into offensive power.</p><p><strong>Energized Retort (2 PP):</strong> When you take damage that reduces your Shield Points, add half the lost SP as additional damage to your next weapon attack.</p>"
+          },
+          "source": "Tech Revolution",
+          "canBeActivated": true,
+          "isActive": false,
+          "ppCost": 2,
+          "mpCost": 1
+        }
+      },
+      {
+        "name": "Thrusters",
+        "type": "mechAuxiliary",
+        "img": "systems/sfrpg/icons/equipment/technological items/glider_foils.webp",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>Powerful engines enable short-distance flight.</p><p><strong>Power Jump (2 PP):</strong> Gain a fly speed of 60 feet with average maneuverability. Maximum height is 30 feet. You must land or continue jumping each round or fall.</p>"
+          },
+          "source": "Tech Revolution",
+          "canBeActivated": true,
+          "isActive": false,
+          "ppCost": 2,
+          "mpCost": 1
+        }
+      },
+      {
+        "name": "Reinforced Frame",
+        "type": "mechUpgrade",
+        "img": "systems/sfrpg/icons/mech-frame.png",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>The mech's frame is reinforced with additional armor plating.</p><p><strong>Effect:</strong> Increase the mech's base HP by 5 and HP advancement by 1.</p>"
+          },
+          "source": "Tech Revolution",
+          "mpCost": 1
+        }
+      },
+      {
+        "name": "Unbreakable Armor",
+        "type": "mechUpgrade",
+        "img": "systems/sfrpg/icons/mech-frame.png",
+        "system": {
+          "description": {
+            "chat": "",
+            "gmnotes": "",
+            "short": "",
+            "unidentified": "",
+            "value": "<p>The mech's armor is reinforced with ultra-dense materials.</p><p><strong>Effect:</strong> The mech gains a +1 bonus to KAC and Fortitude saving throws.</p>"
+          },
+          "source": "Tech Revolution",
+          "mpCost": 2
+        }
+      }
+    ],
+    "createdItemIds": [],
+    "container": {
+      "isOpen": true,
+      "storage": [{
+        "acceptsType": ["mechWeapon", "mechPowerCore", "mechUpperLimb", "mechAuxiliary", "mechUpgrade"],
+        "affectsEncumbrance": false,
+        "amount": 0,
+        "subtype": "",
+        "type": "slot",
+        "weightProperty": ""
+      }]
+    }
+  }
+}

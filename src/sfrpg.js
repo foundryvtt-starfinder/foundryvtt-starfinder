@@ -20,6 +20,7 @@ import { ActorSheetSFRPGHazard } from "./module/actor/sheet/hazard.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
 import { ActorSheetSFRPGVehicle } from "./module/actor/sheet/vehicle.js";
+import { ActorSheetSFRPGMech } from "./module/actor/sheet/mech.js";
 import { ActorSheetFlags } from './module/apps/actor-flags.js';
 import { ChoiceDialog } from './module/apps/choice-dialog.js';
 import { DroneRepairDialog } from './module/apps/drone-repair-dialog.js';
@@ -226,6 +227,7 @@ Hooks.once('init', async function() {
         character: models.SFRPGActorCharacter,
         drone: models.SFRPGActorDrone,
         hazard: models.SFRPGActorHazard,
+        mech: models.SFRPGActorMech,
         npc2: models.SFRPGActorNPC,
         starship: models.SFRPGActorStarship,
         vehicle: models.SFRPGActorVehicle
@@ -276,6 +278,14 @@ Hooks.once('init', async function() {
         upgrade: models.SFRPGItemUpgrade,
         vehicleAttack: models.SFRPGItemVehicleAttack,
         vehicleSystem: models.SFRPGItemVehicleSystem,
+        mechFrame: models.SFRPGItemMechFrame,
+        mechWeapon: models.SFRPGItemMechWeapon,
+        mechAuxiliary: models.SFRPGItemMechAuxiliary,
+        mechUpgrade: models.SFRPGItemMechUpgrade,
+        mechPowerCore: models.SFRPGItemMechPowerCore,
+        mechLowerLimb: models.SFRPGItemMechLowerLimb,
+        mechUpperLimb: models.SFRPGItemMechUpperLimb,
+        mechMissionPod: models.SFRPGItemMechMissionPod,
         weapon: models.SFRPGItemWeapon,
         weaponAccessory: models.SFRPGItemWeaponAccessory
     };
@@ -387,6 +397,7 @@ Hooks.once('init', async function() {
     Actors.registerSheet("sfrpg", ActorSheetSFRPGNPC,       { types: ["npc", "npc2"],   makeDefault: true });
     Actors.registerSheet("sfrpg", ActorSheetSFRPGStarship,  { types: ["starship"],      makeDefault: true });
     Actors.registerSheet("sfrpg", ActorSheetSFRPGVehicle,   { types: ["vehicle"],       makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGMech,      { types: ["mech"],          makeDefault: true });
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });
@@ -405,6 +416,7 @@ Hooks.once('init', async function() {
         drone: "fas fa-robot",
         starship: "fas fa-rocket",
         vehicle: "fas fa-car",
+        mech: "fas fa-shield-halved",
         hazard: "fas fa-skull-crossbones"
     };
 
@@ -446,6 +458,11 @@ Hooks.once('init', async function() {
 
         "vehicleAttack": "fas fa-gun",
         "vehicleSystem": "fas fa-gear",
+
+        "mechFrame": "fas fa-gears",
+        "mechWeapon": "fas fa-crosshairs",
+        "mechAuxiliary": "fas fa-microchip",
+        "mechUpgrade": "fas fa-arrow-up",
 
         "ammunition": "fas fa-box-archive",
         "augmentation": "fas fa-vr-cardboard",
