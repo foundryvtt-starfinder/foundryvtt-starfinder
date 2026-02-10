@@ -361,7 +361,7 @@ export class DiceSFRPG {
     * @returns {Promise<bool>}                              `true` if roll was performed, `false` if it was canceled
     */
     static async damageRoll({ damageParts, rollContext, rollCriteria, speaker,
-        chatMessage = true, criticalDamageData = {}, dialogOptions, flavor, linkedAttackRoll, onClose, skipUI = false, tags = [], title}) {
+        chatMessage = true, criticalDamageData = {doubleDamage: true}, dialogOptions, flavor, linkedAttackRoll, onClose, skipUI = false, tags = [], title}) {
 
         // Verify roll context is valid before continuing
         if (!rollContext?.isValid()) return null;
@@ -398,144 +398,123 @@ export class DiceSFRPG {
         if (rollInfo.button !== 'cancel') {
             for (const rollData of rollInfo.rolls) {
                 const finalFormula = rollData.formula;
+                const itemContext = rollContext.allContexts['item'];
                 const part = rollData.node;
-                const partRollCriteria = foundry.utils.deepClone(rollCriteria); // Duplicate so we can manipulate if needed
-                /** @type {HtmlData[]} */
-                const htmlData = [{ name: "is-damage", value: "true" }];
+                const partRollCriteria = foundry.utils.deepClone(rollCriteria); // duplicate so we can manipulate if needed
+                const messageSystemData = {
+                    critical: {
+                        doubleDamage: criticalDamageData.doubleDamage,
+                        effect: null,
+                        isCritical: false
+                    },
+                    damage: {
+                        isMagic: false,
+                        minimumDamage: false,
+                        types: []
+                    },
+                    descriptors: [],
+                    partIndex: part.partIndex ?? null,
+                    properties: {},
+                    rollCriteria: partRollCriteria,
+                    rollNotes: itemContext?.data?.damageNotes,
+                    specialMaterials: [],
+                    starshipWeaponProperties: {},
+                    tags
+                };
 
                 // Get the damage types for this section; If any are healing, change the rollType
-                const damageTypes = [];
-                for (const damageType of Object.entries(part.types)) {
-                    if (damageType[1]) {
-                        if (!damageTypes.includes(damageType[0])) damageTypes.push(damageType[0]);
-                        if (Object.keys(CONFIG.SFRPG.healingTypes).includes(damageType[0])) partRollCriteria.rollType = "healing";
+                for (const [type, value] of Object.entries(part.types)) {
+                    if (value) {
+                        if (Object.keys(CONFIG.SFRPG.healingTypes).includes(type)) partRollCriteria.rollType = "healing";
+                        messageSystemData.damage.types.push(type);
                     }
-                }
-                partRollCriteria.damageTypese = damageTypes;
-
-                // Create the damage type tags
-                if (damageTypes.length) {
-                    const tag = `damage-type-${(damageTypes.join(`-and-`))}`;
-                    const text = damageTypes.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators["and"]} `);
-                    if (!tags.some(t => t.tag === tag && t.text === text))
-                        tags.push({ tag: tag, text: text });
                 }
 
                 // Add item properties, descriptors, and special materials to roll tags
-                const itemContext = rollContext.allContexts['item'];
                 if (itemContext) {
-
-                    // Regular Weapons use data.properties for their properties
-                    if (itemContext.entity.system.properties) {
-                        const props = [];
-                        for (const [key, propValue] of Object.entries(itemContext.entity.system.properties)) {
-                            if (propValue.value) {
-                                tags.push({tag: `weapon-properties ${key}`, text: SFRPG.weaponProperties[key]});
-                                props.push(key);
-                            }
-                        }
-                        htmlData.push({ name: "weapon-properties", value: JSON.stringify(props) });
-                    }
-
                     // TODO: Move starship weapon properties & materials to the same location as normal properties & materials
                     // Starship Weapons use data.special for their properties
                     if (itemContext.entity.type === "starshipWeapon") {
-                        tags.push({tag: `starship-weapon-type ${itemContext.entity.system.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.system.weaponType]});
-                        htmlData.push({ name: "starship-weapon-type", value: itemContext.entity.system.weaponType });
-
+                        messageSystemData.starshipWeaponType = itemContext.entity.system.weaponType;
                         if (itemContext.entity.system.special) {
-                            const props = [];
                             for (const [key, isEnabled] of Object.entries(itemContext.entity.system.special)) {
-                                if (isEnabled) {
-                                    tags.push({tag: `starship-weapon-properties ${key}`, text: SFRPG.starshipWeaponProperties[key]});
-                                    props.push(key);
-                                }
+                                if (isEnabled) messageSystemData.starshipWeaponProperties[key] = {value: true};
                             }
-                            htmlData.push({ name: "starship-weapon-properties", value: JSON.stringify(props) });
+                        }
+                    } else {
+                        // Regular Weapons use data.properties for their properties
+                        if (itemContext.entity.system.properties) {
+                            for (const [key, propertyData] of Object.entries(itemContext.entity.system.properties)) {
+                                if (propertyData.value) messageSystemData.properties[key] = propertyData;
+                            }
                         }
                     }
-                }
 
-                // Add descriptors tags
-                const descriptors = itemContext.entity.system.descriptors;
-                if (descriptors) {
-                    for (const [descriptor, isEnabled] of Object.entries(descriptors)) {
-                        if (isEnabled) tags.push({tag: descriptor, text: SFRPG.descriptors[descriptor]});
+                    // Add descriptors tags
+                    const descriptors = itemContext.entity.system.descriptors;
+                    if (descriptors) {
+                        for (const [descriptor, isEnabled] of Object.entries(descriptors)) {
+                            if (isEnabled) messageSystemData.descriptors.push(descriptor);
+                        }
                     }
-                }
 
-                // Add special materials tags
-                const specialMaterials = itemContext.entity.system.specialMaterials;
-                if (specialMaterials) {
-                    for (const [material, isEnabled] of Object.entries(specialMaterials)) {
-                        if (isEnabled) tags.push({tag: material, text: SFRPG.specialMaterials[material]});
+                    // Add special materials tags
+                    const specialMaterials = itemContext.entity.system.specialMaterials;
+                    if (specialMaterials) {
+                        for (const [material, isEnabled] of Object.entries(specialMaterials)) {
+                            if (isEnabled) messageSystemData.specialMaterials.push(material);
+                        }
                     }
-                }
 
-                // Add a tag if the damage should be magic
-                const isMagic = itemContext.data.magic || itemContext.entity.hasMagicDamage;
-                if (isMagic) tags.push({tag: 'magic', text: game.i18n.localize("SFRPG.Magic.Magic")});
+                    // Add a tag if the damage should be magic
+                    const isMagic = itemContext.data.magic || itemContext.entity.hasMagicDamage;
+                    if (isMagic) messageSystemData.damage.isMagic = true;
+                }
 
                 // Determine whether the roll should be a critical, and handle those effects
                 const isCritical = (rollInfo.button === "critical" || (skipUI && linkedAttackRoll.isCritical)) ? true : false;
-                // TODO-Ian: I don't like this excessive finalFlavor string manipulation; ditch it
-                let finalFlavor = foundry.utils.deepClone(flavor);
                 if (isCritical) {
+                    messageSystemData.critical = {
+                        doubleDamage: criticalDamageData.doubleDamage,
+                        effect: criticalDamageData.effect,
+                        isCritical: true
+                    };
+
+                    // Double the damage if appropriate (i.e. when not a starship weapon)
                     if (!criticalDamageData?.preventDoubling) {
                         finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
                         finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
                     }
-
-                    htmlData.push({ name: "is-critical", value: "true" });
-                    tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
-                    if (criticalDamageData.effect) htmlData.push({ name: "critical-effect", value: criticalDamageData.effect });
-
-                    finalFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": finalFlavor });
-                }
-
-                // Tack on the names of the damage sections to the flavor text in the chat card
-                if (part?.name) {
-                    finalFlavor += `: ${part.name}`;
-                    if (part.partIndex) {
-                        finalFlavor += ` (${part.partIndex})`;
-                    }
                 }
 
                 // Format the roll explanation, create the roll, and evaluate it
+                // TODO-Ian: Rewrite this to spit out an array of explanations, and this will be much easier to parse
                 const preparedRollExplanation = DiceSFRPG.formatExplanation(finalFormula.formula);
-                const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { tags, breakdown: preparedRollExplanation, rollCriteria: partRollCriteria }).evaluate();
+                const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, rollCriteria: partRollCriteria }).evaluate();
 
                 // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
                 if (roll.total < 1) {
                     roll._total = 1; // TODO-Ian: I don't really like overwriting this property, should get the minimum value some other way
+                    messageSystemData.damage.minimumDamage = true;
 
-                    // Add '(minimum damage)' text and nonlethal tags if needed
-                    const nonlethal = tags.find(e => e.tag === "weapon-properties nonlethal");
-                    if (itemContext.entity.type === "starshipWeapon") {
-                        tags.push({ tag: "minimum-damage", text: game.i18n.localize("SFRPG.Damage.MinimumDamage") });
-                    } else {
-                        if (nonlethal) nonlethal.text += ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`;
-                        else tags.push({ tag: "nonlethal", text: game.i18n.format("SFRPG.Damage.Types.Nonlethal") + ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`});
+                    // Add Nonlethal data if needed
+                    if (itemContext?.entity?.type !== "starshipWeapon") {
+                        if (!foundry.utils.hasProperty(messageSystemData, "properties.nonlethal.value")) {
+                            foundry.utils.setProperty(messageSystemData, "properties.nonlethal.value", true);
+                        }
                     }
                 }
 
-                htmlData.push({ name: "damage-parts", value: JSON.stringify(part) });
-                htmlData.push({ name: "rollNotes", value: itemContext?.data?.damageNotes });
-
                 if (chatMessage) {
                     const messageData = {
-                        content: await roll.render({ htmlData }),
-                        flavor: finalFlavor,
+                        content: await roll.render(),
+                        flavor: flavor,
                         rolls: [roll],
                         sound: CONFIG.sounds.dice,
-                        system: {},
-                        speaker
+                        speaker,
+                        system: messageSystemData,
+                        type: "damage"
                     };
-
-                    // Add special materials, descriptors, and magic status to chat message system data (to overcome DR)
-                    if (specialMaterials) messageData.system.specialMaterials = specialMaterials;
-                    if (descriptors) messageData.system.descriptors = descriptors;
-                    if (itemContext) messageData.system.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
 
                     // Create the chat message
                     const msg = await ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });

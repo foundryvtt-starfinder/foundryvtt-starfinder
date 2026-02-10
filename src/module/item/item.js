@@ -1088,7 +1088,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             rollCriteria: SFRPGRoll.createRollCriteria("damage"),
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage,
-            criticalDamageData: {preventDoubling: true},
+            criticalDamageData: {doubleDamage: false},
             dialogOptions: {
                 width: 400,
                 top: event ? event.clientY - 80 : null,
