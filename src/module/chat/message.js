@@ -9,10 +9,6 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
         this.type = "base";
     }
 
-    static async create(data, options = {}) {
-        return super.create(data, options);
-    }
-
     static addContextOptions(html, options) {
         const canApply = li => {
             const chatMessageId = li.dataset?.messageId;
