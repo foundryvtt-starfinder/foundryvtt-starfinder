@@ -1443,6 +1443,8 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                 if (context) {
                     item.system.context = context;
                 }
+
+                if (item.system.type === "condition") await this.actor.update({[`system.conditions.${item.system.slug}`]: true});
             }
 
             const addedItemResult = await targetActor.createItem(item);
