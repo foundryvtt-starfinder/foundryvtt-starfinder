@@ -400,7 +400,7 @@ export class DiceSFRPG {
                 const itemContext = rollContext.allContexts['item'];
                 const part = rollData.node;
                 const partRollCriteria = foundry.utils.deepClone(rollCriteria); // duplicate so we can manipulate if needed
-                const messageSystemData = {
+                const messageSystemData = { // TODO: Perhaps there's a nicer way to instantiate this via the message's dataModel?
                     critical: {
                         doubleDamage: criticalDamageData.doubleDamage,
                         effect: null,
@@ -515,8 +515,7 @@ export class DiceSFRPG {
                     };
 
                     // Create the chat message
-                    const msg = await ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
-                    console.log(msg);
+                    ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
                 }
                 if (onClose) onClose(roll, formula, finalFormula, isCritical);
             }
