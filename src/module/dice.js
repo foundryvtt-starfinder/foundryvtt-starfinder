@@ -8,7 +8,7 @@ import { ChatMessageSFRPG } from "./chat/message.js";
  * @import RollContext from "./rolls/rollcontext.js";
  * @import ActorSFRPG from "./actor/actor.js";
  * @import RollInfo from "./rolls/rolltree.js";
- * @import {HtmlData, RollCriteria, Tag} from "./rolls/roll.js"
+ * @import {RollCriteria, Tag} from "./rolls/roll.js"
  * @import SFRPGModifier from "./modifiers/modifier.js"
  */
 
@@ -25,8 +25,8 @@ import { ChatMessageSFRPG } from "./chat/message.js";
  * A data structure to define critical damage.
  *
  * @typedef {Object} CriticalDamage
- * @property {string}       effect The critical damage effect.
- * @property {DamagePart[]} parts  Any damage rolls used with this critical
+ * @property {boolean}      doubleDamage    If the critical should result in damage being doubled
+ * @property {string}       effect          The critical damage effect
  */
 
 /**

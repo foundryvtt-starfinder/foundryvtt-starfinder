@@ -11,14 +11,6 @@ const { terms, Roll } = foundry.dice;
  */
 
 /**
- * A structure for passing data into an HTML for for use in data- attributes.
- *
- * @typedef {Object} HtmlData
- * @property {string} name The name of the data property sans data-
- * @property {string} value The value of the data property.
- */
-
-/**
  * A structure for holding data defining roll criteria. These indicate what a roll can do,
  * whether it can be evaluated against a target number (AC, DC, etc.), critical/fumble values,
  * and the roll's type
