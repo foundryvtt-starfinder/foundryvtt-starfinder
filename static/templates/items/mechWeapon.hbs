@@ -57,7 +57,15 @@
                         <label>{{ localize "SFRPG.MechSheet.Weapon.Type" }}</label>
                         <div class="form-fields">
                             <select name="system.weaponType">
-                                {{selectOptions (sfrpg "mechWeaponTypes") selected=itemData.weaponType}}
+                                {{selectOptions (sfrpg "mechWeaponTypes") selected=itemData.weaponType localize=true}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.Weapon.DamageLevel" }}</label>
+                        <div class="form-fields">
+                            <select name="system.damageLevel">
+                                {{selectOptions (sfrpg "mechWeaponDamageLevels") selected=itemData.damageLevel localize=true}}
                             </select>
                         </div>
                     </div>
@@ -65,7 +73,7 @@
                         <label>{{ localize "SFRPG.MechSheet.Weapon.Slot" }}</label>
                         <div class="form-fields">
                             <select name="system.slot">
-                                {{selectOptions (sfrpg "mechWeaponSlots") selected=itemData.slot}}
+                                {{selectOptions (sfrpg "mechWeaponSlots") selected=itemData.slot localize=true}}
                             </select>
                         </div>
                     </div>
@@ -124,10 +132,10 @@
                             <input type="text" name="system.save.dc" value="{{itemData.save.dc}}" data-dtype="String" placeholder="{{placeholders.saveDC.formula}}"/>
                             <select name="system.save.type">
                                 {{selectOption "" "" selected=itemData.save.type}}
-                                {{selectOptions (sfrpg "saves") selected=itemData.save.type}}
+                                {{selectOptions (sfrpg "saves") selected=itemData.save.type localize=true}}
                             </select>
                             <select name="system.save.descriptor">
-                                {{selectOptions (sfrpg "saveDescriptors") selected=itemData.save.descriptor}}
+                                {{selectOptions (sfrpg "saveDescriptors") selected=itemData.save.descriptor localize=true}}
                             </select>
                         </div>
                     </div>
