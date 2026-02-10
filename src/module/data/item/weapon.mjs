@@ -40,20 +40,6 @@ export default class SFRPGItemWeapon extends SFRPGItemBase {
                 initial: "",
                 blank: true,
                 required: false
-            }),
-            weaponCategory: new fields.StringField({
-                initial: "uncategorized",
-                choices: Object.keys(CONFIG.SFRPG.weaponCategories),
-                blank: false,
-                required: true,
-                compendiumIndexField: true
-            }),
-            weaponType: new fields.StringField({
-                initial: "basicM",
-                choices: Object.keys(CONFIG.SFRPG.weaponTypes),
-                blank: false,
-                required: true,
-                compendiumIndexField: true
             })
         });
 
@@ -72,6 +58,9 @@ export default class SFRPGItemWeapon extends SFRPGItemBase {
         }];
         schema.proficient.initial = true;
         schema.ability.initial = "str";
+
+        schema.weaponCategory.required = true;
+        schema.weaponType.required = true;
 
         return schema;
     }

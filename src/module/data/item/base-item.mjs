@@ -49,7 +49,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             chat: new fields.HTMLField(),
             short: new fields.HTMLField(),
             unidentified: new fields.HTMLField(),
-            gmnotes: new fields.HTMLField()
+            gmNotes: new fields.HTMLField()
         });
 
         return schema;
@@ -123,6 +123,10 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 label: "SFRPG.Items.Action.DamageNotes",
                 hint: "SFRPG.Items.Action.DamageNotesTooltip"
             }),
+            descriptors: new fields.TypedObjectField(
+                new fields.BooleanField({initial: false}),
+                {validateKey: (key) => key in CONFIG.SFRPG.descriptors}
+            ),
             formula: new fields.StringField({
                 initial: null,
                 nullable: true,
@@ -169,7 +173,20 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                     required: true,
                     nullable: true,
                     label: "SFRPG.Items.Action.SavingThrow"
-                })
+                }
+            ),
+            weaponCategory: new fields.StringField({
+                initial: "uncategorized",
+                choices: Object.keys(CONFIG.SFRPG.weaponCategories),
+                blank: false,
+                required: false
+            }),
+            weaponType: new fields.StringField({
+                initial: "basicM",
+                choices: Object.keys(CONFIG.SFRPG.weaponTypes),
+                blank: false,
+                required: false
+            })
         };
     }
 
@@ -341,6 +358,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
             equipped: new fields.BooleanField({initial: false}),
             identified: new fields.BooleanField({initial: true}),
             isEquipment: new fields.BooleanField({initial: isEquipment}),
+            magic: new fields.BooleanField({initial: false}),
             proficient: new fields.BooleanField({initial: false})
         };
     }

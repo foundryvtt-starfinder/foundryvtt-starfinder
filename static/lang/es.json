@@ -783,12 +783,14 @@
             "UPBs": "UPBs"
         },
         "Cybernetic": "Cibernético",
+        "DC": "DC",
         "Damage": {
             "DamageOperator": "Operador de daño",
             "EnergyDamage": "Daño de energía",
             "Immunities": "Inmunid. al daño",
             "KineticDamage": "Daño cinético",
             "MinimumDamage": "Daño mínimo",
+            "MultipleDR": "Multiple DR (see tooltip)",
             "PartIndex": "Parte {partIndex} de {partCount}",
             "Reduction": "Reduc. de daño",
             "Resistances": "Resist. a energía",
@@ -1561,6 +1563,7 @@
                     "StarshipAC": "CA",
                     "StarshipTL": "TL",
                     "Tag": "Objetivos: {actionTarget}",
+                    "TagFull": "Targets: {actionTarget}<span class='gm-only'> {targetValue}</span> - {actionResult}",
                     "Title": "Objetivo de la acción",
                     "Tooltip": "Si esta acción tiene como objetivo una propiedad específica, puedes configurarlo aquí."
                 },
@@ -2050,6 +2053,7 @@
                 "5": "5º Nivel",
                 "6": "6º Nivel"
             },
+            "Magic": "Magic",
             "Schools": {
                 "Abjuration": "Abjuración",
                 "Conjuration": "Conjuración",
@@ -2079,6 +2083,11 @@
         "ModifierACPEffectingArmorTypePower": "Solo armaduras potentes",
         "ModifierAppTitle": "Editar modificador: {name}",
         "ModifierArmorClassBoth": "Ambos",
+        "ModifierCustomValueLabel": "Custom Affected Value",
+        "ModifierCustomValueTooltip": "Write a custom modifier value that can be parsed by the system here.",
+        "ModifierDRNote": "To indicate multiple things bypass DR, select Custom. Enter the damage types, properties, or descriptor <i>tags</i> in the custom field separated by <code>||</code> for <b>or</b>, <code>&&</code> for <b>and</b>. Hover for tag options.<br><i>Example for '<b>Bludgeoning or Cold Iron</b>':</i> <code>bludgeoning || coldiron</code>.",
+        "ModifierDRNoteLabel": "Multiple DR Note:",
+        "ModifierDRNoteTooltip": "<span><strong>Damage Types</strong><br><code>bludgeoning</code>, <code>piercing</code>, <code>slashing</code><br><strong>Descriptors</strong><br><code>force</code>, <code>magic</code>, <code>radiation</code><br><strong>Alignments</strong><br><code>chaotic</code>, <code>lawful</code>, <code>good</code>, <code>evil</code><br><strong>Materials</strong><br><code>abysium</code>, <code>adamantine</code>, <code>coldiron</code>, <code>diatha</code>, <code>djezet</code>, <code>horacalcum</code>, <code>inubrix</code>, <code>khefak</code>, <code>noqual</code>, <code>nyblantine</code>, <code>purplecores</code>, <code>siccatite</code>, <code>silver</code>, <code>voidglass</code></span>",
         "ModifierEffectLabels": {
             "Ability": "Ability",
             "Ammunition": "Ammunition",
@@ -2211,6 +2220,11 @@
         "Necrograft": "Necroimplante",
         "None": "Ninguno",
         "Notes": "Notas",
+        "Notification": {
+            "Bugs": "<strong>Support & Issues</strong><p>For support, visit the <code>#sf1e</code> channel on the <a href=\"https://discord.com/invite/foundryvtt\">Foundry VTT Discord Server</a>. To view full change notes, file an issue, or contribute to development, please visit our <a href=\"https://github.com/foundryvtt-starfinder/foundryvtt-starfinder\">Github page</a>.</p>",
+            "Button": "Hide Until Next Update",
+            "Title": "System Update Information"
+        },
         "NpcToggleSkillsDialogTitle": "Alternar habilidades del PNJ",
         "NumberOfArms": "Número de brazos",
         "Organization": "Organización",
@@ -2272,6 +2286,8 @@
             }
         },
         "Rolls": {
+            "AbilityCheck": "Ability Check",
+            "AbilityCheckFull": "Ability Check - {name}",
             "AttackRoll": "Tirada de Ataque",
             "AttackRollFull": "Tirada de Ataque - {name}",
             "Character": {
@@ -2288,6 +2304,10 @@
                 "Nonlethal": "No letal",
                 "NonlethalTooltip": "Puedes usar un arma que inflige daño letal para infligir daño no letal, pero sufres un penalizador a la tirada de ataque."
             },
+            "CriticalHit": "Critical Hit",
+            "CriticalHitCaps": "CRITICAL HIT",
+            "CriticalSuccess": "Critical Success",
+            "CriticalSuccessCaps": "CRITICAL SUCCESS",
             "DamageRoll": "Tirada de Daño",
             "DamageRollFull": "Tirada de Daño - {name}",
             "Dialog": {
@@ -2329,9 +2349,26 @@
                 "SkillCheckTitle": "Chequeo de Destreza - {skill}",
                 "SkillCheckTitleWithProfession": "Chequeo de Destreza - {skill} ({profession})"
             },
+            "Failure": "Failure",
+            "FailureCaps": "FAILURE",
+            "Fumble": "Fumble",
+            "FumbleCaps": "FUMBLE",
+            "GunneryCheck": "Gunnery Check",
+            "GunneryCheckFull": "Gunnery Check - {name}",
             "HealingRoll": "Tirada de Curación",
             "HealingRollFull": "Tirada de Curación - {name}",
+            "Hit": "Hit",
+            "HitCaps": "HIT",
+            "InitiativeRoll": "Initiative Roll",
             "InitiativeRollFull": "Tirada de Iniciativa - {name}",
+            "Miss": "Miss",
+            "MissCaps": "MISS",
+            "Roll": "Roll",
+            "RollTarget": "Roll Target",
+            "SavingThrow": "Saving Throw",
+            "SavingThrowFull": "Saving Throw - {name}",
+            "SkillCheck": "Skill Check",
+            "SkillCheckFull": "Ability Check - {name}",
             "Starship": {
                 "Broadside": "Banda",
                 "CaptainDemand": "Orden del Capitán",
@@ -2366,7 +2403,9 @@
                     "Starboard": "Estribor",
                     "Title": "{name} - Seleccione el cuadrante del arma usado."
                 }
-            }
+            },
+            "Success": "Success",
+            "SuccessCaps": "SUCCESS"
         },
         "Save": "Salvación",
         "SaveAbilityModTooltip": "Modificador de Habilidad: {mod} ({ability})",
@@ -2516,6 +2555,10 @@
                 "ConfirmationTitle": "Lock Artwork Rotation Setting Change",
                 "Hint": "When enabled, enables Lock Artwork Rotation on character scale actors by default (Characters/NPC/Drones/Hazards). This can be overridden by the actor's prototype token settings.",
                 "Name": "Lock Artwork Rotation by Default"
+            },
+            "NotificationSchema": {
+                "Hint": "DON'T CHANGE THIS UNLESS YOU KNOW WHAT YOU ARE DOING.\nControls whether & which system update message(s) should be shown.",
+                "Name": "Update Notification Schema"
             },
             "SFRPGTheme": {
                 "Hint": "Al activarse, se harán algunos ajustes menores a los colores de Foundry para coincidir con el esquema de colores de Starfinder.",
@@ -2927,13 +2970,6 @@
                 "Message": "El daño a una nave siempre proviene de una dirección específica, por favor selecciona el cuadrante al que debe aplicarse el daño entrante.",
                 "Nat20": "¡Daño crítico! {name} sufre un efecto de daño crítico.",
                 "Nat20WithThreshold": "¡Daño crítico! {name} sufre un efecto de daño crítico adicional.",
-                "Quadrant": {
-                    "Aft": "Popa",
-                    "Forward": "Proa",
-                    "Port": "Babor",
-                    "Quadrant": "Cuadrante",
-                    "Starboard": "Estribor"
-                },
                 "Title": "{name} - Selecciona el cuadrante dañado."
             },
             "Details": {
@@ -3030,13 +3066,19 @@
             },
             "Quadrants": {
                 "AblativeHeader": "Armadura Ablativa",
+                "Aft": "Popa",
                 "ArmorClass": "Clase de Armadura",
                 "EvenDistribution": "Distribución uniforme",
+                "Forward": "Proa",
                 "Header": "Defensas del Cuadrante",
                 "NotAvailable": "No disponible",
+                "Port": "Babor",
+                "Quadrant": "Cuadrante",
                 "QuadrantLimit": "Límite del cuadrante",
                 "ShieldHeader": "Escudos",
-                "TargetLock": "Bloqueo de objetivo"
+                "Starboard": "Estribor",
+                "TargetLock": "Bloqueo de objetivo",
+                "TargetQuadrant": "Target Quadrant"
             },
             "RandomQuadrantMacro": {
                 "NoToken": "Selecciona el receptor del efecto crítico antes de continuar.",
@@ -3082,6 +3124,7 @@
         },
         "SubmitButtonLabel": "Enviar",
         "SystemWide": "A nivel del sistema",
+        "Target": "Target",
         "TempHPMaxPlaceHolderText": "+Máx",
         "TempHPPlaceHolderText": "+Temp",
         "Text": "Texto",

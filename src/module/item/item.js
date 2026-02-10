@@ -8,6 +8,7 @@ import StackModifiers from "../rules/closures/stack-modifiers.js";
 import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
+import { ItemChatMixin } from "./mixins/item-chat.js";
 
 /**
  * @import { RollResult } from '../dice.js'
@@ -16,7 +17,7 @@ import { ItemCapacityMixin } from "./mixins/item-capacity.js";
  */
 
 /** @extends {foundry.documents.Item} */
-export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin) {
+export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin, ItemChatMixin) {
 
     constructor(data, context = {}) {
         // Set module art if available. This applies art to items viewed or created from compendiums.
@@ -42,11 +43,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         return CONFIG.SFRPG.attackActions.includes(this.system.actionType);
     }
 
+    /**
+     * Does the item have an other formula implemented?
+     * @type {boolean}
+     */
     get hasOtherFormula() {
         return ("formula" in this.system) && this.system.formula?.trim().length > 0;
     }
-
-    /* -------------------------------------------- */
 
     /**
      * Does the Item implement a damage roll as part of its usage
@@ -55,8 +58,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     get hasDamage() {
         return !!(this.system.damage && this.system.damage.parts.length);
     }
-
-    /* -------------------------------------------- */
 
     /**
      * Does the Item implement a saving throw as part of its usage
@@ -94,6 +95,22 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             ? true
             : (Number(areaData.value) > 0 ? true : false);
         return hasAreaValue;
+    }
+
+    /**
+     * Does the Item's damage qualify as magic?
+     * @type {boolean}
+     */
+    get hasMagicDamage() {
+        if (!this.hasDamage) return false;
+        if (['magic', 'hybrid', 'spell'].includes(this.type)) return true;
+        if (['msak', 'rsak'].includes(this.system.actionType ?? null)) return true;
+        if (this.system.properties?.hybrid?.value) return true;
+        const containedItems = this.contents ?? [];
+        for (const item of containedItems) {
+            if (item.type === 'fusion') return true;
+        }
+        return false;
     }
 
     /**
@@ -177,23 +194,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             if (tgt.value && tgt.value === "") tgt.value = null;
 
             labels.target = [tgt.value].filterJoin(" ");
-
-            /* let area = data.area || {};
-            if (typeof area.value === 'number' && area.value === 0) area.value = null;
-
-            if (area.units === "text") labels.area = String(area.value || "")?.trim();
-            else labels.area = [area.total || area.value, C.distanceUnits[area.units] || null, C.spellAreaShapes[area.shape], C.spellAreaEffects[area.effect]].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
-
-            // Range Label
-            /* let rng = data.range || {};
-            labels.range = [rng.value || "", C.distanceUnits[rng.units]].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
-
-            // Duration Label
-            /* let dur = data.duration || {};
-            labels.duration = [dur.value].filterJoin(" "); */
-            // Now prepared in the calculate-activation-details closure!
         }
 
         // Item Actions
@@ -560,7 +560,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         // Filter properties and return
-        data.properties = props.filter(p => !!p?.name);
+        data.chatProperties = props.filter(p => !!p?.name);
         return data;
     }
 
@@ -861,7 +861,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * @returns {Promise<RollResult?>}
      */
     async rollAttack(options = {}) {
-        options.disableDeductAmmo = options.disableDeductAmmo || options.event.ctrlKey || false;
+        options.disableDeductAmmo = options.disableDeductAmmo || options.event?.ctrlKey || false;
         const itemData = this.system;
         const actorData = this.actor.system;
         const isWeapon = ["weapon", "shield"].includes(this.type);
@@ -1002,6 +1002,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
+            rollType: "attack",
             onClose: this._onAttackRollClose.bind(this, options)
         });
     }
@@ -1186,6 +1187,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.addContext("ship", this.actor);
         rollContext.addContext("item", this, this.system);
         rollContext.addContext("weapon", this, this.system);
+        rollContext.addTargetContext();
         rollContext.setMainContext("");
 
         this.actor?.setupRollContexts(rollContext, ["gunner", "scienceOfficer"]);
@@ -1237,6 +1239,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             },
             rollOptions: rollOptions,
             actorContextKey: "gunner",
+            rollType: "gunnery",
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
@@ -1271,6 +1274,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.addContext("ship", this.actor);
         rollContext.addContext("item", this, this);
         rollContext.addContext("weapon", this, this);
+        rollContext.addTargetContext();
         rollContext.setMainContext("");
 
         return DiceSFRPG.d20Roll({
@@ -1286,6 +1290,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
+            rollType: "attack",
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
@@ -1596,8 +1601,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /* -------------------------------------------- */
 
     /**
-     * Place an attack roll using an item (weapon, feat, spell, or equipment)
-     * Rely upon the DiceSFRPG.d20Roll logic for the core implementation
+     * Place an roll using an item based on an "Other Formula"
+     * Rely upon the DiceSFRPG.createRoll logic for the core implementation
      */
     async rollFormula(options = {}) {
         const itemData = this.system;
@@ -1747,167 +1752,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const promises = [ChatMessage.create(chatData)];
         if (success) promises.push(this.update({ "system.recharge.charged": true }));
         return Promise.all(promises);
-    }
-
-    async placeAbilityTemplate() {
-        const itemData = this.system;
-
-        const type = {
-            "sphere": "circle",
-            "cone": "cone",
-            "cube": "rect",
-            "cylinder": "circle",
-            "line": "ray"
-        }[itemData?.area?.shape] || null;
-
-        if (!type) return;
-
-        const template = AbilityTemplate.fromData({
-            type: type || "circle",
-            distance: this.system?.area?.total || this.system?.area?.value || 0
-        });
-
-        if (!template) return;
-
-        const placed = await template.drawPreview();
-        if (placed) template.place(); // If placement is confirmed
-        return placed;
-
-    }
-
-    /* -------------------------------------------- */
-
-    static chatListeners(html) {
-        html.on('click', '.chat-card .card-buttons button', this._onChatCardAction.bind(this));
-        html.on('click', '.chat-card .item-name', this._onChatCardToggleContent.bind(this));
-    }
-
-    /* -------------------------------------------- */
-
-    /** @param {PointerEvent} event */
-    static async _onChatCardAction(event) {
-        event.preventDefault();
-
-        // Extract card data
-        const button = event.currentTarget;
-        const card = button.closest(".chat-card");
-        const messageId = card.closest(".message").dataset.messageId;
-        const message = game.messages.get(messageId);
-        const action = button.dataset.action;
-
-        // Validate permission to proceed with the roll
-        const isTargetted = ["save", "skill"].includes(action);
-        if (!(isTargetted || game.user.isGM || message.isAuthor)) return;
-
-        // Get the Actor from a synthetic Token
-        const chatCardActor = this._getChatCardActor(card);
-        if (!chatCardActor) {
-            ui.notifications.error("SFRPG.ChatCard.ItemAction.NoActor");
-            return;
-        }
-
-        // Get the Item
-        let item = chatCardActor.items.get(card.dataset.itemId);
-
-        // Adjust item to level, if required
-        if (Object.keys(message.flags?.sfrpg ?? {}).length !== 0 && message.flags?.sfrpg?.level !== item.system.level) {
-            const newItemData = item.toObject();
-            newItemData.system.level = message.flags.sfrpg.level;
-
-            item = new ItemSFRPG(newItemData, {parent: item.parent});
-
-            // Run automation to ensure save DCs are correct.
-            item.prepareData();
-            const processContext = await item.processData();
-            if (processContext.fact.promises) {
-                await Promise.all(processContext.fact.promises);
-            }
-        }
-
-        // Get the target
-        const targetActor = isTargetted ? this._getChatCardTarget(card) : null;
-
-        // Attack and Damage Rolls
-        if (action === "attack") await item.rollAttack({ event });
-        else if (action === "damage") await item.rollDamage({ event });
-        else if (action === "formula") await item.rollFormula({ event });
-        else if (action === "template") await item.placeAbilityTemplate({ event });
-
-        // Skill Check
-        else if (action === "skill" && targetActor) await targetActor.rollSkill(button.dataset.type, { event });
-
-        // Saving Throw
-        else if (action === "save" && targetActor) await targetActor.rollSave(button.dataset.type, { event });
-
-        // Item capacity and consumable usage
-        else if (action === "use") await item.useItem({ event });
-    }
-
-    /**
-     * Handle toggling the visibility of chat card content when the name is clicked.
-     * @param {Event} event The originating click event
-     */
-    static _onChatCardToggleContent(event) {
-        event.preventDefault();
-        const header = event.currentTarget;
-        const card = header.closest('.chat-card');
-        const content = card.querySelector('.card-content');
-        // content.style.display = content.style.display === 'none' ? 'block' : 'none';
-        $(content).slideToggle();
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Get the Actor which is the author of a chat card
-     * @param {HTMLElement} card    The chat card being used
-     * @return {?ActorSFRPG}         The Actor entity or null
-     * @private
-     */
-    static _getChatCardActor(card) {
-
-        const actorId = card.dataset.actorId;
-
-        // Case 1 - a synthetic actor from a Token, legacy reasons the token Id can be a compound key of sceneId and tokenId
-        let tokenId = card.dataset.tokenId;
-        let sceneId = card.dataset.sceneId;
-        if (!sceneId && tokenId?.includes('.')) {
-            [sceneId, tokenId] = tokenId.split(".");
-        }
-
-        let chatCardActor = null;
-        if (tokenId && sceneId) {
-            const scene = game.scenes.get(sceneId);
-            if (scene) {
-                const tokenData = scene.getEmbeddedDocument("Token", tokenId);
-                if (tokenData) {
-                    const token = new Token(tokenData);
-                    chatCardActor = token.actor;
-                }
-            }
-        }
-
-        // Case 2 - use Actor ID directory
-        if (!chatCardActor) {
-            chatCardActor = game.actors.get(actorId);
-        }
-
-        return chatCardActor;
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Get the Actor which is the author of a chat card
-     * @return {?ActorSFRPG}         The Actor entity or null
-     * @private
-     */
-    static _getChatCardTarget() {
-        const character = game.user.character;
-        const controlled = canvas.tokens?.controlled;
-        if (controlled.length === 0) return character || null;
-        if (controlled.length === 1) return controlled[0].actor;
-        else throw new Error(`You must designate a specific Token as the roll target`);
     }
 
     /**

@@ -34,7 +34,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 21
       },
       "size": "medium",
       "sturdy": true
@@ -44,7 +44,7 @@
       "max": 20,
       "value": 0
     },
-    "chatFlavor": "Automatic",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": true,
@@ -69,32 +69,23 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
     "critical": {
       "effect": "",
-      "parts": [
-        {
-          "name": "",
-          "formula": "",
-          "group": null,
-          "isPrimarySection": false,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "nonlethal": false,
-            "piercing": false,
-            "radiation": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": []
     },
     "damage": {
       "parts": [
@@ -102,17 +93,15 @@
           "name": "",
           "formula": "1d8",
           "group": null,
-          "isPrimarySection": false,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
-            "cold": false,
+            "cold": true,
             "electricity": false,
             "fire": false,
             "healing": false,
-            "nonlethal": false,
             "piercing": true,
-            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -126,7 +115,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>Rather than relying on coolant to produce supercooled gas, an ice carbine pumps heat out of large vents integrated in the weapon’s stock and uses the temperature change to produce brittle, razor-sharp shards of ice in the chamber. This design allows it to either fire a short, targeted shot or spray a hailstorm of piercing needles at a group of foes. The heatexchange technology used in these weapons is common on Verces, where it’s used for many purposes, making it relatively easy to find them in the Pact Worlds, from the subzero models (often built in illicit basement labs) to absolute-zero ice carbines, which are the best in the Pact Worlds. Gelid and ultracold ice carbines improve on the subzero version’s technology and overall power.</p>"
     },
     "duration": {
       "units": "instantaneous",
@@ -175,7 +164,7 @@
       "variable": false
     },
     "slug": "",
-    "source": "AR",
+    "source": "AR pg. 35",
     "special": "",
     "specialMaterials": {},
     "target": {
@@ -186,9 +175,9 @@
       "value": 2
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 2
+      "value": null
     },
     "weaponCategory": "cryo",
     "weaponType": "longA"

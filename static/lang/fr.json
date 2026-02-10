@@ -781,12 +781,14 @@
             "UPBs": "BPUs"
         },
         "Cybernetic": "Cybernétique",
+        "DC": "DC",
         "Damage": {
             "DamageOperator": "Damage Operator",
             "EnergyDamage": "Energy Damage",
             "Immunities": "Imm. aux dégâts",
             "KineticDamage": "Kinetic Damage",
             "MinimumDamage": "Dégâts Minimum",
+            "MultipleDR": "Multiple DR (see tooltip)",
             "PartIndex": "Pièce {partIndex} sur {partCount}",
             "Reduction": "Réduction des dégâts",
             "Resistances": "Résistances aux energies",
@@ -1558,6 +1560,7 @@
                     "StarshipAC": "CA",
                     "StarshipTL": "TL",
                     "Tag": "Cibles: {actionTarget}",
+                    "TagFull": "Targets: {actionTarget}<span class='gm-only'> {targetValue}</span> - {actionResult}",
                     "Title": "Action de ciblage",
                     "Tooltip": "Si cette action cible une propriété spécifique, vous pouvez la configurer ici."
                 },
@@ -2046,6 +2049,7 @@
                 "5": "Niveau 5",
                 "6": "Niveau 6"
             },
+            "Magic": "Magic",
             "Schools": {
                 "Abjuration": "Abjuration",
                 "Conjuration": "Invocation",
@@ -2075,6 +2079,11 @@
         "ModifierACPEffectingArmorTypePower": "Seulement Les armures assistéés",
         "ModifierAppTitle": "Editer le modificateur : {name}",
         "ModifierArmorClassBoth": "Les deux",
+        "ModifierCustomValueLabel": "Custom Affected Value",
+        "ModifierCustomValueTooltip": "Write a custom modifier value that can be parsed by the system here.",
+        "ModifierDRNote": "To indicate multiple things bypass DR, select Custom. Enter the damage types, properties, or descriptor <i>tags</i> in the custom field separated by <code>||</code> for <b>or</b>, <code>&&</code> for <b>and</b>. Hover for tag options.<br><i>Example for '<b>Bludgeoning or Cold Iron</b>':</i> <code>bludgeoning || coldiron</code>.",
+        "ModifierDRNoteLabel": "Multiple DR Note:",
+        "ModifierDRNoteTooltip": "<span><strong>Damage Types</strong><br><code>bludgeoning</code>, <code>piercing</code>, <code>slashing</code><br><strong>Descriptors</strong><br><code>force</code>, <code>magic</code>, <code>radiation</code><br><strong>Alignments</strong><br><code>chaotic</code>, <code>lawful</code>, <code>good</code>, <code>evil</code><br><strong>Materials</strong><br><code>abysium</code>, <code>adamantine</code>, <code>coldiron</code>, <code>diatha</code>, <code>djezet</code>, <code>horacalcum</code>, <code>inubrix</code>, <code>khefak</code>, <code>noqual</code>, <code>nyblantine</code>, <code>purplecores</code>, <code>siccatite</code>, <code>silver</code>, <code>voidglass</code></span>",
         "ModifierEffectLabels": {
             "Ability": "Ability",
             "Ammunition": "Ammunition",
@@ -2207,6 +2216,11 @@
         "Necrograft": "Nécrogreffe",
         "None": "Aucun",
         "Notes": "Notes",
+        "Notification": {
+            "Bugs": "<strong>Support & Issues</strong><p>For support, visit the <code>#sf1e</code> channel on the <a href=\"https://discord.com/invite/foundryvtt\">Foundry VTT Discord Server</a>. To view full change notes, file an issue, or contribute to development, please visit our <a href=\"https://github.com/foundryvtt-starfinder/foundryvtt-starfinder\">Github page</a>.</p>",
+            "Button": "Hide Until Next Update",
+            "Title": "System Update Information"
+        },
         "NpcToggleSkillsDialogTitle": "Ajout de compétences aux PNJ",
         "NumberOfArms": "Nombre de bras",
         "Organization": "Organisation",
@@ -2268,6 +2282,8 @@
             }
         },
         "Rolls": {
+            "AbilityCheck": "Ability Check",
+            "AbilityCheckFull": "Ability Check - {name}",
             "AttackRoll": "Jet d'attaque",
             "AttackRollFull": "Jet d'attaque - {name}",
             "Character": {
@@ -2284,6 +2300,10 @@
                 "Nonlethal": "Non létal",
                 "NonlethalTooltip": "Vous pouvez utiliser une arme qui inflige des dégâts létaux pour infliger des dégâts non létaux à la place, mais vous subissez une pénalité à votre jet d'attaque."
             },
+            "CriticalHit": "Critical Hit",
+            "CriticalHitCaps": "CRITICAL HIT",
+            "CriticalSuccess": "Critical Success",
+            "CriticalSuccessCaps": "CRITICAL SUCCESS",
             "DamageRoll": "Jet de dégâts",
             "DamageRollFull": "Jet de dégâts - {name}",
             "Dialog": {
@@ -2325,9 +2345,26 @@
                 "SkillCheckTitle": "Test de compétence - {skill}",
                 "SkillCheckTitleWithProfession": "Test de Compétence - {skill} ({profession})"
             },
+            "Failure": "Failure",
+            "FailureCaps": "FAILURE",
+            "Fumble": "Fumble",
+            "FumbleCaps": "FUMBLE",
+            "GunneryCheck": "Gunnery Check",
+            "GunneryCheckFull": "Gunnery Check - {name}",
             "HealingRoll": "Jet de soin",
             "HealingRollFull": "Jet de soin - {name}",
+            "Hit": "Hit",
+            "HitCaps": "HIT",
+            "InitiativeRoll": "Initiative Roll",
             "InitiativeRollFull": "Jet d'initiative - {name}",
+            "Miss": "Miss",
+            "MissCaps": "MISS",
+            "Roll": "Roll",
+            "RollTarget": "Roll Target",
+            "SavingThrow": "Saving Throw",
+            "SavingThrowFull": "Saving Throw - {name}",
+            "SkillCheck": "Skill Check",
+            "SkillCheckFull": "Ability Check - {name}",
             "Starship": {
                 "Broadside": "Bordée",
                 "CaptainDemand": "Instruction du capitaine",
@@ -2362,7 +2399,9 @@
                     "Starboard": "Tribord",
                     "Title": "{name} - Sélectionner le quadrant d'arme utilisé"
                 }
-            }
+            },
+            "Success": "Success",
+            "SuccessCaps": "SUCCESS"
         },
         "Save": "Sauvegarde",
         "SaveAbilityModTooltip": "Modificateur de caractéristique: {mod} ({ability})",
@@ -2512,6 +2551,10 @@
                 "ConfirmationTitle": "Lock Artwork Rotation Setting Change",
                 "Hint": "When enabled, enables Lock Artwork Rotation on character scale actors by default (Characters/NPC/Drones/Hazards). This can be overridden by the actor's prototype token settings.",
                 "Name": "Lock Artwork Rotation by Default"
+            },
+            "NotificationSchema": {
+                "Hint": "DON'T CHANGE THIS UNLESS YOU KNOW WHAT YOU ARE DOING.\nControls whether & which system update message(s) should be shown.",
+                "Name": "Update Notification Schema"
             },
             "SFRPGTheme": {
                 "Hint": "Lorsqu'il est activé, quelques ajustements mineurs aux couleurs de Foundry seront apportés pour correspondre au schéma de couleurs de Starfinder.",
@@ -2923,13 +2966,6 @@
                 "Message": "Les dégâts à un vaisseau spatial proviennent toujours d'une direction spécifique, veuillez sélectionner le quadrant auquel les dégâts entrants doivent être appliqués.",
                 "Nat20": "Critical damage! {name} takes a critical damage effect.",
                 "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
-                "Quadrant": {
-                    "Aft": "Poupe",
-                    "Forward": "Proue",
-                    "Port": "Bâbord",
-                    "Quadrant": "Quadrant",
-                    "Starboard": "Tribord"
-                },
                 "Title": "{name} - Sélectionner le quadrant endommagé."
             },
             "Details": {
@@ -3026,13 +3062,19 @@
             },
             "Quadrants": {
                 "AblativeHeader": "Blindage ablatif",
+                "Aft": "Poupe",
                 "ArmorClass": "Classe d'Armure",
                 "EvenDistribution": "Distribution uniforme",
+                "Forward": "Proue",
                 "Header": "Défenses du quadrant",
                 "NotAvailable": "Indisponible",
+                "Port": "Bâbord",
+                "Quadrant": "Quadrant",
                 "QuadrantLimit": "Limite de Quadrant",
                 "ShieldHeader": "Boucliers",
-                "TargetLock": "Verrouillage de cible"
+                "Starboard": "Tribord",
+                "TargetLock": "Verrouillage de cible",
+                "TargetQuadrant": "Target Quadrant"
             },
             "RandomQuadrantMacro": {
                 "NoToken": "Select the recipient of the critical effect before proceeding.",
@@ -3078,6 +3120,7 @@
         },
         "SubmitButtonLabel": "Valider",
         "SystemWide": "À l'échelle du système",
+        "Target": "Target",
         "TempHPMaxPlaceHolderText": "+Max",
         "TempHPPlaceHolderText": "+Temp",
         "Text": "Text",

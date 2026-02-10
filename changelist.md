@@ -1,3 +1,100 @@
+# Version 0.30.1
+This update contains a few small fixes that fix a couple of bugs with the new targeting system and chat cards, as well as introduces a method for us (the developers) to make announcements about new features and fixes to users.
+
+## Breaking Changes
+- `item.getChatData()` returns chat properties as `chatProperties` rather than `properties`, which is where they're now spaced in chat message card .hbs files
+
+## Core System Improvements
+- Select Client settings are changed to User settings where they make sense
+- A new update notification system has been added to facilitate communication between the developers and users for when important changes are made.
+- `system.json` `title` field updated to "Starfinder First Edition"; `description` likewise updated
+
+## Bugfixes
+- Item cards display properties in the footer of the card correctly now
+- Item summaries displayed on actor sheets no longer break item properties by overriding them
+- Natural 1's and 20's now evaluate as Failure/Miss and Success/Hit on chat cards, regardless of the rolled value and target DC/AC
+
+# 0.30.0 - Targets Everywhere!
+This new system version adds new features to Starfinder 1e supporting Foundry's "targeting" system, including evaluation of rolls against targets and success/failure/hit/miss display for attack rolls, checks, and saves.
+
+## Breaking Changes
+
+- Damage type, special materials, descriptors, and other chat message flags are now namespaced properly under `flags.sfrpg`
+- Due to flag formatting changes, right-click context menus on old chat messages will no longer function correctly and should be cleared when possible
+- Inline roll `displayDifficulty` property changed to `displayDC` for consistency across codebase
+
+## Core System Improvements
+- Attack Roll/Check/Save evaluation added to the system, automatically determining whether a roll is a success or failure by @ian612
+    - Success/Failure is displayed on the resulting chat card, with GMs also seeing the value the roll is compared against
+    - Streamlining of previously implemented journal inline check buttons to use this same system
+    - See the [Wiki page](https://github.com/foundryvtt-starfinder/foundryvtt-starfinder/wiki/Common-Actions-In-Starfinder) for details on how to use this system
+- Formulas can now reference data on targets to set values (e.g. `@target.details.level.value` would return the current target's lavel/CR) by @ian612
+
+## Bugfixes
+- Errors caused by lack of an `event` being passed to the `item.rollAttack()` method (such as by modules) no longer cause errors by @danimrath
+- Custom chat cards now correctly get the generating token's image for display on the cards
+- Starship damage rolls work correctly again, by skipping descriptor checks if the `descriptor` object is missing from an item by @danimrath
+- Skill notes now save correctly again by @ian612
+
+## Data Entry & Localization
+- Acid Cannon Items have their descriptions added and HP corrected by @TheWaywardAldori
+- A whole slew of weapons (Bone, Cold, Disintegrator, and ~1/2 of the Flame Weapons) from Armory have been updated to modernize their data by @iankid
+
+# 0.29.2 - Damage Revisited
+This update overhauls the Damage Reduction/Energy Resistance system to support all types present in the game.
+
+## Breaking Changes
+
+- Custom DR/ER values should no longer be entered in the "Notes" section of their modifier; instead use the new Custom Value field
+
+## Core System Improvements
+DR/ER updates by @ian612
+
+- A new Custom Value field has been added to modifiers, which appears for relevant effect types (such as DR/ER)
+- Weapon Type data has been added for all items that support attack actions, such that weapon specialization can be applied to them
+- Items with actions now support descriptors, such that alignments and other descriptors can be applied to them
+- Damage from the following is automatically recognized as magic: Magic items, Hybrid items, Spells, spell attacks, items with equipped fusions
+- An item can also manually be set as magic so its damage is recognized as magic
+- Damage Reduction options for the 3 kinetic damage types, 4 alignments, and magic, force, and radiation have been added in addition to special materials
+- Multiple damage types/properties can now be set with and/or joining syntax so that one of a set or all are necessary to overcome the DR
+
+## Bugfixes
+
+- Item saving throw bonus calculations corrected by @danimrath
+- Items on starship actors no longer throw errors when opened due to bugs in the item saving throw calculation by @danimrath
+
+## Data Entry & Localization
+
+- All compendium actors and items using the previous DR format have been updated for compatibility with the new format
+
+# 0.29.1.3
+This is another hotfix to resolve a data model issue preventing GM Notes on items from saving correctly, and to fix some styling issues with inline checks
+
+## Bugfixes
+
+- GM Notes are now correctly defined in the data model for items and actors that have them
+- Inline Checks now respect the `displayDC` option, and correctly display the DC by default on inline checks if it is provided
+- When sent to chat, inline checks no longer display a redundant "send to chat" button
+
+# 0.29.1.2
+Another quick hotfix to resolve a data model error preventing NPC saves from being negative.
+
+## Bugfixes
+
+- The minimum value for NPC saves is now correctly set to -5, not 0 as it was previously
+  - NPC actors in the compendiums that had their saves increased to 0 by this error have been corrected back to old values
+
+# 0.29.1.1
+This is a hotfix release to resolve a couple of small bugs.
+
+## Bugfixes
+
+- The value `@item.properties.operative` and other properties, if not present in item data, should now resolve to `0` in formulas
+  - This fixes weapon specialization not calculating damage bonuses correctly
+- Scaling cantip data settings are restored to spells that use them
+  - If you have the spells Energy Ray, Hazard, Injury Echo, or Telekinetic Projectile, you'll need to delete them and re-add from the compendiums
+- AC bonuses from armor and armor-bonus-granting modifiers now stack correctly, with only the highest value used
+
 # 0.29.1
 This release cleans up some more things on the backend and adds a couple of new features and bugfixes that were enabled by the implementation of the system data model in 0.29.0. Thanks to @levirak, @danimrath, and @ian612 for their contributions to this release, and to the community for filing bug reports and feature requests!
 

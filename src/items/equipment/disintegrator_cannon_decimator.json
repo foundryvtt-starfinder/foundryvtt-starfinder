@@ -16,9 +16,9 @@
     "area": {
       "effect": "",
       "shapable": false,
-      "shape": "",
-      "units": "none",
-      "value": ""
+      "shape": "line",
+      "units": "ft",
+      "value": "40"
     },
     "attackBonus": 0,
     "attributes": {
@@ -34,7 +34,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 48
       },
       "size": "medium",
       "sturdy": true
@@ -44,7 +44,7 @@
       "max": 40,
       "value": 0
     },
-    "chatFlavor": "Line, unwieldy",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": true,
@@ -69,6 +69,17 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -87,9 +98,7 @@
             "electricity": false,
             "fire": false,
             "healing": false,
-            "nonlethal": false,
             "piercing": false,
-            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -102,7 +111,7 @@
           "name": "",
           "formula": "3d10",
           "group": null,
-          "isPrimarySection": false,
+          "isPrimarySection": true,
           "types": {
             "acid": true,
             "bludgeoning": false,
@@ -110,9 +119,7 @@
             "electricity": false,
             "fire": false,
             "healing": false,
-            "nonlethal": false,
             "piercing": false,
-            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -126,7 +133,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>This wide-barreled cannon emits a stream of red-tinged energy that originates from the weapon’s heavy proton tank, affecting all enemies in a line. Like most disintegrator weapons, they are available in liquidator, decimator, executioner, and eradicator models.</p>"
     },
     "duration": {
       "units": "instantaneous",
@@ -179,7 +186,7 @@
       "variable": false
     },
     "slug": "",
-    "source": "AR",
+    "source": "AR pg. 36",
     "special": "",
     "specialMaterials": {},
     "target": {
@@ -190,9 +197,9 @@
       "value": 4
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 4
+      "value": null
     },
     "weaponCategory": "disintegrator",
     "weaponType": "heavy"

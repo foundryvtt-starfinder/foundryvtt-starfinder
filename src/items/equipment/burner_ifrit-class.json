@@ -16,9 +16,9 @@
     "area": {
       "effect": "",
       "shapable": false,
-      "shape": "",
-      "units": "none",
-      "value": ""
+      "shape": "line",
+      "units": "ft",
+      "value": "30"
     },
     "attackBonus": 0,
     "attributes": {
@@ -34,7 +34,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 24
       },
       "size": "medium",
       "sturdy": true
@@ -44,7 +44,7 @@
       "max": 40,
       "value": 0
     },
-    "chatFlavor": "Line, unwieldy",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": true,
@@ -69,6 +69,17 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -77,30 +88,7 @@
       "parts": [
         {
           "name": "",
-          "formula": "1",
-          "group": null,
-          "isPrimarySection": false,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "nonlethal": false,
-            "piercing": false,
-            "radiation": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
-    },
-    "damage": {
-      "parts": [
-        {
-          "name": "",
-          "formula": "1d10",
+          "formula": "1d6",
           "group": null,
           "isPrimarySection": false,
           "types": {
@@ -117,6 +105,27 @@
             "sonic": false
           }
         }
+      ]
+    },
+    "damage": {
+      "parts": [
+        {
+          "name": "",
+          "formula": "1d10",
+          "group": null,
+          "isPrimarySection": true,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
       ],
       "primaryGroup": null
     },
@@ -126,7 +135,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>Indistinguishable from a flamethrower to the lay observer, a burner uses petrol as fuel to produce a strong jet of flame. However, the subtly narrower nozzle and recoil-suppressing gyros allow a burner to fire streams of petrol with more control and focus than its traditional cousin. Ifrit-, salamander-, hellhound-, firedrake-, and phoenix-class burners are all widely available.</p>"
     },
     "duration": {
       "units": "instantaneous",
@@ -179,7 +188,7 @@
       "variable": false
     },
     "slug": "",
-    "source": "AR",
+    "source": "AR pg. 37",
     "special": "",
     "specialMaterials": {},
     "target": {
@@ -190,9 +199,9 @@
       "value": 4
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 4
+      "value": null
     },
     "weaponCategory": "flame",
     "weaponType": "heavy"

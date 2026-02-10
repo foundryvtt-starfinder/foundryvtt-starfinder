@@ -783,12 +783,14 @@
             "UPBs": "BPUs"
         },
         "Cybernetic": "Cybernetico",
+        "DC": "DC",
         "Damage": {
             "DamageOperator": "Damage Operator",
             "EnergyDamage": "Energy Damage",
             "Immunities": "Imudades a dano",
             "KineticDamage": "Kinetic Damage",
             "MinimumDamage": "Minimum Damage",
+            "MultipleDR": "Multiple DR (see tooltip)",
             "PartIndex": "Part {partIndex} of {partCount}",
             "Reduction": "Redução Dano",
             "Resistances": "Resistencia a Energia",
@@ -1564,6 +1566,7 @@
                     "StarshipAC": "AC",
                     "StarshipTL": "TL",
                     "Tag": "Targets: {actionTarget}",
+                    "TagFull": "Targets: {actionTarget}<span class='gm-only'> {targetValue}</span> - {actionResult}",
                     "Title": "Action Target",
                     "Tooltip": "If this action targets a specific property, you can configure that here."
                 },
@@ -2054,6 +2057,7 @@
                 "5": "5º Nível",
                 "6": "6º Nível"
             },
+            "Magic": "Magic",
             "Schools": {
                 "Abjuration": "Abjuração",
                 "Conjuration": "Conjuração",
@@ -2083,6 +2087,11 @@
         "ModifierACPEffectingArmorTypePower": "Apenas Armadura Energizada",
         "ModifierAppTitle": "Editar modificador: {name}",
         "ModifierArmorClassBoth": "Ambos",
+        "ModifierCustomValueLabel": "Custom Affected Value",
+        "ModifierCustomValueTooltip": "Write a custom modifier value that can be parsed by the system here.",
+        "ModifierDRNote": "To indicate multiple things bypass DR, select Custom. Enter the damage types, properties, or descriptor <i>tags</i> in the custom field separated by <code>||</code> for <b>or</b>, <code>&&</code> for <b>and</b>. Hover for tag options.<br><i>Example for '<b>Bludgeoning or Cold Iron</b>':</i> <code>bludgeoning || coldiron</code>.",
+        "ModifierDRNoteLabel": "Multiple DR Note:",
+        "ModifierDRNoteTooltip": "<span><strong>Damage Types</strong><br><code>bludgeoning</code>, <code>piercing</code>, <code>slashing</code><br><strong>Descriptors</strong><br><code>force</code>, <code>magic</code>, <code>radiation</code><br><strong>Alignments</strong><br><code>chaotic</code>, <code>lawful</code>, <code>good</code>, <code>evil</code><br><strong>Materials</strong><br><code>abysium</code>, <code>adamantine</code>, <code>coldiron</code>, <code>diatha</code>, <code>djezet</code>, <code>horacalcum</code>, <code>inubrix</code>, <code>khefak</code>, <code>noqual</code>, <code>nyblantine</code>, <code>purplecores</code>, <code>siccatite</code>, <code>silver</code>, <code>voidglass</code></span>",
         "ModifierEffectLabels": {
             "Ability": "Ability",
             "Ammunition": "Ammunition",
@@ -2215,6 +2224,11 @@
         "Necrograft": "Necrotransplantes",
         "None": "Nenhum",
         "Notes": "Notas",
+        "Notification": {
+            "Bugs": "<strong>Support & Issues</strong><p>For support, visit the <code>#sf1e</code> channel on the <a href=\"https://discord.com/invite/foundryvtt\">Foundry VTT Discord Server</a>. To view full change notes, file an issue, or contribute to development, please visit our <a href=\"https://github.com/foundryvtt-starfinder/foundryvtt-starfinder\">Github page</a>.</p>",
+            "Button": "Hide Until Next Update",
+            "Title": "System Update Information"
+        },
         "NpcToggleSkillsDialogTitle": "Esconder Perícias NPC",
         "NumberOfArms": "Número de Braços",
         "Organization": "Organização",
@@ -2276,6 +2290,8 @@
             }
         },
         "Rolls": {
+            "AbilityCheck": "Ability Check",
+            "AbilityCheckFull": "Ability Check - {name}",
             "AttackRoll": "Rolagem Ataque",
             "AttackRollFull": "Rolagem Ataque - {name}",
             "Character": {
@@ -2292,6 +2308,10 @@
                 "Nonlethal": "Não letal",
                 "NonlethalTooltip": "You can use a weapon that deals lethal damage to deal nonlethal damage instead, but you take a penalty to your attack roll."
             },
+            "CriticalHit": "Critical Hit",
+            "CriticalHitCaps": "CRITICAL HIT",
+            "CriticalSuccess": "Critical Success",
+            "CriticalSuccessCaps": "CRITICAL SUCCESS",
             "DamageRoll": "Rolagem Dano",
             "DamageRollFull": "Rolagem Dano - {name}",
             "Dialog": {
@@ -2333,9 +2353,26 @@
                 "SkillCheckTitle": "Skill Check - {skill}",
                 "SkillCheckTitleWithProfession": "Skill Check - {skill} ({profession})"
             },
+            "Failure": "Failure",
+            "FailureCaps": "FAILURE",
+            "Fumble": "Fumble",
+            "FumbleCaps": "FUMBLE",
+            "GunneryCheck": "Gunnery Check",
+            "GunneryCheckFull": "Gunnery Check - {name}",
             "HealingRoll": "Rolar Cura",
             "HealingRollFull": "Rolar Cura - {name}",
+            "Hit": "Hit",
+            "HitCaps": "HIT",
+            "InitiativeRoll": "Initiative Roll",
             "InitiativeRollFull": "Rolar Iniciativa - {name}",
+            "Miss": "Miss",
+            "MissCaps": "MISS",
+            "Roll": "Roll",
+            "RollTarget": "Roll Target",
+            "SavingThrow": "Saving Throw",
+            "SavingThrowFull": "Saving Throw - {name}",
+            "SkillCheck": "Skill Check",
+            "SkillCheckFull": "Ability Check - {name}",
             "Starship": {
                 "Broadside": "Saraivar",
                 "CaptainDemand": "Captão - Exigir",
@@ -2370,7 +2407,9 @@
                     "Starboard": "Estibordo",
                     "Title": "{name} - Selecione o quadrante da arma usada."
                 }
-            }
+            },
+            "Success": "Success",
+            "SuccessCaps": "SUCCESS"
         },
         "Save": "Salvamento",
         "SaveAbilityModTooltip": "Modificador Habilidade: {mod} ({ability})",
@@ -2520,6 +2559,10 @@
                 "ConfirmationTitle": "Lock Artwork Rotation Setting Change",
                 "Hint": "When enabled, enables Lock Artwork Rotation on character scale actors by default (Characters/NPC/Drones/Hazards). This can be overridden by the actor's prototype token settings.",
                 "Name": "Lock Artwork Rotation by Default"
+            },
+            "NotificationSchema": {
+                "Hint": "DON'T CHANGE THIS UNLESS YOU KNOW WHAT YOU ARE DOING.\nControls whether & which system update message(s) should be shown.",
+                "Name": "Update Notification Schema"
             },
             "SFRPGTheme": {
                 "Hint": "When enabled, a few minor tweaks to Foundry's colours will be made to match Starfinder's colour scheme.",
@@ -2931,13 +2974,6 @@
                 "Message": "Danos a uma espaçonave sempre se originam de uma direção específica, selecione o quadrante em que o dano recebido deve ser aplicado.",
                 "Nat20": "Critical damage! {name} takes a critical damage effect.",
                 "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
-                "Quadrant": {
-                    "Aft": "Popa",
-                    "Forward": "Proa",
-                    "Port": "Bombordo",
-                    "Quadrant": "Quadrante",
-                    "Starboard": "Estibordo"
-                },
                 "Title": "{name} - Selecione o quadrante dano."
             },
             "Details": {
@@ -3034,13 +3070,19 @@
             },
             "Quadrants": {
                 "AblativeHeader": "Placas Ablativas",
+                "Aft": "Popa",
                 "ArmorClass": "CA",
                 "EvenDistribution": "Distribuição uniforme",
+                "Forward": "Proa",
                 "Header": "Defesas Quadrante",
                 "NotAvailable": "Não disponível",
+                "Port": "Bombordo",
+                "Quadrant": "Quadrante",
                 "QuadrantLimit": "Limite Quadrante",
                 "ShieldHeader": "Escudos",
-                "TargetLock": "Travar Mira"
+                "Starboard": "Estibordo",
+                "TargetLock": "Travar Mira",
+                "TargetQuadrant": "Target Quadrant"
             },
             "RandomQuadrantMacro": {
                 "NoToken": "Select the recipient of the critical effect before proceeding.",
@@ -3086,6 +3128,7 @@
         },
         "SubmitButtonLabel": "Enviar",
         "SystemWide": "System-Wide",
+        "Target": "Target",
         "TempHPMaxPlaceHolderText": "+Max",
         "TempHPPlaceHolderText": "+Temp",
         "Text": "Text",

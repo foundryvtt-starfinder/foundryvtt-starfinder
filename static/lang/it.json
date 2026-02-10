@@ -783,12 +783,14 @@
             "UPBs": "UPBs"
         },
         "Cybernetic": "Cibernetico",
+        "DC": "DC",
         "Damage": {
             "DamageOperator": "Damage Operator",
             "EnergyDamage": "Energy Damage",
             "Immunities": "Immune ai Danni",
             "KineticDamage": "Kinetic Damage",
             "MinimumDamage": "Minimum Damage",
+            "MultipleDR": "Multiple DR (see tooltip)",
             "PartIndex": "Part {partIndex} of {partCount}",
             "Reduction": "Riduzione Danni",
             "Resistances": "Resistenza ai Danni",
@@ -1564,6 +1566,7 @@
                     "StarshipAC": "AC",
                     "StarshipTL": "TL",
                     "Tag": "Targets: {actionTarget}",
+                    "TagFull": "Targets: {actionTarget}<span class='gm-only'> {targetValue}</span> - {actionResult}",
                     "Title": "Action Target",
                     "Tooltip": "If this action targets a specific property, you can configure that here."
                 },
@@ -2054,6 +2057,7 @@
                 "5": "Livello 5",
                 "6": "Livello 6"
             },
+            "Magic": "Magic",
             "Schools": {
                 "Abjuration": "Abiurazione",
                 "Conjuration": "Invocazione",
@@ -2083,6 +2087,11 @@
         "ModifierACPEffectingArmorTypePower": "Solo le Armature Potenziate",
         "ModifierAppTitle": "Edita il Modificatore : {name}",
         "ModifierArmorClassBoth": "Entrambe",
+        "ModifierCustomValueLabel": "Custom Affected Value",
+        "ModifierCustomValueTooltip": "Write a custom modifier value that can be parsed by the system here.",
+        "ModifierDRNote": "To indicate multiple things bypass DR, select Custom. Enter the damage types, properties, or descriptor <i>tags</i> in the custom field separated by <code>||</code> for <b>or</b>, <code>&&</code> for <b>and</b>. Hover for tag options.<br><i>Example for '<b>Bludgeoning or Cold Iron</b>':</i> <code>bludgeoning || coldiron</code>.",
+        "ModifierDRNoteLabel": "Multiple DR Note:",
+        "ModifierDRNoteTooltip": "<span><strong>Damage Types</strong><br><code>bludgeoning</code>, <code>piercing</code>, <code>slashing</code><br><strong>Descriptors</strong><br><code>force</code>, <code>magic</code>, <code>radiation</code><br><strong>Alignments</strong><br><code>chaotic</code>, <code>lawful</code>, <code>good</code>, <code>evil</code><br><strong>Materials</strong><br><code>abysium</code>, <code>adamantine</code>, <code>coldiron</code>, <code>diatha</code>, <code>djezet</code>, <code>horacalcum</code>, <code>inubrix</code>, <code>khefak</code>, <code>noqual</code>, <code>nyblantine</code>, <code>purplecores</code>, <code>siccatite</code>, <code>silver</code>, <code>voidglass</code></span>",
         "ModifierEffectLabels": {
             "Ability": "Ability",
             "Ammunition": "Ammunition",
@@ -2215,6 +2224,11 @@
         "Necrograft": "Necroinnesti",
         "None": "Nessuno",
         "Notes": "Note",
+        "Notification": {
+            "Bugs": "<strong>Support & Issues</strong><p>For support, visit the <code>#sf1e</code> channel on the <a href=\"https://discord.com/invite/foundryvtt\">Foundry VTT Discord Server</a>. To view full change notes, file an issue, or contribute to development, please visit our <a href=\"https://github.com/foundryvtt-starfinder/foundryvtt-starfinder\">Github page</a>.</p>",
+            "Button": "Hide Until Next Update",
+            "Title": "System Update Information"
+        },
         "NpcToggleSkillsDialogTitle": "Aggiungi delle competenze al PNG",
         "NumberOfArms": "Numero di braccia",
         "Organization": "Organization",
@@ -2276,6 +2290,8 @@
             }
         },
         "Rolls": {
+            "AbilityCheck": "Ability Check",
+            "AbilityCheckFull": "Ability Check - {name}",
             "AttackRoll": "Tiro per Colpire",
             "AttackRollFull": "Tiro per Colpire - {name}",
             "Character": {
@@ -2292,6 +2308,10 @@
                 "Nonlethal": "Non letale",
                 "NonlethalTooltip": "You can use a weapon that deals lethal damage to deal nonlethal damage instead, but you take a penalty to your attack roll."
             },
+            "CriticalHit": "Critical Hit",
+            "CriticalHitCaps": "CRITICAL HIT",
+            "CriticalSuccess": "Critical Success",
+            "CriticalSuccessCaps": "CRITICAL SUCCESS",
             "DamageRoll": "Tiro del Danno",
             "DamageRollFull": "Tiro del Danno - {name}",
             "Dialog": {
@@ -2333,9 +2353,26 @@
                 "SkillCheckTitle": "Skill Check - {skill}",
                 "SkillCheckTitleWithProfession": "Skill Check - {skill} ({profession})"
             },
+            "Failure": "Failure",
+            "FailureCaps": "FAILURE",
+            "Fumble": "Fumble",
+            "FumbleCaps": "FUMBLE",
+            "GunneryCheck": "Gunnery Check",
+            "GunneryCheckFull": "Gunnery Check - {name}",
             "HealingRoll": "Tiro di Cura",
             "HealingRollFull": "Tiro di Cura - {name}",
+            "Hit": "Hit",
+            "HitCaps": "HIT",
+            "InitiativeRoll": "Initiative Roll",
             "InitiativeRollFull": "Tiro d'Iniziativa - {name}",
+            "Miss": "Miss",
+            "MissCaps": "MISS",
+            "Roll": "Roll",
+            "RollTarget": "Roll Target",
+            "SavingThrow": "Saving Throw",
+            "SavingThrowFull": "Saving Throw - {name}",
+            "SkillCheck": "Skill Check",
+            "SkillCheckFull": "Ability Check - {name}",
             "Starship": {
                 "Broadside": "Bordata",
                 "CaptainDemand": "Esigere del Capitano",
@@ -2370,7 +2407,9 @@
                     "Starboard": "Tribordo",
                     "Title": "{name} -Seleziona l'arco per l' Arma utilizzata"
                 }
-            }
+            },
+            "Success": "Success",
+            "SuccessCaps": "SUCCESS"
         },
         "Save": "Salva",
         "SaveAbilityModTooltip": "Modificatore di caratteristica: {mod} ({ability})",
@@ -2520,6 +2559,10 @@
                 "ConfirmationTitle": "Lock Artwork Rotation Setting Change",
                 "Hint": "When enabled, enables Lock Artwork Rotation on character scale actors by default (Characters/NPC/Drones/Hazards). This can be overridden by the actor's prototype token settings.",
                 "Name": "Lock Artwork Rotation by Default"
+            },
+            "NotificationSchema": {
+                "Hint": "DON'T CHANGE THIS UNLESS YOU KNOW WHAT YOU ARE DOING.\nControls whether & which system update message(s) should be shown.",
+                "Name": "Update Notification Schema"
             },
             "SFRPGTheme": {
                 "Hint": "When enabled, a few minor tweaks to Foundry's colours will be made to match Starfinder's colour scheme.",
@@ -2931,13 +2974,6 @@
                 "Message": "I danni a un'astronave provengono sempre da una direzione specifica, seleziona l'arco a cui deve essere applicato il danno in arrivo.",
                 "Nat20": "Critical damage! {name} takes a critical damage effect.",
                 "Nat20WithThreshold": "Critical damage! {name} takes an additional critical damage effect.",
-                "Quadrant": {
-                    "Aft": "Poppa",
-                    "Forward": "Prua",
-                    "Port": "Babordo",
-                    "Quadrant": "Arco",
-                    "Starboard": "Tribordo"
-                },
                 "Title": "{name} - Seleziona l'arco danneggiato."
             },
             "Details": {
@@ -3034,13 +3070,19 @@
             },
             "Quadrants": {
                 "AblativeHeader": "Armatura Ablativa",
+                "Aft": "Poppa",
                 "ArmorClass": "Classe Armatura",
                 "EvenDistribution": "Distribuzione uniforme",
+                "Forward": "Prua",
                 "Header": "Difese degli archi",
                 "NotAvailable": "Non disp.",
+                "Port": "Babordo",
+                "Quadrant": "Arco",
                 "QuadrantLimit": "Limite dell'arco",
                 "ShieldHeader": "Scudi",
-                "TargetLock": "Aggianciare il bersaglio"
+                "Starboard": "Tribordo",
+                "TargetLock": "Aggianciare il bersaglio",
+                "TargetQuadrant": "Target Quadrant"
             },
             "RandomQuadrantMacro": {
                 "NoToken": "Select the recipient of the critical effect before proceeding.",
@@ -3086,6 +3128,7 @@
         },
         "SubmitButtonLabel": "Salva",
         "SystemWide": "A livello di sistema",
+        "Target": "Target",
         "TempHPMaxPlaceHolderText": "+Max",
         "TempHPPlaceHolderText": "+Temp",
         "Text": "Text",

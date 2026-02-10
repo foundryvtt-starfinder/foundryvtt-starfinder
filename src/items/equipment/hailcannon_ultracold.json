@@ -34,7 +34,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 42
       },
       "size": "medium",
       "sturdy": true
@@ -44,7 +44,7 @@
       "max": 40,
       "value": 0
     },
-    "chatFlavor": "Automatic",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": true,
@@ -69,32 +69,23 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
     "critical": {
       "effect": "Staggered",
-      "parts": [
-        {
-          "name": "",
-          "formula": "",
-          "group": null,
-          "isPrimarySection": false,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "nonlethal": false,
-            "piercing": false,
-            "radiation": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": []
     },
     "damage": {
       "parts": [
@@ -102,17 +93,15 @@
           "name": "",
           "formula": "4d8",
           "group": null,
-          "isPrimarySection": false,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
-            "cold": false,
+            "cold": true,
             "electricity": false,
             "fire": false,
             "healing": false,
-            "nonlethal": false,
             "piercing": true,
-            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -126,7 +115,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>Hailcannons use a complex integrated coolant system to generate staggering barrages of ice. Unlike with many cryo weapons, the hailcannon’s prolific output and massive barrel allow the weapon to be fired in automatic mode, which can overwhelm targets. Subzero hailcannons are the standard model, and the increasing damage capacity of gelid, ultracold, absolute-zero, and clathrate hailcannons proves attractive to many who swear by such weapons.</p>"
     },
     "duration": {
       "units": "instantaneous",
@@ -175,7 +164,7 @@
       "variable": false
     },
     "slug": "",
-    "source": "AR",
+    "source": "AR pg. 35",
     "special": "",
     "specialMaterials": {},
     "target": {
@@ -188,7 +177,7 @@
     "uses": {
       "max": "0",
       "per": "",
-      "value": 4
+      "value": null
     },
     "weaponCategory": "cryo",
     "weaponType": "heavy"

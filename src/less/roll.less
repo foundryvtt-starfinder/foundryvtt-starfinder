@@ -16,6 +16,78 @@
         }
     }
 
+    .target-section {
+        align-items: center;
+
+        label {
+            font-weight: bold;
+            font-size: 14px;
+            color: #4b4a44;
+        }
+
+        .flex-equal {
+            flex: 1 1 0px;
+        }
+
+        div.target {
+            border: black 1px solid;
+            border-radius: 0.25em;
+            padding: 0.5em;
+            margin: 0.25em;
+            display: flex;
+            max-width: 192px;
+            flex-direction: row;
+            cursor: pointer;
+            box-shadow: 0px 0px 2px black;
+            transition: box-shadow 0.2s, transform 0.2s;
+
+            img {
+                align-self: center;
+                border-style: none;
+                border-right: @borderGroove;
+                padding-right: 0.5em;
+                object-fit: cover;
+                object-position: 50% 0;
+            }
+
+            .target-info {
+                align-items: center;
+                justify-content: center;
+
+                h4 {
+                    align-self: center;
+                    text-align: left;
+                    padding-left: 0.5em;
+                    margin: 0;
+                    font-size: var(--font-size-16);
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: block;
+                }
+            }
+
+            &.owned {
+                background: rgba(0, 0, 255, 0.2);
+
+                &:hover {
+                    box-shadow: 0px 0px 10px @sfrpgBlue;
+                    transition: box-shadow 0.2s, transform 0.2s;
+                    transform: scale(1.01);
+                }
+            }
+
+            &.unowned {
+                background: rgba(64, 64, 64, 0.2);
+
+                &:hover {
+                    box-shadow: 0px 0px 10px #771212;
+                    transition: box-shadow 0.2s, transform 0.2s;
+                    transform: scale(1.01);
+                }
+            }
+        }
+    }
+
     ul.modifier-list {
         flex: 0 0 49%;
         list-style: none;

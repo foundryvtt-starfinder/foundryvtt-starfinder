@@ -34,7 +34,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 30
       },
       "size": "medium",
       "sturdy": true
@@ -44,7 +44,7 @@
       "max": 20,
       "value": 0
     },
-    "chatFlavor": "Automatic",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": true,
@@ -69,12 +69,43 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
     "critical": {
-      "effect": "Burn 1d4",
-      "parts": []
+      "effect": "Burn",
+      "parts": [
+        {
+          "name": "",
+          "formula": "1d4",
+          "group": null,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
+            "fire": true,
+            "healing": false,
+            "nonlethal": false,
+            "piercing": false,
+            "radiation": false,
+            "slashing": false,
+            "sonic": false
+          }
+        }
+      ]
     },
     "damage": {
       "parts": [
@@ -82,7 +113,7 @@
           "name": "",
           "formula": "1d8",
           "group": null,
-          "isPrimarySection": false,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
@@ -155,7 +186,7 @@
       "variable": false
     },
     "slug": "",
-    "source": "ARM pg. 17",
+    "source": "AR pg. 37",
     "special": "",
     "specialMaterials": {},
     "target": {
@@ -166,9 +197,9 @@
       "value": 1
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 1
+      "value": null
     },
     "weaponCategory": "flame",
     "weaponType": "longA"

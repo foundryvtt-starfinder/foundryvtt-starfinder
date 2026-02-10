@@ -88,6 +88,22 @@ _SFRPG.saveDescriptors = {
 };
 
 /**
+ * All possible roll types in Starfinder
+ * @type {Object}
+ */
+SFRPG.rollTypes = {
+    "abilityCheck": "SFRPG.Rolls.AbilityCheck",
+    "attack": "SFRPG.Rolls.AttackRoll",
+    "damage": "SFRPG.Rolls.DamageRoll",
+    "gunnery": "SFRPG.Rolls.GunneryCheck",
+    "healing": "SFRPG.Rolls.HealingRoll",
+    "initiative": "SFRPG.Rolls.InitiativeRoll",
+    "roll": "SFRPG.Rolls.Roll",
+    "save": "SFRPG.Rolls.SavingThrow",
+    "skillCheck": "SFRPG.Rolls.SkillCheck"
+};
+
+/**
  * Character alignment options
  * @type {Object}
  */
@@ -755,17 +771,21 @@ _SFRPG.specialMaterials = {
 // Damage Reductions
 _SFRPG.damageReductionTypes = {
     "": "-",
+    ..._SFRPG.kineticDamageTypes,
+    "force": "SFRPG.Descriptors.Force",
+    "magic": "SFRPG.Magic.Magic",
+    "radiation": "SFRPG.Descriptors.Radiation",
+    "chaotic": "SFRPG.Descriptors.Chaotic",
+    "lawful": "SFRPG.Descriptors.Lawful",
+    "good": "SFRPG.Descriptors.Good",
+    "evil": "SFRPG.Descriptors.Evil",
     ..._SFRPG.specialMaterials,
     "custom": "SFRPG.Damage.Types.Custom"
 };
 
 // Energy Resistances
-_SFRPG.energyResistanceTypes = {
-    "acid": "SFRPG.Damage.Types.Acid",
-    "cold": "SFRPG.Damage.Types.Cold",
-    "electricity": "SFRPG.Damage.Types.Electricity",
-    "fire": "SFRPG.Damage.Types.Fire",
-    "sonic": "SFRPG.Damage.Types.Sonic",
+SFRPG.energyResistanceTypes = {
+    ..._SFRPG.energyDamageTypes,
     "custom": "SFRPG.Damage.Types.Custom"
 };
 
@@ -1338,11 +1358,15 @@ _SFRPG.starshipWeaponProperties = {
     "vortex"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex" // CRB
 };
 
-_SFRPG.starshipArcs = {
+_SFRPG.starshipQuadrants = {
     "forward"  : "SFRPG.ShipSystems.StarshipArcs.Forward",
-    "starboard": "SFRPG.ShipSystems.StarshipArcs.Starboard",
-    "aft"      : "SFRPG.ShipSystems.StarshipArcs.Aft",
     "port"     : "SFRPG.ShipSystems.StarshipArcs.Port",
+    "starboard": "SFRPG.ShipSystems.StarshipArcs.Starboard",
+    "aft"      : "SFRPG.ShipSystems.StarshipArcs.Aft"
+};
+
+_SFRPG.starshipArcs = {
+    ..._SFRPG.starshipQuadrants,
     "turret"   : "SFRPG.ShipSystems.StarshipArcs.Turret"
 };
 
@@ -2533,6 +2557,17 @@ _SFRPG.actionTargetsStarship = {
     "": "SFRPG.Items.Action.ActionTarget.None",
     "ac": "SFRPG.Items.Action.ActionTarget.StarshipAC",
     "tl": "SFRPG.Items.Action.ActionTarget.StarshipTL"
+};
+
+/**
+ * An object mapping action targets to the system data path their values are stored (for hit evaluation against targets).
+ */
+SFRPG.actionTargetPaths = {
+    "kac": "attributes.kac.value",
+    "kac8": "attributes.cmd.value",
+    "eac": "attributes.eac.value",
+    "ac5": "5",
+    "ac15": "15"
 };
 
 // Source: CRB, page 391

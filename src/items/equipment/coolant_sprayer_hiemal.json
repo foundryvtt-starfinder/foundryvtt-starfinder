@@ -34,7 +34,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 24
       },
       "size": "medium",
       "sturdy": true
@@ -44,7 +44,7 @@
       "max": 40,
       "value": 0
     },
-    "chatFlavor": "Blast, entangle (1d4 rounds), unwieldy",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": true,
@@ -69,32 +69,23 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
     "critical": {
       "effect": "Staggered",
-      "parts": [
-        {
-          "name": "",
-          "formula": "",
-          "group": null,
-          "isPrimarySection": false,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "nonlethal": false,
-            "piercing": false,
-            "radiation": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": []
     },
     "damage": {
       "parts": [
@@ -106,7 +97,7 @@
           "types": {
             "acid": false,
             "bludgeoning": false,
-            "cold": false,
+            "cold": true,
             "electricity": false,
             "fire": false,
             "healing": false,
@@ -126,7 +117,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>Coolant sprayers were designed following the principles of a flamethrower, but with an eye more toward hindrance than sheer damage. Experts can easily identify a coolant sprayer by the bulky insulation surrounding the sprayer’s coolant reservoir. The weapon expels a cone of activated coolant that stiffens and freezes living tissue. While not harmless, the effect is somewhat less deadly than most energy weapons. Hiemal, algid, glacial, and isothermal coolant sprayers all function in similar ways, though their destructive potential varies from one model to another.</p>\n<p><strong>@UUID[Compendium.sfrpg.conditions.Item.nFBcsp5FS1Wi46Fc]{Entangle} ([[/r 1d4]]{1d4 rounds})</strong></p>"
     },
     "duration": {
       "units": "instantaneous",
@@ -153,7 +144,7 @@
         "value": true
       },
       "entangle": {
-        "extension": "",
+        "extension": "1d4 rounds",
         "value": true
       },
       "two": {
@@ -175,15 +166,15 @@
     "save": {
       "type": "",
       "dc": "",
-      "descriptor": ""
+      "descriptor": "negate"
     },
     "skillCheck": {
-      "type": "",
-      "dc": "",
+      "type": "acr",
+      "dc": "10 + @item.level + @abilities.dex.mod",
       "variable": false
     },
     "slug": "",
-    "source": "AR",
+    "source": "AR pg. 34",
     "special": "",
     "specialMaterials": {},
     "target": {
@@ -194,9 +185,9 @@
       "value": 4
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 4
+      "value": null
     },
     "weaponCategory": "cryo",
     "weaponType": "heavy"

@@ -16,9 +16,9 @@
     "area": {
       "effect": "",
       "shapable": false,
-      "shape": "",
-      "units": "none",
-      "value": ""
+      "shape": "sphere",
+      "units": "ft",
+      "value": "20"
     },
     "attackBonus": 0,
     "attributes": {
@@ -34,7 +34,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 102
       },
       "size": "medium",
       "sturdy": true
@@ -44,7 +44,7 @@
       "max": 10,
       "value": 0
     },
-    "chatFlavor": "Explode (20 ft.), unwieldy",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": true,
@@ -69,6 +69,17 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
@@ -87,9 +98,7 @@
             "electricity": false,
             "fire": false,
             "healing": false,
-            "nonlethal": false,
             "piercing": false,
-            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -102,7 +111,7 @@
           "name": "",
           "formula": "2d20",
           "group": null,
-          "isPrimarySection": false,
+          "isPrimarySection": true,
           "types": {
             "acid": true,
             "bludgeoning": false,
@@ -110,9 +119,7 @@
             "electricity": false,
             "fire": false,
             "healing": false,
-            "nonlethal": false,
             "piercing": false,
-            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -126,7 +133,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>While most disintegrator weapons produce a stream of energy that strikes a single target, a nanite decoupler programs nanites to replicate a disintegrator’s destructive energies over a set area. The integrated generators used to overcharge the nanites for the desired effect make a nanite decoupler a heavy, bulky weapon that requires a skilled user. The caustic nanite decoupler and the vitriolic nanite decoupler are both deadly, destructive weapons.</p>\n<p><strong>Special Property:</strong> explode (20 ft.)</p>"
     },
     "duration": {
       "units": "instantaneous",
@@ -179,7 +186,7 @@
       "variable": false
     },
     "slug": "",
-    "source": "AR",
+    "source": "AR pg. 37",
     "special": "",
     "specialMaterials": {},
     "target": {
@@ -190,9 +197,9 @@
       "value": 5
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 5
+      "value": null
     },
     "weaponCategory": "disintegrator",
     "weaponType": "heavy"

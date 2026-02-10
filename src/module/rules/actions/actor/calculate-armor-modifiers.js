@@ -4,9 +4,9 @@ export default function(engine) {
     engine.closures.add("calculateArmorModifiers", (fact, context) => {
         const data = fact.data;
         const modifiers = fact.modifiers;
+
         const eac = data.attributes.eac;
         const kac = data.attributes.kac;
-
         eac.tooltip = eac.tooltip ?? [];
         kac.tooltip = kac.tooltip ?? [];
 
@@ -29,7 +29,21 @@ export default function(engine) {
                 console.error(e);
             }
 
+            let computedBonusAdjust = 0;
             if (computedBonus !== 0 && localizationKey) {
+                if (bonus.type === "armor" && !foundry.utils.isEmpty(item.armorInfo)) {
+                    // If an armor bonus from modifiers is higher than that provided by the wearer's armor, don't count the worn armor
+                    if (computedBonus > item.armorInfo.bonus) {
+                        const targetTooltipIndex = item.tooltip.findIndex(tip => tip === item.armorInfo.tooltip);
+                        if (targetTooltipIndex >= 0) {
+                            delete item.tooltip[targetTooltipIndex]; // Remove armor tooltip
+                            computedBonusAdjust = item.armorInfo.bonus; // Amount to adjust returned bonus by
+                        }
+                    } else {
+                        // Return 0 for the bonus, don't add to tooltip if armor is better
+                        return 0;
+                    }
+                }
                 item.tooltip.push(game.i18n.format(localizationKey, {
                     type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
@@ -37,7 +51,8 @@ export default function(engine) {
                 }));
             }
 
-            return computedBonus;
+            // Return the computed bonus, adjusting it downward by the armor's AC value if less than the armor bonus from modifiers
+            return computedBonus - computedBonusAdjust;
         };
 
         const armorMods = modifiers.filter(mod => {

@@ -12,7 +12,7 @@
       "condition": "",
       "cost": null
     },
-    "ammunitionType": "",
+    "ammunitionType": "charge",
     "area": {
       "effect": "",
       "shapable": false,
@@ -63,7 +63,7 @@
         {
           "type": "slot",
           "acceptsType": [
-            "goods"
+            "weaponAccessory"
           ],
           "affectsEncumbrance": true,
           "amount": 1,
@@ -92,18 +92,33 @@
         {
           "name": "",
           "formula": "6d6 + @abilities.str.mod",
-          "group": null,
-          "isPrimarySection": false,
+          "group": 0,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
             "cold": true,
             "electricity": false,
+            "fire": false,
+            "healing": false,
+            "piercing": false,
+            "slashing": false,
+            "sonic": false
+          }
+        },
+        {
+          "name": "",
+          "formula": "6d6 + @abilities.str.mod",
+          "group": 0,
+          "isPrimarySection": false,
+          "types": {
+            "acid": false,
+            "bludgeoning": false,
+            "cold": false,
+            "electricity": false,
             "fire": true,
             "healing": false,
-            "nonlethal": false,
             "piercing": false,
-            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -169,7 +184,7 @@
       "variable": false
     },
     "slug": "",
-    "source": "AR pg. 12",
+    "source": "AR pg. 35",
     "special": "",
     "specialMaterials": {},
     "target": {

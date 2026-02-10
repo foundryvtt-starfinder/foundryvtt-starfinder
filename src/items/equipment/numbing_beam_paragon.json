@@ -34,7 +34,7 @@
       },
       "hp": {
         "max": "",
-        "value": 6
+        "value": 90
       },
       "size": "medium",
       "sturdy": true
@@ -44,7 +44,7 @@
       "max": 20,
       "value": 0
     },
-    "chatFlavor": "Nonlethal",
+    "chatFlavor": "",
     "container": {
       "contents": [],
       "includeContentsInWealthCalculation": true,
@@ -69,32 +69,23 @@
           "amount": 1,
           "subtype": "ammunitionSlot",
           "weightProperty": ""
+        },
+        {
+          "type": "slot",
+          "acceptsType": [
+            "weaponAccessory"
+          ],
+          "affectsEncumbrance": true,
+          "amount": 4,
+          "subtype": "",
+          "weightMultiplier": 1,
+          "weightProperty": ""
         }
       ]
     },
     "critical": {
       "effect": "Staggered",
-      "parts": [
-        {
-          "name": "",
-          "formula": "",
-          "group": null,
-          "isPrimarySection": false,
-          "types": {
-            "acid": false,
-            "bludgeoning": false,
-            "cold": false,
-            "electricity": false,
-            "fire": false,
-            "healing": false,
-            "nonlethal": false,
-            "piercing": false,
-            "radiation": false,
-            "slashing": false,
-            "sonic": false
-          }
-        }
-      ]
+      "parts": []
     },
     "damage": {
       "parts": [
@@ -102,17 +93,15 @@
           "name": "",
           "formula": "6d6",
           "group": null,
-          "isPrimarySection": false,
+          "isPrimarySection": true,
           "types": {
             "acid": false,
             "bludgeoning": false,
-            "cold": false,
+            "cold": true,
             "electricity": false,
             "fire": false,
             "healing": false,
-            "nonlethal": false,
             "piercing": false,
-            "radiation": false,
             "slashing": false,
             "sonic": false
           }
@@ -126,7 +115,7 @@
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": ""
+      "value": "<p>Complex algorithms, controls, and safeguards within a numbing beam ensure the weapon never lowers its target’s temperature to lethal levels. Tactical and advanced numbing beams see use in populated areas, while elite and paragon numbing beams are more often employed in military endeavors. Those models intended for use near civilians include prominent external computer interfaces, as though to advertise their safety features, while military models tend toward a sleek, traditional design.</p>"
     },
     "duration": {
       "units": "instantaneous",
@@ -175,7 +164,7 @@
       "variable": false
     },
     "slug": "",
-    "source": "AR",
+    "source": "AR pg. 35",
     "special": "",
     "specialMaterials": {},
     "target": {
@@ -186,9 +175,9 @@
       "value": 1
     },
     "uses": {
-      "max": "0",
+      "max": "",
       "per": "",
-      "value": 1
+      "value": null
     },
     "weaponCategory": "cryo",
     "weaponType": "longA"
