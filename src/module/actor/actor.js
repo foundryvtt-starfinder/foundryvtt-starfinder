@@ -930,7 +930,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         }
 
         const rollMode = roll?.options?.rollMode ?? game.settings.get("core", "rollMode");
-        const preparedRollExplanation = DiceSFRPG.formatExplanation(formula.formula);
+        const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(formula.formula);
         const rollContent = await roll.render({ breakdown: preparedRollExplanation, tags: roll.tags });
 
         ChatMessageSFRPG.create({

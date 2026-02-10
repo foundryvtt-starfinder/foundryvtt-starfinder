@@ -753,7 +753,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             }, messageOptions);
 
             // Prepare roll formula explanation
-            const preparedRollExplanation = DiceSFRPG.formatExplanation(formula.formula);
+            const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(formula.formula);
             const preparedRollExplanationElement = document.createElement("div");
             preparedRollExplanationElement.innerHTML = preparedRollExplanation;
 

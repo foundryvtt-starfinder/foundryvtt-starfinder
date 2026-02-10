@@ -1138,7 +1138,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         if (!roll) return;
 
-        const preparedRollExplanation = DiceSFRPG.formatExplanation(formula.formula);
+        const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(formula.formula);
         const content = await roll.render({ breakdown: preparedRollExplanation });
 
         ChatMessageSFRPG.create({

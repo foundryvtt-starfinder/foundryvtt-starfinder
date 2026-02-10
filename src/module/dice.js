@@ -1,4 +1,3 @@
-import { SFRPG } from "./config.js";
 import RollTree from "./rolls/rolltree.js";
 import StackModifiers from "./rules/closures/stack-modifiers.js";
 import SFRPGRoll from "./rolls/roll.js";
@@ -212,7 +211,7 @@ export class DiceSFRPG {
 
             // Create the roll formula, explanation, and roll
             const finalFormula = await this._calcStackingFormula(baseDie, rollInfo, rollContext.allContexts[actorContextKey]?.entity);
-            const preparedRollExplanation = DiceSFRPG.formatExplanation(finalFormula.formula);
+            const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(finalFormula.formula);
             const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, tags, rollCriteria }).evaluate();
 
             // Add Critical hit and effect information if required
@@ -313,7 +312,7 @@ export class DiceSFRPG {
             else if (rollInfo.button === "advantage") baseDie = "2d20kh";
 
             const finalFormula = await this._calcStackingFormula(baseDie, rollInfo, rollContext.allContexts[actorContextKey]?.entity);
-            const preparedRollExplanation = DiceSFRPG.formatExplanation(finalFormula.formula);
+            const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(finalFormula.formula);
             const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, tags, rollCriteria }).evaluate();
 
             // Roll Evaluation vs Action Target (KAC, EAC, DC, etc.)
@@ -415,6 +414,7 @@ export class DiceSFRPG {
                     descriptors: [],
                     partIndex: part.partIndex ?? null,
                     properties: {},
+                    rollBreakdown: finalFormula.formula,
                     rollCriteria: partRollCriteria,
                     rollNotes: itemContext?.data?.damageNotes,
                     specialMaterials: [],
@@ -487,10 +487,8 @@ export class DiceSFRPG {
                     }
                 }
 
-                // Format the roll explanation, create the roll, and evaluate it
-                // TODO-Ian: Rewrite this to spit out an array of explanations, and this will be much easier to parse
-                const preparedRollExplanation = DiceSFRPG.formatExplanation(finalFormula.formula);
-                const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, rollCriteria: partRollCriteria }).evaluate();
+                // Create the roll and evaluate it
+                const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { rollCriteria: partRollCriteria }).evaluate();
 
                 // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
                 if (roll.total < 1) {
@@ -524,81 +522,6 @@ export class DiceSFRPG {
             }
         } else if (onClose) onClose(null, null, null, false);
         return rollInfo.button !== 'cancel';
-    }
-
-    /**
-     * Hightlight rolls that are considered critical successes or failures.
-     *
-     * @param {ChatMessageSFRPG} message       The ChatMessage document being rendered
-     * @param {JQuery}      html               The pending HTML as a jQuery object
-     */
-    static highlightCriticalSuccessFailure(message, html) {
-        if (!message.isRoll || !message.isContentVisible) return;
-
-        const roll = message.rolls[0];
-        if (!roll.dice.length) return;
-        if (roll.isCritical) {
-            html.find('.dice-total').addClass('success');
-        }
-        if (roll.isFumble) {
-            html.find('.dice-total').addClass('failure');
-        }
-    }
-
-    /**
-     * Add damage types for damage rolls to the chat card.
-     *
-     * @param {ChatMessageSFRPG} message       The ChatMessage document being rendered
-     * @param {JQuery}      html               The pending HTML as a jQuery object
-     */
-    static addDamageTypes(message, html) {
-        if (!message.isRoll || !message.isContentVisible) return;
-
-        const roll = message.rolls[0];
-        if (!(roll?.dice.length > 0)) return;
-        for (const die of roll.dice) {
-            if (die?.options?.isDamageRoll) {
-                const types = die?.options?.damageTypes;
-                const critical = die?.options?.criticalData;
-
-                html.data("damageTypes", types);
-                html.data("critical", critical);
-            }
-        }
-    }
-
-    static formatExplanation(explanationText) {
-        let index = 0;
-        let consumedText = "";
-        let isReading = false;
-        const sections = [];
-        while (index < explanationText.length) {
-            const token = explanationText[index++];
-            if (token === "[") {
-                sections.push({text: consumedText, replace: true});
-                consumedText = "";
-                isReading = true;
-            } else if (token === "]" && isReading) {
-                sections.push({text: consumedText, replace: false});
-                consumedText = "";
-                isReading = false;
-            }
-            consumedText += token;
-        }
-        if (consumedText) {
-            sections.push({text: consumedText, replace: true});
-        }
-
-        let finalResult = "";
-        for (const section of sections) {
-            if (section.replace) {
-                finalResult += section.text.replace(/\+/gi, "<br /> +").replace(/-/gi, "<br /> -");
-            } else {
-                finalResult += section.text;
-            }
-        }
-        finalResult = (finalResult[0] === '-') ? finalResult : '+ ' + finalResult;
-        return finalResult;
     }
 
     static resolveFormulaWithoutDice(sourceFormula, rollContext, options = {logErrors: true}) {
