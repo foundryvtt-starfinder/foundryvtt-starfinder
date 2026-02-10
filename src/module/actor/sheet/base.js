@@ -8,7 +8,6 @@ import { ActorItemHelper, containsItems, getFirstAcceptableStorageIndex, moveIte
 
 import { InputDialog } from "../../apps/input-dialog.js";
 import { ItemDeletionDialog } from "../../apps/item-deletion-dialog.js";
-import { SFRPG } from "../../config.js";
 import { ItemSFRPG } from "../../item/item.js";
 
 import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
@@ -29,7 +28,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         super(...args);
 
         this.acceptedItemTypes = [
-            ...SFRPG.sharedItemTypes
+            ...CONFIG.SFRPG.sharedItemTypes
         ];
 
         this._filters = {
@@ -449,6 +448,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         }
     }
 
+    /** @param {ItemSFRPG} item */
     _prepareAttackString(item)  {
         try {
             const itemData = item.system;
@@ -487,7 +487,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             if (abl) parts.push(`@abilities.${abl}.mod`);
             if (["character", "drone"].includes(actor.type)) parts.push("@attributes.baseAttackBonus.value");
             if (isWeapon) {
-                const procifiencyKey = SFRPG.weaponTypeProficiency[item.system.weaponType];
+                const procifiencyKey = CONFIG.SFRPG.weaponTypeProficiency[item.system.weaponType];
                 const proficient = itemData.proficient || actor?.system?.traits?.weaponProf?.value?.includes(procifiencyKey);
                 if (!proficient) {
                     parts.push(`-4[${game.i18n.localize("SFRPG.Items.NotProficient")}]`);
@@ -551,7 +551,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
             const damageTypes = Object.entries(item.system.damage.parts[0].types)
                 .map(([type, enabled]) => {
-                    if (enabled) return SFRPG.damageTypeToAcronym[type];
+                    if (enabled) return CONFIG.SFRPG.damageTypeToAcronym[type];
                 })
                 .filterJoin(" & ");
 
@@ -566,7 +566,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     /**
     * Add a modifer to this actor.
     *
-    * @param {Event} event The originating click event
+    * @param {PointerEvent} event The originating click event
     */
     _onModifierCreate(event) {
         event.preventDefault();
@@ -581,7 +581,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     /**
     * Delete a modifier from the actor.
     *
-    * @param {Event} event The originating click event
+    * @param {PointerEvent} event The originating click event
     */
     async _onModifierDelete(event) {
         event.preventDefault();
@@ -594,7 +594,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
     * Edit a modifier for an actor.
-    * @param {Event} event The orginating click event
+    * @param {PointerEvent} event The orginating click event
     */
     async _onModifierEdit(event) {
         event.preventDefault();
@@ -609,7 +609,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     /**
     * Toggle a modifier to be enabled or disabled.
     *
-    * @param {Event} event The originating click event
+    * @param {PointerEvent} event The originating click event
     */
     async _onToggleModifierEnabled(event) {
         event.preventDefault();
@@ -625,7 +625,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     /**
      * Toggle an effect and their modifiers to be enabled or disabled.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onToggleEffect(event) {
         event.preventDefault();
@@ -638,7 +638,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     /**
 	 * Toggles an option on the selected item.
 	 *
-	 * @param {Event} event The originating click event
+	 * @param {PointerEvent} event The originating click event
 	 */
     async _onToggleOption(event) {
         event.preventDefault();
@@ -664,7 +664,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     /**
      * handle cycling whether a skill is a class skill or not
      *
-     * @param {Event} event A click or contextmenu event which triggered the handler
+     * @param {PointerEvent} event A click or contextmenu event which triggered the handler
      * @private
      */
     _onCycleClassSkill(event) {
@@ -688,7 +688,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Handle editing a skill
-     * @param {Event} event The originating contextmenu event
+     * @param {PointerEvent} event The originating contextmenu event
      */
     _onEditSkill(event) {
         event.preventDefault();
@@ -699,7 +699,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Handle adding a skill
-     * @param {Event} event The originating contextmenu event
+     * @param {PointerEvent} event The originating contextmenu event
      */
     _onAddSkill(event) {
         event.preventDefault();
@@ -709,7 +709,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Handle creating a new Owned Item for the actor using initial data defined in the HTML dataset
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onItemCreate(event) {
         event.stopPropagation();
@@ -733,7 +733,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * open and prefilter a compendium browser depending on it's environment.
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onOpenBrowser(event) {
         event.preventDefault();
@@ -784,7 +784,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Handle deleting an Owned Item for the actor
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onItemDelete(event) {
         event.preventDefault();
@@ -858,7 +858,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
-     * @param {Event} event The triggering event
+     * @param {PointerEvent} event The triggering event
      */
     _onItemRoll(event) {
         event.preventDefault();
@@ -874,7 +874,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Handle attempting to recharge an item usage by rolling a recharge check
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     _onItemRecharge(event) {
         event.preventDefault();
@@ -885,7 +885,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Handle toggling the equipped state of an item.
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     _onItemEquippedChange(event) {
         event.preventDefault();
@@ -900,7 +900,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     /**
      * Toggles condition modifiers on or off.
      *
-     * @param {Event} event The triggering event.
+     * @param {PointerEvent} event The triggering event.
      */
     async _onToggleConditions(event) {
         event.preventDefault();
@@ -930,7 +930,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Handle Compendium Link Click
-     * @param {Event} event   The originating click event
+     * @param {PointerEvent} event   The originating click event
      */
     async _onOpenSkillCompendium(event) {
         event.preventDefault();
@@ -947,7 +947,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Handle rolling a Save
-     * @param {Event} event   The originating click event
+     * @param {PointerEvent} event   The originating click event
      * @private
      */
     _onRollSave(event) {
@@ -958,7 +958,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Handle rolling a Skill check
-     * @param {Event} event   The originating click event
+     * @param {PointerEvent} event   The originating click event
      * @private
      */
     _onRollSkillCheck(event) {
@@ -969,7 +969,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Handle rolling an Ability check
-     * @param {Event} event   The originating click event
+     * @param {PointerEvent} event   The originating click event
      * @private
      */
     _onRollAbilityCheck(event) {
@@ -981,7 +981,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     /**
      * Handles reloading / replacing ammo or batteries in a weapon.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onReloadWeapon(event) {
         event.preventDefault();
@@ -995,7 +995,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     /**
      * Handles toggling the open/close state of a container.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     _onToggleContainer(event) {
         event.preventDefault();
@@ -1027,7 +1027,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     /**
      * Handle rolling of an item form the Actor sheet, obtaining the item instance an dispatching to it's roll method.
      *
-     * @param {Event} event The html event
+     * @param {PointerEvent} event The html event
      */
     async _onItemSummary(event) {
         event.preventDefault();
@@ -1152,7 +1152,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     /**
      * Creates a TraitSelector dialog
      *
-     * @param {Event} event HTML Event
+     * @param {PointerEvent} event HTML Event
      * @private
      */
     _onTraitSelector(event) {
@@ -1174,7 +1174,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Handle toggling of filters to display a different set of owned items
-     * @param {Event} event     The click event which triggered the toggle
+     * @param {PointerEvent} event     The click event which triggered the toggle
      * @private
      */
     _onToggleFilter(event) {
@@ -1235,11 +1235,13 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         new ActorSheetFlags(this.actor).render(true);
     }
 
+    /** @param {PointerEvent} event */
     _onLevelUp(event) {
         event.preventDefault();
         this.actor.levelUp(event.currentTarget.dataset.actorClassId);
     }
 
+    /** @param {Event} event */
     async _onDrop(event) {
         event.preventDefault();
 
@@ -1251,6 +1253,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         }
     }
 
+    /** @param {Event} event */
     async processDroppedItems(event, parsedDragData) {
         const targetActor = new ActorItemHelper(this.actor.id, this.token?.id, this.token?.parent?.id, { actor: this.actor });
         if (!ActorItemHelper.IsValidHelper(targetActor)) {
@@ -1276,7 +1279,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         if (!this.acceptedItemTypes.includes(item.type)) {
             // Reject item
-            ui.notifications.error(game.i18n.format("SFRPG.InvalidItem", { name: SFRPG.itemTypes[item.type], target: SFRPG.actorTypes[this.actor.type] }));
+            ui.notifications.error(game.i18n.format("SFRPG.InvalidItem", { name: CONFIG.SFRPG.itemTypes[item.type], target: CONFIG.SFRPG.actorTypes[this.actor.type] }));
             return;
         }
 
@@ -1310,7 +1313,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             return;
 
         // Handle trading between actors
-        } else if (parsedDragData.uuid.includes("Actor")) {
+        } else if (parsedDragData?.uuid?.includes("Actor")) {
             const actor = fromUuidSync(parsedDragData.uuid)?.actor || await fromUuid(parsedDragData.uuid)?.actor;
             const tokenId = actor.isToken ? actor.token.id : null;
             const sceneId = actor.isToken ? actor.token.parent.id : null;
@@ -1422,7 +1425,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
     /**
      * Allow item action buttons to be draggable, for the use of creating item macros
-     * @param {Event} ev
+     * @param {DragEvent} ev
      */
     _onItemUsageDragStart(ev) {
         ev.stopPropagation();

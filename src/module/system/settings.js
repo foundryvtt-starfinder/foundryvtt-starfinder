@@ -1,5 +1,4 @@
 import FloatingNumberMenu from "../classes/floating-number-menu.js";
-import { SFRPG } from "../config.js";
 import { ItemSFRPG } from "../item/item.js";
 import { rerenderApps } from "../utils/utilities.js";
 
@@ -140,7 +139,7 @@ export const registerSystemSettings = function() {
         onChange: () => ui.combat.render(false)
     });
 
-    for (const combatType of SFRPG.combatTypes) {
+    for (const combatType of CONFIG.SFRPG.combatTypes) {
         const capitalizedCombatType = combatType[0].toUpperCase() + combatType.slice(1);
         game.settings.register("sfrpg", `${combatType}ChatCards`, {
             name: `SFRPG.Settings.CombatCards.${capitalizedCombatType}Name`,

@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemVehicleSystem extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "vehicleSystem",
+            icon: "fas fa-gear"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.VehicleSystem'

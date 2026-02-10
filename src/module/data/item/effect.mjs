@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemEffect extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "effect",
+            icon: "fas fa-stopwatch"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Effect'
@@ -85,5 +92,20 @@ export default class SFRPGItemEffect extends SFRPGItemBase {
         });
 
         return schema;
+    }
+
+    /**
+     * Return a sentence with the condition and its duration. e.g "flat-footed for 1 minute"
+     */
+    getTextDurationString() {
+        if (this.activeDuration.unit === "permanent") return game.i18n.format("SFRPG.Effect.DurationStringPermanently", {
+            name: this.item.name
+        });
+
+        return game.i18n.format("SFRPG.Effect.DurationString", {
+            name: this.item.name,
+            duration: this.activeDuration.value,
+            unit: this.activeDuration.unit
+        });
     }
 }

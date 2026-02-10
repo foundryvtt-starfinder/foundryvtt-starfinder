@@ -2,6 +2,13 @@ import SFRPGItemBase from './base-item.mjs';
 
 export default class SFRPGItemStarshipOtherSystem extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "starshipOtherSystem",
+            icon: "fas fa-gear"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.StarshipOtherSystem'

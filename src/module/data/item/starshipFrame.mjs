@@ -10,6 +10,13 @@ export default class SFRPGItemStarshipFrame extends SFRPGItemBase {
         return super.migrateData(data);
     };
 
+    static get metadata() {
+        return {
+            type: "starshipFrame",
+            icon: "fas fa-gears"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.StarshipFrame'

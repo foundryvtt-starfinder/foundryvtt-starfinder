@@ -7,34 +7,32 @@ import BaseEnricher from "./base.js";
 export default class IconEnricher extends BaseEnricher {
     // @Icon[type:graviton]
     // @Icon[type:mind-affecting]
-    constructor() {
-        super();
-    }
 
     /** @inheritdoc */
     get enricherType() {
-        return "Icon";
+        return /** @type {const}*/("Icon");
     }
 
     /** @inheritdoc */
     get validTypes() {
-        return ["photon", "graviton", "language-dependent", "mind-affecting", "sense-dependent"];
+        return /** @type {const}*/(["photon", "graviton", "language-dependent", "mind-affecting", "sense-dependent"]);
     }
 
     /** @inheritdoc */
     get icons() {
-        return {
+        return /** @type {const}*/({
             "photon": "systems/sfrpg/images/cup/gameplay/photon.webp",
             "graviton": "systems/sfrpg/images/cup/gameplay/graviton.webp",
             "language-dependent": "systems/sfrpg/images/cup/gameplay/language.webp",
             "mind-affecting": "systems/sfrpg/images/cup/gameplay/mind.webp",
             "sense-dependent": "systems/sfrpg/images/cup/gameplay/sense.webp"
-        };
+        });
     }
 
     /**
      * @overrides BaseEnricher
-     * @returns {HTMLImageElement} */
+     * @returns {HTMLImageElement}
+     */
     createElement() {
         const img = document.createElement("img");
         const name = game.i18n.localize(

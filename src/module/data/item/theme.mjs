@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemTheme extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "theme",
+            icon: "fas fa-user-tie"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Theme'

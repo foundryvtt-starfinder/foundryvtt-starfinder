@@ -3,6 +3,12 @@ import SFRPGItemBase from './base-item.mjs';
 const { fields } = foundry.data;
 
 export default class SFRPGItemASI extends SFRPGItemBase {
+    static get metadata() {
+        return {
+            type: "asi",
+            icon: "fas fa-person-arrow-up-from-line"
+        };
+    }
 
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',

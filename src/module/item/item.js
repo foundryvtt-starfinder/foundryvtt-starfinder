@@ -1,6 +1,5 @@
 import { getItemContainer } from "../actor/actor-inventory-utils.js";
 import AbilityTemplate from "../canvas/ability-template.js";
-import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import SFRPGModifier from "../modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../modifiers/types.js";
@@ -13,6 +12,7 @@ import { ItemCapacityMixin } from "./mixins/item-capacity.js";
 /**
  * @import { RollResult } from '../dice.js'
  * @import { ActorSFRPG } from "../actor/actor.js"
+ * @import SFRPGTimedEffect from "../timedEffect/timedEffect.js"
  */
 
 /** @extends {foundry.documents.Item} */
@@ -39,7 +39,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     get hasAttack() {
         if (this.type === "starshipWeapon") return true;
-        return SFRPG.attackActions.includes(this.system.actionType);
+        return CONFIG.SFRPG.attackActions.includes(this.system.actionType);
     }
 
     get hasOtherFormula() {
@@ -135,7 +135,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // Feat Items
         else if (itemData.type === "feat") {
             const act = data.activation;
-            labels.featType = data?.damage?.parts?.length && SFRPG.attackActions.includes(data.actionType)
+            labels.featType = data?.damage?.parts?.length && CONFIG.SFRPG.attackActions.includes(data.actionType)
                 ? game.i18n.localize("SFRPG.Attack")
                 : act.type ? game.i18n.localize("SFRPG.Items.Action.TitleAction") : game.i18n.localize("SFRPG.Passive");
         }
@@ -163,7 +163,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     labels.activation = (data.duration?.units === "instantaneous")
                         ? game.i18n.localize("SFRPG.AbilityActivationButton.Use")
                         : game.i18n.localize("SFRPG.AbilityActivationButton.Activate");
-                } else if (SFRPG.uncountableActivations.includes(act.type)) {
+                } else if (CONFIG.SFRPG.uncountableActivations.includes(act.type)) {
                     labels.activation = C.abilityActivationTypes[act.type];
                 } else {
                     labels.activation = [
@@ -264,7 +264,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * @param {object} data           The initial data object provided to the document creation request
      * @param {object} options        Additional options which modify the creation request
      * @param {string} userId         The ID of the requesting user, always game.user.id
-     * @returns {boolean|void}        Explicitly return false to prevent creation of this Document
+     * @returns {Promise<boolean|void>}        Explicitly return false to prevent creation of this Document
      */
     async _preCreate(data, options, user) {
         const updates = {};
@@ -284,7 +284,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             }
             else {
                 if (t === "weapon") {
-                    const proficiencyKey = SFRPG.weaponTypeProficiency[itemData.weaponType];
+                    const proficiencyKey = CONFIG.SFRPG.weaponTypeProficiency[itemData.weaponType];
                     const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(proficiencyKey);
                     if (proficient) updates["system.proficient"] = true;
                 } else if (t === "shield") {
@@ -323,9 +323,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         // Apply a default icon to the item based on its type if it doesn't already have an icon selected
-        if (Object.values(SFRPG.foundryDefaultIcons).includes(this.img)) {
-            if (Object.keys(SFRPG.defaultItemIcons).includes(this.type)) {
-                updates.img = ["systems/sfrpg/icons/default/", SFRPG.defaultItemIcons[this.type]].join("");
+        if (Object.values(CONFIG.SFRPG.foundryDefaultIcons).includes(this.img)) {
+            if (Object.keys(CONFIG.SFRPG.defaultItemIcons).includes(this.type)) {
+                updates.img = ["systems/sfrpg/icons/default/", CONFIG.SFRPG.defaultItemIcons[this.type]].join("");
             }
         }
 
@@ -795,7 +795,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // Spell school
         if (CONFIG.SFRPG.spellSchools[data.school]) {
             props.push(
-                {name: game.i18n.localize(SFRPG.spellSchools[data.school]), tooltip: null}
+                {name: game.i18n.localize(CONFIG.SFRPG.spellSchools[data.school]), tooltip: null}
             );
         }
     }
@@ -906,7 +906,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.type)) parts.push("@attributes.baseAttackBonus.value");
         if (isWeapon) {
-            const proficiencyKey = SFRPG.weaponTypeProficiency[this.system.weaponType];
+            const proficiencyKey = CONFIG.SFRPG.weaponTypeProficiency[this.system.weaponType];
             const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(proficiencyKey);
             if (!proficient) {
                 parts.push(`-4[${game.i18n.localize("SFRPG.Items.NotProficient")}]`);
@@ -944,7 +944,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         if (this.system.actionTarget) {
             rollOptions.actionTarget = this.system.actionTarget;
-            rollOptions.actionTargetSource = SFRPG.actionTargets;
+            rollOptions.actionTargetSource = CONFIG.SFRPG.actionTargets;
         }
 
         // Add has__ properties to itemData
@@ -966,7 +966,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
 
         /** Create global attack modifiers. */
-        const additionalModifiers = foundry.utils.deepClone(SFRPG.globalAttackRollModifiers).map(mod => {
+        const additionalModifiers = foundry.utils.deepClone(CONFIG.SFRPG.globalAttackRollModifiers).map(mod => {
             const modInstance = {bonus: new SFRPGModifier(mod.bonus, {parent: this, globalModifier: true})};
             return modInstance;
         });
@@ -1008,7 +1008,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     getAppropriateAttackModifiers(isWeapon) {
         const acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
-        if (SFRPG.spellAttackActions.includes(this.system.actionType)) {
+        if (CONFIG.SFRPG.spellAttackActions.includes(this.system.actionType)) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_ATTACKS);
         } else if (this.system.actionType === "rwak") {
             acceptedModifiers.push(SFRPGEffectType.RANGED_ATTACKS);
@@ -1211,7 +1211,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         if (this.system.actionTarget) {
             rollOptions.actionTarget = this.system.actionTarget;
-            rollOptions.actionTargetSource = SFRPG.actionTargetsStarship;
+            rollOptions.actionTargetSource = CONFIG.SFRPG.actionTargetsStarship;
         }
 
         const quadrant = this.system.mount.arc.charAt(0).toUpperCase() + this.system.mount.arc.slice(1);
@@ -1440,7 +1440,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     getAppropriateDamageModifiers(isWeapon) {
         const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
 
-        if (SFRPG.spellAttackActions.includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
+        if (CONFIG.SFRPG.spellAttackActions.includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
         } else if (this.system.actionType === "rwak") {
             acceptedModifiers.push(SFRPGEffectType.RANGED_DAMAGE);
@@ -1784,6 +1784,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     /* -------------------------------------------- */
 
+    /** @param {PointerEvent} event */
     static async _onChatCardAction(event) {
         event.preventDefault();
 
@@ -2059,10 +2060,20 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * The following functions are run when appropriate by the GM.
      */
 
+    /**
+     * @template {keyof typeof CONFIG.SFRPG.turnEventTypes} [Type=keyof typeof CONFIG.SFRPG.turnEventTypes]
+     * @typedef TurnEvent
+     * @property {string} [name]
+     * @property {keyof typeof CONFIG.SFRPG.effectEndTypes} trigger
+     * @property {Type} type
+     * @property {string} [formula]
+     * @property {Exclude<keyof typeof CONFIG.SFRPG.damageAndHealingTypes, "radiation"|"nonlethal">[]} damageTypes
+     */
+
     _onTurnStart() {
         if (this.type !== "effect" || !this.system.enabled) return;
 
-        for (const turnEvent of this.system.turnEvents) {
+        for (const turnEvent of /** @type {TurnEvent[]} */ (this.system.turnEvents)) {
             if (turnEvent.trigger !== "onTurnStart") continue;
 
             this._handleTurnEvent(turnEvent);
@@ -2074,7 +2085,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     _onTurnEnd() {
         if (this.type !== "effect" || !this.system.enabled) return;
 
-        for (const turnEvent of this.system.turnEvents) {
+        for (const turnEvent of /** @type {TurnEvent[]} */ (this.system.turnEvents)) {
             if (turnEvent.trigger !== "onTurnEnd") continue;
 
             this._handleTurnEvent(turnEvent);
@@ -2082,6 +2093,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     }
 
+    /** @param {TurnEvent} turnEvent */
     _handleTurnEvent(turnEvent) {
         switch (turnEvent.type) {
             case "note":
@@ -2093,6 +2105,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
     }
 
+    /** @param {TurnEvent<"note">} turnEvent */
     _handleEffectNoteEvent(turnEvent) {
         ChatMessage.create({
             content: turnEvent.content,
@@ -2100,6 +2113,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         });
     }
 
+    /** @param {TurnEvent<"roll">} turnEvent */
     async _handleEffectRollEvent(turnEvent) {
         if (!turnEvent.formula) return;
 
@@ -2127,7 +2141,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /**
      * Execute a macro with the context of this item
      * @param {foundry.documents.Macro} macro The macro to execute
-     * @param {Record<string, *>} scope Any additional arguments to pass to macro execution
+     * @param {object} [scope={}] Any additional arguments to pass to macro execution
+     * @param {Event} [scope.event] An optional event passed to the executed macro
      * @returns {Promise<unknown>} The return value of the macro
      */
     async executeMacroWithContext(macro, scope = {}) {

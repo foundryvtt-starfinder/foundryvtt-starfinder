@@ -224,7 +224,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * This method is called upon form submission after form data is validated
      *
-     * @param {Event} event The initial triggering submission event
+     * @param {SubmitEvent} event The initial triggering submission event
      * @param {Object} formData The object of validated form data with which to update the object
      * @private
      */
@@ -335,7 +335,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
     /**
      * Handles dragenter for the passengers tab
-     * @param {Event} event The originating dragenter event
+     * @param {DragEvent} event The originating dragenter event
      */
     _onCrewDragEnter(event) {
         $(event.target).css('background', "rgba(0,0,0,0.3)");
@@ -343,7 +343,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
     /**
      * Handles dragleave for the passengers tab
-     * @param {Event} event The originating dragleave event
+     * @param {DragEvent} event The originating dragleave event
      */
     _onCrewDragLeave(event) {
         $(event.target).css('background', '');
@@ -352,7 +352,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Handle dragging crew members on the sheet.
      *
-     * @param {Event} event Originating dragstart event
+     * @param {DragEvent} event Originating dragstart event
      */
     _onDragCrewStart(event) {
         const actorId = event.currentTarget.dataset.actorId;
@@ -373,7 +373,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Handles ondragover for crew drag-n-drop
      *
-     * @param {Event} event Orgininating ondragover event
+     * @param {DragEvent} event Orgininating ondragover event
      */
     _onCrewDragOver(event) {
         event.preventDefault();
@@ -383,7 +383,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Remove an vehicle from the hangar bay.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onRemoveFromHangarBar(event) {
         event.preventDefault();
@@ -405,7 +405,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Remove an actor from the crew.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onRemoveFromCrew(event) {
         event.preventDefault();
@@ -418,7 +418,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Opens the sheet of a passenger.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onActorView(event) {
         event.preventDefault();
@@ -432,7 +432,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Rolls the Piloting skill check of a passenger.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onRollPassengerPilotingSkill(event) {
         event.preventDefault();
@@ -447,7 +447,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Rolls the Piloting skill check of the pilot.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onRollPilotPilotingSkill(event) {
         event.preventDefault();
@@ -458,7 +458,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Performs a Piloting check for a system (generally Autopilot)
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onRollPilotingForSystem(event) {
 
@@ -473,7 +473,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Deactivates a vehicle system.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onDeactivateVehicleSystem(event) {
         event.preventDefault();
@@ -509,7 +509,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Activates a vehicle system.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onActivateVehicleSystem(event) {
         event.preventDefault();

@@ -3,6 +3,13 @@ import SFRPGActorBase from "./base-actor.mjs";
 const { fields } = foundry.data;
 
 export default class SFRPGActorCharacter extends SFRPGActorBase {
+    static get metadata() {
+        return {
+            type: "character",
+            icon: "fas fa-user"
+        };
+    }
+
     static defineSchema() {
         const schema = super.defineSchema();
 

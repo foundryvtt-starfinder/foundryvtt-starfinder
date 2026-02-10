@@ -1,4 +1,3 @@
-import { SFRPG } from "../config.js";
 import { DocumentBrowserSFRPG } from './document-browser.js';
 
 const starshipComponentTypes = {
@@ -127,7 +126,7 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
         if ((this.filters?.starshipComponentTypes?.activeFilters || []).includes("starshipWeapon")) {
             filters.starshipWeaponTypes = {
                 label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.WeaponType"),
-                content: SFRPG.starshipWeaponTypes,
+                content: CONFIG.SFRPG.starshipWeaponTypes,
                 filter: (element, filters) => { return this._filterWeaponType(element, filters); },
                 activeFilters: this.filters.starshipWeaponTypes?.activeFilters || [],
                 type: "multi-select"
@@ -135,7 +134,7 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
 
             filters.starshipWeaponClass = {
                 label: game.i18n.format("SFRPG.Browsers.StarshipBrowser.WeaponClass"),
-                content: SFRPG.starshipWeaponClass,
+                content: CONFIG.SFRPG.starshipWeaponClass,
                 filter: (element, filters) => { return this._filterWeaponClass(element, filters); },
                 activeFilters: this.filters.starshipWeaponClass?.activeFilters || [],
                 type: "multi-select"
@@ -224,7 +223,7 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
     }
 
     /**
-     * @typedef  {object} filterObjectStarship
+     * @typedef  {object} FilterObjectStarship
      * @property {string[]} starshipComponentTypes Drawn from starshipComponentTypes
      * @property {string[]} starshipWeaponTypes Drawn from SFRPG.starshipWeaponTypes
      * @property {string[]} starshipWeaponClass Drawn from SFRPG.starshipWeaponClass
@@ -232,7 +231,7 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
      */
     /**
      * Prepare the filter object before calling the parent method
-     * @param {filterObjectStarship} filters A filter object
+     * @param {FilterObjectStarship} filters A filter object
      */
     renderWithFilters(filters = {}) {
         const filterObject = filters;
@@ -242,6 +241,7 @@ class StarshipBrowserSFRPG extends DocumentBrowserSFRPG {
 }
 
 let _starshipBrowser = null;
+/** @returns {StarshipBrowserSFRPG} */
 export function getStarshipBrowser() {
     if (!_starshipBrowser) {
         _starshipBrowser = new StarshipBrowserSFRPG();

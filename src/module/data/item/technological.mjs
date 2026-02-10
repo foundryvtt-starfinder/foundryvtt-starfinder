@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemTechnological extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "technological",
+            icon: "fas fa-microchip"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Technological'

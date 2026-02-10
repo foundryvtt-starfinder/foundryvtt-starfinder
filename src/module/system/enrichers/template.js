@@ -1,5 +1,5 @@
 import AbilityTemplate from "../../canvas/ability-template.js";
-import BaseEnricher, { getDatasetfromEvent } from "./base.js";
+import BaseEnricher from "./base.js";
 
 /**
  * Place a template
@@ -7,13 +7,10 @@ import BaseEnricher, { getDatasetfromEvent } from "./base.js";
  */
 export default class TemplateEnricher extends BaseEnricher {
     // @Check[type:sphere|distance:30|color:#ff0000|texture:some/file/path]
-    constructor() {
-        super();
-    }
 
     /** @inheritdoc */
     get enricherType() {
-        return "Template";
+        return /** @type {const}*/("Template");
     }
 
     /** @inheritdoc */
@@ -23,13 +20,13 @@ export default class TemplateEnricher extends BaseEnricher {
 
     /** @inheritdoc */
     get icons() {
-        return {
+        return /** @type {const}*/({
             "sphere": "fa-circle",
             "cone": "fa-triangle",
             "cube": "fa-square",
             "cylinder": "fa-circle",
             "line": "fa-grip-lines-vertical"
-        };
+        });
     }
 
     /**
@@ -37,10 +34,10 @@ export default class TemplateEnricher extends BaseEnricher {
      */
     isValid() {
         if (!this.args.type || !this.validTypes.includes(this.args.type)) {
-            return this._failValidation("Type");
+            return this._failValidation("Type", this.args.type || "");
         }
         if (!this.args.distance || !this.args.distance > 0) {
-            return this._failValidation("Distance");
+            return this._failValidation("Distance", this.args.distance);
         }
 
         return true;
@@ -48,7 +45,8 @@ export default class TemplateEnricher extends BaseEnricher {
 
     /**
      * @extends BaseEnricher
-     * @returns {HTMLAnchorElement} */
+     * @returns {HTMLAnchorElement}
+     */
     createElement() {
         const a = super.createElement();
 
@@ -64,13 +62,14 @@ export default class TemplateEnricher extends BaseEnricher {
 
     }
 
-    static hasRepost = true;
-    static listeners = {
+    hasRepost = true;
+    listeners = {
         "click": this.#clickListener
     };
 
-    static async #clickListener(event) {
-        const data = getDatasetfromEvent(event);
+    /** @param {PointerEvent} event  */
+    async #clickListener(event) {
+        const data = this.getDatasetfromEvent(event);
         let { type, distance, color, texture } = data;
 
         type = {

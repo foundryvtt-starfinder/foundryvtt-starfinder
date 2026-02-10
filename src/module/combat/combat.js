@@ -1,5 +1,4 @@
 import { CombatDifficulty } from "../apps/combat-difficulty.js";
-import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
 /**  @import Combatant from "@client/documents/combatant.mjs" */
@@ -857,7 +856,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         for (const effect of timedEffects.values()) {
             const duration = effect.activeDuration;
-            if (!Object.hasOwn(SFRPG.effectDurationFrom, duration.unit)) continue;
+            if (!Object.hasOwn(CONFIG.SFRPG.effectDurationFrom, duration.unit)) continue;
 
             const worldTime = game.time.worldTime;
             const effectStart = duration.activationTime ?? -Infinity;

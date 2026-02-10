@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemMod extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "mod",
+            icon: "fas fa-screwdriver-wrench"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Mod'

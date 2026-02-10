@@ -39,7 +39,7 @@ import { MeasuredTemplateSFRPG, TemplateLayerSFRPG } from "./module/canvas/templ
 import { addChatMessageContextOptions } from "./module/chat/chat-message-options.js";
 import CounterManagement from "./module/classes/counter-management.js";
 import { CombatSFRPG } from "./module/combat/combat.js";
-import { SFRPG } from "./module/config.js";
+import { _SFRPG } from "./module/config.js";
 import { DiceSFRPG } from './module/dice.js';
 import Engine from "./module/engine/engine.js";
 import { preloadHandlebarsTemplates, setupHandlebars } from "./module/handlebars.js";
@@ -78,6 +78,8 @@ import isObject from './module/utils/is-object.js';
 // Import DataModel classes
 import * as models from './module/data/_module.mjs';
 
+/** @import SFRPGTimedEffect from './module/timedEffect/timedEffect.js' */
+
 const { Actors, Items } = foundry.documents.collections;
 const { ActorSheet, ItemSheet } = foundry.appv1.sheets;
 
@@ -86,7 +88,7 @@ let initTime = null;
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
 /* -------------------------------------------- */
-const moduleStructure = {
+export const moduleStructure = {
     AbilityTemplate,
     applications: {
         // Actor Sheets
@@ -116,9 +118,10 @@ const moduleStructure = {
         SFRPGModifierApplication,
         TraitSelectorSFRPG
     },
+    /** @type {Map<string, ItemSFRPG>} */
     conditionCache: new Map(),
     compendiumArt: { map: new Map(), refresh: registerCompendiumArt },
-    config: SFRPG,
+    config: _SFRPG,
     dice: DiceSFRPG,
     documents: { ActorSFRPG, ItemSFRPG, CombatSFRPG },
     entities: { ActorSFRPG, ItemSFRPG },
@@ -141,6 +144,7 @@ const moduleStructure = {
     SFRPGModifier,
     SFRPGModifierType,
     SFRPGModifierTypes,
+    /** @type {Map<string, SFRPGTimedEffect>} */
     timedEffects: new Map(),
 
     // Namespace style
@@ -195,7 +199,7 @@ Hooks.once('init', async function() {
     moduleStructure.engine = engine;
     game.sfrpg = moduleStructure;
 
-    CONFIG.SFRPG = SFRPG;
+    CONFIG.SFRPG = _SFRPG;
     CONFIG.statusEffects = CONFIG.SFRPG.statusEffects;
 
     console.log("Starfinder | [INIT] Overriding document classes");
@@ -392,70 +396,9 @@ Hooks.once('init', async function() {
     CONFIG.TextEditor.enrichers.push(...Object.values(CONFIG.SFRPG.enricherTypes).map(cls => new cls()));
 
     console.log("Starfinder | [INIT] Applying inline icons");
-    CONFIG.Actor.typeIcons = {
-        character: "fas fa-user",
-        npc2: "fas fa-spaghetti-monster-flying",
-        npc: "fas fa-spaghetti-monster-flying",
-        drone: "fas fa-robot",
-        starship: "fas fa-rocket",
-        vehicle: "fas fa-car",
-        hazard: "fas fa-skull-crossbones"
-    };
-
-    CONFIG.Item.typeIcons = {
-        "archetypes": "fas fa-id-badge",
-        "class": "fas fa-id-card",
-        "race": "fas fa-user-tag",
-        "theme": "fas fa-user-tie",
-
-        "actorResource": "fas fa-chart-pie",
-        "feat": "fas fa-medal",
-        "spell": "fas fa-wand-magic-sparkles",
-        "effect": "fas fa-stopwatch",
-
-        "asi": "fas fa-person-arrow-up-from-line",
-
-        "chassis": "fas fa-car-battery",
-        "mod": "fas fa-screwdriver-wrench",
-
-        "starshipAblativeArmor": "fas fa-shield-halved",
-        "starshipAction": "fas fa-crosshairs",
-        "starshipArmor": "fas fa-user-shield",
-        "starshipComputer": "fas fa-server",
-        "starshipCrewQuarter": "fas fa-house-user",
-        "starshipDefensiveCountermeasure": "fas fa-shield-heart",
-        "starshipDriftEngine": "fas fa-atom",
-        "starshipExpansionBay": "fas fa-boxes-packing",
-        "starshipFortifiedHull": "fas fa-house-lock",
-        "starshipFrame": "fas fa-gears",
-        "starshipOtherSystem": "fas fa-gear",
-        "starshipPowerCore": "fas fa-radiation",
-        "starshipReinforcedBulkhead": "fas fa-file-shield",
-        "starshipSecuritySystem": "fas fa-user-lock",
-        "starshipSensor": "fas fa-location-crosshairs",
-        "starshipShield": "fas fa-shield",
-        "starshipSpecialAbility": "fas fa-medal",
-        "starshipThruster": "fas fa-shuttle-space",
-        "starshipWeapon": "fas fa-explosion",
-
-        "vehicleAttack": "fas fa-gun",
-        "vehicleSystem": "fas fa-gear",
-
-        "ammunition": "fas fa-box-archive",
-        "augmentation": "fas fa-vr-cardboard",
-        "consumable": "fas fa-beer-mug-empty",
-        "container": "fas fa-briefcase",
-        "equipment": "fas fa-shirt",
-        "fusion": "fas fa-bolt",
-        "goods": "fas fa-boxes-stacked",
-        "hybrid": "fas fa-hat-wizard",
-        "magic": "fas fa-wand-magic",
-        "shield": "fas fa-shield",
-        "technological": "fas fa-microchip",
-        "upgrade": "fas fa-link",
-        "weapon": "fas fa-gun",
-        "weaponAccessory": "fas fa-gears"
-    };
+    const applyIcons = (modelObjs) => Object.entries(modelObjs).map(([type, model]) => ({[type]: model.metadata.icon}));
+    CONFIG.Actor.typeIcons = applyIcons(CONFIG.Actor.dataModels);
+    CONFIG.Item.typeIcons = applyIcons(CONFIG.Item.dataModels);
 
     console.log("Starfinder | [INIT] Overriding chat message duration");
     CONFIG.ui.chat.NOTIFY_DURATION = game.settings.get("sfrpg", "chatNotificationDuration") ?? 5000; // Default to foundry's 5 seconds;
@@ -616,12 +559,12 @@ Hooks.once("i18nInit", () => {
         }, {});
     }
 
-    for (const element of SFRPG.globalAttackRollModifiers) {
+    for (const element of CONFIG.SFRPG.globalAttackRollModifiers) {
         element.bonus.name = game.i18n.localize(element.bonus.name);
         element.bonus.notes = game.i18n.localize(element.bonus.notes);
     }
 
-    for (const obj of Object.values(SFRPG.featureCategories)) {
+    for (const obj of Object.values(CONFIG.SFRPG.featureCategories)) {
         obj.category = game.i18n.localize(obj.category);
         obj.label = game.i18n.localize(obj.label);
     }

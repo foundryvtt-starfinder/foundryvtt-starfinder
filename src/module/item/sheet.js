@@ -1,6 +1,5 @@
-import { SFRPG } from "../config.js";
-import RollContext from "../rolls/rollcontext.js";
 import { WeaponPropertySelectorSFRPG } from "../apps/trait-selectors/weapon-property-selector.js";
+import RollContext from "../rolls/rollcontext.js";
 
 const itemSizeArmorClassModifier = {
     "fine": 8,
@@ -176,7 +175,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         // Determine whether to show calculated totals for fields with formulas
         if (itemData?.activation?.type || data.item.type === "weapon") {
             data.activation = {
-                hasInput: !SFRPG.uncountableActivations.includes(itemData?.activation?.type ?? "")
+                hasInput: !CONFIG.SFRPG.uncountableActivations.includes(itemData?.activation?.type ?? "")
             };
 
             data.range = {};
@@ -194,7 +193,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
             data.duration = {};
             data.duration.showTotal = !!itemData.duration?.total && (String(itemData.duration?.total) !== String(itemData.duration?.value));
-            data.duration.hasInput = !SFRPG.uncountableDurations.includes(itemData.duration.units);
+            data.duration.hasInput = !CONFIG.SFRPG.uncountableDurations.includes(itemData.duration.units);
             data.duration.needsEndOn = (itemData.duration?.units === "round");
 
             data.uses = {};
@@ -503,15 +502,15 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         if (item.type === "weapon") {
             category.enabled = true;
-            category.value = SFRPG.weaponTypes[itemData.weaponType];
+            category.value = CONFIG.SFRPG.weaponTypes[itemData.weaponType];
             category.tooltip = "SFRPG.ItemSheet.Weapons.Category";
         } else if (item.type === "equipment") {
             category.enabled = true;
-            category.value = SFRPG.equipmentTypes[itemData.armor.type];
+            category.value = CONFIG.SFRPG.equipmentTypes[itemData.armor.type];
             category.tooltip = "SFRPG.Items.Equipment.Category";
         } else if (item.type === "consumable") {
             category.enabled = true;
-            category.value = SFRPG.consumableTypes[itemData.consumableType];
+            category.value = CONFIG.SFRPG.consumableTypes[itemData.consumableType];
             category.tooltip = "SFRPG.ItemSheet.Consumables.Category";
         }
 

@@ -1,4 +1,3 @@
-import { SFRPG } from "../../config.js";
 import { ActorSheetSFRPG } from "./base.js";
 
 /**
@@ -11,8 +10,8 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     constructor(...args) {
         super(...args);
 
-        this.acceptedItemTypes.push(...SFRPG.characterDefinitionItemTypes);
-        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+        this.acceptedItemTypes.push(...CONFIG.SFRPG.characterDefinitionItemTypes);
+        this.acceptedItemTypes.push(...CONFIG.SFRPG.physicalItemTypes);
     }
 
     static get defaultOptions() {
@@ -67,7 +66,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     /**
      * Toggle the visibility of skills on the NPC sheet.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     _toggleSkills(event) {
         event.preventDefault();
@@ -133,7 +132,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                     && !!item.system.recharge.value
                     && item.system.recharge.charged === false,
                 hasAttack:
-                    SFRPG.attackActions.includes(item.system.actionType)
+                    CONFIG.SFRPG.attackActions.includes(item.system.actionType)
                     && (!["weapon", "shield"].includes(item.type)
                     || item.system.equipped),
                 hasDamage:
@@ -219,13 +218,13 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
             } */ else if (["archetypes", "class", "race", "theme"].includes(item.type)) {
                 if (!(item.type in features)) {
                     let label = "SFRPG.Items.Categories.MiscellaneousItems";
-                    if (item.type in SFRPG.itemTypes) {
-                        label = SFRPG.itemTypes[item.type];
+                    if (item.type in CONFIG.SFRPG.itemTypes) {
+                        label = CONFIG.SFRPG.itemTypes[item.type];
                     }
                     features[item.type] = { label: game.i18n.format(label), items: [], dataset: { }, allowAdd: false };
                 }
                 features[item.type].items.push(item);
-            } else if (item.type in SFRPG.itemTypes) {
+            } else if (item.type in CONFIG.SFRPG.itemTypes) {
                 item.isOpen = item.system.container?.isOpen === undefined ? true : item.system.container.isOpen;
                 itemsToProcess.push(item);
             }
@@ -278,7 +277,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
     /**
      * This method is called upon form submission after form data is validated
      *
-     * @param {Event} event The initial triggering submission event
+     * @param {SubmitEvent} event The initial triggering submission event
      * @param {Object} formData The object of validated form data with which to update the object
      * @private
      */

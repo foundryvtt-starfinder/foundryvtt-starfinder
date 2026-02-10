@@ -2,6 +2,13 @@ import SFRPGItemBase from './base-item.mjs';
 
 export default class SFRPGItemGoods extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "goods",
+            icon: "fas fa-boxes-stacked"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Goods'

@@ -1,9 +1,16 @@
-import SFRPGItemBase from './base-item.mjs';
 import SFRPGDocumentBase from '../base-document.mjs';
+import SFRPGItemBase from './base-item.mjs';
 
 const { fields } = foundry.data;
 
 export default class SFRPGItemEquipment extends SFRPGItemBase {
+
+    static get metadata() {
+        return {
+            type: "equipment",
+            icon: "fas fa-shirt"
+        };
+    }
 
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
@@ -72,7 +79,7 @@ export default class SFRPGItemEquipment extends SFRPGItemBase {
                     nullable: true,
                     required: true
                 })
-            }),
+            }, {compendiumIndexField: true}),
             equippedBulkMultiplier: new fields.NumberField({
                 initial: 1,
                 min: 0,

@@ -1,4 +1,3 @@
-import { SFRPG } from "../config.js";
 import { RPC } from "../rpc.js";
 import { valueEquals } from "../utils/value-equals.js";
 /** @import ItemSFRPG from "../item/item.js" */
@@ -451,7 +450,7 @@ function itemComparisonPrep(item) {
 
 export function getFirstAcceptableStorageIndex(container, itemToAdd) {
     let index = -1;
-    if (!(container.type in SFRPG.containableTypes)) {
+    if (!(container.type in CONFIG.SFRPG.containableTypes)) {
         return null;
     }
 
@@ -507,7 +506,7 @@ function acceptsItem(containerItem, itemToAdd, actor) {
         return false;
     }
 
-    if (!(itemToAdd.type in SFRPG.containableTypes)) {
+    if (!(itemToAdd.type in CONFIG.SFRPG.containableTypes)) {
         // console.log("Rejected because item is not a containable item: " + itemToAdd.type);
         return false;
     }
@@ -585,7 +584,7 @@ export async function onCreateItemCollection(message) {
         // If so we should make it also update when you add or remove more items to make it a container
         // and also allow dropping the collection straight form the canvas.
         texture: {
-            src: "systems/sfrpg/icons/default/" + SFRPG.defaultItemIcons.container
+            src: "systems/sfrpg/icons/default/" + CONFIG.SFRPG.defaultItemIcons.container
         },
         hidden: false,
         locked: false,

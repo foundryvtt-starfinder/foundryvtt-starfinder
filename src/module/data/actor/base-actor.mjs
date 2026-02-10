@@ -26,7 +26,8 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         min: 0,
                         integer: true,
                         nullable: false,
-                        required: true
+                        required: true,
+                        compendiumIndexField: true
                     }),
                     temp: new fields.NumberField({
                         initial: null,
@@ -158,7 +159,8 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         blank: false,
                         choices: Object.keys(CONFIG.SFRPG.actorSizes),
                         required: true,
-                        label: "SFRPG.Size"
+                        label: "SFRPG.Size",
+                        compendiumIndexField: true
                     }),
                     sr: new fields.NumberField({ // TODO: collate this and 'spellResistance' into one field
                         initial: 0,
@@ -206,7 +208,8 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 initial: "",
                 blank: true,
                 required: true,
-                label: "SFRPG.AlignmentPlaceHolderText"
+                label: "SFRPG.AlignmentPlaceHolderText",
+                compendiumIndexField: true
             });
         }
 

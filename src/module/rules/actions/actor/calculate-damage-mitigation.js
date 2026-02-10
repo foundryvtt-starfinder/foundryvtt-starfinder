@@ -1,4 +1,3 @@
-import { SFRPG } from "../../../config.js";
 import { DiceSFRPG } from "../../../dice.js";
 import { SFRPGEffectType } from "../../../modifiers/types.js";
 import RollContext from "../../../rolls/rollcontext.js";
@@ -61,7 +60,7 @@ export default function(engine) {
         for (const drModifier of data.traits.damageMitigation.damageReduction) {
             let negatedBy = "-";
             if (drModifier.negatedBy) {
-                negatedBy = SFRPG.damageReductionTypes[drModifier.negatedBy];
+                negatedBy = CONFIG.SFRPG.damageReductionTypes[drModifier.negatedBy];
                 if (!negatedBy) {
                     negatedBy = drModifier.negatedBy;
                 }

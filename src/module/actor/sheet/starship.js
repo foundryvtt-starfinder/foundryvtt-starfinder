@@ -1,5 +1,4 @@
 import { ChoiceDialog } from "../../apps/choice-dialog.js";
-import { SFRPG } from "../../config.js";
 import RollContext from "../../rolls/rollcontext.js";
 import { ActorSheetSFRPG } from "./base.js";
 
@@ -13,8 +12,8 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     constructor(...args) {
         super(...args);
 
-        this.acceptedItemTypes.push(...SFRPG.starshipDefinitionItemTypes);
-        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+        this.acceptedItemTypes.push(...CONFIG.SFRPG.starshipDefinitionItemTypes);
+        this.acceptedItemTypes.push(...CONFIG.SFRPG.physicalItemTypes);
     }
 
     static get defaultOptions() {
@@ -574,7 +573,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
         } else if (data.type === "Item") {
             const rawItemData = (await Item.fromDropData(data)).toObject();
 
-            if (SFRPG.starshipDefinitionItemTypes.includes(rawItemData.type)) {
+            if (CONFIG.SFRPG.starshipDefinitionItemTypes.includes(rawItemData.type)) {
                 return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
             } else if (this.acceptedItemTypes.includes(rawItemData.type)) {
                 return this.processDroppedItems(event, data);
@@ -587,7 +586,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             const acceptedItems = [];
             const rejectedItems = [];
             for (const item of data.items) {
-                if (SFRPG.starshipDefinitionItemTypes.includes(item.type)) {
+                if (CONFIG.SFRPG.starshipDefinitionItemTypes.includes(item.type)) {
                     starshipItems.push(item);
                 } else if (this.acceptedItemTypes.includes(item.type)) {
                     acceptedItems.push(item);
@@ -655,7 +654,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
     /**
      * Handles dragenter for the crews tab
-     * @param {Event} event The originating dragenter event
+     * @param {DragEvent} event The originating dragenter event
      */
     _onCrewDragEnter(event) {
         $(event.target).css('background', "rgba(0,0,0,0.3)");
@@ -663,7 +662,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
     /**
      * Handles dragleave for the crews tab
-     * @param {Event} event The originating dragleave event
+     * @param {DragEvent} event The originating dragleave event
      */
     _onCrewDragLeave(event) {
         $(event.target).css('background', '');
@@ -672,7 +671,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     /**
      * Handle dragging crew members on the sheet.
      *
-     * @param {Event} event Originating dragstart event
+     * @param {PointerEvent} event Originating dragstart event
      */
     _onDragCrewStart(event) {
         if (this.actor.system.crew.useNPCCrew) return;
@@ -694,7 +693,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     /**
      * Handles ondragover for crew drag-n-drop
      *
-     * @param {Event} event Orgininating ondragover event
+     * @param {PointerEvent} event Orgininating ondragover event
      */
     _onCrewDragOver(event) {
         event.preventDefault();
@@ -704,7 +703,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     /**
      * Remove an actor from the crew.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onRemoveFromCrew(event) {
         event.preventDefault();
@@ -730,7 +729,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
 
     /**
      * Handle rolling of an item from the Actor sheet, obtaining the Item instance and dispatching to it's roll method
-     * @param {Event} event The triggering event
+     * @param {PointerEvent} event The triggering event
      */
     async _onActionRoll(event) {
         event.preventDefault();
@@ -893,7 +892,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     /**
      * Edit critical roles.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onEditAffectedCriticalRoles(event) {
         event.preventDefault();
@@ -983,7 +982,7 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
     /**
      * This method is called upon form submission after form data is validated
      *
-     * @param {Event} event The initial triggering submission event
+     * @param {SubmitEvent} event The initial triggering submission event
      * @param {Object} formData The object of validated form data with which to update the object
      * @private
      */

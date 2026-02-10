@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemHybrid extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "hybrid",
+            icon: "fas fa-hat-wizard"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Hybrid'

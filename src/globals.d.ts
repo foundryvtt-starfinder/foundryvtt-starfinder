@@ -1,6 +1,6 @@
 import "@client/global.mjs";
-import Canvas from "@client/canvas/board.mjs";
-import { SFRPG as CONFIGSFRPG } from "./module/config";
+import "@common/primitives/global.mjs";
+import { _SFRPG as CONFIGSFRPG } from "./module/config";
 
 // This file and the majority of our "typing" is based off of the work of ChaosOS:
 // https://github.com/MetaMorphic-Digital/draw-steel/blob/develop/draw-steel.d.ts
@@ -13,13 +13,13 @@ declare global {
      * When key actions or events occur, a "hook" is defined where user-defined callback functions can execute.
      * This class manages the registration and execution of hooked callback functions.
      */
-    class Hooks extends foundry.helpers.Hooks { }
+    class Hooks extends foundry.helpers.Hooks {}
     const fromUuid = foundry.utils.fromUuid;
     const fromUuidSync = foundry.utils.fromUuidSync;
 
     /**
-    * The singleton game canvas
-    */
+     * The singleton game canvas
+     */
     const canvas: Canvas;
 
     /**
@@ -31,7 +31,12 @@ declare global {
      * @module CONFIG
      */
     declare namespace CONFIG {
-        var SFRPG: typeof CONFIGSFRPG
+        var SFRPG: typeof CONFIGSFRPG;
     }
 
+    const Roll = foundry.dice.Roll;
+
+    type Prettify<T> = {
+        [K in keyof T]: T[K];
+    } & {};
 }

@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemWeapon extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "weapon",
+            icon: "fas fa-gun"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Weapon'
@@ -38,13 +45,15 @@ export default class SFRPGItemWeapon extends SFRPGItemBase {
                 initial: "uncategorized",
                 choices: Object.keys(CONFIG.SFRPG.weaponCategories),
                 blank: false,
-                required: true
+                required: true,
+                compendiumIndexField: true
             }),
             weaponType: new fields.StringField({
                 initial: "basicM",
                 choices: Object.keys(CONFIG.SFRPG.weaponTypes),
                 blank: false,
-                required: true
+                required: true,
+                compendiumIndexField: true
             })
         });
 

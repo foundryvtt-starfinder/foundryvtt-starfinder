@@ -31,7 +31,7 @@ export class TraitSelectorSFRPG extends FormApplication {
     /**
      * Choose the appropriate update method for updating the data
      *
-     * @param {Event} event The event that triggers the update
+     * @param {SubmitEvent} event The event that triggers the update
      * @param {Object} formData The data from the form
      */
     async _updateObject(event, formData) {

@@ -1,9 +1,14 @@
+import { packLoader } from './pack-loader.js';
+/**
+ * @import Collection from "@common/utils/_module.mjs"
+ * @import FilterObjectEquipment from "./equipment-browser.js"
+ * @import FilterObjectSpell from "./spell-browser.js"
+ * @import FilterObjectStarship from "./starship-browser.js"
+ */
+
 /**
  * DocumentBrowserSFRPG forked from ItemBrowserPF2e by Felix Miller aka syl3r86
- * @import { Collection } from "@common/utils/_module.mjs"
  */
-import { packLoader } from './pack-loader.js';
-
 export class DocumentBrowserSFRPG extends Application {
     static get defaultOptions() {
         const options = super.defaultOptions;
@@ -425,10 +430,7 @@ export class DocumentBrowserSFRPG extends Application {
     }
 
     /**
-     * @param {filterObjectEquipment|
-     *         filterObjectSpell    |
-     *         filterObjectAlien    |
-     *         filterObjectStarship} filterObject An object containing valid filters for one of the browser types.
+     * @param {FilterObjectEquipment|FilterObjectSpell|FilterObjectStarship} [filterObject={}] An object containing valid filters for one of the browser types.
      */
     async renderWithFilters(filterObject = {}) {
 
@@ -460,7 +462,7 @@ export class DocumentBrowserSFRPG extends Application {
 
     }
 
-    _waitForElem(selector) {
+    async _waitForElem(selector) {
         return new Promise(resolve => {
             if (document.querySelector(selector)) {
                 return resolve(document.querySelector(selector));

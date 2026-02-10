@@ -2,7 +2,6 @@ import { ChoiceDialog } from "../apps/choice-dialog.js";
 import { AddEditSkillDialog } from "../apps/edit-skill-dialog.js";
 import { NpcSkillToggleDialog } from "../apps/npc-skill-toggle-dialog.js";
 import { SpellCastDialog } from "../apps/spell-cast-dialog.js";
-import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
 import { TokenEffect } from "../token/token-effect.js";
@@ -29,9 +28,15 @@ import { } from "./crew-update.js";
  * @property {string}                     operator An operator that determines how damage is split between multiple types.
  */
 
-/** @import RollResult from '../dice.js' */
+/**
+ * @import RollResult from '../dice.js'
+ * @import ActorConditionsMixin from "./mixins/actor-conditions.js"
+ * */
 
-/** @extends {foundry.documents.Actor} */
+/**
+ * @extends {foundry.documents.Actor}
+ * @augments ActorConditionsMixin
+ * */
 export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
 
     constructor(data, context) {
@@ -212,9 +217,9 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         }
 
         // Apply a default icon to the actor based on its type if it doesn't already have an icon selected
-        if (Object.values(SFRPG.foundryDefaultIcons).includes(this.img)) {
-            if (Object.keys(SFRPG.defaultActorIcons).includes(this.type)) {
-                updates.img = ["systems/sfrpg/icons/default/", SFRPG.defaultActorIcons[this.type]].join("");
+        if (Object.values(CONFIG.SFRPG.foundryDefaultIcons).includes(this.img)) {
+            if (Object.keys(CONFIG.SFRPG.defaultActorIcons).includes(this.type)) {
+                updates.img = ["systems/sfrpg/icons/default/", CONFIG.SFRPG.defaultActorIcons[this.type]].join("");
             }
         }
 
@@ -1088,7 +1093,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                     if (crewData.npcData[role]?.numberOfUses) {
                         rollContext.addContext(
                             role,
-                            { name: game.i18n.localize(SFRPG.starshipRoles[role]) },
+                            { name: game.i18n.localize(CONFIG.SFRPG.starshipRoles[role]) },
                             actorData.system.crew.npcData[role]
                         );
                         populatedRoles.push(role);
@@ -1152,7 +1157,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
         if (newhp) {
             const oldhp = old.attributes.hp;
-            SFRPG.floatingHPValues.hpKeys.forEach(k => { // Check in both standard and temp HP
+            CONFIG.SFRPG.floatingHPValues.hpKeys.forEach(k => { // Check in both standard and temp HP
                 const delta = this.getDelta(k, newhp, oldhp);
                 if (delta !== 0) diff[k] = delta;
             });
@@ -1166,7 +1171,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         }
         if (shields) {
             const oldShields = old.quadrants;
-            SFRPG.floatingHPValues.shieldKeys.forEach(k => { // Check in all shield quadrants
+            CONFIG.SFRPG.floatingHPValues.shieldKeys.forEach(k => { // Check in all shield quadrants
                 const delta = this.getDelta('value', shields[k]?.shields, oldShields[k].shields);
                 if (delta !== 0) diff[`shields.${k}`] = delta;
             });
@@ -1210,7 +1215,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
             for (const [key, value] of Object.entries(hpDiffs)) {
                 if (value === 0) continue; // Skip deltas of 0
-                const cfg = SFRPG.floatingHPValues[key];
+                const cfg = CONFIG.SFRPG.floatingHPValues[key];
                 const percentMax = Math.clamp(Math.abs(value) / foundry.utils.getProperty(t.actor.system, getMaxPath(key)), 0, 1);
                 const sign = (value < 0) ? 'negative' : 'positive';
                 const floaterData = {

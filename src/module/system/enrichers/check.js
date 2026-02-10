@@ -1,5 +1,5 @@
 import CheckNameHelper from "../../utils/skill-names.js";
-import BaseEnricher, { getDatasetfromEvent } from "./base.js";
+import BaseEnricher from "./base.js";
 
 export const checkIcons = Object.freeze({
     "acrobatics": "fa-person-walking",
@@ -45,23 +45,20 @@ export default class CheckEnricher extends BaseEnricher {
     // @Check[type:athletics]
     // @Check[type:life-science]
     // @Check[type:reflex]
-    constructor() {
-        super();
-    }
 
     /** @inheritdoc */
     get enricherType() {
-        return "Check";
+        return /** @type {const}*/("Check");
     }
 
     /** @inheritdoc */
     get validTypes() {
-        return [
+        return /** @type {const}*/([
             ...Object.keys(CONFIG.SFRPG.skills),
             ...Object.keys(CONFIG.SFRPG.saves),
             ...Object.keys(CONFIG.SFRPG.abilities),
             "caster-level"
-        ];
+        ]);
     }
 
     /** @inheritdoc */
@@ -115,7 +112,8 @@ export default class CheckEnricher extends BaseEnricher {
 
     /**
      * @extends BaseEnricher
-     * @returns {HTMLAnchorElement} */
+     * @returns {HTMLAnchorElement}
+     */
     createElement() {
         const a = super.createElement();
 
@@ -129,13 +127,14 @@ export default class CheckEnricher extends BaseEnricher {
 
     }
 
-    static hasRepost = true;
-    static listeners = {
+    hasRepost = true;
+    listeners = {
         "click": this.#clickListener
     };
 
-    static #clickListener(event) {
-        const data = getDatasetfromEvent(event);
+    /** @param {PointerEvent} event */
+    #clickListener(event) {
+        const data = this.getDatasetfromEvent(event);
 
         const actor = _token?.actor ?? game.user?.character;
         if (!actor) return ui.notifications.error("You must have a token or an actor selected.");

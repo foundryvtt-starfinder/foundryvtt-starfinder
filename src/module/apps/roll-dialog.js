@@ -1,6 +1,3 @@
-import { SFRPG } from "../config.js";
-
-// Typedef's for documentation purposes.
 /**
  * A data structure for storing damage statistics.
  *
@@ -125,7 +122,7 @@ export default class RollDialog extends Dialog {
                 if (part.types && !foundry.utils.isEmpty(part.types)) {
                     typeString = Object.entries(part.types)
                         .filter(([, value]) => value)
-                        .map(([key]) => SFRPG.damageTypes[key])
+                        .map(([key]) => CONFIG.SFRPG.damageTypes[key])
                         .join(" & ");
                 }
                 part.type = typeString;

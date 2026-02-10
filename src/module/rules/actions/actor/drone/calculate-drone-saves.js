@@ -1,4 +1,3 @@
-import { SFRPG } from "../../../../config.js";
 
 export default function(engine) {
     engine.closures.add("calculateDroneSaves", (fact) => {
@@ -17,9 +16,9 @@ export default function(engine) {
             let droneLevel = chassisData.levels;
             droneLevel = Math.max(1, Math.min(droneLevel, 20));
 
-            data.attributes.fort.bonus = chassisData.fort === "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
-            data.attributes.reflex.bonus = chassisData.ref === "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
-            data.attributes.will.bonus = chassisData.will === "slow" ? SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
+            data.attributes.fort.bonus = chassisData.fort === "slow" ? CONFIG.SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : CONFIG.SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
+            data.attributes.reflex.bonus = chassisData.ref === "slow" ? CONFIG.SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : CONFIG.SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
+            data.attributes.will.bonus = chassisData.will === "slow" ? CONFIG.SFRPG.droneBadSaveBonusPerLevel[droneLevel - 1] : CONFIG.SFRPG.droneGoodSaveBonusPerLevel[droneLevel - 1];
         }
 
         data.attributes.fort.bonus += data.abilities.con.mod;

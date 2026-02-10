@@ -4,26 +4,30 @@ import { ItemSFRPG } from "../item/item.js";
 import { generateUUID } from "../utils/utilities.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.js";
 
+/**
+ * @import { Document } from "@common/abstract/document.mjs"
+ * @import { DatabaseUpdateOperation, DatabaseDeleteOperation } from "@common/abstract/_types.mjs"
+ */
+
 const { fields } = foundry.data;
 
 /**
- * A data object that hold information about a specific modifier.
+ * A data object that holds information about a specific modifier.
  *
- * @param {Object}        data               The data for the modifier.
- * @param {String}        data.name          The name for the modifier. Only useful for identifying the modifier.
- * @param {Number|String} data.modifier      The value to modify with. This can be either a constant number or a Roll formula.
- * @param {String}        data.type          The modifier type. This is used to determine if a modifier stacks or not.
- * @param {String}        data.modifierType  Determines if this modifier is a constant value (+2) or a roll formula (1d4).
- * @param {String}        data.effectType    The category of things that might be modified by this value.
- * @param {String}        data.valueAffected The specific statistic being affected.
- * @param {Boolean}       data.enabled       Is this modifier enabled or not.
- * @param {String}        data.source        Where does this modifier come from? An item, or an ability?
- * @param {String}        data.notes         Any notes that are useful for this modifier.
- * @param {String}        data.subtab        What subtab should this appear on in the character sheet?
- * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
- * @param {?String}       data.id            Override a random id with a specific one.
- * @param {?Object}       data.damage        If this modifier is a damage section modifier, the damage type and group
- * @param {String}        data.limitTo       If this modifier is on an item, should the modifier affect only that item?
+ * @property {String}        name          The name for the modifier. Only useful for identifying the modifier.
+ * @property {Number|String} modifier      The value to modify with. This can be either a constant number or a Roll formula.
+ * @property {String}        type          The modifier type. This is used to determine if a modifier stacks or not.
+ * @property {String}        modifierType  Determines if this modifier is a constant value (+2) or a roll formula (1d4).
+ * @property {String}        effectType    The category of things that might be modified by this value.
+ * @property {String}        valueAffected The specific statistic being affected.
+ * @property {Boolean}       enabled       Is this modifier enabled or not.
+ * @property {String}        source        Where does this modifier come from? An item, or an ability?
+ * @property {String}        notes         Any notes that are useful for this modifier.
+ * @property {String}        subtab        What subtab should this appear on in the character sheet?
+ * @property {String}        condition     The condition, if any, that this modifier is associated with.
+ * @property {?String}       id            Override a random id with a specific one.
+ * @property {?Object}       damage        If this modifier is a damage section modifier, the damage type and group
+ * @property {String}        limitTo       If this modifier is on an item, should the modifier affect only that item?
  */
 export default class SFRPGModifier extends foundry.abstract.DataModel {
     constructor(data, options = {}) {
@@ -31,11 +35,11 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         this.globalModifier = options.globalModifier || false;
     }
 
-    _initializeSource(source, options = {}) {
+    _initializeSource(data, options = {}) {
         // Create a random id, or set the specific one if provided.
-        source._id ||= (source.id || generateUUID());
+        data._id ||= (data.id || generateUUID());
 
-        return super._initializeSource(source, options);
+        return super._initializeSource(data, options);
     }
 
     // Slight hack to keep modifiers on the database or exported to JSON minimal and clean.
@@ -213,7 +217,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
     /**
      * A helper method to directly update this modifier within its owner, instead of having to find it in the modifiers array every time.
      * @param {Object} data Update data to be applied to this modifier
-     * @param {Object} options Options to be passed to update. @see Document.update in foundry-esm.js 11580.
+     * @param {DatabaseUpdateOperation} options Options to be passed to update. @see {@link Document#update} in foundry-esm.js 11580.
      */
     async parentUpdate(data, options = {}) {
         if (!this.owner) throw new Error("SFRPG | This modifier has no parent, which is required to perform an update via the parent.");
@@ -228,7 +232,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
 
     /**
      * A helper method to delete this modifier from its owner
-     * @param {Object} options Options to be passed to update. @see Document.update in foundry-esm.js 11580.
+     * @param {DatabaseDeleteOperation} options Options to be passed to update. @see {@link Document#delete} in foundry-esm.js 11580.
      */
     async parentDelete(options = {}) {
         if (!this.owner) throw new Error("SFRPG | This modifier has no parent, which is required to delete via the parent.");

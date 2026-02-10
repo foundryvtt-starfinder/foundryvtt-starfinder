@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemStarshipShield extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "starshipShield",
+            icon: "fas fa-shield"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.StarshipShield'

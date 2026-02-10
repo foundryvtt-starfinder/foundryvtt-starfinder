@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemActorResource extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "actorResource",
+            icon: "fas fa-chart-pie"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.ActorResource'

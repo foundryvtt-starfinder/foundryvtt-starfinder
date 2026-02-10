@@ -61,13 +61,15 @@ export default class BaseEnricher {
      * @type {TextEditorEnricher}
      * @returns {Promise<HTMLElement|null>}
      */
-    async enricherFunc(match) {
+    async enricherFunc(match, options) {
         this.match = match;
 
         if (this.match[3]) this.name = this.match[3];
         else this.name = undefined;
 
         this.parseArgs();
+
+        this.cleanArgs();
 
         // Early return an error element if invalid
         if (!this.isValid()) return this.element;
@@ -98,6 +100,11 @@ export default class BaseEnricher {
     }
 
     /**
+     * Modify and coerce args into being valid.
+     */
+    cleanArgs() {}
+
+    /**
      * Checks if there is a type argument, and that it is valid for the enricher's type.
      * Sets this.element if invalid for an early return.
      * @returns {Boolean}
@@ -112,10 +119,11 @@ export default class BaseEnricher {
 
     /**
      * Create an error element after isValid() fails
-     * @param {String} failedArg The argument that failed validation, to be used in the error element
+     * @param {string} failedArg The argument that failed validation, to be used in the error element
+     * @param {string} invalidValue The value that is invaid, to be displayed in the error message
      * @returns {false}
      */
-    _failValidation(failedArg, invalidValue) {
+    _failValidation(failedArg, invalidValue = "") {
         const message = `@${this.enricherType} parsing failed! ${failedArg} ${invalidValue ? `"${invalidValue}" ` : ""}is invalid.`;
 
         const strong = document.createElement("strong");
@@ -149,7 +157,7 @@ export default class BaseEnricher {
 
         a.innerText = this.name;
 
-        if (this.#hasRepost) a = this.addRepost(a);
+        if (this.hasRepost) a = this.addRepost(a);
 
         return a;
     }
@@ -158,12 +166,9 @@ export default class BaseEnricher {
 
     /**
      * Should this enricher have a repost button appended to created elements?
-     * Create both a publicly accessible static variable and an internal instance one.
      * @type {Boolean}
      */
-    static hasRepost = false;
-    /** @type {Boolean} */
-    #hasRepost = this.constructor.hasRepost;
+    hasRepost = false;
 
     /**
      * Take an anchor element and append a repost button
@@ -182,21 +187,21 @@ export default class BaseEnricher {
 
     /** Listeners */
 
-    /** @type {Record<string, (event: Event) => void>}*/
-    static listeners = {};
+    /** @type {Record<string, (event: Event) => (void|Promise<void>)>}*/
+    listeners = {};
 
     /** @param {HTMLEnrichedContentElement} enrichedElement */
     onRenderFunc(enrichedElement) {
-        if (this.#hasRepost) enrichedElement.querySelector("i.repost")?.addEventListener("click", this.repostListener);
+        if (this.hasRepost) enrichedElement.querySelector("i.repost")?.addEventListener("click", this.repostListener.bind(this));
 
-        for (const [event, listener] of Object.entries(this.constructor.listeners)) {
-            enrichedElement.addEventListener(event, listener);
+        for (const [event, listener] of Object.entries(this.listeners)) {
+            enrichedElement.addEventListener(event, listener.bind(this));
         }
     }
 
     /**
      * Handle repost button click, sending a chat message of the current target to chat.
-     * @param {Event} event
+     * @param {PointerEvent} event
      * @returns Create a chat message
      */
     repostListener(event) {
@@ -205,9 +210,14 @@ export default class BaseEnricher {
         return ChatMessage.create({content: event.currentTarget.parentElement.outerHTML});
     }
 
-}
+    /**
+     * Helper to easily return the dataset of the child anchor element of the enriched content element
+     * @param {Event} event
+     * @returns {Record<string, string>}
+     */
+    getDatasetfromEvent(event) {
+        const anchorEl = event.currentTarget.children[0];
+        return anchorEl?.dataset || null;
+    }
 
-export function getDatasetfromEvent(event) {
-    const anchorEl = event.currentTarget.children[0];
-    return anchorEl?.dataset || null;
 }

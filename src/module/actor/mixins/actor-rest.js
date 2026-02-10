@@ -1,6 +1,5 @@
 import { DroneRepairDialog } from "../../apps/drone-repair-dialog.js";
 import { ShortRestDialog } from "../../apps/short-rest.js";
-import { SFRPG } from "../../config.js";
 
 export const ActorRestMixin = (superclass) => class extends superclass {
     /**
@@ -231,7 +230,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
                 if (drp) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.ResolvePoints", {deltaRP: drp}); }
                 if (deltaSpellSlots) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.SpellSlots", {deltaSS: deltaSpellSlots}); }
                 for (const restoredAbilityDamage of restoredAbilityDamages) {
-                    content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.AbilityDamage", {ability: SFRPG.abilities[restoredAbilityDamage.ability], amount: restoredAbilityDamage.amount});
+                    content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.AbilityDamage", {ability: CONFIG.SFRPG.abilities[restoredAbilityDamage.ability], amount: restoredAbilityDamage.amount});
                 }
                 for (const rechargedItem of items) {
                     content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.Item", {itemName: rechargedItem.name});

@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemSpell extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "spell",
+            icon: "fas fa-wand-magic-sparkles"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Spell'
@@ -37,7 +44,7 @@ export default class SFRPGItemSpell extends SFRPGItemBase {
                     initial: false,
                     label: "SFRPG.Items.Spell.Wysh"
                 })
-            }),
+            }, {compendiumIndexField: true}),
             concentration: new fields.BooleanField({
                 initial: false,
                 label: "SFRPG.Items.Spell.Concentration"
@@ -60,7 +67,8 @@ export default class SFRPGItemSpell extends SFRPGItemBase {
                 integer: true,
                 nullable: false,
                 required: false,
-                label: "SFRPG.Items.Spell.Level"
+                label: "SFRPG.Items.Spell.Level",
+                compendiumIndexField: true
             }),
             materials: new fields.SchemaField({
                 consumed: new fields.BooleanField({
@@ -105,7 +113,8 @@ export default class SFRPGItemSpell extends SFRPGItemBase {
                 initial: "abj",
                 required: true,
                 choices: Object.keys(CONFIG.SFRPG.spellSchools),
-                label: "SFRPG.Items.Spell.School"
+                label: "SFRPG.Items.Spell.School",
+                compendiumIndexField: true
             }),
             sr: new fields.BooleanField({
                 initial: false,

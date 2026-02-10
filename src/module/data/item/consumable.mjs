@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemConsumable extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "consumable",
+            icon: "fas fa-beer-mug-empty"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Consumable'

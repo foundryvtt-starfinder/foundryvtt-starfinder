@@ -210,7 +210,6 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
      * @property {string[]} equipmentTypes Drawn from SFRPG.itemTypes
      * @property {string[]} weaponTypes Drawn from SFRPG.weaponTypes
      * @property {string[]} weaponCategories Drawn from SFRPG.weaponCategories
-     * @see {config.js}
      */
     /**
      * Prepare the filter object before calling the parent method
@@ -230,6 +229,7 @@ class EquipmentBrowserSFRPG extends DocumentBrowserSFRPG {
 }
 
 let _equipmentBrowser = null;
+/** @returns {EquipmentBrowserSFRPG} */
 export function getEquipmentBrowser() {
     if (!_equipmentBrowser) {
         _equipmentBrowser = new EquipmentBrowserSFRPG();
