@@ -71,6 +71,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
      * Close all expanded item summaries for the current user.
      */
     async _closeAllItemSummaries() {
+        if (this.actor.compendium) return;
         for (const item of this.actor.items) {
             item.setFlag('sfrpg', `expanded.${game.user.id}`, false);
         }
@@ -175,10 +176,13 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         this._prepareItems(data);
 
-        for (const item of data.items) {
-            item.expanded = item.getFlag('sfrpg', `expanded.${game.user.id}`) || false;
-            if (item.expanded) {
-                await this._prepareItemSummary(item);
+        if (!this.actor.compendium)
+        {
+            for (const item of data.items) {
+                item.expanded = item.getFlag('sfrpg', `expanded.${game.user.id}`) || false;
+                if (item.expanded) {
+                    await this._prepareItemSummary(item);
+                }
             }
         }
 
@@ -1097,7 +1101,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             li.removeClass('expanded');
             item.expanded = false;
             summary.slideUp(200, () => {
-                item.setFlag('sfrpg', `expanded.${game.user.id}`, false);
+                this.actor.compendium ?? item.setFlag('sfrpg', `expanded.${game.user.id}`, false);
             });
         } else {
             const summary = await this._prepareItemSummary(item);
@@ -1105,7 +1109,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             li.addClass('expanded');
             item.expanded = true;
             summary.slideDown(200, () => {
-                item.setFlag('sfrpg', `expanded.${game.user.id}`, true);
+                this.actor.compendium ?? item.setFlag('sfrpg', `expanded.${game.user.id}`, true);
             });
         }
     }
