@@ -57,4 +57,5 @@ export { default as SFRPGItemWeapon } from './item/weapon.mjs';
 export { default as SFRPGItemWeaponAccessory } from './item/weaponAccessory.mjs';
 
 // Export Chat Messages
-export { default as SFRPGChatMessageBase } from './message/base-message.mjs';
+export { default as SFRPGMessageBase } from './message/base-message.mjs';
+export { default as SFRPGMessageDamage } from './message/damage.mjs';

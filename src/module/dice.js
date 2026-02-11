@@ -238,7 +238,8 @@ export class DiceSFRPG {
                     speaker,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    system: {}
+                    system: {},
+                    type: "base"
                 };
                 ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
             }
@@ -327,7 +328,8 @@ export class DiceSFRPG {
                     speaker,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    system: {}
+                    system: {},
+                    type: "base"
                 };
                 ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
             }
@@ -403,7 +405,7 @@ export class DiceSFRPG {
                 const messageSystemData = { // TODO: Perhaps there's a nicer way to instantiate this via the message's dataModel?
                     critical: {
                         doubleDamage: criticalDamageData.doubleDamage,
-                        effect: null,
+                        effect: "",
                         isCritical: false
                     },
                     damage: {
@@ -417,8 +419,8 @@ export class DiceSFRPG {
                     rollBreakdown: finalFormula.formula,
                     rollCriteria: partRollCriteria,
                     rollNotes: itemContext?.data?.damageNotes,
-                    specialMaterials: [],
-                    starshipWeaponProperties: {},
+                    specialMaterials: {},
+                    starshipWeaponProperties: [],
                     tags
                 };
 
@@ -438,7 +440,7 @@ export class DiceSFRPG {
                         messageSystemData.starshipWeaponType = itemContext.entity.system.weaponType;
                         if (itemContext.entity.system.special) {
                             for (const [key, isEnabled] of Object.entries(itemContext.entity.system.special)) {
-                                if (isEnabled) messageSystemData.starshipWeaponProperties[key] = {value: true};
+                                if (isEnabled) messageSystemData.starshipWeaponProperties[key] = true;
                             }
                         }
                     } else {
@@ -462,7 +464,7 @@ export class DiceSFRPG {
                     const specialMaterials = itemContext.entity.system.specialMaterials;
                     if (specialMaterials) {
                         for (const [material, isEnabled] of Object.entries(specialMaterials)) {
-                            if (isEnabled) messageSystemData.specialMaterials.push(material);
+                            if (isEnabled) messageSystemData.specialMaterials[material] = true;
                         }
                     }
 

@@ -153,20 +153,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                     initial: false
                 })
             }),
-            properties: new fields.TypedObjectField(
-                new fields.SchemaField({
-                    extension: new fields.StringField({
-                        initial: "",
-                        blank: true,
-                        required: true
-                    }),
-                    value: new fields.BooleanField({
-                        initial: false,
-                        required: true
-                    })
-                }),
-                {validateKey: (key) => key in CONFIG.SFRPG.weaponProperties}
-            ),
+            properties: SFRPGDocumentBase._propertiesFieldData(),
             save: new fields.SchemaField(
                 SFRPGItemBase.saveTemplate(),
                 {

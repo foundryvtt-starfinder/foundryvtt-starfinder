@@ -314,8 +314,8 @@ Hooks.once('init', async function() {
     };
 
     CONFIG.ChatMessage.dataModels = {
-        base: models.SFRPGChatMessageBase,
-        standard: models.SFRPGChatMessageBase
+        base: models.SFRPGMessageBase,
+        damage: models.SFRPGMessageDamage
     };
 
     CONFIG.ui.hotbar = HotbarSFRPG;

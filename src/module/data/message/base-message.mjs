@@ -2,9 +2,9 @@ import SFRPGDocumentBase from "../base-document.mjs";
 
 const { fields } = foundry.data;
 
-export default class SFRPGChatMessageBase extends SFRPGDocumentBase {
+export default class SFRPGMessageBase extends SFRPGDocumentBase {
     static defineSchema() {
-        const schema = {};
+        const schema = super.defineSchema();
 
         schema.buttons = new fields.ArrayField(
             new fields.SchemaField({
@@ -27,36 +27,28 @@ export default class SFRPGChatMessageBase extends SFRPGDocumentBase {
             })
         );
 
-        // TODO: Eventually, add more detail to this
-        schema.damage = new fields.ObjectField();
-
-        schema.descriptors = new fields.TypedObjectField(
-            new fields.BooleanField({initial: false}),
-            {validateKey: (key) => key in CONFIG.SFRPG.descriptors}
-        );
-
-        schema.hasMagicDamage = new fields.SchemaField({
-            value: new fields.BooleanField({
-                initial: false,
-                nullable: true
-            })
+        // TODO: We may want to change this to an array of strings at some point
+        schema.rollBreakdown = new fields.StringField({
+            initial: "",
+            blank: true
         });
 
         // TODO: Eventually, add more detail to this
-        schema.rollOptions = new fields.ObjectField();
+        schema.rollCriteria = new fields.ObjectField();
+
+        schema.rollNotes = new fields.StringField({
+            initial: "",
+            blank: true
+        });
 
         schema.tags = new fields.TypedObjectField(
-            new fields.SchemaField(SFRPGChatMessageBase._tagData())
+            new fields.SchemaField(SFRPGMessageBase._tagFieldData())
         );
 
-        // merge schema with templates
-        foundry.utils.mergeObject(schema, {
-            ...SFRPGDocumentBase.specialMaterialsTemplate()
-        });
         return schema;
     }
 
-    static _tagData() {
+    static _tagFieldData() {
         return {
             tag: new fields.StringField({
                 initial: "",

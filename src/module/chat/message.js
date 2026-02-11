@@ -5,8 +5,7 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
     constructor(data, options = {}) {
         super(data, options);
 
-        /** @type {string} type of the chat message*/
-        this.type = "base";
+        if (!this.type) this.type = "base";
     }
 
     /** @override */
