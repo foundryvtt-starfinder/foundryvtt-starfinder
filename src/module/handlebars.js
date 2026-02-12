@@ -37,7 +37,10 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/sfrpg/templates/items/parts/weapon-properties.hbs",
         "systems/sfrpg/templates/items/parts/damage-sections.hbs",
         "systems/sfrpg/templates/items/parts/item-duration.hbs",
-        "systems/sfrpg/templates/items/parts/effect-turn-events.hbs"
+        "systems/sfrpg/templates/items/parts/effect-turn-events.hbs",
+
+        // Chat Message Partials
+        "systems/sfrpg/templates/chat/parts/damage.hbs"
     ];
 
     return foundry.applications.handlebars.loadTemplates(templatePaths);

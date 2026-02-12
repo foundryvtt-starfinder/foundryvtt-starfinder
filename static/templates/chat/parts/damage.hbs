@@ -1,0 +1,10 @@
+<div class="message-content damage">
+    {{{message.content}}}
+</div>
+<div class="message-footer damage">
+    {{#if message.system.tags}}
+    {{#each message.system.tags as |tag|}}
+        <span class="tag">{{tag.text}}</span>
+    {{/each}}
+    {{/if}}
+</div>

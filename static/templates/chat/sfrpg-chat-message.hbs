@@ -31,14 +31,12 @@ file, which selects the appropriate hbs partial based on the data passed into it
         <span class="flavor-text">{{{message.flavor}}}</span>
         {{/if}}
     </header>
-    <div class="message-content">
-        {{{message.content}}}
-    </div>
-    <div class="message-footer">
-        {{#if message.system.tags}}
-        {{#each message.system.tags as |tag|}}
-            <span class="tag">{{tag.text}}</span>
-        {{/each}}
-        {{/if}}
-    </div>
+    {{log message.type}}
+    {{#if (eq message.type "damage")}}
+        {{> "systems/sfrpg/templates/chat/parts/damage.hbs"}}
+    {{else if (eq message.type "base")}}
+        <div class="message-content base">
+            {{{message.content}}}
+        </div>
+    {{/if}}
 </li>
