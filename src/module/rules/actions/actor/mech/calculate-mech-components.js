@@ -70,10 +70,7 @@ export default function(engine) {
             data.attributes.hp.tooltip.push(`${upperLimb.name} (Base): +${upperLimb.system.baseHp}`);
         }
 
-        // HP = Base HP + (HP Advancement × tier)
-        const tierHp = hpAdvancement * tier;
-        data.attributes.hp.max = baseHp + tierHp;
-        data.attributes.hp.tooltip.push(`Tier advancement (${hpAdvancement} × ${tier}): +${tierHp}`);
+        // HP finalization is deferred until after upgrade bonuses are applied
 
         // ========================================
         // SP: From tier table
@@ -266,9 +263,9 @@ export default function(engine) {
         if (activeMissionPod && activeMissionPod.system.statMods) {
             const podMods = activeMissionPod.system.statMods;
 
-            // HP modifier
+            // HP modifier (added to baseHp so finalization includes it)
             if (podMods.hp) {
-                data.attributes.hp.max += podMods.hp;
+                baseHp += podMods.hp;
                 data.attributes.hp.tooltip.push(`${activeMissionPod.name}: +${podMods.hp}`);
             }
 
@@ -314,6 +311,78 @@ export default function(engine) {
                 const newSpeed = currentLand + podMods.speed;
                 data.attributes.speed.land = `${newSpeed} ft.`;
             }
+        }
+
+        // ========================================
+        // Upgrades: Apply bonuses from mechUpgrade items
+        // ========================================
+        const upgrades = items.filter(i => i.type === "mechUpgrade");
+        for (const upgrade of upgrades) {
+            const sys = upgrade.system;
+
+            if (sys.baseHpBonus) {
+                baseHp += sys.baseHpBonus;
+                data.attributes.hp.tooltip.push(`${upgrade.name}: +${sys.baseHpBonus} base HP`);
+            }
+            if (sys.hpAdvancementBonus) {
+                hpAdvancement += sys.hpAdvancementBonus;
+                data.attributes.hp.tooltip.push(`${upgrade.name}: +${sys.hpAdvancementBonus}/tier`);
+            }
+            if (sys.eacBonus) {
+                data.attributes.eac.value += sys.eacBonus;
+                data.attributes.eac.tooltip.push(`${upgrade.name}: +${sys.eacBonus}`);
+            }
+            if (sys.kacBonus) {
+                data.attributes.kac.value += sys.kacBonus;
+                data.attributes.kac.tooltip.push(`${upgrade.name}: +${sys.kacBonus}`);
+            }
+            if (sys.reflexBonus) {
+                data.attributes.ref.value += sys.reflexBonus;
+                data.attributes.ref.tooltip.push(`${upgrade.name}: +${sys.reflexBonus}`);
+            }
+            if (sys.fortitudeBonus) {
+                data.attributes.fort.value += sys.fortitudeBonus;
+                data.attributes.fort.tooltip.push(`${upgrade.name}: +${sys.fortitudeBonus}`);
+            }
+            if (sys.spBonusPerTier) {
+                const spBonus = sys.spBonusPerTier * tier;
+                data.attributes.sp.max += spBonus;
+                data.attributes.sp.tooltip.push(`${upgrade.name}: +${sys.spBonusPerTier}×${tier} = +${spBonus}`);
+            }
+            if (sys.speedBonus) {
+                const speedTypes = ["land", "fly", "swim", "burrow"];
+                for (const speedType of speedTypes) {
+                    const current = parseInt(data.attributes.speed[speedType]) || 0;
+                    if (current > 0) {
+                        data.attributes.speed[speedType] = `${current + sys.speedBonus} ft.`;
+                    }
+                }
+            }
+        }
+
+        // ========================================
+        // HP Finalization: Base HP + (HP Advancement × tier)
+        // (computed after upgrades so Reinforced Frame etc. are included)
+        // ========================================
+        const tierHp = hpAdvancement * tier;
+        data.attributes.hp.max = baseHp + tierHp;
+        data.attributes.hp.tooltip.push(`Tier advancement (${hpAdvancement} × ${tier}): +${tierHp}`);
+
+        // ========================================
+        // AC Adjustments: Manual EAC/KAC adjustments
+        // ========================================
+        const eacAdj = data.attributes.eac.adjustment || 0;
+        if (eacAdj) {
+            data.attributes.eac.value += eacAdj;
+            const sign = eacAdj > 0 ? "+" : "";
+            data.attributes.eac.tooltip.push(`${game.i18n.localize("SFRPG.MechSheet.Attributes.EacAdjustment")}: ${sign}${eacAdj}`);
+        }
+
+        const kacAdj = data.attributes.kac.adjustment || 0;
+        if (kacAdj) {
+            data.attributes.kac.value += kacAdj;
+            const sign = kacAdj > 0 ? "+" : "";
+            data.attributes.kac.tooltip.push(`${game.i18n.localize("SFRPG.MechSheet.Attributes.KacAdjustment")}: ${sign}${kacAdj}`);
         }
 
         // ========================================

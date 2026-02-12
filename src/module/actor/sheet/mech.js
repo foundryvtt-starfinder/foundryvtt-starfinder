@@ -14,7 +14,9 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
     }
 
     static get defaultOptions() {
-        return foundry.utils.mergeObject(super.defaultOptions, {
+        const options = super.defaultOptions;
+        options.scrollY = [...(options.scrollY || []), ".tab.details", ".tab.features"];
+        return foundry.utils.mergeObject(options, {
             classes: ["sfrpg", "sheet", "actor", "mech"],
             width: 700
         });
@@ -292,7 +294,10 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         html.find('.pod-deactivate').click(event => this._onMissionPodDeactivate(event));
 
         // PP Controls
-        html.find('.pp-control').click(event => this._onPPControl(event));
+        html.find('.pp-control:not(.ac-adjust)').click(event => this._onPPControl(event));
+
+        // AC Adjustment Controls
+        html.find('.ac-adjust').click(event => this._onACAdjust(event));
 
         // Mech weapon action button dragging (for creating hotbar macros)
         const attackButtons = html[0].querySelectorAll('button.attack, button.damage');
@@ -329,6 +334,21 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         }
 
         this.actor.update({ "system.attributes.pp.value": newValue });
+    }
+
+    /**
+     * Handle AC adjustment increment/decrement controls.
+     * @param {Event} event The click event
+     */
+    _onACAdjust(event) {
+        event.preventDefault();
+        event.stopPropagation();
+        const el = event.currentTarget;
+        const action = el.dataset.action;
+        const field = el.dataset.field;
+        const current = foundry.utils.getProperty(this.actor, field) || 0;
+        const newValue = action === "increase" ? current + 1 : current - 1;
+        this.actor.update({ [field]: newValue });
     }
 
     /**
