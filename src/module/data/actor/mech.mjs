@@ -65,6 +65,13 @@ export default class SFRPGActorMech extends SFRPGActorBase {
                         nullable: false,
                         required: true
                     }),
+                    adjustment: new fields.NumberField({
+                        initial: 0,
+                        integer: true,
+                        nullable: false,
+                        required: true,
+                        label: "SFRPG.MechSheet.Attributes.EacAdjustment"
+                    }),
                     tooltip: new fields.ArrayField(new fields.StringField())
                 }, {label: "SFRPG.EnergyArmorClassShort", hint: "SFRPG.EnergyArmorClass"}),
                 kac: new fields.SchemaField({
@@ -74,6 +81,13 @@ export default class SFRPGActorMech extends SFRPGActorBase {
                         integer: true,
                         nullable: false,
                         required: true
+                    }),
+                    adjustment: new fields.NumberField({
+                        initial: 0,
+                        integer: true,
+                        nullable: false,
+                        required: true,
+                        label: "SFRPG.MechSheet.Attributes.KacAdjustment"
                     }),
                     tooltip: new fields.ArrayField(new fields.StringField())
                 }, {label: "SFRPG.KineticArmorClassShort", hint: "SFRPG.KineticArmorClass"}),
