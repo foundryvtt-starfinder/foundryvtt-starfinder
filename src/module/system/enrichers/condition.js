@@ -45,7 +45,7 @@ export default class ConditionEnricher extends BaseEnricher {
         }
 
         if (this.args.damageType) {
-            const types = this.args.damageType.split(",");
+            const types = this.parseDamageTypes(this.args.damageType);
 
             if (types.some(i => !Object.keys(CONFIG.SFRPG.damageTypes).includes(i)))
                 return this._failValidation("Damage Type", this.args.damageType);
@@ -106,6 +106,7 @@ export default class ConditionEnricher extends BaseEnricher {
 
     /**
      * Apply modifications to the condition source. Returns the unchanged source if none are supplied.
+     * @param {Object<string, ?string|undefined>} [obj={}]
      * @returns {object}
      */
     getModifiedSource({duration = null, unit = null, damage = null, damageType = null, trigger = null} = {}) {
@@ -119,7 +120,7 @@ export default class ConditionEnricher extends BaseEnricher {
             {
                 type: "roll",
                 formula: damage,
-                damageTypes: damageType.split(",").reduce((obj, type) => {
+                damageTypes: this.parseDamageTypes(damageType).reduce((obj, type) => {
                     obj[type] = true;
                     return obj;
                 }, {}),
@@ -128,6 +129,17 @@ export default class ConditionEnricher extends BaseEnricher {
         ]);
 
         return condition;
+    }
+
+    /**
+     * Take a damage type string like `"fire,cold,acid"` and return an array of damage types, accounting for potential whitespace.
+     * @param {string} damageTypes
+     * @returns {(keyof typeof CONFIG.SFRPG.damageTypes)[]}
+     */
+    parseDamageTypes(damageTypes) {
+        const types = damageTypes.split(",");
+
+        return types.map(t => t.trim());
     }
 
 }

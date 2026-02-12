@@ -1,6 +1,7 @@
 /**
  * @import { TextEditorEnricherConfig, TextEditorEnricher } from "@client/config.mjs"
  * @import HTMLEnrichedContentElement from "@client/applications/elements/enriched-content.mjs"
+ * @import ChatMessage from "@client/documents/chat-message.mjs"
  */
 
 /**
@@ -59,7 +60,7 @@ export default class BaseEnricher {
     /**
      * Transform the Regex match array into an enriched element, performing validation.
      * @type {TextEditorEnricher}
-     * @returns {Promise<HTMLElement|null>}
+     * @returns {Promise<?HTMLElement>}
      */
     async enricherFunc(match, options) {
         this.match = match;
@@ -173,7 +174,7 @@ export default class BaseEnricher {
     /**
      * Take an anchor element and append a repost button
      * @param {HTMLAnchorElement} a The original anchor
-     * @returns The inputted Anchor, with a repost button appended
+     * @returns {HTMLAnchorElement} The inputted Anchor, with a repost button appended
      */
     addRepost(a) {
         const repost = document.createElement("i");
@@ -202,7 +203,7 @@ export default class BaseEnricher {
     /**
      * Handle repost button click, sending a chat message of the current target to chat.
      * @param {PointerEvent} event
-     * @returns Create a chat message
+     * @returns {ChatMessage}
      */
     repostListener(event) {
         event.stopPropagation();

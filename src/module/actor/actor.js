@@ -526,7 +526,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
      * @param {string} skillId      The skill id (e.g. "ins")
      * @param {Object} options      Options which configure how the skill check is rolled
-     * @returns {Promise<RollResult?>}
+     * @returns {Promise<?RollResult>}
      */
     async rollSkill(skillId, options = {}) {
         const skl = this.system.skills[skillId];
@@ -569,7 +569,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      *
      * @param {String} abilityId The ability id (e.g. "str")
      * @param {Object} options Options which configure how ability tests are rolled
-     * @returns {Promise<RollResult?>}
+     * @returns {Promise<?RollResult>}
      */
     async rollAbility(abilityId, options = {}) {
         return DiceSFRPG.d20Roll({
@@ -596,7 +596,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      *
      * @param {String} saveId The save id (e.g. "will")
      * @param {Object} options Options which configure how saves are rolled
-     * @returns {Promise<RollResult?>}
+     * @returns {Promise<?RollResult>}
      */
     async rollSave(saveId, options = {}) {
         const label = CONFIG.SFRPG.saves[saveId];
@@ -629,7 +629,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
      * @param {string} skillId      The skill id (e.g. "ins")
      * @param {Object} options      Options which configure how the skill check is rolled
-     * @returns {Promise<RollResult?>}
+     * @returns {Promise<?RollResult>}
      */
     async rollSkillCheck(skillId, options = {}) {
         const rollContext = RollContext.createActorRollContext(this);
@@ -680,7 +680,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
      * Roll the Piloting skill of the pilot of a vehicle
      *
      * @param {Object} options Options which configure how saves are rolled
-     * @returns {Promise<RollResult?>}
+     * @returns {Promise<?RollResult>}
      */
     async rollVehiclePilotingSkill(role = null, actorId = null, system = null, options = {}) {
 
