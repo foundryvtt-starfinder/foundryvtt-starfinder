@@ -153,7 +153,7 @@ export default function(engine) {
         // ========================================
         // Strength Modifier: Tier table + bonus from frame ONLY
         // ========================================
-        let frameStrengthBonus = frame?.system.strength || 0;
+        const frameStrengthBonus = frame?.system.strength || 0;
         data.attributes.strength.tooltip.push(`Base Strength (Tier ${tier}): +${tierStats.strengthMod}`);
         if (frameStrengthBonus) {
             data.attributes.strength.tooltip.push(`${frame.name}: +${frameStrengthBonus}`);
@@ -251,7 +251,8 @@ export default function(engine) {
         // Senses: Alphabetize comma-separated entries
         // ========================================
         if (data.attributes.senses) {
-            const senseParts = data.attributes.senses.split(",").map(s => s.trim()).filter(Boolean);
+            const senseParts = data.attributes.senses.split(",").map(s => s.trim())
+                .filter(Boolean);
             senseParts.sort((a, b) => a.localeCompare(b, undefined, { sensitivity: "base" }));
             data.attributes.senses = senseParts.join(", ");
         }
