@@ -1,0 +1,124 @@
+<form class="{{cssClass}} flexcol" autocomplete="off">
+
+    {{!-- Item Sheet Header --}}
+    <header class="sheet-header flexrow">
+        <img class="profile" src="{{item.img}}" title="{{item.name}}" data-edit="img" />
+
+        <div class="header-details flexrow">
+            <h1 class="charname">
+                <input name="name" type="text" value="{{item.name}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.ItemName" }}" />
+            </h1>
+
+            <div class="item-subtitle">
+                <h4 class="item-type">{{ localize "TYPES.Item.mechUpperLimb" }}</h4>
+                <span class="item-status">{{itemStatus}}</span>
+            </div>
+
+            {{!-- Item Summary --}}
+            <ul class="summary flexrow">
+                <li class="wide" data-tooltip="{{ localize "SFRPG.ItemSheet.Header.SourceTooltip" }}">
+                <input type="text" name="system.source" value="{{itemData.source}}" placeholder="{{ localize "SFRPG.ItemSheet.Header.Source" }}"/>
+                </li>
+            </ul>
+
+        </div>
+
+    </header>
+
+    {{!-- Item Sheet Navigation --}}
+    <nav class="sheet-navigation tabs" data-group="primary">
+        <a class="item active" data-tab="description">{{ localize "SFRPG.Description" }}</a>
+        <a class="item" data-tab="details">{{ localize "SFRPG.Details" }}</a>
+    </nav>
+
+    {{!-- Item Sheet Body --}}
+    <section class="sheet-body">
+
+        {{!-- Description Tab --}}
+        {{> "systems/sfrpg/templates/items/parts/item-description.hbs"}}
+
+        {{!-- Details Tab --}}
+        <div class="tab details" data-group="primary" data-tab="details">
+
+            <div class="bubble">
+                <h3 class="bubble-header">{{ localize "SFRPG.MechSheet.UpperLimb.Combat" }}</h3>
+                <div class="bubble-info">
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.UpperLimb.MeleeAttack" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.meleeAttack" value="{{itemData.meleeAttack}}" data-dtype="Number" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.UpperLimb.RangedAttack" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.rangedAttack" value="{{itemData.rangedAttack}}" data-dtype="Number" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.UpperLimb.Strength" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.strength" value="{{itemData.strength}}" data-dtype="Number" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bubble">
+                <h3 class="bubble-header">{{ localize "SFRPG.Details" }}</h3>
+                <div class="bubble-info">
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.UpperLimb.BaseHp" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.baseHp" value="{{itemData.baseHp}}" data-dtype="Number" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.UpperLimb.Eac" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.eac" value="{{itemData.eac}}" data-dtype="Number" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.UpperLimb.Kac" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.kac" value="{{itemData.kac}}" data-dtype="Number" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.UpperLimb.Slots" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.slots" value="{{itemData.slots}}" data-dtype="Number" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.UpperLimb.MpCost" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.mpCost" value="{{itemData.mpCost}}" data-dtype="Number" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bubble">
+                <h3 class="bubble-header">{{ localize "SFRPG.MechSheet.UpperLimb.SpecialAbility" }}</h3>
+                <div class="bubble-info">
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.UpperLimb.CanBeActivated" }}</label>
+                        <div class="form-fields">
+                            <input type="checkbox" name="system.canBeActivated" {{checked itemData.canBeActivated}} />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.UpperLimb.PpCost" }}</label>
+                        <div class="form-fields">
+                            <input type="text" name="system.ppCost" value="{{itemData.ppCost}}" data-dtype="Number" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </section>
+</form>

@@ -13,7 +13,7 @@ export const ActorCrewMixin = (superclass) => class extends superclass {
 
     getCrewRoleForActor(actorId) {
         const dataSource = this;
-        const acceptedActorTypes = ["starship", "vehicle"];
+        const acceptedActorTypes = ["starship", "vehicle", "mech"];
         if (!acceptedActorTypes.includes(dataSource.type)) {
             console.log(`getCrewRoleForActor(${actorId}) called on an actor (${dataSource.id}) of type ${dataSource.type}, which is not supported!`);
             console.trace();
@@ -33,7 +33,7 @@ export const ActorCrewMixin = (superclass) => class extends superclass {
     }
 
     getActorIdsForCrewRole(role) {
-        const acceptedActorTypes = ["starship", "vehicle"];
+        const acceptedActorTypes = ["starship", "vehicle", "mech"];
         if (!acceptedActorTypes.includes(this.type)) {
             console.log(`getActorIdsForCrewRole(${role}) called on an actor (${this.id}) of type ${this.type}, which is not supported!`);
             console.trace();

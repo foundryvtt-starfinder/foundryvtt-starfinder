@@ -1102,6 +1102,25 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                     }
                 });
             }
+        } else if (actorData.type === "mech") {
+            if (!crewData.useNPCCrew) {
+                const operatorContextIds = [];
+                let operatorCount = 1;
+
+                const operatorActors = crewActorData?.operator?.actors || [];
+                for (const actor of operatorActors) {
+                    if (!actor) continue;
+                    const actorSystemData = actor instanceof ActorSFRPG ? actor.system : actor.data;
+                    const contextId = `operator${operatorCount}`;
+                    rollContext.addContext(contextId, actor, actorSystemData);
+                    operatorContextIds.push(contextId);
+                    operatorCount++;
+                }
+
+                if (desiredSelectors.includes("operator")) {
+                    rollContext.addSelector("operator", operatorContextIds);
+                }
+            }
         }
     }
 

@@ -13,7 +13,7 @@ export default function(engine) {
         const actorData = fact.owner.actorData;
         const classes = actor.items.filter(item => item.type === "class");
 
-        if (data.actionType) {
+        if (data.actionType || (itemData.type === "mechWeapon" && data.save?.type)) {
 
             if (data.save && data.save.type) {
                 const save = data.save || {};
@@ -27,7 +27,10 @@ export default function(engine) {
 
                     const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
 
-                    if (actor.type === "npc" || actor.type === "npc2") {
+                    if (actor.type === "mech") {
+                        // Mech weapon save DC = 10 + 1/2 tier + operator's key ability mod
+                        dcFormula = "10 + floor(@owner.details.tier / 2)";
+                    } else if (actor.type === "npc" || actor.type === "npc2") {
                         if (itemData.type === "spell") {
                             dcFormula = `@owner.attributes.baseSpellDC.value + @item.level`;
                         } else {
@@ -63,7 +66,9 @@ export default function(engine) {
                     const rollResult = DiceSFRPG.resolveFormulaWithoutDice(dcFormula, rollContext, {logErrors: false});
                     if (!rollResult.hadError) {
                         item.labels.dcValue = rollResult.total >= 0 ? rollResult.total : "";
-                        item.labels.save = `DC ${item.labels.dcValue} ${CONFIG.SFRPG.saves[save.type]} ${CONFIG.SFRPG.saveDescriptors[save.descriptor]}`;
+                        const saveType = CONFIG.SFRPG.saves[save.type] || "";
+                        const descriptor = save.descriptor ? CONFIG.SFRPG.saveDescriptors[save.descriptor] : "";
+                        item.labels.save = descriptor ? `${saveType} Save (${descriptor})` : `${saveType} Save`;
                         item.labels.saveFormula = dcFormula;
                         computedSave = true;
                     } else {

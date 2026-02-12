@@ -40,9 +40,12 @@ export default class SFRPGCustomChatMessage {
         let actor = data.rollContext.allContexts['actor'] ? data.rollContext.allContexts['actor'].entity : mainContext?.entity;
         if (!actor) {
             actor = data.rollContext.allContexts['ship'] ? data.rollContext.allContexts['ship'].entity : mainContext?.entity;
-            if (!actor) {
-                return false;
-            }
+        }
+        if (!actor) {
+            actor = data.rollContext.allContexts['mech'] ? data.rollContext.allContexts['mech'].entity : mainContext?.entity;
+        }
+        if (!actor) {
+            return false;
         }
 
         let item = data.rollContext.allContexts['item'] ? data.rollContext.allContexts['item'].entity : mainContext?.entity;
@@ -57,6 +60,7 @@ export default class SFRPGCustomChatMessage {
         const currentCapacity = item instanceof ItemSFRPG ? item.getCurrentCapacity() : null;
         const options = {
             item: item,
+            labels: item.labels || {},
             hasDamage: data.rollType !== "damage" && (item.hasDamage || false),
             hasSave: item.hasSave || false,
             hasSkill: item.hasSkill || false,

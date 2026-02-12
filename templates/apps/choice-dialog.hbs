@@ -1,0 +1,13 @@
+<form id="choice-dialog-form" class="form-rest">
+    <p>{{message}}</p>
+    {{#each choices as |choice id|}}
+    <div class="form-group">
+        <label>{{capitalize choice.name}}{{#if choice.label}}: {{choice.label}}{{/if}}</label>
+        <div class="form-fields">
+            <select id="{{id}}">
+                {{selectOptions choice.options selected=choice.default valueAttr="label" localize=true}}
+            </select>
+        </div>
+    </div>
+    {{/each}}
+</form>
