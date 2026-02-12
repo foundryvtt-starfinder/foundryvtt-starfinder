@@ -60,4 +60,12 @@ export default class SFRPGMessageBase extends SFRPGDocumentBase {
             })
         };
     }
+
+    /**
+     * Renders the tags for a chat message based on the message type and system data.
+     * Tags are saved in system.renderedTags to differentiate them from any that were passed manually to the chat message.
+     */
+    prepareTags() {
+        console.log("BASE!", this);
+    }
 }

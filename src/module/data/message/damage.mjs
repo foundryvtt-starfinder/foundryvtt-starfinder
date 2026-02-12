@@ -62,4 +62,37 @@ export default class SFRPGMessageDamage extends SFRPGMessageBase {
 
         return schema;
     }
+
+    /** @override */
+    prepareTags() {
+        this.renderedTags = [];
+        // Weapon (and other item) properties
+        for (const [prop, value] of Object.entries(this.properties)) {
+            if (value) this.renderedTags.push({tag: `weapon-properties ${prop}`, text: CONFIG.SFRPG.weaponProperties[prop]});
+        }
+
+        // Starship weapon properties
+        for (const prop of this.starshipWeaponProperties) {
+            this.renderedTags.push({tag: `starship-weapon-properties ${prop}`, text: CONFIG.SFRPG.starshipWeaponProperties[prop]});
+        }
+
+        // Descriptors
+        for (const descriptor of this.descriptors) {
+            this.renderedTags.push({tag: descriptor, text: CONFIG.SFRPG.descriptors[descriptor]});
+        }
+
+        // Special Materials
+        for (const [material, value] of Object.entries(this.specialMaterials)) {
+            if (value) this.renderedTags.push({tag: material, text: CONFIG.SFRPG.specialMaterials[material]});
+        }
+
+        // Magic Damage
+        if (this.damage.isMagic) this.renderedTags.push({tag: "magic", text: game.i18n.localize("SFRPG.Magic.Magic")});
+
+        // Critical
+        if (this.critical.isCritical) this.renderedTags.push({tag: "critical", text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
+
+        // Minimum Damage
+        if (this.damage.minimumDamage) this.renderedTags.push({tag: "minimum-damage", text: game.i18n.localize("SFRPG.Damage.MinimumDamage")});
+    }
 }

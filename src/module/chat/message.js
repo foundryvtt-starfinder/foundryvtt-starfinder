@@ -15,8 +15,11 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
 
     /** @override */
     async renderHTML({ canDelete, canClose = false, ...rest } = {}) {
-        console.log(this);
+        this.system.prepareTags();
+        if (!this.system.template) this.system.template = CONFIG.ChatMessage.template;
+
         const html = super.renderHTML({canDelete, canClose, ...rest});
+        console.log(this, await html);
         return html;
     }
 
