@@ -65,34 +65,38 @@ export default class SFRPGMessageDamage extends SFRPGMessageBase {
 
     /** @override */
     prepareTags() {
-        this.renderedTags = [];
+        const tags = this.tags.filter(tag => !tag.rendered);
+
         // Weapon (and other item) properties
         for (const [prop, value] of Object.entries(this.properties)) {
-            if (value) this.renderedTags.push({tag: `weapon-properties ${prop}`, text: CONFIG.SFRPG.weaponProperties[prop]});
+            if (value) tags.push({tag: `weapon-properties ${prop}`, text: CONFIG.SFRPG.weaponProperties[prop], rendered: true});
         }
 
         // Starship weapon properties
         for (const prop of this.starshipWeaponProperties) {
-            this.renderedTags.push({tag: `starship-weapon-properties ${prop}`, text: CONFIG.SFRPG.starshipWeaponProperties[prop]});
+            tags.push({tag: `starship-weapon-properties ${prop}`, text: CONFIG.SFRPG.starshipWeaponProperties[prop], rendered: true});
         }
 
         // Descriptors
         for (const descriptor of this.descriptors) {
-            this.renderedTags.push({tag: descriptor, text: CONFIG.SFRPG.descriptors[descriptor]});
+            tags.push({tag: descriptor, text: CONFIG.SFRPG.descriptors[descriptor], rendered: true});
         }
 
         // Special Materials
         for (const [material, value] of Object.entries(this.specialMaterials)) {
-            if (value) this.renderedTags.push({tag: material, text: CONFIG.SFRPG.specialMaterials[material]});
+            if (value) tags.push({tag: material, text: CONFIG.SFRPG.specialMaterials[material], rendered: true});
         }
 
         // Magic Damage
-        if (this.damage.isMagic) this.renderedTags.push({tag: "magic", text: game.i18n.localize("SFRPG.Magic.Magic")});
+        if (this.damage.isMagic) tags.push({tag: "magic", text: game.i18n.localize("SFRPG.Magic.Magic"), rendered: true});
 
         // Critical
-        if (this.critical.isCritical) this.renderedTags.push({tag: "critical", text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
+        if (this.critical.isCritical) tags.push({tag: "critical", text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit"), rendered: true});
 
         // Minimum Damage
-        if (this.damage.minimumDamage) this.renderedTags.push({tag: "minimum-damage", text: game.i18n.localize("SFRPG.Damage.MinimumDamage")});
+        if (this.damage.minimumDamage) tags.push({tag: "minimum-damage", text: game.i18n.localize("SFRPG.Damage.MinimumDamage"), rendered: true});
+
+        // Store rendered tags
+        this.tags = tags;
     }
 }

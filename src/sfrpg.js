@@ -254,6 +254,8 @@ Hooks.once('init', async function() {
     CONFIG.MeasuredTemplate.objectClass = MeasuredTemplateSFRPG;
     CONFIG.MeasuredTemplate.defaults.angle = 90; // SF uses 90 degree cones
 
+    CONFIG.ChatMessage.template = "./systems/sfrpg/templates/chat/sfrpg-chat-message.hbs";
+
     // DataModels definition
     CONFIG.Actor.dataModels = {
         character: models.SFRPGActorCharacter,

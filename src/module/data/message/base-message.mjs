@@ -41,7 +41,7 @@ export default class SFRPGMessageBase extends SFRPGDocumentBase {
             blank: true
         });
 
-        schema.tags = new fields.TypedObjectField(
+        schema.tags = new fields.ArrayField(
             new fields.SchemaField(SFRPGMessageBase._tagFieldData())
         );
 
@@ -50,13 +50,20 @@ export default class SFRPGMessageBase extends SFRPGDocumentBase {
 
     static _tagFieldData() {
         return {
+            rendered: new fields.BooleanField({
+                required: false
+            }),
             tag: new fields.StringField({
                 initial: "",
-                blank: ""
+                blank: true
             }),
             text: new fields.StringField({
                 initial: "",
-                blank: ""
+                blank: true
+            }),
+            tooltip: new fields.StringField({
+                initial: "",
+                blank: true
             })
         };
     }
