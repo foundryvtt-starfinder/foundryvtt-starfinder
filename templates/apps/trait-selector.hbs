@@ -1,0 +1,70 @@
+<form class="trait-selector" autocomplete="off" onsubmit="event.preventDefault();">
+
+    <div class="trait-header">
+
+        {{!-- Selected Trait List --}}
+        <h3 data-tooltip="Some options may be fixed by character class(es).">{{localize "SFRPG.TraitSelector.SelectedOptions"}}</h3>
+        <ul class="trait-list" id="selected">
+            {{#each choices as |choice key|}}
+                {{#if choice.isSelected}}
+                    <li class="trait" id="{{key}}">
+                        <label class="checkbox" {{#if choice.tooltip}}data-tooltip="<strong>{{choice.label}}</strong><br/>{{choice.tooltip}}"{{/if}}>
+                            <input type="checkbox" name="{{key}}.value" data-dtype="Boolean" {{#if choice.isLocked}}disabled=true{{/if}} {{checked choice.isSelected}}>
+                            {{choice.label}}
+                        </label>
+
+                        {{#if ../needsTextExtension}}
+                            <input class="extension" type="text" name="{{key}}.extension" value="{{choice.extension}}">
+                        {{/if}}
+
+                        <input type="hidden" name="{{key}}.isObject" value="{{choice.isObject}}"></input>
+                        <input type="hidden" name="{{key}}.needsTextExtension" value="{{../needsTextExtension}}"></input>
+                    </li>
+                {{/if}}
+            {{/each}}
+        </ul>
+
+        {{#unless needsCustomField}}<br />{{/unless}}
+
+        {{!-- Special Traits --}}
+        {{#if needsCustomField}}
+            <div class="form-group stacked special-trait">
+                <label style="text-align: center">{{{localize "SFRPG.Special"}}}</label>
+                <input type="text" name="custom" value="{{custom}}" data-dtype="String"/>
+            </div>
+        {{/if}}
+
+        {{!-- Save and Exit Button --}}
+        <button type="submit" name="submit" value="1"><i class="far fa-save"></i> {{localize "SFRPG.TraitSelector.Update"}}</button>
+        <br />
+
+    </div>
+
+    {{!-- Trait Options List --}}
+    <div class="trait-footer">
+
+        <h3 style="margin-top: 10px">{{localize "SFRPG.TraitSelector.AvailableOptions"}}</h3>
+
+        {{!-- Search Bar --}}
+        <div class="sortcontainer" id="tagfilter">
+            <input class="search-bar" name="textFilter" type="text" value="" data-dtype="String" placeholder="{{localize "SFRPG.FeaturesFilter"}}"/>
+        </div>
+
+        <ul class="trait-list" id="unselected">
+            {{#each choices as |choice key|}}
+                {{#unless choice.isSelected}}
+                    <li class="trait" id="{{key}}">
+                        <label class="checkbox" {{#if choice.tooltip}}data-tooltip="<strong>{{choice.label}}</strong><br/>{{choice.tooltip}}"{{/if}}>
+                            <input type="checkbox" name="{{key}}.value" data-dtype="Boolean" {{checked choice.isSelected}}>
+                            {{choice.label}}
+                        </label>
+
+                        <input type="hidden" name="{{key}}.isObject" value="{{choice.isObject}}"></input>
+                        <input type="hidden" name="{{key}}.needsTextExtension" value="{{../needsTextExtension}}"></input>
+                    </li>
+                {{/unless}}
+            {{/each}}
+        </ul>
+    </div>
+
+</form>

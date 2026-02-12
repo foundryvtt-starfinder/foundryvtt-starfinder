@@ -94,6 +94,9 @@ import calculateStarshipTargetLock from './rules/actions/actor/starship/calculat
 import calculateVehicleControlSkill from './rules/actions/actor/vehicle/calculate-vehicle-control-skill.js';
 import calculateVehicleHangar from './rules/actions/actor/vehicle/calculate-vehicle-hangar.js';
 import calculateVehiclePassengers from './rules/actions/actor/vehicle/calculate-vehicle-passengers.js';
+// Mech rules
+import calculateMechCrew from './rules/actions/actor/mech/calculate-mech-crew.js';
+import calculateMechComponents from './rules/actions/actor/mech/calculate-mech-components.js';
 // Item rules
 import calculateActivationDetails from './rules/actions/item/calculate-activation-details.js';
 import calculateSaveDC from './rules/actions/item/calculate-save-dc.js';
@@ -181,6 +184,9 @@ export default function(engine) {
     calculateVehicleControlSkill(engine);
     calculateVehicleHangar(engine);
     calculateVehiclePassengers(engine);
+    // Mech actions
+    calculateMechCrew(engine);
+    calculateMechComponents(engine);
     // Item actions
     calculateSaveDC(engine);
     calculateSkillDC(engine);
@@ -347,6 +353,16 @@ export default function(engine) {
                     "calculateVehicleHangar",
                     "calculateVehiclePassengers",
                     "identity",
+                    { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
+                    "calculateBulkAndWealth"
+                ]
+            },
+            {
+                when: { closure: "isActorType", type: "mech" },
+                then: [
+                    "calculateMechCrew",
+                    "calculateMechComponents",
+                    { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
                     "calculateBulkAndWealth"
                 ]

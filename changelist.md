@@ -1,3 +1,20 @@
+# Version 0.31.0 - Mech Support
+This update adds mech support from the Starfinder Tech Revolution supplement.
+
+## New Features
+- New Mech actor type with tier-based stat progression, Power Points tracking, and a dedicated actor sheet
+- Eight new mech item types: Frame, Power Core, Upper Limb, Lower Limb, Weapon, Auxiliary System, Upgrade, and Mission Pod
+- Drag-and-drop operator assignment with frame-based min/max limits
+- Automatic stat calculation from equipped components with tooltip breakdowns
+- Weapon slot mounting system across frame, upper limb, and lower limb slots
+- Mission pod activation/deactivation with dynamic item and stat modifications
+- New Mech Components compendium with 108 items from Tech Revolution and Mechageddon!
+
+## Core System Improvements
+- Mech Points (MP) currency field added to character sheets
+- Hotbar macro support for mech weapon actions
+- Item collection sheets updated to support mech item types
+
 # Version 0.30.1
 This update contains a few small fixes that fix a couple of bugs with the new targeting system and chat cards, as well as introduces a method for us (the developers) to make announcements about new features and fixes to users.
 

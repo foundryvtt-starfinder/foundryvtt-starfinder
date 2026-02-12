@@ -19,7 +19,8 @@ SFRPG.actorTypes = {
     "npc": "TYPES.Actor.npc",
     "npc2": "TYPES.Actor.npc2",
     "starship": "TYPES.Actor.starship",
-    "vehicle": "TYPES.Actor.vehicle"
+    "vehicle": "TYPES.Actor.vehicle",
+    "mech": "TYPES.Actor.mech"
 };
 
 /**
@@ -215,7 +216,8 @@ SFRPG.skillProficiencyLevels = {
 SFRPG.currencies = {
     "credit": "SFRPG.Currencies.Credits",
     "upb": "SFRPG.Currencies.UPBs",
-    "bp": "SFRPG.Currencies.BPs"
+    "bp": "SFRPG.Currencies.BPs",
+    "mp": "SFRPG.Currencies.MechPoints"
 };
 
 /**
@@ -968,6 +970,99 @@ SFRPG.starshipSizes = {
     "gargantuan": "SFRPG.SizeGargantuan",
     "colossal": "SFRPG.SizeColossal",
     "supercolossal": "SFRPG.SizeSupercolossal"
+};
+
+SFRPG.mechSizes = {
+    "huge": "SFRPG.SizeHuge",
+    "gargantuan": "SFRPG.SizeGargantuan",
+    "colossal": "SFRPG.SizeColossal"
+};
+
+SFRPG.mechReachBySize = {
+    "huge": "15 ft.",
+    "gargantuan": "20 ft.",
+    "colossal": "30 ft."
+};
+
+SFRPG.mechSystemStatus = {
+    "nominal": "SFRPG.MechSheet.Systems.StatusNominal",
+    "malfunctioning": "SFRPG.MechSheet.Systems.StatusMalfunctioning",
+    "inoperable": "SFRPG.MechSheet.Systems.StatusInoperable"
+};
+
+SFRPG.mechWeaponTypes = {
+    "melee": "SFRPG.MechSheet.Weapon.TypeMelee",
+    "ranged": "SFRPG.MechSheet.Weapon.TypeRanged"
+};
+
+SFRPG.mechWeaponSlots = {
+    "locker": "SFRPG.MechSheet.Weapon.SlotLocker",
+    "frame": "SFRPG.MechSheet.Weapon.SlotFrame",
+    "upperLimb": "SFRPG.MechSheet.Weapon.SlotUpperLimb",
+    "lowerLimb": "SFRPG.MechSheet.Weapon.SlotLowerLimb"
+};
+
+// Valid mounting slots (excludes locker - used for validSlots field on weapons)
+SFRPG.mechWeaponMountableSlots = {
+    "frame": "SFRPG.MechSheet.Weapon.SlotFrame",
+    "upperLimb": "SFRPG.MechSheet.Weapon.SlotUpperLimb",
+    "lowerLimb": "SFRPG.MechSheet.Weapon.SlotLowerLimb"
+};
+
+// Mech Statistics by Tier (Tech Revolution pg. 98)
+// { sp, hardnessBonus, baseAC, baseSaveBonus, baseAttackBonus, strengthMod }
+SFRPG.mechStatsByTier = {
+    1:  { sp: 5,  hardnessBonus: 0,  baseAC: 14, baseSaveBonus: 2,  baseAttackBonus: 8,  strengthMod: 0 },
+    2:  { sp: 7,  hardnessBonus: 1,  baseAC: 15, baseSaveBonus: 3,  baseAttackBonus: 8,  strengthMod: 0 },
+    3:  { sp: 9,  hardnessBonus: 1,  baseAC: 16, baseSaveBonus: 4,  baseAttackBonus: 8,  strengthMod: 0 },
+    4:  { sp: 11, hardnessBonus: 2,  baseAC: 18, baseSaveBonus: 5,  baseAttackBonus: 8,  strengthMod: 1 },
+    5:  { sp: 13, hardnessBonus: 2,  baseAC: 19, baseSaveBonus: 5,  baseAttackBonus: 9,  strengthMod: 1 },
+    6:  { sp: 15, hardnessBonus: 3,  baseAC: 20, baseSaveBonus: 6,  baseAttackBonus: 9,  strengthMod: 1 },
+    7:  { sp: 17, hardnessBonus: 3,  baseAC: 21, baseSaveBonus: 7,  baseAttackBonus: 9,  strengthMod: 2 },
+    8:  { sp: 19, hardnessBonus: 4,  baseAC: 23, baseSaveBonus: 8,  baseAttackBonus: 9,  strengthMod: 2 },
+    9:  { sp: 21, hardnessBonus: 4,  baseAC: 24, baseSaveBonus: 8,  baseAttackBonus: 9,  strengthMod: 2 },
+    10: { sp: 23, hardnessBonus: 5,  baseAC: 25, baseSaveBonus: 9,  baseAttackBonus: 10, strengthMod: 3 },
+    11: { sp: 25, hardnessBonus: 5,  baseAC: 26, baseSaveBonus: 10, baseAttackBonus: 10, strengthMod: 3 },
+    12: { sp: 27, hardnessBonus: 6,  baseAC: 28, baseSaveBonus: 11, baseAttackBonus: 10, strengthMod: 3 },
+    13: { sp: 29, hardnessBonus: 6,  baseAC: 29, baseSaveBonus: 11, baseAttackBonus: 10, strengthMod: 4 },
+    14: { sp: 31, hardnessBonus: 7,  baseAC: 30, baseSaveBonus: 12, baseAttackBonus: 10, strengthMod: 4 },
+    15: { sp: 33, hardnessBonus: 7,  baseAC: 31, baseSaveBonus: 13, baseAttackBonus: 11, strengthMod: 4 },
+    16: { sp: 35, hardnessBonus: 8,  baseAC: 33, baseSaveBonus: 14, baseAttackBonus: 11, strengthMod: 5 },
+    17: { sp: 37, hardnessBonus: 8,  baseAC: 34, baseSaveBonus: 14, baseAttackBonus: 11, strengthMod: 5 },
+    18: { sp: 39, hardnessBonus: 9,  baseAC: 35, baseSaveBonus: 15, baseAttackBonus: 11, strengthMod: 5 },
+    19: { sp: 41, hardnessBonus: 9,  baseAC: 36, baseSaveBonus: 16, baseAttackBonus: 11, strengthMod: 6 },
+    20: { sp: 43, hardnessBonus: 10, baseAC: 38, baseSaveBonus: 17, baseAttackBonus: 12, strengthMod: 6 }
+};
+
+SFRPG.mechWeaponDamageLevels = {
+    "low": "SFRPG.MechSheet.Weapon.DamageLevelLow",
+    "medium": "SFRPG.MechSheet.Weapon.DamageLevelMedium",
+    "high": "SFRPG.MechSheet.Weapon.DamageLevelHigh",
+    "extreme": "SFRPG.MechSheet.Weapon.DamageLevelExtreme"
+};
+
+// Tech Revolution Table 4-5: Weapon Damage by tier and level
+SFRPG.mechWeaponDamageByTier = {
+    1:  { low: "1d4",  medium: "1d6",  high: "1d10",  extreme: "1d12" },
+    2:  { low: "1d6",  medium: "1d8",  high: "2d6",   extreme: "2d8" },
+    3:  { low: "2d4",  medium: "2d6",  high: "2d8",   extreme: "2d10" },
+    4:  { low: "2d6",  medium: "2d8",  high: "2d10",  extreme: "2d12" },
+    5:  { low: "3d4",  medium: "3d6",  high: "3d8",   extreme: "3d10" },
+    6:  { low: "3d6",  medium: "3d8",  high: "3d10",  extreme: "3d12" },
+    7:  { low: "5d4",  medium: "4d6",  high: "4d8",   extreme: "4d10" },
+    8:  { low: "6d4",  medium: "5d6",  high: "4d10",  extreme: "4d12" },
+    9:  { low: "7d4",  medium: "4d8",  high: "5d8",   extreme: "5d10" },
+    10: { low: "8d4",  medium: "6d6",  high: "5d10",  extreme: "5d12" },
+    11: { low: "9d4",  medium: "6d8",  high: "6d10",  extreme: "6d12" },
+    12: { low: "10d4", medium: "9d6",  high: "7d10",  extreme: "7d12" },
+    13: { low: "11d4", medium: "10d6", high: "8d10",  extreme: "8d12" },
+    14: { low: "12d4", medium: "9d8",  high: "9d10",  extreme: "9d12" },
+    15: { low: "10d6", medium: "10d8", high: "10d10", extreme: "10d12" },
+    16: { low: "11d6", medium: "11d8", high: "11d10", extreme: "11d12" },
+    17: { low: "12d6", medium: "12d8", high: "12d10", extreme: "12d12" },
+    18: { low: "13d6", medium: "13d8", high: "13d10", extreme: "13d12" },
+    19: { low: "14d6", medium: "14d8", high: "14d10", extreme: "14d12" },
+    20: { low: "15d6", medium: "15d8", high: "15d10", extreme: "15d12" }
 };
 
 SFRPG.itemSizes = {
@@ -2379,6 +2474,13 @@ SFRPG.itemTypes = {
     "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
     "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems",
 
+    "mechFrame": "SFRPG.Items.Categories.MechFrames",
+    "mechWeapon": "SFRPG.Items.Categories.MechWeapons",
+    "mechAuxiliary": "SFRPG.Items.Categories.MechAuxiliarySystems",
+    "mechUpgrade": "SFRPG.Items.Categories.MechUpgrades",
+    "mechPowerCore": "SFRPG.Items.Categories.MechPowerCores",
+    "mechMissionPod": "SFRPG.Items.Categories.MechMissionPods",
+
     "ammunition": "SFRPG.Items.Categories.Ammunition",
     "augmentation": "SFRPG.Items.Categories.Augmentations",
     "consumable": "SFRPG.Items.Categories.Consumables",
@@ -2445,6 +2547,17 @@ SFRPG.vehicleDefinitionItemTypes = [
     "vehicleSystem"
 ];
 
+SFRPG.mechDefinitionItemTypes = [
+    "mechFrame",
+    "mechWeapon",
+    "mechAuxiliary",
+    "mechUpgrade",
+    "mechPowerCore",
+    "mechLowerLimb",
+    "mechUpperLimb",
+    "mechMissionPod"
+];
+
 SFRPG.physicalItemTypes = [
     "ammunition",
     "augmentation",
@@ -2479,7 +2592,13 @@ SFRPG.containableTypes = {
     "shield"       : "SFRPG.Items.Categories.Shields",
     "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories",
     "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
-    "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
+    "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems",
+    "mechWeapon"   : "SFRPG.Items.Categories.MechWeapons",
+    "mechPowerCore": "SFRPG.Items.Categories.MechPowerCores",
+    "mechUpperLimb": "SFRPG.Items.Categories.MechUpperLimbs",
+    "mechLowerLimb": "SFRPG.Items.Categories.MechLowerLimbs",
+    "mechAuxiliary": "SFRPG.Items.Categories.MechAuxiliarySystems",
+    "mechUpgrade"  : "SFRPG.Items.Categories.MechUpgrades"
 };
 
 SFRPG.storageIdentifiers = {

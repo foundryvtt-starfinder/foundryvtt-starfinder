@@ -6,6 +6,7 @@ export { default as SFRPGActorHazard } from './actor/hazard.mjs';
 export { default as SFRPGActorNPC } from './actor/npc.mjs';
 export { default as SFRPGActorVehicle } from './actor/vehicle.mjs';
 export { default as SFRPGActorStarship } from './actor/starship.mjs';
+export { default as SFRPGActorMech } from './actor/mech.mjs';
 
 // Export Items
 export { default as SFRPGItemBase } from './item/base-item.mjs';
@@ -53,5 +54,13 @@ export { default as SFRPGItemTheme } from './item/theme.mjs';
 export { default as SFRPGItemUpgrade } from './item/upgrade.mjs';
 export { default as SFRPGItemVehicleAttack } from './item/vehicleAttack.mjs';
 export { default as SFRPGItemVehicleSystem } from './item/vehicleSystem.mjs';
+export { default as SFRPGItemMechFrame } from './item/mechFrame.mjs';
+export { default as SFRPGItemMechWeapon } from './item/mechWeapon.mjs';
+export { default as SFRPGItemMechAuxiliary } from './item/mechAuxiliary.mjs';
+export { default as SFRPGItemMechUpgrade } from './item/mechUpgrade.mjs';
+export { default as SFRPGItemMechPowerCore } from './item/mechPowerCore.mjs';
+export { default as SFRPGItemMechLowerLimb } from './item/mechLowerLimb.mjs';
+export { default as SFRPGItemMechUpperLimb } from './item/mechUpperLimb.mjs';
+export { default as SFRPGItemMechMissionPod } from './item/mechMissionPod.mjs';
 export { default as SFRPGItemWeapon } from './item/weapon.mjs';
 export { default as SFRPGItemWeaponAccessory } from './item/weaponAccessory.mjs';

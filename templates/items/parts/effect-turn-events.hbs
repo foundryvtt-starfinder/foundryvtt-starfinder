@@ -1,0 +1,95 @@
+{{#each itemData.turnEvents as |event i|}}
+    <div class="bubble turn-event" data-turn-event-idx="{{i}}">
+        <h4 class="turn-event-header bubble-header">
+            {{#if event.name}}{{event.name}}
+            {{else}}{{localize "SFRPG.TurnEvent.TurnEventI" number=i}}
+            {{/if}}
+            <a class="turn-event-control delete-turn-event" {{createTippy title="SFRPG.TurnEvent.DeleteTurnEvent" }}><i
+                    class="fas fa-minus"></i></a>
+        </h4>
+        <div class="bubble-info">
+            <div class="form-group turn-event-name">
+                <label>{{localize "SFRPG.TurnEvent.Name"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.turnEvents.{{i}}.name" value="{{event.name}}"
+                        placeholder="{{ localize "SFRPG.TurnEvent.TurnEventI" number=i}}" />
+                </div>
+            </div>
+            <div class="form-group turn-event-trigger" {{createTippy title="SFRPG.TurnEvent.Trigger"
+                subtitle="SFRPG.TurnEvent.TriggerTooltip" }}>
+                <label>{{localize "SFRPG.TurnEvent.Trigger"}}</label>
+                <div class="form-fields">
+                    <select name="system.turnEvents.{{i}}.trigger">
+                        {{selectOptions (sfrpg "effectEndTypes") selected=event.trigger localize=true}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group turn-event-trigger" {{createTippy title="SFRPG.TurnEvent.Type"
+                subtitle="SFRPG.TurnEvent.TypeTooltip" }}>
+                <label>{{localize "SFRPG.TurnEvent.Type"}}</label>
+                <div class="form-fields">
+                    <select name="system.turnEvents.{{i}}.type">
+                        {{selectOptions (sfrpg "turnEventTypes") selected=event.type localize=true}}
+                    </select>
+                </div>
+            </div>
+
+            {{#if (eq event.type "roll")}}
+                {{!-- Damage Formula --}}
+                <div class="turn-event-formula form-group" {{createTippy title="SFRPG.TurnEvent.Formula"
+                    subtitle="SFRPG.TurnEvent.FormulaTooltip" }}>
+                    <label>{{ localize "SFRPG.TurnEvent.Formula" }}</label>
+                    <div class="form-fields">
+                        <input type="text" value="{{event.formula}}" name="system.turnEvents.{{i}}.formula" />
+                    </div>
+                </div>
+
+                <div class="turn-event-damage form-group stacked">
+                    <div class="form-group form-group-stacked">
+                        <label>{{localize "Energy Damage"}}</label>
+                        {{#each (sfrpg "energyDamageTypes") as |name type|}}
+                            <label class="checkbox">
+                                <input type="checkbox" name="system.turnEvents.{{i}}.damageTypes.{{type}}" {{checked
+                                    (lookup event.damageTypes type)}} />{{name}}
+                            </label>
+                        {{/each}}
+                    </div>
+                    <div class="form-group form-group-stacked">
+                        <label>{{localize "Kinetic Damage"}}</label>
+                        {{#each (sfrpg "kineticDamageTypes") as |name type|}}
+                            <label class="checkbox">
+                                <input type="checkbox" name="system.turnEvents.{{i}}.damageTypes.{{type}}" {{checked
+                                    (lookup event.damageTypes type)}} />{{name}}
+                            </label>
+                        {{/each}}
+                    </div>
+                    <div class="form-group form-group-stacked">
+                        <label>{{localize "SFRPG.HealingTypesHealing"}}</label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="system.turnEvents.{{i}}.damageTypes.healing" {{checked (lookup
+                                event.damageTypes "healing" )}} />{{localize "SFRPG.HealingTypesHealing"}}
+                        </label>
+                    </div>
+                </div>
+
+            {{else if (eq event.type "note")}}
+                <div class="bubble turn-event-note">
+                    <h3 class="bubble-header">{{localize "SFRPG.TurnEvent.NoteContent"}}</h3>
+
+                    <div class="bubble-info bubble-editor" {{createTippy title="SFRPG.TurnEvent.NoteContent"
+                        subtitle="SFRPG.TurnEvent.NoteTooltip" }}>
+                        {{editor
+                        enrichedNote
+                        target=event.noteI
+                        button=true
+                        editable=../../editable
+                        engine="prosemirror"
+                        collaborate=true
+                    }}
+                    </div>
+                </div>
+
+            {{/if}}
+        </div>
+    </div>
+{{/each}}

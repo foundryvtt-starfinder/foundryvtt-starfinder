@@ -57,6 +57,12 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                     min: 0,
                     nullable: true,
                     label: "SFRPG.UPBs"
+                }),
+                mp: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    nullable: true,
+                    label: "SFRPG.MechPoints"
                 })
             }),
             details: new fields.SchemaField({
@@ -243,19 +249,32 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
         const type = options.type ?? "vehicle";
 
         const schema = {
-            passenger: SFRPGActorBase._crewPCField({
-                init: 0,
-                label: "SFRPG.StarshipSheet.Role.Passenger"
-            }),
-            pilot: SFRPGActorBase._crewPCField({
-                init: 1,
-                label: "SFRPG.StarshipSheet.Role.Pilot"
-            }),
             useNPCCrew: new fields.BooleanField({
                 initial: true,
                 required: true
             })
         };
+
+        if (type === "mech") {
+            foundry.utils.mergeObject(schema, {
+                operator: SFRPGActorBase._crewPCField({
+                    init: 0,
+                    label: "SFRPG.MechSheet.Crew.Operator"
+                })
+            });
+        } else {
+            // Starship and vehicle share pilot/passenger
+            foundry.utils.mergeObject(schema, {
+                passenger: SFRPGActorBase._crewPCField({
+                    init: 0,
+                    label: "SFRPG.StarshipSheet.Role.Passenger"
+                }),
+                pilot: SFRPGActorBase._crewPCField({
+                    init: 1,
+                    label: "SFRPG.StarshipSheet.Role.Pilot"
+                })
+            });
+        }
 
         if (type === "vehicle") {
             foundry.utils.mergeObject(schema, {
