@@ -31,7 +31,6 @@ file, which selects the appropriate hbs partial based on the data passed into it
         <span class="flavor-text">{{{message.flavor}}}</span>
         {{/if}}
     </header>
-    {{log message.type}}
     {{#if (eq message.type "damage")}}
         {{> "systems/sfrpg/templates/chat/parts/damage.hbs"}}
     {{else if (eq message.type "base")}}

@@ -73,6 +73,6 @@ export default class SFRPGMessageBase extends SFRPGDocumentBase {
      * Tags are saved in system.renderedTags to differentiate them from any that were passed manually to the chat message.
      */
     prepareTags() {
-        console.log("BASE!", this);
+        // console.log("BASE!", this);
     }
 }
