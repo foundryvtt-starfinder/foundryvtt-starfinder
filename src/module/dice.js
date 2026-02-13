@@ -425,10 +425,12 @@ export class DiceSFRPG {
                 };
 
                 // Get the damage types for this section; If any are healing, change the rollType
+                partRollCriteria.damageTypes = [];
                 for (const [type, value] of Object.entries(part.types)) {
                     if (value) {
                         if (Object.keys(CONFIG.SFRPG.healingTypes).includes(type)) partRollCriteria.rollType = "healing";
                         messageSystemData.damage.types.push(type);
+                        partRollCriteria.damageTypes.push(type);
                     }
                 }
 

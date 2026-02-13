@@ -1211,7 +1211,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 const localized = game.i18n.localize(
                     `SFRPG.FloatingHP${game.settings.get("sfrpg", "verboseFloatyText") ? "Verbose" : ""}.${cfg.label}`
                 );
-                canvas.interface.createScrollingText(t.center, `${localized} ${value.signedString()}`, floaterData);
+                canvas.interface.createScrollingText(t.center, `${localized} ${(value || 0).signedString()}`, floaterData);
                 if (Object.keys(hpDiffs).length > 1) await sleep(1500 * percentMax);
             }
         }

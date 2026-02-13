@@ -1,72 +1,37 @@
 import { ChoiceDialog } from "../../apps/choice-dialog.js";
 import { ChatMessageSFRPG } from "../../chat/message.js";
 
-export class SFRPGHealingSetting {
-    constructor({stamina = false, hitpoints = true, temp = false} = {}) {
-        this.healsStamina = stamina;
-        this.healsHitpoints = hitpoints;
-        this.healsTemporaryHitpoints = temp;
-    }
-
-    toString() {
-        return `[SFRPGHealingSetting sp: ${this.healsStamina}, hp: ${this.healsHitpoints}, temp: ${this.healsTemporaryHitpoints}]`;
-    }
-
-    // Only heals hitpoints
-    static get defaultHealing() {
-        return new SFRPGHealingSetting();
-    }
-
-    // Only heals stamina
-    static get staminaOnly() {
-        const healSetting = new SFRPGHealingSetting();
-        healSetting.healsStamina = true;
-        healSetting.healsHitpoints = false;
-        return healSetting;
-    }
-
-    // Heals health and stamina
-    static get staminaAndHealth() {
-        const healSetting = new SFRPGHealingSetting();
-        healSetting.healsStamina = true;
-        healSetting.healsHitpoints = true;
-        return healSetting;
-    }
-
-    // Heals hitpoints, stamina, and temporary hitpoints.
-    static get healAllProperties() {
-        const healSetting = new SFRPGHealingSetting();
-        healSetting.healsStamina = true;
-        healSetting.healsHitpoints = true;
-        healSetting.healsTemporaryHitpoints = true;
-        return healSetting;
-    }
-}
-
 export class SFRPGDamage {
-    constructor() {
-        this.rawAmount = 0;
-        this.damageTypes = [];
-        this.properties = [];
-        this.bIsCritical = false;
-        this.multiplier = 1;
-        this.healSettings = null;
+    constructor(data) {
+        this.rawAmount          = data.rawAmount ?? 0;
+        this.damageTypes        = data.damageTypes ?? [];
+        this.damageProperties   = data.damageProperties ?? [];
+        this.critical           = data.critical ?? false;
+        this.multiplier         = data.multiplier ?? 1;
+        this.bypassStamina      = data.bypassStamina ?? false;
+        this.healSettings       = data.healSettings ?? null;
     }
 
     toString() {
-        return `[SFRPGDamage amount: ${this.amount}, types: ${JSON.stringify(this.damageTypes)}, props: ${JSON.stringify(this.properties)}, crit: ${this.isCritical}, heal: ${this.healSettings?.toString()}, mult: ${this.multiplier}]`;
+        return `[SFRPGDamage amount: ${this.amount}, types: ${JSON.stringify(this.damageTypes)}, props: ${JSON.stringify(this.damageProperties)}, crit: ${this.isCritical}, heal: ${this.healSettings?.toString()}, mult: ${this.multiplier}]`;
     }
 
     get amount() {
-        return Math.abs(this.rawAmount * this.multiplier);
+        let amount = Math.abs(this.rawAmount * this.multiplier);
+        if (amount < 1) amount = 1;
+        return amount;
     }
 
     get isCritical() {
-        return this.bIsCritical;
+        return this.critical;
+    }
+
+    get isDamage() {
+        return !this.isHealing;
     }
 
     get isHealing() {
-        return this.healSettings !== null;
+        return this.damageTypes.some(type => Object.keys(CONFIG.SFRPG.healingTypes).includes(type));
     }
 
     negatesDamageReduction(damageReductionNegation, damageType) {
@@ -86,98 +51,16 @@ export class SFRPGDamage {
         if (damageReductionNegation.includes('&&')) {
             const drNegationArray = damageReductionNegation.split('&&').map(type => type.trim().toLowerCase());
             for (const drNegation of drNegationArray) {
-                if (!(this.properties.includes(drNegation) || damageMatch(drNegationArray, drNegation, damageType))) return false;
+                if (!(this.damageProperties.includes(drNegation) || damageMatch(drNegationArray, drNegation, damageType))) return false;
             }
             return true;
         } else {
             const drNegationArray = damageReductionNegation.split('||').map(type => type.trim().toLowerCase());
             for (const drNegation of drNegationArray) {
-                if (this.properties.includes(drNegation) || damageType === drNegation) return true;
+                if (this.damageProperties.includes(drNegation) || damageType === drNegation) return true;
             }
             return false;
         }
-    }
-
-    /**
-     * Creates a new SFRPGDamage object.
-     *
-     * @param {Number} damageAmount The amount of damage dealt.
-     * @param {Array or String} damageTypes (Optional, default empty) Either a string or array object containing comma or semi-colon separated strings, e.g.: "fire, piercing", or "f;p", or ["f", "p"], or ["fire", "piercing"]. If left empty, untyped damage is applied.
-     * @param {Bool} isCritical (Optional, default false) A boolean value indicating if this damage was critical damage.
-     * @param {Array} properties (Optional, default empty) An array containing any additional damage properties, e.g.: ["adamantine", "line", "ripper"]; See SFRPG.specialMaterials, SFRPG.weaponProperties, and SFRPG.starshipWeaponProperties
-     */
-    static createDamage(damageAmount, damageTypes = [], isCritical = false, properties = [], options = {}) {
-        const parsedDamageTypes = [];
-        if (damageTypes.constructor === String) {
-            const splitTypes = damageTypes.trim().split(/([,;])+/gi);
-            for (const type of splitTypes) {
-                if (type === ',' || type === ';') {
-                    continue;
-                }
-
-                const trimmedType = SFRPGDamage.parseDamageType(type);
-                if (trimmedType) {
-                    parsedDamageTypes.push(trimmedType);
-                }
-            }
-        } else if (damageTypes.constructor === Array) {
-            for (const damageTypeEntry of damageTypes) {
-                const trimmedType = SFRPGDamage.parseDamageType(damageTypeEntry);
-                if (trimmedType) {
-                    parsedDamageTypes.push(trimmedType);
-                }
-            }
-        } else {
-            throw `SFRPGDamage.createDamage provided with invalid damageTypes, received ${damageType.constructor}, expected String or Array.`;
-        }
-
-        const damageObject = new SFRPGDamage();
-        damageObject.rawAmount = damageAmount;
-        damageObject.damageTypes = parsedDamageTypes;
-        damageObject.bIsCritical = isCritical;
-        damageObject.properties = properties;
-        damageObject.options = options;
-        return damageObject;
-    }
-
-    static createHeal(healedAmount, healSettings = SFRPGHealingSetting.defaultHealing) {
-        if (healSettings.constructor !== SFRPGHealingSetting) {
-            throw `createHeal provided with invalid type, received ${healSettings.constructor}, expected SFRPGHealingSetting.`;
-        }
-
-        const damageObject = new SFRPGDamage();
-        damageObject.rawAmount = healedAmount;
-        damageObject.healSettings = healSettings;
-        return damageObject;
-    }
-
-    /**
-     * Tries to recognize a damage type and provide it in a consistent scheme.
-     *
-     * @param {String} damageType A string containing 1 damage type, e.g. "f", "fire", "Fire", "F".
-     */
-    static parseDamageType(damageType) {
-        if (damageType.constructor !== String) {
-            throw `parseDamageType provided with invalid type, received ${damageType.constructor}, expected String.`;
-        }
-
-        const acronymToDamageMap = {
-            "a": "acid",
-            "b": "bludgeoning",
-            "c": "cold",
-            "e": "electricity",
-            "f": "fire",
-            "p": "piercing",
-            "s": "slashing",
-            "so": "sonic"
-        };
-
-        const lowerType = damageType.trim().toLowerCase();
-        if (acronymToDamageMap[lowerType]) {
-            return acronymToDamageMap[lowerType];
-        }
-
-        return lowerType;
     }
 }
 
@@ -191,136 +74,50 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
      * @returns {Promise<any[]>}
      */
     static async applyDamageFromContextMenu(html, multiplier) {
-        if (html?.length < 1) {
-            return null;
-        }
+        if (html?.length < 1) return null;
 
-        const diceRollElement = html.querySelector('.sfrpg.dice-roll');
-        const diceTotal = diceRollElement?.dataset?.sfrpgDiceTotal;
-
-        const shiftKey = game.keyboard.downKeys.has("ShiftLeft") || game.keyboard.downKeys.has("ShiftRight");
-        let modifier = 0;
-        let healingTarget = null;
-        let bypassStamina = false;
-
-        // Allow for modification of damage if shift key is held while context button is clicked
-        if (shiftKey) {
-            // Clicking the close button throws an error, so catch it if it does
-            try {
-                await Dialog.wait({
-                    title: game.i18n.localize("SFRPG.ChatCard.ContextMenu.ModifyDamage"),
-                    /* eslint-disable indent */
-                    content: `<form>
-                        <p>${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ModifyDamageText")}</p>
-                        <div class="form-group">
-                            <input type="number" id="modifier" placeholder=0 autofocus />
-                        </div>
-                        ${(multiplier < 0) // Is healing
-                        ? `
-                            <div class="form-group">
-                                <label for="apply-healing">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ApplyHealingTo")}</label>
-                                <select name="apply-healing" id="apply-healing">
-                                    <option value="hp">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.HP")}</option>
-                                    <option value="sp">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.SP")}</option>
-                                    <option value="both">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.HPAndSP")}</option>
-                                </select>
-                            </div>
-                        `
-                        : `
-                            <div class="form-group">
-                                <label for="bypass-stamina">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.BypassStamina")}</label>
-                                <input type=checkbox name="bypass-stamina" id="bypass-stamina" />
-                            </div>
-                            `}
-                    </form>`,
-                    /* eslint-enable indent */
-                    default: "yes",
-                    buttons: {
-                        yes: {
-                            icon: "<i class='fas fa-check'></i>",
-                            label: game.i18n.localize("SFRPG.ChatCard.ContextMenu.Accept"),
-                            callback: (html) => {
-                                modifier = parseInt(html[0].querySelector("#modifier").value) || 0;
-                                healingTarget = html[0].querySelector("#apply-healing")?.value || "hp";
-                                bypassStamina = html[0].querySelector("#bypass-stamina")?.checked;
-                                if (!modifier && (healingTarget === "hp" || bypassStamina === false)) ui.notifications.warn(game.i18n.localize("SFRPG.ChatCard.ContextMenu.NoDamageModifier"));
-                            }
-                        }
-                    }
-                });
-            } catch {
-                ui.notifications.warn(game.i18n.localize("SFRPG.ChatCard.ContextMenu.NoDamageModifier"));
-            }
-
-        }
-
-        let rolledAmount = Math.floor((diceTotal ?? Math.floor(parseFloat(html.querySelector('.dice-total').text()))));
-        const isCritical = diceRollElement?.dataset?.sfrpgIsCritical || false;
-        const properties = [];
-
-        const starshipWeaponProperties = diceRollElement?.dataset?.sfrpgStarshipWeaponProperties;
-        if (starshipWeaponProperties) {
-            properties.push(...starshipWeaponProperties);
-        }
-
-        let damageTypes = [];
+        // Get the chat message document defining the damage
         const chatMessageId = html.dataset?.messageId;
         const chatMessage = game.messages.get(chatMessageId);
-        if (chatMessage) {
-            const chatDamageData = chatMessage.system.damage;
-            if (chatDamageData) {
-                rolledAmount = chatDamageData.amount;
-                damageTypes = chatDamageData.types;
-            }
+        if (!chatMessage || chatMessage?.type !== "damage") return null;
 
-            const chatSpecialMaterials = chatMessage.system.specialMaterials;
-            if (chatSpecialMaterials) {
-                for (const [material, enabled] of Object.entries(chatSpecialMaterials)) {
-                    if (enabled) {
-                        properties.push(material);
-                    }
-                }
-            }
+        // Verify that we have at least one damage roll
+        const damageRolls = chatMessage.rolls.filter(roll => roll.isDamageRoll);
+        if (damageRolls.length < 1) return null;
 
-            const chatDescriptors = chatMessage.system.descriptors;
-            if (chatDescriptors) {
-                for (const [descriptor, enabled] of Object.entries(chatDescriptors)) {
-                    if (enabled) {
-                        properties.push(descriptor);
-                    }
-                }
-            }
+        // Add descriptors, starship properties, special materials, weapon properties, and magic status tags
+        const damageProperties = [];
+        damageProperties.push(...chatMessage.system.descriptors);
+        damageProperties.push(...chatMessage.system.starshipWeaponProperties);
 
-            const chatHasMagicDamage = chatMessage.system.hasMagicDamage?.value;
-            if (chatHasMagicDamage) {
-                properties.push("magic");
-            }
+        for (const [key, value] of Object.entries(chatMessage.system.specialMaterials)) {
+            if (value) damageProperties.push(key);
         }
 
-        if (multiplier < 0) {
-            const healingSetting = {
-                hp: SFRPGHealingSetting.defaultHealing,
-                sp: SFRPGHealingSetting.staminaOnly,
-                both: SFRPGHealingSetting.staminaAndHealth
-            }[healingTarget] || SFRPGHealingSetting.defaultHealing;
+        for (const [key, propData] of Object.entries(chatMessage.system.properties)) {
+            if (propData.value) damageProperties.push(key);
+        }
 
-            const heal = SFRPGDamage.createHeal(rolledAmount, healingSetting);
-            heal.modifier = modifier || 0;
-            return this._applyToSelectedActors(heal);
-        } else {
-            const damage = SFRPGDamage.createDamage(
-                rolledAmount,
+        if (chatMessage.system.damage.isMagic) damageProperties.push("magic");
+
+        // Create an array of damage application promises
+        const damagePromises = [];
+        for (const roll of damageRolls) {
+            let damageTypes = roll.rollCriteria.damageTypes;
+            // If appliying in reverse, assume we want to reverse a previous application of damage/healing
+            if (multiplier < 0) {
+                damageTypes = ["healing", "stamina", "tempHP"];
+            }
+            const damage = new SFRPGDamage({
+                rawAmount: roll.total,
                 damageTypes,
-                isCritical,
-                properties,
-                { bypassStamina }
-            );
-
-            damage.multiplier = multiplier;
-            damage.modifier = modifier || 0;
-
-            return this._applyToSelectedActors(damage);
+                critical: chatMessage.system.critical.isCritical,
+                damageProperties: damageProperties,
+                multiplier
+            });
+            damagePromises.push(this._applyToSelectedActors(damage));
         }
+        return damagePromises;
     }
 
     static _applyToSelectedActors(damage) {
@@ -347,8 +144,6 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             throw `actor.applyDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
         }
 
-        // console.log(['Applying damage', damage.toString(), damage]);
-
         switch (this.type) {
             case 'starship':
                 return this._applyStarshipDamage(damage);
@@ -357,124 +152,6 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             default:
                 return this._applyActorDamage(damage);
         }
-    }
-
-    /**
-    * Apply damage to an Actor.
-    *
-    * @param {SFRPGDamage} damage A SFRPGDamage object, describing the damage to be dealt.
-    * @returns A Promise that resolves to the updated Actor
-    */
-    async _applyActorDamage(damage) {
-        if (damage.constructor !== SFRPGDamage) {
-            throw `actor._applyActorDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
-        }
-
-        const actorUpdate = {};
-        const actorData = this.system;
-
-        const damagesPerType = [];
-        if (damage.damageTypes.length > 0) {
-            for (const damageType of damage.damageTypes) {
-                if (this.isImmuneToDamageType(damageType)) {
-                    continue;
-                }
-
-                let totalAppliedDamage = damage.amount / damage.damageTypes.length;
-
-                if (this.isVulnerableToDamageType(damageType)) {
-                    totalAppliedDamage *= 1.5;
-                }
-
-                const resistance = this.getDamageMitigationForDamageType(damageType, damage);
-                totalAppliedDamage -= resistance;
-
-                totalAppliedDamage = Math.max(0, totalAppliedDamage);
-
-                damagesPerType.push(totalAppliedDamage);
-            }
-        } else {
-            damagesPerType.push(damage.amount);
-        }
-
-        const damageRoundingAdvantage = game.settings.get("sfrpg", "damageRoundingAdvantage");
-        let bFloorNext = (damageRoundingAdvantage === "defender");
-        let remainingUndealtDamage = 0;
-        for (const damage of damagesPerType) {
-            if (damage % 1 === 0) {
-                remainingUndealtDamage += damage;
-            } else {
-                if (bFloorNext) {
-                    remainingUndealtDamage += Math.floor(damage);
-                } else {
-                    remainingUndealtDamage += Math.ceil(damage);
-                }
-                bFloorNext = !bFloorNext;
-            }
-        }
-        remainingUndealtDamage += damage.modifier || 0;
-
-        const originalTempHP = parseInt(actorData.attributes.hp.temp) || 0;
-        const originalSP = actorData.attributes?.sp?.value || 0;
-        const originalHP = actorData.attributes.hp.value;
-
-        if (!damage.isHealing) {
-            /** Update temp hitpoints */
-            let newTempHP = Math.clamp(originalTempHP - remainingUndealtDamage, 0,
-                actorData.attributes.hp.tempmax || actorData.attributes.hp.temp);
-            remainingUndealtDamage -= (originalTempHP - newTempHP);
-
-            if (newTempHP <= 0) {
-                newTempHP = null;
-                actorUpdate['system.attributes.hp.tempmax'] = null;
-            }
-
-            actorUpdate["system.attributes.hp.temp"] = newTempHP;
-
-            if (!damage?.options?.bypassStamina) {
-            /** Update stamina points */
-                const newSP = Math.clamp(originalSP - remainingUndealtDamage, 0, actorData.attributes?.sp?.max || 0);
-                remainingUndealtDamage -= (originalSP - newSP);
-
-                actorUpdate["system.attributes.sp.value"] = newSP;
-            }
-
-            /** Update hitpoints */
-            const newHP = Math.clamp(originalHP - remainingUndealtDamage, 0, actorData.attributes.hp.max);
-            remainingUndealtDamage -= (originalHP - newHP);
-
-            actorUpdate["system.attributes.hp.value"] = newHP;
-
-            /** If the remaining undealt damage is equal to or greater than the max hp, the character dies of Massive Damage. */
-            if (this.type === "character" && remainingUndealtDamage >= actorData.attributes.hp.max) {
-                const localizedDeath = game.i18n.format("SFRPG.CharacterSheet.Warnings.DeathByMassiveDamage", {name: this.name});
-                ui.notifications.warn(localizedDeath, {permanent: true});
-            }
-        } else {
-            if (damage.healSettings.healsHitpoints) {
-                const newHP = Math.clamp(originalHP + remainingUndealtDamage, 0, actorData.attributes.hp.max);
-                remainingUndealtDamage -= (newHP - originalHP);
-
-                actorUpdate["system.attributes.hp.value"] = newHP;
-            }
-
-            if (damage.healSettings.healsStamina) {
-                const newSP = Math.clamp(originalSP + remainingUndealtDamage, 0, actorData.attributes?.sp?.max);
-                remainingUndealtDamage -= (newSP - originalSP);
-
-                actorUpdate["system.attributes.sp.value"] = newSP;
-            }
-
-            if (damage.healSettings.healsTemporaryHitpoints) {
-                const newTempHP = Math.clamp(originalTempHP + remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
-                remainingUndealtDamage -= (newTempHP - originalTempHP);
-
-                actorUpdate["system.attributes.hp.temp"] = newTempHP;
-            }
-        }
-
-        const promise = this.update(actorUpdate);
-        return promise;
     }
 
     /**
@@ -532,30 +209,12 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     }
 
     /**
-    * Apply damage to a Vehicle Actor.
-    *
-    * @param {object} damage A SFRPGDamage object, describing the damage to be dealt.
-    * @returns A Promise that resolves to the updated Vehicle
-    */
-    async _applyVehicleDamage(damage) {
-        if (damage.constructor !== SFRPGDamage) {
-            throw `actor._applyVehicleDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
-        }
-
-        ui.notifications.warn("Cannot currently apply damage to vehicles using the context menu");
-        return null;
-    }
-
-    /**
     * Apply damage to a Starship Actor.
     *
     * @param {object} damage A SFRPGDamage object, describing the damage to be dealt.
     * @returns A Promise that resolves to the updated Starship
     */
     async _applyStarshipDamage(damage) {
-        if (damage.constructor !== SFRPGDamage) {
-            throw `actor._applyStarshipDamage received an invalid damage object, received ${damage.constructor}, expected SFRPGDamage.`;
-        }
 
         if (damage.isHealing) {
             ui.notifications.warn("Cannot currently apply healing to starships using the context menu.");
@@ -735,6 +394,119 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 const obj = index.getName("Starship Critical Damage Effects");
                 const doc = await pack.getDocument(obj._id);
                 doc.drawMany(timesToRoll, { rollMode: rollMode });
+            }
+        }
+
+        const promise = this.update(actorUpdate);
+        return promise;
+    }
+
+    /**
+    * Apply damage to a Vehicle Actor.
+    *
+    * @param {object} damage A SFRPGDamage object, describing the damage to be dealt.
+    * @returns A Promise that resolves to the updated Vehicle
+    */
+    async _applyVehicleDamage(damage) {
+        ui.notifications.warn("Cannot currently apply damage to vehicles using the context menu");
+        return null;
+    }
+
+    /**
+    * Apply damage to an Actor.
+    *
+    * @param {SFRPGDamage} damage A SFRPGDamage object, describing the damage to be dealt.
+    * @returns A Promise that resolves to the updated Actor
+    */
+    async _applyActorDamage(damage) {
+
+        const actorUpdate = {};
+        const actorData = this.system;
+
+        const damagePerType = [];
+        if (damage.isDamage && damage.damageTypes.length > 0) {
+            for (const damageType of damage.damageTypes) {
+                if (this.isImmuneToDamageType(damageType)) continue;
+
+                let totalAppliedDamage = damage.amount / damage.damageTypes.length;
+
+                if (this.isVulnerableToDamageType(damageType)) totalAppliedDamage *= 1.5;
+
+                const resistance = this.getDamageMitigationForDamageType(damageType, damage);
+                totalAppliedDamage -= resistance;
+
+                totalAppliedDamage = Math.max(0, totalAppliedDamage);
+
+                damagePerType.push(totalAppliedDamage);
+            }
+        } else {
+            damagePerType.push(damage.amount);
+        }
+
+        // Divide the damage by the number of damage types there are. Alternate rounding damage up and down
+        const damageRoundingAdvantage = game.settings.get("sfrpg", "damageRoundingAdvantage");
+        let floorNext = (damageRoundingAdvantage === "defender");
+        let remainingUndealtDamage = 0;
+        for (const damage of damagePerType) {
+            if (damage % 1 === 0) {
+                remainingUndealtDamage += damage;
+            } else {
+                if (floorNext) remainingUndealtDamage += Math.floor(damage);
+                else remainingUndealtDamage += Math.ceil(damage);
+                floorNext = !floorNext;
+            }
+        }
+
+        // Static instances of the actor's current hp/sp/temphp
+        const originalTempHP = parseInt(actorData.attributes.hp.temp) || 0;
+        const originalSP = actorData.attributes?.sp?.value || 0;
+        const originalHP = actorData.attributes.hp.value;
+
+        // If the damage is not healing, assume it's damage
+        if (damage.isDamage) {
+
+            // Update temp hitpoints
+            const newTempHP = Math.clamp(originalTempHP - remainingUndealtDamage, 0, actorData.attributes.hp.tempmax || 0);
+            remainingUndealtDamage -= (originalTempHP - newTempHP);
+            actorUpdate["system.attributes.hp.temp"] = newTempHP;
+
+            // Update stamina points
+            if (!damage.bypassStamina) {
+                const newSP = Math.clamp(originalSP - remainingUndealtDamage, 0, actorData.attributes?.sp?.max || 0);
+                remainingUndealtDamage -= (originalSP - newSP);
+                actorUpdate["system.attributes.sp.value"] = newSP;
+            }
+
+            // Update hitpoints
+            const newHP = Math.clamp(originalHP - remainingUndealtDamage, 0, actorData.attributes.hp.max);
+            remainingUndealtDamage -= (originalHP - newHP);
+            actorUpdate["system.attributes.hp.value"] = newHP;
+
+            // Display Massive Damage notification if the remaining undealt damage is equal to or greater than the max hp
+            if (this.type === "character" && remainingUndealtDamage >= actorData.attributes.hp.max) {
+                const localizedDeath = game.i18n.format("SFRPG.CharacterSheet.Warnings.DeathByMassiveDamage", {name: this.name});
+                ui.notifications.warn(localizedDeath, {permanent: true});
+            }
+
+        // Handle healing
+        } else {
+
+            if (damage.damageTypes.includes("healing")) {
+                const newHP = Math.clamp(originalHP + remainingUndealtDamage, 0, actorData.attributes.hp.max);
+                remainingUndealtDamage -= (newHP - originalHP);
+                actorUpdate["system.attributes.hp.value"] = newHP;
+            }
+
+            if (damage.damageTypes.includes("stamina")) {
+                const newSP = Math.clamp(originalSP + remainingUndealtDamage, 0, actorData.attributes?.sp?.max);
+                remainingUndealtDamage -= (newSP - originalSP);
+                actorUpdate["system.attributes.sp.value"] = newSP;
+            }
+
+            if (damage.damageTypes.includes("tempHP")) {
+                const newTempHP = Math.clamp(originalTempHP + remainingUndealtDamage, 0, actorData.attributes.hp.tempmax || 0);
+                remainingUndealtDamage -= (newTempHP - originalTempHP);
+                actorUpdate["system.attributes.hp.temp"] = newTempHP;
             }
         }
 

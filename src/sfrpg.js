@@ -16,7 +16,7 @@ import { SFRPG } from "./module/config.js";
 // Import Actor class, helpers, and mixins
 import { ActorSFRPG } from "./module/actor/actor.js";
 import { ActorItemHelper, initializeRemoteInventory } from "./module/actor/actor-inventory-utils.js";
-import { SFRPGDamage, SFRPGHealingSetting } from "./module/actor/mixins/actor-damage.js";
+import { SFRPGDamage } from "./module/actor/mixins/actor-damage.js";
 
 // Import Actor Sheets
 import { ActorSheetSFRPG } from "./module/actor/sheet/base.js";
@@ -186,7 +186,6 @@ const moduleStructure = {
     // Namespace style
     Actor: {
         Damage: {
-            SFRPGHealingSetting,
             SFRPGDamage
         },
         Modifiers: {

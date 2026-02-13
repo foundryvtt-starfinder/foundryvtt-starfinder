@@ -23,12 +23,15 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
         return html;
     }
 
-    static addContextOptions(html, options) {
+    static addContextOptions(_, options) {
         const canApply = li => {
             const chatMessageId = li.dataset?.messageId;
             const chatMessage = game.messages.get(chatMessageId);
-            const isRollWithDamage = chatMessage ? ["roll", "damage"].includes(chatMessage.flags.sfrpg?.rollType) : false;
-            return canvas.tokens?.controlled?.length && li.querySelector(".dice-roll") && isRollWithDamage;
+            let hasDamage = false;
+            if (chatMessage) {
+                hasDamage = ["roll", "damage"].includes(chatMessage.type);
+            }
+            return canvas.tokens?.controlled?.length && li.querySelector(".dice-roll") && hasDamage;
         };
         const noToken = li => !(canvas.tokens?.controlled?.length) && li.querySelector(".dice-roll");
         options.push(
