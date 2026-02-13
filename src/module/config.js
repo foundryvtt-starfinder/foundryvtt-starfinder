@@ -1,6 +1,7 @@
 import BrowserEnricher from "./system/enrichers/browser.js";
 import CheckEnricher from "./system/enrichers/check.js";
 import IconEnricher from "./system/enrichers/icon.js";
+import PPAbilityEnricher from "./system/enrichers/pp-ability.js";
 import TemplateEnricher from "./system/enrichers/template.js";
 
 /** @import { ItemSFRPG } from "./item/item.js" */
@@ -2788,6 +2789,7 @@ SFRPG.enricherTypes = {
     "Browser": BrowserEnricher,
     "Icon": IconEnricher,
     "Check": CheckEnricher,
+    "PPAbility": PPAbilityEnricher,
     "Template": TemplateEnricher
 };
 
