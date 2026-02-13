@@ -523,6 +523,17 @@ export class CombatSFRPG extends foundry.documents.Combat {
         const localizedCombatName = this.getCombatName();
         const localizedPhaseName = game.i18n.format(eventData.newPhase.name);
 
+        // Collect turn-start notes
+        const notes = [];
+        const actor = eventData.newCombatant.actor;
+        if (actor?.type === "mech") {
+            const pp = actor.system.attributes.pp;
+            if (pp.regen > 0 && pp.value < pp.max) {
+                const regenKey = pp.regen === 1 ? CombatSFRPG.chatCardsText.turn.ppRegenSingular : CombatSFRPG.chatCardsText.turn.ppRegen;
+                notes.push(game.i18n.format(regenKey, {regen: pp.regen}));
+            }
+        }
+
         // Basic template rendering data
         const speakerName = eventData.newCombatant.name;
         const templateData = {
@@ -536,7 +547,8 @@ export class CombatSFRPG extends foundry.documents.Combat {
                 message: {
                     title: localizedPhaseName,
                     body: game.i18n.format(eventData.newPhase.description || "")
-                }
+                },
+                notes: notes.length > 0 ? notes : null
             },
             footer: {
                 content: game.i18n.format(CombatSFRPG.chatCardsText.footer, {combatType: localizedCombatName, combatPhase: localizedPhaseName})
@@ -1121,7 +1133,9 @@ CombatSFRPG.chatCardsText = {
         messageTitle: `SFRPG.Combat.ChatCards.Phase.MessageTitle`
     },
     turn: {
-        headerName: `SFRPG.Combat.ChatCards.Turn.Header`
+        headerName: `SFRPG.Combat.ChatCards.Turn.Header`,
+        ppRegen: `SFRPG.Combat.ChatCards.Turn.PPRegen`,
+        ppRegenSingular: `SFRPG.Combat.ChatCards.Turn.PPRegenSingular`
     },
     footer: `SFRPG.Combat.ChatCards.Footer`,
     speaker: {

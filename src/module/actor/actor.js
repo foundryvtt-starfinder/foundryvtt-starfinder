@@ -968,6 +968,17 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     }
 
     _onTurnStart() {
+        // Mech PP regeneration
+        if (this.type === "mech") {
+            const pp = this.system.attributes.pp;
+            if (pp.regen > 0) {
+                const newValue = Math.min(pp.value + pp.regen, pp.max);
+                if (newValue !== pp.value) {
+                    this.update({ "system.attributes.pp.value": newValue });
+                }
+            }
+        }
+
         for (const item of this.items) {
             item._onTurnStart?.();
         }
