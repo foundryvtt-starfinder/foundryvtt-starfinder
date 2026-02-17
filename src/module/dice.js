@@ -203,7 +203,6 @@ export class DiceSFRPG {
 
         // Evaluate the roll unless cancelled
         if (rollInfo.button !== "cancel") {
-
             // Set the main die roll value
             let baseDie = rollCriteria.mainDie;
             if (rollInfo.button === "advantage") baseDie = "2d20kh";
@@ -214,32 +213,51 @@ export class DiceSFRPG {
             const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(finalFormula.formula);
             const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, tags, rollCriteria }).evaluate();
 
-            // Add Critical hit and effect information if required
-            if (roll.isCritical) {
-                flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
-                const criticalData = rollContext.allContexts?.item?.data?.critical;
-                if (criticalData?.effect?.trim()) {
-                    roll.options.tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
-                }
-            }
-
             // Roll Evaluation vs Action Target (KAC, EAC, DC, etc.)
             roll.options.rollCriteria.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollCriteria);
-            roll.options.tags.unshift(DiceSFRPG.rollSuccessTag(roll, rollInfo, rollCriteria));
 
-            // Add item roll notes
-            const htmlData = [{ name: "rollNotes", value: rollContext.allContexts['item']?.system?.rollNotes }];
+            // Define message system data
+            const itemContext = rollContext.allContexts['item'];
+            const target = rollContext.allContexts['target']?.entity?.document ?? null;
+            const messageSystemData = { // TODO: Perhaps there's a nicer way to instantiate this via the message's dataModel?
+                critical: {
+                    effect: rollContext.allContexts?.item?.data?.critical?.effect?.trim() ?? "",
+                    isCritical: roll.isCritical,
+                    isFumble: roll.isFumble
+                },
+                descriptors: [],
+                properties: {},
+                rollBreakdown: finalFormula.formula,
+                rollCriteria,
+                rollNotes: itemContext?.data?.damageNotes,
+                specialMaterials: {},
+                starshipWeaponProperties: [],
+                tags: roll.options.tags,
+                targetInfo: []
+            };
+
+            if (target) {
+                messageSystemData.targetInfo[0] = {
+                    image: target.texture?.src ?? "",
+                    name: target.name,
+                    tokenUUID: target.uuid ?? null,
+                    quadrant: rollInfo.target?.quadrant ?? ""
+                };
+            }
+
+            // Add item properties, descriptors, and special materials to message system data
+            if (itemContext) DiceSFRPG._collectProperties(itemContext, messageSystemData);
 
             // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
             if (chatMessage) {
                 const messageData = {
-                    content: await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices }),
+                    content: await roll.render({ customTooltip: finalFormula.rollDices }),
                     flavor,
                     speaker,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    system: {},
-                    type: "base"
+                    system: messageSystemData,
+                    type: "d20Roll"
                 };
                 ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
             }
@@ -318,12 +336,11 @@ export class DiceSFRPG {
 
             // Roll Evaluation vs Action Target (KAC, EAC, DC, etc.)
             roll.options.rollCriteria.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollCriteria);
-            roll.options.tags.unshift(DiceSFRPG.rollSuccessTag(roll, rollInfo, rollCriteria));
 
             // Create a chat message, applying the appropriate roll type (public, gmroll, etc.) and tags
             if (chatMessage) {
                 const messageData = {
-                    content: await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices }),
+                    content: await roll.render({ customTooltip: finalFormula.rollDices }),
                     flavor,
                     speaker,
                     rolls: [roll],
@@ -434,45 +451,9 @@ export class DiceSFRPG {
                     }
                 }
 
-                // Add item properties, descriptors, and special materials to roll tags
+                // Add item properties, descriptors, and special materials to message system data
                 if (itemContext) {
-                    // TODO: Move starship weapon properties & materials to the same location as normal properties & materials
-                    // Starship Weapons use data.special for their properties
-                    if (itemContext.entity.type === "starshipWeapon") {
-                        messageSystemData.starshipWeaponType = itemContext.entity.system.weaponType;
-                        if (itemContext.entity.system.special) {
-                            for (const [key, isEnabled] of Object.entries(itemContext.entity.system.special)) {
-                                if (isEnabled) messageSystemData.starshipWeaponProperties[key] = true;
-                            }
-                        }
-                    } else {
-                        // Regular Weapons use data.properties for their properties
-                        if (itemContext.entity.system.properties) {
-                            for (const [key, propertyData] of Object.entries(itemContext.entity.system.properties)) {
-                                if (propertyData.value) messageSystemData.properties[key] = propertyData;
-                            }
-                        }
-                    }
-
-                    // Add descriptors tags
-                    const descriptors = itemContext.entity.system.descriptors;
-                    if (descriptors) {
-                        for (const [descriptor, isEnabled] of Object.entries(descriptors)) {
-                            if (isEnabled) messageSystemData.descriptors.push(descriptor);
-                        }
-                    }
-
-                    // Add special materials tags
-                    const specialMaterials = itemContext.entity.system.specialMaterials;
-                    if (specialMaterials) {
-                        for (const [material, isEnabled] of Object.entries(specialMaterials)) {
-                            if (isEnabled) messageSystemData.specialMaterials[material] = true;
-                        }
-                    }
-
-                    // Add a tag if the damage should be magic
-                    const isMagic = itemContext.data.magic || itemContext.entity.hasMagicDamage;
-                    if (isMagic) messageSystemData.damage.isMagic = true;
+                    DiceSFRPG._collectProperties(itemContext, messageSystemData);
                 }
 
                 // Determine whether the roll should be a critical, and handle those effects
@@ -780,6 +761,52 @@ export class DiceSFRPG {
         } catch {
             return formula;
         }
+    }
+
+    /**
+     * Collects properties, descriptors, special materials, and magic status data into the format
+     * expected by chat message system data and packs it into that structure.
+     * @param {RollContext}     itemContext         The item's rollcontext
+     * @param {Object}          messageSystemData   The message system data
+     */
+    static _collectProperties(itemContext, messageSystemData) {
+        // TODO: Move starship weapon properties & materials to the same location as normal properties & materials
+        // Starship Weapons use data.special for their properties
+        if (itemContext.entity.type === "starshipWeapon") {
+            messageSystemData.starshipWeaponType = itemContext.entity.system.weaponType;
+            if (itemContext.entity.system.special) {
+                for (const [key, isEnabled] of Object.entries(itemContext.entity.system.special)) {
+                    if (isEnabled) messageSystemData.starshipWeaponProperties[key] = true;
+                }
+            }
+        } else {
+            // Regular Weapons use data.properties for their properties
+            if (itemContext.entity.system.properties) {
+                for (const [key, propertyData] of Object.entries(itemContext.entity.system.properties)) {
+                    if (propertyData.value) messageSystemData.properties[key] = propertyData;
+                }
+            }
+        }
+
+        // Add descriptors tags
+        const descriptors = itemContext.entity.system.descriptors;
+        if (descriptors) {
+            for (const [descriptor, isEnabled] of Object.entries(descriptors)) {
+                if (isEnabled) messageSystemData.descriptors.push(descriptor);
+            }
+        }
+
+        // Add special materials tags
+        const specialMaterials = itemContext.entity.system.specialMaterials;
+        if (specialMaterials) {
+            for (const [material, isEnabled] of Object.entries(specialMaterials)) {
+                if (isEnabled) messageSystemData.specialMaterials[material] = true;
+            }
+        }
+
+        // Add a tag if the damage should be magic
+        const isMagic = itemContext.data.magic || itemContext.entity.hasMagicDamage;
+        if (isMagic) messageSystemData.damage.isMagic = true;
     }
 
     /**

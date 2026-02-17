@@ -316,6 +316,7 @@ Hooks.once('init', async function() {
 
     CONFIG.ChatMessage.dataModels = {
         base: models.SFRPGMessageBase,
+        d20Roll: models.SFRPGMessaged20Roll,
         damage: models.SFRPGMessageDamage
     };
 

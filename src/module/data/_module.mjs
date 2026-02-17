@@ -58,4 +58,5 @@ export { default as SFRPGItemWeaponAccessory } from './item/weaponAccessory.mjs'
 
 // Export Chat Messages
 export { default as SFRPGMessageBase } from './message/base-message.mjs';
+export { default as SFRPGMessaged20Roll } from './message/d20-roll.mjs';
 export { default as SFRPGMessageDamage } from './message/damage.mjs';

@@ -346,7 +346,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         // Item Actions
-        // TODO-Ian: Why do all actions when we just seem to prepare damage?
+        // Only do damage calculations if item has an action
         if (this.system.hasOwnProperty("actionType")) {
             // Damage
             const damage = this.system.damage || {};

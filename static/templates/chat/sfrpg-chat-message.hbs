@@ -31,7 +31,9 @@ file, which selects the appropriate hbs partial based on the data passed into it
         <span class="flavor-text">{{{message.flavor}}}</span>
         {{/if}}
     </header>
-    {{#if (eq message.type "damage")}}
+    {{#if (eq message.type "d20Roll")}}
+        {{> "systems/sfrpg/templates/chat/parts/d20-roll.hbs"}}
+    {{else if (eq message.type "damage")}}
         {{> "systems/sfrpg/templates/chat/parts/damage.hbs"}}
     {{else if (eq message.type "base")}}
         <div class="message-content base">

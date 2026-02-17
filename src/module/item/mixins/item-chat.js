@@ -488,7 +488,7 @@ export const ItemChatMixin = (superclass) => class extends superclass {
         // Spell school
         if (CONFIG.SFRPG.spellSchools[data.school]) {
             props.push(
-                {name: game.i18n.localize(SFRPG.spellSchools[data.school]), tooltip: null}
+                {name: game.i18n.localize(CONFIG.SFRPG.spellSchools[data.school]), tooltip: null}
             );
         }
     }

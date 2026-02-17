@@ -16,11 +16,66 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
     /** @override */
     async renderHTML({ canDelete, canClose = false, ...rest } = {}) {
         this.system.prepareTags();
-        if (!this.system.template) this.system.template = CONFIG.ChatMessage.template;
-
+        if (this.system.rollCriteria.canEvaluate) {
+            this.system.labels.resultText = this._generateResultText();
+        }
         const html = super.renderHTML({canDelete, canClose, ...rest});
-        console.log(this, await html);
         return html;
+    }
+
+    /**
+     * Generates the success/failure message based on the roll value, type, and target stats
+     */
+    _generateResultText() {
+        const roll = this.rolls[0];
+        const rollCriteria = this.system.rollCriteria;
+        const targetInfo = this.system.targetInfo[0];
+        let prependedQuadrantInfo = "";
+        if (targetInfo?.quadrant) {
+            prependedQuadrantInfo = game.i18n.localize(CONFIG.SFRPG.starshipQuadrants[targetInfo.quadrant]);
+        }
+
+        const evalValue = roll.evalValue;
+        const rollSuccess = roll.product;
+        const rollType = rollCriteria.rollType;
+        const difficulty = rollCriteria.difficulty;
+        const rollIsAttack = ["attack", "gunnery"].includes(rollType);
+
+        const criticalSuccessLocalized = rollIsAttack ? game.i18n.format("SFRPG.Rolls.CriticalHit") : game.i18n.format("SFRPG.Rolls.CriticalSuccess");
+        const successLocalized = rollIsAttack ? game.i18n.format("SFRPG.Rolls.Hit") : game.i18n.format("SFRPG.Rolls.Success");
+        const failureLocalized = rollIsAttack ? game.i18n.format("SFRPG.Rolls.Miss") : game.i18n.format("SFRPG.Rolls.Failure");
+        const fumbleLocalized = game.i18n.format("SFRPG.Rolls.Fumble");
+
+        if (rollCriteria?.actionTarget) {
+            const actionTargetSource = rollCriteria.actionTargetSource[rollCriteria.actionTarget];
+            if (rollSuccess !== null) {
+                const actionTarget = `${prependedQuadrantInfo}${prependedQuadrantInfo ? " " : ""}${actionTargetSource}`;
+                let actionResult = "";
+                if (roll.isCritical) {
+                    actionResult = `<span class="success">${criticalSuccessLocalized}</span>`;
+                } else if (roll.isFumble) {
+                    actionResult = `<span class="fail">${fumbleLocalized}</span>`;
+                } else {
+                    actionResult = `<span class="${rollSuccess ? "success" : "fail"}">${rollSuccess ? successLocalized : failureLocalized}</span>`;
+                }
+                return game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue: evalValue, actionResult});
+            } else {
+                const actionTarget = `${prependedQuadrantInfo}${prependedQuadrantInfo ? " " : ""}${actionTargetSource}`;
+                return game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget});
+            }
+        } else if (difficulty) {
+            const actionTarget = game.i18n.format("SFRPG.DC");
+            let actionResult = "";
+            if (roll.isCritical) {
+                actionResult = `<span class="success">${criticalSuccessLocalized}</span>`;
+            } else if (roll.isFumble) {
+                actionResult = `<span class="fail">${fumbleLocalized}</span>`;
+            } else {
+                actionResult = `<span class="${rollSuccess ? "success" : "fail"}">${rollSuccess ? successLocalized : failureLocalized}</span>`;
+            }
+            return game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue: evalValue, actionResult});
+        }
+        else return "";
     }
 
     static addContextOptions(_, options) {
@@ -97,6 +152,12 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
         }
     }
 
+    /**
+     * Format the roll explanation text string
+     *
+     * @param   {string} explanationText    An unformatted string breaking down the roll
+     * @returns {String}                    A formatted html string with breaks inserted
+     */
     static formatExplanation(explanationText) {
         let index = 0;
         let consumedText = "";

@@ -27,6 +27,13 @@ export default class SFRPGMessageBase extends SFRPGDocumentBase {
             })
         );
 
+        // TODO-Ian: Further define this properly
+        // For storing text labels needed by various chat cards
+        schema.labels = new fields.ObjectField({
+            initial: {},
+            null: false
+        });
+
         // TODO: We may want to change this to an array of strings at some point
         schema.rollBreakdown = new fields.StringField({
             initial: "",
@@ -35,11 +42,6 @@ export default class SFRPGMessageBase extends SFRPGDocumentBase {
 
         // TODO: Eventually, add more detail to this
         schema.rollCriteria = new fields.ObjectField();
-
-        schema.rollNotes = new fields.StringField({
-            initial: "",
-            blank: true
-        });
 
         schema.tags = new fields.ArrayField(
             new fields.SchemaField(SFRPGMessageBase._tagFieldData())

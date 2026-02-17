@@ -57,15 +57,6 @@ export default class SFRPGRoll extends Roll {
     }
 
     /**
-     * Return the roll's HTML Data
-     *
-     * @type {HtmlData[]}
-     */
-    get htmlData() {
-        return this.options.htmlData ?? "";
-    }
-
-    /**
      * Return the roll's type
      *
      * @type {string}
@@ -86,11 +77,13 @@ export default class SFRPGRoll extends Roll {
 
     /**
     * Determine if a roll was a critical success or not
+    * Only attack rolls, gunnery checks, saves, and starship actions can be fumbles.
     *
     * @type {Boolean}   `true` if a critical success, `false` otherwise
     */
     get isCritical() {
         if (!this?.dice?.length || !this.options.rollCriteria.canEvaluate) return false;
+        if (!["attack", "gunnery", "save", "starshipAction"].includes(this.rollType)) return false;
         const mainDie = this.options.rollCriteria.mainDie;
         const dieSize = mainDie ? Number(mainDie.split('d')[1]) : null;
         const critValue = this.options.rollCriteria.critical;
@@ -114,12 +107,14 @@ export default class SFRPGRoll extends Roll {
     }
 
     /**
-    * Determine if a roll was a fumble or not
+    * Determine if a roll was a fumble or not.
+    * Only attack rolls, gunnery checks, saves, and starship actions can be fumbles.
     *
     * @returns {Boolean}    `true` if a fumble, `false` otherwise
     */
     get isFumble() {
         if (!this?.dice?.length || !this.options.rollCriteria.canEvaluate) return false;
+        if (!["attack", "gunnery", "save", "starshipAction"].includes(this.rollType)) return false;
         const mainDie = this.options.rollCriteria.mainDie;
         const dieSize = mainDie ? Number(mainDie.split('d')[1]) : null;
         const fumbleValue = this.options.rollCriteria.fumble;
@@ -180,15 +175,15 @@ export default class SFRPGRoll extends Roll {
     /**
      * @override
      * Evaluates whether a roll is a success or a failure, if an evalValue is present (typically only for d20 rolls)
+     * Does not account for critical success or fumbles; check this.isCritical and this.isFumble.
+     *
      * @type {Boolean}  returns false for failure, true for success, null if not evaluated
      */
     get product() {
         const total = this.total;
         const evalValue = this.evalValue;
         if ((evalValue !== null) && (typeof total === "number")) {
-            if (this.isCritical)    return true;
-            else if (this.isFumble) return false;
-            else                    return total >= evalValue;
+            return total >= evalValue;
         } else {
             return null;
         }
@@ -203,7 +198,6 @@ export default class SFRPGRoll extends Roll {
             blind: false,
             tags: this.tags,
             breakdown: this.breakdown,
-            htmlData: this.htmlData,
             evalValue: this.evalValue,
             rollCriteria: this.rollCriteria
         }, chatOptions);
@@ -221,10 +215,8 @@ export default class SFRPGRoll extends Roll {
             customTooltip: chatOptions.customTooltip,
             total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
             tags: chatOptions.tags,
-            breakdown: chatOptions.breakdown,
-            htmlData: chatOptions.htmlData
+            breakdown: chatOptions.breakdown
         };
-        if (chatData.htmlData) chatData.rollNotes = chatOptions.htmlData?.find(x => x.name === "rollNotes")?.value;
 
         // Render the roll display template
         return foundry.applications.handlebars.renderTemplate(chatOptions.template, chatData);

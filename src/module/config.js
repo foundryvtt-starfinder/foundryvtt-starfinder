@@ -98,10 +98,10 @@ SFRPG.rollTypes = {
     "gunnery": "SFRPG.Rolls.GunneryCheck",
     "healing": "SFRPG.Rolls.HealingRoll",
     "initiative": "SFRPG.Rolls.InitiativeRoll",
-    "none": "",
     "roll": "SFRPG.Rolls.Roll",
     "save": "SFRPG.Rolls.SavingThrow",
-    "skillCheck": "SFRPG.Rolls.SkillCheck"
+    "skillCheck": "SFRPG.Rolls.SkillCheck",
+    "starshipAction": "SFRPG.Rolls.Starship.Action"
 };
 
 /**
