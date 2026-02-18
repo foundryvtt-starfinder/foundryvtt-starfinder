@@ -24,8 +24,34 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
         } else {
             this.system.isContentVisible = false;
         }
-        const html = super.renderHTML({canDelete, canClose, ...rest});
+
+        // Generate the chat card html
+        const html = await super.renderHTML({canDelete, canClose, ...rest});
+
+        // Highlight critical successes and fumbles on the card
+        if (this.isContentVisible) this.highlightCrits(html);
+
         return html;
+    }
+
+    /**
+     * Hightlight rolls that are considered critical successes or failures.
+     *
+     * @param {JQuery}      html               The pending HTML as a jQuery object
+     */
+    highlightCrits(html) {
+        if (!this.isRoll || !this.isContentVisible) return;
+
+        for (const roll of this.rolls) {
+            if (!roll.dice.length) continue;
+            if (roll.isCritical) {
+                html.querySelector('.dice-total').classList.add('critical-success');
+                return;
+            } else if (roll.isFumble) {
+                html.querySelector('.dice-total').classList.add('fumble');
+                return;
+            }
+        }
     }
 
     /**
@@ -195,24 +221,5 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
         }
         finalResult = (finalResult[0] === '-') ? finalResult : '+ ' + finalResult;
         return finalResult;
-    }
-
-    /**
-     * Hightlight rolls that are considered critical successes or failures.
-     *
-     * @param {ChatMessageSFRPG} message       The ChatMessage document being rendered
-     * @param {JQuery}      html               The pending HTML as a jQuery object
-     */
-    static highlightCriticalSuccessFailure(message, html) {
-        if (!message.isRoll || !message.isContentVisible) return;
-
-        const roll = message.rolls[0];
-        if (!roll.dice.length) return;
-        if (roll.isCritical) {
-            html.find('.dice-total').addClass('success');
-        }
-        if (roll.isFumble) {
-            html.find('.dice-total').addClass('failure');
-        }
     }
 }

@@ -804,7 +804,6 @@ async function migrateOldContainers() {
 }
 
 Hooks.on("renderChatMessageHTML", (app, html, data) => {
-    ChatMessageSFRPG.highlightCriticalSuccessFailure(app, $(html), data);
     ChatMessageSFRPG.addDamageTypes(app, $(html), data);
 
     const gmOnlyText = html.querySelector('.gm-only');
