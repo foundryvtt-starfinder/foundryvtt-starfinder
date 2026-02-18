@@ -822,11 +822,11 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
 
-        const rollOptions = {};
+        const rollTargetInfo = {};
 
         if (this.system.actionTarget) {
-            rollOptions.actionTarget = this.system.actionTarget;
-            rollOptions.actionTargetSource = SFRPG.actionTargetsStarship;
+            rollTargetInfo.actionTarget = this.system.actionTarget;
+            rollTargetInfo.actionTargetSource = SFRPG.actionTargetsStarship;
         }
 
         const quadrant = this.system.mount.arc.charAt(0).toUpperCase() + this.system.mount.arc.slice(1);
@@ -848,7 +848,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollCriteria: SFRPGRoll.createRollCriteria("gunnery", rollOptions),
+            rollCriteria: SFRPGRoll.createRollCriteria("gunnery", rollTargetInfo),
             actorContextKey: "gunner",
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {

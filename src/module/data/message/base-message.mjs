@@ -27,6 +27,10 @@ export default class SFRPGMessageBase extends SFRPGDocumentBase {
             })
         );
 
+        schema.isContentVisible = new fields.BooleanField({
+            initial: true
+        });
+
         // TODO-Ian: Further define this properly
         // For storing text labels needed by various chat cards
         schema.labels = new fields.ObjectField({

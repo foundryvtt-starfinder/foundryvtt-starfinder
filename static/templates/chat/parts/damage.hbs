@@ -1,6 +1,9 @@
 <div class="message-content damage">
     {{{message.content}}}
 </div>
+
+<!-- If the roll content should be visible, show tags -->
+{{#if message.system.isContentVisible}}
 <div class="message-footer damage">
     {{#if message.system.tags}}
     {{#each message.system.tags as |tag|}}
@@ -8,3 +11,4 @@
     {{/each}}
     {{/if}}
 </div>
+{{/if}}

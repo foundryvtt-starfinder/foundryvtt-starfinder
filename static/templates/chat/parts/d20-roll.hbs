@@ -1,28 +1,33 @@
 <div class="message-content d20-roll">
-    {{#if (includes message.system.rollCriteria.rollType "abilityCheck" "save" "skillCheck" "starshipAction")}}
-        {{#if message.system.rollCriteria.canEvaluate}}
-        <div class="result-box flexcol">
-            <span class="flex0">{{localize "SFRPG.Result"}}</span>
-            <div class="result">
-                {{{message.system.labels.resultText}}}
-            </div>
-        </div>
-        {{/if}}
-    {{/if}}
-    {{#if (includes message.system.rollCriteria.rollType "attack" "gunnery")}}
-        {{#if message.system.targetInfo.length}}
-        <div class="target-box flexcol">
-            <span class="flex0">{{localize "SFRPG.Target"}}</span>
-            {{#each message.system.targetInfo as |target|}}
-                <div class="target flexrow">
-                    <img src="{{target.image}}" class="flex0" height="32"> <span class="flex2">{{target.name}}</span> <span class="flex3">{{{../message.system.labels.resultText}}}</span>
+    {{#if message.system.isContentVisible}}
+        {{#if (includes message.system.rollCriteria.rollType "abilityCheck" "save" "skillCheck" "starshipAction")}}
+            {{#if message.system.rollCriteria.evalValue}}
+            <div class="result-box flexcol">
+                <span class="flex0">{{localize "SFRPG.Result"}}</span>
+                <div class="result">
+                    {{{message.system.labels.resultText}}}
                 </div>
-            {{/each}}
-        </div>
+            </div>
+            {{/if}}
+        {{/if}}
+        {{#if (includes message.system.rollCriteria.rollType "attack" "gunnery")}}
+            {{#if message.system.targetInfo.length}}
+            <div class="target-box flexcol">
+                <span class="flex0">{{localize "SFRPG.Target"}}</span>
+                {{#each message.system.targetInfo as |target|}}
+                    <div class="target flexrow">
+                        <img src="{{target.image}}" class="flex0" height="32"> <span class="flex2">{{target.name}}</span> <span class="flex3">{{{../message.system.labels.resultText}}}</span>
+                    </div>
+                {{/each}}
+            </div>
+            {{/if}}
         {{/if}}
     {{/if}}
     {{{message.content}}}
 </div>
+
+<!-- If the roll content should be visible, show tags -->
+{{#if message.system.isContentVisible}}
 <div class="message-footer d20-roll">
     {{#if message.system.tags}}
     {{#each message.system.tags as |tag|}}
@@ -32,3 +37,4 @@
     {{/each}}
     {{/if}}
 </div>
+{{/if}}

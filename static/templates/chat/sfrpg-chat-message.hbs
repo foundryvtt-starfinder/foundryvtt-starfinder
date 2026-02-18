@@ -8,28 +8,37 @@ file, which selects the appropriate hbs partial based on the data passed into it
 <li class="sfrpg chat-message message flexcol {{cssClass}}" data-message-id="{{message._id}}"
     {{#if borderColor}}style="border-color:{{borderColor}}"{{/if}}>
     <header class="message-header flexrow">
-        <h4 class="message-sender">{{alias}}</h4>
-        <span class="message-metadata">
-            <time class="message-timestamp">{{timeSince message.timestamp}}</time>
-            {{#if canDelete}}
-            <a aria-label="{{localize 'Delete'}}" class="message-delete" data-action="deleteMessage">
-                <i class="fa-solid fa-trash" inert></i>
-            </a>
-            {{/if}}
-            {{#if canClose}}
-            <a aria-label="{{ localize "CHAT.Dismiss" }}" class="message-dismiss" data-action="dismissMessage">
-                <i class="fa-solid fa-xmark" inert></i>
-            </a>
-            {{/if}}
-        </span>
+        {{#if message.system.isContentVisible}}<img class="speaker-image flex0" src="{{speakerActor.img}}" style="width: 32px; height: 40px; object-fit: contain">{{/if}}
+        <div class="flexcol">
+            <div class="flexrow">
+                <h4 class="message-sender">{{alias}} <span class="tag author">{{author.name}}</span></h4>
+                <span class="message-metadata">
+                    <time class="message-timestamp">{{timeSince message.timestamp}}</time>
+                    {{#if canDelete}}
+                    <a aria-label="{{localize 'Delete'}}" class="message-delete" data-action="deleteMessage">
+                        <i class="fa-solid fa-trash" inert></i>
+                    </a>
+                    {{/if}}
+                    {{#if canClose}}
+                    <a aria-label="{{ localize "CHAT.Dismiss" }}" class="message-dismiss" data-action="dismissMessage">
+                        <i class="fa-solid fa-xmark" inert></i>
+                    </a>
+                    {{/if}}
+                </span>
+            </div>
 
-        {{#if isWhisper}}
-        <span class="whisper-to">{{localize 'CHAT.To'}}: {{whisperTo}}</span>
-        {{/if}}
+            {{#if isWhisper}}
+            <span class="whisper-to">{{localize 'CHAT.To'}}: {{whisperTo}}</span>
+            {{/if}}
 
-        {{#if message.flavor}}
-        <span class="flavor-text">{{{message.flavor}}}</span>
-        {{/if}}
+            <!-- Message Flavor is used to communicate things like privately rolled dice, etc. -->
+            {{#if message.flavor}}
+            <span class="flavor-text">{{{message.flavor}}}</span>
+            <!-- If no message flavor, display the roll title -->
+            {{else}}
+            <span class="flavor-text">{{{message.title}}}</span>
+            {{/if}}
+        </div>
     </header>
     {{#if (eq message.type "d20Roll")}}
         {{> "systems/sfrpg/templates/chat/parts/d20-roll.hbs"}}

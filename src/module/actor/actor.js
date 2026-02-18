@@ -574,7 +574,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollCriteria: SFRPGRoll.createRollCriteria("abilityCheck", {difficulty: options.dc})
+            rollCriteria: SFRPGRoll.createRollCriteria("abilityCheck", {difficulty: options.dc, abilityId, abilityLabel: CONFIG.SFRPG.abilities[abilityId]})
         });
     }
 
@@ -598,7 +598,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollCriteria: SFRPGRoll.createRollCriteria("save", {difficulty: options.dc})
+            rollCriteria: SFRPGRoll.createRollCriteria("save", {difficulty: options.dc, saveId, saveLabel: CONFIG.SFRPG.saves[saveId]})
         });
     }
 
@@ -626,6 +626,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         const title = skillId.includes('pro')
             ? game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitleWithProfession", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)], profession: skill.subname })
             : game.i18n.format("SFRPG.Rolls.Dice.SkillCheckTitle", { skill: CONFIG.SFRPG.skills[skillId.substring(0, 3)] });
+        const skillLabel = `${CONFIG.SFRPG.skills[skillId.substring(0, 3)]}${skillId.includes('pro') ? ` (${skill.subname})` : ""}`;
 
         return DiceSFRPG.d20Roll({
             skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault') ? !options.event?.shiftKey : options.event?.shiftKey,
@@ -643,7 +644,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollCriteria: SFRPGRoll.createRollCriteria("skillCheck", {difficulty: options.dc}),
+            rollCriteria: SFRPGRoll.createRollCriteria("skillCheck", {difficulty: options.dc, skillId, skillLabel}),
             tags: tags
         });
     }
@@ -701,7 +702,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 left: options.event ? options.event.clientX - 80 : null,
                 top: options.event ? options.event.clientY - 80 : null
             },
-            rollCriteria: SFRPGRoll.createRollCriteria("skillCheck", {difficulty: options.dc}),
+            rollCriteria: SFRPGRoll.createRollCriteria("skillCheck", {difficulty: options.dc, skillId: "pil", skillLabel: CONFIG.SFRPG.skills["pil"]}),
             onClose: options.onClose
         });
     }

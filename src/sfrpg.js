@@ -616,6 +616,7 @@ Hooks.once("i18nInit", () => {
         "modifierType",
         "modifierBonusTypes",
         "rangeModes",
+        "rollTypes",
         "saveDescriptors",
         "saveProgression",
         "saves",

@@ -257,6 +257,7 @@ export class DiceSFRPG {
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
                     system: messageSystemData,
+                    title,
                     type: "d20Roll"
                 };
                 ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
@@ -346,6 +347,7 @@ export class DiceSFRPG {
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
                     system: {},
+                    title,
                     type: "base"
                 };
                 ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
@@ -496,6 +498,7 @@ export class DiceSFRPG {
                         sound: CONFIG.sounds.dice,
                         speaker,
                         system: messageSystemData,
+                        title,
                         type: "damage"
                     };
 
