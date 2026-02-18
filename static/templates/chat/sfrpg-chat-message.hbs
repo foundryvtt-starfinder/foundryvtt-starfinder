@@ -34,8 +34,9 @@ file, which selects the appropriate hbs partial based on the data passed into it
             <!-- Message Flavor is used to communicate things like privately rolled dice, etc. -->
             {{#if message.flavor}}
             <span class="flavor-text">{{{message.flavor}}}</span>
-            <!-- If no message flavor, display the roll title -->
-            {{else}}
+            {{/if}}
+            <!-- If content is visible, show title here -->
+            {{#if message.system.isContentVisible}}
             <span class="flavor-text">{{{message.title}}}</span>
             {{/if}}
         </div>

@@ -15,6 +15,8 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
 
     /** @override */
     async renderHTML({ canDelete, canClose = false, ...rest } = {}) {
+
+        // Pre-HTML-rendering data prep
         if (this.isContentVisible) {
             this.system.isContentVisible = true;
             this.system.prepareTags();
