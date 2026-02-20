@@ -65,7 +65,7 @@ export default class SFRPGMessageDamage extends SFRPGMessageBase {
 
     /** @override */
     prepareTags() {
-        const tags = this.tags ?? {};
+        const tags = super.prepareTags();
 
         // Weapon (and other item) properties
         for (const [prop, value] of Object.entries(this.properties)) {

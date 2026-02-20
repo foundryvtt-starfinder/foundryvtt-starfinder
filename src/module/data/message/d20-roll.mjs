@@ -75,7 +75,7 @@ export default class SFRPGMessaged20Roll extends SFRPGMessageBase {
 
     /** @override */
     prepareTags() {
-        const tags = this.tags ?? {};
+        const tags = super.prepareTags();
 
         // Critical hit & effect tag
         if (this.critical.isCritical && this.critical.effect.trim()) {

@@ -39,15 +39,6 @@ export default class SFRPGRoll extends Roll {
     }
 
     /**
-     * Return the tags passed to a roll
-     *
-     * @type {Tag[]}
-     */
-    get tags() {
-        return this.options.tags ?? [];
-    }
-
-    /**
      * Return the roll's breakdown
      *
      * @type {String}
@@ -189,6 +180,7 @@ export default class SFRPGRoll extends Roll {
         }
     }
 
+    // TODO: It might be better to standardize this closer to the modern super.render, along with the methods it uses to prep data
     /** @override */
     async render(chatOptions = {}) {
         chatOptions = foundry.utils.mergeObject({
@@ -196,7 +188,6 @@ export default class SFRPGRoll extends Roll {
             flavor: null,
             template: this.constructor.CHAT_TEMPLATE,
             blind: false,
-            tags: this.tags,
             breakdown: this.breakdown,
             evalValue: this.evalValue,
             rollCriteria: this.rollCriteria
@@ -214,7 +205,6 @@ export default class SFRPGRoll extends Roll {
             tooltip: isPrivate ? "" : await this.getTooltip(),
             customTooltip: chatOptions.customTooltip,
             total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
-            tags: chatOptions.tags,
             breakdown: chatOptions.breakdown
         };
 

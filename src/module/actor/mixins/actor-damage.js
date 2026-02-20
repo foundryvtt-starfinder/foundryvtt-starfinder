@@ -85,7 +85,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         const damageRolls = chatMessage.rolls.filter(roll => roll.isDamageRoll);
         if (damageRolls.length < 1) return null;
 
-        // Add descriptors, starship properties, special materials, weapon properties, and magic status tags
+        // Add descriptors, starship properties, special materials, weapon properties, and magic status
         const damageProperties = [];
         damageProperties.push(...chatMessage.system.descriptors);
         damageProperties.push(...chatMessage.system.starshipWeaponProperties);

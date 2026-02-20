@@ -172,7 +172,7 @@ export class DiceSFRPG {
     * @returns {Promise<RollResult?>}
     */
     static async d20Roll({ parts = [], rollContext, rollCriteria, speaker,
-        actorContextKey = "actor", chatMessage = true, dialogOptions, flavor, onClose, skipUI = false, tags = [], title}) {
+        actorContextKey = "actor", chatMessage = true, dialogOptions, flavor, onClose, skipUI = false, tags = {}, title}) {
 
         // Verify roll context is valid before continuing
         if (!rollContext?.isValid()) return null;
@@ -211,7 +211,7 @@ export class DiceSFRPG {
             // Create the roll formula, explanation, and roll
             const finalFormula = await this._calcStackingFormula(baseDie, rollInfo, rollContext.allContexts[actorContextKey]?.entity);
             const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(finalFormula.formula);
-            const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, tags, rollCriteria }).evaluate();
+            const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, rollCriteria }).evaluate();
 
             // Roll Evaluation vs Action Target (KAC, EAC, DC, etc.)
             roll.options.rollCriteria.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollCriteria);
@@ -232,7 +232,7 @@ export class DiceSFRPG {
                 rollNotes: itemContext?.data?.damageNotes,
                 specialMaterials: {},
                 starshipWeaponProperties: [],
-                tags: roll.options.tags,
+                tags,
                 targetInfo: []
             };
 
@@ -296,7 +296,7 @@ export class DiceSFRPG {
     * @returns {Promise<RollResult>|Promise<null>}          Returns the roll's result or an empty promise.
     */
     static async createRoll({ rollContext, rollCriteria, speaker,
-        actorContextKey = "actor", chatMessage = true, dialogOptions, flavor, parts = [], rollFormula = null, skipUI = false, tags = [], title}) {
+        actorContextKey = "actor", chatMessage = true, dialogOptions, flavor, parts = [], rollFormula = null, skipUI = false, tags = {}, title}) {
 
         // Verify roll context is valid before continuing
         if (!rollContext?.isValid()) return null;
@@ -333,7 +333,7 @@ export class DiceSFRPG {
 
             const finalFormula = await this._calcStackingFormula(baseDie, rollInfo, rollContext.allContexts[actorContextKey]?.entity);
             const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(finalFormula.formula);
-            const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, tags, rollCriteria }).evaluate();
+            const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, rollCriteria }).evaluate();
 
             // Roll Evaluation vs Action Target (KAC, EAC, DC, etc.)
             roll.options.rollCriteria.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollCriteria);
@@ -347,6 +347,7 @@ export class DiceSFRPG {
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
                     system: {},
+                    tags,
                     title,
                     type: "base"
                 };
@@ -381,7 +382,7 @@ export class DiceSFRPG {
     * @returns {Promise<bool>}                              `true` if roll was performed, `false` if it was canceled
     */
     static async damageRoll({ damageParts, rollContext, rollCriteria, speaker,
-        chatMessage = true, criticalDamageData = {doubleDamage: true}, dialogOptions, flavor, linkedAttackRoll, onClose, skipUI = false, tags = [], title}) {
+        chatMessage = true, criticalDamageData = {doubleDamage: true}, dialogOptions, flavor, linkedAttackRoll, onClose, skipUI = false, tags = {}, title}) {
 
         // Verify roll context is valid before continuing
         if (!rollContext?.isValid()) return null;
@@ -614,61 +615,6 @@ export class DiceSFRPG {
     }
 
     /**
-     * Generates the success/failure message based on the roll value, type, and target stats
-     * @param   {SFRPGRoll}     roll            the roll object
-     * @param   {RollInfo}      rollInfo        output from buildRoll, including dialog selections
-     * @param   {RollCriteria}  rollCriteria     additional options to be stored with the roll
-     * @returns {Tag}                           the generated tag that indicates success/failure
-     */
-    static rollSuccessTag(roll, rollInfo, rollCriteria) {
-        let prependedQuadrantInfo = "";
-        if (rollInfo.target.actorType === "starship" && rollInfo.target.quadrant) {
-            prependedQuadrantInfo = `${rollInfo.target.quadrantName} `;
-        }
-
-        const evalValue = roll.evalValue;
-        const rollSuccess = roll.product;
-        const rollType = rollCriteria.rollType;
-        const difficulty = rollCriteria.difficulty;
-
-        const rollIsAttack = rollType === "attack" || rollType === "gunnery";
-        const criticalSuccessLocalized = rollIsAttack ? game.i18n.format("SFRPG.Rolls.CriticalHitCaps") : game.i18n.format("SFRPG.Rolls.CriticalSuccessCaps");
-        const successLocalized = rollIsAttack ? game.i18n.format("SFRPG.Rolls.HitCaps") : game.i18n.format("SFRPG.Rolls.SuccessCaps");
-        const failureLocalized = rollIsAttack ? game.i18n.format("SFRPG.Rolls.MissCaps") : game.i18n.format("SFRPG.Rolls.FailureCaps");
-        const fumbleLocalized = game.i18n.format("SFRPG.Rolls.FumbleCaps");
-
-        if (rollCriteria?.actionTarget) {
-            const actionTargetSource = rollCriteria.actionTargetSource[rollCriteria.actionTarget];
-            if (rollSuccess !== null) {
-                const actionTarget = `${prependedQuadrantInfo}${actionTargetSource}`;
-                let actionResult = "";
-                if (roll.isCritical) {
-                    actionResult = `<span class="success">${criticalSuccessLocalized}</span>`;
-                } else if (roll.isFumble) {
-                    actionResult = `<span class="fail">${fumbleLocalized}</span>`;
-                } else {
-                    actionResult = `<span class="${rollSuccess ? "success" : "fail"}">${rollSuccess ? successLocalized : failureLocalized}</span>`;
-                }
-                return { name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue: evalValue, actionResult}) };
-            } else {
-                const actionTarget = `${prependedQuadrantInfo}${actionTargetSource}`;
-                return { name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget} ) };
-            }
-        } else if (difficulty) {
-            const actionTarget = game.i18n.format("SFRPG.DC");
-            let actionResult = "";
-            if (roll.isCritical) {
-                actionResult = `<span class="success">${criticalSuccessLocalized}</span>`;
-            } else if (roll.isFumble) {
-                actionResult = `<span class="fail">${fumbleLocalized}</span>`;
-            } else {
-                actionResult = `<span class="${rollSuccess ? "success" : "fail"}">${rollSuccess ? successLocalized : failureLocalized}</span>`;
-            }
-            return { name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue: evalValue, actionResult}) };
-        }
-    }
-
-    /**
      * returns the rootNode with removed childnodes that match the modifier.
      * @param {RollNode}        rootNode
      * @param {SFRPGModifier}   modifier
@@ -791,7 +737,7 @@ export class DiceSFRPG {
             }
         }
 
-        // Add descriptors tags
+        // Add descriptors
         const descriptors = itemContext.entity.system.descriptors;
         if (descriptors) {
             for (const [descriptor, isEnabled] of Object.entries(descriptors)) {
@@ -799,7 +745,7 @@ export class DiceSFRPG {
             }
         }
 
-        // Add special materials tags
+        // Add special materials
         const specialMaterials = itemContext.entity.system.specialMaterials;
         if (specialMaterials) {
             for (const [material, isEnabled] of Object.entries(specialMaterials)) {

@@ -645,7 +645,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                 top: options.event ? options.event.clientY - 80 : null
             },
             rollCriteria: SFRPGRoll.createRollCriteria("skillCheck", {difficulty: options.dc, skillId, skillLabel}),
-            tags: tags
+            tags
         });
     }
 
@@ -932,7 +932,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
 
         const rollMode = roll?.options?.rollMode ?? game.settings.get("core", "rollMode");
         const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(formula.formula);
-        const rollContent = await roll.render({ breakdown: preparedRollExplanation, tags: roll.tags });
+        const rollContent = await roll.render({ breakdown: preparedRollExplanation});
 
         ChatMessageSFRPG.create({
             flavor: flavor,
