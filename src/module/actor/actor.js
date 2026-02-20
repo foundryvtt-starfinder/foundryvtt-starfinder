@@ -613,13 +613,13 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         const skill = this.system.skills[skillId];
 
         // Add roll tags for class skills and trained vs. untrained
-        const tags = [];
-        if (skill.value) tags.push({name: "classSkill", text: game.i18n.format("SFRPG.SkillProficiencyLevelClassSkill")});
+        const tags = {};
+        if (skill.value) tags["classSkill"] = {text: game.i18n.format("SFRPG.SkillProficiencyLevelClassSkill")};
         if (skill.ranks) {
-            tags.push({name: "hasSkillRanks", text: game.i18n.format("SFRPG.SkillTrained")});
+            tags["hasSkillRanks"] = {text: game.i18n.format("SFRPG.SkillTrained")};
         } else {
-            if (skill.isTrainedOnly) {tags.push({name: "isTrainedOnly", text: game.i18n.format("SFRPG.SkillTrainedOnly")});}
-            tags.push({name: "hasSkillRanks", text: game.i18n.format("SFRPG.SkillUntrained")});
+            if (skill.isTrainedOnly) tags["isTrainedOnly"] = {text: game.i18n.format("SFRPG.SkillTrainedOnly")};
+            tags["hasSkillRanks"] = {text: game.i18n.format("SFRPG.SkillUntrained")};
         }
 
         // Profession skills have IDs `pro`, `pro1`, `pro2`, etc.

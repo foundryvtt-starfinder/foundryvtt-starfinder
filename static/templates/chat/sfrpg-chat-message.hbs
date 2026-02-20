@@ -8,7 +8,7 @@ file, which selects the appropriate hbs partial based on the data passed into it
 <li class="sfrpg chat-message message flexcol {{cssClass}}" data-message-id="{{message._id}}"
     {{#if borderColor}}style="border-color:{{borderColor}}"{{/if}}>
     <header class="message-header flexrow">
-        {{#if message.system.isContentVisible}}<img class="speaker-image flex0" src="{{speakerActor.img}}" style="width: 32px; height: 40px; object-fit: contain">{{/if}}
+        {{#if isContentVisible}}<img class="speaker-image flex0" src="{{speakerActor.img}}" style="width: 32px; height: 40px; object-fit: contain">{{/if}}
         <div class="flexcol">
             <div class="flexrow">
                 <h4 class="message-sender">{{alias}} <span class="tag author">{{author.name}}</span></h4>
@@ -36,7 +36,7 @@ file, which selects the appropriate hbs partial based on the data passed into it
             <span class="flavor-text">{{{message.flavor}}}</span>
             {{/if}}
             <!-- If content is visible, show title here -->
-            {{#if message.system.isContentVisible}}
+            {{#if isContentVisible}}
             <span class="flavor-text">{{{message.title}}}</span>
             {{/if}}
         </div>

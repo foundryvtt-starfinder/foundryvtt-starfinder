@@ -3,11 +3,13 @@
 </div>
 
 <!-- If the roll content should be visible, show tags -->
-{{#if message.system.isContentVisible}}
+{{#if isContentVisible}}
 <div class="message-footer damage">
-    {{#if message.system.tags}}
-    {{#each message.system.tags as |tag|}}
-        <span class="tag">{{tag.text}}</span>
+    {{#if tags}}
+    {{#each tags as |tag|}}
+        {{#if tag.text}}
+        <span class="tag"{{#if tag.tooltip}} data-tooltip="{{tag.tooltip}}"{{/if}}>{{{tag.text}}}</span>
+        {{/if}}
     {{/each}}
     {{/if}}
 </div>

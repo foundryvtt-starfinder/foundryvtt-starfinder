@@ -1,11 +1,11 @@
 <div class="message-content d20-roll">
-    {{#if message.system.isContentVisible}}
+    {{#if isContentVisible}}
         {{#if (includes message.system.rollCriteria.rollType "abilityCheck" "save" "skillCheck" "starshipAction")}}
             {{#if message.system.rollCriteria.evalValue}}
             <div class="result-box flexcol">
                 <span class="flex0">{{localize "SFRPG.Result"}}</span>
                 <div class="result">
-                    {{{message.system.labels.resultText}}}
+                    {{{labels.resultText}}}
                 </div>
             </div>
             {{/if}}
@@ -16,7 +16,7 @@
                 <span class="flex0">{{localize "SFRPG.Target"}}</span>
                 {{#each message.system.targetInfo as |target|}}
                     <div class="target flexrow">
-                        <img src="{{target.image}}" class="flex0" height="32"> <span class="flex2">{{target.name}}</span> <span class="flex3">{{{../message.system.labels.resultText}}}</span>
+                        <img src="{{target.image}}" class="flex0" height="32"> <span class="flex2">{{target.name}}</span> <span class="flex3">{{{../labels.resultText}}}</span>
                     </div>
                 {{/each}}
             </div>
@@ -27,12 +27,12 @@
 </div>
 
 <!-- If the roll content should be visible, show tags -->
-{{#if message.system.isContentVisible}}
+{{#if isContentVisible}}
 <div class="message-footer d20-roll">
-    {{#if message.system.tags}}
-    {{#each message.system.tags as |tag|}}
+    {{#if tags}}
+    {{#each tags as |tag|}}
         {{#if tag.text}}
-        <span class="tag">{{{tag.text}}}</span>
+        <span class="tag"{{#if tag.tooltip}} data-tooltip="{{tag.tooltip}}"{{/if}}>{{{tag.text}}}</span>
         {{/if}}
     {{/each}}
     {{/if}}

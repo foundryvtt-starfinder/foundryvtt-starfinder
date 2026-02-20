@@ -75,34 +75,39 @@ export default class SFRPGMessaged20Roll extends SFRPGMessageBase {
 
     /** @override */
     prepareTags() {
-        const tags = this.tags.filter(tag => !tag.rendered);
+        const tags = this.tags ?? {};
 
         // Critical hit & effect tag
         if (this.critical.isCritical && this.critical.effect.trim()) {
-            tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": this.critical.effect.trim() })});
+            tags["critical-effect"] = {text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": this.critical.effect.trim() })};
         }
 
         // Weapon (and other item) properties
         for (const [prop, value] of Object.entries(this.properties)) {
-            if (value) tags.push({tag: `weapon-properties ${prop}`, text: CONFIG.SFRPG.weaponProperties[prop], rendered: true});
+            if (value) {
+                tags[`weapon-properties ${prop}`] = {
+                    text: CONFIG.SFRPG.weaponProperties[prop],
+                    tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[prop]
+                };
+            }
         }
 
         // Starship weapon properties
         for (const prop of this.starshipWeaponProperties) {
-            tags.push({tag: `starship-weapon-properties ${prop}`, text: CONFIG.SFRPG.starshipWeaponProperties[prop], rendered: true});
+            tags[`starship-weapon-properties ${prop}`] = {text: CONFIG.SFRPG.starshipWeaponProperties[prop]};
         }
 
         // Descriptors
         for (const descriptor of this.descriptors) {
-            tags.push({tag: descriptor, text: CONFIG.SFRPG.descriptors[descriptor], rendered: true});
+            tags[descriptor] = {text: CONFIG.SFRPG.descriptors[descriptor]};
         }
 
         // Special Materials
         for (const [material, value] of Object.entries(this.specialMaterials)) {
-            if (value) tags.push({tag: material, text: CONFIG.SFRPG.specialMaterials[material], rendered: true});
+            if (value) tags[material] = {text: CONFIG.SFRPG.specialMaterials[material]};
         }
 
         // Store rendered tags
-        this.tags = tags;
+        return tags;
     }
 }

@@ -15,20 +15,22 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
 
     /** @override */
     async renderHTML({ canDelete, canClose = false, ...rest } = {}) {
-
         // Pre-HTML-rendering data prep
+        const data = {
+            isContentVisible: this.isContentVisible,
+            labels: {},
+            tags: {}
+        };
+
         if (this.isContentVisible) {
-            this.system.isContentVisible = true;
-            this.system.prepareTags();
+            data.tags = this.system.prepareTags();
             if (this.system.rollCriteria.canEvaluate) {
-                this.system.labels.resultText = this._generateResultText();
+                data.labels.resultText = this._generateResultText();
             }
-        } else {
-            this.system.isContentVisible = false;
         }
 
         // Generate the chat card html
-        const html = await super.renderHTML({canDelete, canClose, ...rest});
+        const html = await super.renderHTML({canDelete, canClose, ...data, ...rest});
 
         // Highlight critical successes and fumbles on the card
         if (this.isContentVisible) this.highlightCrits(html);
