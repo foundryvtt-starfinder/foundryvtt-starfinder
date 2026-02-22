@@ -229,7 +229,7 @@ export class DiceSFRPG {
                 properties: {},
                 rollBreakdown: finalFormula.formula,
                 rollCriteria,
-                rollNotes: itemContext?.data?.damageNotes,
+                rollNotes: null,
                 specialMaterials: {},
                 starshipWeaponProperties: [],
                 tags,
@@ -338,6 +338,35 @@ export class DiceSFRPG {
             // Roll Evaluation vs Action Target (KAC, EAC, DC, etc.)
             roll.options.rollCriteria.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollCriteria);
 
+            // Define message system data
+            const itemContext = rollContext.allContexts['item'];
+            const target = rollContext.allContexts['target']?.entity?.document ?? null;
+            const messageSystemData = { // TODO: Perhaps there's a nicer way to instantiate this via the message's dataModel?
+                critical: {
+                    effect: rollContext.allContexts?.item?.data?.critical?.effect?.trim() ?? "",
+                    isCritical: roll.isCritical,
+                    isFumble: roll.isFumble
+                },
+                descriptors: [],
+                properties: {},
+                rollBreakdown: finalFormula.formula,
+                rollCriteria,
+                rollNotes: null,
+                specialMaterials: {},
+                starshipWeaponProperties: [],
+                tags,
+                targetInfo: []
+            };
+
+            if (target) {
+                messageSystemData.targetInfo[0] = {
+                    image: target.texture?.src ?? "",
+                    name: target.name,
+                    tokenUUID: target.uuid ?? null,
+                    quadrant: rollInfo.target?.quadrant ?? ""
+                };
+            }
+
             // Create a chat message, applying the appropriate roll type (public, gmroll, etc.) and tags
             if (chatMessage) {
                 const messageData = {
@@ -346,7 +375,7 @@ export class DiceSFRPG {
                     speaker,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    system: {},
+                    system: messageSystemData,
                     tags,
                     title,
                     type: "base"

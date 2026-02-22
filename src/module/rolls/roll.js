@@ -38,6 +38,17 @@ export default class SFRPGRoll extends Roll {
         super(formula, data, options);
     }
 
+    /** @inheritdoc */
+    static CHAT_TEMPLATE = "systems/sfrpg/templates/dice/roll.hbs";
+    /** @inheritdoc */
+    static TOOLTIP_TEMPLATE = "systems/sfrpg/templates/dice/tooltip.hbs";
+
+    static MATH_PROXY = new Proxy(Math, {
+        has: () => true, // Include everything
+        get: (t, k) => k === Symbol.unscopables ? undefined : t[k]
+        // set: () => console.error("You may not set properties of the Roll.MATH_PROXY environment") // Yes-op!
+    });
+
     /**
      * Return the roll's breakdown
      *
@@ -183,45 +194,37 @@ export default class SFRPGRoll extends Roll {
     // TODO: It might be better to standardize this closer to the modern super.render, along with the methods it uses to prep data
     /** @override */
     async render(chatOptions = {}) {
-        chatOptions = foundry.utils.mergeObject({
-            author: game.user.id,
-            flavor: null,
-            template: this.constructor.CHAT_TEMPLATE,
+        // Execute the roll, if needed
+        if (!this._evaluated) await this.evaluate();
+
+        const isPrivate = chatOptions.isPrivate;
+        const template = this.constructor.CHAT_TEMPLATE;
+
+        // Define chat data
+        const chatData = foundry.utils.mergeObject({
+            formula: isPrivate ? "???" : this.formula,
+            flavor: isPrivate ? null : chatOptions.flavor,
+            user: game.user.id,
+            tooltip: isPrivate ? "" : await this.getTooltip(),
+            total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
             blind: false,
             breakdown: this.breakdown,
             evalValue: this.evalValue,
             rollCriteria: this.rollCriteria
         }, chatOptions);
-        const isPrivate = chatOptions.isPrivate;
-
-        // Execute the roll, if needed
-        if (!this._evaluated) await this.evaluate();
-
-        // Define chat data
-        const chatData = {
-            formula: isPrivate ? "???" : this.formula,
-            flavor: isPrivate ? null : chatOptions.flavor,
-            author: chatOptions.user,
-            tooltip: isPrivate ? "" : await this.getTooltip(),
-            customTooltip: chatOptions.customTooltip,
-            total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
-            breakdown: chatOptions.breakdown
-        };
 
         // Render the roll display template
-        return foundry.applications.handlebars.renderTemplate(chatOptions.template, chatData);
+        return foundry.applications.handlebars.renderTemplate(template, chatData);
     }
 
-    /** @inheritdoc */
-    static CHAT_TEMPLATE = "systems/sfrpg/templates/dice/roll.hbs";
-    /** @inheritdoc */
-    static TOOLTIP_TEMPLATE = "systems/sfrpg/templates/dice/tooltip.hbs";
-
-    static MATH_PROXY = new Proxy(Math, {
-        has: () => true, // Include everything
-        get: (t, k) => k === Symbol.unscopables ? undefined : t[k]
-        // set: () => console.error("You may not set properties of the Roll.MATH_PROXY environment") // Yes-op!
-    });
+    /** @override */
+    async getTooltip() {
+        const tooltipData = {
+            parts: this.dice.map(d => d.getTooltipData()),
+            breakdown: this.breakdown
+        };
+        return foundry.applications.handlebars.renderTemplate(this.constructor.TOOLTIP_TEMPLATE, tooltipData);
+    }
 
     static registerMathFunctions() {
         function lookup(value) {

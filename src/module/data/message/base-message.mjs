@@ -6,7 +6,7 @@ export default class SFRPGMessageBase extends SFRPGDocumentBase {
     static defineSchema() {
         const schema = super.defineSchema();
 
-        schema.buttons = new fields.ArrayField(
+        schema.buttons = new fields.TypedObjectField(
             new fields.SchemaField({
                 dc: new fields.NumberField({
                     initial: null,
@@ -24,7 +24,7 @@ export default class SFRPGMessageBase extends SFRPGDocumentBase {
                     blank: false,
                     choices: Object.keys(CONFIG.SFRPG.chatButtonTypes)
                 })
-            })
+            }), {validateKey: (key) => key in CONFIG.SFRPG.chatButtonTypes}
         );
 
         // TODO: We may want to change this to an array of strings at some point
