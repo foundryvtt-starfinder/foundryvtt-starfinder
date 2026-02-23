@@ -301,6 +301,7 @@ SFRPG.damageTypeToIcon = {
 
 /**
  * Conversions between damage types and a color (for text color, background, etc.)
+ * TODO: Change application of these to a css class rather than a hardcoded "style"
  * @type {Object}
  */
 SFRPG.damageTypeToColor = {
@@ -321,8 +322,8 @@ SFRPG.damageTypeToColor = {
         color: "#A62F00"
     },
     "healing": {
-        background: "rgba(205, 235, 115, 1)",
-        color: "#CDEB73"
+        background: "rgba(255, 239, 239, 1)",
+        color: "#ffdfdf"
     },
     "sonic": {
         background: "rgba(0, 139, 139, 1)",
@@ -397,43 +398,6 @@ SFRPG.descriptorsTooltips = {
     "shadow": "SFRPG.Descriptors.ShadowDescription",
     "summoning": "SFRPG.Descriptors.SummoningDescription",
     "teleportation": "SFRPG.Descriptors.TeleportationDescription"
-};
-
-SFRPG.weaponDamageTypes = {
-    "acid": "SFRPG.DamageTypesAcid",
-    "acid+bludgeoning": "SFRPG.DamageTypesAcidAndBludgeoning",
-    "acid+electricity": "SFRPG.DamageTypesAcidAndElectricity",
-    "acid+fire": "SFRPG.DamageTypesAcidAndFire",
-    "acid+piercing": "SFRPG.DamageTypesAcidAndPiercing",
-    "acid+slashing": "SFRPG.DamageTypesAcidAndSlashing",
-    "acid|fire": "SFRPG.DamageTypesAcidOrFire",
-    "acid|slashing": "SFRPG.DamageTypesAcidOrSlashing",
-    "cold": "SFRPG.DamageTypesCold",
-    "cold+piercing": "SFRPG.DamageTypesColdAndPiercing",
-    "cold+slashing": "SFRPG.DamageTypesColdAndSlashing",
-    "cold|fire": "SFRPG.DamageTypesColdOrFire",
-    "electricity": "SFRPG.DamageTypesElectricity",
-    "electricity+fire": "SFRPG.DamageTypesElectricityAndFire",
-    "electricity+piercing": "SFRPG.DamageTypesElectricityAndPiercing",
-    "electricity+slashing": "SFRPG.DamageTypesElectricityAndSlashing",
-    "force": "SFRPG.DamageTypesForce",
-    "fire": "SFRPG.DamageTypesFire",
-    "fire+force": "SFRPG.DamageTypesFireAndForce",
-    "fire+piercing": "SFRPG.DamageTypesFireAndPiercing",
-    "fire+slashing": "SFRPG.DamageTypesFireAndSlashing",
-    "fire|slashing": "SFRPG.DamageTypesFireOrSlashing",
-    "fire|sonic": "SFRPG.DamageTypesFireOrSonic",
-    "sonic": "SFRPG.DamageTypesSonic",
-    "bludgeoning": "SFRPG.DamageTypesBludgeoning",
-    "bludgeoning+cold": "SFRPG.DamageTypesBludgeoningAndCold",
-    "bludgeoning+electricity": "SFRPG.DamageTypesBludgeoningAndElectricity",
-    "bludgeoning+fire": "SFRPG.DamageTypesBludgeoningAndFire",
-    "bludgeoning+sonic": "SFRPG.DamageTypesBludgeoningAndSonic",
-    "piercing": "SFRPG.DamageTypesPiercing",
-    "piercing+sonic": "SFRPG.DamageTypesPiercingAndSonic",
-    "slashing": "SFRPG.DamageTypesSlashing",
-    "slashing+piercing": "SFRPG.DamageTypesSlashingAndPiercing",
-    "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic"
 };
 
 SFRPG.ammunitionTypes = {

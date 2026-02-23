@@ -647,7 +647,6 @@ Hooks.once("i18nInit", () => {
         "vehicleTypes",
         "weaponCategories",
         "weaponCriticalHitEffects",
-        "weaponDamageTypes",
         "weaponProficiencies",
         "weaponProperties",
         "weaponPropertiesTooltips",

@@ -1,3 +1,16 @@
+<!-- If the roll content should be visible, show tags -->
+{{#if isContentVisible}}
+<div class="message-tags d20-roll">
+    {{#if tags}}
+    {{#each tags as |tag|}}
+        {{#if tag.text}}
+        <span class="tag"{{#if tag.tooltip}} data-tooltip="{{tag.tooltip}}"{{/if}}>{{{tag.text}}}</span>
+        {{/if}}
+    {{/each}}
+    {{/if}}
+</div>
+{{/if}}
+
 <div class="message-content d20-roll">
     {{#if isContentVisible}}
         {{#if (includes message.system.rollCriteria.rollType "abilityCheck" "save" "skillCheck" "starshipAction")}}
@@ -25,16 +38,3 @@
     {{/if}}
     {{{message.content}}}
 </div>
-
-<!-- If the roll content should be visible, show tags -->
-{{#if isContentVisible}}
-<div class="message-footer d20-roll">
-    {{#if tags}}
-    {{#each tags as |tag|}}
-        {{#if tag.text}}
-        <span class="tag"{{#if tag.tooltip}} data-tooltip="{{tag.tooltip}}"{{/if}}>{{{tag.text}}}</span>
-        {{/if}}
-    {{/each}}
-    {{/if}}
-</div>
-{{/if}}
