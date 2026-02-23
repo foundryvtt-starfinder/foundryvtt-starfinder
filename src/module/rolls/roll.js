@@ -192,29 +192,6 @@ export default class SFRPGRoll extends Roll {
     }
 
     /**
-     * Returns an HTML string with the style tags for the damage formula
-     *
-     * @type {String}
-     */
-    get damageStyle() {
-        if (!this.isDamageRoll) return "";
-        const damageTypes = this.rollCriteria.damageTypes;
-        const length = damageTypes.length;
-        if (length < 1) return "";
-        else if (length === 1) return `color: ${CONFIG.SFRPG.damageTypeToColor[damageTypes[0]].color}`;
-        else {
-            let styleHTML = "color: linear-gradient(355deg";
-            let step = 0;
-            for (const damageType of damageTypes) {
-                styleHTML += `,${CONFIG.SFRPG.damageTypeToColor[damageType].background} ${Math.floor(step * 100 / (length - 1))}%`;
-                step += 1;
-            }
-            styleHTML += ")";
-            return styleHTML;
-        }
-    }
-
-    /**
      * Returns an HTML string that includes font-awesome icons representing the damage type(s) of the roll,
      * along with a descriptive hover tooltip. Used for rendering damage rolls within chat messages.
      *
@@ -228,6 +205,31 @@ export default class SFRPGRoll extends Roll {
             iconHTML += `<i class="fas ${CONFIG.SFRPG.damageTypeToIcon[damageType]} damage-icon"></i>`;
         }
         return iconHTML;
+    }
+
+    /**
+     * Returns an HTML string with the style tags for the damage formula
+     *
+     * @type {String}
+     */
+    get damageStyle() {
+        if (!this.isDamageRoll) return "";
+        const damageTypes = this.rollCriteria.damageTypes;
+        const length = damageTypes.length;
+        if (length < 1) return "";
+        else return `color: ${CONFIG.SFRPG.damageTypeToColor[damageTypes[0]].color}`;
+        /**
+        else {
+            let styleHTML = "color: linear-gradient(355deg";
+            let step = 0;
+            for (const damageType of damageTypes) {
+                styleHTML += `,${CONFIG.SFRPG.damageTypeToColor[damageType].background} ${Math.floor(step * 100 / (length - 1))}%`;
+                step += 1;
+            }
+            styleHTML += ")";
+            return styleHTML;
+        }
+         */
     }
 
     /**
@@ -270,8 +272,8 @@ export default class SFRPGRoll extends Roll {
 
         if (isDamageOrHealing) {
             chatData.damage = {
-                css: this.damageCss,
                 icons: this.damageIcons,
+                style: this.damageStyle,
                 tooltip: this.damageTooltip
             };
         }
