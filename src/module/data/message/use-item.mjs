@@ -3,7 +3,7 @@ import SFRPGMessageBase from "./base-message.mjs";
 
 const { fields } = foundry.data;
 
-export default class SFRPGMessageD20Roll extends SFRPGMessageBase {
+export default class SFRPGMessageUseItem extends SFRPGMessageBase {
     static defineSchema() {
         const schema = super.defineSchema();
 

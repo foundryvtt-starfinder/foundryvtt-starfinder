@@ -41,10 +41,22 @@ file, which selects the appropriate hbs partial based on the data passed into it
             {{/if}}
         </div>
     </header>
-    {{#if (eq message.type "d20Roll")}}
+    {{#if (eq message.type "combatPhase")}}
+        {{> "systems/sfrpg/templates/chat/parts/combat-phase.hbs"}}
+    {{else if (eq message.type "d20Roll")}}
         {{> "systems/sfrpg/templates/chat/parts/d20-roll.hbs"}}
     {{else if (eq message.type "damage")}}
         {{> "systems/sfrpg/templates/chat/parts/damage.hbs"}}
+    {{else if (eq message.type "initiative")}}
+        {{> "systems/sfrpg/templates/chat/parts/initiative.hbs"}}
+    {{else if (eq message.type "itemInfo")}}
+        {{> "systems/sfrpg/templates/chat/parts/item-info.hbs"}}
+    {{else if (eq message.type "reload")}}
+        {{> "systems/sfrpg/templates/chat/parts/reload.hbs"}}
+    {{else if (eq message.type "spellcasting")}}
+        {{> "systems/sfrpg/templates/chat/parts/spellcasting.hbs"}}
+    {{else if (eq message.type "useItem")}}
+        {{> "systems/sfrpg/templates/chat/parts/use-item.hbs"}}
     {{else if (eq message.type "base")}}
         <div class="message-content base">
             {{{message.content}}}

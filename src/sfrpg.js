@@ -316,8 +316,14 @@ Hooks.once('init', async function() {
 
     CONFIG.ChatMessage.dataModels = {
         base: models.SFRPGMessageBase,
-        d20Roll: models.SFRPGMessaged20Roll,
-        damage: models.SFRPGMessageDamage
+        combatPhase: models.SFRPGMessageCombatPhase,
+        d20Roll: models.SFRPGMessageD20Roll,
+        damage: models.SFRPGMessageDamage,
+        initiative: models.SFRPGMessageInitiative,
+        itemInfo: models.SFRPGMessageItemInfo,
+        reload: models.SFRPGMessageReload,
+        spellcasting: models.SFRPGMessageSpellcasting,
+        useItem: models.SFRPGMessageUseItem
     };
 
     CONFIG.ui.hotbar = HotbarSFRPG;

@@ -40,8 +40,14 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/sfrpg/templates/items/parts/effect-turn-events.hbs",
 
         // Chat Message Partials
+        "systems/sfrpg/templates/chat/parts/combat-phase.hbs",
         "systems/sfrpg/templates/chat/parts/d20-roll.hbs",
-        "systems/sfrpg/templates/chat/parts/damage.hbs"
+        "systems/sfrpg/templates/chat/parts/damage.hbs",
+        "systems/sfrpg/templates/chat/parts/initiative.hbs",
+        "systems/sfrpg/templates/chat/parts/item-info.hbs",
+        "systems/sfrpg/templates/chat/parts/reload.hbs",
+        "systems/sfrpg/templates/chat/parts/spellcasting.hbs",
+        "systems/sfrpg/templates/chat/parts/use-item.hbs"
     ];
 
     return foundry.applications.handlebars.loadTemplates(templatePaths);
