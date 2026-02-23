@@ -258,9 +258,38 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
         if (updatePromise) {
             updatePromise.then(() => {
-                this._postReloadMessage();
 
-                Hooks.callAll("itemReloaded", {actor: this.actor, item: this});
+                const actor = this.actor;
+                const item = this;
+                const title = `${game.i18n.localize("SFRPG.ChatCard.ItemActivation.Reload")} - ${item.name}`;
+
+                // Determine the action type (if a weapon has quick reload, reloading is free)
+                const quickReload = itemData.properties.qreload?.value ?? false;
+                const actionType = quickReload ? "none" : "move";
+
+                const messageSystemData = { // TODO: Perhaps there's a nicer way to instantiate this via the message's dataModel?
+                    actionType,
+                    actor,
+                    item,
+                    tags: {},
+                    tokenUUID: actor.token?.uuid ?? null
+                };
+
+                if (quickReload) {
+                    messageSystemData.tags.qreload = {
+                        text: game.i18n.localize(CONFIG.SFRPG.weaponProperties["qreload"]),
+                        tooltip: game.i18n.localize(CONFIG.SFRPG.weaponPropertiesTooltips["qreload"])
+                    };
+                }
+                const messageData = {
+                    speaker: ChatMessageSFRPG.getSpeaker({ actor }),
+                    system: messageSystemData,
+                    title,
+                    type: "reload"
+                };
+
+                ChatMessageSFRPG.create(messageData, { rollMode: game.settings.get("core", "rollMode") });
+                Hooks.callAll("itemReloaded", {actor, item});
             });
         }
 
@@ -294,33 +323,5 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
             return updatePromise;
         }
-    }
-
-    _postReloadMessage() {
-
-        // Render the chat card template
-        const templateData = {
-            actor: this.actor,
-            item: this,
-            tokenId: this.actor.token?.id,
-            action: "SFRPG.ChatCard.ItemActivation.Reloads",
-            cost: game.i18n.format("SFRPG.AbilityActivationTypesMove")
-        };
-
-        const template = `systems/sfrpg/templates/chat/item-action-card.hbs`;
-        const renderPromise = foundry.applications.handlebars.renderTemplate(template, templateData);
-        renderPromise.then((html) => {
-            // Create the chat message
-            const chatData = {
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-                speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
-                content: html
-            };
-
-            const rollMode = game.settings.get("core", "rollMode");
-            ChatMessageSFRPG.applyRollMode(chatData, rollMode);
-            ChatMessageSFRPG.create(chatData, { displaySheet: false });
-        });
-
     }
 };

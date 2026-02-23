@@ -6,6 +6,11 @@ export default class SFRPGMessageBase extends SFRPGDocumentBase {
     static defineSchema() {
         const schema = super.defineSchema();
 
+        // TODO: Eventually, add more detail to this
+        schema.actor = new fields.ObjectField({ // TODO: Detail this if possible
+            required: false
+        });
+
         schema.buttons = new fields.TypedObjectField(
             new fields.SchemaField({
                 dc: new fields.NumberField({
@@ -28,11 +33,23 @@ export default class SFRPGMessageBase extends SFRPGDocumentBase {
         );
 
         // TODO: Eventually, add more detail to this
+        schema.item = new fields.ObjectField({
+            required: false
+        });
+
+        // TODO: Eventually, add more detail to this
         schema.rollCriteria = new fields.ObjectField();
 
         schema.tags = new fields.TypedObjectField(
             new fields.SchemaField(SFRPGMessageBase._tagFieldData())
         );
+
+        // TODO: Eventually, add more detail to this
+        schema.tokenUUID = new fields.DocumentUUIDField({
+            initial: null,
+            nullable: true,
+            required: false
+        });
 
         return schema;
     }

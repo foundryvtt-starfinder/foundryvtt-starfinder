@@ -80,7 +80,7 @@ export const ItemChatMixin = (superclass) => class extends superclass {
         event.preventDefault();
         const header = event.currentTarget;
         const card = header.closest('.chat-card');
-        const content = card.querySelector('.card-content');
+        const content = card.querySelector('.description');
         // content.style.display = content.style.display === 'none' ? 'block' : 'none';
         $(content).slideToggle();
     }

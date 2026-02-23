@@ -21,6 +21,8 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
             labels: {},
             tags: {}
         };
+        if (this.system.item) data.item = this.system.item;
+        if (this.system.actor) data.actor = this.system.actor;
 
         if (this.isContentVisible) {
             data.tags = this.system.prepareTags();
@@ -163,28 +165,6 @@ export class ChatMessageSFRPG extends foundry.documents.ChatMessage {
             }
         );
         return options;
-    }
-
-    /**
-     * Add damage types for damage rolls to the chat card.
-     *
-     * @param {ChatMessageSFRPG} message       The ChatMessage document being rendered
-     * @param {JQuery}      html               The pending HTML as a jQuery object
-     */
-    static addDamageTypes(message, html) {
-        if (!message.isRoll || !message.isContentVisible) return;
-
-        const roll = message.rolls[0];
-        if (!(roll?.dice.length > 0)) return;
-        for (const die of roll.dice) {
-            if (die?.options?.isDamageRoll) {
-                const types = die?.options?.damageTypes;
-                const critical = die?.options?.criticalData;
-
-                html.data("damageTypes", types);
-                html.data("critical", critical);
-            }
-        }
     }
 
     /**

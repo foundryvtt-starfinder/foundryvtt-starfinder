@@ -9,8 +9,14 @@
     {{/each}}
     {{/if}}
 </div>
-{{/if}}
 
 <div class="message-content reload">
-    {{{message.content}}}
+    <div class="description">
+        {{#if item.system.description.short}}
+            {{{item.system.description.short}}}
+        {{else}}
+            {{{item.system.description.value}}}
+        {{/if}}
+    </div>
 </div>
+{{/if}}
