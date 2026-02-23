@@ -574,7 +574,6 @@ Hooks.once("i18nInit", () => {
         "containableTypes",
         "currencies",
         "damageReductionTypes",
-        "damageTypeOperators",
         "damageTypes",
         "difficultyLevels",
         "distanceUnits",

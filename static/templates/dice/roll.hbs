@@ -3,7 +3,11 @@
     <div class="dice-flavor">{{flavor}}</div>
     {{/if}}
     <div class="dice-result">
+        {{#if isDamageOrHealing}}
+        <div class="dice-formula" style="{{damage.style}}" data-tooltip="{{damage.tooltip}}">{{formula}} {{{damage.icons}}}</div>
+        {{else}}
         <div class="dice-formula">{{formula}}</div>
+        {{/if}}
         {{{tooltip}}}
         <h4 class="dice-total">{{total}}</h4>
     </div>

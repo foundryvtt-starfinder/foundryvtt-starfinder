@@ -27,12 +27,6 @@ export default class SFRPGMessageBase extends SFRPGDocumentBase {
             }), {validateKey: (key) => key in CONFIG.SFRPG.chatButtonTypes}
         );
 
-        // TODO: We may want to change this to an array of strings at some point
-        schema.rollBreakdown = new fields.StringField({
-            initial: "",
-            blank: true
-        });
-
         // TODO: Eventually, add more detail to this
         schema.rollCriteria = new fields.ObjectField();
 

@@ -283,9 +283,63 @@ SFRPG.damageTypeToAcronym = {
     "slashing": "S"
 };
 
-SFRPG.damageTypeOperators = {
-    "and": "SFRPG.Damage.Types.Operators.And",
-    "or": "SFRPG.Damage.Types.Operators.Or"
+/**
+ * Conversions between damage types and a font awesome icon
+ * @type {Object}
+ */
+SFRPG.damageTypeToIcon = {
+    "acid": "fa-vial",
+    "cold": "fa-snowflake",
+    "electricity": "fa-bolt",
+    "fire": "fa-fire",
+    "healing": "fa-briefcase-medical",
+    "sonic": "fa-waveform-lines",
+    "bludgeoning": "fa-hammer",
+    "piercing": "fa-bow-arrow",
+    "slashing": "fa-axe"
+};
+
+/**
+ * Conversions between damage types and a color (for text color, background, etc.)
+ * @type {Object}
+ */
+SFRPG.damageTypeToColor = {
+    "acid": {
+        background: "rgba(0, 115, 0, 1)",
+        color: "#007300"
+    },
+    "cold": {
+        background: "rgba(47, 47, 166, 1)",
+        color: "#2F2FA6"
+    },
+    "electricity": {
+        background: "rgba(218, 165, 32, 1)",
+        color: "goldenrod"
+    },
+    "fire": {
+        background: "rgba(166, 47, 0, 1)",
+        color: "#A62F00"
+    },
+    "healing": {
+        background: "rgba(205, 235, 115, 1)",
+        color: "#CDEB73"
+    },
+    "sonic": {
+        background: "rgba(0, 139, 139, 1)",
+        color: "#008B8B"
+    },
+    "bludgeoning": {
+        background: "rgba(128, 128, 128, 1)",
+        color: "#808080"
+    },
+    "piercing": {
+        background: "rgba(128, 128, 128, 1)",
+        color: "#808080"
+    },
+    "slashing": {
+        background: "rgba(128, 128, 128, 1)",
+        color: "#808080"
+    }
 };
 
 SFRPG.descriptors = {

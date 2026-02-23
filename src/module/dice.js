@@ -227,9 +227,7 @@ export class DiceSFRPG {
                 },
                 descriptors: [],
                 properties: {},
-                rollBreakdown: finalFormula.formula,
                 rollCriteria,
-                rollNotes: null,
                 specialMaterials: {},
                 starshipWeaponProperties: [],
                 tags,
@@ -339,7 +337,6 @@ export class DiceSFRPG {
             roll.options.rollCriteria.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollCriteria);
 
             // Define message system data
-            const itemContext = rollContext.allContexts['item'];
             const target = rollContext.allContexts['target']?.entity?.document ?? null;
             const messageSystemData = { // TODO: Perhaps there's a nicer way to instantiate this via the message's dataModel?
                 critical: {
@@ -349,9 +346,7 @@ export class DiceSFRPG {
                 },
                 descriptors: [],
                 properties: {},
-                rollBreakdown: finalFormula.formula,
                 rollCriteria,
-                rollNotes: null,
                 specialMaterials: {},
                 starshipWeaponProperties: [],
                 tags,
@@ -460,14 +455,13 @@ export class DiceSFRPG {
                     damage: {
                         isMagic: false,
                         minimumDamage: false,
+                        notes: itemContext?.data?.damageNotes,
                         types: []
                     },
                     descriptors: [],
                     partIndex: part.partIndex ?? null,
                     properties: {},
-                    rollBreakdown: finalFormula.formula,
                     rollCriteria: partRollCriteria,
-                    rollNotes: itemContext?.data?.damageNotes,
                     specialMaterials: {},
                     starshipWeaponProperties: [],
                     tags
@@ -488,6 +482,9 @@ export class DiceSFRPG {
                     DiceSFRPG._collectProperties(itemContext, messageSystemData);
                 }
 
+                // Create the roll explanation
+                const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(finalFormula.formula);
+
                 // Determine whether the roll should be a critical, and handle those effects
                 const isCritical = (rollInfo.button === "critical" || (skipUI && linkedAttackRoll.isCritical)) ? true : false;
                 if (isCritical) {
@@ -505,7 +502,7 @@ export class DiceSFRPG {
                 }
 
                 // Create the roll and evaluate it
-                const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { rollCriteria: partRollCriteria }).evaluate();
+                const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, rollCriteria: partRollCriteria }).evaluate();
 
                 // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
                 if (roll.total < 1) {

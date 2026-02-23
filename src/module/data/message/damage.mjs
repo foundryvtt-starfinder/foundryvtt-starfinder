@@ -33,6 +33,10 @@ export default class SFRPGMessageDamage extends SFRPGMessageBase {
                 minimumDamage: new fields.BooleanField({
                     initial: false
                 }),
+                notes: new fields.StringField({
+                    initial: "",
+                    blank: true
+                }),
                 types: new fields.ArrayField(
                     new fields.StringField({
                         blank: false,

@@ -191,12 +191,66 @@ export default class SFRPGRoll extends Roll {
         }
     }
 
-    // TODO: It might be better to standardize this closer to the modern super.render, along with the methods it uses to prep data
+    /**
+     * Returns an HTML string with the style tags for the damage formula
+     *
+     * @type {String}
+     */
+    get damageStyle() {
+        if (!this.isDamageRoll) return "";
+        const damageTypes = this.rollCriteria.damageTypes;
+        const length = damageTypes.length;
+        if (length < 1) return "";
+        else if (length === 1) return `color: ${CONFIG.SFRPG.damageTypeToColor[damageTypes[0]].color}`;
+        else {
+            let styleHTML = "color: linear-gradient(355deg";
+            let step = 0;
+            for (const damageType of damageTypes) {
+                styleHTML += `,${CONFIG.SFRPG.damageTypeToColor[damageType].background} ${Math.floor(step * 100 / (length - 1))}%`;
+                step += 1;
+            }
+            styleHTML += ")";
+            return styleHTML;
+        }
+    }
+
+    /**
+     * Returns an HTML string that includes font-awesome icons representing the damage type(s) of the roll,
+     * along with a descriptive hover tooltip. Used for rendering damage rolls within chat messages.
+     *
+     * @type {String}
+     */
+    get damageIcons() {
+        if (!this.isDamageRoll) return "";
+        const damageTypes = this.rollCriteria.damageTypes;
+        let iconHTML = "";
+        for (const damageType of damageTypes) {
+            iconHTML += `<i class="fas ${CONFIG.SFRPG.damageTypeToIcon[damageType]} damage-icon"></i>`;
+        }
+        return iconHTML;
+    }
+
+    /**
+     * Returns an HTML string that includes localized damage types
+     *
+     * @type {String}
+     */
+    get damageTooltip() {
+        if (!this.isDamageRoll) return "";
+        const damageTypes = this.rollCriteria.damageTypes;
+        const localized = [];
+        for (const damageType of damageTypes) {
+            localized.push(game.i18n.localize(CONFIG.SFRPG.damageAndHealingTypes[damageType]));
+        }
+        return localized.join(" & ");
+    }
+
     /** @override */
     async render(chatOptions = {}) {
         // Execute the roll, if needed
         if (!this._evaluated) await this.evaluate();
 
+        const isDamageOrHealing = this.isDamageRoll;
         const isPrivate = chatOptions.isPrivate;
         const template = this.constructor.CHAT_TEMPLATE;
 
@@ -210,8 +264,17 @@ export default class SFRPGRoll extends Roll {
             blind: false,
             breakdown: this.breakdown,
             evalValue: this.evalValue,
+            isDamageOrHealing,
             rollCriteria: this.rollCriteria
         }, chatOptions);
+
+        if (isDamageOrHealing) {
+            chatData.damage = {
+                css: this.damageCss,
+                icons: this.damageIcons,
+                tooltip: this.damageTooltip
+            };
+        }
 
         // Render the roll display template
         return foundry.applications.handlebars.renderTemplate(template, chatData);
