@@ -1,22 +1,10 @@
 <!-- If the roll content should be visible, show tags -->
 {{#if isContentVisible}}
-<div class="message-tags reload">
-    {{#if tags}}
-    {{#each tags as |tag|}}
-        {{#if tag.text}}
-        <span class="tag"{{#if tag.tooltip}} data-tooltip="{{tag.tooltip}}"{{/if}}>{{{tag.text}}}</span>
-        {{/if}}
-    {{/each}}
-    {{/if}}
-</div>
-
 <div class="message-content reload">
-    <div class="description">
-        {{#if item.system.description.short}}
-            {{{item.system.description.short}}}
-        {{else}}
-            {{{item.system.description.value}}}
-        {{/if}}
+    <div class="reload-stats">
+        {{{localize "SFRPG.ChatCard.Reload.ReloadMessage" ammoName=message.system.ammoName activationType=(sfrpg "abilityActivationTypes" message.system.activationType)}}}{{#if tags.qreload}} (<span class="tag"{{#if tags.qreload.tooltip}} data-tooltip="{{tags.qreload.tooltip}}"{{/if}}>{{{tags.qreload.text}}}</span>){{/if}}
+        <br>
+        {{localize "SFRPG.ChatCard.Reload.CapacityMessage" current=message.system.capacity.current total=message.system.capacity.total}}
     </div>
 </div>
 {{/if}}

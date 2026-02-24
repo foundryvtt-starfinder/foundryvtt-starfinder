@@ -9,9 +9,23 @@ export default class SFRPGMessageReload extends SFRPGMessageBase {
 
         // Damage message-specific properties
         foundry.utils.mergeObject(schema, {
-            actionType: new fields.StringField({
+            activationType: new fields.StringField({
                 blank: true,
                 initial: ""
+            }),
+            ammoName: new fields.StringField({
+                blank: true,
+                initial: ""
+            }),
+            capacity: new fields.SchemaField({
+                current: new fields.NumberField({
+                    initial: null,
+                    nullable: true
+                }),
+                total: new fields.NumberField({
+                    initial: null,
+                    nullable: true
+                })
             }),
             description: new fields.StringField({
                 blank: true,

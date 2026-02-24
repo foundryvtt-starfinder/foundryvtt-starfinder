@@ -198,6 +198,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         }
 
         let updatePromise = null;
+        let newAmmunitionName = "Internal";
         if (this.requiresCapacityItem()) {
             const capacityItem = this.getCapacityItem();
 
@@ -221,6 +222,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 const originalContainer = getItemContainer(this.actor.items, newAmmunition);
 
                 if (newAmmunition.system.useCapacity || capacityItem === null) {
+                    newAmmunitionName = newAmmunition.name;
                     if (capacityItem) {
                         updatePromise = setItemContainer(itemHelper, capacityItem, null, 1);
                     }
@@ -265,11 +267,13 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
                 // Determine the action type (if a weapon has quick reload, reloading is free)
                 const quickReload = itemData.properties.qreload?.value ?? false;
-                const actionType = quickReload ? "none" : "move";
+                const activationType = quickReload ? "none" : "move";
 
                 const messageSystemData = { // TODO: Perhaps there's a nicer way to instantiate this via the message's dataModel?
-                    actionType,
+                    activationType,
                     actor,
+                    ammoName: newAmmunitionName,
+                    capacity: {current: this.getCurrentCapacity(), total: maxCapacity},
                     item,
                     tags: {},
                     tokenUUID: actor.token?.uuid ?? null
