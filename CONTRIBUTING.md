@@ -5,6 +5,8 @@ If you would like to contribute to the project then we welcome any contributions
 > [!NOTE]
 > The maintainers of this project all use Windows as an OS and the Visual Studio Code (VS Code) IDE, so the instructions here will likewise assume you are using it unless otherwise stated. You do not have to use this OS or IDE, just be aware that if you are using another OS you may need to modify some of the following instructions for the setup process to work.
 
+
+
 # General Setup Process
 
 This section details the general setup process from start to finish for new developers interested in contributing to the Starfinder system.
@@ -35,13 +37,17 @@ Within the newly created `Foundry-Dev` folder, do the following:
 <img width="662" height="287" alt="image" src="https://github.com/user-attachments/assets/c2868763-e2ac-4942-b6fa-5755ac9a9833" />
 
 2. Create an empty `user-data` folder to store user data (worlds, systems, modules, etc.).
-3. Create a `foundry-launch.bat` batch file with the following text:
+3. Create a `foundry-launch.bat` batch file with the text below. Executing this file will automatically launch a Foundry server with the correct configuration in a new command window. Closing the window will close the Foundry server. You may need to change this file type or the code within if using a non-Windows operating system.
+
 ```sh
 cd "C:\Users\username\Foundry-Dev"
 node foundryvtt-install\main.js --port=30000 --dataPath=./user-data
 ```
 
-4. Finally, clone your forked repository into its own folder (default: `foundryvtt-starfinder`). To clone a github repository locally in VS Code, [follow these instructions](https://code.visualstudio.com/docs/sourcecontrol/repos-remotes#_clone-repositories).
+4. Finally, clone your forked repository into its own folder (default: `foundryvtt-starfinder`). To clone a github repository locally using VS Code, [follow these instructions](https://code.visualstudio.com/docs/sourcecontrol/repos-remotes#_clone-repositories).
+
+Once this process is complete, you should have a `Foundry-Dev` folder that contains the following within it:
+<img width="782" height="195" alt="image" src="https://github.com/user-attachments/assets/41503927-47f2-471d-ae1e-671e7a276ac7" />
 
 ## Set up symlinks and configure the `src->dist` pipeline
 
@@ -85,6 +91,8 @@ If you would like to debug the system code using the VS Code debugger and breakp
 You should now see options to run and debug the code on VS Code's *Run and Debug* tab. Make sure to build the source code using `build` or `build:watch` before starting debugging.
 
 > There are two versions of the debugging, one for if the system has been built most recently using the `build` command, and one for if `build:watch` is currently running (to connect to the proxy served by Vite at `http://localhost:30001`). You can select which one to use via a dropdown menu on the Run and Debug tab. If the debugging isn't working as expected, make sure you're using the correct debug method!
+
+
 
 # Contributing to Compendiums
 
@@ -173,6 +181,8 @@ Items have a source field, and this source field should be filled in. There is a
 | Starfinder Society | SFS #**y**-**z** pg. **x** | SFS #**1**-**2** pg. **23** |
 | Alien Card Deck | ACD | ACD |
 
+
+
 # NPM Scripts
 The following are the various scripts used for the development of the system, which automate a lot of what would otherwise be manual work.
 
@@ -217,6 +227,8 @@ Link to your foundry installation to add some basic Intellisense support for the
 
 ## `unpack`
 The yin to `cook`'s yang, `unpack` takes Foundry's compendium files and unpacks them into nice, human-readable JSONs, ready for you to make edits to. You'll run this after you've made new items/changes in Foundry. Similar to `cook`, you can unpack just a single compendium by adding the `--pack=XXX` option, where `XXX` is the name of the pack as found in the `src/items` folder.
+
+
 
 # Package Release Process (for maintainers only)
 
