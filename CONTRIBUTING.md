@@ -51,15 +51,15 @@ Once this process is complete, you should have a `Foundry-Dev` folder that conta
 
 ## Set up symlinks and configure the `src->dist` pipeline
 
-The Starfinder system uses a build process (vite) to convert the source code edited during programming to distribution code and data compendiums that are installed by users and run by Foundry VTT. To manage this process, `npm` and a number of scripts are used. To get an initial build set up that can be run for testing, follow these steps.
+The Starfinder system uses a build process (vite) to convert the source code edited during programming to distribution code and data compendiums that are installed by users and run by Foundry VTT. To manage this process, `npm` and a number of scripts are used, and a symbolic link (symlink) is set up between the `user-data/Data/systems/sfrpg/` folder and your code's `dist` folder to remove the need to manually copy files each time changes are made. To get an initial build set up that can be run for testing, follow these steps.
 
 > [!NOTE]
-> For Windows users: If your data folder is the default FoundryVTT setting of `C:\Users\Username\AppData\Local\FoundryVTT`, you may need to run your commandline with administrator privileges.
+> For Windows users: To make a symlink (while running `npm run link` in Step 3), you may need to run your command line/terminal program with administrator privileges.
 > Also for Windows users: You may need to give Windows permissions to run local unsigned scripts if you receive permission errors when trying to run `npm` scripts. To do so, open powershell as an administrator and run the command `Set-ExecutionPolicy RemoteSigned`. [This website](https://dev.to/jackfd120/resolving-npm-execution-policy-error-in-powershell-a-step-by-step-guide-for-developers-32ip) includes full details of what that does.
 
 1. Install the development dependencies by running the following command: `npm ci`
-2. If you already have the Starfinder RPG System installed in your development `user-data/Data/systems` folder, uninstall it so that the next steps will properly set up your Symlink.
-3. Run `npm run link` to create a symbolic link between the `dist` folder and your Foundry data folder. When prompted, enter the file path to where your install's user data folder resides (`C:\Users\username\Foundry-Dev\user-data` if you followed the naming conventions in the previous sections, replacing "username" with yours). This can be found on the Configuration tab on the Setup screen.
+2. If you already have the Starfinder RPG System installed in your development `user-data/Data/systems` folder, uninstall it so that the next steps will properly set up your symlink.
+3. Run `npm run link` to create a symbolic link between the `dist` folder and your Foundry data folder. When prompted, enter the file path to where your install's user data folder resides (`C:\Users\username\Foundry-Dev\user-data\Data` if you followed the naming conventions in the previous sections, replacing "username" with yours). This can be found on the Configuration tab on the Setup screen.
 4. Run `npm run build`. This will do a one-time compile of all the `less` files and copy all the necessary code and template files to a `dist` folder in the project root. Because you created a symbolic link to this `dist` folder within, the compiled and copied files will also appear in your Foundry `Data/systems/sfrpg` folder. Neat!
 
 To launch Foundry, simply run the `foundry-launch.bat` file and open a web browser to `http://localhost:30000/`.
