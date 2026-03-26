@@ -1,8 +1,7 @@
 /**
  * A helper Dialog subclass for spending Resolve Points on a short 10 minute rest
- * @type {Dialog}
  */
-export class ShortRestDialog extends Dialog {
+export class ShortRestDialog extends foundry.appv1.api.Dialog {
     constructor(actor, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];

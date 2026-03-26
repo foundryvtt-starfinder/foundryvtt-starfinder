@@ -2,7 +2,7 @@
  * A simple form to set actor movement speeds
  * @extends {DocumentSheet}
  */
-export class ActorMovementConfig extends DocumentSheet {
+export class ActorMovementConfig extends foundry.appv1.api.DocumentSheet {
 
     /** @override */
     static get defaultOptions() {

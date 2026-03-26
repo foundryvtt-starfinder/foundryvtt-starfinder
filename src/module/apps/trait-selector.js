@@ -3,7 +3,7 @@
  *
  * @type {FormApplication}
  */
-export class TraitSelectorSFRPG extends FormApplication {
+export class TraitSelectorSFRPG extends foundry.appv1.api.FormApplication {
     static get defaultOptions() {
         const options = super.defaultOptions;
 

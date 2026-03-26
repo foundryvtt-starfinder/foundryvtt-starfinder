@@ -10,7 +10,7 @@
 /**
  * A custom dialog for confirming rolls from a user.
  */
-export default class RollDialog extends Dialog {
+export default class RollDialog extends foundry.appv1.api.Dialog {
     /**
      * Construct a custom RollDialog
      *

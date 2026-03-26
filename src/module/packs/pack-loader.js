@@ -1,6 +1,6 @@
 /**
  * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs"
- * @import Collection from "@common/utils/collection.mjs"
+ * @import { Collection } from "@common/utils/collection.mjs"
  * @import { ActorSFRPG } from "../actor/actor.js"
  * @import { ItemSFRPG } from "../item/item.js"
 */
@@ -58,7 +58,8 @@ export class PackLoader {
             if (!data) {
 
                 const index = pack.indexed ? pack.index : await pack.getIndex();
-                const types = Array.from(new Set(/** @type {Collection<string, object>} */(index).map(i => i.type)));
+                /** @type {Set<string>} */
+                const types = new Set(index.map(i => i.type));
                 const indexFields = [];
                 for (const type of types) {
                     const schema = CONFIG[entityType].dataModels[type].schema;
@@ -68,7 +69,7 @@ export class PackLoader {
                     }
                 }
 
-                const content = await pack.getIndex({ fields });
+                const content = await pack.getIndex({ indexFields });
                 this.setCompendiumArt(pack.collection, content);
                 data = this.loadedPacks[entityType][packId] = {
                     pack,

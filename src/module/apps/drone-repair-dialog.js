@@ -2,7 +2,7 @@
  * A helper Dialog subclass for repairing drones
  * @type {Dialog}
  */
-export class DroneRepairDialog extends Dialog {
+export class DroneRepairDialog extends foundry.appv1.api.Dialog {
     constructor(actor, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];

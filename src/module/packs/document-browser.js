@@ -276,6 +276,8 @@ export class DocumentBrowserSFRPG extends Application {
                 console.log(`Starfinder | Compendium Browser | ${pack.metadata.label} - ${content.length} entries found`);
 
                 for (const item of content) {
+                    if (!this.allowedItem(item)) continue;
+
                     const itemData = {
                         uuid: `Compendium.${pack.collection}.${item._id}`,
                         img: item.img,
@@ -284,7 +286,7 @@ export class DocumentBrowserSFRPG extends Application {
                         type: item.type
                     };
 
-                    if (this.allowedItem(item)) items.set(itemData.uuid, itemData);
+                    items.set(itemData.uuid, itemData);
 
                 }
             }

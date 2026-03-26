@@ -227,7 +227,8 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
     /**
      * A helper method to directly update this modifier within its owner, instead of having to find it in the modifiers array every time.
      * @param {Object} data Update data to be applied to this modifier
-     * @param {DatabaseUpdateOperation} options Options to be passed to update. @see {@link foundry.abstract.Document#update} in foundry-esm.js 11580.
+     * @param {DatabaseUpdateOperation} options Options to be passed to update. @see {@link foundry.abstract.Document#update}
+     * @returns {Promise<ActorSFRPG|ItemSFRPG>}
      */
     async parentUpdate(data, options = {}) {
         if (!this.owner) throw new Error("SFRPG | This modifier has no parent, which is required to perform an update via the parent.");
@@ -242,7 +243,8 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
 
     /**
      * A helper method to delete this modifier from its owner
-     * @param {DatabaseDeleteOperation} options Options to be passed to update. @see {@link foundry.abstract.Document#delete} in foundry-esm.js 11580.
+     * @param {DatabaseDeleteOperation} options Options to be passed to update. @see {@link foundry.abstract.Document#delete}
+     * @returns {Promise<ActorSFRPG|ItemSFRPG>}
      */
     async parentDelete(options = {}) {
         if (!this.owner) throw new Error("SFRPG | This modifier has no parent, which is required to delete via the parent.");

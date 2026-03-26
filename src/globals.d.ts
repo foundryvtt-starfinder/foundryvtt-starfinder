@@ -1,3 +1,6 @@
+import "@common/global.mjs";
+import "@common/primitives/global.mjs";
+import Canvas from "@client/canvas/board.mjs";
 import "@client/global.mjs";
 import "@common/primitives/global.mjs";
 import { _SFRPG as CONFIGSFRPG } from "./module/config";
@@ -35,6 +38,12 @@ declare global {
     }
 
     const Roll = foundry.dice.Roll;
+
+    /**
+     * A representation of a color in hexadecimal format.
+     * This class provides methods for transformations and manipulations of colors.
+     */
+    class Color extends foundry.utils.Color {}
 
     type Prettify<T> = {
         [K in keyof T]: T[K];

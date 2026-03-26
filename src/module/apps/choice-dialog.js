@@ -23,7 +23,7 @@
  *
  * @type {Dialog}
  */
-export class ChoiceDialog extends Dialog {
+export class ChoiceDialog extends foundry.appv1.api.Dialog {
     constructor(inputData, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];

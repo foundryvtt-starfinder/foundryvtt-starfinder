@@ -5,7 +5,7 @@
  * @param {Object} data The data used by the dialog
  * @param {Object} options Any options being passed to the dialog
  */
-export class NpcSkillToggleDialog extends Dialog {
+export class NpcSkillToggleDialog extends foundry.appv1.api.Dialog {
     constructor(data = {}, options = {}) {
         super(data, options);
         this.options.classes = ["sfrpg", "dialog"];

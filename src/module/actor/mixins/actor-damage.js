@@ -1,4 +1,5 @@
 import { ChoiceDialog } from "../../apps/choice-dialog.js";
+/** @import { ActorSFRPG } from "../actor.js" */
 
 export class SFRPGHealingSetting {
     constructor({stamina = false, hitpoints = true, temp = false} = {}) {
@@ -47,7 +48,7 @@ export class SFRPGDamage {
         this.rawAmount = 0;
         this.damageTypes = [];
         this.properties = [];
-        this.bIsCritical = false;
+        this.isCritical = false;
         this.multiplier = 1;
         this.healSettings = null;
     }
@@ -58,10 +59,6 @@ export class SFRPGDamage {
 
     get amount() {
         return Math.abs(this.rawAmount * this.multiplier);
-    }
-
-    get isCritical() {
-        return this.bIsCritical;
     }
 
     get isHealing() {
@@ -133,7 +130,7 @@ export class SFRPGDamage {
         const damageObject = new SFRPGDamage();
         damageObject.rawAmount = damageAmount;
         damageObject.damageTypes = parsedDamageTypes;
-        damageObject.bIsCritical = isCritical;
+        damageObject.isCritical = isCritical;
         damageObject.properties = properties;
         damageObject.options = options;
         return damageObject;
@@ -232,7 +229,6 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                             </div>
                             `}
                     </form>`,
-                    /* eslint-enable indent */
                     default: "yes",
                     buttons: {
                         yes: {
@@ -397,18 +393,18 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         }
 
         const damageRoundingAdvantage = game.settings.get("sfrpg", "damageRoundingAdvantage");
-        let bFloorNext = (damageRoundingAdvantage === "defender");
+        let floorNext = (damageRoundingAdvantage === "defender");
         let remainingUndealtDamage = 0;
         for (const damage of damagesPerType) {
             if (damage % 1 === 0) {
                 remainingUndealtDamage += damage;
             } else {
-                if (bFloorNext) {
+                if (floorNext) {
                     remainingUndealtDamage += Math.floor(damage);
                 } else {
                     remainingUndealtDamage += Math.ceil(damage);
                 }
-                bFloorNext = !bFloorNext;
+                floorNext = !floorNext;
             }
         }
         remainingUndealtDamage += damage.modifier || 0;
@@ -480,7 +476,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     * Checks whether an actor is immune to a specific damage type.
     *
     * @param {string} damageType The damage type to evaluate.
-    * @returns True if the actor is immune to this damage type
+    * @returns {boolean} if the actor is immune to this damage type
     */
     isImmuneToDamageType(damageType) {
         return this.system.traits.di.value.includes(damageType);
@@ -490,7 +486,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     * Checks whether an actor is vulnerable to a specific damage type.
     *
     * @param {string} damageType The damage type to evaluate.
-    * @returns True if the actor is immune to this damage type
+    * @returns {boolean} if the actor is immune to this damage type
     */
     isVulnerableToDamageType(damageType) {
         return this.system.traits.dv.value.includes(damageType);
@@ -501,7 +497,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     *
     * @param {string} damageType The damage type to evaluate.
     * @param {SFRPGDamage} damage (Optional, default null) A damage object from which the damage type originates. Damage reduction is not negated if this is not specified.
-    * @returns Amount of damage mitigation applied.
+    * @returns {number} Amount of damage mitigation applied.
     */
     getDamageMitigationForDamageType(damageType, damage = null) {
         const damageMitigation = this.system.traits.damageMitigation;
@@ -549,7 +545,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     * Apply damage to a Starship Actor.
     *
     * @param {object} damage A SFRPGDamage object, describing the damage to be dealt.
-    * @returns A Promise that resolves to the updated Starship
+    * @returns {Promise<ActorSFRPG>} A Promise that resolves to the updated Starship
     */
     async _applyStarshipDamage(damage) {
         if (damage.constructor !== SFRPGDamage) {
@@ -729,15 +725,14 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         if (timesToRoll > 0) {
             if (game.settings.get("sfrpg", "autoRollCritEffect")) {
-                const pack = await game.packs.get('sfrpg.tables');
+                const pack = game.packs.get('sfrpg.tables');
                 const index = pack.index ?? await pack.getIndex();
                 const obj = index.getName("Starship Critical Damage Effects");
                 const doc = await pack.getDocument(obj._id);
-                doc.drawMany(timesToRoll, { rollMode: rollMode });
+                doc.drawMany(timesToRoll, { rollMode });
             }
         }
 
-        const promise = this.update(actorUpdate);
-        return promise;
+        return this.update(actorUpdate);
     }
 };

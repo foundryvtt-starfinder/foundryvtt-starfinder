@@ -4,7 +4,7 @@
 */
 
 /**
- * @typedef {Object} RollData
+ * @typedef {Record<string, any>} RollData
  * An object containing relevant data of a document, to be used at roll-time to resolve `@tags` in formulas.
  *
  * ```js
@@ -22,6 +22,11 @@
  * @typedef {`@${string}`} FormulaKey
  * A string containing an object lookup key
  */
+/**
+ * @typedef {object} Context
+ * @property {ActorSFRPG|ItemSFRPG} entity
+ * @property {object} data
+ */
 
 /**
  * A class to create and manipulate RollContext data.
@@ -31,11 +36,15 @@
  * A given roll context can be made up of various contexts, such as `@owner`, `@item`, `@gunner` etc.
  */
 export default class RollContext {
-    constructor() {
-        this.allContexts = {};
-        this.mainContext = null;
-        this.selectors = [];
-    }
+
+    /** @type {Record<string, Context>} */
+    allContexts = {};
+
+    /** @type {string} */
+    mainContext = null;
+
+    /** @type {({target: string, options: object})[]} */
+    selectors = [];
 
     /**
      * Add a new context to this RollContext
@@ -54,7 +63,7 @@ export default class RollContext {
     /**
      * Sets a given sub-context as the main context. When transformed to roll data, the Main context's data is spread across the root of the object,
      * in addition to being accessible under a @prefix.
-     * @param {Context} mainContext
+     * @param {string} mainContext
      */
     setMainContext(mainContext) {
         this.mainContext = mainContext;
@@ -97,9 +106,9 @@ export default class RollContext {
 
         const [context, key] = this.getContextForVariable(variable);
 
-        let result = RollContext._readValue(context.data, key);
+        let result = foundry.utils.getProperty(context.data, key);
         if (!result) {
-            result = RollContext._readValue(context.entity.data, key);
+            result = foundry.utils.getProperty(context.entity.data, key);
         }
 
         return result;
@@ -168,25 +177,6 @@ export default class RollContext {
                 targetActor.setupRollContexts(this);
             }
         }
-    }
-
-    /**
-     * Given a formula `@tag`, resolve the formula using the object as roll data.
-     * @param {RollData} object An object to be used for lookup.
-     * @param {FormulaKey} key The formula to be used as a key on the object.
-     * @returns {*|null} The data residing at the formula's location in the object, or null if not found.
-     */
-    static _readValue(object, key) {
-        // console.log(["_readValue", key, object]);
-        if (!object || !key) return null;
-
-        const tokens = key.split('.');
-        for (const token of tokens) {
-            object = object[token];
-            if (!object) return null;
-        }
-
-        return object;
     }
 
     /**

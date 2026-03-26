@@ -3,7 +3,7 @@
  *
  * @type {Application}
  */
-export class CombatDifficulty extends Application {
+export class CombatDifficulty extends foundry.appv1.api.Application {
     difficultyData = {};
 
     constructor(combatData, options = {}) {

@@ -1,4 +1,4 @@
-export default class FloatingNumberMenu extends FormApplication {
+export default class FloatingNumberMenu extends foundry.appv1.api.FormApplication {
     constructor(...args) {
         super(...args);
     }
