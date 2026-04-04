@@ -91,7 +91,7 @@ _SFRPG.saveDescriptors = {
  * All possible roll types in Starfinder
  * @type {Object}
  */
-SFRPG.rollTypes = {
+_SFRPG.rollTypes = {
     "abilityCheck": "SFRPG.Rolls.AbilityCheck",
     "attack": "SFRPG.Rolls.AttackRoll",
     "damage": "SFRPG.Rolls.DamageRoll",
@@ -545,15 +545,15 @@ _SFRPG.weaponTypes = {
 
 // Weapons sub categories
 _SFRPG.weaponCategories = {
-    "cryo"         : "SFRPG.WeaponCategoriesCryo",
-    "disruption"   : "SFRPG.WeaponCategoriesDisruption",
+    "cryo": "SFRPG.WeaponCategoriesCryo",
+    "disruption": "SFRPG.WeaponCategoriesDisruption",
     "disintegrator": "SFRPG.WeaponCategoriesDisintegrator",
-    "flame"        : "SFRPG.WeaponCategoriesFlame",
-    "laser"        : "SFRPG.WeaponCategoriesLaser",
-    "plasma"       : "SFRPG.WeaponCategoriesPlasma",
-    "projectile"   : "SFRPG.WeaponCategoriesProjectile",
-    "shock"        : "SFRPG.WeaponCategoriesShock",
-    "sonic"        : "SFRPG.WeaponCategoriesSonic",
+    "flame": "SFRPG.WeaponCategoriesFlame",
+    "laser": "SFRPG.WeaponCategoriesLaser",
+    "plasma": "SFRPG.WeaponCategoriesPlasma",
+    "projectile": "SFRPG.WeaponCategoriesProjectile",
+    "shock": "SFRPG.WeaponCategoriesShock",
+    "sonic": "SFRPG.WeaponCategoriesSonic",
     "uncategorized": "SFRPG.WeaponCategoriesUncategorized"
 };
 
@@ -784,7 +784,7 @@ _SFRPG.damageReductionTypes = {
 };
 
 // Energy Resistances
-SFRPG.energyResistanceTypes = {
+_SFRPG.energyResistanceTypes = {
     ..._SFRPG.energyDamageTypes,
     "custom": "SFRPG.Damage.Types.Custom"
 };
@@ -801,24 +801,24 @@ _SFRPG.spellAreaShapes = {
 
 _SFRPG.spellAreaEffects = {
     "": "",
-    "burst"    : "SFRPG.SpellAreaEffects.Burst",
+    "burst": "SFRPG.SpellAreaEffects.Burst",
     "emanation": "SFRPG.SpellAreaEffects.Emanation",
-    "spread"   : "SFRPG.SpellAreaEffects.Spread"
+    "spread": "SFRPG.SpellAreaEffects.Spread"
 };
 
 // Weapon critical hit effects
 _SFRPG.weaponCriticalHitEffects = {
-    "arc"        : "SFRPG.WeaponCriticalHitEffects.Arc",
-    "bleed"      : "SFRPG.WeaponCriticalHitEffects.Bleed",
-    "burn"       : "SFRPG.WeaponCriticalHitEffects.Burn",
-    "corrode"    : "SFRPG.WeaponCriticalHitEffects.Corrode",
-    "deafen"     : "SFRPG.WeaponCriticalHitEffects.Deafen",
-    "injection"  : "SFRPG.WeaponCriticalHitEffects.Injection",
-    "knockdown"  : "SFRPG.WeaponCriticalHitEffects.Knockdown",
+    "arc": "SFRPG.WeaponCriticalHitEffects.Arc",
+    "bleed": "SFRPG.WeaponCriticalHitEffects.Bleed",
+    "burn": "SFRPG.WeaponCriticalHitEffects.Burn",
+    "corrode": "SFRPG.WeaponCriticalHitEffects.Corrode",
+    "deafen": "SFRPG.WeaponCriticalHitEffects.Deafen",
+    "injection": "SFRPG.WeaponCriticalHitEffects.Injection",
+    "knockdown": "SFRPG.WeaponCriticalHitEffects.Knockdown",
     "severeWound": "SFRPG.WeaponCriticalHitEffects.SevereWound",
-    "staggered"  : "SFRPG.WeaponCriticalHitEffects.Staggered",
-    "stunned"    : "SFRPG.WeaponCriticalHitEffects.Stunned",
-    "wound"      : "SFRPG.WeaponCriticalHitEffects.Wound"
+    "staggered": "SFRPG.WeaponCriticalHitEffects.Staggered",
+    "stunned": "SFRPG.WeaponCriticalHitEffects.Stunned",
+    "wound": "SFRPG.WeaponCriticalHitEffects.Wound"
 };
 
 // Allowed armor types for upgrades
@@ -868,7 +868,7 @@ _SFRPG.spellLevels = {
 // I don't think this is actually used anywhere, but let's keep this and make featureCategories separate below.
 _SFRPG.featTypes = {
     "general": "SFRPG.FeatTypes.General",
-    "combat" : "SFRPG.FeatTypes.Combat"
+    "combat": "SFRPG.FeatTypes.Combat"
 };
 
 /**
@@ -1019,8 +1019,8 @@ _SFRPG.itemActionTypes = {
     "other": "SFRPG.ActionOther"
 };
 
-_SFRPG.spellAttackActions = Object.freeze([ "msak", "rsak" ]);
-_SFRPG.weaponAttackActions = Object.freeze([ "mwak", "rwak" ]);
+_SFRPG.spellAttackActions = Object.freeze(["msak", "rsak"]);
+_SFRPG.weaponAttackActions = Object.freeze(["mwak", "rwak"]);
 _SFRPG.attackActions = Object.freeze([
     ..._SFRPG.spellAttackActions,
     ..._SFRPG.weaponAttackActions
@@ -1197,12 +1197,12 @@ _SFRPG.augmentationTypes = {
 };
 
 _SFRPG.consumableTypes = {
-    "serum"    : "SFRPG.ConsumableTypes.Serum",
-    "ampoule"  : "SFRPG.ConsumableTypes.Ampoule",
-    "spellGem" : "SFRPG.ConsumableTypes.SpellGem",
-    "drugs"    : "SFRPG.ConsumableTypes.Drugs",
-    "medicne"  : "SFRPG.ConsumableTypes.Medicine",
-    "poison"   : "SFRPG.ConsumableTypes.Poison",
+    "serum": "SFRPG.ConsumableTypes.Serum",
+    "ampoule": "SFRPG.ConsumableTypes.Ampoule",
+    "spellGem": "SFRPG.ConsumableTypes.SpellGem",
+    "drugs": "SFRPG.ConsumableTypes.Drugs",
+    "medicne": "SFRPG.ConsumableTypes.Medicine",
+    "poison": "SFRPG.ConsumableTypes.Poison",
     "foodDrink": "SFRPG.ConsumableTypes.FoodDrink",
     "other": "SFRPG.ConsumableTypes.Other"
 };
@@ -1210,7 +1210,7 @@ _SFRPG.consumableTypes = {
 _SFRPG.augmentationSystems = {
     "none": "SFRPG.None",
     "arm": "SFRPG.AugArm",
-    "armAndHand" : "SFRPG.AugArmAndHand",
+    "armAndHand": "SFRPG.AugArmAndHand",
     "allArms": "SFRPG.AugAllArms",
     "brain": "SFRPG.AugBrain",
     "brainHeartLungs": "SFRPG.AugBrainHeartLungs",
@@ -1278,103 +1278,103 @@ _SFRPG.combatRoleImages = {
  * Starship properties and values *
  *--------------------------------*/
 _SFRPG.maneuverability = {
-    "clumsy" : "SFRPG.ShipSystems.Maneuverability.Clumsy",
-    "poor"   : "SFRPG.ShipSystems.Maneuverability.Poor",
+    "clumsy": "SFRPG.ShipSystems.Maneuverability.Clumsy",
+    "poor": "SFRPG.ShipSystems.Maneuverability.Poor",
     "average": "SFRPG.ShipSystems.Maneuverability.Average",
-    "good"   : "SFRPG.ShipSystems.Maneuverability.Good",
+    "good": "SFRPG.ShipSystems.Maneuverability.Good",
     "perfect": "SFRPG.ShipSystems.Maneuverability.Perfect"
 };
 
 // Starship Weapons
 _SFRPG.starshipWeaponTypes = {
-    "direct"  : "SFRPG.ShipSystems.StarshipWeaponTypes.Direct",
-    "ecm":      "SFRPG.ShipSystems.StarshipWeaponTypes.ECM",
-    "melee":    "SFRPG.ShipSystems.StarshipWeaponTypes.Melee",
+    "direct": "SFRPG.ShipSystems.StarshipWeaponTypes.Direct",
+    "ecm": "SFRPG.ShipSystems.StarshipWeaponTypes.ECM",
+    "melee": "SFRPG.ShipSystems.StarshipWeaponTypes.Melee",
     "tracking": "SFRPG.ShipSystems.StarshipWeaponTypes.Tracking"
 };
 
 _SFRPG.starshipWeaponClass = {
-    "light"  : "SFRPG.ShipSystems.StarshipWeaponClass.Light",
-    "heavy"  : "SFRPG.ShipSystems.StarshipWeaponClass.Heavy",
+    "light": "SFRPG.ShipSystems.StarshipWeaponClass.Light",
+    "heavy": "SFRPG.ShipSystems.StarshipWeaponClass.Heavy",
     "capital": "SFRPG.ShipSystems.StarshipWeaponClass.Capital",
-    "spinal":  "SFRPG.ShipSystems.StarshipWeaponClass.Spinal"
+    "spinal": "SFRPG.ShipSystems.StarshipWeaponClass.Spinal"
 };
 
 _SFRPG.starshipWeaponProperties = {
-    "anchoring" : "SFRPG.ShipSystems.StarshipWeaponProperties.Anchoring", // SOM
-    "antimagic" : "SFRPG.ShipSystems.StarshipWeaponProperties.Antimagic", // PoC
-    "array"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Array", // CRB
-    "automated" : "SFRPG.ShipSystems.StarshipWeaponProperties.Automated", // SOM
-    "broad"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Broad", // CRB
-    "bugging"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Bugging", // Near Space
-    "burrowing" : "SFRPG.ShipSystems.StarshipWeaponProperties.Burrowing", // Pact Worlds
-    "buster"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Buster", // SOM
+    "anchoring": "SFRPG.ShipSystems.StarshipWeaponProperties.Anchoring", // SOM
+    "antimagic": "SFRPG.ShipSystems.StarshipWeaponProperties.Antimagic", // PoC
+    "array": "SFRPG.ShipSystems.StarshipWeaponProperties.Array", // CRB
+    "automated": "SFRPG.ShipSystems.StarshipWeaponProperties.Automated", // SOM
+    "broad": "SFRPG.ShipSystems.StarshipWeaponProperties.Broad", // CRB
+    "bugging": "SFRPG.ShipSystems.StarshipWeaponProperties.Bugging", // Near Space
+    "burrowing": "SFRPG.ShipSystems.StarshipWeaponProperties.Burrowing", // Pact Worlds
+    "buster": "SFRPG.ShipSystems.StarshipWeaponProperties.Buster", // SOM
     "cacophonous": "SFRPG.ShipSystems.StarshipWeaponProperties.Cacophonous", // PoC
     "connecting": "SFRPG.ShipSystems.StarshipWeaponProperties.Connecting", // The Last Refuge
     "deathField": "SFRPG.ShipSystems.StarshipWeaponProperties.DeathField", // AA 3
-    "deployed"  : "SFRPG.ShipSystems.StarshipWeaponProperties.Deployed", // SOM
-    "drone"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Drone", // The Reach of Empire
-    "emp"       : "SFRPG.ShipSystems.StarshipWeaponProperties.Emp", // CRB
-    "flakArea"  : "SFRPG.ShipSystems.StarshipWeaponProperties.FlakArea", // The Last Refuge
+    "deployed": "SFRPG.ShipSystems.StarshipWeaponProperties.Deployed", // SOM
+    "drone": "SFRPG.ShipSystems.StarshipWeaponProperties.Drone", // The Reach of Empire
+    "emp": "SFRPG.ShipSystems.StarshipWeaponProperties.Emp", // CRB
+    "flakArea": "SFRPG.ShipSystems.StarshipWeaponProperties.FlakArea", // The Last Refuge
     "forceField": "SFRPG.ShipSystems.StarshipWeaponProperties.ForceField", // SOM
     "gravityTether": "SFRPG.ShipSystems.StarshipWeaponProperties.GravityTether", // Near Space
     "gravityWell": "SFRPG.ShipSystems.StarshipWeaponProperties.GravityWell", // SOM
-    "hacking"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Hacking", // SOM
+    "hacking": "SFRPG.ShipSystems.StarshipWeaponProperties.Hacking", // SOM
     "immobilize": "SFRPG.ShipSystems.StarshipWeaponProperties.Immobilize", // Deceivers' Moon
     "intimidating": "SFRPG.ShipSystems.StarshipWeaponProperties.Intimidating", // SOM
     "irradiateL": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateL", // CRB
     "irradiateM": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateM", // CRB
     "irradiateH": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateH", // CRB
     "irradiateS": "SFRPG.ShipSystems.StarshipWeaponProperties.IrradiateS", // SOM
-    "jamming"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Jamming", // Near Space
-    "limited"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Limited", // CRB
-    "line"      : "SFRPG.ShipSystems.StarshipWeaponProperties.Line", // CRB
-    "mine"      : "SFRPG.ShipSystems.StarshipWeaponProperties.Mine", // SOM
-    "mystical"  : "SFRPG.ShipSystems.StarshipWeaponProperties.Mystical", // SOM
-    "navScram"  : "SFRPG.ShipSystems.StarshipWeaponProperties.NavScram", // SOM
-    "numbing"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Numbing", // SOM
-    "orbital"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Orbital", // SOM
-    "pod"       : "SFRPG.ShipSystems.StarshipWeaponProperties.Pod", // SOM
-    "point"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Point", // CRB
-    "quantum"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Quantum", // CRB
-    "radiant"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Radiant", // The Reach of Empire
-    "rail"      : "SFRPG.ShipSystems.StarshipWeaponProperties.Rail", // SOM
-    "ramming"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Ramming", // SOM
-    "redirect"  : "SFRPG.ShipSystems.StarshipWeaponProperties.Redirect", // Deceivers' Moon
+    "jamming": "SFRPG.ShipSystems.StarshipWeaponProperties.Jamming", // Near Space
+    "limited": "SFRPG.ShipSystems.StarshipWeaponProperties.Limited", // CRB
+    "line": "SFRPG.ShipSystems.StarshipWeaponProperties.Line", // CRB
+    "mine": "SFRPG.ShipSystems.StarshipWeaponProperties.Mine", // SOM
+    "mystical": "SFRPG.ShipSystems.StarshipWeaponProperties.Mystical", // SOM
+    "navScram": "SFRPG.ShipSystems.StarshipWeaponProperties.NavScram", // SOM
+    "numbing": "SFRPG.ShipSystems.StarshipWeaponProperties.Numbing", // SOM
+    "orbital": "SFRPG.ShipSystems.StarshipWeaponProperties.Orbital", // SOM
+    "pod": "SFRPG.ShipSystems.StarshipWeaponProperties.Pod", // SOM
+    "point": "SFRPG.ShipSystems.StarshipWeaponProperties.Point", // CRB
+    "quantum": "SFRPG.ShipSystems.StarshipWeaponProperties.Quantum", // CRB
+    "radiant": "SFRPG.ShipSystems.StarshipWeaponProperties.Radiant", // The Reach of Empire
+    "rail": "SFRPG.ShipSystems.StarshipWeaponProperties.Rail", // SOM
+    "ramming": "SFRPG.ShipSystems.StarshipWeaponProperties.Ramming", // SOM
+    "redirect": "SFRPG.ShipSystems.StarshipWeaponProperties.Redirect", // Deceivers' Moon
     "restricted": "SFRPG.ShipSystems.StarshipWeaponProperties.Restricted", // SOM
-    "ripper"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Ripper", // CRB
+    "ripper": "SFRPG.ShipSystems.StarshipWeaponProperties.Ripper", // CRB
     "scatterscan": "SFRPG.ShipSystems.StarshipWeaponProperties.Scatterscan", // Deceivers' Moon
-    "smart"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Smart", // SOM
+    "smart": "SFRPG.ShipSystems.StarshipWeaponProperties.Smart", // SOM
     "smoldering": "SFRPG.ShipSystems.StarshipWeaponProperties.Smoldering", // Near Space
-    "spore"     : "SFRPG.ShipSystems.StarshipWeaponProperties.Spore", // Pact Worlds
+    "spore": "SFRPG.ShipSystems.StarshipWeaponProperties.Spore", // Pact Worlds
     "suspending": "SFRPG.ShipSystems.StarshipWeaponProperties.Suspending", // Near Space
-    "sustained" : "SFRPG.ShipSystems.StarshipWeaponProperties.Sustained", // Soldiers of Brass
+    "sustained": "SFRPG.ShipSystems.StarshipWeaponProperties.Sustained", // Soldiers of Brass
     "teleportation": "SFRPG.ShipSystems.StarshipWeaponProperties.Teleportation", // SOM
-    "tractor"   : "SFRPG.ShipSystems.StarshipWeaponProperties.Tractor", // CRB
+    "tractor": "SFRPG.ShipSystems.StarshipWeaponProperties.Tractor", // CRB
     "transposition": "SFRPG.ShipSystems.StarshipWeaponProperties.Transposition", // SOM
-    "unerring" : "SFRPG.ShipSystems.StarshipWeaponProperties.Unerring", // PoC
+    "unerring": "SFRPG.ShipSystems.StarshipWeaponProperties.Unerring", // PoC
     "vandalDrones": "SFRPG.ShipSystems.StarshipWeaponProperties.VandalDrones", // AA 3
     "volatile": "SFRPG.ShipSystems.StarshipWeaponProperties.Volatile", // Empire of Bones
-    "vortex"    : "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex" // CRB
+    "vortex": "SFRPG.ShipSystems.StarshipWeaponProperties.Vortex" // CRB
 };
 
 _SFRPG.starshipQuadrants = {
-    "forward"  : "SFRPG.ShipSystems.StarshipArcs.Forward",
-    "port"     : "SFRPG.ShipSystems.StarshipArcs.Port",
+    "forward": "SFRPG.ShipSystems.StarshipArcs.Forward",
+    "port": "SFRPG.ShipSystems.StarshipArcs.Port",
     "starboard": "SFRPG.ShipSystems.StarshipArcs.Starboard",
-    "aft"      : "SFRPG.ShipSystems.StarshipArcs.Aft"
+    "aft": "SFRPG.ShipSystems.StarshipArcs.Aft"
 };
 
 _SFRPG.starshipArcs = {
     ..._SFRPG.starshipQuadrants,
-    "turret"   : "SFRPG.ShipSystems.StarshipArcs.Turret"
+    "turret": "SFRPG.ShipSystems.StarshipArcs.Turret"
 };
 
 _SFRPG.starshipWeaponRanges = {
-    "none":   "SFRPG.ShipSystems.StarshipWeaponRanges.None",
-    "short" : "SFRPG.ShipSystems.StarshipWeaponRanges.Short",
+    "none": "SFRPG.ShipSystems.StarshipWeaponRanges.None",
+    "short": "SFRPG.ShipSystems.StarshipWeaponRanges.Short",
     "medium": "SFRPG.ShipSystems.StarshipWeaponRanges.Medium",
-    "long"  : "SFRPG.ShipSystems.StarshipWeaponRanges.Long"
+    "long": "SFRPG.ShipSystems.StarshipWeaponRanges.Long"
 };
 
 // Starship crew roles
@@ -1457,10 +1457,10 @@ _SFRPG.starshipSizeMultiplierMap = {
 };
 
 _SFRPG.starshipManeuverabilityMap = {
-    "clumsy" : { pilotingBonus: -2, turn: 4 },
-    "poor"   : { pilotingBonus: -1, turn: 3 },
+    "clumsy": { pilotingBonus: -2, turn: 4 },
+    "poor": { pilotingBonus: -1, turn: 3 },
     "average": { pilotingBonus: 0, turn: 2 },
-    "good"   : { pilotingBonus: 1, turn: 1 },
+    "good": { pilotingBonus: 1, turn: 1 },
     "perfect": { pilotingBonus: 2, turn: 0 }
 };
 
@@ -1505,12 +1505,12 @@ _SFRPG.vehicleControlSkills = {
 };
 
 _SFRPG.vehicleCoverTypes = {
-    "none"    : "SFRPG.Vehicles.VehicleCoverTypes.None",
-    "cover"   : "SFRPG.Vehicles.VehicleCoverTypes.Cover",
-    "soft"    : "SFRPG.Vehicles.VehicleCoverTypes.Soft",
-    "partial" : "SFRPG.Vehicles.VehicleCoverTypes.Partial",
+    "none": "SFRPG.Vehicles.VehicleCoverTypes.None",
+    "cover": "SFRPG.Vehicles.VehicleCoverTypes.Cover",
+    "soft": "SFRPG.Vehicles.VehicleCoverTypes.Soft",
+    "partial": "SFRPG.Vehicles.VehicleCoverTypes.Partial",
     "improved": "SFRPG.Vehicles.VehicleCoverTypes.Improved",
-    "total"   : "SFRPG.Vehicles.VehicleCoverTypes.Total"
+    "total": "SFRPG.Vehicles.VehicleCoverTypes.Total"
 };
 
 _SFRPG.vehicleSizes = {
@@ -1525,11 +1525,11 @@ _SFRPG.vehicleSizes = {
 };
 
 _SFRPG.vehicleTypes = {
-    "land" : "SFRPG.Vehicles.VehicleTypes.Land",
+    "land": "SFRPG.Vehicles.VehicleTypes.Land",
     "water": "SFRPG.Vehicles.VehicleTypes.Water",
     "hover": "SFRPG.Vehicles.VehicleTypes.Hover",
     "landW": "SFRPG.Vehicles.VehicleTypes.Landw",
-    "air"  : "SFRPG.Vehicles.VehicleTypes.Air",
+    "air": "SFRPG.Vehicles.VehicleTypes.Air",
     "landA": "SFRPG.Vehicles.VehicleTypes.Landa",
     "landATW": "SFRPG.Vehicles.VehicleTypes.Landatw",
     "landAW": "SFRPG.Vehicles.VehicleTypes.Landaw",
@@ -1827,37 +1827,37 @@ _SFRPG.CR_EXP_LEVELS = [
 ];
 
 _SFRPG.CRTable = {
-    "0":   {minXP: 0,       totalXP: 0,       nextXP: 1,       perPlayerXP: [0,      0,      0],      wealthValue: 0},
-    "1/8": {minXP: 1,       totalXP: 50,      nextXP: 65,      perPlayerXP: [15,     15,     10],     wealthValue: 0},
-    "1/6": {minXP: 51,      totalXP: 65,      nextXP: 100,     perPlayerXP: [20,     15,     10],     wealthValue: 0},
-    "1/4": {minXP: 66,      totalXP: 100,     nextXP: 135,     perPlayerXP: [35,     25,     15],     wealthValue: 0},
-    "1/3": {minXP: 101,     totalXP: 135,     nextXP: 200,     perPlayerXP: [45,     35,     25],     wealthValue: 150},
-    "1/2": {minXP: 136,     totalXP: 200,     nextXP: 400,     perPlayerXP: [65,     50,     35],     wealthValue: 230},
-    "1":   {minXP: 201,     totalXP: 400,     nextXP: 600,     perPlayerXP: [135,    100,    65],     wealthValue: 460},
-    "2":   {minXP: 401,     totalXP: 600,     nextXP: 800,     perPlayerXP: [200,    150,    100],    wealthValue: 775},
-    "3":   {minXP: 601,     totalXP: 800,     nextXP: 1200,    perPlayerXP: [265,    200,    135],    wealthValue: 1100},
-    "4":   {minXP: 801,     totalXP: 1200,    nextXP: 1600,    perPlayerXP: [400,    300,    200],    wealthValue: 1400},
-    "5":   {minXP: 1201,    totalXP: 1600,    nextXP: 2400,    perPlayerXP: [535,    400,    265],    wealthValue: 3100},
-    "6":   {minXP: 1601,    totalXP: 2400,    nextXP: 3200,    perPlayerXP: [800,    600,    400],    wealthValue: 3900},
-    "7":   {minXP: 2401,    totalXP: 3200,    nextXP: 4800,    perPlayerXP: [1070,   800,    535],    wealthValue: 4600},
-    "8":   {minXP: 3201,    totalXP: 4800,    nextXP: 6400,    perPlayerXP: [1600,   1200,   800],    wealthValue: 5400},
-    "9":   {minXP: 4801,    totalXP: 6400,    nextXP: 9600,    perPlayerXP: [2130,   1600,   1070],   wealthValue: 10000},
-    "10":  {minXP: 6401,    totalXP: 9600,    nextXP: 12800,   perPlayerXP: [3200,   2400,   1600],   wealthValue: 14700},
-    "11":  {minXP: 9601,    totalXP: 12800,   nextXP: 19200,   perPlayerXP: [4270,   3200,   2130],   wealthValue: 25000},
-    "12":  {minXP: 12801,   totalXP: 19200,   nextXP: 25600,   perPlayerXP: [6400,   4800,   3200],   wealthValue: 34000},
-    "13":  {minXP: 19201,   totalXP: 25600,   nextXP: 38400,   perPlayerXP: [8530,   6400,   4270],   wealthValue: 50000},
-    "14":  {minXP: 25601,   totalXP: 38400,   nextXP: 51200,   perPlayerXP: [12800,  9600,   6400],   wealthValue: 77000},
-    "15":  {minXP: 38401,   totalXP: 51200,   nextXP: 76800,   perPlayerXP: [17100,  12800,  8530],   wealthValue: 113000},
-    "16":  {minXP: 51201,   totalXP: 76800,   nextXP: 102400,  perPlayerXP: [25600,  19200,  12800],  wealthValue: 178000},
-    "17":  {minXP: 76801,   totalXP: 102400,  nextXP: 153600,  perPlayerXP: [34100,  25600,  17100],  wealthValue: 260000},
-    "18":  {minXP: 102401,  totalXP: 153600,  nextXP: 204800,  perPlayerXP: [51200,  38400,  25600],  wealthValue: 405000},
-    "19":  {minXP: 153601,  totalXP: 204800,  nextXP: 307200,  perPlayerXP: [68300,  51200,  34100],  wealthValue: 555000},
-    "20":  {minXP: 204801,  totalXP: 307200,  nextXP: 409600,  perPlayerXP: [102000, 76800,  51200],  wealthValue: 782000},
-    "21":  {minXP: 307201,  totalXP: 409600,  nextXP: 614400,  perPlayerXP: [137000, 102400, 68300],  wealthValue: 782000},
-    "22":  {minXP: 409601,  totalXP: 614400,  nextXP: 819200,  perPlayerXP: [205000, 153600, 102400], wealthValue: 782000},
-    "23":  {minXP: 614401,  totalXP: 819200,  nextXP: 1228800, perPlayerXP: [273000, 204800, 137000], wealthValue: 782000},
-    "24":  {minXP: 819201,  totalXP: 1228800, nextXP: 1638400, perPlayerXP: [410000, 307200, 204800], wealthValue: 782000},
-    "25":  {minXP: 1228801, totalXP: 1638400, nextXP: 1638400, perPlayerXP: [546000, 409600, 273000], wealthValue: 782000}
+    "0": { minXP: 0, totalXP: 0, nextXP: 1, perPlayerXP: [0, 0, 0], wealthValue: 0 },
+    "1/8": { minXP: 1, totalXP: 50, nextXP: 65, perPlayerXP: [15, 15, 10], wealthValue: 0 },
+    "1/6": { minXP: 51, totalXP: 65, nextXP: 100, perPlayerXP: [20, 15, 10], wealthValue: 0 },
+    "1/4": { minXP: 66, totalXP: 100, nextXP: 135, perPlayerXP: [35, 25, 15], wealthValue: 0 },
+    "1/3": { minXP: 101, totalXP: 135, nextXP: 200, perPlayerXP: [45, 35, 25], wealthValue: 150 },
+    "1/2": { minXP: 136, totalXP: 200, nextXP: 400, perPlayerXP: [65, 50, 35], wealthValue: 230 },
+    "1": { minXP: 201, totalXP: 400, nextXP: 600, perPlayerXP: [135, 100, 65], wealthValue: 460 },
+    "2": { minXP: 401, totalXP: 600, nextXP: 800, perPlayerXP: [200, 150, 100], wealthValue: 775 },
+    "3": { minXP: 601, totalXP: 800, nextXP: 1200, perPlayerXP: [265, 200, 135], wealthValue: 1100 },
+    "4": { minXP: 801, totalXP: 1200, nextXP: 1600, perPlayerXP: [400, 300, 200], wealthValue: 1400 },
+    "5": { minXP: 1201, totalXP: 1600, nextXP: 2400, perPlayerXP: [535, 400, 265], wealthValue: 3100 },
+    "6": { minXP: 1601, totalXP: 2400, nextXP: 3200, perPlayerXP: [800, 600, 400], wealthValue: 3900 },
+    "7": { minXP: 2401, totalXP: 3200, nextXP: 4800, perPlayerXP: [1070, 800, 535], wealthValue: 4600 },
+    "8": { minXP: 3201, totalXP: 4800, nextXP: 6400, perPlayerXP: [1600, 1200, 800], wealthValue: 5400 },
+    "9": { minXP: 4801, totalXP: 6400, nextXP: 9600, perPlayerXP: [2130, 1600, 1070], wealthValue: 10000 },
+    "10": { minXP: 6401, totalXP: 9600, nextXP: 12800, perPlayerXP: [3200, 2400, 1600], wealthValue: 14700 },
+    "11": { minXP: 9601, totalXP: 12800, nextXP: 19200, perPlayerXP: [4270, 3200, 2130], wealthValue: 25000 },
+    "12": { minXP: 12801, totalXP: 19200, nextXP: 25600, perPlayerXP: [6400, 4800, 3200], wealthValue: 34000 },
+    "13": { minXP: 19201, totalXP: 25600, nextXP: 38400, perPlayerXP: [8530, 6400, 4270], wealthValue: 50000 },
+    "14": { minXP: 25601, totalXP: 38400, nextXP: 51200, perPlayerXP: [12800, 9600, 6400], wealthValue: 77000 },
+    "15": { minXP: 38401, totalXP: 51200, nextXP: 76800, perPlayerXP: [17100, 12800, 8530], wealthValue: 113000 },
+    "16": { minXP: 51201, totalXP: 76800, nextXP: 102400, perPlayerXP: [25600, 19200, 12800], wealthValue: 178000 },
+    "17": { minXP: 76801, totalXP: 102400, nextXP: 153600, perPlayerXP: [34100, 25600, 17100], wealthValue: 260000 },
+    "18": { minXP: 102401, totalXP: 153600, nextXP: 204800, perPlayerXP: [51200, 38400, 25600], wealthValue: 405000 },
+    "19": { minXP: 153601, totalXP: 204800, nextXP: 307200, perPlayerXP: [68300, 51200, 34100], wealthValue: 555000 },
+    "20": { minXP: 204801, totalXP: 307200, nextXP: 409600, perPlayerXP: [102000, 76800, 51200], wealthValue: 782000 },
+    "21": { minXP: 307201, totalXP: 409600, nextXP: 614400, perPlayerXP: [137000, 102400, 68300], wealthValue: 782000 },
+    "22": { minXP: 409601, totalXP: 614400, nextXP: 819200, perPlayerXP: [205000, 153600, 102400], wealthValue: 782000 },
+    "23": { minXP: 614401, totalXP: 819200, nextXP: 1228800, perPlayerXP: [273000, 204800, 137000], wealthValue: 782000 },
+    "24": { minXP: 819201, totalXP: 1228800, nextXP: 1638400, perPlayerXP: [410000, 307200, 204800], wealthValue: 782000 },
+    "25": { minXP: 1228801, totalXP: 1638400, nextXP: 1638400, perPlayerXP: [546000, 409600, 273000], wealthValue: 782000 }
 };
 
 _SFRPG.difficultyLevels = {
@@ -2456,31 +2456,31 @@ _SFRPG.physicalItemTypes = [
 ];
 
 _SFRPG.containableTypes = {
-    "weapon"       : "SFRPG.Items.Categories.Weapons",
-    "ammunition"   : "SFRPG.Items.Categories.Ammunition",
-    "equipment"    : "SFRPG.Items.Categories.Equipment",
-    "consumable"   : "SFRPG.Items.Categories.Consumables",
-    "goods"        : "SFRPG.Items.Categories.Goods",
-    "container"    : "SFRPG.Items.Categories.Containers",
-    "hybrid"       : "SFRPG.Items.Categories.HybridItems",
-    "magic"        : "SFRPG.Items.Categories.MagicItems",
+    "weapon": "SFRPG.Items.Categories.Weapons",
+    "ammunition": "SFRPG.Items.Categories.Ammunition",
+    "equipment": "SFRPG.Items.Categories.Equipment",
+    "consumable": "SFRPG.Items.Categories.Consumables",
+    "goods": "SFRPG.Items.Categories.Goods",
+    "container": "SFRPG.Items.Categories.Containers",
+    "hybrid": "SFRPG.Items.Categories.HybridItems",
+    "magic": "SFRPG.Items.Categories.MagicItems",
     "technological": "SFRPG.Items.Categories.TechnologicalItems",
-    "fusion"       : "SFRPG.Items.Categories.WeaponFusions",
-    "upgrade"      : "SFRPG.Items.Categories.ArmorUpgrades",
-    "spell"        : "SFRPG.Items.Categories.Spells",
-    "augmentation" : "SFRPG.Items.Categories.Augmentations",
-    "shield"       : "SFRPG.Items.Categories.Shields",
+    "fusion": "SFRPG.Items.Categories.WeaponFusions",
+    "upgrade": "SFRPG.Items.Categories.ArmorUpgrades",
+    "spell": "SFRPG.Items.Categories.Spells",
+    "augmentation": "SFRPG.Items.Categories.Augmentations",
+    "shield": "SFRPG.Items.Categories.Shields",
     "weaponAccessory": "SFRPG.Items.Categories.WeaponAccessories",
     "vehicleAttack": "SFRPG.Items.Categories.VehicleAttacks",
     "vehicleSystem": "SFRPG.Items.Categories.VehicleSystems"
 };
 
 _SFRPG.storageIdentifiers = {
-    ""              : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierItem",
-    "armorUpgrade"  : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierArmorUpgrade",
-    "weaponSlot"    : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierWeaponSlot",
-    "fusion"        : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierFusion",
-    "spellSlot"     : "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierSpellSlot",
+    "": "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierItem",
+    "armorUpgrade": "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierArmorUpgrade",
+    "weaponSlot": "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierWeaponSlot",
+    "fusion": "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierFusion",
+    "spellSlot": "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierSpellSlot",
     "ammunitionSlot": "SFRPG.ActorSheet.Inventory.Container.StorageIdentifierAmmunitionSlot"
 };
 
@@ -2490,7 +2490,7 @@ _SFRPG.storageTypes = {
 };
 
 _SFRPG.storageWeightProperties = {
-    ""     : "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyItems",
+    "": "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyItems",
     "slots": "SFRPG.ActorSheet.Inventory.Container.CapacityPropertySlots",
     "level": "SFRPG.ActorSheet.Inventory.Container.CapacityPropertyLevel"
 };
@@ -2562,7 +2562,7 @@ _SFRPG.actionTargetsStarship = {
 /**
  * An object mapping action targets to the system data path their values are stored (for hit evaluation against targets).
  */
-SFRPG.actionTargetPaths = {
+_SFRPG.actionTargetPaths = {
     "kac": "attributes.kac.value",
     "kac8": "attributes.cmd.value",
     "eac": "attributes.eac.value",

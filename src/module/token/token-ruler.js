@@ -119,7 +119,7 @@ export default class SFRPGTokenRuler extends foundry.canvas.placeables.tokens.To
                     return false;
                 }
             }
-        }, { performDeletions: true });
+        }, { applyOperators: true });
     }
 
     /**

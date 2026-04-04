@@ -66,17 +66,17 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
 
     _initialize(options = {}) {
         super._initialize(options);
-
         // _id is not a document ID, so we should be able to write to it.
-        Object.defineProperty(this, "_id", { value: this._id, writable: true, configurable: true });
+        // Object.defineProperty(this, "_id", { value: this._id, writable: true, configurable: false });
 
         // Calculate max, if not already
         try {
             const roll = Roll.create(this.modifier.toString(), this.owner.system);
-            this.max = roll.evaluateSync({strict: false}).total;
+            this.max = roll.evaluateSync({ strict: false }).total;
         } catch {
             this.max = 0;
         }
+
     }
 
     static defineSchema() {
@@ -221,7 +221,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
     }
 
     async toggle(active = null) {
-        return this.parentUpdate({enabled: active ?? !this.enabled});
+        return this.parentUpdate({ enabled: active ?? !this.enabled });
     }
 
     /**
@@ -251,7 +251,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
 
         const modifiers = this.owner.toObject().system.modifiers.filter(mod => mod._id !== this._id);
 
-        return this.owner.update({"system.modifiers": modifiers}, options);
+        return this.owner.update({ "system.modifiers": modifiers }, options);
     }
 
     /**

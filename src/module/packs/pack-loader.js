@@ -69,7 +69,7 @@ export class PackLoader {
                     }
                 }
 
-                const content = await pack.getIndex({ indexFields });
+                const content = await pack.getIndex({ fields: indexFields });
                 this.setCompendiumArt(pack.collection, content);
                 data = this.loadedPacks[entityType][packId] = {
                     pack,
@@ -80,7 +80,7 @@ export class PackLoader {
 
             pct++;
 
-            ui.notifications.update(progress, {message: `Loading ${pack.metadata.label}...`, pct: (pct / packs.length) });
+            ui.notifications.update(progress, { message: `Loading ${pack.metadata.label}...`, pct: (pct / packs.length) });
 
             yield data;
         }

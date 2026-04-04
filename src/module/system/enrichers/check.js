@@ -1,5 +1,6 @@
 import CheckNameHelper from "../../utils/skill-names.js";
 import BaseEnricher from "./base.js";
+/* @import { ActorSFRPG } from "../../actor/actor.js" **/
 
 export const checkIcons = Object.freeze({
     "acrobatics": "fa-person-walking",
@@ -124,7 +125,8 @@ export default class CheckEnricher extends BaseEnricher {
         const iconSlug = (this.checkType === "ability") ? CheckNameHelper.longFormNameAbilities(this.args.type) : CheckNameHelper.longFormName(this.args.type);
 
         const displayDC = this.args.displayDC !== undefined ? (this.args.displayDC === 'true' ? true : false) : (dcValue ? true : false);
-        a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${(displayDC || game.user.isGM) ? `<span class="dc-value">DC ${a.dataset.dc} </span>` : ''}${a.innerHTML}`;
+
+        a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${((displayDC || game.user.isGM) && dcValue) ? `<span class="dc-value">DC ${a.dataset.dc} </span>` : ''}${a.innerHTML}`;
 
         return a;
 
@@ -139,8 +141,9 @@ export default class CheckEnricher extends BaseEnricher {
     #clickListener(event) {
         const data = this.getDatasetfromEvent(event);
 
+        /** @type {ActorSFRPG} */
         const actor = _token?.actor ?? game.user?.character;
-        if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
+        if (!actor) return void ui.notifications.error("You must have a token or an actor selected.");
         const options = {
             event,
             dc: data.dc,
@@ -150,8 +153,8 @@ export default class CheckEnricher extends BaseEnricher {
 
         // Disambiguate between "INTelligence and INTimidate", then select skill/save/ability
         if (id === "int") data.type === "intimidate" ? actor.rollSkill(id, options) : actor.rollAbility(id, options);
-        else if (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, options);
-        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, options);
+        else if (id in CONFIG.SFRPG.skills) actor.rollSkill(id, options);
+        else if (id in CONFIG.SFRPG.saves) actor.rollSave(id, options);
         else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, options);
 
     }
