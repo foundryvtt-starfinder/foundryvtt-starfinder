@@ -106,7 +106,7 @@ export default class ConditionEnricher extends BaseEnricher {
 
     /**
      * Apply modifications to the condition source. Returns the unchanged source if none are supplied.
-     * @param {Object<string, ?string|undefined>} [obj={}]
+     * @param {Record<string, ?string|undefined>} [obj={}]
      * @returns {object}
      */
     getModifiedSource({duration = null, unit = null, damage = null, damageType = null, trigger = null} = {}) {
@@ -137,7 +137,7 @@ export default class ConditionEnricher extends BaseEnricher {
      * @returns {(keyof typeof CONFIG.SFRPG.damageTypes)[]}
      */
     parseDamageTypes(damageTypes) {
-        const types = damageTypes.split(",");
+        const types = damageTypes.toLowerCase().split(",");
 
         return types.map(t => t.trim());
     }

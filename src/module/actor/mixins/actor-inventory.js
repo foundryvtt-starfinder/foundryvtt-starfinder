@@ -1,9 +1,11 @@
+/** @import ItemSFRPG from "../../item/item.js" */
+
 export const ActorInventoryMixin = (superclass) => class extends superclass {
     /**
      * Returns the containing item for a given item.
      *
-     * @param {Item} item Item to find the parent of.
-     * @returns {Item} The parent item of the item, or null if not contained.
+     * @param {ItemSFRPG} item Item to find the parent of.
+     * @returns {ItemSFRPG} The parent item of the item, or null if not contained.
      */
     getContainingItem(item) {
         return this.items.find(x => x.system.container?.contents?.find(y => y.id === item.id) !== undefined);
@@ -15,7 +17,7 @@ export const ActorInventoryMixin = (superclass) => class extends superclass {
     async processItemData() {
         const actor = this;
         if (actor.items.size > 0) {
-            Hooks.callAll("beforeItemsProcessed", {actor: actor});
+            Hooks.callAll("beforeItemsProcessed", { actor: actor });
 
             const promises = [];
             for (const item of actor.items) {
@@ -26,7 +28,7 @@ export const ActorInventoryMixin = (superclass) => class extends superclass {
             // Wait a moment to allow the database to update.
             Promise.all(promises).then(x => { return new Promise(resolve => setTimeout(() => resolve(x), 1)); })
                 .then(() => {
-                    Hooks.callAll("afterItemsProcessed", {actor: actor});
+                    Hooks.callAll("afterItemsProcessed", { actor: actor });
                 });
         }
     }

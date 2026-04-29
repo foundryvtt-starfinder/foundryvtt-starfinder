@@ -107,7 +107,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const hangarBayActors = hangarBayData.actorIds.map(crewId => game.actors.get(crewId));
         const localizedNoLimit = game.i18n.localize("SFRPG.VehicleSheet.Hangar.UnlimitedMax");
 
-        data.hangarBay = { label:  game.i18n.localize("SFRPG.VehicleSheet.Hangar.Vehicles") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": hangarBayActors.length, "max": hangarBayData.limit > -1 ? hangarBayData.limit : localizedNoLimit}), actors: hangarBayActors, dataset: { type: "vehicle" }};
+        data.hangarBay = { label: game.i18n.localize("SFRPG.VehicleSheet.Hangar.Vehicles") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", { "current": hangarBayActors.length, "max": hangarBayData.limit > -1 ? hangarBayData.limit : localizedNoLimit }), actors: hangarBayActors, dataset: { type: "vehicle" } };
     }
 
     /**
@@ -154,9 +154,9 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             else if (item.type === "actorResource") arr[3].push(item); // actorResources
 
             return arr;
-        }, [ [], [], [], []]);
+        }, [[], [], [], []]);
 
-        this.processItemContainment(attacks, function(itemType, itemData) {
+        this.processItemContainment(attacks, function (itemType, itemData) {
             // NOTE: We only flag `vehicleAttack` type items as having damage as weapon rolls won't work from the
             // vehicle sheet until we can assign passengers and access their dexterity modifiers.
             if (itemData.item.type === "vehicleAttack") {
@@ -169,7 +169,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         const features = {
             primarySystems: { label: game.i18n.localize("SFRPG.VehicleSheet.Hangar.PrimarySystems"), items: primarySystems, hasActions: true, dataset: { type: "vehicleSystem" } },
-            expansionBays: { label: game.i18n.format(game.i18n.localize("SFRPG.VehicleSheet.Hangar.ExpansionBays") + " " + game.i18n.localize("SFRPG.VehicleSheet.Hangar.AssignedCount"), {current: expansionBays.length, max: data.actor.system.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
+            expansionBays: { label: game.i18n.format(game.i18n.localize("SFRPG.VehicleSheet.Hangar.ExpansionBays") + " " + game.i18n.localize("SFRPG.VehicleSheet.Hangar.AssignedCount"), { current: expansionBays.length, max: data.actor.system.attributes.expansionBays.value }), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
             resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
         };
         data.features = Object.values(features);
@@ -327,7 +327,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
                 "system.crew": crew
             }).then(this.render(false));
         } else {
-            ui.notifications.error(game.i18n.format("SFRPG.VehicleSheet.Passengers.PassengersLimitReached", {targetRole: targetRole}));
+            ui.notifications.error(game.i18n.format("SFRPG.VehicleSheet.Passengers.PassengersLimitReached", { targetRole: targetRole }));
         }
 
         return true;
@@ -481,7 +481,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const item = this.actor.items.get(itemId);
 
         const desiredOutput = (item.system.isActive === true || item.system.isActive === false) ? !item.system.isActive : false;
-        await item.update({'system.isActive': desiredOutput});
+        await item.update({ 'system.isActive': desiredOutput });
 
         // Render the chat card template
         const templateData = {
@@ -496,7 +496,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: html
         };
@@ -541,7 +541,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: html
         };

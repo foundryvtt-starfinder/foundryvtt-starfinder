@@ -89,6 +89,7 @@ export default class BaseEnricher {
         // Split each argument from the square brackets
         const args = this.match[2].split("|");
 
+        /** @type {Record<string, string>} */
         this.args = args.reduce((obj, i) => {
             // Split each arg into a key and a value
             // Matches a colon with a letter before, and either a JSON or character after.

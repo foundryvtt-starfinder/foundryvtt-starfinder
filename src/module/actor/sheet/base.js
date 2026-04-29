@@ -50,9 +50,9 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                 ".modifiers .inventory-list"
             ],
             tabs: [
-                {navSelector: ".tabs", contentSelector: ".sheet-body", initial: "attributes"},
-                {navSelector: ".subtabs", contentSelector: ".modifiers-body", initial: "permanent"},
-                {navSelector: ".biotabs", contentSelector: ".bio-body", initial: "biography"}
+                { navSelector: ".tabs", contentSelector: ".sheet-body", initial: "attributes" },
+                { navSelector: ".subtabs", contentSelector: ".modifiers-body", initial: "permanent" },
+                { navSelector: ".biotabs", contentSelector: ".bio-body", initial: "biography" }
             ]
         });
     }
@@ -109,7 +109,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                         fullBodyImage: "systems/sfrpg/images/mystery-body.webp"
                     }
                 }
-            }, {overwrite: false});
+            }, { overwrite: false });
             this.actor.system.details.biography.fullBodyImage = "systems/sfrpg/images/mystery-body.webp";
         }
 
@@ -424,7 +424,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
         const button = event.currentTarget;
         let app;
-        switch ( button.dataset.action ) {
+        switch (button.dataset.action) {
             case "movement":
                 app = new ActorMovementConfig(this.object);
                 break;
@@ -507,7 +507,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     }
 
     /** @param {ItemSFRPG} item */
-    _prepareAttackString(item)  {
+    _prepareAttackString(item) {
         try {
             const itemData = item.system;
             const actor = item.actor;
@@ -558,7 +558,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             // Remove situational modifiers
             appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null, {actor: actor, item: item});
+            let modifiers = stackModifiers.process(appropriateMods, null, { actor: actor, item: item });
 
             modifiers = Object.values(modifiers)
                 .flat()
@@ -593,7 +593,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             // Remove situational modifiers
             appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null, {actor: item.actor, item: item});
+            let modifiers = stackModifiers.process(appropriateMods, null, { actor: item.actor, item: item });
 
             modifiers = Object.values(modifiers)
                 .flat()
@@ -694,10 +694,10 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     }
 
     /**
-	 * Toggles an option on the selected item.
-	 *
-	 * @param {PointerEvent} event The originating click event
-	 */
+     * Toggles an option on the selected item.
+     *
+     * @param {PointerEvent} event The originating click event
+     */
     async _onToggleOption(event) {
         event.preventDefault();
         const target = $(event.currentTarget);
@@ -716,7 +716,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             options[opt] = false;
         }
 
-        await this.actor.update({["system.options"]: options});
+        await this.actor.update({ ["system.options"]: options });
     }
 
     /**
@@ -752,7 +752,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
         const skillId = event.currentTarget.parentElement.dataset.skill;
 
-        return this.actor.editSkill(skillId, {event: event});
+        return this.actor.editSkill(skillId, { event: event });
     }
 
     /**
@@ -762,7 +762,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     _onAddSkill(event) {
         event.preventDefault();
 
-        return this.actor.addSkill({event: event});
+        return this.actor.addSkill({ event: event });
     }
 
     /**
@@ -786,7 +786,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     async _onShowImage() {
         const actor = this.actor;
         const title = actor.token?.name ?? actor.prototypeToken?.name ?? actor.name;
-        new foundry.applications.apps.ImagePopout({src: actor.img, window: { title }, uuid: actor.uuid }).render(true);
+        new foundry.applications.apps.ImagePopout({ src: actor.img, window: { title }, uuid: actor.uuid }).render(true);
     }
 
     /**
@@ -810,7 +810,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             case 'fusion,upgrade,weaponAccessory':
             case 'augmentation':
                 browser = getEquipmentBrowser();
-                browser.renderWithFilters({equipmentTypes: data.type.split(',')});
+                browser.renderWithFilters({ equipmentTypes: data.type.split(',') });
                 break;
             case 'spell':
                 browser = getSpellBrowser();
@@ -826,7 +826,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             case 'archetypes':
             case 'feat':
             case 'actorResource':
-            // TODO: wait for Features Browser then implement this.
+                // TODO: wait for Features Browser then implement this.
                 break;
             case 'starshipWeapon':
                 browser = getStarshipBrowser();
@@ -871,7 +871,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
-        return item.useItem({event:event});
+        return item.useItem({ event: event });
     }
 
     _onItemRollAttack(event) {
@@ -879,7 +879,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        return item.rollAttack({event: event});
+        return item.rollAttack({ event: event });
     }
 
     _onItemRollDamage(event) {
@@ -887,7 +887,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        return item.rollDamage({event: event});
+        return item.rollDamage({ event: event });
     }
 
     async _onActivateFeat(event) {
@@ -911,7 +911,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        item.update({"system.uses.value": Number(event.currentTarget.value)});
+        item.update({ "system.uses.value": Number(event.currentTarget.value) });
     }
 
     /**
@@ -924,7 +924,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const item = this.actor.items.get(itemId);
 
         if (item.type === "spell") {
-            return this.actor.useSpell(item, {configureDialog: !event.shiftKey});
+            return this.actor.useSpell(item, { configureDialog: !event.shiftKey });
         } else {
             return item.roll();
         }
@@ -980,9 +980,9 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const newBaseValue = parseInt(target[0].value);
 
         if (!Number.isNaN(newBaseValue)) {
-            resourceItem.update({"system.base": newBaseValue});
+            resourceItem.update({ "system.base": newBaseValue });
         } else {
-            resourceItem.update({"system.base": 0});
+            resourceItem.update({ "system.base": 0 });
         }
     }
 
@@ -1011,7 +1011,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     _onRollSave(event) {
         event.preventDefault();
         const save = event.currentTarget.parentElement.dataset.save;
-        this.actor.rollSave(save, {event: event});
+        this.actor.rollSave(save, { event: event });
     }
 
     /**
@@ -1022,7 +1022,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     _onRollSkillCheck(event) {
         event.preventDefault();
         const skill = event.currentTarget.parentElement.dataset.skill;
-        this.actor.rollSkill(skill, {event: event});
+        this.actor.rollSkill(skill, { event: event });
     }
 
     /**
@@ -1033,7 +1033,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     _onRollAbilityCheck(event) {
         event.preventDefault();
         const ability = event.currentTarget.parentElement.dataset.ability;
-        this.actor.rollAbility(ability, {event: event});
+        this.actor.rollAbility(ability, { event: event });
     }
 
     /**
@@ -1063,23 +1063,17 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         const isOpen = item.system.container?.isOpen === undefined ? true : item.system.container.isOpen;
 
-        return item.update({'system.container.isOpen': !isOpen});
+        return item.update({ 'system.container.isOpen': !isOpen });
     }
 
     /**
      * Get The font-awesome icon used to display if a skill is a class skill or not
-     *
-     * @param {Number} level Flag that determines if a skill is a class skill or not
-     * @returns {String}
-     * @private
+     * @param {0|3} level Flag that determines if a skill is a class skill or not
      */
     _getClassSkillIcon(level) {
-        const icons = {
-            0: '<i class="far fa-circle"></i>',
-            3: '<i class="fas fa-check"></i>'
-        };
+        if (level !== 3 || level !== 0) return null;
 
-        return icons[level];
+        return /** @type {const} */(`<i class="${level === 3 ? 'fas fa-check' : 'far fa-circle'}"></i>`);
     }
 
     /**
@@ -1171,7 +1165,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                     spells: [],
                     uses: useLabels[lvl] || spellsPerDay.value || 0,
                     slots: useLabels[lvl] || spellsPerDay.max || 0,
-                    dataset: {"type": "spell", "level": lvl}
+                    dataset: { "type": "spell", "level": lvl }
                 };
 
                 if (actorData.spells.classes && actorData.spells.classes.length > 0) {
@@ -1180,7 +1174,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                         for (const [classKey, storedData] of Object.entries(spellsPerDay.perClass)) {
                             const classInfo = actorData.spells.classes.find(x => x.key === classKey);
                             if (storedData.max > 0) {
-                                spellBook[lvl].classes.push({key: classKey, name: classInfo?.name || classKey, value: storedData.value || 0, max: storedData.max});
+                                spellBook[lvl].classes.push({ key: classKey, name: classInfo?.name || classKey, value: storedData.value || 0, max: storedData.max });
                             }
                         }
                     }
@@ -1360,7 +1354,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             }
             return;
 
-        // Handle trading between actors
+            // Handle trading between actors
         } else if (parsedDragData?.uuid?.includes("Actor")) {
             const actor = fromUuidSync(parsedDragData.uuid)?.actor || await fromUuid(parsedDragData.uuid)?.actor;
             const tokenId = actor.isToken ? actor.token.id : null;
@@ -1378,32 +1372,32 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                 InputDialog.show(
                     game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferTitle"),
                     game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferMessage"), {
-                        amount: {
-                            name: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferLabel"),
-                            label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferInfo", { max: itemToMove.system.quantity }),
-                            placeholder: itemToMove.system.quantity,
-                            validator: (v) => {
-                                const number = Number(v);
-                                if (Number.isNaN(number)) {
-                                    return false;
-                                }
-
-                                if (number < 1) {
-                                    return false;
-                                }
-
-                                if (number > itemToMove.system.quantity) {
-                                    return false;
-                                }
-                                return true;
+                    amount: {
+                        name: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferLabel"),
+                        label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.AmountToTransferInfo", { max: itemToMove.system.quantity }),
+                        placeholder: itemToMove.system.quantity,
+                        validator: (v) => {
+                            const number = Number(v);
+                            if (Number.isNaN(number)) {
+                                return false;
                             }
+
+                            if (number < 1) {
+                                return false;
+                            }
+
+                            if (number > itemToMove.system.quantity) {
+                                return false;
+                            }
+                            return true;
                         }
-                    }, (values) => {
-                        const itemInTargetActor = moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer, values.amount);
-                        if (itemInTargetActor === itemToMove) {
-                            this._onSortItem(event, itemInTargetActor);
-                        }
-                    });
+                    }
+                }, (values) => {
+                    const itemInTargetActor = moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer, values.amount);
+                    if (itemInTargetActor === itemToMove) {
+                        this._onSortItem(event, itemInTargetActor);
+                    }
+                });
             } else {
                 const itemInTargetActor = await moveItemBetweenActorsAsync(sourceActor, itemToMove, targetActor, targetContainer);
                 if (itemInTargetActor === itemToMove) {
@@ -1411,7 +1405,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                 }
             }
 
-        // Continue regular workflow
+            // Continue regular workflow
         } else {
 
             if (item.system.modifiers) {
@@ -1423,7 +1417,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                     if (formula) {
                         try {
                             const roll = Roll.create(formula, targetActor.actor.system);
-                            modifier.max = await roll.evaluate({maximize: true}).total;
+                            modifier.max = await roll.evaluate({ maximize: true }).total;
                         } catch {
                             modifier.max = 0;
                         }
@@ -1444,7 +1438,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
                     item.system.context = context;
                 }
 
-                if (item.system.type === "condition") await this.actor.update({[`system.conditions.${item.system.slug}`]: true});
+                if (item.system.type === "condition") await this.actor.update({ [`system.conditions.${item.system.slug}`]: true });
             }
 
             const addedItemResult = await targetActor.createItem(item);

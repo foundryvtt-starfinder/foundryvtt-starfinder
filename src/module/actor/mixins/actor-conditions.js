@@ -1,4 +1,4 @@
-/**  @import { ActorSFRPG } from "../actor.js" */
+/** @import ItemSFRPG from "../../item/item.js" */
 
 /**
  * @mixin
@@ -61,7 +61,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
 
                 if (createdItems && createdItems.length > 0) {
                     await this._updateActorCondition(conditionName, true);
-                    Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName, enabled});
+                    Hooks.callAll("onActorSetCondition", { actor: this, item: createdItems[0], conditionName, enabled });
                 }
 
             }
@@ -72,7 +72,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
                 effect.delete();
                 await this.deleteEmbeddedDocuments("Item", [conditionItem.id]);
                 await this._updateActorCondition(conditionName, false);
-                Hooks.callAll("onActorSetCondition", {actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled});
+                Hooks.callAll("onActorSetCondition", { actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled });
             }
         }
 
@@ -99,7 +99,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * @private
      */
     _checkFlatFooted(conditionName, enabled) {
-        const hasFlatFooted =  this.hasCondition("flat-footed");
+        const hasFlatFooted = this.hasCondition("flat-footed");
         let hasCausingCondition = false;
         for (const condition of CONFIG.SFRPG.conditionsCausingFlatFooted) {
             if (this.hasCondition(condition)) {
@@ -120,7 +120,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
 
     /**
      * Checks if the item is an effect in the status effects list
-     * @param item foundry item document
+     * @param {string} name foundry item document
      * @returns {boolean}
      * @private
      */
@@ -145,8 +145,9 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
 
     static async generateConditionCache() {
         const pack = game.packs.get("sfrpg.conditions");
-        const documents = await pack.getDocuments({type: "effect"});
+        const documents = await pack.getDocuments({ type: "effect" });
 
+        /** @type {[string, ItemSFRPG][]} */
         const cacheEntries = documents.reduce((obj, doc) => {
             obj[doc.system.slug] = doc;
             return obj;

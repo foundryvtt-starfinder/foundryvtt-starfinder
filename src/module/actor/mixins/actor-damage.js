@@ -2,7 +2,7 @@ import { ChoiceDialog } from "../../apps/choice-dialog.js";
 /** @import { ActorSFRPG } from "../actor.js" */
 
 export class SFRPGHealingSetting {
-    constructor({stamina = false, hitpoints = true, temp = false} = {}) {
+    constructor({ stamina = false, hitpoints = true, temp = false } = {}) {
         this.healsStamina = stamina;
         this.healsHitpoints = hitpoints;
         this.healsTemporaryHitpoints = temp;
@@ -98,7 +98,7 @@ export class SFRPGDamage {
      * Creates a new SFRPGDamage object.
      *
      * @param {Number} damageAmount The amount of damage dealt.
-     * @param {Array or String} damageTypes (Optional, default empty) Either a string or array object containing comma or semi-colon separated strings, e.g.: "fire, piercing", or "f;p", or ["f", "p"], or ["fire", "piercing"]. If left empty, untyped damage is applied.
+     * @param {Array|String} damageTypes (Optional, default empty) Either a string or array object containing comma or semi-colon separated strings, e.g.: "fire, piercing", or "f;p", or ["f", "p"], or ["fire", "piercing"]. If left empty, untyped damage is applied.
      * @param {Bool} isCritical (Optional, default false) A boolean value indicating if this damage was critical damage.
      * @param {Array} properties (Optional, default empty) An array containing any additional damage properties, e.g.: ["adamantine", "line", "ripper"]; See SFRPG.specialMaterials, SFRPG.weaponProperties, and SFRPG.starshipWeaponProperties
      */
@@ -182,7 +182,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
      * A utility method used to apply damage to any selected tokens when an option
      * is selected from a chat card context menu.
      *
-     * @param {HTML} html The HTML object representing the chat card.
+     * @param {HTMLElement} html The HTML object representing the chat card.
      * @param {Number} multiplier A number used to multiply the damage being applied
      * @returns {Promise<any[]>}
      */
@@ -212,7 +212,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                             <input type="number" id="modifier" placeholder=0 autofocus />
                         </div>
                         ${(multiplier < 0) // Is healing
-                        ? `
+                            ? `
                             <div class="form-group">
                                 <label for="apply-healing">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.ApplyHealingTo")}</label>
                                 <select name="apply-healing" id="apply-healing">
@@ -222,7 +222,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                                 </select>
                             </div>
                         `
-                        : `
+                            : `
                             <div class="form-group">
                                 <label for="bypass-stamina">${game.i18n.localize("SFRPG.ChatCard.ContextMenu.BypassStamina")}</label>
                                 <input type=checkbox name="bypass-stamina" id="bypass-stamina" />
@@ -358,7 +358,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     * Apply damage to an Actor.
     *
     * @param {SFRPGDamage} damage A SFRPGDamage object, describing the damage to be dealt.
-    * @returns A Promise that resolves to the updated Actor
+    * @returns {Promise<ActorSFRPG>} A Promise that resolves to the updated Actor
     */
     async _applyActorDamage(damage) {
         if (damage.constructor !== SFRPGDamage) {
@@ -427,7 +427,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             actorUpdate["system.attributes.hp.temp"] = newTempHP;
 
             if (!damage?.options?.bypassStamina) {
-            /** Update stamina points */
+                /** Update stamina points */
                 const newSP = Math.clamp(originalSP - remainingUndealtDamage, 0, actorData.attributes?.sp?.max || 0);
                 remainingUndealtDamage -= (originalSP - newSP);
 
@@ -442,8 +442,8 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
             /** If the remaining undealt damage is equal to or greater than the max hp, the character dies of Massive Damage. */
             if (this.type === "character" && remainingUndealtDamage >= actorData.attributes.hp.max) {
-                const localizedDeath = game.i18n.format("SFRPG.CharacterSheet.Warnings.DeathByMassiveDamage", {name: this.name});
-                ui.notifications.warn(localizedDeath, {permanent: true});
+                const localizedDeath = game.i18n.format("SFRPG.CharacterSheet.Warnings.DeathByMassiveDamage", { name: this.name });
+                ui.notifications.warn(localizedDeath, { permanent: true });
             }
         } else {
             if (damage.healSettings.healsHitpoints) {
@@ -468,8 +468,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             }
         }
 
-        const promise = this.update(actorUpdate);
-        return promise;
+        return this.update(actorUpdate);
     }
 
     /**
@@ -496,7 +495,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     * Returns the amount of damage mitigation for a given damage type.
     *
     * @param {string} damageType The damage type to evaluate.
-    * @param {SFRPGDamage} damage (Optional, default null) A damage object from which the damage type originates. Damage reduction is not negated if this is not specified.
+    * @param {?SFRPGDamage} damage A damage object from which the damage type originates. Damage reduction is not negated if this is not specified.
     * @returns {number} Amount of damage mitigation applied.
     */
     getDamageMitigationForDamageType(damageType, damage = null) {
@@ -529,8 +528,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     /**
     * Apply damage to a Vehicle Actor.
     *
-    * @param {object} damage A SFRPGDamage object, describing the damage to be dealt.
-    * @returns A Promise that resolves to the updated Vehicle
+    * @param {SFRPGDamage} damage A SFRPGDamage object, describing the damage to be dealt.
     */
     async _applyVehicleDamage(damage) {
         if (damage.constructor !== SFRPGDamage) {
@@ -544,7 +542,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     /**
     * Apply damage to a Starship Actor.
     *
-    * @param {object} damage A SFRPGDamage object, describing the damage to be dealt.
+    * @param {SFRPGDamage} damage A SFRPGDamage object, describing the damage to be dealt.
     * @returns {Promise<ActorSFRPG>} A Promise that resolves to the updated Starship
     */
     async _applyStarshipDamage(damage) {
@@ -565,7 +563,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             game.i18n.format("SFRPG.StarshipSheet.Quadrants.Aft")
         ];
         const results = await ChoiceDialog.show(
-            game.i18n.format("SFRPG.StarshipSheet.Damage.Title", {name: this.name}),
+            game.i18n.format("SFRPG.StarshipSheet.Damage.Title", { name: this.name }),
             game.i18n.format("SFRPG.StarshipSheet.Damage.Message"),
             {
                 quadrant: {
@@ -696,14 +694,14 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         if (newCT > originalCT) {
             const crossedThresholds = newCT - originalCT;
-            const warningMessage = game.i18n.format("SFRPG.StarshipSheet.Damage.CrossedCriticalThreshold", {name: this.name, crossedThresholds: crossedThresholds});
+            const warningMessage = game.i18n.format("SFRPG.StarshipSheet.Damage.CrossedCriticalThreshold", { name: this.name, crossedThresholds: crossedThresholds });
             timesToRoll += crossedThresholds;
             ui.notifications.warn(warningMessage);
             const chatData = {
                 user: game.user.id,
-                speaker: ChatMessage.getSpeaker({actor: this}),
+                speaker: ChatMessage.getSpeaker({ actor: this }),
                 content: warningMessage,
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             };
             ChatMessage.applyRollMode(chatData, rollMode);
             ChatMessage.create(chatData);
@@ -711,13 +709,13 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
 
         if (damage.isCritical && newHullPoints !== originalHullPoints) {
             timesToRoll++;
-            const warningMessage = game.i18n.format((newCT > originalCT) ?  "SFRPG.StarshipSheet.Damage.Nat20WithThreshold" : "SFRPG.StarshipSheet.Damage.Nat20", {name: this.name});
+            const warningMessage = game.i18n.format((newCT > originalCT) ? "SFRPG.StarshipSheet.Damage.Nat20WithThreshold" : "SFRPG.StarshipSheet.Damage.Nat20", { name: this.name });
             ui.notifications.warn(warningMessage);
             const chatData = {
                 user: game.user.id,
-                speaker: ChatMessage.getSpeaker({actor: this}),
+                speaker: ChatMessage.getSpeaker({ actor: this }),
                 content: warningMessage,
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             };
             ChatMessage.applyRollMode(chatData, rollMode);
             ChatMessage.create(chatData);

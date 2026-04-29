@@ -68,7 +68,7 @@ export default class SFRPGCustomChatMessage {
             dataRoll: roll,
             rollType: data.rollType,
             rollNotes: data.htmlData?.find(x => x.name === "rollNotes")?.value,
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             tokenImg: actor.token?.texture?.src || actor.img,
             actorId: actor.id,
             tokenId: this.getToken(actor),
@@ -109,7 +109,7 @@ export default class SFRPGCustomChatMessage {
 
     static async _render(roll, data, options) {
         const templateName = "systems/sfrpg/templates/chat/chat-message-attack-roll.hbs";
-        let rollContent = await roll.render({htmlData: data.htmlData, customTooltip: options.rollDices});
+        let rollContent = await roll.render({ htmlData: data.htmlData, customTooltip: options.rollDices });
 
         // Insert the damage type string if possible.
         const damageTypeString = options?.damageTypeString;
@@ -118,7 +118,7 @@ export default class SFRPGCustomChatMessage {
         }
 
         if (options.rollOptions?.actionTarget) {
-            rollContent = DiceSFRPG.appendTextToRoll(rollContent, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", {actionTarget: options.rollOptions.actionTargetSource[options.rollOptions.actionTarget]}));
+            rollContent = DiceSFRPG.appendTextToRoll(rollContent, game.i18n.format("SFRPG.Items.Action.ActionTarget.ChatMessage", { actionTarget: options.rollOptions.actionTargetSource[options.rollOptions.actionTarget] }));
         }
 
         options = foundry.utils.mergeObject(options, { rollContent });
@@ -130,10 +130,10 @@ export default class SFRPGCustomChatMessage {
             speaker: data.speaker,
             content: cardContent,
             rolls: [roll],
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice,
             rollType: data.rollType,
-            flags: {sfrpg: {rollType: data.rollType}}
+            flags: { sfrpg: { rollType: data.rollType } }
         };
 
         if (damageTypeString?.length > 0) {

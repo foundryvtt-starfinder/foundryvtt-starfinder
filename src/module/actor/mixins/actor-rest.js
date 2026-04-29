@@ -66,9 +66,9 @@ export const ActorRestMixin = (superclass) => class extends superclass {
 
             ChatMessage.create({
                 author: game.user.id,
-                speaker: ChatMessage.getSpeaker({actor: this}),
+                speaker: ChatMessage.getSpeaker({ actor: this }),
                 content: msg,
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             });
         }
 
@@ -125,9 +125,9 @@ export const ActorRestMixin = (superclass) => class extends superclass {
 
             ChatMessage.create({
                 author: game.user.id,
-                speaker: ChatMessage.getSpeaker({actor: this}),
+                speaker: ChatMessage.getSpeaker({ actor: this }),
                 content: msg,
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             });
         }
 
@@ -179,7 +179,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
         for (const [abl, ability] of Object.entries(data.abilities)) {
             if (ability.damage && ability.damage > 0) {
                 updateData[`system.abilities.${abl}.damage`] = --ability.damage;
-                restoredAbilityDamages.push({ability: abl, amount: 1});
+                restoredAbilityDamages.push({ ability: abl, amount: 1 });
             }
         }
 
@@ -224,24 +224,24 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             const bulletPoint = '<br/><span><i class="fas fa-circle" style="font-size: 6px; vertical-align: middle; height: 7px;"></i></span> ';
             let content = "";
             if (dhp || dsp || drp || deltaSpellSlots || restoredAbilityDamages.length > 0 || items.length > 0) {
-                content = game.i18n.format("SFRPG.Rest.Long.ChatMessage.Header", {name: this.name});
-                if (dhp) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.HitPoints", {deltaHP: dhp}); }
-                if (dsp) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.StaminaPoints", {deltaSP: dsp}); }
-                if (drp) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.ResolvePoints", {deltaRP: drp}); }
-                if (deltaSpellSlots) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.SpellSlots", {deltaSS: deltaSpellSlots}); }
+                content = game.i18n.format("SFRPG.Rest.Long.ChatMessage.Header", { name: this.name });
+                if (dhp) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.HitPoints", { deltaHP: dhp }); }
+                if (dsp) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.StaminaPoints", { deltaSP: dsp }); }
+                if (drp) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.ResolvePoints", { deltaRP: drp }); }
+                if (deltaSpellSlots) { content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.SpellSlots", { deltaSS: deltaSpellSlots }); }
                 for (const restoredAbilityDamage of restoredAbilityDamages) {
-                    content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.AbilityDamage", {ability: CONFIG.SFRPG.abilities[restoredAbilityDamage.ability], amount: restoredAbilityDamage.amount});
+                    content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.AbilityDamage", { ability: CONFIG.SFRPG.abilities[restoredAbilityDamage.ability], amount: restoredAbilityDamage.amount });
                 }
                 for (const rechargedItem of items) {
-                    content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.Item", {itemName: rechargedItem.name});
+                    content += bulletPoint + game.i18n.format("SFRPG.Rest.Long.ChatMessage.Item", { itemName: rechargedItem.name });
                 }
             } else {
-                content = game.i18n.format("SFRPG.Rest.Long.ChatMessage.HeaderNoRecovery", {name: this.name});
+                content = game.i18n.format("SFRPG.Rest.Long.ChatMessage.HeaderNoRecovery", { name: this.name });
             }
 
             ChatMessage.create({
                 author: game.user.id,
-                speaker: ChatMessage.getSpeaker({actor: this}),
+                speaker: ChatMessage.getSpeaker({ actor: this }),
                 content: content
             });
         }
