@@ -1,10 +1,9 @@
-import { SFRPG } from "../../../../config.js";
 
 export default function(engine) {
     engine.closures.add("calculateDroneSkills", (fact) => {
         const data = fact.data;
 
-        const skillkeys = Object.keys(SFRPG.skills);
+        const skillkeys = Object.keys(CONFIG.CONFIG.SFRPG.skills);
         for (const skillKey of skillkeys) {
             const skill = data.skills[skillKey];
             if (!skill.enabled) {
@@ -19,7 +18,7 @@ export default function(engine) {
                 const tooltip = game.i18n.format("SFRPG.SkillModifierTooltip", {
                     type: "Ability Score",
                     mod: abilityMod.signedString(),
-                    source: SFRPG.abilities[skill.ability]
+                    source: CONFIG.SFRPG.abilities[skill.ability]
                 });
 
                 skill.tooltip.push(tooltip);

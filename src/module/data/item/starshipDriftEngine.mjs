@@ -10,6 +10,13 @@ export default class SFRPGItemStarshipDriftEngine extends SFRPGItemBase {
         return super.migrateData(data);
     }
 
+    static get metadata() {
+        return {
+            type: "starshipDriftEngine",
+            icon: "fas fa-atom"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.StarshipDriftEngine'

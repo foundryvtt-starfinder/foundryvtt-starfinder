@@ -88,7 +88,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         const updatedCapacity = Math.max(0, currentCapacity - consumedAmount);
 
         if (this.type === "ammunition" && !this.system.useCapacity) {
-            return this.update({'system.quantity': updatedCapacity});
+            return this.update({ 'system.quantity': updatedCapacity });
         } else if (this.type === "consumable") {
             // Consumables always reduce uses by one, but also can reduce item quantity
             const itemData = this.system;
@@ -114,11 +114,11 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                     }
                 } else {
                     // Deduct the remaining charges
-                    this.update({'system.uses.value': remainingUses});
+                    this.update({ 'system.uses.value': remainingUses });
                 }
             }
         } else {
-            return this.update({'system.capacity.value': updatedCapacity});
+            return this.update({ 'system.capacity.value': updatedCapacity });
         }
     }
 
@@ -142,7 +142,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         const updatedCapacity = currentCapacity + increaseAmount;
 
         if (this.type === "ammunition" && !this.system.useCapacity) {
-            return this.update({'system.quantity': Math.min(updatedCapacity, maxCapacity)});
+            return this.update({ 'system.quantity': Math.min(updatedCapacity, maxCapacity) });
         } else if (this.type === "consumable") {
             if (updatedCapacity > maxCapacity) {
                 const capacityOvershoot = (updatedCapacity - maxCapacity) % maxCapacity;
@@ -153,10 +153,10 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 });
             } else {
                 // Add charges
-                this.update({'system.uses.value': Math.min(updatedCapacity, maxCapacity)});
+                this.update({ 'system.uses.value': Math.min(updatedCapacity, maxCapacity) });
             }
         } else {
-            return this.update({'system.capacity.value': Math.min(updatedCapacity, maxCapacity)});
+            return this.update({ 'system.capacity.value': Math.min(updatedCapacity, maxCapacity) });
         }
     }
 
@@ -169,7 +169,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             return null;
         } else if (this.type === "consumable") {
             try {
-                const roll = Roll.create(this.system.uses.max, {...this.actor.system, item: this.system}).evaluateSync({strict: false});
+                const roll = Roll.create(this.system.uses.max, { ...this.actor.system, item: this.system }).evaluateSync({ strict: false });
                 return roll.total ? roll.total : (this.system.quantity > 0 ? 1 : 0);
             } catch (e) {
                 console.error(e);
@@ -192,7 +192,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
         if (currentCapacity >= maxCapacity) {
             // No need to reload if already at max capacity.
-            ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.AlreadyFullyLoaded", {name: this.name}));
+            ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.AlreadyFullyLoaded", { name: this.name }));
             return false;
         }
 
@@ -207,7 +207,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                     const container = getItemContainer(this.actor.items, x);
                     return !container || container.type === "container";
                 })
-                .sort((firstEl, secondEl) => secondEl.getCurrentCapacity() - firstEl.getCurrentCapacity() );
+                .sort((firstEl, secondEl) => secondEl.getCurrentCapacity() - firstEl.getCurrentCapacity());
 
             if (matchingItems.length > 0) {
                 const newAmmunition = matchingItems[0];
@@ -241,17 +241,17 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 }
 
                 if (updatePromise && originalContainer) {
-                    ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.ReloadFromContainer", {name: this.name, ammoName: newAmmunition.name, containerName: originalContainer.name}), {permanent: true});
+                    ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.ReloadFromContainer", { name: this.name, ammoName: newAmmunition.name, containerName: originalContainer.name }), { permanent: true });
                 }
 
             } else {
-                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.NoAmmunitionAvailable", {name: this.name}));
+                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.NoAmmunitionAvailable", { name: this.name }));
             }
         } else {
             if (this.type === "consumable") {
-                updatePromise = this.update({'system.uses.value': maxCapacity});
+                updatePromise = this.update({ 'system.uses.value': maxCapacity });
             } else {
-                updatePromise = this.update({'system.capacity.value': maxCapacity});
+                updatePromise = this.update({ 'system.capacity.value': maxCapacity });
             }
         }
 
@@ -259,7 +259,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
             updatePromise.then(() => {
                 this._postReloadMessage();
 
-                Hooks.callAll("itemReloaded", {actor: this.actor, item: this});
+                Hooks.callAll("itemReloaded", { actor: this.actor, item: this });
             });
         }
 
@@ -276,11 +276,11 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
             const updates = [];
             if (capacityItem) {
-                updates.push({_id: capacityItem.id, "system.quantity": currentItemCapacity});
+                updates.push({ _id: capacityItem.id, "system.quantity": currentItemCapacity });
             }
 
             if (newAmmunition && ammunitionItemCapacity > 0) {
-                updates.push({_id: newAmmunition.id, "system.quantity": ammunitionItemCapacity});
+                updates.push({ _id: newAmmunition.id, "system.quantity": ammunitionItemCapacity });
             }
 
             const updatePromise = this.actor.updateEmbeddedDocuments("Item", updates);
@@ -311,7 +311,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         renderPromise.then((html) => {
             // Create the chat message
             const chatData = {
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                 content: html
             };

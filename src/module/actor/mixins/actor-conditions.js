@@ -1,3 +1,11 @@
+/** @import ItemSFRPG from "../../item/item.js" */
+
+/**
+ * @mixin
+ * @template {new (...args: any[]) => any} T
+ * @param {T} superclass - The class to extend
+ * @returns {new (...args: any[]) => {generateConditionCache: () => void} & InstanceType<T>}
+ */
 export const ActorConditionsMixin = (superclass) => class extends superclass {
     /**
      * Check if the Actor has the condition.
@@ -48,29 +56,23 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
 
         if (enabled) {
             if (!conditionItem) {
-                const pack = game.packs.get("sfrpg.conditions");
-                const indexKey = CONFIG.SFRPG.statusEffects.find(e => e.id === conditionName).compendiumKey;
-                const index = pack.indexed ? pack.index : await pack.getIndex();
-                const entry = index.get(indexKey);
+                const condition = game.sfrpg.conditionCache.get(conditionName).toObject();
+                const createdItems = await this.createEmbeddedDocuments("Item", [condition]);
 
-                if (entry) {
-                    const entity = await pack.getDocument(entry._id);
-                    const itemData = entity.toObject();
-                    const createdItems = await this.createEmbeddedDocuments("Item", [itemData]);
-
-                    if (createdItems && createdItems.length > 0) {
-                        await this._updateActorCondition(conditionName, true);
-                        Hooks.callAll("onActorSetCondition", {actor: this, item: createdItems[0], conditionName, enabled});
-                    }
+                if (createdItems && createdItems.length > 0) {
+                    await this._updateActorCondition(conditionName, true);
+                    Hooks.callAll("onActorSetCondition", { actor: this, item: createdItems[0], conditionName, enabled });
                 }
+
             }
+            // Do nothing if the condition is already present on the actor, as desired
         } else {
             if (conditionItem) {
                 const effect = game.sfrpg.timedEffects.get(conditionItem.uuid);
                 effect.delete();
                 await this.deleteEmbeddedDocuments("Item", [conditionItem.id]);
                 await this._updateActorCondition(conditionName, false);
-                Hooks.callAll("onActorSetCondition", {actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled});
+                Hooks.callAll("onActorSetCondition", { actor: this, item: conditionItem, conditionName: conditionName, enabled: enabled });
             }
         }
 
@@ -97,7 +99,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
      * @private
      */
     _checkFlatFooted(conditionName, enabled) {
-        const hasFlatFooted =  this.hasCondition("flat-footed");
+        const hasFlatFooted = this.hasCondition("flat-footed");
         let hasCausingCondition = false;
         for (const condition of CONFIG.SFRPG.conditionsCausingFlatFooted) {
             if (this.hasCondition(condition)) {
@@ -118,7 +120,7 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
 
     /**
      * Checks if the item is an effect in the status effects list
-     * @param item foundry item document
+     * @param {string} name foundry item document
      * @returns {boolean}
      * @private
      */
@@ -139,5 +141,18 @@ export const ActorConditionsMixin = (superclass) => class extends superclass {
 
         await this.update(updateData);
         this._checkFlatFooted(conditionName, enabled);
+    }
+
+    static async generateConditionCache() {
+        const pack = game.packs.get("sfrpg.conditions");
+        const documents = await pack.getDocuments({ type: "effect" });
+
+        /** @type {[string, ItemSFRPG][]} */
+        const cacheEntries = documents.reduce((obj, doc) => {
+            obj[doc.system.slug] = doc;
+            return obj;
+        }, {});
+
+        game.sfrpg.conditionCache = new Map(Object.entries(cacheEntries));
     }
 };

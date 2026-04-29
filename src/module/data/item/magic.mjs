@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemMagic extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "magic",
+            icon: "fas fa-wand-magic"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Magic'

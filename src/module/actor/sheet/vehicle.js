@@ -107,7 +107,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const hangarBayActors = hangarBayData.actorIds.map(crewId => game.actors.get(crewId));
         const localizedNoLimit = game.i18n.localize("SFRPG.VehicleSheet.Hangar.UnlimitedMax");
 
-        data.hangarBay = { label:  game.i18n.localize("SFRPG.VehicleSheet.Hangar.Vehicles") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", {"current": hangarBayActors.length, "max": hangarBayData.limit > -1 ? hangarBayData.limit : localizedNoLimit}), actors: hangarBayActors, dataset: { type: "vehicle" }};
+        data.hangarBay = { label: game.i18n.localize("SFRPG.VehicleSheet.Hangar.Vehicles") + " " + game.i18n.format("SFRPG.VehicleSheet.Passengers.AssignedCount", { "current": hangarBayActors.length, "max": hangarBayData.limit > -1 ? hangarBayData.limit : localizedNoLimit }), actors: hangarBayActors, dataset: { type: "vehicle" } };
     }
 
     /**
@@ -154,9 +154,9 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
             else if (item.type === "actorResource") arr[3].push(item); // actorResources
 
             return arr;
-        }, [ [], [], [], []]);
+        }, [[], [], [], []]);
 
-        this.processItemContainment(attacks, function(itemType, itemData) {
+        this.processItemContainment(attacks, function (itemType, itemData) {
             // NOTE: We only flag `vehicleAttack` type items as having damage as weapon rolls won't work from the
             // vehicle sheet until we can assign passengers and access their dexterity modifiers.
             if (itemData.item.type === "vehicleAttack") {
@@ -169,7 +169,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         const features = {
             primarySystems: { label: game.i18n.localize("SFRPG.VehicleSheet.Hangar.PrimarySystems"), items: primarySystems, hasActions: true, dataset: { type: "vehicleSystem" } },
-            expansionBays: { label: game.i18n.format(game.i18n.localize("SFRPG.VehicleSheet.Hangar.ExpansionBays") + " " + game.i18n.localize("SFRPG.VehicleSheet.Hangar.AssignedCount"), {current: expansionBays.length, max: data.actor.system.attributes.expansionBays.value}), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
+            expansionBays: { label: game.i18n.format(game.i18n.localize("SFRPG.VehicleSheet.Hangar.ExpansionBays") + " " + game.i18n.localize("SFRPG.VehicleSheet.Hangar.AssignedCount"), { current: expansionBays.length, max: data.actor.system.attributes.expansionBays.value }), items: expansionBays, hasActions: false, dataset: { type: "starshipExpansionBay" } },
             resources: { label: game.i18n.format("SFRPG.ActorSheet.Features.Categories.ActorResources"), items: actorResources, hasActions: false, dataset: { type: "actorResource" } }
         };
         data.features = Object.values(features);
@@ -224,7 +224,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * This method is called upon form submission after form data is validated
      *
-     * @param {Event} event The initial triggering submission event
+     * @param {SubmitEvent} event The initial triggering submission event
      * @param {Object} formData The object of validated form data with which to update the object
      * @private
      */
@@ -327,7 +327,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
                 "system.crew": crew
             }).then(this.render(false));
         } else {
-            ui.notifications.error(game.i18n.format("SFRPG.VehicleSheet.Passengers.PassengersLimitReached", {targetRole: targetRole}));
+            ui.notifications.error(game.i18n.format("SFRPG.VehicleSheet.Passengers.PassengersLimitReached", { targetRole: targetRole }));
         }
 
         return true;
@@ -335,7 +335,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
     /**
      * Handles dragenter for the passengers tab
-     * @param {Event} event The originating dragenter event
+     * @param {DragEvent} event The originating dragenter event
      */
     _onCrewDragEnter(event) {
         $(event.target).css('background', "rgba(0,0,0,0.3)");
@@ -343,7 +343,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
     /**
      * Handles dragleave for the passengers tab
-     * @param {Event} event The originating dragleave event
+     * @param {DragEvent} event The originating dragleave event
      */
     _onCrewDragLeave(event) {
         $(event.target).css('background', '');
@@ -352,7 +352,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Handle dragging crew members on the sheet.
      *
-     * @param {Event} event Originating dragstart event
+     * @param {DragEvent} event Originating dragstart event
      */
     _onDragCrewStart(event) {
         const actorId = event.currentTarget.dataset.actorId;
@@ -373,7 +373,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Handles ondragover for crew drag-n-drop
      *
-     * @param {Event} event Orgininating ondragover event
+     * @param {DragEvent} event Orgininating ondragover event
      */
     _onCrewDragOver(event) {
         event.preventDefault();
@@ -383,7 +383,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Remove an vehicle from the hangar bay.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onRemoveFromHangarBar(event) {
         event.preventDefault();
@@ -405,7 +405,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Remove an actor from the crew.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onRemoveFromCrew(event) {
         event.preventDefault();
@@ -418,7 +418,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Opens the sheet of a passenger.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onActorView(event) {
         event.preventDefault();
@@ -432,7 +432,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Rolls the Piloting skill check of a passenger.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onRollPassengerPilotingSkill(event) {
         event.preventDefault();
@@ -447,7 +447,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Rolls the Piloting skill check of the pilot.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onRollPilotPilotingSkill(event) {
         event.preventDefault();
@@ -458,7 +458,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Performs a Piloting check for a system (generally Autopilot)
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onRollPilotingForSystem(event) {
 
@@ -473,7 +473,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Deactivates a vehicle system.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onDeactivateVehicleSystem(event) {
         event.preventDefault();
@@ -481,7 +481,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
         const item = this.actor.items.get(itemId);
 
         const desiredOutput = (item.system.isActive === true || item.system.isActive === false) ? !item.system.isActive : false;
-        await item.update({'system.isActive': desiredOutput});
+        await item.update({ 'system.isActive': desiredOutput });
 
         // Render the chat card template
         const templateData = {
@@ -496,7 +496,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: html
         };
@@ -509,7 +509,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
     /**
      * Activates a vehicle system.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onActivateVehicleSystem(event) {
         event.preventDefault();
@@ -541,7 +541,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: html
         };

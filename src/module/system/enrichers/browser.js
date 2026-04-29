@@ -3,6 +3,7 @@ import { getEquipmentBrowser } from "../../packs/equipment-browser.js";
 import { getSpellBrowser } from "../../packs/spell-browser.js";
 import { getStarshipBrowser } from "../../packs/starship-browser.js";
 import BaseEnricher from "./base.js";
+/** @import { DocumentBrowserSFRPG } from "../../packs/document-browser.js"*/
 
 /**
  * Open a specified compendium browser, optionally with pre-defined filters.
@@ -12,10 +13,6 @@ export default class BrowserEnricher extends BaseEnricher {
     // E.g @Browser(type:equipment|filters:{"equipmentTypes":"weapon","weaponTypes":"smallA","weaponCategories":"cryo","search":"Big Gun"})
     // @Browser(type:spell|filters:{"classes":["mystic","technomancer"],"levels":[0,1,2],"schools":"conjuration"}>{Some cool spells})
     // @Browser(type:starship|filters:{"starshipComponentTypes":["starshipWeapon"], "starshipWeaponTypes":"ecm","starshipWeaponClass":"heavy"})
-
-    constructor() {
-        super();
-    }
 
     /**
      * @override
@@ -27,27 +24,28 @@ export default class BrowserEnricher extends BaseEnricher {
 
     /** @inheritdoc */
     get enricherType() {
-        return "Browser";
+        return /** @type {const}*/("Browser");
     }
 
     /** @inheritdoc */
     get validTypes() {
-        return ["spell", "equipment", "starship", "alien"];
+        return /** @type {const}*/(["spell", "equipment", "starship", "alien"]);
     }
 
     /** @inheritdoc */
     get icons() {
-        return {
+        return /** @type {const}*/({
             equipment: "fa-gun",
             spell: "fa-wand-magic-sparkles",
             starship: "fa-rocket",
             alien: "fa-spaghetti-monster-flying"
-        };
+        });
     }
 
     /**
      * @extends BaseEnricher
-     * @returns {HTMLAnchorElement} */
+     * @returns {HTMLAnchorElement}
+     */
     createElement() {
         const a = super.createElement();
 
@@ -59,10 +57,13 @@ export default class BrowserEnricher extends BaseEnricher {
 
     }
 
-    static hasListener = true;
+    listeners = {
+        "click": this.#clickListener
+    };
 
-    static listener(event) {
-        const data = event.currentTarget.dataset;
+    /** @param {PointerEvent} event  */
+    #clickListener(event) {
+        const data = this.getDatasetfromEvent(event);
         let browser, filters;
 
         // Gotta double parse this to get rid of escape characters from the HTML.

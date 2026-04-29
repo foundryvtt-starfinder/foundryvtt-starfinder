@@ -1,4 +1,3 @@
-import { SFRPG } from "../../../config.js";
 
 function computeCompoundBulkForItem(item, contents) {
     let contentBulk = 0;
@@ -171,7 +170,7 @@ function computeWealthForActor(actor, inventoryWealth) {
             const currencyValue = Number(amount);
             if (!Number.isNaN(currencyValue)) {
                 wealth.currencies += currencyValue;
-                wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.Currency", {currency: SFRPG.currencies[currency], amount: moneyFormatter.format(currencyValue)}));
+                wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.Currency", {currency: CONFIG.SFRPG.currencies[currency], amount: moneyFormatter.format(currencyValue)}));
             }
         }
     }
@@ -180,7 +179,7 @@ function computeWealthForActor(actor, inventoryWealth) {
 
     if (actor.type === "character") {
         const actorLevel = Math.min(Math.max(0, actorData.details?.level?.value || 0), 20);
-        wealth.expectedByLevel = SFRPG.characterWealthByLevel[actorLevel];
+        wealth.expectedByLevel = CONFIG.SFRPG.characterWealthByLevel[actorLevel];
 
         wealth.tooltip.push("");
         wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.Expected", {expectedWealth: moneyFormatter.format(wealth.expectedByLevel)}));
@@ -188,12 +187,12 @@ function computeWealthForActor(actor, inventoryWealth) {
         if (wealth.expectedByLevel < wealth.total) {
             let estimatedLevel = 1;
             for (let i = 1; i < 20; i++) {
-                if (SFRPG.characterWealthByLevel[i] >= wealth.total) {
+                if (CONFIG.SFRPG.characterWealthByLevel[i] >= wealth.total) {
                     estimatedLevel = i;
                     break;
                 }
             }
-            wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.EstimatedLevel", {estimatedLevel: estimatedLevel, valueAtLevel: moneyFormatter.format(SFRPG.characterWealthByLevel[estimatedLevel])}));
+            wealth.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Inventory.Wealth.EstimatedLevel", {estimatedLevel: estimatedLevel, valueAtLevel: moneyFormatter.format(CONFIG.SFRPG.characterWealthByLevel[estimatedLevel])}));
         }
     }
 
@@ -209,7 +208,7 @@ export default function(engine) {
         // console.warn(`Starting calculateBulkAndWealth for ${actor.name}`);
 
         const items = fact.items;
-        const physicalItems = items.filter(x => SFRPG.physicalItemTypes.includes(x.type));
+        const physicalItems = items.filter(x => CONFIG.SFRPG.physicalItemTypes.includes(x.type));
 
         // Compute ownership tree
         for (const item of physicalItems) {

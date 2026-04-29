@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemStarshipFortifiedHull extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "starshipFortifiedHull",
+            icon: "fas fa-house-lock"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.StarshipFortifiedHull'

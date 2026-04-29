@@ -1,5 +1,4 @@
 import { getItemContainer } from "../actor/actor-inventory-utils.js";
-import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import SFRPGModifier from "../modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../modifiers/types.js";
@@ -12,6 +11,8 @@ import { ItemChatMixin } from "./mixins/item-chat.js";
 
 /**
  * @import { RollResult } from '../dice.js'
+ * @import { ActorSFRPG } from "../actor/actor.js"
+ * @import SFRPGTimedEffect from "../timedEffect/timedEffect.js"
  */
 
 /** @extends {foundry.documents.Item} */
@@ -38,7 +39,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     get hasAttack() {
         if (this.type === "starshipWeapon") return true;
-        return SFRPG.attackActions.includes(this.system.actionType);
+        return CONFIG.SFRPG.attackActions.includes(this.system.actionType);
     }
 
     /**
@@ -150,7 +151,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // Feat Items
         else if (itemData.type === "feat") {
             const act = data.activation;
-            labels.featType = data?.damage?.parts?.length && SFRPG.attackActions.includes(data.actionType)
+            labels.featType = data?.damage?.parts?.length && CONFIG.SFRPG.attackActions.includes(data.actionType)
                 ? game.i18n.localize("SFRPG.Attack")
                 : act.type ? game.i18n.localize("SFRPG.Items.Action.TitleAction") : game.i18n.localize("SFRPG.Passive");
         }
@@ -178,7 +179,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     labels.activation = (data.duration?.units === "instantaneous")
                         ? game.i18n.localize("SFRPG.AbilityActivationButton.Use")
                         : game.i18n.localize("SFRPG.AbilityActivationButton.Activate");
-                } else if (SFRPG.uncountableActivations.includes(act.type)) {
+                } else if (CONFIG.SFRPG.uncountableActivations.includes(act.type)) {
                     labels.activation = C.abilityActivationTypes[act.type];
                 } else {
                     labels.activation = [
@@ -221,7 +222,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                         else part.isPrimarySection = false;
                     }
 
-                // If the primary group is blank, set the 1st damage section, and any parts in the same group, as primary.
+                    // If the primary group is blank, set the 1st damage section, and any parts in the same group, as primary.
                 } else if (!(itemParts.some(part => part.isPrimarySection))) {
                     itemParts[0].isPrimarySection = true;
                     const primaryGroup = itemParts[0].group ?? null;
@@ -262,7 +263,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * @param {object} data           The initial data object provided to the document creation request
      * @param {object} options        Additional options which modify the creation request
      * @param {string} userId         The ID of the requesting user, always game.user.id
-     * @returns {boolean|void}        Explicitly return false to prevent creation of this Document
+     * @returns {Promise<boolean|void>}        Explicitly return false to prevent creation of this Document
      */
     async _preCreate(data, options, user) {
         const updates = {};
@@ -270,7 +271,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const itemData = this.system;
 
         if (t === "class" && !itemData?.slug) {
-            updates["system.slug"] = this.name.slugify({replacement: "_", strict: true});
+            updates["system.slug"] = this.name.slugify({ replacement: "_", strict: true });
         }
 
         // Events for when an item is created on an actor since pre/_onCreateDescendantDocuments lie >:(
@@ -282,7 +283,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             }
             else {
                 if (t === "weapon") {
-                    const proficiencyKey = SFRPG.weaponTypeProficiency[itemData.weaponType];
+                    const proficiencyKey = CONFIG.SFRPG.weaponTypeProficiency[itemData.weaponType];
                     const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(proficiencyKey);
                     if (proficient) updates["system.proficient"] = true;
                 } else if (t === "shield") {
@@ -309,7 +310,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             if (t === "asi") {
                 const numASI = this.actor.items.filter(x => x.type === "asi").length;
                 const level = 5 + numASI * 5;
-                updates["name"] = game.i18n.format("SFRPG.ItemSheet.AbilityScoreIncrease.ItemName", {level: level});
+                updates["name"] = game.i18n.format("SFRPG.ItemSheet.AbilityScoreIncrease.ItemName", { level: level });
             }
 
         } else {
@@ -321,9 +322,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         // Apply a default icon to the item based on its type if it doesn't already have an icon selected
-        if (Object.values(SFRPG.foundryDefaultIcons).includes(this.img)) {
-            if (Object.keys(SFRPG.defaultItemIcons).includes(this.type)) {
-                updates.img = ["systems/sfrpg/icons/default/", SFRPG.defaultItemIcons[this.type]].join("");
+        if (Object.values(CONFIG.SFRPG.foundryDefaultIcons).includes(this.img)) {
+            if (Object.keys(CONFIG.SFRPG.defaultItemIcons).includes(this.type)) {
+                updates.img = ["systems/sfrpg/icons/default/", CONFIG.SFRPG.defaultItemIcons[this.type]].join("");
             }
         }
 
@@ -361,16 +362,16 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             if (descriptionText?.length > 0) {
                 // Alter description by removing non-eligble level tags.
                 const levelTags = [
-                    {level: 0, tag: "level_0"},
-                    {level: 1, tag: "level_1"},
-                    {level: 2, tag: "level_2"},
-                    {level: 3, tag: "level_3"},
-                    {level: 4, tag: "level_4"},
-                    {level: 5, tag: "level_5"},
-                    {level: 6, tag: "level_6"}
+                    { level: 0, tag: "level_0" },
+                    { level: 1, tag: "level_1" },
+                    { level: 2, tag: "level_2" },
+                    { level: 3, tag: "level_3" },
+                    { level: 4, tag: "level_4" },
+                    { level: 5, tag: "level_5" },
+                    { level: 6, tag: "level_6" }
                 ];
 
-                for (const {level, tag} of levelTags) {
+                for (const { level, tag } of levelTags) {
                     const shouldShowEx = level === this.system.level;
                     const startTagEx = `[${tag}_only]`;
                     const endTagEx = `[/${tag}_only]`;
@@ -452,7 +453,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     level: this.system.level
                 }
             },
-            speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor})
+            speaker: token ? ChatMessage.getSpeaker({ token: token }) : ChatMessage.getSpeaker({ actor: this.actor })
         };
 
         const rollMode = game.settings.get("core", "rollMode");
@@ -468,7 +469,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     /**
      * Prepare this item's description, and chat message properties.
-     * @returns {Object} An object containing the item's rollData (including its owners), and chat message properties.
+     * @returns {Promise<object>} An object containing the item's rollData (including its owners), and chat message properties.
      */
     async getChatData() {
         const data = this.system;
@@ -549,7 +550,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (this.type === "container") {
             if (this.actor) {
                 const wealthString = new Intl.NumberFormat(game.i18n.lang).format(Math.floor(this.contentWealth));
-                const wealthProperty = game.i18n.format("SFRPG.CharacterSheet.Inventory.ContainedWealth", {wealth: wealthString});
+                const wealthProperty = game.i18n.format("SFRPG.CharacterSheet.Inventory.ContainedWealth", { wealth: wealthString });
                 props.push({
                     name: wealthProperty,
                     tooltip: null
@@ -596,9 +597,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     _equipmentChatData(data, labels, props) {
         props.push(
-            {name: CONFIG.SFRPG.armorTypes[data.armor.type], tooltip: null},
-            {name: labels.eac || null, tooltip: null},
-            {name: labels.kac || null, tooltip: null}
+            { name: CONFIG.SFRPG.armorTypes[data.armor.type], tooltip: null },
+            { name: labels.eac || null, tooltip: null },
+            { name: labels.kac || null, tooltip: null }
         );
     }
 
@@ -610,9 +611,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     _weaponChatData(data, labels, props) {
         props.push(
-            {name: CONFIG.SFRPG.weaponTypes[data.weaponType], tooltip: null},
+            { name: CONFIG.SFRPG.weaponTypes[data.weaponType], tooltip: null },
             ...Object.entries(data.properties).filter(e => e[1].value === true)
-                .map(e => ({name: CONFIG.SFRPG.weaponProperties[e[0]], tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]]})
+                .map(e => ({ name: CONFIG.SFRPG.weaponProperties[e[0]], tooltip: CONFIG.SFRPG.weaponPropertiesTooltips[e[0]] })
                 )
         );
     }
@@ -625,8 +626,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     _consumableChatData(data, labels, props) {
         props.push(
-            {name: CONFIG.SFRPG.consumableTypes[data.consumableType], tooltip: null},
-            {name: this.getRemainingUses() + "/" + this.getMaxUses() + ` ${game.i18n.localize("SFRPG.FeaturesCharges")}`, tooltip: null}
+            { name: CONFIG.SFRPG.consumableTypes[data.consumableType], tooltip: null },
+            { name: this.getRemainingUses() + "/" + this.getMaxUses() + ` ${game.i18n.localize("SFRPG.FeaturesCharges")}`, tooltip: null }
         );
         data.hasCharges = this.getRemainingUses() >= 0;
     }
@@ -639,8 +640,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     _goodsChatData(data, labels, props) {
         props.push(
-            {name: CONFIG.SFRPG.itemTypes["goods"], tooltip: null},
-            data.bulk ? {name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null} : null
+            { name: CONFIG.SFRPG.itemTypes["goods"], tooltip: null },
+            data.bulk ? { name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null } : null
         );
     }
 
@@ -652,9 +653,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     _technologicalChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("TYPES.Item.technological"), tooltip: null},
-            data.bulk ? {name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null} : null,
-            data.hands ? {name: `${game.i18n.localize("SFRPG.Items.Description.Hands")} ${data.hands}`, tooltip: null} : null
+            { name: game.i18n.localize("TYPES.Item.technological"), tooltip: null },
+            data.bulk ? { name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null } : null,
+            data.hands ? { name: `${game.i18n.localize("SFRPG.Items.Description.Hands")} ${data.hands}`, tooltip: null } : null
         );
     }
 
@@ -666,9 +667,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     _hybridChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("TYPES.Item.hybrid"), tooltip: null},
-            data.bulk ? {name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null} : null,
-            data.hands ? {name: `${game.i18n.localize("SFRPG.Items.Description.Hands")} ${data.hands}`, tooltip: null} : null
+            { name: game.i18n.localize("TYPES.Item.hybrid"), tooltip: null },
+            data.bulk ? { name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null } : null,
+            data.hands ? { name: `${game.i18n.localize("SFRPG.Items.Description.Hands")} ${data.hands}`, tooltip: null } : null
         );
     }
 
@@ -680,9 +681,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     _magicChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("TYPES.Item.magic"), tooltip: null},
-            data.bulk ? {name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null} : null,
-            data.hands ? {name: `${game.i18n.localize("SFRPG.Items.Description.Hands")} ${data.hands}`, tooltip: null} : null
+            { name: game.i18n.localize("TYPES.Item.magic"), tooltip: null },
+            data.bulk ? { name: `${game.i18n.localize("SFRPG.InventoryBulk")} ${data.bulk}`, tooltip: null } : null,
+            data.hands ? { name: `${game.i18n.localize("SFRPG.Items.Description.Hands")} ${data.hands}`, tooltip: null } : null
         );
     }
 
@@ -702,17 +703,17 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         props.push(
-            {name: game.i18n.localize("TYPES.Item.upgrade"), tooltip: null},
-            data.slots ? {name: `${game.i18n.localize("SFRPG.Items.Upgrade.Slots")} ${data.slots}`, tooltip: null} : null,
-            {name: `${game.i18n.localize("SFRPG.Items.Upgrade.AllowedArmorType")}: ${allowedArmorType}`, tooltip: null}
+            { name: game.i18n.localize("TYPES.Item.upgrade"), tooltip: null },
+            data.slots ? { name: `${game.i18n.localize("SFRPG.Items.Upgrade.Slots")} ${data.slots}`, tooltip: null } : null,
+            { name: `${game.i18n.localize("SFRPG.Items.Upgrade.AllowedArmorType")}: ${allowedArmorType}`, tooltip: null }
         );
     }
 
     _augmentationChatData(data, labels, props) {
         props.push(
-            {name:game.i18n.localize("TYPES.Item.augmentation"), tooltip: null},
-            data.type ? {name: CONFIG.SFRPG.augmentationTypes[data.type], tooltip: null} : null,
-            data.system ? {name: CONFIG.SFRPG.augmentationSystems[data.system], tooltip: null} : null
+            { name: game.i18n.localize("TYPES.Item.augmentation"), tooltip: null },
+            data.type ? { name: CONFIG.SFRPG.augmentationTypes[data.type], tooltip: null } : null,
+            data.system ? { name: CONFIG.SFRPG.augmentationSystems[data.system], tooltip: null } : null
         );
     }
 
@@ -724,19 +725,19 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      */
     _fusionChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("TYPES.Item.fusion"), tooltip: null},
-            data.level ? {name: `${game.i18n.localize("SFRPG.LevelLabelText")} ${data.level}`, tooltip: null} : null
+            { name: game.i18n.localize("TYPES.Item.fusion"), tooltip: null },
+            data.level ? { name: `${game.i18n.localize("SFRPG.LevelLabelText")} ${data.level}`, tooltip: null } : null
         );
     }
 
     _starshipWeaponChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("TYPES.Item.starshipWeapon"), tooltip: null},
-            data.weaponType ? {name: CONFIG.SFRPG.starshipWeaponTypes[data.weaponType], tooltip: null} : null,
-            data.class ? {name: CONFIG.SFRPG.starshipWeaponClass[data.class], tooltip: null} : null,
-            data.range ? {name: CONFIG.SFRPG.starshipWeaponRanges[data.range], tooltip: null} : null,
-            data.mount.mounted ? {name: game.i18n.localize("SFRPG.Items.ShipWeapon.Mounted"), tooltip: null} : {name: game.i18n.localize("SFRPG.Items.ShipWeapon.NotMounted"), tooltip: null},
-            data.speed > 0 ? {name: game.i18n.format("SFRPG.Items.ShipWeapon.Speed", {speed: data.speed}), tooltip: null} : null
+            { name: game.i18n.localize("TYPES.Item.starshipWeapon"), tooltip: null },
+            data.weaponType ? { name: CONFIG.SFRPG.starshipWeaponTypes[data.weaponType], tooltip: null } : null,
+            data.class ? { name: CONFIG.SFRPG.starshipWeaponClass[data.class], tooltip: null } : null,
+            data.range ? { name: CONFIG.SFRPG.starshipWeaponRanges[data.range], tooltip: null } : null,
+            data.mount.mounted ? { name: game.i18n.localize("SFRPG.Items.ShipWeapon.Mounted"), tooltip: null } : { name: game.i18n.localize("SFRPG.Items.ShipWeapon.NotMounted"), tooltip: null },
+            data.speed > 0 ? { name: game.i18n.format("SFRPG.Items.ShipWeapon.Speed", { speed: data.speed }), tooltip: null } : null
         );
     }
 
@@ -787,13 +788,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         // Spell properties
         props.push(
-            {name: labels.level, tooltip: null}
+            { name: labels.level, tooltip: null }
         );
 
         // Spell school
         if (CONFIG.SFRPG.spellSchools[data.school]) {
             props.push(
-                {name: game.i18n.localize(SFRPG.spellSchools[data.school]), tooltip: null}
+                { name: game.i18n.localize(CONFIG.SFRPG.spellSchools[data.school]), tooltip: null }
             );
         }
     }
@@ -806,23 +807,23 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     _featChatData(data, labels, props) {
         // Feat properties
         props.push(
-            {name: data.requirements, tooltip: null}
+            { name: data.requirements, tooltip: null }
         );
     }
 
     _themeChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("TYPES.Item.theme"), tooltip: null},
-            data.abilityMod.ability ? {name: `Ability ${CONFIG.SFRPG.abilities[data.abilityMod.ability]}`, tooltip: null} : null,
-            data.skill ? {name: `Skill ${CONFIG.SFRPG.skills[data.skill]}`, tooltip: null} : null
+            { name: game.i18n.localize("TYPES.Item.theme"), tooltip: null },
+            data.abilityMod.ability ? { name: `Ability ${CONFIG.SFRPG.abilities[data.abilityMod.ability]}`, tooltip: null } : null,
+            data.skill ? { name: `Skill ${CONFIG.SFRPG.skills[data.skill]}`, tooltip: null } : null
         );
     }
 
     _raceChatData(data, labels, props) {
         props.push(
-            {name: game.i18n.localize("TYPES.Item.race"), tooltip: null},
-            data.type ? {name: data.type, tooltip: null} : null,
-            data.subtype ? {name: data.subtype, tooltip: null} : null
+            { name: game.i18n.localize("TYPES.Item.race"), tooltip: null },
+            data.type ? { name: data.type, tooltip: null } : null,
+            data.subtype ? { name: data.subtype, tooltip: null } : null
         );
     }
 
@@ -834,7 +835,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     _vehicleSystemChatData(data, label, props) {
 
-        if (data.senses &&  data.senses.usedForSenses) {
+        if (data.senses && data.senses.usedForSenses) {
             // We deliminate the senses by `,` and present each sense as a separate property
             const sensesDeliminated = data.senses.senses.split(",");
             for (let index = 0; index < sensesDeliminated.length; index++) {
@@ -904,7 +905,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (abl) parts.push(`@abilities.${abl}.mod`);
         if (["character", "drone"].includes(this.actor.type)) parts.push("@attributes.baseAttackBonus.value");
         if (isWeapon) {
-            const proficiencyKey = SFRPG.weaponTypeProficiency[this.system.weaponType];
+            const proficiencyKey = CONFIG.SFRPG.weaponTypeProficiency[this.system.weaponType];
             const proficient = itemData.proficient || this.actor?.system?.traits?.weaponProf?.value?.includes(proficiencyKey);
             if (!proficient) {
                 parts.push(`-4[${game.i18n.localize("SFRPG.Items.NotProficient")}]`);
@@ -914,7 +915,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         let modifiers = this.getAppropriateAttackModifiers(isWeapon);
 
         const stackModifiers = new StackModifiers();
-        modifiers = await stackModifiers.processAsync(modifiers, null, {actor: this.actor});
+        modifiers = await stackModifiers.processAsync(modifiers, null, { actor: this.actor });
 
         const rolledMods = [];
         const addModifier = (bonus, parts) => {
@@ -923,7 +924,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                 return;
             }
             const computedBonus = bonus.modifier;
-            parts.push({score: computedBonus, explanation: bonus.name});
+            parts.push({ score: computedBonus, explanation: bonus.name });
             return computedBonus;
         };
 
@@ -942,7 +943,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         if (this.system.actionTarget) {
             rollOptions.actionTarget = this.system.actionTarget;
-            rollOptions.actionTargetSource = SFRPG.actionTargets;
+            rollOptions.actionTargetSource = CONFIG.SFRPG.actionTargets;
         }
 
         // Add has__ properties to itemData
@@ -952,20 +953,20 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         itemData.hasDamage = this.hasDamage;
         itemData.hasCapacity = this.hasCapacity();
 
-        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
+        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", { name: this.name });
 
         // Warn the user if there is no ammo left
         const usage = itemData.usage?.value || 0;
         const availableCapacity = this.getCurrentCapacity();
         if (availableCapacity < usage) {
-            ui.notifications.warn(game.i18n.format("SFRPG.ItemNoAmmo", {name: this.name}));
+            ui.notifications.warn(game.i18n.format("SFRPG.ItemNoAmmo", { name: this.name }));
         }
 
-        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
+        const rollContext = RollContext.createItemRollContext(this, this.actor, { itemData: itemData });
 
         /** Create global attack modifiers. */
-        const additionalModifiers = foundry.utils.deepClone(SFRPG.globalAttackRollModifiers).map(mod => {
-            const modInstance = {bonus: new SFRPGModifier(mod.bonus, {parent: this, globalModifier: true})};
+        const additionalModifiers = foundry.utils.deepClone(CONFIG.SFRPG.globalAttackRollModifiers).map(mod => {
+            const modInstance = { bonus: new SFRPGModifier(mod.bonus, { parent: this, globalModifier: true }) };
             return modInstance;
         });
 
@@ -976,7 +977,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             });
         }
 
-        rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
+        rollContext.addContext("additional", { name: "additional" }, { modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
 
         // Call the roll helper utility
@@ -1007,7 +1008,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     getAppropriateAttackModifiers(isWeapon) {
         const acceptedModifiers = [SFRPGEffectType.ALL_ATTACKS];
-        if (SFRPG.spellAttackActions.includes(this.system.actionType)) {
+        if (CONFIG.SFRPG.spellAttackActions.includes(this.system.actionType)) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_ATTACKS);
         } else if (this.system.actionType === "rwak") {
             acceptedModifiers.push(SFRPGEffectType.RANGED_ATTACKS);
@@ -1094,7 +1095,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     _calculateAmmoUsageWithModifiers(value) {
         let modifiers = this.getAppropriateAmmoUsageModifiers();
         const stackModifiers = new StackModifiers();
-        modifiers = stackModifiers.process(modifiers, null, {actor: this.actor, item: this});
+        modifiers = stackModifiers.process(modifiers, null, { actor: this.actor, item: this });
         let multiplier = 1.0;
         const modsToProcess = [];
         for (const modValue of Object.values(modifiers)) {
@@ -1137,11 +1138,11 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             }
         }
 
-        Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+        Hooks.callAll("attackRolled", { actor: this.actor, item: this, roll: roll, formula: { base: formula, final: finalFormula }, rollMetadata: options?.rollMetadata });
 
         const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
         if (rollDamageWithAttack && !DiceSFRPG.isFumble(roll) && !options.disableDamageAfterAttack) {
-            this.rollDamage({}, {linkedAttackRoll: roll});
+            this.rollDamage({}, { linkedAttackRoll: roll });
         }
     }
 
@@ -1172,7 +1173,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         } else { // If not an ECM weapon and not an NPC, use BAB/Piloting + Dex
             parts = ["max(@gunner.attributes.baseAttackBonus.value, @gunner.skills.pil.ranks)", "@gunner.abilities.dex.mod"];
         }
-        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
+        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", { name: this.name });
 
         // If max capacity is 0, assume the item doesn't have limited fire property
         if (this.hasCapacity() && this.getCurrentCapacity() <= 0 && this.getMaxCapacity() > 0) {
@@ -1192,26 +1193,26 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         /** Create additional modifiers. */
         const additionalModifiers = [
-            {bonus: {_id: "ComputerBonus", name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: `${this.actor.system?.attributes?.computer?.value ?? 0}`, enabled: false} },
-            {bonus: {_id: "CaptainDemand", name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false} },
-            {bonus: {_id: "CaptainEncouragement", name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false} },
-            {bonus: {_id: "ScienceOfficerLockOn", name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false} },
-            {bonus: {_id: "SnapShot", name: game.i18n.format("SFRPG.Rolls.Starship.SnapShot"), modifier: "-2", enabled: false} },
-            {bonus: {_id: "FireAtWill", name: game.i18n.format("SFRPG.Rolls.Starship.FireAtWill"), modifier: "-4", enabled: false} },
-            {bonus: {_id: "Broadside", name: game.i18n.format("SFRPG.Rolls.Starship.Broadside"), modifier: "-2", enabled: false} }
+            { bonus: { _id: "ComputerBonus", name: game.i18n.format("SFRPG.Rolls.Starship.ComputerBonus"), modifier: `${this.actor.system?.attributes?.computer?.value ?? 0}`, enabled: false } },
+            { bonus: { _id: "CaptainDemand", name: game.i18n.format("SFRPG.Rolls.Starship.CaptainDemand"), modifier: "4", enabled: false } },
+            { bonus: { _id: "CaptainEncouragement", name: game.i18n.format("SFRPG.Rolls.Starship.CaptainEncouragement"), modifier: "2", enabled: false } },
+            { bonus: { _id: "ScienceOfficerLockOn", name: game.i18n.format("SFRPG.Rolls.Starship.ScienceOfficerLockOn"), modifier: "2", enabled: false } },
+            { bonus: { _id: "SnapShot", name: game.i18n.format("SFRPG.Rolls.Starship.SnapShot"), modifier: "-2", enabled: false } },
+            { bonus: { _id: "FireAtWill", name: game.i18n.format("SFRPG.Rolls.Starship.FireAtWill"), modifier: "-4", enabled: false } },
+            { bonus: { _id: "Broadside", name: game.i18n.format("SFRPG.Rolls.Starship.Broadside"), modifier: "-2", enabled: false } }
         ];
 
         const attackBonus = parseInt(this.system.attackBonus);
         if (attackBonus) parts.push("@item.attackBonus");
 
-        rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
+        rollContext.addContext("additional", { name: "additional" }, { modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
         parts.push("@additional.modifiers.bonus");
 
         const rollOptions = {};
 
         if (this.system.actionTarget) {
             rollOptions.actionTarget = this.system.actionTarget;
-            rollOptions.actionTargetSource = SFRPG.actionTargetsStarship;
+            rollOptions.actionTargetSource = CONFIG.SFRPG.actionTargetsStarship;
         }
 
         const quadrant = this.system.mount.arc.charAt(0).toUpperCase() + this.system.mount.arc.slice(1);
@@ -1249,7 +1250,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                         this.consumeCapacity(1);
                     }
 
-                    Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                    Hooks.callAll("attackRolled", { actor: this.actor, item: this, roll: roll, formula: { base: formula, final: finalFormula }, rollMetadata: options?.rollMetadata });
                 }
             }
         });
@@ -1265,7 +1266,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // TODO: Take vehicle's negative attack modifiers
         const parts = [];
 
-        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", {name: this.name});
+        const title = game.settings.get('sfrpg', 'useCustomChatCards') ? game.i18n.format("SFRPG.Rolls.AttackRoll") : game.i18n.format("SFRPG.Rolls.AttackRollFull", { name: this.name });
 
         /** Build the roll context */
         const rollContext = new RollContext();
@@ -1300,7 +1301,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                         this.consumeCapacity(1);
                     }
 
-                    Hooks.callAll("attackRolled", {actor: this.actor, item: this, roll: roll, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                    Hooks.callAll("attackRolled", { actor: this.actor, item: this, roll: roll, formula: { base: formula, final: finalFormula }, rollMetadata: options?.rollMetadata });
                 }
             }
         });
@@ -1314,9 +1315,9 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * @returns {Promise<bool>}  `true` if roll was performed, `false` if it was canceled
      */
     async rollDamage({ event } = {}, options = {}) {
-        const itemData  = this.system;
+        const itemData = this.system;
         const actorData = this.actor.getRollData(); // this.actor.system;
-        const isWeapon  = ["weapon", "shield"].includes(this.type);
+        const isWeapon = ["weapon", "shield"].includes(this.type);
         const isHealing = this.system.actionType === "heal";
 
         if (!this.hasDamage) {
@@ -1325,7 +1326,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         if (this.type === "starshipWeapon") return this._rollStarshipDamage({ event: event });
-        if (this.type === "vehicleAttack") return this._rollVehicleDamage({ event: event});
+        if (this.type === "vehicleAttack") return this._rollVehicleDamage({ event: event });
 
         // Determine ability score modifier
         let abl = itemData.ability;
@@ -1342,7 +1343,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         let modifiers = this.getAppropriateDamageModifiers(isWeapon);
 
         const stackModifiers = new StackModifiers();
-        modifiers = await stackModifiers.processAsync(modifiers, null, {actor: this.actor});
+        modifiers = await stackModifiers.processAsync(modifiers, null, { actor: this.actor });
 
         const rolledMods = [];
         const addModifier = (bonus, parts) => {
@@ -1385,19 +1386,19 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             }
         } else {
             if (isHealing) {
-                title = game.i18n.format("SFRPG.Rolls.HealingRollFull", {name: this.name});
+                title = game.i18n.format("SFRPG.Rolls.HealingRollFull", { name: this.name });
             } else {
-                title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
+                title = game.i18n.format("SFRPG.Rolls.DamageRollFull", { name: this.name });
             }
         }
 
-        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
+        const rollContext = RollContext.createItemRollContext(this, this.actor, { itemData: itemData });
 
         /** Create additional modifiers. */
         const additionalModifiers = [];
 
         if (itemData.properties?.archaic?.value && isWeapon) {
-            additionalModifiers.push({bonus: { name: game.i18n.format("SFRPG.WeaponPropertiesArchaic"), modifier: "-5", enabled: true, notes: game.i18n.format("SFRPG.WeaponPropertiesArchaicTooltip") } });
+            additionalModifiers.push({ bonus: { name: game.i18n.format("SFRPG.WeaponPropertiesArchaic"), modifier: "-5", enabled: true, notes: game.i18n.format("SFRPG.WeaponPropertiesArchaicTooltip") } });
         }
 
         for (const rolledMod of rolledMods) {
@@ -1407,7 +1408,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         if (additionalModifiers.length > 0) {
-            rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
+            rollContext.addContext("additional", { name: "additional" }, { modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
             parts.push({ formula: "@additional.modifiers.bonus" });
         }
 
@@ -1434,7 +1435,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             },
             onClose: (roll, formula, finalFormula, isCritical) => {
                 if (roll) {
-                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                    Hooks.callAll("damageRolled", { actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: { base: formula, final: finalFormula }, rollMetadata: options?.rollMetadata });
                 }
             }
         });
@@ -1443,7 +1444,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     getAppropriateDamageModifiers(isWeapon) {
         const acceptedModifiers = [SFRPGEffectType.ALL_DAMAGE];
 
-        if (SFRPG.spellAttackActions.includes(this.system.actionType) || (this.type === "spell"  && this.system.actionType === "save")) {
+        if (CONFIG.SFRPG.spellAttackActions.includes(this.system.actionType) || (this.type === "spell" && this.system.actionType === "save")) {
             acceptedModifiers.push(SFRPGEffectType.SPELL_DAMAGE);
         } else if (this.system.actionType === "rwak") {
             acceptedModifiers.push(SFRPGEffectType.RANGED_DAMAGE);
@@ -1504,7 +1505,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
             title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
         } else {
-            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
+            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", { name: this.name });
         }
 
         /** Build the roll context */
@@ -1529,7 +1530,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             },
             onClose: (roll, formula, finalFormula, isCritical) => {
                 if (roll) {
-                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                    Hooks.callAll("damageRolled", { actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: { base: formula, final: finalFormula }, rollMetadata: options?.rollMetadata });
                 }
             }
         });
@@ -1551,7 +1552,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         if (game.settings.get('sfrpg', 'useCustomChatCards')) {
             title = game.i18n.localize("SFRPG.Rolls.DamageRoll");
         } else {
-            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", {name: this.name});
+            title = game.i18n.format("SFRPG.Rolls.DamageRollFull", { name: this.name });
         }
 
         /** Build the roll context */
@@ -1566,7 +1567,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         return DiceSFRPG.damageRoll({
             event: event,
             parts: parts,
-            criticalData: {preventDoubling: true},
+            criticalData: { preventDoubling: true },
             rollContext: rollContext,
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -1579,7 +1580,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             },
             onClose: (roll, formula, finalFormula, isCritical) => {
                 if (roll) {
-                    Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
+                    Hooks.callAll("damageRolled", { actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: { base: formula, final: finalFormula }, rollMetadata: options?.rollMetadata });
                 }
             }
         });
@@ -1609,7 +1610,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         // Define Roll Data
-        const rollContext = RollContext.createItemRollContext(this, this.actor, {itemData: itemData});
+        const rollContext = RollContext.createItemRollContext(this, this.actor, { itemData: itemData });
 
         const title = game.i18n.localize(`SFRPG.Items.Action.OtherFormula`);
         const rollResult = await DiceSFRPG.createRoll({
@@ -1630,7 +1631,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             chatMessage: options.chatMessage,
             content: content,
             rolls: [rollResult.roll],
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
         });
     }
@@ -1652,12 +1653,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
 
         if (!sufficientCapacity && !addCapacity) {
-            ui.notifications.error(game.i18n.format("SFRPG.Items.Consumable.ErrorNoUses", {name: this.name}));
+            ui.notifications.error(game.i18n.format("SFRPG.Items.Consumable.ErrorNoUses", { name: this.name }));
             return;
         }
 
         if (!addCapacity && this.type === "consumable" && itemData.actionType) {
-            options.flavorOverride = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", {consumableName: this.name});
+            options.flavorOverride = game.i18n.format("SFRPG.Items.Consumable.UseChatMessage", { consumableName: this.name });
 
             // Roll damage/attack or place template if needed. Do this here for the case where the item is consumed on use.
             if (this.hasAttack) {
@@ -1697,8 +1698,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             renderPromise.then((html) => {
                 // Create the chat message
                 const chatData = {
-                    type: CONST.CHAT_MESSAGE_STYLES.OTHER,
-                    speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor}),
+                    style: CONST.CHAT_MESSAGE_STYLES.OTHER,
+                    speaker: token ? ChatMessage.getSpeaker({ token: token }) : ChatMessage.getSpeaker({ actor: this.actor }),
                     content: html
                 };
 
@@ -1735,7 +1736,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const rollMode = game.settings.get("core", "rollMode");
         const chatData = {
             author: game.user.id,
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",
@@ -1804,7 +1805,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             damage
         });
         console.log("Adding a modifier to the item");
-        await this.update({["system.modifiers"]: modifiers});
+        await this.update({ ["system.modifiers"]: modifiers });
     }
 
     static async _onScalingCantripsSettingChanges(setting) {
@@ -1824,7 +1825,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             let updates = [];
             const params = actor.items.filter(i => i.system.scaling?.d3 || i.system.scaling?.d6);
             if (params.length > 0) {
-                updates = params.map( (currentValue) => {
+                updates = params.map((currentValue) => {
                     return {
                         _id: currentValue.id,
                         "system.damage.parts": currentValue.system.damage.parts,
@@ -1885,7 +1886,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
             parts.forEach(i => i.formula = (isNPC) ? npcd3scaling : d3scaling);
 
-            console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
+            console.log(`Starfinder | Updated ${item.name} to use the ${(isNPC) ? 'NPC ' : ""}d3 scaling formula.`);
 
         } else if (item.system.scaling?.d6) {
             const d6scaling = "(lookupRange(@details.cl.value,1,7,2,10,3,13,4,15,5,17,7,19,9))d6+(ternary(gte(@details.cl.value,3),floor(@details.level.value/2),0))";
@@ -1893,7 +1894,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
             parts.forEach(i => i.formula = (isNPC) ? npcd6scaling : d6scaling);
 
-            console.log(`Starfinder | Updated ${item.name} to use the ${ (isNPC) ? "NPC " : ""}d6 scaling formula.`);
+            console.log(`Starfinder | Updated ${item.name} to use the ${(isNPC) ? "NPC " : ""}d6 scaling formula.`);
         }
     }
 
@@ -1902,10 +1903,20 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * The following functions are run when appropriate by the GM.
      */
 
+    /**
+     * @template {keyof typeof CONFIG.SFRPG.turnEventTypes} [Type=keyof typeof CONFIG.SFRPG.turnEventTypes]
+     * @typedef TurnEvent
+     * @property {string} [name]
+     * @property {keyof typeof CONFIG.SFRPG.effectEndTypes} trigger
+     * @property {Type} type
+     * @property {string} [formula]
+     * @property {Exclude<keyof typeof CONFIG.SFRPG.damageAndHealingTypes, "radiation"|"nonlethal">[]} damageTypes
+     */
+
     _onTurnStart() {
         if (this.type !== "effect" || !this.system.enabled) return;
 
-        for (const turnEvent of this.system.turnEvents) {
+        for (const turnEvent of /** @type {TurnEvent[]} */ (this.system.turnEvents)) {
             if (turnEvent.trigger !== "onTurnStart") continue;
 
             this._handleTurnEvent(turnEvent);
@@ -1917,7 +1928,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     _onTurnEnd() {
         if (this.type !== "effect" || !this.system.enabled) return;
 
-        for (const turnEvent of this.system.turnEvents) {
+        for (const turnEvent of /** @type {TurnEvent[]} */ (this.system.turnEvents)) {
             if (turnEvent.trigger !== "onTurnEnd") continue;
 
             this._handleTurnEvent(turnEvent);
@@ -1925,6 +1936,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
     }
 
+    /** @param {TurnEvent} turnEvent */
     _handleTurnEvent(turnEvent) {
         switch (turnEvent.type) {
             case "note":
@@ -1936,6 +1948,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
     }
 
+    /** @param {TurnEvent<"note">} turnEvent */
     _handleEffectNoteEvent(turnEvent) {
         ChatMessage.create({
             content: turnEvent.content,
@@ -1943,6 +1956,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         });
     }
 
+    /** @param {TurnEvent<"roll">} turnEvent */
     async _handleEffectRollEvent(turnEvent) {
         if (!turnEvent.formula) return;
 
@@ -1970,7 +1984,8 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     /**
      * Execute a macro with the context of this item
      * @param {foundry.documents.Macro} macro The macro to execute
-     * @param {Record<string, *>} scope Any additional arguments to pass to macro execution
+     * @param {object} [scope={}] Any additional arguments to pass to macro execution
+     * @param {Event} [scope.event] An optional event passed to the executed macro
      * @returns {Promise<unknown>} The return value of the macro
      */
     async executeMacroWithContext(macro, scope = {}) {

@@ -19,7 +19,8 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
      * @param {String}        data.source        Where did this modifier come from? An item, ability or something else?
      * @param {String}        data.notes         Any notes or comments about the modifier.
      * @param {String}        data.condition     The condition, if any, that this modifier is associated with.
-     * @param {?String}   data.id            Override the randomly generated id with this.
+     * @param {?String}       data.id            Override the randomly generated id with this.
+     * @returns {Promise<this>}
      */
     async addModifier({
         name = "",
@@ -55,7 +56,7 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
             limitTo,
             damage
         });
-        await this.update({"system.modifiers": modifiers});
+        return this.update({ "system.modifiers": modifiers });
     }
 
     /**
@@ -79,30 +80,30 @@ export const ActorModifiersMixin = (superclass) => class extends superclass {
 
             let modifiersToPush = [];
             switch (item.type) {
-            // Armor upgrades are only valid if they are slotted into an equipped armor
+                // Armor upgrades are only valid if they are slotted into an equipped armor
                 case "upgrade":
-                {
-                    if (!ignoreEquipment) {
-                        const container = getItemContainer(this.items, item);
-                        if (container && container.type === "equipment" && container.system.equipped) {
-                            modifiersToPush = itemModifiers;
+                    {
+                        if (!ignoreEquipment) {
+                            const container = getItemContainer(this.items, item);
+                            if (container && container.type === "equipment" && container.system.equipped) {
+                                modifiersToPush = itemModifiers;
+                            }
                         }
+                        break;
                     }
-                    break;
-                }
 
                 // Weapon upgrades (Fusions and accessories) are only valid if they are slotted into an equipped weapon
                 case "fusion":
                 case "weaponAccessory":
-                {
-                    if (!ignoreEquipment) {
-                        const container = getItemContainer(this.items, item);
-                        if (container && container.type === "weapon" && container.system.equipped) {
-                            modifiersToPush = itemModifiers;
+                    {
+                        if (!ignoreEquipment) {
+                            const container = getItemContainer(this.items, item);
+                            if (container && container.type === "weapon" && container.system.equipped) {
+                                modifiersToPush = itemModifiers;
+                            }
                         }
+                        break;
                     }
-                    break;
-                }
 
                 // Feats are only active when they are passive, or activated
                 case "feat":

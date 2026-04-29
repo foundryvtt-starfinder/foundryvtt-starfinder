@@ -1,4 +1,3 @@
-import { SFRPG } from "../../../config.js";
 import { SFRPGEffectType, SFRPGModifierType } from "../../../modifiers/types.js";
 
 export default function(engine) {
@@ -23,7 +22,7 @@ export default function(engine) {
 
             if (computedBonus !== 0 && localizationKey) {
                 item.tooltip.push(game.i18n.format(localizationKey, {
-                    speed: SFRPG.speeds[speedKey],
+                    speed: CONFIG.SFRPG.speeds[speedKey],
                     type: game.i18n.format(`SFRPG.ModifierType${bonus.type.capitalize()}`),
                     mod: computedBonus.signedString(),
                     source: bonus.name
@@ -64,13 +63,13 @@ export default function(engine) {
         if (armorSpeed) {
             data.attributes.speed.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.Speed", {
                 speed: game.i18n.localize("SFRPG.ActorSheet.Attributes.Speed.Types.All"),
-                type: SFRPG.modifierTypes["armor"],
+                type: CONFIG.SFRPG.modifierTypes["armor"],
                 mod: armorSpeed.signedString(),
                 source: slowestArmor.name
             }));
         }
 
-        for (const speedKey of Object.keys(SFRPG.speeds)) {
+        for (const speedKey of Object.keys(CONFIG.SFRPG.speeds)) {
             if (speedKey === "special") {
                 continue;
             }
@@ -128,7 +127,7 @@ export default function(engine) {
 
                     if (computedBonus !== 0) {
                         data.attributes.speed.tooltip.push(game.i18n.format("SFRPG.ActorSheet.Modifiers.Tooltips.Speed", {
-                            speed: SFRPG.speeds[speedKey],
+                            speed: CONFIG.SFRPG.speeds[speedKey],
                             type: modifierBonus.type.capitalize(),
                             mod: Math.floor(100 * computedBonus) + "%",
                             source: modifierBonus.name

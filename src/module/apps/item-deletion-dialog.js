@@ -1,8 +1,7 @@
 /**
  * A helper Dialog subclass for confirming deletion of items.
- * @type {Dialog}
  */
-export class ItemDeletionDialog extends Dialog {
+export class ItemDeletionDialog extends foundry.appv1.api.Dialog {
     constructor(itemName, containsItems, confirmationCallback, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];

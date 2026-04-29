@@ -74,7 +74,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
         const maxUses = this.getMaxUses();
         if (!this.isActive() && maxUses > 0) {
             if (remainingUses <= 0) {
-                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.UI.ErrorNoCharges", {name: this.name}));
+                ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.UI.ErrorNoCharges", { name: this.name }));
                 return false;
             }
 
@@ -165,7 +165,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 htmlPromise.then((html) => {
                     // Create the chat message
                     const chatData = {
-                        type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+                        style: CONST.CHAT_MESSAGE_STYLES.OTHER,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                         content: html,
                         flags: {
@@ -182,7 +182,7 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                     ChatMessage.create(chatData, { displaySheet: false });
                 });
 
-                Hooks.callAll("itemActivationChanged", {actor: this.actor, item: this, isActive: active});
+                Hooks.callAll("itemActivationChanged", { actor: this.actor, item: this, isActive: active });
             });
         }
 

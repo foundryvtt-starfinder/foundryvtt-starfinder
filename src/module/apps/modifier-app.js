@@ -351,7 +351,7 @@ export default class SFRPGModifierApplication extends foundry.appv1.api.FormAppl
     /**
      * Update the Actor object with the new modifier data.
      *
-     * @param {Event} event The event that triggers the update
+     * @param {SubmitEvent} event The event that triggers the update
      * @param {Object} formData The data from the form
      */
     _updateObject(event, formData) {

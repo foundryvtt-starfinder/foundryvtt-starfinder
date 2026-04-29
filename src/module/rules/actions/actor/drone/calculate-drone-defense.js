@@ -1,4 +1,3 @@
-import { SFRPG } from "../../../../config.js";
 
 export default function(engine) {
     engine.closures.add("calculateDroneDefense", (fact) => {
@@ -17,8 +16,8 @@ export default function(engine) {
             let droneLevel = chassisData.levels;
             droneLevel = Math.max(1, Math.min(droneLevel, 20));
 
-            data.attributes.eac.value = chassisData.eac + SFRPG.droneACBonusPerLevel[droneLevel - 1];
-            data.attributes.kac.value = chassisData.kac + SFRPG.droneACBonusPerLevel[droneLevel - 1];
+            data.attributes.eac.value = chassisData.eac + CONFIG.SFRPG.droneACBonusPerLevel[droneLevel - 1];
+            data.attributes.kac.value = chassisData.kac + CONFIG.SFRPG.droneACBonusPerLevel[droneLevel - 1];
         }
 
         data.attributes.eac.value += data.abilities.dex.mod;

@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemWeapon extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "weapon",
+            icon: "fas fa-gun"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Weapon'

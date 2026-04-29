@@ -2,6 +2,13 @@ import SFRPGItemBase from './base-item.mjs';
 
 export default class SFRPGItemStarshipCrewQuarter extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "starshipCrewQuarter",
+            icon: "fas fa-house-user"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.StarshipCrewQuarter'

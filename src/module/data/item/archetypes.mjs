@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemArchetypes extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "archetypes",
+            icon: "fas fa-id-badge"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Archetypes'

@@ -2,7 +2,7 @@ import eslint from "@eslint/js";
 
 export default [
     {
-        ignores: ["dist/*", "foundry/*"]
+        ignores: ["dist/**/*", "foundry/**/*"]
     },
 
     eslint.configs.recommended,

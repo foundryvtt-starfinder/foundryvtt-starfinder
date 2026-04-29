@@ -1,8 +1,15 @@
 import SFRPGItemBase from './base-item.mjs';
 
-const {fields} = foundry.data;
+const { fields } = foundry.data;
 
 export default class SFRPGItemClass extends SFRPGItemBase {
+
+    static get metadata() {
+        return {
+            type: "class",
+            icon: "fas fa-id-card"
+        };
+    }
 
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',

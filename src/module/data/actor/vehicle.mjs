@@ -3,6 +3,13 @@ import SFRPGActorBase from "./base-actor.mjs";
 const { fields } = foundry.data;
 
 export default class SFRPGActorVehicle extends SFRPGActorBase {
+    static get metadata()  {
+        return {
+            type: "vehicle",
+            icon: "fas fa-car"
+        };
+    };
+
     static defineSchema() {
         const schema = super.defineSchema();
 

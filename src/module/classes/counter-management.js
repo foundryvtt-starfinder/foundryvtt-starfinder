@@ -1,3 +1,8 @@
+/**
+ * @import Combatant from "@client/documents/combatant.mjs"
+ * @import { ItemSFRPG } from "../item/item.js"
+*/
+
 export default class CounterManagement {
 
     setup() {
@@ -98,9 +103,11 @@ export default class CounterManagement {
                         const counterToken = event.target.closest('.counter-token');
                         const combatantId = counterToken.dataset.combatantId;
 
+                        /** @type {Combatant} */
                         const combatant = game.combat.combatants.get(combatantId);
                         if (combatant) {
                             const actorResourceId = counterToken.dataset.actorResourceId;
+                            /** @type {ItemSFRPG} */
                             const actorResource = combatant.actor.items.get(actorResourceId);
                             if (actorResource) {
                                 actorResource.sheet.render(true);
@@ -112,6 +119,7 @@ export default class CounterManagement {
         });
     }
 
+    /** @returns {Combatant[]} */
     _getCombatants() {
         const combatants = [];
 

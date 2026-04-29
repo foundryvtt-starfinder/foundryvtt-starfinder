@@ -1,6 +1,3 @@
-import { SFRPG } from "../config.js";
-
-// Typedef's for documentation purposes.
 /**
  * A data structure for storing damage statistics.
  *
@@ -13,7 +10,7 @@ import { SFRPG } from "../config.js";
 /**
  * A custom dialog for confirming rolls from a user.
  */
-export default class RollDialog extends Dialog {
+export default class RollDialog extends foundry.appv1.api.Dialog {
     /**
      * Construct a custom RollDialog
      *
@@ -147,7 +144,7 @@ export default class RollDialog extends Dialog {
                 if (part.types && !foundry.utils.isEmpty(part.types)) {
                     typeString = Object.entries(part.types)
                         .filter(([, value]) => value)
-                        .map(([key]) => SFRPG.damageTypes[key])
+                        .map(([key]) => CONFIG.SFRPG.damageTypes[key])
                         .join(" & ");
                 }
                 part.type = typeString;

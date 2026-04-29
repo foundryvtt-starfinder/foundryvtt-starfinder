@@ -1,4 +1,4 @@
-export class ActorSheetFlags extends DocumentSheet {
+export class ActorSheetFlags extends foundry.appv1.api.DocumentSheet {
     static get defaultOptions() {
         const options = super.defaultOptions;
         return foundry.utils.mergeObject(options, {

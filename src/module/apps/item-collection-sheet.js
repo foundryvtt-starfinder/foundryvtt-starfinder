@@ -3,7 +3,7 @@ import { ItemSheetSFRPG } from "../item/sheet.js";
 import { RPC } from "../rpc.js";
 import { ItemDeletionDialog } from "./item-deletion-dialog.js";
 
-export class ItemCollectionSheet extends DocumentSheet {
+export class ItemCollectionSheet extends foundry.appv1.api.DocumentSheet {
     constructor(itemCollection) {
         super(itemCollection, {});
         this.itemCollection = itemCollection;

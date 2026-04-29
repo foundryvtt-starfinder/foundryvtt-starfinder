@@ -1,17 +1,15 @@
 /**
  * @import { CompendiumCollection } from "@client/documents/collections/_module.mjs"
- * @import Collection from "@common/utils/collection.mjs"
+ * @import { Collection } from "@common/utils/collection.mjs"
  * @import { ActorSFRPG } from "../actor/actor.js"
  * @import { ItemSFRPG } from "../item/item.js"
 */
 
 export class PackLoader {
-    constructor() {
-        this.loadedPacks = {
-            Actor: {},
-            Item: {}
-        };
-    }
+    loadedPacks = {
+        Actor: {},
+        Item: {}
+    };
 
     /**
      * @param {"Actor"|"Item"} entityType
@@ -53,12 +51,25 @@ export class PackLoader {
         for (const packId of packs) {
             let data = this.loadedPacks[entityType][packId];
 
-            /** @type {CompendiumCollection<ActorSFRPG|ItemSFRPG> | undefined} */
+            /** @type {CompendiumCollection<ActorSFRPG|ItemSFRPG>|undefined} */
             const pack = data?.pack || game.packs.get(packId);
             if (pack?.documentName !== entityType) continue;
 
             if (!data) {
-                const content = await pack.getIndex({ fields });
+
+                const index = pack.indexed ? pack.index : await pack.getIndex();
+                /** @type {Set<string>} */
+                const types = new Set(index.map(i => i.type));
+                const indexFields = [];
+                for (const type of types) {
+                    const schema = CONFIG[entityType].dataModels[type].schema;
+
+                    for (const field of schema) {
+                        if (field.options.compendiumIndexField) indexFields.push(field.fieldPath);
+                    }
+                }
+
+                const content = await pack.getIndex({ fields: indexFields });
                 this.setCompendiumArt(pack.collection, content);
                 data = this.loadedPacks[entityType][packId] = {
                     pack,
@@ -69,7 +80,7 @@ export class PackLoader {
 
             pct++;
 
-            ui.notifications.update(progress, {message: `Loading ${pack.metadata.label}...`, pct: (pct / packs.length) });
+            ui.notifications.update(progress, { message: `Loading ${pack.metadata.label}...`, pct: (pct / packs.length) });
 
             yield data;
         }
@@ -79,7 +90,7 @@ export class PackLoader {
 
     /**
      * @param {string} packName
-     * @param {Collection[]} index
+     * @param {Collection<string, object>[]} index
      */
     setCompendiumArt(packName, index) {
         if (!packName.startsWith("sfrpg.")) return;

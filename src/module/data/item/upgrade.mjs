@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemUpgrade extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "upgrade",
+            icon: "fas fa-link"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Upgrade'

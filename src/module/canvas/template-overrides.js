@@ -1,3 +1,5 @@
+/** @import Ray from "@client/canvas/geometry/_module.mjs" */
+
 const { Ray } = foundry.canvas.geometry;
 
 // Applies patches to core functions to integrate Starfinder specific measurements.

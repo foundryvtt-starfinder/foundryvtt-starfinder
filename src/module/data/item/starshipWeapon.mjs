@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemStarshipWeapon extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "starshipWeapon",
+            icon: "fas fa-explosion"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.StarshipWeapon'
@@ -61,7 +68,8 @@ export default class SFRPGItemStarshipWeapon extends SFRPGItemBase {
                 choices: Object.keys(CONFIG.SFRPG.starshipWeaponClass),
                 blank: false,
                 label: "SFRPG.ItemSheet.StarshipWeapon.Class",
-                hint: "SFRPG.ItemSheet.StarshipWeapon.ClassTooltip"
+                hint: "SFRPG.ItemSheet.StarshipWeapon.ClassTooltip",
+                compendiumIndexField: true
             }),
             damage: new fields.SchemaField({
                 parts: new fields.ArrayField(
@@ -119,7 +127,8 @@ export default class SFRPGItemStarshipWeapon extends SFRPGItemBase {
                 blank: false,
                 required: true,
                 label: "SFRPG.ItemSheet.StarshipWeapon.WeaponType",
-                hint: "SFRPG.ItemSheet.StarshipWeapon.WeaponTypeTooltip"
+                hint: "SFRPG.ItemSheet.StarshipWeapon.WeaponTypeTooltip",
+                compendiumIndexField: true
             })
         });
 

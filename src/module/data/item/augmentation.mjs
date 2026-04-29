@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemAugmentation extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "augmentation",
+            icon: "fas fa-vr-cardboard"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Augmentation'
@@ -34,7 +41,8 @@ export default class SFRPGItemAugmentation extends SFRPGItemBase {
                 choices: Object.keys(CONFIG.SFRPG.augmentationTypes),
                 blank: false,
                 required: true,
-                label: "SFRPG.Items.Augmentation.Type"
+                label: "SFRPG.Items.Augmentation.Type",
+                compendiumIndexField: true
             })
         });
 

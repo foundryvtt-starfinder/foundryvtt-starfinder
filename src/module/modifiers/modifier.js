@@ -4,10 +4,15 @@ import { ItemSFRPG } from "../item/item.js";
 import { generateUUID } from "../utils/utilities.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./types.js";
 
+/**
+ * @import { Document } from "@common/abstract/document.mjs"
+ * @import { DatabaseUpdateOperation, DatabaseDeleteOperation } from "@common/abstract/_types.mjs"
+ */
+
 const { fields } = foundry.data;
 
 /**
- * A data object that hold information about a specific modifier.
+ * A data object that holds information about a specific modifier.
  *
  * @param {Object}        data               The data for the modifier.
  * @param {String}        data.name          The name for the modifier. Only useful for identifying the modifier.
@@ -32,11 +37,11 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         this.globalModifier = options.globalModifier || false;
     }
 
-    _initializeSource(source, options = {}) {
+    _initializeSource(data, options = {}) {
         // Create a random id, or set the specific one if provided.
-        source._id ||= (source.id || generateUUID());
+        data._id ||= (data.id || generateUUID());
 
-        return super._initializeSource(source, options);
+        return super._initializeSource(data, options);
     }
 
     // Slight hack to keep modifiers on the database or exported to JSON minimal and clean.
@@ -61,17 +66,17 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
 
     _initialize(options = {}) {
         super._initialize(options);
-
         // _id is not a document ID, so we should be able to write to it.
-        Object.defineProperty(this, "_id", { value: this._id, writable: true, configurable: true });
+        // Object.defineProperty(this, "_id", { value: this._id, writable: true, configurable: false });
 
         // Calculate max, if not already
         try {
             const roll = Roll.create(this.modifier.toString(), this.owner.system);
-            this.max = roll.evaluateSync({strict: false}).total;
+            this.max = roll.evaluateSync({ strict: false }).total;
         } catch {
             this.max = 0;
         }
+
     }
 
     static defineSchema() {
@@ -205,23 +210,25 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         return this.actor.isToken ? this.actor.token : this.actor.getActiveTokens(true, true);
     }
 
-    /** @type {Boolean} */
+    /** @type {boolean} */
     get hasDamageSection() {
         return this.constructor._hasDamageSection(this);
     }
 
+    /** @returns {boolean} */
     static _hasDamageSection(obj) {
         return (obj.damage && Object.values(obj.damage.damageTypes).some(type => !!type)) || false;
     }
 
     async toggle(active = null) {
-        return this.parentUpdate({enabled: active ?? !this.enabled});
+        return this.parentUpdate({ enabled: active ?? !this.enabled });
     }
 
     /**
      * A helper method to directly update this modifier within its owner, instead of having to find it in the modifiers array every time.
      * @param {Object} data Update data to be applied to this modifier
-     * @param {Object} options Options to be passed to update. @see Document.update in foundry-esm.js 11580.
+     * @param {DatabaseUpdateOperation} options Options to be passed to update. @see {@link foundry.abstract.Document#update}
+     * @returns {Promise<ActorSFRPG|ItemSFRPG>}
      */
     async parentUpdate(data, options = {}) {
         if (!this.owner) throw new Error("SFRPG | This modifier has no parent, which is required to perform an update via the parent.");
@@ -236,14 +243,15 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
 
     /**
      * A helper method to delete this modifier from its owner
-     * @param {Object} options Options to be passed to update. @see Document.update in foundry-esm.js 11580.
+     * @param {DatabaseDeleteOperation} options Options to be passed to update. @see {@link foundry.abstract.Document#delete}
+     * @returns {Promise<ActorSFRPG|ItemSFRPG>}
      */
     async parentDelete(options = {}) {
         if (!this.owner) throw new Error("SFRPG | This modifier has no parent, which is required to delete via the parent.");
 
         const modifiers = this.owner.toObject().system.modifiers.filter(mod => mod._id !== this._id);
 
-        return this.owner.update({"system.modifiers": modifiers}, options);
+        return this.owner.update({ "system.modifiers": modifiers }, options);
     }
 
     /**

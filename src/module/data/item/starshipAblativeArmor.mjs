@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemStarshipAblativeArmor extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "starshipAblativeArmor",
+            icon: "fas fa-shield-halved"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.StarshipAblativeArmor'

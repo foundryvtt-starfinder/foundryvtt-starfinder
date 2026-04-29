@@ -1,3 +1,5 @@
+import { ActorSFRPG } from "../actor/actor.js";
+import { ItemSFRPG } from "../item/item.js";
 import SFRPGModifier from "../modifiers/modifier.js";
 
 const { fields } = foundry.data;
@@ -72,6 +74,16 @@ export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
             special: new fields.StringField({initial: "", required: true}),
             mainMovement: new fields.StringField({initial: "land", required: true})
         };
+    }
+
+    get actor() {
+        if (this.parent instanceof ActorSFRPG) return this.parent;
+        if (this.parent instanceof ItemSFRPG) {
+            /** @type {?ActorSFRPG} */
+            const actor = this.parent?.actor ?? null;
+            return actor;
+        }
+        return null;
     }
 
 }

@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemStarshipAction extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "starshipAction",
+            icon: "fas fa-crosshairs"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.StarshipAction'

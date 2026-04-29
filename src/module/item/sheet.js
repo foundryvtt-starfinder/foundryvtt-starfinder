@@ -1,6 +1,5 @@
-import { SFRPG } from "../config.js";
-import RollContext from "../rolls/rollcontext.js";
 import { WeaponPropertySelectorSFRPG } from "../apps/trait-selectors/weapon-property-selector.js";
+import RollContext from "../rolls/rollcontext.js";
 
 const itemSizeArmorClassModifier = {
     "fine": 8,
@@ -179,7 +178,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         // Determine whether to show calculated totals for fields with formulas
         if (itemData?.activation?.type || data.item.type === "weapon") {
             data.activation = {
-                hasInput: !SFRPG.uncountableActivations.includes(itemData?.activation?.type ?? "")
+                hasInput: !CONFIG.SFRPG.uncountableActivations.includes(itemData?.activation?.type ?? "")
             };
 
             data.range = {};
@@ -197,7 +196,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
             data.duration = {};
             data.duration.showTotal = !!itemData.duration?.total && (String(itemData.duration?.total) !== String(itemData.duration?.value));
-            data.duration.hasInput = !SFRPG.uncountableDurations.includes(itemData.duration.units);
+            data.duration.hasInput = !CONFIG.SFRPG.uncountableDurations.includes(itemData.duration.units);
             data.duration.needsEndOn = (itemData.duration?.units === "round");
 
             data.uses = {};
@@ -327,7 +326,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
     /**
      * Get the text item status which is shown beneath the Item type in the top-right corner of the sheet
-     * @return {string}
+     * @returns {string}
      * @private
      */
     _getItemStatus() {
@@ -354,7 +353,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
     /**
      * Get the Array of item properties which are used in the small sidebar of the description tab
-     * @return {Array}
+     * @returns {{name: string, tooltip: ?string, title: ?string}[] | string}
      * @private
      */
     _getItemProperties() {
@@ -505,15 +504,15 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         if (item.type === "weapon") {
             category.enabled = true;
-            category.value = SFRPG.weaponTypes[itemData.weaponType];
+            category.value = CONFIG.SFRPG.weaponTypes[itemData.weaponType];
             category.tooltip = "SFRPG.ItemSheet.Weapons.Category";
         } else if (item.type === "equipment") {
             category.enabled = true;
-            category.value = SFRPG.equipmentTypes[itemData.armor.type];
+            category.value = CONFIG.SFRPG.equipmentTypes[itemData.armor.type];
             category.tooltip = "SFRPG.Items.Equipment.Category";
         } else if (item.type === "consumable") {
             category.enabled = true;
-            category.value = SFRPG.consumableTypes[itemData.consumableType];
+            category.value = CONFIG.SFRPG.consumableTypes[itemData.consumableType];
             category.tooltip = "SFRPG.ItemSheet.Consumables.Category";
         }
 
@@ -706,7 +705,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         html.find('[data-origin-uuid]').on("click", this._onClickOrigin.bind(this));
     }
 
-    async _canDragDrop() {
+    _canDragDrop() {
         return this.item.canUserModify(game.user, 'update');
     }
 
@@ -868,7 +867,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     /**
      * Add a modifer to this item.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     _onModifierCreate(event) {
         event.preventDefault();
@@ -881,7 +880,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     /**
     * Delete a modifier from the actor.
     *
-    * @param {Event} event The originating click event
+    * @param {PointerEvent} event The originating click event
     */
     async _onModifierDelete(event) {
         event.preventDefault();
@@ -893,7 +892,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     }
     /**
     * Edit a modifier for an item.
-    * @param {Event} event The orginating click event
+    * @param {PointerEvent} event The orginating click event
     */
     async _onModifierEdit(event) {
         event.preventDefault();
@@ -908,7 +907,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     /**
      * Toggle a modifier to be enabled or disabled.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onToggleModifierEnabled(event) {
         event.preventDefault();
@@ -921,6 +920,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         return modifier.toggle();
     }
 
+    /** @param {PointerEvent} event */
     async _onAddStorage(event) {
         event.preventDefault();
 
@@ -938,6 +938,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         });
     }
 
+    /** @param {PointerEvent} event */
     async _onRemoveStorage(event) {
         event.preventDefault();
 
@@ -951,6 +952,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         });
     }
 
+    /** @param {PointerEvent} event */
     async _onChangeStorageType(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -971,6 +973,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         });
     }
 
+    /** @param {PointerEvent} event */
     async _onChangeStorageSubtype(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -985,6 +988,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         });
     }
 
+    /** @param {PointerEvent} event */
     async _onChangeStorageAmount(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -1002,6 +1006,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         }
     }
 
+    /** @param {PointerEvent} event */
     async _onChangeStorageWeightProperty(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -1016,6 +1021,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         });
     }
 
+    /** @param {PointerEvent} event */
     async _onChangeStorageAcceptsItem(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -1041,6 +1047,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         });
     }
 
+    /** @param {PointerEvent} event */
     async _onChangeSupportedStarshipSizes(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -1062,6 +1069,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         });
     }
 
+    /** @param {PointerEvent} event */
     async _onChangeStorageAffectsEncumbrance(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -1077,6 +1085,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     }
 
     /** Actor resource visualization */
+    /** @param {PointerEvent} event */
     async _onActorResourceVisualizationControl(event) {
         event.preventDefault();
         const a = event.currentTarget;
@@ -1104,6 +1113,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         }
     }
 
+    /** @param {PointerEvent} event */
     async _onClickResourceVisualizationImage(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -1129,6 +1139,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         return fp.browse();
     }
 
+    /** @param {PointerEvent} event */
     async _onChangeResourceVisualizationMode(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -1144,6 +1155,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         });
     }
 
+    /** @param {PointerEvent} event */
     async _onChangeResourceVisualizationValue(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -1162,6 +1174,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         });
     }
 
+    /** @param {PointerEvent} event */
     async _onChangeResourceVisualizationTitle(event) {
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -1180,7 +1193,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
     /**
      * Creates a TraitSelector dialog
      *
-     * @param {Event} event HTML Event
+     * @param {PointerEvent} event HTML Event
      * @private
      */
     _onTraitSelector(event) {
@@ -1202,7 +1215,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
     /**
      * Toggle an effect and their modifiers to be enabled or disabled.
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     async _onToggleDetailsEffect(event) {
         event.preventDefault();
@@ -1226,6 +1239,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         }
     }
 
+    /** @param {PointerEvent} event */
     async _onClickOrigin(event) {
         event.preventDefault();
         const uuid = event.currentTarget.dataset.originUuid;
@@ -1236,7 +1250,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
     /**
      * Add or remove a turn event from an effect
-     * @param {Event} event     The original click event
+     * @param {PointerEvent} event     The original click event
      * @return {Promise}        The update promise
      * @private
      */

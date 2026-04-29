@@ -1,4 +1,3 @@
-import { SFRPG } from "../config.js";
 import { DocumentBrowserSFRPG } from './document-browser.js';
 import { packLoader } from './pack-loader.js';
 
@@ -164,19 +163,19 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
             },
             size: {
                 label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterSize"),
-                content: SFRPG.actorSizes,
+                content: CONFIG.SFRPG.actorSizes,
                 filter: (element, filters) => { return this._filterSizes(element, filters); },
                 type: "multi-select"
             },
             type: {
                 label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterType"),
-                content: SFRPG.npctypes,
+                content: CONFIG.SFRPG.npctypes,
                 filter: (element, filters) => { return this._filterTypes(element, filters); },
                 type: "multi-select"
             },
             alignment: {
                 label: game.i18n.format("SFRPG.Browsers.AlienArchiveBrowser.BrowserFilterAlignment"),
-                content: SFRPG.alignmentsNPC,
+                content: CONFIG.SFRPG.alignmentsNPC,
                 filter: (element, filters) => { return this._filterAlignment(element, filters); },
                 type: "multi-select"
             }
@@ -269,6 +268,7 @@ class AlienArchiveBrowserSFRPG extends DocumentBrowserSFRPG {
 }
 
 let _alienArchiveBrowser = null;
+/** @returns {AlienArchiveBrowserSFRPG} */
 export function getAlienArchiveBrowser() {
     if (!_alienArchiveBrowser) {
         _alienArchiveBrowser = new AlienArchiveBrowserSFRPG();

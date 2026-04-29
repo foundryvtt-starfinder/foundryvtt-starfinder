@@ -2,7 +2,7 @@
  * A specialized Dialog subclass for editing skills
  * @type {Dialog}
  */
-export class AddEditSkillDialog extends Dialog {
+export class AddEditSkillDialog extends foundry.appv1.api.Dialog {
     constructor(skill, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];

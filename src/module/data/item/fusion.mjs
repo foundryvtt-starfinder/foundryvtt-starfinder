@@ -2,6 +2,13 @@ import SFRPGItemBase from './base-item.mjs';
 
 export default class SFRPGItemFusion extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "fusion",
+            icon: "fas fa-bolt"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Fusion'

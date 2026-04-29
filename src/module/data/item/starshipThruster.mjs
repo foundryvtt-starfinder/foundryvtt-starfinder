@@ -10,6 +10,13 @@ export default class SFRPGItemStarshipThruster extends SFRPGItemBase {
         return super.migrateData(data);
     };
 
+    static get metadata() {
+        return {
+            type: "starshipThruster",
+            icon: "fas fa-shuttle-space"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.StarshipThruster'

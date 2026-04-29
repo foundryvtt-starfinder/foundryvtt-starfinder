@@ -1,8 +1,11 @@
 /**
+* @import { ActorSFRPG } from "../actor/actor.js"
+* @import { ItemSFRPG } from "../item/item.js"
+*/
+/**
  * A specialized Dialog subclass for casting a spell item at a certain level
- * @type {Dialog}
  */
-export class SpellCastDialog extends Dialog {
+export class SpellCastDialog extends foundry.appv1.api.Dialog {
     constructor(actor, item, dialogData = {}, options = {}) {
         super(dialogData, options);
         this.options.classes = ["sfrpg", "dialog"];

@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemChassis extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "chassis",
+            icon: "fas fa-car-battery"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Chassis'

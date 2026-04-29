@@ -3,6 +3,14 @@ import SFRPGActorBase from "./base-actor.mjs";
 const { fields } = foundry.data;
 
 export default class SFRPGActorNPC extends SFRPGActorBase {
+
+    static get metadata() {
+        return {
+            type: "npc2",
+            icon: "fas fa-spaghetti-monster-flying"
+        };
+    }
+
     static defineSchema() {
         const schema = super.defineSchema();
 
@@ -122,7 +130,8 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
                 integer: true,
                 nullable: false,
                 required: true,
-                label: "SFRPG.CR"
+                label: "SFRPG.CR",
+                compendiumIndexField: true
             }),
             environment: new fields.StringField({
                 initial: "",
@@ -147,7 +156,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
                     min: 1,
                     nullable: true
                 })
-            }, {label: "SFRPG.NPCSheet.Biography.Organization.GroupSize", hint: "SFRPG.NPCSheet.Biography.Organization.GroupSizeTooltip"}),
+            }, {label: "SFRPG.NPCSheet.Biography.Organization.GroupSize", hint: "SFRPG.NPCSheet.Biography.Organization.GroupSizeTooltip", compendiumIndexField: true}),
             raceAndGrafts: new fields.StringField({
                 initial: "",
                 blank: true,
@@ -167,7 +176,8 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
                 initial: "",
                 blank: true,
                 required: false,
-                label: "SFRPG.NPCSheet.Header.TypePlaceHolderText"
+                label: "SFRPG.NPCSheet.Header.TypePlaceHolderText",
+                compendiumIndexField: true
             })
         });
 

@@ -1,4 +1,3 @@
-import { SFRPG } from "../config.js";
 import { DocumentBrowserSFRPG } from './document-browser.js';
 
 class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
@@ -53,21 +52,21 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
         const filters = {
             levels: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterLevel"),
-                content: SFRPG.spellLevels,
+                content: CONFIG.SFRPG.spellLevels,
                 filter: (element, filters) => { return this._filterLevels(element, filters); },
                 activeFilters: this.filters?.levels?.activeFilters || [],
                 type: "multi-select"
             },
             classes: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterClass"),
-                content: SFRPG.spellcastingClasses,
+                content: CONFIG.SFRPG.spellcastingClasses,
                 filter: (element, filters) => { return this._filterClasses(element, filters); },
                 activeFilters: this.filters?.classes?.activeFilters || [],
                 type: "multi-select"
             },
             schools: {
                 label: game.i18n.format("SFRPG.Browsers.SpellBrowser.BrowserFilterSchool"),
-                content: SFRPG.spellSchools,
+                content: CONFIG.SFRPG.spellSchools,
                 filter: (element, filters) => { return this._filterSchools(element, filters); },
                 activeFilters: this.filters?.schools?.activeFilters || [],
                 type: "multi-select"
@@ -114,9 +113,9 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
 
     /**
      * @typedef  {object} FilterObjectSpell
-     * @property {string[]} levels Drawn from SFRPG.spellLevels
-     * @property {string[]} classes Drawn from SFRPG.spellcastingClasses
-     * @property {string[]} schools Drawn from SFRPG.spellSchools
+     * @property {string[]} [levels] Drawn from SFRPG.spellLevels
+     * @property {string[]} [classes] Drawn from SFRPG.spellcastingClasses
+     * @property {string[]} [schools] Drawn from SFRPG.spellSchools
      * @see {config.js}
      */
     /**
@@ -165,6 +164,7 @@ class SpellBrowserSFRPG extends DocumentBrowserSFRPG {
 }
 
 let _spellBrowser = null;
+/** @returns {SpellBrowserSFRPG} */
 export function getSpellBrowser() {
     if (!_spellBrowser) {
         _spellBrowser = new SpellBrowserSFRPG();

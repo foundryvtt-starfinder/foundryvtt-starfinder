@@ -1,5 +1,4 @@
 import { CombatDifficulty } from "../apps/combat-difficulty.js";
-import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
 /**  @import Combatant from "@client/documents/combatant.mjs" */
@@ -76,7 +75,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             "turn": combatType === "starship" ? null : 0
         };
         Hooks.callAll("combatStart", this, update);
-        await this.update(update, {advanceTime: CONFIG.time.roundTime});
+        await this.update(update, { advanceTime: CONFIG.time.roundTime });
 
         const currentPhase = this.getCurrentPhase();
         const eventData = {
@@ -133,7 +132,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         this.current = this._getCurrentState(c);
 
         // One-time initialization of the previous state
-        if ( !this.previous ) this.previous = this.current;
+        if (!this.previous) this.previous = this.current;
 
         return this.turns = turns;
     }
@@ -150,7 +149,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         const updateOptions = {};
         const currentPhase = this.getCurrentPhase();
         if (currentPhase.resetInitiative) {
-            ui.notifications.error(CombatSFRPG.errors.historyLimitedResetInitiative, {permanent: false, localize: true});
+            ui.notifications.error(CombatSFRPG.errors.historyLimitedResetInitiative, { permanent: false, localize: true });
             return;
         }
 
@@ -179,14 +178,14 @@ export class CombatSFRPG extends foundry.documents.Combat {
                 nextPhase = this.getPhases().length - 1;
                 nextRound -= 1;
                 if (nextRound <= 0) {
-                    ui.notifications.error(CombatSFRPG.errors.historyLimitedStartOfEncounter, {permanent: false, localize: true});
+                    ui.notifications.error(CombatSFRPG.errors.historyLimitedStartOfEncounter, { permanent: false, localize: true });
                     return;
                 }
             }
 
             const round = Math.max(this.round - 1, 0);
             let advanceTime = -1 * (this.turn || 0) * CONFIG.time.turnTime;
-            if ( round > 0 ) advanceTime -= CONFIG.time.roundTime;
+            if (round > 0) advanceTime -= CONFIG.time.roundTime;
             updateOptions.advanceTime = advanceTime;
             updateOptions.direction = -1;
         }
@@ -218,7 +217,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         const phases = this.getPhases();
         const currentPhase = phases[this.flags.sfrpg.phase];
         if (currentPhase.resetInitiative && this.hasCombatantsWithoutInitiative()) {
-            ui.notifications.error(CombatSFRPG.errors.missingInitiative, {permanent: false, localize: true});
+            ui.notifications.error(CombatSFRPG.errors.missingInitiative, { permanent: false, localize: true });
             return;
         }
 
@@ -309,9 +308,9 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         const round = Math.max(this.round - 1, 0);
         let advanceTime = -1 * (this.turn || 0) * CONFIG.time.turnTime;
-        if ( round > 0 ) advanceTime -= CONFIG.time.roundTime;
+        if (round > 0) advanceTime -= CONFIG.time.roundTime;
 
-        await this._handleUpdate(nextRound, nextPhase, nextTurn, {advanceTime, direction: -1});
+        await this._handleUpdate(nextRound, nextPhase, nextTurn, { advanceTime, direction: -1 });
     }
 
     async nextRound() {
@@ -335,7 +334,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         const advanceTime = Math.max(this.turns.length - this.turn, 0) * CONFIG.time.turnTime;
 
-        await this._handleUpdate(nextRound, nextPhase, nextTurn, {advanceTime: advanceTime + CONFIG.time.roundTime, direction: 1});
+        await this._handleUpdate(nextRound, nextPhase, nextTurn, { advanceTime: advanceTime + CONFIG.time.roundTime, direction: 1 });
     }
 
     async _handleUpdate(nextRound, nextPhase, nextTurn, updateOptions = {}) {
@@ -455,14 +454,14 @@ export class CombatSFRPG extends foundry.documents.Combat {
         const templateData = {
             header: {
                 image: "systems/sfrpg/icons/cards/rolling-dices.svg",
-                name: game.i18n.format(CombatSFRPG.chatCardsText.round.headerName, {round: this.round})
+                name: game.i18n.format(CombatSFRPG.chatCardsText.round.headerName, { round: this.round })
             },
             body: {
                 header: game.i18n.format(CombatSFRPG.chatCardsText.round.bodyHeader),
                 headerColor: CombatSFRPG.colors.round
             },
             footer: {
-                content: game.i18n.format(CombatSFRPG.chatCardsText.footer, {combatType: localizedCombatName, combatPhase: localizedPhaseName})
+                content: game.i18n.format(CombatSFRPG.chatCardsText.footer, { combatType: localizedCombatName, combatPhase: localizedPhaseName })
             }
         };
 
@@ -472,7 +471,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -490,7 +489,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         const templateData = {
             header: {
                 image: phaseIcon,
-                name: game.i18n.format(CombatSFRPG.chatCardsText.phase.headerName, {phase: localizedPhaseName})
+                name: game.i18n.format(CombatSFRPG.chatCardsText.phase.headerName, { phase: localizedPhaseName })
             },
             body: {
                 header: localizedPhaseName,
@@ -501,7 +500,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
                 }
             },
             footer: {
-                content: game.i18n.format(CombatSFRPG.chatCardsText.footer, {combatType: localizedCombatName, combatPhase: localizedPhaseName})
+                content: game.i18n.format(CombatSFRPG.chatCardsText.footer, { combatType: localizedCombatName, combatPhase: localizedPhaseName })
             }
         };
 
@@ -511,7 +510,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -528,7 +527,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         const templateData = {
             header: {
                 image: eventData.newCombatant.img,
-                name: game.i18n.format(CombatSFRPG.chatCardsText.turn.headerName, {combatant: eventData.newCombatant.name})
+                name: game.i18n.format(CombatSFRPG.chatCardsText.turn.headerName, { combatant: eventData.newCombatant.name })
             },
             body: {
                 header: "",
@@ -539,7 +538,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
                 }
             },
             footer: {
-                content: game.i18n.format(CombatSFRPG.chatCardsText.footer, {combatType: localizedCombatName, combatPhase: localizedPhaseName})
+                content: game.i18n.format(CombatSFRPG.chatCardsText.footer, { combatType: localizedCombatName, combatPhase: localizedPhaseName })
             }
         };
 
@@ -549,7 +548,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             whisper: eventData.newCombatant.hidden ? ChatMessage.getWhisperRecipients("GM") : [],
             content: html
@@ -678,7 +677,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
     }
 
     async _getInitiativeRoll(combatant) {
-        const rollContext = RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"});
+        const rollContext = RollContext.createActorRollContext(combatant.actor, { actorKey: "combatant" });
 
         const parts = [];
 
@@ -702,14 +701,14 @@ export class CombatSFRPG extends foundry.documents.Combat {
             parts: parts,
             event,
             rollType: "initiative",
-            title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
+            title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", { name: combatant.actor.name })
         });
 
         rollResult.roll.flags = { sfrpg: { finalFormula: rollResult.formula } };
         return rollResult.roll;
     }
 
-    async rollInitiative(ids, {updateTurn = true, messageOptions = {}} = {}) {
+    async rollInitiative(ids, { updateTurn = true, messageOptions = {} } = {}) {
 
         // Structure input data
         ids = typeof ids === "string" ? [ids] : ids;
@@ -724,14 +723,14 @@ export class CombatSFRPG extends foundry.documents.Combat {
         for (const id of ids) {
             // Get Combatant data
             const combatant = this.combatants.get(id);
-            if ( !combatant?.isOwner ) return results;
+            if (!combatant?.isOwner) return results;
 
             // If starship combat and no pilot initiative is just ship piloting bonuses
             if (this.getCombatType() === "starship" && combatant.actor.type === "starship"
                 && ((!combatant.actor.system.crew.useNPCCrew && combatant.actor.system.crew.pilot.actorIds.length === 0)
                     || (combatant.actor.system.crew.useNPCCrew && !combatant.actor.system.crew.npcData.pilot.skills.pil))
             ) {
-                updates.push({_id: id, initiative: combatant.actor.system.attributes.pilotingBonus.value});
+                updates.push({ _id: id, initiative: combatant.actor.system.attributes.pilotingBonus.value });
                 continue;
             }
 
@@ -740,7 +739,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             if (!roll) {
                 continue;
             }
-            updates.push({_id: id, initiative: roll.total});
+            updates.push({ _id: id, initiative: roll.total });
 
             // Construct chat message data
             const messageData = foundry.utils.mergeObject({
@@ -751,7 +750,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
                     alias: combatant.token.name
                 },
                 flavor: `${combatant.token.name} rolls for Initiative!`,
-                flags: {"core.initiativeRoll": true}
+                flags: { "core.initiativeRoll": true }
             }, messageOptions);
 
             // Prepare roll formula explanation
@@ -775,25 +774,25 @@ export class CombatSFRPG extends foundry.documents.Combat {
                 content: explainedRollContent,
                 rollMode: combatant.hidden && rollMode === CONST.DICE_ROLL_MODES.PUBLIC && defaultRollMode === CONST.DICE_ROLL_MODES.PUBLIC ? "gmroll" : rollMode,
                 rolls: [roll],
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 sound: CONFIG.sounds.dice
             };
 
-            if ( !isFirst ) {
+            if (!isFirst) {
                 chatData.sound = null;   // Only play 1 sound for the whole set
             }
             isFirst = false;
             messages.push(chatData);
         }
 
-        if ( !updates.length ) return this;
+        if (!updates.length) return this;
 
         // Update multiple combatants
         await this.updateEmbeddedDocuments("Combatant", updates);
 
         // Ensure the turn order remains with the same combatant
-        if ( updateTurn && currentId ) {
-            await this.update({turn: this.turns.findIndex(t => t.id === currentId)});
+        if (updateTurn && currentId) {
+            await this.update({ turn: this.turns.findIndex(t => t.id === currentId) });
         }
 
         // Create multiple chat messages
@@ -818,10 +817,10 @@ export class CombatSFRPG extends foundry.documents.Combat {
         const ia = Number.isNumeric(a.initiative) ? a.initiative : -9999;
         const ib = Number.isNumeric(b.initiative) ? b.initiative : -9999;
         const ci = ia - ib;
-        if ( ci !== 0 ) return ci;
+        if (ci !== 0) return ci;
         const [an, bn] = [a.token?.name || "", b.token?.name || ""];
         const cn = an.localeCompare(bn);
-        if ( cn !== 0 ) return cn;
+        if (cn !== 0) return cn;
         return a.tokenId - b.tokenId;
     }
 
@@ -858,7 +857,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         for (const effect of timedEffects.values()) {
             const duration = effect.activeDuration;
-            if (!Object.hasOwn(SFRPG.effectDurationFrom, duration.unit)) continue;
+            if (!Object.hasOwn(CONFIG.SFRPG.effectDurationFrom, duration.unit)) continue;
 
             const worldTime = game.time.worldTime;
             const effectStart = duration.activationTime ?? -Infinity;
@@ -936,13 +935,13 @@ export class CombatSFRPG extends foundry.documents.Combat {
         if (game.user.isGM && combatant.actor && !this.started) {
             switch (combatant.actor.type) {
                 case "starship":
-                    this.update({"flags.sfrpg.combatType": "starship"});
+                    this.update({ "flags.sfrpg.combatType": "starship" });
                     break;
                 case "vehicle":
-                    this.update({"flags.sfrpg.combatType": "vehicleChase"});
+                    this.update({ "flags.sfrpg.combatType": "vehicleChase" });
                     break;
                 default:
-                    this.update({"flags.sfrpg.combatType": "normal"});
+                    this.update({ "flags.sfrpg.combatType": "normal" });
                     break;
             }
         }

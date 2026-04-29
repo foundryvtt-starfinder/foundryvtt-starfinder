@@ -2,6 +2,13 @@ import SFRPGItemBase from './base-item.mjs';
 
 export default class SFRPGItemContainer extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "container",
+            icon: "fas fa-briefcase"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Container'

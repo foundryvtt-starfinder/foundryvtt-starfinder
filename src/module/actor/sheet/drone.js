@@ -1,12 +1,11 @@
-import { SFRPG } from "../../config.js";
 import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
     constructor(...args) {
         super(...args);
 
-        this.acceptedItemTypes.push(...SFRPG.droneDefinitionItemTypes);
-        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+        this.acceptedItemTypes.push(...CONFIG.SFRPG.droneDefinitionItemTypes);
+        this.acceptedItemTypes.push(...CONFIG.SFRPG.physicalItemTypes);
     }
 
     static get defaultOptions() {
@@ -78,7 +77,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                 allowAdd: true
             },
             ammunition: {
-                label: game.i18n.format(SFRPG.itemTypes["ammunition"]),
+                label: game.i18n.format(CONFIG.SFRPG.itemTypes["ammunition"]),
                 items: [],
                 dataset: { type: "ammunition" },
                 allowAdd: true
@@ -109,7 +108,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                     isOnCooldown: item.system.recharge
                         && !!item.system.recharge.value
                         && item.system.recharge.charged === false,
-                    hasAttack: SFRPG.attackActions.includes(item.system.actionType)
+                    hasAttack: CONFIG.SFRPG.attackActions.includes(item.system.actionType)
                         && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                     hasDamage: item.system.damage?.parts
                         && item.system.damage.parts.length > 0
@@ -165,7 +164,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         });
 
         const droneLevelIndex = data.system.details.level.value - 1;
-        const maxMods = SFRPG.droneModsPerLevel[droneLevelIndex];
+        const maxMods = CONFIG.SFRPG.droneModsPerLevel[droneLevelIndex];
 
         const activeFeats = [];
         const passiveFeats = [];
@@ -180,7 +179,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
             else otherFeatures.push(f);
         }
 
-        const maxFeats = SFRPG.droneFeatsPerLevel[droneLevelIndex];
+        const maxFeats = CONFIG.SFRPG.droneFeatsPerLevel[droneLevelIndex];
 
         const chassisLabel = game.i18n.format("SFRPG.DroneSheet.Features.Chassis");
         const modsLabel = game.i18n.format("SFRPG.DroneSheet.Features.Mods", {
@@ -314,7 +313,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
     /**
      * Add a modifer to this actor.
      *
-     * @param {Event} event The originating click event
+     * @param {PointerEvent} event The originating click event
      */
     _onModifierCreate(event) {
         event.preventDefault();
@@ -328,7 +327,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
     /**
      * Repair the drone, calling the relevant repair method on the actor.
-     * @param {Event} event The triggering click event
+     * @param {PointerEvent} event The triggering click event
      * @returns {Promise}
      * @private
      */

@@ -1,4 +1,3 @@
-import { SFRPG } from "../../../../config.js";
 
 export default function(engine) {
     engine.closures.add("calculateDroneChassis", (fact) => {
@@ -19,7 +18,7 @@ export default function(engine) {
         if (activeChassis) {
             const chassisData = activeChassis.system;
 
-            data.traits.size = SFRPG.actorSizes[chassisData.size];
+            data.traits.size = CONFIG.SFRPG.actorSizes[chassisData.size];
             data.attributes.speed = foundry.utils.mergeObject(data.attributes.speed, chassisData.speed, {overwrite: true});
             data.attributes.speed.special = "";
 
@@ -27,19 +26,19 @@ export default function(engine) {
             droneLevel = Math.max(1, Math.min(droneLevel, 20));
 
             data.details.level.value = droneLevel;
-            data.attributes.hp.max = SFRPG.droneHitpointsPerLevel[droneLevel - 1];
-            data.attributes.rp.max = SFRPG.droneResolveMethod(droneLevel); // Upgraded Power Core (Ex)
+            data.attributes.hp.max = CONFIG.SFRPG.droneHitpointsPerLevel[droneLevel - 1];
+            data.attributes.rp.max = CONFIG.SFRPG.droneResolveMethod(droneLevel); // Upgraded Power Core (Ex)
             data.attributes.baseAttackBonus = {
-                value: SFRPG.droneBABBonusPerLevel[droneLevel - 1],
+                value: CONFIG.SFRPG.droneBABBonusPerLevel[droneLevel - 1],
                 rolledMods: [],
                 tooltip: [game.i18n.format("SFRPG.BABTooltip", {
                     class: activeChassis.name,
-                    bonus: SFRPG.droneBABBonusPerLevel[droneLevel - 1].signedString()
+                    bonus: CONFIG.SFRPG.droneBABBonusPerLevel[droneLevel - 1].signedString()
                 })]
             };
 
             const abilityIncreaseStats = [chassisData.abilityIncreaseStats.first, chassisData.abilityIncreaseStats.second];
-            const abilityIncreases = SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
+            const abilityIncreases = CONFIG.SFRPG.droneAbilityScoreIncreaseLevels.filter(x => x <= droneLevel).length;
 
             data.abilities.cha.base = chassisData.abilityScores.cha + (abilityIncreaseStats.includes("cha") ? abilityIncreases : 0);
             data.abilities.dex.base = chassisData.abilityScores.dex + (abilityIncreaseStats.includes("dex") ? abilityIncreases : 0);
@@ -65,7 +64,7 @@ export default function(engine) {
         }
 
         // Clear out skills, this and future closures will enable them again
-        const skillkeys = Object.keys(SFRPG.skills);
+        const skillkeys = Object.keys(CONFIG.SFRPG.skills);
         for (const skill of skillkeys) {
             data.skills[skill].enabled = false;
             data.skills[skill].value = 0;

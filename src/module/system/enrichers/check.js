@@ -1,5 +1,6 @@
 import CheckNameHelper from "../../utils/skill-names.js";
 import BaseEnricher from "./base.js";
+/* @import { ActorSFRPG } from "../../actor/actor.js" **/
 
 export const checkIcons = Object.freeze({
     "acrobatics": "fa-person-walking",
@@ -45,23 +46,20 @@ export default class CheckEnricher extends BaseEnricher {
     // @Check[type:athletics]
     // @Check[type:life-science]
     // @Check[type:reflex]
-    constructor() {
-        super();
-    }
 
     /** @inheritdoc */
     get enricherType() {
-        return "Check";
+        return /** @type {const}*/("Check");
     }
 
     /** @inheritdoc */
     get validTypes() {
-        return [
+        return /** @type {const}*/([
             ...Object.keys(CONFIG.SFRPG.skills),
             ...Object.keys(CONFIG.SFRPG.saves),
             ...Object.keys(CONFIG.SFRPG.abilities),
             "caster-level"
-        ];
+        ]);
     }
 
     /** @inheritdoc */
@@ -100,7 +98,7 @@ export default class CheckEnricher extends BaseEnricher {
      */
     isValid() {
         if (!this.args.type || !this.validTypes.includes(CheckNameHelper.shortFormName(this.args.type))) {
-            return this._failValidation("Type");
+            return this._failValidation("Type", this.args.type || "");
         }
 
         return true;
@@ -115,7 +113,8 @@ export default class CheckEnricher extends BaseEnricher {
 
     /**
      * @extends BaseEnricher
-     * @returns {HTMLAnchorElement} */
+     * @returns {HTMLAnchorElement}
+     */
     createElement() {
         const a = super.createElement();
         if (this.args.displayDC === 'true' || this.args.displayDC === 'false') a.dataset.displayDC = this.args.displayDC;
@@ -126,20 +125,25 @@ export default class CheckEnricher extends BaseEnricher {
         const iconSlug = (this.checkType === "ability") ? CheckNameHelper.longFormNameAbilities(this.args.type) : CheckNameHelper.longFormName(this.args.type);
 
         const displayDC = this.args.displayDC !== undefined ? (this.args.displayDC === 'true' ? true : false) : (dcValue ? true : false);
-        a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${(displayDC || game.user.isGM) ? `<span class="dc-value">DC ${a.dataset.dc} </span>` : ''}${a.innerHTML}`;
+
+        a.innerHTML = `<i class="fas ${this.icons[iconSlug]}"></i>${((displayDC || game.user.isGM) && dcValue) ? `<span class="dc-value">DC ${a.dataset.dc} </span>` : ''}${a.innerHTML}`;
 
         return a;
 
     }
 
-    static hasRepost = true;
-    static hasListener = true;
+    hasRepost = true;
+    listeners = {
+        "click": this.#clickListener
+    };
 
-    static listener(event) {
-        const data = event.currentTarget.dataset;
+    /** @param {PointerEvent} event */
+    #clickListener(event) {
+        const data = this.getDatasetfromEvent(event);
 
+        /** @type {ActorSFRPG} */
         const actor = _token?.actor ?? game.user?.character;
-        if (!actor) return ui.notifications.error("You must have a token or an actor selected.");
+        if (!actor) return void ui.notifications.error("You must have a token or an actor selected.");
         const options = {
             event,
             dc: data.dc,
@@ -149,8 +153,8 @@ export default class CheckEnricher extends BaseEnricher {
 
         // Disambiguate between "INTelligence and INTimidate", then select skill/save/ability
         if (id === "int") data.type === "intimidate" ? actor.rollSkill(id, options) : actor.rollAbility(id, options);
-        else if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, options);
-        else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, options);
+        else if (id in CONFIG.SFRPG.skills) actor.rollSkill(id, options);
+        else if (id in CONFIG.SFRPG.saves) actor.rollSave(id, options);
         else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, options);
 
     }

@@ -13,6 +13,13 @@ export default class SFRPGItemWeaponAccessory extends SFRPGItemBase {
         return super.migrateData(data);
     }
 
+    static get metadata() {
+        return {
+            type: "weaponAccessory",
+            icon: "fas fa-gears"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.WeaponAccessory'

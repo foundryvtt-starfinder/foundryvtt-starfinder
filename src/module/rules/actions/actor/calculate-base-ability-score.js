@@ -1,4 +1,3 @@
-import { SFRPG } from "../../../config.js";
 import { SFRPGEffectType, SFRPGModifierType } from "../../../modifiers/types.js";
 
 export default function(engine) {
@@ -61,7 +60,7 @@ export default function(engine) {
         for (const asi of asis) {
             const asiData = asi.system;
 
-            for (const ability of Object.keys(SFRPG.abilities)) {
+            for (const ability of Object.keys(CONFIG.SFRPG.abilities)) {
                 if (asiData.abilities[ability]) {
                     if (!(ability in abilityScoreIncreasesMod)) {
                         abilityScoreIncreasesMod[ability] = 1;

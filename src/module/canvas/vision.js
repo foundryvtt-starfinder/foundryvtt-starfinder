@@ -1,3 +1,8 @@
+/**
+ * @import Scene from "@client/documents/scene.mjs"
+ * @import SceneConfig from "@client/applications/sheets/scene-config.mjs"
+ */
+
 const { VisionMode } = foundry.canvas.perception;
 const { ColorAdjustmentsSamplerShader } = foundry.canvas.rendering.shaders;
 
@@ -104,13 +109,13 @@ function setupVisionModes() {
 }
 
 function setDefaultSceneSettings() {
-    Hooks.on("preCreateScene", (scene) => {
+    Hooks.on("preCreateScene", (/** @type {Scene}*/scene) => {
         scene.updateSource({ "environment.globalLight.darkness.max": 0.75, "environment.globalLight.enabled": true });
     });
 }
 
 function sceneConfigTooltips() {
-    Hooks.on("renderSceneConfig", (app, html) => {
+    Hooks.on("renderSceneConfig", (/** @type {SceneConfig}*/app, /** @type {HTMLFormElement}*/html) => {
         const darknessSlider = html.querySelector("range-picker[name='environment.globalLight.darkness.max']");
         const globalIllumination = html.querySelector("input[name='environment.globalLight.enabled']");
 

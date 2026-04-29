@@ -3,7 +3,6 @@
  *
  * Pre-loaded templates are compiled and cached for fast access when rendering
  *
- * @returns {Promise}
  */
 export const preloadHandlebarsTemplates = async function() {
     const templatePaths = [

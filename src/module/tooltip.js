@@ -40,7 +40,7 @@ export default class TooltipManagerSFRPG extends foundry.helpers.interaction.Too
     /**
      * Activate interactivity by listening for hover events on HTML elements which have a data-tooltip defined.
      */
-    activateEventListeners() {
+    activateListeners() {
         document.body.addEventListener("pointerenter", this.#onActivate.bind(this), true);
         document.body.addEventListener("pointerleave", this.#onDeactivate.bind(this), true);
         document.body.addEventListener("pointerup", this._onLockTooltip.bind(this), true);
@@ -66,8 +66,8 @@ export default class TooltipManagerSFRPG extends foundry.helpers.interaction.Too
         }
 
         if (!element.dataset.tooltip && !element.dataset.tooltipHtml) {
-        // Check if the element has moved out from underneath the cursor and pointerenter has fired on a non-child of the
-        // tooltipped element.
+            // Check if the element has moved out from underneath the cursor and pointerenter has fired on a non-child of the
+            // tooltipped element.
             if (this.#active && !this.element.contains(element)) this.#startDeactivation();
             return;
         }
@@ -149,10 +149,10 @@ export default class TooltipManagerSFRPG extends foundry.helpers.interaction.Too
      * @param {MouseEvent} event  The mouse move event.
      */
     #testLockedTooltipProximity(event) {
-        if ( !this.#locked.elements.size ) return;
-        const {clientX: x, clientY: y} = event;
+        if (!this.#locked.elements.size) return;
+        const { clientX: x, clientY: y } = event;
         const buffer = this.#locked.boundingBox.clone().pad(this.constructor.LOCKED_TOOLTIP_BUFFER_PX);
-        if ( !buffer.contains(x, y) ) this.dismissLockedTooltips();
+        if (!buffer.contains(x, y)) this.dismissLockedTooltips();
     }
 
     /**
@@ -160,10 +160,10 @@ export default class TooltipManagerSFRPG extends foundry.helpers.interaction.Too
    */
     #computeLockedBoundingBox() {
         let bb = null;
-        for ( const element of this.#locked.elements.values() ) {
-            const {x, y, width, height} = element.getBoundingClientRect();
+        for (const element of this.#locked.elements.values()) {
+            const { x, y, width, height } = element.getBoundingClientRect();
             const rect = new PIXI.Rectangle(x, y, width, height);
-            if ( bb ) bb.enlarge(rect);
+            if (bb) bb.enlarge(rect);
             else bb = rect;
         }
         this.#locked.boundingBox = bb;
@@ -176,7 +176,7 @@ export default class TooltipManagerSFRPG extends foundry.helpers.interaction.Too
     lockTooltip() {
         const clone = this.tooltip.cloneNode(false);
         // Steal the content from the original tooltip rather than cloning it, so that listeners are preserved.
-        while ( this.tooltip.firstChild ) clone.appendChild(this.tooltip.firstChild);
+        while (this.tooltip.firstChild) clone.appendChild(this.tooltip.firstChild);
         clone.removeAttribute("id");
         clone.classList.add("locked-tooltip", "active");
         document.body.appendChild(clone);
@@ -195,7 +195,7 @@ export default class TooltipManagerSFRPG extends foundry.helpers.interaction.Too
    * Dismiss the set of active locked tooltips.
    */
     dismissLockedTooltips() {
-        for ( const element of this.#locked.elements.values() ) {
+        for (const element of this.#locked.elements.values()) {
             element.remove();
         }
         this.#locked.elements = new Set();

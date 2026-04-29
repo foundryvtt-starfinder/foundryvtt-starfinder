@@ -1,13 +1,12 @@
-import { SFRPG } from "../../config.js";
 import { ActorSheetSFRPG } from "./base.js";
 
 export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
     constructor(...args) {
         super(...args);
 
-        this.acceptedItemTypes.push(...SFRPG.characterDefinitionItemTypes);
-        this.acceptedItemTypes.push(...SFRPG.playerCharacterDefinitionItemTypes);
-        this.acceptedItemTypes.push(...SFRPG.physicalItemTypes);
+        this.acceptedItemTypes.push(...CONFIG.SFRPG.characterDefinitionItemTypes);
+        this.acceptedItemTypes.push(...CONFIG.SFRPG.playerCharacterDefinitionItemTypes);
+        this.acceptedItemTypes.push(...CONFIG.SFRPG.physicalItemTypes);
     }
 
     static get defaultOptions() {
@@ -49,16 +48,16 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
         const actorData = data.system;
 
         const inventory = {
-            weapon: { label: game.i18n.format(SFRPG.itemTypes["weapon"]), items: [], dataset: { type: "weapon" }, allowAdd: true },
-            shield: { label: game.i18n.format(SFRPG.itemTypes["shield"]), items: [], dataset: { type: "shield" }, allowAdd: true },
-            equipment: { label: game.i18n.format(SFRPG.itemTypes["equipment"]), items: [], dataset: { type: "equipment" }, allowAdd: true },
-            ammunition: { label: game.i18n.format(SFRPG.itemTypes["ammunition"]), items: [], dataset: { type: "ammunition" }, allowAdd: true },
-            consumable: { label: game.i18n.format(SFRPG.itemTypes["consumable"]), items: [], dataset: { type: "consumable" }, allowAdd: true },
-            goods: { label: game.i18n.format(SFRPG.itemTypes["goods"]), items: [], dataset: { type: "goods" }, allowAdd: true },
-            container: { label: game.i18n.format(SFRPG.itemTypes["container"]), items: [], dataset: { type: "container" }, allowAdd: true },
+            weapon: { label: game.i18n.format(CONFIG.SFRPG.itemTypes["weapon"]), items: [], dataset: { type: "weapon" }, allowAdd: true },
+            shield: { label: game.i18n.format(CONFIG.SFRPG.itemTypes["shield"]), items: [], dataset: { type: "shield" }, allowAdd: true },
+            equipment: { label: game.i18n.format(CONFIG.SFRPG.itemTypes["equipment"]), items: [], dataset: { type: "equipment" }, allowAdd: true },
+            ammunition: { label: game.i18n.format(CONFIG.SFRPG.itemTypes["ammunition"]), items: [], dataset: { type: "ammunition" }, allowAdd: true },
+            consumable: { label: game.i18n.format(CONFIG.SFRPG.itemTypes["consumable"]), items: [], dataset: { type: "consumable" }, allowAdd: true },
+            goods: { label: game.i18n.format(CONFIG.SFRPG.itemTypes["goods"]), items: [], dataset: { type: "goods" }, allowAdd: true },
+            container: { label: game.i18n.format(CONFIG.SFRPG.itemTypes["container"]), items: [], dataset: { type: "container" }, allowAdd: true },
             technological: { label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.SpecialItems"), items: [], dataset: { type: "technological,magic,hybrid" }, allowAdd: true },
             fusion: { label: game.i18n.format("SFRPG.ActorSheet.Inventory.Interface.EquipmentEnhancements"), items: [], dataset: { type: "fusion,upgrade,weaponAccessory" }, allowAdd: true },
-            augmentation: { label: game.i18n.format(SFRPG.itemTypes["augmentation"]), items: [], dataset: { type: "augmentation" }, allowAdd: true }
+            augmentation: { label: game.i18n.format(CONFIG.SFRPG.itemTypes["augmentation"]), items: [], dataset: { type: "augmentation" }, allowAdd: true }
         };
 
         let physicalInventoryItems = [];
@@ -83,7 +82,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
                 isStack: item.system.quantity ? item.system.quantity > 1 : false,
                 isOpen: item.type === "container" ? item.system.container.isOpen : true,
                 isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
-                hasAttack: SFRPG.attackActions.includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
+                hasAttack: CONFIG.SFRPG.attackActions.includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                 hasDamage: item.system.damage?.parts && item.system.damage.parts.length > 0 && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                 hasUses: item.canBeUsed(),
                 isCharged: !item.hasUses || item.getRemainingUses() <= 0 || !item.isOnCooldown,
@@ -145,8 +144,8 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
             if (!(targetItemType in inventory)) {
                 let label = "SFRPG.Items.Categories.MiscellaneousItems";
-                if (targetItemType in SFRPG.itemTypes) {
-                    label = SFRPG.itemTypes[targetItemType];
+                if (targetItemType in CONFIG.SFRPG.itemTypes) {
+                    label = CONFIG.SFRPG.itemTypes[targetItemType];
                 } else {
                     console.log(`Item '${itemData.item.name}' with type '${targetItemType}' is not a registered item type!`);
                 }
@@ -283,7 +282,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
     /**
      * Take a short 10 minute rest, calling the relevant function on the Actor instance
-     * @param {Event} event The triggering click event
+     * @param {PointerEvent} event The triggering click event
      * @returns {Promise}
      * @private
      */
@@ -295,7 +294,7 @@ export class ActorSheetSFRPGCharacter extends ActorSheetSFRPG {
 
     /**
      * Take a long rest, calling the relevant function on the Actor instance
-     * @param {Event} event   The triggering click event
+     * @param {PointerEvent} event   The triggering click event
      * @returns {Promise}
      * @private
      */

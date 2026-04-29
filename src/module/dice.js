@@ -1,8 +1,7 @@
 import SFRPGCustomChatMessage from "./chat/chatbox.js";
-import { SFRPG } from "./config.js";
+import SFRPGRoll from "./rolls/roll.js";
 import RollTree from "./rolls/rolltree.js";
 import StackModifiers from "./rules/closures/stack-modifiers.js";
-import SFRPGRoll from "./rolls/roll.js";
 
 /**
  * @import SFRPGRoll from "./rolls/roll.js";
@@ -436,7 +435,7 @@ export class DiceSFRPG {
     * @param {Object}               data.dialogOptions Modal dialog options
     * @param {String}               data.rollType       Type of roll (options: CONFIG.SFRPG.rollType)
     * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
-    * @returns {Promise<bool>}                         `true` if roll was performed, `false` if it was canceled
+    * @returns {Promise<boolean>}                         `true` if roll was performed, `false` if it was canceled
     */
     static async damageRoll({ event = new Event(''), parts, linkedAttackRoll, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions,
         rollType = "damage", tags = []}) {
@@ -536,8 +535,8 @@ export class DiceSFRPG {
 
                 if (obj.types && obj.types.length > 0) {
                     const tag = `damage-type-${(obj.types.join(`-${obj.operator}-`))}`;
-                    const text = obj.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[obj.operator]} `);
-                    const shortText = obj.types.map(type => SFRPG.damageTypeToAcronym[type]).join(` & `);
+                    const text = obj.types.map(type => CONFIG.SFRPG.damageTypes[type]).join(` ${CONFIG.SFRPG.damageTypeOperators[obj.operator]} `);
+                    const shortText = obj.types.map(type => CONFIG.SFRPG.damageTypeToAcronym[type]).join(` & `);
 
                     // In most use cases, damage rolls should never contain more parts. But because the system is complex and confusing, it is theoretically possible.
                     // If that happens, we'll just concatenate the damage types to the roll string and pretend nothing is wrong.
@@ -563,7 +562,7 @@ export class DiceSFRPG {
                         const props = [];
                         for (const [key, propValue] of Object.entries(itemContext.entity.system.properties)) {
                             if (propValue.value) {
-                                tags.push({tag: `weapon-properties ${key}`, text: SFRPG.weaponProperties[key]});
+                                tags.push({tag: `weapon-properties ${key}`, text: CONFIG.SFRPG.weaponProperties[key]});
                                 props.push(key);
                             }
                         }
@@ -575,7 +574,7 @@ export class DiceSFRPG {
 
                 // Starship Weapons use data.special for their properties
                 if (itemContext.entity.type === "starshipWeapon") {
-                    tags.push({tag: `starship-weapon-type ${itemContext.entity.system.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.system.weaponType]});
+                    tags.push({tag: `starship-weapon-type ${itemContext.entity.system.weaponType}`, text: CONFIG.SFRPG.starshipWeaponTypes[itemContext.entity.system.weaponType]});
                     htmlData.push({ name: "starship-weapon-type", value: itemContext.entity.system.weaponType });
 
                     if (itemContext.entity.system.special) {
@@ -583,7 +582,7 @@ export class DiceSFRPG {
                             const props = [];
                             for (const [key, isEnabled] of Object.entries(itemContext.entity.system.special)) {
                                 if (isEnabled) {
-                                    tags.push({tag: `starship-weapon-properties ${key}`, text: SFRPG.starshipWeaponProperties[key]});
+                                    tags.push({tag: `starship-weapon-properties ${key}`, text: CONFIG.SFRPG.starshipWeaponProperties[key]});
                                     props.push(key);
                                 }
                             }
@@ -598,7 +597,7 @@ export class DiceSFRPG {
                 const descriptors = itemContext.entity.system.descriptors;
                 if (descriptors) {
                     for (const [descriptor, isEnabled] of Object.entries(descriptors)) {
-                        if (isEnabled) tags.push({tag: descriptor, text: SFRPG.descriptors[descriptor]});
+                        if (isEnabled) tags.push({tag: descriptor, text: CONFIG.SFRPG.descriptors[descriptor]});
                     }
                 }
 
@@ -606,7 +605,7 @@ export class DiceSFRPG {
                 const specialMaterials = itemContext.entity.system.specialMaterials;
                 if (specialMaterials) {
                     for (const [material, isEnabled] of Object.entries(specialMaterials)) {
-                        if (isEnabled) tags.push({tag: material, text: SFRPG.specialMaterials[material]});
+                        if (isEnabled) tags.push({tag: material, text: CONFIG.SFRPG.specialMaterials[material]});
                     }
                 }
 

@@ -9,6 +9,13 @@ export default class SFRPGItemStarshipReinforcedBulkhead extends SFRPGItemBase {
         'SFRPG.Item.StarshipReinforcedBulkhead'
     ];
 
+    static get metadata() {
+        return {
+            type: "starshipReinforcedBulkhead",
+            icon: "fas fa-file-shield"
+        };
+    }
+
     static defineSchema() {
         const schema = super.defineSchema();
 

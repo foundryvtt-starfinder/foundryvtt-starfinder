@@ -13,7 +13,7 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 if (storage.weightProperty === "bulk") storage.weightProperty = "";
             }
         }
-        if (!(this.name === 'SFRPGItemAugmentation')) {
+        if (this.name !== 'SFRPGItemAugmentation') {
             if (data.system) delete data.system; // Augmentations have a system property, which is... unfortunate
         } else if (typeof data.system !== "string") {
             data.system = "none";
@@ -179,13 +179,15 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 initial: "uncategorized",
                 choices: Object.keys(CONFIG.SFRPG.weaponCategories),
                 blank: false,
-                required: false
+                required: false,
+                compendiumIndexField: true
             }),
             weaponType: new fields.StringField({
                 initial: "basicM",
                 choices: Object.keys(CONFIG.SFRPG.weaponTypes),
                 blank: false,
-                required: false
+                required: false,
+                compendiumIndexField: true
             })
         };
     }
@@ -482,7 +484,8 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 initial: 1,
                 min: 0,
                 integer: true,
-                required: true
+                required: true,
+                compendiumIndexField: true
             }),
             price: new fields.NumberField({
                 initial: 0,
@@ -550,7 +553,8 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 initial: null,
                 min: 0,
                 nullable: true,
-                required: true
+                required: true,
+                compendiumIndexField: true
             }),
             costMultipliedBySize: new fields.BooleanField({
                 initial: false,
@@ -569,8 +573,13 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 initial: null,
                 min: 0,
                 nullable: true,
-                required: false
+                required: false,
+                compendiumIndexField: true
             })
         };
+    }
+
+    get item() {
+        return this.parent;
     }
 }

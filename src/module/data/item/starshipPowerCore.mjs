@@ -11,6 +11,13 @@ export default class SFRPGItemStarshipPowerCore extends SFRPGItemBase {
         return super.migrateData(data);
     };
 
+    static get metadata() {
+        return {
+            type: "starshipPowerCore",
+            icon: "fas fa-radiation"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.StarshipPowerCore'

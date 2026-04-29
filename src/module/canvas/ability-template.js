@@ -14,7 +14,7 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
    * @param {string} texture             An texture color for the template to use
    * @returns {?AbilityTemplate}     The template object, or null if the data does not produce a template
    */
-    static fromData({type, distance, color, texture}) {
+    static fromData({ type, distance, color, texture }) {
         if (!["cone", "circle", "rect", "ray"].includes(type)) return null;
 
         if (!distance) return null;
@@ -30,7 +30,7 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
             y: 0,
             fillColor: color ?? game.user.color,
             texture: texture ?? null,
-            _id: randomID(16),
+            _id: foundry.utils.randomID(16),
             hidden: event.altKey
         };
 
@@ -99,7 +99,7 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
                 const now = Date.now(); // Apply a 20ms throttle
                 if (now - moveTime <= 20) return;
                 let pos = event.data.getLocalPosition(this.layer);
-                if ( !event.shiftKey ) {
+                if (!event.shiftKey) {
                     // Snap the origin to the grid as per the rules
                     const M = CONST.GRID_SNAPPING_MODES;
                     let mode = M.VERTEX;
@@ -107,7 +107,7 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
                         case "circle": mode |= M.CENTER; break;
                         case "ray": mode |= M.SIDE_MIDPOINT; break; // RAW lines come from corners, but that creates 10ft lines
                     }
-                    pos = canvas.grid.getSnappedPoint({x: pos.x, y: pos.y}, { mode });
+                    pos = canvas.grid.getSnappedPoint({ x: pos.x, y: pos.y }, { mode });
                 }
                 this.document.x = pos.x;
                 this.document.y = pos.y;

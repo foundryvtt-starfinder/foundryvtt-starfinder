@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemEffect extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "effect",
+            icon: "fas fa-stopwatch"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.Effect'
@@ -51,10 +58,10 @@ export default class SFRPGItemEffect extends SFRPGItemBase {
             }),
             turnEvents: new fields.ArrayField(
                 new fields.SchemaField({ // TODO: migrate this to use the common damage part schema
-                    content: new fields.HTMLField({required: false}),
+                    content: new fields.HTMLField({ required: false }),
                     damageTypes: new fields.TypedObjectField(
-                        new fields.BooleanField({initial: false}),
-                        {validateKey: (key) => key in CONFIG.SFRPG.damageAndHealingTypes}
+                        new fields.BooleanField({ initial: false }),
+                        { validateKey: (key) => key in CONFIG.SFRPG.damageAndHealingTypes }
                     ),
                     formula: new fields.StringField({
                         initial: "",
@@ -85,5 +92,20 @@ export default class SFRPGItemEffect extends SFRPGItemBase {
         });
 
         return schema;
+    }
+
+    /**
+     * Return a sentence with the condition and its duration. e.g "flat-footed for 1 minute"
+     */
+    getTextDurationString() {
+        if (this.activeDuration.unit === "permanent") return _loc("SFRPG.Effect.DurationStringPermanently", {
+            name: this.item.name
+        });
+
+        return _loc("SFRPG.Effect.DurationString", {
+            name: this.item.name,
+            duration: this.activeDuration.value,
+            unit: this.activeDuration.unit
+        });
     }
 }

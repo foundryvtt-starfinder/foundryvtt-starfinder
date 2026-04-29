@@ -1,4 +1,3 @@
-import { SFRPG } from "../../../config.js";
 import { DiceSFRPG } from "../../../dice.js";
 import { SFRPGEffectType } from "../../../modifiers/types.js";
 import RollContext from "../../../rolls/rollcontext.js";
@@ -40,7 +39,7 @@ export default function(engine) {
             const modifierInfo = {
                 value: resolvedModifierValue,
                 negatedBy: drModifier.valueAffected,
-                negatedByDisplay: SFRPG.damageReductionTypes[drModifier.valueAffected] ?? "-",
+                negatedByDisplay: CONFIG.SFRPG.damageReductionTypes[drModifier.valueAffected] ?? "-",
                 source: drModifier
             };
 
@@ -50,14 +49,14 @@ export default function(engine) {
                     modifierInfo.negatedByDisplay = modifierInfo.negatedBy
                         .split('&&')
                         .map(type => {
-                            return SFRPG.damageReductionTypes[type.trim().toLowerCase()] ?? type.trim();
+                            return CONFIG.SFRPG.damageReductionTypes[type.trim().toLowerCase()] ?? type.trim();
                         })
                         .join(` ${game.i18n.localize('SFRPG.Damage.Types.Operators.And')} `);
                 } else if (modifierInfo.negatedBy.includes('||')) {
                     modifierInfo.negatedByDisplay = modifierInfo.negatedBy
                         .split('||')
                         .map(type => {
-                            return SFRPG.damageReductionTypes[type.trim().toLowerCase()] ?? type.trim();
+                            return CONFIG.SFRPG.damageReductionTypes[type.trim().toLowerCase()] ?? type.trim();
                         })
                         .join(` ${game.i18n.localize('SFRPG.Damage.Types.Operators.Or')} `);
                 }

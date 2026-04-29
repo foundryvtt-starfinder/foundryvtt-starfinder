@@ -3,6 +3,13 @@ import SFRPGActorBase from "./base-actor.mjs";
 const { fields } = foundry.data;
 
 export default class SFRPGActorDrone extends SFRPGActorBase {
+    static get metadata() {
+        return {
+            type: "drone",
+            icon: "fas fa-robot"
+        };
+    }
+
     static defineSchema() {
         const schema = super.defineSchema();
 

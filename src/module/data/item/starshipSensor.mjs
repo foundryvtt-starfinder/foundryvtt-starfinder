@@ -4,6 +4,13 @@ const { fields } = foundry.data;
 
 export default class SFRPGItemStarshipSensor extends SFRPGItemBase {
 
+    static get metadata() {
+        return {
+            type: "starshipSensor",
+            icon: "fas fa-location-crosshairs"
+        };
+    }
+
     static LOCALIZATION_PREFIXES = [
         'SFRPG.Item.Base',
         'SFRPG.Item.StarshipSensor'
