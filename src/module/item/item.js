@@ -440,7 +440,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // Basic chat message data
         const chatData = {
             author: game.user.id,
-            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             content: html,
             flags: {
                 core: {
@@ -1630,7 +1629,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             chatMessage: options.chatMessage,
             content: content,
             rolls: [rollResult.roll],
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
         });
     }
@@ -1697,7 +1695,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             renderPromise.then((html) => {
                 // Create the chat message
                 const chatData = {
-                    type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                     speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor}),
                     content: html
                 };
@@ -1735,7 +1732,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const rollMode = game.settings.get("core", "rollMode");
         const chatData = {
             author: game.user.id,
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",

@@ -165,7 +165,6 @@ export const ItemActivationMixin = (superclass) => class extends superclass {
                 htmlPromise.then((html) => {
                     // Create the chat message
                     const chatData = {
-                        type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                         speaker: ChatMessage.getSpeaker({ actor: this.actor }),
                         content: html,
                         flags: {

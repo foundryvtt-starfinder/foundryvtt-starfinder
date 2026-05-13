@@ -472,7 +472,6 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -511,7 +510,6 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -549,7 +547,6 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             whisper: eventData.newCombatant.hidden ? ChatMessage.getWhisperRecipients("GM") : [],
             content: html
@@ -775,7 +772,6 @@ export class CombatSFRPG extends foundry.documents.Combat {
                 content: explainedRollContent,
                 rollMode: combatant.hidden && rollMode === CONST.DICE_ROLL_MODES.PUBLIC && defaultRollMode === CONST.DICE_ROLL_MODES.PUBLIC ? "gmroll" : rollMode,
                 rolls: [roll],
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 sound: CONFIG.sounds.dice
             };
 
