@@ -955,6 +955,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
             content: rollContent,
             rolls: [rollResult.roll],
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
         }, { rollMode: rollMode});
     }

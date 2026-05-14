@@ -793,7 +793,7 @@ Hooks.on("renderChatMessageHTML", (app, html, data) => {
     DiceSFRPG.addDamageTypes(app, $(html), data);
 
     const gmOnlyText = html.querySelector('.gm-only');
-    if (!game.user.isGM) {
+    if (!game.user.isGM && gmOnlyText) {
         gmOnlyText.style.display = "none";
     }
 

@@ -68,7 +68,8 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             ChatMessage.create({
                 author: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
-                content: msg
+                content: msg,
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             });
         }
 
@@ -126,7 +127,8 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             ChatMessage.create({
                 author: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
-                content: msg
+                content: msg,
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             });
         }
 
@@ -241,7 +243,8 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             ChatMessage.create({
                 author: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
-                content: content
+                content: content,
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             });
         }
 

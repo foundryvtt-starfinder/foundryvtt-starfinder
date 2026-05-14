@@ -68,6 +68,7 @@ export default class SFRPGCustomChatMessage {
             dataRoll: roll,
             rollType: data.rollType,
             rollNotes: data.htmlData?.find(x => x.name === "rollNotes")?.value,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             tokenImg: actor.token?.texture?.src || actor.img,
             actorId: actor.id,
             tokenId: this.getToken(actor),
@@ -129,6 +130,7 @@ export default class SFRPGCustomChatMessage {
             speaker: data.speaker,
             content: cardContent,
             rolls: [roll],
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice,
             rollType: data.rollType,
             flags: {sfrpg: {rollType: data.rollType}}

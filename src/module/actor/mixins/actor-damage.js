@@ -707,6 +707,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 user: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
                 content: warningMessage,
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             };
             ChatMessage.applyRollMode(chatData, rollMode);
             ChatMessage.create(chatData);
@@ -720,6 +721,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 user: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
                 content: warningMessage,
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             };
             ChatMessage.applyRollMode(chatData, rollMode);
             ChatMessage.create(chatData);
