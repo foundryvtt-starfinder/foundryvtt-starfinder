@@ -190,6 +190,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         const itemData = this.system;
         const currentCapacity = this.getCurrentCapacity();
         const maxCapacity = this.getMaxCapacity();
+        let newAmmunitionCapacity = null;
 
         if (currentCapacity >= maxCapacity) {
             // No need to reload if already at max capacity.
@@ -198,7 +199,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
         }
 
         let updatePromise = null;
-        let newAmmunitionName = "Internal";
+        let newAmmunitionName = "[Internal]";
         if (this.requiresCapacityItem()) {
             const capacityItem = this.getCapacityItem();
 
@@ -211,7 +212,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 })
                 .sort((firstEl, secondEl) => secondEl.getCurrentCapacity() - firstEl.getCurrentCapacity() );
 
-            if (matchingItems.length > 0) {
+            if (matchingItems.length) {
                 const newAmmunition = matchingItems[0];
 
                 // Create actor item helper
@@ -223,6 +224,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
 
                 if (newAmmunition.system.useCapacity || capacityItem === null) {
                     newAmmunitionName = newAmmunition.name;
+                    newAmmunitionCapacity = newAmmunition.getCurrentCapacity();
                     if (capacityItem) {
                         updatePromise = setItemContainer(itemHelper, capacityItem, null, 1);
                     }
@@ -236,7 +238,6 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                         if (!newAmmunition.system.useCapacity) {
                             totalAmountLoaded = Math.min(maxCapacity, newAmmunition.getCurrentCapacity());
                         }
-
                         updatePromise = setItemContainer(itemHelper, newAmmunition, this, totalAmountLoaded);
                     }
                 } else {
@@ -251,6 +252,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                 ui.notifications.warn(game.i18n.format("SFRPG.ActorSheet.Inventory.Weapon.NoAmmunitionAvailable", {name: this.name}));
             }
         } else {
+            newAmmunitionCapacity = maxCapacity;
             if (this.type === "consumable") {
                 updatePromise = this.update({'system.uses.value': maxCapacity});
             } else {
@@ -273,7 +275,7 @@ export const ItemCapacityMixin = (superclass) => class extends superclass {
                     activationType,
                     actor,
                     ammoName: newAmmunitionName,
-                    capacity: {current: this.getCurrentCapacity(), total: maxCapacity},
+                    capacity: {current: newAmmunitionCapacity, total: maxCapacity},
                     item,
                     tags: {},
                     tokenUUID: actor.token?.uuid ?? null
