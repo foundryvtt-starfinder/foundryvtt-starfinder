@@ -244,7 +244,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
                 author: game.user.id,
                 speaker: ChatMessage.getSpeaker({actor: this}),
                 content: content,
-                style: CONST.CHAT_MESSAGE_STYLES.OTHER,
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             });
         }
 
