@@ -693,7 +693,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             rollContext.setMainContext("pilot");
         } else {
             parts.push("@combatant.attributes.init.total");
-            if (game.settings.get("sfrpg", "useInitiativeTiebreaker")) {
+            if (game.settings.get("sfrpg", "useInitiativeTiebreaker") && combatant.actor.system.attributes?.init?.total) {
                 parts.push(combatant.actor.system.attributes.init.total / 100);
             }
         }
