@@ -71,15 +71,21 @@
                         </div>
                     </li>
                     <li class="attribute" data-tooltip="{{#each system.attributes.eac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
-                        <h4 class="attribute-name box-title">{{ localize "SFRPG.EnergyArmorClass" }}</h4>
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.EnergyArmorClassShort" }}</h4>
                         <div class="attribute-value">
                             <span class="calculated-value">{{system.attributes.eac.value}}</span>
                         </div>
                     </li>
                     <li class="attribute" data-tooltip="{{#each system.attributes.kac.tooltip as |tip|}}{{tip}}<br>{{/each}}">
-                        <h4 class="attribute-name box-title">{{ localize "SFRPG.KineticArmorClass" }}</h4>
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.KineticArmorClassShort" }}</h4>
                         <div class="attribute-value">
                             <span class="calculated-value">{{system.attributes.kac.value}}</span>
+                        </div>
+                    </li>
+                    <li class="attribute" data-tooltip="{{#each system.attributes.init.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                        <h4 class="attribute-name box-title">{{ localize "SFRPG.InitiativeShort" }}</h4>
+                        <div class="attribute-value">
+                            <span class="calculated-value">{{numberFormat system.attributes.init.total sign=true}}</span>
                         </div>
                     </li>
                     <li class="attribute" data-tooltip="{{#each system.attributes.fort.tooltip as |tip|}}{{tip}}<br>{{/each}}">
@@ -135,25 +141,25 @@
                 <h3 class="form-header noborder">{{ localize "SFRPG.MechSheet.Attributes.SpeedTitle" }}</h3>
                 <div class="flexrow">
                     <div class="flexcol">
-                        <div class="form-group">
+                        <div class="form-group" data-tooltip="{{#each system.attributes.speedTooltip.land as |tip|}}{{tip}}<br>{{/each}}">
                             <label>{{ localize "SFRPG.MechSheet.Attributes.Speed.Land" }}</label>
                             <div class="form-fields">
                                 <span class="calculated-value">{{system.attributes.speed.land}}</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" data-tooltip="{{#each system.attributes.speedTooltip.fly as |tip|}}{{tip}}<br>{{/each}}">
                             <label>{{ localize "SFRPG.MechSheet.Attributes.Speed.Fly" }}</label>
                             <div class="form-fields">
                                 <span class="calculated-value">{{system.attributes.speed.fly}}</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" data-tooltip="{{#each system.attributes.speedTooltip.swim as |tip|}}{{tip}}<br>{{/each}}">
                             <label>{{ localize "SFRPG.MechSheet.Attributes.Speed.Swim" }}</label>
                             <div class="form-fields">
                                 <span class="calculated-value">{{system.attributes.speed.swim}}</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" data-tooltip="{{#each system.attributes.speedTooltip.burrow as |tip|}}{{tip}}<br>{{/each}}">
                             <label>{{ localize "SFRPG.MechSheet.Attributes.Speed.Burrow" }}</label>
                             <div class="form-fields">
                                 <span class="calculated-value">{{system.attributes.speed.burrow}}</span>
@@ -179,7 +185,7 @@
                                 <span class="calculated-value">+{{system.attributes.attackBonus.value}}</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" data-tooltip="{{#each system.attributes.reachTooltip as |tip|}}{{tip}}<br>{{/each}}">
                             <label>{{ localize "SFRPG.Reach" }}</label>
                             <div class="form-fields">
                                 <span class="calculated-value">{{system.attributes.reach}}</span>
@@ -199,13 +205,13 @@
                 <h3 class="form-header noborder">{{ localize "SFRPG.MechSheet.Attributes.OtherTitle" }}</h3>
                 <div class="flexrow">
                     <div class="flexcol">
-                        <div class="form-group">
+                        <div class="form-group" data-tooltip="{{#each system.attributes.sizeTooltip as |tip|}}{{tip}}<br>{{/each}}">
                             <label>{{ localize "SFRPG.Size" }}</label>
                             <div class="form-fields">
                                 <span class="calculated-value">{{localize (lookup (sfrpg "mechSizes") system.attributes.size)}}</span>
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" data-tooltip="{{#each system.attributes.operatorsTooltip as |tip|}}{{tip}}<br>{{/each}}">
                             <label>{{ localize "SFRPG.MechSheet.Attributes.Operators" }}</label>
                             <div class="form-fields">
                                 <span class="calculated-value">{{system.attributes.operators.min}} - {{system.attributes.operators.max}}</span>

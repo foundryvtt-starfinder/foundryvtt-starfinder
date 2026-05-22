@@ -97,6 +97,7 @@ import calculateVehiclePassengers from './rules/actions/actor/vehicle/calculate-
 // Mech rules
 import calculateMechCrew from './rules/actions/actor/mech/calculate-mech-crew.js';
 import calculateMechComponents from './rules/actions/actor/mech/calculate-mech-components.js';
+import calculateMechInitiative from './rules/actions/actor/mech/calculate-mech-initiative.js';
 // Item rules
 import calculateActivationDetails from './rules/actions/item/calculate-activation-details.js';
 import calculateSaveDC from './rules/actions/item/calculate-save-dc.js';
@@ -187,6 +188,7 @@ export default function(engine) {
     // Mech actions
     calculateMechCrew(engine);
     calculateMechComponents(engine);
+    calculateMechInitiative(engine);
     // Item actions
     calculateSaveDC(engine);
     calculateSkillDC(engine);
@@ -362,6 +364,7 @@ export default function(engine) {
                 then: [
                     "calculateMechCrew",
                     "calculateMechComponents",
+                    "calculateMechInitiative",
                     { closure: "calculateActorResources", stackModifiers: "stackModifiers" },
                     { closure: "calculateActorResourcesLate", stackModifiers: "stackModifiers" },
                     "calculateBulkAndWealth"
