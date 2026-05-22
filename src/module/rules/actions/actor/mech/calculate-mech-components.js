@@ -39,6 +39,10 @@ export default function(engine) {
         data.attributes.ref = data.attributes.ref || { value: 0, tooltip: [] };
         data.attributes.fort.tooltip = [];
         data.attributes.ref.tooltip = [];
+        data.attributes.speedTooltip = { land: [], fly: [], swim: [], burrow: [] };
+        data.attributes.reachTooltip = [];
+        data.attributes.sizeTooltip = [];
+        data.attributes.operatorsTooltip = [];
 
         // ========================================
         // HP: Base HP + (HP Advancement × tier)
@@ -203,11 +207,13 @@ export default function(engine) {
         // Start with frame base speed
         if (frame?.system.speed) {
             parseSpeedString(frame.system.speed, data.attributes.speed);
+            addSpeedTooltips(frame.system.speed, data.attributes.speedTooltip, frame.name);
         }
 
         // Apply lower limb speed modifiers on top of frame base
         if (lowerLimb?.system.speed) {
             applySpeedModifiers(lowerLimb.system.speed, data.attributes.speed);
+            addSpeedTooltips(lowerLimb.system.speed, data.attributes.speedTooltip, lowerLimb.name);
         }
 
         // ========================================
@@ -224,12 +230,16 @@ export default function(engine) {
         // ========================================
         if (frame?.system.size) {
             data.attributes.size = frame.system.size;
+            const sizeLabel = game.i18n.localize(CONFIG.SFRPG.mechSizes[frame.system.size]) || frame.system.size;
+            data.attributes.sizeTooltip.push(`${frame.name}: ${sizeLabel}`);
         }
 
         // ========================================
         // Reach: Determined by size
         // ========================================
         data.attributes.reach = CONFIG.SFRPG.mechReachBySize[data.attributes.size] || "15 ft.";
+        const reachSizeLabel = game.i18n.localize(CONFIG.SFRPG.mechSizes[data.attributes.size]) || data.attributes.size;
+        data.attributes.reachTooltip.push(`${reachSizeLabel} size: ${data.attributes.reach}`);
 
         // ========================================
         // Slots: From frame and limbs
@@ -246,6 +256,9 @@ export default function(engine) {
             min: frame?.system.operatorsMin || 1,
             max: frame?.system.operatorsMax || 2
         };
+        if (frame) {
+            data.attributes.operatorsTooltip.push(`${frame.name}: ${data.attributes.operators.min} - ${data.attributes.operators.max}`);
+        }
 
         // ========================================
         // Senses: Alphabetize comma-separated entries
@@ -311,6 +324,7 @@ export default function(engine) {
                 const currentLand = parseInt(data.attributes.speed.land) || 0;
                 const newSpeed = currentLand + podMods.speed;
                 data.attributes.speed.land = `${newSpeed} ft.`;
+                data.attributes.speedTooltip.land.push(`${activeMissionPod.name}: +${podMods.speed} ft.`);
             }
         }
 
@@ -356,6 +370,7 @@ export default function(engine) {
                     const current = parseInt(data.attributes.speed[speedType]) || 0;
                     if (current > 0) {
                         data.attributes.speed[speedType] = `${current + sys.speedBonus} ft.`;
+                        data.attributes.speedTooltip[speedType].push(`${upgrade.name}: +${sys.speedBonus} ft.`);
                     }
                 }
             }
@@ -459,7 +474,7 @@ function applySpeedModifiers(speedStr, speedObj) {
     const speedTypes = ["land", "fly", "swim", "burrow"];
 
     for (const part of parts) {
-        let type = null; // null means "all speeds"
+        let type = null;
         let remainder = part;
 
         if (part.toLowerCase().startsWith("fly")) {
@@ -479,13 +494,10 @@ function applySpeedModifiers(speedStr, speedObj) {
             const mod = parseInt(modMatch[1]);
 
             if (type === null) {
-                // No type prefix - apply modifier to ALL existing speeds
-                for (const speedType of speedTypes) {
-                    const current = parseInt(speedObj[speedType]) || 0;
-                    if (current > 0) {
-                        const newSpeed = current + mod;
-                        speedObj[speedType] = `${newSpeed} ft.`;
-                    }
+                // No type prefix - apply to land speed only
+                const current = parseInt(speedObj.land) || 0;
+                if (current > 0) {
+                    speedObj.land = `${current + mod} ft.`;
                 }
             } else {
                 // Specific type - apply to that type only
@@ -499,6 +511,38 @@ function applySpeedModifiers(speedStr, speedObj) {
             if (!speedObj[targetType]) {
                 speedObj[targetType] = remainder;
             }
+        }
+    }
+}
+
+/**
+ * Add tooltip entries for a speed string, attributing them to a source component.
+ */
+function addSpeedTooltips(speedStr, tooltipObj, sourceName) {
+    if (!speedStr) return;
+
+    const parts = speedStr.split(",").map(s => s.trim());
+
+    for (const part of parts) {
+        let type = "land";
+        let display = part;
+
+        if (part.toLowerCase().startsWith("fly")) {
+            type = "fly";
+            display = part.replace(/^fly\s*/i, "");
+        } else if (part.toLowerCase().startsWith("swim")) {
+            type = "swim";
+            display = part.replace(/^swim\s*/i, "");
+        } else if (part.toLowerCase().startsWith("burrow")) {
+            type = "burrow";
+            display = part.replace(/^burrow\s*/i, "");
+        }
+
+        const modMatch = display.match(/^[+-]/);
+        if (modMatch) {
+            tooltipObj[type].push(`${sourceName}: ${display}`);
+        } else {
+            tooltipObj[type].push(`${sourceName}: ${display}`);
         }
     }
 }
