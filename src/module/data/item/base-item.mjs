@@ -544,6 +544,33 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
         };
     }
 
+    static mechActionTemplate() {
+        return {
+            name: new fields.StringField({
+                initial: "",
+                blank: true,
+                label: "SFRPG.MechSheet.Action.Name"
+            }),
+            description: new fields.StringField({
+                initial: "",
+                blank: true,
+                label: "SFRPG.MechSheet.Action.Description"
+            }),
+            ppCost: new fields.NumberField({
+                initial: null,
+                min: 0,
+                integer: true,
+                nullable: true,
+                label: "SFRPG.MechSheet.Action.PpCost"
+            }),
+            actionType: new fields.StringField({
+                initial: "",
+                blank: true,
+                label: "SFRPG.MechSheet.Action.ActionType"
+            })
+        };
+    }
+
     static starshipBPTemplate() {
         return {
             cost: new fields.NumberField({

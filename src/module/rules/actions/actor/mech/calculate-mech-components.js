@@ -427,6 +427,10 @@ export default function(engine) {
             }
         }
 
+        data.attributes.fort.bonus = data.attributes.fort.value;
+        data.attributes.ref.bonus = data.attributes.ref.value;
+        data.attributes.reflex = data.attributes.ref;
+
         return fact;
     });
 }

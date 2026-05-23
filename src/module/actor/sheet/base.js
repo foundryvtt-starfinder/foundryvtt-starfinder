@@ -519,15 +519,47 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             const actor = item.actor;
             const actorData = actor.system;
 
-            // Mech weapons: base attack (tier + limbs) shown on sheet;
-            // operator's BAB/Piloting is added at roll time
+            // Mech weapons: base attack (tier + limbs) + best operator bonus
             if (item.type === "mechWeapon") {
                 const isMelee = itemData.weaponType === "melee";
                 const baseAttack = isMelee
                     ? actorData.attributes?.meleeAttackBonus || 0
                     : actorData.attributes?.rangedAttackBonus || 0;
-                const sign = baseAttack >= 0 ? "+" : "";
-                item.config.attackString = `${sign}${baseAttack} + ${game.i18n.localize("SFRPG.MechSheet.OperatorBonus")}`;
+
+                const tooltipParts = [];
+                const existingTooltip = actorData.attributes?.attackBonus?.tooltip || [];
+                for (const entry of existingTooltip) {
+                    if (isMelee && entry.includes("(Ranged)")) continue;
+                    if (!isMelee && entry.includes("(Melee)")) continue;
+                    if (entry.includes("Operator")) continue;
+                    tooltipParts.push(entry);
+                }
+
+                let operatorBonus = 0;
+                let bestOperatorName = null;
+                let bestOperatorSource = null;
+                const operatorIds = actorData.crew?.operator?.actorIds || [];
+                for (const id of operatorIds) {
+                    const op = game.actors.get(id);
+                    if (!op) continue;
+                    const bab = op.system.attributes?.baseAttackBonus?.value || 0;
+                    const pilRanks = op.system.skills?.pil?.ranks || 0;
+                    const best = Math.max(bab, pilRanks);
+                    if (best > operatorBonus) {
+                        operatorBonus = best;
+                        bestOperatorName = op.name;
+                        bestOperatorSource = best === pilRanks ? "Piloting" : "BAB";
+                    }
+                }
+
+                if (bestOperatorName) {
+                    tooltipParts.push(`${bestOperatorName} (${bestOperatorSource}): +${operatorBonus}`);
+                }
+
+                const total = baseAttack + operatorBonus;
+                const sign = total >= 0 ? "+" : "";
+                item.config.attackString = `${sign}${total}`;
+                item.config.attackTooltip = tooltipParts.join("\n");
                 return;
             }
 

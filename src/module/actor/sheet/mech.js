@@ -15,7 +15,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
 
     static get defaultOptions() {
         const options = super.defaultOptions;
-        options.scrollY = [...(options.scrollY || []), ".tab.details", ".tab.features"];
+        options.scrollY = [...(options.scrollY || []), ".tab.details", ".tab.features", ".tab.actions"];
         return foundry.utils.mergeObject(options, {
             classes: ["sfrpg", "sheet", "actor", "mech"],
             width: 700
@@ -247,6 +247,82 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         };
         data.hasLockerWeapons = lockerWeapons.length > 0;
 
+        // === Actions Tab Data ===
+        const actionsTab = {};
+
+        // Enabled weapons: mounted weapons (not in locker)
+        actionsTab.enabledWeapons = weapons.filter(w => w.system.slot !== "locker");
+
+        // PP Actions (universal, always available)
+        const currentPP = actorData.attributes?.pp?.value || 0;
+        const insufficientPPTooltip = game.i18n.localize("SFRPG.MechSheet.Actions.InsufficientPP");
+        actionsTab.ppActions = [
+            { name: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Aim.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Aim.Description"), ppCost: 1 },
+            { name: game.i18n.localize("SFRPG.MechSheet.Actions.PP.DevastatingHit.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.PP.DevastatingHit.Description"), ppCost: 3 },
+            { name: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Maneuver.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Maneuver.Description"), ppCost: 1 },
+            { name: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Replenish.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Replenish.Description"), ppCost: 2 },
+            { name: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Resist.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Resist.Description"), ppCost: 1 }
+        ];
+        for (const action of actionsTab.ppActions) {
+            action.canAfford = currentPP >= action.ppCost;
+            action.insufficientPPTooltip = insufficientPPTooltip;
+        }
+
+        // Special Actions (universal, action type instead of PP cost)
+        const actionTypeLabels = {
+            standard: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Standard"),
+            move: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Move"),
+            full: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Full"),
+            swift: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Swift"),
+            reaction: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Reaction")
+        };
+        const constantLabel = game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Constant");
+
+        actionsTab.specialActions = [
+            { name: game.i18n.localize("SFRPG.MechSheet.Actions.Special.CalledShot.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.Special.CalledShot.Description"), actionType: "standard", actionTypeLabel: actionTypeLabels.standard },
+            { name: game.i18n.localize("SFRPG.MechSheet.Actions.Special.Hurl.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.Special.Hurl.Description"), actionType: "full", actionTypeLabel: actionTypeLabels.full },
+            { name: game.i18n.localize("SFRPG.MechSheet.Actions.Special.Scan.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.Special.Scan.Description"), actionType: "move", actionTypeLabel: actionTypeLabels.move }
+        ];
+
+        // Gear Actions: from equipped components that have actions arrays
+        actionsTab.gearActions = [];
+        const componentSources = [...weapons, ...lowerLimbs, ...upperLimbs, ...auxiliarySystems];
+        for (const component of componentSources) {
+            const actions = component.system.actions || [];
+            for (let i = 0; i < actions.length; i++) {
+                const action = actions[i];
+                if (!action.name) continue;
+
+                const hasPPCost = action.ppCost !== null && action.ppCost !== undefined;
+                let buttonLabel;
+                if (hasPPCost) {
+                    buttonLabel = `${action.ppCost} PP`;
+                } else if (action.actionType && actionTypeLabels[action.actionType]) {
+                    buttonLabel = actionTypeLabels[action.actionType];
+                } else {
+                    buttonLabel = constantLabel;
+                }
+
+                actionsTab.gearActions.push({
+                    actionName: action.name,
+                    gearName: component.name,
+                    displayName: `${action.name} (${component.name})`,
+                    description: action.description,
+                    ppCost: action.ppCost,
+                    actionType: action.actionType,
+                    buttonLabel: buttonLabel,
+                    hasPPCost: hasPPCost,
+                    canAfford: !hasPPCost || currentPP >= action.ppCost,
+                    insufficientPPTooltip: insufficientPPTooltip,
+                    itemId: component._id,
+                    actionIndex: i
+                });
+            }
+        }
+        actionsTab.gearActions.sort((a, b) => a.displayName.localeCompare(b.displayName));
+
+        data.actionsTab = actionsTab;
+
         // Mission pods data - sort alphabetically
         missionPods.sort((a, b) => a.name.localeCompare(b.name));
         const activePod = missionPods.find(p => p.system.isActive);
@@ -299,6 +375,11 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         // AC Adjustment Controls
         html.find('.ac-adjust').click(event => this._onACAdjust(event));
 
+        // Actions Tab - action buttons post to chat
+        html.find('.mech-pp-action').click(event => this._onMechAction(event, "pp"));
+        html.find('.mech-special-action').click(event => this._onMechAction(event, "special"));
+        html.find('.mech-gear-action').click(event => this._onMechAction(event, "gear"));
+
         // Mech weapon action button dragging (for creating hotbar macros)
         const attackButtons = html[0].querySelectorAll('button.attack, button.damage');
         for (const btn of attackButtons) {
@@ -349,6 +430,98 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         const current = foundry.utils.getProperty(this.actor, field) || 0;
         const newValue = action === "increase" ? current + 1 : current - 1;
         this.actor.update({ [field]: newValue });
+    }
+
+    /**
+     * Handle clicking a mech action button. Posts a chat card describing the action.
+     * @param {Event} event The click event
+     * @param {string} actionCategory "pp", "special", or "gear"
+     */
+    async _onMechAction(event, actionCategory) {
+        event.preventDefault();
+        const el = event.currentTarget;
+        const actionIndex = parseInt(el.dataset.actionIndex);
+
+        let name, description, ppCost, actionType, gearName, img;
+        img = this.actor.img;
+
+        if (actionCategory === "pp") {
+            const ppActions = [
+                { name: "SFRPG.MechSheet.Actions.PP.Aim.Name", desc: "SFRPG.MechSheet.Actions.PP.Aim.Description", ppCost: 1 },
+                { name: "SFRPG.MechSheet.Actions.PP.DevastatingHit.Name", desc: "SFRPG.MechSheet.Actions.PP.DevastatingHit.Description", ppCost: 3 },
+                { name: "SFRPG.MechSheet.Actions.PP.Maneuver.Name", desc: "SFRPG.MechSheet.Actions.PP.Maneuver.Description", ppCost: 1 },
+                { name: "SFRPG.MechSheet.Actions.PP.Replenish.Name", desc: "SFRPG.MechSheet.Actions.PP.Replenish.Description", ppCost: 2 },
+                { name: "SFRPG.MechSheet.Actions.PP.Resist.Name", desc: "SFRPG.MechSheet.Actions.PP.Resist.Description", ppCost: 1 }
+            ];
+            const action = ppActions[actionIndex];
+            name = game.i18n.localize(action.name);
+            description = game.i18n.localize(action.desc);
+            ppCost = action.ppCost;
+        } else if (actionCategory === "special") {
+            const specialActions = [
+                { name: "SFRPG.MechSheet.Actions.Special.CalledShot.Name", desc: "SFRPG.MechSheet.Actions.Special.CalledShot.Description", actionType: "standard" },
+                { name: "SFRPG.MechSheet.Actions.Special.Hurl.Name", desc: "SFRPG.MechSheet.Actions.Special.Hurl.Description", actionType: "full" },
+                { name: "SFRPG.MechSheet.Actions.Special.Scan.Name", desc: "SFRPG.MechSheet.Actions.Special.Scan.Description", actionType: "move" }
+            ];
+            const action = specialActions[actionIndex];
+            name = game.i18n.localize(action.name);
+            description = game.i18n.localize(action.desc);
+            actionType = action.actionType;
+        } else if (actionCategory === "gear") {
+            const itemId = el.dataset.itemId;
+            const itemActionIndex = parseInt(el.dataset.itemActionIndex);
+            const item = this.actor.items.get(itemId);
+            if (!item) return;
+            const action = item.system.actions?.[itemActionIndex];
+            if (!action) return;
+            name = `${action.name} (${item.name})`;
+            description = action.description;
+            ppCost = action.ppCost;
+            actionType = action.actionType;
+            gearName = item.name;
+            img = item.img;
+        }
+
+        const actionTypeLabels = {
+            standard: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Standard"),
+            move: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Move"),
+            full: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Full"),
+            swift: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Swift"),
+            reaction: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Reaction")
+        };
+
+        // Deduct PP if this action has a cost
+        if (ppCost !== null && ppCost !== undefined && ppCost > 0) {
+            const currentPP = this.actor.system.attributes.pp.value || 0;
+            if (currentPP < ppCost) {
+                ui.notifications.warn(game.i18n.localize("SFRPG.MechSheet.Actions.InsufficientPP"));
+                return;
+            }
+            await this.actor.update({ "system.attributes.pp.value": currentPP - ppCost });
+        }
+
+        const ppSpent = (ppCost !== null && ppCost !== undefined && ppCost > 0)
+            ? game.i18n.format("SFRPG.MechSheet.Actions.PPSpent", { amount: ppCost })
+            : null;
+
+        const templateData = {
+            actor: this.actor,
+            name: name,
+            img: img,
+            description: description,
+            ppCost: ppCost !== null && ppCost !== undefined ? `${ppCost} PP` : null,
+            ppSpent: ppSpent,
+            actionTypeLabel: actionType ? (actionTypeLabels[actionType] || actionType) : null,
+            gearName: gearName || null
+        };
+
+        const html = await renderTemplate("systems/sfrpg/templates/chat/mech-action-card.hbs", templateData);
+        await ChatMessage.create({
+            user: game.user.id,
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: html,
+            type: CONST.CHAT_MESSAGE_TYPES.OTHER
+        });
     }
 
     /**
