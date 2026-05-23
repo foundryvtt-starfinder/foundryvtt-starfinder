@@ -107,7 +107,11 @@ export default class SFRPGItemMechWeapon extends SFRPGItemBase {
                 initial: "",
                 blank: true,
                 label: "SFRPG.MechSheet.Weapon.Special"
-            })
+            }),
+            actions: new fields.ArrayField(
+                new fields.SchemaField(SFRPGItemBase.mechActionTemplate()),
+                { initial: [], required: true, label: "SFRPG.MechSheet.Action.Actions" }
+            )
         });
 
         return schema;

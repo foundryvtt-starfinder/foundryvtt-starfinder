@@ -838,6 +838,37 @@ Hooks.on("renderAbstractSidebarTab", async (app) => {
     }
 });
 
+Hooks.on("onAfterUpdateCombat", async (eventData) => {
+    if (!game.users.activeGM?.isSelf) return;
+    if (!eventData.isNewTurn || !eventData.newCombatant) return;
+
+    const actor = eventData.newCombatant.actor;
+    if (!actor || actor.type !== "mech") return;
+
+    const pp = actor.system.attributes.pp;
+    const regen = pp.regen || 0;
+    if (regen <= 0 || pp.value >= pp.max) return;
+
+    const oldValue = pp.value;
+    const newValue = Math.min(oldValue + regen, pp.max);
+    const gained = newValue - oldValue;
+
+    await actor.update({"system.attributes.pp.value": newValue});
+
+    const whisperTargets = game.users.filter(u => u.isGM || actor.testUserPermission(u, "OWNER")).map(u => u.id);
+
+    await ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({actor: actor}),
+        content: game.i18n.format("SFRPG.MechSheet.Actions.PPRegenMessage", {
+            name: actor.name,
+            amount: gained,
+            current: newValue,
+            max: pp.max
+        }),
+        whisper: whisperTargets
+    });
+});
+
 // Set this hook up outside of init for the sake of module compatibility.
 Hooks.on("renderGamePause", () => {
     if (game.settings.get("sfrpg", "sfrpgTheme")) {

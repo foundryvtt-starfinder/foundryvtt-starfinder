@@ -35,7 +35,11 @@ export default class SFRPGItemMechAuxiliary extends SFRPGItemBase {
                 integer: true,
                 required: true,
                 label: "SFRPG.MechSheet.Auxiliary.MpCost"
-            })
+            }),
+            actions: new fields.ArrayField(
+                new fields.SchemaField(SFRPGItemBase.mechActionTemplate()),
+                { initial: [], required: true, label: "SFRPG.MechSheet.Action.Actions" }
+            )
         });
 
         return schema;

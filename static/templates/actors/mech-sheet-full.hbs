@@ -37,6 +37,7 @@
     <nav class="sheet-navigation tabs" data-group="primary">
         <a class="item active" data-tab="details">{{ localize "SFRPG.Details" }}</a>
         <a class="item" data-tab="components">{{ localize "SFRPG.MechSheet.Tabs.Components" }}</a>
+        <a class="item" data-tab="actions">{{ localize "SFRPG.MechSheet.Tabs.Actions" }}</a>
         {{#if hasLockerWeapons}}<a class="item" data-tab="weapons-locker">{{ localize "SFRPG.MechSheet.Tabs.WeaponsLocker" }}</a>{{/if}}
         <a class="item" data-tab="operators">{{ localize "SFRPG.MechSheet.Tabs.Operators" }}</a>
         <a class="item" data-tab="notes">{{ localize "SFRPG.Notes" }}</a>
@@ -88,14 +89,14 @@
                             <span class="calculated-value">{{numberFormat system.attributes.init.total sign=true}}</span>
                         </div>
                     </li>
-                    <li class="attribute" data-tooltip="{{#each system.attributes.fort.tooltip as |tip|}}{{tip}}<br>{{/each}}">
-                        <h4 class="attribute-name box-title">{{ localize "SFRPG.FortitudeSave" }}</h4>
+                    <li class="attribute save" data-save="fort" data-tooltip="{{#each system.attributes.fort.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                        <h4 class="attribute-name save-name box-title rollable">{{ localize "SFRPG.FortitudeSave" }}</h4>
                         <div class="attribute-value">
                             <span class="calculated-value">+{{system.attributes.fort.value}}</span>
                         </div>
                     </li>
-                    <li class="attribute" data-tooltip="{{#each system.attributes.ref.tooltip as |tip|}}{{tip}}<br>{{/each}}">
-                        <h4 class="attribute-name box-title">{{ localize "SFRPG.ReflexSave" }}</h4>
+                    <li class="attribute save" data-save="reflex" data-tooltip="{{#each system.attributes.ref.tooltip as |tip|}}{{tip}}<br>{{/each}}">
+                        <h4 class="attribute-name save-name box-title rollable">{{ localize "SFRPG.ReflexSave" }}</h4>
                         <div class="attribute-value">
                             <span class="calculated-value">+{{system.attributes.ref.value}}</span>
                         </div>
@@ -451,6 +452,111 @@
                 {{/if}}
             </ol>
             {{/each}}
+        </div>
+
+        {{!-- Actions Tab --}}
+        <div class="tab actions flexcol" data-group="primary" data-tab="actions">
+
+            {{!-- Enabled Weapons --}}
+            <ol class="mech-action-list">
+                <li class="mech-action-header flexrow">
+                    <h3 class="item-name noborder">{{ localize "SFRPG.MechSheet.Actions.EnabledWeapons" }}</h3>
+                </li>
+                {{#if actionsTab.enabledWeapons.length}}
+                {{#each actionsTab.enabledWeapons as |weapon|}}
+                <li class="mech-action-item flexrow item" data-item-id="{{weapon._id}}">
+                    <div class="mech-action-name flexrow">
+                        <div class="item-image small" style="background-image: url({{weapon.img}})"></div>
+                        <h4 class="rollable">{{weapon.name}}</h4>
+                    </div>
+                    {{#if @root.isOwner}}
+                    <div class="mech-action-buttons item-action">
+                        {{#if weapon.config.hasAttack}}
+                        <button type="button" class="tag attack" data-tooltip="{{weapon.config.attackTooltip}}">
+                            {{weapon.config.attackString}}
+                        </button>
+                        {{/if}}
+                        {{#if weapon.config.hasDamage}}
+                        <button type="button" class="tag damage" data-tooltip="{{localize "SFRPG.Damage.Title"}}">
+                            {{weapon.config.damageString}}
+                        </button>
+                        {{/if}}
+                    </div>
+                    {{/if}}
+                </li>
+                {{/each}}
+                {{else}}
+                <li class="mech-action-item flexrow empty-slot">
+                    <span>{{ localize "SFRPG.MechSheet.Actions.NoEnabledWeapons" }}</span>
+                </li>
+                {{/if}}
+            </ol>
+
+            {{!-- PP Actions --}}
+            <ol class="mech-action-list">
+                <li class="mech-action-header flexrow">
+                    <h3 class="item-name noborder">{{ localize "SFRPG.MechSheet.Actions.PPActions" }}</h3>
+                </li>
+                {{#each actionsTab.ppActions as |action|}}
+                <li class="mech-action-item flexrow">
+                    <div class="mech-action-name" data-tooltip="{{action.description}}">
+                        <h4>{{action.name}}</h4>
+                    </div>
+                    {{#if @root.isOwner}}
+                    <div class="mech-action-buttons">
+                        <button type="button" class="tag mech-pp-action pp-cost-button{{#unless action.canAfford}} disabled{{/unless}}" data-action-index="{{@index}}" {{#unless action.canAfford}}disabled data-tooltip="{{action.insufficientPPTooltip}}"{{/unless}}>
+                            {{action.ppCost}} PP
+                        </button>
+                    </div>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ol>
+
+            {{!-- Special Actions --}}
+            <ol class="mech-action-list">
+                <li class="mech-action-header flexrow">
+                    <h3 class="item-name noborder">{{ localize "SFRPG.MechSheet.Actions.SpecialActions" }}</h3>
+                </li>
+                {{#each actionsTab.specialActions as |action|}}
+                <li class="mech-action-item flexrow">
+                    <div class="mech-action-name" data-tooltip="{{action.description}}">
+                        <h4>{{action.name}}</h4>
+                    </div>
+                    {{#if @root.isOwner}}
+                    <div class="mech-action-buttons">
+                        <button type="button" class="tag mech-special-action action-type-button" data-action-index="{{@index}}">
+                            {{action.actionTypeLabel}}
+                        </button>
+                    </div>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ol>
+
+            {{!-- Gear Actions --}}
+            {{#if actionsTab.gearActions.length}}
+            <ol class="mech-action-list">
+                <li class="mech-action-header flexrow">
+                    <h3 class="item-name noborder">{{ localize "SFRPG.MechSheet.Actions.GearActions" }}</h3>
+                </li>
+                {{#each actionsTab.gearActions as |action|}}
+                <li class="mech-action-item flexrow">
+                    <div class="mech-action-name" data-tooltip="{{action.description}}">
+                        <h4>{{action.displayName}}</h4>
+                    </div>
+                    {{#if @root.isOwner}}
+                    <div class="mech-action-buttons">
+                        <button type="button" class="tag mech-gear-action {{#if action.hasPPCost}}pp-cost-button{{else}}action-type-button{{/if}}{{#unless action.canAfford}} disabled{{/unless}}" data-item-id="{{action.itemId}}" data-item-action-index="{{action.actionIndex}}" data-action-index="{{@index}}" {{#unless action.canAfford}}disabled data-tooltip="{{action.insufficientPPTooltip}}"{{/unless}}>
+                            {{action.buttonLabel}}
+                        </button>
+                    </div>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ol>
+            {{/if}}
+
         </div>
 
         {{!-- Weapons Locker Tab --}}
