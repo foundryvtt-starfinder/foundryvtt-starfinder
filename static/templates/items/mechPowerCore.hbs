@@ -44,6 +44,14 @@
                 <h3 class="bubble-header">{{ localize "SFRPG.MechSheet.PowerCore.Title" }}</h3>
                 <div class="bubble-info">
                     <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.PowerCore.CoreType" }}</label>
+                        <div class="form-fields">
+                            <select name="system.coreType">
+                                {{selectOptions (sfrpg "mechCoreTypes") selected=itemData.coreType localize=true}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label>{{ localize "SFRPG.MechSheet.PowerCore.PPInitial" }}</label>
                         <div class="form-fields">
                             <input type="text" name="system.ppInitial" value="{{itemData.ppInitial}}" data-dtype="Number" />
@@ -67,6 +75,47 @@
                             <input type="text" name="system.mpCost" value="{{itemData.mpCost}}" data-dtype="Number" />
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="bubble">
+                <h3 class="bubble-header">{{ localize "SFRPG.MechSheet.PowerCore.Template" }}</h3>
+                <div class="bubble-info">
+                    <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.PowerCore.Template" }}</label>
+                        <div class="form-fields">
+                            <select name="system.template" class="power-core-template-select">
+                                <option value="">{{ localize "SFRPG.MechSheet.PowerCore.TemplateNone" }}</option>
+                                {{selectOptions (sfrpg "mechPowerCoreTemplateChoices") selected=itemData.template localize=true}}
+                            </select>
+                        </div>
+                    </div>
+
+                    {{#if templateInfo}}
+                    <div class="template-info">
+                        <p class="template-description">{{templateInfo.description}}</p>
+                        <div class="template-modifiers">
+                            {{#if templateInfo.hasModifiers}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.MechSheet.PowerCore.TemplatePPModifiers" }}</label>
+                                <span class="template-mod-values">{{templateInfo.modifierSummary}}</span>
+                            </div>
+                            {{/if}}
+                            {{#if templateInfo.mpCostDisplay}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.MechSheet.PowerCore.TemplateMpCost" }}</label>
+                                <span>{{templateInfo.mpCostDisplay}}</span>
+                            </div>
+                            {{/if}}
+                            {{#if templateInfo.restrictionDisplay}}
+                            <div class="form-group">
+                                <label>{{ localize "SFRPG.MechSheet.PowerCore.TemplateRestriction" }}</label>
+                                <span>{{templateInfo.restrictionDisplay}}</span>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                    {{/if}}
                 </div>
             </div>
 

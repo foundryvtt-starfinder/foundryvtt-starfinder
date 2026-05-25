@@ -13,6 +13,13 @@ export default class SFRPGItemMechPowerCore extends SFRPGItemBase {
         const schema = super.defineSchema();
 
         foundry.utils.mergeObject(schema, {
+            coreType: new fields.StringField({
+                initial: "dynamo",
+                blank: false,
+                choices: ["dynamo", "eternal"],
+                required: true,
+                label: "SFRPG.MechSheet.PowerCore.CoreType"
+            }),
             ppInitial: new fields.NumberField({
                 initial: 3,
                 min: 0,
@@ -40,6 +47,12 @@ export default class SFRPGItemMechPowerCore extends SFRPGItemBase {
                 integer: true,
                 required: true,
                 label: "SFRPG.MechSheet.PowerCore.MpCost"
+            }),
+            template: new fields.StringField({
+                initial: "",
+                blank: true,
+                required: false,
+                label: "SFRPG.MechSheet.PowerCore.Template"
             })
         });
 

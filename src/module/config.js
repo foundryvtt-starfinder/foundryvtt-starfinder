@@ -1034,6 +1034,128 @@ SFRPG.mechStatsByTier = {
     20: { sp: 43, hardnessBonus: 10, baseAC: 38, baseSaveBonus: 17, baseAttackBonus: 12, strengthMod: 6 }
 };
 
+SFRPG.mechCoreTypes = {
+    "dynamo": "SFRPG.MechSheet.PowerCore.CoreTypes.Dynamo",
+    "eternal": "SFRPG.MechSheet.PowerCore.CoreTypes.Eternal"
+};
+
+SFRPG.mechPowerCoreTemplates = {
+    "aeon": {
+        label: "SFRPG.MechSheet.PowerCore.Templates.Aeon.Name",
+        description: "SFRPG.MechSheet.PowerCore.Templates.Aeon.Description",
+        restriction: "eternal",
+        ppRateMod: 0,
+        ppInitialMod: -1,
+        ppMaxMod: -1,
+        mpCostMultiplier: 0,
+        source: "Tech Revolution pg. 102",
+        actions: []
+    },
+    "battle": {
+        label: "SFRPG.MechSheet.PowerCore.Templates.Battle.Name",
+        description: "SFRPG.MechSheet.PowerCore.Templates.Battle.Description",
+        restriction: "rateAbove1",
+        ppRateMod: -1,
+        ppInitialMod: 0,
+        ppMaxMod: 1,
+        mpCostMultiplier: 0.5,
+        source: "Tech Revolution pg. 102",
+        actions: []
+    },
+    "corpsegnawer": {
+        label: "SFRPG.MechSheet.PowerCore.Templates.Corpsegnawer.Name",
+        description: "SFRPG.MechSheet.PowerCore.Templates.Corpsegnawer.Description",
+        restriction: null,
+        ppRateMod: 0,
+        ppInitialMod: 0,
+        ppMaxMod: 0,
+        mpCostMultiplier: 0.5,
+        source: "Tech Revolution pg. 102",
+        actions: [
+            {
+                name: "SFRPG.MechSheet.PowerCore.Templates.Corpsegnawer.ActionName",
+                description: "SFRPG.MechSheet.PowerCore.Templates.Corpsegnawer.ActionDescription",
+                ppCost: null,
+                actionType: "standard"
+            }
+        ]
+    },
+    "scrapper": {
+        label: "SFRPG.MechSheet.PowerCore.Templates.Scrapper.Name",
+        description: "SFRPG.MechSheet.PowerCore.Templates.Scrapper.Description",
+        restriction: null,
+        ppRateMod: 0,
+        ppInitialMod: 0,
+        ppMaxMod: 0,
+        mpCostMultiplier: 1,
+        source: "Tech Revolution pg. 102",
+        actions: []
+    },
+    "archadrenal": {
+        label: "SFRPG.MechSheet.PowerCore.Templates.Archadrenal.Name",
+        description: "SFRPG.MechSheet.PowerCore.Templates.Archadrenal.Description",
+        restriction: "rateAbove1",
+        ppRateMod: 0,
+        ppInitialMod: -1,
+        ppMaxMod: 0,
+        mpCostMultiplier: 0.5,
+        source: "Mechageddon! pg. 152",
+        actions: [
+            {
+                name: "SFRPG.MechSheet.PowerCore.Templates.Archadrenal.ActionName",
+                description: "SFRPG.MechSheet.PowerCore.Templates.Archadrenal.ActionDescription",
+                ppCost: null,
+                actionType: "free"
+            }
+        ]
+    },
+    "artificialInfandibulum": {
+        label: "SFRPG.MechSheet.PowerCore.Templates.ArtificialInfandibulum.Name",
+        description: "SFRPG.MechSheet.PowerCore.Templates.ArtificialInfandibulum.Description",
+        restriction: "eternal",
+        ppRateMod: 0,
+        ppInitialMod: -1,
+        ppMaxMod: -1,
+        mpCostMultiplier: 2,
+        source: "Mechageddon! pg. 152",
+        actions: [
+            {
+                name: "SFRPG.MechSheet.PowerCore.Templates.ArtificialInfandibulum.ReloadActionName",
+                description: "SFRPG.MechSheet.PowerCore.Templates.ArtificialInfandibulum.ReloadActionDescription",
+                ppCost: 2,
+                actionType: ""
+            },
+            {
+                name: "SFRPG.MechSheet.PowerCore.Templates.ArtificialInfandibulum.DoubleFireActionName",
+                description: "SFRPG.MechSheet.PowerCore.Templates.ArtificialInfandibulum.DoubleFireActionDescription",
+                ppCost: null,
+                actionType: ""
+            }
+        ]
+    },
+    "concerto": {
+        label: "SFRPG.MechSheet.PowerCore.Templates.Concerto.Name",
+        description: "SFRPG.MechSheet.PowerCore.Templates.Concerto.Description",
+        restriction: null,
+        ppRateMod: 0,
+        ppInitialMod: 0,
+        ppMaxMod: 0,
+        mpCostMultiplier: 0.5,
+        source: "Mechageddon! pg. 152",
+        actions: []
+    }
+};
+
+SFRPG.mechPowerCoreTemplateChoices = {
+    "aeon": "SFRPG.MechSheet.PowerCore.Templates.Aeon.Name",
+    "battle": "SFRPG.MechSheet.PowerCore.Templates.Battle.Name",
+    "corpsegnawer": "SFRPG.MechSheet.PowerCore.Templates.Corpsegnawer.Name",
+    "scrapper": "SFRPG.MechSheet.PowerCore.Templates.Scrapper.Name",
+    "archadrenal": "SFRPG.MechSheet.PowerCore.Templates.Archadrenal.Name",
+    "artificialInfandibulum": "SFRPG.MechSheet.PowerCore.Templates.ArtificialInfandibulum.Name",
+    "concerto": "SFRPG.MechSheet.PowerCore.Templates.Concerto.Name"
+};
+
 SFRPG.mechWeaponDamageLevels = {
     "low": "SFRPG.MechSheet.Weapon.DamageLevelLow",
     "medium": "SFRPG.MechSheet.Weapon.DamageLevelMedium",

@@ -217,12 +217,40 @@ export default function(engine) {
         }
 
         // ========================================
-        // Power Points: From power core
+        // Power Points: From power core + template modifiers
         // ========================================
         if (powerCore) {
             data.attributes.pp.initial = powerCore.system.ppInitial || 3;
             data.attributes.pp.max = powerCore.system.ppMax || 5;
             data.attributes.pp.regen = powerCore.system.ppRegen || 1;
+
+            const templateKey = powerCore.system.template;
+            if (templateKey) {
+                const templateData = CONFIG.SFRPG.mechPowerCoreTemplates[templateKey];
+                if (templateData) {
+                    const templateLabel = game.i18n.localize(templateData.label);
+
+                    if (templateData.ppInitialMod) {
+                        data.attributes.pp.initial = Math.max(0, data.attributes.pp.initial + templateData.ppInitialMod);
+                        data.attributes.pp.tooltip = data.attributes.pp.tooltip || [];
+                        data.attributes.pp.tooltip.push(`${templateLabel} (Initial): ${templateData.ppInitialMod > 0 ? "+" : ""}${templateData.ppInitialMod}`);
+                    }
+                    if (templateData.ppMaxMod) {
+                        data.attributes.pp.max = Math.max(0, data.attributes.pp.max + templateData.ppMaxMod);
+                        data.attributes.pp.tooltip = data.attributes.pp.tooltip || [];
+                        data.attributes.pp.tooltip.push(`${templateLabel} (Max): ${templateData.ppMaxMod > 0 ? "+" : ""}${templateData.ppMaxMod}`);
+                    }
+                    if (templateData.ppRateMod) {
+                        data.attributes.pp.regen = Math.max(0, data.attributes.pp.regen + templateData.ppRateMod);
+                        data.attributes.pp.tooltip = data.attributes.pp.tooltip || [];
+                        data.attributes.pp.tooltip.push(`${templateLabel} (Regen): ${templateData.ppRateMod > 0 ? "+" : ""}${templateData.ppRateMod}`);
+                    }
+
+                    if (templateData.mpCostMultiplier > 0) {
+                        data.attributes.pp.templateMpCost = Math.floor(templateData.mpCostMultiplier * tier);
+                    }
+                }
+            }
         }
 
         // ========================================

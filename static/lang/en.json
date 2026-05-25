@@ -3342,11 +3342,63 @@
             },
             "PowerCore": {
                 "Title": "Power Core",
+                "CoreType": "Core Type",
+                "CoreTypes": {
+                    "Dynamo": "Dynamo",
+                    "Eternal": "Eternal"
+                },
                 "PPInitial": "Initial PP",
                 "PPMax": "Maximum PP",
                 "PPRegen": "PP Regen/Turn",
                 "MpCost": "MP Cost",
-                "OnlyOne": "A mech can only have one power core."
+                "OnlyOne": "A mech can only have one power core.",
+                "Template": "Template",
+                "TemplateNone": "None",
+                "TemplatePPModifiers": "PP Modifiers",
+                "TemplateMpCost": "Template MP Cost",
+                "TemplateTier": "Tier",
+                "TemplateRestriction": "Restriction",
+                "TemplateRestrictionError": "This template requires: {requirement}",
+                "RestrictionEternal": "Eternal core only",
+                "RestrictionRateAbove1": "PP Regen/Turn greater than 1",
+                "Templates": {
+                    "Aeon": {
+                        "Name": "Aeon",
+                        "Description": "Operators can expend unused spell slots to grant PP equal to half the slot level (rounded down), once per round."
+                    },
+                    "Battle": {
+                        "Name": "Battle",
+                        "Description": "Optimized for combat, this template sacrifices regeneration rate for increased maximum capacity."
+                    },
+                    "Corpsegnawer": {
+                        "Name": "Corpsegnawer",
+                        "Description": "The mech can draw life energy from nearby corpses to boost its power regeneration rate.",
+                        "ActionName": "Draw Life Energy",
+                        "ActionDescription": "As a standard action, draw life energy from corpses within reach (dead no more than 1 minute). Increases PP regen rate by 1 for 1 round per 4 levels/CR of the creature. Creature must be at least half the mech's tier."
+                    },
+                    "Scrapper": {
+                        "Name": "Scrapper",
+                        "Description": "The mech gains 1d4 PP whenever it receives a system failure condition. Excess PP beyond maximum are lost after the next turn."
+                    },
+                    "Archadrenal": {
+                        "Name": "Archadrenal",
+                        "Description": "The mech can convert its own structural integrity into power, taking damage to generate PP.",
+                        "ActionName": "Convert HP to PP",
+                        "ActionDescription": "As a free action, take 3 × tier HP damage (unmitigated, but heals normally) to gain 1 PP."
+                    },
+                    "ArtificialInfandibulum": {
+                        "Name": "Artificial Infandibulum",
+                        "Description": "All weapons count as magical. Ammunition can be reloaded via PP. Energy weapons can activate twice per round and can switch damage types (fire/electricity/sonic). Energy weapon hits create a gravitation effect (Reflex DC 10 + half tier + STR mod, 20-ft push on hit).",
+                        "ReloadActionName": "Reload Ammunition",
+                        "ReloadActionDescription": "Spend 2 or more PP to reload ammunition for a mech weapon.",
+                        "DoubleFireActionName": "Double Fire (Energy)",
+                        "DoubleFireActionDescription": "Energy weapons can activate a second time per round (second activation deals lower damage tier). Can switch energy damage type to fire, electricity, or sonic."
+                    },
+                    "Concerto": {
+                        "Name": "Concerto",
+                        "Description": "Profession (musician) replaces standard operation checks (except scanning and repair). The mech gains a roadie operator who provides one additional action per round."
+                    }
+                }
             },
             "LowerLimb": {
                 "Title": "Lower Limb",

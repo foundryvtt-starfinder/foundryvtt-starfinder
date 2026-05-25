@@ -306,6 +306,34 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
             }
         }
 
+        if (data.item.type === "mechPowerCore" && data.itemData.template) {
+            const templateData = CONFIG.SFRPG.mechPowerCoreTemplates[data.itemData.template];
+            if (templateData) {
+                const mods = [];
+                if (templateData.ppRateMod) mods.push(`${game.i18n.localize("SFRPG.MechSheet.PowerCore.PPRegen")}: ${templateData.ppRateMod > 0 ? "+" : ""}${templateData.ppRateMod}`);
+                if (templateData.ppInitialMod) mods.push(`${game.i18n.localize("SFRPG.MechSheet.PowerCore.PPInitial")}: ${templateData.ppInitialMod > 0 ? "+" : ""}${templateData.ppInitialMod}`);
+                if (templateData.ppMaxMod) mods.push(`${game.i18n.localize("SFRPG.MechSheet.PowerCore.PPMax")}: ${templateData.ppMaxMod > 0 ? "+" : ""}${templateData.ppMaxMod}`);
+
+                let restrictionDisplay = "";
+                if (templateData.restriction === "eternal") {
+                    restrictionDisplay = game.i18n.localize("SFRPG.MechSheet.PowerCore.RestrictionEternal");
+                } else if (templateData.restriction === "rateAbove1") {
+                    restrictionDisplay = game.i18n.localize("SFRPG.MechSheet.PowerCore.RestrictionRateAbove1");
+                }
+
+                data.templateInfo = {
+                    description: game.i18n.localize(templateData.description),
+                    hasModifiers: mods.length > 0,
+                    modifierSummary: mods.join(", "),
+                    mpCostDisplay: templateData.mpCostMultiplier > 0
+                        ? `${templateData.mpCostMultiplier} × ${game.i18n.localize("SFRPG.MechSheet.PowerCore.TemplateTier")}`
+                        : "",
+                    restrictionDisplay: restrictionDisplay,
+                    source: templateData.source
+                };
+            }
+        }
+
         return data;
     }
 
@@ -652,6 +680,28 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
                 newValue = isDelta ? Number(oldValue) + Number(sanitizedInput) : Number(sanitizedInput);
             }
             formData["system.quantity"] = newValue;
+        }
+
+        // Validate power core template restrictions
+        if (this.item.type === "mechPowerCore" && formData["system.template"]) {
+            const templateKey = formData["system.template"];
+            const templateData = CONFIG.SFRPG.mechPowerCoreTemplates[templateKey];
+            if (templateData) {
+                const coreType = formData["system.coreType"] ?? this.item.system.coreType;
+                const ppRegen = formData["system.ppRegen"] ?? this.item.system.ppRegen;
+
+                if (templateData.restriction === "eternal" && coreType !== "eternal") {
+                    ui.notifications.error(game.i18n.format("SFRPG.MechSheet.PowerCore.TemplateRestrictionError", {
+                        requirement: game.i18n.localize("SFRPG.MechSheet.PowerCore.RestrictionEternal")
+                    }));
+                    formData["system.template"] = "";
+                } else if (templateData.restriction === "rateAbove1" && ppRegen <= 1) {
+                    ui.notifications.error(game.i18n.format("SFRPG.MechSheet.PowerCore.TemplateRestrictionError", {
+                        requirement: game.i18n.localize("SFRPG.MechSheet.PowerCore.RestrictionRateAbove1")
+                    }));
+                    formData["system.template"] = "";
+                }
+            }
         }
 
         // Update the Item

@@ -286,7 +286,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
 
         // Gear Actions: from equipped components that have actions arrays
         actionsTab.gearActions = [];
-        const componentSources = [...weapons, ...lowerLimbs, ...upperLimbs, ...auxiliarySystems];
+        const componentSources = [...weapons, ...lowerLimbs, ...upperLimbs, ...auxiliarySystems, ...powerCores];
         for (const component of componentSources) {
             const actions = component.system.actions || [];
             for (let i = 0; i < actions.length; i++) {
@@ -319,6 +319,43 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
                 });
             }
         }
+        // Power core template actions (from CONFIG)
+        for (const core of powerCores) {
+            const templateKey = core.system.template;
+            if (!templateKey) continue;
+            const templateData = CONFIG.SFRPG.mechPowerCoreTemplates[templateKey];
+            if (!templateData?.actions?.length) continue;
+
+            const templateLabel = game.i18n.localize(templateData.label);
+            for (const tAction of templateData.actions) {
+                const actionName = game.i18n.localize(tAction.name);
+                const hasPPCost = tAction.ppCost !== null && tAction.ppCost !== undefined;
+                let buttonLabel;
+                if (hasPPCost) {
+                    buttonLabel = `${tAction.ppCost} PP`;
+                } else if (tAction.actionType && actionTypeLabels[tAction.actionType]) {
+                    buttonLabel = actionTypeLabels[tAction.actionType];
+                } else {
+                    buttonLabel = constantLabel;
+                }
+
+                actionsTab.gearActions.push({
+                    actionName: actionName,
+                    gearName: `${core.name} (${templateLabel})`,
+                    displayName: `${actionName} (${core.name})`,
+                    description: game.i18n.localize(tAction.description),
+                    ppCost: tAction.ppCost,
+                    actionType: tAction.actionType,
+                    buttonLabel: buttonLabel,
+                    hasPPCost: hasPPCost,
+                    canAfford: !hasPPCost || currentPP >= tAction.ppCost,
+                    insufficientPPTooltip: insufficientPPTooltip,
+                    itemId: core._id,
+                    actionIndex: -1
+                });
+            }
+        }
+
         actionsTab.gearActions.sort((a, b) => a.displayName.localeCompare(b.displayName));
 
         data.actionsTab = actionsTab;
