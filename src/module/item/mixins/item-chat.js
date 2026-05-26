@@ -38,7 +38,7 @@ export const ItemChatMixin = (superclass) => class extends superclass {
         let item = chatCardActor.items.get(card.dataset.itemId);
 
         // Adjust item to level, if required
-        if (Object.keys(message.flags?.sfrpg ?? {}).length !== 0 && message.flags?.sfrpg?.level !== item.system.level) {
+        if (Object.keys(message.flags?.sfrpg ?? {}).length !== 0 && message.flags?.sfrpg?.level && message.flags?.sfrpg?.level !== item.system.level) {
             const newItemData = item.toObject();
             newItemData.system.level = message.flags.sfrpg.level;
 

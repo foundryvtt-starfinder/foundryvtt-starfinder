@@ -63,7 +63,7 @@ export default class SFRPGModifier extends foundry.abstract.DataModel {
         super._initialize(options);
 
         // _id is not a document ID, so we should be able to write to it.
-        Object.defineProperty(this, "_id", { value: this._id, writable: true, configurable: true });
+        // Object.defineProperty(this, "_id", { value: this._id, writable: true, configurable: true });
 
         // Calculate max, if not already
         try {

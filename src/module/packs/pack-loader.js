@@ -58,7 +58,7 @@ export class PackLoader {
             if (pack?.documentName !== entityType) continue;
 
             if (!data) {
-                const content = await pack.getIndex({ fields });
+                const content = await pack.getIndex({ fields: fields });
                 this.setCompendiumArt(pack.collection, content);
                 data = this.loadedPacks[entityType][packId] = {
                     pack,
