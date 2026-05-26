@@ -17,10 +17,6 @@ import { ItemChatMixin } from "./mixins/item-chat.js";
 /** @extends {foundry.documents.Item} */
 export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin, ItemChatMixin) {
 
-    constructor(data, context = {}) {
-        super(data, context);
-    }
-
     /* -------------------------------------------- */
     /*  Item Properties                             */
     /* -------------------------------------------- */
