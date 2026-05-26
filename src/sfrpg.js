@@ -46,6 +46,7 @@ import { preloadHandlebarsTemplates, setupHandlebars } from "./module/handlebars
 import { ItemSFRPG } from "./module/item/item.js";
 import { ItemSheetSFRPG } from "./module/item/sheet.js";
 import migrateWorld from './module/migration.js';
+import { updateNotification } from './module/apps/update-notification';
 import SFRPGModifier from "./module/modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module/modifiers/types.js";
 import { RPC } from "./module/rpc.js";
@@ -500,6 +501,8 @@ Hooks.once('init', async function() {
         });
     }
 
+    registerKeybinds();
+
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
@@ -681,6 +684,7 @@ Hooks.once("ready", async () => {
         connectToDocument(macro);
     }
 
+    // Migration system
     if (game.users.activeGM?.isSelf) {
         const currentSchema = game.settings.get('sfrpg', 'worldSchemaVersion') ?? 0;
         const systemSchema = Number(game.system.flags.sfrpg.schema);
@@ -709,6 +713,9 @@ Hooks.once("ready", async () => {
 
     }
 
+    // System Update Information Notifications
+    updateNotification();
+
     Hooks.on("dropCanvasData", (canvas, data) => canvasHandler(canvas, data));
 
     const finishTime = (new Date()).getTime();
@@ -717,6 +724,37 @@ Hooks.once("ready", async () => {
     const startupDuration = finishTime - initTime;
     console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
+
+export function registerKeybinds() {
+    const { SHIFT, CONTROL } = foundry.helpers.interaction.KeyboardManager.MODIFIER_KEYS;
+
+    game.keybindings.register('sfrpg', 'summaries', {
+        name: game.i18n.localize('SFRPG.Keybindings.CloseAllItemSummaries.Name'),
+        hint: game.i18n.localize('SFRPG.Keybindings.CloseAllItemSummaries.Hint'),
+        editable: [
+            {
+                key: 'KeyC',
+                modifiers: [CONTROL, SHIFT]
+            }
+        ],
+        onDown: () => {
+            const app = Object.values(ui.windows).find(app => app instanceof ActorSheetSFRPG && app.actor);
+            if (app) {
+                app._closeAllItemSummaries();
+            }
+            return true;
+        },
+        restricted: false,
+        precedence: CONST.KEYBINDING_PRECEDENCE.PRIORITY
+    });
+}
+
+/**
+ * Migrates containers from an old format (not sure what version) to a modern version.
+ * This should probably be removed at some point, since Data Model migration is preferable.
+ *
+ * @returns {[Promise]} An array of promises to resolve
+ */
 async function migrateOldContainers() {
     const promises = [];
     for (const actor of game.actors.contents) {
@@ -750,7 +788,7 @@ Hooks.on("renderChatMessageHTML", (app, html, data) => {
     DiceSFRPG.addDamageTypes(app, $(html), data);
 
     const gmOnlyText = html.querySelector('.gm-only');
-    if (!game.user.isGM) {
+    if (!game.user.isGM && gmOnlyText) {
         gmOnlyText.style.display = "none";
     }
 
