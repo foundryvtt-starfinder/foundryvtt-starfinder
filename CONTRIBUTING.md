@@ -15,7 +15,7 @@ This section details the general setup process from start to finish for new deve
 
 Before getting to anything related to the Starfinder system, you'll need to install some programs that the development process requires.
 
-1. You'll need `node` installed on your system. You will need a version of `node` that is at least 20.x or greater (22.x or later recommended). To install it, go to [the Node.js downloads page](https://nodejs.org/en/download/) and choose an installer for your operating system. The current LTS is probably a good choice, though the current version works just as well.
+1. You'll need `node` installed on your system. You will need a version of `node` that is at least 24.x or greater. To install it, go to [the Node.js downloads page](https://nodejs.org/en/download/) and choose an installer for your operating system. The current LTS is probably a good choice, though the current version works just as well.
 2. You'll also need a `git` client installed; whether that is the [command line tool](https://cli.github.com) or something like [Sourcetree](https://www.sourcetreeapp.com) or [GitKraken](https://www.gitkraken.com) is up to you.
 Your integrated development environment (IDE) may also include git integration; please refer to the documentation available for the IDE for how to set this up.
 3. Install an Integrated Development Environment (IDE) to edit code, debug, etc. We recommend [VS Code](https://code.visualstudio.com/download).
