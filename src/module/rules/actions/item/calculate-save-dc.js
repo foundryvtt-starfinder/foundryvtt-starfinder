@@ -22,10 +22,13 @@ export default function(engine) {
                 if (!dcFormula) {
                     const ownerKeyAbilityId = classes[0]?.system.kas ?? null;
                     const itemKeyAbilityId = data.ability;
+                    const spellPrepMode = data.preparation.mode;
                     const spellbookSpellAbility = actorData?.attributes.spellcasting;
                     const classSpellAbility = classes[0]?.system.spellAbility;
 
-                    const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
+                    const abilityKey = itemKeyAbilityId
+                        || ((spellPrepMode === "innate" || spellPrepMode === "always") ? spellbookSpellAbility || classSpellAbility : classSpellAbility || spellbookSpellAbility)
+                        || ownerKeyAbilityId;
 
                     if (actor.type === "npc" || actor.type === "npc2") {
                         if (itemData.type === "spell") {
