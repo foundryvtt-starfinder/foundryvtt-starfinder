@@ -10,6 +10,7 @@ This update adds support for Foundry VTT Version 14, while addressing a couple o
 
 ## Bugfixes
 - Document expanded fields on sheets now stay open when combat state or turn is updated
+- The Spellcasting Ability field at the top of the spellbook page for characters and drones now works correctly
 
 # Version 0.30.1
 This update contains a few small fixes that fix a couple of bugs with the new targeting system and chat cards, as well as introduces a method for us (the developers) to make announcements about new features and fixes to users.
