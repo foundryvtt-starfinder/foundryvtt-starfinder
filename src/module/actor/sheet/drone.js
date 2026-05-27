@@ -28,6 +28,10 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
 
     async getData() {
         const sheetData = await super.getData();
+        if (sheetData.actor.system.details.owner) {
+            const owner = await fromUuid(sheetData.actor.system.details.owner);
+            sheetData.owner = owner ?? null;
+        }
 
         return sheetData;
     }
@@ -309,6 +313,24 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         html.find(".modifier-edit").click(this._onModifierEdit.bind(this));
         html.find(".modifier-delete").click(this._onModifierDelete.bind(this));
         html.find(".modifier-toggle").click(this._onToggleModifierEnabled.bind(this));
+
+        html.find("span.drone-owner-name").on("click", (event) => this._onOwnerClick(event));
+        html.find("span.drone-owner-name").on("contextmenu", (event) => this._onOwnerRemove(event));
+    }
+
+    async _onOwnerClick(event) {
+        event.preventDefault();
+        const uuid = event.currentTarget.dataset.ownerUuid;
+        const actor = await fromUuid(uuid);
+
+        if (actor) {
+            actor.sheet.render(true);
+        }
+    }
+
+    async _onOwnerRemove(event) {
+        event.preventDefault();
+        await this.actor.update({"system.details.owner": null});
     }
 
     /**
@@ -336,5 +358,18 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
         event.preventDefault();
         await this._onSubmit(event);
         return this.actor.repairDrone();
+    }
+
+    /** @override */
+    async _onDrop(event) {
+        event.preventDefault();
+        const parsedDragData = foundry.applications.ux.TextEditor.getDragEventData(event);
+        if (Hooks.call('dropActorSheetData', this.actor, this, parsedDragData) === false) {
+            // Further processing halted
+        } else if (parsedDragData.type === "Actor") {
+            await this.actor.update({"system.details.owner": parsedDragData.uuid});
+        } else if (parsedDragData.type === "Item" || parsedDragData.type === 'ItemCollection') {
+            await this.processDroppedItems(event, parsedDragData);
+        }
     }
 }
