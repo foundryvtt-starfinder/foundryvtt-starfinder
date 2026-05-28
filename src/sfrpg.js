@@ -111,7 +111,6 @@ import { getStarshipBrowser } from "./module/packs/starship-browser.js";
 // Import Utilities
 import CounterManagement from "./module/classes/counter-management.js";
 import { RPC } from "./module/rpc.js";
-import registerCompendiumArt from "./module/system/compendium-art.js";
 import { connectToDocument, rollItemMacro } from "./module/system/hotbar-macros.js";
 import isObject from './module/utils/is-object.js';
 import { generateUUID, rerenderApps } from "./module/utils/utilities.js";
