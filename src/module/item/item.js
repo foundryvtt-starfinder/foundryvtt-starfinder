@@ -17,17 +17,6 @@ import { ItemChatMixin } from "./mixins/item-chat.js";
 /** @extends {foundry.documents.Item} */
 export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin, ItemChatMixin) {
 
-    constructor(data, context = {}) {
-        // Set module art if available. This applies art to items viewed or created from compendiums.
-        if (context.pack && data._id) {
-            const art = game.sfrpg.compendiumArt.map.get(`Compendium.${context.pack}.${data._id}`);
-            if (art) {
-                data.img = art.item;
-            }
-        }
-        super(data, context);
-    }
-
     /* -------------------------------------------- */
     /*  Item Properties                             */
     /* -------------------------------------------- */
@@ -1606,7 +1595,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             chatMessage: options.chatMessage,
             content: content,
             rolls: [rollResult.roll],
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
         });
     }
@@ -1673,7 +1662,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             renderPromise.then((html) => {
                 // Create the chat message
                 const chatData = {
-                    type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+                    style: CONST.CHAT_MESSAGE_STYLES.OTHER,
                     speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor}),
                     content: html
                 };
@@ -1711,7 +1700,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const rollMode = game.settings.get("core", "rollMode");
         const chatData = {
             author: game.user.id,
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",
