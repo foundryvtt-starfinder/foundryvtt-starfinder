@@ -1298,7 +1298,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     async _onDrop(event) {
         event.preventDefault();
 
-        const parsedDragData = TextEditor.getDragEventData(event);
+        const parsedDragData = foundry.applications.ux.TextEditor.getDragEventData(event);
         if (Hooks.call('dropActorSheetData', this.actor, this, parsedDragData) === false) {
             // Further processing halted
         } else if (parsedDragData.type === 'Item' || parsedDragData.type === 'ItemCollection') {
