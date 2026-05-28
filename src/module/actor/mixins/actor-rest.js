@@ -70,7 +70,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
                 author: game.user.id,
                 speaker: ChatMessageSFRPG.getSpeaker({actor: this}),
                 content: msg,
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             });
         }
 
@@ -129,7 +129,7 @@ export const ActorRestMixin = (superclass) => class extends superclass {
                 author: game.user.id,
                 speaker: ChatMessageSFRPG.getSpeaker({actor: this}),
                 content: msg,
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             });
         }
 
@@ -244,7 +244,8 @@ export const ActorRestMixin = (superclass) => class extends superclass {
             ChatMessageSFRPG.create({
                 author: game.user.id,
                 speaker: ChatMessageSFRPG.getSpeaker({actor: this}),
-                content: content
+                content: content,
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER
             });
         }
 

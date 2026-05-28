@@ -333,6 +333,15 @@ export const registerSystemSettings = function() {
         }
     });
 
+    game.settings.register("sfrpg", "closeAllItemSummaries", {
+        name: "SFRPG.Settings.CloseAllItemSummaries.Name",
+        hint: "SFRPG.Settings.CloseAllItemSummaries.Hint",
+        scope: "user",
+        config: true,
+        default: true,
+        type: Boolean
+    });
+
     game.settings.register("sfrpg", "notificationSchema", {
         name: "SFRPG.Settings.NotificationSchema.Name",
         hint: "SFRPG.Settings.NotificationSchema.Hint",

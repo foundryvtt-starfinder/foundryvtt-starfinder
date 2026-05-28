@@ -157,7 +157,6 @@ const moduleStructure = {
         SFRPGModifierApplication,
         TraitSelectorSFRPG
     },
-    compendiumArt: { map: new Map(), refresh: registerCompendiumArt },
     config: SFRPG,
     dice: DiceSFRPG,
     documents: { ActorSFRPG, ItemSFRPG, CombatSFRPG },
@@ -549,6 +548,8 @@ Hooks.once('init', async function() {
         });
     }
 
+    registerKeybinds();
+
     const finishTime = (new Date()).getTime();
     console.log(`Starfinder | [INIT] Done (operation took ${finishTime - initTime} ms)`);
 });
@@ -719,9 +720,6 @@ Hooks.once("ready", async () => {
     console.log("Starfinder | [READY] Setting up Vision Modes");
     setupVision();
 
-    console.log("Starfinder | [READY] Applying artwork from modules to compendiums");
-    registerCompendiumArt();
-
     console.log("Starfinder | [READY] Setting up event listeners");
     BaseEnricher.addListeners();
     ItemSFRPG.chatListeners($("body"));
@@ -773,6 +771,30 @@ Hooks.once("ready", async () => {
     console.log(`Starfinder | [STARTUP] Total launch took ${Number(startupDuration / 1000).toFixed(2)} seconds.`);
 });
 
+export function registerKeybinds() {
+    const { SHIFT, CONTROL } = foundry.helpers.interaction.KeyboardManager.MODIFIER_KEYS;
+
+    game.keybindings.register('sfrpg', 'summaries', {
+        name: game.i18n.localize('SFRPG.Keybindings.CloseAllItemSummaries.Name'),
+        hint: game.i18n.localize('SFRPG.Keybindings.CloseAllItemSummaries.Hint'),
+        editable: [
+            {
+                key: 'KeyC',
+                modifiers: [CONTROL, SHIFT]
+            }
+        ],
+        onDown: () => {
+            const app = Object.values(ui.windows).find(app => app instanceof ActorSheetSFRPG && app.actor);
+            if (app) {
+                app._closeAllItemSummaries();
+            }
+            return true;
+        },
+        restricted: false,
+        precedence: CONST.KEYBINDING_PRECEDENCE.PRIORITY
+    });
+}
+
 /**
  * Migrates containers from an old format (not sure what version) to a modern version.
  * This should probably be removed at some point, since Data Model migration is preferable.
@@ -809,7 +831,7 @@ async function migrateOldContainers() {
 
 Hooks.on("renderChatMessageHTML", (app, html, data) => {
     const gmOnlyText = html.querySelector('.gm-only');
-    if (!game.user.isGM) {
+    if (!game.user.isGM && gmOnlyText) {
         gmOnlyText.style.display = "none";
     }
 

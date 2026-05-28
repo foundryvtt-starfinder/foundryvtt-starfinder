@@ -40,7 +40,7 @@ export default class TooltipManagerSFRPG extends foundry.helpers.interaction.Too
     /**
      * Activate interactivity by listening for hover events on HTML elements which have a data-tooltip defined.
      */
-    activateEventListeners() {
+    activateListeners() {
         document.body.addEventListener("pointerenter", this.#onActivate.bind(this), true);
         document.body.addEventListener("pointerleave", this.#onDeactivate.bind(this), true);
         document.body.addEventListener("pointerup", this._onLockTooltip.bind(this), true);

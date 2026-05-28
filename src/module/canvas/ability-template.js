@@ -30,7 +30,7 @@ export default class AbilityTemplate extends MeasuredTemplateSFRPG {
             y: 0,
             fillColor: color ?? game.user.color,
             texture: texture ?? null,
-            _id: randomID(16),
+            _id: foundry.utils.randomID(16),
             hidden: event.altKey
         };
 

@@ -497,7 +497,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             content: html
         };
@@ -542,7 +542,7 @@ export class ActorSheetSFRPGVehicle extends ActorSheetSFRPG {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: this.actor }),
             content: html
         };

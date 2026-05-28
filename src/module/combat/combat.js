@@ -78,7 +78,8 @@ export class CombatSFRPG extends foundry.documents.Combat {
             "turn": combatType === "starship" ? null : 0
         };
         Hooks.callAll("combatStart", this, update);
-        await this.update(update, {advanceTime: CONFIG.time.roundTime});
+        game.time.advance(CONFIG.time.roundTime);
+        await this.update(update);
 
         const currentPhase = this.getCurrentPhase();
         const eventData = {
@@ -379,6 +380,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         updateOptions["eventData"] = eventData;
 
+        game.time.advance(updateOptions.advanceTime || 0);
         await this.update(updateData, updateOptions);
 
         if (eventData.isNewPhase) {
@@ -474,7 +476,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -513,7 +515,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
@@ -551,7 +553,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create the chat message
         const chatData = {
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             speaker: ChatMessageSFRPG.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             whisper: eventData.newCombatant.hidden ? ChatMessageSFRPG.getWhisperRecipients("GM") : [],
             content: html
@@ -690,7 +692,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             rollContext.setMainContext("pilot");
         } else {
             parts.push("@combatant.attributes.init.total");
-            if (game.settings.get("sfrpg", "useInitiativeTiebreaker")) {
+            if (game.settings.get("sfrpg", "useInitiativeTiebreaker") && combatant.actor.system.attributes?.init?.total) {
                 parts.push(combatant.actor.system.attributes.init.total / 100);
             }
         }
@@ -773,7 +775,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
                 content: explainedRollContent,
                 rollMode: combatant.hidden && rollMode === CONST.DICE_ROLL_MODES.PUBLIC && defaultRollMode === CONST.DICE_ROLL_MODES.PUBLIC ? "gmroll" : rollMode,
                 rolls: [roll],
-                type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+                style: CONST.CHAT_MESSAGE_STYLES.OTHER,
                 sound: CONFIG.sounds.dice
             };
 
