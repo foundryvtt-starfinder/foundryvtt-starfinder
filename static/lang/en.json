@@ -888,12 +888,6 @@
         },
         "Disabled": "Disabled",
         "DistAny": "Any",
-        "Keybindings": {
-            "CloseAllItemSummaries": {
-                "Hint": "Closes all opened item summaries on the character sheet.",
-                "Name": "Close All Item Summaries"
-            }
-        },
         "DroneSheet": {
             "Chassis": {
                 "Details": {
@@ -1184,9 +1178,9 @@
         "ImprovedInitiativeLabel": "Improved Initiative",
         "InitiativeDexModTooltip": "Dexterity Modifier: {mod}",
         "InitiativeLabel": "Initiative",
-        "InitiativeShort": "Init",
         "InitiativeModiferLabel": "Mod",
         "InitiativeModiferTooltip": "{type} Bonus: {mod} ({source})",
+        "InitiativeShort": "Init",
         "InvalidItem": "{name} is an invalid Item for a {target}.",
         "InvalidStarshipItem": "{name} is an invalid Item for a starship.",
         "Inventory": "Inventory",
@@ -1677,6 +1671,14 @@
                 "Goods": "Goods",
                 "HybridItems": "Hybrid Items",
                 "MagicItems": "Magic Items",
+                "MechAuxiliarySystems": "Mech Auxiliary Systems",
+                "MechFrames": "Mech Frames",
+                "MechLowerLimbs": "Mech Lower Limbs",
+                "MechMissionPods": "Mech Mission Pods",
+                "MechPowerCores": "Mech Power Cores",
+                "MechUpgrades": "Mech Upgrades",
+                "MechUpperLimbs": "Mech Upper Limbs",
+                "MechWeapons": "Mech Weapons",
                 "MiscellaneousItems": "Miscellaneous Items",
                 "Races": "Species",
                 "Shields": "Shields",
@@ -1700,14 +1702,6 @@
                 "StarshipWeapons": "Starship Weapons",
                 "TechnologicalItems": "Technological Items",
                 "Themes": "Themes",
-                "MechFrames": "Mech Frames",
-                "MechWeapons": "Mech Weapons",
-                "MechAuxiliarySystems": "Mech Auxiliary Systems",
-                "MechUpgrades": "Mech Upgrades",
-                "MechPowerCores": "Mech Power Cores",
-                "MechUpperLimbs": "Mech Upper Limbs",
-                "MechLowerLimbs": "Mech Lower Limbs",
-                "MechMissionPods": "Mech Mission Pods",
                 "VehicleAttacks": "Vehicle Attacks",
                 "VehicleSystems": "Vehicle Systems",
                 "WeaponAccessories": "Weapon Accessories",
@@ -1891,6 +1885,12 @@
             }
         },
         "KeyAbilityScore": "Key Ability Score",
+        "Keybindings": {
+            "CloseAllItemSummaries": {
+                "Hint": "Closes all opened item summaries on the character sheet.",
+                "Name": "Close All Item Summaries"
+            }
+        },
         "KineticArmorClass": "Kinetic AC",
         "KineticArmorClassShort": "KAC",
         "Languages": "Languages",
@@ -2078,6 +2078,307 @@
         },
         "Magitech": "Magitech",
         "Maximum": "Maximum",
+        "MechSheet": {
+            "Action": {
+                "ActionType": "Action Type",
+                "Actions": "Special Actions",
+                "AddAction": "Add Action",
+                "Description": "Description",
+                "Name": "Action Name",
+                "PpCost": "PP Cost",
+                "RemoveAction": "Remove Action"
+            },
+            "Actions": {
+                "ActionTypes": {
+                    "Constant": "Constant",
+                    "Full": "Full",
+                    "Move": "Move",
+                    "Reaction": "Reaction",
+                    "Standard": "Standard",
+                    "Swift": "Swift"
+                },
+                "EnabledWeapons": "Enabled Weapons",
+                "GearActions": "Gear Actions",
+                "InsufficientPP": "Insufficient Power Points to perform this action.",
+                "NoEnabledWeapons": "No weapons mounted",
+                "NoGearActions": "No gear actions available",
+                "PP": {
+                    "Aim": {
+                        "Description": "Before attempting an attack roll, roll 1d4 and add the result as an insight bonus to the attack roll.",
+                        "Name": "Aim"
+                    },
+                    "DevastatingHit": {
+                        "Description": "After hitting a creature with an attack, but before dealing damage, increase the weapon's damage value by one step (e.g., medium damage instead deals high damage). A weapon that already deals extreme damage instead adds 1 additional damage for every damage die rolled. This can't be used for weapons that attack an intersection rather than a creature.",
+                        "Name": "Devastating Hit"
+                    },
+                    "Maneuver": {
+                        "Description": "Choose one skill. Until the beginning of the mech's next turn, operators add any insight bonuses they have that apply to that skill to the mech's checks with that skill.",
+                        "Name": "Maneuver"
+                    },
+                    "Replenish": {
+                        "Description": "Activate when regaining Shield Points. The number of SP the mech recovers increases by 1d8. This increases by an additional 1d8 at tier 5 and every 5 tiers thereafter.",
+                        "Name": "Replenish"
+                    },
+                    "Resist": {
+                        "Description": "Before attempting a saving throw, roll 1d4 and add the result as a resistance bonus to the saving throw.",
+                        "Name": "Resist"
+                    }
+                },
+                "PPActions": "PP Actions",
+                "PPRegenMessage": "{name} regenerates {amount} PP ({current}/{max})",
+                "PPSpent": "{amount} PP spent",
+                "Special": {
+                    "CalledShot": {
+                        "Description": "Expend 1 or 3 PP and make an attack against a single mech. If the attack's damage causes system damage, choose which component takes the damage (excluding power core or cockpit). If 3 PP were expended, any component can be selected.",
+                        "Name": "Called Shot"
+                    },
+                    "Hurl": {
+                        "Description": "Grab a nearby object and throw it as a ranged attack with a 30-foot range increment. The object can be at most two size categories smaller than the mech. Maximum or next-smallest size objects deal medium damage; smaller objects deal light damage. Throwing a creature or vehicle requires a successful grapple combat maneuver.",
+                        "Name": "Hurl"
+                    },
+                    "Scan": {
+                        "Description": "Use the sensor array to study one creature, mech, or object observed with a precise sense. Against a creature, this functions as a check to identify using the mech's Computers bonus. Success also grants a +1 insight bonus to the next attack against that creature. Against a mech or object, a Computers check reveals information about it. Each additional scan of the same target within an hour costs 1 PP per previous attempt.",
+                        "Name": "Scan"
+                    }
+                },
+                "SpecialActions": "Special Actions"
+            },
+            "Attributes": {
+                "AttackBonus": "Attack Bonus",
+                "CombatTitle": "Combat",
+                "EacAdjustment": "EAC Adj.",
+                "EffectiveStrength": "Effective Strength",
+                "HPShort": "HP",
+                "Hardness": "Hardness",
+                "HpTooltip": "Mech Hit Points. When reduced to 0 HP, the mech is wrecked.",
+                "KacAdjustment": "KAC Adj.",
+                "MechPoints": "Mech Points (MP)",
+                "Operators": "Operators",
+                "OtherTitle": "Other Attributes",
+                "PPCurrent": "Current PP",
+                "PPInitial": "Initial PP",
+                "PPMax": "Maximum PP",
+                "PPRegen": "PP Regen/Turn",
+                "PowerPoints": "Power Points",
+                "PowerPointsTitle": "Power Points",
+                "SPShort": "SP",
+                "Senses": "Senses",
+                "ShieldPoints": "Shield Points (SP)",
+                "Slots": {
+                    "Auxiliary": "Auxiliary System Slots",
+                    "Frame": "Frame Weapon Slots",
+                    "LowerLimb": "Lower Limb Weapon Slots",
+                    "UpperLimb": "Upper Limb Weapon Slots"
+                },
+                "SlotsTitle": "Weapon Slots",
+                "SpTooltip": "Shield Points absorb damage before HP. They regenerate each turn.",
+                "Speed": {
+                    "Burrow": "Burrow Speed",
+                    "Fly": "Fly Speed",
+                    "Land": "Land Speed",
+                    "Swim": "Swim Speed"
+                },
+                "SpeedTitle": "Speed"
+            },
+            "Auxiliary": {
+                "CanBeActivated": "Can be Activated",
+                "MpCost": "MP Cost",
+                "PpCost": "PP Cost"
+            },
+            "Crew": {
+                "AssignedCount": "({current} / {max})",
+                "CrewLimitReached": "You have reached the maximum number of operators ({max}).",
+                "Header": "Mech Operators",
+                "IsNPCOperators": "Is NPC Operators",
+                "NPCOperatorsHint": "NPC operators are controlled directly from the operator fields.",
+                "Operator": "Operator",
+                "Operators": "Operators",
+                "OperatorsSetting": "NPC Operators"
+            },
+            "DamageModMelee": "Mech Damage (Tier + Str)",
+            "DamageModRanged": "Mech Damage (Tier)",
+            "Details": {
+                "Frame": "Frame",
+                "Model": "Model",
+                "Tier": "Tier"
+            },
+            "Features": {
+                "AuxiliarySystems": "Auxiliary Systems",
+                "Frame": "Frame ({current})",
+                "LowerLimbs": "Lower Limbs ({current})",
+                "PowerCores": "Power Cores ({current})",
+                "Upgrades": "Upgrades",
+                "UpperLimbs": "Upper Limbs ({current})",
+                "Weapons": "Weapons"
+            },
+            "Frame": {
+                "AuxSlots": "Auxiliary Slots",
+                "BaseHp": "Base HP",
+                "Eac": "EAC Bonus",
+                "Fort": "Fortitude Bonus",
+                "FrameSlots": "Frame Weapon Slots",
+                "Hardness": "Hardness",
+                "HpAdvancement": "HP Advancement",
+                "Kac": "KAC Bonus",
+                "MpCost": "MP Cost",
+                "OperatorsMax": "Max Operators",
+                "OperatorsMin": "Min Operators",
+                "Ref": "Reflex Bonus",
+                "Size": "Size",
+                "Speed": "Speed",
+                "Strength": "Strength Modifier"
+            },
+            "Header": {
+                "Frame": "Frame",
+                "FramePlaceholder": "Frame name",
+                "NamePlaceholder": "Mech name",
+                "NameTooltip": "Enter the mech's name here.",
+                "Tier": "Tier",
+                "TierPlaceholder": "1"
+            },
+            "Initiative": {
+                "NoOperatorTooltip": "No operator assigned",
+                "OperatorTooltip": "Operator ({name}): {mod}",
+                "TierBonusTooltip": "Tier {tier} bonus: {mod}"
+            },
+            "InvalidItem": "{name} is not a valid mech item.",
+            "Inventory": {
+                "Inventory": "Cargo"
+            },
+            "LowerLimb": {
+                "BaseHp": "Base HP",
+                "CanBeActivated": "Has Special Ability",
+                "Eac": "EAC Modifier",
+                "Fort": "Fort Modifier",
+                "HpAdvancement": "HP Advancement",
+                "Kac": "KAC Modifier",
+                "MpCost": "MP Cost",
+                "OnlyOne": "A mech can only have one set of lower limbs.",
+                "PpCost": "PP Cost",
+                "Ref": "Ref Modifier",
+                "Slots": "Weapon Slots",
+                "SpecialAbility": "Special Ability",
+                "Speed": "Speed",
+                "Title": "Lower Limb"
+            },
+            "MissionPod": {
+                "Activate": "Activate",
+                "ActivateConfirmPrompt": "Activating {pod} will replace current upper limbs, power core, auxiliary systems, and upgrades. Current weapons in affected slots will be moved to the weapons locker. Continue?",
+                "ActivateConfirmTitle": "Activate Mission Pod",
+                "Contents": "Pod Contents",
+                "Deactivate": "Deactivate",
+                "DeactivateConfirmPrompt": "Deactivating {pod} will return its items to the pod and remove stat modifiers. Continue?",
+                "DeactivateConfirmTitle": "Deactivate Mission Pod",
+                "IsActive": "Active",
+                "Modifiers": {
+                    "EAC": "EAC",
+                    "Fort": "Fort",
+                    "HP": "HP",
+                    "KAC": "KAC",
+                    "Ref": "Ref",
+                    "SP": "SP",
+                    "Speed": "Speed (ft.)",
+                    "Strength": "Strength",
+                    "Title": "Stat Modifiers"
+                },
+                "MpCost": "MP Cost",
+                "OnlyOne": "Only one mission pod can be active at a time.",
+                "Title": "Mission Pod"
+            },
+            "OperatorBonus": "Operator",
+            "OperatorBonusAtRollTime": "+ Operator's BAB or Piloting (at roll time)",
+            "PowerCore": {
+                "MpCost": "MP Cost",
+                "OnlyOne": "A mech can only have one power core.",
+                "PPInitial": "Initial PP",
+                "PPMax": "Maximum PP",
+                "PPRegen": "PP Regen/Turn",
+                "Title": "Power Core"
+            },
+            "Systems": {
+                "AuxSystem": "Auxiliary Systems",
+                "Frame": "Frame",
+                "LowerLimbs": "Lower Limbs",
+                "PowerCore": "Power Core",
+                "Status": "Status",
+                "StatusInoperable": "Inoperable",
+                "StatusMalfunctioning": "Malfunctioning",
+                "StatusNominal": "Nominal",
+                "Title": "System Damage",
+                "UpperLimbs": "Upper Limbs"
+            },
+            "Tabs": {
+                "Actions": "Actions",
+                "Components": "Components",
+                "Operators": "Operators",
+                "Weapons": "Weapons",
+                "WeaponsLocker": "Weapons Locker"
+            },
+            "Upgrade": {
+                "BaseHpBonus": "Base HP Bonus",
+                "EacBonus": "EAC Bonus",
+                "FortitudeBonus": "Fortitude Bonus",
+                "HpAdvancementBonus": "HP Advancement Bonus",
+                "KacBonus": "KAC Bonus",
+                "MpCost": "MP Cost",
+                "ReflexBonus": "Reflex Bonus",
+                "SpBonusPerTier": "SP Bonus per Tier",
+                "SpeedBonus": "Speed Bonus"
+            },
+            "UpperLimb": {
+                "BaseHp": "Base HP",
+                "CanBeActivated": "Has Special Ability",
+                "Combat": "Combat",
+                "Eac": "EAC Modifier",
+                "Kac": "KAC Modifier",
+                "MeleeAttack": "Melee Attack Bonus",
+                "MpCost": "MP Cost",
+                "OnlyOne": "A mech can only have one set of upper limbs.",
+                "PpCost": "PP Cost",
+                "RangedAttack": "Ranged Attack Bonus",
+                "Slots": "Weapon Slots",
+                "SpecialAbility": "Special Ability",
+                "Strength": "Strength Modifier",
+                "Title": "Upper Limb"
+            },
+            "Weapon": {
+                "Area": "Area",
+                "Capacity": "Capacity",
+                "DamageLevel": "Damage Level",
+                "DamageLevelExtreme": "Extreme",
+                "DamageLevelHigh": "High",
+                "DamageLevelLow": "Low",
+                "DamageLevelMedium": "Medium",
+                "MpCost": "MP Cost",
+                "PpCost": "PP Cost",
+                "Range": "Range",
+                "Slot": "Weapon Slot",
+                "SlotFrame": "Frame",
+                "SlotLocker": "Weapons Locker",
+                "SlotLowerLimb": "Lower Limb",
+                "SlotUpperLimb": "Upper Limb",
+                "Special": "Special Properties",
+                "Type": "Weapon Type",
+                "TypeMelee": "Melee",
+                "TypeRanged": "Ranged",
+                "Usage": "Usage",
+                "ValidSlots": "Valid Mounting Slots"
+            },
+            "WeaponsLocker": {
+                "AddedToLocker": "Weapon added to locker (no valid slots available).",
+                "Description": "Weapons stored here are not mounted and cannot be used in combat. Drag weapons to mounted slots in the Components tab to use them.",
+                "Empty": "No weapons in locker",
+                "MountedWeapons": "Mounted Weapons",
+                "NoComponentInstalled": "No component installed",
+                "NoWeaponsMounted": "No weapons mounted",
+                "RemoveComponentPrompt": "Removing {component} will move {count} weapon(s) to the Weapons Locker. They will be unusable until mounted to a valid slot. Continue?",
+                "RemoveComponentTitle": "Remove Component",
+                "SelectSlotPrompt": "Select where to mount {weapon}:",
+                "SelectSlotTitle": "Select Weapon Slot",
+                "SendToLocker": "Send to Locker",
+                "Title": "Weapons Locker"
+            }
+        },
         "Medium": "Medium",
         "Meter": "Meter",
         "Mi": "Miles",
@@ -3907,11 +4208,11 @@
             "character": "Player Character",
             "drone": "Drone",
             "hazard": "Hazard",
+            "mech": "Mech",
             "npc": "Old Style NPC",
             "npc2": "Non-player Character",
             "starship": "Starship",
-            "vehicle": "Vehicle",
-            "mech": "Mech"
+            "vehicle": "Vehicle"
         },
         "Item": {
             "actorResource": "Actor Resource",
@@ -3930,6 +4231,14 @@
             "goods": "Goods",
             "hybrid": "Hybrid",
             "magic": "Magic",
+            "mechAuxiliary": "Mech Auxiliary System",
+            "mechFrame": "Mech Frame",
+            "mechLowerLimb": "Mech Lower Limb",
+            "mechMissionPod": "Mech Mission Pod",
+            "mechPowerCore": "Mech Power Core",
+            "mechUpgrade": "Mech Upgrade",
+            "mechUpperLimb": "Mech Upper Limb",
+            "mechWeapon": "Mech Weapon",
             "mod": "Drone Mod",
             "race": "Species",
             "shield": "Shield",
@@ -3958,14 +4267,6 @@
             "upgrade": "Armor Upgrade",
             "vehicleAttack": "Vehicle Attack",
             "vehicleSystem": "Vehicle System",
-            "mechFrame": "Mech Frame",
-            "mechWeapon": "Mech Weapon",
-            "mechAuxiliary": "Mech Auxiliary System",
-            "mechUpgrade": "Mech Upgrade",
-            "mechPowerCore": "Mech Power Core",
-            "mechLowerLimb": "Mech Lower Limb",
-            "mechUpperLimb": "Mech Upper Limb",
-            "mechMissionPod": "Mech Mission Pod",
             "weapon": "Weapon",
             "weaponAccessory": "Weapon Accessory"
         }
