@@ -442,7 +442,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
      */
     async _prepareItemSummary(item) {
         const chatData = await item.getChatData();
-        const desiredDescription = chatData.description.short || chatData.description.value;
+        const desiredDescription = chatData.description.enrichedShort || chatData.description.enrichedValue;
         const div = $(`<div class="item-summary">${desiredDescription}</div>`);
         const props = $(`<div class="item-properties"></div>`);
         chatData.chatProperties.forEach(p => {
