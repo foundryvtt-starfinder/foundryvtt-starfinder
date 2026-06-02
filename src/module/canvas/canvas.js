@@ -169,8 +169,8 @@ async function handleCanvasDropAsync(canvas, data, targetActor) {
 }
 
 export function canvasHandler(canvas, data) {
-    // We're only interested in overriding item drops.
-    if (!data || (data.type !== "Item" && data.type !== "ItemCollection")) {
+    // We're only interested in overriding item drops. If item piles is enabled, defer to that
+    if (game.modules.get("item-piles")?.active || !data || (data.type !== "Item" && data.type !== "ItemCollection")) {
         return true;
     }
 
@@ -213,12 +213,9 @@ export function canvasHandler(canvas, data) {
             }
             return false;
         } else {
-            // If there isn't a target actor, we're creating a loot token. If item piles is enabled, defer to that
-            if (game.modules.get("item-piles")?.active) return true;
-            else {
-                handleCanvasDropAsync(canvas, data, targetActor);
-                return false;
-            }
+            // If there isn't a target actor, we're creating a loot token.
+            handleCanvasDropAsync(canvas, data, targetActor);
+            return false;
         }
 
     }
