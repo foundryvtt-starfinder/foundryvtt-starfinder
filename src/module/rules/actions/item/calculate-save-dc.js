@@ -25,7 +25,13 @@ export default function(engine) {
                     const spellbookSpellAbility = actorData?.attributes.spellcasting;
                     const classSpellAbility = classes[0]?.system.spellAbility;
 
-                    const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
+                    const spellPrepMode = data.preparation?.mode ?? null;
+                    let spellAbilityId = "";
+                    if (itemData.type === "spell") {
+                        spellAbilityId = (spellPrepMode === "innate" || spellPrepMode === "always") ? spellbookSpellAbility || classSpellAbility : classSpellAbility || spellbookSpellAbility;
+                    }
+
+                    const abilityKey = itemKeyAbilityId || spellAbilityId || ownerKeyAbilityId;
 
                     if (actor.type === "npc" || actor.type === "npc2") {
                         if (itemData.type === "spell") {
