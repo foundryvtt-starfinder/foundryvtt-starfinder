@@ -413,10 +413,10 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     }
                 }
 
-                if (templateData.system.description.short) {
-                    templateData.system.description.short = descriptionText;
+                if (templateData.system.description.enrichedShort) {
+                    templateData.system.description.enrichedShort = descriptionText;
                 } else {
-                    templateData.system.description.value = descriptionText;
+                    templateData.system.description.enrichedValue = descriptionText;
                 }
             }
         }
@@ -468,12 +468,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const rollData = RollContext.createItemRollContext(this, this.actor).getRollData();
 
         // Rich text description
-        if (data.description.short) data.description.short = await foundry.applications.ux.TextEditor.enrichHTML(data.description.short, {
+        if (data.description.short) data.description.enrichedShort = await foundry.applications.ux.TextEditor.enrichHTML(data.description.short, {
             async,
             secrets,
             rollData
         });
-        data.description.value = await foundry.applications.ux.TextEditor.enrichHTML(data.description.value, {
+        data.description.enrichedValue = await foundry.applications.ux.TextEditor.enrichHTML(data.description.value, {
             async,
             secrets,
             rollData

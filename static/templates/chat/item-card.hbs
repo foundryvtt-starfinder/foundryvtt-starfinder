@@ -5,12 +5,12 @@
     </header>
 
     <div class="card-content">
-        {{#if system.description.short}}
-            {{{system.description.short}}}
+        {{#if system.description.enrichedShort}}
+            {{{system.description.enrichedShort}}}
         {{else}}
-            {{{system.description.value}}}
+            {{{system.description.enrichedValue}}}
         {{/if}}
-        {{#if system.materials.value}}
+        {{#if system.materials.enrichedValue}}
         <p><strong>{{ localize "SFRPG.Items.Spell.SpellcastingMaterials" }}:</strong> {{system.materials.value}}</p>
         {{/if}}
     </div>

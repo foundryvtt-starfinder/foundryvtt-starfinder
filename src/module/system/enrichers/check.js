@@ -149,7 +149,7 @@ export default class CheckEnricher extends BaseEnricher {
 
         // Disambiguate between "INTelligence and INTimidate", then select skill/save/ability
         if (id === "int") data.type === "intimidate" ? actor.rollSkill(id, options) : actor.rollAbility(id, options);
-        else if      (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, options);
+        else if (id in CONFIG.SFRPG.skills)    actor.rollSkill(id, options);
         else if (id in CONFIG.SFRPG.saves)     actor.rollSave(id, options);
         else if (id in CONFIG.SFRPG.abilities) actor.rollAbility(id, options);
 

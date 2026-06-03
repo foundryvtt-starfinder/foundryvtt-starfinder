@@ -3,6 +3,7 @@ This update adds support for Foundry VTT Version 14, while addressing a couple o
 
 ## Breaking Changes
 - Starfinder's Compendium Art Mapping functionality has been removed in favor of Foundry's native compendium art map support.
+- Enriched description html for chat cards is now located at `description.enrichedShort` and `description.enrichedValue` instead of `description.short` and `description.value`, respectively
 
 ## Core System Improvements
 - Added support for Foundry v14
@@ -11,6 +12,7 @@ This update adds support for Foundry VTT Version 14, while addressing a couple o
 ## Bugfixes
 - Document expanded fields on sheets now stay open when combat state or turn is updated
 - The Spellcasting Ability field at the top of the spellbook page for characters and drones now works correctly
+- Inline links' and enrichers' dynamic formulas no longer break once sent to chat
 
 # Version 0.30.1
 This update contains a few small fixes that fix a couple of bugs with the new targeting system and chat cards, as well as introduces a method for us (the developers) to make announcements about new features and fixes to users.
