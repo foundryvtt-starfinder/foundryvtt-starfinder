@@ -7,7 +7,8 @@ This update adds support for Foundry VTT Version 14, while addressing a couple o
 
 ## Core System Improvements
 - Added support for Foundry v14
-- Documentation updated for version 14 dev dependencies and install versions
+- Documentation updated for version 14 development dependencies and install versions
+- Drones can now have their owner set by dragging and dropping an actor onto the drone sheet
 
 ## Bugfixes
 - Document expanded fields on sheets now stay open when combat state or turn is updated
