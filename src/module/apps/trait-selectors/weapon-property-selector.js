@@ -20,7 +20,7 @@ export class WeaponPropertySelectorSFRPG extends TraitSelectorSFRPG {
     _getTraitChoices(traitData) {
 
         // create the array of choices
-        const choices = duplicate(this.options.choices);
+        const choices = foundry.utils.duplicate(this.options.choices);
         // console.log(this, choices, traitData);
 
         for (const [key, displayName] of Object.entries(choices)) {
