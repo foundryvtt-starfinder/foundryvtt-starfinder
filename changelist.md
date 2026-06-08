@@ -1,3 +1,11 @@
+# Version 14.0.1
+Addresses a couple of bugs that popped up in the v14 transition.
+
+## Bugfixes
+- Allow CRs with fractional values (and fix compendium actor errors)
+- Fix trait selector apps (languages, weapon properties, etc.)
+- Patch Foundry core bug not allowing players to create items
+
 # Version 14.0.0
 This update adds support for Foundry VTT Version 14, while addressing a couple of other small bugs.
 
