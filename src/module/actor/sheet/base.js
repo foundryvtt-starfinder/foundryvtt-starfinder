@@ -708,7 +708,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         let options = null;
         if (this.actor.system.options) {
-            options = duplicate(this.actor.system.options);
+            options = foundry.utils.duplicate(this.actor.system.options);
         }
         if (!options) {
             options = new Map();
