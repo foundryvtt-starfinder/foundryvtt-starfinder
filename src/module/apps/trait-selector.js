@@ -24,7 +24,7 @@ export class TraitSelectorSFRPG extends FormApplication {
      */
     getData() {
         const dataLocation = this.options.location;
-        const traitData = getProperty(this.object, dataLocation);
+        const traitData = foundry.utils.getProperty(this.object, dataLocation);
         return this._getTraitChoices(traitData);
     }
 
