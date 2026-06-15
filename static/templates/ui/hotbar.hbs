@@ -18,6 +18,8 @@
                         <footer class="footer">{{slot.macro.macroConfig.capacityCurrent}}/{{slot.macro.macroConfig.capacityMaximum}}</footer>
                     {{else if slot.macro.macroConfig.hasUses}}
                         <footer class="footer">{{slot.macro.macroConfig.item.system.uses.value}}/{{slot.macro.macroConfig.item.system.uses.total}}</footer>
+                    {{else if slot.hasResource}}
+                        <footer class="footer">({{slot.resourceValues.base}}) {{slot.resourceValues.value}}</footer>
                     {{/if}}
                 {{/if}}
             </li>

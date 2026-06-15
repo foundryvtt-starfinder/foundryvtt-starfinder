@@ -117,7 +117,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     /* -------------------------------------------- */
-    /*	Data Preparation                             */
+    /*	Data Preparation                            */
     /* -------------------------------------------- */
 
     /**
@@ -1140,6 +1140,18 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     _deductItemCharge() {
         const usage = this.system.usage;
         this.consumeCapacity(this._calculateAmmoUsageWithModifiers(usage.value));
+    }
+
+    /**
+     * Adjust an actor resource value up or down by a value
+     *
+     * @param {Number}      adjustValue The value to adjust the resource by
+     * @returns {Boolean}               True if adjusted, false if wrong item type
+     */
+    adjustResourceValue(adjustValue) {
+        if (this.type !== "actorResource") return false;
+        const newValue = this.system.base + adjustValue;
+        this.update({ "system.base": newValue });
     }
 
     /**

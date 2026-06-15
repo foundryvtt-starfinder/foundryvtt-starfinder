@@ -25,11 +25,13 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
             const itemMacroDetails = macro?.flags?.sfrpg?.itemMacro;
             if (itemMacroDetails?.itemUuid) {
                 const item = fromUuidSync(itemMacroDetails?.itemUuid);
+                const actor = item.actor || null;
                 if (!item || !item.actor) continue;
 
                 await item.processData();
 
                 const macroConfig = {
+                    actor,
                     item,
                     isOnCooldown: item.system.recharge && !!item.system.recharge.value && (item.system.recharge.charged === false),
                     hasAttack: CONFIG.SFRPG.attackActions.includes(item.system.actionType) && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
@@ -38,7 +40,6 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
                     hasActivation: item.canBeActivated() && item.system.duration?.units !== 'instantaneous',
                     isActive: item.isActive(),
                     hasCapacity: item.hasCapacity()
-
                 };
 
                 if (macroConfig.hasCapacity) {
@@ -51,6 +52,8 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
                 slot.hasCapacity = itemMacroDetails.macroType === "attack" && macroConfig.hasCapacity;
                 slot.activeGlow = itemMacroDetails.macroType === "activate" && macroConfig.isActive;
                 slot.hasUses = itemMacroDetails.macroType === "activate" && macroConfig.hasUses;
+                slot.hasResource = itemMacroDetails.macroType === "adjustResource";
+                slot.resourceValues = this._getActorResourceValue(macroConfig, itemMacroDetails.macroType);
 
                 slot.tooltip = `<strong>${slot.tooltip}</strong>`;
                 slot.tooltip += `
@@ -69,6 +72,10 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
                 } else if (itemMacroDetails.macroType === "attack" && macroConfig.hasCapacity) {
                     slot.tooltip += `
                         ${game.i18n.localize("SFRPG.ActorSheet.Inventory.Container.Capacity")}: ${macroConfig.capacityCurrent}/${macroConfig.capacityMaximum}
+                    `;
+                } else if (itemMacroDetails.macroType === "adjustResource") {
+                    slot.tooltip += `
+                        (${game.i18n.localize("SFRPG.ItemSheet.ActorResource.UsageBaseValue")}: ${slot.resourceValues.base}) ${game.i18n.localize("SFRPG.ItemSheet.ActorResource.UsageComputedValue")}: ${slot.resourceValues.value}
                     `;
                 }
 
@@ -93,6 +100,7 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
 
     _getIcon(macroConfig, macroType) {
         if (macroType === "attack") return "fa-hand-fist";
+        if (macroType === "adjustResource") return "fa-plus-minus";
         else if (macroType === "damage")  return "fa-burst";
         else if (macroType === "reload")  return "fa-redo";
         else if (macroType === "activate") {
@@ -102,6 +110,15 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
             }
         }
 
+    }
+
+    _getActorResourceValue(macroConfig, macroType) {
+        if (macroType !== "adjustResource") return {};
+        const type = macroConfig.item.system.type;
+        const subType = macroConfig.item.system.subType;
+        const base = macroConfig.actor.getResourceBaseValue(type, subType);
+        const value = macroConfig.actor.getResourceComputedValue(type, subType);
+        return {base, value};
     }
 
     _getGreyscaleStatus(item, macroType) {
