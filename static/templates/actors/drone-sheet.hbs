@@ -26,8 +26,8 @@
 
             {{!-- Character Summary --}}
             <ul class="summary">
-                <li>
-                    <input type="text" name="system.details.owner" value="{{system.details.owner}}" data-tooltip="<strong>{{localize "SFRPG.DroneSheet.Header.Owner"}}</strong><br>@details.owner" placeholder="{{localize "SFRPG.DroneSheet.Header.Owner"}}" />
+                <li class="drone-owner" data-tooltip="SFRPG.DroneSheet.Header.DropToSetOwner">
+                    {{localize "SFRPG.DroneSheet.Header.Owner"}} - {{#if owner.name}}<span class="drone-owner-name tag" data-owner-uuid="{{owner._uuid}}">{{owner.name}}</span>{{else}}None{{/if}}
                 </li>
             </ul>
 

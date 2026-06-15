@@ -760,12 +760,12 @@ export class ActorSheetSFRPGStarship extends ActorSheetSFRPG {
             const summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            const desiredDescription = await foundry.applications.ux.TextEditor.enrichHTML(content || chatData.description.value, {
+            const enrichedDescription = await foundry.applications.ux.TextEditor.enrichHTML(content || chatData.description.value, {
                 async: true,
                 rollData: this.actor.getRollData() ?? {},
                 secrets: this.actor.isOwner
             });
-            const div = $(`<div class="item-summary">${desiredDescription}</div>`);
+            const div = $(`<div class="item-summary">${enrichedDescription}</div>`);
             Hooks.callAll("renderItemSummary", this, div, {});
 
             li.append(div.hide());

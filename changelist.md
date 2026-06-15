@@ -1,16 +1,27 @@
+# Version 14.0.1
+Addresses a couple of bugs that popped up in the v14 transition.
+
+## Bugfixes
+- Allow CRs with fractional values (and fix compendium actor errors)
+- Fix trait selector apps (languages, weapon properties, etc.)
+- Patch Foundry core bug not allowing players to create items
+
 # Version 14.0.0
 This update adds support for Foundry VTT Version 14, while addressing a couple of other small bugs.
 
 ## Breaking Changes
 - Starfinder's Compendium Art Mapping functionality has been removed in favor of Foundry's native compendium art map support.
+- Enriched description html for chat cards is now located at `description.enrichedShort` and `description.enrichedValue` instead of `description.short` and `description.value`, respectively
 
 ## Core System Improvements
 - Added support for Foundry v14
-- Documentation updated for version 14 dev dependencies and install versions
+- Documentation updated for version 14 development dependencies and install versions
+- Drones can now have their owner set by dragging and dropping an actor onto the drone sheet
 
 ## Bugfixes
 - Document expanded fields on sheets now stay open when combat state or turn is updated
 - The Spellcasting Ability field at the top of the spellbook page for characters and drones now works correctly
+- Inline links' and enrichers' dynamic formulas no longer break once sent to chat
 
 # Version 0.30.1
 This update contains a few small fixes that fix a couple of bugs with the new targeting system and chat cards, as well as introduces a method for us (the developers) to make announcements about new features and fixes to users.

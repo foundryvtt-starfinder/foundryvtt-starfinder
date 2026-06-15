@@ -56,6 +56,13 @@ export default class SFRPGActorDrone extends SFRPGActorBase {
             })
         });
 
+        foundry.utils.mergeObject(schema.details.fields, {
+            owner: new fields.DocumentUUIDField({
+                initial: null,
+                nullable: true
+            })
+        });
+
         // Edit initial values as needed
         schema.skills.initial.acr.enabled = true;
         schema.skills.initial.ath.enabled = true;

@@ -119,7 +119,7 @@ export default class SFRPGActorNPC extends SFRPGActorBase {
             cr: new fields.NumberField({
                 initial: 1,
                 min: 0,
-                integer: true,
+                integer: false,
                 nullable: false,
                 required: true,
                 label: "SFRPG.CR"

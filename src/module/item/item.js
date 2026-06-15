@@ -562,10 +562,10 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     }
                 }
 
-                if (templateData.system.description.short) {
-                    templateData.system.description.short = descriptionText;
+                if (templateData.system.description.enrichedShort) {
+                    templateData.system.description.enrichedShort = descriptionText;
                 } else {
-                    templateData.system.description.value = descriptionText;
+                    templateData.system.description.enrichedValue = descriptionText;
                 }
             }
         }
