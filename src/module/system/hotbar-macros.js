@@ -107,7 +107,7 @@ export function rollItemMacro(itemUuid, macroType, event = null) {
         case "use":
             return item.useItem({ event });
         case "adjustResource":
-            return item.adjustResourceValue(ctrlKey ? -1 : 1);
+            return item.system.adjustResourceValue(ctrlKey ? -1 : 1);
         default:
             return item.roll();
     }

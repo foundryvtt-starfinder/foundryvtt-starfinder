@@ -1143,18 +1143,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     /**
-     * Adjust an actor resource value up or down by a value
-     *
-     * @param {Number}      adjustValue The value to adjust the resource by
-     * @returns {Boolean}               True if adjusted, false if wrong item type
-     */
-    adjustResourceValue(adjustValue) {
-        if (this.type !== "actorResource") return false;
-        const newValue = this.system.base + adjustValue;
-        this.update({ "system.base": newValue });
-    }
-
-    /**
      * Place an attack roll for a starship using an item.
      * @param {Object} options Options to pass to the attack roll
      *
