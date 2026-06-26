@@ -1,3 +1,22 @@
+# Version 0.32.0
+
+## New Features
+- Mech power points and conditions are automatically reset when combat starts
+- A GM-only whispered chat message summarizes which conditions were removed from each mech at combat start
+- Mech Actions tab with weapon attacks, PP actions, special actions, and gear actions
+- Mech initiative calculation and attribute tooltips
+- Mech upgrade bonus calculations and AC adjustments
+
+## Bugfixes
+- Fix mech item sheets failing to render due to missing mech-actions.hbs partial registration
+- Fix Adamantine Claws mech weapon damage type from bludgeoning to slashing
+- Fix mission pod item sheet statMods values and type label
+- Add ownership check before setting compendium flags
+
+## Core System Improvements
+- Manifest and download URLs updated to point to development branch
+- Power Points automatically regenerate each turn during mech combat
+
 # Version 0.31.0 - Mech Support
 This update adds mech support from the Starfinder Tech Revolution supplement.
 
