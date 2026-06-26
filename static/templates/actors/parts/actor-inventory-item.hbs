@@ -13,7 +13,7 @@
                 <div class="item-action {{#if item.parentItem}}flexrow flexnowrap{{else}}flexcol{{/if}}">
                     {{#if (or item.config.hasAttack item.config.hasDamage)}}
                         {{#if item.config.hasAttack}}
-                        <button type="button" class="tag attack" data-tooltip="{{localize "SFRPG.Attack"}}">{{item.config.attackString}}</button>
+                        <button type="button" class="tag attack" data-tooltip="{{#if item.config.attackTooltip}}{{item.config.attackTooltip}}{{else}}{{localize "SFRPG.Attack"}}{{/if}}">{{item.config.attackString}}</button>
                         {{/if}}
                         {{#if (and item.config.hasDamage (not (eq item.type "consumable")))}}
                             {{#if (eq item.system.actionType "heal")}}

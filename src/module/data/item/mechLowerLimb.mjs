@@ -82,7 +82,11 @@ export default class SFRPGItemMechLowerLimb extends SFRPGItemBase {
                 min: 0,
                 required: true,
                 label: "SFRPG.MechSheet.LowerLimb.MpCost"
-            })
+            }),
+            actions: new fields.ArrayField(
+                new fields.SchemaField(SFRPGItemBase.mechActionTemplate()),
+                { initial: [], required: true, label: "SFRPG.MechSheet.Action.Actions" }
+            )
         });
 
         return schema;
