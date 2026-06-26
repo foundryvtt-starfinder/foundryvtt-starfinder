@@ -838,6 +838,69 @@ Hooks.on("renderAbstractSidebarTab", async (app) => {
     }
 });
 
+Hooks.on("combatStart", async (combat) => {
+    if (!game.users.activeGM?.isSelf) return;
+
+    const mechCombatants = combat.combatants.filter(c => c.actor?.type === "mech");
+    if (mechCombatants.length === 0) return;
+
+    const removedConditions = [];
+
+    for (const combatant of mechCombatants) {
+        const actor = combatant.actor;
+        const pp = actor.system.attributes.pp;
+
+        if (pp.value !== pp.initial) {
+            await actor.update({"system.attributes.pp.value": pp.initial});
+        }
+
+        const conditionNames = [];
+        for (const effect of CONFIG.SFRPG.statusEffects) {
+            if (actor.hasCondition(effect.id)) {
+                conditionNames.push(effect.id);
+            }
+        }
+
+        for (const conditionName of conditionNames) {
+            await actor.setCondition(conditionName, false);
+        }
+
+        if (conditionNames.length > 0) {
+            removedConditions.push({
+                name: actor.name,
+                conditions: conditionNames.map(c => game.i18n.localize(
+                    CONFIG.SFRPG.statusEffects.find(e => e.id === c).name
+                ))
+            });
+        }
+    }
+
+    const gmUsers = game.users.filter(u => u.isGM).map(u => u.id);
+    const lines = [game.i18n.localize("SFRPG.MechSheet.Actions.CombatResetTitle")];
+    for (const combatant of mechCombatants) {
+        const actor = combatant.actor;
+        const pp = actor.system.attributes.pp;
+        lines.push(game.i18n.format("SFRPG.MechSheet.Actions.CombatResetPP", {
+            name: actor.name,
+            value: pp.initial,
+            max: pp.max
+        }));
+    }
+    if (removedConditions.length > 0) {
+        for (const {name, conditions} of removedConditions) {
+            lines.push(game.i18n.format("SFRPG.MechSheet.Actions.CombatResetConditions", {
+                name,
+                conditions: conditions.join(", ")
+            }));
+        }
+    }
+
+    await ChatMessage.create({
+        content: lines.join("<br>"),
+        whisper: gmUsers
+    });
+});
+
 Hooks.on("onAfterUpdateCombat", async (eventData) => {
     if (!game.users.activeGM?.isSelf) return;
     if (!eventData.isNewTurn || !eventData.newCombatant) return;
