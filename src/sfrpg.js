@@ -60,6 +60,7 @@ import BaseEnricher from "./module/system/enrichers/base.js";
 import BrowserEnricher from "./module/system/enrichers/browser.js";
 import CheckEnricher from "./module/system/enrichers/check.js";
 import IconEnricher from "./module/system/enrichers/icon.js";
+import PPAbilityEnricher from "./module/system/enrichers/pp-ability.js";
 import TemplateEnricher from "./module/system/enrichers/template.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
@@ -406,7 +407,7 @@ Hooks.once('init', async function() {
     preloadHandlebarsTemplates();
 
     console.log("Starfinder | [INIT] Setting up inline buttons");
-    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher(), new TemplateEnricher());
+    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher(), new PPAbilityEnricher(), new TemplateEnricher());
 
     console.log("Starfinder | [INIT] Applying inline icons");
     CONFIG.Actor.typeIcons = {
