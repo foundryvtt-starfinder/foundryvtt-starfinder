@@ -909,28 +909,46 @@ Hooks.on("onAfterUpdateCombat", async (eventData) => {
     const actor = eventData.newCombatant.actor;
     if (!actor || actor.type !== "mech") return;
 
-    const pp = actor.system.attributes.pp;
-    const regen = pp.regen || 0;
-    if (regen <= 0 || pp.value >= pp.max) return;
-
-    const oldValue = pp.value;
-    const newValue = Math.min(oldValue + regen, pp.max);
-    const gained = newValue - oldValue;
-
-    await actor.update({"system.attributes.pp.value": newValue});
-
     const whisperTargets = game.users.filter(u => u.isGM || actor.testUserPermission(u, "OWNER")).map(u => u.id);
+    const messages = [];
 
-    await ChatMessage.create({
-        speaker: ChatMessage.getSpeaker({actor: actor}),
-        content: game.i18n.format("SFRPG.MechSheet.Actions.PPRegenMessage", {
+    const pp = actor.system.attributes.pp;
+    const ppRegen = pp.regen || 0;
+    if (ppRegen > 0 && pp.value < pp.max) {
+        const oldPP = pp.value;
+        const newPP = Math.min(oldPP + ppRegen, pp.max);
+        const gainedPP = newPP - oldPP;
+        await actor.update({"system.attributes.pp.value": newPP});
+        messages.push(game.i18n.format("SFRPG.MechSheet.Actions.PPRegenMessage", {
             name: actor.name,
-            amount: gained,
-            current: newValue,
+            amount: gainedPP,
+            current: newPP,
             max: pp.max
-        }),
-        whisper: whisperTargets
-    });
+        }));
+    }
+
+    const sp = actor.system.attributes.sp;
+    const tier = actor.system.details.tier || 0;
+    if (tier > 0 && sp.value < sp.max) {
+        const oldSP = sp.value;
+        const newSP = Math.min(oldSP + tier, sp.max);
+        const gainedSP = newSP - oldSP;
+        await actor.update({"system.attributes.sp.value": newSP});
+        messages.push(game.i18n.format("SFRPG.MechSheet.Actions.SPRegenMessage", {
+            name: actor.name,
+            amount: gainedSP,
+            current: newSP,
+            max: sp.max
+        }));
+    }
+
+    if (messages.length > 0) {
+        await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({actor: actor}),
+            content: messages.join("<br>"),
+            whisper: whisperTargets
+        });
+    }
 });
 
 // Set this hook up outside of init for the sake of module compatibility.
