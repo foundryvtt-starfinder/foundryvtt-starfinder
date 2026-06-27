@@ -257,6 +257,7 @@
     &.dice-roll {
         .dice-footer {
             border-top: 2px groove #fff;
+            cursor: default;
             font-size: var(--font-size-12);
             font-style: normal;
             order: 3;
@@ -286,6 +287,27 @@
                         color: @sfrpgRed;
                         font-weight: bold;
                     }
+                }
+            }
+
+            .critical-dice-roll {
+                display: inline-block;
+                background-color: @sfrpgRed;
+                border: 1px solid #000000;
+                border-radius: 3px;
+                color: #ffffff;
+                padding: 1px 6px;
+                text-decoration: none;
+                cursor: pointer;
+                font-family: 'Exo 2', sans-serif;
+
+                &:hover {
+                    background-color: darken(@sfrpgRed, 10%);
+                    color: #ffffff;
+                }
+
+                i {
+                    margin-right: 2px;
                 }
             }
         }

@@ -822,6 +822,20 @@ Hooks.on("renderChatMessageHTML", (app, html, data) => {
         }
 
     }
+
+    const diceRoll = html.querySelector('.dice-roll[data-action="expandRoll"]');
+    if (diceRoll) {
+        diceRoll.addEventListener('click', (e) => {
+            if (e.target.closest('.dice-footer')) {
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                const inlineRoll = e.target.closest('.inline-roll');
+                if (inlineRoll?.dataset?.formula) {
+                    new Roll(inlineRoll.dataset.formula).toMessage();
+                }
+            }
+        }, true);
+    }
 });
 
 Hooks.on("getChatMessageContextOptions", addChatMessageContextOptions);

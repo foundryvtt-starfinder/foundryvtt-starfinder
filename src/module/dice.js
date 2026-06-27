@@ -253,7 +253,12 @@ export class DiceSFRPG {
                         roll.d20Critical = true;
                         flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
                         if (criticalData?.effect?.trim()) {
-                            tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
+                            const critEffectLabel = SFRPG.weaponCriticalHitEffects?.[criticalData.effect];
+                            let critText = critEffectLabel ? game.i18n.localize(critEffectLabel) : criticalData.effect;
+                            if (criticalData.dice?.trim()) {
+                                critText += ` <a class="inline-roll roll critical-dice-roll" data-mode="roll" data-formula="${criticalData.dice}" data-tooltip="${criticalData.dice}"><i class="fas fa-dice-d20"></i> ${criticalData.dice}</a>`;
+                            }
+                            tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": critText })});
                         }
                     } else if (d.total === fumble) {
                         roll.d20Fumble = true;
