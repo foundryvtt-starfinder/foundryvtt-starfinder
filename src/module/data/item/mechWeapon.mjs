@@ -103,6 +103,11 @@ export default class SFRPGItemMechWeapon extends SFRPGItemBase {
                 required: true,
                 label: "SFRPG.Items.Action.SavingThrow"
             }),
+            critical: new fields.StringField({
+                initial: "",
+                blank: true,
+                label: "SFRPG.MechSheet.Weapon.Critical"
+            }),
             special: new fields.StringField({
                 initial: "",
                 blank: true,

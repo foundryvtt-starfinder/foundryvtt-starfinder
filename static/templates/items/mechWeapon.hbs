@@ -114,6 +114,15 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.Weapon.Critical" }}</label>
+                        <div class="form-fields">
+                            <select name="system.critical">
+                                {{selectOption "" "" selected=itemData.critical}}
+                                {{selectOptions (sfrpg "weaponCriticalHitEffects") selected=itemData.critical localize=true}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label>{{ localize "SFRPG.MechSheet.Weapon.Special" }}</label>
                         <div class="form-fields">
                             <input type="text" name="system.special" value="{{itemData.special}}" />
