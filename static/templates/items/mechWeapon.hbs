@@ -84,6 +84,23 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.Weapon.ValidSlots" }}</label>
+                        <div class="form-fields">
+                            <label class="checkbox">
+                                <input type="checkbox" name="system.validSlots.frame" {{checked (contains itemData.validSlots "frame")}} />
+                                {{ localize "SFRPG.MechSheet.Weapon.SlotFrame" }}
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="system.validSlots.upperLimb" {{checked (contains itemData.validSlots "upperLimb")}} />
+                                {{ localize "SFRPG.MechSheet.Weapon.SlotUpperLimb" }}
+                            </label>
+                            <label class="checkbox">
+                                <input type="checkbox" name="system.validSlots.lowerLimb" {{checked (contains itemData.validSlots "lowerLimb")}} />
+                                {{ localize "SFRPG.MechSheet.Weapon.SlotLowerLimb" }}
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label>{{ localize "SFRPG.MechSheet.Weapon.Range" }}</label>
                         <div class="form-fields">
                             <input type="text" name="system.range" value="{{itemData.range}}" />
