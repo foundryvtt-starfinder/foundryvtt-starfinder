@@ -905,6 +905,7 @@ Hooks.on("combatStart", async (combat) => {
 Hooks.on("onAfterUpdateCombat", async (eventData) => {
     if (!game.users.activeGM?.isSelf) return;
     if (!eventData.isNewTurn || !eventData.newCombatant) return;
+    if (eventData.direction < 0) return;
 
     const actor = eventData.newCombatant.actor;
     if (!actor || actor.type !== "mech") return;
