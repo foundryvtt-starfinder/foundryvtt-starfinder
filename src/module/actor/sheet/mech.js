@@ -164,6 +164,8 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         const lowerLimbWeapons = weapons.filter(w => w.system.slot === "lowerLimb");
         const lockerWeapons = weapons.filter(w => w.system.slot === "locker");
 
+        const sumSlots = (wpns) => wpns.reduce((sum, w) => sum + (w.system.slotsUsed || 1), 0);
+
         // Sort auxiliary systems alphabetically by name
         auxiliarySystems.sort((a, b) => a.name.localeCompare(b.name));
 
@@ -171,6 +173,10 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         const frameSlots = actorData.attributes?.slots?.frame || 0;
         const upperLimbSlots = actorData.attributes?.slots?.upperLimb || 0;
         const lowerLimbSlots = actorData.attributes?.slots?.lowerLimb || 0;
+
+        const frameSlotsUsed = sumSlots(frameWeapons);
+        const upperLimbSlotsUsed = sumSlots(upperLimbWeapons);
+        const lowerLimbSlotsUsed = sumSlots(lowerLimbWeapons);
 
         // Check if components exist
         const hasFrame = frames.length > 0;
@@ -185,10 +191,10 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
                 dataset: { type: "mechFrame" },
                 allowAdd: frames.length < 1,
                 weapons: frameWeapons,
-                weaponSlots: { used: frameWeapons.length, max: frameSlots },
+                weaponSlots: { used: frameSlotsUsed, max: frameSlots },
                 slotType: "frame",
                 hasComponent: hasFrame,
-                allowAddWeapon: hasFrame && frameWeapons.length < frameSlots
+                allowAddWeapon: hasFrame && frameSlotsUsed < frameSlots
             },
             powerCores: {
                 category: game.i18n.format("SFRPG.MechSheet.Features.PowerCores", { current: powerCores.length }),
@@ -204,10 +210,10 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
                 dataset: { type: "mechLowerLimb" },
                 allowAdd: lowerLimbs.length < 1,
                 weapons: lowerLimbWeapons,
-                weaponSlots: { used: lowerLimbWeapons.length, max: lowerLimbSlots },
+                weaponSlots: { used: lowerLimbSlotsUsed, max: lowerLimbSlots },
                 slotType: "lowerLimb",
                 hasComponent: hasLowerLimb,
-                allowAddWeapon: hasLowerLimb && lowerLimbWeapons.length < lowerLimbSlots
+                allowAddWeapon: hasLowerLimb && lowerLimbSlotsUsed < lowerLimbSlots
             },
             upperLimbs: {
                 category: game.i18n.format("SFRPG.MechSheet.Features.UpperLimbs", { current: upperLimbs.length }),
@@ -216,10 +222,10 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
                 dataset: { type: "mechUpperLimb" },
                 allowAdd: upperLimbs.length < 1,
                 weapons: upperLimbWeapons,
-                weaponSlots: { used: upperLimbWeapons.length, max: upperLimbSlots },
+                weaponSlots: { used: upperLimbSlotsUsed, max: upperLimbSlots },
                 slotType: "upperLimb",
                 hasComponent: hasUpperLimb,
-                allowAddWeapon: hasUpperLimb && upperLimbWeapons.length < upperLimbSlots
+                allowAddWeapon: hasUpperLimb && upperLimbSlotsUsed < upperLimbSlots
             },
             auxiliarySystems: {
                 category: game.i18n.format("SFRPG.MechSheet.Features.AuxiliarySystems"),
@@ -727,13 +733,14 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         const actorData = this.actor.system;
 
         // Check which slots have components and available capacity
+        const weaponSlotsNeeded = itemData.system.slotsUsed || 1;
         const availableSlots = [];
         for (const slot of validSlots) {
             const hasComponent = this._hasComponentForSlot(slot);
-            const slotsUsed = this._getWeaponsInSlot(slot).length;
+            const slotsUsed = this._getWeaponsInSlot(slot).reduce((sum, w) => sum + (w.system.slotsUsed || 1), 0);
             const maxSlots = actorData.attributes?.slots?.[slot] || 0;
 
-            if (hasComponent && slotsUsed < maxSlots) {
+            if (hasComponent && slotsUsed + weaponSlotsNeeded <= maxSlots) {
                 availableSlots.push({
                     slot,
                     label: game.i18n.localize(CONFIG.SFRPG.mechWeaponMountableSlots[slot]),
