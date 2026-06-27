@@ -46,6 +46,14 @@ export default class SFRPGItemMechWeapon extends SFRPGItemBase {
                 required: true,
                 label: "SFRPG.MechSheet.Weapon.Slot"
             }),
+            slotsUsed: new fields.NumberField({
+                initial: 1,
+                min: 1,
+                integer: true,
+                nullable: false,
+                required: true,
+                label: "SFRPG.MechSheet.Weapon.SlotsUsed"
+            }),
             validSlots: new fields.ArrayField(
                 new fields.StringField({
                     choices: Object.keys(CONFIG.SFRPG?.mechWeaponMountableSlots || {

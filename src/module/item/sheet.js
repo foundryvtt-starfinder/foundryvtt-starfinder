@@ -654,6 +654,17 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
             formData["system.quantity"] = newValue;
         }
 
+        // Handle validSlots checkboxes -> array conversion for mechWeapon
+        if (this.object.type === "mechWeapon") {
+            const validSlots = [];
+            for (const slot of ["frame", "upperLimb", "lowerLimb"]) {
+                const key = `system.validSlots.${slot}`;
+                if (formData[key]) validSlots.push(slot);
+                delete formData[key];
+            }
+            formData["system.validSlots"] = validSlots;
+        }
+
         // Update the Item
         return super._updateObject(event, formData);
     }
