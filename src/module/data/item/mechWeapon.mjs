@@ -116,6 +116,11 @@ export default class SFRPGItemMechWeapon extends SFRPGItemBase {
                     initial: "",
                     blank: true,
                     label: "SFRPG.MechSheet.Weapon.Critical"
+                }),
+                dice: new fields.StringField({
+                    initial: "",
+                    blank: true,
+                    label: "SFRPG.MechSheet.Weapon.CriticalDice"
                 })
             }),
             special: new fields.StringField({
