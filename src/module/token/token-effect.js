@@ -16,6 +16,10 @@ export class TokenEffect {
         return this.#effect.parent;
     }
 
+    get showIcon() {
+        return this.#effect.system.showOnToken ? 1 : 0;
+    }
+
     get name() {
         return this.#effect.name;
     }

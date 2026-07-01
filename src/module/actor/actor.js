@@ -38,6 +38,15 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
         super(data, context);
     }
 
+    // appliedEffects effects can be displayed on the token, so hijack it and include effects
+    get appliedEffects() {
+        const fromEffects = this.items
+            .filter((e) => e.type === "effect" && e.system.showOnToken && e.system.enabled)
+            .map((e) => new TokenEffect(e));
+
+        return [...super.appliedEffects, ...fromEffects];
+    }
+
     // Temporary effects are displayed on the token, so hijack it and include effects
     get temporaryEffects() {
         const fromEffects = this.items
