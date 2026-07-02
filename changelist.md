@@ -1,3 +1,12 @@
+# Version 14.0.2
+Fixes conditions not showing up on tokens and adds hotbar dragging macros for actor resource adjustment.
+
+## Bugfixes
+- Re-enable showing of condition icons overtop of tokens by @danimrath
+
+## Core System Improvements
+- Actor Resources can now be dragged to a hotbar to allow for quick adjustment up or down with a Click/Ctrl+Click by @ian612
+
 # Version 14.0.1
 Addresses a couple of bugs that popped up in the v14 transition.
 
