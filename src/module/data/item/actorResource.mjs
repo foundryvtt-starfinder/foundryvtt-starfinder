@@ -128,4 +128,14 @@ export default class SFRPGItemActorResource extends SFRPGItemBase {
             })
         };
     }
+
+    /**
+     * Adjust an actor resource value up or down by a value
+     *
+     * @param {Number}      adjustValue The value to adjust the resource by
+     */
+    adjustResourceValue(adjustValue) {
+        const newValue = this.base + adjustValue;
+        this.parent.update({ "system.base": newValue });
+    }
 }

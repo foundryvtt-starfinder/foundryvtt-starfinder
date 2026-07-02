@@ -117,7 +117,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     /* -------------------------------------------- */
-    /*	Data Preparation                             */
+    /*	Data Preparation                            */
     /* -------------------------------------------- */
 
     /**
