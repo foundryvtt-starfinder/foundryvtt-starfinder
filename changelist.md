@@ -6,16 +6,28 @@
 - Mech Actions tab with weapon attacks, PP actions, special actions, and gear actions
 - Mech initiative calculation and attribute tooltips
 - Mech upgrade bonus calculations and AC adjustments
+- Mech shield point regeneration at start of each turn during combat
+- Mech weapon slot system with validSlots and slotsUsed fields for multi-slot weapons (e.g. Scythe uses 2 upper limb slots)
+- Critical hit effect field on mech weapons with rollable dice display in chat
+- Migration to automatically sync mech component actions from compendium data
+- Clickable PP ability buttons for mech components
 
 ## Bugfixes
 - Fix mech item sheets failing to render due to missing mech-actions.hbs partial registration
 - Fix Adamantine Claws mech weapon damage type from bludgeoning to slashing
+- Fix Adamantine Claws and Thundergauntlet compendium icons
 - Fix mission pod item sheet statMods values and type label
+- Fix critical hit effect display and dice-footer click behavior
+- Skip mech PP/SP regen when navigating backward in combat tracker
 - Add ownership check before setting compendium flags
 
 ## Core System Improvements
 - Manifest and download URLs updated to point to development branch
 - Power Points automatically regenerate each turn during mech combat
+
+## Compendium Updates
+- Add Gyroidal Drill Bit mech weapon with critical hit effect
+- Add Mechageddon weapon slot data to all mech weapons
 
 # Version 0.31.0 - Mech Support
 This update adds mech support from the Starfinder Tech Revolution supplement.
