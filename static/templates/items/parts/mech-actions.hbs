@@ -1,0 +1,43 @@
+<ol class="mech-actions-list form-group">
+    {{#each itemData.actions as |action i|}}
+    <li class="mech-action-entry" data-action-index="{{i}}">
+        <div class="mech-action-entry-header flexrow">
+            <span class="mech-action-entry-title">{{#if action.name}}{{action.name}}{{else}}{{ localize "SFRPG.MechSheet.Action.Name" }}{{/if}}</span>
+            <a class="mech-action-control delete-action" data-tooltip="{{ localize "SFRPG.MechSheet.Action.RemoveAction" }}"><i class="fas fa-minus"></i></a>
+        </div>
+        <div class="mech-action-entry-fields">
+            <div class="form-group">
+                <label>{{ localize "SFRPG.MechSheet.Action.Name" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.actions.{{i}}.name" value="{{action.name}}" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{ localize "SFRPG.MechSheet.Action.Description" }}</label>
+                <div class="form-fields">
+                    <textarea name="system.actions.{{i}}.description" rows="3">{{action.description}}</textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{ localize "SFRPG.MechSheet.Action.PpCost" }}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.actions.{{i}}.ppCost" value="{{action.ppCost}}" data-dtype="Number" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{ localize "SFRPG.MechSheet.Action.ActionType" }}</label>
+                <div class="form-fields">
+                    <select name="system.actions.{{i}}.actionType">
+                        <option value="" {{#unless action.actionType}}selected{{/unless}}></option>
+                        <option value="standard" {{#if (eq action.actionType "standard")}}selected{{/if}}>{{ localize "SFRPG.MechSheet.Actions.ActionTypes.Standard" }}</option>
+                        <option value="move" {{#if (eq action.actionType "move")}}selected{{/if}}>{{ localize "SFRPG.MechSheet.Actions.ActionTypes.Move" }}</option>
+                        <option value="full" {{#if (eq action.actionType "full")}}selected{{/if}}>{{ localize "SFRPG.MechSheet.Actions.ActionTypes.Full" }}</option>
+                        <option value="swift" {{#if (eq action.actionType "swift")}}selected{{/if}}>{{ localize "SFRPG.MechSheet.Actions.ActionTypes.Swift" }}</option>
+                        <option value="reaction" {{#if (eq action.actionType "reaction")}}selected{{/if}}>{{ localize "SFRPG.MechSheet.Actions.ActionTypes.Reaction" }}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </li>
+    {{/each}}
+</ol>
