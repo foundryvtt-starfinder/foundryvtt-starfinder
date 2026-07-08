@@ -32,8 +32,10 @@
                 </li>
                 <li class="attribute mp-box" data-tooltip="{{#each system.currency.mpTooltip as |tip|}}{{tip}}<br>{{/each}}">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.MechSheet.Attributes.MechPoints" }}</h4>
-                    <div class="attribute-value">
+                    <div class="attribute-value multiple">
                         <span class="calculated-value">{{system.currency.mp}}</span>
+                        <span class="sep"> / </span>
+                        <span class="calculated-value">{{system.currency.mpMax}}</span>
                     </div>
                 </li>
             </ul>
