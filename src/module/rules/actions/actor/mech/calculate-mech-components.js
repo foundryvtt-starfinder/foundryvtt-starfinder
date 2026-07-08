@@ -385,7 +385,8 @@ export default function(engine) {
         data.attributes.hp.tooltip.push(`Tier advancement (${hpAdvancement} × ${tier}): +${tierHp}`);
 
         // ========================================
-        // Mech Points: Sum mpCost from all mech component items
+        // Mech Points: Sum (mpCost × tier) from all mech component items
+        // Tech Revolution pg. 98: each component's MP cost is multiplied by tier
         // ========================================
         const mechComponentTypes = ["mechFrame", "mechUpperLimb", "mechLowerLimb", "mechPowerCore", "mechAuxiliary", "mechUpgrade", "mechWeapon", "mechMissionPod"];
         let totalMp = 0;
@@ -393,8 +394,9 @@ export default function(engine) {
 
         for (const item of items) {
             if (mechComponentTypes.includes(item.type) && item.system.mpCost) {
-                totalMp += item.system.mpCost;
-                data.currency.mpTooltip.push(`${item.name}: ${item.system.mpCost}`);
+                const itemMp = item.system.mpCost * tier;
+                totalMp += itemMp;
+                data.currency.mpTooltip.push(`${item.name}: ${item.system.mpCost} × ${tier} = ${itemMp}`);
             }
         }
 
