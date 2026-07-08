@@ -385,6 +385,22 @@ export default function(engine) {
         data.attributes.hp.tooltip.push(`Tier advancement (${hpAdvancement} × ${tier}): +${tierHp}`);
 
         // ========================================
+        // Mech Points: Sum mpCost from all mech component items
+        // ========================================
+        const mechComponentTypes = ["mechFrame", "mechUpperLimb", "mechLowerLimb", "mechPowerCore", "mechAuxiliary", "mechUpgrade", "mechWeapon", "mechMissionPod"];
+        let totalMp = 0;
+        data.currency.mpTooltip = [];
+
+        for (const item of items) {
+            if (mechComponentTypes.includes(item.type) && item.system.mpCost) {
+                totalMp += item.system.mpCost;
+                data.currency.mpTooltip.push(`${item.name}: ${item.system.mpCost}`);
+            }
+        }
+
+        data.currency.mp = totalMp;
+
+        // ========================================
         // AC Adjustments: Manual EAC/KAC adjustments
         // ========================================
         const eacAdj = data.attributes.eac.adjustment || 0;
