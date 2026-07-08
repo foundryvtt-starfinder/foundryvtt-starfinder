@@ -385,6 +385,25 @@ export default function(engine) {
         data.attributes.hp.tooltip.push(`Tier advancement (${hpAdvancement} × ${tier}): +${tierHp}`);
 
         // ========================================
+        // Mech Points: Sum (mpCost × tier) from all mech component items
+        // Tech Revolution pg. 98: each component's MP cost is multiplied by tier
+        // ========================================
+        const mechComponentTypes = ["mechFrame", "mechUpperLimb", "mechLowerLimb", "mechPowerCore", "mechAuxiliary", "mechUpgrade", "mechWeapon", "mechMissionPod"];
+        let totalMp = 0;
+        data.currency.mpTooltip = [];
+
+        for (const item of items) {
+            if (mechComponentTypes.includes(item.type) && item.system.mpCost) {
+                const itemMp = item.system.mpCost * tier;
+                totalMp += itemMp;
+                data.currency.mpTooltip.push(`${item.name}: ${item.system.mpCost} × ${tier} = ${itemMp}`);
+            }
+        }
+
+        data.currency.mp = totalMp;
+        data.currency.mpMax = (tier + 1) * 15;
+
+        // ========================================
         // AC Adjustments: Manual EAC/KAC adjustments
         // ========================================
         const eacAdj = data.attributes.eac.adjustment || 0;

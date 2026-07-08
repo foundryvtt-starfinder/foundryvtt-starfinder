@@ -6,6 +6,9 @@
     /* ----------------------------------------- */
 
     .summary {
+        display: flex;
+        align-items: center;
+
         .frame-name {
             display: block;
             line-height: 24px;
@@ -14,6 +17,26 @@
             &.placeholder {
                 color: var(--color-text-dark-secondary);
                 font-style: italic;
+            }
+        }
+
+        .mp-box {
+            margin-left: auto;
+            margin-right: 3px;
+            min-height: 60px;
+            min-width: 70px;
+            border: @borderGroove;
+            border-radius: 4px;
+            .exo2();
+            text-align: center;
+
+            .attribute-name {
+                flex: 0 0 18px;
+            }
+
+            .attribute-value .calculated-value {
+                font-size: var(--font-size-24);
+                font-weight: bold;
             }
         }
     }

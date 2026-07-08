@@ -313,7 +313,13 @@ export default class SFRPGActorMech extends SFRPGActorBase {
                     initial: 0,
                     min: 0,
                     nullable: true
-                })
+                }),
+                mpMax: new fields.NumberField({
+                    initial: 0,
+                    min: 0,
+                    nullable: true
+                }),
+                mpTooltip: new fields.ArrayField(new fields.StringField())
             }),
             details: new fields.SchemaField({
                 tier: new fields.NumberField({

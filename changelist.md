@@ -11,6 +11,10 @@
 - Critical hit effect field on mech weapons with rollable dice display in chat
 - Migration to automatically sync mech component actions from compendium data
 - Clickable PP ability buttons for mech components
+- Auto-calculate Mech Point (MP) total from all component mpCost values multiplied by tier
+- MP displayed as used/max in a styled box in the mech sheet header with tooltip breakdown per component
+- MP max calculated from Tech Revolution Table 4-2: (tier + 1) × 15
+- Auxiliary systems section header shows current/max count with add button hidden at capacity
 
 ## Bugfixes
 - Fix mech item sheets failing to render due to missing mech-actions.hbs partial registration
@@ -28,6 +32,7 @@
 ## Compendium Updates
 - Add Gyroidal Drill Bit mech weapon with critical hit effect
 - Add Mechageddon weapon slot data to all mech weapons
+- Fix power core mpCost values: mk 1-4 dynamo and eternal cores now correctly set to their mk rating (were all 0)
 
 # Version 0.31.0 - Mech Support
 This update adds mech support from the Starfinder Tech Revolution supplement.

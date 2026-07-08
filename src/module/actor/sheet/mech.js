@@ -228,11 +228,14 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
                 allowAddWeapon: hasUpperLimb && upperLimbSlotsUsed < upperLimbSlots
             },
             auxiliarySystems: {
-                category: game.i18n.format("SFRPG.MechSheet.Features.AuxiliarySystems"),
+                category: game.i18n.format("SFRPG.MechSheet.Features.AuxiliarySystems", {
+                    current: auxiliarySystems.length,
+                    max: Math.min(4, actorData.attributes?.slots?.auxiliary || 0)
+                }),
                 items: auxiliarySystems,
                 hasActions: false,
                 dataset: { type: "mechAuxiliary" },
-                allowAdd: true
+                allowAdd: auxiliarySystems.length < Math.min(4, actorData.attributes?.slots?.auxiliary || 0)
             },
             upgrades: {
                 category: game.i18n.format("SFRPG.MechSheet.Features.Upgrades"),

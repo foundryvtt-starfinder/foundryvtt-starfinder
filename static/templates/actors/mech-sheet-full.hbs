@@ -30,6 +30,14 @@
                 <li>
                     <input type="text" name="system.details.source" value="{{system.details.source}}" placeholder="{{localize "SFRPG.NPCSheet.Header.SourcePlaceHolderText"}}" />
                 </li>
+                <li class="attribute mp-box" data-tooltip="{{#each system.currency.mpTooltip as |tip|}}{{tip}}<br>{{/each}}">
+                    <h4 class="attribute-name box-title">{{ localize "SFRPG.MechSheet.Attributes.MechPoints" }}</h4>
+                    <div class="attribute-value multiple">
+                        <span class="calculated-value">{{system.currency.mp}}</span>
+                        <span class="sep"> / </span>
+                        <span class="calculated-value">{{system.currency.mpMax}}</span>
+                    </div>
+                </li>
             </ul>
         </div>
     </header>
@@ -216,12 +224,6 @@
                             <label>{{ localize "SFRPG.MechSheet.Attributes.Operators" }}</label>
                             <div class="form-fields">
                                 <span class="calculated-value">{{system.attributes.operators.min}} - {{system.attributes.operators.max}}</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label>{{ localize "SFRPG.MechSheet.Attributes.MechPoints" }}</label>
-                            <div class="form-fields">
-                                <input type="text" name="system.currency.mp" value="{{system.currency.mp}}" data-dtype="Number" />
                             </div>
                         </div>
                     </div>
