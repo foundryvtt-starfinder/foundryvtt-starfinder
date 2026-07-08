@@ -401,8 +401,7 @@ export default function(engine) {
         }
 
         data.currency.mp = totalMp;
-        const numOperators = data.crew?.operator?.actorIds?.length || 0;
-        data.currency.mpMax = tier * 15 * numOperators;
+        data.currency.mpMax = (tier + 1) * 15;
 
         // ========================================
         // AC Adjustments: Manual EAC/KAC adjustments
