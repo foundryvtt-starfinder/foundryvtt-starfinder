@@ -331,7 +331,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
 
                 let saveLabel = null;
                 if (action.saveType && saveTypeLabels[action.saveType]) {
-                    const dc = action.saveDCBase != null
+                    const dc = action.saveDCBase !== null
                         ? action.saveDCBase + (action.saveDCScaling === "tier" ? tier : Math.floor(tier / 2))
                         : 12 + Math.floor(tier / 2);
                     saveLabel = `${saveTypeLabels[action.saveType]} DC ${dc}`;
