@@ -15,6 +15,7 @@
 - MP displayed as used/max in a styled box in the mech sheet header with tooltip breakdown per component
 - MP max calculated from Tech Revolution Table 4-2: (tier + 1) × 15
 - Auxiliary systems section header shows current/max count with add button hidden at capacity
+- Save DC pills shown on actions tab for mech abilities and weapons that require saving throws
 
 ## Bugfixes
 - Fix mech item sheets failing to render due to missing mech-actions.hbs partial registration

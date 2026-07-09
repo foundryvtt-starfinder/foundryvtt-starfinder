@@ -258,9 +258,26 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
 
         // === Actions Tab Data ===
         const actionsTab = {};
+        const tier = actorData.details?.tier || 1;
+
+        const saveTypeLabels = {
+            fort: game.i18n.localize("SFRPG.MechSheet.Action.SaveTypes.Fort"),
+            fortitude: game.i18n.localize("SFRPG.MechSheet.Action.SaveTypes.Fort"),
+            ref: game.i18n.localize("SFRPG.MechSheet.Action.SaveTypes.Ref"),
+            reflex: game.i18n.localize("SFRPG.MechSheet.Action.SaveTypes.Ref"),
+            will: game.i18n.localize("SFRPG.MechSheet.Action.SaveTypes.Will")
+        };
 
         // Enabled weapons: mounted weapons (not in locker)
         actionsTab.enabledWeapons = weapons.filter(w => w.system.slot !== "locker");
+
+        for (const weapon of actionsTab.enabledWeapons) {
+            const save = weapon.system.save;
+            if (save?.type) {
+                const dc = save.dc || (12 + Math.floor(tier / 2));
+                weapon.config.saveLabel = `${saveTypeLabels[save.type] || save.type} DC ${dc}`;
+            }
+        }
 
         // PP Actions (universal, always available)
         const currentPP = actorData.attributes?.pp?.value || 0;
@@ -312,6 +329,14 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
                     buttonLabel = constantLabel;
                 }
 
+                let saveLabel = null;
+                if (action.saveType && saveTypeLabels[action.saveType]) {
+                    const dc = action.saveDCBase != null
+                        ? action.saveDCBase + (action.saveDCScaling === "tier" ? tier : Math.floor(tier / 2))
+                        : 12 + Math.floor(tier / 2);
+                    saveLabel = `${saveTypeLabels[action.saveType]} DC ${dc}`;
+                }
+
                 actionsTab.gearActions.push({
                     actionName: action.name,
                     gearName: component.name,
@@ -324,7 +349,8 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
                     canAfford: !hasPPCost || currentPP >= action.ppCost,
                     insufficientPPTooltip: insufficientPPTooltip,
                     itemId: component._id,
-                    actionIndex: i
+                    actionIndex: i,
+                    saveLabel: saveLabel
                 });
             }
         }

@@ -483,6 +483,9 @@
                             {{weapon.config.damageString}}
                         </button>
                         {{/if}}
+                        {{#if weapon.config.saveLabel}}
+                        <span class="tag save-pill">{{weapon.config.saveLabel}}</span>
+                        {{/if}}
                     </div>
                     {{/if}}
                 </li>
@@ -549,6 +552,9 @@
                     </div>
                     {{#if @root.isOwner}}
                     <div class="mech-action-buttons">
+                        {{#if action.saveLabel}}
+                        <span class="tag save-pill">{{action.saveLabel}}</span>
+                        {{/if}}
                         <button type="button" class="tag mech-gear-action {{#if action.hasPPCost}}pp-cost-button{{else}}action-type-button{{/if}}{{#unless action.canAfford}} disabled{{/unless}}" data-item-id="{{action.itemId}}" data-item-action-index="{{action.actionIndex}}" data-action-index="{{@index}}" {{#unless action.canAfford}}disabled data-tooltip="{{action.insufficientPPTooltip}}"{{/unless}}>
                             {{action.buttonLabel}}
                         </button>
