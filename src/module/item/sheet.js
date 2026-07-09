@@ -109,6 +109,11 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         data.actor = this.document.parent;
         data.labels = this.item.labels;
 
+        if (data.item.type === "mechUpperLimb") {
+            data.itemData.isMeleeChosen = data.itemData.attackBonusChoice === "melee";
+            data.itemData.isRangedChosen = data.itemData.attackBonusChoice === "ranged";
+        }
+
         // Item Type, Status, and Details
         data.itemType = game.i18n.format(`TYPES.Item.${data.item.type}`);
         data.itemStatus = this._getItemStatus();

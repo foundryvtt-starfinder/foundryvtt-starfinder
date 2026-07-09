@@ -18,6 +18,7 @@
 - Save DC pills shown on actions tab for mech abilities and weapons that require saving throws
 
 ## Bugfixes
+- Precision Arms now requires choosing +1 melee OR +1 ranged bonus, not both
 - Fix mech item sheets failing to render due to missing mech-actions.hbs partial registration
 - Fix Adamantine Claws mech weapon damage type from bludgeoning to slashing
 - Fix Adamantine Claws and Thundergauntlet compendium icons

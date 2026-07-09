@@ -56,6 +56,16 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label>{{ localize "SFRPG.MechSheet.UpperLimb.ShowAttackBonusChoice" }}</label>
+                        <div class="form-fields">
+                            <input type="checkbox" name="system.showAttackBonusChoice" {{checked itemData.showAttackBonusChoice}} />
+                            <select name="system.attackBonusChoice" {{#unless itemData.showAttackBonusChoice}}disabled{{/unless}}>
+                                <option value="melee" {{#if itemData.isMeleeChosen}}selected{{/if}}>{{ localize "SFRPG.MechSheet.UpperLimb.ChoiceMelee" }}</option>
+                                <option value="ranged" {{#if itemData.isRangedChosen}}selected{{/if}}>{{ localize "SFRPG.MechSheet.UpperLimb.ChoiceRanged" }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label>{{ localize "SFRPG.MechSheet.UpperLimb.Strength" }}</label>
                         <div class="form-fields">
                             <input type="text" name="system.strength" value="{{itemData.strength}}" data-dtype="Number" />
