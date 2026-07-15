@@ -84,16 +84,6 @@ jobs:
                   branch: "development"
                   github_token: ${{ secrets.GITHUB_TOKEN }}
 
-            # Merge development into master
-            - name: Merge development -> master
-              uses: devmasx/merge-branch@master
-              with:
-                  type: now
-                  from_branch: development
-                  target_branch: master
-                  message: "Merge development into master"
-                  github_token: ${{ secrets.GITHUB_TOKEN }}
-
             # POST to the package admin release endpoint
             #- name: Publish Module to FoundryVTT Website
             #  id: publish-to-foundry-website
