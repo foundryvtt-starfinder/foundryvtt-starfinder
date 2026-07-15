@@ -403,9 +403,11 @@ export default function(engine) {
 
         for (const item of items) {
             if (mechComponentTypes.includes(item.type) && item.system.mpCost) {
-                const itemMp = item.system.mpCost * tier;
+                const effectiveLevel = (item.type === "mechWeapon" && item.system.levelOverride) ? item.system.levelOverride : tier;
+                const itemMp = item.system.mpCost * effectiveLevel;
                 totalMp += itemMp;
-                data.currency.mpTooltip.push(`${item.name}: ${item.system.mpCost} × ${tier} = ${itemMp}`);
+                const levelLabel = effectiveLevel !== tier ? `${effectiveLevel} (Lvl)` : `${tier}`;
+                data.currency.mpTooltip.push(`${item.name}: ${item.system.mpCost} × ${levelLabel} = ${itemMp}`);
             }
         }
 
@@ -430,27 +432,28 @@ export default function(engine) {
         }
 
         // ========================================
-        // Weapon Damage: Computed from tier + damage level (Tech Revolution Table 4-5)
+        // Weapon Damage: Computed from weapon level + damage level (Tech Revolution Table 4-5)
+        // Weapon level defaults to mech tier but can be overridden per weapon.
         // ========================================
-        const damageTable = CONFIG.SFRPG.mechWeaponDamageByTier[tier];
-        if (damageTable) {
-            const mechWeapons = items.filter(i => i.type === "mechWeapon");
-            for (const weapon of mechWeapons) {
-                const level = weapon.system.damageLevel || "medium";
-                const formula = damageTable[level];
-                if (formula && weapon.system.damage?.parts) {
-                    // Set the first damage part's formula from the table
-                    if (weapon.system.damage.parts.length > 0) {
-                        weapon.system.damage.parts[0].formula = formula;
-                    } else {
-                        weapon.system.damage.parts.push({
-                            formula: formula,
-                            types: {},
-                            name: "",
-                            group: null,
-                            isPrimarySection: false
-                        });
-                    }
+        const mechWeapons = items.filter(i => i.type === "mechWeapon");
+        for (const weapon of mechWeapons) {
+            const weaponLevel = weapon.system.levelOverride || tier;
+            const damageTable = CONFIG.SFRPG.mechWeaponDamageByTier[weaponLevel];
+            if (!damageTable) continue;
+
+            const damageLevel = weapon.system.damageLevel || "medium";
+            const formula = damageTable[damageLevel];
+            if (formula && weapon.system.damage?.parts) {
+                if (weapon.system.damage.parts.length > 0) {
+                    weapon.system.damage.parts[0].formula = formula;
+                } else {
+                    weapon.system.damage.parts.push({
+                        formula: formula,
+                        types: {},
+                        name: "",
+                        group: null,
+                        isPrimarySection: false
+                    });
                 }
             }
         }

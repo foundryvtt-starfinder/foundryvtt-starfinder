@@ -34,6 +34,15 @@ export default class SFRPGItemMechWeapon extends SFRPGItemBase {
                 }),
                 label: "SFRPG.MechSheet.Weapon.DamageLevel"
             }),
+            levelOverride: new fields.NumberField({
+                initial: null,
+                min: 1,
+                max: 20,
+                integer: true,
+                nullable: true,
+                required: false,
+                label: "SFRPG.MechSheet.Weapon.LevelOverride"
+            }),
             weaponType: new fields.StringField({
                 initial: "melee",
                 blank: false,

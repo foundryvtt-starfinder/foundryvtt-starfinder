@@ -139,6 +139,8 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
             if (item.type === "mechWeapon") {
                 item.config.hasAttack = true;
                 item.config.hasDamage = hasDamage;
+                const effectiveLevel = item.system.levelOverride || actorData.details?.tier || 1;
+                item.config.levelLabel = `(${game.i18n.localize("SFRPG.MechSheet.Weapon.LevelShort")} ${effectiveLevel})`;
                 arr[0].push(item);
             } else if (item.type === "mechFrame") arr[1].push(item);
             else if (item.type === "mechAuxiliary") arr[2].push(item);
@@ -272,9 +274,10 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         actionsTab.enabledWeapons = weapons.filter(w => w.system.slot !== "locker");
 
         for (const weapon of actionsTab.enabledWeapons) {
+            const weaponLevel = weapon.system.levelOverride || tier;
             const save = weapon.system.save;
             if (save?.type) {
-                const dc = save.dc || (12 + Math.floor(tier / 2));
+                const dc = save.dc || (12 + Math.floor(weaponLevel / 2));
                 weapon.config.saveLabel = `${saveTypeLabels[save.type] || save.type} DC ${dc}`;
             }
         }

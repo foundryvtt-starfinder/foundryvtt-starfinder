@@ -28,8 +28,12 @@ export default function(engine) {
                     const abilityKey = itemKeyAbilityId || spellbookSpellAbility || classSpellAbility || ownerKeyAbilityId;
 
                     if (actor.type === "mech") {
-                        // Mech weapon save DC = 10 + 1/2 tier + operator's key ability mod
-                        dcFormula = "10 + floor(@owner.details.tier / 2)";
+                        // Mech weapon save DC = 10 + 1/2 weapon level + operator's key ability mod
+                        // Weapon level defaults to mech tier but can be overridden per weapon
+                        const weaponLevel = data.levelOverride || null;
+                        dcFormula = weaponLevel
+                            ? `10 + floor(${weaponLevel} / 2)`
+                            : "10 + floor(@owner.details.tier / 2)";
                     } else if (actor.type === "npc" || actor.type === "npc2") {
                         if (itemData.type === "spell") {
                             dcFormula = `@owner.attributes.baseSpellDC.value + @item.level`;
