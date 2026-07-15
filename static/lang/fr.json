@@ -557,7 +557,9 @@
                     "GM": "Le MJ"
                 },
                 "Turn": {
-                    "Header": "Tour de {combatant}"
+                    "Header": "Tour de {combatant}",
+                    "PPRegen": "Regenerates {regen} Power Points.",
+                    "PPRegenSingular": "Regenerates {regen} Power Point."
                 }
             },
             "Difficulty": {
@@ -1042,6 +1044,18 @@
                     "Photon": "Photon",
                     "SenseDependent": "Dépendant des sens"
                 }
+            },
+            "PPAbility": {
+                "Confirm": "Confirm",
+                "CostLabel": "({cost} PP)",
+                "CostLabelVariable": "({cost}+ PP)",
+                "DefaultName": "PP Ability",
+                "InsufficientPP": "Insufficient PP for {name}. Requires {cost} PP, but only {current} PP available.",
+                "NoMechSelected": "You must have a mech token selected to use this ability.",
+                "PPRemaining": "PP Remaining: {remaining}/{max}",
+                "PPSpent": "{cost} PP Spent",
+                "VariableCostPrompt": "Enter PP to spend (minimum {min}, {available} available):",
+                "VariableCostTitle": "Variable PP Cost"
             },
             "SendToChat": "Envoyer vers le chat",
             "TypeError": "{enricherType} l'analyse a échoué ! Le type n'est pas valide."
@@ -2086,7 +2100,15 @@
                 "Description": "Description",
                 "Name": "Action Name",
                 "PpCost": "PP Cost",
-                "RemoveAction": "Remove Action"
+                "RemoveAction": "Remove Action",
+                "SaveDCBase": "Save DC Base",
+                "SaveDCScaling": "Save DC Scaling",
+                "SaveType": "Save Type",
+                "SaveTypes": {
+                    "Fort": "Fort",
+                    "Ref": "Ref",
+                    "Will": "Will"
+                }
             },
             "Actions": {
                 "ActionTypes": {
@@ -2097,6 +2119,9 @@
                     "Standard": "Standard",
                     "Swift": "Swift"
                 },
+                "CombatResetConditions": "Removed conditions from {name}: {conditions}",
+                "CombatResetPP": "{name} PP reset to {value}/{max}",
+                "CombatResetTitle": "<strong>Mech Combat Start</strong>",
                 "EnabledWeapons": "Enabled Weapons",
                 "GearActions": "Gear Actions",
                 "InsufficientPP": "Insufficient Power Points to perform this action.",
@@ -2127,6 +2152,7 @@
                 "PPActions": "PP Actions",
                 "PPRegenMessage": "{name} regenerates {amount} PP ({current}/{max})",
                 "PPSpent": "{amount} PP spent",
+                "SPRegenMessage": "{name} regenerates {amount} SP ({current}/{max})",
                 "Special": {
                     "CalledShot": {
                         "Description": "Expend 1 or 3 PP and make an attack against a single mech. If the attack's damage causes system damage, choose which component takes the damage (excluding power core or cockpit). If 3 PP were expended, any component can be selected.",
@@ -2326,8 +2352,11 @@
                 "SpeedBonus": "Speed Bonus"
             },
             "UpperLimb": {
+                "AttackBonusChoice": "Attack Bonus",
                 "BaseHp": "Base HP",
                 "CanBeActivated": "Has Special Ability",
+                "ChoiceMelee": "+1 Melee",
+                "ChoiceRanged": "+1 Ranged",
                 "Combat": "Combat",
                 "Eac": "EAC Modifier",
                 "Kac": "KAC Modifier",
@@ -2336,6 +2365,7 @@
                 "OnlyOne": "A mech can only have one set of upper limbs.",
                 "PpCost": "PP Cost",
                 "RangedAttack": "Ranged Attack Bonus",
+                "ShowAttackBonusChoice": "Choose Attack Bonus",
                 "Slots": "Weapon Slots",
                 "SpecialAbility": "Special Ability",
                 "Strength": "Strength Modifier",
@@ -2344,11 +2374,16 @@
             "Weapon": {
                 "Area": "Area",
                 "Capacity": "Capacity",
+                "Critical": "Critical Hit Effect",
+                "CriticalDice": "Critical Dice",
                 "DamageLevel": "Damage Level",
                 "DamageLevelExtreme": "Extreme",
                 "DamageLevelHigh": "High",
                 "DamageLevelLow": "Low",
                 "DamageLevelMedium": "Medium",
+                "LevelOverride": "Weapon Level",
+                "LevelOverridePlaceholder": "Mech tier",
+                "LevelShort": "level",
                 "MpCost": "MP Cost",
                 "PpCost": "PP Cost",
                 "Range": "Range",
@@ -2357,6 +2392,7 @@
                 "SlotLocker": "Weapons Locker",
                 "SlotLowerLimb": "Lower Limb",
                 "SlotUpperLimb": "Upper Limb",
+                "SlotsUsed": "Slots Used",
                 "Special": "Special Properties",
                 "Type": "Weapon Type",
                 "TypeMelee": "Melee",
