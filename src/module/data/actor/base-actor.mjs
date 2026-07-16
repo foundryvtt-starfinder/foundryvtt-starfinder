@@ -258,7 +258,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
 
         const schema = {
             useNPCCrew: new fields.BooleanField({
-                initial: true,
+                initial: type !== "mech",
                 required: true
             })
         };
