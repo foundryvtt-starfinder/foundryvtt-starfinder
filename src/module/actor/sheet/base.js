@@ -209,6 +209,9 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const currency = expandedData.system.currency;
         if (currency) {
             for (const [name, input] of Object.entries(currency)) {
+                // Skip non-string inputs (e.g., numbers from calculated fields)
+                if (typeof input !== 'string') continue;
+
                 const oldValue = this.actor?.system?.currency[name];
                 let newValue = oldValue;
                 const isDelta = input.startsWith("+") || input.startsWith("-");
@@ -515,6 +518,51 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             const itemData = item.system;
             const actor = item.actor;
             const actorData = actor.system;
+
+            // Mech weapons: base attack (tier + limbs) + best operator bonus
+            if (item.type === "mechWeapon") {
+                const isMelee = itemData.weaponType === "melee";
+                const baseAttack = isMelee
+                    ? actorData.attributes?.meleeAttackBonus || 0
+                    : actorData.attributes?.rangedAttackBonus || 0;
+
+                const tooltipParts = [];
+                const existingTooltip = actorData.attributes?.attackBonus?.tooltip || [];
+                for (const entry of existingTooltip) {
+                    if (isMelee && entry.includes("(Ranged)")) continue;
+                    if (!isMelee && entry.includes("(Melee)")) continue;
+                    if (entry.includes("Operator")) continue;
+                    tooltipParts.push(entry);
+                }
+
+                let operatorBonus = 0;
+                let bestOperatorName = null;
+                let bestOperatorSource = null;
+                const operatorIds = actorData.crew?.operator?.actorIds || [];
+                for (const id of operatorIds) {
+                    const op = game.actors.get(id);
+                    if (!op) continue;
+                    const bab = op.system.attributes?.baseAttackBonus?.value || 0;
+                    const pilRanks = op.system.skills?.pil?.ranks || 0;
+                    const best = Math.max(bab, pilRanks);
+                    if (best > operatorBonus) {
+                        operatorBonus = best;
+                        bestOperatorName = op.name;
+                        bestOperatorSource = best === pilRanks ? "Piloting" : "BAB";
+                    }
+                }
+
+                if (bestOperatorName) {
+                    tooltipParts.push(`${bestOperatorName} (${bestOperatorSource}): +${operatorBonus}`);
+                }
+
+                const total = baseAttack + operatorBonus;
+                const sign = total >= 0 ? "+" : "";
+                item.config.attackString = `${sign}${total}`;
+                item.config.attackTooltip = tooltipParts.join("\n");
+                return;
+            }
+
             const isWeapon = ["weapon", "shield"].includes(item.type);
 
             // TODO: This chunk is the same code as in item.js's rollAttack(), probably good practice to combine these into one method somewhere
@@ -588,9 +636,31 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
      */
     _prepareDamageString(item) {
         try {
-            const isWeapon = ["weapon", "shield"].includes(item.type);
             const formula = item.system.damage.parts[0].formula;
             if (!formula) throw ("No damage formula, deferring to default string");
+
+            // Mech weapons add tier-based damage modifier
+            if (item.type === "mechWeapon") {
+                const isMelee = item.system.weaponType === "melee";
+                const damageModKey = isMelee ? "melee" : "ranged";
+                const damageModValue = item.actor.system.attributes?.damageModifier?.[damageModKey] || 0;
+
+                const preparedFormula = damageModValue ? `${formula} + ${damageModValue}` : formula;
+                const rollData = RollContext.createItemRollContext(item, item.actor).getRollData();
+                const roll = Roll.create(preparedFormula, rollData).simplifiedFormula;
+                if (!roll) throw ("Invalid roll, deferring to default string.");
+
+                const damageTypes = Object.entries(item.system.damage.parts[0].types)
+                    .map(([type, enabled]) => {
+                        if (enabled) return SFRPG.damageTypeToAcronym[type];
+                    })
+                    .filterJoin(" & ");
+
+                item.config.damageString = `${roll} ${damageTypes}`;
+                return;
+            }
+
+            const isWeapon = ["weapon", "shield"].includes(item.type);
 
             let appropriateMods = item.getAppropriateDamageModifiers(isWeapon);
             // Remove situational modifiers

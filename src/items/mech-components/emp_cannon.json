@@ -1,0 +1,50 @@
+{
+  "_id": "IsnVat3k5H9iKbJF",
+  "name": "EMP Cannon",
+  "type": "mechAuxiliary",
+  "folder": "vj3kvHdvf2DlBF6O",
+  "img": "systems/sfrpg/icons/equipment/weapons/advanced_zero_cannon.webp",
+  "system": {
+    "actions": [
+      {
+        "name": "Jam Weapon",
+        "actionType": "standard",
+        "description": "As a standard action, make a ranged attack against another mech within 120 feet, optionally targeting one weapon. If it hits, the selected weapon becomes nonfunctional for 1 minute unless the targeted mech succeeds at a Fortitude save.",
+        "ppCost": 3,
+        "saveType": "fort",
+        "saveDCBase": 12,
+        "saveDCScaling": "halfTier"
+      },
+      {
+        "name": "Kill Engine",
+        "actionType": "standard",
+        "description": "As a standard action, make a ranged attack against another mech within 120 feet, selecting one movement type. If it hits, that speed is reduced to 0 feet for 1 round unless the targeted mech succeeds at a Fortitude save.",
+        "ppCost": 4,
+        "saveType": "fort",
+        "saveDCBase": 12,
+        "saveDCScaling": "halfTier"
+      },
+      {
+        "name": "Sabotage Power",
+        "actionType": "standard",
+        "description": "As a standard action, make a ranged attack against another mech within 120 feet, targeting its power core. If it hits, the targeted mech can't regain or expend Power Points for 1 round unless it succeeds at a Fortitude save.",
+        "ppCost": 3,
+        "saveType": "fort",
+        "saveDCBase": 12,
+        "saveDCScaling": "halfTier"
+      }
+    ],
+    "canBeActivated": true,
+    "description": {
+      "chat": "",
+      "gmnotes": "",
+      "short": "",
+      "unidentified": "",
+      "value": "<p>This system destabilizes enemy mech machinery with electromagnetic pulses.</p>\n<p>@PPAbility[cost:3]{Jam Weapon} Disable an enemy mech's weapon for 1 minute.</p>\n<p>@PPAbility[cost:4]{Kill Engine} Reduce an enemy mech's movement speed to 0 for 1 round.</p>\n<p>@PPAbility[cost:3]{Sabotage Power} Prevent an enemy mech from expending power points for 1 round.</p>\n<p><strong>Save DC:</strong> 12 + half mech tier.</p>"
+    },
+    "isActive": false,
+    "mpCost": 2,
+    "ppCost": 3,
+    "source": "Tech Revolution pg. 107"
+  }
+}

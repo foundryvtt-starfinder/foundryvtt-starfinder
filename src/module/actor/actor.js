@@ -960,6 +960,17 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     }
 
     _onTurnStart() {
+        // Mech PP regeneration
+        if (this.type === "mech") {
+            const pp = this.system.attributes.pp;
+            if (pp.regen > 0) {
+                const newValue = Math.min(pp.value + pp.regen, pp.max);
+                if (newValue !== pp.value) {
+                    this.update({ "system.attributes.pp.value": newValue });
+                }
+            }
+        }
+
         for (const item of this.items) {
             item._onTurnStart?.();
         }
@@ -1093,6 +1104,25 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
                         rollContext.addSelector(role, populatedRoles);
                     }
                 });
+            }
+        } else if (actorData.type === "mech") {
+            if (!crewData.useNPCCrew) {
+                const operatorContextIds = [];
+                let operatorCount = 1;
+
+                const operatorActors = crewActorData?.operator?.actors || [];
+                for (const actor of operatorActors) {
+                    if (!actor) continue;
+                    const actorSystemData = actor instanceof ActorSFRPG ? actor.system : actor.data;
+                    const contextId = `operator${operatorCount}`;
+                    rollContext.addContext(contextId, actor, actorSystemData);
+                    operatorContextIds.push(contextId);
+                    operatorCount++;
+                }
+
+                if (desiredSelectors.includes("operator")) {
+                    rollContext.addSelector("operator", operatorContextIds);
+                }
             }
         }
     }

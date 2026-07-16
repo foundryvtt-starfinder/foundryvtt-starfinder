@@ -109,6 +109,11 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         data.actor = this.document.parent;
         data.labels = this.item.labels;
 
+        if (data.item.type === "mechUpperLimb") {
+            data.itemData.isMeleeChosen = data.itemData.attackBonusChoice === "melee";
+            data.itemData.isRangedChosen = data.itemData.attackBonusChoice === "ranged";
+        }
+
         // Item Type, Status, and Details
         data.itemType = game.i18n.format(`TYPES.Item.${data.item.type}`);
         data.itemStatus = this._getItemStatus();
@@ -654,6 +659,17 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
             formData["system.quantity"] = newValue;
         }
 
+        // Handle validSlots checkboxes -> array conversion for mechWeapon
+        if (this.object.type === "mechWeapon") {
+            const validSlots = [];
+            for (const slot of ["frame", "upperLimb", "lowerLimb"]) {
+                const key = `system.validSlots.${slot}`;
+                if (formData[key]) validSlots.push(slot);
+                delete formData[key];
+            }
+            formData["system.validSlots"] = validSlots;
+        }
+
         // Update the Item
         return super._updateObject(event, formData);
     }
@@ -672,6 +688,9 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
 
         // Modify damage formula
         html.find(".damage-control").click(this._onDamageControl.bind(this));
+
+        // Modify mech actions array
+        html.find(".mech-action-control").click(this._onMechActionControl.bind(this));
         html.find("input.primary-section-checkbox").click(this._onTogglePrimaryDamageSection.bind(this));
         html.find(".visualization-control").click(this._onActorResourceVisualizationControl.bind(this));
         html.find(".ability-adjustments-control").click(this._onAbilityAdjustmentsControl.bind(this));
@@ -841,6 +860,29 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
             return this.item.update({
                 "system.critical.parts": criticalDamage.parts
             });
+        }
+    }
+
+    async _onMechActionControl(event) {
+        event.preventDefault();
+        const a = event.currentTarget;
+
+        if (a.classList.contains("add-action")) {
+            await this._onSubmit(event);
+            const actions = this.item.system.actions || [];
+            return this.item.update({
+                "system.actions": actions.concat([
+                    { name: "", description: "", ppCost: null, actionType: "" }
+                ])
+            });
+        }
+
+        if (a.classList.contains("delete-action")) {
+            await this._onSubmit(event);
+            const li = a.closest(".mech-action-entry");
+            const actions = foundry.utils.deepClone(this.item.system.actions || []);
+            actions.splice(Number(li.dataset.actionIndex), 1);
+            return this.item.update({ "system.actions": actions });
         }
     }
 

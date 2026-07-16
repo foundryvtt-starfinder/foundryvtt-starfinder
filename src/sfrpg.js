@@ -20,6 +20,7 @@ import { ActorSheetSFRPGHazard } from "./module/actor/sheet/hazard.js";
 import { ActorSheetSFRPGNPC } from "./module/actor/sheet/npc.js";
 import { ActorSheetSFRPGStarship } from "./module/actor/sheet/starship.js";
 import { ActorSheetSFRPGVehicle } from "./module/actor/sheet/vehicle.js";
+import { ActorSheetSFRPGMech } from "./module/actor/sheet/mech.js";
 import { ActorSheetFlags } from './module/apps/actor-flags.js';
 import { ChoiceDialog } from './module/apps/choice-dialog.js';
 import { DroneRepairDialog } from './module/apps/drone-repair-dialog.js';
@@ -59,6 +60,7 @@ import BaseEnricher from "./module/system/enrichers/base.js";
 import BrowserEnricher from "./module/system/enrichers/browser.js";
 import CheckEnricher from "./module/system/enrichers/check.js";
 import IconEnricher from "./module/system/enrichers/icon.js";
+import PPAbilityEnricher from "./module/system/enrichers/pp-ability.js";
 import TemplateEnricher from "./module/system/enrichers/template.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
@@ -224,6 +226,7 @@ Hooks.once('init', async function() {
         character: models.SFRPGActorCharacter,
         drone: models.SFRPGActorDrone,
         hazard: models.SFRPGActorHazard,
+        mech: models.SFRPGActorMech,
         npc2: models.SFRPGActorNPC,
         starship: models.SFRPGActorStarship,
         vehicle: models.SFRPGActorVehicle
@@ -274,6 +277,14 @@ Hooks.once('init', async function() {
         upgrade: models.SFRPGItemUpgrade,
         vehicleAttack: models.SFRPGItemVehicleAttack,
         vehicleSystem: models.SFRPGItemVehicleSystem,
+        mechFrame: models.SFRPGItemMechFrame,
+        mechWeapon: models.SFRPGItemMechWeapon,
+        mechAuxiliary: models.SFRPGItemMechAuxiliary,
+        mechUpgrade: models.SFRPGItemMechUpgrade,
+        mechPowerCore: models.SFRPGItemMechPowerCore,
+        mechLowerLimb: models.SFRPGItemMechLowerLimb,
+        mechUpperLimb: models.SFRPGItemMechUpperLimb,
+        mechMissionPod: models.SFRPGItemMechMissionPod,
         weapon: models.SFRPGItemWeapon,
         weaponAccessory: models.SFRPGItemWeaponAccessory
     };
@@ -385,6 +396,7 @@ Hooks.once('init', async function() {
     Actors.registerSheet("sfrpg", ActorSheetSFRPGNPC,       { types: ["npc", "npc2"],   makeDefault: true });
     Actors.registerSheet("sfrpg", ActorSheetSFRPGStarship,  { types: ["starship"],      makeDefault: true });
     Actors.registerSheet("sfrpg", ActorSheetSFRPGVehicle,   { types: ["vehicle"],       makeDefault: true });
+    Actors.registerSheet("sfrpg", ActorSheetSFRPGMech,      { types: ["mech"],          makeDefault: true });
 
     Items.unregisterSheet("core", ItemSheet);
     Items.registerSheet("sfrpg", ItemSheetSFRPG, { makeDefault: true });
@@ -393,7 +405,7 @@ Hooks.once('init', async function() {
     preloadHandlebarsTemplates();
 
     console.log("Starfinder | [INIT] Setting up inline buttons");
-    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher(), new TemplateEnricher());
+    CONFIG.TextEditor.enrichers.push(new BrowserEnricher(), new IconEnricher(), new CheckEnricher(), new PPAbilityEnricher(), new TemplateEnricher());
 
     console.log("Starfinder | [INIT] Applying inline icons");
     CONFIG.Actor.typeIcons = {
@@ -403,6 +415,7 @@ Hooks.once('init', async function() {
         drone: "fas fa-robot",
         starship: "fas fa-rocket",
         vehicle: "fas fa-car",
+        mech: "fas fa-shield-halved",
         hazard: "fas fa-skull-crossbones"
     };
 
@@ -444,6 +457,11 @@ Hooks.once('init', async function() {
 
         "vehicleAttack": "fas fa-gun",
         "vehicleSystem": "fas fa-gear",
+
+        "mechFrame": "fas fa-gears",
+        "mechWeapon": "fas fa-crosshairs",
+        "mechAuxiliary": "fas fa-microchip",
+        "mechUpgrade": "fas fa-arrow-up",
 
         "ammunition": "fas fa-box-archive",
         "augmentation": "fas fa-vr-cardboard",
@@ -799,6 +817,20 @@ Hooks.on("renderChatMessageHTML", (app, html, data) => {
         }
 
     }
+
+    const diceRoll = html.querySelector('.dice-roll[data-action="expandRoll"]');
+    if (diceRoll) {
+        diceRoll.addEventListener('click', (e) => {
+            if (e.target.closest('.dice-footer')) {
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                const inlineRoll = e.target.closest('.inline-roll');
+                if (inlineRoll?.dataset?.formula) {
+                    new Roll(inlineRoll.dataset.formula).toMessage();
+                }
+            }
+        }, true);
+    }
 });
 
 Hooks.on("getChatMessageContextOptions", addChatMessageContextOptions);
@@ -813,6 +845,119 @@ Hooks.on("renderAbstractSidebarTab", async (app) => {
                 systemSection.insertAdjacentHTML("afterend", textToAdd);
             }
         }
+    }
+});
+
+Hooks.on("combatStart", async (combat) => {
+    if (!game.users.activeGM?.isSelf) return;
+
+    const mechCombatants = combat.combatants.filter(c => c.actor?.type === "mech");
+    if (mechCombatants.length === 0) return;
+
+    const removedConditions = [];
+
+    for (const combatant of mechCombatants) {
+        const actor = combatant.actor;
+        const pp = actor.system.attributes.pp;
+
+        if (pp.value !== pp.initial) {
+            await actor.update({"system.attributes.pp.value": pp.initial});
+        }
+
+        const conditionNames = [];
+        for (const effect of CONFIG.SFRPG.statusEffects) {
+            if (actor.hasCondition(effect.id)) {
+                conditionNames.push(effect.id);
+            }
+        }
+
+        for (const conditionName of conditionNames) {
+            await actor.setCondition(conditionName, false);
+        }
+
+        if (conditionNames.length > 0) {
+            removedConditions.push({
+                name: actor.name,
+                conditions: conditionNames.map(c => game.i18n.localize(
+                    CONFIG.SFRPG.statusEffects.find(e => e.id === c).name
+                ))
+            });
+        }
+    }
+
+    const gmUsers = game.users.filter(u => u.isGM).map(u => u.id);
+    const lines = [game.i18n.localize("SFRPG.MechSheet.Actions.CombatResetTitle")];
+    for (const combatant of mechCombatants) {
+        const actor = combatant.actor;
+        const pp = actor.system.attributes.pp;
+        lines.push(game.i18n.format("SFRPG.MechSheet.Actions.CombatResetPP", {
+            name: actor.name,
+            value: pp.initial,
+            max: pp.max
+        }));
+    }
+    if (removedConditions.length > 0) {
+        for (const {name, conditions} of removedConditions) {
+            lines.push(game.i18n.format("SFRPG.MechSheet.Actions.CombatResetConditions", {
+                name,
+                conditions: conditions.join(", ")
+            }));
+        }
+    }
+
+    await ChatMessage.create({
+        content: lines.join("<br>"),
+        whisper: gmUsers
+    });
+});
+
+Hooks.on("onAfterUpdateCombat", async (eventData) => {
+    if (!game.users.activeGM?.isSelf) return;
+    if (!eventData.isNewTurn || !eventData.newCombatant) return;
+    if (eventData.direction < 0) return;
+
+    const actor = eventData.newCombatant.actor;
+    if (!actor || actor.type !== "mech") return;
+
+    const whisperTargets = game.users.filter(u => u.isGM || actor.testUserPermission(u, "OWNER")).map(u => u.id);
+    const messages = [];
+
+    const pp = actor.system.attributes.pp;
+    const ppRegen = pp.regen || 0;
+    if (ppRegen > 0 && pp.value < pp.max) {
+        const oldPP = pp.value;
+        const newPP = Math.min(oldPP + ppRegen, pp.max);
+        const gainedPP = newPP - oldPP;
+        await actor.update({"system.attributes.pp.value": newPP});
+        messages.push(game.i18n.format("SFRPG.MechSheet.Actions.PPRegenMessage", {
+            name: actor.name,
+            amount: gainedPP,
+            current: newPP,
+            max: pp.max
+        }));
+    }
+
+    const sp = actor.system.attributes.sp;
+    const tier = actor.system.details.tier || 0;
+    if (tier > 0 && sp.value < sp.max) {
+        const oldSP = sp.value;
+        const newSP = Math.min(oldSP + tier, sp.max);
+        const gainedSP = newSP - oldSP;
+        await actor.update({"system.attributes.sp.value": newSP});
+        messages.push(game.i18n.format("SFRPG.MechSheet.Actions.SPRegenMessage", {
+            name: actor.name,
+            amount: gainedSP,
+            current: newSP,
+            max: sp.max
+        }));
+    }
+
+    if (messages.length > 0) {
+        await ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({actor: actor}),
+            content: messages.join("<br>"),
+            whisper: whisperTargets
+        });
     }
 });
 

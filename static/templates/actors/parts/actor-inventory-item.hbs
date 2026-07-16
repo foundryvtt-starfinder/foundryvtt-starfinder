@@ -6,14 +6,14 @@
                 <div class="item-image {{#if (not bigItem)}}small{{/if}}" style="background-image: url({{item.img}})"></div>
                 <h4>
                     {{#if (and (not (eq item.type "feat")) (or item.config.isStack (getStarfinderBoolean "alwaysShowQuantity")))}}({{item.system.quantity}}) {{/if}}
-                    {{item.name}}
+                    {{item.name}}{{#if item.config.levelLabel}} {{item.config.levelLabel}}{{/if}}
                 </h4>
 
                 {{#if (and isOwner (or item.system.usage.per (or item.config.hasAttack item.config.hasDamage)))}}
                 <div class="item-action {{#if item.parentItem}}flexrow flexnowrap{{else}}flexcol{{/if}}">
                     {{#if (or item.config.hasAttack item.config.hasDamage)}}
                         {{#if item.config.hasAttack}}
-                        <button type="button" class="tag attack" data-tooltip="{{localize "SFRPG.Attack"}}">{{item.config.attackString}}</button>
+                        <button type="button" class="tag attack" data-tooltip="{{#if item.config.attackTooltip}}{{item.config.attackTooltip}}{{else}}{{localize "SFRPG.Attack"}}{{/if}}">{{item.config.attackString}}</button>
                         {{/if}}
                         {{#if (and item.config.hasDamage (not (eq item.type "consumable")))}}
                             {{#if (eq item.system.actionType "heal")}}

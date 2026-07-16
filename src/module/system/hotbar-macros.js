@@ -10,6 +10,10 @@ const createMacroFnLookup = {
 
 Hooks.on("hotbarDrop", (bar, data, slot) => {
     const createMacroFn = data && createMacroFnLookup[data.type];
+    if (bar.locked && createMacroFn) {
+        ui.notifications.warn(game.i18n.localize("SFRPG.Hotbar.LockedWarning"));
+        return false;
+    }
     if (!bar.locked && createMacroFn) {
         createMacroFn(data).then((macro) => {
             game.user.assignHotbarMacro(macro, slot);

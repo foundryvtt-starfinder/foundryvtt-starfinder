@@ -9,7 +9,8 @@ const SFRPGMigrationSchemas = Object.freeze({
     DAMAGE_TYPE_REFACTOR: 0.005,
     DAMAGE_REDUCTION_REFACTOR: 0.006,
     THE_WEBP_UPDATE: 0.008, // We changed all icons from .png to .webp
-    THE_GUNNERY_UPDATE: 0.009 // Since Gunnery is now a selectable skill for NPC starships, migrate an NPC gunner's ranks in Piloting (the previous hacky solution) to their modifier in Gunnery.
+    THE_GUNNERY_UPDATE: 0.009, // Since Gunnery is now a selectable skill for NPC starships, migrate an NPC gunner's ranks in Piloting (the previous hacky solution) to their modifier in Gunnery.
+    MECH_ACTIONS_SYNC: 0.010 // Sync mech component actions from compendium to actor items that were imported before actions were added.
 });
 
 /**
@@ -151,6 +152,8 @@ const migrateActor = async function(actor, schema) {
         _migrateDocumentIconToWebP(actorData, updateData);
     if (schema < SFRPGMigrationSchemas.THE_GUNNERY_UPDATE && actorData.type === 'starship' && actorData.system.crew.useNPCCrew)
         _migrateStarshipGunnerySkill(actorData, updateData);
+    if (schema < SFRPGMigrationSchemas.MECH_ACTIONS_SYNC && actorData.type === 'mech')
+        await _migrateMechComponentActions(actor);
 
     for (const item of actor.items) {
         const itemUpdateData = await migrateItem(item, schema);
@@ -539,6 +542,31 @@ const _migrateStringContentToWebP = function(string) {
     string = string.replace(/(systems\/sfrpg\/[^"]*).png/gi, "$1.webp");
     string = string.replace(/(systems\/sfrpg\/[^"]*).jpg/gi, "$1.webp");
     return string;
+};
+
+// ================== 0.010: Mech Component Actions Sync ==================
+const _migrateMechComponentActions = async function(actor) {
+    const pack = game.packs.get('sfrpg.mech-components');
+    if (!pack) return;
+
+    const compendiumDocs = await pack.getDocuments();
+    const mechComponentTypes = ['mechWeapon', 'mechAuxiliary', 'mechUpperLimb', 'mechLowerLimb'];
+
+    for (const item of actor.items) {
+        if (!mechComponentTypes.includes(item.type)) continue;
+
+        const actorActions = item.system.actions;
+        if (Array.isArray(actorActions) && actorActions.length > 0) continue;
+
+        const compItem = compendiumDocs.find(d => d.name === item.name && d.type === item.type);
+        if (!compItem) continue;
+
+        const compActions = compItem.system.actions;
+        if (!Array.isArray(compActions) || compActions.length === 0) continue;
+
+        console.log(`Starfinder | Syncing actions for ${item.name} from compendium`);
+        await item.update({ 'system.actions': compActions });
+    }
 };
 
 // ================== 0.009: Starship Gunnery Conversion ==================

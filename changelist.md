@@ -1,3 +1,49 @@
+# Version 14.1.0 - Mech Support + Upstream Sync
+This update merges mech support from the Tech Revolution supplement with upstream Foundry VTT v14 compatibility.
+
+## New Features
+- New Mech actor type with tier-based stat progression, Power Points tracking, and a dedicated actor sheet
+- Eight new mech item types: Frame, Power Core, Upper Limb, Lower Limb, Weapon, Auxiliary System, Upgrade, and Mission Pod
+- Drag-and-drop operator assignment with frame-based min/max limits
+- Automatic stat calculation from equipped components with tooltip breakdowns
+- Weapon slot mounting system across frame, upper limb, and lower limb slots
+- Mission pod activation/deactivation with dynamic item and stat modifications
+- New Mech Components compendium with 108 items from Tech Revolution and Mechageddon!
+- Mech Actions tab with weapon attacks, PP actions, special actions, and gear actions
+- Mech initiative calculation and attribute tooltips
+- Mech upgrade bonus calculations and AC adjustments
+- Mech power points and conditions are automatically reset when combat starts
+- Mech shield point regeneration at start of each turn during combat
+- Mech weapon slot system with validSlots and slotsUsed fields for multi-slot weapons
+- Critical hit effect field on mech weapons with rollable dice display in chat
+- Auto-calculate Mech Point (MP) total from all component mpCost values multiplied by tier
+- MP displayed as used/max in a styled box in the mech sheet header with tooltip breakdown per component
+- MP max calculated from Tech Revolution Table 4-2: (tier + 1) × 15
+- Auxiliary systems section header shows current/max count with add button hidden at capacity
+- Save DC pills shown on actions tab for mech abilities and weapons that require saving throws
+- Clickable PP ability buttons for mech components
+- Migration to automatically sync mech component actions from compendium data
+
+## Bugfixes
+- Precision Arms now requires choosing +1 melee OR +1 ranged bonus, not both
+- Fix mech item sheets failing to render due to missing mech-actions.hbs partial registration
+- Fix Adamantine Claws mech weapon damage type from bludgeoning to slashing
+- Fix Adamantine Claws and Thundergauntlet compendium icons
+- Fix mission pod item sheet statMods values and type label
+- Fix critical hit effect display and dice-footer click behavior
+- Skip mech PP/SP regen when navigating backward in combat tracker
+
+## Core System Improvements
+- Mech Points (MP) currency field added to character sheets
+- Hotbar macro support for mech weapon actions
+- Item collection sheets updated to support mech item types
+- Power Points automatically regenerate each turn during mech combat
+
+## Compendium Updates
+- Add Gyroidal Drill Bit mech weapon with critical hit effect
+- Add Mechageddon weapon slot data to all mech weapons
+- Fix power core mpCost values: mk 1-4 dynamo and eternal cores now correctly set to their mk rating (were all 0)
+
 # Version 14.0.2
 Fixes conditions not showing up on tokens and adds hotbar dragging macros for actor resource adjustment.
 
