@@ -13,6 +13,7 @@ This update merges mech support from the Tech Revolution supplement with upstrea
 - Mech initiative calculation and attribute tooltips
 - Mech upgrade bonus calculations and AC adjustments
 - Mech power points and conditions are automatically reset when combat starts
+- A GM-only whispered chat message summarizes which conditions were removed from each mech at combat start
 - Mech shield point regeneration at start of each turn during combat
 - Mech weapon slot system with validSlots and slotsUsed fields for multi-slot weapons
 - Critical hit effect field on mech weapons with rollable dice display in chat
@@ -32,6 +33,7 @@ This update merges mech support from the Tech Revolution supplement with upstrea
 - Fix mission pod item sheet statMods values and type label
 - Fix critical hit effect display and dice-footer click behavior
 - Skip mech PP/SP regen when navigating backward in combat tracker
+- Add ownership check before setting compendium flags
 
 ## Core System Improvements
 - Mech Points (MP) currency field added to character sheets
