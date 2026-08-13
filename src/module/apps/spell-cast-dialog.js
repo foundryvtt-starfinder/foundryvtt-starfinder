@@ -139,7 +139,7 @@ export class SpellCastDialog extends Dialog {
         });
 
         // Create the Dialog and return as a Promise
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             const dlg = new this(actor, item, {
                 title: game.i18n.format("SFRPG.SpellCasting.Title", {spellName: item.name}),
                 content: html,

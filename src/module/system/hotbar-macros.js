@@ -52,12 +52,13 @@ async function createItemMacro(data) {
         let macroType = data.macroType || "chatCard";
         if (macroType.includes("feat")) macroType = "activate";
         if (item.type === "spell") macroType = "cast";
+        if (item.type === "actorResource") macroType = "adjustResource";
 
         macro = await findElseCreateMacro({
             name: item.name + (macroType !== "chatCard" ? ` (${game.i18n.localize(`SFRPG.ItemMacro.${macroType.capitalize()}`)})` : ""),
             type: "script",
             img: item.img,
-            command: `game.sfrpg.rollItemMacro("${item.uuid}", "${macroType}");`,
+            command: `game.sfrpg.rollItemMacro("${item.uuid}", "${macroType}", event);`,
             flags: {
                 sfrpg: {
                     actor: item.actor.uuid,
@@ -74,7 +75,7 @@ async function createItemMacro(data) {
     return macro;
 }
 
-export function rollItemMacro(itemUuid, macroType) {
+export function rollItemMacro(itemUuid, macroType, event = null) {
     let item = fromUuidSync(itemUuid);
     if (!item) {
         // For backward compatibility's sake, fallback to the old method of searching by name.
@@ -91,6 +92,7 @@ export function rollItemMacro(itemUuid, macroType) {
             }
         }
     }
+    const ctrlKey = event?.ctrlKey;
 
     if (!item) {
         return ui.notifications.error(game.i18n.localize("SFRPG.Macro.ErrorMissingItem"));
@@ -108,6 +110,8 @@ export function rollItemMacro(itemUuid, macroType) {
             return item.useSpell();
         case "use":
             return item.useItem({ event });
+        case "adjustResource":
+            return item.system.adjustResourceValue(ctrlKey ? -1 : 1);
         default:
             return item.roll();
     }

@@ -35,28 +35,20 @@ import { } from "./crew-update.js";
 export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
 
     constructor(data, context) {
-        // Set module art if available. This applies art to actors viewed or created from compendiums.
-        if (context.pack && data._id) {
-            const art = game.sfrpg.compendiumArt.map.get(`Compendium.${context.pack}.${data._id}`);
-            if (art) {
-                data.img = art.actor;
-                const tokenArt = typeof art.token === "string"
-                    ? { texture: { src: art.token } }
-                    : {
-                        texture: {
-                            src: art.token.img,
-                            scaleX: art.token.scale,
-                            scaleY: art.token.scale
-                        }
-                    };
-                data.prototypeToken = foundry.utils.mergeObject(data.prototypeToken ?? {}, tokenArt);
-            }
-        }
         super(data, context);
-        // console.log(`Constructor for actor named ${data.name} of type ${data.type}`);
+    }
+
+    // appliedEffects effects can be displayed on the token, so hijack it and include shown effects
+    get appliedEffects() {
+        const fromEffects = this.items
+            .filter((e) => e.type === "effect" && e.system.showOnToken && e.system.enabled)
+            .map((e) => new TokenEffect(e));
+
+        return [...super.appliedEffects, ...fromEffects];
     }
 
     // Temporary effects are displayed on the token, so hijack it and include effects
+    // This is no longer called in Foundry V14 but the code is still present so we'll keep it here for now in case they call it again.
     get temporaryEffects() {
         const fromEffects = this.items
             .filter((e) => e.type === "effect" && e.system.showOnToken && e.system.enabled)
@@ -955,7 +947,7 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
             speaker: ChatMessage.getSpeaker({ actor: speakerActor }),
             content: rollContent,
             rolls: [rollResult.roll],
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
         }, { rollMode: rollMode});
     }
@@ -985,6 +977,13 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     }
 
     _onTurnEnd() {
+        // A damage level override is declared against a specific hit, so an armed one that was
+        // never rolled expires here. The PP stays spent - use the sheet's disarm control to get
+        // it back before the turn ends.
+        if (this.type === "mech" && this.getFlag("sfrpg", "damageLevelOverride")) {
+            this.unsetFlag("sfrpg", "damageLevelOverride");
+        }
+
         for (const item of this.items) {
             item._onTurnEnd?.();
         }

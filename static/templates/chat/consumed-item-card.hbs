@@ -5,11 +5,11 @@
     </header>
 
     <div class="card-content">
-        {{#if (or system.description.value system.description.short)}}
-            {{#if system.description.short}}
-                {{{system.description.short}}}
+        {{#if (or system.description.enrichedValue system.description.enrichedShort)}}
+            {{#if system.description.enrichedShort}}
+                {{{system.description.enrichedShort}}}
             {{else}}
-                {{{system.description.value}}}
+                {{{system.description.enrichedValue}}}
             {{/if}}
         {{/if}}
     </div>

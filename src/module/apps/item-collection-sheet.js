@@ -197,7 +197,7 @@ export class ItemCollectionSheet extends DocumentSheet {
             const summary = li.children('.item-summary');
             summary.slideUp(200, () => summary.remove());
         } else {
-            const div = $(`<div class="item-summary">${chatData.system.description.value}</div>`);
+            const div = $(`<div class="item-summary">${chatData.system.description.enrichedValue}</div>`);
             Hooks.callAll("renderItemSummary", this, div, {}); // Event listeners need to be added to newly added HTML.
             const props = $(`<div class="item-properties"></div>`);
             chatData.chatProperties.forEach(p => props.append(`<span class="tag" ${ p.tooltip ? ("data-tooltip='" + p.tooltip + "'") : ""}>${p.name}</span>`));
@@ -288,7 +288,7 @@ export class ItemCollectionSheet extends DocumentSheet {
         htmlOptions.rollData ||= (this.actor.getRollData() ?? {});
 
         // Rich text description
-        data.system.description.value = await foundry.applications.ux.TextEditor.enrichHTML(data.system.description.value, htmlOptions);
+        data.system.description.enrichedValue = await foundry.applications.ux.TextEditor.enrichHTML(data.system.description.value, htmlOptions);
 
         // Item type specific properties
         const props = [];

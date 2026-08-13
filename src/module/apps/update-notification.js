@@ -10,6 +10,11 @@ const updateNotifications = {
         version: "0.30.1",
         userType: "all",
         message: "To facilitate better communication between the system developers and users, we have added this notification system, starting in Version 0.30.1, which will display upon installing a new system version with significant changes to be aware of. If an update is minor, you may not see one of these messages.<br>As they will only show up upon installing a new system version and we don't have the ability to wait for localization for all languages before releasing system updates, these messages will unfortunately only be in English (apologies to international users!)."
+    },
+    0.002: {
+        version: "14.0.0",
+        userType: "gm",
+        message: "Starfinder 1e has been updated to work with Foundry VTT version 14!<br>As part of this update, Starfinder 1e's compendium art mapping functionality has been removed in favor of Foundry's native functionality. To convert your old art map to the new format recognized by Foundry, a macro is included in the <i>Macros</i> compendium. You will need to use the macro and follow the additional instructions in the macro file's comments."
     }
 };
 

@@ -227,6 +227,14 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                 reflex: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.ReflexSave"}),
                 will: new fields.SchemaField(SFRPGActorBase._saveFieldData(), {label: "SFRPG.WillSave"})
             });
+            foundry.utils.mergeObject(schema.attributes.fields, {
+                spellcasting: new fields.StringField({
+                    initial: "",
+                    blank: true,
+                    choices: ["", ...Object.keys(CONFIG.SFRPG.abilities)],
+                    required: false
+                })
+            });
         }
         return schema;
     }
@@ -250,7 +258,7 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
 
         const schema = {
             useNPCCrew: new fields.BooleanField({
-                initial: true,
+                initial: type !== "mech",
                 required: true
             })
         };

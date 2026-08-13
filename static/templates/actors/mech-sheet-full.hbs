@@ -497,6 +497,17 @@
                 {{/if}}
             </ol>
 
+            {{!-- Armed damage level override --}}
+            {{#if actionsTab.armedOverride}}
+            <div class="mech-override-banner">
+                <i class="fas fa-bolt"></i>
+                <span class="mech-override-label">{{actionsTab.armedOverride.label}}</span>
+                {{#if isOwner}}
+                <button type="button" class="tag mech-override-cancel">{{ localize "SFRPG.MechSheet.DamageLevelOverride.Cancel" }}</button>
+                {{/if}}
+            </div>
+            {{/if}}
+
             {{!-- PP Actions --}}
             <ol class="mech-action-list">
                 <li class="mech-action-header flexrow">

@@ -1,21 +1,29 @@
-# Version 0.32.0
+# Version 14.1.0 - Mech Support + Upstream Sync
+This update merges mech support from the Tech Revolution supplement with upstream Foundry VTT v14 compatibility.
 
 ## New Features
-- Mech power points and conditions are automatically reset when combat starts
-- A GM-only whispered chat message summarizes which conditions were removed from each mech at combat start
+- New Mech actor type with tier-based stat progression, Power Points tracking, and a dedicated actor sheet
+- Eight new mech item types: Frame, Power Core, Upper Limb, Lower Limb, Weapon, Auxiliary System, Upgrade, and Mission Pod
+- Drag-and-drop operator assignment with frame-based min/max limits
+- Automatic stat calculation from equipped components with tooltip breakdowns
+- Weapon slot mounting system across frame, upper limb, and lower limb slots
+- Mission pod activation/deactivation with dynamic item and stat modifications
+- New Mech Components compendium with 108 items from Tech Revolution and Mechageddon!
 - Mech Actions tab with weapon attacks, PP actions, special actions, and gear actions
 - Mech initiative calculation and attribute tooltips
 - Mech upgrade bonus calculations and AC adjustments
+- Mech power points and conditions are automatically reset when combat starts
+- A GM-only whispered chat message summarizes which conditions were removed from each mech at combat start
 - Mech shield point regeneration at start of each turn during combat
-- Mech weapon slot system with validSlots and slotsUsed fields for multi-slot weapons (e.g. Scythe uses 2 upper limb slots)
+- Mech weapon slot system with validSlots and slotsUsed fields for multi-slot weapons
 - Critical hit effect field on mech weapons with rollable dice display in chat
-- Migration to automatically sync mech component actions from compendium data
-- Clickable PP ability buttons for mech components
 - Auto-calculate Mech Point (MP) total from all component mpCost values multiplied by tier
 - MP displayed as used/max in a styled box in the mech sheet header with tooltip breakdown per component
 - MP max calculated from Tech Revolution Table 4-2: (tier + 1) × 15
 - Auxiliary systems section header shows current/max count with add button hidden at capacity
 - Save DC pills shown on actions tab for mech abilities and weapons that require saving throws
+- Clickable PP ability buttons for mech components
+- Migration to automatically sync mech component actions from compendium data
 
 ## Bugfixes
 - Precision Arms now requires choosing +1 melee OR +1 ranged bonus, not both
@@ -28,7 +36,9 @@
 - Add ownership check before setting compendium flags
 
 ## Core System Improvements
-- Manifest and download URLs updated to point to development branch
+- Mech Points (MP) currency field added to character sheets
+- Hotbar macro support for mech weapon actions
+- Item collection sheets updated to support mech item types
 - Power Points automatically regenerate each turn during mech combat
 
 ## Compendium Updates
@@ -36,22 +46,39 @@
 - Add Mechageddon weapon slot data to all mech weapons
 - Fix power core mpCost values: mk 1-4 dynamo and eternal cores now correctly set to their mk rating (were all 0)
 
-# Version 0.31.0 - Mech Support
-This update adds mech support from the Starfinder Tech Revolution supplement.
+# Version 14.0.2
+Fixes conditions not showing up on tokens and adds hotbar dragging macros for actor resource adjustment.
 
-## New Features
-- New Mech actor type with tier-based stat progression, Power Points tracking, and a dedicated actor sheet
-- Eight new mech item types: Frame, Power Core, Upper Limb, Lower Limb, Weapon, Auxiliary System, Upgrade, and Mission Pod
-- Drag-and-drop operator assignment with frame-based min/max limits
-- Automatic stat calculation from equipped components with tooltip breakdowns
-- Weapon slot mounting system across frame, upper limb, and lower limb slots
-- Mission pod activation/deactivation with dynamic item and stat modifications
-- New Mech Components compendium with 108 items from Tech Revolution and Mechageddon!
+## Bugfixes
+- Re-enable showing of condition icons overtop of tokens by @danimrath
 
 ## Core System Improvements
-- Mech Points (MP) currency field added to character sheets
-- Hotbar macro support for mech weapon actions
-- Item collection sheets updated to support mech item types
+- Actor Resources can now be dragged to a hotbar to allow for quick adjustment up or down with a Click/Ctrl+Click by @ian612
+
+# Version 14.0.1
+Addresses a couple of bugs that popped up in the v14 transition.
+
+## Bugfixes
+- Allow CRs with fractional values (and fix compendium actor errors)
+- Fix trait selector apps (languages, weapon properties, etc.)
+- Patch Foundry core bug not allowing players to create items
+
+# Version 14.0.0
+This update adds support for Foundry VTT Version 14, while addressing a couple of other small bugs.
+
+## Breaking Changes
+- Starfinder's Compendium Art Mapping functionality has been removed in favor of Foundry's native compendium art map support.
+- Enriched description html for chat cards is now located at `description.enrichedShort` and `description.enrichedValue` instead of `description.short` and `description.value`, respectively
+
+## Core System Improvements
+- Added support for Foundry v14
+- Documentation updated for version 14 development dependencies and install versions
+- Drones can now have their owner set by dragging and dropping an actor onto the drone sheet
+
+## Bugfixes
+- Document expanded fields on sheets now stay open when combat state or turn is updated
+- The Spellcasting Ability field at the top of the spellbook page for characters and drones now works correctly
+- Inline links' and enrichers' dynamic formulas no longer break once sent to chat
 
 # Version 0.30.1
 This update contains a few small fixes that fix a couple of bugs with the new targeting system and chat cards, as well as introduces a method for us (the developers) to make announcements about new features and fixes to users.

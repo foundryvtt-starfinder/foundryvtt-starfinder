@@ -5,6 +5,7 @@ import SFRPGModifier from "../modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../modifiers/types.js";
 import RollContext from "../rolls/rollcontext.js";
 import StackModifiers from "../rules/closures/stack-modifiers.js";
+import { applyPerDieBonus, resolveDamageLevel } from "../rules/mech-damage-level.js";
 import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
@@ -16,17 +17,6 @@ import { ItemChatMixin } from "./mixins/item-chat.js";
 
 /** @extends {foundry.documents.Item} */
 export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMixin, ItemCapacityMixin, ItemChatMixin) {
-
-    constructor(data, context = {}) {
-        // Set module art if available. This applies art to items viewed or created from compendiums.
-        if (context.pack && data._id) {
-            const art = game.sfrpg.compendiumArt.map.get(`Compendium.${context.pack}.${data._id}`);
-            if (art) {
-                data.img = art.item;
-            }
-        }
-        super(data, context);
-    }
 
     /* -------------------------------------------- */
     /*  Item Properties                             */
@@ -129,7 +119,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     /* -------------------------------------------- */
-    /*	Data Preparation                             */
+    /*	Data Preparation                            */
     /* -------------------------------------------- */
 
     /**
@@ -425,10 +415,10 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
                     }
                 }
 
-                if (templateData.system.description.short) {
-                    templateData.system.description.short = descriptionText;
+                if (templateData.system.description.enrichedShort) {
+                    templateData.system.description.enrichedShort = descriptionText;
                 } else {
-                    templateData.system.description.value = descriptionText;
+                    templateData.system.description.enrichedValue = descriptionText;
                 }
             }
         }
@@ -480,12 +470,12 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const rollData = RollContext.createItemRollContext(this, this.actor).getRollData();
 
         // Rich text description
-        if (data.description.short) data.description.short = await foundry.applications.ux.TextEditor.enrichHTML(data.description.short, {
+        if (data.description.short) data.description.enrichedShort = await foundry.applications.ux.TextEditor.enrichHTML(data.description.short, {
             async,
             secrets,
             rollData
         });
-        data.description.value = await foundry.applications.ux.TextEditor.enrichHTML(data.description.value, {
+        data.description.enrichedValue = await foundry.applications.ux.TextEditor.enrichHTML(data.description.value, {
             async,
             secrets,
             rollData
@@ -1317,6 +1307,20 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             part.isDamageSection = true;
         }
 
+        // An armed damage level override (e.g. Devastating Hit) replaces the dice term with the
+        // row the boosted level points at. Only the dice are swapped - the mech damage modifier
+        // below is applied afterwards either way, so it can't be dropped or counted twice.
+        const tags = [];
+        const override = this.actor.getFlag("sfrpg", "damageLevelOverride");
+        let overrideApplied = false;
+        if (override && parts.length > 0) {
+            const boosted = this._applyDamageLevelOverride(parts[0], override);
+            if (boosted) {
+                tags.push({ tag: "damage-level-override", text: boosted.tagText });
+                overrideApplied = true;
+            }
+        }
+
         // Add mech damage modifier (tier + strength for melee, tier for ranged)
         // Added directly to the first damage part's formula so the roll parser handles it correctly
         const damageModValue = this.actor.system.attributes?.damageModifier?.[damageModKey] || 0;
@@ -1345,6 +1349,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             title: title,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             chatMessage: options.chatMessage ?? true,
+            tags: tags,
             dialogOptions: {
                 skipUI: options.skipUI,
                 width: 400,
@@ -1353,10 +1358,49 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             },
             onClose: (roll, formula, finalFormula, isCritical) => {
                 if (roll) {
+                    // Only spend the override once a roll actually resolved - cancelling the
+                    // damage dialog leaves it armed rather than eating the PP.
+                    if (overrideApplied) this.actor.unsetFlag("sfrpg", "damageLevelOverride");
+
                     Hooks.callAll("damageRolled", {actor: this.actor, item: this, roll: roll, isCritical: isCritical, formula: {base: formula, final: finalFormula}, rollMetadata: options?.rollMetadata});
                 }
             }
         });
+    }
+
+    /**
+     * Rewrite a mech weapon's dice term for an armed damage level override.
+     *
+     * The weapon's own level is looked up in the same damage table the rules engine uses, so a
+     * boosted roll reads straight off Tech Revolution Table 4-5 rather than trying to scale the
+     * existing formula. Mutates the passed damage part.
+     *
+     * @param {Object} part The first damage part, whose formula carries the weapon's dice.
+     * @param {{steps?: number, level?: string, source?: string}} override The armed override.
+     * @returns {{tagText: string}|null} Text for the chat card tag, or null if the override could not be applied.
+     */
+    _applyDamageLevelOverride(part, override) {
+        // Mirrors how calculate-mech-components.js resolves these, so a boosted roll lands on the
+        // same table row the sheet already shows for the weapon.
+        const baseLevel = this.system.damageLevel || "medium";
+        const tier = Math.max(1, Math.min(20, this.actor.system.details?.tier || 1));
+        const weaponLevel = this.system.levelOverride || tier;
+
+        const damageTable = CONFIG.SFRPG.mechWeaponDamageByTier[weaponLevel];
+        if (!damageTable) return null;
+
+        const { level, bonusPerDie } = resolveDamageLevel(baseLevel, override);
+        const boostedFormula = damageTable[level];
+        if (!boostedFormula) return null;
+
+        part.formula = applyPerDieBonus(boostedFormula, bonusPerDie);
+
+        return {
+            tagText: game.i18n.format("SFRPG.MechSheet.DamageLevelOverride.Tag", {
+                source: override.source ? game.i18n.localize(override.source) : "",
+                level: game.i18n.localize(CONFIG.SFRPG.mechWeaponDamageLevels[level])
+            })
+        };
     }
 
     /**
@@ -1837,7 +1881,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             chatMessage: options.chatMessage,
             content: content,
             rolls: [rollResult.roll],
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             sound: CONFIG.sounds.dice
         });
     }
@@ -1904,7 +1948,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             renderPromise.then((html) => {
                 // Create the chat message
                 const chatData = {
-                    type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+                    style: CONST.CHAT_MESSAGE_STYLES.OTHER,
                     speaker: token ? ChatMessage.getSpeaker({token: token}) : ChatMessage.getSpeaker({actor: this.actor}),
                     content: html
                 };
@@ -1942,7 +1986,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const rollMode = game.settings.get("core", "rollMode");
         const chatData = {
             author: game.user.id,
-            type: CONST.CHAT_MESSAGE_STYLES.OTHER,
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER,
             flavor: `${this.name} recharge check - ${success ? "success!" : "failure!"}`,
             whisper: (["gmroll", "blindroll"].includes(rollMode)) ? ChatMessage.getWhisperRecipients("GM") : null,
             blind: rollMode === "blindroll",

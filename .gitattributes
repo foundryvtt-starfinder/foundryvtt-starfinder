@@ -1,0 +1,14 @@
+# The cook/unpack round trip rewrites source JSON with LF endings. With
+# core.autocrlf=true and no rule here, git checks those files out as CRLF, so
+# every `npm run cook` leaves thousands of files marked modified with no content
+# change at all. Pinning them to LF makes the working copy match what unpack
+# writes, so only real edits show up in git status.
+src/items/**/*.json text eol=lf
+src/**/*.json       text eol=lf
+static/lang/*.json  text eol=lf
+
+# LevelDB compendium packs are binary. They are gitignored today, but if one is
+# ever added, line ending conversion would corrupt it.
+packs/**            binary
+dist/packs/**       binary
+*.ldb               binary

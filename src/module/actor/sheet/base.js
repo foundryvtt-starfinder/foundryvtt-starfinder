@@ -445,7 +445,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
      */
     async _prepareItemSummary(item) {
         const chatData = await item.getChatData();
-        const desiredDescription = chatData.description.short || chatData.description.value;
+        const desiredDescription = chatData.description.enrichedShort || chatData.description.enrichedValue;
         const div = $(`<div class="item-summary">${desiredDescription}</div>`);
         const props = $(`<div class="item-properties"></div>`);
         chatData.chatProperties.forEach(p => {
@@ -778,7 +778,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
         let options = null;
         if (this.actor.system.options) {
-            options = duplicate(this.actor.system.options);
+            options = foundry.utils.duplicate(this.actor.system.options);
         }
         if (!options) {
             options = new Map();
@@ -1368,7 +1368,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
     async _onDrop(event) {
         event.preventDefault();
 
-        const parsedDragData = TextEditor.getDragEventData(event);
+        const parsedDragData = foundry.applications.ux.TextEditor.getDragEventData(event);
         if (Hooks.call('dropActorSheetData', this.actor, this, parsedDragData) === false) {
             // Further processing halted
         } else if (parsedDragData.type === 'Item' || parsedDragData.type === 'ItemCollection') {

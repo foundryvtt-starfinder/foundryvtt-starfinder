@@ -5,17 +5,31 @@
   "folder": "vj3kvHdvf2DlBF6O",
   "img": "systems/sfrpg/icons/equipment/technological items/medkit-advanced.webp",
   "system": {
-    "canBeActivated": false,
+    "actions": [
+      {
+        "name": "Reconstruction",
+        "actionType": "standard",
+        "description": "As a standard action, the mech repairs its hull, healing an amount of Hit Points equal to 1d6 × the mech's tier. Once a mech has been repaired in this way, it can't benefit from this ability again for 24 hours.",
+        "ppCost": 3
+      },
+      {
+        "name": "Builder Swarm",
+        "actionType": "standard",
+        "description": "As a standard action, the mech repairs the hull of a mech within 100 feet, healing an amount of Hit Points equal to 1d6 × the mech's tier. Once a mech has been repaired, it can't benefit from this ability again for 24 hours.",
+        "ppCost": 4
+      }
+    ],
+    "canBeActivated": true,
     "description": {
       "chat": "",
       "gmnotes": "",
       "short": "",
       "unidentified": "",
-      "value": "<p>Magical nanites constantly repair the mech's hull.</p>\n<p><strong>Effect:</strong> The mech gains fast healing or regeneration capabilities.</p>"
+      "value": "<p>Magical nanites repair a mech's hull.</p>\n<p>@PPAbility[cost:3]{Reconstruction} Repair this mech's hull, healing 1d6 × the mech's tier Hit Points. A mech can't benefit from this again for 24 hours.</p>\n<p>@PPAbility[cost:4]{Builder Swarm} Repair the hull of a mech within 100 feet, healing 1d6 × the mech's tier Hit Points. A mech can't benefit from this again for 24 hours.</p>"
     },
     "isActive": false,
-    "mpCost": 2,
-    "ppCost": 0,
-    "source": "Mechageddon!"
+    "mpCost": 0,
+    "ppCost": 4,
+    "source": "Mechageddon! pg. 153"
   }
 }
