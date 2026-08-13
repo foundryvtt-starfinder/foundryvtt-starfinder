@@ -583,7 +583,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
             user: game.user.id,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
             content: html,
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER
+            style: CONST.CHAT_MESSAGE_STYLES.OTHER
         });
     }
 
