@@ -977,6 +977,13 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     }
 
     _onTurnEnd() {
+        // A damage level override is declared against a specific hit, so an armed one that was
+        // never rolled expires here. The PP stays spent - use the sheet's disarm control to get
+        // it back before the turn ends.
+        if (this.type === "mech" && this.getFlag("sfrpg", "damageLevelOverride")) {
+            this.unsetFlag("sfrpg", "damageLevelOverride");
+        }
+
         for (const item of this.items) {
             item._onTurnEnd?.();
         }

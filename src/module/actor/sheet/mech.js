@@ -359,6 +359,17 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         }
         actionsTab.gearActions.sort((a, b) => a.displayName.localeCompare(b.displayName));
 
+        // An armed damage level override shows a banner with a disarm control, so a mis-click
+        // can be undone before the PP is committed to a roll.
+        const override = this.actor.getFlag("sfrpg", "damageLevelOverride");
+        actionsTab.armedOverride = override
+            ? {
+                source: override.source,
+                ppSpent: override.ppSpent || 0,
+                label: game.i18n.format("SFRPG.MechSheet.DamageLevelOverride.Armed", { source: override.source })
+            }
+            : null;
+
         data.actionsTab = actionsTab;
 
         // Mission pods data - sort alphabetically
@@ -417,6 +428,9 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         html.find('.mech-pp-action').click(event => this._onMechAction(event, "pp"));
         html.find('.mech-special-action').click(event => this._onMechAction(event, "special"));
         html.find('.mech-gear-action').click(event => this._onMechAction(event, "gear"));
+
+        // Cancel an armed damage level override
+        html.find('.mech-override-cancel').click(event => this._onCancelOverride(event));
 
         // Mech weapon action button dragging (for creating hotbar macros)
         const attackButtons = html[0].querySelectorAll('button.attack, button.damage');
@@ -480,13 +494,13 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         const el = event.currentTarget;
         const actionIndex = parseInt(el.dataset.actionIndex);
 
-        let name, description, ppCost, actionType, gearName, img;
+        let name, description, ppCost, actionType, gearName, img, armsOverride;
         img = this.actor.img;
 
         if (actionCategory === "pp") {
             const ppActions = [
                 { name: "SFRPG.MechSheet.Actions.PP.Aim.Name", desc: "SFRPG.MechSheet.Actions.PP.Aim.Description", ppCost: 1 },
-                { name: "SFRPG.MechSheet.Actions.PP.DevastatingHit.Name", desc: "SFRPG.MechSheet.Actions.PP.DevastatingHit.Description", ppCost: 3 },
+                { name: "SFRPG.MechSheet.Actions.PP.DevastatingHit.Name", desc: "SFRPG.MechSheet.Actions.PP.DevastatingHit.Description", ppCost: 3, armsOverride: { steps: 1 } },
                 { name: "SFRPG.MechSheet.Actions.PP.Maneuver.Name", desc: "SFRPG.MechSheet.Actions.PP.Maneuver.Description", ppCost: 1 },
                 { name: "SFRPG.MechSheet.Actions.PP.Replenish.Name", desc: "SFRPG.MechSheet.Actions.PP.Replenish.Description", ppCost: 2 },
                 { name: "SFRPG.MechSheet.Actions.PP.Resist.Name", desc: "SFRPG.MechSheet.Actions.PP.Resist.Description", ppCost: 1 }
@@ -495,6 +509,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
             name = game.i18n.localize(action.name);
             description = game.i18n.localize(action.desc);
             ppCost = action.ppCost;
+            armsOverride = action.armsOverride;
         } else if (actionCategory === "special") {
             const specialActions = [
                 { name: "SFRPG.MechSheet.Actions.Special.CalledShot.Name", desc: "SFRPG.MechSheet.Actions.Special.CalledShot.Description", actionType: "standard" },
@@ -538,6 +553,16 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
             await this.actor.update({ "system.attributes.pp.value": currentPP - ppCost });
         }
 
+        // Actions like Devastating Hit are declared before damage is rolled, so they arm an
+        // override that the next mech damage roll consumes.
+        if (armsOverride) {
+            await this.actor.setFlag("sfrpg", "damageLevelOverride", {
+                ...armsOverride,
+                source: name,
+                ppSpent: ppCost || 0
+            });
+        }
+
         const ppSpent = (ppCost !== null && ppCost !== undefined && ppCost > 0)
             ? game.i18n.format("SFRPG.MechSheet.Actions.PPSpent", { amount: ppCost })
             : null;
@@ -560,6 +585,32 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
             content: html,
             type: CONST.CHAT_MESSAGE_TYPES.OTHER
         });
+    }
+
+    /**
+     * Handle cancelling a damage level override that has not been rolled yet, refunding its PP.
+     * @param {Event} event The click event
+     */
+    async _onCancelOverride(event) {
+        event.preventDefault();
+
+        const override = this.actor.getFlag("sfrpg", "damageLevelOverride");
+        if (!override) return;
+
+        await this.actor.unsetFlag("sfrpg", "damageLevelOverride");
+
+        const refund = override.ppSpent || 0;
+        if (refund > 0) {
+            const pp = this.actor.system.attributes.pp;
+            await this.actor.update({
+                "system.attributes.pp.value": Math.min(pp.value + refund, pp.max)
+            });
+        }
+
+        ui.notifications.info(game.i18n.format("SFRPG.MechSheet.DamageLevelOverride.Cancelled", {
+            source: override.source,
+            amount: refund
+        }));
     }
 
     /**
