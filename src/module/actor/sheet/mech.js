@@ -508,65 +508,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
      */
     async _onMissionPodActivate(event) {
         event.preventDefault();
-        const li = $(event.currentTarget).parents(".item");
-        const podId = li.data("item-id");
-        const pod = this.actor.items.get(podId);
-
-        if (!pod) return;
-
-        // Check if another pod is already active
-        const activePod = this.actor.items.find(i => i.type === "mechMissionPod" && i.system.isActive);
-        if (activePod) {
-            ui.notifications.warn(game.i18n.localize("SFRPG.MechSheet.MissionPod.OnlyOne"));
-            return;
-        }
-
-        // Confirm activation
-        const confirmed = await Dialog.confirm({
-            title: game.i18n.localize("SFRPG.MechSheet.MissionPod.ActivateConfirmTitle"),
-            content: `<p>${game.i18n.format("SFRPG.MechSheet.MissionPod.ActivateConfirmPrompt", { pod: pod.name })}</p>`,
-            yes: () => true,
-            no: () => false,
-            defaultYes: false
-        });
-
-        if (!confirmed) return;
-
-        // Create items from pod's item templates
-        const itemTemplates = pod.system.itemTemplates || [];
-        const createdItemIds = [];
-
-        if (itemTemplates.length > 0) {
-            // Prepare item data from templates
-            const itemsToCreate = itemTemplates.map(template => {
-                const itemData = foundry.utils.deepClone(template);
-                // Remove _id so Foundry generates a new one
-                delete itemData._id;
-                // Mark as from mission pod
-                itemData.flags = itemData.flags || {};
-                itemData.flags.sfrpg = itemData.flags.sfrpg || {};
-                itemData.flags.sfrpg.fromMissionPod = pod.id;
-                return itemData;
-            });
-
-            // Create the items on the actor
-            const createdItems = await this.actor.createEmbeddedDocuments("Item", itemsToCreate);
-            for (const item of createdItems) {
-                createdItemIds.push(item.id);
-            }
-        }
-
-        // Activate the pod and store created item IDs
-        await pod.update({
-            "system.isActive": true,
-            "system.createdItemIds": createdItemIds
-        });
-
-        // Force actor data re-preparation and sheet re-render
-        this.actor.prepareData();
-        this.render(false);
-
-        ui.notifications.info(`${pod.name} activated.`);
+        return this._onMissionPodToggle(event, true);
     }
 
     /**
@@ -575,44 +517,17 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
      */
     async _onMissionPodDeactivate(event) {
         event.preventDefault();
+        return this._onMissionPodToggle(event, false);
+    }
+
+    /**
+     * @param {Event} event The click event
+     * @param {boolean} active True to activate the pod, false to deactivate it
+     */
+    async _onMissionPodToggle(event, active) {
         const li = $(event.currentTarget).parents(".item");
-        const podId = li.data("item-id");
-        const pod = this.actor.items.get(podId);
-
-        if (!pod) return;
-
-        // Confirm deactivation
-        const confirmed = await Dialog.confirm({
-            title: game.i18n.localize("SFRPG.MechSheet.MissionPod.DeactivateConfirmTitle"),
-            content: `<p>${game.i18n.format("SFRPG.MechSheet.MissionPod.DeactivateConfirmPrompt", { pod: pod.name })}</p>`,
-            yes: () => true,
-            no: () => false,
-            defaultYes: false
-        });
-
-        if (!confirmed) return;
-
-        // Remove items that were created from this pod's templates
-        const createdItemIds = pod.system.createdItemIds || [];
-        if (createdItemIds.length > 0) {
-            // Filter to only IDs that still exist
-            const idsToDelete = createdItemIds.filter(id => this.actor.items.has(id));
-            if (idsToDelete.length > 0) {
-                await this.actor.deleteEmbeddedDocuments("Item", idsToDelete);
-            }
-        }
-
-        // Deactivate the pod and clear created item IDs
-        await pod.update({
-            "system.isActive": false,
-            "system.createdItemIds": []
-        });
-
-        // Force actor data re-preparation and sheet re-render
-        this.actor.prepareData();
-        this.render(false);
-
-        ui.notifications.info(`${pod.name} deactivated.`);
+        const changed = await this.actor.setMissionPodActive(li.data("item-id"), active);
+        if (changed) this.render(false);
     }
 
     /**

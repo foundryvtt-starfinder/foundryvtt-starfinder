@@ -103,6 +103,94 @@ export const ActorMechMixin = (superclass) => class extends superclass {
     }
 
     /**
+     * Activate or deactivate one of this mech's mission pods.
+     *
+     * Activating creates the pod's item templates on the mech and records their
+     * ids; deactivating deletes those items again. Only one pod may be active at
+     * a time.
+     *
+     * @param {string} podId Id of the mechMissionPod item
+     * @param {boolean} active True to activate, false to deactivate
+     * @param {Object} [options]
+     * @param {boolean} [options.confirm] Ask before changing state
+     * @returns {Promise<boolean>} True if the pod's state changed
+     */
+    async setMissionPodActive(podId, active, { confirm = true } = {}) {
+        const pod = this.items.get(podId);
+        if (!pod || pod.type !== "mechMissionPod") return false;
+        if (!!pod.system.isActive === !!active) return false;
+
+        if (active) {
+            const activePod = this.items.find(i => i.type === "mechMissionPod" && i.system.isActive);
+            if (activePod) {
+                ui.notifications.warn(game.i18n.localize("SFRPG.MechSheet.MissionPod.OnlyOne"));
+                return false;
+            }
+        }
+
+        const prompt = active ? "Activate" : "Deactivate";
+        if (confirm) {
+            const confirmed = await Dialog.confirm({
+                title: game.i18n.localize(`SFRPG.MechSheet.MissionPod.${prompt}ConfirmTitle`),
+                content: `<p>${game.i18n.format(`SFRPG.MechSheet.MissionPod.${prompt}ConfirmPrompt`, { pod: pod.name })}</p>`,
+                yes: () => true,
+                no: () => false,
+                defaultYes: false
+            });
+
+            if (!confirmed) return false;
+        }
+
+        if (active) {
+            // Create items from the pod's item templates
+            const itemTemplates = pod.system.itemTemplates || [];
+            const createdItemIds = [];
+
+            if (itemTemplates.length > 0) {
+                const itemsToCreate = itemTemplates.map(template => {
+                    const itemData = foundry.utils.deepClone(template);
+                    // Remove _id so Foundry generates a new one
+                    delete itemData._id;
+                    // Mark as from mission pod
+                    itemData.flags = itemData.flags || {};
+                    itemData.flags.sfrpg = itemData.flags.sfrpg || {};
+                    itemData.flags.sfrpg.fromMissionPod = pod.id;
+                    return itemData;
+                });
+
+                const createdItems = await this.createEmbeddedDocuments("Item", itemsToCreate);
+                for (const item of createdItems) {
+                    createdItemIds.push(item.id);
+                }
+            }
+
+            await pod.update({
+                "system.isActive": true,
+                "system.createdItemIds": createdItemIds
+            });
+        } else {
+            // Remove the items this pod created, ignoring any already deleted
+            const createdItemIds = pod.system.createdItemIds || [];
+            const idsToDelete = createdItemIds.filter(id => this.items.has(id));
+            if (idsToDelete.length > 0) {
+                await this.deleteEmbeddedDocuments("Item", idsToDelete);
+            }
+
+            await pod.update({
+                "system.isActive": false,
+                "system.createdItemIds": []
+            });
+        }
+
+        // The pod's items change the mech's derived stats, which are computed once
+        // per data preparation rather than watched.
+        this.prepareData();
+
+        ui.notifications.info(`${pod.name} ${active ? "activated" : "deactivated"}.`);
+        return true;
+    }
+
+    /**
      * Cancel a damage level override that has not been rolled yet, refunding the
      * Power Points that armed it.
      *
