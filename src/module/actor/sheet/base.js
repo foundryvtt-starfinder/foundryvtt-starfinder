@@ -1512,7 +1512,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
             }
 
             if (item.type === "effect") {
-                // Initialise origin data for effects
+                // Initialize origin data for effects
                 const { context } = parsedDragData;
                 if (context) {
                     item.system.context = context;

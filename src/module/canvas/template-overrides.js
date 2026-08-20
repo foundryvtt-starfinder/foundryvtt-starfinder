@@ -82,7 +82,7 @@ export class MeasuredTemplateSFRPG extends foundry.canvas.placeables.MeasuredTem
             templateAngle = this.document.angle;
 
         // Parse rays as per Bresenham's algorithm
-        // FIXME: causes strange highlight behaviour on V12 for some reason? Deferring to core ray highlighting for now
+        // FIXME: causes strange highlight behavior on V12 for some reason? Deferring to core ray highlighting for now
         /* if (templateType === "ray") {
             const result = [];
 

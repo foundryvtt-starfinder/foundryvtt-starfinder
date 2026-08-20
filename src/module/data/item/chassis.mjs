@@ -88,14 +88,14 @@ export default class SFRPGItemChassis extends SFRPGItemBase {
                 min: 0,
                 integer: true,
                 required: true,
-                label: "SFRPG.DroneSheet.Chassis.Details.Defence.EAC"
+                label: "SFRPG.DroneSheet.Chassis.Details.Defense.EAC"
             }),
             kac: new fields.NumberField({
                 initial: 1,
                 min: 0,
                 integer: true,
                 required: true,
-                label: "SFRPG.DroneSheet.Chassis.Details.Defence.KAC"
+                label: "SFRPG.DroneSheet.Chassis.Details.Defense.KAC"
             }),
             ref: new fields.StringField({
                 initial: "fast",
