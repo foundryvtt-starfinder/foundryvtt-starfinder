@@ -16,6 +16,7 @@ export default function(engine) {
     engine.closures.add("calculateMechComponents", (fact, context) => {
         const data = fact.data;
         const items = fact.items;
+        const actor = fact.actor;
 
         // Get component items
         const frame = items.find(i => i.type === "mechFrame");
