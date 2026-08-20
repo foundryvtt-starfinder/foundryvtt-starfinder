@@ -1012,13 +1012,18 @@ SFRPG.mechActionTypes = {
  *
  * `armsOverride` is written to the `sfrpg.damageLevelOverride` flag and consumed
  * by the next mech damage roll.
+ *
+ * `armsAttackBonus` names a formula the player rolls from the action's chat card,
+ * writing the result to the `sfrpg.attackBonusOverride` flag for the next mech
+ * attack roll to consume.
  * @type {Array}
  */
 SFRPG.mechPPActions = [
     {
         name: "SFRPG.MechSheet.Actions.PP.Aim.Name",
         description: "SFRPG.MechSheet.Actions.PP.Aim.Description",
-        ppCost: 1
+        ppCost: 1,
+        armsAttackBonus: { formula: "1d4" }
     },
     {
         name: "SFRPG.MechSheet.Actions.PP.DevastatingHit.Name",

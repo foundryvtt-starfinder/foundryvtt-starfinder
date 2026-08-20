@@ -1328,6 +1328,20 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         }
         additionalModifiers.push(...conditionMods.rolled.map(entry => entry.modifier));
 
+        // An armed attack bonus (e.g. Aim) was rolled from the action's chat card, so
+        // the number is already fixed and goes in as a flat part named for the action.
+        const attackBonus = this.actor?.getFlag("sfrpg", "attackBonusOverride");
+        const attackBonusApplies = overrideAppliesTo(attackBonus, this.id);
+        if (attackBonusApplies) {
+            parts.push({
+                score: attackBonus.value,
+                explanation: game.i18n.format("SFRPG.MechSheet.AttackBonusOverride.Tag", {
+                    source: attackBonus.source,
+                    value: attackBonus.value
+                })
+            });
+        }
+
         if (additionalModifiers.length > 0) {
             rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
             parts.push("@additional.modifiers.bonus");
@@ -1385,6 +1399,10 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             rollType: "attack",
             onClose: (roll, formula, finalFormula) => {
                 if (roll) {
+                    // Only spend the bonus once a roll actually resolved - cancelling the
+                    // attack dialog leaves it armed rather than eating the PP.
+                    if (attackBonusApplies) this.actor.unsetFlag("sfrpg", "attackBonusOverride");
+
                     const rollDamageWithAttack = game.settings.get("sfrpg", "rollDamageWithAttack");
                     if (rollDamageWithAttack && !options.disableDamageAfterAttack) {
                         this.rollDamage({});

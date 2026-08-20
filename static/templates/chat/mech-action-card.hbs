@@ -1,10 +1,14 @@
-<div class="sfrpg chat-card mech-action-card" data-actor-id="{{actor.id}}">
+<div class="sfrpg chat-card mech-action-card" data-actor-id="{{actor.id}}" data-actor-uuid="{{actor.uuid}}">
     <header class="card-header flexrow">
         <img class="action-img" src="{{img}}" title="{{name}}" width="36" height="36" />
         <h3 class="action-name">{{name}}</h3>
     </header>
     <div class="card-content">
+        {{#if descriptionHTML}}
+        <p>{{{descriptionHTML}}}</p>
+        {{else}}
         <p>{{description}}</p>
+        {{/if}}
     </div>
     {{#if actionTypeLabel}}
     <footer class="card-footer">

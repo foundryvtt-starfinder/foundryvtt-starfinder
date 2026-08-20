@@ -64,6 +64,7 @@ import CheckEnricher from "./module/system/enrichers/check.js";
 import IconEnricher from "./module/system/enrichers/icon.js";
 import PPAbilityEnricher from "./module/system/enrichers/pp-ability.js";
 import TemplateEnricher from "./module/system/enrichers/template.js";
+import { onMechAttackBonusClick } from "./module/system/mech-bonus-link.js";
 import TextEditorSFRPG from "./module/system/text-editor.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
@@ -700,6 +701,7 @@ Hooks.once("ready", async () => {
 
     console.log("Starfinder | [READY] Setting up event listeners");
     BaseEnricher.addListeners();
+    $("body").on("click", 'a[data-action="mechAttackBonus"]', onMechAttackBonusClick);
     ItemSFRPG.chatListeners($("body"));
     extendDragData();
 

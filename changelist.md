@@ -10,6 +10,7 @@
 - A mech's Shield Points are restored to full when combat starts, alongside the Power Point and condition reset that already happened there. Shields still regenerate at the mech's tier per turn during the fight; this is what puts them back between fights. The GM's combat-start summary says which mechs had shields restored and to what
 - Massive Target Penetrating Weapon's Charged Extreme Projectile now works. Spending its 3 PP makes that weapon's next damage roll use the extreme column of the damage table, the way Devastating Hit already raised a weapon's damage level. It previously spent the Power Points for no mechanical effect
 - A mech component's action can declare the damage level it fires at, set on the component's item sheet. An action that declares one arms an override on the weapon it is printed on, so firing a different weapon leaves it armed instead of spending it on the wrong shot
+- The Aim action now does something. Its chat card's 1d4 is a link, and clicking it rolls the die and holds the result against the mech's next attack roll, where it is added and named on the card. It expires at the end of the turn if no attack is made, and the sheet shows a banner while it is armed with a control that disarms it and gives the Power Point back. Aim and Devastating Hit can both be armed at once, since one changes the attack and the other the damage
 
 ## Bugfixes
 - The mech sheet showed Mech Points as a long decimal on a mech below tier 1, where each component's cost is multiplied by a fraction of a tier. Both the spent and the maximum are now shown rounded down; the underlying figure is unchanged, and the per-component breakdown in the tooltip still shows the exact arithmetic
@@ -25,6 +26,7 @@
 ## Core System Improvements
 - Mech actions, damage level override cancellation and mission pod activation moved from the mech sheet onto the mech actor, so they can be triggered without a sheet open — from a macro, a module or another sheet
 - New `ActorSFRPG#useMechAction()`, `#cancelMechDamageOverride()` and `#setMissionPodActive()`, which own the Power Point arithmetic, the damage level override and the one-active-pod rule, all of which the mech sheet's click handlers previously did themselves
+- New `ActorSFRPG#armMechAttackBonus()` and `#cancelMechAttackBonus()`, which roll an action's declared bonus and hold it against the mech's next attack roll, or hand back what it cost
 - Mech action tables published as `CONFIG.SFRPG.mechActionTypes`, `CONFIG.SFRPG.mechPPActions` and `CONFIG.SFRPG.mechSpecialActions`, replacing the copies the mech sheet kept for itself, so an action index means the same thing everywhere
 
 # Version 14.1.0 - Mech Support + Upstream Sync

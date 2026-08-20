@@ -132,3 +132,31 @@ function linkTextNode(node, createLink) {
         target.replaceWith(link);
     }
 }
+
+/**
+ * An anchor that rolls a formula when clicked.
+ *
+ * Built to match what `[[/r 1d6]]` produces, so it picks up the roll handler
+ * core already binds to the document body and looks no different from an
+ * expression an author marked up themselves.
+ *
+ * @param {string} formula The formula to roll.
+ * @param {string} text The expression as it was written.
+ * @returns {HTMLAnchorElement}
+ */
+export function createDiceLink(formula, text) {
+    const a = document.createElement("a");
+
+    a.classList.add("inline-roll", "roll");
+    a.dataset.formula = formula;
+    a.dataset.flavor = "";
+    a.dataset.tooltipText = formula;
+
+    const icon = document.createElement("i");
+    icon.classList.add("fa-solid", "fa-dice-d20");
+    icon.inert = true;
+
+    a.append(icon, text);
+
+    return a;
+}
