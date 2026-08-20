@@ -12,6 +12,9 @@
 - A mech component's action can declare the damage level it fires at, set on the component's item sheet. An action that declares one arms an override on the weapon it is printed on, so firing a different weapon leaves it armed instead of spending it on the wrong shot
 
 ## Bugfixes
+- The mech sheet showed Mech Points as a long decimal on a mech below tier 1, where each component's cost is multiplied by a fraction of a tier. Both the spent and the maximum are now shown rounded down; the underlying figure is unchanged, and the per-component breakdown in the tooltip still shows the exact arithmetic
+- The mech sheet's Fortitude and Reflex boxes are labeled Fort and Refl, matching the abbreviated Init, EAC and KAC labels beside them
+- The mech sheet's Hit Point and Shield Point boxes no longer wrap. They print a value, a separator and a maximum where the other six boxes print one number, so they are wider now and the six single-number boxes are correspondingly narrower; the row itself is the same size
 - Mechs no longer gain Power Points during the first round of combat. Combat start sets a mech to its initial Power Points, and that allotment is what the first round is for - regeneration now begins in the round after
 - A mech regenerated both Power Points and Shield Points twice on every turn. Two separate implementations were running: the actor's own turn handler and the combat hook. The actor's copy is gone and the hook is the only one left
 - A mech weapon cannot be added to a mech or raised above the mech's tier + 1, the weapons locker included. On a mech, the weapon's level is chosen from a list of the levels that mech allows rather than typed, and a level arriving by any other route - a drop, a macro, another mech - is refused with a message naming the ceiling
