@@ -1,4 +1,5 @@
 import { ActorSFRPG } from "../actor.js";
+import { armedOverrideBanners } from "../../rules/mech-attack-bonus.js";
 import { ActorSheetSFRPG } from "./base.js";
 import { droppedSlot, maxWeaponLevel, mountRefusal } from "./mech-weapon-slots.js";
 
@@ -353,16 +354,22 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         }
         actionsTab.gearActions.sort((a, b) => a.displayName.localeCompare(b.displayName));
 
-        // An armed damage level override shows a banner with a disarm control, so a mis-click
-        // can be undone before the PP is committed to a roll.
-        const override = this.actor.getFlag("sfrpg", "damageLevelOverride");
-        actionsTab.armedOverride = override
-            ? {
-                source: override.source,
-                ppSpent: override.ppSpent || 0,
-                label: game.i18n.format("SFRPG.MechSheet.DamageLevelOverride.Armed", { source: override.source })
-            }
-            : null;
+        // Each armed override shows a banner with a disarm control, so a mis-click can be
+        // undone before the PP is committed to a roll. Aim and Devastating Hit change
+        // different rolls, so both can be armed and both banners can be up at once.
+        const banners = armedOverrideBanners({
+            damageLevelOverride: this.actor.getFlag("sfrpg", "damageLevelOverride"),
+            attackBonusOverride: this.actor.getFlag("sfrpg", "attackBonusOverride")
+        });
+        actionsTab.armedOverrides = banners.map(banner => ({
+            ...banner,
+            label: banner.kind === "attack"
+                ? game.i18n.format("SFRPG.MechSheet.AttackBonusOverride.Armed", {
+                    source: banner.source,
+                    value: banner.value
+                })
+                : game.i18n.format("SFRPG.MechSheet.DamageLevelOverride.Armed", { source: banner.source })
+        }));
 
         data.actionsTab = actionsTab;
 
@@ -494,11 +501,15 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
     }
 
     /**
-     * Handle cancelling a damage level override that has not been rolled yet, refunding its PP.
+     * Handle cancelling an armed override that has not been rolled against yet, refunding its PP.
      * @param {Event} event The click event
      */
     async _onCancelOverride(event) {
         event.preventDefault();
+
+        if (event.currentTarget.dataset.overrideKind === "attack") {
+            return this.actor.cancelMechAttackBonus();
+        }
 
         return this.actor.cancelMechDamageOverride();
     }

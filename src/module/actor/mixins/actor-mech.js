@@ -1,5 +1,7 @@
 import { SFRPG } from "../../config.js";
+import { actionAttackBonus } from "../../rules/mech-attack-bonus.js";
 import { actionDamageOverride } from "../../rules/mech-damage-level.js";
+import { promoteDiceLinkToBonus } from "../../system/mech-bonus-link.js";
 
 export const ActorMechMixin = (superclass) => class extends superclass {
     /**
@@ -20,7 +22,7 @@ export const ActorMechMixin = (superclass) => class extends superclass {
      *                                      action could not be performed
      */
     async useMechAction(category, index, { itemId = null, itemActionIndex = null } = {}) {
-        let name, description, ppCost, actionType, gearName, armsOverride;
+        let name, description, ppCost, actionType, gearName, armsOverride, armsAttackBonus;
         // Set for gear actions so the override they arm is spent by the weapon it
         // is printed on and not by whatever the mech fires next.
         let overrideItemId = null;
@@ -33,6 +35,7 @@ export const ActorMechMixin = (superclass) => class extends superclass {
             description = game.i18n.localize(action.description);
             ppCost = action.ppCost;
             armsOverride = action.armsOverride;
+            armsAttackBonus = actionAttackBonus(action);
         } else if (category === "special") {
             const action = SFRPG.mechSpecialActions[index];
             if (!action) return null;
@@ -51,6 +54,7 @@ export const ActorMechMixin = (superclass) => class extends superclass {
             gearName = item.name;
             img = item.img;
             armsOverride = actionDamageOverride(action);
+            armsAttackBonus = actionAttackBonus(action);
             if (armsOverride) overrideItemId = item.id;
         } else {
             return null;
@@ -81,6 +85,28 @@ export const ActorMechMixin = (superclass) => class extends superclass {
             });
         }
 
+        // Aim's die is not rolled here. Its description already reads "roll 1d4",
+        // and enriching the description turns that into a dice link, so the card
+        // hands the player the roll rather than making it for them. Clicking the
+        // link rolls the die and arms the bonus - see onMechAttackBonusClick.
+        let descriptionHTML = null;
+        if (armsAttackBonus) {
+            const enriched = await foundry.applications.ux.TextEditor.implementation.enrichHTML(description);
+            const wrapper = document.createElement("div");
+            wrapper.innerHTML = enriched;
+
+            const promoted = promoteDiceLinkToBonus(wrapper, armsAttackBonus.formula, {
+                source: name,
+                ppSpent: ppCost || 0,
+                itemId: category === "gear" ? itemId : null,
+                tooltip: game.i18n.format("SFRPG.MechSheet.AttackBonusOverride.LinkTooltip", {
+                    formula: armsAttackBonus.formula
+                })
+            });
+
+            if (promoted) descriptionHTML = wrapper.innerHTML;
+        }
+
         const ppSpent = (ppCost !== null && ppCost !== undefined && ppCost > 0)
             ? game.i18n.format("SFRPG.MechSheet.Actions.PPSpent", { amount: ppCost })
             : null;
@@ -90,6 +116,7 @@ export const ActorMechMixin = (superclass) => class extends superclass {
             name: name,
             img: img,
             description: description,
+            descriptionHTML: descriptionHTML,
             ppCost: ppCost !== null && ppCost !== undefined ? `${ppCost} PP` : null,
             ppSpent: ppSpent,
             actionTypeLabel: actionType ? (actionTypeLabels[actionType] || actionType) : null,
@@ -198,6 +225,48 @@ export const ActorMechMixin = (superclass) => class extends superclass {
     }
 
     /**
+     * Roll an action's declared bonus and arm it against this mech's next attack roll.
+     *
+     * Called from the dice link on the action's chat card rather than when the
+     * action is used, so the player rolls the die themselves and sees the number
+     * before committing to an attack.
+     *
+     * @param {string} formula The formula to roll, e.g. "1d4"
+     * @param {Object} [options]
+     * @param {string} [options.source] Name of the action arming the bonus
+     * @param {number} [options.ppSpent] Power Points already spent, refunded if the bonus is disarmed
+     * @param {string} [options.itemId] Weapon the bonus is restricted to, if any
+     * @returns {Promise<number|null>} The rolled bonus, or null if one was already armed
+     */
+    async armMechAttackBonus(formula, { source = "", ppSpent = 0, itemId = null } = {}) {
+        const armed = this.getFlag("sfrpg", "attackBonusOverride");
+        if (armed) {
+            ui.notifications.warn(game.i18n.format("SFRPG.MechSheet.AttackBonusOverride.AlreadyArmed", {
+                source: armed.source,
+                value: armed.value
+            }));
+            return null;
+        }
+
+        const roll = await new Roll(formula, this.getRollData()).evaluate();
+
+        await roll.toMessage({
+            speaker: ChatMessage.getSpeaker({ actor: this }),
+            flavor: game.i18n.format("SFRPG.MechSheet.AttackBonusOverride.RollFlavor", { source })
+        });
+
+        await this.setFlag("sfrpg", "attackBonusOverride", {
+            source: source,
+            formula: formula,
+            value: roll.total,
+            ppSpent: ppSpent,
+            itemId: itemId
+        });
+
+        return roll.total;
+    }
+
+    /**
      * Cancel a damage level override that has not been rolled yet, refunding the
      * Power Points that armed it.
      *
@@ -205,10 +274,36 @@ export const ActorMechMixin = (superclass) => class extends superclass {
      *                                 override was armed
      */
     async cancelMechDamageOverride() {
-        const override = this.getFlag("sfrpg", "damageLevelOverride");
+        return this._cancelMechOverride("damageLevelOverride", "SFRPG.MechSheet.DamageLevelOverride.Cancelled");
+    }
+
+    /**
+     * Cancel an attack bonus that has not been rolled against yet, refunding the
+     * Power Points that armed it.
+     *
+     * @returns {Promise<number|null>} The Power Points refunded, or null if no
+     *                                 bonus was armed
+     */
+    async cancelMechAttackBonus() {
+        return this._cancelMechOverride("attackBonusOverride", "SFRPG.MechSheet.AttackBonusOverride.Cancelled");
+    }
+
+    /**
+     * Clear one of the mech's armed overrides and hand back what it cost.
+     *
+     * The refund is capped at the mech's maximum so replenishing Power Points
+     * before disarming can't push the pool past full.
+     *
+     * @private
+     * @param {string} flag Name of the flag under the sfrpg scope
+     * @param {string} messageKey Localization key for the notification
+     * @returns {Promise<number|null>} The Power Points refunded, or null if the flag was not set
+     */
+    async _cancelMechOverride(flag, messageKey) {
+        const override = this.getFlag("sfrpg", flag);
         if (!override) return null;
 
-        await this.unsetFlag("sfrpg", "damageLevelOverride");
+        await this.unsetFlag("sfrpg", flag);
 
         const refund = override.ppSpent || 0;
         if (refund > 0) {
@@ -218,7 +313,7 @@ export const ActorMechMixin = (superclass) => class extends superclass {
             });
         }
 
-        ui.notifications.info(game.i18n.format("SFRPG.MechSheet.DamageLevelOverride.Cancelled", {
+        ui.notifications.info(game.i18n.format(messageKey, {
             source: override.source,
             amount: refund
         }));
