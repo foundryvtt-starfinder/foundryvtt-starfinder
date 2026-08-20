@@ -5,6 +5,11 @@ import SFRPGModifier from "../modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../modifiers/types.js";
 import RollContext from "../rolls/rollcontext.js";
 import StackModifiers from "../rules/closures/stack-modifiers.js";
+import {
+    collectMechRollModifiers,
+    MECH_CONDITION_SCOPE,
+    worstAffectedOperator
+} from "../rules/mech-condition-modifiers.js";
 import { applyPerDieBonus, resolveDamageLevel } from "../rules/mech-damage-level.js";
 import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
@@ -1183,6 +1188,51 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     /**
+     * The condition modifiers that apply to this mech weapon roll, already stacked.
+     *
+     * The mech's own conditions and its operators' are evaluated separately,
+     * because a condition's value can be a formula reading its own actor's data -
+     * a negative level is worth the number of levels that actor has, and
+     * evaluating an operator's formula against the mech would read nothing.
+     *
+     * @private
+     * @param {"attack"|"damage"} kind Which roll is being made.
+     * @returns {Promise<{constants: Array, rolled: Array}>} Flat modifiers and formula modifiers.
+     */
+    async _getMechConditionModifiers(kind) {
+        const weaponType = this.system.weaponType === "melee" ? "melee" : "ranged";
+        const mech = this.actor;
+
+        const operators = (mech?.crew?.operator?.actors ?? [])
+            .filter(Boolean)
+            .map(actor => ({ actor, conditions: conditionsOf(actor) }));
+
+        const worst = worstAffectedOperator(operators.map(o => o.conditions), { weaponType, kind });
+        const operator = operators.find(o => o.conditions === worst);
+
+        // Each side is stacked against the actor whose conditions they are.
+        const stacked = await Promise.all([
+            stackConditionModifiers(
+                collectMechRollModifiers({ mechConditions: conditionsOf(mech), weaponType, kind }),
+                mech
+            ),
+            stackConditionModifiers(
+                collectMechRollModifiers({ operatorConditions: worst, weaponType, kind }),
+                operator?.actor
+            )
+        ]);
+
+        const constants = [];
+        const rolled = [];
+        for (const entry of stacked.flat()) {
+            if (entry.modifier.modifierType === SFRPGModifierType.FORMULA) rolled.push(entry);
+            else constants.push(entry);
+        }
+
+        return { constants, rolled, all: [...constants, ...rolled] };
+    }
+
+    /**
      * Place an attack roll for a mech using a mechWeapon item.
      * Attack = base attack (tier) + operator's BAB or Piloting ranks + upper limb bonuses.
      * The operator is whoever is rolling (selected at roll time).
@@ -1216,6 +1266,14 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         /** Create additional modifiers. */
         const additionalModifiers = [];
+
+        // Conditions on the mech, and on the operator they route inward from,
+        // penalise the attack the same way they would a character's.
+        const conditionMods = await this._getMechConditionModifiers("attack");
+        for (const { modifier, slug, source } of conditionMods.constants) {
+            parts.push({ score: modifier.modifier, explanation: mechConditionLabel(modifier, slug, source) });
+        }
+        additionalModifiers.push(...conditionMods.rolled.map(entry => entry.modifier));
 
         if (additionalModifiers.length > 0) {
             rollContext.addContext("additional", {name: "additional"}, {modifiers: { bonus: "n/a", rolledMods: additionalModifiers } });
@@ -1326,6 +1384,15 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const damageModValue = this.actor.system.attributes?.damageModifier?.[damageModKey] || 0;
         if (damageModValue && parts.length > 0) {
             parts[0].formula = `${parts[0].formula} + ${damageModValue}`;
+        }
+
+        // Conditions that reduce damage are appended the same way, and named on
+        // the card so the smaller number is accounted for.
+        const conditionMods = await this._getMechConditionModifiers("damage");
+        for (const { modifier, slug, source } of conditionMods.all) {
+            if (parts.length === 0) break;
+            parts[0].formula = `${parts[0].formula} + (${modifier.modifier})`;
+            tags.push({ tag: "mech-condition", text: mechConditionLabel(modifier, slug, source) });
         }
 
         let title = '';
@@ -2238,4 +2305,71 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             ...scope
         });
     }
+}
+
+/**
+ * An actor's conditions, as the mech condition table addresses them.
+ *
+ * Conditions are `effect` items carrying a `slug` matching an id in
+ * CONFIG.SFRPG.statusEffects. Only the ones the table knows about are returned,
+ * so an unrelated effect item can never reach a mech roll.
+ *
+ * @param {ActorSFRPG} actor The actor to read.
+ * @returns {Array<{slug: string, modifiers: Array}>} One entry per applicable condition.
+ */
+function conditionsOf(actor) {
+    if (!actor?.items) return [];
+
+    return actor.items
+        .filter(item => item.type === "effect" && MECH_CONDITION_SCOPE[item.system?.slug])
+        .map(item => ({ slug: item.system.slug, modifiers: item.system.modifiers ?? [] }));
+}
+
+/**
+ * Apply the stacking rules to condition modifiers, keeping each one's origin.
+ *
+ * The modifiers are cloned first. StackModifiers evaluates formulas onto the
+ * objects it is handed, and these are the actor's own live modifier data.
+ *
+ * @param {Array<{modifier: object, slug: string, source: string}>} entries Modifiers with their origin.
+ * @param {ActorSFRPG} actor The actor the modifiers belong to, whose data any formula is evaluated against.
+ * @returns {Promise<Array<{modifier: object, slug: string, source: string}>>} The modifiers that survived stacking.
+ */
+async function stackConditionModifiers(entries, actor) {
+    if (!entries.length) return [];
+
+    const byModifier = new Map();
+    const clones = entries.map(entry => {
+        const clone = foundry.utils.deepClone(entry.modifier);
+        byModifier.set(clone, entry);
+        return clone;
+    });
+
+    const stacked = await new StackModifiers().processAsync(clones, null, { actor });
+
+    return Object.values(stacked)
+        .flat()
+        .filter(Boolean)
+        .map(modifier => ({ ...byModifier.get(modifier), modifier }));
+}
+
+/**
+ * How a condition penalty is named on a mech's roll.
+ *
+ * The condition's own name comes from CONFIG.SFRPG.statusEffects, so it reads
+ * the same as it does anywhere else, and the operator's is marked as theirs -
+ * otherwise a player sees a penalty on the mech with nothing explaining it.
+ *
+ * @param {object} modifier The modifier being applied.
+ * @param {string} slug The condition's slug.
+ * @param {"mech"|"operator"} source Which side the condition is on.
+ * @returns {string} A label for the roll breakdown.
+ */
+function mechConditionLabel(modifier, slug, source) {
+    const status = CONFIG.SFRPG.statusEffects.find(effect => effect.id === slug);
+    const condition = status ? game.i18n.localize(status.name) : (modifier.name ?? slug);
+
+    return source === "operator"
+        ? game.i18n.format("SFRPG.MechSheet.Conditions.FromOperator", { condition })
+        : condition;
 }
