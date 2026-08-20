@@ -1,5 +1,6 @@
 import { ActorSFRPG } from "../actor.js";
 import { ActorSheetSFRPG } from "./base.js";
+import { droppedSlot, mountRefusal } from "./mech-weapon-slots.js";
 
 /**
  * An Actor sheet for a mech in the SFRPG system.
@@ -754,7 +755,16 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
             const actor = await ActorSFRPG.fromDropData(data);
             return this._onCrewDrop(event, actor.id);
         } else if (data.type === "Item") {
-            const rawItemData = (await Item.fromDropData(data)).toObject();
+            const droppedItem = await Item.fromDropData(data);
+
+            // An item already on this mech is being moved, not added. Creating a
+            // copy of it is what the branches below would otherwise do.
+            if (droppedItem?.parent?.uuid === this.actor.uuid) {
+                if (droppedItem.type === "mechWeapon") return this._onWeaponMove(event, droppedItem);
+                return this._onSortItem(event, droppedItem);
+            }
+
+            const rawItemData = droppedItem.toObject();
 
             if (CONFIG.SFRPG.mechDefinitionItemTypes.includes(rawItemData.type)) {
                 // Only allow one frame per mech
@@ -804,14 +814,76 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
     }
 
     /**
-     * Handle dropping a mech weapon onto the sheet.
-     * Shows a slot selection dialog if multiple valid slots are available.
+     * Handle dropping a weapon the mech already owns onto one of its mounts.
+     *
+     * This moves the weapon rather than copying it, so the only change is the
+     * slot it is assigned to. A drop that missed the mounted weapons lists is
+     * a reorder within the list it came from.
+     *
+     * @param {Event} event The drop event
+     * @param {Item} weapon The weapon being moved
+     * @returns {Promise}
+     */
+    async _onWeaponMove(event, weapon) {
+        const slot = droppedSlot(event.target);
+        if (slot === null) return this._onSortItem(event, weapon);
+        if (slot === weapon.system.slot) return this._onSortItem(event, weapon);
+
+        const refusal = mountRefusal({
+            slot,
+            weapon,
+            mountedWeapons: this._getWeaponsInSlot(slot),
+            hasComponent: this._hasComponentForSlot(slot),
+            capacity: this.actor.system.attributes?.slots?.[slot] || 0
+        });
+
+        if (refusal) {
+            ui.notifications.warn(game.i18n.format(refusal, {
+                weapon: weapon.name,
+                slot: game.i18n.localize(CONFIG.SFRPG.mechWeaponMountableSlots[slot] || slot)
+            }));
+            return false;
+        }
+
+        return weapon.update({ "system.slot": slot });
+    }
+
+    /**
+     * Handle dropping a mech weapon from outside the sheet.
+     *
+     * A drop onto one of the mounted weapons lists mounts it there. A drop
+     * anywhere else falls back to scanning for a slot the weapon fits, showing a
+     * selection dialog when more than one will take it.
      *
      * @param {Event} event The drop event
      * @param {Object} itemData The weapon item data
      * @returns {Promise}
      */
     async _onWeaponDrop(event, itemData) {
+        // A weapon dropped straight onto a mount goes there, so long as the mount
+        // will take it. Only a drop that missed the mounts falls back to scanning
+        // for somewhere the weapon fits.
+        const targetSlot = droppedSlot(event.target);
+        if (targetSlot !== null) {
+            const refusal = mountRefusal({
+                slot: targetSlot,
+                weapon: itemData,
+                mountedWeapons: this._getWeaponsInSlot(targetSlot),
+                hasComponent: this._hasComponentForSlot(targetSlot),
+                capacity: this.actor.system.attributes?.slots?.[targetSlot] || 0
+            });
+
+            if (!refusal) {
+                itemData.system.slot = targetSlot;
+                return this.actor.createEmbeddedDocuments("Item", [itemData]);
+            }
+
+            ui.notifications.warn(game.i18n.format(refusal, {
+                weapon: itemData.name,
+                slot: game.i18n.localize(CONFIG.SFRPG.mechWeaponMountableSlots[targetSlot] || targetSlot)
+            }));
+        }
+
         const validSlots = itemData.system.validSlots || ["frame"];
         const actorData = this.actor.system;
 

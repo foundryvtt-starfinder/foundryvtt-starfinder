@@ -337,7 +337,7 @@
 
                 {{!-- Weapons mounted to this component --}}
                 {{#if section.weaponSlots}}
-                <li class="inventory-header flexrow weapons-subheader">
+                <li class="inventory-header flexrow weapons-subheader" data-weapon-slot="{{section.slotType}}">
                     <h4 class="item-name noborder">
                         {{ localize "SFRPG.MechSheet.WeaponsLocker.MountedWeapons" }}
                         ({{section.weaponSlots.used}}/{{section.weaponSlots.max}})
@@ -352,9 +352,18 @@
                     {{/if}}
                     {{/if}}
                 </li>
-                <ol class="item-list weapons-list">
+                <ol class="item-list weapons-list" data-weapon-slot="{{section.slotType}}">
                     {{#each section.weapons as |weapon wid|}}
                     {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=weapon children=weapon.contents }}
+                    {{else}}
+                    {{!-- A mount with nothing in it still has to be a drop target. --}}
+                    <li class="item empty-slot">
+                        {{#if section.hasComponent}}
+                        <span>{{ localize "SFRPG.MechSheet.WeaponsLocker.NoWeaponsMounted" }}</span>
+                        {{else}}
+                        <span>{{ localize "SFRPG.MechSheet.WeaponsLocker.NoComponentInstalled" }}</span>
+                        {{/if}}
+                    </li>
                     {{/each}}
                 </ol>
                 {{/if}}
@@ -431,7 +440,7 @@
 
                 {{!-- Weapons mounted to this component --}}
                 {{#if section.weaponSlots}}
-                <li class="inventory-header flexrow weapons-subheader">
+                <li class="inventory-header flexrow weapons-subheader" data-weapon-slot="{{section.slotType}}">
                     <h4 class="item-name noborder">
                         {{ localize "SFRPG.MechSheet.WeaponsLocker.MountedWeapons" }}
                         ({{section.weaponSlots.used}}/{{section.weaponSlots.max}})
@@ -446,9 +455,18 @@
                     {{/if}}
                     {{/if}}
                 </li>
-                <ol class="item-list weapons-list">
+                <ol class="item-list weapons-list" data-weapon-slot="{{section.slotType}}">
                     {{#each section.weapons as |weapon wid|}}
                     {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../../this bigItem=true item=weapon children=weapon.contents }}
+                    {{else}}
+                    {{!-- A mount with nothing in it still has to be a drop target. --}}
+                    <li class="item empty-slot">
+                        {{#if section.hasComponent}}
+                        <span>{{ localize "SFRPG.MechSheet.WeaponsLocker.NoWeaponsMounted" }}</span>
+                        {{else}}
+                        <span>{{ localize "SFRPG.MechSheet.WeaponsLocker.NoComponentInstalled" }}</span>
+                        {{/if}}
+                    </li>
                     {{/each}}
                 </ol>
                 {{/if}}
@@ -596,7 +614,7 @@
                     {{/if}}
                 </li>
 
-                <ol class="item-list">
+                <ol class="item-list" data-weapon-slot="locker">
                     {{#each weaponsLocker.weapons as |weapon wid|}}
                     {{> "systems/sfrpg/templates/actors/parts/actor-inventory-item.hbs" ../this bigItem=true item=weapon children=weapon.contents }}
                     {{/each}}
