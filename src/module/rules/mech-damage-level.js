@@ -54,3 +54,45 @@ export function applyPerDieBonus(formula, bonusPerDie) {
 
     return `${formula} + ${Number(match[1]) * bonusPerDie}`;
 }
+
+/**
+ * Whether an armed damage level override applies to the weapon rolling damage.
+ *
+ * A general action like Devastating Hit is declared before a target is chosen and
+ * applies to whatever fires next, so it arms an override with no itemId. An
+ * ability printed on one weapon - Charged Extreme Projectile reconfigures the
+ * mech's torso around that specific barrel - arms one carrying the id of the item
+ * it came from, and firing anything else leaves it armed rather than spending it
+ * on the wrong weapon.
+ *
+ * @param {{itemId?: string}|null|undefined} override The armed override, if any.
+ * @param {string} itemId Id of the mech weapon about to roll damage.
+ * @returns {boolean} True if the override should be applied to this roll.
+ */
+export function overrideAppliesTo(override, itemId) {
+    if (!override) return false;
+    if (!override.itemId) return true;
+
+    return override.itemId === itemId;
+}
+
+/**
+ * The damage level override a mech component's action declares, if any.
+ *
+ * An action sets an absolute level rather than stepping up the track, because an
+ * ability that reads "dealing extreme damage" says what it deals outright - it is
+ * not worth one step from wherever the weapon started.
+ *
+ * An unrecognized level is refused rather than armed. Arming it would spend the
+ * Power Points on an override that no damage table row answers to, leaving the
+ * flag set and the roll unchanged.
+ *
+ * @param {{damageLevel?: string}|null|undefined} action One entry from a component's actions array.
+ * @returns {{level: string}|null} The override to arm, or null if the action declares none.
+ */
+export function actionDamageOverride(action) {
+    const level = action?.damageLevel;
+    if (!level || !DAMAGE_LEVEL_ORDER.includes(level)) return null;
+
+    return { level };
+}

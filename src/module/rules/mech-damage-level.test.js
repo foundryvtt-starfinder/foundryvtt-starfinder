@@ -1,5 +1,5 @@
 import { describe, expect, test } from "vitest";
-import { applyPerDieBonus, resolveDamageLevel } from "./mech-damage-level.js";
+import { actionDamageOverride, applyPerDieBonus, overrideAppliesTo, resolveDamageLevel } from "./mech-damage-level.js";
 
 describe("resolveDamageLevel", () => {
     test("returns the base level unchanged when there is no override", () => {
@@ -54,5 +54,42 @@ describe("applyPerDieBonus", () => {
 
     test("leaves a formula it cannot parse alone", () => {
         expect(applyPerDieBonus("", 1)).toBe("");
+    });
+});
+
+describe("overrideAppliesTo", () => {
+    test("applies an override that names no weapon to whichever one fires", () => {
+        expect(overrideAppliesTo({ steps: 1 }, "weapon1")).toBe(true);
+    });
+
+    test("applies an override to the weapon it was armed from", () => {
+        expect(overrideAppliesTo({ level: "extreme", itemId: "weapon1" }, "weapon1")).toBe(true);
+    });
+
+    test("holds an override back from a weapon other than the one it names", () => {
+        expect(overrideAppliesTo({ level: "extreme", itemId: "weapon1" }, "weapon2")).toBe(false);
+    });
+
+    test("applies nothing when no override is armed", () => {
+        expect(overrideAppliesTo(null, "weapon1")).toBe(false);
+    });
+});
+
+describe("actionDamageOverride", () => {
+    test("reads the level an action declares", () => {
+        expect(actionDamageOverride({ damageLevel: "extreme" })).toEqual({ level: "extreme" });
+    });
+
+    test("declares nothing for an action with no damage level", () => {
+        expect(actionDamageOverride({ ppCost: 3 })).toBeNull();
+    });
+
+    test("refuses a level no damage table row answers to", () => {
+        // Arming this would spend the Power Points on an override the roll cannot use.
+        expect(actionDamageOverride({ damageLevel: "catastrophic" })).toBeNull();
+    });
+
+    test("declares nothing when there is no action to read", () => {
+        expect(actionDamageOverride(undefined)).toBeNull();
     });
 });
