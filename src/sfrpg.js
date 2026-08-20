@@ -64,6 +64,7 @@ import CheckEnricher from "./module/system/enrichers/check.js";
 import IconEnricher from "./module/system/enrichers/icon.js";
 import PPAbilityEnricher from "./module/system/enrichers/pp-ability.js";
 import TemplateEnricher from "./module/system/enrichers/template.js";
+import TextEditorSFRPG from "./module/system/text-editor.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
 import AbilityTemplate from "./module/canvas/ability-template.js";
@@ -389,6 +390,9 @@ Hooks.once('init', async function() {
 
     console.log("Starfinder | [INIT] Overriding tooltips");
     CONFIG.ux.TooltipManager = TooltipManagerSFRPG;
+
+    console.log("Starfinder | [INIT] Overriding the text editor");
+    CONFIG.ux.TextEditor = TextEditorSFRPG;
 
     console.log("Starfinder | [INIT] Registering sheets");
     Actors.unregisterSheet("core", ActorSheet);
