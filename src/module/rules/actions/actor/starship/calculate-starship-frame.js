@@ -255,7 +255,7 @@ export default function(engine) {
                 + frame.system.weaponMounts.starboard.lightSlots + frame.system.weaponMounts.starboard.heavySlots + frame.system.weaponMounts.starboard.capitalSlots
                 + frame.system.weaponMounts.turret.lightSlots + frame.system.weaponMounts.turret.heavySlots + frame.system.weaponMounts.turret.capitalSlots;
 
-            /** Get modifying armour. */
+            /** Get modifying armor. */
             const ablativeArmorItems = fact.items.filter(x => x.type === "starshipAblativeArmor");
             const armorItems = fact.items.filter(x => x.type === "starshipArmor");
             const armorTurnPenalty = armorItems[0]?.system?.turnDistancePenalty ?? 0;

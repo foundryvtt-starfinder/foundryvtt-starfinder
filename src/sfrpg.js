@@ -587,7 +587,7 @@ Hooks.once("i18nInit", () => {
         "modifierEffectTypesAttack",
         "modifierEffectTypesDamage",
         "modifierEffectTypesAmmunition",
-        "modifierEffectTypesDefence",
+        "modifierEffectTypesDefense",
         "modifierEffectTypesResource",
         "modifierEffectTypesAbility",
         "modifierEffectTypesSkill",

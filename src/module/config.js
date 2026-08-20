@@ -1775,7 +1775,7 @@ SFRPG.modifierEffectTypesAmmunition = {
     "all-ammo-usage-multiplier": "SFRPG.ActorSheet.Modifiers.EffectTypes.AllAmmoUsageMultiplier"
 };
 
-SFRPG.modifierEffectTypesDefence = {
+SFRPG.modifierEffectTypesDefense = {
     "ac": "SFRPG.ModifierEffectTypeAC",
     "cmd": "SFRPG.ModifierEffectTypeCMD",
     "damage-reduction": "SFRPG.ActorSheet.Modifiers.EffectTypes.DamageReduction",
@@ -1844,7 +1844,7 @@ SFRPG.modifierEffectTypes = {
     ...SFRPG.modifierEffectTypesAttack,
     ...SFRPG.modifierEffectTypesDamage,
     ...SFRPG.modifierEffectTypesAmmunition,
-    ...SFRPG.modifierEffectTypesDefence,
+    ...SFRPG.modifierEffectTypesDefense,
     ...SFRPG.modifierEffectTypesResource,
     ...SFRPG.modifierEffectTypesAbility,
     ...SFRPG.modifierEffectTypesSkill,
