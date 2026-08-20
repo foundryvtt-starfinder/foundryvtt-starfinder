@@ -1,10 +1,10 @@
 import { JSDOM } from "jsdom";
 import { beforeEach, describe, expect, it } from "vitest";
-import { droppedSlot, mountRefusal } from "./mech-weapon-slots.js";
+import { droppedSlot, levelRefusal, maxWeaponLevel, mountRefusal } from "./mech-weapon-slots.js";
 
-/** A weapon as the sheet sees it: an id, the slots it may go in, and its size. */
-function weapon({ id = "w1", validSlots = ["frame", "upperLimb"], slotsUsed = 1 } = {}) {
-    return { id, name: "Autocannon", system: { validSlots, slotsUsed } };
+/** A weapon as the sheet sees it: an id, the slots it may go in, its size and its level. */
+function weapon({ id = "w1", validSlots = ["frame", "upperLimb"], slotsUsed = 1, levelOverride = null } = {}) {
+    return { id, name: "Autocannon", system: { validSlots, slotsUsed, levelOverride } };
 }
 
 describe("droppedSlot", () => {
@@ -139,5 +139,70 @@ describe("mountRefusal", () => {
             hasComponent: true,
             capacity: 4
         })).toBe("SFRPG.MechSheet.WeaponsLocker.UnknownSlot");
+    });
+});
+
+describe("maxWeaponLevel", () => {
+    it("allows one level above the mech's tier", () => {
+        expect(maxWeaponLevel(5)).toBe(6);
+    });
+
+    it("refuses to read a tier it was not given as though it were high", () => {
+        // Waving a weapon through because the tier could not be read would defeat
+        // the cap entirely, so an unreadable tier counts as 0.
+        expect(maxWeaponLevel(undefined)).toBe(1);
+    });
+});
+
+describe("levelRefusal", () => {
+    it("allows a weapon one level above the mech's tier", () => {
+        expect(levelRefusal({ weapon: weapon({ levelOverride: 6 }), tier: 5 })).toBeNull();
+    });
+
+    it("refuses a weapon two levels above the mech's tier", () => {
+        expect(levelRefusal({ weapon: weapon({ levelOverride: 7 }), tier: 5 }))
+            .toBe("SFRPG.MechSheet.WeaponsLocker.LevelTooHigh");
+    });
+
+    it("allows a weapon below the mech's tier", () => {
+        expect(levelRefusal({ weapon: weapon({ levelOverride: 2 }), tier: 5 })).toBeNull();
+    });
+
+    it("allows a weapon that carries no level of its own", () => {
+        // Without an override the weapon is resolved as the mech's own tier
+        // everywhere else, so it can never be above it.
+        expect(levelRefusal({ weapon: weapon(), tier: 5 })).toBeNull();
+    });
+});
+
+describe("mountRefusal level cap", () => {
+    it("refuses a mount for a weapon above the mech's tier + 1", () => {
+        expect(mountRefusal({
+            slot: "frame",
+            weapon: weapon({ levelOverride: 7 }),
+            hasComponent: true,
+            capacity: 2,
+            tier: 5
+        })).toBe("SFRPG.MechSheet.WeaponsLocker.LevelTooHigh");
+    });
+
+    it("mounts a weapon at exactly the mech's tier + 1", () => {
+        expect(mountRefusal({
+            slot: "frame",
+            weapon: weapon({ levelOverride: 6 }),
+            hasComponent: true,
+            capacity: 2,
+            tier: 5
+        })).toBeNull();
+    });
+
+    it("lets an over-level weapon sit in the locker", () => {
+        // The locker is storage, not a mount - the weapon is refused when it is
+        // mounted rather than when it is put away.
+        expect(mountRefusal({
+            slot: "locker",
+            weapon: weapon({ levelOverride: 20 }),
+            tier: 1
+        })).toBeNull();
     });
 });

@@ -1,6 +1,6 @@
 import { ActorSFRPG } from "../actor.js";
 import { ActorSheetSFRPG } from "./base.js";
-import { droppedSlot, mountRefusal } from "./mech-weapon-slots.js";
+import { droppedSlot, maxWeaponLevel, mountRefusal } from "./mech-weapon-slots.js";
 
 /**
  * An Actor sheet for a mech in the SFRPG system.
@@ -638,14 +638,12 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
             weapon,
             mountedWeapons: this._getWeaponsInSlot(slot),
             hasComponent: this._hasComponentForSlot(slot),
-            capacity: this.actor.system.attributes?.slots?.[slot] || 0
+            capacity: this.actor.system.attributes?.slots?.[slot] || 0,
+            tier: this.actor.system.details?.tier
         });
 
         if (refusal) {
-            ui.notifications.warn(game.i18n.format(refusal, {
-                weapon: weapon.name,
-                slot: game.i18n.localize(CONFIG.SFRPG.mechWeaponMountableSlots[slot] || slot)
-            }));
+            ui.notifications.warn(game.i18n.format(refusal, this._mountRefusalContext(weapon, slot)));
             return false;
         }
 
@@ -674,7 +672,8 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
                 weapon: itemData,
                 mountedWeapons: this._getWeaponsInSlot(targetSlot),
                 hasComponent: this._hasComponentForSlot(targetSlot),
-                capacity: this.actor.system.attributes?.slots?.[targetSlot] || 0
+                capacity: this.actor.system.attributes?.slots?.[targetSlot] || 0,
+                tier: this.actor.system.details?.tier
             });
 
             if (!refusal) {
@@ -682,10 +681,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
                 return this.actor.createEmbeddedDocuments("Item", [itemData]);
             }
 
-            ui.notifications.warn(game.i18n.format(refusal, {
-                weapon: itemData.name,
-                slot: game.i18n.localize(CONFIG.SFRPG.mechWeaponMountableSlots[targetSlot] || targetSlot)
-            }));
+            ui.notifications.warn(game.i18n.format(refusal, this._mountRefusalContext(itemData, targetSlot)));
         }
 
         const validSlots = itemData.system.validSlots || ["frame"];
@@ -730,6 +726,28 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
 
         itemData.system.slot = selectedSlot;
         return this.actor.createEmbeddedDocuments("Item", [itemData]);
+    }
+
+    /**
+     * The values a mount refusal message can name.
+     *
+     * Every refusal is formatted with the same set, so a message can name the
+     * weapon, the mount, the mech's tier or the level ceiling that tier allows
+     * without each call site having to know which refusal came back.
+     *
+     * @param {Object|Item} weapon The weapon being mounted, as an item or item data
+     * @param {string} slot The mount it was dropped on
+     * @returns {Object} Format values for the refusal message
+     */
+    _mountRefusalContext(weapon, slot) {
+        const tier = this.actor.system.details?.tier;
+        return {
+            weapon: weapon.name,
+            slot: game.i18n.localize(CONFIG.SFRPG.mechWeaponMountableSlots[slot] || slot),
+            level: weapon.system?.levelOverride ?? tier,
+            tier: tier,
+            max: maxWeaponLevel(tier)
+        };
     }
 
     /**
