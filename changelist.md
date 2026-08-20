@@ -1,3 +1,10 @@
+# Version 14.1.1
+
+## Core System Improvements
+- Mech actions, damage level override cancellation and mission pod activation moved from the mech sheet onto the mech actor, so they can be triggered without a sheet open — from a macro, a module or another sheet
+- New `ActorSFRPG#useMechAction()`, `#cancelMechDamageOverride()` and `#setMissionPodActive()`, which own the Power Point arithmetic, the damage level override and the one-active-pod rule, all of which the mech sheet's click handlers previously did themselves
+- Mech action tables published as `CONFIG.SFRPG.mechActionTypes`, `CONFIG.SFRPG.mechPPActions` and `CONFIG.SFRPG.mechSpecialActions`, replacing the copies the mech sheet kept for itself, so an action index means the same thing everywhere
+
 # Version 14.1.0 - Mech Support + Upstream Sync
 This update merges mech support from the Tech Revolution supplement with upstream Foundry VTT v14 compatibility.
 
