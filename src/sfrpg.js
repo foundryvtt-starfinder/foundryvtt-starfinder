@@ -52,6 +52,7 @@ import SFRPGModifier from "./module/modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module/modifiers/types.js";
 import { RPC } from "./module/rpc.js";
 import { mechShieldRefills } from "./module/rules/mech-shield-reset.js";
+import { mechTurnRegen } from "./module/rules/mech-turn-regen.js";
 import registerSystemRules from "./module/rules.js";
 import { registerSystemSettings } from "./module/system/settings.js";
 import TooltipManagerSFRPG from "./module/tooltip.js";
@@ -939,31 +940,30 @@ Hooks.on("onAfterUpdateCombat", async (eventData) => {
     const messages = [];
 
     const pp = actor.system.attributes.pp;
-    const ppRegen = pp.regen || 0;
-    if (ppRegen > 0 && pp.value < pp.max) {
-        const oldPP = pp.value;
-        const newPP = Math.min(oldPP + ppRegen, pp.max);
-        const gainedPP = newPP - oldPP;
-        await actor.update({"system.attributes.pp.value": newPP});
+    const sp = actor.system.attributes.sp;
+    const regenerated = mechTurnRegen({
+        pp,
+        sp,
+        tier: actor.system.details.tier,
+        round: eventData.newRound ?? eventData.combat?.round
+    });
+
+    if (regenerated.pp !== null) {
+        await actor.update({"system.attributes.pp.value": regenerated.pp});
         messages.push(game.i18n.format("SFRPG.MechSheet.Actions.PPRegenMessage", {
             name: actor.name,
-            amount: gainedPP,
-            current: newPP,
+            amount: regenerated.pp - pp.value,
+            current: regenerated.pp,
             max: pp.max
         }));
     }
 
-    const sp = actor.system.attributes.sp;
-    const tier = actor.system.details.tier || 0;
-    if (tier > 0 && sp.value < sp.max) {
-        const oldSP = sp.value;
-        const newSP = Math.min(oldSP + tier, sp.max);
-        const gainedSP = newSP - oldSP;
-        await actor.update({"system.attributes.sp.value": newSP});
+    if (regenerated.sp !== null) {
+        await actor.update({"system.attributes.sp.value": regenerated.sp});
         messages.push(game.i18n.format("SFRPG.MechSheet.Actions.SPRegenMessage", {
             name: actor.name,
-            amount: gainedSP,
-            current: newSP,
+            amount: regenerated.sp - sp.value,
+            current: regenerated.sp,
             max: sp.max
         }));
     }

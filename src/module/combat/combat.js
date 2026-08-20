@@ -1,4 +1,5 @@
 import { CombatDifficulty } from "../apps/combat-difficulty.js";
+import { mechTurnRegen } from "../rules/mech-turn-regen.js";
 import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
@@ -530,7 +531,16 @@ export class CombatSFRPG extends foundry.documents.Combat {
         const actor = eventData.newCombatant.actor;
         if (actor?.type === "mech") {
             const pp = actor.system.attributes.pp;
-            if (pp.regen > 0 && pp.value < pp.max) {
+            // Read from the same rule that performs it, so the card cannot promise
+            // Power Points the mech is not about to get.
+            const regenerated = mechTurnRegen({
+                pp,
+                sp: actor.system.attributes.sp,
+                tier: actor.system.details.tier,
+                round: eventData.newRound ?? this.round
+            });
+
+            if (regenerated.pp !== null) {
                 const regenKey = pp.regen === 1 ? CombatSFRPG.chatCardsText.turn.ppRegenSingular : CombatSFRPG.chatCardsText.turn.ppRegen;
                 notes.push(game.i18n.format(regenKey, {regen: pp.regen}));
             }

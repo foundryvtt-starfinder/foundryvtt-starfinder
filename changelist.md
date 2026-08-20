@@ -11,6 +11,8 @@
 - A mech component's action can declare the damage level it fires at, set on the component's item sheet. An action that declares one arms an override on the weapon it is printed on, so firing a different weapon leaves it armed instead of spending it on the wrong shot
 
 ## Bugfixes
+- Mechs no longer gain Power Points during the first round of combat. Combat start sets a mech to its initial Power Points, and that allotment is what the first round is for - regeneration now begins in the round after
+- A mech regenerated both Power Points and Shield Points twice on every turn. Two separate implementations were running: the actor's own turn handler and the combat hook. The actor's copy is gone and the hook is the only one left
 - A mech weapon cannot be added to a mech or raised above the mech's tier + 1, the weapons locker included. On a mech, the weapon's level is chosen from a list of the levels that mech allows rather than typed, and a level arriving by any other route - a drop, a macro, another mech - is refused with a message naming the ceiling
 - Dragging a mounted mech weapon from one mount to another now moves it. It previously created a second copy of the weapon in the mount it came from and put nothing in the mount it was dropped on
 - Mech weapon mounts refuse a weapon they cannot take, saying whether the slot is wrong for that weapon, the component is missing, or there is no room
