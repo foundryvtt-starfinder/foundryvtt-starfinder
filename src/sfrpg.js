@@ -51,6 +51,7 @@ import { updateNotification } from './module/apps/update-notification';
 import SFRPGModifier from "./module/modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module/modifiers/types.js";
 import { RPC } from "./module/rpc.js";
+import { mechShieldRefills } from "./module/rules/mech-shield-reset.js";
 import registerSystemRules from "./module/rules.js";
 import { registerSystemSettings } from "./module/system/settings.js";
 import TooltipManagerSFRPG from "./module/tooltip.js";
@@ -885,6 +886,15 @@ Hooks.on("combatStart", async (combat) => {
         }
     }
 
+    // Shields regenerate at the mech's tier per turn once a combat is running,
+    // but nothing restores them between encounters, so each one starts a mech
+    // back at full. Read before any update, and applied per actor because an
+    // unlinked token's actor is synthetic and cannot be updated in a batch.
+    const refilledShields = mechShieldRefills(mechCombatants.map(c => c.actor));
+    for (const {actor, sp} of refilledShields) {
+        await actor.update({"system.attributes.sp.value": sp});
+    }
+
     const gmUsers = game.users.filter(u => u.isGM).map(u => u.id);
     const lines = [game.i18n.localize("SFRPG.MechSheet.Actions.CombatResetTitle")];
     for (const combatant of mechCombatants) {
@@ -894,6 +904,12 @@ Hooks.on("combatStart", async (combat) => {
             name: actor.name,
             value: pp.initial,
             max: pp.max
+        }));
+    }
+    for (const {actor, sp} of refilledShields) {
+        lines.push(game.i18n.format("SFRPG.MechSheet.Actions.CombatResetSP", {
+            name: actor.name,
+            value: sp
         }));
     }
     if (removedConditions.length > 0) {
