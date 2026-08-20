@@ -33,9 +33,9 @@
                 <li class="attribute mp-box" data-tooltip="{{#each system.currency.mpTooltip as |tip|}}{{tip}}<br>{{/each}}">
                     <h4 class="attribute-name box-title">{{ localize "SFRPG.MechSheet.Attributes.MechPoints" }}</h4>
                     <div class="attribute-value multiple">
-                        <span class="calculated-value">{{system.currency.mp}}</span>
+                        <span class="calculated-value">{{floor system.currency.mp}}</span>
                         <span class="sep"> / </span>
-                        <span class="calculated-value">{{system.currency.mpMax}}</span>
+                        <span class="calculated-value">{{floor system.currency.mpMax}}</span>
                     </div>
                 </li>
             </ul>
@@ -98,13 +98,13 @@
                         </div>
                     </li>
                     <li class="attribute save" data-save="fort" data-tooltip="{{#each system.attributes.fort.tooltip as |tip|}}{{tip}}<br>{{/each}}">
-                        <h4 class="attribute-name save-name box-title rollable">{{ localize "SFRPG.FortitudeSave" }}</h4>
+                        <h4 class="attribute-name save-name box-title rollable">{{ localize "SFRPG.FortitudeSaveShort" }}</h4>
                         <div class="attribute-value">
                             <span class="calculated-value">+{{system.attributes.fort.value}}</span>
                         </div>
                     </li>
                     <li class="attribute save" data-save="reflex" data-tooltip="{{#each system.attributes.ref.tooltip as |tip|}}{{tip}}<br>{{/each}}">
-                        <h4 class="attribute-name save-name box-title rollable">{{ localize "SFRPG.ReflexSave" }}</h4>
+                        <h4 class="attribute-name save-name box-title rollable">{{ localize "SFRPG.ReflexSaveShort" }}</h4>
                         <div class="attribute-value">
                             <span class="calculated-value">+{{system.attributes.ref.value}}</span>
                         </div>

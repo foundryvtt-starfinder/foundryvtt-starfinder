@@ -100,6 +100,11 @@ export function setupHandlebars() {
         return v1 / v2;
     });
 
+    Handlebars.registerHelper("floor", function(value) {
+        'use strict';
+        return Math.floor(value);
+    });
+
     Handlebars.registerHelper("isNull", function(value) {
         if (value === 0) return false;
         return !value;
