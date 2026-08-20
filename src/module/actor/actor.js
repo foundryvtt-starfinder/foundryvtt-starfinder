@@ -11,6 +11,7 @@ import { ActorConditionsMixin } from "./mixins/actor-conditions.js";
 import { ActorCrewMixin } from "./mixins/actor-crew.js";
 import { ActorDamageMixin } from "./mixins/actor-damage.js";
 import { ActorInventoryMixin } from "./mixins/actor-inventory.js";
+import { ActorMechMixin } from "./mixins/actor-mech.js";
 import { ActorModifiersMixin } from "./mixins/actor-modifiers.js";
 import { ActorResourcesMixin } from "./mixins/actor-resources.js";
 import { ActorRestMixin } from "./mixins/actor-rest.js";
@@ -32,7 +33,7 @@ import { } from "./crew-update.js";
 /** @import RollResult from '../dice.js' */
 
 /** @extends {foundry.documents.Actor} */
-export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
+export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorConditionsMixin, ActorCrewMixin, ActorDamageMixin, ActorInventoryMixin, ActorMechMixin, ActorModifiersMixin, ActorResourcesMixin, ActorRestMixin) {
 
     constructor(data, context) {
         super(data, context);

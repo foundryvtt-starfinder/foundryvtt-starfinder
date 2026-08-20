@@ -991,6 +991,81 @@ SFRPG.mechSystemStatus = {
     "inoperable": "SFRPG.MechSheet.Systems.StatusInoperable"
 };
 
+/**
+ * Action type labels for mech actions, shared by the mech sheet and the mech
+ * action chat card.
+ * @type {Object}
+ */
+SFRPG.mechActionTypes = {
+    "standard": "SFRPG.MechSheet.Actions.ActionTypes.Standard",
+    "move": "SFRPG.MechSheet.Actions.ActionTypes.Move",
+    "full": "SFRPG.MechSheet.Actions.ActionTypes.Full",
+    "swift": "SFRPG.MechSheet.Actions.ActionTypes.Swift",
+    "reaction": "SFRPG.MechSheet.Actions.ActionTypes.Reaction"
+};
+
+/**
+ * Universal mech actions paid for with Power Points (Tech Revolution pg. 104).
+ *
+ * Addressed by array index, so the order here is what `useMechAction("pp", index)`
+ * and the sheet's action buttons both resolve against.
+ *
+ * `armsOverride` is written to the `sfrpg.damageLevelOverride` flag and consumed
+ * by the next mech damage roll.
+ * @type {Array}
+ */
+SFRPG.mechPPActions = [
+    {
+        name: "SFRPG.MechSheet.Actions.PP.Aim.Name",
+        description: "SFRPG.MechSheet.Actions.PP.Aim.Description",
+        ppCost: 1
+    },
+    {
+        name: "SFRPG.MechSheet.Actions.PP.DevastatingHit.Name",
+        description: "SFRPG.MechSheet.Actions.PP.DevastatingHit.Description",
+        ppCost: 3,
+        armsOverride: { steps: 1 }
+    },
+    {
+        name: "SFRPG.MechSheet.Actions.PP.Maneuver.Name",
+        description: "SFRPG.MechSheet.Actions.PP.Maneuver.Description",
+        ppCost: 1
+    },
+    {
+        name: "SFRPG.MechSheet.Actions.PP.Replenish.Name",
+        description: "SFRPG.MechSheet.Actions.PP.Replenish.Description",
+        ppCost: 2
+    },
+    {
+        name: "SFRPG.MechSheet.Actions.PP.Resist.Name",
+        description: "SFRPG.MechSheet.Actions.PP.Resist.Description",
+        ppCost: 1
+    }
+];
+
+/**
+ * Universal mech actions that cost an action rather than Power Points.
+ * Addressed by array index, as SFRPG.mechPPActions is.
+ * @type {Array}
+ */
+SFRPG.mechSpecialActions = [
+    {
+        name: "SFRPG.MechSheet.Actions.Special.CalledShot.Name",
+        description: "SFRPG.MechSheet.Actions.Special.CalledShot.Description",
+        actionType: "standard"
+    },
+    {
+        name: "SFRPG.MechSheet.Actions.Special.Hurl.Name",
+        description: "SFRPG.MechSheet.Actions.Special.Hurl.Description",
+        actionType: "full"
+    },
+    {
+        name: "SFRPG.MechSheet.Actions.Special.Scan.Name",
+        description: "SFRPG.MechSheet.Actions.Special.Scan.Description",
+        actionType: "move"
+    }
+];
+
 SFRPG.mechWeaponTypes = {
     "melee": "SFRPG.MechSheet.Weapon.TypeMelee",
     "ranged": "SFRPG.MechSheet.Weapon.TypeRanged"

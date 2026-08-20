@@ -285,33 +285,26 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         // PP Actions (universal, always available)
         const currentPP = actorData.attributes?.pp?.value || 0;
         const insufficientPPTooltip = game.i18n.localize("SFRPG.MechSheet.Actions.InsufficientPP");
-        actionsTab.ppActions = [
-            { name: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Aim.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Aim.Description"), ppCost: 1 },
-            { name: game.i18n.localize("SFRPG.MechSheet.Actions.PP.DevastatingHit.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.PP.DevastatingHit.Description"), ppCost: 3 },
-            { name: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Maneuver.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Maneuver.Description"), ppCost: 1 },
-            { name: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Replenish.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Replenish.Description"), ppCost: 2 },
-            { name: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Resist.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.PP.Resist.Description"), ppCost: 1 }
-        ];
-        for (const action of actionsTab.ppActions) {
-            action.canAfford = currentPP >= action.ppCost;
-            action.insufficientPPTooltip = insufficientPPTooltip;
-        }
+        actionsTab.ppActions = CONFIG.SFRPG.mechPPActions.map(action => ({
+            name: game.i18n.localize(action.name),
+            description: game.i18n.localize(action.description),
+            ppCost: action.ppCost,
+            canAfford: currentPP >= action.ppCost,
+            insufficientPPTooltip: insufficientPPTooltip
+        }));
 
         // Special Actions (universal, action type instead of PP cost)
-        const actionTypeLabels = {
-            standard: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Standard"),
-            move: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Move"),
-            full: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Full"),
-            swift: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Swift"),
-            reaction: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Reaction")
-        };
+        const actionTypeLabels = Object.fromEntries(
+            Object.entries(CONFIG.SFRPG.mechActionTypes).map(([key, label]) => [key, game.i18n.localize(label)])
+        );
         const constantLabel = game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Constant");
 
-        actionsTab.specialActions = [
-            { name: game.i18n.localize("SFRPG.MechSheet.Actions.Special.CalledShot.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.Special.CalledShot.Description"), actionType: "standard", actionTypeLabel: actionTypeLabels.standard },
-            { name: game.i18n.localize("SFRPG.MechSheet.Actions.Special.Hurl.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.Special.Hurl.Description"), actionType: "full", actionTypeLabel: actionTypeLabels.full },
-            { name: game.i18n.localize("SFRPG.MechSheet.Actions.Special.Scan.Name"), description: game.i18n.localize("SFRPG.MechSheet.Actions.Special.Scan.Description"), actionType: "move", actionTypeLabel: actionTypeLabels.move }
-        ];
+        actionsTab.specialActions = CONFIG.SFRPG.mechSpecialActions.map(action => ({
+            name: game.i18n.localize(action.name),
+            description: game.i18n.localize(action.description),
+            actionType: action.actionType,
+            actionTypeLabel: actionTypeLabels[action.actionType] || action.actionType
+        }));
 
         // Gear Actions: from equipped components that have actions arrays
         actionsTab.gearActions = [];
@@ -485,105 +478,17 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
     }
 
     /**
-     * Handle clicking a mech action button. Posts a chat card describing the action.
+     * Handle clicking a mech action button.
      * @param {Event} event The click event
      * @param {string} actionCategory "pp", "special", or "gear"
      */
     async _onMechAction(event, actionCategory) {
         event.preventDefault();
         const el = event.currentTarget;
-        const actionIndex = parseInt(el.dataset.actionIndex);
 
-        let name, description, ppCost, actionType, gearName, img, armsOverride;
-        img = this.actor.img;
-
-        if (actionCategory === "pp") {
-            const ppActions = [
-                { name: "SFRPG.MechSheet.Actions.PP.Aim.Name", desc: "SFRPG.MechSheet.Actions.PP.Aim.Description", ppCost: 1 },
-                { name: "SFRPG.MechSheet.Actions.PP.DevastatingHit.Name", desc: "SFRPG.MechSheet.Actions.PP.DevastatingHit.Description", ppCost: 3, armsOverride: { steps: 1 } },
-                { name: "SFRPG.MechSheet.Actions.PP.Maneuver.Name", desc: "SFRPG.MechSheet.Actions.PP.Maneuver.Description", ppCost: 1 },
-                { name: "SFRPG.MechSheet.Actions.PP.Replenish.Name", desc: "SFRPG.MechSheet.Actions.PP.Replenish.Description", ppCost: 2 },
-                { name: "SFRPG.MechSheet.Actions.PP.Resist.Name", desc: "SFRPG.MechSheet.Actions.PP.Resist.Description", ppCost: 1 }
-            ];
-            const action = ppActions[actionIndex];
-            name = game.i18n.localize(action.name);
-            description = game.i18n.localize(action.desc);
-            ppCost = action.ppCost;
-            armsOverride = action.armsOverride;
-        } else if (actionCategory === "special") {
-            const specialActions = [
-                { name: "SFRPG.MechSheet.Actions.Special.CalledShot.Name", desc: "SFRPG.MechSheet.Actions.Special.CalledShot.Description", actionType: "standard" },
-                { name: "SFRPG.MechSheet.Actions.Special.Hurl.Name", desc: "SFRPG.MechSheet.Actions.Special.Hurl.Description", actionType: "full" },
-                { name: "SFRPG.MechSheet.Actions.Special.Scan.Name", desc: "SFRPG.MechSheet.Actions.Special.Scan.Description", actionType: "move" }
-            ];
-            const action = specialActions[actionIndex];
-            name = game.i18n.localize(action.name);
-            description = game.i18n.localize(action.desc);
-            actionType = action.actionType;
-        } else if (actionCategory === "gear") {
-            const itemId = el.dataset.itemId;
-            const itemActionIndex = parseInt(el.dataset.itemActionIndex);
-            const item = this.actor.items.get(itemId);
-            if (!item) return;
-            const action = item.system.actions?.[itemActionIndex];
-            if (!action) return;
-            name = `${action.name} (${item.name})`;
-            description = action.description;
-            ppCost = action.ppCost;
-            actionType = action.actionType;
-            gearName = item.name;
-            img = item.img;
-        }
-
-        const actionTypeLabels = {
-            standard: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Standard"),
-            move: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Move"),
-            full: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Full"),
-            swift: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Swift"),
-            reaction: game.i18n.localize("SFRPG.MechSheet.Actions.ActionTypes.Reaction")
-        };
-
-        // Deduct PP if this action has a cost
-        if (ppCost !== null && ppCost !== undefined && ppCost > 0) {
-            const currentPP = this.actor.system.attributes.pp.value || 0;
-            if (currentPP < ppCost) {
-                ui.notifications.warn(game.i18n.localize("SFRPG.MechSheet.Actions.InsufficientPP"));
-                return;
-            }
-            await this.actor.update({ "system.attributes.pp.value": currentPP - ppCost });
-        }
-
-        // Actions like Devastating Hit are declared before damage is rolled, so they arm an
-        // override that the next mech damage roll consumes.
-        if (armsOverride) {
-            await this.actor.setFlag("sfrpg", "damageLevelOverride", {
-                ...armsOverride,
-                source: name,
-                ppSpent: ppCost || 0
-            });
-        }
-
-        const ppSpent = (ppCost !== null && ppCost !== undefined && ppCost > 0)
-            ? game.i18n.format("SFRPG.MechSheet.Actions.PPSpent", { amount: ppCost })
-            : null;
-
-        const templateData = {
-            actor: this.actor,
-            name: name,
-            img: img,
-            description: description,
-            ppCost: ppCost !== null && ppCost !== undefined ? `${ppCost} PP` : null,
-            ppSpent: ppSpent,
-            actionTypeLabel: actionType ? (actionTypeLabels[actionType] || actionType) : null,
-            gearName: gearName || null
-        };
-
-        const html = await renderTemplate("systems/sfrpg/templates/chat/mech-action-card.hbs", templateData);
-        await ChatMessage.create({
-            user: game.user.id,
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            content: html,
-            style: CONST.CHAT_MESSAGE_STYLES.OTHER
+        return this.actor.useMechAction(actionCategory, parseInt(el.dataset.actionIndex), {
+            itemId: el.dataset.itemId,
+            itemActionIndex: parseInt(el.dataset.itemActionIndex)
         });
     }
 
@@ -594,23 +499,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
     async _onCancelOverride(event) {
         event.preventDefault();
 
-        const override = this.actor.getFlag("sfrpg", "damageLevelOverride");
-        if (!override) return;
-
-        await this.actor.unsetFlag("sfrpg", "damageLevelOverride");
-
-        const refund = override.ppSpent || 0;
-        if (refund > 0) {
-            const pp = this.actor.system.attributes.pp;
-            await this.actor.update({
-                "system.attributes.pp.value": Math.min(pp.value + refund, pp.max)
-            });
-        }
-
-        ui.notifications.info(game.i18n.format("SFRPG.MechSheet.DamageLevelOverride.Cancelled", {
-            source: override.source,
-            amount: refund
-        }));
+        return this.actor.cancelMechDamageOverride();
     }
 
     /**
@@ -619,65 +508,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
      */
     async _onMissionPodActivate(event) {
         event.preventDefault();
-        const li = $(event.currentTarget).parents(".item");
-        const podId = li.data("item-id");
-        const pod = this.actor.items.get(podId);
-
-        if (!pod) return;
-
-        // Check if another pod is already active
-        const activePod = this.actor.items.find(i => i.type === "mechMissionPod" && i.system.isActive);
-        if (activePod) {
-            ui.notifications.warn(game.i18n.localize("SFRPG.MechSheet.MissionPod.OnlyOne"));
-            return;
-        }
-
-        // Confirm activation
-        const confirmed = await Dialog.confirm({
-            title: game.i18n.localize("SFRPG.MechSheet.MissionPod.ActivateConfirmTitle"),
-            content: `<p>${game.i18n.format("SFRPG.MechSheet.MissionPod.ActivateConfirmPrompt", { pod: pod.name })}</p>`,
-            yes: () => true,
-            no: () => false,
-            defaultYes: false
-        });
-
-        if (!confirmed) return;
-
-        // Create items from pod's item templates
-        const itemTemplates = pod.system.itemTemplates || [];
-        const createdItemIds = [];
-
-        if (itemTemplates.length > 0) {
-            // Prepare item data from templates
-            const itemsToCreate = itemTemplates.map(template => {
-                const itemData = foundry.utils.deepClone(template);
-                // Remove _id so Foundry generates a new one
-                delete itemData._id;
-                // Mark as from mission pod
-                itemData.flags = itemData.flags || {};
-                itemData.flags.sfrpg = itemData.flags.sfrpg || {};
-                itemData.flags.sfrpg.fromMissionPod = pod.id;
-                return itemData;
-            });
-
-            // Create the items on the actor
-            const createdItems = await this.actor.createEmbeddedDocuments("Item", itemsToCreate);
-            for (const item of createdItems) {
-                createdItemIds.push(item.id);
-            }
-        }
-
-        // Activate the pod and store created item IDs
-        await pod.update({
-            "system.isActive": true,
-            "system.createdItemIds": createdItemIds
-        });
-
-        // Force actor data re-preparation and sheet re-render
-        this.actor.prepareData();
-        this.render(false);
-
-        ui.notifications.info(`${pod.name} activated.`);
+        return this._onMissionPodToggle(event, true);
     }
 
     /**
@@ -686,44 +517,17 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
      */
     async _onMissionPodDeactivate(event) {
         event.preventDefault();
+        return this._onMissionPodToggle(event, false);
+    }
+
+    /**
+     * @param {Event} event The click event
+     * @param {boolean} active True to activate the pod, false to deactivate it
+     */
+    async _onMissionPodToggle(event, active) {
         const li = $(event.currentTarget).parents(".item");
-        const podId = li.data("item-id");
-        const pod = this.actor.items.get(podId);
-
-        if (!pod) return;
-
-        // Confirm deactivation
-        const confirmed = await Dialog.confirm({
-            title: game.i18n.localize("SFRPG.MechSheet.MissionPod.DeactivateConfirmTitle"),
-            content: `<p>${game.i18n.format("SFRPG.MechSheet.MissionPod.DeactivateConfirmPrompt", { pod: pod.name })}</p>`,
-            yes: () => true,
-            no: () => false,
-            defaultYes: false
-        });
-
-        if (!confirmed) return;
-
-        // Remove items that were created from this pod's templates
-        const createdItemIds = pod.system.createdItemIds || [];
-        if (createdItemIds.length > 0) {
-            // Filter to only IDs that still exist
-            const idsToDelete = createdItemIds.filter(id => this.actor.items.has(id));
-            if (idsToDelete.length > 0) {
-                await this.actor.deleteEmbeddedDocuments("Item", idsToDelete);
-            }
-        }
-
-        // Deactivate the pod and clear created item IDs
-        await pod.update({
-            "system.isActive": false,
-            "system.createdItemIds": []
-        });
-
-        // Force actor data re-preparation and sheet re-render
-        this.actor.prepareData();
-        this.render(false);
-
-        ui.notifications.info(`${pod.name} deactivated.`);
+        const changed = await this.actor.setMissionPodActive(li.data("item-id"), active);
+        if (changed) this.render(false);
     }
 
     /**
