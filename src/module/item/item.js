@@ -10,6 +10,7 @@ import {
     conditionsFromItems,
     worstAffectedOperator
 } from "../rules/mech-condition-modifiers.js";
+import { LOCKER_SLOT, levelRefusal, maxWeaponLevel } from "../actor/sheet/mech-weapon-slots.js";
 import { applyPerDieBonus, overrideAppliesTo, resolveDamageLevel } from "../rules/mech-damage-level.js";
 import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
@@ -326,6 +327,44 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         this.updateSource(updates);
 
         return super._preCreate(data, options, user);
+    }
+
+    /**
+     * Refuse a level override that takes a mounted mech weapon above what its mech
+     * may carry.
+     *
+     * A mech may mount weapons one level above its own tier. The bound cannot be
+     * expressed on the field itself, because the ceiling belongs to the mech the
+     * weapon is mounted on rather than to the weapon. A weapon sitting in the
+     * locker is left alone - it is not mounted, and mounting it is refused at that
+     * point instead.
+     *
+     * @param {object} changed The differential data being applied
+     * @param {object} options Additional options which modify the update request
+     * @param {string} user The id of the requesting user
+     * @returns {boolean|void} False to cancel the update
+     */
+    async _preUpdate(changed, options, user) {
+        const newLevel = changed?.system?.levelOverride;
+        const mounted = this.type === "mechWeapon"
+            && this.actor?.type === "mech"
+            && this.system.slot !== LOCKER_SLOT;
+
+        if (newLevel !== undefined && mounted) {
+            const tier = this.actor.system.details?.tier;
+            const refusal = levelRefusal({ weapon: { system: { levelOverride: newLevel } }, tier });
+            if (refusal) {
+                ui.notifications.warn(game.i18n.format("SFRPG.MechSheet.Weapon.LevelOverrideTooHigh", {
+                    weapon: this.name,
+                    level: newLevel,
+                    tier: tier,
+                    max: maxWeaponLevel(tier)
+                }));
+                return false;
+            }
+        }
+
+        return super._preUpdate(changed, options, user);
     }
 
     /* -------------------------------------------- */
