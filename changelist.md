@@ -1,5 +1,15 @@
 # Version 14.1.1
 
+## New Features
+- Conditions on a mech now modify its attack and damage rolls. Positional conditions (Off-Target, Off-Kilter, Entangled, Grappled, Pinned, Prone, Dazzled) apply to the mech itself
+- Conditions on a mech's operators reach the mech's rolls too, for the conditions that belong to a crew member rather than a machine: Frightened, Shaken, Sickened, Fatigued, Exhausted, Negative Level, plus Off-Target and Dazzled. Where operators differ, the worst-affected one counts, matching how mech initiative already takes the lowest operator
+- The chat card names the condition behind each penalty, and marks the ones that came from an operator
+
+## Bugfixes
+- Dragging a mounted mech weapon from one mount to another now moves it. It previously created a second copy of the weapon in the mount it came from and put nothing in the mount it was dropped on
+- Mech weapon mounts refuse a weapon they cannot take, saying whether the slot is wrong for that weapon, the component is missing, or there is no room
+- An empty mech weapon mount shows a placeholder row, so it can be dropped onto
+
 ## Core System Improvements
 - Mech actions, damage level override cancellation and mission pod activation moved from the mech sheet onto the mech actor, so they can be triggered without a sheet open — from a macro, a module or another sheet
 - New `ActorSFRPG#useMechAction()`, `#cancelMechDamageOverride()` and `#setMissionPodActive()`, which own the Power Point arithmetic, the damage level override and the one-active-pod rule, all of which the mech sheet's click handlers previously did themselves
