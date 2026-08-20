@@ -46,6 +46,20 @@ export function maxWeaponLevel(tier) {
 }
 
 /**
+ * The levels a weapon mounted on a mech of this tier may be set to.
+ *
+ * Offering only the reachable levels is what keeps an out-of-range one from
+ * being entered at all; the refusals below are what stop it arriving by any
+ * other route.
+ *
+ * @param {number} tier The mech's tier.
+ * @returns {number[]} Every level from 1 up to the mech's ceiling.
+ */
+export function allowedWeaponLevels(tier) {
+    return Array.from({ length: maxWeaponLevel(tier) }, (_, index) => index + 1);
+}
+
+/**
  * Why a weapon is too high a level for a mech.
  *
  * Only a weapon carrying an explicit levelOverride can breach the cap. A weapon
@@ -65,6 +79,25 @@ export function levelRefusal({ weapon, tier }) {
 }
 
 /**
+ * The level a weapon is being set to by an update, whichever shape it arrives in.
+ *
+ * A sheet submits its form flattened - `{"system.levelOverride": 8}` - while code
+ * calling update() passes it nested. Foundry hands _preUpdate whichever the
+ * caller used, so both have to be read.
+ *
+ * @param {object} changed The differential data from an update
+ * @returns {number|null|undefined} The level being set, or undefined if this update does not set one
+ */
+export function updatedWeaponLevel(changed) {
+    if (!changed) return undefined;
+
+    if ("system.levelOverride" in changed) return changed["system.levelOverride"];
+    if (changed.system && "levelOverride" in changed.system) return changed.system.levelOverride;
+
+    return undefined;
+}
+
+/**
  * Why a weapon cannot go in a slot.
  *
  * The weapon is excluded from the slots already spent, so re-dropping a weapon
@@ -80,17 +113,17 @@ export function levelRefusal({ weapon, tier }) {
  * @returns {string|null} A localization key for the refusal, or null when the move is allowed
  */
 export function mountRefusal({ slot, weapon, mountedWeapons = [], hasComponent = false, capacity = 0, tier = 0 }) {
+    // A mech may not carry an over-level weapon at all, so this is checked before
+    // the locker is waved through.
+    const tooHigh = levelRefusal({ weapon, tier });
+    if (tooHigh) return tooHigh;
+
     if (slot === LOCKER_SLOT) return null;
 
     if (!(slot in SLOT_COMPONENT_TYPES)) return "SFRPG.MechSheet.WeaponsLocker.UnknownSlot";
 
     const validSlots = weapon?.system?.validSlots ?? [];
     if (!validSlots.includes(slot)) return "SFRPG.MechSheet.WeaponsLocker.InvalidSlotForWeapon";
-
-    // The locker is already allowed above, so an over-level weapon may sit there.
-    // Only mounting it is refused.
-    const tooHigh = levelRefusal({ weapon, tier });
-    if (tooHigh) return tooHigh;
 
     if (!hasComponent) return "SFRPG.MechSheet.WeaponsLocker.NoComponentForSlot";
 

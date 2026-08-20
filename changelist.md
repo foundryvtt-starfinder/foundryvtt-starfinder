@@ -11,7 +11,7 @@
 - A mech component's action can declare the damage level it fires at, set on the component's item sheet. An action that declares one arms an override on the weapon it is printed on, so firing a different weapon leaves it armed instead of spending it on the wrong shot
 
 ## Bugfixes
-- A mech weapon cannot be mounted or upgraded above the mech's tier + 1. Dropping an over-level weapon onto a mount is refused with a message naming the ceiling, and raising a mounted weapon's level override past it is refused the same way. An over-level weapon may still sit in the weapons locker, where it is not in play
+- A mech weapon cannot be added to a mech or raised above the mech's tier + 1, the weapons locker included. On a mech, the weapon's level is chosen from a list of the levels that mech allows rather than typed, and a level arriving by any other route - a drop, a macro, another mech - is refused with a message naming the ceiling
 - Dragging a mounted mech weapon from one mount to another now moves it. It previously created a second copy of the weapon in the mount it came from and put nothing in the mount it was dropped on
 - Mech weapon mounts refuse a weapon they cannot take, saying whether the slot is wrong for that weapon, the component is missing, or there is no room
 - An empty mech weapon mount shows a placeholder row, so it can be dropped onto
