@@ -1,6 +1,7 @@
 # Version 14.1.1
 
 ## New Features
+- A dice expression written in plain text - "takes 2d6 acid damage" - is now a link that rolls it. This applies wherever text is displayed, so item and spell descriptions, biographies, journals and chat cards all pick it up. Text that was already marked up as a roll is left as it is, and so is a dice expression inside a code block, an existing link, or one whose meaning would be changed by linking part of it, such as the 1d4 of "1d4x10 credits"
 - Conditions on a mech now modify its attack and damage rolls. Positional conditions (Off-Target, Off-Kilter, Entangled, Grappled, Pinned, Prone, Dazzled) apply to the mech itself
 - Conditions on a mech's operators reach the mech's rolls too, for the conditions that belong to a crew member rather than a machine: Frightened, Shaken, Sickened, Fatigued, Exhausted, Negative Level, plus Off-Target and Dazzled. Where operators differ, the worst-affected one counts, matching how mech initiative already takes the lowest operator
 - The chat card names the condition behind each penalty, and marks the ones that came from an operator
