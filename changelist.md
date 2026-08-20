@@ -7,6 +7,8 @@
 - Mechs have a Will save. A mech has no will of its own, so it is the lowest Will save among its operators, with a tooltip naming which one it came from
 - Conditions on a mech modify its EAC, KAC, Fortitude, Reflex and Will. Only the mech's own conditions count here: a mech's armor class is its plating and its saves are the machine's resilience, so an operator being shaken does not make the mech easier to hit
 - A mech's Shield Points are restored to full when combat starts, alongside the Power Point and condition reset that already happened there. Shields still regenerate at the mech's tier per turn during the fight; this is what puts them back between fights. The GM's combat-start summary says which mechs had shields restored and to what
+- Massive Target Penetrating Weapon's Charged Extreme Projectile now works. Spending its 3 PP makes that weapon's next damage roll use the extreme column of the damage table, the way Devastating Hit already raised a weapon's damage level. It previously spent the Power Points for no mechanical effect
+- A mech component's action can declare the damage level it fires at, set on the component's item sheet. An action that declares one arms an override on the weapon it is printed on, so firing a different weapon leaves it armed instead of spending it on the wrong shot
 
 ## Bugfixes
 - Dragging a mounted mech weapon from one mount to another now moves it. It previously created a second copy of the weapon in the mount it came from and put nothing in the mount it was dropped on

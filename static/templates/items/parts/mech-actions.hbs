@@ -37,6 +37,15 @@
                     </select>
                 </div>
             </div>
+            <div class="form-group">
+                <label>{{ localize "SFRPG.MechSheet.Action.DamageLevel" }}</label>
+                <div class="form-fields">
+                    <select name="system.actions.{{i}}.damageLevel">
+                        <option value="" {{#unless action.damageLevel}}selected{{/unless}}>{{ localize "SFRPG.MechSheet.Action.DamageLevelNone" }}</option>
+                        {{selectOptions (sfrpg "mechWeaponDamageLevels") selected=action.damageLevel localize=true}}
+                    </select>
+                </div>
+            </div>
         </div>
     </li>
     {{/each}}

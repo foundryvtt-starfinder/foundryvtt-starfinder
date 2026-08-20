@@ -1,4 +1,5 @@
 import { SFRPG } from "../../config.js";
+import { actionDamageOverride } from "../../rules/mech-damage-level.js";
 
 export const ActorMechMixin = (superclass) => class extends superclass {
     /**
@@ -20,6 +21,9 @@ export const ActorMechMixin = (superclass) => class extends superclass {
      */
     async useMechAction(category, index, { itemId = null, itemActionIndex = null } = {}) {
         let name, description, ppCost, actionType, gearName, armsOverride;
+        // Set for gear actions so the override they arm is spent by the weapon it
+        // is printed on and not by whatever the mech fires next.
+        let overrideItemId = null;
         let img = this.img;
 
         if (category === "pp") {
@@ -46,6 +50,8 @@ export const ActorMechMixin = (superclass) => class extends superclass {
             actionType = action.actionType;
             gearName = item.name;
             img = item.img;
+            armsOverride = actionDamageOverride(action);
+            if (armsOverride) overrideItemId = item.id;
         } else {
             return null;
         }
@@ -70,7 +76,8 @@ export const ActorMechMixin = (superclass) => class extends superclass {
             await this.setFlag("sfrpg", "damageLevelOverride", {
                 ...armsOverride,
                 source: name,
-                ppSpent: ppCost || 0
+                ppSpent: ppCost || 0,
+                itemId: overrideItemId
             });
         }
 

@@ -10,7 +10,7 @@ import {
     conditionsFromItems,
     worstAffectedOperator
 } from "../rules/mech-condition-modifiers.js";
-import { applyPerDieBonus, resolveDamageLevel } from "../rules/mech-damage-level.js";
+import { applyPerDieBonus, overrideAppliesTo, resolveDamageLevel } from "../rules/mech-damage-level.js";
 import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
 import { ItemCapacityMixin } from "./mixins/item-capacity.js";
@@ -1371,7 +1371,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const tags = [];
         const override = this.actor.getFlag("sfrpg", "damageLevelOverride");
         let overrideApplied = false;
-        if (override && parts.length > 0) {
+        if (overrideAppliesTo(override, this.id) && parts.length > 0) {
             const boosted = this._applyDamageLevelOverride(parts[0], override);
             if (boosted) {
                 tags.push({ tag: "damage-level-override", text: boosted.tagText });

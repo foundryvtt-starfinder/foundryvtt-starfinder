@@ -568,6 +568,13 @@ export default class SFRPGItemBase extends SFRPGDocumentBase {
                 blank: true,
                 label: "SFRPG.MechSheet.Action.ActionType"
             }),
+            // An ability that fires the weapon it is printed on at a set damage
+            // level - "dealing extreme damage" - rather than at the weapon's own.
+            damageLevel: new fields.StringField({
+                initial: "",
+                blank: true,
+                label: "SFRPG.MechSheet.Action.DamageLevel"
+            }),
             saveType: new fields.StringField({
                 initial: "",
                 blank: true,
