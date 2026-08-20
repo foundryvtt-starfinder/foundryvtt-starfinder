@@ -1,3 +1,4 @@
+import { allowedWeaponLevels } from "../actor/sheet/mech-weapon-slots.js";
 import { SFRPG } from "../config.js";
 import RollContext from "../rolls/rollcontext.js";
 import { WeaponPropertySelectorSFRPG } from "../apps/trait-selectors/weapon-property-selector.js";
@@ -108,6 +109,14 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         data.itemData = data.data.system;
         data.actor = this.document.parent;
         data.labels = this.item.labels;
+
+        // A mech weapon on a mech is capped at the mech's tier + 1, so the sheet
+        // offers only the levels that mech will take. Off a mech there is no tier
+        // to cap against, and the field stays a free number.
+        if (data.item.type === "mechWeapon" && this.actor?.type === "mech") {
+            data.weaponLevels = allowedWeaponLevels(this.actor.system.details?.tier);
+            data.weaponLevelDefault = this.actor.system.details?.tier;
+        }
 
         if (data.item.type === "mechUpperLimb") {
             data.itemData.isMeleeChosen = data.itemData.attackBonusChoice === "melee";

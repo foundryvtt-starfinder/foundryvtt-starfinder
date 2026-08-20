@@ -1,6 +1,6 @@
 import { JSDOM } from "jsdom";
 import { beforeEach, describe, expect, it } from "vitest";
-import { droppedSlot, levelRefusal, maxWeaponLevel, mountRefusal } from "./mech-weapon-slots.js";
+import { allowedWeaponLevels, droppedSlot, levelRefusal, maxWeaponLevel, mountRefusal, updatedWeaponLevel } from "./mech-weapon-slots.js";
 
 /** A weapon as the sheet sees it: an id, the slots it may go in, its size and its level. */
 function weapon({ id = "w1", validSlots = ["frame", "upperLimb"], slotsUsed = 1, levelOverride = null } = {}) {
@@ -196,13 +196,56 @@ describe("mountRefusal level cap", () => {
         })).toBeNull();
     });
 
-    it("lets an over-level weapon sit in the locker", () => {
-        // The locker is storage, not a mount - the weapon is refused when it is
-        // mounted rather than when it is put away.
+    it("refuses an over-level weapon even into the locker", () => {
+        // The locker is part of the mech, and a mech may not carry a weapon
+        // above its ceiling at all.
         expect(mountRefusal({
             slot: "locker",
             weapon: weapon({ levelOverride: 20 }),
             tier: 1
+        })).toBe("SFRPG.MechSheet.WeaponsLocker.LevelTooHigh");
+    });
+
+    it("still takes a weapon within the cap into the locker", () => {
+        expect(mountRefusal({
+            slot: "locker",
+            weapon: weapon({ levelOverride: 2 }),
+            tier: 5
         })).toBeNull();
+    });
+});
+
+describe("allowedWeaponLevels", () => {
+    it("offers every level up to the mech's tier + 1", () => {
+        expect(allowedWeaponLevels(5)).toEqual([1, 2, 3, 4, 5, 6]);
+    });
+
+    it("offers level 1 alone for a mech whose tier cannot be read", () => {
+        expect(allowedWeaponLevels(undefined)).toEqual([1]);
+    });
+});
+
+describe("updatedWeaponLevel", () => {
+    it("reads a level from the flattened shape a sheet submits", () => {
+        // The item sheet posts its form as {"system.levelOverride": 8}, which is
+        // what reached _preUpdate unread and let a level 8 weapon onto a tier 5 mech.
+        expect(updatedWeaponLevel({ "system.levelOverride": 8, "system.slot": "frame" })).toBe(8);
+    });
+
+    it("reads a level from the nested shape code passes to update()", () => {
+        expect(updatedWeaponLevel({ system: { levelOverride: 8 } })).toBe(8);
+    });
+
+    it("reads a level being cleared back to the mech's tier", () => {
+        // Null is a real value here and must not read as "no change".
+        expect(updatedWeaponLevel({ "system.levelOverride": null })).toBeNull();
+    });
+
+    it("reads nothing from an update that leaves the level alone", () => {
+        expect(updatedWeaponLevel({ "system.slot": "frame" })).toBeUndefined();
+    });
+
+    it("reads nothing when there is no update to read", () => {
+        expect(updatedWeaponLevel(undefined)).toBeUndefined();
     });
 });

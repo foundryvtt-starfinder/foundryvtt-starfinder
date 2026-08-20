@@ -10,7 +10,7 @@ import {
     conditionsFromItems,
     worstAffectedOperator
 } from "../rules/mech-condition-modifiers.js";
-import { LOCKER_SLOT, levelRefusal, maxWeaponLevel } from "../actor/sheet/mech-weapon-slots.js";
+import { levelRefusal, maxWeaponLevel, updatedWeaponLevel } from "../actor/sheet/mech-weapon-slots.js";
 import { applyPerDieBonus, overrideAppliesTo, resolveDamageLevel } from "../rules/mech-damage-level.js";
 import { Mix } from "../utils/custom-mixer.js";
 import { ItemActivationMixin } from "./mixins/item-activation.js";
@@ -266,6 +266,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const t = this.type;
         const itemData = this.system;
 
+        // A mech may not be given a weapon above its tier + 1, whichever route the
+        // weapon arrives by - a drop, a macro, or a copy from another mech.
+        if (t === "mechWeapon" && this.actor?.type === "mech"
+            && this._refuseWeaponLevel(itemData.levelOverride, this.actor)) {
+            return false;
+        }
+
         if (t === "class" && !itemData?.slug) {
             updates["system.slug"] = this.name.slugify({replacement: "_", strict: true});
         }
@@ -330,14 +337,13 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
     }
 
     /**
-     * Refuse a level override that takes a mounted mech weapon above what its mech
-     * may carry.
+     * Refuse a level override that takes a mech weapon above what its mech may carry.
      *
-     * A mech may mount weapons one level above its own tier. The bound cannot be
-     * expressed on the field itself, because the ceiling belongs to the mech the
-     * weapon is mounted on rather than to the weapon. A weapon sitting in the
-     * locker is left alone - it is not mounted, and mounting it is refused at that
-     * point instead.
+     * The bound cannot be expressed on the field itself, because the ceiling
+     * belongs to the mech the weapon is on rather than to the weapon. The item
+     * sheet offers only the reachable levels, so this is what stops one arriving
+     * by any other route - a macro, a module, or a level set before the weapon
+     * was added to the mech.
      *
      * @param {object} changed The differential data being applied
      * @param {object} options Additional options which modify the update request
@@ -345,26 +351,34 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
      * @returns {boolean|void} False to cancel the update
      */
     async _preUpdate(changed, options, user) {
-        const newLevel = changed?.system?.levelOverride;
-        const mounted = this.type === "mechWeapon"
-            && this.actor?.type === "mech"
-            && this.system.slot !== LOCKER_SLOT;
+        const newLevel = updatedWeaponLevel(changed);
 
-        if (newLevel !== undefined && mounted) {
-            const tier = this.actor.system.details?.tier;
-            const refusal = levelRefusal({ weapon: { system: { levelOverride: newLevel } }, tier });
-            if (refusal) {
-                ui.notifications.warn(game.i18n.format("SFRPG.MechSheet.Weapon.LevelOverrideTooHigh", {
-                    weapon: this.name,
-                    level: newLevel,
-                    tier: tier,
-                    max: maxWeaponLevel(tier)
-                }));
-                return false;
-            }
+        if (newLevel !== undefined && this.type === "mechWeapon" && this.actor?.type === "mech") {
+            if (this._refuseWeaponLevel(newLevel, this.actor)) return false;
         }
 
         return super._preUpdate(changed, options, user);
+    }
+
+    /**
+     * Warn that a level is beyond what a mech may carry, if it is.
+     *
+     * @param {number} level The level being set
+     * @param {ActorSFRPG} mech The mech the weapon is on
+     * @returns {boolean} True if the level was refused
+     */
+    _refuseWeaponLevel(level, mech) {
+        const tier = mech.system.details?.tier;
+        if (!levelRefusal({ weapon: { system: { levelOverride: level } }, tier })) return false;
+
+        ui.notifications.warn(game.i18n.format("SFRPG.MechSheet.Weapon.LevelOverrideTooHigh", {
+            weapon: this.name,
+            level: level,
+            tier: tier,
+            max: maxWeaponLevel(tier)
+        }));
+
+        return true;
     }
 
     /* -------------------------------------------- */
