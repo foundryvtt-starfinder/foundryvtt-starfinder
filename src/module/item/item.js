@@ -7,7 +7,7 @@ import RollContext from "../rolls/rollcontext.js";
 import StackModifiers from "../rules/closures/stack-modifiers.js";
 import {
     collectMechRollModifiers,
-    MECH_CONDITION_SCOPE,
+    conditionsFromItems,
     worstAffectedOperator
 } from "../rules/mech-condition-modifiers.js";
 import { applyPerDieBonus, resolveDamageLevel } from "../rules/mech-damage-level.js";
@@ -1205,7 +1205,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
 
         const operators = (mech?.crew?.operator?.actors ?? [])
             .filter(Boolean)
-            .map(actor => ({ actor, conditions: conditionsOf(actor) }));
+            .map(actor => ({ actor, conditions: conditionsFromItems(actor.items) }));
 
         const worst = worstAffectedOperator(operators.map(o => o.conditions), { weaponType, kind });
         const operator = operators.find(o => o.conditions === worst);
@@ -1213,7 +1213,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         // Each side is stacked against the actor whose conditions they are.
         const stacked = await Promise.all([
             stackConditionModifiers(
-                collectMechRollModifiers({ mechConditions: conditionsOf(mech), weaponType, kind }),
+                collectMechRollModifiers({ mechConditions: conditionsFromItems(mech?.items), weaponType, kind }),
                 mech
             ),
             stackConditionModifiers(
@@ -1268,7 +1268,7 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const additionalModifiers = [];
 
         // Conditions on the mech, and on the operator they route inward from,
-        // penalise the attack the same way they would a character's.
+        // penalize the attack the same way they would a character's.
         const conditionMods = await this._getMechConditionModifiers("attack");
         for (const { modifier, slug, source } of conditionMods.constants) {
             parts.push({ score: modifier.modifier, explanation: mechConditionLabel(modifier, slug, source) });
@@ -2305,24 +2305,6 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             ...scope
         });
     }
-}
-
-/**
- * An actor's conditions, as the mech condition table addresses them.
- *
- * Conditions are `effect` items carrying a `slug` matching an id in
- * CONFIG.SFRPG.statusEffects. Only the ones the table knows about are returned,
- * so an unrelated effect item can never reach a mech roll.
- *
- * @param {ActorSFRPG} actor The actor to read.
- * @returns {Array<{slug: string, modifiers: Array}>} One entry per applicable condition.
- */
-function conditionsOf(actor) {
-    if (!actor?.items) return [];
-
-    return actor.items
-        .filter(item => item.type === "effect" && MECH_CONDITION_SCOPE[item.system?.slug])
-        .map(item => ({ slug: item.system.slug, modifiers: item.system.modifiers ?? [] }));
 }
 
 /**

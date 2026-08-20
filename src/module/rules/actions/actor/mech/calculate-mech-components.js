@@ -37,8 +37,10 @@ export default function(engine) {
         data.attributes.attackBonus.tooltip = [];
         data.attributes.fort = data.attributes.fort || { value: 0, tooltip: [] };
         data.attributes.ref = data.attributes.ref || { value: 0, tooltip: [] };
+        data.attributes.will = data.attributes.will || { value: 0, tooltip: [] };
         data.attributes.fort.tooltip = [];
         data.attributes.ref.tooltip = [];
+        data.attributes.will.tooltip = [];
         data.attributes.speedTooltip = { land: [], fly: [], swim: [], burrow: [] };
         data.attributes.reachTooltip = [];
         data.attributes.sizeTooltip = [];
@@ -458,8 +460,34 @@ export default function(engine) {
             }
         }
 
+        // A mech has no will of its own, so its Will save is its operators'. The
+        // crew resists as a group and the group is only as steady as whoever
+        // cracks first, so the lowest operator sets it - the same reading of a
+        // shared crew stat that calculateMechInitiative applies to initiative.
+        const operators = (actor.crew?.operator?.actors ?? []).filter(Boolean);
+        let lowestWill = null;
+        let lowestOperator = null;
+        for (const operator of operators) {
+            const operatorWill = operator.system?.attributes?.will?.bonus ?? 0;
+            if (lowestWill === null || operatorWill < lowestWill) {
+                lowestWill = operatorWill;
+                lowestOperator = operator;
+            }
+        }
+
+        data.attributes.will.value = lowestWill ?? 0;
+        if (lowestOperator) {
+            data.attributes.will.tooltip.push(game.i18n.format("SFRPG.MechSheet.WillSave.OperatorTooltip", {
+                name: lowestOperator.name,
+                mod: (lowestWill ?? 0).signedString()
+            }));
+        } else {
+            data.attributes.will.tooltip.push(game.i18n.localize("SFRPG.MechSheet.WillSave.NoOperatorTooltip"));
+        }
+
         data.attributes.fort.bonus = data.attributes.fort.value;
         data.attributes.ref.bonus = data.attributes.ref.value;
+        data.attributes.will.bonus = data.attributes.will.value;
         data.attributes.reflex = data.attributes.ref;
 
         return fact;

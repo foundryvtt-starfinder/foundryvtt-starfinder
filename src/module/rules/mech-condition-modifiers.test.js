@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
     acceptedEffectTypes,
+    collectMechDefenseModifiers,
     collectMechRollModifiers,
+    conditionsFromItems,
     MECH_CONDITION_SCOPE,
     worstAffectedOperator
 } from "./mech-condition-modifiers.js";
@@ -105,7 +107,7 @@ describe("collectMechRollModifiers", () => {
         expect(collected).toEqual([]);
     });
 
-    it("collects the damage half of a condition that penalises both", () => {
+    it("collects the damage half of a condition that penalizes both", () => {
         const sickened = [condition("sickened", mod("all-attacks", -2), mod("melee-damage", -2))];
 
         const collected = collectMechRollModifiers({
@@ -195,5 +197,88 @@ describe("MECH_CONDITION_SCOPE", () => {
             .map(([slug]) => slug);
 
         expect(orphans).toEqual([]);
+    });
+});
+
+describe("collectMechDefenseModifiers", () => {
+    it("applies an AC penalty marked as affecting both to EAC and to KAC", () => {
+        const entangled = [condition("entangled", mod("ac", -2, { valueAffected: "both" }))];
+
+        expect(slugs(collectMechDefenseModifiers({ mechConditions: entangled, target: "eac" }))).toEqual(["entangled"]);
+        expect(slugs(collectMechDefenseModifiers({ mechConditions: entangled, target: "kac" }))).toEqual(["entangled"]);
+    });
+
+    it("keeps an EAC-only penalty out of KAC", () => {
+        const eacOnly = [condition("entangled", mod("ac", -2, { valueAffected: "eac" }))];
+
+        expect(collectMechDefenseModifiers({ mechConditions: eacOnly, target: "kac" })).toEqual([]);
+    });
+
+    it("applies a Reflex-only penalty to Reflex and not to Fortitude", () => {
+        const pinned = [condition("pinned", mod("save", -4, { valueAffected: "reflex" }))];
+
+        expect(slugs(collectMechDefenseModifiers({ mechConditions: pinned, target: "reflex" }))).toEqual(["pinned"]);
+        expect(collectMechDefenseModifiers({ mechConditions: pinned, target: "fort" })).toEqual([]);
+    });
+
+    it("applies a penalty to every save without it naming one", () => {
+        // `saves` carries no valueAffected, so it must not be filtered out by one.
+        const frightened = [condition("frightened", mod("saves", -2, { valueAffected: "" }))];
+        const routedToMech = [condition("entangled", mod("saves", -2, { valueAffected: "" }))];
+
+        expect(collectMechDefenseModifiers({ mechConditions: frightened, target: "fort" })).toEqual([]);
+        expect(slugs(collectMechDefenseModifiers({ mechConditions: routedToMech, target: "fort" }))).toEqual(["entangled"]);
+    });
+
+    it("drops a condition the table does not route to the mech", () => {
+        // Exhausted lowers a creature's AC. A mech is not a creature.
+        const exhausted = [condition("exhausted", mod("ac", -3, { valueAffected: "both" }))];
+
+        expect(collectMechDefenseModifiers({ mechConditions: exhausted, target: "eac" })).toEqual([]);
+    });
+
+    it("leaves attack modifiers out of a defense", () => {
+        const offTarget = [condition("off-target", mod("all-attacks", -2))];
+
+        expect(collectMechDefenseModifiers({ mechConditions: offTarget, target: "eac" })).toEqual([]);
+    });
+
+    it("applies a Will-only penalty to Will and not to Fortitude", () => {
+        // A mech's Will save comes from its operators, but a condition on the mech
+        // still adjusts the value it ends up rolling.
+        const willOnly = [condition("flat-footed", mod("save", -2, { valueAffected: "will" }))];
+
+        expect(slugs(collectMechDefenseModifiers({ mechConditions: willOnly, target: "will" }))).toEqual(["flat-footed"]);
+        expect(collectMechDefenseModifiers({ mechConditions: willOnly, target: "fort" })).toEqual([]);
+    });
+
+    it("returns nothing for a target that is not one of the mech's defenses", () => {
+        const entangled = [condition("entangled", mod("ac", -2, { valueAffected: "both" }))];
+
+        expect(collectMechDefenseModifiers({ mechConditions: entangled, target: "cmd" })).toEqual([]);
+    });
+});
+
+describe("conditionsFromItems", () => {
+    const effect = (slug, ...modifiers) => ({ type: "effect", system: { slug, modifiers } });
+
+    it("reads a condition the routing table knows", () => {
+        const read = conditionsFromItems([effect("off-target", mod("all-attacks", -2))]);
+
+        expect(read).toEqual([{ slug: "off-target", modifiers: [mod("all-attacks", -2)] }]);
+    });
+
+    it("ignores an effect item that is not a routed condition", () => {
+        expect(conditionsFromItems([effect("some-homebrew-buff", mod("all-attacks", 4))])).toEqual([]);
+    });
+
+    it("ignores an item that is not an effect", () => {
+        const weapon = { type: "weapon", system: { slug: "off-target", modifiers: [mod("all-attacks", -2)] } };
+
+        expect(conditionsFromItems([weapon])).toEqual([]);
+    });
+
+    it("returns nothing when the actor has no items to read", () => {
+        expect(conditionsFromItems(undefined)).toEqual([]);
     });
 });

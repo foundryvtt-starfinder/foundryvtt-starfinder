@@ -4,6 +4,8 @@
 - Conditions on a mech now modify its attack and damage rolls. Positional conditions (Off-Target, Off-Kilter, Entangled, Grappled, Pinned, Prone, Dazzled) apply to the mech itself
 - Conditions on a mech's operators reach the mech's rolls too, for the conditions that belong to a crew member rather than a machine: Frightened, Shaken, Sickened, Fatigued, Exhausted, Negative Level, plus Off-Target and Dazzled. Where operators differ, the worst-affected one counts, matching how mech initiative already takes the lowest operator
 - The chat card names the condition behind each penalty, and marks the ones that came from an operator
+- Mechs have a Will save. A mech has no will of its own, so it is the lowest Will save among its operators, with a tooltip naming which one it came from
+- Conditions on a mech modify its EAC, KAC, Fortitude, Reflex and Will. Only the mech's own conditions count here: a mech's armor class is its plating and its saves are the machine's resilience, so an operator being shaken does not make the mech easier to hit
 
 ## Bugfixes
 - Dragging a mounted mech weapon from one mount to another now moves it. It previously created a second copy of the weapon in the mount it came from and put nothing in the mount it was dropped on

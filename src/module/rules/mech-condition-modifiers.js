@@ -22,13 +22,78 @@ export const MECH_CONDITION_SCOPE = Object.freeze({
     "grappled":       { mech: true,  operator: false },
     "pinned":         { mech: true,  operator: false },
     "prone":          { mech: true,  operator: false },
+    "flat-footed":    { mech: true,  operator: false },
     "frightened":     { mech: false, operator: true },
     "shaken":         { mech: false, operator: true },
     "sickened":       { mech: false, operator: true },
     "fatigued":       { mech: false, operator: true },
     "exhausted":      { mech: false, operator: true },
+    "panicked":       { mech: false, operator: true },
     "negative-level": { mech: false, operator: true }
 });
+
+/**
+ * The mech's defenses, and the modifier data that reaches each.
+ *
+ * `saves` covers every save at once; `save` names one through `valueAffected`.
+ * A mech's Will save is its operators' rather than its own, and their conditions
+ * are already counted in the value it is derived from - so only conditions on
+ * the mech itself are applied on top of it here.
+ *
+ * @type {Readonly<Object<string, {effectTypes: string[], values: string[]}>>}
+ */
+const DEFENSE_TARGETS = Object.freeze({
+    eac:     { effectTypes: ["ac"],            values: ["eac", "both"] },
+    kac:     { effectTypes: ["ac"],            values: ["kac", "both"] },
+    fort:    { effectTypes: ["save", "saves"], values: ["fort", "highest", "lowest"] },
+    reflex:  { effectTypes: ["save", "saves"], values: ["reflex", "highest", "lowest"] },
+    will:    { effectTypes: ["save", "saves"], values: ["will", "highest", "lowest"] }
+});
+
+/**
+ * The condition modifiers that apply to one of a mech's defenses.
+ *
+ * Only the mech's own conditions count. A mech's armor class is its plating and
+ * its saves are the machine's own resilience, so an operator being shaken does
+ * not make the mech easier to hit - unlike an attack roll, which the operator
+ * is the one making.
+ *
+ * @param {object} options
+ * @param {Array<{slug: string, modifiers: Array}>} [options.mechConditions] Conditions on the mech.
+ * @param {"eac"|"kac"|"fort"|"reflex"} options.target Which defense is being computed.
+ * @returns {Array<{modifier: object, slug: string, source: "mech"}>} Modifiers to apply.
+ */
+export function collectMechDefenseModifiers({ mechConditions = [], target }) {
+    const defense = DEFENSE_TARGETS[target];
+    if (!defense) return [];
+
+    return mechConditions
+        .filter(condition => MECH_CONDITION_SCOPE[condition?.slug]?.mech)
+        .flatMap(condition => (condition.modifiers ?? [])
+            .filter(modifier => modifier?.enabled !== false
+                && defense.effectTypes.includes(modifier?.effectType)
+                // A modifier for every save names no single one.
+                && (modifier.effectType === "saves" || defense.values.includes(modifier.valueAffected)))
+            .map(modifier => ({ modifier, slug: condition.slug, source: "mech" })));
+}
+
+/**
+ * An actor's conditions, as this module addresses them.
+ *
+ * Conditions are `effect` items carrying a `slug` matching an id in
+ * CONFIG.SFRPG.statusEffects. Only the ones the routing table knows about are
+ * returned, so an unrelated effect item can never reach a mech.
+ *
+ * @param {Iterable} items The actor's items.
+ * @returns {Array<{slug: string, modifiers: Array}>} One entry per applicable condition.
+ */
+export function conditionsFromItems(items) {
+    if (!items) return [];
+
+    return [...items]
+        .filter(item => item.type === "effect" && MECH_CONDITION_SCOPE[item.system?.slug])
+        .map(item => ({ slug: item.system.slug, modifiers: item.system.modifiers ?? [] }));
+}
 
 /**
  * The modifier effect types a mech weapon roll of this kind accepts.

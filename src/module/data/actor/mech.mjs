@@ -170,6 +170,17 @@ export default class SFRPGActorMech extends SFRPGActorBase {
                     }),
                     tooltip: new fields.ArrayField(new fields.StringField())
                 }, {label: "SFRPG.MechSheet.Attributes.RefSave"}),
+                // A mech has no will of its own. Its Will save is its operators',
+                // taken from whichever of them resists least.
+                will: new fields.SchemaField({
+                    value: new fields.NumberField({
+                        initial: 0,
+                        integer: true,
+                        nullable: false,
+                        required: true
+                    }),
+                    tooltip: new fields.ArrayField(new fields.StringField())
+                }, {label: "SFRPG.MechSheet.Attributes.WillSave"}),
                 pp: new fields.SchemaField({
                     initial: new fields.NumberField({
                         initial: 3,
