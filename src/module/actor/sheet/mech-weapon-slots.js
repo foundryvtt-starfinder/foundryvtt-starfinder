@@ -136,3 +136,57 @@ export function mountRefusal({ slot, weapon, mountedWeapons = [], hasComponent =
 
     return null;
 }
+
+/**
+ * Where a weapon arriving on the sheet should be put.
+ *
+ * A drop that landed on a mount is answered by that mount alone: it goes there,
+ * or it is refused. Looking elsewhere would move the weapon away from the mount
+ * the player aimed at, which is the one thing the drop said to do.
+ *
+ * Only a drop that landed on no mount at all is placed by looking at what will
+ * take the weapon - nothing sends it to the locker, one mounts it there, and
+ * several leave the choice to the player.
+ *
+ * A weapon's own stored slot is not consulted. Compendium weapons carry one, and
+ * honoring it would put the weapon wherever its author left it rather than where
+ * it was dropped.
+ *
+ * @param {object} options
+ * @param {string|null} [options.targetSlot] The mount the drop landed on, or null if it landed on none
+ * @param {object} options.weapon The weapon being placed, as an item or item data
+ * @param {Object<string, {mountedWeapons: Array, hasComponent: boolean, capacity: number}>} [options.mounts] The state of each mount
+ * @param {number} [options.tier] Tier of the mech the weapon would be mounted on
+ * @returns {{action: string, slot?: string|null, slots?: string[], reason?: string}} What to do with the weapon
+ */
+export function weaponDropPlacement({ targetSlot = null, weapon, mounts = {}, tier = 0 }) {
+    // An over-level weapon is refused outright rather than shelved, so that the
+    // locker cannot become a way to keep one on the mech.
+    const tooHigh = levelRefusal({ weapon, tier });
+    if (tooHigh) return { action: "refuse", reason: tooHigh, slot: targetSlot };
+
+    const refusalFor = (slot) => mountRefusal({
+        slot,
+        weapon,
+        mountedWeapons: mounts[slot]?.mountedWeapons ?? [],
+        hasComponent: mounts[slot]?.hasComponent ?? false,
+        capacity: mounts[slot]?.capacity ?? 0,
+        tier
+    });
+
+    if (targetSlot !== null) {
+        const refusal = refusalFor(targetSlot);
+        if (refusal) return { action: "refuse", reason: refusal, slot: targetSlot };
+        return { action: "mount", slot: targetSlot };
+    }
+
+    // Every mount the mech has is a candidate. Which of them will take the
+    // weapon is the refusal rules' answer, not a second reading of the
+    // weapon's own list.
+    const fits = Object.keys(mounts).filter(slot => !refusalFor(slot));
+
+    if (fits.length === 0) return { action: "locker" };
+    if (fits.length === 1) return { action: "mount", slot: fits[0] };
+
+    return { action: "choose", slots: fits };
+}

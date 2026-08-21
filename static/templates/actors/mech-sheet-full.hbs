@@ -322,7 +322,10 @@
         <div class="tab features flexcol" data-group="primary" data-tab="components">
             {{!-- Frame section --}}
             {{#each featuresTop as |section sid|}}
-            <ol class="inventory-list">
+            {{!-- The whole section is the mount's drop target, not just the
+                  weapon rows, so a weapon dropped on the component itself still
+                  mounts where the player aimed. --}}
+            <ol class="inventory-list"{{#if section.slotType}} data-weapon-slot="{{section.slotType}}"{{/if}}>
                 <li class="inventory-header flexrow">
                     <h3 class="item-name noborder flexrow">{{section.category}}</h3>
                     {{#if ../isOwner}}
@@ -425,7 +428,7 @@
 
             {{!-- Remaining component sections --}}
             {{#each featuresBottom as |section sid|}}
-            <ol class="inventory-list">
+            <ol class="inventory-list"{{#if section.slotType}} data-weapon-slot="{{section.slotType}}"{{/if}}>
                 <li class="inventory-header flexrow">
                     <h3 class="item-name noborder flexrow">{{section.category}}</h3>
                     {{#if ../isOwner}}
