@@ -1,6 +1,6 @@
 import { JSDOM } from "jsdom";
 import { beforeEach, describe, expect, it } from "vitest";
-import { allowedWeaponLevels, droppedSlot, levelRefusal, maxWeaponLevel, mountRefusal, updatedWeaponLevel } from "./mech-weapon-slots.js";
+import { allowedWeaponLevels, droppedSlot, levelRefusal, maxWeaponLevel, mountRefusal, updatedWeaponLevel, weaponDropPlacement } from "./mech-weapon-slots.js";
 
 /** A weapon as the sheet sees it: an id, the slots it may go in, its size and its level. */
 function weapon({ id = "w1", validSlots = ["frame", "upperLimb"], slotsUsed = 1, levelOverride = null } = {}) {
@@ -247,5 +247,99 @@ describe("updatedWeaponLevel", () => {
 
     it("reads nothing when there is no update to read", () => {
         expect(updatedWeaponLevel(undefined)).toBeUndefined();
+    });
+});
+
+describe("weaponDropPlacement", () => {
+    /** A mount with room in it, unless told otherwise. */
+    function mount({ mountedWeapons = [], hasComponent = true, capacity = 2 } = {}) {
+        return { mountedWeapons, hasComponent, capacity };
+    }
+
+    /** Every mount installed and empty, which is the uninteresting case. */
+    function allMounts(overrides = {}) {
+        return { frame: mount(), upperLimb: mount(), lowerLimb: mount(), ...overrides };
+    }
+
+    it("mounts a weapon on the mount it was dropped on rather than the one it arrives carrying", () => {
+        // Compendium weapons carry a slot of their own, and honoring it is what
+        // put every dropped weapon in the upper limbs.
+        const carried = weapon();
+        carried.system.slot = "upperLimb";
+
+        const placement = weaponDropPlacement({ targetSlot: "frame", weapon: carried, mounts: allMounts() });
+
+        expect(placement).toEqual({ action: "mount", slot: "frame" });
+    });
+
+    it("refuses a weapon the mount it was dropped on will not take rather than mounting it elsewhere", () => {
+        const full = mount({ mountedWeapons: [weapon({ id: "other", slotsUsed: 2 })] });
+
+        const placement = weaponDropPlacement({
+            targetSlot: "frame",
+            weapon: weapon(),
+            mounts: allMounts({ frame: full })
+        });
+
+        expect(placement.action).toBe("refuse");
+        expect(placement.reason).toBe("SFRPG.MechSheet.WeaponsLocker.NotEnoughSlots");
+    });
+
+    it("names the mount that refused, so the message can say which one", () => {
+        const placement = weaponDropPlacement({
+            targetSlot: "lowerLimb",
+            weapon: weapon({ validSlots: ["frame"] }),
+            mounts: allMounts()
+        });
+
+        expect(placement.slot).toBe("lowerLimb");
+    });
+
+    it("refuses a weapon above the mech's level ceiling wherever it was dropped", () => {
+        const placement = weaponDropPlacement({
+            targetSlot: null,
+            weapon: weapon({ levelOverride: 9 }),
+            mounts: allMounts(),
+            tier: 2
+        });
+
+        expect(placement.action).toBe("refuse");
+        expect(placement.reason).toBe("SFRPG.MechSheet.WeaponsLocker.LevelTooHigh");
+    });
+
+    it("mounts a weapon that landed on no mount when only one will take it", () => {
+        const placement = weaponDropPlacement({
+            targetSlot: null,
+            weapon: weapon(),
+            mounts: allMounts({ upperLimb: mount({ hasComponent: false }) })
+        });
+
+        expect(placement).toEqual({ action: "mount", slot: "frame" });
+    });
+
+    it("leaves the choice to the player when more than one mount will take it", () => {
+        const placement = weaponDropPlacement({ targetSlot: null, weapon: weapon(), mounts: allMounts() });
+
+        expect(placement).toEqual({ action: "choose", slots: ["frame", "upperLimb"] });
+    });
+
+    it("offers only the mounts the weapon may go in", () => {
+        const placement = weaponDropPlacement({
+            targetSlot: null,
+            weapon: weapon({ validSlots: ["frame", "lowerLimb"] }),
+            mounts: allMounts()
+        });
+
+        expect(placement.slots).toEqual(["frame", "lowerLimb"]);
+    });
+
+    it("sends a weapon no mount will take to the locker", () => {
+        const placement = weaponDropPlacement({
+            targetSlot: null,
+            weapon: weapon(),
+            mounts: allMounts({ frame: mount({ hasComponent: false }), upperLimb: mount({ hasComponent: false }) })
+        });
+
+        expect(placement).toEqual({ action: "locker" });
     });
 });

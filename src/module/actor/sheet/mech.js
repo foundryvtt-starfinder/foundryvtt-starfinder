@@ -1,7 +1,7 @@
 import { ActorSFRPG } from "../actor.js";
 import { armedOverrideBanners } from "../../rules/mech-attack-bonus.js";
 import { ActorSheetSFRPG } from "./base.js";
-import { droppedSlot, maxWeaponLevel, mountRefusal } from "./mech-weapon-slots.js";
+import { LOCKER_SLOT, SLOT_COMPONENT_TYPES, droppedSlot, maxWeaponLevel, mountRefusal, weaponDropPlacement } from "./mech-weapon-slots.js";
 
 /**
  * An Actor sheet for a mech in the SFRPG system.
@@ -581,6 +581,14 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
 
             const rawItemData = droppedItem.toObject();
 
+            // Weapons are checked before the component list because that list
+            // includes mechWeapon, and matching it there would create the weapon
+            // with whatever slot its source data carries instead of the one it
+            // was dropped on.
+            if (rawItemData.type === "mechWeapon") {
+                return this._onWeaponDrop(event, rawItemData);
+            }
+
             if (CONFIG.SFRPG.mechDefinitionItemTypes.includes(rawItemData.type)) {
                 // Only allow one frame per mech
                 if (rawItemData.type === "mechFrame") {
@@ -615,8 +623,6 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
                     }
                 }
                 return this.actor.createEmbeddedDocuments("Item", [rawItemData]);
-            } else if (rawItemData.type === "mechWeapon") {
-                return this._onWeaponDrop(event, rawItemData);
             } else if (this.acceptedItemTypes.includes(rawItemData.type)) {
                 return this.processDroppedItems(event, data);
             } else {
@@ -647,9 +653,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         const refusal = mountRefusal({
             slot,
             weapon,
-            mountedWeapons: this._getWeaponsInSlot(slot),
-            hasComponent: this._hasComponentForSlot(slot),
-            capacity: this.actor.system.attributes?.slots?.[slot] || 0,
+            ...this._mountState(slot),
             tier: this.actor.system.details?.tier
         });
 
@@ -664,78 +668,61 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
     /**
      * Handle dropping a mech weapon from outside the sheet.
      *
-     * A drop onto one of the mounted weapons lists mounts it there. A drop
-     * anywhere else falls back to scanning for a slot the weapon fits, showing a
-     * selection dialog when more than one will take it.
+     * Where the weapon goes is decided by weaponDropPlacement; this only carries
+     * that decision out.
      *
      * @param {Event} event The drop event
      * @param {Object} itemData The weapon item data
      * @returns {Promise}
      */
     async _onWeaponDrop(event, itemData) {
-        // A weapon dropped straight onto a mount goes there, so long as the mount
-        // will take it. Only a drop that missed the mounts falls back to scanning
-        // for somewhere the weapon fits.
-        const targetSlot = droppedSlot(event.target);
-        if (targetSlot !== null) {
-            const refusal = mountRefusal({
-                slot: targetSlot,
-                weapon: itemData,
-                mountedWeapons: this._getWeaponsInSlot(targetSlot),
-                hasComponent: this._hasComponentForSlot(targetSlot),
-                capacity: this.actor.system.attributes?.slots?.[targetSlot] || 0,
-                tier: this.actor.system.details?.tier
-            });
+        const mounts = Object.fromEntries(
+            Object.keys(SLOT_COMPONENT_TYPES).map(slot => [slot, this._mountState(slot)])
+        );
 
-            if (!refusal) {
-                itemData.system.slot = targetSlot;
-                return this.actor.createEmbeddedDocuments("Item", [itemData]);
-            }
+        const placement = weaponDropPlacement({
+            targetSlot: droppedSlot(event.target),
+            weapon: itemData,
+            mounts,
+            tier: this.actor.system.details?.tier
+        });
 
-            ui.notifications.warn(game.i18n.format(refusal, this._mountRefusalContext(itemData, targetSlot)));
+        if (placement.action === "refuse") {
+            ui.notifications.warn(game.i18n.format(placement.reason, this._mountRefusalContext(itemData, placement.slot)));
+            return false;
         }
 
-        const validSlots = itemData.system.validSlots || ["frame"];
-        const actorData = this.actor.system;
-
-        // Check which slots have components and available capacity
-        const weaponSlotsNeeded = itemData.system.slotsUsed || 1;
-        const availableSlots = [];
-        for (const slot of validSlots) {
-            const hasComponent = this._hasComponentForSlot(slot);
-            const slotsUsed = this._getWeaponsInSlot(slot).reduce((sum, w) => sum + (w.system.slotsUsed || 1), 0);
-            const maxSlots = actorData.attributes?.slots?.[slot] || 0;
-
-            if (hasComponent && slotsUsed + weaponSlotsNeeded <= maxSlots) {
-                availableSlots.push({
-                    slot,
-                    label: game.i18n.localize(CONFIG.SFRPG.mechWeaponMountableSlots[slot]),
-                    used: slotsUsed,
-                    max: maxSlots
-                });
-            }
-        }
-
-        // If no slots available, add to locker
-        if (availableSlots.length === 0) {
-            itemData.system.slot = "locker";
+        if (placement.action === "locker") {
             ui.notifications.info(game.i18n.localize("SFRPG.MechSheet.WeaponsLocker.AddedToLocker"));
-            return this.actor.createEmbeddedDocuments("Item", [itemData]);
+            return this._createWeaponInSlot(itemData, LOCKER_SLOT);
         }
 
-        // If only one slot available, use it
-        if (availableSlots.length === 1) {
-            itemData.system.slot = availableSlots[0].slot;
-            return this.actor.createEmbeddedDocuments("Item", [itemData]);
+        if (placement.action === "choose") {
+            const options = placement.slots.map(slot => ({
+                slot,
+                label: game.i18n.localize(CONFIG.SFRPG.mechWeaponMountableSlots[slot]),
+                used: this._getWeaponsInSlot(slot).reduce((sum, w) => sum + (w.system.slotsUsed || 1), 0),
+                max: this.actor.system.attributes?.slots?.[slot] || 0
+            }));
+
+            const chosen = await this._showSlotSelectionDialog(itemData.name, options);
+            if (chosen === null) return false;
+
+            return this._createWeaponInSlot(itemData, chosen);
         }
 
-        // Multiple slots available - show selection dialog
-        const selectedSlot = await this._showSlotSelectionDialog(itemData.name, availableSlots);
-        if (selectedSlot === null) {
-            return false; // User cancelled
-        }
+        return this._createWeaponInSlot(itemData, placement.slot);
+    }
 
-        itemData.system.slot = selectedSlot;
+    /**
+     * Create a dropped weapon on the mech in a given slot.
+     *
+     * @param {Object} itemData The weapon item data
+     * @param {string} slot The slot to mount it in
+     * @returns {Promise}
+     */
+    async _createWeaponInSlot(itemData, slot) {
+        itemData.system.slot = slot;
         return this.actor.createEmbeddedDocuments("Item", [itemData]);
     }
 
@@ -754,10 +741,24 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         const tier = this.actor.system.details?.tier;
         return {
             weapon: weapon.name,
-            slot: game.i18n.localize(CONFIG.SFRPG.mechWeaponMountableSlots[slot] || slot),
+            slot: slot ? game.i18n.localize(CONFIG.SFRPG.mechWeaponMountableSlots[slot] || slot) : "",
             level: weapon.system?.levelOverride ?? tier,
             tier: tier,
             max: maxWeaponLevel(tier)
+        };
+    }
+
+    /**
+     * What a mount currently holds, as the refusal rules want it.
+     *
+     * @param {string} slot The slot type (frame, upperLimb, lowerLimb)
+     * @returns {{mountedWeapons: Array, hasComponent: boolean, capacity: number}}
+     */
+    _mountState(slot) {
+        return {
+            mountedWeapons: this._getWeaponsInSlot(slot),
+            hasComponent: this._hasComponentForSlot(slot),
+            capacity: this.actor.system.attributes?.slots?.[slot] || 0
         };
     }
 
