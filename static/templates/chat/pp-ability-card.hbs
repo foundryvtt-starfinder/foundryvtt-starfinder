@@ -1,0 +1,14 @@
+<div class="sfrpg chat-card pp-ability-card">
+    <header class="card-header flexrow">
+        <img class="action-img" src="{{actorImg}}" title="{{actorName}}" width="36" height="36" />
+        <h3 class="action-name">{{abilityName}}</h3>
+    </header>
+    {{!-- The description is lifted from the sentence around the link, so an
+          ability written without one prints no empty paragraph. --}}
+    {{#if description}}
+    <div class="card-content">
+        <p>{{{description}}}</p>
+    </div>
+    {{/if}}
+    <div class="card-pp-spent">{{ppSpent}}</div>
+</div>
