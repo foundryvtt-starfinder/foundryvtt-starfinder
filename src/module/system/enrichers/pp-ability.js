@@ -102,7 +102,6 @@ export default class PPAbilityEnricher extends BaseEnricher {
         }
 
         const currentPP = actor.system.attributes.pp.value;
-        const maxPP = actor.system.attributes.pp.max;
 
         // Check sufficient PP
         if (currentPP < cost) {
@@ -139,13 +138,7 @@ export default class PPAbilityEnricher extends BaseEnricher {
             abilityName,
             cost,
             description,
-            remaining: newPP,
-            max: maxPP,
-            ppSpent: game.i18n.format("SFRPG.Enrichers.PPAbility.PPSpent", { cost }),
-            ppRemaining: game.i18n.format("SFRPG.Enrichers.PPAbility.PPRemaining", {
-                remaining: newPP,
-                max: maxPP
-            })
+            ppSpent: game.i18n.format("SFRPG.Enrichers.PPAbility.PPSpent", { cost })
         };
 
         const content = await renderTemplate(

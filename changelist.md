@@ -26,6 +26,7 @@
 - A whole component section is now a drop target for its mount, not just the Mounted Weapons rows, so a weapon dropped anywhere in the Frame box mounts on the frame
 - A mech weapon refused by the mount it was dropped on is now rejected with the reason. It previously warned and then mounted the weapon somewhere else anyway
 - The mech weapon slot selection dialog's Accept and Cancel buttons showed their localization keys instead of their labels
+- Clicking a Power Point ability button in a mech component's description spent the Power Points and then failed, posting no chat card and leaving an error in the console. The chat card template it renders was never written. 36 items in the Mech Components compendium use these buttons
 
 ## Core System Improvements
 - Mech actions, damage level override cancellation and mission pod activation moved from the mech sheet onto the mech actor, so they can be triggered without a sheet open — from a macro, a module or another sheet
