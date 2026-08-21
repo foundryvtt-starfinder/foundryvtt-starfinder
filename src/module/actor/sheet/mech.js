@@ -815,7 +815,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
                 buttons: {
                     ok: {
                         icon: '<i class="fas fa-check"></i>',
-                        label: game.i18n.localize("SFRPG.Accept"),
+                        label: game.i18n.localize("SFRPG.AcceptButtonLabel"),
                         callback: (html) => {
                             const slot = html.find('[name="slot"]').val();
                             resolve(slot);
@@ -828,7 +828,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
                     },
                     cancel: {
                         icon: '<i class="fas fa-times"></i>',
-                        label: game.i18n.localize("SFRPG.Cancel"),
+                        label: game.i18n.localize("SFRPG.CancelButtonLabel"),
                         callback: () => resolve(null)
                     }
                 },

@@ -25,6 +25,7 @@
 - A mech weapon dragged in from a compendium now mounts where it was dropped. It previously went to whichever mount its compendium entry named, which for most weapons is the upper limbs, no matter which mount the player aimed at
 - A whole component section is now a drop target for its mount, not just the Mounted Weapons rows, so a weapon dropped anywhere in the Frame box mounts on the frame
 - A mech weapon refused by the mount it was dropped on is now rejected with the reason. It previously warned and then mounted the weapon somewhere else anyway
+- The mech weapon slot selection dialog's Accept and Cancel buttons showed their localization keys instead of their labels
 
 ## Core System Improvements
 - Mech actions, damage level override cancellation and mission pod activation moved from the mech sheet onto the mech actor, so they can be triggered without a sheet open — from a macro, a module or another sheet
