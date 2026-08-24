@@ -76,7 +76,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             "turn": combatType === "starship" ? null : 0
         };
         Hooks.callAll("combatStart", this, update);
-        game.time.advance(CONFIG.time.roundTime);
+        await game.time.advance(CONFIG.time.roundTime);
         await this.update(update);
 
         const currentPhase = this.getCurrentPhase();
@@ -106,14 +106,14 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }
 
         Hooks.callAll("onBeginCombat", eventData);
-        this._handleTimedEffects(eventData);
+        await this._handleTimedEffects(eventData);
         await this._notifyAfterUpdate(eventData);
     }
 
     async delete(options = {}) {
         Hooks.callAll("onBeforeCombatEnd", this);
         super.delete(options);
-        game.time.advance(CONFIG.time.roundTime);
+        await game.time.advance(CONFIG.time.roundTime);
     }
 
     // Override to account for ascending or descending turn order.
@@ -357,7 +357,8 @@ export class CombatSFRPG extends foundry.documents.Combat {
             newPhase: newPhase,
             oldCombatant: currentPhase.iterateTurns ? this.turns[this.turn] : null,
             newCombatant: newPhase.iterateTurns ? this.turns[nextTurn] : null,
-            direction: updateOptions.direction || nextRound - this.round || nextTurn - this.turn
+            direction: updateOptions.direction || nextRound - this.round || nextTurn - this.turn,
+            advanceTime: updateOptions.advanceTime || 0
         };
 
         if (!eventData.isNewRound && !eventData.isNewPhase && !eventData.isNewTurn) {
@@ -378,7 +379,6 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         updateOptions["eventData"] = eventData;
 
-        game.time.advance(updateOptions.advanceTime || 0);
         await this.update(updateData, updateOptions);
 
         if (eventData.isNewPhase) {
@@ -396,7 +396,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
         await this._notifyAfterUpdate(eventData);
     }
 
-    _onUpdate(changed, options, userId) {
+    async _onUpdate(changed, options, userId) {
         super._onUpdate(changed, options, userId);
 
         // Get an active GM to run events players may not have permissions to do.
@@ -404,7 +404,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Handle timed events if the event that is occurring is phase/round/turn advance.
         if (options.eventData) {
-            this._handleTimedEffects(options.eventData);
+            await this._handleTimedEffects(options.eventData);
         }
     }
 
@@ -853,7 +853,10 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }
     }
 
-    _handleTimedEffects(eventData) {
+    async _handleTimedEffects(eventData) {
+        if (eventData.advanceTime) {
+            await game.time.advance(eventData.advanceTime);
+        }
         if (!eventData.isNewTurn) return;
 
         const timedEffects = game.sfrpg.timedEffects;
