@@ -1,5 +1,4 @@
 import { CombatDifficulty } from "../apps/combat-difficulty.js";
-import { mechTurnRegen } from "../rules/mech-turn-regen.js";
 import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
 import RollContext from "../rolls/rollcontext.js";
@@ -526,26 +525,6 @@ export class CombatSFRPG extends foundry.documents.Combat {
         const localizedCombatName = this.getCombatName();
         const localizedPhaseName = game.i18n.format(eventData.newPhase.name);
 
-        // Collect turn-start notes
-        const notes = [];
-        const actor = eventData.newCombatant.actor;
-        if (actor?.type === "mech") {
-            const pp = actor.system.attributes.pp;
-            // Read from the same rule that performs it, so the card cannot promise
-            // Power Points the mech is not about to get.
-            const regenerated = mechTurnRegen({
-                pp,
-                sp: actor.system.attributes.sp,
-                tier: actor.system.details.tier,
-                round: eventData.newRound ?? this.round
-            });
-
-            if (regenerated.pp !== null) {
-                const regenKey = pp.regen === 1 ? CombatSFRPG.chatCardsText.turn.ppRegenSingular : CombatSFRPG.chatCardsText.turn.ppRegen;
-                notes.push(game.i18n.format(regenKey, {regen: pp.regen}));
-            }
-        }
-
         // Basic template rendering data
         const speakerName = eventData.newCombatant.name;
         const templateData = {
@@ -559,8 +538,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
                 message: {
                     title: localizedPhaseName,
                     body: game.i18n.format(eventData.newPhase.description || "")
-                },
-                notes: notes.length > 0 ? notes : null
+                }
             },
             footer: {
                 content: game.i18n.format(CombatSFRPG.chatCardsText.footer, {combatType: localizedCombatName, combatPhase: localizedPhaseName})
@@ -1145,9 +1123,7 @@ CombatSFRPG.chatCardsText = {
         messageTitle: `SFRPG.Combat.ChatCards.Phase.MessageTitle`
     },
     turn: {
-        headerName: `SFRPG.Combat.ChatCards.Turn.Header`,
-        ppRegen: `SFRPG.Combat.ChatCards.Turn.PPRegen`,
-        ppRegenSingular: `SFRPG.Combat.ChatCards.Turn.PPRegenSingular`
+        headerName: `SFRPG.Combat.ChatCards.Turn.Header`
     },
     footer: `SFRPG.Combat.ChatCards.Footer`,
     speaker: {
