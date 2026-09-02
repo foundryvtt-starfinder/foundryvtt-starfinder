@@ -65,6 +65,7 @@ import IconEnricher from "./module/system/enrichers/icon.js";
 import PPAbilityEnricher from "./module/system/enrichers/pp-ability.js";
 import TemplateEnricher from "./module/system/enrichers/template.js";
 import { onMechAttackBonusClick } from "./module/system/mech-bonus-link.js";
+import { onMechReplenishClick, onSpendMechReplenish } from "./module/system/mech-replenish-link.js";
 import TextEditorSFRPG from "./module/system/text-editor.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
@@ -675,6 +676,7 @@ Hooks.once("setup", function() {
 
     console.log("Starfinder | [SETUP] Initializing RPC system");
     RPC.initialize();
+    RPC.registerCallback("spendMechReplenish", "gm", onSpendMechReplenish);
 
     console.log("Starfinder | [SETUP] Initializing remote inventory system");
     initializeRemoteInventory();
@@ -702,6 +704,7 @@ Hooks.once("ready", async () => {
     console.log("Starfinder | [READY] Setting up event listeners");
     BaseEnricher.addListeners();
     $("body").on("click", 'a[data-action="mechAttackBonus"]', onMechAttackBonusClick);
+    $("body").on("click", 'a[data-action="mechReplenish"]', onMechReplenishClick);
     ItemSFRPG.chatListeners($("body"));
     extendDragData();
 

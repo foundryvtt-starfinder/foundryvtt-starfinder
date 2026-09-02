@@ -1,3 +1,11 @@
+# Version 14.1.2
+
+## New Features
+- The Replenish action now rolls its own dice. Its card reads "you gain 2d8 SP" with the dice written for the mech's own tier, and clicking them rolls and restores that many Shield Points, up to the mech's maximum. The result is whispered to the mech's owners and the GM the way the end-of-turn regeneration message is, and is not posted when the mech was already too close to full to gain anything. The dice can only be clicked by an owner or the GM, and they grey out once rolled so the 2 Power Points buy one roll
+
+## Bugfixes
+- A mech's Power and Shield Points now regenerate at the end of its turn rather than the start, in every round including the first, and once per round. Power Points were previously held back through the first round, and stepping back through the initiative order and forward again handed the mech its regeneration a second time
+
 # Version 14.1.1
 
 ## New Features

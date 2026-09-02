@@ -1039,7 +1039,8 @@ SFRPG.mechPPActions = [
     {
         name: "SFRPG.MechSheet.Actions.PP.Replenish.Name",
         description: "SFRPG.MechSheet.Actions.PP.Replenish.Description",
-        ppCost: 2
+        ppCost: 2,
+        restoresShields: { die: 8, base: 1, perTiers: 5 }
     },
     {
         name: "SFRPG.MechSheet.Actions.PP.Resist.Name",
