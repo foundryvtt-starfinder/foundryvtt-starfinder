@@ -52,7 +52,7 @@ import SFRPGModifier from "./module/modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "./module/modifiers/types.js";
 import { RPC } from "./module/rpc.js";
 import { mechShieldRefills } from "./module/rules/mech-shield-reset.js";
-import { mechTurnRegen } from "./module/rules/mech-turn-regen.js";
+import { mechTurnRegen, shouldRegenOnTurnEnd } from "./module/rules/mech-turn-regen.js";
 import registerSystemRules from "./module/rules.js";
 import { registerSystemSettings } from "./module/system/settings.js";
 import TooltipManagerSFRPG from "./module/tooltip.js";
@@ -934,12 +934,24 @@ Hooks.on("combatStart", async (combat) => {
     });
 });
 
+// A mech regenerates at the end of its turn, so this reads the combatant the
+// combat just moved away from rather than the one it moved to.
 Hooks.on("onAfterUpdateCombat", async (eventData) => {
     if (!game.users.activeGM?.isSelf) return;
-    if (!eventData.isNewTurn || !eventData.newCombatant) return;
-    if (eventData.direction < 0) return;
 
-    const actor = eventData.newCombatant.actor;
+    const combatant = eventData.oldCombatant;
+    if (!combatant) return;
+
+    const endedRound = eventData.oldRound ?? eventData.combat?.round;
+    const due = shouldRegenOnTurnEnd({
+        direction: eventData.direction,
+        isNewTurn: eventData.isNewTurn,
+        round: endedRound,
+        lastRegenRound: combatant.getFlag("sfrpg", "lastRegenRound") ?? null
+    });
+    if (!due) return;
+
+    const actor = combatant.actor;
     if (!actor || actor.type !== "mech") return;
 
     const whisperTargets = game.users.filter(u => u.isGM || actor.testUserPermission(u, "OWNER")).map(u => u.id);
@@ -950,8 +962,7 @@ Hooks.on("onAfterUpdateCombat", async (eventData) => {
     const regenerated = mechTurnRegen({
         pp,
         sp,
-        tier: actor.system.details.tier,
-        round: eventData.newRound ?? eventData.combat?.round
+        tier: actor.system.details.tier
     });
 
     if (regenerated.pp !== null) {
@@ -973,6 +984,11 @@ Hooks.on("onAfterUpdateCombat", async (eventData) => {
             max: sp.max
         }));
     }
+
+    // Mark the round settled whether or not anything changed. A mech that was
+    // already at full has still had this turn's regeneration resolved, and the GM
+    // stepping back to it must not open a second helping.
+    await combatant.setFlag("sfrpg", "lastRegenRound", endedRound);
 
     if (messages.length > 0) {
         await ChatMessage.create({

@@ -961,9 +961,9 @@ export class ActorSFRPG extends Mix(foundry.documents.Actor).with(ActorCondition
     }
 
     _onTurnStart() {
-        // A mech's Power and Shield Point regeneration is handled by the
-        // onAfterUpdateCombat hook, which reports what it restored and knows which
-        // round it is. Doing it here as well regenerated both pools twice a turn.
+        // A mech's Power and Shield Point regeneration belongs to the end of its
+        // turn, and is handled by the onAfterUpdateCombat hook, which reports what
+        // it restored. Doing it here as well regenerated both pools twice a turn.
         for (const item of this.items) {
             item._onTurnStart?.();
         }
