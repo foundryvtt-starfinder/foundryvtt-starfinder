@@ -482,6 +482,15 @@
         color: var(--color-text-dark-secondary);
         text-align: right;
     }
+
+    /* Replenish's dice, once they have been rolled. The link stays legible so the
+       card still reads as a sentence, but nothing about it invites a second click. */
+    a.enriched-link.replenish-spent {
+        opacity: 0.5;
+        cursor: default;
+        pointer-events: none;
+        text-decoration: line-through;
+    }
 }
 
 /* ----------------------------------------- */
