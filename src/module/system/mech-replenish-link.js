@@ -48,6 +48,22 @@ export function spendReplenishLink(content) {
 }
 
 /**
+ * Who sees the result of a Replenish roll.
+ *
+ * The Shield Points a mech got back are its own crew's business and the GM's, so
+ * the message goes to the mech's owners and every GM and to nobody else.
+ *
+ * @param {Iterable<{id: string, isGM: boolean}>} users The users in the world.
+ * @param {{testUserPermission: Function}} actor The mech that rolled.
+ * @returns {string[]} The ids to whisper to.
+ */
+export function replenishRecipients(users, actor) {
+    return [...users]
+        .filter(user => user.isGM || actor.testUserPermission(user, "OWNER"))
+        .map(user => user.id);
+}
+
+/**
  * Handle a click on Replenish's dice, rolling them and restoring the Shield Points.
  *
  * The mech is read from the card's uuid rather than its id, so an unlinked token's
@@ -84,7 +100,12 @@ export async function onMechReplenishClick(event) {
 
     if (gained > 0) {
         await actor.update({ "system.attributes.sp.value": value });
-        await roll.toMessage({
+
+        // Built here rather than through Roll#toMessage, which applies the current
+        // roll mode and, on the default public setting, empties the whisper list.
+        // The result is the mech's business and the GM's, as the end-of-turn
+        // regeneration message is.
+        await ChatMessage.create({
             speaker: ChatMessage.getSpeaker({ actor }),
             flavor: game.i18n.format("SFRPG.MechSheet.Actions.SPRegenMessage", {
                 name: actor.name,
@@ -92,7 +113,9 @@ export async function onMechReplenishClick(event) {
                 current: value,
                 max: sp.max
             }),
-            whisper: game.users.filter(u => u.isGM || actor.testUserPermission(u, "OWNER")).map(u => u.id)
+            rolls: [roll],
+            sound: CONFIG.sounds.dice,
+            whisper: replenishRecipients(game.users, actor)
         });
     }
 

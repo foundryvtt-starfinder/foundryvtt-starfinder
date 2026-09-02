@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 import { describe, expect, test } from "vitest";
-import { SPENT_CLASS, promoteDiceLinkToReplenish, spendReplenishLink } from "./mech-replenish-link.js";
+import { SPENT_CLASS, promoteDiceLinkToReplenish, replenishRecipients, spendReplenishLink } from "./mech-replenish-link.js";
 import { createDiceLink, linkDiceExpressions } from "./dice-links.js";
 
 /**
@@ -100,5 +100,43 @@ describe("spendReplenishLink", () => {
         spent.innerHTML = spendReplenishLink(aim);
 
         expect(spent.querySelector('a[data-action="mechAttackBonus"]')).not.toBeNull();
+    });
+});
+
+describe("replenishRecipients", () => {
+    /** A world's users, and a mech only some of them own. */
+    function world(owners) {
+        const users = [
+            { id: "gm", isGM: true },
+            { id: "pilot", isGM: false },
+            { id: "bystander", isGM: false }
+        ];
+        const actor = { testUserPermission: (user) => owners.includes(user.id) };
+        return { users, actor };
+    }
+
+    test("tells the GM, who runs the fight the shields were lost in", () => {
+        const { users, actor } = world([]);
+
+        expect(replenishRecipients(users, actor)).toContain("gm");
+    });
+
+    test("tells the mech's owner", () => {
+        const { users, actor } = world(["pilot"]);
+
+        expect(replenishRecipients(users, actor)).toContain("pilot");
+    });
+
+    test("leaves out a player with no claim on the mech", () => {
+        const { users, actor } = world(["pilot"]);
+
+        expect(replenishRecipients(users, actor)).not.toContain("bystander");
+    });
+
+    test("names each recipient once, so the whisper list holds no duplicates", () => {
+        const { users, actor } = world(["gm", "pilot"]);
+        const recipients = replenishRecipients(users, actor);
+
+        expect(recipients).toEqual([...new Set(recipients)]);
     });
 });
