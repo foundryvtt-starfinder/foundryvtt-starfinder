@@ -75,6 +75,7 @@ import {
     onSpendMechFailure
 } from "./module/system/mech-failure-link.js";
 import { failuresTriggered } from "./module/rules/mech-system-failure.js";
+import { effectiveSystems, regenerationRate } from "./module/rules/mech-system-effects.js";
 import TextEditorSFRPG from "./module/system/text-editor.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
@@ -976,11 +977,30 @@ Hooks.on("onAfterUpdateCombat", async (eventData) => {
 
     const pp = actor.system.attributes.pp;
     const sp = actor.system.attributes.sp;
+
+    // A damaged power core slows what comes back and an inoperable one stops it.
+    // The rate is read from the effective statuses, so an override the mech
+    // bought at the start of this turn is still standing at the end of it.
+    const rate = regenerationRate(effectiveSystems(
+        actor.system.attributes.systems,
+        actor.getFlag("sfrpg", "systemOverrides") ?? {}
+    ).powerCore);
+
     const regenerated = mechTurnRegen({
         pp,
         sp,
         tier: actor.system.details.tier
     });
+
+    if (rate <= 0) {
+        regenerated.pp = null;
+        regenerated.sp = null;
+    } else if (rate < 1) {
+        regenerated.pp = regenerated.pp === null ? null : pp.value + Math.floor((regenerated.pp - pp.value) * rate);
+        regenerated.sp = regenerated.sp === null ? null : sp.value + Math.floor((regenerated.sp - sp.value) * rate);
+        if (regenerated.pp === pp.value) regenerated.pp = null;
+        if (regenerated.sp === sp.value) regenerated.sp = null;
+    }
 
     if (regenerated.pp !== null) {
         await actor.update({"system.attributes.pp.value": regenerated.pp});

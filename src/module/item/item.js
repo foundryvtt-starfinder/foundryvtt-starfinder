@@ -5,6 +5,13 @@ import SFRPGModifier from "../modifiers/modifier.js";
 import { SFRPGEffectType, SFRPGModifierType, SFRPGModifierTypes } from "../modifiers/types.js";
 import RollContext from "../rolls/rollcontext.js";
 import StackModifiers from "../rules/closures/stack-modifiers.js";
+import { COMPONENT_LABELS } from "../rules/mech-system-failure.js";
+import {
+    SLOT_COMPONENT,
+    effectiveSystems,
+    weaponPenalties,
+    weaponUsable
+} from "../rules/mech-system-effects.js";
 import {
     collectMechRollModifiers,
     conditionsFromItems,
@@ -1296,6 +1303,22 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
         const isMelee = this.system.weaponType === "melee";
         const attackKey = isMelee ? "meleeAttackBonus" : "rangedAttackBonus";
 
+        // A mount that has failed outright cannot fire what it carries, and a
+        // mount that is merely malfunctioning makes it harder to aim.
+        const systemStatuses = effectiveSystems(
+            this.actor?.system?.attributes?.systems,
+            this.actor?.getFlag("sfrpg", "systemOverrides") ?? {}
+        );
+        if (!weaponUsable(systemStatuses, this.system.slot)) {
+            ui.notifications.warn(game.i18n.format("SFRPG.MechSheet.SystemFailure.WeaponUnusable", {
+                name: this.name,
+                component: game.i18n.localize(
+                    `SFRPG.MechSheet.Systems.${COMPONENT_LABELS[SLOT_COMPONENT[this.system.slot]]}`
+                )
+            }));
+            return null;
+        }
+
         // Base attack (tier) + upper limb mods are pre-calculated on the mech
         // Operator's BAB or Piloting ranks are added here at roll time
         const parts = [
@@ -1327,6 +1350,17 @@ export class ItemSFRPG extends Mix(foundry.documents.Item).with(ItemActivationMi
             parts.push({ score: modifier.modifier, explanation: mechConditionLabel(modifier, slug, source) });
         }
         additionalModifiers.push(...conditionMods.rolled.map(entry => entry.modifier));
+
+        for (const penalty of weaponPenalties(systemStatuses, this.system.slot)) {
+            parts.push({
+                score: penalty.value,
+                explanation: game.i18n.format("SFRPG.MechSheet.SystemFailure.AttackPenalty", {
+                    component: game.i18n.localize(
+                        `SFRPG.MechSheet.Systems.${COMPONENT_LABELS[penalty.component]}`
+                    )
+                })
+            });
+        }
 
         // An armed attack bonus (e.g. Aim) was rolled from the action's chat card, so
         // the number is already fixed and goes in as a flat part named for the action.
