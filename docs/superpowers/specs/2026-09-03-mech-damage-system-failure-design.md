@@ -85,14 +85,17 @@ that owns all of the document reading and writing.
 `src/module/rules/mech-system-failure-effects.js` covers the one-off effects that
 fire at the moment a component's status changes rather than while it holds:
 
-- `powerCoreLoss(status)` — `1d4` Power Points lost on first becoming
-  malfunctioning and again on becoming inoperable.
-- `cockpitVictims(operators, status)` — half the operators rounded up on
-  malfunctioning, all of them on inoperable.
-- `cockpitDamage(tier)` — `<tier>d8` — and `cockpitSaveDC(tier)` — 15 + half the
-  tier.
-- `auxiliaryToDisable(systems, roll)` — which auxiliary system ceases to function
-  when the auxiliary component becomes inoperable.
+- `powerCoreLoss(status)` — the `1d4` formula to offer, or nothing when the
+  status carries no loss.
+- `cockpitVictims(operators, status)` — how many operators are affected: half
+  rounded up on malfunctioning, all of them on inoperable.
+- `cockpitDamage(tier)` — the `<tier>d8` formula — and `cockpitSaveDC(tier)` —
+  15 + half the tier.
+- `auxiliarySelection(systems)` — the formula to roll, sized to the list, and
+  `auxiliaryToDisable(systems, roll)` — which system that roll names.
+
+Each of these returns a formula or reads a result. The rolling belongs to the
+Foundry layer, which posts it as a button.
 
 ### Data
 
@@ -135,29 +138,56 @@ to `applyDamage` to accumulate that remainder into `flags.sfrpg.overkill` before
 the clamp, in the same place the character branch already reads
 `remainingUndealtDamage` for massive damage.
 
+## Nothing Rolls Itself
+
+Every random outcome in this design is produced by someone pressing a button.
+The system never rolls a die on its own and reports the result: it posts a card
+with the die on it, and the state changes when that die is rolled.
+
+This covers the component table, the Power Point loss, the cockpit saves and
+their damage, the auxiliary system that fails outright, and both percentage
+checks. The pure rules functions take a roll result as an argument and return a
+formula or a decision; not one of them calls `Roll`.
+
+Each button is the promoted dice link `promoteDiceLink` builds for Aim and
+Replenish, on a card whispered to the mech's owners and every GM, clickable by
+an owner or a GM and greyed out once pressed — the pattern Replenish already
+uses, including the spent state written into the stored message so it survives a
+reload and shows as spent to the other viewer.
+
+A card left unrolled leaves the mech unchanged. This is deliberate: an
+unresolved failure is visible in chat, where a silently applied one would not
+be.
+
 ## The Failure Event
 
-When the hook sees a threshold crossed:
+When the hook sees a threshold crossed it records the threshold in
+`flags.sfrpg.systemFailures` and posts the failure card. The card says the mech
+has suffered a system failure and carries a 1d20 button. Nothing else has
+happened yet.
 
-1. Roll 1d20, take the component from the table, step its status.
-2. Apply the one-off effects for that component and new status.
-3. Write the status, record the threshold in `flags.sfrpg.systemFailures`, and
-   post a card.
+Pressing it rolls the die, reads the component from the table, steps that
+component's status and writes it. The card is rewritten in place to name the
+component, the new condition and what that condition means, with the die that
+chose it still shown.
 
-The card is whispered to the mech's owners and every GM, matching the
-regeneration and Replenish messages. It names the component, the new condition,
-and what that condition means.
+If the new status carries a one-off effect, that same rewrite adds the button
+for it. Two thresholds crossed by a single hit post two cards, resolved
+independently and in either order.
 
-The one-off effects at transition:
+The one-off effects at transition, each its own button:
 
-- **Power core** — roll 1d4 and subtract from Power Points, floored at zero.
-- **Cockpit** — the card carries a Reflex button for each affected operator. The
-  mech's owner presses it, the system rolls the save against DC 15 + half tier,
-  rolls `<tier>d8` bludgeoning, halves it on a success, and applies it to that
-  operator. Half the operators rounded up on malfunctioning; all of them on
-  inoperable. Which half is the owner's choice, offered on the card.
-- **Auxiliary system, on becoming inoperable** — one auxiliary system chosen at
-  random ceases to function, recorded on the item.
+- **Power core** — a `1d4` button. Rolling it subtracts that many Power Points,
+  floored at zero.
+- **Cockpit** — a Reflex button for each affected operator. Pressing one rolls
+  that operator's save against DC 15 + half the mech's tier and `<tier>d8`
+  bludgeoning in the same click, halves the damage on a success, and applies it.
+  Half the operators rounded up on malfunctioning; all of them on inoperable.
+  Which half is the owner's choice, made on the card before the buttons appear.
+- **Auxiliary system, on becoming inoperable** — a button rolling a die sized to
+  the number of auxiliary systems the mech has. The system it names ceases to
+  function, recorded on the item. A mech with one auxiliary system still rolls
+  1d1, so the card reads the same way as every other.
 
 ## Ongoing Effects
 
@@ -206,9 +236,8 @@ worked out, which is the point of buying it.
 
 ## Chance Rolls
 
-The two percentage checks are whispered cards with a roll button — the promoted
-dice link `promoteDiceLink` builds for Aim and Replenish — sent to the mech's
-owners. Neither is rolled silently: the player sees the die.
+Both percentage checks are `1d100` buttons on whispered cards, resolved the same
+way as everything else here.
 
 **Auxiliary activation** fires when the mech activates an auxiliary system, and
 at the start of each turn for systems giving a constant benefit. On a failure the
@@ -251,8 +280,14 @@ one at a time, confirmed to fail for the right reason, then reverted.
 - Regeneration, movement and hardness rates.
 - Overkill accumulation, and the destroyed boundary either side of twice maximum
   Hit Points.
-- The transition effects: power core loss, operator count rounding, and the
-  damage and DC formulas by tier.
+- The transition effects: operator count rounding, and the damage and DC
+  formulas by tier.
+- The auxiliary system a roll selects, at either end of the list and for a mech
+  carrying only one.
+- Each percentage check's threshold either side of the failing roll, at both 25%
+  and 50%.
+- That no rules module calls `Roll`: a test over the module directory failing the
+  build if one does.
 
 The Foundry-facing parts — the `updateActor` hook, the cards, the sheet, the
 operator damage, the Power Point actions — are verified in the Mechageddon world
