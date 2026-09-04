@@ -444,14 +444,16 @@ export function transitionButtons({ component, status, tier = 0, operatorCount =
  * @param {number} options.chance The chance in a hundred of failing.
  * @param {string} options.purpose "auxiliary" or "cockpit".
  * @param {string} options.label The button's text.
+ * @param {string} [options.systemId] The auxiliary system the check is about.
  * @returns {Promise<ChatMessage|null>} The card, or null when nothing can fail.
  */
-export async function postChanceCard(actor, { chance, purpose, label }) {
+export async function postChanceCard(actor, { chance, purpose, label, systemId = null }) {
     if (!chance) return null;
 
     const tooltip = game.i18n.localize("SFRPG.MechSheet.SystemFailure.ChanceTooltip");
     const prompt = `<p><a class="enriched-link" data-action="mechChanceCheck"`
         + ` data-formula="1d100" data-chance="${chance}" data-purpose="${purpose}"`
+        + (systemId ? ` data-system-id="${systemId}"` : "")
         + ` data-index="0" data-tooltip="${tooltip}">${label}</a></p>`;
 
     return ChatMessage.create({
@@ -463,10 +465,25 @@ export async function postChanceCard(actor, { chance, purpose, label }) {
 }
 
 /**
+ * Whether an auxiliary system is working at all.
+ *
+ * Two things stop one: the selection roll an inoperable auxiliary component
+ * makes, which stops a system for good, and a percentage check the system
+ * failed this turn, which stops it until the mech's next turn.
+ *
+ * @param {Item} system The auxiliary system.
+ * @returns {boolean} False when the system does nothing at the moment.
+ */
+export function auxiliarySystemUsable(system) {
+    return !system.getFlag("sfrpg", "disabledByFailure")
+        && !system.getFlag("sfrpg", "failedThisTurn");
+}
+
+/**
  * Post the check an auxiliary system owes before it is relied on.
  *
- * A system already stopped by a failed component is skipped: it is not working
- * at all, so there is nothing to find out.
+ * A system that is not working at all is skipped: there is nothing to find out
+ * about a system that has already stopped.
  *
  * @param {Actor} actor The mech.
  * @param {Item} system The auxiliary system being relied on.
@@ -474,12 +491,13 @@ export async function postChanceCard(actor, { chance, purpose, label }) {
  * @returns {Promise<ChatMessage|null>} The card, or null when none is owed.
  */
 export async function postAuxiliaryCheck(actor, system, status) {
-    if (system.getFlag("sfrpg", "disabledByFailure")) return null;
+    if (!auxiliarySystemUsable(system)) return null;
 
     const chance = auxiliaryFailureChance(status);
     return postChanceCard(actor, {
         chance,
         purpose: "auxiliary",
+        systemId: system.id,
         label: game.i18n.format("SFRPG.MechSheet.SystemFailure.AuxiliaryCheckLabel", {
             name: system.name,
             chance
@@ -504,6 +522,13 @@ export async function onMechChanceCheckClick(event) {
     const outcome = link.dataset.purpose === "cockpit"
         ? (failed ? "CockpitActionLost" : "CockpitActionKept")
         : (failed ? "AuxiliaryFailed" : "AuxiliaryWorked");
+
+    // An auxiliary system that failed its check cannot be used again until the
+    // start of the mech's next turn, which is when the flag is cleared. The
+    // cockpit's lost action is spent as it happens and leaves nothing behind.
+    if (failed && link.dataset.purpose === "auxiliary" && link.dataset.systemId) {
+        await actor.items.get(link.dataset.systemId)?.setFlag("sfrpg", "failedThisTurn", true);
+    }
 
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),

@@ -326,7 +326,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
             .map(([component, system]) => ({
                 component,
                 overcome: systemStatuses[component] !== system.value,
-                label: game.i18n.format("SFRPG.MechSheet.SystemFailure.Tag", {
+                label: game.i18n.format("SFRPG.MechSheet.SystemFailure.ComponentTag", {
                     component: game.i18n.localize(`SFRPG.MechSheet.Systems.${COMPONENT_LABELS[component]}`),
                     status: game.i18n.localize(CONFIG.SFRPG.mechSystemStatus[system.value])
                 })
@@ -335,7 +335,10 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         // One entry per component currently carrying a system failure, and none
         // at all for a mech in working order. Built from the mech rather than
         // from the static action table, so they come and go with the damage.
-        actionsTab.overcomeActions = overcomeActions(systemStatuses).map(action => ({
+        actionsTab.overcomeActions = overcomeActions(
+            systemStatuses,
+            this.actor.getFlag("sfrpg", "systemOverrides") ?? {}
+        ).map(action => ({
             ...action,
             name: game.i18n.format(`SFRPG.MechSheet.SystemFailure.Overcome${action.status === "inoperable" ? "Inoperable" : "Malfunctioning"}`, {
                 component: game.i18n.localize(`SFRPG.MechSheet.Systems.${COMPONENT_LABELS[action.component]}`)

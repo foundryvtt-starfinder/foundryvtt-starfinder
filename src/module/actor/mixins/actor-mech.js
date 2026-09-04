@@ -5,7 +5,7 @@ import { promoteDiceLinkToBonus } from "../../system/mech-bonus-link.js";
 import { promoteDiceLinkToReplenish } from "../../system/mech-replenish-link.js";
 import { replenishFormula } from "../../rules/mech-replenish.js";
 import { effectiveSystems, overcomeActions } from "../../rules/mech-system-effects.js";
-import { postAuxiliaryCheck, postChanceCard } from "../../system/mech-failure-link.js";
+import { auxiliarySystemUsable, postAuxiliaryCheck, postChanceCard } from "../../system/mech-failure-link.js";
 
 export const ActorMechMixin = (superclass) => class extends superclass {
     /**
@@ -20,11 +20,9 @@ export const ActorMechMixin = (superclass) => class extends superclass {
      * @returns {Promise<boolean>} True when the Power Points were spent.
      */
     async useOvercomeAction(component) {
-        const statuses = effectiveSystems(
-            this.system.attributes.systems,
-            this.getFlag("sfrpg", "systemOverrides") ?? {}
-        );
-        const action = overcomeActions(statuses).find(entry => entry.component === component);
+        const held = this.getFlag("sfrpg", "systemOverrides") ?? {};
+        const statuses = effectiveSystems(this.system.attributes.systems, held);
+        const action = overcomeActions(statuses, held).find(entry => entry.component === component);
         if (!action) return false;
 
         const currentPP = this.system.attributes.pp.value || 0;
@@ -33,7 +31,7 @@ export const ActorMechMixin = (superclass) => class extends superclass {
             return false;
         }
 
-        const overrides = { ...(this.getFlag("sfrpg", "systemOverrides") ?? {}), [component]: action.override };
+        const overrides = { ...held, [component]: action.override };
         await this.update({
             "system.attributes.pp.value": currentPP - action.ppCost,
             "flags.sfrpg.systemOverrides": overrides
@@ -93,6 +91,15 @@ export const ActorMechMixin = (superclass) => class extends superclass {
             if (!item) return null;
             const action = item.system.actions?.[itemActionIndex];
             if (!action) return null;
+
+            // A system stopped by the failure roll, or by a check it failed
+            // earlier this turn, does nothing at all - so it takes no payment.
+            if (item.type === "mechAuxiliary" && !auxiliarySystemUsable(item)) {
+                ui.notifications.warn(game.i18n.format("SFRPG.MechSheet.SystemFailure.SystemStopped", {
+                    name: item.name
+                }));
+                return null;
+            }
             name = `${action.name} (${item.name})`;
             description = action.description;
             ppCost = action.ppCost;

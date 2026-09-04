@@ -156,15 +156,17 @@ const OVERCOME_BY_STATUS = Object.freeze({
 /**
  * The Power Point actions to offer for the failures this mech is carrying.
  *
- * One per failed component, and none at all for a mech in working order. The
- * statuses passed in are the effective ones, so a component already overcome
- * this turn is not offered a second time.
+ * One per failed component, and none at all for a mech in working order. A
+ * component the mech has already bought an override for this turn is not
+ * offered again: each override moves a component one step and no further, so a
+ * second purchase for the same component would buy nothing.
  *
  * @param {Object<string, string>} statuses Effective status by component.
+ * @param {Object<string, string>} [overrides] The overrides already held.
  * @returns {Array<{component: string, status: string, ppCost: number, override: string}>} The actions to show.
  */
-export function overcomeActions(statuses = {}) {
+export function overcomeActions(statuses = {}, overrides = {}) {
     return Object.entries(statuses)
-        .filter(([, status]) => isFailed(status))
+        .filter(([component, status]) => isFailed(status) && !overrides[component])
         .map(([component, status]) => ({ component, status, ...OVERCOME_BY_STATUS[status] }));
 }

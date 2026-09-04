@@ -14,7 +14,10 @@ const RULES_DIR = dirname(fileURLToPath(import.meta.url));
 /** Foundry globals a pure rules module has no business touching. */
 const FORBIDDEN = [
     /\bnew Roll\b/,
+    /\bnew foundry\.dice\.Roll\b/,
     /\bRoll\.create\b/,
+    /\bRoll\.simulate\b/,
+    /\bMath\.random\b/,
     /\bgame\./,
     /\bCONFIG\./,
     /\bChatMessage\b/,

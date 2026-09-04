@@ -196,4 +196,13 @@ describe("overcomeActions", () => {
 
         expect(actions.map(action => action.component)).toEqual(["upperLimbs", "powerCore"]);
     });
+
+    it("stops offering a component the mech has already bought an override for", () => {
+        const actions = overcomeActions(
+            { powerCore: "malfunctioning", cockpit: "inoperable" },
+            { powerCore: "downgraded" }
+        );
+
+        expect(actions.map(action => action.component)).toEqual(["cockpit"]);
+    });
 });

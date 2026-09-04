@@ -893,6 +893,12 @@ Hooks.on("combatStart", async (combat) => {
             await actor.update({"system.attributes.pp.value": pp.initial});
         }
 
+        // The thresholds already crossed belong to the encounter just ended. A
+        // mech repaired between fights has to be able to fail again.
+        if (actor.getFlag("sfrpg", "systemFailures")) {
+            await actor.unsetFlag("sfrpg", "systemFailures");
+        }
+
         const conditionNames = [];
         for (const effect of CONFIG.SFRPG.statusEffects) {
             if (actor.hasCondition(effect.id)) {
@@ -960,12 +966,29 @@ Hooks.on("combatStart", async (combat) => {
 Hooks.on("onAfterUpdateCombat", async (eventData) => {
     if (!game.users.activeGM?.isSelf) return;
 
+    // The departing mech's power core rate is read before anything is cleared:
+    // when the combat holds one mech, or wraps back onto the same one, the mech
+    // arriving and the mech whose turn just ended are the same actor, and the
+    // override it bought at the start of that turn still has to count.
+    const departing = eventData.oldCombatant?.actor;
+    const departingRate = departing?.type === "mech"
+        ? regenerationRate(effectiveSystems(
+            departing.system.attributes.systems,
+            departing.getFlag("sfrpg", "systemOverrides") ?? {}
+        ).powerCore)
+        : 1;
+
     // A component the pilot paid to overcome stays overcome until the start of
     // the mech's next turn, so the moment that turn arrives the overrides go.
+    // The same is true of an auxiliary system that failed a check on its turn.
     const arriving = eventData.newCombatant?.actor;
-    if (arriving?.type === "mech" && eventData.direction > 0
-        && arriving.getFlag("sfrpg", "systemOverrides")) {
-        await arriving.unsetFlag("sfrpg", "systemOverrides");
+    if (arriving?.type === "mech" && eventData.direction > 0) {
+        if (arriving.getFlag("sfrpg", "systemOverrides")) {
+            await arriving.unsetFlag("sfrpg", "systemOverrides");
+        }
+        for (const system of arriving.items.filter(item => item.getFlag("sfrpg", "failedThisTurn"))) {
+            await system.unsetFlag("sfrpg", "failedThisTurn");
+        }
     }
 
     // A system that has to be activated is checked when it is used. One giving a
@@ -1006,12 +1029,8 @@ Hooks.on("onAfterUpdateCombat", async (eventData) => {
     const sp = actor.system.attributes.sp;
 
     // A damaged power core slows what comes back and an inoperable one stops it.
-    // The rate is read from the effective statuses, so an override the mech
-    // bought at the start of this turn is still standing at the end of it.
-    const rate = regenerationRate(effectiveSystems(
-        actor.system.attributes.systems,
-        actor.getFlag("sfrpg", "systemOverrides") ?? {}
-    ).powerCore);
+    // Worked out at the top of this handler, before any override was cleared.
+    const rate = departingRate;
 
     const regenerated = mechTurnRegen({
         pp,
@@ -1108,24 +1127,35 @@ async function postMechFailureCard(actor, threshold) {
 
 // updateActor reports the new Hit Points but not the old ones, so the value on
 // the way in is kept for the handler below to compare against.
-Hooks.on("preUpdateActor", (actor, changes) => {
+Hooks.on("preUpdateActor", (actor, changes, options) => {
     if (actor.type !== "mech") return;
     if (foundry.utils.getProperty(changes, "system.attributes.hp.value") === undefined) return;
 
-    actor._sfrpgPreviousHp = actor.system.attributes.hp.value;
+    // On the update options, which Foundry broadcasts, rather than on the
+    // document: a player lowering their own mech's Hit Points runs this hook on
+    // their client alone, and it is the GM's client that has to read the value.
+    options.sfrpgPreviousHp = actor.system.attributes.hp.value;
 });
 
 // A mech's components fail as it takes damage. The thresholds are checked on the
 // update rather than inside applyDamage because a mech's Hit Points also change
 // from a GM typing in the box, from a macro, and from any module that writes them.
-Hooks.on("updateActor", async (actor, changes) => {
+Hooks.on("updateActor", async (actor, changes, options) => {
     if (!game.users.activeGM?.isSelf) return;
     if (actor.type !== "mech") return;
 
     const value = foundry.utils.getProperty(changes, "system.attributes.hp.value");
     if (value === undefined) return;
 
-    const previousValue = actor._sfrpgPreviousHp ?? value;
+    const previousValue = options?.sfrpgPreviousHp ?? value;
+
+    // Damage past zero is only worth keeping while the mech is still down. Once
+    // it is repaired to full, what it took past zero is repaired with it, so a
+    // later beating is not added to one the mech has already recovered from.
+    if (value >= actor.system.attributes.hp.max && actor.getFlag("sfrpg", "overkill")) {
+        await actor.unsetFlag("sfrpg", "overkill");
+    }
+
     const fired = actor.getFlag("sfrpg", "systemFailures") ?? [];
     const triggered = failuresTriggered({
         value,
