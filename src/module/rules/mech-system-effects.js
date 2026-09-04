@@ -1,3 +1,5 @@
+import { isFailed } from "./mech-system-failure.js";
+
 /**
  * How an override improves a component's status.
  *
@@ -84,4 +86,85 @@ export function auxiliaryFailureChance(status) {
     if (status === "inoperable") return 50;
 
     return 0;
+}
+
+/**
+ * Which component carries each weapon mount.
+ *
+ * The locker is not a mount - a weapon stowed there is not attached to anything
+ * that can be damaged - so it is deliberately absent.
+ *
+ * @type {Readonly<Object<string, string>>}
+ */
+export const SLOT_COMPONENT = Object.freeze({
+    upperLimb: "upperLimbs",
+    lowerLimb: "lowerLimbs",
+    frame: "frame"
+});
+
+/** The penalty a malfunctioning component puts on the rolls it touches. */
+const FAILURE_PENALTY = -2;
+
+/**
+ * The attack penalties a weapon picks up from the mount it is on.
+ *
+ * An inoperable mount gives no penalty because its weapons cannot be fired at
+ * all - see {@link weaponUsable}.
+ *
+ * @param {Object<string, string>} statuses Effective status by component.
+ * @param {string} slot The weapon's mount.
+ * @returns {Array<{component: string, value: number}>} The penalties to apply.
+ */
+export function weaponPenalties(statuses = {}, slot) {
+    const component = SLOT_COMPONENT[slot];
+    if (!component) return [];
+    if (statuses[component] !== "malfunctioning") return [];
+
+    return [{ component, value: FAILURE_PENALTY }];
+}
+
+/**
+ * Whether a weapon on this mount can be fired.
+ *
+ * @param {Object<string, string>} statuses Effective status by component.
+ * @param {string} slot The weapon's mount.
+ * @returns {boolean} False only when the mount is inoperable.
+ */
+export function weaponUsable(statuses = {}, slot) {
+    const component = SLOT_COMPONENT[slot];
+    if (!component) return true;
+
+    return statuses[component] !== "inoperable";
+}
+
+/**
+ * The penalty on a combat maneuver that does not use a mech weapon.
+ *
+ * @param {Object<string, string>} statuses Effective status by component.
+ * @returns {number} -2 when the upper limbs are malfunctioning, 0 otherwise.
+ */
+export function maneuverPenalty(statuses = {}) {
+    return statuses.upperLimbs === "malfunctioning" ? FAILURE_PENALTY : 0;
+}
+
+/** What each failed status costs to overcome, and what buying it grants. */
+const OVERCOME_BY_STATUS = Object.freeze({
+    malfunctioning: Object.freeze({ ppCost: 2, override: "ignored" }),
+    inoperable: Object.freeze({ ppCost: 4, override: "downgraded" })
+});
+
+/**
+ * The Power Point actions to offer for the failures this mech is carrying.
+ *
+ * One per failed component, and none at all for a mech in working order. The
+ * statuses passed in are the effective ones, so a component already overcome
+ * this turn is not offered a second time.
+ *
+ * @param {Object<string, string>} statuses Effective status by component.
+ * @returns {Array<{component: string, status: string, ppCost: number, override: string}>} The actions to show.
+ */
+export function overcomeActions(statuses = {}) {
+    return Object.entries(statuses)
+        .filter(([, status]) => isFailed(status))
+        .map(([component, status]) => ({ component, status, ...OVERCOME_BY_STATUS[status] }));
 }
