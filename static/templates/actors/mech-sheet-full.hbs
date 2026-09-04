@@ -5,14 +5,6 @@
     </div>
     {{/unless}}
 
-    {{#if systemFailures.length}}
-    <div class="mech-failure-tags">
-        {{#each systemFailures as |failure|}}
-        <span class="tag mech-failure-tag{{#if failure.overcome}} overcome{{/if}}">{{failure.label}}</span>
-        {{/each}}
-    </div>
-    {{/if}}
-
     <header class="sheet-header flexrow">
         <div class="image-container">
             <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" height="140" width="140" />

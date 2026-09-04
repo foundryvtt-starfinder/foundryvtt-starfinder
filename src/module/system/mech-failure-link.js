@@ -172,7 +172,7 @@ export async function onMechFailureRollClick(event) {
         name: actor.name,
         component: componentName(component),
         status: game.i18n.localize(CONFIG.SFRPG.mechSystemStatus[status])
-    });
+    }) + effectText(component, status);
 
     await ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
@@ -185,6 +185,26 @@ export async function onMechFailureRollClick(event) {
     await markSpent(link.closest("[data-actor-uuid]"), "mechFailureRoll");
 
     return component;
+}
+
+/**
+ * What a component's new condition does to the mech, in a sentence.
+ *
+ * The card is where the player learns what just happened to their mech, so it
+ * says what the condition costs rather than leaving them to look it up.
+ *
+ * @param {string} component The component that failed.
+ * @param {string} status The status it has taken on.
+ * @returns {string} A paragraph of HTML, empty when there is nothing to say.
+ */
+export function effectText(component, status) {
+    const label = COMPONENT_LABELS[component];
+    if (!label) return "";
+
+    const suffix = status === "inoperable" ? "Inoperable" : "Malfunctioning";
+    return `<p class="mech-failure-effect">`
+        + game.i18n.localize(`SFRPG.MechSheet.SystemFailure.Effect${label}${suffix}`)
+        + `</p>`;
 }
 
 /**

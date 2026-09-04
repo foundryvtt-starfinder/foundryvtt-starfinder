@@ -1,6 +1,6 @@
 import { ActorSFRPG } from "../actor.js";
 import { armedOverrideBanners } from "../../rules/mech-attack-bonus.js";
-import { COMPONENT_LABELS, damageState, isFailed } from "../../rules/mech-system-failure.js";
+import { COMPONENT_LABELS, damageState } from "../../rules/mech-system-failure.js";
 import { effectiveSystems, overcomeActions, weaponUsable } from "../../rules/mech-system-effects.js";
 import { ActorSheetSFRPG } from "./base.js";
 import { LOCKER_SLOT, SLOT_COMPONENT_TYPES, droppedSlot, maxWeaponLevel, mountRefusal, weaponDropPlacement } from "./mech-weapon-slots.js";
@@ -317,20 +317,6 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
             max: hp.max,
             overkill: this.actor.getFlag("sfrpg", "overkill") ?? 0
         });
-
-        // A tag per component the mech's own dropdowns call failed. One the mech
-        // has paid to overcome is shown struck through rather than hidden, so the
-        // owner can see what their Power Points bought.
-        data.systemFailures = Object.entries(actorData.attributes?.systems ?? {})
-            .filter(([, system]) => isFailed(system.value))
-            .map(([component, system]) => ({
-                component,
-                overcome: systemStatuses[component] !== system.value,
-                label: game.i18n.format("SFRPG.MechSheet.SystemFailure.ComponentTag", {
-                    component: game.i18n.localize(`SFRPG.MechSheet.Systems.${COMPONENT_LABELS[component]}`),
-                    status: game.i18n.localize(CONFIG.SFRPG.mechSystemStatus[system.value])
-                })
-            }));
 
         // One entry per component currently carrying a system failure, and none
         // at all for a mech in working order. Built from the mech rather than
