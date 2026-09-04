@@ -2,11 +2,13 @@ import { COMPONENT_LABELS, componentForRoll, nextStatus } from "../rules/mech-sy
 import {
     auxiliarySelection,
     auxiliaryToDisable,
+    chanceFailed,
     cockpitDamage,
     cockpitSaveDC,
     cockpitVictimCount,
     powerCoreLoss
 } from "../rules/mech-system-transitions.js";
+import { auxiliaryFailureChance } from "../rules/mech-system-effects.js";
 import { RPC } from "../rpc.js";
 
 /**
@@ -429,4 +431,88 @@ export function transitionButtons({ component, status, tier = 0, operatorCount =
     }
 
     return [];
+}
+
+/**
+ * Post a card carrying one percentage check for the player to roll.
+ *
+ * The chance is written into the button rather than checked here, so the roll
+ * that decides it is a press the player makes and can see.
+ *
+ * @param {Actor} actor The mech the check is about.
+ * @param {object} options
+ * @param {number} options.chance The chance in a hundred of failing.
+ * @param {string} options.purpose "auxiliary" or "cockpit".
+ * @param {string} options.label The button's text.
+ * @returns {Promise<ChatMessage|null>} The card, or null when nothing can fail.
+ */
+export async function postChanceCard(actor, { chance, purpose, label }) {
+    if (!chance) return null;
+
+    const tooltip = game.i18n.localize("SFRPG.MechSheet.SystemFailure.ChanceTooltip");
+    const prompt = `<p><a class="enriched-link" data-action="mechChanceCheck"`
+        + ` data-formula="1d100" data-chance="${chance}" data-purpose="${purpose}"`
+        + ` data-index="0" data-tooltip="${tooltip}">${label}</a></p>`;
+
+    return ChatMessage.create({
+        user: game.user.id,
+        speaker: ChatMessage.getSpeaker({ actor }),
+        content: await failureContent(actor, prompt),
+        whisper: failureRecipients(game.users, actor)
+    });
+}
+
+/**
+ * Post the check an auxiliary system owes before it is relied on.
+ *
+ * A system already stopped by a failed component is skipped: it is not working
+ * at all, so there is nothing to find out.
+ *
+ * @param {Actor} actor The mech.
+ * @param {Item} system The auxiliary system being relied on.
+ * @param {string} status The auxiliary component's effective status.
+ * @returns {Promise<ChatMessage|null>} The card, or null when none is owed.
+ */
+export async function postAuxiliaryCheck(actor, system, status) {
+    if (system.getFlag("sfrpg", "disabledByFailure")) return null;
+
+    const chance = auxiliaryFailureChance(status);
+    return postChanceCard(actor, {
+        chance,
+        purpose: "auxiliary",
+        label: game.i18n.format("SFRPG.MechSheet.SystemFailure.AuxiliaryCheckLabel", {
+            name: system.name,
+            chance
+        })
+    });
+}
+
+/**
+ * Handle a click on a percentage check.
+ *
+ * @param {Event} event The click event.
+ * @returns {Promise<boolean|null>} True when the check failed, or null if nothing was rolled.
+ */
+export async function onMechChanceCheckClick(event) {
+    const clicked = await beginClick(event);
+    if (!clicked) return null;
+
+    const { link, actor, card } = clicked;
+    const roll = await new Roll(link.dataset.formula).evaluate();
+    const failed = chanceFailed(roll.total, Number(link.dataset.chance));
+
+    const outcome = link.dataset.purpose === "cockpit"
+        ? (failed ? "CockpitActionLost" : "CockpitActionKept")
+        : (failed ? "AuxiliaryFailed" : "AuxiliaryWorked");
+
+    await ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor }),
+        flavor: game.i18n.localize(`SFRPG.MechSheet.SystemFailure.${outcome}`),
+        rolls: [roll],
+        sound: CONFIG.sounds.dice,
+        whisper: failureRecipients(game.users, actor)
+    });
+    await markSpent(card, "mechChanceCheck", link.dataset.index);
+
+    return failed;
 }

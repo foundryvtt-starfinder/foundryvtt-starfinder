@@ -565,6 +565,21 @@
                 {{/each}}
             </ol>
 
+            {{#if actionsTab.showCockpitCheck}}
+            <ol class="mech-action-list">
+                <li class="mech-action-item flexrow">
+                    <div class="mech-action-name">
+                        <h4>{{ localize "SFRPG.MechSheet.SystemFailure.CockpitCheckLabel" }}</h4>
+                    </div>
+                    {{#if isOwner}}
+                    <div class="mech-action-buttons">
+                        <button type="button" class="tag mech-cockpit-check action-type-button">1d100</button>
+                    </div>
+                    {{/if}}
+                </li>
+            </ol>
+            {{/if}}
+
             {{!-- Overcome System Failure --}}
             {{#if actionsTab.overcomeActions.length}}
             <ol class="mech-action-list">

@@ -297,6 +297,12 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
             insufficientPPTooltip: insufficientPPTooltip
         }));
 
+        // The cockpit's controls only need a check once they have failed outright.
+        actionsTab.showCockpitCheck = effectiveSystems(
+            actorData.attributes?.systems,
+            this.actor.getFlag("sfrpg", "systemOverrides") ?? {}
+        ).cockpit === "inoperable";
+
         // One entry per component currently carrying a system failure, and none
         // at all for a mech in working order. Built from the mech rather than
         // from the static action table, so they come and go with the damage.
@@ -446,6 +452,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
         // Actions Tab - action buttons post to chat
         html.find('.mech-pp-action').click(event => this._onMechAction(event, "pp"));
         html.find('.mech-overcome-action').click(event => this.actor.useOvercomeAction(event.currentTarget.dataset.component));
+        html.find('.mech-cockpit-check').click(() => this.actor.rollCockpitControlCheck());
         html.find('.mech-special-action').click(event => this._onMechAction(event, "special"));
         html.find('.mech-gear-action').click(event => this._onMechAction(event, "gear"));
 

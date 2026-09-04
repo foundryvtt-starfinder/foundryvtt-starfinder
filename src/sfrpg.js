@@ -69,13 +69,15 @@ import { onMechReplenishClick, onSpendMechReplenish } from "./module/system/mech
 import {
     failureRecipients,
     onMechAuxiliaryPickClick,
+    onMechChanceCheckClick,
     onMechCockpitSaveClick,
     onMechFailureRollClick,
     onMechPowerCoreLossClick,
-    onSpendMechFailure
+    onSpendMechFailure,
+    postAuxiliaryCheck
 } from "./module/system/mech-failure-link.js";
 import { failuresTriggered } from "./module/rules/mech-system-failure.js";
-import { effectiveSystems, regenerationRate } from "./module/rules/mech-system-effects.js";
+import { auxiliaryFailureChance, effectiveSystems, regenerationRate } from "./module/rules/mech-system-effects.js";
 import TextEditorSFRPG from "./module/system/text-editor.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
@@ -720,6 +722,7 @@ Hooks.once("ready", async () => {
     $("body").on("click", 'a[data-action="mechPowerCoreLoss"]', onMechPowerCoreLossClick);
     $("body").on("click", 'a[data-action="mechCockpitSave"]', onMechCockpitSaveClick);
     $("body").on("click", 'a[data-action="mechAuxiliaryPick"]', onMechAuxiliaryPickClick);
+    $("body").on("click", 'a[data-action="mechChanceCheck"]', onMechChanceCheckClick);
     ItemSFRPG.chatListeners($("body"));
     extendDragData();
 
@@ -963,6 +966,22 @@ Hooks.on("onAfterUpdateCombat", async (eventData) => {
     if (arriving?.type === "mech" && eventData.direction > 0
         && arriving.getFlag("sfrpg", "systemOverrides")) {
         await arriving.unsetFlag("sfrpg", "systemOverrides");
+    }
+
+    // A system that has to be activated is checked when it is used. One giving a
+    // constant benefit is never activated, so its check is owed at the start of
+    // each of the mech's turns instead.
+    if (arriving?.type === "mech" && eventData.direction > 0) {
+        const statuses = effectiveSystems(
+            arriving.system.attributes.systems,
+            arriving.getFlag("sfrpg", "systemOverrides") ?? {}
+        );
+        if (auxiliaryFailureChance(statuses.auxSystem) > 0) {
+            for (const system of arriving.items.filter(item => item.type === "mechAuxiliary"
+                && !item.system.canBeActivated)) {
+                await postAuxiliaryCheck(arriving, system, statuses.auxSystem);
+            }
+        }
     }
 
     const combatant = eventData.oldCombatant;
