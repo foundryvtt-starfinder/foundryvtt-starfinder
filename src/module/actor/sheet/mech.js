@@ -1,5 +1,7 @@
 import { ActorSFRPG } from "../actor.js";
 import { armedOverrideBanners } from "../../rules/mech-attack-bonus.js";
+import { COMPONENT_LABELS } from "../../rules/mech-system-failure.js";
+import { effectiveSystems, overcomeActions } from "../../rules/mech-system-effects.js";
 import { ActorSheetSFRPG } from "./base.js";
 import { LOCKER_SLOT, SLOT_COMPONENT_TYPES, droppedSlot, maxWeaponLevel, mountRefusal, weaponDropPlacement } from "./mech-weapon-slots.js";
 
@@ -295,6 +297,22 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
             insufficientPPTooltip: insufficientPPTooltip
         }));
 
+        // One entry per component currently carrying a system failure, and none
+        // at all for a mech in working order. Built from the mech rather than
+        // from the static action table, so they come and go with the damage.
+        const statuses = effectiveSystems(
+            actorData.attributes?.systems,
+            this.actor.getFlag("sfrpg", "systemOverrides") ?? {}
+        );
+        actionsTab.overcomeActions = overcomeActions(statuses).map(action => ({
+            ...action,
+            name: game.i18n.format(`SFRPG.MechSheet.SystemFailure.Overcome${action.status === "inoperable" ? "Inoperable" : "Malfunctioning"}`, {
+                component: game.i18n.localize(`SFRPG.MechSheet.Systems.${COMPONENT_LABELS[action.component]}`)
+            }),
+            canAfford: currentPP >= action.ppCost,
+            insufficientPPTooltip: insufficientPPTooltip
+        }));
+
         // Special Actions (universal, action type instead of PP cost)
         const actionTypeLabels = Object.fromEntries(
             Object.entries(CONFIG.SFRPG.mechActionTypes).map(([key, label]) => [key, game.i18n.localize(label)])
@@ -427,6 +445,7 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
 
         // Actions Tab - action buttons post to chat
         html.find('.mech-pp-action').click(event => this._onMechAction(event, "pp"));
+        html.find('.mech-overcome-action').click(event => this.actor.useOvercomeAction(event.currentTarget.dataset.component));
         html.find('.mech-special-action').click(event => this._onMechAction(event, "special"));
         html.find('.mech-gear-action').click(event => this._onMechAction(event, "gear"));
 

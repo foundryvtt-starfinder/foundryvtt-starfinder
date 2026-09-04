@@ -957,6 +957,14 @@ Hooks.on("combatStart", async (combat) => {
 Hooks.on("onAfterUpdateCombat", async (eventData) => {
     if (!game.users.activeGM?.isSelf) return;
 
+    // A component the pilot paid to overcome stays overcome until the start of
+    // the mech's next turn, so the moment that turn arrives the overrides go.
+    const arriving = eventData.newCombatant?.actor;
+    if (arriving?.type === "mech" && eventData.direction > 0
+        && arriving.getFlag("sfrpg", "systemOverrides")) {
+        await arriving.unsetFlag("sfrpg", "systemOverrides");
+    }
+
     const combatant = eventData.oldCombatant;
     if (!combatant) return;
 

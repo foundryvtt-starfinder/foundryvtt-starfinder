@@ -4,8 +4,43 @@ import { actionDamageOverride } from "../../rules/mech-damage-level.js";
 import { promoteDiceLinkToBonus } from "../../system/mech-bonus-link.js";
 import { promoteDiceLinkToReplenish } from "../../system/mech-replenish-link.js";
 import { replenishFormula } from "../../rules/mech-replenish.js";
+import { effectiveSystems, overcomeActions } from "../../rules/mech-system-effects.js";
 
 export const ActorMechMixin = (superclass) => class extends superclass {
+    /**
+     * Spend Power Points to shrug off one component's system failure.
+     *
+     * The override holds until the start of the mech's next turn. Because
+     * regeneration is worked out at the end of a turn, an override bought at the
+     * start of that turn is still standing when the power core's rate is read -
+     * which is the point of buying it.
+     *
+     * @param {string} component The component to overcome.
+     * @returns {Promise<boolean>} True when the Power Points were spent.
+     */
+    async useOvercomeAction(component) {
+        const statuses = effectiveSystems(
+            this.system.attributes.systems,
+            this.getFlag("sfrpg", "systemOverrides") ?? {}
+        );
+        const action = overcomeActions(statuses).find(entry => entry.component === component);
+        if (!action) return false;
+
+        const currentPP = this.system.attributes.pp.value || 0;
+        if (currentPP < action.ppCost) {
+            ui.notifications.warn(game.i18n.localize("SFRPG.MechSheet.Actions.InsufficientPP"));
+            return false;
+        }
+
+        const overrides = { ...(this.getFlag("sfrpg", "systemOverrides") ?? {}), [component]: action.override };
+        await this.update({
+            "system.attributes.pp.value": currentPP - action.ppCost,
+            "flags.sfrpg.systemOverrides": overrides
+        });
+
+        return true;
+    }
+
     /**
      * Perform one of the mech's actions: spend its Power Points, arm any damage
      * level override it declares, and post its chat card.

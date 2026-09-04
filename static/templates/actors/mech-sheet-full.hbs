@@ -565,6 +565,29 @@
                 {{/each}}
             </ol>
 
+            {{!-- Overcome System Failure --}}
+            {{#if actionsTab.overcomeActions.length}}
+            <ol class="mech-action-list">
+                <li class="mech-action-header flexrow">
+                    <h3 class="item-name noborder">{{ localize "SFRPG.MechSheet.SystemFailure.OvercomeTitle" }}</h3>
+                </li>
+                {{#each actionsTab.overcomeActions as |action|}}
+                <li class="mech-action-item flexrow">
+                    <div class="mech-action-name">
+                        <h4>{{action.name}}</h4>
+                    </div>
+                    {{#if @root.isOwner}}
+                    <div class="mech-action-buttons">
+                        <button type="button" class="tag mech-overcome-action pp-cost-button{{#unless action.canAfford}} disabled{{/unless}}" data-component="{{action.component}}" {{#unless action.canAfford}}disabled data-tooltip="{{action.insufficientPPTooltip}}"{{/unless}}>
+                            {{action.ppCost}} PP
+                        </button>
+                    </div>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ol>
+            {{/if}}
+
             {{!-- Special Actions --}}
             <ol class="mech-action-list">
                 <li class="mech-action-header flexrow">
