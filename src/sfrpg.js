@@ -66,6 +66,8 @@ import PPAbilityEnricher from "./module/system/enrichers/pp-ability.js";
 import TemplateEnricher from "./module/system/enrichers/template.js";
 import { onMechAttackBonusClick } from "./module/system/mech-bonus-link.js";
 import { onMechReplenishClick, onSpendMechReplenish } from "./module/system/mech-replenish-link.js";
+import { failureRecipients, onMechFailureRollClick, onSpendMechFailure } from "./module/system/mech-failure-link.js";
+import { failuresTriggered } from "./module/rules/mech-system-failure.js";
 import TextEditorSFRPG from "./module/system/text-editor.js";
 
 import RollDialog from "./module/apps/roll-dialog.js";
@@ -677,6 +679,7 @@ Hooks.once("setup", function() {
     console.log("Starfinder | [SETUP] Initializing RPC system");
     RPC.initialize();
     RPC.registerCallback("spendMechReplenish", "gm", onSpendMechReplenish);
+    RPC.registerCallback("spendMechFailure", "gm", onSpendMechFailure);
 
     console.log("Starfinder | [SETUP] Initializing remote inventory system");
     initializeRemoteInventory();
@@ -705,6 +708,7 @@ Hooks.once("ready", async () => {
     BaseEnricher.addListeners();
     $("body").on("click", 'a[data-action="mechAttackBonus"]', onMechAttackBonusClick);
     $("body").on("click", 'a[data-action="mechReplenish"]', onMechReplenishClick);
+    $("body").on("click", 'a[data-action="mechFailureRoll"]', onMechFailureRollClick);
     ItemSFRPG.chatListeners($("body"));
     extendDragData();
 
@@ -1010,5 +1014,73 @@ Hooks.on("renderGamePause", () => {
         if (icon) {
             icon.src = "systems/sfrpg/images/cup/organizations/starfinder_society.webp";
         }
+    }
+});
+
+/**
+ * Post the card that hands a mech's owner the roll for a system failure.
+ *
+ * Nothing about the mech changes here. The component is not chosen until the
+ * 1d20 on the card is pressed, so a failure nobody has resolved stays visible
+ * in chat rather than being applied quietly.
+ *
+ * @param {Actor} actor The mech that failed.
+ * @param {string} threshold Which Hit Point threshold brought it on.
+ * @returns {Promise<ChatMessage>} The card.
+ */
+async function postMechFailureCard(actor, threshold) {
+    const formula = "1d20";
+    const tooltip = game.i18n.format("SFRPG.MechSheet.SystemFailure.RollTooltip", { formula });
+    const button = `<a class="enriched-link" data-action="mechFailureRoll" data-formula="${formula}"`
+        + ` data-threshold="${threshold}" data-tooltip="${tooltip}">${formula}</a>`;
+    const prompt = game.i18n
+        .format("SFRPG.MechSheet.SystemFailure.Prompt", { name: actor.name, formula })
+        .replace(formula, button);
+
+    const content = await foundry.applications.handlebars.renderTemplate(
+        "systems/sfrpg/templates/chat/mech-failure-card.hbs",
+        { actorId: actor.id, actorUuid: actor.uuid, img: actor.img, name: actor.name, prompt }
+    );
+
+    return ChatMessage.create({
+        speaker: ChatMessage.getSpeaker({ actor }),
+        content,
+        whisper: failureRecipients(game.users, actor)
+    });
+}
+
+// updateActor reports the new Hit Points but not the old ones, so the value on
+// the way in is kept for the handler below to compare against.
+Hooks.on("preUpdateActor", (actor, changes) => {
+    if (actor.type !== "mech") return;
+    if (foundry.utils.getProperty(changes, "system.attributes.hp.value") === undefined) return;
+
+    actor._sfrpgPreviousHp = actor.system.attributes.hp.value;
+});
+
+// A mech's components fail as it takes damage. The thresholds are checked on the
+// update rather than inside applyDamage because a mech's Hit Points also change
+// from a GM typing in the box, from a macro, and from any module that writes them.
+Hooks.on("updateActor", async (actor, changes) => {
+    if (!game.users.activeGM?.isSelf) return;
+    if (actor.type !== "mech") return;
+
+    const value = foundry.utils.getProperty(changes, "system.attributes.hp.value");
+    if (value === undefined) return;
+
+    const previousValue = actor._sfrpgPreviousHp ?? value;
+    const fired = actor.getFlag("sfrpg", "systemFailures") ?? [];
+    const triggered = failuresTriggered({
+        value,
+        previousValue,
+        max: actor.system.attributes.hp.max,
+        fired
+    });
+    if (triggered.length === 0) return;
+
+    await actor.setFlag("sfrpg", "systemFailures", [...fired, ...triggered]);
+
+    for (const threshold of triggered) {
+        await postMechFailureCard(actor, threshold);
     }
 });
