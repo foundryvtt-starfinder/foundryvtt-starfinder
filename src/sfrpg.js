@@ -898,6 +898,10 @@ Hooks.on("combatStart", async (combat) => {
         if (actor.getFlag("sfrpg", "systemFailures")) {
             await actor.unsetFlag("sfrpg", "systemFailures");
         }
+        for (const claim of announcedFailures) {
+            if (claim.startsWith(`${actor.id}:`)) announcedFailures.delete(claim);
+        }
+        await actor.setFlag("sfrpg", "failureEpoch", foundry.utils.randomID(8));
 
         const conditionNames = [];
         for (const effect of CONFIG.SFRPG.statusEffects) {
@@ -1105,6 +1109,15 @@ Hooks.on("renderGamePause", () => {
  * @returns {Promise<ChatMessage>} The card.
  */
 async function postMechFailureCard(actor, threshold) {
+    // One card per threshold, whoever posts it. `game.users.activeGM.isSelf` is
+    // true in every browser session the GM has open, so two windows on the same
+    // world both reach this, and neither has seen the other's flag write yet.
+    // The card says which mech, which threshold and which fight it belongs to; a
+    // session that finds one already posted leaves it alone. The fight is part of
+    // it so that a card from an earlier encounter does not silence this one.
+    const stamp = `${actor.id}:${actor.getFlag("sfrpg", "failureEpoch") ?? "none"}:${threshold}`;
+    if (game.messages.some(message => message.getFlag("sfrpg", "mechFailure") === stamp)) return null;
+
     const formula = "1d20";
     const tooltip = game.i18n.format("SFRPG.MechSheet.SystemFailure.RollTooltip", { formula });
     const button = `<a class="enriched-link" data-action="mechFailureRoll" data-formula="${formula}"`
@@ -1121,9 +1134,21 @@ async function postMechFailureCard(actor, threshold) {
     return ChatMessage.create({
         speaker: ChatMessage.getSpeaker({ actor }),
         content,
+        flags: { sfrpg: { mechFailure: stamp } },
         whisper: failureRecipients(game.users, actor)
     });
 }
+
+/**
+ * The thresholds a card has already been posted for, as `<actor id>:<threshold>`.
+ *
+ * The flag on the actor is the durable record, but writing it is asynchronous:
+ * one damage roll can reach the handler below twice within the same few
+ * milliseconds, and both passes read the flag before either has written it. This
+ * is claimed synchronously, so the second pass finds the threshold taken and
+ * posts nothing. Cleared with the flag when the next fight starts.
+ */
+const announcedFailures = new Set();
 
 // updateActor reports the new Hit Points but not the old ones, so the value on
 // the way in is kept for the handler below to compare against.
@@ -1165,9 +1190,15 @@ Hooks.on("updateActor", async (actor, changes, options) => {
     });
     if (triggered.length === 0) return;
 
-    await actor.setFlag("sfrpg", "systemFailures", [...fired, ...triggered]);
+    // Claimed here, before the first await, so a second pass arriving while the
+    // flag is still being written has nothing left to announce.
+    const unclaimed = triggered.filter(threshold => !announcedFailures.has(`${actor.id}:${threshold}`));
+    if (unclaimed.length === 0) return;
+    for (const threshold of unclaimed) announcedFailures.add(`${actor.id}:${threshold}`);
 
-    for (const threshold of triggered) {
+    await actor.setFlag("sfrpg", "systemFailures", [...fired, ...unclaimed]);
+
+    for (const threshold of unclaimed) {
         await postMechFailureCard(actor, threshold);
     }
 });
