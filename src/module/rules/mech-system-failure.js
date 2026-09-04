@@ -58,3 +58,77 @@ export function damageState({ value = 0, max = 0, overkill = 0 } = {}) {
 
     return "intact";
 }
+
+/**
+ * The 1d20 system failure table, as rows ending at each face.
+ *
+ * @type {ReadonlyArray<{max: number, component: string}>}
+ */
+export const COMPONENT_TABLE = Object.freeze([
+    Object.freeze({ max: 5, component: "upperLimbs" }),
+    Object.freeze({ max: 10, component: "lowerLimbs" }),
+    Object.freeze({ max: 13, component: "frame" }),
+    Object.freeze({ max: 16, component: "auxSystem" }),
+    Object.freeze({ max: 18, component: "powerCore" }),
+    Object.freeze({ max: 20, component: "cockpit" })
+]);
+
+/**
+ * The label key suffix each component is named by.
+ *
+ * The sheet, the chat cards and the roll tooltips all localize a component
+ * through `SFRPG.MechSheet.Systems.<suffix>`, so the mapping is kept here with
+ * the rest of the component data rather than copied into each of them.
+ *
+ * @type {Readonly<Object<string, string>>}
+ */
+export const COMPONENT_LABELS = Object.freeze({
+    upperLimbs: "UpperLimbs",
+    lowerLimbs: "LowerLimbs",
+    frame: "Frame",
+    auxSystem: "AuxSystem",
+    powerCore: "PowerCore",
+    cockpit: "Cockpit"
+});
+
+/** The statuses a component moves through, in order. */
+const STATUS_ORDER = ["nominal", "malfunctioning", "inoperable"];
+
+/**
+ * The component a system failure roll hits.
+ *
+ * @param {number} roll The result of the 1d20.
+ * @returns {string|null} The component key, or null for a roll off the table.
+ */
+export function componentForRoll(roll) {
+    const face = Number(roll);
+    if (!Number.isFinite(face) || face < 1) return null;
+
+    return COMPONENT_TABLE.find(row => face <= row.max)?.component ?? null;
+}
+
+/**
+ * The status a component takes on when it suffers a failure.
+ *
+ * A component already inoperable has nothing worse to become, so the failure is
+ * absorbed rather than passed on to another component.
+ *
+ * @param {string} status The component's current status.
+ * @returns {string} The status it takes on.
+ */
+export function nextStatus(status) {
+    const index = STATUS_ORDER.indexOf(status);
+    const from = index < 0 ? 0 : index;
+
+    return STATUS_ORDER[Math.min(from + 1, STATUS_ORDER.length - 1)];
+}
+
+/**
+ * Whether a component is carrying a system failure condition.
+ *
+ * @param {string} status The component's status.
+ * @returns {boolean} True when it is malfunctioning or inoperable.
+ */
+export function isFailed(status) {
+    return status === "malfunctioning" || status === "inoperable";
+}
