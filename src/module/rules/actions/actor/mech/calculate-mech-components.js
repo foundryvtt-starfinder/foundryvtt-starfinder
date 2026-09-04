@@ -1,3 +1,5 @@
+import { effectiveSystems, hardnessRate, movementRate } from "../../../mech-system-effects.js";
+
 /**
  * Calculate mech statistics from component items (frame, limbs, power core).
  * Based on Starfinder Tech Revolution mech rules.
@@ -85,11 +87,29 @@ export default function(engine) {
         data.attributes.sp.max = tierStats.sp;
         data.attributes.sp.tooltip.push(`Tier ${tier}: ${tierStats.sp}`);
 
+        // A component the mech has paid to overcome this turn reads as the better
+        // status, so every rate below is worked out from the effective ones.
+        const systemStatuses = effectiveSystems(
+            data.attributes.systems,
+            actor.getFlag?.("sfrpg", "systemOverrides") ?? {}
+        );
+
         // ========================================
         // Hardness: Frame hardness + tier table bonus
         // ========================================
         const frameHardness = frame?.system.hardness || 0;
         data.attributes.hardness = frameHardness + tierStats.hardnessBonus;
+
+        // A damaged frame stops protecting the mech: halved while it is
+        // malfunctioning, gone once it is inoperable.
+        const frameRate = hardnessRate(systemStatuses.frame);
+        if (frameRate < 1) {
+            data.attributes.hardness = Math.floor(data.attributes.hardness * frameRate);
+            data.attributes.hardnessTooltip = [
+                ...(data.attributes.hardnessTooltip ?? []),
+                game.i18n.localize("SFRPG.MechSheet.SystemFailure.FrameHardness")
+            ];
+        }
 
         // ========================================
         // AC: Base AC (tier table) + bonuses from frame and limbs
@@ -226,6 +246,22 @@ export default function(engine) {
         if (lowerLimb?.system.speed) {
             applySpeedModifiers(lowerLimb.system.speed, data.attributes.speed);
             addSpeedTooltips(lowerLimb.system.speed, data.attributes.speedTooltip, lowerLimb.name);
+        }
+
+        // Failed lower limbs halve the mech's own speeds and then stop them. This
+        // runs before auxiliary systems add theirs, because a speed an auxiliary
+        // system provides is not the limbs' to slow.
+        const limbRate = movementRate(systemStatuses.lowerLimbs);
+        if (limbRate < 1) {
+            for (const speedType of ["land", "fly", "swim", "burrow"]) {
+                const current = parseInt(data.attributes.speed[speedType]) || 0;
+                if (current <= 0) continue;
+
+                data.attributes.speed[speedType] = `${Math.floor(current * limbRate)} ft.`;
+                data.attributes.speedTooltip[speedType].push(
+                    game.i18n.localize("SFRPG.MechSheet.SystemFailure.LowerLimbSpeed")
+                );
+            }
         }
 
         // ========================================

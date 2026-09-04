@@ -270,6 +270,10 @@ export default class SFRPGActorMech extends SFRPGActorBase {
                     auxSystem: new fields.SchemaField(
                         SFRPGActorMech._mechSystemFieldData(),
                         {label: "SFRPG.MechSheet.Systems.AuxSystem"}
+                    ),
+                    cockpit: new fields.SchemaField(
+                        SFRPGActorMech._mechSystemFieldData(),
+                        {label: "SFRPG.MechSheet.Systems.Cockpit"}
                     )
                 }),
                 slots: new fields.SchemaField({

@@ -1,4 +1,10 @@
 <form class="{{cssClass}} flexcol" autocomplete="off">
+    {{#unless (eq damageState "intact")}}
+    <div class="mech-damage-banner {{damageState}}" data-tooltip="{{#if (eq damageState "destroyed")}}{{ localize "SFRPG.MechSheet.SystemFailure.DestroyedHint" }}{{else}}{{ localize "SFRPG.MechSheet.SystemFailure.WreckedHint" }}{{/if}}">
+        {{#if (eq damageState "destroyed")}}{{ localize "SFRPG.MechSheet.SystemFailure.Destroyed" }}{{else}}{{ localize "SFRPG.MechSheet.SystemFailure.Wrecked" }}{{/if}}
+    </div>
+    {{/unless}}
+
     <header class="sheet-header flexrow">
         <div class="image-container">
             <img class="profile" src="{{actor.img}}" title="{{actor.name}}" data-edit="img" height="140" width="140" />
@@ -313,6 +319,14 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>{{ localize "SFRPG.MechSheet.Systems.Cockpit" }}</label>
+                            <div class="form-fields">
+                                <select name="system.attributes.systems.cockpit.value">
+                                    {{selectOptions (sfrpg "mechSystemStatus") selected=system.attributes.systems.cockpit.value localize=true}}
+                                </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -494,7 +508,7 @@
                 </li>
                 {{#if actionsTab.enabledWeapons.length}}
                 {{#each actionsTab.enabledWeapons as |weapon|}}
-                <li class="mech-action-item flexrow item" data-item-id="{{weapon._id}}">
+                <li class="mech-action-item flexrow item{{#if weapon.config.unusable}} weapon-unusable{{/if}}" data-item-id="{{weapon._id}}"{{#if weapon.config.unusable}} data-tooltip="{{ localize "SFRPG.MechSheet.SystemFailure.MountFailed" }}"{{/if}}>
                     <div class="mech-action-name flexrow">
                         <div class="item-image small" style="background-image: url({{weapon.img}})"></div>
                         <h4 class="rollable">{{weapon.name}} {{weapon.config.levelLabel}}</h4>
@@ -556,6 +570,44 @@
                 </li>
                 {{/each}}
             </ol>
+
+            {{#if actionsTab.showCockpitCheck}}
+            <ol class="mech-action-list">
+                <li class="mech-action-item flexrow">
+                    <div class="mech-action-name">
+                        <h4>{{ localize "SFRPG.MechSheet.SystemFailure.CockpitCheckLabel" }}</h4>
+                    </div>
+                    {{#if isOwner}}
+                    <div class="mech-action-buttons">
+                        <button type="button" class="tag mech-cockpit-check action-type-button">1d100</button>
+                    </div>
+                    {{/if}}
+                </li>
+            </ol>
+            {{/if}}
+
+            {{!-- Overcome System Failure --}}
+            {{#if actionsTab.overcomeActions.length}}
+            <ol class="mech-action-list">
+                <li class="mech-action-header flexrow">
+                    <h3 class="item-name noborder">{{ localize "SFRPG.MechSheet.SystemFailure.OvercomeTitle" }}</h3>
+                </li>
+                {{#each actionsTab.overcomeActions as |action|}}
+                <li class="mech-action-item flexrow">
+                    <div class="mech-action-name">
+                        <h4>{{action.name}}</h4>
+                    </div>
+                    {{#if @root.isOwner}}
+                    <div class="mech-action-buttons">
+                        <button type="button" class="tag mech-overcome-action pp-cost-button{{#unless action.canAfford}} disabled{{/unless}}" data-component="{{action.component}}" {{#unless action.canAfford}}disabled data-tooltip="{{action.insufficientPPTooltip}}"{{/unless}}>
+                            {{action.ppCost}} PP
+                        </button>
+                    </div>
+                    {{/if}}
+                </li>
+                {{/each}}
+            </ol>
+            {{/if}}
 
             {{!-- Special Actions --}}
             <ol class="mech-action-list">

@@ -1,5 +1,7 @@
 import { ActorSFRPG } from "../actor.js";
 import { armedOverrideBanners } from "../../rules/mech-attack-bonus.js";
+import { COMPONENT_LABELS, damageState } from "../../rules/mech-system-failure.js";
+import { effectiveSystems, overcomeActions, weaponUsable } from "../../rules/mech-system-effects.js";
 import { ActorSheetSFRPG } from "./base.js";
 import { LOCKER_SLOT, SLOT_COMPONENT_TYPES, droppedSlot, maxWeaponLevel, mountRefusal, weaponDropPlacement } from "./mech-weapon-slots.js";
 
@@ -272,6 +274,13 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
             will: game.i18n.localize("SFRPG.MechSheet.Action.SaveTypes.Will")
         };
 
+        // What each component is worth right now: its own status, unless the mech
+        // has paid to overcome it this turn.
+        const systemStatuses = effectiveSystems(
+            actorData.attributes?.systems,
+            this.actor.getFlag("sfrpg", "systemOverrides") ?? {}
+        );
+
         // Enabled weapons: mounted weapons (not in locker)
         actionsTab.enabledWeapons = weapons.filter(w => w.system.slot !== "locker");
 
@@ -282,6 +291,8 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
                 const dc = save.dc || (12 + Math.floor(weaponLevel / 2));
                 weapon.config.saveLabel = `${saveTypeLabels[save.type] || save.type} DC ${dc}`;
             }
+
+            weapon.config.unusable = !weaponUsable(systemStatuses, weapon.system.slot);
         }
 
         // PP Actions (universal, always available)
@@ -291,6 +302,33 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
             name: game.i18n.localize(action.name),
             description: game.i18n.localize(action.description),
             ppCost: action.ppCost,
+            canAfford: currentPP >= action.ppCost,
+            insufficientPPTooltip: insufficientPPTooltip
+        }));
+
+        // The cockpit's controls only need a check once they have failed outright.
+        actionsTab.showCockpitCheck = systemStatuses.cockpit === "inoperable";
+
+        // Wrecked at no Hit Points, destroyed once the mech has taken more than
+        // twice what it had - which is why the overkill past zero was kept.
+        const hp = actorData.attributes?.hp ?? {};
+        data.damageState = damageState({
+            value: hp.value,
+            max: hp.max,
+            overkill: this.actor.getFlag("sfrpg", "overkill") ?? 0
+        });
+
+        // One entry per component currently carrying a system failure, and none
+        // at all for a mech in working order. Built from the mech rather than
+        // from the static action table, so they come and go with the damage.
+        actionsTab.overcomeActions = overcomeActions(
+            systemStatuses,
+            this.actor.getFlag("sfrpg", "systemOverrides") ?? {}
+        ).map(action => ({
+            ...action,
+            name: game.i18n.format(`SFRPG.MechSheet.SystemFailure.Overcome${action.status === "inoperable" ? "Inoperable" : "Malfunctioning"}`, {
+                component: game.i18n.localize(`SFRPG.MechSheet.Systems.${COMPONENT_LABELS[action.component]}`)
+            }),
             canAfford: currentPP >= action.ppCost,
             insufficientPPTooltip: insufficientPPTooltip
         }));
@@ -427,6 +465,8 @@ export class ActorSheetSFRPGMech extends ActorSheetSFRPG {
 
         // Actions Tab - action buttons post to chat
         html.find('.mech-pp-action').click(event => this._onMechAction(event, "pp"));
+        html.find('.mech-overcome-action').click(event => this.actor.useOvercomeAction(event.currentTarget.dataset.component));
+        html.find('.mech-cockpit-check').click(() => this.actor.rollCockpitControlCheck());
         html.find('.mech-special-action').click(event => this._onMechAction(event, "special"));
         html.find('.mech-gear-action').click(event => this._onMechAction(event, "gear"));
 

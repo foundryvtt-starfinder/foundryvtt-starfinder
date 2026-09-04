@@ -529,3 +529,33 @@
         }
     }
 }
+
+/* ----------------------------------------- */
+/*  Damage state and system failures         */
+/* ----------------------------------------- */
+
+.sfrpg .mech-damage-banner {
+    padding: 4px 8px;
+    margin-bottom: 4px;
+    border-radius: 3px;
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--color-text-light-highlight);
+    background: #8b2b2b;
+
+    /* A mech past twice its Hit Points is beyond repair, so it reads darker
+       than one that is merely out of the fight. */
+    &.destroyed {
+        background: #3a0d0d;
+    }
+}
+
+.sfrpg .mech-action-item.weapon-unusable {
+    opacity: 0.5;
+
+    h4.rollable {
+        text-decoration: line-through;
+    }
+}
