@@ -66,7 +66,14 @@ import PPAbilityEnricher from "./module/system/enrichers/pp-ability.js";
 import TemplateEnricher from "./module/system/enrichers/template.js";
 import { onMechAttackBonusClick } from "./module/system/mech-bonus-link.js";
 import { onMechReplenishClick, onSpendMechReplenish } from "./module/system/mech-replenish-link.js";
-import { failureRecipients, onMechFailureRollClick, onSpendMechFailure } from "./module/system/mech-failure-link.js";
+import {
+    failureRecipients,
+    onMechAuxiliaryPickClick,
+    onMechCockpitSaveClick,
+    onMechFailureRollClick,
+    onMechPowerCoreLossClick,
+    onSpendMechFailure
+} from "./module/system/mech-failure-link.js";
 import { failuresTriggered } from "./module/rules/mech-system-failure.js";
 import TextEditorSFRPG from "./module/system/text-editor.js";
 
@@ -709,6 +716,9 @@ Hooks.once("ready", async () => {
     $("body").on("click", 'a[data-action="mechAttackBonus"]', onMechAttackBonusClick);
     $("body").on("click", 'a[data-action="mechReplenish"]', onMechReplenishClick);
     $("body").on("click", 'a[data-action="mechFailureRoll"]', onMechFailureRollClick);
+    $("body").on("click", 'a[data-action="mechPowerCoreLoss"]', onMechPowerCoreLossClick);
+    $("body").on("click", 'a[data-action="mechCockpitSave"]', onMechCockpitSaveClick);
+    $("body").on("click", 'a[data-action="mechAuxiliaryPick"]', onMechAuxiliaryPickClick);
     ItemSFRPG.chatListeners($("body"));
     extendDragData();
 
