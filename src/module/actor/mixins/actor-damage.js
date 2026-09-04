@@ -414,21 +414,27 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
         remainingUndealtDamage += damage.modifier || 0;
 
         const originalTempHP = parseInt(actorData.attributes.hp.temp) || 0;
+        const hasTemporaryHitPoints = actorData.attributes.hp.temp !== undefined;
         const originalSP = actorData.attributes?.sp?.value || 0;
         const originalHP = actorData.attributes.hp.value;
 
         if (!damage.isHealing) {
             /** Update temp hitpoints */
-            let newTempHP = Math.clamp(originalTempHP - remainingUndealtDamage, 0,
-                actorData.attributes.hp.tempmax || actorData.attributes.hp.temp);
-            remainingUndealtDamage -= (originalTempHP - newTempHP);
+            // Not every actor keeps temporary Hit Points. A mech's Hit Points are
+            // one pool with no temporary layer above it, and clamping against a
+            // maximum it does not have turns every number after this into NaN.
+            if (hasTemporaryHitPoints) {
+                let newTempHP = Math.clamp(originalTempHP - remainingUndealtDamage, 0,
+                    actorData.attributes.hp.tempmax || actorData.attributes.hp.temp);
+                remainingUndealtDamage -= (originalTempHP - newTempHP);
 
-            if (newTempHP <= 0) {
-                newTempHP = null;
-                actorUpdate['system.attributes.hp.tempmax'] = null;
+                if (newTempHP <= 0) {
+                    newTempHP = null;
+                    actorUpdate['system.attributes.hp.tempmax'] = null;
+                }
+
+                actorUpdate["system.attributes.hp.temp"] = newTempHP;
             }
-
-            actorUpdate["system.attributes.hp.temp"] = newTempHP;
 
             if (!damage?.options?.bypassStamina) {
             /** Update stamina points */
@@ -443,6 +449,15 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
             remainingUndealtDamage -= (originalHP - newHP);
 
             actorUpdate["system.attributes.hp.value"] = newHP;
+
+            // A mech that takes more than twice its Hit Points is destroyed and
+            // cannot be repaired, but the clamp above throws away the damage past
+            // zero that the count depends on. Keep it, so the state can be worked
+            // out however long the beating takes.
+            if (this.type === "mech" && remainingUndealtDamage > 0) {
+                const overkill = (this.getFlag("sfrpg", "overkill") || 0) + remainingUndealtDamage;
+                actorUpdate["flags.sfrpg.overkill"] = overkill;
+            }
 
             /** If the remaining undealt damage is equal to or greater than the max hp, the character dies of Massive Damage. */
             if (this.type === "character" && remainingUndealtDamage >= actorData.attributes.hp.max) {
@@ -464,7 +479,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
                 actorUpdate["system.attributes.sp.value"] = newSP;
             }
 
-            if (damage.healSettings.healsTemporaryHitpoints) {
+            if (damage.healSettings.healsTemporaryHitpoints && hasTemporaryHitPoints) {
                 const newTempHP = Math.clamp(originalTempHP + remainingUndealtDamage, 0, actorData.attributes.hp.tempmax);
                 remainingUndealtDamage -= (newTempHP - originalTempHP);
 
@@ -483,7 +498,9 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     * @returns True if the actor is immune to this damage type
     */
     isImmuneToDamageType(damageType) {
-        return this.system.traits.di.value.includes(damageType);
+        // A mech carries no traits block at all, so this is asked of actors that
+        // have nothing to answer with.
+        return this.system.traits?.di?.value?.includes(damageType) ?? false;
     }
 
     /**
@@ -493,7 +510,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     * @returns True if the actor is immune to this damage type
     */
     isVulnerableToDamageType(damageType) {
-        return this.system.traits.dv.value.includes(damageType);
+        return this.system.traits?.dv?.value?.includes(damageType) ?? false;
     }
 
     /**
@@ -504,7 +521,7 @@ export const ActorDamageMixin = (superclass) => class extends superclass {
     * @returns Amount of damage mitigation applied.
     */
     getDamageMitigationForDamageType(damageType, damage = null) {
-        const damageMitigation = this.system.traits.damageMitigation;
+        const damageMitigation = this.system.traits?.damageMitigation;
         if (!damageMitigation) {
             return 0;
         }
