@@ -1108,6 +1108,30 @@ Hooks.on("renderGamePause", () => {
  * @param {string} threshold Which Hit Point threshold brought it on.
  * @returns {Promise<ChatMessage>} The card.
  */
+/**
+ * The document id a failure card is written under.
+ *
+ * Two browser sessions of the same GM both reach the threshold check, and
+ * neither has seen the other's card by the time it posts, so checking the chat
+ * log is not enough on its own. Deriving the id from what the card is about
+ * means both sessions write the same document: whichever arrives second
+ * replaces the first rather than adding a second card.
+ *
+ * @param {string} stamp What the card is about: mech, fight and threshold.
+ * @returns {string} A 16 character id, the shape Foundry uses.
+ */
+function failureCardId(stamp) {
+    let low = 0x811c9dc5;
+    let high = 0x01000193;
+    for (let index = 0; index < stamp.length; index++) {
+        const code = stamp.charCodeAt(index);
+        low = Math.imul(low ^ code, 16777619) >>> 0;
+        high = Math.imul(high + code, 2246822519) >>> 0;
+    }
+
+    return `${low.toString(36)}${high.toString(36)}`.padEnd(16, "0").slice(0, 16);
+}
+
 async function postMechFailureCard(actor, threshold) {
     // One card per threshold, whoever posts it. `game.users.activeGM.isSelf` is
     // true in every browser session the GM has open, so two windows on the same
@@ -1132,11 +1156,12 @@ async function postMechFailureCard(actor, threshold) {
     );
 
     return ChatMessage.create({
+        _id: failureCardId(stamp),
         speaker: ChatMessage.getSpeaker({ actor }),
         content,
         flags: { sfrpg: { mechFailure: stamp } },
         whisper: failureRecipients(game.users, actor)
-    });
+    }, { keepId: true });
 }
 
 /**
