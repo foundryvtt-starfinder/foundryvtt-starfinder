@@ -1,3 +1,5 @@
+import { baseSquaresForFrame, scaledTokenSize, snapResolution } from "./token-scale.js";
+
 export default class SFRPGTokenDocument extends foundry.documents.TokenDocument {
     async _preCreate(data, options, user) {
         const updates = {};
@@ -8,10 +10,46 @@ export default class SFRPGTokenDocument extends foundry.documents.TokenDocument 
                 updates.movementAction = "crawl";
             }
 
+            // Size the token to the scene's scale, so that a Huge mech dropped on a
+            // 10 ft grid takes one square rather than three. A mech goes by the frame it
+            // has equipped; everything else goes by the squares its token was drawn at.
+            if (game.settings.get("sfrpg", "scaleTokensToGrid")) {
+                const gridDistance = this.parent?.grid?.distance;
+                const options = { isMech: this.actor.type === "mech" };
+                const frameSquares = baseSquaresForFrame(this.actor);
+                const prototype = this.actor.prototypeToken;
+
+                updates.width = scaledTokenSize(frameSquares ?? prototype?.width ?? this.width, gridDistance, options);
+                updates.height = scaledTokenSize(frameSquares ?? prototype?.height ?? this.height, gridDistance, options);
+            }
         }
 
         this.updateSource(updates);
         return super._preCreate(data, options, user);
+    }
+
+    /**
+     * @override to snap a token that does not fill whole squares to the 5 ft steps it moves in.
+     * Foundry rounds a token's size to the nearest half square before snapping, which leaves a
+     * third-of-a-square token stepping in quarters and stopping short of the square's far edge.
+     */
+    getSnappedPosition(data = {}) {
+        const grid = this.parent?.grid;
+        if (!grid?.isSquare) return super.getSnappedPosition(data);
+
+        const resolutionX = snapResolution(data.width ?? this.width, grid.distance);
+        const resolutionY = snapResolution(data.height ?? this.height, grid.distance);
+        if (!resolutionX && !resolutionY) return super.getSnappedPosition(data);
+
+        const snapped = super.getSnappedPosition(data);
+        const point = { x: data.x ?? this.x, y: data.y ?? this.y };
+        const mode = CONST.GRID_SNAPPING_MODES.VERTEX;
+
+        return {
+            x: resolutionX ? grid.getSnappedPoint(point, { mode, resolution: resolutionX }).x : snapped.x,
+            y: resolutionY ? grid.getSnappedPoint(point, { mode, resolution: resolutionY }).y : snapped.y,
+            elevation: snapped.elevation
+        };
     }
 
     // When a linked token's base actor is updated, check if the movement action is correct

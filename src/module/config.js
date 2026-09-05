@@ -3,6 +3,7 @@ import CheckEnricher from "./system/enrichers/check.js";
 import IconEnricher from "./system/enrichers/icon.js";
 import PPAbilityEnricher from "./system/enrichers/pp-ability.js";
 import TemplateEnricher from "./system/enrichers/template.js";
+import { tokenSizes } from "./token/token-sizes.js";
 
 /** @import { ItemSFRPG } from "./item/item.js" */
 
@@ -1159,23 +1160,7 @@ SFRPG.itemSizes = {
     "colossal": "SFRPG.SizeColossal"
 };
 
-/**
- * The amount of space on a 5ft grid square that a
- * token of a specific size takes.
- * @type {Object}
- */
-SFRPG.tokenSizes = {
-    "fine": 1,
-    "diminutive": 1,
-    "tiny": 1,
-    "small": 1,
-    "medium": 1,
-    "large": 2,
-    "huge": 3,
-    "gargantuan": 4,
-    "colossal": 6,
-    "supercolossal": 6
-};
+SFRPG.tokenSizes = tokenSizes;
 
 SFRPG.spellcastingClasses = {
     "myst": "SFRPG.AllowedClasses.Myst",
