@@ -28,6 +28,15 @@ export const registerSystemSettings = function() {
         type: Boolean
     });
 
+    game.settings.register("sfrpg", "scaleTokensToGrid", {
+        name: "SFRPG.Settings.ScaleTokensToGrid.Name",
+        hint: "SFRPG.Settings.ScaleTokensToGrid.Hint",
+        scope: "world",
+        config: true,
+        default: true,
+        type: Boolean
+    });
+
     game.settings.register("sfrpg", "useAdvantageDisadvantage", {
         name: "SFRPG.Settings.Advantage.Name",
         hint: "SFRPG.Settings.Advantage.Hint",
