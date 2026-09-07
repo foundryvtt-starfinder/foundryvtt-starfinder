@@ -16,6 +16,16 @@ export class TokenEffect {
         return this.#effect.parent;
     }
 
+    /**
+     * In Foundry V14 Compared to CONST ACTIVE_EFFECT_SHOW_ICON
+     * The icon is never shown. NEVER: 0,
+     * The icon is showed if the ActiveEffect has a temporary duration. CONDITIONAL: 1,
+     * The icon is always shown. ALWAYS: 2
+     */
+    get showIcon() {
+        return this.#effect.system.showOnToken ? 1 : 0;
+    }
+
     get name() {
         return this.#effect.name;
     }
