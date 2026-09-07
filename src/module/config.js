@@ -93,13 +93,15 @@ SFRPG.saveDescriptors = {
 SFRPG.rollTypes = {
     "abilityCheck": "SFRPG.Rolls.AbilityCheck",
     "attack": "SFRPG.Rolls.AttackRoll",
+    "concealment": "SFRPG.Rolls.Concealment",
     "damage": "SFRPG.Rolls.DamageRoll",
     "gunnery": "SFRPG.Rolls.GunneryCheck",
     "healing": "SFRPG.Rolls.HealingRoll",
     "initiative": "SFRPG.Rolls.InitiativeRoll",
     "roll": "SFRPG.Rolls.Roll",
     "save": "SFRPG.Rolls.SavingThrow",
-    "skillCheck": "SFRPG.Rolls.SkillCheck"
+    "skillCheck": "SFRPG.Rolls.SkillCheck",
+    "starshipAction": "SFRPG.Rolls.Starship.Action"
 };
 
 /**
@@ -241,22 +243,12 @@ SFRPG.kineticDamageTypes = {
 };
 
 /**
- * Valid damage types that are not kinetic or energy in SFRPG
- * @type {Object}
- */
-SFRPG.otherDamageTypes = {
-    "radiation": "SFRPG.Damage.Types.Radiation",
-    "nonlethal": "SFRPG.Damage.Types.Nonlethal"
-};
-
-/**
  * All valid damage types in SFRPG
  * @type {Object}
  */
 SFRPG.damageTypes = {
     ...SFRPG.energyDamageTypes,
-    ...SFRPG.kineticDamageTypes,
-    ...SFRPG.otherDamageTypes
+    ...SFRPG.kineticDamageTypes
 };
 
 /**
@@ -291,9 +283,64 @@ SFRPG.damageTypeToAcronym = {
     "slashing": "S"
 };
 
-SFRPG.damageTypeOperators = {
-    "and": "SFRPG.Damage.Types.Operators.And",
-    "or": "SFRPG.Damage.Types.Operators.Or"
+/**
+ * Conversions between damage types and a font awesome icon
+ * @type {Object}
+ */
+SFRPG.damageTypeToIcon = {
+    "acid": "fa-vial",
+    "cold": "fa-snowflake",
+    "electricity": "fa-bolt",
+    "fire": "fa-fire",
+    "healing": "fa-briefcase-medical",
+    "sonic": "fa-waveform-lines",
+    "bludgeoning": "fa-hammer",
+    "piercing": "fa-bow-arrow",
+    "slashing": "fa-axe"
+};
+
+/**
+ * Conversions between damage types and a color (for text color, background, etc.)
+ * TODO: Change application of these to a css class rather than a hardcoded "style"
+ * @type {Object}
+ */
+SFRPG.damageTypeToColor = {
+    "acid": {
+        background: "rgba(0, 115, 0, 1)",
+        color: "#007300"
+    },
+    "cold": {
+        background: "rgba(47, 47, 166, 1)",
+        color: "#2F2FA6"
+    },
+    "electricity": {
+        background: "rgba(218, 165, 32, 1)",
+        color: "goldenrod"
+    },
+    "fire": {
+        background: "rgba(166, 47, 0, 1)",
+        color: "#A62F00"
+    },
+    "healing": {
+        background: "rgba(255, 239, 239, 1)",
+        color: "#ffdfdf"
+    },
+    "sonic": {
+        background: "rgba(0, 139, 139, 1)",
+        color: "#008B8B"
+    },
+    "bludgeoning": {
+        background: "rgba(128, 128, 128, 1)",
+        color: "#808080"
+    },
+    "piercing": {
+        background: "rgba(128, 128, 128, 1)",
+        color: "#808080"
+    },
+    "slashing": {
+        background: "rgba(128, 128, 128, 1)",
+        color: "#808080"
+    }
 };
 
 SFRPG.descriptors = {
@@ -351,43 +398,6 @@ SFRPG.descriptorsTooltips = {
     "shadow": "SFRPG.Descriptors.ShadowDescription",
     "summoning": "SFRPG.Descriptors.SummoningDescription",
     "teleportation": "SFRPG.Descriptors.TeleportationDescription"
-};
-
-SFRPG.weaponDamageTypes = {
-    "acid": "SFRPG.DamageTypesAcid",
-    "acid+bludgeoning": "SFRPG.DamageTypesAcidAndBludgeoning",
-    "acid+electricity": "SFRPG.DamageTypesAcidAndElectricity",
-    "acid+fire": "SFRPG.DamageTypesAcidAndFire",
-    "acid+piercing": "SFRPG.DamageTypesAcidAndPiercing",
-    "acid+slashing": "SFRPG.DamageTypesAcidAndSlashing",
-    "acid|fire": "SFRPG.DamageTypesAcidOrFire",
-    "acid|slashing": "SFRPG.DamageTypesAcidOrSlashing",
-    "cold": "SFRPG.DamageTypesCold",
-    "cold+piercing": "SFRPG.DamageTypesColdAndPiercing",
-    "cold+slashing": "SFRPG.DamageTypesColdAndSlashing",
-    "cold|fire": "SFRPG.DamageTypesColdOrFire",
-    "electricity": "SFRPG.DamageTypesElectricity",
-    "electricity+fire": "SFRPG.DamageTypesElectricityAndFire",
-    "electricity+piercing": "SFRPG.DamageTypesElectricityAndPiercing",
-    "electricity+slashing": "SFRPG.DamageTypesElectricityAndSlashing",
-    "force": "SFRPG.DamageTypesForce",
-    "fire": "SFRPG.DamageTypesFire",
-    "fire+force": "SFRPG.DamageTypesFireAndForce",
-    "fire+piercing": "SFRPG.DamageTypesFireAndPiercing",
-    "fire+slashing": "SFRPG.DamageTypesFireAndSlashing",
-    "fire|slashing": "SFRPG.DamageTypesFireOrSlashing",
-    "fire|sonic": "SFRPG.DamageTypesFireOrSonic",
-    "sonic": "SFRPG.DamageTypesSonic",
-    "bludgeoning": "SFRPG.DamageTypesBludgeoning",
-    "bludgeoning+cold": "SFRPG.DamageTypesBludgeoningAndCold",
-    "bludgeoning+electricity": "SFRPG.DamageTypesBludgeoningAndElectricity",
-    "bludgeoning+fire": "SFRPG.DamageTypesBludgeoningAndFire",
-    "bludgeoning+sonic": "SFRPG.DamageTypesBludgeoningAndSonic",
-    "piercing": "SFRPG.DamageTypesPiercing",
-    "piercing+sonic": "SFRPG.DamageTypesPiercingAndSonic",
-    "slashing": "SFRPG.DamageTypesSlashing",
-    "slashing+piercing": "SFRPG.DamageTypesSlashingAndPiercing",
-    "slashing+sonic": "SFRPG.DamageTypesSlashingAndSonic"
 };
 
 SFRPG.ammunitionTypes = {
@@ -1560,7 +1570,7 @@ SFRPG.saveProgression = {
     "fast": "SFRPG.SaveProgressionFast"
 };
 
-SFRPG.modifierTypes = {
+SFRPG.modifierBonusTypes = {
     "ability": "SFRPG.ModifierTypeAbility",
     "armor": "SFRPG.ModifierTypeArmor",
     "base": "SFRPG.ModifierTypeBase",
@@ -1691,6 +1701,7 @@ SFRPG.effectTypes = {
 
 SFRPG.modifierType = {
     "constant": "SFRPG.ModifierTypeConstant",
+    "damageSection": "SFRPG.ModifierTypeDamageSection",
     "formula": "SFRPG.ModifierTypeFormula"
 };
 
@@ -1707,6 +1718,7 @@ SFRPG.globalAttackRollModifiers = [
             name: "SFRPG.Rolls.Character.Charge",
             modifier: "-2",
             type: "untyped",
+            effectType: "all-attacks",
             enabled: false,
             modifierType: "formula",
             subtab: "temporary",
@@ -1720,6 +1732,7 @@ SFRPG.globalAttackRollModifiers = [
             name: "SFRPG.Rolls.Character.Flanking",
             modifier: "+2",
             type: "untyped",
+            effectType: "all-attacks",
             enabled: false,
             modifierType: "formula",
             subtab: "temporary",
@@ -1733,6 +1746,7 @@ SFRPG.globalAttackRollModifiers = [
             name: "SFRPG.Rolls.Character.FightDefensively",
             modifier: "-4",
             type: "untyped",
+            effectType: "all-attacks",
             enabled: false,
             modifierType: "formula",
             subtab: "temporary",
@@ -1746,6 +1760,7 @@ SFRPG.globalAttackRollModifiers = [
             name: "SFRPG.Rolls.Character.FullAttack",
             modifier: "-4",
             type: "untyped",
+            effectType: "all-attacks",
             enabled: false,
             modifierType: "formula",
             subtab: "temporary",
@@ -1759,6 +1774,7 @@ SFRPG.globalAttackRollModifiers = [
             name: "SFRPG.Rolls.Character.HarryingFire",
             modifier: "+2",
             type: "untyped",
+            effectType: "all-attacks",
             enabled: false,
             modifierType: "formula",
             subtab: "temporary",
@@ -1772,6 +1788,7 @@ SFRPG.globalAttackRollModifiers = [
             name: "SFRPG.Rolls.Character.Nonlethal",
             modifier: "-4",
             type: "untyped",
+            effectType: "all-attacks",
             enabled: false,
             modifierType: "formula",
             subtab: "temporary",
@@ -2740,4 +2757,14 @@ SFRPG.defaultItemIcons = {
     "upgrade": "armor-upgrade.svg",
     "weapon": "bolter-gun.svg",
     "weaponAccessory": "gun-stock.svg"
+};
+
+SFRPG.chatButtonTypes = {
+    "ability": "SFRPG.Ability",
+    "attack": "SFRPG.Attack",
+    "damage": "SFRPG.Damage",
+    "healing": "SFRPG.Healing",
+    "other": "SFRPG.Other",
+    "save": "SFRPG.Save",
+    "skill": "SFRPG.Skill"
 };

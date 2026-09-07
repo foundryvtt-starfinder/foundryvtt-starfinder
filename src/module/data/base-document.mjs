@@ -17,11 +17,18 @@ export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
 
     static damagePartTemplate() {
         return {
-            name: new fields.StringField({
+            formula: new fields.StringField({
                 initial: "",
                 blank: true
             }),
-            formula: new fields.StringField({
+            group: new fields.NumberField({
+                initial: null,
+                min: 0,
+                integer: true,
+                nullable: true
+            }),
+            isPrimarySection: new fields.BooleanField(),
+            name: new fields.StringField({
                 initial: "",
                 blank: true
             }),
@@ -31,14 +38,7 @@ export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
                     return obj;
                 }, {}),
                 {required: false}
-            ),
-            group: new fields.NumberField({
-                initial: null,
-                min: 0,
-                integer: true,
-                nullable: true
-            }),
-            isPrimarySection: new fields.BooleanField()
+            )
         };
     }
 
@@ -47,6 +47,15 @@ export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
             modifiers: new fields.ArrayField(
                 new fields.EmbeddedDataField(SFRPGModifier),
                 {required: true}
+            )
+        };
+    }
+
+    static specialMaterialsTemplate() {
+        return {
+            specialMaterials: new fields.TypedObjectField(
+                new fields.BooleanField({initial: false}),
+                {validateKey: (key) => Object.keys(CONFIG.SFRPG.specialMaterials).includes(key)}
             )
         };
     }
@@ -72,6 +81,23 @@ export default class SFRPGDocumentBase extends foundry.abstract.TypeDataModel {
             special: new fields.StringField({initial: "", required: true}),
             mainMovement: new fields.StringField({initial: "land", required: true})
         };
+    }
+
+    static _propertiesFieldData() {
+        return new fields.TypedObjectField(
+            new fields.SchemaField({
+                extension: new fields.StringField({
+                    initial: "",
+                    blank: true,
+                    required: true
+                }),
+                value: new fields.BooleanField({
+                    initial: false,
+                    required: true
+                })
+            }),
+            {validateKey: (key) => key in CONFIG.SFRPG.weaponProperties}
+        );
     }
 
 }

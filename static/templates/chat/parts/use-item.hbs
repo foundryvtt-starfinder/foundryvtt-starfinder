@@ -1,0 +1,16 @@
+<!-- If the roll content should be visible, show tags -->
+{{#if isContentVisible}}
+<div class="message-tags use-item">
+    {{#if tags}}
+    {{#each tags as |tag|}}
+        {{#if tag.text}}
+        <span class="tag"{{#if tag.tooltip}} data-tooltip="{{tag.tooltip}}"{{/if}}>{{{tag.text}}}</span>
+        {{/if}}
+    {{/each}}
+    {{/if}}
+</div>
+{{/if}}
+
+<div class="message-content use-item">
+    {{{message.content}}}
+</div>

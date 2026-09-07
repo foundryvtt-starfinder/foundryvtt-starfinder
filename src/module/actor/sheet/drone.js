@@ -120,7 +120,7 @@ export class ActorSheetSFRPGDrone extends ActorSheetSFRPG {
                         && (!["weapon", "shield"].includes(item.type) || item.system.equipped),
                     hasUses: item.canBeUsed(),
                     isCharged: !item.hasUses || item.getRemainingUses() <= 0 || !item.isOnCooldown,
-                    hasCapacity: item.hasCapacity()
+                    hasCapacity: item.hasCapacity
                 };
 
                 if (item.config.hasCapacity) {

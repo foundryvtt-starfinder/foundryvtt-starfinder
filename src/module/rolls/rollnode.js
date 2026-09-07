@@ -127,11 +127,9 @@ export default class RollNode {
                     .reduce((value, bonus) => value - bonus.max, Number(this.variableValue));
 
                 let formulaDescription = this.referenceModifier?.name || "@" + this.formula;
-                if (!this.options.useRawStrings) {
-                    const tooltip = this.rollTooltips.join(',\n') || this.variableTooltips.join(',\n');
-                    const spanTag = tooltip ? `span title="${tooltip}"` : 'span';
-                    formulaDescription = `<${spanTag}>${formulaDescription}</span>`;
-                }
+                const tooltip = this.rollTooltips.join(',\n') || this.variableTooltips.join(',\n');
+                const spanTag = tooltip ? `span title="${tooltip}"` : 'span';
+                formulaDescription = `<${spanTag}>${formulaDescription}</span>`;
 
                 resolvedValue.finalRoll = `${variableValue}`;
                 resolvedValue.formula = `${variableValue}[${formulaDescription}]`;

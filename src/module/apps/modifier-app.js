@@ -125,9 +125,9 @@ export default class SFRPGModifierApplication extends foundry.appv1.api.FormAppl
 
             if (!(this.damageEffectTypes.includes(effectType))) {
                 $("fieldset.damage-section-details").prop("disabled", true); // Damage section details
-                damageSectionType.hide(); // Damage section modifier type
+                damageSectionType.prop("hidden", true); // Damage section modifier type
             } else {
-                damageSectionType.show();
+                damageSectionType.prop("hidden", false);
             }
 
             // Hide limit to setting if modifier doesn't affect an item
@@ -286,6 +286,14 @@ export default class SFRPGModifierApplication extends foundry.appv1.api.FormAppl
         const effectType = this.element.find(".modifier-effect-type select").val();
         const valueAffectedElement = this.element.find(".modifier-value-affected select");
         const modifierTypeElement = this.element.find(".modifier-modifier-type select");
+
+        const damageSectionType = $("option[value='damageSection']");
+        if (!(this.damageEffectTypes.includes(effectType))) {
+            $("fieldset.damage-section-details").prop("disabled", true); // Damage section details
+            damageSectionType.prop("hidden", true); // Damage section modifier type
+        } else {
+            damageSectionType.prop("hidden", false);
+        }
 
         if (modifierTypeElement.val() === "damageSection") $("fieldset.damage-section-details").prop("disabled", false);
         if (this.damageEffectTypes.includes(effectType)) $("option[value='damageSection']").show();

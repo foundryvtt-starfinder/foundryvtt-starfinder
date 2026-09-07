@@ -1,6 +1,8 @@
 import { CombatDifficulty } from "../apps/combat-difficulty.js";
+import { ChatMessageSFRPG } from "../chat/message.js";
 import { SFRPG } from "../config.js";
 import { DiceSFRPG } from "../dice.js";
+import SFRPGRoll from "../rolls/roll.js";
 import RollContext from "../rolls/rollcontext.js";
 /**  @import Combatant from "@client/documents/combatant.mjs" */
 /*
@@ -475,11 +477,11 @@ export class CombatSFRPG extends foundry.documents.Combat {
         // Create the chat message
         const chatData = {
             style: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
 
-        await ChatMessage.create(chatData, { displaySheet: false });
+        await ChatMessageSFRPG.create(chatData, { displaySheet: false });
     }
 
     async _printNewPhaseChatCard(eventData) {
@@ -514,11 +516,11 @@ export class CombatSFRPG extends foundry.documents.Combat {
         // Create the chat message
         const chatData = {
             style: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
             content: html
         };
 
-        await ChatMessage.create(chatData, { displaySheet: false });
+        await ChatMessageSFRPG.create(chatData, { displaySheet: false });
     }
 
     async _printNewTurnChatCard(eventData) {
@@ -552,12 +554,12 @@ export class CombatSFRPG extends foundry.documents.Combat {
         // Create the chat message
         const chatData = {
             style: CONST.CHAT_MESSAGE_STYLES.OTHER,
-            speaker: ChatMessage.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
-            whisper: eventData.newCombatant.hidden ? ChatMessage.getWhisperRecipients("GM") : [],
+            speaker: ChatMessageSFRPG.getSpeaker({ actor: eventData.newCombatant, token: eventData.newCombatant?.token, alias: speakerName }),
+            whisper: eventData.newCombatant.hidden ? ChatMessageSFRPG.getWhisperRecipients("GM") : [],
             content: html
         };
 
-        await ChatMessage.create(chatData, { displaySheet: false });
+        await ChatMessageSFRPG.create(chatData, { displaySheet: false });
     }
 
     getCombatType() {
@@ -680,10 +682,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
     }
 
     async _getInitiativeRoll(combatant) {
-        const rollContext = RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"});
-
         const parts = [];
-
         if (this.getCombatType() === "starship") {
             parts.push("@pilot.skills.pil.mod");
             if (!combatant.actor.system.crew.useNPCCrew) {
@@ -699,16 +698,15 @@ export class CombatSFRPG extends foundry.documents.Combat {
         }
 
         const rollResult = await DiceSFRPG.createRoll({
-            rollContext: rollContext,
             actorContextKey: "combatant",
+            chatMessage: false,
             parts: parts,
-            event,
-            rollType: "initiative",
+            rollContext: RollContext.createActorRollContext(combatant.actor, {actorKey: "combatant"}),
+            rollCriteria: SFRPGRoll.createRollCriteria("initiative"),
+            skipUI: game.settings.get('sfrpg', 'useQuickRollAsDefault'),
             title: game.i18n.format("SFRPG.Rolls.InitiativeRollFull", {name: combatant.actor.name})
         });
-
-        rollResult.roll.flags = { sfrpg: { finalFormula: rollResult.formula } };
-        return rollResult.roll;
+        return rollResult;
     }
 
     async rollInitiative(ids, {updateTurn = true, messageOptions = {}} = {}) {
@@ -738,7 +736,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             }
 
             // Roll initiative
-            const roll = await this._getInitiativeRoll(combatant, "");
+            const {roll, formula} = await this._getInitiativeRoll(combatant, "");
             if (!roll) {
                 continue;
             }
@@ -757,7 +755,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
             }, messageOptions);
 
             // Prepare roll formula explanation
-            const preparedRollExplanation = DiceSFRPG.formatFormula(roll.flags.sfrpg.finalFormula.formula);
+            const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(formula.formula);
             const preparedRollExplanationElement = document.createElement("div");
             preparedRollExplanationElement.innerHTML = preparedRollExplanation;
 
@@ -800,7 +798,7 @@ export class CombatSFRPG extends foundry.documents.Combat {
 
         // Create multiple chat messages
         await messages.forEach(message => {
-            ChatMessage.create(message, { rollMode: message.rollMode });
+            ChatMessageSFRPG.create(message, { rollMode: message.rollMode });
         });
 
         // Return the updated Combat

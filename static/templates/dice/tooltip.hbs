@@ -1,16 +1,28 @@
-{{#each parts}}
-<section class="tooltip-part">
-    <div class="dice">
-        <header class="part-header flexrow">
-            <span class="part-formula">{{this.formula}}</span>
-            {{#if this.flavor}}<span class="part-flavor">{{this.flavor}}</span>{{/if}}
-            <span class="part-total">{{this.total}}</span>
-        </header>
-        <ol class="dice-rolls">
-        {{#each this.rolls}}
-            <li class="roll {{this.classes}}">{{{this.result}}}</li>
+{{#if parts.length}}
+<div class="dice-tooltip">
+    <div class="wrapper">
+        {{#each parts}}
+        <section class="tooltip-part">
+            <div class="dice">
+                <header class="part-header flexrow">
+                    {{#if icon}}
+                    <span class="part-method" data-tooltip aria-label="{{ localize method }}">
+                        {{{ icon }}}
+                    </span>
+                    {{/if}}
+                    <span class="part-formula">{{this.formula}}</span>
+                    {{#if this.flavor}}<span class="part-flavor">{{this.flavor}}</span>{{/if}}
+                    <span class="part-total">{{this.total}}</span>
+                </header>
+                <ol class="dice-rolls">
+                {{#each this.rolls}}
+                <li class="roll {{this.classes}}">{{{this.result}}}</li>
+                {{/each}}
+                </ol>
+                <div class="breakdown">{{{../breakdown}}}</div>
+            </div>
+        </section>
         {{/each}}
-        </ol>
     </div>
-</section>
-{{/each}}
+</div>
+{{/if}}

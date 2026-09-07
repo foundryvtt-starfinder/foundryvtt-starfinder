@@ -1,0 +1,65 @@
+<!--
+Copied from `templates/sidebar/chat-message.hbs` in v13
+This method of inserting custom chat message hbs is used as a workaround since ChatMessage's `renderHTML()`
+does not accept a custom template. Instead, the template at CONFIG.ChatMessage.template is overridden with this
+file, which selects the appropriate hbs partial based on the data passed into it.
+-->
+{{log this}}
+<li class="sfrpg chat-message message flexcol {{cssClass}}" data-message-id="{{message._id}}"
+    {{#if borderColor}}style="border-color:{{borderColor}}"{{/if}}>
+    <header class="message-header flexrow">
+        {{#if isContentVisible}}<img class="speaker-image flex0" src="{{speakerActor.img}}" style="width: 32px; height: 40px; object-fit: contain">{{/if}}
+        <div class="flexcol">
+            <div class="flexrow">
+                <h4 class="message-sender">{{alias}} <span class="tag author">{{author.name}}</span></h4>
+                <span class="message-metadata">
+                    <time class="message-timestamp">{{timeSince message.timestamp}}</time>
+                    {{#if canDelete}}
+                    <a aria-label="{{localize 'Delete'}}" class="message-delete" data-action="deleteMessage">
+                        <i class="fa-solid fa-trash" inert></i>
+                    </a>
+                    {{/if}}
+                    {{#if canClose}}
+                    <a aria-label="{{ localize "CHAT.Dismiss" }}" class="message-dismiss" data-action="dismissMessage">
+                        <i class="fa-solid fa-xmark" inert></i>
+                    </a>
+                    {{/if}}
+                </span>
+            </div>
+
+            {{#if isWhisper}}
+            <span class="whisper-to">{{localize 'CHAT.To'}}: {{whisperTo}}</span>
+            {{/if}}
+
+            <!-- Message Flavor is used to communicate things like privately rolled dice, etc. -->
+            {{#if message.flavor}}
+            <span class="flavor-text">{{{message.flavor}}}</span>
+            {{/if}}
+            <!-- If content is visible, show title here -->
+            {{#if isContentVisible}}
+            <span class="flavor-text">{{{message.title}}}</span>
+            {{/if}}
+        </div>
+    </header>
+    {{#if (eq message.type "combatPhase")}}
+        {{> "systems/sfrpg/templates/chat/parts/combat-phase.hbs"}}
+    {{else if (eq message.type "d20Roll")}}
+        {{> "systems/sfrpg/templates/chat/parts/d20-roll.hbs"}}
+    {{else if (eq message.type "damage")}}
+        {{> "systems/sfrpg/templates/chat/parts/damage.hbs"}}
+    {{else if (eq message.type "initiative")}}
+        {{> "systems/sfrpg/templates/chat/parts/initiative.hbs"}}
+    {{else if (eq message.type "itemInfo")}}
+        {{> "systems/sfrpg/templates/chat/parts/item-info.hbs"}}
+    {{else if (eq message.type "reload")}}
+        {{> "systems/sfrpg/templates/chat/parts/reload.hbs"}}
+    {{else if (eq message.type "spellcasting")}}
+        {{> "systems/sfrpg/templates/chat/parts/spellcasting.hbs"}}
+    {{else if (eq message.type "useItem")}}
+        {{> "systems/sfrpg/templates/chat/parts/use-item.hbs"}}
+    {{else if (eq message.type "base")}}
+        <div class="message-content base">
+            {{{message.content}}}
+        </div>
+    {{/if}}
+</li>

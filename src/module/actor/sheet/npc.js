@@ -143,7 +143,7 @@ export class ActorSheetSFRPGNPC extends ActorSheetSFRPG {
                     || item.system.equipped),
                 hasUses: item.canBeUsed(),
                 isCharged: !item.hasUses || item.getRemainingUses() <= 0 || !item.isOnCooldown,
-                hasCapacity: item.hasCapacity()
+                hasCapacity: item.hasCapacity
             };
 
             if (item.config.hasCapacity) {

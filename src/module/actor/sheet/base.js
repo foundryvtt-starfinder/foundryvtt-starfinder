@@ -17,6 +17,7 @@ import { getStarshipBrowser } from "../../packs/starship-browser.js";
 import RollContext from "../../rolls/rollcontext.js";
 
 import { ActorTraitSelectorSFRPG } from "../../apps/trait-selectors/actor-trait-selector.js";
+import SFRPGRoll from "../../rolls/roll.js";
 
 /**
  * Extend the basic ActorSheet class to do all the SFRPG things!
@@ -514,32 +515,8 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         try {
             const itemData = item.system;
             const actor = item.actor;
-            const actorData = actor.system;
             const isWeapon = ["weapon", "shield"].includes(item.type);
-
-            // TODO: This chunk is the same code as in item.js's rollAttack(), probably good practice to combine these into one method somewhere
-            let abl = itemData.ability;
-            if (!abl && (this.actor.type === "npc" || this.actor.type === "npc2")) {
-                abl = "";
-            } else if (!abl && (this.type === "spell")) {
-                if (itemData.actionType === "rsak") {
-                    abl = "dex";
-                } else if (itemData.actionType === "msak") {
-                    abl = "str";
-                } else {
-                    abl = actorData.attributes.spellcasting || "int";
-                }
-            } else if (itemData.properties?.operative?.value && actorData.abilities.dex.value > actorData.abilities.str.value) {
-                abl = "dex";
-            } else if (!abl) {
-                if (itemData.actionType === "rwak" || itemData.actionType === "rsak") {
-                    abl = "dex";
-                } else if (itemData.actionType === "mwak" || itemData.actionType === "msak") {
-                    abl = "str";
-                } else {
-                    abl = "str";
-                }
-            }
+            const abl = item.attackAbility;
 
             // Define Roll parts
             const parts = [];
@@ -557,9 +534,8 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
             const formula = parts.join("+");
 
-            let appropriateMods = item.getAppropriateAttackModifiers(isWeapon);
             // Remove situational modifiers
-            appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
+            const appropriateMods = item.relevantModifiers.attack.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
             let modifiers = stackModifiers.process(appropriateMods, null, {actor: actor, item: item});
 
@@ -572,7 +548,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
 
             const rollData = RollContext.createItemRollContext(item, item.actor).getRollData();
 
-            const roll = Roll.create(preparedFormula, rollData).simplifiedFormula;
+            const roll = SFRPGRoll.create(preparedFormula, rollData).simplifiedFormula;
             item.config.attackString = Number(roll) >= 0 ? `+${roll}` : roll;
 
         } catch (err) {
@@ -588,15 +564,13 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
      */
     _prepareDamageString(item) {
         try {
-            const isWeapon = ["weapon", "shield"].includes(item.type);
             const formula = item.system.damage.parts[0].formula;
             if (!formula) throw ("No damage formula, deferring to default string");
 
-            let appropriateMods = item.getAppropriateDamageModifiers(isWeapon);
-            // Remove situational modifiers
-            appropriateMods = appropriateMods.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
+            // Get non-situational damage modifiers
+            const constantMods = item.relevantModifiers.damage.filter(mod => mod.modifierType !== SFRPGModifierType.FORMULA);
             const stackModifiers = new StackModifiers();
-            let modifiers = stackModifiers.process(appropriateMods, null, {actor: item.actor, item: item});
+            let modifiers = stackModifiers.process(constantMods, null, {actor: item.actor, item: item});
 
             modifiers = Object.values(modifiers)
                 .flat()
@@ -874,7 +848,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         event.preventDefault();
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
-        return item.useItem({event:event});
+        return item.useItem({event});
     }
 
     _onItemRollAttack(event) {
@@ -890,7 +864,7 @@ export class ActorSheetSFRPG extends foundry.appv1.sheets.ActorSheet {
         const itemId = event.currentTarget.closest('.item').dataset.itemId;
         const item = this.actor.items.get(itemId);
 
-        return item.rollDamage({event: event});
+        return item.rollDamage(event);
     }
 
     async _onActivateFeat(event) {

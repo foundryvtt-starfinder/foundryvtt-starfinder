@@ -1,5 +1,6 @@
 import { DroneRepairDialog } from "../../apps/drone-repair-dialog.js";
 import { ShortRestDialog } from "../../apps/short-rest.js";
+import { ChatMessageSFRPG } from "../../chat/message.js";
 import { SFRPG } from "../../config.js";
 
 export const ActorRestMixin = (superclass) => class extends superclass {
@@ -65,9 +66,9 @@ export const ActorRestMixin = (superclass) => class extends superclass {
                 msg = game.i18n.format("SFRPG.Rest.Short.ChatMessage.Restored", { name: this.name, spentRP: drp, regainedSP: dsp });
             }
 
-            ChatMessage.create({
+            ChatMessageSFRPG.create({
                 author: game.user.id,
-                speaker: ChatMessage.getSpeaker({actor: this}),
+                speaker: ChatMessageSFRPG.getSpeaker({actor: this}),
                 content: msg,
                 style: CONST.CHAT_MESSAGE_STYLES.OTHER
             });
@@ -124,9 +125,9 @@ export const ActorRestMixin = (superclass) => class extends superclass {
         if (chat) {
             const msg = game.i18n.format("SFRPG.RepairDroneChatMessage", { name: this.name, regainedHP: dhp });
 
-            ChatMessage.create({
+            ChatMessageSFRPG.create({
                 author: game.user.id,
-                speaker: ChatMessage.getSpeaker({actor: this}),
+                speaker: ChatMessageSFRPG.getSpeaker({actor: this}),
                 content: msg,
                 style: CONST.CHAT_MESSAGE_STYLES.OTHER
             });
@@ -240,9 +241,9 @@ export const ActorRestMixin = (superclass) => class extends superclass {
                 content = game.i18n.format("SFRPG.Rest.Long.ChatMessage.HeaderNoRecovery", {name: this.name});
             }
 
-            ChatMessage.create({
+            ChatMessageSFRPG.create({
                 author: game.user.id,
-                speaker: ChatMessage.getSpeaker({actor: this}),
+                speaker: ChatMessageSFRPG.getSpeaker({actor: this}),
                 content: content,
                 style: CONST.CHAT_MESSAGE_STYLES.OTHER
             });

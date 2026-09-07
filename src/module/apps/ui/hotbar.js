@@ -39,7 +39,7 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
                     hasUses: item.hasUses(),
                     hasActivation: item.canBeActivated() && item.system.duration?.units !== 'instantaneous',
                     isActive: item.isActive(),
-                    hasCapacity: item.hasCapacity()
+                    hasCapacity: item.hasCapacity
                 };
 
                 if (macroConfig.hasCapacity) {
@@ -124,7 +124,7 @@ export class HotbarSFRPG extends foundry.applications.ui.Hotbar {
     _getGreyscaleStatus(item, macroType) {
         if (!["activate", "attack", "use", "healing"].includes(macroType)) return false;
 
-        if (item.hasCapacity()) return item.getCurrentCapacity() <= 0;
+        if (item.hasCapacity) return item.getCurrentCapacity() <= 0;
         else if (item.hasUses()) return !item.canBeUsed();
         return false;
     }

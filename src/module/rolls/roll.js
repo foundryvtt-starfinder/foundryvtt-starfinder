@@ -5,41 +5,138 @@ const { terms, Roll } = foundry.dice;
  * A data structure for outputing any metadata that is rendered at the bottom
  * of a Roll chat card.
  *
- * @typedef {Object} Tag
- * @property {string} tag Text that will be addeded as a class on an HTMLElement
- * @property {string} text The text rendered on the card.
+ * @typedef {Object}    Tag
+ * @property {string}   tag     Text that will be addeded as a class on an HTMLElement
+ * @property {string}   text    The text rendered on the card.
  */
 
 /**
- * A structure for passing data into an HTML for for use in data- attributes.
+ * A structure for holding data defining roll criteria. These indicate what a roll can do,
+ * whether it can be evaluated against a target number (AC, DC, etc.), critical/fumble values,
+ * and the roll's type
  *
- * @typedef {Object} HtmlData
- * @property {string} name The name of the data property sans data-
- * @property {string} value The value of the data property.
+ * @typedef     {Object}    RollCriteria
+ * @property    {boolean}   canEvaluate     Whether it's possible to evaluate the roll against a target number (AC, DC, etc.)
+ * @property    {string}    mainDie         A string representing the main die to be rolled as part of the roll (e.g. "1d20"). null for damage and healing rolls
+ * @property    {string}    rollType        The type of roll (options in CONFIG.SFRPG.rollTypes)
+ * @property    {number}    [critical]      The die value at or above which is deemed a critical success
+ * @property    {number}    [evalValue]     The value that a roll is evaluated against
+ * @property    {number}    [fumble]        The die value at or below which is deemed a fumble
  */
 
 /**
- * A custom implementation for the foundry {@link Roll} class.
+ * A custom implementation for the foundry {@link foundry.dice.Roll} class.
  *
  * @inheritdoc
  */
 export default class SFRPGRoll extends Roll {
     constructor(formula, data = {}, options = {}) {
-        const rollData = {
-            formula: formula,
-            data: data,
-            options: options
-        };
-        Hooks.callAll("onBeforeRoll", rollData);
+        if (!options.rollCriteria) {
+            options.rollCriteria = SFRPGRoll.createRollCriteria("roll");
+        }
+        Hooks.callAll("onBeforeRoll", {formula, data, options});
+        super(formula, data, options);
+    }
 
-        super(rollData.formula, rollData.data, rollData.options);
+    /** @inheritdoc */
+    static CHAT_TEMPLATE = "systems/sfrpg/templates/dice/roll.hbs";
+    /** @inheritdoc */
+    static TOOLTIP_TEMPLATE = "systems/sfrpg/templates/dice/tooltip.hbs";
 
-        /** @type {Tag[]} */
-        this.tags = rollData.data.tags;
-        /** @type {string} */
-        this.breakdown = rollData.data.breakdown;
-        /** @type {HtmlData[]} */
-        this.htmlData = rollData.data.htmlData;
+    static MATH_PROXY = new Proxy(Math, {
+        has: () => true, // Include everything
+        get: (t, k) => k === Symbol.unscopables ? undefined : t[k]
+        // set: () => console.error("You may not set properties of the Roll.MATH_PROXY environment") // Yes-op!
+    });
+
+    /**
+     * Return the roll's breakdown
+     *
+     * @type {String}
+     */
+    get breakdown() {
+        return this.options.breakdown ?? "";
+    }
+
+    /**
+     * Return the roll's type
+     *
+     * @type {string}
+     */
+    get rollType() {
+        return this.options.rollCriteria.rollType ?? "";
+    }
+
+    /**
+     * Return the roll's evaluation value (if present)
+     *
+     * @type {string}
+     */
+    get evalValue() {
+        if (this.options.rollCriteria.canEvaluate) return this.options.rollCriteria.evalValue;
+        else return null;
+    }
+
+    /**
+    * Determine if a roll was a critical success or not
+    * Only attack rolls, gunnery checks, saves, and starship actions can be fumbles.
+    *
+    * @type {Boolean}   `true` if a critical success, `false` otherwise
+    */
+    get isCritical() {
+        if (!this?.dice?.length || !this.options.rollCriteria.canEvaluate) return false;
+        if (!["attack", "gunnery", "save", "starshipAction"].includes(this.rollType)) return false;
+        const mainDie = this.options.rollCriteria.mainDie;
+        const dieSize = mainDie ? Number(mainDie.split('d')[1]) : null;
+        const critValue = this.options.rollCriteria.critical;
+
+        for (const d of this.dice) {
+            if (d.faces === dieSize && d.results.length === 1 && critValue) {
+                if (d.total >= critValue) return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Determine if a roll is a "damage roll" (i.e. is intended to be applied to HP or SP).
+     *
+     * @returns {Boolean}   `true` if rollType is "damage" or "healing"
+     */
+    get isDamageRoll() {
+        return ["damage", "healing"].includes(this.options.rollCriteria.rollType);
+    }
+
+    /**
+    * Determine if a roll was a fumble or not.
+    * Only attack rolls, gunnery checks, saves, and starship actions can be fumbles.
+    *
+    * @returns {Boolean}    `true` if a fumble, `false` otherwise
+    */
+    get isFumble() {
+        if (!this?.dice?.length || !this.options.rollCriteria.canEvaluate) return false;
+        if (!["attack", "gunnery", "save", "starshipAction"].includes(this.rollType)) return false;
+        const mainDie = this.options.rollCriteria.mainDie;
+        const dieSize = mainDie ? Number(mainDie.split('d')[1]) : null;
+        const fumbleValue = this.options.rollCriteria.fumble;
+
+        for (const d of this.dice) {
+            if (d.faces === dieSize && d.results.length === 1 && fumbleValue) {
+                if (d.total <= fumbleValue) return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Return the roll's full set of criteria
+     *
+     * @type {RollCriteria}
+     */
+    get rollCriteria() {
+        return this.options.rollCriteria;
     }
 
     /**
@@ -77,16 +174,96 @@ export default class SFRPGRoll extends Roll {
         return DiceSFRPG.simplifyRollFormula(Roll.fromTerms(newterms).formula) || "0";
     }
 
-    /** @inheritdoc */
-    static CHAT_TEMPLATE = "systems/sfrpg/templates/dice/roll.hbs";
-    /** @inheritdoc */
-    static TOOLTIP_TEMPLATE = "systems/sfrpg/templates/dice/tooltip.hbs";
+    /**
+     * @override
+     * Evaluates whether a roll is a success or a failure, if an evalValue is present (typically only for d20 rolls)
+     * Does not account for critical success or fumbles; check this.isCritical and this.isFumble.
+     *
+     * @type {Boolean}  returns false for failure, true for success, null if not evaluated
+     */
+    get product() {
+        const total = this.total;
+        const evalValue = this.evalValue;
+        if ((evalValue !== null) && (typeof total === "number")) {
+            return total >= evalValue;
+        } else {
+            return null;
+        }
+    }
 
-    static MATH_PROXY = new Proxy(Math, {
-        has: () => true, // Include everything
-        get: (t, k) => k === Symbol.unscopables ? undefined : t[k]
-        // set: () => console.error("You may not set properties of the Roll.MATH_PROXY environment") // Yes-op!
-    });
+    /**
+     * Returns an HTML string that includes font-awesome icons representing the damage type(s) of the roll,
+     * along with a descriptive hover tooltip. Used for rendering damage rolls within chat messages.
+     *
+     * @type {String}
+     */
+    get damageIcons() {
+        if (!this.isDamageRoll) return "";
+        const damageTypes = this.rollCriteria.damageTypes;
+        let iconHTML = "";
+        for (const damageType of damageTypes) {
+            iconHTML += `<i class="fas ${CONFIG.SFRPG.damageTypeToIcon[damageType]} damage-icon" style="color: ${CONFIG.SFRPG.damageTypeToColor[damageType].color}"></i>`;
+        }
+        return iconHTML;
+    }
+
+    /**
+     * Returns an HTML string that includes localized damage types
+     *
+     * @type {String}
+     */
+    get damageTooltip() {
+        if (!this.isDamageRoll) return "";
+        const damageTypes = this.rollCriteria.damageTypes;
+        const localized = [];
+        for (const damageType of damageTypes) {
+            localized.push(game.i18n.localize(CONFIG.SFRPG.damageAndHealingTypes[damageType]));
+        }
+        return localized.join(" & ");
+    }
+
+    /** @override */
+    async render(chatOptions = {}) {
+        // Execute the roll, if needed
+        if (!this._evaluated) await this.evaluate();
+
+        const isDamageOrHealing = this.isDamageRoll;
+        const isPrivate = chatOptions.isPrivate;
+        const template = this.constructor.CHAT_TEMPLATE;
+
+        // Define chat data
+        const chatData = foundry.utils.mergeObject({
+            formula: isPrivate ? "???" : this.formula,
+            flavor: isPrivate ? null : chatOptions.flavor,
+            user: game.user.id,
+            tooltip: isPrivate ? "" : await this.getTooltip(),
+            total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
+            blind: false,
+            breakdown: this.breakdown,
+            evalValue: this.evalValue,
+            isDamageOrHealing,
+            rollCriteria: this.rollCriteria
+        }, chatOptions);
+
+        if (isDamageOrHealing) {
+            chatData.damage = {
+                icons: this.damageIcons,
+                tooltip: this.damageTooltip
+            };
+        }
+
+        // Render the roll display template
+        return foundry.applications.handlebars.renderTemplate(template, chatData);
+    }
+
+    /** @override */
+    async getTooltip() {
+        const tooltipData = {
+            parts: this.dice.map(d => d.getTooltipData()),
+            breakdown: this.breakdown
+        };
+        return foundry.applications.handlebars.renderTemplate(this.constructor.TOOLTIP_TEMPLATE, tooltipData);
+    }
 
     static registerMathFunctions() {
         function lookup(value) {
@@ -121,41 +298,6 @@ export default class SFRPGRoll extends Roll {
             lookupRange
         });
 
-    }
-
-    /** @override */
-    async render(chatOptions = {}) {
-        chatOptions = foundry.utils.mergeObject({
-            author: game.user.id,
-            flavor: null,
-            template: this.constructor.CHAT_TEMPLATE,
-            blind: false
-        }, chatOptions);
-        const isPrivate = chatOptions.isPrivate;
-
-        if (chatOptions?.breakdown) this.breakdown = chatOptions.breakdown;
-        if (chatOptions?.tags) this.tags = chatOptions.tags;
-        if (chatOptions?.htmlData) this.htmlData = chatOptions.htmlData;
-
-        // Execute the roll, if needed
-        if (!this._evaluated) await this.evaluate();
-
-        // Define chat data
-        const chatData = {
-            formula: isPrivate ? "???" : this.formula,
-            flavor: isPrivate ? null : chatOptions.flavor,
-            author: chatOptions.user,
-            tooltip: isPrivate ? "" : await this.getTooltip(),
-            customTooltip: chatOptions.customTooltip,
-            total: isPrivate ? "?" : Math.round(this.total * 100) / 100,
-            tags: this.tags,
-            breakdown: this.breakdown,
-            htmlData: this.htmlData,
-            rollNotes: this.htmlData?.find(x => x.name === "rollNotes")?.value
-        };
-
-        // Render the roll display template
-        return foundry.applications.handlebars.renderTemplate(chatOptions.template, chatData);
     }
 
     /**
@@ -220,5 +362,59 @@ export default class SFRPGRoll extends Roll {
             }
         }
         return formula;
+    }
+
+    /**
+     * A helper function to generate a default RollCriteria object based on a given rollType
+     * @param {string}          rollType    The type of roll to create a default RollCriteria object for
+     * @returns {RollCriteria}
+     */
+    static createRollCriteria(rollType, options = {}) {
+        let rollCriteria = {};
+        switch (rollType) {
+            case "abilityCheck":
+            case "attack":
+            case "gunnery":
+            case "save":
+            case "skillCheck":
+                rollCriteria = {
+                    canEvaluate: true,
+                    critical: 20,
+                    fumble: 1,
+                    mainDie: "1d20",
+                    rollType
+                };
+                break;
+            case "concealment":
+                rollCriteria = {
+                    canEvaluate: true,
+                    mainDie: "1d100",
+                    rollType
+                };
+                break;
+            case "damage":
+            case "healing":
+                rollCriteria = {
+                    canEvaluate: false,
+                    mainDie: null,
+                    rollType
+                };
+                break;
+            case "initiative":
+                rollCriteria = {
+                    canEvaluate: false,
+                    mainDie: "1d20",
+                    rollType
+                };
+                break;
+            default:
+                // "roll", "none", or otherwise
+                rollCriteria = {
+                    canEvaluate: false,
+                    mainDie: null,
+                    rollType
+                };
+        }
+        return foundry.utils.mergeObject(rollCriteria, options, {overwrite: true});
     }
 }

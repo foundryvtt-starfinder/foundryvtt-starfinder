@@ -20,7 +20,7 @@
         "AbilityActivationTypesHour": "Hour",
         "AbilityActivationTypesMinute": "Minute",
         "AbilityActivationTypesMove": "Move Action",
-        "AbilityActivationTypesNone": "Free",
+        "AbilityActivationTypesNone": "Free Action",
         "AbilityActivationTypesNull": "Passive",
         "AbilityActivationTypesOther": "Other Actions",
         "AbilityActivationTypesReaction": "Reaction",
@@ -519,11 +519,15 @@
                 "Deactivates": "Deactivates",
                 "Duration": "Duration: {duration}",
                 "NoCharges": "No Charges",
-                "Reloads": "Reloads",
+                "Reload": "Reload",
                 "Use": "Use",
                 "UseCapacity": "Used Capacity"
             },
-            "PlaceAbilityTemplate": "Place {label}"
+            "PlaceAbilityTemplate": "Place {label}",
+            "Reload": {
+                "ReloadMessage": "Reloaded with <span class=\"doc-name\">{ammoName}</span> as a <span class=\"action-name\">{activationType}</span>",
+                "CapacityMessage": "New Capacity: {current}/{total}"
+            }
         },
         "Check": "Check",
         "ClassArmorProf": "Armor Proficiencies",
@@ -1551,7 +1555,6 @@
                 "ActionTarget": {
                     "AC15": "AC 15",
                     "AC5": "AC 5",
-                    "ChatMessage": " against {actionTarget}",
                     "EAC": "EAC",
                     "KAC": "KAC",
                     "KAC8": "KAC +8",
@@ -1559,8 +1562,8 @@
                     "Other": "Other",
                     "StarshipAC": "AC",
                     "StarshipTL": "TL",
-                    "Tag": "Targets: {actionTarget}",
-                    "TagFull": "Targets: {actionTarget}<span class='gm-only'> {targetValue}</span> - {actionResult}",
+                    "Tag": "vs. {actionTarget}",
+                    "TagFull": "{actionResult} vs. {actionTarget}<span class='gm-only'> {targetValue}</span>",
                     "Title": "Action Target",
                     "Tooltip": "If this action targets a specific property, you can configure that here."
                 },
@@ -2143,6 +2146,7 @@
         "ModifierTypeBase": "Base",
         "ModifierTypeCircumstance": "Circumstance",
         "ModifierTypeConstant": "Constant Modifier",
+        "ModifierTypeDamageSection": "Damage Section Modifier",
         "ModifierTypeDivine": "Divine",
         "ModifierTypeEnhancement": "Enhancement",
         "ModifierTypeFormula": "Situational Modifier",
@@ -2287,6 +2291,7 @@
                 "Title": "10-Min Rest"
             }
         },
+        "Result": "Result",
         "Rolls": {
             "AbilityCheck": "Ability Check",
             "AbilityCheckFull": "Ability Check - {name}",
@@ -2306,6 +2311,8 @@
                 "Nonlethal": "Nonlethal",
                 "NonlethalTooltip": "You can use a weapon that deals lethal damage to deal nonlethal damage instead, but you take a penalty to your attack roll."
             },
+            "ConcealmentRoll": "Concealment Roll",
+            "ConcealmentRollFull": "Concealment Roll - {name}",
             "CriticalHit": "Critical Hit",
             "CriticalHitCaps": "CRITICAL HIT",
             "CriticalSuccess": "Critical Success",
@@ -2370,8 +2377,9 @@
             "SavingThrow": "Saving Throw",
             "SavingThrowFull": "Saving Throw - {name}",
             "SkillCheck": "Skill Check",
-            "SkillCheckFull": "Ability Check - {name}",
+            "SkillCheckFull": "Skill Check - {name}",
             "Starship": {
+                "Action": "Starship Action",
                 "Broadside": "Broadside",
                 "CaptainDemand": "Captain's Demand",
                 "CaptainEncouragement": "Captain's Encouragement",
@@ -2590,10 +2598,6 @@
             "TokenConditionLabels": {
                 "Hint": "Adds text labels to the token conditions.",
                 "Name": "Token condition labels"
-            },
-            "UseCustomChatCard": {
-                "Hint": "Toggle whether to use the new custom chat cards or the original ones.",
-                "Name": "Use custom Starfinder chat card?"
             },
             "UseQuickRollAsDefault": {
                 "Hint": "When checked, abilities that roll dice will skip the roll dialog window by default. If the shift key is held while clicking, the window will be shown instead.",
@@ -3132,7 +3136,7 @@
         "SystemWide": "System-Wide",
         "Target": "Target",
         "TempHPMaxPlaceHolderText": "+Max",
-        "TempHPPlaceHolderText": "+Temp",
+        "TempHPPlaceHolderText": "+Tmp",
         "Text": "Text",
         "ThemePlaceHolderText": "Theme",
         "Tippy": {

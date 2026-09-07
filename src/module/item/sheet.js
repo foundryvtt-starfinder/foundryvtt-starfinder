@@ -255,7 +255,7 @@ export class ItemSheetSFRPG extends foundry.appv1.sheets.ItemSheet {
         data.modifiers = this.item.system.modifiers;
 
         data.hasSpeed = this.item.system.weaponType === "tracking" || (this.item.system.special && this.item.system.special["limited"]);
-        data.hasCapacity = this.item.hasCapacity();
+        data.hasCapacity = this.item.hasCapacity;
 
         // Enrich text editors
 

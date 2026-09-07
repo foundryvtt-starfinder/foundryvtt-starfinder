@@ -35,6 +35,13 @@ export default class SFRPGActorBase extends SFRPGDocumentBase {
                         nullable: true,
                         required: true
                     }),
+                    tempmax: new fields.NumberField({
+                        initial: null,
+                        min: 0,
+                        integer: true,
+                        nullable: true,
+                        required: true
+                    }),
                     value: new fields.NumberField({
                         initial: 0,
                         min: 0,

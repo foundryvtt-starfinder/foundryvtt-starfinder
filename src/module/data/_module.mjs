@@ -55,3 +55,14 @@ export { default as SFRPGItemVehicleAttack } from './item/vehicleAttack.mjs';
 export { default as SFRPGItemVehicleSystem } from './item/vehicleSystem.mjs';
 export { default as SFRPGItemWeapon } from './item/weapon.mjs';
 export { default as SFRPGItemWeaponAccessory } from './item/weaponAccessory.mjs';
+
+// Export Chat Messages
+export { default as SFRPGMessageBase } from './message/base-message.mjs';
+export { default as SFRPGMessageCombatPhase } from './message/combat-phase.mjs';
+export { default as SFRPGMessageD20Roll } from './message/d20-roll.mjs';
+export { default as SFRPGMessageDamage } from './message/damage.mjs';
+export { default as SFRPGMessageInitiative } from './message/initiative.mjs';
+export { default as SFRPGMessageItemInfo } from './message/item-info.mjs';
+export { default as SFRPGMessageReload } from './message/reload.mjs';
+export { default as SFRPGMessageSpellcasting } from './message/spellcasting.mjs';
+export { default as SFRPGMessageUseItem } from './message/use-item.mjs';

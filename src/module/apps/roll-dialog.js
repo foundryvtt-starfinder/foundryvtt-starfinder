@@ -17,18 +17,18 @@ export default class RollDialog extends Dialog {
     /**
      * Construct a custom RollDialog
      *
-     * @param {object} params The parameters passed into the class.
-     * @param {RollTree} params.rollTree
-     * @param {string} params.formula The formula used for this roll.
-     * @param {RollContext} params.contexts Contextual data for the roll.
-     * @param {Modifier[]} params.availableModifiers Any conditional modifiers that can apply to this roll.
-     * @param {string} params.mainDie The primary die type used in this roll.
-     * @param {DamagePart[]} [params.parts] An array of DamageParts.
-     * @param {Object} [params.dialogData] Any additional data being passed to the dialog.
-     * @param {String} params.rollType The type of roll being made
-     * @param {DialogOptions} [params.options] Any additional options being passed to the dialog.
+     * @param {object}          params              The parameters passed into the class.
+     * @param {RollTree}        params.rollTree
+     * @param {string}          params.formula      The formula used for this roll.
+     * @param {RollContext}     params.contexts     Contextual data for the roll.
+     * @param {Modifier[]}      params.availableModifiers   Any conditional modifiers that can apply to this roll.
+     * @param {string}          params.mainDie      The primary die type used in this roll.
+     * @param {DamagePart[]}    [params.parts]      An array of DamageParts.
+     * @param {Object}          [params.dialogData] Any additional data being passed to the dialog.
+     * @param {Object}          params.rollOptions  Roll options for the roll
+     * @param {DialogOptions}   [params.options]    Any additional options being passed to the dialog.
      */
-    constructor({ rollTree, formula, contexts, availableModifiers, mainDie, parts = [], dialogData = {}, rollType = "roll", options = {} }) {
+    constructor({ rollTree, formula, contexts, availableModifiers, mainDie, parts = [], dialogData = {}, rollOptions = {}, options = {} }) {
         super(dialogData, options);
 
         this.rollTree = rollTree;
@@ -84,7 +84,7 @@ export default class RollDialog extends Dialog {
         }
 
         /** Set roll type */
-        this.rollType = rollType;
+        this.rollType = rollOptions.rollType ?? "roll";
 
         /** Returned values */
         this.additionalBonus = "";
@@ -124,8 +124,8 @@ export default class RollDialog extends Dialog {
         data.damageGroups = this.damageGroups;
 
         for (const modifier of data.availableModifiers) {
-            if (Object.keys(CONFIG.SFRPG.modifierTypes).includes(modifier.type)) {
-                modifier.localizedType = game.i18n.localize(`${CONFIG.SFRPG.modifierTypes[modifier.type]}`);
+            if (Object.keys(CONFIG.SFRPG.modifierBonusTypes).includes(modifier.type)) {
+                modifier.localizedType = game.i18n.localize(`${CONFIG.SFRPG.modifierBonusTypes[modifier.type]}`);
             }
         }
 
@@ -333,7 +333,6 @@ export default class RollDialog extends Dialog {
     static showRollDialog(rollTree, formula, contexts, availableModifiers = [], mainDie, options = {}) {
         return new Promise(resolve => {
             const buttons = options.buttons || { roll: { id: "roll", label: game.i18n.localize("SFRPG.Rolls.Dice.Roll") } };
-            const defaultButton = options.defaultButton || (Object.values(buttons)[0].id ?? Object.values(buttons)[0].label);
 
             const dlg = new RollDialog({
                 availableModifiers,
@@ -341,16 +340,20 @@ export default class RollDialog extends Dialog {
                 dialogData: {
                     title: options.title || game.i18n.localize("SFRPG.Rolls.Dice.Roll"),
                     buttons: buttons,
-                    default: defaultButton,
+                    default: "normal",
                     close: (button, rollMode, bonus, parts, targetQuadrant) => {
-                        resolve({button, rollMode, bonus: bonus?.trim(), parts, targetQuadrant});
+                        const cleanBonus = bonus?.replace(/\+\s*-\s*/gi, "- ")
+                            .replace(/\+\s*\+\s*/gi, "+ ")
+                            .replace(/\s\s+/g, ' ')
+                            .trim();
+                        resolve({button, rollMode, bonus: cleanBonus, parts, targetQuadrant});
                     }
                 },
                 formula,
                 mainDie,
                 parts: options.parts,
                 rollTree,
-                rollType: options.rollType,
+                rollOptions: options.rollOptions ?? {},
                 options: options.dialogOptions || {}
             });
             dlg.render(true);

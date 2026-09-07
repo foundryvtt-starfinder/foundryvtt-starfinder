@@ -37,7 +37,17 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/sfrpg/templates/items/parts/weapon-properties.hbs",
         "systems/sfrpg/templates/items/parts/damage-sections.hbs",
         "systems/sfrpg/templates/items/parts/item-duration.hbs",
-        "systems/sfrpg/templates/items/parts/effect-turn-events.hbs"
+        "systems/sfrpg/templates/items/parts/effect-turn-events.hbs",
+
+        // Chat Message Partials
+        "systems/sfrpg/templates/chat/parts/combat-phase.hbs",
+        "systems/sfrpg/templates/chat/parts/d20-roll.hbs",
+        "systems/sfrpg/templates/chat/parts/damage.hbs",
+        "systems/sfrpg/templates/chat/parts/initiative.hbs",
+        "systems/sfrpg/templates/chat/parts/item-info.hbs",
+        "systems/sfrpg/templates/chat/parts/reload.hbs",
+        "systems/sfrpg/templates/chat/parts/spellcasting.hbs",
+        "systems/sfrpg/templates/chat/parts/use-item.hbs"
     ];
 
     return foundry.applications.handlebars.loadTemplates(templatePaths);
@@ -253,6 +263,26 @@ export function setupHandlebars() {
         const formatter = new Intl.NumberFormat(game.i18n.lang);
         const formattedValue = formatter.format(value);
         return formattedValue;
+    });
+
+    /**
+     * A helper to see if a value is within a set of options, an array, or the keys of an object
+     */
+    Handlebars.registerHelper('includes', function(value, ...args) {
+        // Remove last value containing details
+        args.pop();
+        const array = [];
+        if (args.length < 1) return false;
+        for (const arg of args) {
+            if (arg.constructor === Array) {
+                array.push(...arg);
+            } else if (typeof arg === "object") {
+                array.push(...Object.keys(arg));
+            } else {
+                array.push(arg);
+            }
+        }
+        return array.includes(value);
     });
 
     /**

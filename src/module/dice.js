@@ -1,21 +1,15 @@
-import SFRPGCustomChatMessage from "./chat/chatbox.js";
-import { SFRPG } from "./config.js";
 import RollTree from "./rolls/rolltree.js";
 import StackModifiers from "./rules/closures/stack-modifiers.js";
 import SFRPGRoll from "./rolls/roll.js";
+import { ChatMessageSFRPG } from "./chat/message.js";
 
 /**
  * @import SFRPGRoll from "./rolls/roll.js";
  * @import RollContext from "./rolls/rollcontext.js";
- */
-
-// Type definitions for documentation.
-/**
- * A data structure for storing data about damage types
- *
- * @typedef {Object} DamageType
- * @property {String[]} types    An array of damage types.
- * @property {string}   operator An operator that determines how damage is split between multiple types.
+ * @import ActorSFRPG from "./actor/actor.js";
+ * @import RollInfo from "./rolls/rolltree.js";
+ * @import {RollCriteria, Tag} from "./rolls/roll.js"
+ * @import SFRPGModifier from "./modifiers/modifier.js"
  */
 
 /**
@@ -31,8 +25,8 @@ import SFRPGRoll from "./rolls/roll.js";
  * A data structure to define critical damage.
  *
  * @typedef {Object} CriticalDamage
- * @property {string}       effect The critical damage effect.
- * @property {DamagePart[]} parts  Any damage rolls used with this critical
+ * @property {boolean}      doubleDamage    If the critical should result in damage being doubled
+ * @property {string}       effect          The critical damage effect
  */
 
 /**
@@ -69,7 +63,6 @@ import SFRPGRoll from "./rolls/roll.js";
  *                                        have their vertical scroll positions preserved during a re-render.
  * @property {TabsConfiguration[]} [tabs] An array of tabbed container configurations which should be enabled
  *                                        for the application.
- * @property {boolean}  [skipUI]          Should this dialog be skipped?
  */
 
 /**
@@ -86,33 +79,6 @@ import SFRPGRoll from "./rolls/roll.js";
  * @typedef {Object} RollResult
  * @property {SFRPGRoll} roll The data for the roll
  * @property {FinalFormula} formula The finalized formula used in the roll
- */
-
-/**
- * A data structure for outputing any metadata that is rendered at the bottom
- * of a Roll chat card.
- *
- * @typedef {Object} Tag
- * @property {string} tag Text that will be addeded as a class on an HTMLElement
- * @property {string} text The text rendered on the card.
- */
-
-/**
- * A structure for passing data into an HTML for for use in data- attributes.
- *
- * @typedef {Object} HtmlData
- * @property {string} name The name of the data property sans data-
- * @property {string} value The value of the data property.
- */
-
-/**
- * An optional modifer that can be added to a roll.
- *
- * @typedef {Object} Modifier
- * @property {string}  name     The name of the modifer.
- * @property {boolean} enabled  Whether this modifier is enabled or not.
- * @property {string}  modifier The modifier being added.
- * @property {string}  notes    Any additional text about the modifier.
  */
 
 /**
@@ -147,178 +113,160 @@ import SFRPGRoll from "./rolls/roll.js";
  */
 
 export class DiceSFRPG {
+
+    /**
+     * Roll dialog buttons for normal rolls
+     * @type {Object}
+     */
+    static get normalRollButtons() {
+        return {
+            Normal: {
+                id: "normal",
+                label: game.i18n.localize("SFRPG.Rolls.Dice.Roll")
+            }
+        };
+    }
+
+    /**
+     * Roll dialog buttons for rolls where advantage is enabled
+     * @type {Object}
+     */
+    static get advantageRollButtons() {
+        return {
+            "Disadvantage": { id: "disadvantage", label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") },
+            "Normal": { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") },
+            "Advantage": { id: "advantage", label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") }
+        };
+    }
+
+    /**
+     * Roll dialog buttons for damage rolls
+     * @type {Object}
+     */
+    static get damageRollButtons() {
+        return {
+            Normal: { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.NormalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalDamageTooltip") },
+            Critical: { id: "critical", label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
+        };
+    }
+
     /**
     * A standardized helper function for managing core Starfinder "d20 rolls"
     *
     * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
     * This chooses the default options of a normal attack with no bonus, Advantage, or Disadvantage respectively
     *
-    * @param {Object}               data                The parameters passed into the method
-    * @param {Event|JQuery.Event}   [data.event]        The triggering event which initiated the roll
-    * @param {string[]}             data.parts          The dice roll component parts, excluding the initial d20
-    * @param {RollContext}          data.rollContext    The contextual data for this roll
-    * @param {String}               data.title          The dice roll UI window title
-    * @param {SpeakerData}          data.speaker        The ChatMessage speaker to pass when creating the chat
-    * @param {string}               data.flavor         Any flavor text associated with this roll
-    * @param {Boolean}              [data.advantage]    Allow rolling with advantage (and therefore also with disadvantage)
-    * @param {Object}               data.rollOptions    Additional options to be stored with the roll
-    * @param {Number}               [data.critical]     The value of d20 result which represents a critical success
-    * @param {Number}               [data.fumble]       The value of d20 result which represents a critical failure
-    * @param {onD20DialogClosed}    data.onClose        Callback for actions to take when the dialog form is closed
-    * @param {DialogOptions}        data.dialogOptions  Modal dialog options
-    * @param {String}               data.rollType       Type of roll (options: CONFIG.SFRPG.rollType)
-    * @param {Number}               data.difficulty     Optional parameter for checks
-    * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
+    * @param {Object}               data                    The parameters passed into the method
+    * @param {string[]}             data.parts              The dice roll component parts, excluding the initial d20
+    * @param {RollContext}          data.rollContext        The contextual data for this roll
+    * @param {RollCriteria}         data.rollCriteria       Additional data to further define the roll and what it's doing
+    * @param {SpeakerData}          data.speaker            The ChatMessage speaker to pass when creating the chat (optional if chatMessage is false)
+    * @param {string}               [data.actorContextKey]  Key for evaluating the correct rollContext entry when calculating formulas
+    * @param {boolean}              [data.chatMessage]      Whether to create & show a chat message after making the roll
+    * @param {DialogOptions}        [data.dialogOptions]    Modal dialog options
+    * @param {string}               [data.flavor]           Any flavor text associated with this roll
+    * @param {onD20DialogClosed}    [data.onClose]          Callback for actions to take when the dialog form is closed
+    * @param {boolean}              [data.skipUI]           The triggering event which initiated the roll
+    * @param {Tag[]}                [data.tags]             Any roll metadata that will be output on the bottom of the chat card
+    * @param {string}               [data.title]            The dice roll UI window title
     * @returns {Promise<RollResult?>}
     */
-    static async d20Roll({ event = new Event(''), parts, rollContext, title, speaker, flavor, advantage = true, rollOptions = {},
-        critical = 20, fumble = 1, chatMessage = true, onClose, dialogOptions, actorContextKey = "actor",
-        rollType = "roll", difficulty = undefined, tags = []}) {
+    static async d20Roll({ parts = [], rollContext, rollCriteria, speaker,
+        actorContextKey = "actor", chatMessage = true, dialogOptions, flavor, onClose, skipUI = false, tags = {}, title}) {
 
-        flavor = `${title}${(flavor ? " <br> " + flavor : "")}`;
+        // Verify roll context is valid before continuing
+        if (!rollContext?.isValid()) return null;
 
-        if (!rollContext?.isValid()) {
-            console.log(['Invalid rollContext', rollContext]);
-            return null;
-        }
-
-        /** New roll formula system */
-        const buttons = {};
-        if (game.settings.get("sfrpg", "useAdvantageDisadvantage") && advantage) {
-            buttons["Disadvantage"] = { id: "disadvantage", label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
-            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
-            buttons["Advantage"] = { id: "advantage", label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
-        } else {
-            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
-        }
-
-        const partMapper = (part) => {
+        // Unpack and simplify any roll parts that are objects (these come from modifiers that affect rolls)
+        const formulaParts = [];
+        for (const part of parts) {
             if (part instanceof Object) {
                 const simplifiedFormula = this._simplifyFormula(part.score || "0", rollContext);
                 const explanation = part.explanation ? `[${part.explanation}]` : "";
-                return `${simplifiedFormula}${explanation}`;
+                formulaParts.push(`${simplifiedFormula}${explanation}`);
+            } else {
+                formulaParts.push(part);
             }
-            return part;
-        };
+        }
 
-        const formula = parts.map(partMapper).join(" + ");
-        const rollInfo = await RollTree.buildRoll(formula, rollContext, {
-            buttons: buttons,
+        // Build the roll formula
+        const formula = formulaParts.join(" + ");
+
+        // Get the roll information determined by selections in the roll dialog
+        const rollInfo = await RollTree.buildRoll(formula, rollContext, rollCriteria, {
+            buttons: game.settings.get("sfrpg", "useAdvantageDisadvantage") ? this.advantageRollButtons : this.normalRollButtons,
             debug: false,
-            defaultButton: "normal",
             dialogOptions: dialogOptions,
-            mainDie: "1d20",
-            rollType: rollType,
-            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
-            title: title,
-            useRawStrings: false
+            skipUI: skipUI && !rollContext.hasMultipleSelectors(),
+            title: title
         });
 
-        if (rollInfo.button === "cancel") {
-            if (onClose) {
-                onClose(null, null, null);
-            }
-            return null;
-        } else {
-            let dieRoll = "1d20";
-            if (rollInfo.button === "disadvantage") {
-                dieRoll = "2d20kl";
-            } else if (rollInfo.button === "advantage") {
-                dieRoll = "2d20kh";
-            }
+        // Evaluate the roll unless cancelled
+        if (rollInfo.button !== "cancel") {
+            // Set the main die roll value
+            let baseDie = rollCriteria.mainDie;
+            if (rollInfo.button === "advantage") baseDie = "2d20kh";
+            else if (rollInfo.button === "disadvantage") baseDie = "2d20kl";
 
-            const node = rollInfo.rolls[0].node;
-            const finalFormula = await this._calcStackingFormula(node, rollInfo.modifiers, rollInfo.bonus, rollContext.allContexts[actorContextKey]?.entity);
+            // Create the roll formula, explanation, and roll
+            const finalFormula = await this._calcStackingFormula(baseDie, rollInfo, rollContext.allContexts[actorContextKey]?.entity);
+            const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(finalFormula.formula);
+            const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, rollCriteria }).evaluate();
 
-            finalFormula.finalRoll = `${dieRoll} + ${finalFormula.finalRoll}`;
-            finalFormula.formula = `${dieRoll} + ${finalFormula.formula}`;
-            finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
-                .trim();
-            finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
-            const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
+            // Roll Evaluation vs Action Target (KAC, EAC, DC, etc.)
+            roll.options.rollCriteria.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollCriteria);
 
-            const rollObject = Roll.create(finalFormula.finalRoll, { breakdown: preparedRollExplanation, tags: tags });
-            rollObject.options.rollOptions = rollOptions;
-            const roll = await rollObject.evaluate();
-
-            // Flag critical thresholds and add Critical hit and effect information
-            for (const d of roll.dice) {
-                if (d.faces === 20) {
-                    d.options.critical = critical;
-                    d.options.fumble = fumble;
-
-                    // Critical Effect flavor and tags
-                    const criticalData = rollContext.allContexts?.item?.data?.critical;
-                    if (d.total === critical) {
-                        roll.d20Critical = true;
-                        flavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": flavor });
-                        if (criticalData?.effect?.trim()) {
-                            tags.push({ tag: "critical-effect", text: game.i18n.format("SFRPG.Rolls.Dice.CriticalEffect", {"criticalEffect": criticalData.effect })});
-                        }
-                    } else if (d.total === fumble) {
-                        roll.d20Fumble = true;
-                    }
-                }
-            }
-
-            // Roll Evaluation
-            const evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions, difficulty);
-            const rollSuccess = DiceSFRPG.evaluateRollVsValue(roll, evalValue);
-            DiceSFRPG.addRollSuccessTag(roll, rollInfo, rollOptions, rollType, difficulty, evalValue, rollSuccess, tags);
-
-            // Chat Cards
+            // Define message system data
             const itemContext = rollContext.allContexts['item'];
-            const htmlData = [{ name: "rollNotes", value: itemContext?.system?.rollNotes }];
-            let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
-            let errorToThrow = null;
+            const target = rollContext.allContexts['target']?.entity?.document ?? null;
+            const messageSystemData = { // TODO: Perhaps there's a nicer way to instantiate this via the message's dataModel?
+                critical: {
+                    effect: rollContext.allContexts?.item?.data?.critical?.effect?.trim() ?? "",
+                    isCritical: roll.isCritical,
+                    isFumble: roll.isFumble
+                },
+                descriptors: [],
+                properties: {},
+                rollCriteria,
+                specialMaterials: {},
+                starshipWeaponProperties: [],
+                tags,
+                targetInfo: []
+            };
 
-            if (useCustomCard && chatMessage) {
-                // Push the roll to the ChatBox
-                const customData = {
-                    title: flavor,
-                    rollContext,
-                    speaker,
-                    rollMode: rollInfo.mode,
-                    breakdown: preparedRollExplanation,
-                    htmlData,
-                    rollType: rollType,
-                    rollOptions,
-                    rollDices: finalFormula.rollDices,
-                    rollSuccess,
-                    tags: tags
+            if (target) {
+                messageSystemData.targetInfo[0] = {
+                    image: target.texture?.src ?? "",
+                    name: target.name,
+                    tokenUUID: target.uuid ?? null,
+                    quadrant: rollInfo.target?.quadrant ?? ""
                 };
+            }
 
-                try {
-                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
-                } catch (error) {
-                    useCustomCard = false;
-                    errorToThrow = error;
-                }
-            } else if (!useCustomCard && chatMessage) {
+            // Add item properties, descriptors, and special materials to message system data
+            if (itemContext) DiceSFRPG._collectProperties(itemContext, messageSystemData);
+
+            // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
+            if (chatMessage) {
                 const messageData = {
+                    content: await roll.render({ customTooltip: finalFormula.rollDices }),
                     flavor,
                     speaker,
                     rolls: [roll],
                     sound: CONFIG.sounds.dice,
-                    flags: {sfrpg: { rollOptions, rollSuccess, rollType }},
-                    tags: tags
+                    system: messageSystemData,
+                    title,
+                    type: "d20Roll"
                 };
-
-                messageData.content = await roll.render({ htmlData: htmlData, customTooltip: finalFormula.rollDices });
-
-                // Create a chat message, applying the appropriate roll type (public, gmroll, etc.)
-                ChatMessage.create(messageData, { rollMode: rollInfo.mode });
+                ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
             }
 
-            if (onClose) {
-                onClose(roll, formula, finalFormula);
-            }
-
-            if (errorToThrow) {
-                throw errorToThrow;
-            }
-
+            if (onClose) onClose(roll, formula, finalFormula);
             return { roll, finalFormula };
+
+        } else {
+            if (onClose) onClose(null, null, null);
+            return null;
         }
     }
 
@@ -330,91 +278,110 @@ export class DiceSFRPG {
     *
     * Returns a promise that will return an object containing roll and formula.
     *
-    * @param {Object}               data                The parameters passed into the method.
-    * @param {Event|JQuery.Event}   [data.event]        The triggering event which initiated the roll
-    * @param {String}               [data.rollFormula]  The roll formula to use, excluding the initial die. If left empty, will look for parts.
-    * @param {string[]}             data.parts          The dice roll component parts, excluding the initial die
-    * @param {RollContext}          data.rollContext    The contextual data for this roll
-    * @param {String}               data.title          The dice roll UI window title
-    * @param {String}               [data.mainDie]      The main die to use for this roll, e.g. "d20".
-    * @param {Boolean}              [data.advantage]    Allow rolling with advantage (and therefore also with disadvantage)
-    * @param {Number}               [data.critical]     The value of d20 result which represents a critical success
-    * @param {Number}               [data.fumble]       The value of d20 result which represents a critical failure
-    * @param {string}               [data.breakdown]    An explanation of the roll modifiers and where they came from.
-    * @param {DialogOptions}        data.dialogOptions  Modal dialog options
-    * @param {String}               data.rollType       Type of roll (options: CONFIG.SFRPG.rollType)
-    * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
-    * @returns {Promise<RollResult>|Promise<null>}      Returns the roll's result or an empty promise.
+    * @param {Object}               data                    The parameters passed into the method.
+    * @param {RollContext}          data.rollContext        The contextual data for this roll
+    * @param {RollCriteria}         data.rollCriteria       Additional data to further define the roll and what it's doing
+    * @param {SpeakerData}          data.speaker            The ChatMessage speaker to pass when creating the chat (optional if chatMessage is false)
+    * @param {string}               [data.actorContextKey]  Key for evaluating the correct rollContext entry when calculating formulas
+    * @param {boolean}              [data.chatMessage]      Whether to create & show a chat message after making the roll
+    * @param {DialogOptions}        [data.dialogOptions]    Modal dialog options
+    * @param {string}               [data.flavor]           Any flavor text associated with this roll
+    * @param {string[]}             [data.parts]            The dice roll component parts, excluding the initial die
+    * @param {string}               [data.rollFormula]      The roll formula to use, excluding the initial die. If left empty, will look for parts.
+    * @param {boolean}              [data.skipUI]           The triggering event which initiated the roll
+    * @param {Tag[]}                [data.tags]             Any roll metadata that will be output on the bottom of the chat card
+    * @param {string}               [data.title]            The dice roll UI window title
+    * @returns {Promise<RollResult>|Promise<null>}          Returns the roll's result or an empty promise.
     */
-    static async createRoll({ event = new Event(''), rollFormula = null, parts, rollContext, title, mainDie = "d20", advantage = true,
-        critical = 20, fumble = 1, breakdown = "", dialogOptions, useRawStrings = false, actorContextKey = "actor",
-        rollType = "roll", tags = []}) {
+    static async createRoll({ rollContext, rollCriteria, speaker,
+        actorContextKey = "actor", chatMessage = true, dialogOptions, flavor, parts = [], rollFormula = null, skipUI = false, tags = {}, title}) {
 
-        if (!rollContext?.isValid()) {
-            console.log(['Invalid rollContext', rollContext]);
-            return null;
+        // Verify roll context is valid before continuing
+        if (!rollContext?.isValid()) return null;
+
+        // Unpack and simplify any roll parts that are objects (these come from modifiers that affect rolls)
+        const formulaParts = [];
+        for (const part of parts) {
+            if (part instanceof Object) {
+                const simplifiedFormula = this._simplifyFormula(part.score || "0", rollContext);
+                const explanation = part.explanation ? `[${part.explanation}]` : "";
+                formulaParts.push(`${simplifiedFormula}${explanation}`);
+            } else {
+                formulaParts.push(part);
+            }
         }
 
-        /** New roll formula system */
-        const buttons = {};
-        if (game.settings.get("sfrpg", "useAdvantageDisadvantage") && advantage) {
-            buttons["Disadvantage"] = { id: "disadvantage", label: game.i18n.format("SFRPG.Rolls.Dice.Disadvantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.DisadvantageTooltip") };
-            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Normal"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalTooltip") };
-            buttons["Advantage"] = { id: "advantage", label: game.i18n.format("SFRPG.Rolls.Dice.Advantage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.AdvantageTooltip") };
-        } else {
-            buttons["Normal"] = { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.Roll") };
-        }
+        // Build the roll formula
+        const formula = rollFormula || formulaParts.join(" + ");
 
-        const formula = rollFormula || parts.join(" + ");
-        const rollInfo = await RollTree.buildRoll(formula, rollContext, {
-            buttons: buttons,
+        // Get the roll information determined by selections in the roll dialog
+        const rollInfo = await RollTree.buildRoll(formula, rollContext, rollCriteria, {
+            buttons: game.settings.get("sfrpg", "useAdvantageDisadvantage") && mainDie === "1d20" ? this.advantageRollButtons : this.normalRollButtons,
             debug: false,
-            defaultButton: "normal",
             dialogOptions: dialogOptions,
-            mainDie: mainDie ? "1" + mainDie : null,
-            rollType: rollType,
-            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
-            title: title,
-            useRawStrings: useRawStrings
+            skipUI: skipUI && !rollContext.hasMultipleSelectors(),
+            title: title
         });
 
-        if (rollInfo.button === "cancel") {
+        // If cancelled, exit
+        if (rollInfo.button !== "cancel") {
+            let baseDie = rollCriteria.mainDie;
+            if (rollInfo.button === "disadvantage") baseDie = "2d20kl";
+            else if (rollInfo.button === "advantage") baseDie = "2d20kh";
+
+            const finalFormula = await this._calcStackingFormula(baseDie, rollInfo, rollContext.allContexts[actorContextKey]?.entity);
+            const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(finalFormula.formula);
+            const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, rollCriteria }).evaluate();
+
+            // Roll Evaluation vs Action Target (KAC, EAC, DC, etc.)
+            roll.options.rollCriteria.evalValue = DiceSFRPG.getTargetRollEvalValue(roll, rollInfo, rollContext, rollCriteria);
+
+            // Define message system data
+            const target = rollContext.allContexts['target']?.entity?.document ?? null;
+            const messageSystemData = { // TODO: Perhaps there's a nicer way to instantiate this via the message's dataModel?
+                critical: {
+                    effect: rollContext.allContexts?.item?.data?.critical?.effect?.trim() ?? "",
+                    isCritical: roll.isCritical,
+                    isFumble: roll.isFumble
+                },
+                descriptors: [],
+                properties: {},
+                rollCriteria,
+                specialMaterials: {},
+                starshipWeaponProperties: [],
+                tags,
+                targetInfo: []
+            };
+
+            if (target) {
+                messageSystemData.targetInfo[0] = {
+                    image: target.texture?.src ?? "",
+                    name: target.name,
+                    tokenUUID: target.uuid ?? null,
+                    quadrant: rollInfo.target?.quadrant ?? ""
+                };
+            }
+
+            // Create a chat message, applying the appropriate roll type (public, gmroll, etc.) and tags
+            if (chatMessage) {
+                const messageData = {
+                    content: await roll.render({ customTooltip: finalFormula.rollDices }),
+                    flavor,
+                    speaker,
+                    rolls: [roll],
+                    sound: CONFIG.sounds.dice,
+                    system: messageSystemData,
+                    tags,
+                    title,
+                    type: "base"
+                };
+                ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
+            }
+            return {roll: roll, formula: finalFormula};
+
+        } else {
             return null;
         }
-
-        const node = rollInfo.rolls[0].node;
-        const finalFormula = await this._calcStackingFormula(node, rollInfo.modifiers, rollInfo.bonus, rollContext.allContexts[actorContextKey]?.entity);
-
-        if (mainDie) {
-            let dieRoll = "1" + mainDie;
-            if (mainDie === "d20") {
-                if (rollInfo.button === "disadvantage") {
-                    dieRoll = "2d20kl";
-                } else if (rollInfo.button === "advantage") {
-                    dieRoll = "2d20kh";
-                }
-            }
-            finalFormula.finalRoll = [dieRoll, finalFormula.finalRoll].filter(Boolean).join(' + ');
-            finalFormula.formula = [dieRoll, finalFormula.formula].filter(Boolean).join(' + ');
-        }
-
-        finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
-            .trim();
-        finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
-
-        const rollObject = Roll.create(finalFormula.finalRoll, { breakdown, tags });
-        const roll = await rollObject.evaluate();
-        roll.options.rollMode = rollInfo.mode;
-
-        // Flag critical thresholds
-        for (const d of roll.dice) {
-            if (d.faces === 20) {
-                d.options.critical = critical;
-                d.options.fumble = fumble;
-            }
-        }
-
-        return {roll: roll, formula: finalFormula};
     }
 
     /**
@@ -423,514 +390,152 @@ export class DiceSFRPG {
     * Holding SHIFT, ALT, or CTRL when the attack is rolled will "fast-forward".
     * This chooses the default options of a normal attack with no bonus, Critical, or no bonus respectively
     *
-    * @param {Object}               data               Parameters passed into the method
-    * @param {Event}                [data.event]       The triggering event which initiated the roll
-    * @param {DamagePart[]}         data.parts         The dice roll component parts
-    * @param {SFRPGRoll}            linkedAttackRoll   A linked attack roll, passed if damage is automatically rolled with attacks
-    * @param {CriticalDamage}       data.criticalData  Critical damage information, in case of a critical hit
-    * @param {RollContext}          data.rollContext   The contextual data for this roll
-    * @param {String}               data.title         The dice roll UI window title
-    * @param {SpeakerData}          data.speaker       The ChatMessage speaker to pass when creating the chat
-    * @param {string}               data.flavor        Any flavor text associated with this roll
-    * @param {onDamageDialogClosed} data.onClose       Callback for actions to take when the dialog form is closed
-    * @param {Object}               data.dialogOptions Modal dialog options
-    * @param {String}               data.rollType       Type of roll (options: CONFIG.SFRPG.rollType)
-    * @param {Tag[]}                [data.tags]         Any roll metadata that will be output on the bottom of the chat card.
-    * @returns {Promise<bool>}                         `true` if roll was performed, `false` if it was canceled
+    * @param {Object}               data                    Parameters passed into the method
+    * @param {DamagePart[]}         data.damageParts        The component damage parts of the roll
+    * @param {RollContext}          data.rollContext        The contextual data for this roll
+    * @param {RollCriteria}         data.rollCriteria       Additional data to further define the roll and what it's doing
+    * @param {SpeakerData}          data.speaker            The ChatMessage speaker to pass when creating the chat (optional if chatMessage is false)
+    * @param {boolean}              [data.chatMessage]      Whether to create & show a chat message after making the roll
+    * @param {DialogOptions}        [data.dialogOptions]    Modal dialog options
+    * @param {string}               [data.flavor]           Any flavor text associated with this roll
+    * @param {SFRPGRoll}            [data.linkedAttackRoll] A linked attack roll, passed if damage is automatically rolled with attacks
+    * @param {onD20DialogClosed}    [data.onClose]          Callback for actions to take when the dialog form is closed
+    * @param {boolean}              [data.skipUI]           Whether or not the roll dialog should be skipped
+    * @param {Tag[]}                [data.tags]             Any roll metadata that will be output on the bottom of the chat card.
+    * @param {string}               [data.title]            The dice roll UI window title
+    * @returns {Promise<bool>}                              `true` if roll was performed, `false` if it was canceled
     */
-    static async damageRoll({ event = new Event(''), parts, linkedAttackRoll, criticalData, rollContext, title, speaker, flavor, chatMessage = true, onClose, dialogOptions,
-        rollType = "damage", tags = []}) {
-        flavor = `${title || ""}${(flavor ? " - " + flavor : "")}`;
+    static async damageRoll({ damageParts, rollContext, rollCriteria, speaker,
+        chatMessage = true, criticalDamageData = {doubleDamage: true}, dialogOptions, flavor, linkedAttackRoll, onClose, skipUI = false, tags = {}, title}) {
 
-        if (!rollContext?.isValid()) {
-            console.log(['Invalid rollContext', rollContext]);
-            return false;
-        }
+        // Verify roll context is valid before continuing
+        if (!rollContext?.isValid()) return null;
 
-        /** New roll formula system */
-        const buttons = {
-            Normal: { id: "normal", label: game.i18n.format("SFRPG.Rolls.Dice.NormalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.NormalDamageTooltip") },
-            Critical: { id: "critical", label: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamage"), tooltip: game.i18n.format("SFRPG.Rolls.Dice.CriticalDamageTooltip") }
-        };
-
-        /** @type {DamageType[]} */
-        const damageTypes = parts.reduce((acc, cur) => {
-            if (cur.types && !foundry.utils.isEmpty(cur.types)) {
-                const filteredTypes = Object.entries(cur.types).filter(type => type[1]);
-                const obj = { types: [], operator: "" };
-
-                for (const type of filteredTypes) {
-                    obj.types.push(type[0]);
-                    if (Object.keys(CONFIG.SFRPG.healingTypes).includes(type[0])) rollType = "healing";
-                }
-
-                if (cur.operator) obj.operator = cur.operator;
-                if (obj.types.length > 0) acc.push(obj);
-            }
-
-            return acc;
-        }, []);
-
-        const finalParts = [];
+        // Split the damage parts into damage sections and formula parts (modifiers, like bonuses/penalties)
         const damageSections = [];
-        for (const part of parts) {
-            if (part instanceof Object) {
-                if (part.isDamageSection) {
-                    damageSections.push(part);
-
-                    const rollInfo = await RollTree.buildRoll(part.formula, rollContext, {
-                        buttons: buttons,
-                        defaultButton: "normal",
-                        rollType: rollType,
-                        skipUI: true
-                    });
-                    part.formula = rollInfo.rolls[0].formula.finalRoll;
-                } else {
-                    const simplifiedFormula = this._simplifyFormula(part.formula || "0", rollContext);
-                    const explanation = part.explanation ? `[${part.explanation}]` : "";
-                    finalParts.push(`${simplifiedFormula}${explanation}`);
-                }
+        const formulaParts = [];
+        for (const part of damageParts) {
+            if (part.isDamageSection) {
+                // Replace variables in the damage section's formula before continuing
+                // Don't fully simplify yet; we'll do that later so the tooltip can be generated first
+                const rollInfo = await RollTree.buildRoll(part.formula, rollContext, rollCriteria, {skipUI: true});
+                part.formula = rollInfo.rolls[0].formula.finalRoll;
+                damageSections.push(part);
             } else {
-                finalParts.push(formula);
+                // Simplify the formula for any formula parts, also replacing variables
+                const simplifiedFormula = this._simplifyFormula(part.formula || "0", rollContext);
+                const explanation = part.explanation ? `[${part.explanation}]` : "";
+                formulaParts.push(`${simplifiedFormula}${explanation}`);
             }
         }
 
-        const formula = finalParts.join(" + ");
-        const rollInfo = await RollTree.buildRoll(formula, rollContext, {
-            buttons: buttons,
+        const formula = formulaParts.join(" + ");
+        const rollInfo = await RollTree.buildRoll(formula, rollContext, rollCriteria, {
+            buttons: DiceSFRPG.damageRollButtons,
             debug: false,
-            defaultButton: "normal",
             dialogOptions: dialogOptions,
-            mainDie: "",
             parts: damageSections,
-            rollType: rollType,
-            skipUI: ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) && !rollContext.hasMultipleSelectors(),
-            title: title,
-            useRawStrings: false
+            skipUI: skipUI && !rollContext.hasMultipleSelectors(),
+            title: title
         });
 
         // Evaluate the roll
-        if (rollInfo.button === 'cancel') {
-            if (onClose) {
-                onClose(null, null, null, false);
-            }
-        } else for (const { formula: finalFormula, node: part } of rollInfo.rolls) {
-            /** @type {HtmlData[]} */
-            const htmlData = [{ name: "is-damage", value: "true" }];
-
-            const usedParts = part ? [part] : parts;
-            if (part) {
-                part.operator = "and";
-            }
-
-            let damageTypeString = "";
-            const tempParts = usedParts.reduce((arr, curr) => {
-                const obj = { formula: curr.formula, damage: 0, types: [], operator: curr.operator };
-                if (curr.types && !foundry.utils.isEmpty(curr.types)) {
-                    for (const [key, isEnabled] of Object.entries(curr.types)) {
-                        if (isEnabled) {
-                            obj.types.push(key);
-                        }
-                    }
-                }
-
-                if (obj.types && obj.types.length > 0) {
-                    const tag = `damage-type-${(obj.types.join(`-${obj.operator}-`))}`;
-                    const text = obj.types.map(type => SFRPG.damageTypes[type]).join(` ${SFRPG.damageTypeOperators[obj.operator]} `);
-                    const shortText = obj.types.map(type => SFRPG.damageTypeToAcronym[type]).join(` & `);
-
-                    // In most use cases, damage rolls should never contain more parts. But because the system is complex and confusing, it is theoretically possible.
-                    // If that happens, we'll just concatenate the damage types to the roll string and pretend nothing is wrong.
-                    if (damageTypeString?.length > 0) {
-                        damageTypeString += ", ";
-                    }
-                    damageTypeString += shortText;
-
-                    if (!tags.some(t => t.tag === tag && t.text === text))
-                        tags.push({ tag: tag, text: text });
-                }
-
-                arr.push(obj);
-                return arr;
-            }, []);
-
-            // Add item properties, descriptors, and special materials to roll tags
-            const itemContext = rollContext.allContexts['item'];
-            if (itemContext) {
-                // Regular Weapons use data.properties for their properties
-                if (itemContext.entity.system.properties) {
-                    try {
-                        const props = [];
-                        for (const [key, propValue] of Object.entries(itemContext.entity.system.properties)) {
-                            if (propValue.value) {
-                                tags.push({tag: `weapon-properties ${key}`, text: SFRPG.weaponProperties[key]});
-                                props.push(key);
-                            }
-                        }
-                        htmlData.push({ name: "weapon-properties", value: JSON.stringify(props) });
-                    } catch {
-                        // pass
-                    }
-                }
-
-                // Starship Weapons use data.special for their properties
-                if (itemContext.entity.type === "starshipWeapon") {
-                    tags.push({tag: `starship-weapon-type ${itemContext.entity.system.weaponType}`, text: SFRPG.starshipWeaponTypes[itemContext.entity.system.weaponType]});
-                    htmlData.push({ name: "starship-weapon-type", value: itemContext.entity.system.weaponType });
-
-                    if (itemContext.entity.system.special) {
-                        try {
-                            const props = [];
-                            for (const [key, isEnabled] of Object.entries(itemContext.entity.system.special)) {
-                                if (isEnabled) {
-                                    tags.push({tag: `starship-weapon-properties ${key}`, text: SFRPG.starshipWeaponProperties[key]});
-                                    props.push(key);
-                                }
-                            }
-                            htmlData.push({ name: "starship-weapon-properties", value: JSON.stringify(props) });
-                        } catch {
-                            // pass
-                        }
-                    }
-                }
-
-                // Add descriptors
-                const descriptors = itemContext.entity.system.descriptors;
-                if (descriptors) {
-                    for (const [descriptor, isEnabled] of Object.entries(descriptors)) {
-                        if (isEnabled) tags.push({tag: descriptor, text: SFRPG.descriptors[descriptor]});
-                    }
-                }
-
-                // Add special materials
-                const specialMaterials = itemContext.entity.system.specialMaterials;
-                if (specialMaterials) {
-                    for (const [material, isEnabled] of Object.entries(specialMaterials)) {
-                        if (isEnabled) tags.push({tag: material, text: SFRPG.specialMaterials[material]});
-                    }
-                }
-
-                const isMagic = itemContext.data.magic || itemContext.entity.hasMagicDamage;
-                if (isMagic) tags.push({tag: 'magic', text: game.i18n.localize("SFRPG.Magic.Magic")});
-            }
-
-            // Determine whether the roll should be a critical damage roll
-            let isCritical = false;
-            if ((game.settings.get('sfrpg', 'useQuickRollAsDefault')) ? !event?.shiftKey : event?.shiftKey || dialogOptions?.skipUI) {
-                // if quick roll is selected, determine whether a roll is a critical hit based on the linked attack (if present)
-                // if the control key is pressed, roll critical damage regardless
-                isCritical = event?.ctrlKey ? true : (linkedAttackRoll ? DiceSFRPG.isCriticalSuccess(linkedAttackRoll) : false);
-            } else if (rollInfo.button === "critical") {
-                isCritical = true;
-            }
-
-            let finalFlavor = foundry.utils.deepClone(flavor);
-            if (isCritical) {
-                htmlData.push({ name: "is-critical", value: "true" });
-                tags.push({tag: `critical`, text: game.i18n.localize("SFRPG.Rolls.Dice.CriticalHit")});
-
-                if (!criticalData?.preventDoubling) {
-                    finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
-                    finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
-                }
-
-                if (criticalData !== undefined) {
-                    const critRoll = criticalData.parts?.filter(x => x.formula?.trim().length > 0).map(x => x.formula)
-                        .join("+") ?? "";
-                    if (critRoll.length > 0) {
-                        finalFormula.finalRoll = finalFormula.finalRoll + " + " + critRoll;
-                        finalFormula.formula = finalFormula.formula + " + " + critRoll;
-                    }
-
-                    htmlData.push({ name: "critical-data", value: JSON.stringify(criticalData) });
-                }
-
-                finalFlavor = game.i18n.format("SFRPG.Rolls.Dice.CriticalFlavor", { "title": finalFlavor });
-            }
-
-            if (part?.name) {
-                finalFlavor += `: ${part.name}`;
-                if (part.partIndex) {
-                    finalFlavor += ` (${part.partIndex})`;
-                }
-            }
-
-            finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
-                .trim();
-            finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
-            const preparedRollExplanation = DiceSFRPG.formatFormula(finalFormula.formula);
-
-            const rollObject = Roll.create(finalFormula.finalRoll, { tags: tags, breakdown: preparedRollExplanation });
-            const roll = await rollObject.evaluate();
-
-            // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
-            if (roll._total < 1) {
-                roll._total = 1;
-                const nonlethal = tags.find(e => e.tag === "weapon-properties nonlethal");
-
-                if (itemContext.type !== "starshipWeapon") {
-                    if (nonlethal) {
-                        nonlethal.text += ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`;
-                    } else {
-                        tags.push({ tag: "nonlethal", text: game.i18n.format("SFRPG.Damage.Types.Nonlethal") + ` (${game.i18n.localize("SFRPG.Damage.MinimumDamage")})`});
-                    }
-                } else {
-                    tags.push({ tag: "minimum-damage", text: game.i18n.localize("SFRPG.Damage.MinimumDamage") });
-                }
-            }
-
-            // Associate the damage types for this attack to the first DiceTerm
-            // for the roll.
-            const die = roll.dice && roll.dice.length > 0 ? roll.dice[0] : null;
-
-            if (die) {
-                /** @type {boolean} */
-                die.options.isDamageRoll = true;
-                die.options.damageTypes = damageTypes;
-                die.options.damageParts = tempParts;
-
-                if (criticalData) {
-                    die.options.criticalData = criticalData;
-                }
-
-                const properties = rollContext.allContexts["item"]?.data?.properties;
-                if (properties) {
-                    die.options.isModal = properties.modal || properties.double;
-                }
-            }
-
-            htmlData.push({ name: "damage-parts", value: JSON.stringify(tempParts) });
-            htmlData.push({ name: "rollNotes", value: itemContext?.data?.damageNotes });
-
-            let useCustomCard = game.settings.get("sfrpg", "useCustomChatCards");
-            let errorToThrow = null;
-            if (useCustomCard && chatMessage) {
-                // Push the roll to the ChatBox
-                const customData = {
-                    title: finalFlavor,
-                    rollContext:  rollContext,
-                    speaker: speaker,
-                    rollMode: rollInfo.mode,
-                    breakdown: preparedRollExplanation,
-                    tags: tags,
-                    htmlData: htmlData,
-                    rollType: rollType,
-                    damageTypeString: damageTypeString
+        if (rollInfo.button !== 'cancel') {
+            for (const rollData of rollInfo.rolls) {
+                const finalFormula = rollData.formula;
+                const itemContext = rollContext.allContexts['item'];
+                const part = rollData.node;
+                const partRollCriteria = foundry.utils.deepClone(rollCriteria); // duplicate so we can manipulate if needed
+                const messageSystemData = { // TODO: Perhaps there's a nicer way to instantiate this via the message's dataModel?
+                    critical: {
+                        doubleDamage: criticalDamageData.doubleDamage,
+                        effect: "",
+                        isCritical: false
+                    },
+                    damage: {
+                        isMagic: false,
+                        minimumDamage: false,
+                        notes: itemContext?.data?.damageNotes,
+                        types: []
+                    },
+                    descriptors: [],
+                    partIndex: part.partIndex ?? null,
+                    properties: {},
+                    rollCriteria: partRollCriteria,
+                    specialMaterials: {},
+                    starshipWeaponProperties: [],
+                    tags
                 };
 
-                // Add special materials, descriptors, and magic status to chat message flags (to overcome DR)
+                // Get the damage types for this section; If any are healing, change the rollType
+                partRollCriteria.damageTypes = [];
+                for (const [type, value] of Object.entries(part.types)) {
+                    if (value) {
+                        if (Object.keys(CONFIG.SFRPG.healingTypes).includes(type)) partRollCriteria.rollType = "healing";
+                        messageSystemData.damage.types.push(type);
+                        partRollCriteria.damageTypes.push(type);
+                    }
+                }
+
+                // Add item properties, descriptors, and special materials to message system data
                 if (itemContext) {
-                    if (itemContext.entity.system.specialMaterials) {
-                        customData.specialMaterials = itemContext.entity.system.specialMaterials;
-                    }
-
-                    if (itemContext.entity.system.descriptors) {
-                        customData.descriptors = itemContext.entity.system.descriptors;
-                    }
-
-                    customData.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
+                    DiceSFRPG._collectProperties(itemContext, messageSystemData);
                 }
 
-                try {
-                    useCustomCard = SFRPGCustomChatMessage.renderStandardRoll(roll, customData);
-                } catch (error) {
-                    useCustomCard = false;
-                    errorToThrow = error;
-                }
-            }
+                // Create the roll explanation
+                const preparedRollExplanation = ChatMessageSFRPG.formatExplanation(finalFormula.formula);
 
-            if (!useCustomCard && chatMessage) {
-                const rollContent = await roll.render({ htmlData: htmlData });
-                const messageData = {
-                    content: rollContent,
-                    flags: {sfrpg: {rollType: rollType}},
-                    flavor: finalFlavor,
-                    rolls: [roll],
-                    sound: CONFIG.sounds.dice,
-                    speaker
-                };
-
-                // Insert the damage type string if possible.
-                if (damageTypeString?.length > 0) {
-                    messageData.content = DiceSFRPG.appendTextToRoll(rollContent, damageTypeString);
-                    messageData.flags.sfrpg.damage = {
-                        amount: roll.total,
-                        types: damageTypeString?.replace(' & ', ',')?.toLowerCase() ?? ""
+                // Determine whether the roll should be a critical, and handle those effects
+                const isCritical = (rollInfo.button === "critical" || (skipUI && linkedAttackRoll.isCritical)) ? true : false;
+                if (isCritical) {
+                    messageSystemData.critical = {
+                        doubleDamage: criticalDamageData.doubleDamage,
+                        effect: criticalDamageData.effect,
+                        isCritical: true
                     };
+
+                    // Double the damage if appropriate (i.e. when not a starship weapon)
+                    if (!criticalDamageData?.preventDoubling) {
+                        finalFormula.finalRoll = finalFormula.finalRoll + " + " + finalFormula.finalRoll;
+                        finalFormula.formula = finalFormula.formula + " + " + finalFormula.formula;
+                    }
                 }
 
-                // Add special materials, descriptors, and magic status to chat message flags (to overcome DR)
-                if (itemContext) {
-                    if (itemContext.entity.system.specialMaterials) {
-                        messageData.flags.sfrpg.specialMaterials = itemContext.entity.system.specialMaterials;
-                    }
+                // Create the roll and evaluate it
+                const roll = await SFRPGRoll.create(finalFormula.finalRoll, {}, { breakdown: preparedRollExplanation, rollCriteria: partRollCriteria }).evaluate();
 
-                    if (itemContext.entity.system.descriptors) {
-                        messageData.flags.sfrpg.descriptors = itemContext.entity.system.descriptors;
-                    }
+                // CRB pg. 240, < 1 damage returns 1 non-lethal damage.
+                if (roll.total < 1) {
+                    roll._total = 1; // TODO-Ian: I don't really like overwriting this property, should get the minimum value some other way
+                    messageSystemData.damage.minimumDamage = true;
 
-                    messageData.flags.sfrpg.hasMagicDamage = {value: (itemContext.data.magic || itemContext.entity.hasMagicDamage) ? true : false};
+                    // Add Nonlethal data if needed
+                    if (itemContext?.entity?.type !== "starshipWeapon") {
+                        if (!foundry.utils.hasProperty(messageSystemData, "properties.nonlethal.value")) {
+                            foundry.utils.setProperty(messageSystemData, "properties.nonlethal.value", true);
+                        }
+                    }
                 }
 
-                ChatMessage.create(messageData, { rollMode: rollInfo.mode });
-            }
+                if (chatMessage) {
+                    const messageData = {
+                        content: await roll.render(),
+                        flavor: flavor,
+                        rolls: [roll],
+                        sound: CONFIG.sounds.dice,
+                        speaker,
+                        system: messageSystemData,
+                        title,
+                        type: "damage"
+                    };
 
-            if (onClose) {
-                onClose(roll, formula, finalFormula, isCritical);
+                    // Create the chat message
+                    ChatMessageSFRPG.create(messageData, { rollMode: rollInfo.mode });
+                }
+                if (onClose) onClose(roll, formula, finalFormula, isCritical);
             }
-
-            if (errorToThrow) {
-                throw errorToThrow;
-            }
-        }
-
+        } else if (onClose) onClose(null, null, null, false);
         return rollInfo.button !== 'cancel';
-    }
-
-    static appendTextToRoll(originalRollHTML, textToAppend) {
-        const diceRollHtml = '<h3 class="dice-total">';
-
-        const diceRollIndex = originalRollHTML.indexOf(diceRollHtml);
-        const firstHalf = originalRollHTML.substring(0, diceRollIndex + diceRollHtml.length);
-        const splitOffFirstHalf = originalRollHTML.substring(diceRollIndex + diceRollHtml.length);
-
-        const closeTagIndex = splitOffFirstHalf.indexOf('</h3>');
-        const rollResultHtml = splitOffFirstHalf.substring(0, closeTagIndex);
-        const secondHalf = splitOffFirstHalf.substring(closeTagIndex);
-
-        const combinedResult = firstHalf + rollResultHtml + ` ${textToAppend}` + secondHalf;
-        return combinedResult;
-    }
-
-    /**
-     * Hightlight rolls that are considered critical successes or failures.
-     *
-     * @param {ChatMessage} message            The ChatMessage document being rendered
-     * @param {JQuery}      html               The pending HTML as a jQuery object
-     * @param {Object}      data               The input data provided for template rendering
-     * @param {Object}      data.data          The ChatMessage data
-     * @param {User}        data.user          The User that initiated the ChatMessage
-     * @param {User}        data.author        The name of the Actor that created this ChatMessage
-     * @param {string}      data.alias         The alias of the Actor that created this ChatMessage
-     * @param {string[]}    data.cssClass      CSS classes that should be applied to this message
-     * @param {boolean}     data.isWhisper     Should this ChatMessage be sent in a private message
-     * @param {string[]}    data.whisperTo     A list of user names this message should be sent to
-     * @param {string}      [data.borderColor] A border color applied to the chat card
-     */
-    static highlightCriticalSuccessFailure(message, html) {
-        if (!message.isRoll || !message.isContentVisible) return;
-
-        const roll = message.rolls[0];
-        if (!roll.dice.length) return;
-        if (DiceSFRPG.isCriticalSuccess(roll)) {
-            html.find('.dice-total').addClass('success');
-        }
-        if (DiceSFRPG.isFumble(roll)) {
-            html.find('.dice-total').addClass('failure');
-        }
-    }
-
-    /**
-    * A helper function for determining if a roll was a critical success or not
-    *
-    * @param {?Object}  roll        The roll object
-    * @param {Number}       dieSize     The size of the die to look for to  trigger the critical
-    * @param {Number}       critValue   The number needed to roll at or above to trigger the critical
-    * @returns {Boolean}                `true` if a critical success, `false` otherwise
-    */
-    static isCriticalSuccess(roll, dieSize = 20, critValue = null) {
-        if (!roll?.dice?.length) {
-            return false;
-        }
-
-        for (const d of roll.dice) {
-            if (d.faces === dieSize && d.results.length === 1 && (critValue || d.options.critical)) {
-                if (d.total >= (critValue ?? d.options.critical)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-    * A helper function for determining if a roll was a fumble or not
-    *
-    * @param {Object}  roll        The roll object
-    * @param {Number}       dieSize     The size of the die to look for to  trigger the fumble
-    * @param {Number}       fumbleValue The number needed to roll at or below to trigger the fumble
-    * @returns {Boolean}                `true` if a fumble, `false` otherwise
-    */
-    static isFumble(roll, dieSize = 20, fumbleValue = null) {
-        if (!roll?.dice?.length) {
-            return false;
-        }
-
-        for (const d of roll.dice) {
-            if (d.faces === dieSize && d.results.length === 1 && (fumbleValue || d.options.fumble)) {
-                if (d.total <= (fumbleValue ?? d.options.fumble)) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * Add damage types for damage rolls to the chat card.
-     *
-     * @param {ChatMessage} message            The ChatMessage document being rendered
-     * @param {JQuery}      html               The pending HTML as a jQuery object
-     */
-    static addDamageTypes(message, html) {
-        if (!message.isRoll || !message.isContentVisible) return;
-
-        const roll = message.rolls[0];
-        if (!(roll?.dice.length > 0)) return;
-        for (const die of roll.dice) {
-            if (die?.options?.isDamageRoll) {
-                const types = die?.options?.damageTypes;
-                const critical = die?.options?.criticalData;
-
-                html.data("damageTypes", types);
-                html.data("critical", critical);
-            }
-        }
-    }
-
-    static formatFormula(formulaText) {
-        let index = 0;
-        let consumedText = "";
-        let isReading = false;
-        const sections = [];
-        while (index < formulaText.length) {
-            const token = formulaText[index++];
-            if (token === "[") {
-                sections.push({text: consumedText, replace: true});
-                consumedText = "";
-                isReading = true;
-            } else if (token === "]" && isReading) {
-                sections.push({text: consumedText, replace: false});
-                consumedText = "";
-                isReading = false;
-            }
-            consumedText += token;
-        }
-        if (consumedText) {
-            sections.push({text: consumedText, replace: true});
-        }
-
-        let finalResult = "";
-        for (const section of sections) {
-            if (section.replace) {
-                finalResult += section.text.replace(/\+/gi, "<br /> +").replace(/-/gi, "<br /> -");
-            } else {
-                finalResult += section.text;
-            }
-        }
-        return finalResult;
     }
 
     static resolveFormulaWithoutDice(sourceFormula, rollContext, options = {logErrors: true}) {
@@ -979,34 +584,15 @@ export class DiceSFRPG {
     }
 
     /**
-     * Evaluates whether a d20 roll is a success or a failure
-     * @param   {SFRPGRoll}     roll            roll to evaluate
-     * @param   {Number}        evalValue       value to evaluate against
-     * @returns {Boolean}                       returns false for failure, true for success, null if not evaluated
-     */
-    static evaluateRollVsValue(roll, evalValue = null) {
-        if ((evalValue !== null) && (typeof roll.total === "number")) {
-            if (roll.d20Critical) {
-                return true;
-            } else if (roll.d20Fumble) {
-                return false;
-            }
-            return roll.total >= evalValue;
-        } else {
-            return null;
-        }
-    }
-
-    /**
      * Gets the value that the roll total should be evaluated against
      * @param   {SFRPGRoll}     roll            roll to evaluate
      * @param   {RollInfo}      rollInfo        output from buildRoll, including dialog selections
      * @param   {RollContext}   rollContext     the context under which to evaluate to roll
-     * @param   {Object}        rollOptions     additional options to be stored with the roll
-     * @param   {Number}        difficulty      hardcoded value to evaluate over actionTarget (optional)
+     * @param   {RollCriteria}  rollCriteria    additional options to be stored with the roll
      */
-    static getTargetRollEvalValue(roll, rollInfo, rollContext, rollOptions, difficulty = undefined) {
-        const actionTarget = rollOptions.actionTarget;
+    static getTargetRollEvalValue(roll, rollInfo, rollContext, rollCriteria) {
+        const actionTarget = rollCriteria.actionTarget;
+        const difficulty = rollCriteria.difficulty;
         const targetActorType = rollInfo.target?.actorType;
         const targetQuadrant = rollInfo.target?.quadrant ?? "";
         const validTargets = targetActorType === "starship" ? Object.keys(CONFIG.SFRPG.actionTargetsStarship) : Object.keys(CONFIG.SFRPG.actionTargets);
@@ -1055,63 +641,9 @@ export class DiceSFRPG {
     }
 
     /**
-     * Generates the success/failure message based on the roll value, type, and target stats
-     * @param   {SFRPGRoll}     roll            the roll object
-     * @param   {RollInfo}      rollInfo        output from buildRoll, including dialog selections
-     * @param   {Object}        rollOptions     additional options to be stored with the roll
-     * @param   {String}        rollType        a string specifying the type of roll being made
-     * @param   {Number}        difficulty      DC value specified for skill checks, saving throws, and other rolls
-     * @param   {Number}        evalValue       the value against which the roll is to be evaluated
-     * @param   {Boolean}       rollSuccess     determines if the roll was successful
-     * @param   {Tag[]}         tags            tags array of any roll tags to be added to the chat card
-     */
-    static addRollSuccessTag(roll, rollInfo, rollOptions, rollType, difficulty, evalValue, rollSuccess, tags) {
-        let prependedQuadrantInfo = "";
-        if (rollInfo.target.actorType === "starship" && rollInfo.target.quadrant) {
-            prependedQuadrantInfo = `${rollInfo.target.quadrantName} `;
-        }
-
-        const rollIsAttack = rollType === "attack" || rollType === "gunnery";
-        const criticalSuccessLocalized = rollIsAttack ? game.i18n.format("SFRPG.Rolls.CriticalHitCaps") : game.i18n.format("SFRPG.Rolls.CriticalSuccessCaps");
-        const successLocalized = rollIsAttack ? game.i18n.format("SFRPG.Rolls.HitCaps") : game.i18n.format("SFRPG.Rolls.SuccessCaps");
-        const failureLocalized = rollIsAttack ? game.i18n.format("SFRPG.Rolls.MissCaps") : game.i18n.format("SFRPG.Rolls.FailureCaps");
-        const fumbleLocalized = game.i18n.format("SFRPG.Rolls.FumbleCaps");
-
-        if (rollOptions?.actionTarget) {
-            const actionTargetSource = rollOptions.actionTargetSource[rollOptions.actionTarget];
-            if (rollSuccess !== null) {
-                const actionTarget = `${prependedQuadrantInfo}${actionTargetSource}`;
-                let actionResult = "";
-                if (roll.d20Critical) {
-                    actionResult = `<span class="success">${criticalSuccessLocalized}</span>`;
-                } else if (roll.d20Fumble) {
-                    actionResult = `<span class="fail">${fumbleLocalized}</span>`;
-                } else {
-                    actionResult = `<span class="${rollSuccess ? "success" : "fail"}">${rollSuccess ? successLocalized : failureLocalized}</span>`;
-                }
-                tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue: evalValue, actionResult}) });
-            } else {
-                const actionTarget = `${prependedQuadrantInfo}${actionTargetSource}`;
-                tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.Tag", {actionTarget} ) });
-            }
-        } else if (difficulty) {
-            const actionTarget = game.i18n.format("SFRPG.DC");
-            let actionResult = "";
-            if (roll.d20Critical) {
-                actionResult = `<span class="success">${criticalSuccessLocalized}</span>`;
-            } else if (roll.d20Fumble) {
-                actionResult = `<span class="fail">${fumbleLocalized}</span>`;
-            } else {
-                actionResult = `<span class="${rollSuccess ? "success" : "fail"}">${rollSuccess ? successLocalized : failureLocalized}</span>`;
-            }
-            tags.unshift({ name: "actionTarget", text: game.i18n.format("SFRPG.Items.Action.ActionTarget.TagFull", {actionTarget, targetValue: evalValue, actionResult}) });
-        }
-    }
-
-    /**
      * returns the rootNode with removed childnodes that match the modifier.
-     * @param {RollNode} rootNode
-     * @param {Object} modifier
+     * @param {RollNode}        rootNode
+     * @param {SFRPGModifier}   modifier
      */
     static _removeModifierNodes(rootNode, modifier) {
         let node = rootNode;
@@ -1129,82 +661,65 @@ export class DiceSFRPG {
 
     /**
      * Calculates the final formula used for rolls with applied stacking of the modifiers
-     * @param {RollNode} node - the Rootnode which is used for the roll
-     * @param {SFRPGModifier[]} rollMods - all modifiers applied to this roll (unstacked)
-     * @param {Number} bonus - the situational bonus for this roll
+     * @param {String}          baseDie     the base die used in the roll (string representation)
+     * @param {RollInfo}        rollInfo    output from buildRoll, including dialog selections
+     * @param {ActorSFRPG}      actor       the actor making the roll
      * @returns {ResolvedRoll}
      */
-    static async _calcStackingFormula(node, rollMods, bonus = null, actor = null) {
+    static async _calcStackingFormula(baseDie = null, rollInfo, actor = null) {
+        const node = rollInfo.rolls[0].node;
+        const rollMods = rollInfo.modifiers;
+        const bonus = rollInfo.bonus ?? '';
+        const enabledRollMods = rollMods.filter(mod => mod.enabled);
+
+        // Remove modifier nodes that already exist so they aren't double-counted
         let rootNode = node;
+        for (const mod of enabledRollMods) rootNode = this._removeModifierNodes(rootNode, mod);
 
-        const stackModifiers = new StackModifiers();
-        const stackedMods = await stackModifiers.processAsync(rollMods.filter(mod => {
-            if (mod.enabled && mod.type) {
-                rootNode = this._removeModifierNodes(rootNode, mod);
-                return true;
-            }
-        }), null, { actor: actor });
+        // Stack modifiers, removing multiples with the same type
+        const stackedRollMods = await new StackModifiers().processAsync(enabledRollMods, null, { actor: actor });
 
-        let rollString = '';
-        let formulaString = '';
-        const rollDices = [];
-        const stackedModsArray = Object.keys(stackedMods);
-        for (let stackModsI = 0; stackModsI < stackedModsArray.length; stackModsI++) {
-            const stackModifier = stackedMods[stackedModsArray[stackModsI]];
-            if (stackModifier === null || stackModifier === undefined) {
-                continue;
-            }
-            if (stackModifier instanceof Array) {
-                for (let stackModifierI = 0; stackModifierI < stackModifier.length; stackModifierI++) {
-                    const modifier = stackModifier[stackModifierI];
-                    rollString += `${modifier.max.toString()}+`;
-                    // TODO:
-                    /*
-                        add title to the span f.e.:
-                        title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
-                        but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
-                    */
-                    if (!modifier.isDeterministic) {
-                        rollDices.push(...modifier.dices);
-                        formulaString += `${modifier.max.toString()}(${modifier.modifier})[<span>${modifier.name}</span>] + `;
-                    } else {
-                        formulaString += `${modifier.max.toString()}[<span>${modifier.name}</span>] + `;
-                    }
-                }
-            } else {
-                rollString += `${stackModifier.max.toString()}+`;
-                // TODO:
-                /*
-                    add title to the span f.e.:
-                    title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
-                    but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
-                */
-                if (!stackModifier.isDeterministic) {
-                    rollDices.push(...stackModifier.dices);
-                    formulaString += `${stackModifier.max.toString()}(${stackModifier.modifier})[<span>${stackModifier.name}</span>] + `;
+        // Account for situational roll modifiers in the roll formula & explanation
+        const rollModFormulaParts = [];
+        const rollModExplanationParts = [];
+        const rollModDice = [];
+        for (const modifiers of Object.values(stackedRollMods)) {
+            for (const modifier of modifiers) {
+                rollModFormulaParts.push(modifier.max);
+
+                if (modifier.isDeterministic) {
+                    rollModExplanationParts.push(`${modifier.max} [<span>${modifier.name}</span>]`);
                 } else {
-                    formulaString += `${stackModifier.max.toString()}[<span>${stackModifier.name}</span>] + `;
+                    rollModExplanationParts.push(`${modifier.max}(${modifier.modifier}) [<span>${modifier.name}</span>]`);
+                    rollModDice.push(...modifier.dices);
                 }
+                /*
+                TODO: add title to the span, e.g.:
+                title="${game.i18n.format(localizationKey, type: modifier.type.capitalize(),mod: modifier.max.signedString(),source: modifier.name)}"
+                but in order to do that we will need the localization key for the current modifier which we do not have at this point. Maybe we will have to pass it down from the modifier calculation lol.
+                */
             }
         }
 
-        formulaString += bonus ? `${bonus.toString()}[<span>${game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus")}</span>]` : '';
+        // Add the situational bonus if present
+        if (bonus) {
+            rollModFormulaParts.push(bonus);
+            rollModExplanationParts.push(`${bonus} [<span>${game.i18n.localize("SFRPG.Rolls.Dialog.SituationalBonus")}</span>]`);
+        }
 
-        rollString += bonus ? `${bonus}` : '';
-        rollString = rollString.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
-            .trim();
-        rollString = rollString.endsWith("+") ? rollString.substring(0, rollString.length - 1).trim() : rollString;
-
+        // Generate the unmodified formula object to return
         const finalFormula = rootNode.resolveForRoll(rollMods);
 
-        finalFormula.finalRoll = rollString ? `${finalFormula.finalRoll} + ${rollString}` : finalFormula.finalRoll;
-        finalFormula.formula = formulaString ? `${finalFormula.formula} + ${formulaString}` : finalFormula.formula;
-
-        finalFormula.formula = finalFormula.formula.replace(/\+\s*-\s*/gi, "- ").replace(/\+\s*\+\s*/gi, "+ ")
-            .trim();
-        finalFormula.formula = finalFormula.formula.endsWith("+") ? finalFormula.formula.substring(0, finalFormula.formula.length - 1).trim() : finalFormula.formula;
-
-        finalFormula.rollDices = rollDices;
+        // Set the dice, formula string (finalRoll), and explanation string (formula) on the object to be returned
+        finalFormula.rollDices = rollModDice;
+        finalFormula.finalRoll = [baseDie ?? '', finalFormula.finalRoll, ...rollModFormulaParts]
+            .join(" + ")
+            .replace(/\+\s*-\s*/gi, "- ")
+            .replace(/\+\s*\+\s*/gi, "+ ");
+        finalFormula.formula = [finalFormula.formula, ...rollModExplanationParts]
+            .join(" + ")
+            .replace(/\+\s*-\s*/gi, "- ")
+            .replace(/\+\s*\+\s*/gi, "+ ");
 
         return finalFormula;
     }
@@ -1217,10 +732,56 @@ export class DiceSFRPG {
      */
     static _simplifyFormula(formula, rollContext) {
         try {
-            return Roll.create(formula, rollContext.getRollData()).simplifiedFormula;
+            return SFRPGRoll.create(formula, rollContext.getRollData()).simplifiedFormula;
         } catch {
             return formula;
         }
+    }
+
+    /**
+     * Collects properties, descriptors, special materials, and magic status data into the format
+     * expected by chat message system data and packs it into that structure.
+     * @param {RollContext}     itemContext         The item's rollcontext
+     * @param {Object}          messageSystemData   The message system data
+     */
+    static _collectProperties(itemContext, messageSystemData) {
+        // TODO: Move starship weapon properties & materials to the same location as normal properties & materials
+        // Starship Weapons use data.special for their properties
+        if (itemContext.entity.type === "starshipWeapon") {
+            messageSystemData.starshipWeaponType = itemContext.entity.system.weaponType;
+            if (itemContext.entity.system.special) {
+                for (const [key, isEnabled] of Object.entries(itemContext.entity.system.special)) {
+                    if (isEnabled) messageSystemData.starshipWeaponProperties[key] = true;
+                }
+            }
+        } else {
+            // Regular Weapons use data.properties for their properties
+            if (itemContext.entity.system.properties) {
+                for (const [key, propertyData] of Object.entries(itemContext.entity.system.properties)) {
+                    if (propertyData.value) messageSystemData.properties[key] = propertyData;
+                }
+            }
+        }
+
+        // Add descriptors
+        const descriptors = itemContext.entity.system.descriptors;
+        if (descriptors) {
+            for (const [descriptor, isEnabled] of Object.entries(descriptors)) {
+                if (isEnabled) messageSystemData.descriptors.push(descriptor);
+            }
+        }
+
+        // Add special materials
+        const specialMaterials = itemContext.entity.system.specialMaterials;
+        if (specialMaterials) {
+            for (const [material, isEnabled] of Object.entries(specialMaterials)) {
+                if (isEnabled) messageSystemData.specialMaterials[material] = true;
+            }
+        }
+
+        // Add a tag if the damage should be magic
+        const isMagic = itemContext.data.magic || itemContext.entity.hasMagicDamage;
+        if (isMagic) messageSystemData.damage.isMagic = true;
     }
 
     /**
@@ -1240,7 +801,7 @@ export class DiceSFRPG {
     static simplifyRollFormula(formula, { preserveFlavor = false } = {}) {
         // Create a new roll and verify that the formula is valid before attempting simplification.
         let roll;
-        try { roll = Roll.create(formula); } catch (err) { console.warn(`Unable to simplify formula '${formula}': ${err}`); }
+        try { roll = SFRPGRoll.create(formula); } catch (err) { console.warn(`Unable to simplify formula '${formula}': ${err}`); }
         Roll.validate(roll.formula);
 
         // Optionally strip flavor annotations.

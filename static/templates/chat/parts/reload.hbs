@@ -1,0 +1,10 @@
+<!-- If the roll content should be visible, show tags -->
+{{#if isContentVisible}}
+<div class="message-content reload">
+    <div class="reload-stats">
+        {{{localize "SFRPG.ChatCard.Reload.ReloadMessage" ammoName=message.system.ammoName activationType=(sfrpg "abilityActivationTypes" message.system.activationType)}}}{{#if tags.qreload}} (<span class="tag"{{#if tags.qreload.tooltip}} data-tooltip="{{tags.qreload.tooltip}}"{{/if}}>{{{tags.qreload.text}}}</span>){{/if}}
+        <br>
+        {{localize "SFRPG.ChatCard.Reload.CapacityMessage" current=message.system.capacity.current total=message.system.capacity.total}}
+    </div>
+</div>
+{{/if}}
